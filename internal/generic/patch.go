@@ -15,15 +15,18 @@ import (
 
 // patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
 // It sorts remove operations to ensure they are applied in reverse order to avoid index out of bounds errors.
-// For key-value arrays (Tags, LoadBalancerAttributes, etc.), it uses full-array replacement instead
-// of index-based patches to avoid corruption when CloudFormation returns arrays in different order.
-func patchDocument(old, new string) (string, error) {
+// For order-unstable arrays (Tags, LoadBalancerAttributes, Set-typed attributes such as Config, etc.),
+// it uses full-array replacement instead of index-based patches to avoid corruption when CloudFormation
+// returns arrays in a different order than they were submitted. unorderedArrayPaths carries the
+// CloudFormation paths of attributes known -- from the Terraform schema -- to be backed by a Set,
+// and may be nil.
+func patchDocument(old, new string, unorderedArrayPaths map[string]bool) (string, error) {
 	patch, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
 	if err != nil {
 		return "", err
 	}
 
-	patch = replaceKeyValueArrayPatchesWithFullReplace(patch, new)
+	patch = replaceKeyValueArrayPatchesWithFullReplace(patch, new, unorderedArrayPaths)
 
 	// Sort the patch operations to ensure remove operations are applied in reverse order
 	sortedPatch := sortPatchOperations(patch)
@@ -48,30 +51,40 @@ func patchDocument(old, new string) (string, error) {
 }
 
 // replaceKeyValueArrayPatchesWithFullReplace replaces index-based patch operations targeting
-// key-value arrays with full array replacements. CloudFormation does not preserve array ordering
-// for key-value structures (objects with "Key"/"key" field), so positional patches target wrong elements.
-func replaceKeyValueArrayPatchesWithFullReplace(patch []jsonpatch.JsonPatchOperation, newState string) []jsonpatch.JsonPatchOperation {
+// order-unstable arrays with full array replacements. CloudFormation does not preserve array
+// ordering for key-value structures (objects with a "Key"/"key" field) or for any attribute
+// whose CFN schema declares "insertionOrder": false (surfaced here via unorderedArrayPaths, the
+// Set-typed attribute paths from the Terraform schema), so positional patches against either can
+// target the wrong elements.
+func replaceKeyValueArrayPatchesWithFullReplace(patch []jsonpatch.JsonPatchOperation, newState string, unorderedArrayPaths map[string]bool) []jsonpatch.JsonPatchOperation {
 	var newDoc map[string]any
 	if err := json.Unmarshal([]byte(newState), &newDoc); err != nil {
 		return patch
 	}
 
-	// Find all array paths that have index-based operations
+	// Find every array boundary (at any nesting depth) touched by an index-based
+	// operation. A single deeply-nested op path can cross more than one array -- e.g.
+	// an ordinary ordered list of objects where one object holds a Tags array -- so
+	// every enclosing array is a candidate, not just the outermost or innermost one.
 	arrayPaths := make(map[string]bool)
 	for _, op := range patch {
-		if arrayPath := extractArrayPath(op.Path); arrayPath != "" {
+		for _, arrayPath := range extractArrayPaths(op.Path) {
 			arrayPaths[arrayPath] = true
 		}
 	}
 
-	// Check which arrays are key-value arrays (need to check old state for removals)
+	// Check which of those arrays need full-replace treatment (need to check old state
+	// for removals). Each candidate is judged independently: an outer ordered list that
+	// merely contains an order-unstable array is left alone, while the inner array (or a
+	// top-level one) is flagged on its own merits.
 	keyValueArrays := make(map[string]bool)
 	for path := range arrayPaths {
-		// Check if it's a key-value array in new state, or if all ops are removes (array deleted)
-		if isKeyValueArray(newDoc, path) {
+		// Full-replace if it's a key-value shaped array, a known Set-typed (order-unstable)
+		// attribute, or if all ops are removes (array deleted).
+		if isKeyValueArray(newDoc, path) || unorderedArrayPaths[stripArrayIndices(path)] {
 			keyValueArrays[path] = true
 		} else if allOpsAreRemoves(patch, path) {
-			// For removed arrays, assume they were key-value if being removed
+			// For removed arrays, assume they need full replace if being removed
 			keyValueArrays[path] = true
 		}
 	}
@@ -80,11 +93,17 @@ func replaceKeyValueArrayPatchesWithFullReplace(patch []jsonpatch.JsonPatchOpera
 		return patch
 	}
 
-	// Filter out index-based operations for key-value arrays
+	// Filter out index-based operations that fall within any flagged array, at any depth.
 	var filtered []jsonpatch.JsonPatchOperation
 	for _, op := range patch {
-		arrayPath := extractArrayPath(op.Path)
-		if arrayPath != "" && keyValueArrays[arrayPath] {
+		covered := false
+		for _, arrayPath := range extractArrayPaths(op.Path) {
+			if keyValueArrays[arrayPath] {
+				covered = true
+				break
+			}
+		}
+		if covered {
 			continue
 		}
 		filtered = append(filtered, op)
@@ -108,31 +127,64 @@ func replaceKeyValueArrayPatchesWithFullReplace(patch []jsonpatch.JsonPatchOpera
 	return filtered
 }
 
-// allOpsAreRemoves checks if all operations for a given array path are remove operations
+// allOpsAreRemoves checks whether an array is being emptied out: every operation is
+// either a remove of the array itself, or a remove of one of its direct elements
+// (arrayPath + "/" + index, with nothing deeper). An op nested further down -- e.g.
+// removing one field, or one element of a different array nested inside one of this
+// array's elements -- does not count, so removing a single Tag from one element of an
+// unrelated outer list doesn't cause the outer list to be spuriously flagged as removed.
 func allOpsAreRemoves(patch []jsonpatch.JsonPatchOperation, arrayPath string) bool {
 	hasOps := false
 	for _, op := range patch {
-		if strings.HasPrefix(op.Path, arrayPath+"/") || op.Path == arrayPath {
-			hasOps = true
-			if op.Operation != "remove" {
-				return false
-			}
+		rest, ok := strings.CutPrefix(op.Path, arrayPath+"/")
+		isDirectElement := ok && !strings.Contains(rest, "/")
+		if !isDirectElement && op.Path != arrayPath {
+			continue
+		}
+		hasOps = true
+		if op.Operation != "remove" {
+			return false
 		}
 	}
 	return hasOps
 }
 
-// extractArrayPath extracts the array path from an indexed path (e.g., "/Tags/0" -> "/Tags")
-func extractArrayPath(path string) string {
-	lastSlash := strings.LastIndex(path, "/")
-	if lastSlash <= 0 {
-		return ""
+// extractArrayPaths extracts the path of every array an index-based patch operation
+// falls within, one per array index found in the path at any depth -- e.g. "/Tags/0"
+// -> ["/Tags"], "/Config/0/StartTime/Hours" -> ["/Config"] for a patch that replaces a
+// single field nested inside an array element, and "/A/0/Tags/1" -> ["/A", "/A/0/Tags"]
+// for a Tags array nested inside another array's elements. The caller judges each
+// candidate independently, since the array that actually needs full-replace treatment
+// may be the outer one, the inner one, or (for a plain ordered list) neither.
+func extractArrayPaths(path string) []string {
+	parts := strings.Split(strings.TrimPrefix(path, "/"), "/")
+	var paths []string
+	for i, part := range parts {
+		if _, err := strconv.Atoi(part); err == nil {
+			paths = append(paths, "/"+strings.Join(parts[:i], "/"))
+		}
 	}
-	lastPart := path[lastSlash+1:]
-	if _, err := strconv.Atoi(lastPart); err == nil {
-		return path[:lastSlash]
+	return paths
+}
+
+// stripArrayIndices removes numeric path segments (array indices) from a JSON pointer
+// path, e.g. "/QueueConfigs/0/Tags" -> "/QueueConfigs/Tags". Used to match a concrete,
+// index-bearing array path from a runtime patch against the index-free skeleton paths
+// precomputed from the Terraform schema (unorderedArrayPaths), since a Set nested inside
+// another array's elements has no index placeholder in its schema-derived path.
+func stripArrayIndices(path string) string {
+	parts := strings.Split(path, "/")
+	kept := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if p == "" {
+			continue
+		}
+		if _, err := strconv.Atoi(p); err == nil {
+			continue
+		}
+		kept = append(kept, p)
 	}
-	return ""
+	return "/" + strings.Join(kept, "/")
 }
 
 // isKeyValueArray checks if the array at the given path contains key-value objects
