@@ -60,13 +60,30 @@
   ],
   "definitions": {
     "WallClockWindow": {
-      "description": "",
+      "description": "An evaluation window that aligns the evaluated range to fixed clock boundaries that match the alarm's period, such as the top of the hour, midnight, or the start of the calendar week, optionally in a specific time zone.\n When you use a wall clock window, the alarm's period must be 1 minute (60 seconds), 5 minutes (300 seconds), 1 hour (3,600 seconds), 1 day (86,400 seconds), or 1 week (604,800 seconds). Other period values aren't supported with a wall clock window.\n Choose a wall clock window when your monitoring is tied to a business or calendar period, such as daily reports, batch jobs, or backups, or when you want alarm evaluations to match the periods shown on a metric dashboard.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Timezone": {
-          "description": "The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).",
+          "description": "The time zone to use when the alarm aligns the evaluation window to clock boundaries. You can specify an IANA time zone name (for example, ``America/New_York``), a fixed UTC offset (for example, ``+05:30``), or an offset-prefixed identifier (for example, ``UTC+05:30``). The offset must be aligned to a multiple of 5 minutes. If you don't specify a time zone, CloudWatch uses ``UTC``.\n The time zone affects window alignment for all periods, including periods of one hour or shorter.",
           "type": "string"
+        }
+      }
+    },
+    "WarmUpConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "WarmUpPeriodDurationInMinutes": {
+          "description": "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+          "maximum": 2880,
+          "type": "integer",
+          "minimum": 1
+        },
+        "OnlyStartEvaluatingAfterWarmUpPeriodEnds": {
+          "description": "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+          "type": "boolean"
         }
       }
     },
@@ -130,16 +147,16 @@
           ]
         }
       ],
-      "description": "",
+      "description": "The evaluation window that an alarm uses to select the range of metric data that it evaluates each time it runs. This is a union type. Set exactly one of its members, ``SlidingWindow`` or ``WallClockWindow``. If you don't set ``EvaluationWindow``, the alarm uses a ``SlidingWindow`` by default.\n For more information, see [Alarm evaluation windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User Guide*.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "WallClockWindow": {
-          "description": "Configuration for wall clock based evaluation window.",
+          "description": "A wall clock window, which aligns the evaluated range to fixed clock boundaries that match the alarm's period, such as the top of the hour, midnight, or the start of the calendar week.",
           "$ref": "#/definitions/WallClockWindow"
         },
         "SlidingWindow": {
-          "description": "Configuration for sliding evaluation window (default behavior).",
+          "description": "A sliding window, which advances each time the alarm is evaluated, forming a rolling time window. This is the default evaluation window.",
           "additionalProperties": false,
           "type": "object"
         }
@@ -311,8 +328,12 @@
       "description": "The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``.\n For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.\n For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``.",
       "type": "string"
     },
-    "EvaluationWindow": {
+    "WarmUpConfiguration": {
       "description": "",
+      "$ref": "#/definitions/WarmUpConfiguration"
+    },
+    "EvaluationWindow": {
+      "description": "The evaluation window that the alarm uses to select the range of metric data that it evaluates. This is either a sliding window or a wall clock window. For more information, see [Alarm evaluation windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User Guide*.",
       "$ref": "#/definitions/EvaluationWindow"
     },
     "InsufficientDataActions": {

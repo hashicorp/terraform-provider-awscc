@@ -47,12 +47,14 @@
       "maxLength": 1024
     },
     "CreatedTimestamp": {
-      "description": "The time at which an AppInstance was created. In epoch milliseconds.",
-      "type": "number"
+      "description": "The time at which an AppInstance was created, as an ISO 8601 timestamp.",
+      "type": "string",
+      "format": "date-time"
     },
     "LastUpdatedTimestamp": {
-      "description": "The time an AppInstance was last updated. In epoch milliseconds.",
-      "type": "number"
+      "description": "The time an AppInstance was last updated, as an ISO 8601 timestamp.",
+      "type": "string",
+      "format": "date-time"
     },
     "Tags": {
       "description": "Tags assigned to the AppInstance.",

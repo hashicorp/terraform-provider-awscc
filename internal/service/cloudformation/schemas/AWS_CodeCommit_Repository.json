@@ -1,0 +1,247 @@
+{
+  "typeName": "AWS::CodeCommit::Repository",
+  "description": "Resource Type definition for AWS::CodeCommit::Repository",
+  "additionalProperties": false,
+  "properties": {
+    "CloneUrlHttp": {
+      "type": "string",
+      "description": "The URL to use for cloning the repository over HTTPS."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The ID of the AWS Key Management Service encryption key used to encrypt and decrypt the repository.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "CloneUrlSsh": {
+      "type": "string",
+      "description": "The URL to use for cloning the repository over SSH."
+    },
+    "RepositoryName": {
+      "type": "string",
+      "description": "The name of the new repository to be created.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "Triggers": {
+      "type": "array",
+      "description": "Information about a trigger for a repository.",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/RepositoryTrigger"
+      }
+    },
+    "RepositoryId": {
+      "type": "string",
+      "description": "The ID of the repository."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the repository."
+    },
+    "Code": {
+      "$ref": "#/definitions/Code",
+      "description": "Information about code to be committed to a repository after it is created in an AWS CloudFormation stack. Information about code is only used in resource creation. Updates to a stack will not reflect changes made to code properties after initial resource creation."
+    },
+    "RepositoryDescription": {
+      "type": "string",
+      "description": "A comment or description about the new repository.",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "Tags": {
+      "type": "array",
+      "description": "One or more tag key-value pairs to use when tagging this repository.",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Name": {
+      "type": "string",
+      "description": "The repository's name."
+    }
+  },
+  "definitions": {
+    "S3": {
+      "type": "object",
+      "description": "Information about the Amazon S3 bucket that contains a ZIP file of code to be committed to the repository. Changes to this property are ignored after initial resource creation.",
+      "additionalProperties": false,
+      "properties": {
+        "ObjectVersion": {
+          "type": "string",
+          "description": "The object version of the ZIP file, if versioning is enabled for the Amazon S3 bucket. Changes to this property are ignored after initial resource creation.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "Bucket": {
+          "type": "string",
+          "description": "The name of the Amazon S3 bucket that contains the ZIP file with the content that will be committed to the new repository. This can be specified using the name of the bucket in the AWS account. Changes to this property are ignored after initial resource creation.",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "Key": {
+          "type": "string",
+          "description": "The key to use for accessing the Amazon S3 bucket. Changes to this property are ignored after initial resource creation.",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "Bucket",
+        "Key"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag is a key-value pair that is used to manage the resource.",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string",
+          "description": "The tag's value."
+        },
+        "Key": {
+          "type": "string",
+          "description": "The tag's key."
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "RepositoryTrigger": {
+      "type": "object",
+      "description": "Information about a trigger for a repository.",
+      "additionalProperties": false,
+      "properties": {
+        "CustomData": {
+          "type": "string",
+          "description": "Any custom data associated with the trigger to be included in the information sent to the target of the trigger."
+        },
+        "Events": {
+          "type": "array",
+          "description": "The repository events that cause the trigger to run actions in another service, such as sending a notification through Amazon SNS.",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "Branches": {
+          "type": "array",
+          "description": "The branches to be included in the trigger configuration. If you specify an empty array, the trigger applies to all branches.",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "DestinationArn": {
+          "type": "string",
+          "description": "The ARN of the resource that is the target for a trigger (for example, the ARN of a topic in Amazon SNS)."
+        },
+        "Name": {
+          "type": "string",
+          "description": "The name of the trigger."
+        }
+      },
+      "required": [
+        "Events",
+        "DestinationArn",
+        "Name"
+      ]
+    },
+    "Code": {
+      "type": "object",
+      "description": "Information about code to be committed to a repository after it is created in an AWS CloudFormation stack. Information about code is only used in resource creation. Updates to a stack will not reflect changes made to code properties after initial resource creation.",
+      "additionalProperties": false,
+      "properties": {
+        "S3": {
+          "$ref": "#/definitions/S3",
+          "description": "Information about the Amazon S3 bucket that contains a ZIP file of code to be committed to the repository. Changes to this property are ignored after initial resource creation."
+        },
+        "BranchName": {
+          "type": "string",
+          "description": "Optional. Specifies a branch name to be used as the default branch when importing code into a repository on initial creation. If this property is not set, the name main will be used for the default branch for the repository. Changes to this property are ignored after initial resource creation. We recommend using this parameter to set the name to main to align with the default behavior of CodeCommit unless another name is needed.",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "S3"
+      ]
+    }
+  },
+  "required": [
+    "RepositoryName"
+  ],
+  "propertyTransform": {
+    "/properties/KmsKeyId": "$join([\"(^arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:kms:[a-z]{2}[-]{1}[a-z]{3,10}[-]{0,1}[a-z]{0,10}[-]{1}[1-3]{1}:[0-9]{12}[:]{1}(key\\/)?|^)\", KmsKeyId])"
+  },
+  "primaryIdentifier": [
+    "/properties/RepositoryId"
+  ],
+  "readOnlyProperties": [
+    "/properties/CloneUrlHttp",
+    "/properties/RepositoryId",
+    "/properties/Name",
+    "/properties/CloneUrlSsh",
+    "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Code"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "codecommit:TagResource",
+      "codecommit:UntagResource",
+      "codecommit:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "codecommit:CreateRepository",
+        "codecommit:PutRepositoryTriggers",
+        "codecommit:CreateCommit",
+        "codecommit:TagResource",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "codecommit:ListRepositories",
+        "codecommit:GetRepository",
+        "codecommit:GetRepositoryTriggers",
+        "codecommit:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "codecommit:UpdateRepositoryName",
+        "codecommit:UpdateRepositoryDescription",
+        "codecommit:UpdateRepositoryEncryptionKey",
+        "codecommit:PutRepositoryTriggers",
+        "codecommit:TagResource",
+        "codecommit:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "codecommit:ListRepositories",
+        "codecommit:DeleteRepository"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "codecommit:ListRepositories"
+      ]
+    }
+  }
+}

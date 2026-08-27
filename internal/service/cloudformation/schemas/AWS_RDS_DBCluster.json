@@ -468,7 +468,6 @@
     "/properties/StorageThroughput"
   ],
   "createOnlyProperties": [
-    "/properties/AvailabilityZones",
     "/properties/ClusterScalabilityType",
     "/properties/DBClusterIdentifier",
     "/properties/DBSubnetGroupName",
@@ -487,6 +486,7 @@
     "/properties/UseLatestRestorableTime"
   ],
   "conditionalCreateOnlyProperties": [
+    "/properties/AvailabilityZones",
     "/properties/Engine",
     "/properties/GlobalClusterIdentifier",
     "/properties/MasterUsername"

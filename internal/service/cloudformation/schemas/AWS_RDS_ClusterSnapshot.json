@@ -1,0 +1,213 @@
+{
+  "typeName": "AWS::RDS::ClusterSnapshot",
+  "description": "Creates a snapshot of a DB cluster.",
+  "properties": {
+    "DBClusterSnapshotArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the DB cluster snapshot."
+    },
+    "DBClusterSnapshotIdentifier": {
+      "type": "string",
+      "description": "The identifier for the DB cluster snapshot. Must contain from 1 to 63 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+    },
+    "DBClusterIdentifier": {
+      "type": "string",
+      "description": "The identifier of the DB cluster to create a snapshot for."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags to be assigned to the DB cluster snapshot.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "AvailabilityZones": {
+      "type": "array",
+      "description": "The list of Availability Zones where instances in the DB cluster snapshot can be restored.",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "Engine": {
+      "type": "string",
+      "description": "The name of the database engine for this DB cluster snapshot."
+    },
+    "EngineVersion": {
+      "type": "string",
+      "description": "The version of the database engine for this DB cluster snapshot."
+    },
+    "SnapshotType": {
+      "type": "string",
+      "description": "The type of the DB cluster snapshot."
+    },
+    "AllocatedStorage": {
+      "type": "integer",
+      "description": "The allocated storage size of the DB cluster snapshot in gibibytes (GiB)."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of this DB cluster snapshot."
+    },
+    "Port": {
+      "type": "integer",
+      "description": "The port that the DB cluster was listening on at the time of the snapshot."
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The VPC ID associated with the DB cluster snapshot."
+    },
+    "ClusterCreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the DB cluster was created, in Universal Coordinated Time (UTC)."
+    },
+    "MasterUsername": {
+      "type": "string",
+      "description": "The master username for this DB cluster snapshot."
+    },
+    "EngineMode": {
+      "type": "string",
+      "description": "The engine mode of the database engine for this DB cluster snapshot."
+    },
+    "LicenseModel": {
+      "type": "string",
+      "description": "The license model information for this DB cluster snapshot."
+    },
+    "StorageEncrypted": {
+      "type": "boolean",
+      "description": "Indicates whether the DB cluster snapshot is encrypted."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot."
+    },
+    "IAMDatabaseAuthenticationEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether mapping of AWS IAM accounts to database accounts is enabled."
+    },
+    "DbClusterResourceId": {
+      "type": "string",
+      "description": "The resource ID of the DB cluster that this DB cluster snapshot was created from."
+    },
+    "SnapshotCreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the snapshot was taken, in Universal Coordinated Time (UTC)."
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "DBClusterSnapshotIdentifier",
+    "DBClusterIdentifier"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/DBClusterSnapshotArn",
+    "/properties/AvailabilityZones",
+    "/properties/Engine",
+    "/properties/EngineVersion",
+    "/properties/SnapshotType",
+    "/properties/AllocatedStorage",
+    "/properties/Status",
+    "/properties/Port",
+    "/properties/VpcId",
+    "/properties/ClusterCreateTime",
+    "/properties/MasterUsername",
+    "/properties/EngineMode",
+    "/properties/LicenseModel",
+    "/properties/StorageEncrypted",
+    "/properties/KmsKeyId",
+    "/properties/IAMDatabaseAuthenticationEnabled",
+    "/properties/DbClusterResourceId",
+    "/properties/SnapshotCreateTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/DBClusterSnapshotIdentifier",
+    "/properties/DBClusterIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/DBClusterSnapshotArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DBClusterSnapshotIdentifier"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "rds:AddTagsToResource",
+      "rds:RemoveTagsFromResource",
+      "rds:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds:CreateDBClusterSnapshot",
+        "rds:DescribeDBClusterSnapshots",
+        "rds:DescribeDBClusters",
+        "rds:AddTagsToResource",
+        "rds:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds:DescribeDBClusterSnapshots",
+        "rds:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds:DescribeDBClusterSnapshots",
+        "rds:ListTagsForResource",
+        "rds:AddTagsToResource",
+        "rds:RemoveTagsFromResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds:DeleteDBClusterSnapshot",
+        "rds:DescribeDBClusterSnapshots",
+        "rds:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds:DescribeDBClusterSnapshots"
+      ]
+    }
+  }
+}

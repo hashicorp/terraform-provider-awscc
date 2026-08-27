@@ -1,0 +1,154 @@
+{
+  "typeName": "AWS::Amplify::Webhook",
+  "description": "Resource Type definition for AWS::Amplify::Webhook. Creates a webhook on an Amplify app.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the webhook.",
+      "maxLength": 1000
+    },
+    "AppId": {
+      "type": "string",
+      "description": "The unique ID for an Amplify app.",
+      "minLength": 1,
+      "maxLength": 20,
+      "pattern": "^d[a-z0-9]+$"
+    },
+    "BranchName": {
+      "type": "string",
+      "description": "The name for a branch that is part of an Amplify app.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^(?s).+$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description for a webhook.",
+      "maxLength": 1000
+    },
+    "WebhookId": {
+      "type": "string",
+      "description": "The unique ID for a webhook.",
+      "maxLength": 255
+    },
+    "WebhookUrl": {
+      "type": "string",
+      "description": "The URL of the webhook.",
+      "maxLength": 1000
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags for the webhook.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "BranchName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/WebhookId"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/WebhookId",
+    "/properties/WebhookUrl"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AppId"
+  ],
+  "createOnlyProperties": [
+    "/properties/AppId"
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "amplify:TagResource",
+      "amplify:UntagResource",
+      "amplify:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "amplify:CreateWebhook",
+        "amplify:GetWebhook",
+        "amplify:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "amplify:GetWebhook",
+        "amplify:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "amplify:UpdateWebhook",
+        "amplify:GetWebhook",
+        "amplify:TagResource",
+        "amplify:UntagResource",
+        "amplify:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "amplify:DeleteWebhook",
+        "amplify:GetWebhook"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20,
+            "pattern": "^d[a-z0-9]+$"
+          }
+        },
+        "required": [
+          "AppId"
+        ]
+      },
+      "permissions": [
+        "amplify:ListWebhooks"
+      ]
+    }
+  }
+}

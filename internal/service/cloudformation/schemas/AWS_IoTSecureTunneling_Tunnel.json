@@ -1,0 +1,177 @@
+{
+  "typeName": "AWS::IoTSecureTunneling::Tunnel",
+  "description": "A connection between a source computer and a destination device using AWS IoT Secure Tunneling.",
+  "properties": {
+    "TunnelArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the tunnel.",
+      "minLength": 1,
+      "maxLength": 1600
+    },
+    "TunnelId": {
+      "type": "string",
+      "description": "A unique alpha-numeric tunnel ID.",
+      "pattern": "^[a-zA-Z0-9_\\-+=:]{1,128}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A short text description of the tunnel.",
+      "pattern": ""
+    },
+    "DestinationConfig": {
+      "description": "The destination configuration for the tunnel.",
+      "$ref": "#/definitions/DestinationConfig"
+    },
+    "TimeoutConfig": {
+      "description": "Timeout configuration for the tunnel.",
+      "$ref": "#/definitions/TimeoutConfig"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A collection of tag metadata.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the tunnel. Valid values are OPEN and CLOSED.",
+      "enum": [
+        "OPEN",
+        "CLOSED"
+      ]
+    }
+  },
+  "definitions": {
+    "DestinationConfig": {
+      "type": "object",
+      "description": "The destination configuration.",
+      "properties": {
+        "ThingName": {
+          "type": "string",
+          "description": "The name of the IoT thing to which you want to connect.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9:_-]+$"
+        },
+        "Services": {
+          "type": "array",
+          "description": "A list of service names that identify the target application.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9:_-]+$"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Services"
+      ],
+      "additionalProperties": false
+    },
+    "TimeoutConfig": {
+      "type": "object",
+      "description": "Tunnel timeout configuration.",
+      "properties": {
+        "MaxLifetimeTimeoutMinutes": {
+          "type": "integer",
+          "description": "The maximum amount of time (in minutes) a tunnel can remain open.",
+          "minimum": 1,
+          "maximum": 720
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/TunnelArn",
+    "/properties/TunnelId",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/Description",
+    "/properties/DestinationConfig",
+    "/properties/TimeoutConfig"
+  ],
+  "primaryIdentifier": [
+    "/properties/TunnelArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/TunnelId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iot:TagResource",
+      "iot:UntagResource",
+      "iot:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iot:OpenTunnel",
+        "iot:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iot:DescribeTunnel",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iot:DescribeTunnel",
+        "iot:TagResource",
+        "iot:UntagResource",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iot:CloseTunnel",
+        "iot:DescribeTunnel"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iot:ListTunnels"
+      ]
+    }
+  }
+}

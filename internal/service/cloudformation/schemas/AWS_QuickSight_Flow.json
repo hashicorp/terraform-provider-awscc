@@ -1,0 +1,167 @@
+{
+  "typeName": "AWS::QuickSight::Flow",
+  "description": "Definition of AWS::QuickSight::Flow Resource Type",
+  "definitions": {
+    "FlowPublishState": {
+      "type": "string",
+      "enum": [
+        "PUBLISHED",
+        "DRAFT",
+        "PENDING_APPROVAL"
+      ]
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "Actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1
+          }
+        },
+        "Principal": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Actions",
+        "Principal"
+      ],
+      "additionalProperties": false
+    },
+    "StepAliasMapping": {
+      "type": "object",
+      "properties": {
+        "StepId": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "StepAlias": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "StepAlias",
+        "StepId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string"
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "maxLength": 12,
+      "minLength": 12,
+      "pattern": "^[0-9]{12}$"
+    },
+    "CreatedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 1024,
+      "minLength": 0,
+      "pattern": ""
+    },
+    "FlowDefinition": {},
+    "FlowId": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "LastUpdatedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "Permissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Permission"
+      }
+    },
+    "PublishState": {
+      "$ref": "#/definitions/FlowPublishState"
+    },
+    "StepAliases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/StepAliasMapping"
+      }
+    }
+  },
+  "required": [
+    "AwsAccountId",
+    "Name",
+    "FlowDefinition"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedTime",
+    "/properties/FlowId",
+    "/properties/LastUpdatedTime",
+    "/properties/PublishState",
+    "/properties/StepAliases"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "quicksight:CreateFlow",
+        "quicksight:DescribeFlow"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeFlow",
+        "quicksight:GetFlowPermissions"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "quicksight:UpdateFlow",
+        "quicksight:UpdateFlowPermissions",
+        "quicksight:DescribeFlow"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "quicksight:DescribeFlow",
+        "quicksight:DeleteFlow"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "quicksight:ListFlows"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AwsAccountId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Permissions"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  }
+}

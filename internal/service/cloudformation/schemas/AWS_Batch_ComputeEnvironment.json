@@ -44,6 +44,9 @@
     "EksConfiguration": {
       "$ref": "#/definitions/EksConfiguration"
     },
+    "EcsSettings": {
+      "$ref": "#/definitions/EcsSettings"
+    },
     "Context": {
       "type": "string"
     }
@@ -428,6 +431,20 @@
         "EksClusterArn",
         "KubernetesNamespace"
       ]
+    },
+    "EcsSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ContainerInsights": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "ENHANCED",
+            "DISABLED"
+          ]
+        }
+      }
     }
   },
   "tagging": {

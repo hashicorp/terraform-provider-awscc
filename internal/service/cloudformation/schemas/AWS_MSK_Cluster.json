@@ -662,7 +662,7 @@
         "firehose:TagDeliveryStream",
         "acm-pca:GetCertificateAuthorityCertificate"
       ],
-      "timeoutInMinutes": 720
+      "timeoutInMinutes": 2160
     },
     "delete": {
       "permissions": [

@@ -105,6 +105,9 @@
     "/properties/DestinationResourceArn",
     "/properties/DeliveryDestinationType"
   ],
+  "writeOnlyProperties": [
+    "/properties/DeliveryDestinationPolicy"
+  ],
   "readOnlyProperties": [
     "/properties/Arn"
   ],

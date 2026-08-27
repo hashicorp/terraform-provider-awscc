@@ -223,6 +223,7 @@
     "/properties/PerformanceMode"
   ],
   "propertyTransform": {
+    "/properties/Encrypted": "Encrypted and Encrypted $OR true",
     "/properties/KmsKeyId": "\"arn:aws[-a-z]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]+\"",
     "/properties/FileSystemProtection/ReplicationOverwriteProtection": "$uppercase(FileSystemProtection.ReplicationOverwriteProtection)='DISABLED' ? 'REPLICATING' : $uppercase(FileSystemProtection.ReplicationOverwriteProtection)",
     "/properties/ReplicationConfiguration/Destinations/*/FileSystemId": "$split(FileSystemId, \"/\")[-1]"

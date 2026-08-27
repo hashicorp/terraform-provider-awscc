@@ -1,0 +1,178 @@
+{
+  "typeName": "AWS::Personalize::MetricAttribution",
+  "description": "Creates a metric attribution for reporting on recommendation impact in Amazon Personalize.",
+  "definitions": {
+    "MetricAttribute": {
+      "type": "object",
+      "description": "A metric attribute for the metric attribution.",
+      "properties": {
+        "EventType": {
+          "type": "string",
+          "description": "The metric's event type.",
+          "maxLength": 256
+        },
+        "MetricName": {
+          "type": "string",
+          "description": "The metric's name.",
+          "maxLength": 256
+        },
+        "Expression": {
+          "type": "string",
+          "description": "The attribute's expression.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "EventType",
+        "MetricName",
+        "Expression"
+      ],
+      "additionalProperties": false
+    },
+    "S3DataDestination": {
+      "type": "object",
+      "description": "The configuration details of an Amazon S3 output bucket.",
+      "properties": {
+        "Path": {
+          "type": "string",
+          "description": "The file path of the Amazon S3 bucket.",
+          "maxLength": 256,
+          "pattern": "^(s3|http|https)://.+$"
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "description": "The ARN of the KMS key.",
+          "maxLength": 2048,
+          "pattern": "^arn:aws.*:kms:.*:[0-9]{12}:key/"
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "additionalProperties": false
+    },
+    "MetricsOutputConfig": {
+      "type": "object",
+      "description": "The output configuration details for the metric attribution.",
+      "properties": {
+        "S3DataDestination": {
+          "$ref": "#/definitions/S3DataDestination"
+        },
+        "RoleArn": {
+          "type": "string",
+          "description": "The ARN of the IAM role for the metric attribution.",
+          "maxLength": 256,
+          "pattern": "^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+        }
+      },
+      "required": [
+        "RoleArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name of the metric attribution.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+    },
+    "MetricAttributionArn": {
+      "type": "string",
+      "description": "The ARN of the metric attribution.",
+      "maxLength": 256,
+      "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
+    },
+    "DatasetGroupArn": {
+      "type": "string",
+      "description": "The ARN of the destination dataset group.",
+      "maxLength": 256,
+      "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
+    },
+    "Metrics": {
+      "type": "array",
+      "description": "A list of metric attributes for the metric attribution.",
+      "items": {
+        "$ref": "#/definitions/MetricAttribute"
+      },
+      "maxItems": 10,
+      "insertionOrder": false
+    },
+    "MetricsOutputConfig": {
+      "$ref": "#/definitions/MetricsOutputConfig"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the metric attribution."
+    }
+  },
+  "required": [
+    "Name",
+    "DatasetGroupArn",
+    "Metrics",
+    "MetricsOutputConfig"
+  ],
+  "readOnlyProperties": [
+    "/properties/MetricAttributionArn",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/DatasetGroupArn",
+    "/properties/Metrics"
+  ],
+  "primaryIdentifier": [
+    "/properties/MetricAttributionArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "personalize:CreateMetricAttribution",
+        "personalize:DescribeMetricAttribution",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "personalize:DescribeMetricAttribution",
+        "personalize:ListMetricAttributionMetrics"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "personalize:UpdateMetricAttribution",
+        "personalize:DescribeMetricAttribution",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "personalize:DeleteMetricAttribution",
+        "personalize:DescribeMetricAttribution"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "personalize:ListMetricAttributions"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/Metrics/*/EventType": "$uppercase(EventType)",
+    "/properties/Metrics/*/MetricName": "$uppercase(MetricName)"
+  }
+}

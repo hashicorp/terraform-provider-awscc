@@ -1,0 +1,161 @@
+{
+  "typeName": "AWS::Cases::Case",
+  "description": "Creates a case in the specified Cases domain.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the case.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "CaseId": {
+      "type": "string",
+      "description": "A unique identifier of the case.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The unique identifier of the Cases domain.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "TemplateId": {
+      "type": "string",
+      "description": "A unique identifier of a template.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "Title": {
+      "type": "string",
+      "description": "The title of the case.",
+      "maxLength": 4100
+    },
+    "CustomerId": {
+      "type": "string",
+      "description": "The full customer profile ARN for the case.",
+      "maxLength": 4100
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags for the case.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "maxLength": 256,
+          "pattern": "^([a-zA-Z0-9 _.:/=+\\-@]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "DomainId",
+    "TemplateId",
+    "Title",
+    "CustomerId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CaseId"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/TemplateId",
+    "/properties/CustomerId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainId",
+      "/properties/CaseId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cases:TagResource",
+      "cases:UntagResource",
+      "cases:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cases:CreateCase",
+        "cases:GetCase",
+        "cases:TagResource",
+        "cases:GetDomain",
+        "profile:SearchProfiles"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cases:GetCase",
+        "cases:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cases:UpdateCase",
+        "cases:GetCase",
+        "cases:TagResource",
+        "cases:UntagResource",
+        "cases:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cases:DeleteCase"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainId": {
+            "type": "string",
+            "description": "The unique identifier of the Cases domain.",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "DomainId"
+        ]
+      },
+      "permissions": [
+        "cases:SearchCases"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
