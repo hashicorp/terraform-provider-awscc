@@ -27,6 +27,15 @@ go run ./internal/tools/bigdiffer
 # Report only; fail (non-zero) if all_schemas.hcl is not normalized or has
 # blocking anomalies (duplicate blocks or naming-invariant violations):
 go run ./internal/tools/bigdiffer -check
+
+# Regenerate the whole provider offline from the committed overlay + schema
+# cache (parallel, in-process; writes *_gen.go, registrations_gen.go,
+# import_examples_gen.json). Replaces the legacy `make resources/…/schemas` crawl:
+go run ./internal/tools/bigdiffer -generate
+
+# Live weekly incremental: discover, regenerate only the types whose schema
+# changed, apply the policy to the overlay, write the cache + aggregates:
+go run ./internal/tools/bigdiffer -update
 ```
 
 Flags:
@@ -39,6 +48,12 @@ Flags:
 - `-allschemas-dir` — directory of `available_schemas.<date>.hcl` snapshot files
 - `-checkout` — `suppressions_checkout.txt` path (cross-referenced, never modified)
 - `-check` — verify only; write nothing
+- `-generate` — regenerate the whole provider offline from the committed overlay
+  + schema cache (writes generated code + aggregates); does not touch AWS
+- `-update` — live weekly incremental: one discovery crawl reconciles the overlay
+  and regenerates only the New/Changed types from their fresh bytes, promoting
+  files and cache only on clean generation (never regress), freezing or
+  suppressing what breaks, then re-emitting the aggregates (needs AWS, `us-east-1`)
 
 ## What it does today (reconcile + report)
 

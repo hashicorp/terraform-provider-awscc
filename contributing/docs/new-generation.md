@@ -299,10 +299,14 @@ in `bigdiffer-generation.md`. In dependency order:
 2. **Brick 7 — full-corpus parity (the lynchpin).** Generate all types into a
    temp tree and byte-compare against the committed `*_gen.go` +
    `import_examples_gen.json`. Proves the owned engine is faithful.
-3. **Brick 8 — parallelize.** `errgroup`, `-race`-clean, still byte-identical.
-4. **Brick 9 — incremental weekly pipeline.** discover → detect → generate only
-   New + Changed → policy → overlay mutate/synthesize → cache write-back → emit
-   the single registration file → report.
+3. **Brick 8 — parallelize. Done.** `errgroup`, `-race`-clean, still
+   byte-identical; 7.4× over serial.
+4. **Brick 9 — incremental weekly pipeline. Done.** `-generate` (full offline
+   parallel regeneration) and `-update` (live: discover → detect → regenerate only
+   New/Changed from fresh bytes → policy → promote-on-success / freeze-or-suppress
+   on failure, never regress → cache write-back → emit the single registration
+   file + `import_examples_gen.json` → report). Engine now loads schemas in-memory
+   (no CWD side effect).
 5. **Brick 10 — docs.** Own `docs-import`; orchestrate `tfplugindocs` + `docs-fmt`.
 6. **Brick 11 — cutover polish.** Compile gate, machine-readable report,
    deprecation docs on the legacy path/targets. Then the deferred items below.

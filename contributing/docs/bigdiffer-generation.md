@@ -216,12 +216,32 @@ time is measured to be a real bottleneck.
   **not** in this brick — it is an aggregate from `schema/main.go`'s
   `GenerateResourceImportExamples`, so its parity is grouped with Brick 9.
 - **Brick 8 — Parallelize.** `errgroup` over the corpus; `-race` clean; still
-  byte-identical; measure the speedup. *Done = fast `-full`.*
-- **Brick 9 — Incremental weekly pipeline.** discover → detect → generate only
-  New + Changed → policy → overlay mutate/synthesize → cache write-back → emit the
-  single registration file **and `import_examples_gen.json`** (the aggregates,
-  with their own parity check) → report. *Done = the weekly `-discover` run does
-  everything.*
+  byte-identical; measure the speedup. *Done: serial 5.26s → parallel(16) 710ms,
+  7.4×; `-race` clean over 1067 concurrent artifacts.*
+- **Brick 9 — Incremental weekly pipeline. Done.** Shipped as two modes plus an
+  engine fix:
+  - `9.1` `writeCorpus` (writes genResults to `internal/aws/<svc>/`) and
+    `emitRegistration` — the single blank-import file that replaces the three
+    legacy directive files; its import set is exactly the legacy union (285
+    packages).
+  - `9.2` `codegen.GenerateImportExamples` (copied `imports.tmpl`) + the
+    `emitImportExamples` aggregate, byte-identical to committed
+    `import_examples_gen.json` (`TestImportExamplesParity`).
+  - `9.3a` **`-generate`** — a full, offline, parallel regeneration of the whole
+    provider (`generateCorpus` → `writeCorpus` → both aggregates). The in-process
+    replacement for the legacy `make resources/…/schemas` directive crawl; does
+    not touch AWS.
+  - `9.3b` **`-update`** — the live weekly incremental. One discovery crawl feeds
+    both overlay reconciliation and change detection; only New/Changed types are
+    regenerated from their fresh bytes; generation success/failure drives the
+    policy (`decide`) applied to the overlay in one `normalizeWithDecisions` pass;
+    `refreshCandidate` stages fresh bytes in a temp file and **promotes files +
+    cache only on clean generation (never regress)**; the aggregates are
+    re-emitted. Requires AWS (us-east-1); the live crawl is exercised manually.
+  - **Engine fix:** `codegen.NewResource` now loads schemas in-memory via
+    `NewResourceJsonSchemaDocument` instead of `NewResourceJsonSchemaPath`, which
+    chdir'd into the schema directory without restoring — a CWD-corruption + a
+    concurrency hazard. Parity unchanged (0 drift, 8432 files).
 - **Brick 10 — Docs.** `make docs` is `tfplugindocs generate` (a standard
   external tool we keep and invoke) plus in-house `docs-import` and `docs-fmt`.
   bigdiffer owns `docs-import` and orchestrates `tfplugindocs` + `docs-fmt` as
