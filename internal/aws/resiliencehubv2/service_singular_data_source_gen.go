@@ -604,7 +604,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "InvokerRoleName": {
 		//	      "description": "Name of the invoker IAM role.",
-		//	      "pattern": "^[A-Za-z0-9_+=,.@\\-]{1,64}$",
+		//	      "pattern": "^(([A-Za-z0-9_+=,.@\\-]+/){1,511})?[A-Za-z0-9_+=,.@\\-]{1,64}$",
 		//	      "type": "string"
 		//	    }
 		//	  },

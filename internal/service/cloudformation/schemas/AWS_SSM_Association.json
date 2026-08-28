@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm",
   "tagging": {
     "permissions": [
       "ssm:AddTagsToResource",
@@ -12,6 +11,21 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
+  "typeName": "AWS::SSM::Association",
+  "readOnlyProperties": [
+    "/properties/AssociationId"
+  ],
+  "description": "The AWS::SSM::Association resource associates an SSM document in AWS Systems Manager with EC2 instances that contain a configuration agent to process the document.",
+  "createOnlyProperties": [
+    "/properties/InstanceId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AssociationId"
+  ],
+  "required": [
+    "Name"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm",
   "handlers": {
     "read": {
       "permissions": [
@@ -38,6 +52,7 @@
       "permissions": [
         "iam:PassRole",
         "ssm:UpdateAssociation",
+        "ssm:DescribeAssociation",
         "ssm:GetCalendarState",
         "ssm:AddTagsToResource",
         "ssm:RemoveTagsFromResource",
@@ -55,18 +70,10 @@
       ]
     }
   },
-  "typeName": "AWS::SSM::Association",
-  "readOnlyProperties": [
-    "/properties/AssociationId"
-  ],
-  "description": "The AWS::SSM::Association resource associates an SSM document in AWS Systems Manager with EC2 instances that contain a configuration agent to process the document.",
   "writeOnlyProperties": [
     "/properties/WaitForSuccessTimeoutSeconds"
   ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/AssociationId"
-  ],
   "definitions": {
     "Target": {
       "additionalProperties": false,
@@ -335,8 +342,5 @@
         "$ref": "#/definitions/Tag"
       }
     }
-  },
-  "required": [
-    "Name"
-  ]
+  }
 }

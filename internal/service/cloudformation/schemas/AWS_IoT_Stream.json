@@ -1,0 +1,196 @@
+{
+  "typeName": "AWS::IoT::Stream",
+  "description": "Resource Type definition for AWS IoT Stream. A stream is a publicly addressable resource that is an abstraction for a list of files that can be transferred to an IoT device.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the stream."
+    },
+    "StreamId": {
+      "type": "string",
+      "description": "The stream ID.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the stream.",
+      "maxLength": 2028,
+      "pattern": "^[^\\p{C}]+$"
+    },
+    "Files": {
+      "type": "array",
+      "description": "The files to stream.",
+      "items": {
+        "$ref": "#/definitions/StreamFile"
+      },
+      "minItems": 1,
+      "maxItems": 50
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "An IAM role that allows the IoT service principal to access your S3 files.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "StreamVersion": {
+      "type": "integer",
+      "description": "The stream version.",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date when the stream was created.",
+      "format": "date-time"
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "description": "The date when the stream was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Metadata which can be used to manage streams.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "StreamFile": {
+      "type": "object",
+      "description": "Represents a file to stream.",
+      "properties": {
+        "FileId": {
+          "type": "integer",
+          "description": "The file ID.",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "S3Location": {
+          "$ref": "#/definitions/S3Location"
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3Location": {
+      "type": "object",
+      "description": "The location of the file in S3.",
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "description": "The S3 bucket.",
+          "minLength": 1
+        },
+        "Key": {
+          "type": "string",
+          "description": "The S3 key.",
+          "minLength": 1
+        },
+        "Version": {
+          "type": "string",
+          "description": "The S3 bucket version."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A set of key/value pairs that are used to manage the resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag's key.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag's value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "StreamId",
+    "Files",
+    "RoleArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/StreamVersion",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/StreamId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/StreamId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iot:TagResource",
+      "iot:UntagResource",
+      "iot:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iot:CreateStream",
+        "iot:DescribeStream",
+        "iot:TagResource",
+        "iot:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iot:DescribeStream",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iot:UpdateStream",
+        "iot:DescribeStream",
+        "iot:TagResource",
+        "iot:UntagResource",
+        "iot:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iot:DeleteStream"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iot:ListStreams"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

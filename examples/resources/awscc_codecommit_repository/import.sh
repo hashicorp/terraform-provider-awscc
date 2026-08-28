@@ -1,0 +1,1 @@
+$ terraform import awscc_codecommit_repository.example "repository_id"

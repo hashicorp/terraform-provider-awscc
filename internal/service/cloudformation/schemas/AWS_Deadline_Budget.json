@@ -1,0 +1,261 @@
+{
+  "typeName": "AWS::Deadline::Budget",
+  "description": "Creates a budget to set spending thresholds for your rendering activity.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the budget."
+    },
+    "BudgetId": {
+      "type": "string",
+      "description": "The budget ID.",
+      "pattern": "^budget-[0-9a-f]{32}$"
+    },
+    "FarmId": {
+      "type": "string",
+      "description": "The farm ID.",
+      "pattern": "^farm-[0-9a-f]{32}$"
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The display name of the budget.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the budget.",
+      "minLength": 0,
+      "maxLength": 100
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the budget.",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "ApproximateDollarLimit": {
+      "type": "number",
+      "description": "The dollar limit based on consumed usage.",
+      "minimum": 0.01
+    },
+    "UsageTrackingResource": {
+      "$ref": "#/definitions/UsageTrackingResource"
+    },
+    "Actions": {
+      "type": "array",
+      "description": "The budget actions to specify what happens when the budget runs out.",
+      "items": {
+        "$ref": "#/definitions/BudgetActionToAdd"
+      },
+      "minItems": 0,
+      "maxItems": 10
+    },
+    "Schedule": {
+      "$ref": "#/definitions/BudgetSchedule"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "UsageTrackingResource": {
+      "type": "object",
+      "description": "The usage details of the allotted budget.",
+      "properties": {
+        "QueueId": {
+          "type": "string",
+          "description": "The queue ID.",
+          "pattern": "^queue-[0-9a-f]{32}$"
+        }
+      },
+      "required": [
+        "QueueId"
+      ],
+      "additionalProperties": false
+    },
+    "BudgetActionToAdd": {
+      "type": "object",
+      "description": "The budget action to add.",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The type of budget action.",
+          "enum": [
+            "STOP_SCHEDULING_AND_COMPLETE_TASKS",
+            "STOP_SCHEDULING_AND_CANCEL_TASKS"
+          ]
+        },
+        "ThresholdPercentage": {
+          "type": "number",
+          "description": "The percentage threshold for the budget action.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "Description": {
+          "type": "string",
+          "description": "A description for the budget action.",
+          "minLength": 0,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "Type",
+        "ThresholdPercentage"
+      ],
+      "additionalProperties": false
+    },
+    "BudgetSchedule": {
+      "type": "object",
+      "description": "The start and end time of the budget.",
+      "properties": {
+        "Fixed": {
+          "$ref": "#/definitions/FixedBudgetSchedule"
+        }
+      },
+      "required": [
+        "Fixed"
+      ],
+      "additionalProperties": false
+    },
+    "FixedBudgetSchedule": {
+      "type": "object",
+      "description": "The details of a fixed budget schedule.",
+      "properties": {
+        "StartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the budget starts."
+        },
+        "EndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the budget ends."
+        }
+      },
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "FarmId",
+    "DisplayName",
+    "UsageTrackingResource",
+    "ApproximateDollarLimit",
+    "Actions",
+    "Schedule"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/BudgetId",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/FarmId",
+    "/properties/UsageTrackingResource"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/FarmId",
+      "/properties/BudgetId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "deadline:TagResource",
+      "deadline:UntagResource",
+      "deadline:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "deadline:CreateBudget",
+        "deadline:GetBudget",
+        "deadline:TagResource",
+        "deadline:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "deadline:GetBudget",
+        "deadline:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "deadline:UpdateBudget",
+        "deadline:GetBudget",
+        "deadline:TagResource",
+        "deadline:UntagResource",
+        "deadline:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "deadline:DeleteBudget",
+        "deadline:GetBudget",
+        "deadline:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "FarmId": {
+            "type": "string",
+            "pattern": "^farm-[0-9a-f]{32}$"
+          }
+        },
+        "required": [
+          "FarmId"
+        ]
+      },
+      "permissions": [
+        "deadline:ListBudgets"
+      ]
+    }
+  }
+}

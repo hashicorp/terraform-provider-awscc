@@ -1,0 +1,1 @@
+$ terraform import awscc_supportauthz_support_permit.example "arn"

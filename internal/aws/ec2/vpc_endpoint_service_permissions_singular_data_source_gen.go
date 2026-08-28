@@ -27,6 +27,7 @@ func vPCEndpointServicePermissionsDataSource(ctx context.Context) (datasource.Da
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },

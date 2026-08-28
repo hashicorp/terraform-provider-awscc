@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_connection.example "catalog_id|name"

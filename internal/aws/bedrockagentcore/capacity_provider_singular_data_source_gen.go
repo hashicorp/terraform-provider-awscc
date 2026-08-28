@@ -264,9 +264,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                  "description": "The operating system and CPU architecture for the instances.",
 		//	                  "enum": [
 		//	                    "LINUX_X86_64",
-		//	                    "LINUX_ARM64",
-		//	                    "MAC_ARM64",
-		//	                    "WINDOWS_X86_64"
+		//	                    "LINUX_ARM64"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },

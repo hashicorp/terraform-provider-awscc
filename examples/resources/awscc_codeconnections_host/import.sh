@@ -1,0 +1,1 @@
+$ terraform import awscc_codeconnections_host.example "host_arn"

@@ -928,6 +928,39 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The instances distribution.",
 		//	      "properties": {
+		//	        "DistributionSegments": {
+		//	          "description": "",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "TargetCapacityTypes": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "on-demand-capacity-reservation",
+		//	                    "capacity-block",
+		//	                    "interruptible-capacity-reservation",
+		//	                    "on-demand"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TargetCapacityTypes"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
 		//	        "OnDemandAllocationStrategy": {
 		//	          "description": "The allocation strategy to apply to your On-Demand Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.\n The following lists the valid values:\n  + lowest-price Uses price to determine which instance types are the highest priority, launching the lowest priced instance types within an Availability Zone first. This is the default value for Auto Scaling groups that specify InstanceRequirements. + prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling launches your highest priority instance types first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance type, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. This is the default value for Auto Scaling groups that don't specify InstanceRequirements and cannot be used for groups that do.",
 		//	          "type": "string"
@@ -1322,6 +1355,44 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				// Property: InstancesDistribution
 				"instances_distribution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DistributionSegments
+						"distribution_segments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TargetCapacityTypes
+									"target_capacity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtLeast(1),
+											listvalidator.UniqueValues(),
+											listvalidator.ValueStringsAre(
+												stringvalidator.OneOf(
+													"on-demand-capacity-reservation",
+													"capacity-block",
+													"interruptible-capacity-reservation",
+													"on-demand",
+												),
+											),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: OnDemandAllocationStrategy
 						"on_demand_allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The allocation strategy to apply to your On-Demand Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.\n The following lists the valid values:\n  + lowest-price Uses price to determine which instance types are the highest priority, launching the lowest priced instance types within an Availability Zone first. This is the default value for Auto Scaling groups that specify InstanceRequirements. + prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling launches your highest priority instance types first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance type, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. This is the default value for Auto Scaling groups that don't specify InstanceRequirements and cannot be used for groups that do.",
@@ -2469,6 +2540,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"deletion_protection":                      "DeletionProtection",
 		"desired_capacity":                         "DesiredCapacity",
 		"desired_capacity_type":                    "DesiredCapacityType",
+		"distribution_segments":                    "DistributionSegments",
 		"excluded_instance_types":                  "ExcludedInstanceTypes",
 		"granularity":                              "Granularity",
 		"health_check_grace_period":                "HealthCheckGracePeriod",
@@ -2536,6 +2608,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"spot_max_price":                                          "SpotMaxPrice",
 		"spot_max_price_percentage_over_lowest_price":             "SpotMaxPricePercentageOverLowestPrice",
 		"tags":                   "Tags",
+		"target_capacity_types":  "TargetCapacityTypes",
 		"target_group_ar_ns":     "TargetGroupARNs",
 		"terminate_hook_abandon": "TerminateHookAbandon",
 		"termination_policies":   "TerminationPolicies",

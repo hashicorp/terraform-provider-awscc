@@ -1,0 +1,288 @@
+{
+  "typeName": "AWS::SupportAuthZ::SupportPermit",
+  "description": "Resource Type definition for AWS::SupportAuthZ::SupportPermit. Represents a support permit that grants AWS support time-bounded access to one or more resources for a set of actions.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "ActionSet": {
+      "description": "The set of actions a support permit grants. Exactly one of AllActions or Actions must be provided.",
+      "type": "object",
+      "properties": {
+        "AllActions": {
+          "description": "Grants all actions.",
+          "type": "object",
+          "additionalProperties": false
+        },
+        "Actions": {
+          "description": "An explicit list of actions to grant.",
+          "type": "array",
+          "insertionOrder": true,
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 255,
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9_.-]+$"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceSet": {
+      "description": "The set of resources a support permit applies to. Exactly one of AllResourcesInRegion or Resources must be provided.",
+      "type": "object",
+      "properties": {
+        "AllResourcesInRegion": {
+          "description": "Applies to all resources in the region.",
+          "type": "object",
+          "additionalProperties": false
+        },
+        "Resources": {
+          "description": "An explicit list of resource ARNs.",
+          "type": "array",
+          "insertionOrder": true,
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^[a-zA-Z0-9:/_.-]+$"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Condition": {
+      "description": "A time-bound condition controlling when the permit is active. Exactly one of AllowAfter or AllowBefore must be provided.",
+      "type": "object",
+      "properties": {
+        "AllowAfter": {
+          "description": "The permit is active only after this time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "AllowBefore": {
+          "description": "The permit is active only before this time.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Permit": {
+      "description": "The grant definition: which actions on which resources, optionally constrained by time conditions.",
+      "type": "object",
+      "properties": {
+        "Actions": {
+          "$ref": "#/definitions/ActionSet"
+        },
+        "Resources": {
+          "$ref": "#/definitions/ResourceSet"
+        },
+        "Conditions": {
+          "description": "Optional time-bound conditions (at most two).",
+          "type": "array",
+          "insertionOrder": true,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/Condition"
+          }
+        }
+      },
+      "required": [
+        "Actions",
+        "Resources"
+      ],
+      "additionalProperties": false
+    },
+    "SigningKeyInfo": {
+      "description": "The signing key used by the permit. Exactly one key type must be provided.",
+      "type": "object",
+      "properties": {
+        "KmsKey": {
+          "description": "The ARN of the KMS key used to sign permit grants.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[a-zA-Z0-9/:_-]{1,512}$"
+        }
+      },
+      "required": [
+        "KmsKey"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the support permit.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^[a-zA-Z0-9:/-]{1,512}$"
+    },
+    "PermitId": {
+      "description": "The service-generated identifier of the support permit (the resource segment of the ARN).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^[a-zA-Z0-9-]{1,512}$"
+    },
+    "Name": {
+      "description": "The name of the support permit.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[a-zA-Z0-9]{1,256}$"
+    },
+    "Description": {
+      "description": "An optional description of the support permit.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Permit": {
+      "$ref": "#/definitions/Permit"
+    },
+    "SigningKeyInfo": {
+      "$ref": "#/definitions/SigningKeyInfo"
+    },
+    "SupportCaseDisplayId": {
+      "description": "The support case display identifier associated with the permit. When provided, the permit is linked to the specified AWS Support case.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^[a-zA-Z0-9:/-]{1,512}$"
+    },
+    "Status": {
+      "description": "The current status of the support permit.",
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "DELETING"
+      ]
+    },
+    "CreatedAt": {
+      "description": "The time at which the support permit was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "description": "A list of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "Permit",
+    "SigningKeyInfo"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/PermitId",
+    "/properties/Status",
+    "/properties/CreatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/Permit",
+    "/properties/SigningKeyInfo",
+    "/properties/SupportCaseDisplayId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "additionalIdentifiers": [
+    [
+      "/properties/PermitId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "supportauthz:TagResource",
+      "supportauthz:UntagResource",
+      "supportauthz:ListTagsForResource",
+      "supportauthz:GetSupportPermit"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "supportauthz:CreateSupportPermit",
+        "supportauthz:GetSupportPermit",
+        "supportauthz:RegisterKey",
+        "supportauthz:TagResource",
+        "supportauthz:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "supportauthz:GetSupportPermit",
+        "supportauthz:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "supportauthz:GetSupportPermit",
+        "supportauthz:TagResource",
+        "supportauthz:UntagResource",
+        "supportauthz:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "supportauthz:DeleteSupportPermit",
+        "supportauthz:GetSupportPermit",
+        "supportauthz:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "supportauthz:ListSupportPermits"
+      ]
+    }
+  }
+}

@@ -51,7 +51,7 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "properties": {
 		//	    "Content": {
 		//	      "description": "The content of the quick response.",
-		//	      "maxLength": 1024,
+		//	      "maxLength": 4000,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    }
@@ -94,7 +94,7 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "properties": {
 		//	        "Content": {
 		//	          "description": "The content of the quick response.",
-		//	          "maxLength": 1024,
+		//	          "maxLength": 4000,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
@@ -107,7 +107,7 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "properties": {
 		//	        "Content": {
 		//	          "description": "The content of the quick response.",
-		//	          "maxLength": 1024,
+		//	          "maxLength": 4000,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -32,6 +33,22 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::BedrockAgentCore::PaymentConnector resource.
 func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AuthorizationUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
+		//	  "maxLength": 4096,
+		//	  "pattern": "^https://[^\\p{C}]*$",
+		//	  "type": "string"
+		//	}
+		"authorization_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorCreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +110,12 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	    "READY",
 		//	    "CREATE_FAILED",
 		//	    "UPDATE_FAILED",
-		//	    "DELETE_FAILED"
+		//	    "DELETE_FAILED",
+		//	    "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+		//	    "PENDING_AUTHENTICATION",
+		//	    "PROVISIONING",
+		//	    "AUTHENTICATION_EXPIRED",
+		//	    "AUTHENTICATION_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -121,12 +143,15 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 					"StripePrivy",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CredentialProviderConfigurations
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The credential provider configurations for the connector",
+		//	  "description": "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -161,7 +186,7 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 1,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -213,13 +238,15 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The credential provider configurations for the connector",
-			Required:    true,
+			Description: "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 1),
+				listvalidator.SizeBetween(0, 1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -292,6 +319,33 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ProvisionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.",
+		//	  "enum": [
+		//	    "MANUAL",
+		//	    "QUICK_CREATE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"provision_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"MANUAL",
+					"QUICK_CREATE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ProvisionMode is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -321,6 +375,7 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"authorization_url":                  "AuthorizationUrl",
 		"coinbase_cdp":                       "CoinbaseCDP",
 		"connector_created_at":               "ConnectorCreatedAt",
 		"connector_last_updated_at":          "ConnectorLastUpdatedAt",
@@ -333,9 +388,13 @@ func paymentConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"payment_connector_arn":              "PaymentConnectorArn",
 		"payment_connector_id":               "PaymentConnectorId",
 		"payment_manager_id":                 "PaymentManagerId",
+		"provision_mode":                     "ProvisionMode",
 		"stripe_privy":                       "StripePrivy",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ProvisionMode",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

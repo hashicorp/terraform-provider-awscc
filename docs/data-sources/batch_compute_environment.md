@@ -25,6 +25,7 @@ Data Source schema for AWS::Batch::ComputeEnvironment
 - `compute_environment_name` (String)
 - `compute_resources` (Attributes) (see [below for nested schema](#nestedatt--compute_resources))
 - `context` (String)
+- `ecs_settings` (Attributes) (see [below for nested schema](#nestedatt--ecs_settings))
 - `eks_configuration` (Attributes) (see [below for nested schema](#nestedatt--eks_configuration))
 - `replace_compute_environment` (Boolean)
 - `service_role` (String)
@@ -181,6 +182,14 @@ Read-Only:
 
 - `min_scale_down_delay_minutes` (Number)
 
+
+
+<a id="nestedatt--ecs_settings"></a>
+### Nested Schema for `ecs_settings`
+
+Read-Only:
+
+- `container_insights` (String)
 
 
 <a id="nestedatt--eks_configuration"></a>

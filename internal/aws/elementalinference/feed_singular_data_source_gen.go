@@ -8,7 +8,6 @@ package elementalinference
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,6 +23,18 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ElementalInference::Feed resource.
 func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 32,
+		//	  "pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$",
+		//	  "type": "string"
+		//	}
+		"access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -91,12 +102,58 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "maxLength": 1024,
 		//	                "pattern": "^[\\w \\-\\.',@:;]*$",
 		//	                "type": "string"
+		//	              },
+		//	              "DataSourceConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "FixtureId": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "FixtureId"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Cropping": {
 		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "TemplateGroups": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TemplateUris": {
+		//	                      "items": {
+		//	                        "maxLength": 255,
+		//	                        "minLength": 10,
+		//	                        "pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "maxItems": 2,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name",
+		//	                    "TemplateUris"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 4,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Subtitling": {
@@ -193,13 +250,41 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 									"callback_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
+									// Property: DataSourceConfiguration
+									"data_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FixtureId
+											"fixture_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Cropping
-							"cropping": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType: jsontypes.NormalizedType{},
-								Computed:   true,
+							"cropping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TemplateGroups
+									"template_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: TemplateUris
+												"template_uris": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Subtitling
 							"subtitling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -279,25 +364,30 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ElementalInference::Feed").WithTerraformTypeName("awscc_elementalinference_feed")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"aspect_ratio":      "AspectRatio",
-		"callback_metadata": "CallbackMetadata",
-		"clipping":          "Clipping",
-		"cropping":          "Cropping",
-		"data_endpoints":    "DataEndpoints",
-		"description":       "Description",
-		"dictionary":        "Dictionary",
-		"feed_id":           "Id",
-		"height":            "Height",
-		"language":          "Language",
-		"name":              "Name",
-		"output_config":     "OutputConfig",
-		"outputs":           "Outputs",
-		"profanity_filter":  "ProfanityFilter",
-		"status":            "Status",
-		"subtitling":        "Subtitling",
-		"tags":              "Tags",
-		"width":             "Width",
+		"access_role_arn":           "AccessRoleArn",
+		"arn":                       "Arn",
+		"aspect_ratio":              "AspectRatio",
+		"callback_metadata":         "CallbackMetadata",
+		"clipping":                  "Clipping",
+		"cropping":                  "Cropping",
+		"data_endpoints":            "DataEndpoints",
+		"data_source_configuration": "DataSourceConfiguration",
+		"description":               "Description",
+		"dictionary":                "Dictionary",
+		"feed_id":                   "Id",
+		"fixture_id":                "FixtureId",
+		"height":                    "Height",
+		"language":                  "Language",
+		"name":                      "Name",
+		"output_config":             "OutputConfig",
+		"outputs":                   "Outputs",
+		"profanity_filter":          "ProfanityFilter",
+		"status":                    "Status",
+		"subtitling":                "Subtitling",
+		"tags":                      "Tags",
+		"template_groups":           "TemplateGroups",
+		"template_uris":             "TemplateUris",
+		"width":                     "Width",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

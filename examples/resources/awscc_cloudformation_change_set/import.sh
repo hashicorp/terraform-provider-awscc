@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_change_set.example "change_set_id"

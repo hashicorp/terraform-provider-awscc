@@ -101,10 +101,11 @@ func Test_comparePathsNumerically(t *testing.T) {
 
 func Test_replaceKeyValueArrayPatchesWithFullReplace(t *testing.T) {
 	tests := []struct {
-		name     string
-		patch    []jsonpatch.JsonPatchOperation
-		newState string
-		want     []jsonpatch.JsonPatchOperation
+		name                string
+		patch               []jsonpatch.JsonPatchOperation
+		newState            string
+		unorderedArrayPaths map[string]bool
+		want                []jsonpatch.JsonPatchOperation
 	}{
 		{
 			name: "replaces index-based tag operations with full replace",
@@ -215,11 +216,110 @@ func Test_replaceKeyValueArrayPatchesWithFullReplace(t *testing.T) {
 				{Operation: "replace", Path: "/Tags/0", Value: map[string]any{"Key": "a", "Value": "1"}},
 			},
 		},
+		{
+			// Reproduces issue #3260: Config elements have no "Key"/"key" field, so
+			// isKeyValueArray alone would miss them. unorderedArrayPaths (derived from
+			// the attribute's Set type in the Terraform schema) must catch this instead.
+			name: "handles Set-typed non-key-value array via unorderedArrayPaths",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Config/0/StartTime/Hours", Value: float64(8)},
+			},
+			newState:            `{"Config":[{"Day":"MONDAY","StartTime":{"Hours":8,"Minutes":0}},{"Day":"TUESDAY","StartTime":{"Hours":10,"Minutes":0}},{"Day":"WEDNESDAY","StartTime":{"Hours":11,"Minutes":0}}]}`,
+			unorderedArrayPaths: map[string]bool{"/Config": true},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Config", Value: []any{
+					map[string]any{"Day": "MONDAY", "StartTime": map[string]any{"Hours": float64(8), "Minutes": float64(0)}},
+					map[string]any{"Day": "TUESDAY", "StartTime": map[string]any{"Hours": float64(10), "Minutes": float64(0)}},
+					map[string]any{"Day": "WEDNESDAY", "StartTime": map[string]any{"Hours": float64(11), "Minutes": float64(0)}},
+				}},
+			},
+		},
+		{
+			// Without a matching unorderedArrayPaths entry, non-key-value arrays are
+			// left as positional patches -- confirms the new signal is additive, not a
+			// blanket full-replace for every array.
+			name: "leaves non-key-value array unchanged when path not in unorderedArrayPaths",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Config/0/StartTime/Hours", Value: float64(8)},
+			},
+			newState: `{"Config":[{"Day":"MONDAY","StartTime":{"Hours":8,"Minutes":0}}]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Config/0/StartTime/Hours", Value: float64(8)},
+			},
+		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := replaceKeyValueArrayPatchesWithFullReplace(tt.patch, tt.newState)
+			got := replaceKeyValueArrayPatchesWithFullReplace(tt.patch, tt.newState, tt.unorderedArrayPaths)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("replaceKeyValueArrayPatchesWithFullReplace() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// Test_replaceKeyValueArrayPatchesWithFullReplace_Nested covers arrays nested inside
+// another array's elements (e.g. AWS::EC2::LaunchTemplate's
+// TagSpecifications[].Tags, or a hypothetical Set nested inside an ordered list). A
+// patch operation into such a structure crosses two array boundaries, and it's the
+// inner one -- not the outer, ordinary-list one -- that needs full-replace protection.
+// This guards against a regression where only the outermost (or only the innermost)
+// index in a path was considered, which would either miss the real order-unstable
+// array or misidentify an unrelated ordered container as needing full replacement.
+func Test_replaceKeyValueArrayPatchesWithFullReplace_Nested(t *testing.T) {
+	tests := []struct {
+		name                string
+		patch               []jsonpatch.JsonPatchOperation
+		newState            string
+		unorderedArrayPaths map[string]bool
+		want                []jsonpatch.JsonPatchOperation
+	}{
+		{
+			name: "key-value array nested inside an ordered list gets full replace, not the outer list",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "add", Path: "/TagSpecifications/0/Tags/1", Value: map[string]any{"Key": "team", "Value": "a"}},
+			},
+			newState: `{"TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"env","Value":"prod"},{"Key":"team","Value":"a"}]}]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/TagSpecifications/0/Tags", Value: []any{
+					map[string]any{"Key": "env", "Value": "prod"},
+					map[string]any{"Key": "team", "Value": "a"},
+				}},
+			},
+		},
+		{
+			name: "removing one nested tag doesn't spuriously full-replace the outer list too",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/TagSpecifications/0/Tags/1"},
+			},
+			newState: `{"TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"env","Value":"prod"},{"Key":"owner","Value":"x"}]}]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/TagSpecifications/0/Tags", Value: []any{
+					map[string]any{"Key": "env", "Value": "prod"},
+					map[string]any{"Key": "owner", "Value": "x"},
+				}},
+			},
+		},
+		{
+			name: "Set-typed attribute nested inside an ordered list's elements gets full replace",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "add", Path: "/QueueConfigs/0/Tags/1", Value: map[string]any{"Foo": "b"}},
+			},
+			newState:            `{"QueueConfigs":[{"Name":"q1","Tags":[{"Foo":"a"},{"Foo":"b"}]}]}`,
+			unorderedArrayPaths: map[string]bool{"/QueueConfigs/Tags": true},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/QueueConfigs/0/Tags", Value: []any{
+					map[string]any{"Foo": "a"},
+					map[string]any{"Foo": "b"},
+				}},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := replaceKeyValueArrayPatchesWithFullReplace(tt.patch, tt.newState, tt.unorderedArrayPaths)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("replaceKeyValueArrayPatchesWithFullReplace() = %v, want %v", got, tt.want)
 			}

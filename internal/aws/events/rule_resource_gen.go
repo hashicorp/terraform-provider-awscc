@@ -127,6 +127,20 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RuleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.",
+		//	  "type": "string"
+		//	}
+		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleExpression
 		// CloudFormation resource type schema:
 		//
@@ -1466,6 +1480,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		"retry_policy":                   "RetryPolicy",
 		"retry_strategy":                 "RetryStrategy",
 		"role_arn":                       "RoleArn",
+		"rule_name":                      "RuleName",
 		"run_command_parameters":         "RunCommandParameters",
 		"run_command_targets":            "RunCommandTargets",
 		"sage_maker_pipeline_parameters": "SageMakerPipelineParameters",

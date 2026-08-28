@@ -101,6 +101,7 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// DeliveryDestinationPolicy is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeliveryDestinationType
 		// CloudFormation resource type schema:
@@ -303,6 +304,9 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 		"value":                       "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DeliveryDestinationPolicy",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

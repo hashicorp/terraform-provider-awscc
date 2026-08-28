@@ -27,7 +27,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 255,
+		//	  "maxLength": 4096,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -537,7 +537,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 1000,
+		//	  "maxLength": 4096,
 		//	  "pattern": "(?s).*",
 		//	  "type": "string"
 		//	}

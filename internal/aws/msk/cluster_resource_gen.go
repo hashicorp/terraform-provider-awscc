@@ -1504,7 +1504,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	})
 	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(30)
 
-	opts = opts.WithUpdateTimeoutInMinutes(720)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

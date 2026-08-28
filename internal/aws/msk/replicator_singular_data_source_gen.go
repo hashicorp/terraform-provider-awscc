@@ -108,6 +108,106 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
+		//	          "SaslOAuthBearer": {
+		//	            "additionalProperties": false,
+		//	            "description": "Details for client authentication using SASL/OAUTHBEARER.",
+		//	            "properties": {
+		//	              "ClientCredentials": {
+		//	                "additionalProperties": false,
+		//	                "description": "Details for SASL/OAUTHBEARER using standard client_credentials grant. Mutually exclusive with iamJwtBearer and clientCredentialsAssertion.",
+		//	                "properties": {
+		//	                  "TokenRequestSecretArn": {
+		//	                    "description": "Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TokenRequestSecretArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ClientCredentialsAssertion": {
+		//	                "additionalProperties": false,
+		//	                "description": "Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion (RFC 7521/7523). Mutually exclusive with clientCredentials and iamJwtBearer.",
+		//	                "properties": {
+		//	                  "Audience": {
+		//	                    "description": "The audience (aud claim) set in the STS JWT client assertion.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SigningAlgorithm": {
+		//	                    "description": "The algorithm used to sign the JWT client assertion.",
+		//	                    "enum": [
+		//	                      "RS256",
+		//	                      "ES384"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TokenRequestSecretArn": {
+		//	                    "description": "Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Audience",
+		//	                  "SigningAlgorithm"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "IamJwtBearer": {
+		//	                "additionalProperties": false,
+		//	                "description": "Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523). Mutually exclusive with clientCredentials and clientCredentialsAssertion.",
+		//	                "properties": {
+		//	                  "Audience": {
+		//	                    "description": "The audience (aud claim) set in the STS JWT assertion.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SigningAlgorithm": {
+		//	                    "description": "The algorithm used to sign the JWT assertion.",
+		//	                    "enum": [
+		//	                      "RS256",
+		//	                      "ES384"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TokenRequestSecretArn": {
+		//	                    "description": "Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Audience",
+		//	                  "SigningAlgorithm"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Scope": {
+		//	                "description": "OAuth scope to request. Included in the token request if provided.",
+		//	                "type": "string"
+		//	              },
+		//	              "TokenEndpointAuthenticationMethod": {
+		//	                "description": "How client credentials are sent to the identity provider (POST, BASIC, or NONE).",
+		//	                "enum": [
+		//	                  "POST",
+		//	                  "BASIC",
+		//	                  "NONE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TokenEndpointTlsCertificateArn": {
+		//	                "description": "Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.",
+		//	                "type": "string"
+		//	              },
+		//	              "TokenEndpointUrl": {
+		//	                "description": "The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TokenEndpointUrl",
+		//	              "TokenEndpointAuthenticationMethod"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "SaslScram": {
 		//	            "additionalProperties": false,
 		//	            "description": "Details for SASL/SCRAM client authentication.",
@@ -240,6 +340,89 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Details for mTLS client authentication.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SaslOAuthBearer
+							"sasl_o_auth_bearer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ClientCredentials
+									"client_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: TokenRequestSecretArn
+											"token_request_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Details for SASL/OAUTHBEARER using standard client_credentials grant. Mutually exclusive with iamJwtBearer and clientCredentialsAssertion.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ClientCredentialsAssertion
+									"client_credentials_assertion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Audience
+											"audience": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The audience (aud claim) set in the STS JWT client assertion.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SigningAlgorithm
+											"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The algorithm used to sign the JWT client assertion.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: TokenRequestSecretArn
+											"token_request_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion (RFC 7521/7523). Mutually exclusive with clientCredentials and iamJwtBearer.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: IamJwtBearer
+									"iam_jwt_bearer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Audience
+											"audience": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The audience (aud claim) set in the STS JWT assertion.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SigningAlgorithm
+											"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The algorithm used to sign the JWT assertion.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: TokenRequestSecretArn
+											"token_request_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523). Mutually exclusive with clientCredentials and clientCredentialsAssertion.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Scope
+									"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "OAuth scope to request. Included in the token request if provided.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TokenEndpointAuthenticationMethod
+									"token_endpoint_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "How client credentials are sent to the identity provider (POST, BASIC, or NONE).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TokenEndpointTlsCertificateArn
+									"token_endpoint_tls_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TokenEndpointUrl
+									"token_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Details for client authentication using SASL/OAUTHBEARER.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SaslScram
@@ -853,9 +1036,12 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"amazon_msk_cluster":                   "AmazonMskCluster",
 		"apache_kafka_cluster":                 "ApacheKafkaCluster",
 		"apache_kafka_cluster_id":              "ApacheKafkaClusterId",
+		"audience":                             "Audience",
 		"bootstrap_broker_string":              "BootstrapBrokerString",
 		"bucket":                               "Bucket",
 		"client_authentication":                "ClientAuthentication",
+		"client_credentials":                   "ClientCredentials",
+		"client_credentials_assertion":         "ClientCredentialsAssertion",
 		"cloudwatch_logs":                      "CloudWatchLogs",
 		"consumer_group_offset_sync_mode":      "ConsumerGroupOffsetSyncMode",
 		"consumer_group_replication":           "ConsumerGroupReplication",
@@ -872,6 +1058,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_in_transit":                "EncryptionInTransit",
 		"encryption_type":                      "EncryptionType",
 		"firehose":                             "Firehose",
+		"iam_jwt_bearer":                       "IamJwtBearer",
 		"kafka_clusters":                       "KafkaClusters",
 		"key":                                  "Key",
 		"log_delivery":                         "LogDelivery",
@@ -886,10 +1073,13 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"replicator_name":                      "ReplicatorName",
 		"root_ca_certificate":                  "RootCaCertificate",
 		"s3":                                   "S3",
+		"sasl_o_auth_bearer":                   "SaslOAuthBearer",
 		"sasl_scram":                           "SaslScram",
+		"scope":                                "Scope",
 		"secret_arn":                           "SecretArn",
 		"security_group_ids":                   "SecurityGroupIds",
 		"service_execution_role_arn":           "ServiceExecutionRoleArn",
+		"signing_algorithm":                    "SigningAlgorithm",
 		"source_kafka_cluster_arn":             "SourceKafkaClusterArn",
 		"source_kafka_cluster_id":              "SourceKafkaClusterId",
 		"starting_position":                    "StartingPosition",
@@ -899,6 +1089,10 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_compression_type":              "TargetCompressionType",
 		"target_kafka_cluster_arn":             "TargetKafkaClusterArn",
 		"target_kafka_cluster_id":              "TargetKafkaClusterId",
+		"token_endpoint_authentication_method": "TokenEndpointAuthenticationMethod",
+		"token_endpoint_tls_certificate_arn":   "TokenEndpointTlsCertificateArn",
+		"token_endpoint_url":                   "TokenEndpointUrl",
+		"token_request_secret_arn":             "TokenRequestSecretArn",
 		"topic_name_configuration":             "TopicNameConfiguration",
 		"topic_replication":                    "TopicReplication",
 		"topics_to_exclude":                    "TopicsToExclude",

@@ -236,6 +236,7 @@ Read-Only:
 
 Read-Only:
 
+- `distribution_segments` (Attributes List) (see [below for nested schema](#nestedatt--mixed_instances_policy--instances_distribution--distribution_segments))
 - `on_demand_allocation_strategy` (String) The allocation strategy to apply to your On-Demand Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.
  The following lists the valid values:
   + lowest-price Uses price to determine which instance types are the highest priority, launching the lowest priced instance types within an Availability Zone first. This is the default value for Auto Scaling groups that specify InstanceRequirements. + prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling launches your highest priority instance types first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance type, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. This is the default value for Auto Scaling groups that don't specify InstanceRequirements and cannot be used for groups that do.
@@ -254,6 +255,14 @@ Read-Only:
 - `spot_max_price` (String) The maximum price per unit hour that you are willing to pay for a Spot Instance. If your maximum price is lower than the Spot price for the instance types that you selected, your Spot Instances are not launched. We do not recommend specifying a maximum price because it can lead to increased interruptions. When Spot Instances launch, you pay the current Spot price. To remove a maximum price that you previously set, include the property but specify an empty string ("") for the value.
   If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify one.
   Valid Range: Minimum value of 0.001
+
+<a id="nestedatt--mixed_instances_policy--instances_distribution--distribution_segments"></a>
+### Nested Schema for `mixed_instances_policy.instances_distribution.distribution_segments`
+
+Read-Only:
+
+- `target_capacity_types` (List of String)
+
 
 
 <a id="nestedatt--mixed_instances_policy--launch_template"></a>

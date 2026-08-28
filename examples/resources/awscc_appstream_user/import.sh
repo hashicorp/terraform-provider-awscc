@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_user.example "user_name|authentication_type"

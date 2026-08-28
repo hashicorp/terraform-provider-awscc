@@ -23,6 +23,19 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::BedrockAgentCore::PaymentConnector resource.
 func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AuthorizationUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
+		//	  "maxLength": 4096,
+		//	  "pattern": "^https://[^\\p{C}]*$",
+		//	  "type": "string"
+		//	}
+		"authorization_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorCreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -72,7 +85,12 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "READY",
 		//	    "CREATE_FAILED",
 		//	    "UPDATE_FAILED",
-		//	    "DELETE_FAILED"
+		//	    "DELETE_FAILED",
+		//	    "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+		//	    "PENDING_AUTHENTICATION",
+		//	    "PROVISIONING",
+		//	    "AUTHENTICATION_EXPIRED",
+		//	    "AUTHENTICATION_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -96,7 +114,7 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The credential provider configurations for the connector",
+		//	  "description": "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -131,7 +149,7 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 1,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -161,7 +179,7 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The credential provider configurations for the connector",
+			Description: "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -214,6 +232,21 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The identifier of the parent payment manager",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProvisionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.",
+		//	  "enum": [
+		//	    "MANUAL",
+		//	    "QUICK_CREATE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"provision_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -231,6 +264,7 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::PaymentConnector").WithTerraformTypeName("awscc_bedrockagentcore_payment_connector")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"authorization_url":                  "AuthorizationUrl",
 		"coinbase_cdp":                       "CoinbaseCDP",
 		"connector_created_at":               "ConnectorCreatedAt",
 		"connector_last_updated_at":          "ConnectorLastUpdatedAt",
@@ -243,6 +277,7 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		"payment_connector_arn":              "PaymentConnectorArn",
 		"payment_connector_id":               "PaymentConnectorId",
 		"payment_manager_id":                 "PaymentManagerId",
+		"provision_mode":                     "ProvisionMode",
 		"stripe_privy":                       "StripePrivy",
 	})
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_kendra_query_suggestions_block_list.example "arn"

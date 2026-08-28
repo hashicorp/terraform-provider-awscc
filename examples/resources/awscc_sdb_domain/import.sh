@@ -1,0 +1,1 @@
+$ terraform import awscc_sdb_domain.example "id"

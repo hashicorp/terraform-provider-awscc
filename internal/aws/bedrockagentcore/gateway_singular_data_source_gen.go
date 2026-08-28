@@ -796,6 +796,43 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			CustomType: timetypes.RFC3339Type{},
 			Computed:   true,
 		}, /*END ATTRIBUTE*/
+		// Property: WafConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "FailureMode": {
+		//	      "enum": [
+		//	        "FAIL_CLOSE",
+		//	        "FAIL_OPEN"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"waf_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureMode
+				"failure_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: WebAclArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:[a-z0-9\\-]+:wafv2:[a-z0-9\\-]+:[0-9]{12}:regional/webacl/.+$",
+		//	  "type": "string"
+		//	}
+		"web_acl_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkloadIdentityDetails
 		// CloudFormation resource type schema:
 		//
@@ -858,6 +895,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint_ip_address_type":          "EndpointIpAddressType",
 		"exception_level":                   "ExceptionLevel",
 		"exclude":                           "Exclude",
+		"failure_mode":                      "FailureMode",
 		"field":                             "Field",
 		"gateway_arn":                       "GatewayArn",
 		"gateway_identifier":                "GatewayIdentifier",
@@ -899,6 +937,8 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                              "Tags",
 		"updated_at":                        "UpdatedAt",
 		"vpc_identifier":                    "VpcIdentifier",
+		"waf_configuration":                 "WafConfiguration",
+		"web_acl_arn":                       "WebAclArn",
 		"workload_identity_arn":             "WorkloadIdentityArn",
 		"workload_identity_details":         "WorkloadIdentityDetails",
 	})

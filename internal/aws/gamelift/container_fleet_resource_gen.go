@@ -1064,7 +1064,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "MetricName": {
-		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
 		//	        "enum": [
 		//	          "ActivatingGameSessions",
 		//	          "ActiveGameSessions",
@@ -1091,7 +1091,8 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
 		//	        "enum": [
 		//	          "RuleBased",
-		//	          "TargetBased"
+		//	          "TargetBased",
+		//	          "ManagedScaling"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -1128,7 +1129,6 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "MetricName",
 		//	      "Name"
 		//	    ],
 		//	    "type": "object"
@@ -1170,7 +1170,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1188,7 +1188,6 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 								"WaitTime",
 								"ConcurrentActivatableGameSessions",
 							),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1216,6 +1215,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.OneOf(
 								"RuleBased",
 								"TargetBased",
+								"ManagedScaling",
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

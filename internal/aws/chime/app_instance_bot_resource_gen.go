@@ -9,10 +9,10 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -251,28 +251,32 @@ func appInstanceBotResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time at which the AppInstanceBot was created. In epoch milliseconds.",
-		//	  "type": "number"
+		//	  "description": "The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.",
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the AppInstanceBot was created. In epoch milliseconds.",
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time at which the AppInstanceBot was last updated. In epoch milliseconds.",
-		//	  "type": "number"
+		//	  "description": "The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.",
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the AppInstanceBot was last updated. In epoch milliseconds.",
+		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Metadata

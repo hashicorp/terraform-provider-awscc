@@ -1,0 +1,1 @@
+$ terraform import awscc_mediatailor_prefetch_schedule.example "arn"

@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -342,7 +343,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The evaluation window that the alarm uses to select the range of metric data that it evaluates. This is either a sliding window or a wall clock window. For more information, see [Alarm evaluation windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User Guide*.",
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
@@ -358,15 +359,15 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "SlidingWindow": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configuration for sliding evaluation window (default behavior).",
+		//	      "description": "A sliding window, which advances each time the alarm is evaluated, forming a rolling time window. This is the default evaluation window.",
 		//	      "type": "object"
 		//	    },
 		//	    "WallClockWindow": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configuration for wall clock based evaluation window.",
+		//	      "description": "A wall clock window, which aligns the evaluated range to fixed clock boundaries that match the alarm's period, such as the top of the hour, midnight, or the start of the calendar week.",
 		//	      "properties": {
 		//	        "Timezone": {
-		//	          "description": "The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).",
+		//	          "description": "The time zone to use when the alarm aligns the evaluation window to clock boundaries. You can specify an IANA time zone name (for example, ``America/New_York``), a fixed UTC offset (for example, ``+05:30``), or an offset-prefixed identifier (for example, ``UTC+05:30``). The offset must be aligned to a multiple of 5 minutes. If you don't specify a time zone, CloudWatch uses ``UTC``.\n The time zone affects window alignment for all periods, including periods of one hour or shorter.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -380,7 +381,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SlidingWindow
 				"sliding_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 					CustomType:  jsontypes.NormalizedType{},
-					Description: "Configuration for sliding evaluation window (default behavior).",
+					Description: "A sliding window, which advances each time the alarm is evaluated, forming a rolling time window. This is the default evaluation window.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -392,7 +393,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Timezone
 						"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).",
+							Description: "The time zone to use when the alarm aligns the evaluation window to clock boundaries. You can specify an IANA time zone name (for example, ``America/New_York``), a fixed UTC offset (for example, ``+05:30``), or an offset-prefixed identifier (for example, ``UTC+05:30``). The offset must be aligned to a multiple of 5 minutes. If you don't specify a time zone, CloudWatch uses ``UTC``.\n The time zone affects window alignment for all periods, including periods of one hour or shorter.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -400,7 +401,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configuration for wall clock based evaluation window.",
+					Description: "A wall clock window, which aligns the evaluated range to fixed clock boundaries that match the alarm's period, such as the top of the hour, midnight, or the start of the calendar week.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -408,7 +409,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The evaluation window that the alarm uses to select the range of metric data that it evaluates. This is either a sliding window or a wall clock window. For more information, see [Alarm evaluation windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User Guide*.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -956,6 +957,57 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WarmUpConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "OnlyStartEvaluatingAfterWarmUpPeriodEnds": {
+		//	      "description": "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "WarmUpPeriodDurationInMinutes": {
+		//	      "description": "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+		//	      "maximum": 2880,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_up_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnlyStartEvaluatingAfterWarmUpPeriodEnds
+				"only_start_evaluating_after_warm_up_period_ends": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WarmUpPeriodDurationInMinutes
+				"warm_up_period_duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 2880),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1012,23 +1064,26 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"name":                                 "Name",
 		"namespace":                            "Namespace",
 		"ok_actions":                           "OKActions",
-		"pending_period":                       "PendingPeriod",
-		"period":                               "Period",
-		"prom_ql_criteria":                     "PromQLCriteria",
-		"query":                                "Query",
-		"recovery_period":                      "RecoveryPeriod",
-		"return_data":                          "ReturnData",
-		"sliding_window":                       "SlidingWindow",
-		"stat":                                 "Stat",
-		"statistic":                            "Statistic",
-		"tags":                                 "Tags",
-		"threshold":                            "Threshold",
-		"threshold_metric_id":                  "ThresholdMetricId",
-		"timezone":                             "Timezone",
-		"treat_missing_data":                   "TreatMissingData",
-		"unit":                                 "Unit",
-		"value":                                "Value",
-		"wall_clock_window":                    "WallClockWindow",
+		"only_start_evaluating_after_warm_up_period_ends": "OnlyStartEvaluatingAfterWarmUpPeriodEnds",
+		"pending_period":                     "PendingPeriod",
+		"period":                             "Period",
+		"prom_ql_criteria":                   "PromQLCriteria",
+		"query":                              "Query",
+		"recovery_period":                    "RecoveryPeriod",
+		"return_data":                        "ReturnData",
+		"sliding_window":                     "SlidingWindow",
+		"stat":                               "Stat",
+		"statistic":                          "Statistic",
+		"tags":                               "Tags",
+		"threshold":                          "Threshold",
+		"threshold_metric_id":                "ThresholdMetricId",
+		"timezone":                           "Timezone",
+		"treat_missing_data":                 "TreatMissingData",
+		"unit":                               "Unit",
+		"value":                              "Value",
+		"wall_clock_window":                  "WallClockWindow",
+		"warm_up_configuration":              "WarmUpConfiguration",
+		"warm_up_period_duration_in_minutes": "WarmUpPeriodDurationInMinutes",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

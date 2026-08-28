@@ -120,7 +120,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The ECR URI of the container",
 		//	          "maxLength": 1024,
 		//	          "minLength": 1,
-		//	          "pattern": "^\\d{12}\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)([:@]\\S+)$",
+		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -831,6 +831,36 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Authorizer configuration for the agent runtime",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CapacityProviderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Capacity provider configuration for the agent runtime",
+		//	  "properties": {
+		//	    "CapacityProviderArn": {
+		//	      "description": "ARN of the capacity provider",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CapacityProviderArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"capacity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityProviderArn
+				"capacity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of the capacity provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Capacity provider configuration for the agent runtime",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -897,6 +927,31 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Filesystem configuration for the runtime",
 		//	    "properties": {
+		//	      "CapacityProviderVolume": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+		//	        "properties": {
+		//	          "MountPath": {
+		//	            "description": "Mount path for filesystem configuration",
+		//	            "maxLength": 200,
+		//	            "minLength": 6,
+		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
+		//	            "type": "string"
+		//	          },
+		//	          "VolumeName": {
+		//	            "description": "Name of the capacity provider volume",
+		//	            "maxLength": 48,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "VolumeName",
+		//	          "MountPath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "EfsAccessPoint": {
 		//	        "additionalProperties": false,
 		//	        "description": "Configuration for EFS access point filesystem",
@@ -972,6 +1027,23 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filesystem_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CapacityProviderVolume
+					"capacity_provider_volume": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MountPath
+							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Mount path for filesystem configuration",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeName
+							"volume_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the capacity provider volume",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: EfsAccessPoint
 					"efs_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1043,13 +1115,13 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "IdleRuntimeSessionTimeout": {
 		//	      "description": "Timeout in seconds for idle runtime sessions",
-		//	      "maximum": 28800,
+		//	      "maximum": 1209600,
 		//	      "minimum": 60,
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxLifetime": {
 		//	      "description": "Maximum lifetime in seconds for runtime sessions",
-		//	      "maximum": 28800,
+		//	      "maximum": 1209600,
 		//	      "minimum": 60,
 		//	      "type": "integer"
 		//	    }
@@ -1327,6 +1399,9 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authorizer_configuration":          "AuthorizerConfiguration",
 		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
 		"bucket":                            "Bucket",
+		"capacity_provider_arn":             "CapacityProviderArn",
+		"capacity_provider_configuration":   "CapacityProviderConfiguration",
+		"capacity_provider_volume":          "CapacityProviderVolume",
 		"claim_match_operator":              "ClaimMatchOperator",
 		"claim_match_value":                 "ClaimMatchValue",
 		"code":                              "Code",
@@ -1380,6 +1455,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnets":                           "Subnets",
 		"tags":                              "Tags",
 		"version_id":                        "VersionId",
+		"volume_name":                       "VolumeName",
 		"vpc_identifier":                    "VpcIdentifier",
 		"workload_identities":               "WorkloadIdentities",
 		"workload_identity_arn":             "WorkloadIdentityArn",

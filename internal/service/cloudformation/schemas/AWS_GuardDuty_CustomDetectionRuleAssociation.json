@@ -1,0 +1,148 @@
+{
+  "typeName": "AWS::GuardDuty::CustomDetectionRuleAssociation",
+  "description": "Resource Type definition for AWS::GuardDuty::CustomDetectionRuleAssociation. Associates a GuardDuty custom detection rule with the caller's account, enabling the rule in either LIVE or DRY_RUN mode.",
+  "sourceUrl": "https://docs.aws.amazon.com/guardduty/",
+  "properties": {
+    "RuleId": {
+      "type": "string",
+      "description": "The catalog identifier of the custom detection rule to associate.",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "Mode": {
+      "type": "string",
+      "description": "Whether the rule runs in LIVE mode (generates findings) or DRY_RUN mode (evaluates without generating findings).",
+      "enum": [
+        "LIVE",
+        "DRY_RUN"
+      ]
+    },
+    "AssociationId": {
+      "type": "string",
+      "description": "The service-generated unique identifier of the association.",
+      "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the association.",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^arn:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[0-9]*:.+$"
+    },
+    "AccountId": {
+      "type": "string",
+      "description": "The AWS account ID the association applies to.",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The time the association was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The time the association was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags applied to the association.",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/TagItem"
+      }
+    }
+  },
+  "definitions": {
+    "TagItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RuleId",
+    "Mode"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociationId",
+    "/properties/Arn",
+    "/properties/AccountId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/RuleId"
+  ],
+  "primaryIdentifier": [
+    "/properties/RuleId",
+    "/properties/AssociationId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "guardduty:GetCustomDetectionRuleAssociation",
+      "guardduty:TagResource",
+      "guardduty:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "guardduty:CreateCustomDetectionRuleAssociation",
+        "guardduty:GetCustomDetectionRuleAssociation",
+        "guardduty:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "guardduty:GetCustomDetectionRuleAssociation"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "guardduty:UpdateCustomDetectionRuleAssociation",
+        "guardduty:GetCustomDetectionRuleAssociation",
+        "guardduty:TagResource",
+        "guardduty:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "guardduty:DeleteCustomDetectionRuleAssociation",
+        "guardduty:GetCustomDetectionRuleAssociation"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "guardduty:ListCustomDetectionRuleAssociations"
+      ]
+    }
+  }
+}

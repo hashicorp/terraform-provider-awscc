@@ -266,6 +266,18 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Avoid validating models when creating a deployment. Supported only for WebSocket APIs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExecuteApiArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "pattern": "arn:aws(-[\\w]+)*:execute-api:[a-z0-9-]+:[0-9]{12}:.+",
+		//	  "type": "string"
+		//	}
+		"execute_api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailOnWarnings
 		// CloudFormation resource type schema:
 		//
@@ -407,6 +419,7 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"disable_execute_api_endpoint": "DisableExecuteApiEndpoint",
 		"disable_schema_validation":    "DisableSchemaValidation",
 		"etag":                         "Etag",
+		"execute_api_arn":              "ExecuteApiArn",
 		"expose_headers":               "ExposeHeaders",
 		"fail_on_warnings":             "FailOnWarnings",
 		"ip_address_type":              "IpAddressType",

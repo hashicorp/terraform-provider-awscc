@@ -35,6 +35,110 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::MWAAServerless::Workflow resource.
 func workflowResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Code
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images).",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "type": "string"
+		//	        },
+		//	        "ObjectKey": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "VersionId": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "ObjectKey"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(3, 63),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ObjectKey
+						"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1024),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VersionId
+						"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1024),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images).",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CodeSnapshottedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"code_snapshotted_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -454,6 +558,8 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket":                   "Bucket",
+		"code":                     "Code",
+		"code_snapshotted_at":      "CodeSnapshottedAt",
 		"created_at":               "CreatedAt",
 		"cron_expression":          "CronExpression",
 		"definition_s3_location":   "DefinitionS3Location",
@@ -467,6 +573,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		"network_configuration":    "NetworkConfiguration",
 		"object_key":               "ObjectKey",
 		"role_arn":                 "RoleArn",
+		"s3_location":              "S3Location",
 		"schedule_configuration":   "ScheduleConfiguration",
 		"security_group_ids":       "SecurityGroupIds",
 		"subnet_ids":               "SubnetIds",

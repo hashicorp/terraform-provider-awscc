@@ -1,0 +1,410 @@
+{
+  "typeName": "AWS::IdentityStore::User",
+  "description": "Creates a user within the specified identity store.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the user."
+    },
+    "IdentityStoreId": {
+      "type": "string",
+      "description": "The globally unique identifier for the identity store.",
+      "minLength": 1,
+      "maxLength": 36,
+      "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "UserId": {
+      "type": "string",
+      "description": "The identifier for a user in the identity store.",
+      "minLength": 1,
+      "maxLength": 47,
+      "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+    },
+    "UserName": {
+      "type": "string",
+      "description": "A unique string used to identify the user.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
+    },
+    "Name": {
+      "type": "object",
+      "description": "The name of the user.",
+      "properties": {
+        "Formatted": {
+          "type": "string",
+          "description": "A string containing a formatted version of the name for display.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "FamilyName": {
+          "type": "string",
+          "description": "The family name of the user.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "GivenName": {
+          "type": "string",
+          "description": "The given name of the user.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "MiddleName": {
+          "type": "string",
+          "description": "The middle name of the user.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "HonorificPrefix": {
+          "type": "string",
+          "description": "The honorific prefix of the user.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "HonorificSuffix": {
+          "type": "string",
+          "description": "The honorific suffix of the user.",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "additionalProperties": false
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "A string containing the name of the user for display.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "NickName": {
+      "type": "string",
+      "description": "An alternate name for the user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "ProfileUrl": {
+      "type": "string",
+      "description": "A URL associated with the user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Emails": {
+      "type": "array",
+      "description": "A list of email addresses associated with the user.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Value": {
+            "type": "string",
+            "description": "The email address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Type": {
+            "type": "string",
+            "description": "The type of email address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary email address."
+          }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 1
+    },
+    "Addresses": {
+      "type": "array",
+      "description": "A list of addresses associated with the user.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "StreetAddress": {
+            "type": "string",
+            "description": "The street of the address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Locality": {
+            "type": "string",
+            "description": "A string of the address locality.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Region": {
+            "type": "string",
+            "description": "The region of the address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "The postal code of the address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Country": {
+            "type": "string",
+            "description": "The country of the address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Formatted": {
+            "type": "string",
+            "description": "A formatted version of the address for display.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Type": {
+            "type": "string",
+            "description": "The type of address.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary address."
+          }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 1
+    },
+    "PhoneNumbers": {
+      "type": "array",
+      "description": "A list of phone numbers associated with the user.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Value": {
+            "type": "string",
+            "description": "The phone number.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Type": {
+            "type": "string",
+            "description": "The type of phone number.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary phone number."
+          }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 1
+    },
+    "UserType": {
+      "type": "string",
+      "description": "A string indicating the type of user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Title": {
+      "type": "string",
+      "description": "The title of the user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "PreferredLanguage": {
+      "type": "string",
+      "description": "The preferred language of the user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Locale": {
+      "type": "string",
+      "description": "The geographical region or location of the user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Timezone": {
+      "type": "string",
+      "description": "The time zone for the user.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Photos": {
+      "type": "array",
+      "description": "A list of photos associated with the user.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Value": {
+            "type": "string",
+            "description": "The photo data or URL.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Type": {
+            "type": "string",
+            "description": "The type of photo.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Display": {
+            "type": "string",
+            "description": "A display name for the photo.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary photo."
+          }
+        },
+        "required": [
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 3
+    },
+    "Website": {
+      "type": "string",
+      "description": "The user's personal website or blog URL.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Birthdate": {
+      "type": "string",
+      "description": "The user's birthdate in YYYY-MM-DD format.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Roles": {
+      "type": "array",
+      "description": "A list of roles associated with the user.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Value": {
+            "type": "string",
+            "description": "The role name.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Type": {
+            "type": "string",
+            "description": "The type of role.",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "Primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary role."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "UserStatus": {
+      "type": "string",
+      "description": "The current status of the user account.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date and time the user was created.",
+      "format": "date-time"
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "The identifier of the user or system that created the user."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time the user was last updated.",
+      "format": "date-time"
+    },
+    "UpdatedBy": {
+      "type": "string",
+      "description": "The identifier of the user or system that last updated the user."
+    }
+  },
+  "required": [
+    "IdentityStoreId"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/UserId",
+    "/properties/UserStatus",
+    "/properties/CreatedAt",
+    "/properties/CreatedBy",
+    "/properties/UpdatedAt",
+    "/properties/UpdatedBy"
+  ],
+  "createOnlyProperties": [
+    "/properties/IdentityStoreId",
+    "/properties/UserName",
+    "/properties/Emails",
+    "/properties/Addresses",
+    "/properties/PhoneNumbers",
+    "/properties/Photos",
+    "/properties/Roles"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/IdentityStoreId",
+      "/properties/UserId"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "identitystore:CreateUser",
+        "identitystore:DescribeUser"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "identitystore:DescribeUser"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "identitystore:UpdateUser",
+        "identitystore:DescribeUser"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "identitystore:DeleteUser",
+        "identitystore:DescribeUser"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "IdentityStoreId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          }
+        },
+        "required": [
+          "IdentityStoreId"
+        ]
+      },
+      "permissions": [
+        "identitystore:ListUsers"
+      ]
+    }
+  }
+}

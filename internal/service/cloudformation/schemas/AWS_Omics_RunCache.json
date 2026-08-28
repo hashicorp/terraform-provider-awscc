@@ -1,0 +1,174 @@
+{
+  "typeName": "AWS::Omics::RunCache",
+  "description": "Definition of AWS::Omics::RunCache Resource Type",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The run cache ARN.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^arn:.+$"
+    },
+    "CacheBehavior": {
+      "type": "string",
+      "description": "The default cache behavior for runs using this cache.",
+      "enum": [
+        "CACHE_ON_FAILURE",
+        "CACHE_ALWAYS"
+      ]
+    },
+    "CacheBucketOwnerId": {
+      "type": "string",
+      "description": "The AWS account ID of the expected owner of the S3 bucket for the run cache.",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[0-9]+$"
+    },
+    "CacheS3Location": {
+      "type": "string",
+      "description": "The S3 location for storing the cached task outputs.",
+      "pattern": ""
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "Creation time of the run cache (an ISO 8601 formatted string).",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the run cache.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The run cache ID.",
+      "minLength": 1,
+      "maxLength": 18,
+      "pattern": "^[0-9]+$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "A name for the run cache.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The run cache status.",
+      "enum": [
+        "ACTIVE",
+        "DELETED",
+        "FAILED"
+      ]
+    },
+    "Tags": {
+      "description": "Tags for the run cache.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreationTime",
+    "/properties/Id",
+    "/properties/Status"
+  ],
+  "writeOnlyProperties": [
+    "/properties/CacheS3Location"
+  ],
+  "createOnlyProperties": [
+    "/properties/CacheS3Location",
+    "/properties/CacheBucketOwnerId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "omics:TagResource",
+      "omics:UntagResource",
+      "omics:GetRunCache"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "omics:CreateRunCache",
+        "omics:GetRunCache",
+        "omics:TagResource",
+        "s3:GetBucketLocation",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "omics:GetRunCache"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "omics:UpdateRunCache",
+        "omics:GetRunCache",
+        "omics:TagResource",
+        "omics:UntagResource",
+        "omics:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "omics:DeleteRunCache",
+        "omics:GetRunCache"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "omics:ListRunCaches"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

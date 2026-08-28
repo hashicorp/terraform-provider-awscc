@@ -1,0 +1,1 @@
+$ terraform import awscc_docdb_db_cluster_parameter_group.example "name"

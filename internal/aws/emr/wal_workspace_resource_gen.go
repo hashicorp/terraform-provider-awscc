@@ -136,7 +136,7 @@ func wALWorkspaceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::EMR::WALWorkspace Type",
+		Description: "Resource Type definition for AWS::EMR::WALWorkspace",
 		Version:     1,
 		Attributes:  attributes,
 	}

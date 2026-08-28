@@ -96,6 +96,13 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
+		//	                "EncryptionScope": {
+		//	                  "enum": [
+		//	                    "ENCRYPTED_SOURCE_ONLY",
+		//	                    "NEW_DESTINATION_LOG_GROUPS"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
 		//	                "EncryptionStrategy": {
 		//	                  "enum": [
 		//	                    "CUSTOMER_MANAGED",
@@ -112,6 +119,31 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	              },
 		//	              "required": [
 		//	                "EncryptionStrategy"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "TagPropagationConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DestinationRoleArn": {
+		//	                  "description": "The ARN of the destination account IAM role used for tag propagation.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TagConflictResolutionStrategy": {
+		//	                  "description": "The strategy to resolve tag conflicts during propagation.",
+		//	                  "enum": [
+		//	                    "IN_SYNC",
+		//	                    "ADD_ONLY",
+		//	                    "UPDATE_SYNC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DestinationRoleArn"
 		//	              ],
 		//	              "type": "object"
 		//	            }
@@ -309,6 +341,20 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
+										// Property: EncryptionScope
+										"encryption_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENCRYPTED_SOURCE_ONLY",
+													"NEW_DESTINATION_LOG_GROUPS",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
 										// Property: EncryptionStrategy
 										"encryption_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
@@ -331,6 +377,46 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 1011),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TagPropagationConfiguration
+								"tag_propagation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationRoleArn
+										"destination_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the destination account IAM role used for tag propagation.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TagConflictResolutionStrategy
+										"tag_conflict_resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The strategy to resolve tag conflicts during propagation.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"IN_SYNC",
+													"ADD_ONLY",
+													"UPDATE_SYNC",
+												),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -629,8 +715,10 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"destination":                             "Destination",
 		"destination_logs_configuration":          "DestinationLogsConfiguration",
 		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
+		"destination_role_arn":                    "DestinationRoleArn",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
+		"encryption_scope":                        "EncryptionScope",
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",
@@ -648,6 +736,8 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"source":                                  "Source",
 		"source_logs_configuration":               "SourceLogsConfiguration",
 		"source_metrics_configuration":            "SourceMetricsConfiguration",
+		"tag_conflict_resolution_strategy":        "TagConflictResolutionStrategy",
+		"tag_propagation_configuration":           "TagPropagationConfiguration",
 		"tags":                                    "Tags",
 		"value":                                   "Value",
 	})

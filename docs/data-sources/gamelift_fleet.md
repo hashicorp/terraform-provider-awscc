@@ -164,7 +164,7 @@ Read-Only:
 - `comparison_operator` (String) Comparison operator to use when measuring a metric against the threshold value.
 - `evaluation_periods` (Number) Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.
 - `location` (String)
-- `metric_name` (String) Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.
+- `metric_name` (String) Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.
 - `name` (String) A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.
 - `policy_type` (String) The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.
 - `scaling_adjustment` (Number) Amount of adjustment to make, based on the scaling adjustment type.

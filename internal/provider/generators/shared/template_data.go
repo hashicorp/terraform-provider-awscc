@@ -5,6 +5,7 @@ package shared
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"os"
 	"slices"
@@ -58,11 +59,16 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, res)
 
 	sb := strings.Builder{}
+	deduplicate, err := schemaIsDeRecursed(cfTypeSchemaFile)
+	if err != nil {
+		return nil, err
+	}
 	codeEmitter := codegen.Emitter{
 		CfResource:   resource.CfResource,
 		IsDataSource: resType == DataSourceType,
 		Ui:           ui,
 		Writer:       &sb,
+		Deduplicate:  deduplicate,
 	}
 
 	// Generate code for the CloudFormation root properties schema.
@@ -245,6 +251,26 @@ type TemplateData struct {
 type Resource struct {
 	CfResource *cfschema.Resource
 	TfType     string
+}
+
+// schemaIsDeRecursed reports whether the CloudFormation schema file was
+// depth-limited (de-recursed) by tools/derecurse-schema.py, indicated by the
+// presence of the top-level "x-derecursed" key. Only such schemas need the
+// deduplicating emitter (#3270); pristine schemas generate inline as before.
+func schemaIsDeRecursed(cfTypeSchemaFile string) (bool, error) {
+	data, err := os.ReadFile(cfTypeSchemaFile)
+	if err != nil {
+		return false, fmt.Errorf("reading CloudFormation resource schema %s: %w", cfTypeSchemaFile, err)
+	}
+
+	var doc struct {
+		XDerecursed json.RawMessage `json:"x-derecursed"`
+	}
+	if err := json.Unmarshal(data, &doc); err != nil {
+		return false, fmt.Errorf("parsing CloudFormation resource schema %s: %w", cfTypeSchemaFile, err)
+	}
+
+	return len(doc.XDerecursed) > 0, nil
 }
 
 // NewResource creates a Resource type

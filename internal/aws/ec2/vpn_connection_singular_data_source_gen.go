@@ -81,7 +81,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Describes the storage location for an instance store-backed AMI.",
+		//	  "description": "Specifies the storage mode for the pre-shared key (PSK). Valid values are ``Standard`` (stored in the S2Slong service) or ``SecretsManager`` (stored in AWS Secrets Manager).",
 		//	  "enum": [
 		//	    "Standard",
 		//	    "SecretsManager"
@@ -89,7 +89,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "string"
 		//	}
 		"pre_shared_key_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Describes the storage location for an instance store-backed AMI.",
+			Description: "Specifies the storage mode for the pre-shared key (PSK). Valid values are ``Standard`` (stored in the S2Slong service) or ``SecretsManager`` (stored in AWS Secrets Manager).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RemoteIpv4NetworkCidr

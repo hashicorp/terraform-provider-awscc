@@ -1,0 +1,1 @@
+$ terraform import awscc_dataexchange_event_action.example "arn"
