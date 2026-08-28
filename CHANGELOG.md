@@ -1,3 +1,5 @@
+## 1.100.0 (Unreleased)
+
 ## 1.99.0 (August 28, 2026)
 
 NOTES:
