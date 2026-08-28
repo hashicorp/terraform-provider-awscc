@@ -770,8 +770,16 @@ func inlineAliases(schema *object) ([]string, error) {
 		return resolve(target, append(seen, name))
 	}
 
-	targets := make(map[string]string, len(aliases))
+	// Resolve in sorted order so that a malformed schema with an alias cycle
+	// always reports the same member.
+	aliasNames := make([]string, 0, len(aliases))
 	for name := range aliases {
+		aliasNames = append(aliasNames, name)
+	}
+	sort.Strings(aliasNames)
+
+	targets := make(map[string]string, len(aliases))
+	for _, name := range aliasNames {
 		target, err := resolve(name, nil)
 		if err != nil {
 			return nil, err
