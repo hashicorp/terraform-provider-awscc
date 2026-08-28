@@ -5,8 +5,6 @@ package main
 import (
 	"path/filepath"
 	"testing"
-
-	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
 // loadCorpus decodes the overlay and builds the config for corpus tests.
@@ -16,15 +14,11 @@ func loadCorpus(t *testing.T) (config, []resourceRow) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	var f allSchemasFile
-	if err := hclsimple.DecodeFile(overlayPath, nil, &f); err != nil {
-		t.Fatalf("decoding overlay: %v", err)
-	}
-	cfg, err := newConfig(overlayPath, f.Defaults, f.Meta)
+	cfg, rows, err := loadOverlay(overlayPath)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("loading overlay: %v", err)
 	}
-	return cfg, f.Resources
+	return cfg, rows
 }
 
 // TestGenerateCorpusRace exercises concurrent generation over a diverse sample of

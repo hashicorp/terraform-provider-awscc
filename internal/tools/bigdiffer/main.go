@@ -66,16 +66,25 @@ func main() {
 		checkoutPath   = flag.String("checkout", defaultCheckout, "path to suppressions_checkout.txt (cross-referenced, never modified)")
 		discoverLive   = flag.Bool("discover", false, "query AWS live (us-east-1) for the available base instead of reading a snapshot file")
 		check          = flag.Bool("check", false, "verify all_schemas.hcl is already normalized; exit non-zero if not (writes nothing)")
+		generate       = flag.Bool("generate", false, "regenerate the whole provider offline from the committed overlay + schema cache (writes *_gen.go, registrations_gen.go, import_examples_gen.json)")
 	)
 	flag.Parse()
 
-	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check); err != nil {
+	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check, *generate); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
 
-func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check bool) error {
+func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check, generate bool) error {
+	if generate {
+		cfg, rows, err := loadOverlay(allSchemasPath)
+		if err != nil {
+			return err
+		}
+		return runGenerate(cfg, rows)
+	}
+
 	// Resolve the base: either query AWS live (bigdiffer owns discovery), or read
 	// a snapshot file. Live discovery has no "previous" snapshot, so every base
 	// row missing from the overlay is simply reported as newly added.

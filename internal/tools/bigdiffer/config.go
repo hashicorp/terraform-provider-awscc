@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"path/filepath"
 	"runtime"
+
+	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
 // config is bigdiffer's single source of truth for the paths and tunables the
@@ -15,13 +17,14 @@ import (
 // directory (the brittle assumption the legacy generators and our own early
 // gate tests had to work around).
 type config struct {
-	overlayPath      string // all_schemas.hcl (absolute)
-	overlayDir       string // directory containing the overlay (…/internal/provider)
-	cacheDir         string // committed CloudFormation schema JSONs
-	metaSchemaPath   string // provider meta-schema JSON
-	servicesPath     string // identity/names/services.hcl (IsGlobal/HasMutableIdentity)
-	outputRoot       string // base dir for generated <svc>/… code (…/internal)
-	registrationPath string // the single blank-import registration file bigdiffer emits
+	overlayPath        string // all_schemas.hcl (absolute)
+	overlayDir         string // directory containing the overlay (…/internal/provider)
+	cacheDir           string // committed CloudFormation schema JSONs
+	metaSchemaPath     string // provider meta-schema JSON
+	servicesPath       string // identity/names/services.hcl (IsGlobal/HasMutableIdentity)
+	outputRoot         string // base dir for generated <svc>/… code (…/internal)
+	registrationPath   string // the single blank-import registration file bigdiffer emits
+	importExamplesPath string // import_examples_gen.json aggregate
 
 	prefix         string // terraform_type_name_prefix, e.g. "awscc"
 	region         string // CloudFormation registry region for -discover
@@ -41,15 +44,30 @@ func newConfig(overlayPath string, defaults defaultsBlock, meta metaSchemaBlock)
 	outputRoot := filepath.Dir(overlayDir) // …/internal/provider -> …/internal
 
 	return config{
-		overlayPath:      absOverlay,
-		overlayDir:       overlayDir,
-		cacheDir:         filepath.Clean(filepath.Join(overlayDir, defaults.SchemaCacheDirectory)),
-		metaSchemaPath:   filepath.Clean(filepath.Join(overlayDir, meta.Path)),
-		servicesPath:     filepath.Join(outputRoot, "identity", "names", "services.hcl"),
-		outputRoot:       outputRoot,
-		registrationPath: filepath.Join(overlayDir, "registrations_gen.go"),
-		prefix:           defaults.TerraformTypeNamePrefix,
-		region:           discoverRegion,
-		genConcurrency:   runtime.NumCPU(),
+		overlayPath:        absOverlay,
+		overlayDir:         overlayDir,
+		cacheDir:           filepath.Clean(filepath.Join(overlayDir, defaults.SchemaCacheDirectory)),
+		metaSchemaPath:     filepath.Clean(filepath.Join(overlayDir, meta.Path)),
+		servicesPath:       filepath.Join(outputRoot, "identity", "names", "services.hcl"),
+		outputRoot:         outputRoot,
+		registrationPath:   filepath.Join(overlayDir, "registrations_gen.go"),
+		importExamplesPath: filepath.Join(overlayDir, "import_examples_gen.json"),
+		prefix:             defaults.TerraformTypeNamePrefix,
+		region:             discoverRegion,
+		genConcurrency:     runtime.NumCPU(),
 	}, nil
+}
+
+// loadOverlay decodes the overlay file and builds the config from its
+// defaults/meta blocks, returning the config and the resource rows.
+func loadOverlay(overlayPath string) (config, []resourceRow, error) {
+	var f allSchemasFile
+	if err := hclsimple.DecodeFile(overlayPath, nil, &f); err != nil {
+		return config{}, nil, fmt.Errorf("decoding overlay %s: %w", overlayPath, err)
+	}
+	cfg, err := newConfig(overlayPath, f.Defaults, f.Meta)
+	if err != nil {
+		return config{}, nil, err
+	}
+	return cfg, f.Resources, nil
 }
