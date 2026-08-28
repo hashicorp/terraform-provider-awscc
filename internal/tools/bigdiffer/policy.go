@@ -10,10 +10,11 @@ import (
 
 // Overlay attribute names the policy sets on a block.
 const (
-	attrFrozenSince      = "frozen_since"
-	attrNonProvisionable = "non_provisionable"
-	attrSuppressResource = "suppress_resource_generation"
-	attrSuppressSingular = "suppress_singular_data_source_generation"
+	attrFrozenSince       = "frozen_since"
+	attrNonProvisionable  = "non_provisionable"
+	attrSuppressResource  = "suppress_resource_generation"
+	attrSuppressSingular  = "suppress_singular_data_source_generation"
+	attrSuppressionReason = "suppression_reason"
 )
 
 // changeClass is the reconciliation class of a type (design §3). "Absent" splits

@@ -194,6 +194,15 @@ type Report struct {
 }
 
 func normalize(overlay string, base, previous []resourceRow, checkout map[string]bool) (string, Report, error) {
+	return normalizeWithDecisions(overlay, base, previous, checkout, nil)
+}
+
+// normalizeWithDecisions is normalize plus a policy pass: as each block is
+// written, any policy decision keyed by its CloudFormation type name is applied
+// with setBlockAttributes (comment-preserving), so suppression flags,
+// frozen_since, and suppression_reason land on exactly the right blocks. A nil
+// decisions map reduces to a plain reconcile.
+func normalizeWithDecisions(overlay string, base, previous []resourceRow, checkout map[string]bool, decisions map[string]policyDecision) (string, Report, error) {
 	loc := countLineRE.FindStringIndex(overlay)
 	if loc == nil {
 		return "", Report{}, fmt.Errorf("could not find the count header comment in all_schemas.hcl")
@@ -302,7 +311,17 @@ func normalize(overlay string, base, previous []resourceRow, checkout map[string
 	sb.WriteString(head)
 	fmt.Fprintf(&sb, "# %d CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n", len(base))
 	for i, it := range items {
-		sb.WriteString(it.text)
+		text := it.text
+		if d, ok := decisions[it.key]; ok {
+			if attrs := decisionAttrs(d); len(attrs) > 0 {
+				mutated, err := setBlockAttributes(text, attrs)
+				if err != nil {
+					return "", Report{}, fmt.Errorf("applying policy to %s: %w", it.key, err)
+				}
+				text = mutated
+			}
+		}
+		sb.WriteString(text)
 		if i < len(items)-1 {
 			sb.WriteString("\n\n")
 		} else {
@@ -310,6 +329,22 @@ func normalize(overlay string, base, previous []resourceRow, checkout map[string
 		}
 	}
 	return sb.String(), report, nil
+}
+
+// decisionAttrs flattens a policy decision into the attribute set to write on its
+// block: the suppression/freeze flags plus suppression_reason when present.
+func decisionAttrs(d policyDecision) map[string]string {
+	if len(d.setAttrs) == 0 && d.reason == "" {
+		return nil
+	}
+	attrs := make(map[string]string, len(d.setAttrs)+1)
+	for k, v := range d.setAttrs {
+		attrs[k] = v
+	}
+	if d.reason != "" {
+		attrs[attrSuppressionReason] = d.reason
+	}
+	return attrs
 }
 
 var (
