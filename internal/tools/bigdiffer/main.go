@@ -67,22 +67,26 @@ func main() {
 		discoverLive   = flag.Bool("discover", false, "query AWS live (us-east-1) for the available base instead of reading a snapshot file")
 		check          = flag.Bool("check", false, "verify all_schemas.hcl is already normalized; exit non-zero if not (writes nothing)")
 		generate       = flag.Bool("generate", false, "regenerate the whole provider offline from the committed overlay + schema cache (writes *_gen.go, registrations_gen.go, import_examples_gen.json)")
+		update         = flag.Bool("update", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
 	)
 	flag.Parse()
 
-	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check, *generate); err != nil {
+	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check, *generate, *update); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
 
-func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check, generate bool) error {
+func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check, generate, update bool) error {
 	if generate {
 		cfg, rows, err := loadOverlay(allSchemasPath)
 		if err != nil {
 			return err
 		}
 		return runGenerate(cfg, rows)
+	}
+	if update {
+		return runUpdate(context.Background(), allSchemasPath, checkoutPath)
 	}
 
 	// Resolve the base: either query AWS live (bigdiffer owns discovery), or read
