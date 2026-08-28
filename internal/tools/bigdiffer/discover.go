@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/config"
+	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
@@ -85,7 +85,7 @@ func discover(ctx context.Context) ([]discovered, error) {
 // newCFNClient builds a CloudFormation client pinned to the reference region with
 // an aggressive retryer so concurrent DescribeType calls ride through throttling.
 func newCFNClient(ctx context.Context) (*cloudformation.Client, error) {
-	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(discoverRegion))
+	cfg, err := awsconfig.LoadDefaultConfig(ctx, awsconfig.WithRegion(discoverRegion))
 	if err != nil {
 		return nil, fmt.Errorf("loading AWS config: %w", err)
 	}
