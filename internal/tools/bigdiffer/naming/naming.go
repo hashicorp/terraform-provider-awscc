@@ -177,6 +177,7 @@ var (
 	customNameRE3 = regexp.MustCompile(`issions$`)
 	customNameRE4 = regexp.MustCompile(`(W|w)indows$`)
 	customNameRE5 = regexp.MustCompile(`(S|s)ettings$`)
+	customNameRE6 = regexp.MustCompile(`(D|d)ata$`)
 )
 
 func isCustomName(name string) bool {
@@ -184,7 +185,8 @@ func isCustomName(name string) bool {
 		customNameRE2.MatchString(name) ||
 		customNameRE3.MatchString(name) ||
 		customNameRE4.MatchString(name) ||
-		customNameRE5.MatchString(name)
+		customNameRE5.MatchString(name) ||
+		customNameRE6.MatchString(name)
 }
 
 func isCapitalLetter(ch byte) bool   { return ch >= 'A' && ch <= 'Z' }
