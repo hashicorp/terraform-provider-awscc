@@ -972,6 +972,47 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EcsSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ContainerInsights": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "ENHANCED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ecs_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerInsights
+				"container_insights": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"ENHANCED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EksConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1195,11 +1236,13 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"compute_environment_arn":            "ComputeEnvironmentArn",
 		"compute_environment_name":           "ComputeEnvironmentName",
 		"compute_resources":                  "ComputeResources",
+		"container_insights":                 "ContainerInsights",
 		"context":                            "Context",
 		"desiredv_cpus":                      "DesiredvCpus",
 		"ec_2_configuration":                 "Ec2Configuration",
 		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
 		"ec_2_key_pair":                      "Ec2KeyPair",
+		"ecs_settings":                       "EcsSettings",
 		"eks_cluster_arn":                    "EksClusterArn",
 		"eks_configuration":                  "EksConfiguration",
 		"fips_enabled":                       "FipsEnabled",

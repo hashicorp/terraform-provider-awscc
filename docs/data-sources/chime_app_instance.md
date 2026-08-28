@@ -22,8 +22,8 @@ Data Source schema for AWS::Chime::AppInstance
 ### Read-Only
 
 - `app_instance_arn` (String) The Amazon Resource Number (ARN) of the AppInstance.
-- `created_timestamp` (Number) The time at which an AppInstance was created. In epoch milliseconds.
-- `last_updated_timestamp` (Number) The time an AppInstance was last updated. In epoch milliseconds.
+- `created_timestamp` (String) The time at which an AppInstance was created, as an ISO 8601 timestamp.
+- `last_updated_timestamp` (String) The time an AppInstance was last updated, as an ISO 8601 timestamp.
 - `metadata` (String) The metadata of the AppInstance. Limited to a 1KB string in UTF-8.
 - `name` (String) The name of the AppInstance.
 - `tags` (Attributes List) Tags assigned to the AppInstance. (see [below for nested schema](#nestedatt--tags))

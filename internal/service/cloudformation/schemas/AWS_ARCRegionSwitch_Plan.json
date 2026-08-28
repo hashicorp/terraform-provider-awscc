@@ -745,6 +745,19 @@
             "NeptuneGlobalDatabaseConfig"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RdsSwitchoverReadReplicaConfig",
+          "properties": {
+            "RdsSwitchoverReadReplicaConfig": {
+              "$ref": "#/definitions/RdsSwitchoverReadReplicaConfiguration"
+            }
+          },
+          "required": [
+            "RdsSwitchoverReadReplicaConfig"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -767,6 +780,7 @@
         "Parallel",
         "RdsCreateCrossRegionReplica",
         "RdsPromoteReadReplica",
+        "RdsSwitchoverReadReplica",
         "Route53HealthCheck"
       ]
     },
@@ -1100,6 +1114,48 @@
         "DbInstanceArnMap"
       ],
       "additionalProperties": false
+    },
+    "RdsSwitchoverReadReplicaConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "DbInstanceArnMap": {
+          "$ref": "#/definitions/RdsDbInstanceArnMap"
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/RdsUngraceful"
+        }
+      },
+      "required": [
+        "DbInstanceArnMap"
+      ],
+      "additionalProperties": false
+    },
+    "RdsUngraceful": {
+      "type": "object",
+      "properties": {
+        "Ungraceful": {
+          "$ref": "#/definitions/RdsUngracefulBehavior"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RdsUngracefulBehavior": {
+      "type": "string",
+      "enum": [
+        "promoteReadReplica"
+      ]
     },
     "RecoveryApproach": {
       "type": "string",

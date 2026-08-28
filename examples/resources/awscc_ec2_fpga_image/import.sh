@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_fpga_image.example "arn"

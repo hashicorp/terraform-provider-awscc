@@ -60,7 +60,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		//	    },
 		//	    "SigningProtocol": {
 		//	      "description": "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
-		//	      "pattern": "^(sigv4)$",
+		//	      "pattern": "^(sigv4|sigv4a)$",
 		//	      "type": "string"
 		//	    }
 		//	  },

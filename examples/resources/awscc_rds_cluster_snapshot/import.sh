@@ -1,0 +1,1 @@
+$ terraform import awscc_rds_cluster_snapshot.example "db_cluster_snapshot_arn"

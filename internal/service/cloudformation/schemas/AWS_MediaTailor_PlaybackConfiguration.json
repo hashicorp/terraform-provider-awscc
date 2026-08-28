@@ -246,6 +246,34 @@
         "MaxDurationSeconds": {
           "description": "The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won't play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.",
           "type": "integer"
+        },
+        "AdDecisionServerConfiguration": {
+          "$ref": "#/definitions/PreRollAdDecisionServerConfiguration"
+        }
+      }
+    },
+    "PreRollAdDecisionServerConfiguration": {
+      "description": "The configuration for the request to the pre-roll Ad Decision Server.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "VastResponse": {
+          "$ref": "#/definitions/PreRollVastResponse"
+        }
+      }
+    },
+    "PreRollVastResponse": {
+      "description": "The configuration for how MediaTailor processes the VAST response returned by the pre-roll Ad Decision Server.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AdSequencingMode": {
+          "description": "Determines how MediaTailor sequences ads returned in the pre-roll VAST response.",
+          "type": "string",
+          "enum": [
+            "FOLLOW_AD_SEQUENCE",
+            "IGNORE_AD_SEQUENCE"
+          ]
         }
       }
     },
@@ -367,11 +395,31 @@
       "properties": {
         "HttpRequest": {
           "$ref": "#/definitions/HttpRequest"
+        },
+        "VastResponse": {
+          "$ref": "#/definitions/VastResponse"
         }
       },
       "required": [
         "HttpRequest"
       ]
+    },
+    "VastResponse": {
+      "description": "The configuration for how MediaTailor processes the VAST response returned by the Ad Decision Server.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AdSequencingMode": {
+          "description": "Determines how MediaTailor sequences ads returned in the VAST response from the Ad Decision Server.",
+          "type": "string",
+          "enum": [
+            "FOLLOW_AD_SEQUENCE",
+            "IGNORE_AD_SEQUENCE",
+            "FOLLOW_AD_SEQUENCE_ONLY_LIVE",
+            "FOLLOW_AD_SEQUENCE_ONLY_VOD"
+          ]
+        }
+      }
     },
     "HttpRequest": {
       "description": "The configuration for the request to the Ad Decision Server URL.",

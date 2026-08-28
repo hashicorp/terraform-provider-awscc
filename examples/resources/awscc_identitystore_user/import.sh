@@ -1,0 +1,1 @@
+$ terraform import awscc_identitystore_user.example "arn"

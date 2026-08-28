@@ -222,7 +222,8 @@ func globalResolverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of regions the Global Resolver will exist in. This list cannot be updated and will stay fixed for the duration of the Global Resolver.",
+		//	  "description": "The list of regions the Global Resolver exists in. Regions can be added or removed on update; the order of this list is not significant.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 32,
 		//	    "minLength": 1,
@@ -232,13 +233,16 @@ func globalResolverResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of regions the Global Resolver will exist in. This list cannot be updated and will stay fixed for the duration of the Global Resolver.",
+			Description: "The list of regions the Global Resolver exists in. Regions can be added or removed on update; the order of this list is not significant.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(1, 32),
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:

@@ -44,7 +44,7 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "AdvancedBackupSettings": {
-		//	      "insertionOrder": true,
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -274,6 +274,7 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

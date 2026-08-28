@@ -40,6 +40,8 @@ Data Source schema for AWS::BedrockAgentCore::Gateway
 - `status_reasons` (List of String)
 - `tags` (Map of String)
 - `updated_at` (String)
+- `waf_configuration` (Attributes) (see [below for nested schema](#nestedatt--waf_configuration))
+- `web_acl_arn` (String)
 - `workload_identity_details` (Attributes) (see [below for nested schema](#nestedatt--workload_identity_details))
 
 <a id="nestedatt--authorizer_configuration"></a>
@@ -216,6 +218,14 @@ Read-Only:
 - `enable_response_streaming` (Boolean)
 
 
+
+
+<a id="nestedatt--waf_configuration"></a>
+### Nested Schema for `waf_configuration`
+
+Read-Only:
+
+- `failure_mode` (String)
 
 
 <a id="nestedatt--workload_identity_details"></a>

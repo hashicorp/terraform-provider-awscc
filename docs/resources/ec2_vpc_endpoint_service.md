@@ -71,6 +71,8 @@ resource "awscc_ec2_vpc_endpoint_service" "example" {
 - `gateway_load_balancer_arns` (List of String)
 - `network_load_balancer_arns` (List of String)
 - `payer_responsibility` (String)
+- `private_dns_name` (String)
+- `private_dns_name_configuration` (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_configuration))
 - `supported_ip_address_types` (List of String) Specify which Ip Address types are supported for VPC endpoint service.
 - `supported_regions` (Set of String) The Regions from which service consumers can access the service.
 - `tags` (Attributes List) The tags to add to the VPC endpoint service. (see [below for nested schema](#nestedatt--tags))
@@ -79,6 +81,17 @@ resource "awscc_ec2_vpc_endpoint_service" "example" {
 
 - `id` (String) Uniquely identifies the resource.
 - `service_id` (String)
+
+<a id="nestedatt--private_dns_name_configuration"></a>
+### Nested Schema for `private_dns_name_configuration`
+
+Read-Only:
+
+- `name` (String)
+- `state` (String)
+- `type` (String)
+- `value` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

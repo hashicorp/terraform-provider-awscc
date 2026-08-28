@@ -85,6 +85,13 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
+		//	                "EncryptionScope": {
+		//	                  "enum": [
+		//	                    "ENCRYPTED_SOURCE_ONLY",
+		//	                    "NEW_DESTINATION_LOG_GROUPS"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
 		//	                "EncryptionStrategy": {
 		//	                  "enum": [
 		//	                    "CUSTOMER_MANAGED",
@@ -101,6 +108,31 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	              },
 		//	              "required": [
 		//	                "EncryptionStrategy"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "TagPropagationConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DestinationRoleArn": {
+		//	                  "description": "The ARN of the destination account IAM role used for tag propagation.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TagConflictResolutionStrategy": {
+		//	                  "description": "The strategy to resolve tag conflicts during propagation.",
+		//	                  "enum": [
+		//	                    "IN_SYNC",
+		//	                    "ADD_ONLY",
+		//	                    "UPDATE_SYNC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DestinationRoleArn"
 		//	              ],
 		//	              "type": "object"
 		//	            }
@@ -247,6 +279,10 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 										"encryption_conflict_resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
+										// Property: EncryptionScope
+										"encryption_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
 										// Property: EncryptionStrategy
 										"encryption_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
@@ -254,6 +290,22 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 										// Property: KmsKeyArn
 										"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TagPropagationConfiguration
+								"tag_propagation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationRoleArn
+										"destination_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the destination account IAM role used for tag propagation.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TagConflictResolutionStrategy
+										"tag_conflict_resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The strategy to resolve tag conflicts during propagation.",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Computed: true,
@@ -427,8 +479,10 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"destination":                             "Destination",
 		"destination_logs_configuration":          "DestinationLogsConfiguration",
 		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
+		"destination_role_arn":                    "DestinationRoleArn",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
+		"encryption_scope":                        "EncryptionScope",
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",
@@ -446,6 +500,8 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"source":                                  "Source",
 		"source_logs_configuration":               "SourceLogsConfiguration",
 		"source_metrics_configuration":            "SourceMetricsConfiguration",
+		"tag_conflict_resolution_strategy":        "TagConflictResolutionStrategy",
+		"tag_propagation_configuration":           "TagPropagationConfiguration",
 		"tags":                                    "Tags",
 		"value":                                   "Value",
 	})

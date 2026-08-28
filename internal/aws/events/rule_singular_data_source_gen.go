@@ -89,6 +89,17 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the role that is used for target invocation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RuleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.",
+		//	  "type": "string"
+		//	}
+		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleExpression
 		// CloudFormation resource type schema:
 		//
@@ -1014,6 +1025,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"retry_policy":                   "RetryPolicy",
 		"retry_strategy":                 "RetryStrategy",
 		"role_arn":                       "RoleArn",
+		"rule_name":                      "RuleName",
 		"run_command_parameters":         "RunCommandParameters",
 		"run_command_targets":            "RunCommandTargets",
 		"sage_maker_pipeline_parameters": "SageMakerPipelineParameters",

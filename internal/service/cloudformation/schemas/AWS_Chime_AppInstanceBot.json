@@ -141,12 +141,14 @@
       "$ref": "#/definitions/Configuration"
     },
     "CreatedTimestamp": {
-      "description": "The time at which the AppInstanceBot was created. In epoch milliseconds.",
-      "type": "number"
+      "description": "The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.",
+      "type": "string",
+      "format": "date-time"
     },
     "LastUpdatedTimestamp": {
-      "description": "The time at which the AppInstanceBot was last updated. In epoch milliseconds.",
-      "type": "number"
+      "description": "The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.",
+      "type": "string",
+      "format": "date-time"
     },
     "Tags": {
       "description": "The tags assigned to the AppInstanceBot.",

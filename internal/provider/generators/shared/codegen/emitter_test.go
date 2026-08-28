@@ -133,6 +133,7 @@ func emitTestResource(t *testing.T, resource *cfschema.Resource, isDataSource bo
 		IsDataSource: isDataSource,
 		Ui:           cli.NewMockUi(),
 		Writer:       &rootSchema,
+		Deduplicate:  true,
 	}
 
 	_, attributeFunctions, err := emitter.EmitRootPropertiesSchema("awscc_test_thing", make(map[string]string))

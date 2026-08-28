@@ -1208,6 +1208,60 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WafConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "FailureMode": {
+		//	      "enum": [
+		//	        "FAIL_CLOSE",
+		//	        "FAIL_OPEN"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"waf_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureMode
+				"failure_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"FAIL_CLOSE",
+							"FAIL_OPEN",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WebAclArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:[a-z0-9\\-]+:wafv2:[a-z0-9\\-]+:[0-9]{12}:regional/webacl/.+$",
+		//	  "type": "string"
+		//	}
+		"web_acl_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WorkloadIdentityDetails
 		// CloudFormation resource type schema:
 		//
@@ -1284,6 +1338,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_ip_address_type":          "EndpointIpAddressType",
 		"exception_level":                   "ExceptionLevel",
 		"exclude":                           "Exclude",
+		"failure_mode":                      "FailureMode",
 		"field":                             "Field",
 		"gateway_arn":                       "GatewayArn",
 		"gateway_identifier":                "GatewayIdentifier",
@@ -1325,6 +1380,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                              "Tags",
 		"updated_at":                        "UpdatedAt",
 		"vpc_identifier":                    "VpcIdentifier",
+		"waf_configuration":                 "WafConfiguration",
+		"web_acl_arn":                       "WebAclArn",
 		"workload_identity_arn":             "WorkloadIdentityArn",
 		"workload_identity_details":         "WorkloadIdentityDetails",
 	})

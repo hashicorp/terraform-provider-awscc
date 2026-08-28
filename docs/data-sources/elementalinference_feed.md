@@ -21,6 +21,7 @@ Data Source schema for AWS::ElementalInference::Feed
 
 ### Read-Only
 
+- `access_role_arn` (String)
 - `arn` (String)
 - `data_endpoints` (List of String)
 - `feed_id` (String)
@@ -44,7 +45,7 @@ Read-Only:
 Read-Only:
 
 - `clipping` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--clipping))
-- `cropping` (String)
+- `cropping` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--cropping))
 - `subtitling` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--subtitling))
 
 <a id="nestedatt--outputs--output_config--clipping"></a>
@@ -53,6 +54,32 @@ Read-Only:
 Read-Only:
 
 - `callback_metadata` (String)
+- `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--clipping--data_source_configuration))
+
+<a id="nestedatt--outputs--output_config--clipping--data_source_configuration"></a>
+### Nested Schema for `outputs.output_config.clipping.data_source_configuration`
+
+Read-Only:
+
+- `fixture_id` (String)
+
+
+
+<a id="nestedatt--outputs--output_config--cropping"></a>
+### Nested Schema for `outputs.output_config.cropping`
+
+Read-Only:
+
+- `template_groups` (Attributes List) (see [below for nested schema](#nestedatt--outputs--output_config--cropping--template_groups))
+
+<a id="nestedatt--outputs--output_config--cropping--template_groups"></a>
+### Nested Schema for `outputs.output_config.cropping.template_groups`
+
+Read-Only:
+
+- `name` (String)
+- `template_uris` (List of String)
+
 
 
 <a id="nestedatt--outputs--output_config--subtitling"></a>

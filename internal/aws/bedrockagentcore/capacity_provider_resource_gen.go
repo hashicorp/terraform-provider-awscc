@@ -286,9 +286,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "The operating system and CPU architecture for the instances.",
 		//	                  "enum": [
 		//	                    "LINUX_X86_64",
-		//	                    "LINUX_ARM64",
-		//	                    "MAC_ARM64",
-		//	                    "WINDOWS_X86_64"
+		//	                    "LINUX_ARM64"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -852,8 +850,6 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 												stringvalidator.OneOf(
 													"LINUX_X86_64",
 													"LINUX_ARM64",
-													"MAC_ARM64",
-													"WINDOWS_X86_64",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/

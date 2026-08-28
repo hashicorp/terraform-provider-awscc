@@ -1,0 +1,170 @@
+{
+  "typeName": "AWS::Textract::Adapter",
+  "description": "The AWS::Textract::Adapter resource creates an Amazon Textract adapter, which can be fine-tuned for enhanced performance on user-provided documents.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-textract",
+  "additionalProperties": false,
+  "definitions": {
+    "AdapterName": {
+      "type": "string",
+      "description": "The name to be assigned to the adapter being created.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9-_]+$"
+    },
+    "AdapterDescription": {
+      "type": "string",
+      "description": "The description to be assigned to the adapter being created.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><]+$"
+    },
+    "FeatureType": {
+      "type": "string",
+      "description": "The type of feature that the adapter is being trained on.",
+      "enum": [
+        "QUERIES"
+      ]
+    },
+    "AutoUpdate": {
+      "type": "string",
+      "description": "Controls whether or not the adapter should automatically update.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the adapter.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the adapter."
+    },
+    "AdapterId": {
+      "type": "string",
+      "description": "A unique identifier for the adapter resource.",
+      "minLength": 12,
+      "maxLength": 1011
+    },
+    "AdapterName": {
+      "$ref": "#/definitions/AdapterName"
+    },
+    "Description": {
+      "$ref": "#/definitions/AdapterDescription"
+    },
+    "FeatureTypes": {
+      "type": "array",
+      "description": "The type of feature that the adapter is being trained on. Currently, supported feature types are: QUERIES",
+      "items": {
+        "$ref": "#/definitions/FeatureType"
+      },
+      "minItems": 1,
+      "insertionOrder": false
+    },
+    "AutoUpdate": {
+      "$ref": "#/definitions/AutoUpdate"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to be added to the adapter.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 200,
+      "insertionOrder": false
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The date and time that the adapter was created.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "AdapterName",
+    "FeatureTypes"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AdapterId",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/FeatureTypes"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AdapterId"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "textract:CreateAdapter",
+        "textract:GetAdapter",
+        "textract:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "textract:GetAdapter"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "textract:UpdateAdapter",
+        "textract:GetAdapter",
+        "textract:TagResource",
+        "textract:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "textract:DeleteAdapter",
+        "textract:GetAdapter"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "textract:ListAdapters"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "textract:TagResource",
+      "textract:UntagResource",
+      "textract:GetAdapter"
+    ]
+  }
+}

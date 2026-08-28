@@ -1,0 +1,51 @@
+{
+  "typeName": "AWS::SDB::Domain",
+  "description": "Resource Type definition for AWS::SDB::Domain",
+  "properties": {
+    "Id": {
+      "description": "The name of the domain to create.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Information about the SimpleDB domain.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sdb:CreateDomain",
+        "sdb:DomainMetadata"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sdb:DomainMetadata"
+      ]
+    },
+    "update": {
+      "permissions": []
+    },
+    "delete": {
+      "permissions": [
+        "sdb:DeleteDomain",
+        "sdb:DomainMetadata"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sdb:ListDomains"
+      ]
+    }
+  }
+}

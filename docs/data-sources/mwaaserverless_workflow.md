@@ -21,6 +21,8 @@ Data Source schema for AWS::MWAAServerless::Workflow
 
 ### Read-Only
 
+- `code` (Attributes) The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images). (see [below for nested schema](#nestedatt--code))
+- `code_snapshotted_at` (String)
 - `created_at` (String)
 - `definition_s3_location` (Attributes) (see [below for nested schema](#nestedatt--definition_s3_location))
 - `description` (String)
@@ -36,6 +38,24 @@ Data Source schema for AWS::MWAAServerless::Workflow
 - `workflow_arn` (String)
 - `workflow_status` (String)
 - `workflow_version` (String)
+
+<a id="nestedatt--code"></a>
+### Nested Schema for `code`
+
+Read-Only:
+
+- `s3_location` (Attributes) (see [below for nested schema](#nestedatt--code--s3_location))
+
+<a id="nestedatt--code--s3_location"></a>
+### Nested Schema for `code.s3_location`
+
+Read-Only:
+
+- `bucket` (String)
+- `object_key` (String)
+- `version_id` (String)
+
+
 
 <a id="nestedatt--definition_s3_location"></a>
 ### Nested Schema for `definition_s3_location`

@@ -221,7 +221,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "InstanceType": {
 		//	        "enum": [
 		//	          "i4i.metal",
-		//	          "i7i.metal-24xl"
+		//	          "i7i.metal-24xl",
+		//	          "i7i.metal-48xl"
 		//	        ],
 		//	        "type": "string"
 		//	      },

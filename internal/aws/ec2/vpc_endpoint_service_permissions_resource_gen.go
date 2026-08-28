@@ -32,6 +32,7 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -43,6 +44,7 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

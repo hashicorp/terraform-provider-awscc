@@ -139,7 +139,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The ECR URI of the container",
 		//	          "maxLength": 1024,
 		//	          "minLength": 1,
-		//	          "pattern": "^\\d{12}\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)([:@]\\S+)$",
+		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -271,7 +271,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1024),
-								stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)([:@]\\S+)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1217,6 +1217,49 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CapacityProviderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Capacity provider configuration for the agent runtime",
+		//	  "properties": {
+		//	    "CapacityProviderArn": {
+		//	      "description": "ARN of the capacity provider",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CapacityProviderArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"capacity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityProviderArn
+				"capacity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of the capacity provider",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Capacity provider configuration for the agent runtime",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1300,6 +1343,31 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Filesystem configuration for the runtime",
 		//	    "properties": {
+		//	      "CapacityProviderVolume": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+		//	        "properties": {
+		//	          "MountPath": {
+		//	            "description": "Mount path for filesystem configuration",
+		//	            "maxLength": 200,
+		//	            "minLength": 6,
+		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
+		//	            "type": "string"
+		//	          },
+		//	          "VolumeName": {
+		//	            "description": "Name of the capacity provider volume",
+		//	            "maxLength": 48,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "VolumeName",
+		//	          "MountPath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "EfsAccessPoint": {
 		//	        "additionalProperties": false,
 		//	        "description": "Configuration for EFS access point filesystem",
@@ -1375,6 +1443,45 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"filesystem_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CapacityProviderVolume
+					"capacity_provider_volume": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MountPath
+							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Mount path for filesystem configuration",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(6, 200),
+									stringvalidator.RegexMatches(regexp.MustCompile("^/mnt/[a-zA-Z0-9._-]+/?$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeName
+							"volume_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the capacity provider volume",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 48),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: EfsAccessPoint
 					"efs_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1514,13 +1621,13 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "IdleRuntimeSessionTimeout": {
 		//	      "description": "Timeout in seconds for idle runtime sessions",
-		//	      "maximum": 28800,
+		//	      "maximum": 1209600,
 		//	      "minimum": 60,
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxLifetime": {
 		//	      "description": "Maximum lifetime in seconds for runtime sessions",
-		//	      "maximum": 28800,
+		//	      "maximum": 1209600,
 		//	      "minimum": 60,
 		//	      "type": "integer"
 		//	    }
@@ -1535,7 +1642,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(60, 28800),
+						int64validator.Between(60, 1209600),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -1547,7 +1654,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(60, 28800),
+						int64validator.Between(60, 1209600),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -1622,13 +1729,18 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				// Property: NetworkMode
 				"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Network mode configuration type",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"PUBLIC",
 							"VPC",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkModeConfig
 				"network_mode_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1679,7 +1791,11 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Network access configuration for the Agent",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProtocolConfiguration
 		// CloudFormation resource type schema:
@@ -1902,6 +2018,9 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"authorizer_configuration":          "AuthorizerConfiguration",
 		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
 		"bucket":                            "Bucket",
+		"capacity_provider_arn":             "CapacityProviderArn",
+		"capacity_provider_configuration":   "CapacityProviderConfiguration",
+		"capacity_provider_volume":          "CapacityProviderVolume",
 		"claim_match_operator":              "ClaimMatchOperator",
 		"claim_match_value":                 "ClaimMatchValue",
 		"code":                              "Code",
@@ -1955,6 +2074,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"subnets":                           "Subnets",
 		"tags":                              "Tags",
 		"version_id":                        "VersionId",
+		"volume_name":                       "VolumeName",
 		"vpc_identifier":                    "VpcIdentifier",
 		"workload_identities":               "WorkloadIdentities",
 		"workload_identity_arn":             "WorkloadIdentityArn",

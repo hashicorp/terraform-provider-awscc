@@ -1,0 +1,316 @@
+{
+  "typeName": "AWS::MGN::NetworkMigrationDefinition",
+  "description": "Resource schema for AWS::MGN::NetworkMigrationDefinition",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the network migration definition.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "NetworkMigrationDefinitionID": {
+      "type": "string",
+      "description": "The unique identifier of the network migration definition.",
+      "minLength": 21,
+      "maxLength": 21,
+      "pattern": "^nmd-[0-9a-zA-Z]{17}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the network migration definition.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the network migration definition.",
+      "minLength": 0,
+      "maxLength": 600,
+      "pattern": "^[^\\x00]*$"
+    },
+    "SourceConfigurations": {
+      "type": "array",
+      "description": "A list of source configurations for the network migration.",
+      "items": {
+        "$ref": "#/definitions/SourceConfiguration"
+      },
+      "minItems": 0,
+      "maxItems": 2
+    },
+    "TargetS3Configuration": {
+      "$ref": "#/definitions/TargetS3Configuration",
+      "description": "The S3 configuration for storing the target network artifacts."
+    },
+    "TargetNetwork": {
+      "$ref": "#/definitions/TargetNetwork",
+      "description": "The target network configuration including topology and CIDR ranges."
+    },
+    "TargetDeployment": {
+      "type": "string",
+      "description": "The target deployment configuration for the migrated network.",
+      "enum": [
+        "SINGLE_ACCOUNT",
+        "MULTI_ACCOUNT"
+      ]
+    },
+    "ScopeTags": {
+      "$ref": "#/definitions/ScopeTagsMap",
+      "description": "Scope tags for the network migration definition."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the network migration definition.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the network migration definition was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the network migration definition was last updated."
+    }
+  },
+  "definitions": {
+    "SourceConfiguration": {
+      "type": "object",
+      "description": "Configuration for a migration source environment.",
+      "properties": {
+        "SourceEnvironment": {
+          "type": "string",
+          "description": "The source environment type.",
+          "enum": [
+            "NSX",
+            "VSPHERE",
+            "FORTIGATE_FIREWALL",
+            "PALO_ALTO_FIREWALL",
+            "CISCO_ACI",
+            "LOGICAL_MODEL",
+            "MODELIZE_IT"
+          ]
+        },
+        "SourceS3Configuration": {
+          "$ref": "#/definitions/SourceS3Configuration"
+        }
+      },
+      "required": [
+        "SourceEnvironment",
+        "SourceS3Configuration"
+      ],
+      "additionalProperties": false
+    },
+    "SourceS3Configuration": {
+      "type": "object",
+      "description": "S3 configuration for source network data.",
+      "properties": {
+        "S3Bucket": {
+          "type": "string",
+          "description": "The name of the S3 bucket containing source data.",
+          "pattern": "^[a-zA-Z0-9.\\-_]{1,255}$"
+        },
+        "S3BucketOwner": {
+          "type": "string",
+          "description": "The AWS account ID of the S3 bucket owner.",
+          "minLength": 12,
+          "maxLength": 12,
+          "pattern": "[0-9]{12,}"
+        },
+        "S3Key": {
+          "type": "string",
+          "description": "The S3 key (path) for the source data.",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "S3Bucket",
+        "S3BucketOwner",
+        "S3Key"
+      ],
+      "additionalProperties": false
+    },
+    "TargetS3Configuration": {
+      "type": "object",
+      "description": "S3 configuration for storing target network artifacts.",
+      "properties": {
+        "S3Bucket": {
+          "type": "string",
+          "description": "The name of the S3 bucket for target artifacts.",
+          "pattern": "^[a-zA-Z0-9.\\-_]{1,255}$"
+        },
+        "S3BucketOwner": {
+          "type": "string",
+          "description": "The AWS account ID of the S3 bucket owner.",
+          "minLength": 12,
+          "maxLength": 12,
+          "pattern": "[0-9]{12,}"
+        }
+      },
+      "required": [
+        "S3Bucket",
+        "S3BucketOwner"
+      ],
+      "additionalProperties": false
+    },
+    "TargetNetwork": {
+      "type": "object",
+      "description": "Configuration for the target network topology and addressing.",
+      "properties": {
+        "Topology": {
+          "type": "string",
+          "description": "The network topology type for the target environment.",
+          "enum": [
+            "ISOLATED_VPC",
+            "HUB_AND_SPOKE"
+          ]
+        },
+        "InboundCidr": {
+          "type": "string",
+          "description": "The CIDR block for inbound traffic in the target network.",
+          "minLength": 9,
+          "maxLength": 18,
+          "pattern": "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"
+        },
+        "OutboundCidr": {
+          "type": "string",
+          "description": "The CIDR block for outbound traffic in the target network.",
+          "minLength": 9,
+          "maxLength": 18,
+          "pattern": "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"
+        },
+        "InspectionCidr": {
+          "type": "string",
+          "description": "The CIDR block for inspection traffic in the target network.",
+          "minLength": 9,
+          "maxLength": 18,
+          "pattern": "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"
+        }
+      },
+      "required": [
+        "Topology"
+      ],
+      "additionalProperties": false
+    },
+    "ScopeTagsMap": {
+      "type": "object",
+      "description": "Scope tags map for the network migration definition.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9\\s+\\-=._:/@]*$"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 40
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "Name",
+    "SourceConfigurations",
+    "TargetS3Configuration",
+    "TargetNetwork"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/NetworkMigrationDefinitionID",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/NetworkMigrationDefinitionID"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mgn:TagResource",
+      "mgn:UntagResource",
+      "mgn:GetNetworkMigrationDefinition"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mgn:CreateNetworkMigrationDefinition",
+        "mgn:GetNetworkMigrationDefinition",
+        "mgn:InitializeService",
+        "mgn:TagResource",
+        "iam:CreateServiceLinkedRole",
+        "s3:GetObject",
+        "s3:GetObjectAttributes",
+        "s3:GetBucketLocation",
+        "s3:ListBucket",
+        "s3:PutObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mgn:GetNetworkMigrationDefinition"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mgn:UpdateNetworkMigrationDefinition",
+        "mgn:GetNetworkMigrationDefinition",
+        "mgn:TagResource",
+        "mgn:UntagResource",
+        "mgn:ListTagsForResource",
+        "s3:GetObject",
+        "s3:GetObjectAttributes",
+        "s3:GetBucketLocation",
+        "s3:ListBucket",
+        "s3:PutObject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mgn:DeleteNetworkMigrationDefinition",
+        "mgn:GetNetworkMigrationDefinition"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mgn:ListNetworkMigrationDefinitions"
+      ]
+    }
+  }
+}

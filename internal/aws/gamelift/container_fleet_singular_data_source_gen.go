@@ -711,7 +711,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "type": "integer"
 		//	      },
 		//	      "MetricName": {
-		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
 		//	        "enum": [
 		//	          "ActivatingGameSessions",
 		//	          "ActiveGameSessions",
@@ -738,7 +738,8 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "description": "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
 		//	        "enum": [
 		//	          "RuleBased",
-		//	          "TargetBased"
+		//	          "TargetBased",
+		//	          "ManagedScaling"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -775,7 +776,6 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "MetricName",
 		//	      "Name"
 		//	    ],
 		//	    "type": "object"
@@ -798,7 +798,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END ATTRIBUTE*/
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Name

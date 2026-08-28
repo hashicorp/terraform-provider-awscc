@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -112,6 +113,77 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateDnsName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"private_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateDnsNameConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Name": {
+		//	      "type": "string"
+		//	    },
+		//	    "State": {
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "type": "string"
+		//	    },
+		//	    "Value": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"private_dns_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: State
+				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
@@ -269,17 +341,22 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"acceptance_required":          "AcceptanceRequired",
-		"contributor_insights_enabled": "ContributorInsightsEnabled",
-		"gateway_load_balancer_arns":   "GatewayLoadBalancerArns",
-		"key":                          "Key",
-		"network_load_balancer_arns":   "NetworkLoadBalancerArns",
-		"payer_responsibility":         "PayerResponsibility",
-		"service_id":                   "ServiceId",
-		"supported_ip_address_types":   "SupportedIpAddressTypes",
-		"supported_regions":            "SupportedRegions",
-		"tags":                         "Tags",
-		"value":                        "Value",
+		"acceptance_required":            "AcceptanceRequired",
+		"contributor_insights_enabled":   "ContributorInsightsEnabled",
+		"gateway_load_balancer_arns":     "GatewayLoadBalancerArns",
+		"key":                            "Key",
+		"name":                           "Name",
+		"network_load_balancer_arns":     "NetworkLoadBalancerArns",
+		"payer_responsibility":           "PayerResponsibility",
+		"private_dns_name":               "PrivateDnsName",
+		"private_dns_name_configuration": "PrivateDnsNameConfiguration",
+		"service_id":                     "ServiceId",
+		"state":                          "State",
+		"supported_ip_address_types":     "SupportedIpAddressTypes",
+		"supported_regions":              "SupportedRegions",
+		"tags":                           "Tags",
+		"type":                           "Type",
+		"value":                          "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

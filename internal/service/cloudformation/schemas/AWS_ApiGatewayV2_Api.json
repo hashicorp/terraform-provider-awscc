@@ -43,6 +43,11 @@
       "type": "string",
       "description": ""
     },
+    "ExecuteApiArn": {
+      "description": "",
+      "type": "string",
+      "pattern": "arn:aws(-[\\w]+)*:execute-api:[a-z0-9-]+:[0-9]{12}:.+"
+    },
     "Description": {
       "type": "string",
       "description": "The description of the API."
@@ -170,7 +175,8 @@
   ],
   "readOnlyProperties": [
     "/properties/ApiId",
-    "/properties/ApiEndpoint"
+    "/properties/ApiEndpoint",
+    "/properties/ExecuteApiArn"
   ],
   "writeOnlyProperties": [
     "/properties/Body",

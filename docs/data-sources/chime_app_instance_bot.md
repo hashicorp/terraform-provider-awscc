@@ -24,8 +24,8 @@ Data Source schema for AWS::Chime::AppInstanceBot
 - `app_instance_arn` (String) The ARN of the AppInstance.
 - `app_instance_bot_arn` (String) The ARN of the AppInstanceBot.
 - `configuration` (Attributes) A structure that contains configuration data. (see [below for nested schema](#nestedatt--configuration))
-- `created_timestamp` (Number) The time at which the AppInstanceBot was created. In epoch milliseconds.
-- `last_updated_timestamp` (Number) The time at which the AppInstanceBot was last updated. In epoch milliseconds.
+- `created_timestamp` (String) The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.
+- `last_updated_timestamp` (String) The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.
 - `metadata` (String) The metadata of the AppInstanceBot.
 - `name` (String) The name of the AppInstanceBot.
 - `tags` (Attributes List) The tags assigned to the AppInstanceBot. (see [below for nested schema](#nestedatt--tags))

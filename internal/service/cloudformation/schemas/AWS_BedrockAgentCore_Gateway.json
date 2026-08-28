@@ -534,6 +534,22 @@
       },
       "additionalProperties": false
     },
+    "WafConfiguration": {
+      "type": "object",
+      "properties": {
+        "FailureMode": {
+          "$ref": "#/definitions/WafFailureMode"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WafFailureMode": {
+      "type": "string",
+      "enum": [
+        "FAIL_CLOSE",
+        "FAIL_OPEN"
+      ]
+    },
     "WorkloadIdentityDetails": {
       "type": "object",
       "properties": {
@@ -639,6 +655,15 @@
       "type": "string",
       "format": "date-time"
     },
+    "WafConfiguration": {
+      "$ref": "#/definitions/WafConfiguration"
+    },
+    "WebAclArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": "^arn:[a-z0-9\\-]+:wafv2:[a-z0-9\\-]+:[0-9]{12}:regional/webacl/.+$"
+    },
     "WorkloadIdentityDetails": {
       "$ref": "#/definitions/WorkloadIdentityDetails"
     }
@@ -656,6 +681,7 @@
     "/properties/Status",
     "/properties/StatusReasons",
     "/properties/UpdatedAt",
+    "/properties/WebAclArn",
     "/properties/WorkloadIdentityDetails"
   ],
   "primaryIdentifier": [

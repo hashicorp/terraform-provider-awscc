@@ -1,0 +1,98 @@
+{
+  "typeName": "AWS::AppSync::Type",
+  "description": "Represents a GraphQL type in an AWS AppSync GraphQL API.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the type."
+    },
+    "ApiId": {
+      "type": "string",
+      "description": "The API ID."
+    },
+    "Definition": {
+      "type": "string",
+      "description": "The type definition, in GraphQL Schema Definition Language (SDL) format."
+    },
+    "Format": {
+      "type": "string",
+      "description": "The type format: SDL or JSON.",
+      "enum": [
+        "SDL",
+        "JSON"
+      ]
+    },
+    "Name": {
+      "type": "string",
+      "description": "The type name.",
+      "minLength": 1,
+      "maxLength": 65536,
+      "pattern": "^[_A-Za-z][_0-9A-Za-z]*$"
+    }
+  },
+  "required": [
+    "ApiId",
+    "Definition",
+    "Format"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/ApiId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ApiId",
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appsync:CreateType",
+        "appsync:GetType"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appsync:GetType"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appsync:UpdateType",
+        "appsync:GetType"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appsync:DeleteType",
+        "appsync:GetType"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ApiId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ApiId"
+        ]
+      },
+      "permissions": [
+        "appsync:ListTypes"
+      ]
+    }
+  }
+}

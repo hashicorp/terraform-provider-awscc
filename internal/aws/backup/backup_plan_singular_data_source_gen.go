@@ -31,7 +31,7 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "AdvancedBackupSettings": {
-		//	      "insertionOrder": true,
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {

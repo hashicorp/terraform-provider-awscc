@@ -398,6 +398,10 @@
         "MTLS": {
           "description": "Details for mTLS client authentication.",
           "$ref": "#/definitions/KafkaClusterMtlsAuthentication"
+        },
+        "SaslOAuthBearer": {
+          "description": "Details for client authentication using SASL/OAUTHBEARER.",
+          "$ref": "#/definitions/KafkaClusterSaslOAuthBearerAuthentication"
         }
       }
     },
@@ -413,6 +417,122 @@
       },
       "required": [
         "SecretArn"
+      ]
+    },
+    "KafkaClusterSaslOAuthBearerAuthentication": {
+      "description": "Details for client authentication using SASL/OAUTHBEARER.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TokenEndpointUrl": {
+          "description": "The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.",
+          "type": "string"
+        },
+        "ClientCredentials": {
+          "description": "Details for SASL/OAUTHBEARER using standard client_credentials grant. Mutually exclusive with iamJwtBearer and clientCredentialsAssertion.",
+          "$ref": "#/definitions/KafkaClusterOAuthClientCredentials"
+        },
+        "IamJwtBearer": {
+          "description": "Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523). Mutually exclusive with clientCredentials and clientCredentialsAssertion.",
+          "$ref": "#/definitions/KafkaClusterOAuthIamJwtBearer"
+        },
+        "ClientCredentialsAssertion": {
+          "description": "Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion (RFC 7521/7523). Mutually exclusive with clientCredentials and iamJwtBearer.",
+          "$ref": "#/definitions/KafkaClusterOAuthClientCredentialsAssertion"
+        },
+        "TokenEndpointAuthenticationMethod": {
+          "description": "How client credentials are sent to the identity provider (POST, BASIC, or NONE).",
+          "$ref": "#/definitions/TokenEndpointAuthenticationMethod"
+        },
+        "Scope": {
+          "description": "OAuth scope to request. Included in the token request if provided.",
+          "type": "string"
+        },
+        "TokenEndpointTlsCertificateArn": {
+          "description": "Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "TokenEndpointUrl",
+        "TokenEndpointAuthenticationMethod"
+      ]
+    },
+    "KafkaClusterOAuthClientCredentials": {
+      "description": "Details for SASL/OAUTHBEARER using the standard client_credentials grant. The referenced secret must contain client_id and client_secret.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TokenRequestSecretArn": {
+          "description": "Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "TokenRequestSecretArn"
+      ]
+    },
+    "KafkaClusterOAuthIamJwtBearer": {
+      "description": "Details for SASL/OAUTHBEARER using the JWT Bearer assertion grant (RFC 7523). An STS-vended JWT is used as the assertion.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Audience": {
+          "description": "The audience (aud claim) set in the STS JWT assertion.",
+          "type": "string"
+        },
+        "SigningAlgorithm": {
+          "description": "The algorithm used to sign the JWT assertion.",
+          "$ref": "#/definitions/JwtSigningAlgorithm"
+        },
+        "TokenRequestSecretArn": {
+          "description": "Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Audience",
+        "SigningAlgorithm"
+      ]
+    },
+    "KafkaClusterOAuthClientCredentialsAssertion": {
+      "description": "Details for SASL/OAUTHBEARER using the client credentials grant with a JWT client assertion (RFC 7521/7523 Section 2.2). An STS-vended JWT is used as the client_assertion.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Audience": {
+          "description": "The audience (aud claim) set in the STS JWT client assertion.",
+          "type": "string"
+        },
+        "SigningAlgorithm": {
+          "description": "The algorithm used to sign the JWT client assertion.",
+          "$ref": "#/definitions/JwtSigningAlgorithm"
+        },
+        "TokenRequestSecretArn": {
+          "description": "Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Audience",
+        "SigningAlgorithm"
+      ]
+    },
+    "TokenEndpointAuthenticationMethod": {
+      "description": "How client credentials are sent to the identity provider's token endpoint.",
+      "type": "string",
+      "enum": [
+        "POST",
+        "BASIC",
+        "NONE"
+      ]
+    },
+    "JwtSigningAlgorithm": {
+      "description": "The algorithm used to sign the STS JWT assertion.",
+      "type": "string",
+      "enum": [
+        "RS256",
+        "ES384"
       ]
     },
     "KafkaClusterSaslScramAuthentication": {

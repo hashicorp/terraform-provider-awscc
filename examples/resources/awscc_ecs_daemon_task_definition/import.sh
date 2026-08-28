@@ -1,0 +1,1 @@
+$ terraform import awscc_ecs_daemon_task_definition.example "daemon_task_definition_arn"

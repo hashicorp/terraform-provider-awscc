@@ -1,0 +1,222 @@
+{
+  "typeName": "AWS::CloudFormation::ChangeSet",
+  "description": "Resource type definition for AWS::CloudFormation::ChangeSet",
+  "properties": {
+    "ChangeSetId": {
+      "description": "The ARN of the change set.",
+      "type": "string",
+      "pattern": "^arn:[-a-zA-Z0-9:/]*$",
+      "minLength": 1
+    },
+    "ChangeSetName": {
+      "description": "The name of the change set. Must be unique among all change sets associated with the specified stack.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z][-a-zA-Z0-9]*$"
+    },
+    "StackName": {
+      "description": "The name or unique ID of the stack for which you are creating a change set.",
+      "type": "string",
+      "minLength": 1
+    },
+    "TemplateBody": {
+      "description": "A structure that contains the body of the revised template.",
+      "type": "string",
+      "minLength": 1
+    },
+    "TemplateURL": {
+      "description": "The URL of the file that contains the revised template.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5120
+    },
+    "UsePreviousTemplate": {
+      "description": "Whether to reuse the template associated with the stack to create the change set.",
+      "type": "boolean"
+    },
+    "Description": {
+      "description": "A description to help you identify this change set.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "ChangeSetType": {
+      "description": "The type of change set operation.",
+      "type": "string",
+      "enum": [
+        "CREATE",
+        "UPDATE",
+        "IMPORT"
+      ]
+    },
+    "Capabilities": {
+      "description": "The capabilities that are allowed in the stack.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "CAPABILITY_IAM",
+          "CAPABILITY_NAMED_IAM",
+          "CAPABILITY_AUTO_EXPAND"
+        ]
+      }
+    },
+    "RoleARN": {
+      "description": "The ARN of an IAM role that CloudFormation assumes when executing the change set.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "NotificationARNs": {
+      "description": "The ARNs of Amazon SNS topics that CloudFormation associates with the stack.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5
+    },
+    "IncludeNestedStacks": {
+      "description": "Creates a change set for all nested stacks specified in the template.",
+      "type": "boolean"
+    },
+    "OnStackFailure": {
+      "description": "Determines what action will be taken if stack creation fails.",
+      "type": "string",
+      "enum": [
+        "DO_NOTHING",
+        "ROLLBACK",
+        "DELETE"
+      ]
+    },
+    "ImportExistingResources": {
+      "description": "Indicates if the change set imports resources that already exist.",
+      "type": "boolean"
+    },
+    "DeploymentMode": {
+      "description": "Determines how CloudFormation handles configuration drift during deployment.",
+      "type": "string",
+      "enum": [
+        "REVERT_DRIFT"
+      ]
+    },
+    "StackId": {
+      "description": "The unique ID of the stack.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "The time the change set was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "description": "Key-value pairs to associate with the change set.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "ChangeSetName",
+    "StackName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ChangeSetId",
+    "/properties/StackId",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/ChangeSetName",
+    "/properties/StackName",
+    "/properties/TemplateBody",
+    "/properties/TemplateURL",
+    "/properties/UsePreviousTemplate",
+    "/properties/Description",
+    "/properties/ChangeSetType",
+    "/properties/Capabilities",
+    "/properties/RoleARN",
+    "/properties/NotificationARNs",
+    "/properties/IncludeNestedStacks",
+    "/properties/OnStackFailure",
+    "/properties/ImportExistingResources",
+    "/properties/DeploymentMode",
+    "/properties/Tags"
+  ],
+  "writeOnlyProperties": [
+    "/properties/TemplateBody",
+    "/properties/TemplateURL",
+    "/properties/UsePreviousTemplate",
+    "/properties/ChangeSetType",
+    "/properties/RoleARN"
+  ],
+  "primaryIdentifier": [
+    "/properties/ChangeSetId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudformation:CreateChangeSet"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudformation:CreateChangeSet",
+        "cloudformation:DescribeChangeSet",
+        "iam:PassRole",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudformation:DescribeChangeSet"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudformation:DeleteChangeSet",
+        "cloudformation:DescribeChangeSet"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "StackName": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "permissions": [
+        "cloudformation:ListChangeSets"
+      ]
+    }
+  }
+}

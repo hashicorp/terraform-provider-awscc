@@ -75,7 +75,7 @@ func quickResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Content": {
 		//	      "description": "The content of the quick response.",
-		//	      "maxLength": 1024,
+		//	      "maxLength": 4000,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    }
@@ -90,7 +90,7 @@ func quickResponseResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 1024),
+						stringvalidator.LengthBetween(1, 4000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -132,7 +132,7 @@ func quickResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "Content": {
 		//	          "description": "The content of the quick response.",
-		//	          "maxLength": 1024,
+		//	          "maxLength": 4000,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
@@ -145,7 +145,7 @@ func quickResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "Content": {
 		//	          "description": "The content of the quick response.",
-		//	          "maxLength": 1024,
+		//	          "maxLength": 4000,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }

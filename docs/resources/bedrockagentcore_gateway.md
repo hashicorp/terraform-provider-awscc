@@ -32,6 +32,7 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
 - `protocol_type` (String)
 - `tags` (Map of String)
+- `waf_configuration` (Attributes) (see [below for nested schema](#nestedatt--waf_configuration))
 
 ### Read-Only
 
@@ -43,6 +44,7 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 - `status` (String)
 - `status_reasons` (List of String)
 - `updated_at` (String)
+- `web_acl_arn` (String)
 - `workload_identity_details` (Attributes) (see [below for nested schema](#nestedatt--workload_identity_details))
 
 <a id="nestedatt--authorizer_configuration"></a>
@@ -219,6 +221,14 @@ Optional:
 - `enable_response_streaming` (Boolean)
 
 
+
+
+<a id="nestedatt--waf_configuration"></a>
+### Nested Schema for `waf_configuration`
+
+Optional:
+
+- `failure_mode` (String)
 
 
 <a id="nestedatt--workload_identity_details"></a>

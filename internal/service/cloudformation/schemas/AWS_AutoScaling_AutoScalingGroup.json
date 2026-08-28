@@ -460,6 +460,17 @@
           "description": "The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is launched first as your group scales.\n This number has the same unit of measurement as the group's desired capacity. If you change the default unit of measurement (number of instances) by specifying weighted capacity values in your launch template overrides list, or by changing the default desired capacity type setting of the group, you must specify this number using the same unit of measurement.\n Default: 0\n  An update to this setting means a gradual replacement of instances to adjust the current On-Demand Instance levels. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the previous ones.",
           "type": "integer"
         },
+        "DistributionSegments": {
+          "minItems": 1,
+          "maxItems": 1,
+          "uniqueItems": false,
+          "description": "",
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DistributionSegment"
+          }
+        },
         "OnDemandPercentageAboveBaseCapacity": {
           "description": "Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond ``OnDemandBaseCapacity``. Expressed as a number (for example, 20 specifies 20% On-Demand Instances, 80% Spot Instances). If set to 100, only On-Demand Instances are used.\n Default: 100\n  An update to this setting means a gradual replacement of instances to adjust the current On-Demand and Spot Instance levels for your additional capacity higher than the base capacity. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the previous ones.",
           "type": "integer"
@@ -845,6 +856,31 @@
       },
       "required": [
         "CapacityReservationPreference"
+      ]
+    },
+    "DistributionSegment": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TargetCapacityTypes": {
+          "minItems": 1,
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "on-demand-capacity-reservation",
+              "capacity-block",
+              "interruptible-capacity-reservation",
+              "on-demand"
+            ]
+          }
+        }
+      },
+      "required": [
+        "TargetCapacityTypes"
       ]
     }
   },

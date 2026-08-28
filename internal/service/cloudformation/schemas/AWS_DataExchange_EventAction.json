@@ -1,0 +1,226 @@
+{
+  "typeName": "AWS::DataExchange::EventAction",
+  "description": "An event action is an AWS Data Exchange resource that automatically exports data set revisions to Amazon S3 when a revision is published.",
+  "definitions": {
+    "AutoExportRevisionDestinationEntry": {
+      "type": "object",
+      "description": "A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.",
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "description": "The Amazon S3 bucket that is the destination for the event action."
+        },
+        "KeyPattern": {
+          "type": "string",
+          "description": "A string representing the pattern for generated names of the individual assets in the revision."
+        }
+      },
+      "required": [
+        "Bucket"
+      ],
+      "additionalProperties": false
+    },
+    "ExportServerSideEncryption": {
+      "type": "object",
+      "description": "Encryption configuration of the export job.",
+      "properties": {
+        "KmsKeyArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects."
+        },
+        "Type": {
+          "type": "string",
+          "description": "The type of server side encryption used for encrypting the objects in Amazon S3.",
+          "enum": [
+            "aws:kms",
+            "AES256"
+          ]
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "AutoExportRevisionToS3RequestDetails": {
+      "type": "object",
+      "description": "Details of the operation to be performed by the job.",
+      "properties": {
+        "Encryption": {
+          "$ref": "#/definitions/ExportServerSideEncryption"
+        },
+        "RevisionDestination": {
+          "$ref": "#/definitions/AutoExportRevisionDestinationEntry"
+        }
+      },
+      "required": [
+        "RevisionDestination"
+      ],
+      "additionalProperties": false
+    },
+    "Action": {
+      "type": "object",
+      "description": "What occurs after a certain event.",
+      "properties": {
+        "ExportRevisionToS3": {
+          "$ref": "#/definitions/AutoExportRevisionToS3RequestDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RevisionPublished": {
+      "type": "object",
+      "description": "Information about the published revision.",
+      "properties": {
+        "DataSetId": {
+          "type": "string",
+          "description": "The data set ID of the published revision.",
+          "pattern": "^[a-zA-Z0-9]{30,40}$"
+        }
+      },
+      "required": [
+        "DataSetId"
+      ],
+      "additionalProperties": false
+    },
+    "Event": {
+      "type": "object",
+      "description": "What occurs to start an action.",
+      "properties": {
+        "RevisionPublished": {
+          "$ref": "#/definitions/RevisionPublished"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Action": {
+      "$ref": "#/definitions/Action",
+      "description": "What occurs after a certain event."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN for the event action."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the event action was created, in ISO 8601 format."
+    },
+    "Event": {
+      "$ref": "#/definitions/Event",
+      "description": "What occurs to start an action."
+    },
+    "EventActionId": {
+      "type": "string",
+      "description": "The unique identifier for the event action.",
+      "pattern": "^[a-zA-Z0-9]{30,40}$"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the event action.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the event action was last updated, in ISO 8601 format."
+    }
+  },
+  "required": [
+    "Action",
+    "Event"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/EventActionId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Event"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/EventActionId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "dataexchange:TagResource",
+      "dataexchange:UntagResource",
+      "dataexchange:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dataexchange:CreateEventAction",
+        "dataexchange:GetEventAction",
+        "dataexchange:TagResource",
+        "kms:CreateGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dataexchange:GetEventAction",
+        "dataexchange:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dataexchange:UpdateEventAction",
+        "dataexchange:GetEventAction",
+        "dataexchange:TagResource",
+        "dataexchange:UntagResource",
+        "dataexchange:ListTagsForResource",
+        "kms:CreateGrant"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dataexchange:DeleteEventAction",
+        "dataexchange:GetEventAction",
+        "kms:RevokeGrant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dataexchange:ListEventActions"
+      ]
+    }
+  }
+}

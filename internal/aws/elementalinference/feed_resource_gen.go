@@ -9,7 +9,7 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -36,6 +36,26 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::ElementalInference::Feed resource.
 func feedResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 32,
+		//	  "pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$",
+		//	  "type": "string"
+		//	}
+		"access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(32, 255),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -115,12 +135,58 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 		//	                "maxLength": 1024,
 		//	                "pattern": "^[\\w \\-\\.',@:;]*$",
 		//	                "type": "string"
+		//	              },
+		//	              "DataSourceConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "FixtureId": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "FixtureId"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Cropping": {
 		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "TemplateGroups": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TemplateUris": {
+		//	                      "items": {
+		//	                        "maxLength": 255,
+		//	                        "minLength": 10,
+		//	                        "pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "maxItems": 2,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name",
+		//	                    "TemplateUris"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 4,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Subtitling": {
@@ -236,6 +302,28 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: DataSourceConfiguration
+									"data_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FixtureId
+											"fixture_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
@@ -244,12 +332,57 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Cropping
-							"cropping": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType: jsontypes.NormalizedType{},
-								Optional:   true,
-								Computed:   true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
+							"cropping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TemplateGroups
+									"template_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$"), ""),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: TemplateUris
+												"template_uris": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 2),
+														listvalidator.ValueStringsAre(
+															stringvalidator.LengthBetween(10, 255),
+															stringvalidator.RegexMatches(regexp.MustCompile("^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"), ""),
+														),
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 4),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Subtitling
@@ -410,25 +543,30 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"aspect_ratio":      "AspectRatio",
-		"callback_metadata": "CallbackMetadata",
-		"clipping":          "Clipping",
-		"cropping":          "Cropping",
-		"data_endpoints":    "DataEndpoints",
-		"description":       "Description",
-		"dictionary":        "Dictionary",
-		"feed_id":           "Id",
-		"height":            "Height",
-		"language":          "Language",
-		"name":              "Name",
-		"output_config":     "OutputConfig",
-		"outputs":           "Outputs",
-		"profanity_filter":  "ProfanityFilter",
-		"status":            "Status",
-		"subtitling":        "Subtitling",
-		"tags":              "Tags",
-		"width":             "Width",
+		"access_role_arn":           "AccessRoleArn",
+		"arn":                       "Arn",
+		"aspect_ratio":              "AspectRatio",
+		"callback_metadata":         "CallbackMetadata",
+		"clipping":                  "Clipping",
+		"cropping":                  "Cropping",
+		"data_endpoints":            "DataEndpoints",
+		"data_source_configuration": "DataSourceConfiguration",
+		"description":               "Description",
+		"dictionary":                "Dictionary",
+		"feed_id":                   "Id",
+		"fixture_id":                "FixtureId",
+		"height":                    "Height",
+		"language":                  "Language",
+		"name":                      "Name",
+		"output_config":             "OutputConfig",
+		"outputs":                   "Outputs",
+		"profanity_filter":          "ProfanityFilter",
+		"status":                    "Status",
+		"subtitling":                "Subtitling",
+		"tags":                      "Tags",
+		"template_groups":           "TemplateGroups",
+		"template_uris":             "TemplateUris",
+		"width":                     "Width",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

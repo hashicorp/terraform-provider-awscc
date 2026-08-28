@@ -410,6 +410,42 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WarmUpConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide.",
+		//	  "properties": {
+		//	    "OnlyStartEvaluatingAfterWarmUpPeriodEnds": {
+		//	      "description": "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "WarmUpPeriodDurationInMinutes": {
+		//	      "description": "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+		//	      "maximum": 2880,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_up_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnlyStartEvaluatingAfterWarmUpPeriodEnds
+				"only_start_evaluating_after_warm_up_period_ends": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WarmUpPeriodDurationInMinutes
+				"warm_up_period_duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -427,32 +463,35 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::LogAlarm").WithTerraformTypeName("awscc_cloudwatch_log_alarm")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action_log_line_count":         "ActionLogLineCount",
-		"action_log_line_role_arn":      "ActionLogLineRoleArn",
-		"actions_enabled":               "ActionsEnabled",
-		"aggregation_expression":        "AggregationExpression",
-		"alarm_actions":                 "AlarmActions",
-		"alarm_description":             "AlarmDescription",
-		"alarm_name":                    "AlarmName",
-		"arn":                           "Arn",
-		"comparison_operator":           "ComparisonOperator",
-		"end_time_offset":               "EndTimeOffset",
-		"insufficient_data_actions":     "InsufficientDataActions",
-		"key":                           "Key",
-		"log_group_identifiers":         "LogGroupIdentifiers",
-		"ok_actions":                    "OKActions",
-		"query_results_to_alarm":        "QueryResultsToAlarm",
-		"query_results_to_evaluate":     "QueryResultsToEvaluate",
-		"query_string":                  "QueryString",
-		"schedule_configuration":        "ScheduleConfiguration",
-		"schedule_expression":           "ScheduleExpression",
-		"scheduled_query_configuration": "ScheduledQueryConfiguration",
-		"scheduled_query_role_arn":      "ScheduledQueryRoleARN",
-		"start_time_offset":             "StartTimeOffset",
-		"tags":                          "Tags",
-		"threshold":                     "Threshold",
-		"treat_missing_data":            "TreatMissingData",
-		"value":                         "Value",
+		"action_log_line_count":     "ActionLogLineCount",
+		"action_log_line_role_arn":  "ActionLogLineRoleArn",
+		"actions_enabled":           "ActionsEnabled",
+		"aggregation_expression":    "AggregationExpression",
+		"alarm_actions":             "AlarmActions",
+		"alarm_description":         "AlarmDescription",
+		"alarm_name":                "AlarmName",
+		"arn":                       "Arn",
+		"comparison_operator":       "ComparisonOperator",
+		"end_time_offset":           "EndTimeOffset",
+		"insufficient_data_actions": "InsufficientDataActions",
+		"key":                       "Key",
+		"log_group_identifiers":     "LogGroupIdentifiers",
+		"ok_actions":                "OKActions",
+		"only_start_evaluating_after_warm_up_period_ends": "OnlyStartEvaluatingAfterWarmUpPeriodEnds",
+		"query_results_to_alarm":                          "QueryResultsToAlarm",
+		"query_results_to_evaluate":                       "QueryResultsToEvaluate",
+		"query_string":                                    "QueryString",
+		"schedule_configuration":                          "ScheduleConfiguration",
+		"schedule_expression":                             "ScheduleExpression",
+		"scheduled_query_configuration":                   "ScheduledQueryConfiguration",
+		"scheduled_query_role_arn":                        "ScheduledQueryRoleARN",
+		"start_time_offset":                               "StartTimeOffset",
+		"tags":                                            "Tags",
+		"threshold":                                       "Threshold",
+		"treat_missing_data":                              "TreatMissingData",
+		"value":                                           "Value",
+		"warm_up_configuration":                           "WarmUpConfiguration",
+		"warm_up_period_duration_in_minutes":              "WarmUpPeriodDurationInMinutes",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

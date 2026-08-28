@@ -1,0 +1,167 @@
+{
+  "typeName": "AWS::Bedrock::Session",
+  "description": "Definition of AWS::Bedrock::Session Resource Type",
+  "properties": {
+    "SessionArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the session.",
+      "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]+:[0-9]{12}:session/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "SessionId": {
+      "type": "string",
+      "description": "The unique identifier of the session in UUID format.",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "SessionStatus": {
+      "type": "string",
+      "description": "The current status of the session.",
+      "enum": [
+        "ACTIVE",
+        "EXPIRED",
+        "ENDED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp for when the session was created.",
+      "format": "date-time"
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "description": "The timestamp for when the session was last modified.",
+      "format": "date-time"
+    },
+    "SessionMetadata": {
+      "type": "object",
+      "description": "A map of key-value pairs containing attributes to be persisted across the session.",
+      "maxProperties": 50,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 5000
+        }
+      },
+      "additionalProperties": false
+    },
+    "EncryptionKeyArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the KMS key to use to encrypt the session data.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags associated with the session.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A tag associated with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/SessionArn",
+    "/properties/SessionId",
+    "/properties/SessionStatus",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/EncryptionKeyArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/SessionArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SessionId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bedrock:TagResource",
+      "bedrock:UntagResource",
+      "bedrock:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock:CreateSession",
+        "bedrock:GetSession",
+        "bedrock:TagResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock:GetSession",
+        "bedrock:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock:UpdateSession",
+        "bedrock:GetSession",
+        "bedrock:TagResource",
+        "bedrock:UntagResource",
+        "bedrock:ListTagsForResource",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock:DeleteSession",
+        "bedrock:EndSession",
+        "bedrock:GetSession",
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock:ListSessions"
+      ]
+    }
+  }
+}

@@ -24,6 +24,76 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::MWAAServerless::Workflow resource.
 func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Code
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images).",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "type": "string"
+		//	        },
+		//	        "ObjectKey": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "VersionId": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "ObjectKey"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ObjectKey
+						"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VersionId
+						"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CodeSnapshottedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"code_snapshotted_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -328,6 +398,8 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket":                   "Bucket",
+		"code":                     "Code",
+		"code_snapshotted_at":      "CodeSnapshottedAt",
 		"created_at":               "CreatedAt",
 		"cron_expression":          "CronExpression",
 		"definition_s3_location":   "DefinitionS3Location",
@@ -341,6 +413,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"network_configuration":    "NetworkConfiguration",
 		"object_key":               "ObjectKey",
 		"role_arn":                 "RoleArn",
+		"s3_location":              "S3Location",
 		"schedule_configuration":   "ScheduleConfiguration",
 		"security_group_ids":       "SecurityGroupIds",
 		"subnet_ids":               "SubnetIds",

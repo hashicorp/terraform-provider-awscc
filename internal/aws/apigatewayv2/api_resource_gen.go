@@ -366,6 +366,21 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// DisableSchemaValidation is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: ExecuteApiArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "pattern": "arn:aws(-[\\w]+)*:execute-api:[a-z0-9-]+:[0-9]{12}:.+",
+		//	  "type": "string"
+		//	}
+		"execute_api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FailOnWarnings
 		// CloudFormation resource type schema:
 		//
@@ -558,6 +573,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 		"disable_execute_api_endpoint": "DisableExecuteApiEndpoint",
 		"disable_schema_validation":    "DisableSchemaValidation",
 		"etag":                         "Etag",
+		"execute_api_arn":              "ExecuteApiArn",
 		"expose_headers":               "ExposeHeaders",
 		"fail_on_warnings":             "FailOnWarnings",
 		"ip_address_type":              "IpAddressType",

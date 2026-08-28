@@ -27,9 +27,9 @@ Resource Type definition for AWS::Chime::AppInstance
 ### Read-Only
 
 - `app_instance_arn` (String) The Amazon Resource Number (ARN) of the AppInstance.
-- `created_timestamp` (Number) The time at which an AppInstance was created. In epoch milliseconds.
+- `created_timestamp` (String) The time at which an AppInstance was created, as an ISO 8601 timestamp.
 - `id` (String) Uniquely identifies the resource.
-- `last_updated_timestamp` (Number) The time an AppInstance was last updated. In epoch milliseconds.
+- `last_updated_timestamp` (String) The time an AppInstance was last updated, as an ISO 8601 timestamp.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

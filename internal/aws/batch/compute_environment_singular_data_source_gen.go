@@ -643,6 +643,32 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"context": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EcsSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ContainerInsights": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "ENHANCED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ecs_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerInsights
+				"container_insights": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EksConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -799,11 +825,13 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"compute_environment_arn":            "ComputeEnvironmentArn",
 		"compute_environment_name":           "ComputeEnvironmentName",
 		"compute_resources":                  "ComputeResources",
+		"container_insights":                 "ContainerInsights",
 		"context":                            "Context",
 		"desiredv_cpus":                      "DesiredvCpus",
 		"ec_2_configuration":                 "Ec2Configuration",
 		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
 		"ec_2_key_pair":                      "Ec2KeyPair",
+		"ecs_settings":                       "EcsSettings",
 		"eks_cluster_arn":                    "EksClusterArn",
 		"eks_configuration":                  "EksConfiguration",
 		"fips_enabled":                       "FipsEnabled",

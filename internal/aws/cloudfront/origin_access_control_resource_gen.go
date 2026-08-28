@@ -70,7 +70,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		//	    },
 		//	    "SigningProtocol": {
 		//	      "description": "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
-		//	      "pattern": "^(sigv4)$",
+		//	      "pattern": "^(sigv4|sigv4a)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -119,7 +119,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 					Description: "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^(sigv4)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(sigv4|sigv4a)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

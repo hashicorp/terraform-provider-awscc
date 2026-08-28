@@ -109,16 +109,17 @@ resource "awscc_bedrockagentcore_runtime" "example" {
 
 - `agent_runtime_artifact` (Attributes) The artifact of the agent (see [below for nested schema](#nestedatt--agent_runtime_artifact))
 - `agent_runtime_name` (String) Name for a resource
-- `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
 - `role_arn` (String) Amazon Resource Name (ARN) of an IAM role
 
 ### Optional
 
 - `authorizer_configuration` (Attributes) Authorizer configuration for the agent runtime (see [below for nested schema](#nestedatt--authorizer_configuration))
+- `capacity_provider_configuration` (Attributes) Capacity provider configuration for the agent runtime (see [below for nested schema](#nestedatt--capacity_provider_configuration))
 - `description` (String) Description of the resource
 - `environment_variables` (Map of String) Environment variables for the agent runtime
 - `filesystem_configurations` (Attributes List) Filesystem configurations for the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations))
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
+- `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
 - `protocol_configuration` (String) Protocol configuration for the agent runtime
 - `request_header_configuration` (Attributes) Configuration for HTTP request headers (see [below for nested schema](#nestedatt--request_header_configuration))
 - `tags` (Map of String) A map of tag keys and values
@@ -177,27 +178,6 @@ Optional:
 Optional:
 
 - `container_uri` (String) The ECR URI of the container
-
-
-
-<a id="nestedatt--network_configuration"></a>
-### Nested Schema for `network_configuration`
-
-Required:
-
-- `network_mode` (String) Network mode configuration type
-
-Optional:
-
-- `network_mode_config` (Attributes) Network mode configuration for VPC (see [below for nested schema](#nestedatt--network_configuration--network_mode_config))
-
-<a id="nestedatt--network_configuration--network_mode_config"></a>
-### Nested Schema for `network_configuration.network_mode_config`
-
-Optional:
-
-- `security_groups` (List of String) Security groups for VPC
-- `subnets` (List of String) Subnets for VPC
 
 
 
@@ -338,14 +318,32 @@ Optional:
 
 
 
+<a id="nestedatt--capacity_provider_configuration"></a>
+### Nested Schema for `capacity_provider_configuration`
+
+Optional:
+
+- `capacity_provider_arn` (String) ARN of the capacity provider
+
+
 <a id="nestedatt--filesystem_configurations"></a>
 ### Nested Schema for `filesystem_configurations`
 
 Optional:
 
+- `capacity_provider_volume` (Attributes) Configuration for a CapacityProvider-managed volume to mount into the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations--capacity_provider_volume))
 - `efs_access_point` (Attributes) Configuration for EFS access point filesystem (see [below for nested schema](#nestedatt--filesystem_configurations--efs_access_point))
 - `s3_files_access_point` (Attributes) Configuration for S3 Files access point filesystem (see [below for nested schema](#nestedatt--filesystem_configurations--s3_files_access_point))
 - `session_storage` (Attributes) Configuration for session storage (see [below for nested schema](#nestedatt--filesystem_configurations--session_storage))
+
+<a id="nestedatt--filesystem_configurations--capacity_provider_volume"></a>
+### Nested Schema for `filesystem_configurations.capacity_provider_volume`
+
+Optional:
+
+- `mount_path` (String) Mount path for filesystem configuration
+- `volume_name` (String) Name of the capacity provider volume
+
 
 <a id="nestedatt--filesystem_configurations--efs_access_point"></a>
 ### Nested Schema for `filesystem_configurations.efs_access_point`
@@ -381,6 +379,24 @@ Optional:
 
 - `idle_runtime_session_timeout` (Number) Timeout in seconds for idle runtime sessions
 - `max_lifetime` (Number) Maximum lifetime in seconds for runtime sessions
+
+
+<a id="nestedatt--network_configuration"></a>
+### Nested Schema for `network_configuration`
+
+Optional:
+
+- `network_mode` (String) Network mode configuration type
+- `network_mode_config` (Attributes) Network mode configuration for VPC (see [below for nested schema](#nestedatt--network_configuration--network_mode_config))
+
+<a id="nestedatt--network_configuration--network_mode_config"></a>
+### Nested Schema for `network_configuration.network_mode_config`
+
+Optional:
+
+- `security_groups` (List of String) Security groups for VPC
+- `subnets` (List of String) Subnets for VPC
+
 
 
 <a id="nestedatt--request_header_configuration"></a>

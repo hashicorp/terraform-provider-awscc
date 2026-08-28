@@ -19,15 +19,17 @@ Resource Type definition for AWS::BedrockAgentCore::PaymentConnector
 
 - `connector_name` (String) The name of the payment connector
 - `connector_type` (String)
-- `credential_provider_configurations` (Attributes List) The credential provider configurations for the connector (see [below for nested schema](#nestedatt--credential_provider_configurations))
 - `payment_manager_id` (String) The identifier of the parent payment manager
 
 ### Optional
 
+- `credential_provider_configurations` (Attributes List) The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes. (see [below for nested schema](#nestedatt--credential_provider_configurations))
 - `description` (String) A description of the payment connector
+- `provision_mode` (String) The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.
 
 ### Read-Only
 
+- `authorization_url` (String) The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.
 - `connector_created_at` (String) The timestamp when the connector was created
 - `connector_last_updated_at` (String) The timestamp when the connector was last updated
 - `connector_status` (String)

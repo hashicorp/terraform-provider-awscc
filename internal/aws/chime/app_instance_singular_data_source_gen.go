@@ -8,6 +8,7 @@ package chime
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -39,22 +40,26 @@ func appInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time at which an AppInstance was created. In epoch milliseconds.",
-		//	  "type": "number"
+		//	  "description": "The time at which an AppInstance was created, as an ISO 8601 timestamp.",
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time at which an AppInstance was created. In epoch milliseconds.",
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which an AppInstance was created, as an ISO 8601 timestamp.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time an AppInstance was last updated. In epoch milliseconds.",
-		//	  "type": "number"
+		//	  "description": "The time an AppInstance was last updated, as an ISO 8601 timestamp.",
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time an AppInstance was last updated. In epoch milliseconds.",
+		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time an AppInstance was last updated, as an ISO 8601 timestamp.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Metadata
