@@ -31,6 +31,24 @@ var pluralDataSourceSchemaTemplate string
 //go:embed plural_data_source_tests.tmpl
 var pluralDataSourceTestsTemplate string
 
+//go:embed imports.tmpl
+var importExamplesTemplate string
+
+// ImportExample is one resource's entry in import_examples_gen.json.
+type ImportExample struct {
+	ResourceName         string
+	GenerateListResource bool
+	Identifier           []string
+}
+
+// GenerateImportExamples renders the import_examples_gen.json aggregate from the
+// given resource entries. The output is JSON (not Go), so it is not
+// gofmt-formatted — the template's exact layout is authoritative.
+func GenerateImportExamples(examples []ImportExample) ([]byte, error) {
+	data := struct{ Resources []ImportExample }{Resources: examples}
+	return parseTemplate("imports", importExamplesTemplate, data)
+}
+
 // GenerateResource renders a resource's generated code and acceptance-test source
 // in-process, returning the gofmt-formatted bytes. It is the owned, in-process
 // equivalent of generators/resource/main.go: build the template data, snake-case

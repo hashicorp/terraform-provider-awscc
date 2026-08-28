@@ -6,9 +6,13 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
+	"io"
 	"os"
 	"path/filepath"
 	"sort"
+
+	"github.com/hashicorp/cli"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/codegen"
 )
 
 // modulePath is the Go module path; generated import paths are built from it.
@@ -98,4 +102,50 @@ func emitRegistration(cfg config, rows []resourceRow) ([]byte, error) {
 		return nil, fmt.Errorf("formatting registration file:\n%s\n%w", b.Bytes(), err)
 	}
 	return formatted, nil
+}
+
+// emitImportExamples renders import_examples_gen.json: one entry per resource
+// that generates a resource artifact, carrying its primary-identifier names (the
+// raw, non-snake-cased names, as the legacy aggregate uses) and its
+// list-resource flag. Mirrors schema/main.go's GenerateResourceImportExamples,
+// which likewise re-derives the identifiers via the template data.
+func emitImportExamples(cfg config, rows []resourceRow) ([]byte, error) {
+	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
+
+	var examples []codegen.ImportExample
+	for _, row := range rows {
+		p, err := generationPlan(row, cfg.prefix, cfg.cacheDir)
+		if err != nil {
+			return nil, fmt.Errorf("plan %s: %w", row.CloudFormationTypeName, err)
+		}
+
+		var res *genArtifact
+		for i := range p.artifacts {
+			if p.artifacts[i].kind == artifactResource {
+				res = &p.artifacts[i]
+				break
+			}
+		}
+		if res == nil {
+			continue // resource generation suppressed; no import example
+		}
+
+		td, err := codegen.GenerateTemplateData(ui, p.schemaFile, codegen.ResourceType, res.tfType, res.packageName, cfg.servicesPath)
+		if err != nil {
+			return nil, fmt.Errorf("template data %s: %w", p.cfType, err)
+		}
+
+		identifier := make([]string, 0, len(td.PrimaryIdentifier))
+		for _, v := range td.PrimaryIdentifier {
+			identifier = append(identifier, v.Name)
+		}
+
+		examples = append(examples, codegen.ImportExample{
+			ResourceName:         res.tfType,
+			GenerateListResource: res.listResource,
+			Identifier:           identifier,
+		})
+	}
+
+	return codegen.GenerateImportExamples(examples)
 }
