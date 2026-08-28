@@ -202,15 +202,25 @@ time is measured to be a real bottleneck.
   onto the owned engine; drop its `generators/**` imports. Land the
   import-boundary test. *Done = bigdiffer emits one type's code in-process,
   self-contained.*
-- **Brick 7 — Full-corpus parity (serial; the lynchpin).** Generate all types
-  into a temp tree and byte-compare to the committed `*_gen.go` +
-  `import_examples_gen.json` (empty diff). Pure validation, no file changes.
-  *Done = the owned engine is provably faithful.*
+- **Brick 7 — Full-corpus parity (the lynchpin). DONE.** Generate every type's
+  artifacts through the owned engine and compare to the committed `*_gen.go`. The
+  true criterion is bigdiffer == legacy, so committed is only the fast first pass:
+  on a mismatch the harness runs the legacy generator for that artifact and
+  compares against it — equal means the committed file is merely stale (logged,
+  non-fatal), only a real bigdiffer-vs-legacy difference fails. Result: 1579
+  types, 8432 files, **0 drift**, ~7s in-process. Two stale committed files found
+  (`appconfig::extension` resource + singular DS: bigdiffer matches current legacy
+  but the release shipped an out-of-date file; they regenerate correctly on the
+  next full run). One real drift found and fixed: the copied naming lacked
+  internal/naming's `(D|d)ata$ -> _plural` rule. `import_examples_gen.json` is
+  **not** in this brick — it is an aggregate from `schema/main.go`'s
+  `GenerateResourceImportExamples`, so its parity is grouped with Brick 9.
 - **Brick 8 — Parallelize.** `errgroup` over the corpus; `-race` clean; still
   byte-identical; measure the speedup. *Done = fast `-full`.*
 - **Brick 9 — Incremental weekly pipeline.** discover → detect → generate only
   New + Changed → policy → overlay mutate/synthesize → cache write-back → emit the
-  single registration file → report. *Done = the weekly `-discover` run does
+  single registration file **and `import_examples_gen.json`** (the aggregates,
+  with their own parity check) → report. *Done = the weekly `-discover` run does
   everything.*
 - **Brick 10 — Docs.** `make docs` is `tfplugindocs generate` (a standard
   external tool we keep and invoke) plus in-house `docs-import` and `docs-fmt`.
