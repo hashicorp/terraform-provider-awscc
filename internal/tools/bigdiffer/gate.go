@@ -5,12 +5,11 @@ package main
 import (
 	"strings"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/codegen"
 )
 
 // The gate answers "does this schema still generate?" per type. It deliberately
-// reuses the proven code-emission engine (shared.NewResource + codegen.Emitter)
+// reuses the proven code-emission engine (codegen.NewResource + codegen.Emitter)
 // but NOT shared.GenerateTemplateData: that wrapper writes last_resource.txt to
 // the CWD (a data race under concurrency) and reads ../identity/names/services.hcl
 // via a CWD-relative path (a false failure when run from anywhere else). The
@@ -65,7 +64,7 @@ func (silentUI) Warn(string)                      {}
 // whether it validated and emitted. It has no side effects and is safe to call
 // concurrently (each call builds its own resource, emitter, and writer).
 func gateArtifact(schemaFile, tfType string, isDataSource bool) (gateOutcome, error) {
-	res, err := shared.NewResource(tfType, schemaFile)
+	res, err := codegen.NewResource(tfType, schemaFile)
 	if err != nil {
 		return gateFailedValidation, err
 	}
