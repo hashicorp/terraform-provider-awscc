@@ -1,6 +1,14 @@
 // SPDX-License-Identifier: MPL-2.0
 
-package main
+// Package naming is bigdiffer's own copy of the naming/pluralization logic it
+// needs, owned rather than imported from internal/naming. Beyond the "copy,
+// don't depend on legacy" policy, the legacy Pluralize has a data race — it calls
+// inflection.AddIrregular on every invocation, mutating the library's global
+// rules (and triggering its lazy global compile), which the race detector flags
+// under concurrency. This copy fixes that by registering the irregular once and
+// serializing all access to the (non-thread-safe) inflection package. The
+// parsing/attribute logic is copied verbatim so derived names stay identical.
+package naming
 
 import (
 	"fmt"
@@ -11,21 +19,12 @@ import (
 	"github.com/jinzhu/inflection"
 )
 
-// bigdiffer owns its naming logic rather than importing internal/naming. Beyond
-// the project's "copy, don't depend on legacy" policy, the legacy Pluralize has a
-// data race — it calls inflection.AddIrregular on every invocation, mutating the
-// library's global rules (and triggering its lazy global compile), which the race
-// detector flags under concurrency. This copy fixes that by registering the
-// irregular once and serializing all access to the (non-thread-safe) inflection
-// package. The parsing/attribute logic is copied verbatim from the legacy so the
-// derived Terraform names stay identical.
-
-const orgNameAWS = "AWS"
+const OrganizationNameAWS = "AWS"
 
 var cfnTypeNameRE = regexp.MustCompile(`^([a-zA-Z0-9]{2,64})::([a-zA-Z0-9]{2,64})::([a-zA-Z0-9]{2,64})$`)
 
-// parseCloudFormationTypeName splits e.g. "AWS::Logs::LogGroup" into org, svc, res.
-func parseCloudFormationTypeName(typeName string) (string, string, string, error) {
+// ParseCloudFormationTypeName splits e.g. "AWS::Logs::LogGroup" into org, svc, res.
+func ParseCloudFormationTypeName(typeName string) (string, string, string, error) {
 	m := cfnTypeNameRE.FindStringSubmatch(typeName)
 	if len(m) != 4 {
 		return "", "", "", fmt.Errorf("matching CloudFormation type name returned %d matches; expected 4", len(m))
@@ -37,8 +36,8 @@ const tfTypeNameSep = "_"
 
 var tfTypeNameRE = regexp.MustCompile(`^([a-zA-Z0-9]{2,64})` + tfTypeNameSep + `([a-zA-Z0-9]{2,64})` + tfTypeNameSep + `([a-zA-Z0-9_]{2,})$`)
 
-// parseTerraformTypeName splits e.g. "aws_logs_log_group" into org, svc, res.
-func parseTerraformTypeName(typeName string) (string, string, string, error) {
+// ParseTerraformTypeName splits e.g. "aws_logs_log_group" into org, svc, res.
+func ParseTerraformTypeName(typeName string) (string, string, string, error) {
 	m := tfTypeNameRE.FindStringSubmatch(typeName)
 	if len(m) != 4 {
 		return "", "", "", fmt.Errorf("matching Terraform type name returned %d matches; expected 4", len(m))
@@ -46,8 +45,8 @@ func parseTerraformTypeName(typeName string) (string, string, string, error) {
 	return m[1], m[2], m[3], nil
 }
 
-// createTerraformTypeName joins org/svc/res into a Terraform type name.
-func createTerraformTypeName(org, svc, res string) string {
+// CreateTerraformTypeName joins org/svc/res into a Terraform type name.
+func CreateTerraformTypeName(org, svc, res string) string {
 	return strings.Join([]string{org, svc, res}, tfTypeNameSep)
 }
 
@@ -62,10 +61,10 @@ var propertyNameReplacements = map[string]string{
 	"OTel":           "Otel",
 }
 
-// cloudFormationPropertyToTerraformAttribute converts a CloudFormation property
+// CloudFormationPropertyToTerraformAttribute converts a CloudFormation property
 // name to a Terraform attribute name, e.g. "GlobalReplicationGroupDescription" ->
 // "global_replication_group_description".
-func cloudFormationPropertyToTerraformAttribute(propertyName string) string {
+func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 	propertyName = strings.TrimSpace(propertyName)
 	if propertyName == "" {
 		return propertyName
@@ -115,6 +114,18 @@ func cloudFormationPropertyToTerraformAttribute(propertyName string) string {
 }
 
 var (
+	snakeFirstCapRE = regexp.MustCompile("(.)([A-Z][a-z]+)")
+	snakeAllCapRE   = regexp.MustCompile("([a-z0-9])([A-Z])")
+)
+
+// SnakeCase converts a CamelCase identifier to snake_case.
+func SnakeCase(s string) string {
+	snake := snakeFirstCapRE.ReplaceAllString(s, "${1}_${2}")
+	snake = snakeAllCapRE.ReplaceAllString(snake, "${1}_${2}")
+	return strings.ToLower(snake)
+}
+
+var (
 	inflectOnce sync.Once
 	inflectMu   sync.Mutex
 )
@@ -130,9 +141,19 @@ func inflectPlural(name string) string {
 	return inflection.Plural(name)
 }
 
-// pluralize converts a Terraform type name to its plural form, matching the
+// Pluralize converts a Terraform type name to its plural form, matching the
 // legacy behavior: '_plural' for custom names, trailing 's' after a digit.
-func pluralize(name string) string {
+func Pluralize(name string) string {
+	return pluralizeWithSuffix(name, "_plural")
+}
+
+// PluralizeWithCustomNameSuffix is Pluralize with a caller-chosen suffix for
+// names that are "custom" (isCustomName), used by the plural-data-source path.
+func PluralizeWithCustomNameSuffix(name, suffix string) string {
+	return pluralizeWithSuffix(name, suffix)
+}
+
+func pluralizeWithSuffix(name, suffix string) string {
 	if name == "" {
 		return name
 	}
@@ -142,7 +163,7 @@ func pluralize(name string) string {
 		return plural
 	}
 	if isCustomName(plural) {
-		return plural + "_plural"
+		return plural + suffix
 	}
 	if b := []byte(plural); isNumeric(b[len(b)-1]) {
 		return plural + "s"

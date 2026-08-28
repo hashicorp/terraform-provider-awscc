@@ -36,6 +36,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
+
 	"github.com/hashicorp/hcl/v2/gohcl"
 	"github.com/hashicorp/hcl/v2/hclparse"
 	"github.com/hashicorp/hcl/v2/hclsimple"
@@ -427,11 +429,11 @@ func canonicalBlock(label, cfn string, suppressPlural bool) string {
 }
 
 func expectedLabel(cfn string) (string, error) {
-	org, svc, res, err := parseCloudFormationTypeName(cfn)
+	org, svc, res, err := naming.ParseCloudFormationTypeName(cfn)
 	if err != nil {
 		return "", err
 	}
-	return strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + cloudFormationPropertyToTerraformAttribute(res), nil
+	return strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + naming.CloudFormationPropertyToTerraformAttribute(res), nil
 }
 
 // crossValidate decodes the overlay with a real HCL parser and asserts that the

@@ -9,6 +9,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
@@ -133,7 +135,7 @@ func awsTypeNames(summaries []types.TypeSummary) []string {
 		if name == "" {
 			continue
 		}
-		if org, _, _, err := parseCloudFormationTypeName(name); err != nil || org != orgNameAWS {
+		if org, _, _, err := naming.ParseCloudFormationTypeName(name); err != nil || org != naming.OrganizationNameAWS {
 			continue
 		}
 		if !seen[name] {
@@ -148,11 +150,11 @@ func awsTypeNames(summaries []types.TypeSummary) []string {
 // describeOne fetches and sanitizes one type's schema and derives its row. A
 // failure is returned in-band (discovered.err) so the crawl continues.
 func describeOne(ctx context.Context, conn *cloudformation.Client, cfn string) discovered {
-	org, svc, res, err := parseCloudFormationTypeName(cfn)
+	org, svc, res, err := naming.ParseCloudFormationTypeName(cfn)
 	if err != nil {
 		return discovered{row: resourceRow{CloudFormationTypeName: cfn}, err: fmt.Errorf("parsing %q: %w", cfn, err)}
 	}
-	label := strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + cloudFormationPropertyToTerraformAttribute(res)
+	label := strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + naming.CloudFormationPropertyToTerraformAttribute(res)
 
 	schema, pluralSupported, err := describeSchema(ctx, conn, cfn)
 	if err != nil {
