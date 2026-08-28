@@ -259,6 +259,8 @@ func TestUnconstructibleAtLevelOne(t *testing.T) {
 	}
 }
 
+// TestAliasCycle also pins the reported member: with more than one alias cycle
+// the error must not depend on map iteration order.
 func TestAliasCycle(t *testing.T) {
 	schema := `{
   "definitions": {
@@ -267,14 +269,23 @@ func TestAliasCycle(t *testing.T) {
     },
     "B": {
       "$ref": "#/definitions/A"
+    },
+    "C": {
+      "$ref": "#/definitions/D"
+    },
+    "D": {
+      "$ref": "#/definitions/C"
     }
   }
 }
 `
-	_, _, err := processSchema([]byte(schema), 3)
+	want := "error: alias cycle at A"
+	for range 20 {
+		_, _, err := processSchema([]byte(schema), 3)
 
-	if err == nil || !strings.Contains(err.Error(), "alias cycle") {
-		t.Errorf("expected alias cycle error, got %v", err)
+		if err == nil || err.Error() != want {
+			t.Fatalf("expected %q, got %v", want, err)
+		}
 	}
 }
 
