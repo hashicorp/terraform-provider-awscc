@@ -1,8 +1,8 @@
-## 1.99.0 (August 27, 2026)
+## 1.99.0 (August 28, 2026)
 
 NOTES:
 
-* provider: Generated schema code is now deduplicated into shared helper functions, reducing generated source size and allowing very large or deeply-nested CloudFormation schemas that previously exceeded a Go compiler per-function limit to build. Runtime behavior is unchanged. ([#3270](https://github.com/hashicorp/terraform-provider-awscc/pull/3270))
+* provider: Schema generation can now deduplicate schema code when a schema requires it, enabling support for very large or deeply-nested resources that previously could not be generated. The capability is unused in this release and, on its own, introduces no change to generated code or runtime behavior. ([#3270](https://github.com/hashicorp/terraform-provider-awscc/pull/3270))
 
 FEATURES:
 
