@@ -25,6 +25,9 @@ type config struct {
 	outputRoot         string // base dir for generated <svc>/… code (…/internal)
 	registrationPath   string // the single blank-import registration file bigdiffer emits
 	importExamplesPath string // import_examples_gen.json aggregate
+	repoRoot           string // repository root (…/, parent of internal)
+	examplesDir        string // examples/ (import-example docs land here)
+	docsDir            string // docs/ (tfplugindocs output)
 
 	prefix         string // terraform_type_name_prefix, e.g. "awscc"
 	region         string // CloudFormation registry region for -discover
@@ -52,6 +55,9 @@ func newConfig(overlayPath string, defaults defaultsBlock, meta metaSchemaBlock)
 		outputRoot:         outputRoot,
 		registrationPath:   filepath.Join(overlayDir, "registrations_gen.go"),
 		importExamplesPath: filepath.Join(overlayDir, "import_examples_gen.json"),
+		repoRoot:           filepath.Dir(outputRoot),
+		examplesDir:        filepath.Join(filepath.Dir(outputRoot), "examples"),
+		docsDir:            filepath.Join(filepath.Dir(outputRoot), "docs"),
 		prefix:             defaults.TerraformTypeNamePrefix,
 		region:             discoverRegion,
 		genConcurrency:     runtime.NumCPU(),

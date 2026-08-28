@@ -68,16 +68,17 @@ func main() {
 		check          = flag.Bool("check", false, "verify all_schemas.hcl is already normalized; exit non-zero if not (writes nothing)")
 		generate       = flag.Bool("generate", false, "regenerate the whole provider offline from the committed overlay + schema cache (writes *_gen.go, registrations_gen.go, import_examples_gen.json)")
 		update         = flag.Bool("update", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
+		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
 	)
 	flag.Parse()
 
-	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check, *generate, *update); err != nil {
+	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check, *generate, *update, *docs); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
 
-func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check, generate, update bool) error {
+func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check, generate, update, docs bool) error {
 	if generate {
 		cfg, rows, err := loadOverlay(allSchemasPath)
 		if err != nil {
@@ -87,6 +88,13 @@ func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, disc
 	}
 	if update {
 		return runUpdate(context.Background(), allSchemasPath, checkoutPath)
+	}
+	if docs {
+		cfg, _, err := loadOverlay(allSchemasPath)
+		if err != nil {
+			return err
+		}
+		return runDocs(cfg)
 	}
 
 	// Resolve the base: either query AWS live (bigdiffer owns discovery), or read
