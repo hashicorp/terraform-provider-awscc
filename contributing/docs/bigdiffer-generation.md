@@ -259,3 +259,14 @@ Absent-row `DescribeType` probe (§3), checkout-file retirement (§5),
 snapshot-path removal (§1), self-heal re-probe + machine-readable report (§7–§8),
 and the eventual deletion of the legacy generators, the three directive files,
 and the legacy `make` targets — only after parity has held for several cycles.
+
+Naming simplification (parity-validated). The `isCustomName` regex list
+(`efs`/`tions`/`issions`/`windows`/`settings`/`data`) appears to approximate a
+single condition: `inflection.Plural(name) == name` (pluralization left the name
+unchanged, so it must be disambiguated). Replacing the list with the general rule
+"if the plural equals the input, append `_plural`" would drop the hardcoded
+special-cases. It is a behavior change (it would suffix *every* inflection-
+unchanged name, not just the listed ones), so it must be proven equivalent by
+running the full-corpus parity harness: flip the rule, and if the diff stays 0,
+the list was redundant. Deferred to its own brick precisely because parity now
+makes it safe to attempt.

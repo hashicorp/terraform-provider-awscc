@@ -5,32 +5,28 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
-	"github.com/hashicorp/cli"
 	"github.com/hashicorp/hcl/v2/hclsimple"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/codegen"
 )
 
-// TestFullCorpusParity is Brick 7's lynchpin: it generates every overlay type's
-// artifacts through bigdiffer's owned in-process engine and compares them to the
-// committed *_gen.go files. The true faithfulness criterion is "bigdiffer ==
-// legacy", so a byte-compare against the committed corpus is only the fast first
-// pass: when bigdiffer differs from the committed file, the test runs the legacy
-// generator for that artifact and compares against that instead. If bigdiffer
-// matches legacy, the committed file is simply stale (the release shipped code
-// that no longer matches its own schema+engine) — not drift, and logged. Only a
-// genuine bigdiffer-vs-legacy difference fails the test. It writes nothing under
-// version control (legacy runs go to temp dirs; last_resource.txt litter is
-// cleaned up).
+// TestFullCorpusParity is the lynchpin: it generates every overlay type's
+// artifacts through bigdiffer's owned engine (concurrently, via generateCorpus)
+// and compares them to the committed *_gen.go. The true criterion is bigdiffer ==
+// legacy, so committed is only the fast first pass: on a mismatch the harness runs
+// the legacy generator for that artifact and compares against it — equal means the
+// committed file is merely stale (logged, non-fatal), only a real
+// bigdiffer-vs-legacy difference fails. Generating concurrently also exercises the
+// engine under goroutines (run with -race to prove race-freedom). It writes
+// nothing under version control.
 //
-// Slow (serial over the whole corpus), so it is skipped under -short. Set
-// BIGDIFFER_PARITY_ONLY=AWS::Svc::Type to check a single type while iterating.
+// Slow, so it is skipped under -short. Set BIGDIFFER_PARITY_ONLY=AWS::Svc::Type to
+// check a single type while iterating.
 func TestFullCorpusParity(t *testing.T) {
 	if testing.Short() {
 		t.Skip("full-corpus parity is slow; run without -short")
@@ -49,94 +45,87 @@ func TestFullCorpusParity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// The legacy generators write a last_resource.txt debug file into their CWD
-	// (internal/provider); clean it up afterward so the test leaves no trace.
 	defer os.Remove(filepath.Join(cfg.overlayDir, "last_resource.txt"))
 
-	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
+	rows := f.Resources
+	if only != "" {
+		var filtered []resourceRow
+		for _, r := range rows {
+			if r.CloudFormationTypeName == only {
+				filtered = append(filtered, r)
+			}
+		}
+		rows = filtered
+	}
 
-	var checked, drift, stale, genErrors, types int
-	for _, row := range f.Resources {
-		if only != "" && row.CloudFormationTypeName != only {
+	// Measure serial vs parallel to record the speedup; check the parallel output.
+	serialStart := time.Now()
+	_ = generateCorpus(cfg, rows, 1)
+	serialDur := time.Since(serialStart)
+
+	parStart := time.Now()
+	results := generateCorpus(cfg, rows, cfg.genConcurrency)
+	parDur := time.Since(parStart)
+
+	var checked, drift, stale, genErrors int
+	for _, r := range results {
+		if r.err != nil {
+			genErrors++
+			if genErrors <= 10 {
+				t.Errorf("%s %s: generate: %v", r.p.cfType, r.a.kind, r.err)
+			}
 			continue
 		}
-		types++
-		p, err := generationPlan(row, cfg.prefix, cfg.cacheDir)
-		if err != nil {
-			t.Errorf("%s: plan: %v", row.CloudFormationTypeName, err)
-			continue
-		}
-		for _, a := range p.artifacts {
-			code, test, gerr := generateArtifact(ui, cfg, p, a)
-			if gerr != nil {
-				genErrors++
-				if genErrors <= 10 {
-					t.Errorf("%s %s: generate: %v", p.cfType, a.kind, gerr)
+		for _, pair := range []struct {
+			file string
+			got  []byte
+		}{
+			{r.a.codeFile, r.code},
+			{r.a.testFile, r.test},
+		} {
+			checked++
+			path := filepath.Join(cfg.outputRoot, r.a.pathSuffix, pair.file)
+			want, rerr := os.ReadFile(path)
+			if rerr != nil {
+				drift++
+				if drift <= 10 {
+					t.Errorf("reading committed %s: %v", path, rerr)
 				}
 				continue
 			}
-			for _, pair := range []struct {
-				file string
-				got  []byte
-			}{
-				{a.codeFile, code},
-				{a.testFile, test},
-			} {
-				checked++
-				path := filepath.Join(cfg.outputRoot, a.pathSuffix, pair.file)
-				want, rerr := os.ReadFile(path)
-				if rerr != nil {
-					drift++
-					if drift <= 10 {
-						t.Errorf("reading committed %s: %v", path, rerr)
-					}
-					continue
-				}
-				if bytes.Equal(pair.got, want) {
-					continue
-				}
-				// Committed differs: is bigdiffer faithful to *legacy*, or drifting?
-				legacy, lerr := runLegacyArtifact(t, cfg, p, a)
-				if lerr != nil {
-					drift++
-					if drift <= 10 {
-						t.Errorf("MISMATCH %s (%s); legacy re-run failed: %v", path, a.kind, lerr)
-					}
-					continue
-				}
-				legacyGot := legacy.code
-				if pair.file == a.testFile {
-					legacyGot = legacy.test
-				}
-				if bytes.Equal(pair.got, legacyGot) {
-					stale++
-					t.Logf("STALE committed %s (%s): bigdiffer matches legacy; committed file is out of date", path, a.kind)
-					continue
-				}
+			if bytes.Equal(pair.got, want) {
+				continue
+			}
+			legacy, lerr := runLegacyArtifact(t, cfg, r.p, r.a)
+			if lerr != nil {
 				drift++
 				if drift <= 10 {
-					t.Errorf("DRIFT %s (%s): bigdiffer != legacy\n%s", path, a.kind, firstDiff(legacyGot, pair.got))
+					t.Errorf("MISMATCH %s (%s); legacy re-run failed: %v", path, r.a.kind, lerr)
 				}
+				continue
+			}
+			legacyGot := legacy.code
+			if pair.file == r.a.testFile {
+				legacyGot = legacy.test
+			}
+			if bytes.Equal(pair.got, legacyGot) {
+				stale++
+				t.Logf("STALE committed %s (%s): bigdiffer matches legacy; committed file is out of date", path, r.a.kind)
+				continue
+			}
+			drift++
+			if drift <= 10 {
+				t.Errorf("DRIFT %s (%s): bigdiffer != legacy\n%s", path, r.a.kind, firstDiff(legacyGot, pair.got))
 			}
 		}
 	}
-	t.Logf("parity: %d types, %d files checked, %d drift, %d stale-committed, %d generate errors", types, checked, drift, stale, genErrors)
+
+	speedup := float64(serialDur) / float64(parDur)
+	t.Logf("parity: %d types, %d files checked, %d drift, %d stale-committed, %d generate errors", len(rows), checked, drift, stale, genErrors)
+	t.Logf("generation: serial %v, parallel(%d) %v, speedup %.1fx", serialDur.Round(time.Millisecond), cfg.genConcurrency, parDur.Round(time.Millisecond), speedup)
 	if drift > 0 || genErrors > 0 {
 		t.Fatalf("parity failed: %d drift, %d generate errors (%d stale-committed are non-fatal)", drift, genErrors, stale)
 	}
-}
-
-// generateArtifact renders one artifact's code+test via bigdiffer's owned engine.
-func generateArtifact(ui cli.Ui, cfg config, p plan, a genArtifact) (code, test []byte, err error) {
-	switch a.kind {
-	case artifactResource:
-		return codegen.GenerateResource(ui, p.schemaFile, a.tfType, a.packageName, cfg.servicesPath, a.listResource)
-	case artifactSingularDataSource:
-		return codegen.GenerateSingularDataSource(ui, p.schemaFile, a.tfType, a.packageName, cfg.servicesPath)
-	case artifactPluralDataSource:
-		return codegen.GeneratePluralDataSource(p.cfType, a.tfType, a.packageName)
-	}
-	return nil, nil, fmt.Errorf("unknown artifact kind %q", a.kind)
 }
 
 type legacyOutput struct{ code, test []byte }
