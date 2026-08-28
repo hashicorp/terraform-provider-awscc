@@ -261,10 +261,22 @@ func schemaIsDeRecursed(cfTypeSchemaFile string) (bool, error) {
 	return len(doc.XDerecursed) > 0, nil
 }
 
-// NewResource creates a Resource type
-// from the corresponding resource's CloudFormation Schema file
+// NewResource creates a Resource type from the corresponding resource's
+// CloudFormation Schema file. The schema is read into memory and parsed via
+// NewResourceJsonSchemaDocument rather than NewResourceJsonSchemaPath: the
+// path-based loader chdirs into the schema's directory (to resolve relative
+// refs) and does not restore the working directory — harmless for the tool (it
+// uses absolute paths) but a process-global side effect that corrupts CWD for
+// anything relying on it, and a hazard under concurrent generation. Sanitized
+// CloudFormation schemas are self-contained (internal "#/…" refs only), so the
+// in-memory document is equivalent — proven by full-corpus parity.
 func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
-	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(cfTypeSchemaFile)
+	schemaBytes, err := os.ReadFile(cfTypeSchemaFile)
+	if err != nil {
+		return nil, fmt.Errorf("reading CloudFormation Resource Type Schema file: %w", err)
+	}
+
+	resourceSchema, err := cfschema.NewResourceJsonSchemaDocument(string(schemaBytes))
 
 	if err != nil {
 		return nil, fmt.Errorf("reading CloudFormation Resource Type Schema: %w", err)
