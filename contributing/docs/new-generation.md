@@ -148,7 +148,7 @@ Change class plus gate result determine the overlay edit:
 | Change class | Gate result | Overlay action |
 |--------------|-------------|----------------|
 | New | ok | add plain block |
-| New | failed | add block with `suppress_*_generation` + reason (backlog) |
+| New | failed | add block, suppressing only the artifacts that failed + reason (backlog) |
 | Present | ok | keep block; accept refreshed bytes |
 | Present | failed | set `frozen_since`; keep last-good bytes; flag |
 | Non-provisionable (live) | n/a | keep block; set `non_provisionable = true` |
@@ -200,6 +200,34 @@ design commitments:
   is advisory, never a hard PR gate (the overlay is expected to lag live AWS).
 - Self-contained. The tool owns the overlay's shape and its own discovery rather
   than importing the legacy generator/update packages, so those can be deleted.
+- Resilient, concurrent discovery (`discover.go`). `DescribeType` fans out over a
+  bounded worker pool (`errgroup`, limit 10); a per-type failure is captured
+  in-band (`discovered.err`) rather than aborting the crawl. The same "one type's
+  failure never blocks the rest" principle §6 requires of the gate is already
+  proven here, one phase earlier.
+- Gate without the CWD-coupled wrapper (`gate.go`). The gate deliberately calls
+  `shared.NewResource` + `codegen.Emitter.EmitRootPropertiesSchema` directly
+  instead of `shared.GenerateTemplateData`, because that wrapper writes
+  `last_resource.txt` to the CWD (a data race under concurrency) and reads
+  `../identity/names/services.hcl` via a CWD-relative path (a false failure
+  outside `internal/provider`). This is a cleaner in-process front half than
+  reusing the existing wrapper, and it resolves in one step what would otherwise
+  be a `shared` refactor.
+- Plural data sources are not schema-emission gated (`gate.go`). A plural data
+  source is generated from the CFN type name alone, not via
+  `codegen.EmitRootPropertiesSchema`, so it cannot fail the front-half gate by
+  construction. `gateType` only runs the gate for the resource and singular data
+  source artifacts; a plural-DS-only failure is left to the compile gate (§6
+  tail).
+- Gating runs serially, on evidence (`naming.go`, `gate.go`). The legacy
+  code-emission engine mutates global state during emission (e.g.
+  `inflection.AddIrregular`) and is not safe for concurrent in-process reuse —
+  confirmed by the race detector, not assumed. The legacy pipeline avoided this
+  by parallelizing across separate OS processes, not goroutines. bigdiffer
+  copies the naming logic it needs (`naming.go`) and serializes access to the
+  unsafe parts, and gates candidates serially rather than concurrently. This is
+  acceptable because the candidate set is small by design (§6): only New and
+  Changed types reach the gate.
 
 ## 10. What is eliminated
 
@@ -217,30 +245,43 @@ design commitments:
 
 ## 11. Roadmap (gaps in the current tool)
 
-The current tool implements §2, §9, and the additive/reporting half of §3. The
-remaining gaps, roughly in dependency order:
+Status by design section. "Built" means the code exists and is unit-tested;
+"wired" means `run()` actually calls it. As of this writing, discovery, change
+detection, recipe derivation, and the gate are each built and independently
+tested, but none are yet wired into `run()` — the pipeline still ends at
+reconcile-and-report (§1–§3's additive half).
 
-1. Gate + policy (§6–§7). The largest gap. Today the tool only adds rows and
-   reports; it never runs generation nor writes `suppress_*` / `frozen_since`
-   from results. This requires per-type, resilient, in-process generation (the
-   §6 crux).
-2. Absent-row probe (§3). The tool reports retained rows but does not
-   `DescribeType`-probe them to split non-provisionable-live from withdrawn. It
-   relies on pre-existing annotations to explain them.
-3. Selective cache refresh (§4). The tool edits only the HCL; it does not
-   download schemas, skip frozen types, or short-circuit byte-identical refreshes.
-4. Reuse the discovery bytes (§2). `discover` calls `DescribeType` per type only
-   for the plural-DS decision and discards the sanitized schema — the exact bytes
-   the cache needs. One sweep should feed both the reconciler and the cache.
-5. Retire the checkout file (§5). It is still read as an external cross-reference
-   rather than migrated into `frozen_since` and deleted.
-6. Drop the snapshot path (§1). The tool still supports reading dated
-   `available_schemas.<date>.hcl`, and its New-vs-backlog split depends on a
-   "previous" snapshot that live discovery lacks. Under `-discover`, backlog
-   needs a different signal (or the distinction is dropped).
-7. Self-healing re-probe (§7, last row) and a machine-readable report (§8) are
-   not yet implemented; docs/build orchestration is out of the tool's current
-   scope.
+| Piece | Design ref | Status |
+|---|---|---|
+| Reconcile overlay ↔ live AWS, additive + report | §2–§3 | Wired |
+| Concurrent discovery, one sweep captures schema bytes | §2, §9 | Built + wired (discovery only; bytes unused downstream yet) |
+| Absent-row `DescribeType` probe (non-provisionable vs. withdrawn) | §3 | Not built |
+| Selective refresh / change detection (byte-compare vs. cache) | §4 | Built (`change.go`), not wired |
+| Recipe derivation (artifacts, naming, paths per row) | §7 (prereq) | Built (`plan.go`), not wired |
+| Gate (in-process front half, per-artifact) | §6 | Built (`gate.go`), not wired |
+| Policy mapping (class × gate result → overlay edit) | §7 | Built (`policy.go`), not wired |
+| Block mutation (`frozen_since` / `suppress_*` written to an existing block) | §7 (prereq) | Built (`mutate.go`), not wired |
+| Compile gate | §6 tail | Not built |
+| Retire checkout file into `frozen_since` | §5 | Not built — still read as an external cross-reference |
+| Drop the dated-snapshot path | §1 | Not built — `-discover` and snapshot modes still coexist |
+| Self-healing re-probe, machine-readable report | §7 last row, §8 | Not built |
+
+Remaining work, in dependency order:
+
+1. Orchestration (the capstone). All of discovery, change detection, recipe
+   derivation, the gate, policy, and block mutation exist and are independently
+   correct; `run()` still ends at reconcile-and-report. Wiring them into one
+   pipeline — discover → detect changes → write refreshed bytes to the cache →
+   build plans for the candidate set → gate → decide → mutate existing blocks /
+   synthesize new ones → re-sort → write + report — is integration, not new
+   design. Cache write-back (comparing bytes but not persisting them) belongs
+   inside this step: a New type's plan only resolves to a real schema file once
+   its bytes are written.
+2. Absent-row probe (§3), compile gate (§6 tail), checkout-file retirement (§5),
+   snapshot-path removal (§1), self-heal + machine-readable report (§7–§8) —
+   unchanged from before; none started. Self-heal is cheap once orchestration
+   lands, since it reruns the same gate → decide path against frozen types
+   instead of candidates.
 
 ## 12. Thesis
 

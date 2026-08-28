@@ -4,8 +4,92 @@
 # bigdiffer: gate & policy — implementation plan
 
 Working doc (may be discarded once the gap is closed). Tracks how to implement
-the gate + policy gap — §6–§7 of `new-generation.md`, roadmap item #1 in §11.
+the gate + policy gap — §6–§7 of `new-generation.md`, roadmap item #3 in §11.
 Section refs below point at `new-generation.md`.
+
+## Status
+
+Built and unit-tested, not yet wired into `run()`:
+
+- `discover.go` — concurrent discovery, captures sanitized schema bytes per type.
+- `change.go` — `detectChanges`/`classifyChange`: byte-compares discovered vs.
+  cached schemas, respects `frozen_since`, classifies
+  new/changed/unchanged/frozen/missing. Closes prerequisite #1 below.
+- `plan.go` — `generationPlan`: pure, in-memory recipe derivation (artifacts,
+  Terraform type, package/paths) per overlay row, honoring `suppress_*`. This
+  is the reimplementation the "recipe" half of prerequisite #2 called for — see
+  correction below on its actual size.
+- `naming.go` — bigdiffer-owned naming/pluralization logic, copied from
+  `internal/naming` rather than imported, because the legacy `Pluralize` mutates
+  global `inflection` state on every call — a data race under concurrency,
+  confirmed by the race detector. Fixes it by registering the irregular once and
+  serializing access.
+- `gate.go` — `gateType`/`runGate`: in-process front-half gate. Gates only the
+  resource and singular-data-source artifacts (plural data sources are not
+  schema-emission-driven and cannot fail this gate by construction — see
+  correction below). Runs candidates **serially**, not concurrently: the reused
+  legacy emission engine (`codegen.Emitter`, via `naming.go`'s dependencies) is
+  not safe for concurrent in-process use, also confirmed by the race detector.
+  Acceptable because the candidate set (New + Changed) is small by design.
+- `policy.go` — `decide(class, gateResult, today)`: pure implementation of the
+  §7 matrix. New+ok adds a plain block; New+failed adds a block suppressing only
+  the artifacts that actually failed (a finer-grained action than §7's table
+  originally stated — see correction below) with a reason; Present+ok keeps the
+  block; Present+failed freezes at last-good bytes; non-provisionable annotates;
+  withdrawn freezes. Encodes both §7 invariants. Table-tested.
+- `mutate.go` — `setBlockAttributes`: edits a single block via `hclwrite`,
+  adding/updating attributes while preserving comments and existing attributes,
+  and re-aligning the result. The one capability beyond verbatim preservation
+  that policy needs. Tested for add/update/preserve/no-op.
+
+Not yet built: cache write-back (bytes compared but not persisted), synthesizing
+a *new* block's text from a `policyDecision` (mutation only edits existing
+blocks so far), the compile gate, and wiring all of the above into one pipeline.
+See `new-generation.md` §11 for the authoritative status table.
+
+## Corrections to this plan's original claims
+
+- **Recipe core size.** The "Key finding" below estimated the reusable core at
+  "~170 lines, copy & redesign." The actual reimplementation, `plan.go`, is
+  ~95 lines including doc comments. The estimate was in the right range; treat
+  it as resolved rather than a remaining unknown.
+- **Plural data sources have no front-half gate.** The "gate mechanism" section
+  below states the front half runs "per applicable artifact (resource /
+  singular DS / plural DS)." That's wrong for plural DS: `plural-data-source/main.go`
+  never calls the schema-parsing front half — it builds its template data from
+  the CFN type name alone and never touches `shared.NewResource`. `gate.go` now
+  reflects this correctly: `gateType` explicitly skips `artifactPluralDataSource`
+  with a comment explaining why, rather than gating it and getting a
+  meaningless `ok`. Treat `failed-validation` / `failed-generation` as only
+  possible for `artifactResource` and `artifactSingularDataSource`.
+- **The `GenerateTemplateData` CWD hazard is resolved, not merely noted.**
+  `gate.go` avoids `shared.GenerateTemplateData` entirely — it calls
+  `shared.NewResource` + `codegen.Emitter.EmitRootPropertiesSchema` directly, so
+  the `last_resource.txt` write and the CWD-relative `services.hcl` read never
+  happen during gating. No `shared` refactor is needed for concurrency safety.
+- **In-process concurrency for gating is not safe, and the plan's "resilience is
+  free" framing undersold this.** The original "Key finding" argued per-type
+  subprocess invocation buys resilience for free; the actual implementation
+  went in-process instead (a stronger, harder property) and discovered via the
+  race detector that the reused legacy emission engine mutates global state
+  (`inflection.AddIrregular` in what became `naming.go`) — unsafe under
+  goroutines even though the legacy pipeline never hit this bug (it parallelizes
+  across OS processes). `gate.go`'s `runGate` is therefore serial by design, not
+  as a placeholder. This is the right call for now: the candidate set is small,
+  so serial gating is cheap, and it avoids auditing the rest of `codegen.Emitter`
+  for other shared state before it's needed.
+- **Policy is finer-grained than §7's table text.** `decide()` suppresses only
+  the artifacts that actually failed (e.g. a resource that fails but whose
+  singular DS would succeed only sets `suppress_resource_generation`), not a
+  blanket "suppress everything" for the type. `new-generation.md` §7 has been
+  updated to reflect this.
+- **The S3::Bucket integration fixture (Verification strategy, below) is
+  unconfirmed and likely wrong.** `all_schemas.hcl`'s `aws_s3_bucket` block
+  carries no `frozen_since` and no `suppress_*` — its schema is only pinned in
+  the legacy `suppressions_checkout.txt`, and nothing here confirms it fails
+  `gateType`. Before using it as a known-breaker fixture, run `gateType` against
+  its live schema and confirm the outcome; if it passes, pick a different fixture
+  or drop the claim that this exercises `failed-generation`.
 
 ## Objective
 
@@ -56,107 +140,141 @@ Implications:
 
 ## Prerequisites / missing pieces (dependency order)
 
-1. **Change detection (§4).** Which types actually changed this run. Requires
-   selective refresh: for each non-frozen type, fetch AWS bytes, byte-compare to
-   the cached JSON, replace only if different, and record the changed set.
-   New types are always candidates. Frozen types are skipped.
-   - Enabler: reuse the `DescribeType` bytes from discovery (§10 / roadmap #4)
-     so the fetch is the same crawl, not a second one.
-2. **Recipe + refresh core (copy & redesign, not reuse).** Copy the reusable
-   ~170 lines of `schema/main.go` — `Downloader.Schemas` (per-type recipe:
-   Terraform type via `naming.CreateTerraformTypeName`, package/paths, plural
-   name, `-listresource`, and `suppress_*` gating) and `ResourceSchema`
-   (download-or-cached + `frozen_since` + meta-schema validation). Redesign for
-   the in-memory pipeline: return recipes as values, refresh by
-   compare-not-missing (§4), and **drop** the directive-file/template emission
-   (`GenerateResources`/`GenerateDataSources`) — bigdiffer never writes
-   `resources.go`; it consumes recipes directly.
-3. **Gate mechanism (in-process front half).** The pass/fail signal is
-   `shared.GenerateTemplateData(...)` per applicable artifact (resource /
-   singular DS / plural DS). It parses the CFN schema into template data and is
-   where the vast majority of generation failures surface (unsupported types,
-   recursive definitions, bad identifiers). No temp output tree is needed because
-   recipes are in memory and the check is in-process. Full template rendering +
-   compilation is covered once by the whole-repo build (P6). New dependency:
-   `shared` (the generation engine core) — acceptable now; the template layer can
-   be copied later if full independence is wanted.
-4. **Block mutation in the overlay.** New capability. Today bigdiffer only *adds*
-   blocks and preserves existing ones verbatim. Policy must *set* attributes
-   (`frozen_since = "<date>"`, `suppress_*_generation = true`) on an existing
-   block while preserving its comments/reason. Implement as a text edit on the
-   block's item, then `hcl`/`terraform fmt` to realign (the trick already used
-   for migrations).
-5. **Result taxonomy + policy mapping.** Per candidate:
-   `ok | failed-validation | failed-generation | failed-build`, plus its change
-   class. A pure function maps (class × result) → overlay edit per the §7 matrix.
-6. **Compile gate (§6 tail, §10).** Per-type compile is impractical (needs
-   package context). Keep it as a single whole-repo `go build` / `make build`
-   after edits are applied; a build failure feeds the same policy (freeze the
-   present offender / suppress the new one) and re-runs.
+1. **Change detection (§4). Done — `change.go`.** `detectChanges` fetches AWS
+   bytes (via the shared discovery sweep), byte-compares against the cache,
+   respects `frozen_since`, and classifies each type. `gateCandidates` narrows
+   to New + Changed. Not yet done: writing the compared bytes back to the cache
+   (still read-only) and calling this from `run()`.
+2. **Recipe core (§7 prereq). Done — `plan.go`.** `generationPlan` derives
+   artifacts, Terraform type, package, and paths per row, in memory, honoring
+   `suppress_*`. ~95 lines; no directive-file emission, no subprocess.
+3. **Gate mechanism (§6). Done — `gate.go`.** `gateType` runs the front half
+   per artifact via `shared.NewResource` + `codegen.Emitter` directly (bypassing
+   `shared.GenerateTemplateData`'s CWD hazards — see Corrections, above).
+   `runGate` fans candidates out with `errgroup`. Per the plural-DS correction
+   above, only `artifactResource` and `artifactSingularDataSource` produce a
+   meaningful `failed-validation`/`failed-generation`; treat plural-DS gate
+   outcomes as advisory until the compile gate exists.
+4. **Wiring.** Not built. `run()` still ends at reconcile-and-report; discovery,
+   change detection, recipe derivation, the gate, policy, and block mutation are
+   all correct in isolation but not connected. This is integration work, not
+   new design: feed `discovered.schema` into `detectChanges`, write refreshed
+   bytes to the cache for New/Changed types (a New type's `plan.schemaFile`
+   only resolves to a real file once this exists), restrict `generationPlan` +
+   `runGate` to `gateCandidates`, run `decide` on each result, and apply the
+   decision — `setBlockAttributes` for existing blocks, and a new "synthesize a
+   block's text from a fresh `resourceRow`" step for New types (not yet built;
+   `mutate.go` only edits existing blocks).
+5. **Block mutation in the overlay. Done — `mutate.go`.** `setBlockAttributes`
+   sets `frozen_since` / `suppress_*` / `non_provisionable` on an existing block
+   via `hclwrite`, preserving comments and existing attributes. Still open:
+   rendering a brand-new block's text for a New+failed decision (today's
+   `canonicalBlock` in `main.go` only handles the plain New+ok case with no
+   suppression attributes).
+6. **Result taxonomy + policy mapping. Done — `policy.go`.** `decide(class,
+   gateResult, today)` maps (class × result) → a `policyDecision` per the §7
+   matrix, table-tested, suppressing only the artifacts that actually failed
+   (see Corrections, above).
+7. **Compile gate (§6 tail, §10).** Not built. Per-type compile is impractical
+   (needs package context). Keep it as a single whole-repo `go build` /
+   `make build` after edits are applied; a build failure feeds the same policy
+   (freeze the present offender / suppress the new one) and re-runs. This is
+   the only gate that can catch a plural-DS-only failure.
 
 ## Build plan (incremental, each independently testable)
 
-- **Stage A — selective refresh + changed set.** Download non-frozen to temp,
-  byte-compare, replace changed, emit the changed set. Frozen skipped. New mode;
-  does not yet gate. Verify against a week with known churn.
-- **Stage B — gate runner.** For each candidate, derive its recipe(s) in memory
-  (copied core, P2) and run the generation front half
-  (`shared.GenerateTemplateData`) for the applicable artifacts, returning
-  per-type results. No temp tree, no subprocess. Test with a known-good and a
-  known-broken type.
-- **Stage C — policy engine.** Pure `apply(class, result) → edit` matching the
-  §7 table. Table-driven unit tests; no AWS, no generation.
-- **Stage D — block mutation.** `setAttr(block, name, value)` preserving
-  comments; fmt. Unit-tested on the complex-block fixtures already in
-  `main_test.go`.
-- **Stage E — orchestration.** Wire run() into the pipeline: reconcile → refresh
-  (A) → gate (B) → policy (C) → mutate (D) → report → optional build (P6).
-  Keep the structural `-check` untouched and offline.
+- **Stage A — selective refresh + changed set. Done, minus cache write.**
+  `change.go` implements the compare; the write-back and the `run()` wiring
+  remain (folded into prerequisite #4 above).
+- **Stage B — gate runner. Done.** `gate.go` implements this exactly as
+  specified, with the CWD hazard resolved rather than deferred, and runs
+  serially rather than concurrently for a verified reason (see Corrections).
+- **Stage C — policy engine. Done.** `policy.go`'s `decide` matches the §7
+  table, table-tested, pure — no AWS, no generation.
+- **Stage D — block mutation. Done for existing blocks.** `mutate.go`'s
+  `setBlockAttributes` preserves comments and fmt's the result via `hclwrite`.
+  Not yet done: synthesizing a new block's text for a New+failed decision (see
+  prerequisite #5).
+- **Stage E — orchestration.** Wire everything into the pipeline: reconcile →
+  refresh (A) → gate (B) → policy (C) → mutate (D) → report → optional build
+  (prerequisite #7). Keep the structural `-check` untouched and offline. Not
+  started; this is prerequisite #4's wiring.
 - **Stage F — later.** Self-heal re-probe of frozen types to scratch (§7 last
   row); machine-readable report (§8).
 
 ## Required bigdiffer refactors
 
-- **New recipe/refresh module (copied core).** A bigdiffer-owned file adapted
-  from `schema/main.go`'s `Downloader.Schemas` + `ResourceSchema`: derive
-  per-type recipes in memory and refresh the cache by compare-not-missing. No
-  directive emission. This is the "copy for free, redesign" piece.
-- **run() becomes a pipeline.** Currently: read → `normalize` → write.
-  New: read → reconcile → refresh → gate → policy → emit → report. `normalize`
-  stays the reconcile/emit core; policy edits are applied to the item set before
-  the final emit.
-- **Item model gains mutation.** The verbatim text-blob item needs a
-  "set attribute" operation (insert or replace an attribute line inside a live
-  block, preserve everything else, reformat). This is the one real departure
-  from pure verbatim preservation, and is the highest-risk refactor.
-- **Report gains gate results.** New/changed types with their result and the
-  applied policy action, for the human review step (§8).
+- **Recipe/refresh module — done.** `plan.go` (recipe) and `change.go` (refresh
+  compare) are the bigdiffer-owned replacements for `schema/main.go`'s
+  `Downloader.Schemas` + `ResourceSchema`, with no directive emission. Remaining:
+  the cache write-back inside `change.go`'s path (prerequisite #4).
+- **`run()` becomes a pipeline — not started.** Currently: read → `normalize` →
+  write. Target: read → reconcile → refresh → gate → policy → emit → report.
+  `normalize` stays the reconcile/emit core; policy edits are applied to the
+  item set before the final emit. All the stages this wiring connects
+  (discovery, `detectChanges`, `generationPlan`, `runGate`, `decide`,
+  `setBlockAttributes`) already exist.
+- **Item model gains mutation — done, differently than planned.** The original
+  plan called for a text-blob "set attribute" operation on an item. `mutate.go`
+  instead re-parses a single block with `hclwrite` and re-serializes it — a
+  token-preserving edit rather than string surgery, which is a better fit for
+  the design's "verbatim preservation" commitment (§9) than manual line editing
+  would have been. Still open: synthesizing a brand-new block's text for a
+  New+failed decision (prerequisite #5) — `mutate.go` only edits blocks that
+  already exist.
+- **Report gains gate results — not started.** New/changed types with their
+  result and the applied policy action, for the human review step (§8).
 
 ## Open decisions
 
-- **Copy & redesign, don't reuse (decided).** bigdiffer absorbs `schema/main.go`'s
-  ~170-line recipe/refresh core rather than shelling out to it. This removes the
-  temp-overlay + subprocess + directive-file round-trip entirely.
+- **Copy & redesign, don't reuse (decided, done).** `plan.go` is bigdiffer's own
+  ~95-line recipe core rather than a shell-out to `schema/main.go`. No temp
+  overlay, subprocess, or directive-file round-trip.
 - **New-type gating is no longer special (resolved).** Because recipes are
   derived in memory from a `resourceRow`, a New type's recipe is computed
   directly — nothing is written to disk to gate it, so no tentative overlay is
-  needed. (This dissolves the open item from the first draft.)
-- **`shared` dependency (open).** The gate's front half uses
-  `shared.GenerateTemplateData`. Acceptable now; copy the template layer later if
-  full independence from the generation engine is wanted.
-- **Change detection source (lean byte-compare).** Byte-compare in bigdiffer
-  (self-contained) vs. `git diff` on the schemas dir (cheap but git-coupled).
-  Prefer byte-compare.
+  needed.
+- **`shared` dependency (resolved, narrower than expected).** The gate uses
+  `shared.NewResource` + `shared/codegen.Emitter` — not `GenerateTemplateData` —
+  specifically because that avoided the CWD hazards outright (see Corrections).
+  This is a smaller, safer surface of `shared` than originally planned to depend
+  on, and needs no further refactor for concurrency.
+- **Change detection source (resolved).** Byte-compare in bigdiffer, using the
+  bytes already captured by `discover.go`'s single sweep — no `git diff`, no
+  second AWS fetch.
+- **Gate concurrency (resolved, differently than planned).** The plan assumed
+  in-process gating would be safe to parallelize across candidates. The race
+  detector disproved this: the reused legacy emission engine mutates global
+  state during emission. `runGate` gates serially instead. Making it safe to
+  parallelize (auditing and rewriting the emitter) is deferred — it is a
+  performance optimization on a step that is already cheap because the
+  candidate set is small (§6), not a correctness requirement.
 
 ## Verification strategy
 
-- Unit: policy matrix (pure), block mutation (fixtures), result parsing (stub
-  generator).
-- Integration (real known-breaker): gate `AWS::S3::Bucket` against its *live*
-  schema. It is frozen precisely because its current schema breaks generation,
-  so the gate must return `failed-generation` and policy must propose
-  `frozen_since` — a real end-to-end check of the whole gate→policy path.
-- Integration (known-good): gate a simple stable type (e.g. `AWS::Logs::LogGroup`)
-  and expect `ok` with no overlay edit.
+- Unit: all built pieces now have test files — policy matrix (`policy_test.go`,
+  pure), block mutation (`mutate_test.go`, fixtures), gate outcomes
+  (`gate_test.go`, real committed schema + error paths), change detection
+  (`change_test.go`), recipe derivation (`plan_test.go`), and the naming filter
+  (`discover_test.go`). The suite is `-race`-clean at `-count=5`. Result parsing
+  from a stub generator is obsolete: the gate is in-process, not a subprocess.
+- Integration (known-breaker, TBD). Do not assume `AWS::S3::Bucket` fails the
+  gate — its overlay block carries no `frozen_since`/`suppress_*`, only a
+  `suppressions_checkout.txt` pin, and that pin's reason is unconfirmed against
+  `gateType`. Before writing this test, run `gateType` against a handful of
+  currently-frozen types' *live* schemas and use whichever one actually returns
+  `failed-validation` or `failed-generation`. AppFlow `ConnectorProfile` (frozen
+  for an `isSandboxEnvironment`/`IsSandboxEnvironment` naming collision, issue
+  #1526) is a plausible candidate but is also unconfirmed — it may generate
+  cleanly and only produce semantically wrong output, which the gate cannot
+  detect (see the correctness-oracle caveat, next).
+- Correctness-oracle caveat. The gate proves "does it parse and emit," not "is
+  the output right." A freeze whose root cause is valid-but-wrong output (as
+  AppFlow's may be) will gate as `ok`, and naive self-heal logic (§7 last row)
+  would then propose an incorrect un-freeze. When policy mapping (Stage C) is
+  built, either exclude semantic freezes from the self-heal candidate set or
+  require a human-reviewable diff of generated output, not just a gate pass.
+- Integration (known-good): gate a simple stable type (e.g. `AWS::Logs::LogGroup`,
+  already used in `plan_test.go`) and expect `ok` with no overlay edit.
 - Idempotence: a second run with no AWS change produces no edits.
 
