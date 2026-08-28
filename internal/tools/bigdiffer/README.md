@@ -8,7 +8,8 @@
 the error-prone weekly ritual of hand-jamming new `resource_schema` blocks.
 Design and status: see `contributing/docs/new-generation.md` (target design,
 §11 for the authoritative status table) and
-`contributing/docs/bigdiffer-gate-policy.md` (gate + policy implementation plan).
+`contributing/docs/bigdiffer-generation.md` (the in-progress generation /
+orchestration work — Brick 6).
 
 > Note: there is also a `make bigdiffer` target that only prints the raw `diff`
 > between two dated `available_schemas` files. It is unrelated and slated for
@@ -91,9 +92,11 @@ These exist, are unit-tested, and are not yet called from `run()`:
   effects) and reports `ok` / `failed-validation` / `failed-generation`. Plural
   data sources aren't schema-emission-driven and are excluded from this gate by
   design; a plural-only failure surfaces at the compile gate instead. Runs
-  candidates serially — the reused emission engine isn't safe to parallelize
-  in-process, confirmed by the race detector — which is fine since the
-  candidate set (new + changed types) is small.
+  candidates serially **for now** — a defensive interim from when the gate was
+  the only consumer. The data race we hit was in the shared pluralizer (now
+  fixed in `naming.go`); the emitter itself has no mutable global state, so
+  concurrent in-process generation is viable and is the plan for the generation
+  step (see `bigdiffer-generation.md`).
 - **Policy** (`policy.go`) — `decide` maps a change class and gate result to an
   overlay edit: add a plain block, add a block suppressing only the artifacts
   that failed, freeze at last-good bytes, annotate non-provisionable, or freeze
@@ -103,9 +106,10 @@ These exist, are unit-tested, and are not yet called from `run()`:
   policy needs to act on an existing block; synthesizing a new block's text for
   a suppressed New type is not yet built.
 
-See `bigdiffer-gate-policy.md` for the remaining work: wiring all of this
-together, writing refreshed bytes back to the cache, synthesizing new-block text
-for suppressed additions, and the compile gate.
+See `bigdiffer-generation.md` for the remaining work: wiring all of this
+together into incremental, concurrent generation that keeps its output — writing
+refreshed bytes back to the cache, synthesizing new-block text for suppressed
+additions, and the compile gate.
 
 ## Suppression model (why there are two mechanisms, for now)
 

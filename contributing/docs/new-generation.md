@@ -219,15 +219,20 @@ design commitments:
   construction. `gateType` only runs the gate for the resource and singular data
   source artifacts; a plural-DS-only failure is left to the compile gate (§6
   tail).
-- Gating runs serially, on evidence (`naming.go`, `gate.go`). The legacy
-  code-emission engine mutates global state during emission (e.g.
-  `inflection.AddIrregular`) and is not safe for concurrent in-process reuse —
-  confirmed by the race detector, not assumed. The legacy pipeline avoided this
-  by parallelizing across separate OS processes, not goroutines. bigdiffer
-  copies the naming logic it needs (`naming.go`) and serializes access to the
-  unsafe parts, and gates candidates serially rather than concurrently. This is
-  acceptable because the candidate set is small by design (§6): only New and
-  Changed types reach the gate.
+- Gating runs serially today, but the engine is concurrency-clean (`naming.go`,
+  `gate.go`). The data race the detector caught was localized to the shared
+  pluralizer — the legacy `naming.Pluralize` calls `inflection.AddIrregular` on
+  every invocation, mutating that library's global rules — not to the emitter.
+  bigdiffer copies the naming logic and serializes that one unsafe dependency
+  (`naming.go`). On inspection `codegen.Emitter` has **no mutable package-level
+  state** (its only global is a read-only slice), so it is safe to drive from
+  concurrent goroutines. The current serial gate was therefore a defensive
+  interim from when the gate was the sole consumer, not a hard limit: the only
+  remaining in-process concurrency hazards are two CWD-coupled lines in
+  `shared.GenerateTemplateData` (the `last_resource.txt` write and the
+  CWD-relative `services.hcl` read), both fixable by owning a corrected copy.
+  Concurrent in-process generation is thus viable, and is the plan for the
+  generation step (Brick 6, see `bigdiffer-generation.md`).
 
 ## 10. What is eliminated
 
@@ -268,15 +273,20 @@ reconcile-and-report (§1–§3's additive half).
 
 Remaining work, in dependency order:
 
-1. Orchestration (the capstone). All of discovery, change detection, recipe
-   derivation, the gate, policy, and block mutation exist and are independently
-   correct; `run()` still ends at reconcile-and-report. Wiring them into one
-   pipeline — discover → detect changes → write refreshed bytes to the cache →
-   build plans for the candidate set → gate → decide → mutate existing blocks /
-   synthesize new ones → re-sort → write + report — is integration, not new
-   design. Cache write-back (comparing bytes but not persisting them) belongs
-   inside this step: a New type's plan only resolves to a real schema file once
-   its bytes are written.
+1. Orchestration + generation (the capstone — Brick 6). All of discovery, change
+   detection, recipe derivation, the gate, policy, and block mutation exist and
+   are independently correct; `run()` still ends at reconcile-and-report. Brick 6
+   wires them into one pipeline — discover → detect changes → build plans for the
+   candidate set → validate-and-generate → decide → mutate existing blocks /
+   synthesize new ones → write refreshed bytes + generated code → re-sort →
+   report. Crucially, this step **generates the changed types for real and keeps
+   the output** (not a throwaway gate): validation is the front half of
+   generation (§6), so the same pass that gates produces the `*_gen.go` files,
+   incrementally (only New + Changed, versus the legacy full-corpus regen) and
+   concurrently (the engine is concurrency-clean, §9). This is more than wiring;
+   the detailed design, the copied-and-fixed generation engine, and the
+   anticipated challenges (whole-corpus index/registration files, output-path
+   resolution, a legacy-parity test) live in `bigdiffer-generation.md`.
 2. Absent-row probe (§3), compile gate (§6 tail), checkout-file retirement (§5),
    snapshot-path removal (§1), self-heal + machine-readable report (§7–§8) —
    unchanged from before; none started. Self-heal is cheap once orchestration
