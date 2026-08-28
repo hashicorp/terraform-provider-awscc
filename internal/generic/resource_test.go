@@ -7,7 +7,52 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 )
+
+func TestResourceWithUpdateIgnorePropertyPaths(t *testing.T) {
+	// Verify that resourceWithUpdateIgnorePropertyPaths correctly populates
+	// updateIgnoreAttributePaths, mirroring the writeOnlyPropertyPaths mechanism.
+	// The Update path uses these to zero out both sides of the patch diff so that
+	// CloudControl never receives patch operations for the affected attributes.
+	rt := genericResource{
+		cfToTfNameMap: map[string]string{
+			"AuthorizerConfiguration": "authorizer_configuration",
+			"Name":                    "name",
+		},
+	}
+
+	_ = schema.Schema{} // ensure schema import is used
+
+	opt := resourceWithUpdateIgnorePropertyPaths([]string{
+		"/properties/AuthorizerConfiguration",
+	})
+
+	if err := opt(&rt); err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+
+	if len(rt.updateIgnoreAttributePaths) != 1 {
+		t.Fatalf("expected 1 updateIgnoreAttributePath, got %d", len(rt.updateIgnoreAttributePaths))
+	}
+
+	expected := path.Root("authorizer_configuration")
+	if !rt.updateIgnoreAttributePaths[0].Equal(expected) {
+		t.Errorf("got: %s, expected: %s", rt.updateIgnoreAttributePaths[0], expected)
+	}
+
+	// Invalid path should be silently skipped (mirrors writeOnlyPropertyPaths behaviour).
+	opt2 := resourceWithUpdateIgnorePropertyPaths([]string{
+		"/definitions/ShouldBeSkipped",
+	})
+	if err := opt2(&rt); err != nil {
+		t.Fatalf("unexpected error for invalid path: %s", err)
+	}
+	// rt still has the previous paths overwritten with zero because opt2 replaces the slice.
+	if len(rt.updateIgnoreAttributePaths) != 0 {
+		t.Errorf("expected invalid path to be skipped, got %d paths", len(rt.updateIgnoreAttributePaths))
+	}
+}
 
 func TestPropertyPathToAttributePath(t *testing.T) {
 	testCases := []struct {
