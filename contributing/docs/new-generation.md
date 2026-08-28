@@ -245,8 +245,17 @@ design commitments:
 | `make bigdiffer` (git diff of dated files) | Removed — nothing to diff (§1). |
 | Manual overlay edit | Automated — the reconciler writes blocks (§3, §7). |
 | Validate gate (`make schemas`, its validation half) + rerun loop | Collapsed into the resilient pass — validation is its front half (§6). |
-| Generate gate — `make resources`, `make singular-data-sources`, `make plural-data-sources`, `make docs-all` — + rerun loops | Removed as the second half of the double gate; collapsed into the one resilient per-type pass (§6). |
+| Generate — `make resources`, `make singular-data-sources`, `make plural-data-sources` + rerun loops | bigdiffer **owns** the engine and generates in-process and in parallel, only for New + Changed types; validation is the front half (§6). |
+| `make docs-all` | bigdiffer orchestrates it — owns `docs-import`, invokes the standard `tfplugindocs` + `docs-fmt`; it does not reimplement `tfplugindocs`. |
+| 3000+ `//go:generate` directives + the three `resources.go` / `*_data_sources.go` directive files | Replaced by in-process parallel generation and a single blank-import registration file (§6, `bigdiffer-generation.md`). |
 | `make build` | Kept as the final compile gate; its failures feed the same overlay policy as §7. |
+
+Nothing above is deleted in the initial cutover. The legacy generators, directive
+files, and `make` targets stay as a documented, deprecated fallback ("kept for
+fallback, do not use, slated for removal"). The cutover is **conceptual** —
+bigdiffer relies on none of it, proven by an import-boundary test (no import of
+`internal/provider/generators/**`) plus full-corpus parity — and the legacy code
+is removed only after parity has held for several cycles.
 
 ## 11. Roadmap (gaps in the current tool)
 
@@ -266,32 +275,42 @@ reconcile-and-report (§1–§3's additive half).
 | Gate (in-process front half, per-artifact) | §6 | Built (`gate.go`), not wired |
 | Policy mapping (class × gate result → overlay edit) | §7 | Built (`policy.go`), not wired |
 | Block mutation (`frozen_since` / `suppress_*` written to an existing block) | §7 (prereq) | Built (`mutate.go`), not wired |
-| Compile gate | §6 tail | Not built |
+| Compile gate | §6 tail | Not built — planned whole-repo `go build ./internal/...` (Brick 11) |
+| Own the generation engine (copy emitter / template-data / writer / templates) | §6, §10 | Not built (Brick 6) |
+| Generate in-process, keep output, parallel + incremental | §6, §10 | Not built (Bricks 7–9) |
+| Single blank-import registration file (replaces the directive files) | §10 | Not built (Brick 9) |
+| Docs — own `docs-import`, orchestrate `tfplugindocs` | §10 | Not built (Brick 10) |
 | Retire checkout file into `frozen_since` | §5 | Not built — still read as an external cross-reference |
 | Drop the dated-snapshot path | §1 | Not built — `-discover` and snapshot modes still coexist |
 | Self-healing re-probe, machine-readable report | §7 last row, §8 | Not built |
 
-Remaining work, in dependency order:
+Remaining work is the generation phase, broken into digestible bricks. bigdiffer
+**owns** the generation engine and replaces the legacy `make`/`go:generate`
+machinery entirely — generating in-process and in parallel, keeping the output —
+rather than importing it or re-emitting its 3000+ directives. The detailed
+design, the generator-surface investigation, and the anticipated challenges live
+in `bigdiffer-generation.md`. In dependency order:
 
-1. Orchestration + generation (the capstone — Brick 6). All of discovery, change
-   detection, recipe derivation, the gate, policy, and block mutation exist and
-   are independently correct; `run()` still ends at reconcile-and-report. Brick 6
-   wires them into one pipeline — discover → detect changes → build plans for the
-   candidate set → validate-and-generate → decide → mutate existing blocks /
-   synthesize new ones → write refreshed bytes + generated code → re-sort →
-   report. Crucially, this step **generates the changed types for real and keeps
-   the output** (not a throwaway gate): validation is the front half of
-   generation (§6), so the same pass that gates produces the `*_gen.go` files,
-   incrementally (only New + Changed, versus the legacy full-corpus regen) and
-   concurrently (the engine is concurrency-clean, §9). This is more than wiring;
-   the detailed design, the copied-and-fixed generation engine, and the
-   anticipated challenges (whole-corpus index/registration files, output-path
-   resolution, a legacy-parity test) live in `bigdiffer-generation.md`.
-2. Absent-row probe (§3), compile gate (§6 tail), checkout-file retirement (§5),
-   snapshot-path removal (§1), self-heal + machine-readable report (§7–§8) —
-   unchanged from before; none started. Self-heal is cheap once orchestration
-   lands, since it reruns the same gate → decide path against frozen types
-   instead of candidates.
+1. **Brick 6 — config + own the engine (single type).** Copy the emitter,
+   template-data assembly, file writer, and templates into
+   `internal/tools/bigdiffer/codegen` (CWD fixes, in-memory bytes, pluralization
+   from the `plan`); rewire the gate onto it; drop the `generators/**` imports;
+   add the import-boundary test.
+2. **Brick 7 — full-corpus parity (the lynchpin).** Generate all types into a
+   temp tree and byte-compare against the committed `*_gen.go` +
+   `import_examples_gen.json`. Proves the owned engine is faithful.
+3. **Brick 8 — parallelize.** `errgroup`, `-race`-clean, still byte-identical.
+4. **Brick 9 — incremental weekly pipeline.** discover → detect → generate only
+   New + Changed → policy → overlay mutate/synthesize → cache write-back → emit
+   the single registration file → report.
+5. **Brick 10 — docs.** Own `docs-import`; orchestrate `tfplugindocs` + `docs-fmt`.
+6. **Brick 11 — cutover polish.** Compile gate, machine-readable report,
+   deprecation docs on the legacy path/targets. Then the deferred items below.
+
+Deferred beyond the bricks: absent-row probe (§3), checkout-file retirement (§5),
+snapshot-path removal (§1), self-heal + machine-readable report (§7–§8), and the
+eventual deletion of the legacy generators/directive files/`make` targets — only
+after parity has held for several cycles.
 
 ## 12. Thesis
 
