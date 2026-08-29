@@ -242,11 +242,16 @@ time is measured to be a real bottleneck.
     `NewResourceJsonSchemaDocument` instead of `NewResourceJsonSchemaPath`, which
     chdir'd into the schema directory without restoring — a CWD-corruption + a
     concurrency hazard. Parity unchanged (0 drift, 8432 files).
-- **Brick 10 — Docs.** `make docs` is `tfplugindocs generate` (a standard
-  external tool we keep and invoke) plus in-house `docs-import` and `docs-fmt`.
-  bigdiffer owns `docs-import` and orchestrates `tfplugindocs` + `docs-fmt` as
-  steps — it does not reimplement `tfplugindocs`. *Done = full cutover capability
-  (resources + data sources + docs).*
+- **Brick 10 — Docs. Done.** `-docs` owns `docs-import` and orchestrates the two
+  external steps of `make docs-all`. `codegen.GenerateImportExampleDocs` copies
+  the legacy import-examples generator verbatim (four templates rendered through
+  the same `parseTemplate`/`Split`, same snake-cased pipe-joined identifier), and
+  `runDocs` writes `examples/**` then invokes `terraform fmt` (docs-fmt) and
+  `tfplugindocs generate` (docs) — it does not reimplement `tfplugindocs`. Parity:
+  4206 non-fmt files (`import.sh`, `import-by-string-id.tf`,
+  `list-resource.tfquery.hcl`) byte-identical to committed (0 drift); the one
+  fmt-touched file (`import-by-identity.tf`), run through `terraform fmt`, matches
+  committed. *Done = full cutover capability (resources + data sources + docs).*
 - **Brick 11 — Cutover polish.** Compile gate, machine-readable report,
   deprecation docs on the legacy path/`make` targets, optional `make generate`
   hook onto bigdiffer. Deferred design items (absent-row probe, checkout-file

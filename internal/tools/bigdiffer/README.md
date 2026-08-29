@@ -36,6 +36,10 @@ go run ./internal/tools/bigdiffer -generate
 # Live weekly incremental: discover, regenerate only the types whose schema
 # changed, apply the policy to the overlay, write the cache + aggregates:
 go run ./internal/tools/bigdiffer -update
+
+# Regenerate documentation: own import-example docs from import_examples_gen.json,
+# then orchestrate terraform fmt + tfplugindocs (both must be on PATH):
+go run ./internal/tools/bigdiffer -docs
 ```
 
 Flags:
@@ -54,6 +58,9 @@ Flags:
   and regenerates only the New/Changed types from their fresh bytes, promoting
   files and cache only on clean generation (never regress), freezing or
   suppressing what breaks, then re-emitting the aggregates (needs AWS, `us-east-1`)
+- `-docs` — own `docs-import` (import-example docs from `import_examples_gen.json`),
+  then orchestrate `terraform fmt` and `tfplugindocs generate` (both must be on
+  PATH; does not reimplement `tfplugindocs`)
 
 ## What it does today (reconcile + report)
 

@@ -307,7 +307,10 @@ in `bigdiffer-generation.md`. In dependency order:
    on failure, never regress → cache write-back → emit the single registration
    file + `import_examples_gen.json` → report). Engine now loads schemas in-memory
    (no CWD side effect).
-5. **Brick 10 — docs.** Own `docs-import`; orchestrate `tfplugindocs` + `docs-fmt`.
+5. **Brick 10 — docs. Done.** `-docs` owns `docs-import` (the import-example docs,
+   copied verbatim from the legacy generator; parity-checked) and orchestrates
+   `terraform fmt` + `tfplugindocs generate` — it does not reimplement
+   `tfplugindocs`.
 6. **Brick 11 — cutover polish.** Compile gate, machine-readable report,
    deprecation docs on the legacy path/targets. Then the deferred items below.
 
