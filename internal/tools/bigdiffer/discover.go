@@ -10,8 +10,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
@@ -19,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
 	"golang.org/x/sync/errgroup"
 )
 

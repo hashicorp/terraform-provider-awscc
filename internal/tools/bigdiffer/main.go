@@ -36,10 +36,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
-
 	"github.com/hashicorp/hcl/v2/gohcl"
 	"github.com/hashicorp/hcl/v2/hclparse"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
 )
 
 const (
