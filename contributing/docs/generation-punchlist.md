@@ -44,22 +44,14 @@ All detail lives in `suppressed-and-frozen.md`.
 3. **Reason taxonomy** — every `suppression_reason` bigdiffer writes is
    `category: detail`, one of `structural` / `generation_failed` / `build_failed`
    / `manual` / `unknown`. *(core)*
-4. **Per-artifact independence** — a resource, singular DS, and plural DS
-   succeed or fail independently in one pass. Requires changing **two** sites:
-   `refreshCandidate` (promote per-artifact, not all-or-nothing on `gr.ok()`)
-   **and** `decide()`'s `classPresent` branch (per-artifact `suppress_*` with a
-   reason, not a blanket `frozen_since`). Preserve the resource↔plural
-   `ListResource` coupling. *(core)*
-   **Done when:** given a type where exactly one artifact (resource, singular
-   DS, or plural DS) fails and the others succeed — for both a New type and a
-   Present/Changed type — the successful artifacts' files are written/promoted,
-   the failed artifact's file is left untouched (Present) or simply not written
-   (New), and `all_schemas.hcl` ends up with `suppress_*` set only on the failed
-   artifact (with a `category: detail` reason), not on the whole type. A New
-   type with a resource that succeeds but whose plural DS fails is *not*
-   promoted with `GenerateListResource: true`. Covered by tests for all three
-   single-artifact-failure combinations, on both New and Present, plus the
-   existing all-fail and all-succeed cases (never-regress unchanged).
+4. ~~**Per-artifact independence**~~ — ✅ **Done** (commit `a08072eb6`). A
+   resource, singular DS, and plural DS now succeed or fail independently in one
+   pass: `refreshCandidate` stages each successful artifact and skips failed
+   ones, `decide()`'s `classPresent` branch suppresses only the failed
+   artifact(s) (keeping `frozen_since`, since one JSON backs all three), and
+   `reconcileListResource` preserves the resource↔plural `ListResource`
+   coupling. Tested across all three single-artifact-failure combinations on
+   both New and Present. *(core)*
 5. **Reason on freeze** — `frozen_since` always carries a categorized
    `suppression_reason`; today it carries none. *(core)*
 6. **Tag `structural` at the source** — the plural-DS structural determination
@@ -72,13 +64,40 @@ All detail lives in `suppressed-and-frozen.md`.
 
 ### Enforcement & backlog
 
-8. **`-check` reason anomaly** — advisory report line for any suppressed/frozen
-   row lacking a `suppression_reason`. Non-noisy only *after* item 9 backfills
-   the existing rows. Detail: `suppressed-and-frozen.md`. *(core)*
-9. **`-heal` subcommand** — re-probe reason-less/`unknown` rows
-   (structural → regenerate → compile-gate → migrate any free-form
-   `# Suppression Reason` comment into `manual:`), reporting proposals, never
-   auto-applying. Detail: `suppressed-and-frozen.md`. *(core)*
+8. ~~**`-check` reason anomaly**~~ — ✅ **Done** (`ad401cd95`). Added
+   `Report.ReasonlessSuppressed`: any live row with a suppressed artifact or a
+   set `frozen_since` and no `suppression_reason` is printed as an advisory
+   anomaly (never a `-check` failure, matching `UnexplainedRetained`). Fixed
+   `runCheck`'s success message in the same pass — it previously claimed
+   "anomaly-free" unconditionally even when advisory anomalies (this one or
+   `UnexplainedRetained`) were present; it now reports the advisory count.
+   Verified against the real overlay: 463 reason-less rows correctly flagged,
+   `-check` still exits 0, overlay untouched. *(core)*
+9. ~~**`-heal` subcommand**~~ — ✅ **Done** (`04b6a264d`). `internal/tools/bigdiffer/heal.go`:
+   for every reason-less/`unknown` row, probes each suppressed artifact
+   (structural check via the existing `pluralSupported`, then a real
+   regeneration attempt) and the freeze itself, proposing `lift` (generates
+   cleanly now) or a categorized `reason`, falling back to migrating a
+   free-form `# Suppression Reason:` comment into `manual:` or `unknown` if
+   nothing else applies. Never writes `all_schemas.hcl`. The compile-gate step
+   is deferred to item 1 landing.
+   **Load-bearing fix found via a live run against the real overlay:** some
+   rows are suppressed *because* their schema is recursive
+   (`# Suppression Reason: Recursive Attribute Definitions`, issue #95), and
+   `codegen.Emitter` has no recursion-depth guard — re-probing one in-process
+   is a confirmed, unrecoverable Go stack overflow that would crash the whole
+   `-heal` run. Fixed by isolating every regeneration probe in a subprocess
+   (a hidden `-heal-probe-artifact` mode `-heal` re-execs itself into) under a
+   30s timeout and a 512MiB `GOMEMLIMIT`, so a crash or runaway probe kills
+   only that subprocess — the same "one failure never blocks the rest"
+   principle `discover.go` and `generateCorpus` already apply. Verified end to
+   end against the real overlay: all 463 reason-less rows processed to
+   completion (including the two confirmed-recursive `AWS::WAFv2::*` types,
+   which now report a normal `generation_failed` proposal instead of crashing),
+   549 proposals (62 `lift`, 487 `reason`), overlay untouched.
+   `TestProbeArtifactIsolatesRecursiveSchema` reproduces the crash against a
+   real built binary and asserts it is contained (intentionally the one slow
+   bigdiffer test — skipped under `-short`). *(core)*
 10. **One-time reason backfill** — the bulk labor: tag the ~428 structural
     plural suppressions, and triage the 35 reason-less freezes + 3 bare
     suppressions. Includes **mining open GitHub issues** to propose reasons and
@@ -90,18 +109,14 @@ All detail lives in `suppressed-and-frozen.md`.
 11. **Machine-readable report** — structured output so `-check`/`-heal`
     proposals and the issue stubs are consumable (and seed release notes).
     Detail: `new-generation.md` §8, §11. *(core)*
-12. **Never-regress cross-type atomicity** — `-update` writes generated files in
-    the per-candidate loop but the overlay only once after; a late error leaves
-    files promoted and the overlay un-reconciled. Stage all, promote after the
-    batch. *(core)*
-    **Done when:** a hard I/O error (not a generation failure — those already
-    stay in-band via `gr`) on candidate N of a multi-candidate `-update` run
-    leaves the working tree exactly as it was before the run started — no
-    candidate's files or cache are promoted, and `all_schemas.hcl` is
-    unmodified — rather than candidates 1..N-1 promoted with the overlay never
-    reconciled. Covered by a test that injects a failure partway through a
-    multi-candidate batch and asserts nothing was promoted and the overlay file
-    is byte-identical to its pre-run content.
+12. ~~**Never-regress cross-type atomicity**~~ — ✅ **Done** (commit
+    `a08072eb6`). `refreshCandidate` now stages every artifact and cached schema
+    under a temp `stagingDir`, writing nothing to the real tree; `promoteStaged`
+    copies staging → real tree in one pass *after* the whole candidate batch has
+    staged successfully, so a hard error anywhere in the per-candidate loop
+    returns before any promotion and leaves the tree and `all_schemas.hcl`
+    exactly as they started. `TestUpdateBatchAtomicity` injects a mid-batch
+    failure and asserts nothing was promoted. *(core)*
 
 ### Deferred
 
