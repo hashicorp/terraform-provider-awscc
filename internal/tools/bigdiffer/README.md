@@ -4,12 +4,16 @@
 # bigdiffer
 
 `bigdiffer` reconciles `internal/provider/all_schemas.hcl` (the hand-curated
-"overlay") against the live CloudFormation registry, and is meant to replace
-the error-prone weekly ritual of hand-jamming new `resource_schema` blocks.
-Design and status: see `contributing/docs/new-generation.md` (target design,
-§11 for the authoritative status table) and
-`contributing/docs/bigdiffer-generation.md` (the in-progress generation /
-orchestration work — Brick 6).
+"overlay") against the live CloudFormation registry, regenerates only the
+resources whose schema changed, and applies one declarative policy — replacing
+the error-prone weekly ritual of hand-jamming new `resource_schema` blocks and
+running a chain of `make` targets.
+
+- **Weekly release process:** `contributing/docs/generating-the-provider-with-bigdiffer.md`
+  (and the legacy fallback in `generating-the-provider.md`).
+- **Design and status:** `contributing/docs/new-generation.md` (target design,
+  §11 status table) and `contributing/docs/bigdiffer-generation.md` (the
+  generation / orchestration working doc).
 
 > Note: there is also a `make bigdiffer` target that only prints the raw `diff`
 > between two dated `available_schemas` files. It is unrelated and slated for

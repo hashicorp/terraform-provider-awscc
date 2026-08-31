@@ -311,8 +311,10 @@ in `bigdiffer-generation.md`. In dependency order:
    copied verbatim from the legacy generator; parity-checked) and orchestrates
    `terraform fmt` + `tfplugindocs generate` — it does not reimplement
    `tfplugindocs`.
-6. **Brick 11 — cutover polish.** Compile gate, machine-readable report,
-   deprecation docs on the legacy path/targets. Then the deferred items below.
+6. **Brick 11 — cutover polish. Done.** Step narration + progress bars; the weekly
+   release (`generating-the-provider-with-bigdiffer.md`) and the legacy fallback
+   documented; legacy `make` targets marked deprecated + `make bigdiffer-*`
+   shortcuts added. Then the deferred items below.
 
 Deferred beyond the bricks: absent-row probe (§3), checkout-file retirement (§5),
 snapshot-path removal (§1), self-heal + machine-readable report (§7–§8), and the
