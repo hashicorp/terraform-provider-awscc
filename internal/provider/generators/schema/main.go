@@ -1,6 +1,12 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
+// Legacy code: superseded by bigdiffer's discovery + `-update`/`-generate`/`-docs`
+// pipeline (internal/tools/bigdiffer), including
+// codegen.GenerateImportExampleDocs for the import-example docs this file also
+// generates. Kept as the deprecated `make`/go:generate fallback; see
+// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+
 package main
 
 import (
