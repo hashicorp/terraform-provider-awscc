@@ -41,9 +41,11 @@ keep, trim, or delete as the work settles.
 
 All detail lives in `suppressed-and-frozen.md`.
 
-3. **Reason taxonomy** — every `suppression_reason` bigdiffer writes is
-   `category: detail`, one of `structural` / `generation_failed` / `build_failed`
-   / `manual` / `unknown`. *(core)*
+3. ~~**Reason taxonomy**~~ — ✅ **Done** (commit `a08072eb6`, alongside item 4).
+   `policy.go`'s `reasonCategory` (`structural` / `generation_failed` /
+   `build_failed` / `manual` / `unknown`) + `formatReason` (`category: detail`).
+   `build_failed` is defined but unreachable until item 1 (compile gate) lands.
+   *(core)*
 4. ~~**Per-artifact independence**~~ — ✅ **Done** (commit `a08072eb6`). A
    resource, singular DS, and plural DS now succeed or fail independently in one
    pass: `refreshCandidate` stages each successful artifact and skips failed
@@ -52,11 +54,17 @@ All detail lives in `suppressed-and-frozen.md`.
    `reconcileListResource` preserves the resource↔plural `ListResource`
    coupling. Tested across all three single-artifact-failure combinations on
    both New and Present. *(core)*
-5. **Reason on freeze** — `frozen_since` always carries a categorized
-   `suppression_reason`; today it carries none. *(core)*
-6. **Tag `structural` at the source** — the plural-DS structural determination
-   is in `discover.go` (`!pluralSupported`), not the planner; that is where the
-   `structural:` reason should be stamped. *(core)*
+5. ~~**Reason on freeze**~~ — ✅ **Done** (commit `a08072eb6`, alongside item 4).
+   Every `frozen_since`-setting branch in `decide()` (`classPresent` total
+   failure, `classPresent` partial failure, `classWithdrawn`) sets `reason` —
+   `generation_failed`-tagged for the two `classPresent` cases,
+   `manual: withdrawn from AWS, pending major-version removal` for
+   `classWithdrawn`. *(core)*
+6. ~~**Tag `structural` at the source**~~ — ✅ **Done** (commit `a08072eb6`,
+   alongside item 4). `canonicalBlock` (`main.go`) stamps
+   `structural: no list handler with zero required arguments` whenever it
+   writes the plural-DS structural suppression the discovery crawl determined,
+   instead of a bare, unexplained flag. *(core)*
 7. **GitHub-issue guidance** — for `generation_failed`/`build_failed` only,
    emit a ready-to-file issue stub (type, artifact, category, captured error)
    and let `suppression_reason` carry the issue URL. `structural` never warrants
