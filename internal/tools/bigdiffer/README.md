@@ -175,6 +175,11 @@ cross-reference and preserves the HCL flags verbatim. The design
 (`new-generation.md` §5) folds the checkout file into `frozen_since` and retires
 it; that migration has not happened yet.
 
+See `contributing/docs/suppressed-and-frozen.md` for the full picture: exactly
+what each lever means today (including what is not currently known about the
+existing rows), and the spec for the reason taxonomy, `-check` enforcement, and
+the `-heal` subcommand.
+
 ## Anomaly reports (advisory)
 
 The tool prints, but does not auto-fix:
