@@ -145,9 +145,10 @@ nothing under `internal/provider/generators/**` — enforced by
 - **Policy** (`policy.go`) — `decide` maps a change class and generation result to
   an overlay edit: add a plain block, add one suppressing only the artifacts that
   failed, freeze at last-good bytes, annotate non-provisionable, or freeze a
-  withdrawn type. Pure and table-tested. (The standalone front-half gate in
-  `gate.go` predates generation-as-gate and is now used only by its own test; the
-  live pipeline maps real generation outcomes to the same `gateResult`.)
+  withdrawn type. Pure and table-tested. Generation itself is the gate:
+  `refreshCandidate` generates a type and `gateResultFromGenResults` maps the
+  per-artifact success/failure into the `gateResult` that `decide` consumes
+  (`gate.go` now holds just those outcome types).
 - **Block mutation** (`mutate.go`) — sets attributes on an existing block via
   `hclwrite`, preserving comments and existing attributes; blocks for new
   additions are synthesized during the reconcile pass.
