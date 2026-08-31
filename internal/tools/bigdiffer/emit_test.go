@@ -90,7 +90,7 @@ func TestRegistrationParity(t *testing.T) {
 // internal/aws/ from Go source text.
 func blankImports(src string) map[string]struct{} {
 	out := map[string]struct{}{}
-	for _, line := range strings.Split(src, "\n") {
+	for line := range strings.SplitSeq(src, "\n") {
 		line = strings.TrimSpace(line)
 		if !strings.HasPrefix(line, "_ \"") {
 			continue

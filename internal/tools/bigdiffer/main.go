@@ -29,6 +29,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"maps"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -310,9 +311,7 @@ func decisionAttrs(d policyDecision) map[string]string {
 		return nil
 	}
 	attrs := make(map[string]string, len(d.setAttrs)+1)
-	for k, v := range d.setAttrs {
-		attrs[k] = v
-	}
+	maps.Copy(attrs, d.setAttrs)
 	if d.reason != "" {
 		attrs[attrSuppressionReason] = d.reason
 	}
@@ -382,7 +381,7 @@ func extractItems(region string) []item {
 
 func classifyItem(text string) item {
 	it := item{text: text}
-	for _, ln := range strings.Split(text, "\n") {
+	for ln := range strings.SplitSeq(text, "\n") {
 		trimmed := strings.TrimSpace(ln)
 		if strings.HasPrefix(trimmed, `resource_schema "`) {
 			it.live = true
