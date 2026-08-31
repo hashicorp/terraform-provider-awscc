@@ -107,7 +107,7 @@ Grounded by reading the generators, not assumed:
   schemas carry the key). The copy must preserve `Emitter.Deduplicate` (inherited
   via `schemaIsDeRecursed`), but it needs no special handling now.
 
-## Pipeline (the weekly `-discover` path)
+## Pipeline (the weekly `-update` path)
 
 ```
 discover(ctx)                         # rows + sanitized bytes (have it)
@@ -263,8 +263,8 @@ time is measured to be a real bottleneck.
   a deprecation note; `make bigdiffer-update/-generate/-docs` shortcuts added. The
   compile gate stays the documented `make build`; a machine-readable report and
   the deferred design items (absent-row probe, checkout-file retirement,
-  snapshot-path removal, self-heal re-probe, parity-validated naming
-  simplification, eventual legacy deletion) remain for later.
+  self-heal re-probe, parity-validated naming simplification, eventual legacy
+  deletion) remain for later.
 
 Parity (7) before concurrency (8) before incremental (9) is deliberate: prove
 faithful, then fast, then smart.
@@ -290,7 +290,7 @@ them, and improves testability (no brittle CWD-relative assumptions, which
 ## Deferred (beyond this phase)
 
 Absent-row `DescribeType` probe (§3), checkout-file retirement (§5),
-snapshot-path removal (§1), self-heal re-probe + machine-readable report (§7–§8),
+self-heal re-probe + machine-readable report (§7–§8),
 and the eventual deletion of the legacy generators, the three directive files,
 and the legacy `make` targets — only after parity has held for several cycles.
 

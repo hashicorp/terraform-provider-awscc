@@ -281,7 +281,7 @@ reconcile-and-report (§1–§3's additive half).
 | Single blank-import registration file (replaces the directive files) | §10 | Not built (Brick 9) |
 | Docs — own `docs-import`, orchestrate `tfplugindocs` | §10 | Not built (Brick 10) |
 | Retire checkout file into `frozen_since` | §5 | Not built — still read as an external cross-reference |
-| Drop the dated-snapshot path | §1 | Not built — `-discover` and snapshot modes still coexist |
+| Drop the dated-snapshot path | §1 | **Done** — snapshot modes and `-discover` removed; discovery is only via `-update` |
 | Self-healing re-probe, machine-readable report | §7 last row, §8 | Not built |
 
 Remaining work is the generation phase, broken into digestible bricks. bigdiffer
@@ -317,7 +317,7 @@ in `bigdiffer-generation.md`. In dependency order:
    shortcuts added. Then the deferred items below.
 
 Deferred beyond the bricks: absent-row probe (§3), checkout-file retirement (§5),
-snapshot-path removal (§1), self-heal + machine-readable report (§7–§8), and the
+self-heal + machine-readable report (§7–§8), and the
 eventual deletion of the legacy generators/directive files/`make` targets — only
 after parity has held for several cycles.
 

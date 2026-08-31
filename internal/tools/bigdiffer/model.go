@@ -29,8 +29,9 @@ type allSchemasFile struct {
 	Resources []resourceRow   `hcl:"resource_schema,block"`
 }
 
-// availableFile mirrors a bare list of resource_schema blocks (the shape a live
-// discovery snapshot or a legacy available_schemas.<date>.hcl file takes).
+// availableFile mirrors a bare list of resource_schema blocks (no defaults or
+// meta_schema). It is a convenience decode target for tests that parse a single
+// block or a fragment.
 type availableFile struct {
 	Resources []resourceRow `hcl:"resource_schema,block"`
 }

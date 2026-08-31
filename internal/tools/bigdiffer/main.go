@@ -34,23 +34,18 @@ import (
 	"regexp"
 	"sort"
 	"strings"
-	"time"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
 
 	"github.com/hashicorp/hcl/v2/gohcl"
 	"github.com/hashicorp/hcl/v2/hclparse"
-	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
 const (
-	defaultAllSchemas    = "internal/provider/all_schemas.hcl"
-	defaultAllSchemasDir = "internal/provider/generators/allschemas"
-	defaultCheckout      = "internal/update/suppressions_checkout.txt"
+	defaultAllSchemas = "internal/provider/all_schemas.hcl"
+	defaultCheckout   = "internal/update/suppressions_checkout.txt"
 
-	availablePrefix = "available_schemas."
-	availableSuffix = ".hcl"
-	dateLayout      = "2006-01-02"
+	dateLayout = "2006-01-02"
 
 	pluralAttr = "suppress_plural_data_source_generation"
 	cfnAttr    = "cloudformation_type_name"
@@ -61,118 +56,83 @@ var countLineRE = regexp.MustCompile(`(?m)^# \d+ CloudFormation resource types s
 func main() {
 	var (
 		allSchemasPath = flag.String("all-schemas", defaultAllSchemas, "path to the curated all_schemas.hcl overlay")
-		availablePath  = flag.String("available", "", "path to the generated available_schemas.<date>.hcl base (default: newest in -allschemas-dir)")
-		allSchemasDir  = flag.String("allschemas-dir", defaultAllSchemasDir, "directory containing available_schemas.<date>.hcl files")
 		checkoutPath   = flag.String("checkout", defaultCheckout, "path to suppressions_checkout.txt (cross-referenced, never modified)")
-		discoverLive   = flag.Bool("discover", false, "query AWS live (us-east-1) for the available base instead of reading a snapshot file")
-		check          = flag.Bool("check", false, "verify all_schemas.hcl is already normalized; exit non-zero if not (writes nothing)")
+		check          = flag.Bool("check", false, "verify all_schemas.hcl is normalized and anomaly-free (offline; writes nothing)")
 		generate       = flag.Bool("generate", false, "regenerate the whole provider offline from the committed overlay + schema cache (writes *_gen.go, registrations_gen.go, import_examples_gen.json)")
 		update         = flag.Bool("update", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
 	)
 	flag.Parse()
 
-	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check, *generate, *update, *docs); err != nil {
+	if err := run(*allSchemasPath, *checkoutPath, *check, *generate, *update, *docs); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
 
-func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check, generate, update, docs bool) error {
-	if generate {
+// run dispatches to exactly one command. bigdiffer is the generator, not a manual
+// snapshot-diff helper: the weekly workflow is -update, offline rebuilds are
+// -generate, docs are -docs, and -check is an offline hygiene guard for CI.
+func run(allSchemasPath, checkoutPath string, check, generate, update, docs bool) error {
+	switch {
+	case update:
+		return runUpdate(context.Background(), allSchemasPath, checkoutPath)
+	case generate:
 		cfg, rows, err := loadOverlay(allSchemasPath)
 		if err != nil {
 			return err
 		}
 		return runGenerate(cfg, rows)
-	}
-	if update {
-		return runUpdate(context.Background(), allSchemasPath, checkoutPath)
-	}
-	if docs {
+	case docs:
 		cfg, _, err := loadOverlay(allSchemasPath)
 		if err != nil {
 			return err
 		}
 		return runDocs(cfg)
+	case check:
+		return runCheck(allSchemasPath, checkoutPath)
+	default:
+		flag.Usage()
+		return fmt.Errorf("no command given; use one of -update, -generate, -docs, -check")
 	}
+}
 
-	// Resolve the base: either query AWS live (bigdiffer owns discovery), or read
-	// a snapshot file. Live discovery has no "previous" snapshot, so every base
-	// row missing from the overlay is simply reported as newly added.
-	var (
-		base     []resourceRow
-		previous []resourceRow
-	)
-	if discoverLive {
-		disc, err := discover(context.Background())
-		if err != nil {
-			return fmt.Errorf("live discovery: %w", err)
-		}
-		base = make([]resourceRow, len(disc))
-		for i, d := range disc {
-			base[i] = d.row
-		}
-	} else {
-		if availablePath == "" {
-			newest, _, err := latestAvailable(allSchemasDir)
-			if err != nil {
-				return err
-			}
-			availablePath = newest
-		}
-		_, previousPath, _ := latestAvailable(allSchemasDir)
-
-		b, err := parseAvailable(availablePath)
-		if err != nil {
-			return fmt.Errorf("parsing base %s: %w", availablePath, err)
-		}
-		base = b
-
-		if previousPath != "" && previousPath != availablePath {
-			if prev, err := parseAvailable(previousPath); err == nil {
-				previous = prev
-			}
-		}
+// runCheck verifies all_schemas.hcl is normalized (sorted, canonical formatting,
+// correct count header) and anomaly-free, using the overlay as its own base so no
+// AWS query or snapshot file is needed. It writes nothing and is suitable for CI.
+func runCheck(allSchemasPath, checkoutPath string) error {
+	_, rows, err := loadOverlay(allSchemasPath)
+	if err != nil {
+		return err
 	}
-
 	overlayContent, err := os.ReadFile(allSchemasPath)
 	if err != nil {
 		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
 	}
-
 	checkout, err := parseCheckout(checkoutPath)
 	if err != nil {
 		return fmt.Errorf("reading checkout %s: %w", checkoutPath, err)
 	}
 
-	out, report, err := normalize(string(overlayContent), base, previous, checkout)
+	// Reconcile the overlay against itself: no rows are added, so this only
+	// re-sorts and re-formats, surfacing any hand-edit that left it un-normalized.
+	out, report, err := normalize(string(overlayContent), rows, nil, checkout)
 	if err != nil {
 		return err
 	}
-
 	report.write(os.Stderr)
 
-	if check {
-		problems := report.anomalyProblems()
-		if out != string(overlayContent) {
-			problems = append([]string{"not normalized (run `go run ./internal/tools/bigdiffer` to fix)"}, problems...)
-		}
-		if len(problems) == 0 {
-			fmt.Fprintln(os.Stderr, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
-			return nil
-		}
+	problems := report.anomalyProblems()
+	// The count-header value counts schemas *available from AWS*, which an offline
+	// run cannot know, so compare everything except that line: sorting, canonical
+	// formatting, and byte-preservation of blocks.
+	if countLineRE.ReplaceAllString(out, "#") != countLineRE.ReplaceAllString(string(overlayContent), "#") {
+		problems = append([]string{"not normalized (sorting/formatting; re-run `-update`, or fix by hand)"}, problems...)
+	}
+	if len(problems) > 0 {
 		return fmt.Errorf("all_schemas.hcl check failed: %s", strings.Join(problems, "; "))
 	}
-
-	if out == string(overlayContent) {
-		fmt.Fprintln(os.Stderr, "bigdiffer: no changes.")
-		return nil
-	}
-	if err := os.WriteFile(allSchemasPath, []byte(out), 0o644); err != nil {
-		return fmt.Errorf("writing %s: %w", allSchemasPath, err)
-	}
-	fmt.Fprintf(os.Stderr, "bigdiffer: wrote %s.\n", allSchemasPath)
+	fmt.Fprintln(os.Stderr, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
 	return nil
 }
 
@@ -533,14 +493,6 @@ func crossValidate(overlay string, items []item) ([]resourceRow, error) {
 	return decoded.Resources, nil
 }
 
-func parseAvailable(path string) ([]resourceRow, error) {
-	var s availableFile
-	if err := hclsimple.DecodeFile(path, nil, &s); err != nil {
-		return nil, err
-	}
-	return s.Resources, nil
-}
-
 // parseCheckout reads suppressions_checkout.txt and returns the set of pinned
 // CloudFormation type names (e.g. AWS_IoTFleetWise_DecoderManifest.json ->
 // AWS::IoTFleetWise::DecoderManifest).
@@ -563,35 +515,6 @@ func parseCheckout(path string) (map[string]bool, error) {
 		out[strings.ReplaceAll(base, "_", "::")] = true
 	}
 	return out, nil
-}
-
-// latestAvailable returns the newest and second-newest available_schemas.<date>.hcl
-// paths in dir, by embedded date.
-func latestAvailable(dir string) (newest, previous string, err error) {
-	entries, err := os.ReadDir(dir)
-	if err != nil {
-		return "", "", err
-	}
-	var dates []string
-	for _, e := range entries {
-		name := e.Name()
-		if !strings.HasPrefix(name, availablePrefix) || !strings.HasSuffix(name, availableSuffix) {
-			continue
-		}
-		d := strings.TrimSuffix(strings.TrimPrefix(name, availablePrefix), availableSuffix)
-		if _, perr := time.Parse(dateLayout, d); perr == nil {
-			dates = append(dates, d)
-		}
-	}
-	if len(dates) == 0 {
-		return "", "", fmt.Errorf("no %s*%s files in %s", availablePrefix, availableSuffix, dir)
-	}
-	sort.Strings(dates)
-	newest = filepath.Join(dir, availablePrefix+dates[len(dates)-1]+availableSuffix)
-	if len(dates) >= 2 {
-		previous = filepath.Join(dir, availablePrefix+dates[len(dates)-2]+availableSuffix)
-	}
-	return newest, previous, nil
 }
 
 // anomalyProblems returns human-readable descriptions of anomalies that should
