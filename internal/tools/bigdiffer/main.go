@@ -120,7 +120,7 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 	if err != nil {
 		return err
 	}
-	report.write(os.Stderr)
+	report.write()
 
 	problems := report.anomalyProblems()
 	// The count-header value counts schemas *available from AWS*, which an offline
@@ -531,34 +531,34 @@ func (r Report) anomalyProblems() []string {
 	return problems
 }
 
-func (r Report) write(w *os.File) {
-	fmt.Fprintf(w, "== bigdiffer report ==\n")
-	fmt.Fprintf(w, "available (base) resources: %d\n", r.Total)
-	fmt.Fprintf(w, "added (new this week):      %d\n", len(r.AddedNew))
+func (r Report) write() {
+	fmt.Fprintf(os.Stderr, "== bigdiffer report ==\n")
+	fmt.Fprintf(os.Stderr, "available (base) resources: %d\n", r.Total)
+	fmt.Fprintf(os.Stderr, "added (new this week):      %d\n", len(r.AddedNew))
 	for _, b := range r.AddedNew {
-		fmt.Fprintf(w, "  + %s  (%s)\n", b.cfn, b.label)
+		fmt.Fprintf(os.Stderr, "  + %s  (%s)\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(w, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
+	fmt.Fprintf(os.Stderr, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
 	for _, b := range r.AddedBacklog {
-		fmt.Fprintf(w, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
+		fmt.Fprintf(os.Stderr, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(w, "retained (gone from AWS):    %d\n", len(r.Retained))
+	fmt.Fprintf(os.Stderr, "retained (gone from AWS):    %d\n", len(r.Retained))
 	if len(r.UnexplainedRetained) > 0 {
-		fmt.Fprintf(w, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
+		fmt.Fprintf(os.Stderr, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
 		for _, b := range r.UnexplainedRetained {
-			fmt.Fprintf(w, "  ! %s  (%s)\n", b.cfn, b.label)
+			fmt.Fprintf(os.Stderr, "  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}
 	if len(r.Duplicates) > 0 {
-		fmt.Fprintf(w, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
+		fmt.Fprintf(os.Stderr, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
 		for _, d := range r.Duplicates {
-			fmt.Fprintf(w, "  ! %s\n", d)
+			fmt.Fprintf(os.Stderr, "  ! %s\n", d)
 		}
 	}
 	if len(r.NamingViolate) > 0 {
-		fmt.Fprintf(w, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
+		fmt.Fprintf(os.Stderr, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
 		for _, v := range r.NamingViolate {
-			fmt.Fprintf(w, "  ! %s\n", v)
+			fmt.Fprintf(os.Stderr, "  ! %s\n", v)
 		}
 	}
 }

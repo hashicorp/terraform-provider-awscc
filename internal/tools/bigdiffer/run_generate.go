@@ -36,7 +36,7 @@ func runGenerate(cfg config, rows []resourceRow) error {
 		return fmt.Errorf("generation failed for %d artifact(s)", genErrs)
 	}
 
-	stepf("Writing %d generated files…", len(results)*2)
+	stepf("Writing generated files for %d artifacts…", len(results))
 	n, err := writeCorpus(cfg, results)
 	if err != nil {
 		return err
@@ -47,7 +47,7 @@ func runGenerate(cfg config, rows []resourceRow) error {
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(cfg.registrationPath, reg, 0o644); err != nil {
+	if err := os.WriteFile(cfg.registrationPath, reg, filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", cfg.registrationPath, err)
 	}
 
@@ -55,7 +55,7 @@ func runGenerate(cfg config, rows []resourceRow) error {
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(cfg.importExamplesPath, ie, 0o644); err != nil {
+	if err := os.WriteFile(cfg.importExamplesPath, ie, filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
 	}
 

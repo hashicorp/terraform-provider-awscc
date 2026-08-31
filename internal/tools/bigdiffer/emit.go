@@ -19,6 +19,12 @@ import (
 // modulePath is the Go module path; generated import paths are built from it.
 const modulePath = "github.com/hashicorp/terraform-provider-awscc"
 
+// File-mode permissions for generated output.
+const (
+	dirPerm  os.FileMode = 0o755
+	filePerm os.FileMode = 0o644
+)
+
 // writeCorpus writes each generated artifact's code and test file to
 // cfg.outputRoot/<pathSuffix>/<file>, creating directories as needed. Returns the
 // number of files written. A generate error in any result aborts before writing
@@ -30,7 +36,7 @@ func writeCorpus(cfg config, results []genResult) (int, error) {
 			return written, fmt.Errorf("%s %s: %w", r.p.cfType, r.a.kind, r.err)
 		}
 		dir := filepath.Join(cfg.outputRoot, r.a.pathSuffix)
-		if err := os.MkdirAll(dir, 0o755); err != nil {
+		if err := os.MkdirAll(dir, dirPerm); err != nil {
 			return written, fmt.Errorf("creating %s: %w", dir, err)
 		}
 		for _, fw := range []struct {
@@ -41,7 +47,7 @@ func writeCorpus(cfg config, results []genResult) (int, error) {
 			{r.a.testFile, r.test},
 		} {
 			path := filepath.Join(dir, fw.name)
-			if err := os.WriteFile(path, fw.data, 0o644); err != nil {
+			if err := os.WriteFile(path, fw.data, filePerm); err != nil {
 				return written, fmt.Errorf("writing %s: %w", path, err)
 			}
 			written++

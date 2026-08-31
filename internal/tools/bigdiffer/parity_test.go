@@ -46,7 +46,7 @@ func TestFullCorpusParity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(filepath.Join(cfg.overlayDir, "last_resource.txt"))
+	defer func() { _ = os.Remove(filepath.Join(cfg.overlayDir, "last_resource.txt")) }()
 
 	rows := f.Resources
 	if only != "" {

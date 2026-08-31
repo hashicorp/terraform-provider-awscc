@@ -66,10 +66,10 @@ func generateImportExampleDocs(importExamplesPath, examplesDir string) (int, err
 		}
 		for _, f := range files {
 			path := filepath.Join(examplesDir, f.RelPath)
-			if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+			if err := os.MkdirAll(filepath.Dir(path), dirPerm); err != nil {
 				return written, fmt.Errorf("creating dir for %s: %w", path, err)
 			}
-			if err := os.WriteFile(path, f.Content, 0o644); err != nil {
+			if err := os.WriteFile(path, f.Content, filePerm); err != nil {
 				return written, fmt.Errorf("writing %s: %w", path, err)
 			}
 			written++

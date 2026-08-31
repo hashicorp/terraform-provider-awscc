@@ -11,6 +11,9 @@ import (
 	"golang.org/x/term"
 )
 
+// barThrottle bounds how often the progress bar re-renders.
+const barThrottle = 100 * time.Millisecond
+
 // stepf prints a top-level step header to stderr (e.g. "==> Discovering…"), so a
 // maintainer can follow what bigdiffer is doing at each stage.
 func stepf(format string, a ...any) {
@@ -35,7 +38,7 @@ func newBar(total int, label string) *progressbar.ProgressBar {
 		progressbar.OptionShowCount(),
 		progressbar.OptionShowElapsedTimeOnFinish(),
 		progressbar.OptionSetPredictTime(true),
-		progressbar.OptionThrottle(100*time.Millisecond),
+		progressbar.OptionThrottle(barThrottle),
 		progressbar.OptionClearOnFinish(),
 	)
 }

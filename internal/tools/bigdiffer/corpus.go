@@ -85,5 +85,6 @@ func generateCorpus(cfg config, rows []resourceRow, concurrency int, onArtifact 
 	}
 	_ = g.Wait() // per-artifact errors are in-band in each genResult.
 
+	//nolint:makezero // results is pre-sized so each goroutine writes results[i] by index; plan errors are appended after.
 	return append(results, planErrs...)
 }

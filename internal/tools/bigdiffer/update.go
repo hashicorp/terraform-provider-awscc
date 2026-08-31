@@ -80,7 +80,7 @@ func gateResultFromGenResults(cfType string, results []genResult) gateResult {
 // untouched (never regress). It returns the gateResult for the policy engine.
 func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, error) {
 	stagedSchema := schemaCachePath(stagingDir, c.cfType)
-	if err := os.WriteFile(stagedSchema, c.schema, 0o644); err != nil {
+	if err := os.WriteFile(stagedSchema, c.schema, filePerm); err != nil {
 		return gateResult{}, fmt.Errorf("staging %s: %w", c.cfType, err)
 	}
 
@@ -96,10 +96,10 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, e
 	if _, err := writeCorpus(cfg, results); err != nil {
 		return gr, fmt.Errorf("writing %s: %w", c.cfType, err)
 	}
-	if err := os.MkdirAll(cfg.cacheDir, 0o755); err != nil {
+	if err := os.MkdirAll(cfg.cacheDir, dirPerm); err != nil {
 		return gr, fmt.Errorf("creating cache dir: %w", err)
 	}
-	if err := os.WriteFile(schemaCachePath(cfg.cacheDir, c.cfType), c.schema, 0o644); err != nil {
+	if err := os.WriteFile(schemaCachePath(cfg.cacheDir, c.cfType), c.schema, filePerm); err != nil {
 		return gr, fmt.Errorf("promoting cache for %s: %w", c.cfType, err)
 	}
 	return gr, nil
@@ -150,7 +150,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	if err != nil {
 		return fmt.Errorf("creating staging dir: %w", err)
 	}
-	defer os.RemoveAll(stagingDir)
+	defer func() { _ = os.RemoveAll(stagingDir) }()
 
 	stepf("Regenerating %d changed type(s) from fresh bytes (never-regress)…", len(cands))
 	candBar := newBar(len(cands), "regenerate")
@@ -187,7 +187,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(allSchemasPath, []byte(out), 0o644); err != nil {
+	if err := os.WriteFile(allSchemasPath, []byte(out), filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", allSchemasPath, err)
 	}
 
@@ -201,18 +201,18 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(cfg.registrationPath, reg, 0o644); err != nil {
+	if err := os.WriteFile(cfg.registrationPath, reg, filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", cfg.registrationPath, err)
 	}
 	ie, err := emitImportExamples(cfg, finalRows)
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(cfg.importExamplesPath, ie, 0o644); err != nil {
+	if err := os.WriteFile(cfg.importExamplesPath, ie, filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
 	}
 
-	report.write(os.Stderr)
+	report.write()
 	stepf("Done: refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), okN, brokeN)
 	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`, `go run ./internal/tools/bigdiffer -docs`.")
 	return nil
