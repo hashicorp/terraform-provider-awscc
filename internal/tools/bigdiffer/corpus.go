@@ -37,12 +37,14 @@ func generateArtifact(ui cli.Ui, cfg config, p plan, a genArtifact) (code, test 
 }
 
 // generateCorpus generates every artifact for the given rows concurrently,
-// bounded by concurrency workers. Generation is CPU-bound and independent per
-// artifact, so this parallelizes cleanly: each work item writes its own result
-// slot (no shared mutable state), the emitter has no package-level globals, and
-// bigdiffer's naming serializes the one non-thread-safe dependency (inflection).
-// One artifact's failure is captured in-band and never aborts the others.
-func generateCorpus(cfg config, rows []resourceRow, concurrency int) []genResult {
+// bounded by concurrency workers. onArtifact, when non-nil, is invoked once per
+// generated artifact (safe for concurrent use) so callers can drive a progress
+// bar. Generation is CPU-bound and independent per artifact, so this
+// parallelizes cleanly: each work item writes its own result slot (no shared
+// mutable state), the emitter has no package-level globals, and bigdiffer's
+// naming serializes the one non-thread-safe dependency (inflection). One
+// artifact's failure is captured in-band and never aborts the others.
+func generateCorpus(cfg config, rows []resourceRow, concurrency int, onArtifact func()) []genResult {
 	if concurrency < 1 {
 		concurrency = 1
 	}
@@ -75,6 +77,9 @@ func generateCorpus(cfg config, rows []resourceRow, concurrency int) []genResult
 		g.Go(func() error {
 			code, test, err := generateArtifact(ui, cfg, w.p, w.a)
 			results[i] = genResult{p: w.p, a: w.a, code: code, test: test, err: err}
+			if onArtifact != nil {
+				onArtifact()
+			}
 			return nil
 		})
 	}

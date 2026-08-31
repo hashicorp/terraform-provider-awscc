@@ -53,10 +53,14 @@ func discover(ctx context.Context) ([]discovered, error) {
 		return nil, err
 	}
 
+	stepf("Listing available CloudFormation resource types (%s)…", discoverRegion)
 	names, err := listTypeNames(ctx, conn)
 	if err != nil {
 		return nil, err
 	}
+
+	stepf("Describing %d types (concurrency %d, DescribeType is throttled)…", len(names), discoverConcurrency)
+	bar := newBar(len(names), "describe")
 
 	// Fan out DescribeType across a bounded worker pool. Each goroutine writes
 	// its own slot, so no mutex is needed; per-type errors are captured in-band.
@@ -66,10 +70,12 @@ func discover(ctx context.Context) ([]discovered, error) {
 	for i, cfn := range names {
 		g.Go(func() error {
 			results[i] = describeOne(ctx, conn, cfn)
+			_ = bar.Add(1)
 			return nil
 		})
 	}
 	_ = g.Wait() // goroutines never return an error; failures are in-band.
+	_ = bar.Finish()
 
 	var failures int
 	for _, d := range results {

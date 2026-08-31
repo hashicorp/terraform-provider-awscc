@@ -18,7 +18,11 @@ import (
 func runGenerate(cfg config, rows []resourceRow) error {
 	start := time.Now()
 
-	results := generateCorpus(cfg, rows, cfg.genConcurrency)
+	stepf("Generating the provider from %d types (concurrency %d)…", len(rows), cfg.genConcurrency)
+	genBar := newBar(countArtifacts(cfg, rows), "generate")
+	results := generateCorpus(cfg, rows, cfg.genConcurrency, func() { _ = genBar.Add(1) })
+	_ = genBar.Finish()
+
 	var genErrs int
 	for _, r := range results {
 		if r.err != nil {
@@ -32,11 +36,13 @@ func runGenerate(cfg config, rows []resourceRow) error {
 		return fmt.Errorf("generation failed for %d artifact(s)", genErrs)
 	}
 
+	stepf("Writing %d generated files…", len(results)*2)
 	n, err := writeCorpus(cfg, results)
 	if err != nil {
 		return err
 	}
 
+	stepf("Emitting aggregates (registration + import examples)…")
 	reg, err := emitRegistration(cfg, rows)
 	if err != nil {
 		return err
@@ -53,7 +59,19 @@ func runGenerate(cfg config, rows []resourceRow) error {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
 	}
 
-	fmt.Fprintf(os.Stderr, "bigdiffer: generated %d files + registration + import_examples for %d types in %s\n",
-		n, len(rows), time.Since(start).Round(time.Millisecond))
+	stepf("Done: generated %d files for %d types in %s.", n, len(rows), time.Since(start).Round(time.Millisecond))
+	infof("Next: `make build` to compile-check, then `go run ./internal/tools/bigdiffer -docs`.")
 	return nil
+}
+
+// countArtifacts totals the artifacts across all rows' plans, for a progress bar
+// bound. Plan errors are ignored here; they surface as generation errors.
+func countArtifacts(cfg config, rows []resourceRow) int {
+	total := 0
+	for _, row := range rows {
+		if p, err := generationPlan(row, cfg.prefix, cfg.cacheDir); err == nil {
+			total += len(p.artifacts)
+		}
+	}
+	return total
 }

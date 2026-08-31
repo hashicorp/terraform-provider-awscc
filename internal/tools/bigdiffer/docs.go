@@ -81,28 +81,31 @@ func generateImportExampleDocs(importExamplesPath, examplesDir string) (int, err
 // runDocs runs the full documentation pipeline: own docs-import, then orchestrate
 // terraform fmt (docs-fmt) and tfplugindocs (docs), matching `make docs-all`.
 func runDocs(cfg config) error {
+	stepf("docs-import: generating import-example docs from import_examples_gen.json…")
 	n, err := generateImportExampleDocs(cfg.importExamplesPath, cfg.examplesDir)
 	if err != nil {
 		return fmt.Errorf("docs-import: %w", err)
 	}
-	fmt.Fprintf(os.Stderr, "bigdiffer: docs-import wrote %d import-example files\n", n)
+	infof("wrote %d import-example files under %s", n, cfg.examplesDir)
 
 	// docs-fmt: format the generated Terraform example files.
-	fmt.Fprintln(os.Stderr, "bigdiffer: docs-fmt (terraform fmt -recursive)")
+	stepf("docs-fmt: terraform fmt -recursive…")
 	if err := runTool(cfg.examplesDir, "terraform", "fmt", "-recursive"); err != nil {
 		return fmt.Errorf("docs-fmt: %w", err)
 	}
 
 	// docs: regenerate the registry docs with tfplugindocs (external tool).
+	stepf("docs: tfplugindocs generate…")
 	for _, sub := range []string{"data-sources", "resources", "list-resources"} {
 		if err := removeMarkdown(filepath.Join(cfg.docsDir, sub)); err != nil {
 			return fmt.Errorf("clearing docs/%s: %w", sub, err)
 		}
 	}
-	fmt.Fprintln(os.Stderr, "bigdiffer: docs (tfplugindocs generate)")
 	if err := runTool(cfg.repoRoot, "tfplugindocs", "generate", "--provider-name", "terraform-provider-awscc"); err != nil {
 		return fmt.Errorf("tfplugindocs: %w", err)
 	}
+	stepf("Done: documentation regenerated.")
+	infof("Update CHANGELOG.md + version/VERSION, then commit.")
 	return nil
 }
 

@@ -87,7 +87,7 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, e
 	row := c.row
 	row.CloudFormationSchemaPath = stagedSchema // generate from the staged bytes
 
-	results := generateCorpus(cfg, []resourceRow{row}, 1)
+	results := generateCorpus(cfg, []resourceRow{row}, 1, nil)
 	gr := gateResultFromGenResults(c.cfType, results)
 	if !gr.ok() {
 		return gr, nil // keep last-good output and cache
@@ -141,7 +141,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return err
 	}
 	summary := summarize(changes)
-	fmt.Fprintf(os.Stderr, "bigdiffer: changes — new %d, changed %d, unchanged %d, frozen %d, missing %d\n",
+	stepf("Detected changes — new %d, changed %d, unchanged %d, frozen %d, missing %d.",
 		summary.New, summary.Changed, summary.Unchanged, summary.Frozen, summary.Missing)
 
 	cands := buildCandidates(changes, discByCFN, overlayByCFN)
@@ -152,6 +152,8 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 	defer os.RemoveAll(stagingDir)
 
+	stepf("Regenerating %d changed type(s) from fresh bytes (never-regress)…", len(cands))
+	candBar := newBar(len(cands), "regenerate")
 	today := time.Now().Format(dateLayout)
 	decisions := make(map[string]policyDecision, len(cands))
 	var okN, brokeN int
@@ -165,11 +167,14 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 			okN++
 		} else {
 			brokeN++
-			fmt.Fprintf(os.Stderr, "bigdiffer: %s: %s\n", c.cfType, decisions[c.cfType].summary)
+			infof("%s: %s", c.cfType, decisions[c.cfType].summary)
 		}
+		_ = candBar.Add(1)
 	}
+	_ = candBar.Finish()
 
 	// Reconcile the overlay and apply the policy edits in one pass.
+	stepf("Reconciling all_schemas.hcl and applying policy…")
 	overlayContent, err := os.ReadFile(allSchemasPath)
 	if err != nil {
 		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
@@ -187,6 +192,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 
 	// Re-emit the aggregates from the reconciled overlay.
+	stepf("Emitting aggregates (registration + import examples)…")
 	_, finalRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -207,7 +213,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 
 	report.write(os.Stderr)
-	fmt.Fprintf(os.Stderr, "bigdiffer: refreshed %d changed type(s): %d generated OK, %d frozen/suppressed\n",
-		len(cands), okN, brokeN)
+	stepf("Done: refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), okN, brokeN)
+	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`, `go run ./internal/tools/bigdiffer -docs`.")
 	return nil
 }

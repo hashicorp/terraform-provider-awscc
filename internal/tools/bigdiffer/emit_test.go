@@ -29,7 +29,7 @@ func TestWriteCorpus(t *testing.T) {
 		t.Skipf("AWS::Logs::LogGroup not in overlay (%d)", len(logGroup))
 	}
 
-	results := generateCorpus(cfg, logGroup, 1)
+	results := generateCorpus(cfg, logGroup, 1, nil)
 	n, err := writeCorpus(cfg, results)
 	if err != nil {
 		t.Fatalf("writeCorpus: %v", err)

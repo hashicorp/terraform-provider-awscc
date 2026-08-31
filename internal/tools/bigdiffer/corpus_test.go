@@ -40,7 +40,7 @@ func TestGenerateCorpusRace(t *testing.T) {
 		}
 	}
 
-	results := generateCorpus(cfg, sample, cfg.genConcurrency)
+	results := generateCorpus(cfg, sample, cfg.genConcurrency, nil)
 
 	var errs int
 	for _, r := range results {
