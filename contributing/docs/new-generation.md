@@ -283,11 +283,12 @@ its modes (`-check`, `-update`, `-generate`, `-docs`).
 | Drop the dated-snapshot path | §1 | **Done** — snapshot modes and `-discover` removed; discovery only happens inside `-update`/`-generate` |
 | Self-healing re-probe, machine-readable report | §7 last row, §8 | Not built |
 
-What remains, in priority order: the compile gate (§6 tail — currently a manual
-`make build` outside bigdiffer, so a build-breaking change isn't caught by the
-tool's own policy loop), the absent-row probe (§3), checkout-file retirement
-(§5), and self-heal + a machine-readable report (§7–§8). None of these block
-using bigdiffer for the weekly cycle today; see
+The status table above is a design→implementation coverage snapshot. The
+**outstanding work** — compile gate, absent-row probe, suppression-reason
+taxonomy and `-heal`, machine-readable report, and the deferred cleanups — is
+tracked with priorities, dependencies, and detail pointers in
+`generation-punchlist.md`; it is not re-listed here. None of it blocks using
+bigdiffer for the weekly cycle today; see
 `generating-the-provider-with-bigdiffer.md` for the current operational process
 and the legacy fallback.
 

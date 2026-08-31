@@ -24,6 +24,8 @@ them currently record *why* they were pulled. This doc has two parts:
     - [Suppression reason taxonomy](#suppression-reason-taxonomy)
     - [Frozen, precisely](#frozen-precisely)
     - [Per-artifact independence](#per-artifact-independence)
+    - [GitHub issues: when to file, and what to say](#github-issues-when-to-file-and-what-to-say)
+    - [Mining existing issues to backfill reasons](#mining-existing-issues-to-backfill-reasons)
     - [`-check`: enforce a reason](#-check-enforce-a-reason)
     - [`-heal`: re-probe and fill gaps](#-heal-re-probe-and-fill-gaps)
     - [What does not change](#what-does-not-change)
@@ -236,7 +238,8 @@ of a frozen (or live) schema version is what determines what actually builds.
 
 ### Per-artifact independence
 
-This is the behavior change tracked as task 6 (implementation, not this doc):
+This is the behavior change tracked in `generation-punchlist.md` (implementation,
+not this doc):
 a resource, its singular data source, and its plural data source succeed or
 fail **independently** within one generation pass against one schema version,
 and the outcome for each is reflected both in the provider (only files for
@@ -250,6 +253,50 @@ us fix correctly instead of papering over.
 The resource↔plural `ListResource` coupling is preserved: a resource is
 generated with `GenerateListResource` only when the plural data source for the
 same pass is not suppressed (whether previously or newly).
+
+### GitHub issues: when to file, and what to say
+
+Not every suppression deserves a GitHub issue, and bigdiffer should say which do.
+The taxonomy maps directly onto the decision:
+
+| Category | File an issue? | Why |
+|---|---|---|
+| `structural` | **No** | Upstream and common — the CFN schema simply has no qualifying `list` handler. Not our defect, nothing to track; filing here would be constant noise. |
+| `generation_failed` | **Yes** | The owned engine couldn't render the artifact from a schema AWS considers valid — a real defect (ours or the schema's) worth tracking. Validation failures fold in here (validation is the front half of generation, §6 of `new-generation.md`). |
+| `build_failed` | **Yes** | The artifact rendered but didn't compile — a real defect. |
+| `manual` | Human's call | Whoever suppressed it knows the reason and whether it warrants an issue. |
+| `unknown` | Triage | Reason lost to history; `-heal` reclassifies it first, and whether it then warrants an issue follows the category it lands on. |
+
+For the issue-worthy categories (`generation_failed`, `build_failed`), bigdiffer
+should emit, in its report, a ready-to-file **issue stub** per affected type: the
+CloudFormation type name, the failed artifact(s), the category, and the captured
+error text (the `detail` half of `category: detail`) — so filing is copy-paste,
+not archaeology. This is the structured successor to the legacy process's "open
+an issue with details" instruction (and to `internal/update/makes.go`'s
+`suppression_reason = "<error>:<issue URL>"` convention), except the error is
+captured automatically and the human only files it and pastes the URL back.
+
+Once the issue exists, its URL belongs in the row. `suppression_reason` may carry
+the issue URL alongside the category (`category: detail (issue: URL)`) — the
+structured form of the legacy `<error>:<issue URL>` intent. bigdiffer never
+invents or auto-files issues; it tells the human exactly when one is warranted
+and hands them the text.
+
+### Mining existing issues to backfill reasons
+
+The reason-less backlog (Part 1) predates all of this, but the reasons often
+already exist — in open GitHub issues filed by the legacy process, which mandated
+one per suppression. Those issues carry the error detail and the type name. A
+one-time (or `-heal`-assisted) pass can mine the repo's open issues — matching on
+CloudFormation type name and error signatures — to *propose* `suppression_reason`
+values and issue-URL links for rows that have none today.
+
+This is best-effort and advisory, like every `-heal` proposal: a mined reason is
+reported for human confirmation, never written silently. It won't cover every
+row, but it can convert a meaningful share of the 35 reason-less freezes and the
+bare suppressions from `unknown` into a categorized reason with an issue link,
+cheaply — turning the "what we don't know" list in Part 1 back into recorded
+intent.
 
 ### `-check`: enforce a reason
 
@@ -299,7 +346,7 @@ consistent with every other bigdiffer policy decision.
   cross-reference, exactly as documented in `bigdiffer-generation.md` §5. Folding
   it into `frozen_since` is unrelated to this spec and stays a future migration.
   `-heal` does not touch it.
-  `non_provisionable` remains a bare annotation with no generation effect and no
+- `non_provisionable` remains a bare annotation with no generation effect and no
   reason requirement (it says AWS lists the type as un-provisionable, not that
   bigdiffer failed to generate it).
 - Everything here is advisory and additive: no existing suppression, freeze, or
