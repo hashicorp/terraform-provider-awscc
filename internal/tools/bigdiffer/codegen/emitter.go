@@ -1636,7 +1636,7 @@ func writeObjectGoLiteral(w io.Writer, obj map[string]any) {
 	keys := tfmaps.Keys(obj)
 	sort.Strings(keys)
 
-	fprintf(w, "map[string]interface{}{\n")
+	fprintf(w, "map[string]any{\n")
 	for _, key := range keys {
 		fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(key))
 		switch value := obj[key]; v := value.(type) {
