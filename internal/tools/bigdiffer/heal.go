@@ -204,15 +204,25 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 		return fmt.Errorf("probe timed out after %s (possible runaway/recursive schema)", healProbeTimeout)
 	}
 	if runErr != nil {
+		trimmed := strings.TrimSpace(string(out))
 		var exitErr *exec.ExitError
-		if errors.As(runErr, &exitErr) && exitErr.ExitCode() != 0 {
+		// A Go fatal runtime error (stack overflow, OOM inside the Go
+		// runtime) exits 2 and self-reports a goroutine dump to stdout/stderr
+		// — CombinedOutput captures it, so trimmed is non-empty and useful. A
+		// signal-killed process (SIGKILL, an OS-level OOM kill) reports
+		// ExitCode() == -1 and typically produces no output at all before
+		// dying. Either way the probe is contained and reported, not crashed
+		// into the parent; this only decides what text the proposal carries.
+		if errors.As(runErr, &exitErr) && exitErr.ExitCode() > 0 && trimmed != "" {
 			// A clean, reported generation failure: the probe printed the
-			// error to stdout/stderr and exited non-zero on purpose.
-			return errors.New(strings.TrimSpace(string(out)))
+			// error to stdout/stderr and exited non-zero on purpose (or a Go
+			// fatal error that self-reported before dying).
+			return errors.New(trimmed)
 		}
-		// A hard crash (signal, OOM kill, stack overflow) — the process died
-		// before it could report anything useful of its own.
-		return fmt.Errorf("probe crashed (signal/OOM/stack overflow), output: %s: %w", strings.TrimSpace(string(out)), runErr)
+		if trimmed == "" {
+			trimmed = "no output captured"
+		}
+		return fmt.Errorf("probe crashed (signal/OOM/no self-reported error), output: %s: %w", trimmed, runErr)
 	}
 	return nil
 }

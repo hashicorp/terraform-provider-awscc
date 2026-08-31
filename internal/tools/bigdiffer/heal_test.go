@@ -148,3 +148,61 @@ func TestProbeArtifactIsolatesRecursiveSchema(t *testing.T) {
 		t.Errorf("expected a crash/stack-overflow signature in the error, got: %v", err)
 	}
 }
+
+// TestProbeArtifactWithBinaryEmptyOutputCrash is the fix for the crash-vs-
+// clean-failure classification review note: a process that dies with no
+// self-reported output (e.g. a silent OOM/SIGKILL before it could print
+// anything) must not produce an empty, useless error — it should be reported
+// as a crash with a non-empty placeholder message, not errors.New("").
+func TestProbeArtifactWithBinaryEmptyOutputCrash(t *testing.T) {
+	t.Parallel()
+
+	// A trivial script standing in for "exec succeeded, process ran, but
+	// produced zero output and exited non-zero" — the exact shape a
+	// signal-killed process with nothing printed yet would leave behind.
+	dir := t.TempDir()
+	script := filepath.Join(dir, "silent-fail.sh")
+	if err := os.WriteFile(script, []byte("#!/bin/sh\nexit 1\n"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config{}
+	row := resourceRow{ResourceTypeName: "aws_svc_thing", CloudFormationTypeName: "AWS::Svc::Thing"}
+	err := probeArtifactWithBinary(script, cfg, row, artifactResource, []byte("{}"))
+	if err == nil {
+		t.Fatal("expected an error")
+	}
+	if err.Error() == "" {
+		t.Error("error message must not be empty even when the process produced no output")
+	}
+	if !strings.Contains(err.Error(), "crashed") {
+		t.Errorf("a non-ExitError-with-real-output failure should be classified as a crash, got: %v", err)
+	}
+}
+
+// TestProbeArtifactWithBinaryCleanFailure confirms the common case is
+// unaffected by the crash-classification fix: a process that exits non-zero
+// but does report real output (a normal generation error) is classified as a
+// clean, reported failure, not a crash.
+func TestProbeArtifactWithBinaryCleanFailure(t *testing.T) {
+	t.Parallel()
+
+	dir := t.TempDir()
+	script := filepath.Join(dir, "clean-fail.sh")
+	if err := os.WriteFile(script, []byte("#!/bin/sh\necho 'emitting schema code: boom' >&2\nexit 1\n"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config{}
+	row := resourceRow{ResourceTypeName: "aws_svc_thing", CloudFormationTypeName: "AWS::Svc::Thing"}
+	err := probeArtifactWithBinary(script, cfg, row, artifactResource, []byte("{}"))
+	if err == nil {
+		t.Fatal("expected an error")
+	}
+	if strings.Contains(err.Error(), "crashed") {
+		t.Errorf("a reported failure with real output should not be classified as a crash, got: %v", err)
+	}
+	if !strings.Contains(err.Error(), "boom") {
+		t.Errorf("expected the script's own error text to be preserved, got: %v", err)
+	}
+}
