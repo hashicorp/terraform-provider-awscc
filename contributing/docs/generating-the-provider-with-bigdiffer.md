@@ -52,6 +52,10 @@ frozen/suppressed afterward and open issues as before.
 
 ## The weekly release
 
+> [!TIP]
+> `make bigdiffer-update`, `make bigdiffer-docs`, and `make bigdiffer-generate` are
+> shortcuts for the `go run ./internal/tools/bigdiffer …` commands used below.
+
 ### 1. Setup
 
 Unchanged from the legacy process:
