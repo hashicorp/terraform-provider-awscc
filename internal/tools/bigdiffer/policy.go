@@ -15,6 +15,7 @@ const (
 	attrNonProvisionable  = "non_provisionable"
 	attrSuppressResource  = "suppress_resource_generation"
 	attrSuppressSingular  = "suppress_singular_data_source_generation"
+	attrSuppressPlural    = "suppress_plural_data_source_generation"
 	attrSuppressionReason = "suppression_reason"
 )
 
@@ -99,6 +100,8 @@ func suppressAttrsForFailures(gr gateResult) map[string]string {
 			attrs[attrSuppressResource] = "true"
 		case artifactSingularDataSource:
 			attrs[attrSuppressSingular] = "true"
+		case artifactPluralDataSource:
+			attrs[attrSuppressPlural] = "true"
 		}
 	}
 	if len(attrs) == 0 {

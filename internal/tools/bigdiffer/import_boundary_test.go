@@ -14,13 +14,18 @@ import (
 
 // TestNoLegacyGeneratorImports enforces the cutover assurance: bigdiffer (the
 // tool and every subpackage) must not import the legacy generation machinery
-// under internal/provider/generators/**. Owning naming and the codegen engine is
-// what lets that machinery eventually be deleted; this test keeps a stray import
-// from silently reintroducing the dependency.
+// under internal/provider/generators/**, nor the legacy internal/naming package.
+// Owning naming and the codegen engine is what lets that machinery eventually be
+// deleted; this test keeps a stray import from silently reintroducing the
+// dependency — including internal/naming.Pluralize's confirmed inflection.AddIrregular
+// data race, which bigdiffer/naming exists specifically to avoid.
 func TestNoLegacyGeneratorImports(t *testing.T) {
 	t.Parallel()
 
-	const forbidden = "internal/provider/generators"
+	forbidden := []string{
+		"internal/provider/generators",
+		"terraform-provider-awscc/internal/naming",
+	}
 	fset := token.NewFileSet()
 
 	err := filepath.WalkDir(".", func(path string, d fs.DirEntry, err error) error {
@@ -36,8 +41,10 @@ func TestNoLegacyGeneratorImports(t *testing.T) {
 		}
 		for _, imp := range f.Imports {
 			p := strings.Trim(imp.Path.Value, `"`)
-			if strings.Contains(p, forbidden) {
-				t.Errorf("%s imports legacy generator package %q; bigdiffer must own its engine", path, p)
+			for _, bad := range forbidden {
+				if strings.Contains(p, bad) {
+					t.Errorf("%s imports legacy package %q; bigdiffer must own its engine", path, p)
+				}
 			}
 		}
 		return nil

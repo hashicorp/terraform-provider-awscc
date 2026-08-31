@@ -1,28 +1,41 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
-// Command bigdiffer updates internal/provider/all_schemas.hcl.
+// Command bigdiffer keeps internal/provider/all_schemas.hcl in sync with what
+// AWS offers, and owns generating the provider from it. Four modes:
 //
-// The mandate is simple: keep all_schemas.hcl in sync with what AWS offers.
-//   - See where we are: parse the curated overlay (all_schemas.hcl).
-//   - See what's new: get the available base either by querying AWS live
-//     (-discover, us-east-1) or by reading a snapshot file (-available). bigdiffer
-//     owns discovery itself (ListTypes + DescribeType), so there is no need to
-//     generate and diff checked-in available_schemas.<date>.hcl snapshots.
-//   - Reconcile against the base on the CloudFormation type name:
-//   - Add rows present in the base but missing from the overlay (recovers
-//     backlog and genuinely new resources), copying the resource type name
-//     and suppress_plural flag from the base.
+//   - -check: parse the overlay, verify it is normalized and anomaly-free.
+//     Offline, writes nothing; safe on every PR.
+//   - -update: the live weekly incremental. One AWS crawl (ListTypes +
+//     DescribeType, us-east-1) feeds both overlay reconciliation (add new rows,
+//     report retained/anomalous ones) and change detection (byte-compare against
+//     the schema cache). Only New/Changed types are regenerated from their fresh
+//     bytes; generation success/failure drives policy (frozen_since / suppress_*)
+//     applied to the overlay in one pass. Never regresses: a type's files + cache
+//     are promoted only on clean generation.
+//   - -generate: a full, offline, parallel regeneration of the whole provider
+//     from the committed overlay + schema cache. Does not touch AWS.
+//   - -docs: owns import-example docs generation from import_examples_gen.json,
+//     then orchestrates terraform fmt + tfplugindocs generate.
+//
+// There is no separate discovery or snapshot-diff mode: bigdiffer owns discovery
+// itself, so there is no need to generate and diff checked-in
+// available_schemas.<date>.hcl snapshots, and no need for git or dated files.
+// Reconciliation, on the CloudFormation type name:
+//   - Add rows present live but missing from the overlay (recovers backlog and
+//     genuinely new resources), copying the resource type name and suppress_plural
+//     flag from the discovered row.
 //   - Preserve every existing overlay block byte-for-byte, including
 //     free-form "# Suppression Reason" comments and suppression attributes.
 //   - Re-sort all blocks by CloudFormation type name.
 //   - Update the header count to the number of available schemas.
-//   - Report anomalies. A retained row (in the overlay, gone from the base) is
+//   - Report anomalies. A retained row (in the overlay, gone from live AWS) is
 //     benign when explained by frozen_since or non_provisionable.
 //
-// bigdiffer is self-contained: it defines all_schemas.hcl's shape (model.go) and
-// its own discovery (discover.go) rather than importing the legacy generator or
-// update packages, which are slated for removal.
+// bigdiffer is self-contained: it defines all_schemas.hcl's shape (model.go),
+// its own discovery (discover.go), its own naming (naming/naming.go), and owns a
+// copy of the generation engine (codegen/) rather than importing the legacy
+// generator or update packages, which are slated for removal.
 package main
 
 import (
@@ -284,13 +297,19 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 	fmt.Fprintf(&sb, "# %d CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n", len(base))
 	for i, it := range items {
 		text := it.text
-		if d, ok := decisions[it.key]; ok {
-			if attrs := decisionAttrs(d); len(attrs) > 0 {
-				mutated, err := setBlockAttributes(text, attrs)
-				if err != nil {
-					return "", Report{}, fmt.Errorf("applying policy to %s: %w", it.key, err)
+		// Only mutate live blocks. A commented-out block can still carry a
+		// matching it.key (classifyItem's comment fallback), and setBlockAttributes
+		// requires exactly one resource_schema block, which a commented-out block
+		// has none of — mutating it would abort the whole run.
+		if it.live {
+			if d, ok := decisions[it.key]; ok {
+				if attrs := decisionAttrs(d); len(attrs) > 0 {
+					mutated, err := setBlockAttributes(text, attrs)
+					if err != nil {
+						return "", Report{}, fmt.Errorf("applying policy to %s: %w", it.key, err)
+					}
+					text = mutated
 				}
-				text = mutated
 			}
 		}
 		sb.WriteString(text)

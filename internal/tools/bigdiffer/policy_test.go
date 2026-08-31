@@ -47,6 +47,25 @@ func TestDecide(t *testing.T) {
 		}
 	})
 
+	t.Run("new + plural-only failure suppresses only the plural artifact", func(t *testing.T) {
+		t.Parallel()
+		brokenPlural := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+			{kind: artifactSingularDataSource, outcome: gateOK},
+			{kind: artifactPluralDataSource, outcome: gateFailedGeneration, err: errors.New("plural boom")},
+		}}
+		d := decide(classNew, brokenPlural, today)
+		if d.setAttrs[attrSuppressPlural] != "true" {
+			t.Errorf("plural artifact failed, should be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressResource]; ok {
+			t.Errorf("resource gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressSingular]; ok {
+			t.Errorf("singular gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+	})
+
 	t.Run("present + ok keeps the block untouched", func(t *testing.T) {
 		t.Parallel()
 		d := decide(classPresent, okRes, today)

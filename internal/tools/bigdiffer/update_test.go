@@ -64,6 +64,46 @@ func blockFor(overlay, label string) string {
 	return overlay[start : start+end+2]
 }
 
+// TestNormalizeWithDecisionsSkipsCommentedOutCollision is a regression test: a
+// fully commented-out block can carry the same cloudformation_type_name as a
+// live block elsewhere in the overlay (classifyItem's comment fallback still
+// assigns it a key, with live=false). A decision keyed by that CloudFormation
+// type name must only mutate the live block; applying setBlockAttributes to the
+// commented-out text has zero resource_schema blocks and previously aborted the
+// whole run.
+func TestNormalizeWithDecisionsSkipsCommentedOutCollision(t *testing.T) {
+	t.Parallel()
+
+	overlay := testHead +
+		"# 1 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
+		`resource_schema "aws_ec2_live" {
+  cloudformation_type_name = "AWS::EC2::Live"
+}
+
+# resource_schema "aws_ec2_old" {
+#   cloudformation_type_name = "AWS::EC2::Live"
+# }` + "\n"
+
+	base := []resourceRow{
+		{ResourceTypeName: "aws_ec2_live", CloudFormationTypeName: "AWS::EC2::Live"},
+	}
+	decisions := map[string]policyDecision{
+		"AWS::EC2::Live": {setAttrs: map[string]string{attrFrozenSince: "2026-08-28"}},
+	}
+
+	out, _, err := normalizeWithDecisions(overlay, base, nil, map[string]bool{}, decisions)
+	if err != nil {
+		t.Fatalf("normalizeWithDecisions: %v", err)
+	}
+	live := blockFor(out, "aws_ec2_live")
+	if !strings.Contains(live, "frozen_since") {
+		t.Errorf("live block should be frozen, got:\n%s", live)
+	}
+	if !strings.Contains(out, "# resource_schema \"aws_ec2_old\"") {
+		t.Errorf("commented-out block should survive untouched:\n%s", out)
+	}
+}
+
 func TestBuildCandidates(t *testing.T) {
 	t.Parallel()
 
