@@ -98,6 +98,16 @@ All detail lives in `suppressed-and-frozen.md`.
    `TestProbeArtifactIsolatesRecursiveSchema` reproduces the crash against a
    real built binary and asserts it is contained (intentionally the one slow
    bigdiffer test — skipped under `-short`). *(core)*
+9a. **Suppress recurring `lift` proposals for known-manual suppressions** —
+    a plural data source manually suppressed for a semantic reason (not a
+    generation failure) always re-proposes `lift` on every `-heal` run,
+    because `codegen.GeneratePluralDataSource` builds from the CFN type name
+    alone and structurally cannot fail (noted during item 9's review). Once a
+    human rejects a `lift` proposal, `-heal` should not keep re-surfacing it —
+    needs a way to record "reviewed, keep suppressed" distinct from a bare
+    `manual:` reason (e.g. a sub-tag, or treating any non-taxonomy/free-form
+    `manual:` detail as already-adjudicated and skipping the regeneration
+    probe for it). Not yet designed. *(backlog)*
 10. **One-time reason backfill** — the bulk labor: tag the ~428 structural
     plural suppressions, and triage the 35 reason-less freezes + 3 bare
     suppressions. Includes **mining open GitHub issues** to propose reasons and
