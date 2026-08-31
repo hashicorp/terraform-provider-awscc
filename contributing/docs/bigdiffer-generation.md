@@ -1,12 +1,18 @@
 <!-- Copyright IBM Corp. 2021, 2026 -->
 <!-- SPDX-License-Identifier: MPL-2.0 -->
 
-# bigdiffer: generation & orchestration (Bricks 6–11)
+# bigdiffer: generation & orchestration (Bricks 6–11) — DONE
 
-Working doc for the generation phase — moving code generation off the legacy
+Design record for the generation phase — moving code generation off the legacy
 `make`/`go:generate` machinery and into bigdiffer, which **owns the whole engine,
-generates every artifact in-process and in parallel, and keeps the output**. May
-be discarded once the phase ships. Section refs point at `new-generation.md`.
+generates every artifact in-process and in parallel, and keeps the output**. All
+bricks below (6–11) have shipped; this stays as the historical design record and
+generator-surface investigation rather than being discarded, since the reasoning
+(parity-first, then concurrency, then incremental) and the surface-level findings
+(registration is self-contained, pluralization hazard, etc.) remain the reference
+for anyone touching the engine later. Section refs point at `new-generation.md`,
+whose §11 roadmap tracks what is still outstanding beyond this phase (compile
+gate, absent-row probe, checkout retirement, self-heal).
 
 ## Thesis
 
@@ -86,13 +92,14 @@ Grounded by reading the generators, not assumed:
       small funcMap (`Title`, `Split`), runs `go/format.Source`, writes the file.
     - Six templates (`schema.tmpl` + `tests.tmpl` for resource / singular-DS /
       plural-DS), `//go:embed` in the copy.
-    - `naming.SnakeCase` (used for `PrimaryIdentifier`) — safe (local regexes) but
-      not yet in `bigdiffer/naming.go`; add it.
+    - `naming.SnakeCase` (used for `PrimaryIdentifier`) — safe (local regexes);
+      ported to `bigdiffer/naming` (the `internal/tools/bigdiffer/naming`
+      subpackage) alongside `Pluralize`/`PluralizeWithCustomNameSuffix`.
 - **Pluralization is the one `inflection` hazard, and it is already solved.**
   The only calls to `naming.Pluralize` / `PluralizeWithCustomNameSuffix` in the
   generation path are the index/directive emission (`schema/main.go:286`) and
   the plural-DS generator (`plural-data-source/main.go:84`) — the exact global
-  mutation Brick 3/4 found and fixed with `bigdiffer/naming.go`'s mutex-guarded
+  mutation Brick 3/4 found and fixed with `bigdiffer/naming`'s mutex-guarded
   `pluralize`. bigdiffer's `plan.go` already computes the plural name via that
   safe function, so the rule is simply: **generation consumes the plural name
   from the `plan`; it never calls `internal/naming.Pluralize`.** The hazard is
@@ -194,13 +201,16 @@ time is measured to be a real bottleneck.
 
 ## Brick breakdown (dependency-ordered)
 
-- **Brick 6 — Config + own the engine (single type).** Introduce the `config`
-  struct (resolves all paths, region, concurrency, prefix, mode). Copy the
-  emitter, `GenerateTemplateData`, `common.Generator`, `SnakeCase`, and the six
-  templates into `internal/tools/bigdiffer/codegen`, with the two CWD fixes,
-  in-memory bytes, and pluralization sourced from the `plan`. Rewire `gate.go`
-  onto the owned engine; drop its `generators/**` imports. Land the
-  import-boundary test. *Done = bigdiffer emits one type's code in-process,
+- **Brick 6 — Config + own the engine (single type). DONE.** Introduced the
+  `config` struct (resolves all paths, region, concurrency, prefix, mode).
+  Copied the emitter, `GenerateTemplateData`, `common.Generator`, `SnakeCase`,
+  and the six templates into `internal/tools/bigdiffer/codegen`, with the two
+  CWD fixes, in-memory bytes, and pluralization sourced from the `plan`.
+  Removed the standalone `gate.go` front-half gate in favor of
+  generation-is-the-gate; dropped the `generators/**` imports. Landed the
+  import-boundary test (later widened to also forbid `internal/naming`
+  directly, closing the gap that would let the fixed `inflection` race back in
+  silently). *Done = bigdiffer emits one type's code in-process,
   self-contained.*
 - **Brick 7 — Full-corpus parity (the lynchpin). DONE.** Generate every type's
   artifacts through the owned engine and compare to the committed `*_gen.go`. The
@@ -286,6 +296,31 @@ derived once from the overlay `defaults` + flags — and resolving all
 relative-to-overlay paths to absolute there — centralizes the levers, documents
 them, and improves testability (no brittle CWD-relative assumptions, which
 `gate_test.go` already had to work around). This is Brick 6's first step.
+
+## Corrections found in review (post-Brick 11)
+
+Two policy-engine bugs (predating this doc, in Brick 5's `policy.go`/`main.go`)
+surfaced during a code review of the shipped tool and were fixed in place, with
+regression tests:
+
+- `suppressAttrsForFailures` (`policy.go`) had no case for
+  `artifactPluralDataSource`, so a New type whose *only* failure was its plural
+  data source was added to the overlay with nothing suppressed — the generated
+  plural-DS file for a failing artifact never gets written, but the type's
+  registration import would still be emitted, breaking `go build`. Added the
+  missing case and the `suppress_plural_data_source_generation` constant.
+- `normalizeWithDecisions`'s decision-application loop (`main.go`) mutated any
+  item whose `key` matched a decision, without checking `it.live`. A fully
+  commented-out block can carry a matching `cloudformation_type_name` via
+  `classifyItem`'s comment fallback; mutating its text hits `setBlockAttributes`
+  expecting exactly one live block and aborts the whole `-update` run on a
+  false collision. Added the `it.live` guard.
+
+Both are covered by new tests (`TestDecide/new_+_plural-only_failure_...`,
+`TestNormalizeWithDecisionsSkipsCommentedOutCollision`). The import-boundary
+test was also widened in the same pass to forbid `internal/naming` directly
+(previously it only forbade `internal/provider/generators/**`), closing a gap
+that would let the fixed `inflection` race back in via a stray future import.
 
 ## Deferred (beyond this phase)
 

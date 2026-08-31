@@ -9,10 +9,12 @@ CloudFormation (CFN) types while protecting the provider from additions and
 updates that would break it. It is organized and precise, communicates amply,
 and treats its users' time as valuable through automation.
 
-Status: design proposal. It defines the model, the data flow, and the decision
-rules — not a specific implementation. Sections 1–8 define the target design;
-section 9 records decisions already proven in the current tool; sections 10–11
-map today's process onto it.
+Status: sections 1–8 define the target design; section 9 records decisions
+proven in the current tool; section 10 maps today's process onto it; section 11
+tracks what remains. As of Brick 11, the design is substantially shipped —
+`internal/tools/bigdiffer` owns discovery, change detection, generation, policy,
+and docs orchestration for the weekly cycle (`generating-the-provider-with-bigdiffer.md`).
+Remaining gaps are tracked in §11, not blocking.
 
 Scope: generate resources, data sources, and list resources from current CFN
 schemas, plus docs. Release mechanics (tagging, changelog, PRs) are out of scope.
@@ -205,34 +207,33 @@ design commitments:
   in-band (`discovered.err`) rather than aborting the crawl. The same "one type's
   failure never blocks the rest" principle §6 requires of the gate is already
   proven here, one phase earlier.
-- Gate without the CWD-coupled wrapper (`gate.go`). The gate deliberately calls
-  `shared.NewResource` + `codegen.Emitter.EmitRootPropertiesSchema` directly
-  instead of `shared.GenerateTemplateData`, because that wrapper writes
-  `last_resource.txt` to the CWD (a data race under concurrency) and reads
-  `../identity/names/services.hcl` via a CWD-relative path (a false failure
-  outside `internal/provider`). This is a cleaner in-process front half than
-  reusing the existing wrapper, and it resolves in one step what would otherwise
-  be a `shared` refactor.
-- Plural data sources are not schema-emission gated (`gate.go`). A plural data
-  source is generated from the CFN type name alone, not via
-  `codegen.EmitRootPropertiesSchema`, so it cannot fail the front-half gate by
-  construction. `gateType` only runs the gate for the resource and singular data
-  source artifacts; a plural-DS-only failure is left to the compile gate (§6
-  tail).
-- Gating runs serially today, but the engine is concurrency-clean (`naming.go`,
-  `gate.go`). The data race the detector caught was localized to the shared
-  pluralizer — the legacy `naming.Pluralize` calls `inflection.AddIrregular` on
-  every invocation, mutating that library's global rules — not to the emitter.
-  bigdiffer copies the naming logic and serializes that one unsafe dependency
-  (`naming.go`). On inspection `codegen.Emitter` has **no mutable package-level
-  state** (its only global is a read-only slice), so it is safe to drive from
-  concurrent goroutines. The current serial gate was therefore a defensive
-  interim from when the gate was the sole consumer, not a hard limit: the only
-  remaining in-process concurrency hazards are two CWD-coupled lines in
-  `shared.GenerateTemplateData` (the `last_resource.txt` write and the
-  CWD-relative `services.hcl` read), both fixable by owning a corrected copy.
-  Concurrent in-process generation is thus viable, and is the plan for the
-  generation step (Brick 6, see `bigdiffer-generation.md`).
+- Generation is the gate; the standalone front-half gate was removed. An earlier
+  version had a separate gate call `shared.NewResource` +
+  `codegen.Emitter.EmitRootPropertiesSchema` directly (deliberately bypassing
+  `shared.GenerateTemplateData`'s CWD hazards: a `last_resource.txt` debug write
+  and a CWD-relative `../identity/names/services.hcl` read). Brick 6 replaced
+  that gate with an owned copy of the full engine, including a corrected
+  `GenerateTemplateData` (in-memory schema bytes, no CWD writes, absolute
+  `services.hcl` path) — so generating a type for real *is* validating it; there
+  is no separate emission-only pass to keep in sync.
+- Plural data sources are not schema-emission gated. A plural data source is
+  generated from the CFN type name alone, not via
+  `codegen.EmitRootPropertiesSchema`, so it cannot fail on schema emission by
+  construction; a plural-DS-only failure surfaces only through its own
+  generation step or the compile gate (§6 tail, still not built — see §11).
+- Concurrency is proven, not assumed, and required a real fix
+  (`naming/naming.go`). The data race the detector caught was localized to the
+  shared pluralizer — the legacy `internal/naming.Pluralize` calls
+  `inflection.AddIrregular` on every invocation, mutating that library's global
+  rules — not to the emitter. bigdiffer owns a copy of the naming logic
+  (`internal/tools/bigdiffer/naming`) that registers the irregular once behind a
+  mutex, eliminating the race at its source rather than serializing around it.
+  `codegen.Emitter` itself has no mutable package-level state (its only global
+  is a read-only slice) and is driven concurrently in production
+  (`corpus.go`/`emit.go`, `errgroup`, proven `-race`-clean, 7.4× over serial —
+  Brick 8). An import-boundary test (`import_boundary_test.go`) forbids any
+  bigdiffer file from importing the legacy `internal/naming` package, so a stray
+  import can't silently reintroduce the race.
 
 ## 10. What is eliminated
 
@@ -259,46 +260,55 @@ is removed only after parity has held for several cycles.
 
 ## 11. Roadmap (gaps in the current tool)
 
-Status by design section. "Built" means the code exists and is unit-tested;
-"wired" means `run()` actually calls it. As of this writing, discovery, change
-detection, recipe derivation, and the gate are each built and independently
-tested, but none are yet wired into `run()` — the pipeline still ends at
-reconcile-and-report (§1–§3's additive half).
+Status by design section, current as of Brick 11 shipping. "Built" means the
+code exists and is unit-tested; "wired" means `run()` actually calls it in one of
+its modes (`-check`, `-update`, `-generate`, `-docs`).
 
 | Piece | Design ref | Status |
 |---|---|---|
-| Reconcile overlay ↔ live AWS, additive + report | §2–§3 | Wired |
-| Concurrent discovery, one sweep captures schema bytes | §2, §9 | Built + wired (discovery only; bytes unused downstream yet) |
+| Reconcile overlay ↔ live AWS, additive + report | §2–§3 | Wired (`-check`, `-update`) |
+| Concurrent discovery, one sweep captures schema bytes | §2, §9 | Built + wired — bytes drive both change detection and generation |
 | Absent-row `DescribeType` probe (non-provisionable vs. withdrawn) | §3 | Not built |
-| Selective refresh / change detection (byte-compare vs. cache) | §4 | Built (`change.go`), not wired |
-| Recipe derivation (artifacts, naming, paths per row) | §7 (prereq) | Built (`plan.go`), not wired |
-| Gate (in-process front half, per-artifact) | §6 | Built (`gate.go`), not wired |
-| Policy mapping (class × gate result → overlay edit) | §7 | Built (`policy.go`), not wired |
-| Block mutation (`frozen_since` / `suppress_*` written to an existing block) | §7 (prereq) | Built (`mutate.go`), not wired |
-| Compile gate | §6 tail | Not built — planned whole-repo `go build ./internal/...` (Brick 11) |
-| Own the generation engine (copy emitter / template-data / writer / templates) | §6, §10 | Not built (Brick 6) |
-| Generate in-process, keep output, parallel + incremental | §6, §10 | Not built (Bricks 7–9) |
-| Single blank-import registration file (replaces the directive files) | §10 | Not built (Brick 9) |
-| Docs — own `docs-import`, orchestrate `tfplugindocs` | §10 | Not built (Brick 10) |
+| Selective refresh / change detection (byte-compare vs. cache) | §4 | Built + wired (`change.go`, via `-update`) |
+| Recipe derivation (artifacts, naming, paths per row) | §7 (prereq) | Built + wired (`plan.go`) |
+| Gate (generation is the gate; front-half gate removed) | §6 | Built + wired — `-update`/`-generate` generate for real; a broken artifact is caught by generating it, not by a separate emission-only pass |
+| Policy mapping (class × gate result → overlay edit) | §7 | Built + wired (`policy.go`, via `-update`) |
+| Block mutation (`frozen_since` / `suppress_*` written to an existing block) | §7 (prereq) | Built + wired (`mutate.go`) |
+| Compile gate | §6 tail | Not built — `go build ./internal/...` is still a separate manual step, not run by bigdiffer itself |
+| Own the generation engine (copy emitter / template-data / writer / templates) | §6, §10 | **Done** (Brick 6) — `internal/tools/bigdiffer/codegen`, zero legacy-generator imports (enforced by `import_boundary_test.go`) |
+| Generate in-process, keep output, parallel + incremental | §6, §10 | **Done** (Bricks 7–9) — full-corpus parity proven byte-identical; parallel (`errgroup`, race-clean); `-update` is incremental (New+Changed only) |
+| Single blank-import registration file (replaces the directive files) | §10 | **Done** (Brick 9) — `emit.go:emitRegistration` |
+| Docs — own `docs-import`, orchestrate `tfplugindocs` | §10 | **Done** (Brick 10) — `docs.go:runDocs` |
 | Retire checkout file into `frozen_since` | §5 | Not built — still read as an external cross-reference |
-| Drop the dated-snapshot path | §1 | **Done** — snapshot modes and `-discover` removed; discovery is only via `-update` |
+| Drop the dated-snapshot path | §1 | **Done** — snapshot modes and `-discover` removed; discovery only happens inside `-update`/`-generate` |
 | Self-healing re-probe, machine-readable report | §7 last row, §8 | Not built |
 
-Remaining work is the generation phase, broken into digestible bricks. bigdiffer
-**owns** the generation engine and replaces the legacy `make`/`go:generate`
-machinery entirely — generating in-process and in parallel, keeping the output —
-rather than importing it or re-emitting its 3000+ directives. The detailed
-design, the generator-surface investigation, and the anticipated challenges live
-in `bigdiffer-generation.md`. In dependency order:
+What remains, in priority order: the compile gate (§6 tail — currently a manual
+`make build` outside bigdiffer, so a build-breaking change isn't caught by the
+tool's own policy loop), the absent-row probe (§3), checkout-file retirement
+(§5), and self-heal + a machine-readable report (§7–§8). None of these block
+using bigdiffer for the weekly cycle today; see
+`generating-the-provider-with-bigdiffer.md` for the current operational process
+and the legacy fallback.
 
-1. **Brick 6 — config + own the engine (single type).** Copy the emitter,
+Remaining work — the compile gate, absent-row probe, checkout retirement, and
+self-heal/report — is tracked above. The generation phase itself (Bricks 6–11)
+is done; its detailed design, generator-surface investigation, and challenges
+worked through along the way live in `bigdiffer-generation.md`. In dependency
+order, what shipped:
+
+1. **Brick 6 — config + own the engine. Done.** Copied the emitter,
    template-data assembly, file writer, and templates into
    `internal/tools/bigdiffer/codegen` (CWD fixes, in-memory bytes, pluralization
-   from the `plan`); rewire the gate onto it; drop the `generators/**` imports;
-   add the import-boundary test.
-2. **Brick 7 — full-corpus parity (the lynchpin).** Generate all types into a
-   temp tree and byte-compare against the committed `*_gen.go` +
-   `import_examples_gen.json`. Proves the owned engine is faithful.
+   via bigdiffer's own `naming` subpackage); removed the standalone front-half
+   gate in favor of generation-is-the-gate; dropped the `generators/**` imports;
+   added the import-boundary test (now also forbidding the legacy
+   `internal/naming` package, since that is where the fixed `inflection` race
+   lived).
+2. **Brick 7 — full-corpus parity (the lynchpin). Done.** Generates all ~1580
+   types into a temp tree and byte-compares against the committed `*_gen.go` +
+   `import_examples_gen.json` (`parity_test.go`). Proved the owned engine is
+   byte-identical to the legacy one, not just structurally similar.
 3. **Brick 8 — parallelize. Done.** `errgroup`, `-race`-clean, still
    byte-identical; 7.4× over serial.
 4. **Brick 9 — incremental weekly pipeline. Done.** `-generate` (full offline
@@ -314,12 +324,11 @@ in `bigdiffer-generation.md`. In dependency order:
 6. **Brick 11 — cutover polish. Done.** Step narration + progress bars; the weekly
    release (`generating-the-provider-with-bigdiffer.md`) and the legacy fallback
    documented; legacy `make` targets marked deprecated + `make bigdiffer-*`
-   shortcuts added. Then the deferred items below.
+   shortcuts added.
 
-Deferred beyond the bricks: absent-row probe (§3), checkout-file retirement (§5),
-self-heal + machine-readable report (§7–§8), and the
-eventual deletion of the legacy generators/directive files/`make` targets — only
-after parity has held for several cycles.
+The legacy generators, directive files, and `make` targets remain as a
+documented fallback (§10) and are deleted only once parity has held for several
+cycles of real weekly use — not on a fixed timeline.
 
 ## 12. Thesis
 

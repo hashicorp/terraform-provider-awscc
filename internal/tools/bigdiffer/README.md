@@ -13,7 +13,7 @@ running a chain of `make` targets.
   (and the legacy fallback in `generating-the-provider.md`).
 - **Design and status:** `contributing/docs/new-generation.md` (target design,
   §11 status table) and `contributing/docs/bigdiffer-generation.md` (the
-  generation / orchestration working doc).
+  generation/orchestration design record — Bricks 6–11, all shipped).
 
 > Note: there is also a `make bigdiffer` target that only prints the raw `diff`
 > between two dated `available_schemas` files. It is unrelated and slated for
@@ -156,7 +156,7 @@ nothing under `internal/provider/generators/**` — enforced by
   (which supersedes the legacy `resources.go` / `singular_data_sources.go` /
   `plural_data_sources.go` directive files) and `import_examples_gen.json`.
 
-See `contributing/docs/bigdiffer-generation.md` (working doc) and
+See `contributing/docs/bigdiffer-generation.md` (design record, Bricks 6–11) and
 `contributing/docs/new-generation.md` (durable design, §11 status) for the full
 picture, and `generating-the-provider-with-bigdiffer.md` for the weekly process.
 
