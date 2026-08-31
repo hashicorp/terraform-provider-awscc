@@ -36,7 +36,7 @@ back. No git, no dated snapshots, no manual transcription.
 
 ## 2. Model: two inputs, one output
 
-```
+```text
   AWS registry ──▶ ┌────────────┐
   (live types)     │ Reconciler ├──▶ updated all_schemas.hcl (+ change report)
   all_schemas ───▶ └────────────┘   join on CFN type name, in memory

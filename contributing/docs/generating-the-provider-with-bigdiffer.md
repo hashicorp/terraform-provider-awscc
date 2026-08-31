@@ -20,12 +20,12 @@ is the same as the legacy process; you just reach it with two commands instead o
 <!--mdtoc: begin-->
 * [What bigdiffer replaces](#what-bigdiffer-replaces)
 * [The weekly release](#the-weekly-release)
-  * [1. Setup](#1-setup)
-  * [2. Update](#2-update)
-  * [3. Build and smoke test](#3-build-and-smoke-test)
-  * [4. Documentation](#4-documentation)
-  * [5. CHANGELOG and version](#5-changelog-and-version)
-  * [6. Commit and open a pull request](#6-commit-and-open-a-pull-request)
+    * [1. Setup](#1-setup)
+    * [2. Update](#2-update)
+    * [3. Build and smoke test](#3-build-and-smoke-test)
+    * [4. Documentation](#4-documentation)
+    * [5. CHANGELOG and version](#5-changelog-and-version)
+    * [6. Commit and open a pull request](#6-commit-and-open-a-pull-request)
 * [Reading the report](#reading-the-report)
 * [Full regeneration (offline)](#full-regeneration-offline)
 * [Fallback: the legacy process](#fallback-the-legacy-process)
@@ -102,18 +102,18 @@ What it does, in one discovery crawl:
 
 It prints a [report](#reading-the-report) of what changed and what (if anything)
 was frozen or suppressed. Review it together with `git diff`. For each
-frozen/suppressed type, open a GitHub issue with the reason (see an example issue
-[here](https://github.com/hashicorp/terraform-provider-awscc/issues/2070)); the
-`internal/update/suppressions_checkout.txt` pins are still honored.
+frozen/suppressed type, open a GitHub issue with the reason (see
+[example issue #2070](https://github.com/hashicorp/terraform-provider-awscc/issues/2070));
+the `internal/update/suppressions_checkout.txt` pins are still honored.
 
 Files `-update` changes (the same set the legacy process produces, plus
 `registrations_gen.go`):
 
-- `internal/service/cloudformation/schemas/*.json` — refreshed schema cache
-- `internal/provider/all_schemas.hcl` — new blocks + policy annotations
-- `internal/aws/**/*_gen.go` — regenerated code for changed types only
-- `internal/provider/import_examples_gen.json` — import-examples aggregate
-- `internal/provider/registrations_gen.go` — see the note below
+* `internal/service/cloudformation/schemas/*.json` — refreshed schema cache
+* `internal/provider/all_schemas.hcl` — new blocks + policy annotations
+* `internal/aws/**/*_gen.go` — regenerated code for changed types only
+* `internal/provider/import_examples_gen.json` — import-examples aggregate
+* `internal/provider/registrations_gen.go` — see the note below
 
 > [!NOTE]
 > **`registrations_gen.go`** is bigdiffer's single blank-import file that
@@ -191,13 +191,13 @@ Open a pull request and verify CI passes; once merged, cut the release.
 `-update` narrates each phase (`==>` lines) and prints a reconciliation report to
 stderr:
 
-- **Detected changes — new / changed / unchanged / frozen / missing.** New and
+* **Detected changes — new / changed / unchanged / frozen / missing.** New and
   Changed are regenerated; Unchanged are skipped; Frozen (pinned via
   `frozen_since`) are never re-evaluated; Missing means discovery could not
   describe the type.
-- **Per-type lines** for anything frozen or suppressed, with the policy summary
+* **Per-type lines** for anything frozen or suppressed, with the policy summary
   and reason — these are your issue-filing worklist.
-- **Anomalies** — retained-but-unexplained rows (in the overlay, gone from AWS,
+* **Anomalies** — retained-but-unexplained rows (in the overlay, gone from AWS,
   with no `frozen_since`/`non_provisionable`/checkout pin), duplicate blocks, and
   naming-invariant violations. Investigate these before merging.
 
@@ -224,11 +224,11 @@ result. If bigdiffer is ever unavailable or misbehaving, follow
 
 Interoperating between the two is seamless:
 
-- The **schema cache** (`internal/service/cloudformation/schemas/*.json`) and the
+* The **schema cache** (`internal/service/cloudformation/schemas/*.json`) and the
   **overlay** (`all_schemas.hcl`) use the identical on-disk format, so a cache and
   overlay produced by bigdiffer are consumed unchanged by the legacy `make`
   targets, and vice versa. No conversion is needed.
-- Before committing a legacy-only run, delete bigdiffer's registration file so
+* Before committing a legacy-only run, delete bigdiffer's registration file so
   registration comes solely from the regenerated legacy directive files:
 
   ```sh

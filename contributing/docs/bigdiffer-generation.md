@@ -69,25 +69,25 @@ Grounded by reading the generators, not assumed:
   `plan.go` already derives `<svc>`, `<res>`, the file names, and the safe
   plural Terraform name.
 - **The engine to own (copy, do not import):**
-  - `codegen.Emitter` (~1500 lines). Its `EmitRootPropertiesSchema` surface — the
-    one `gate.go` already drives — is **concurrency-clean**: `emitter.go`'s only
-    `naming` calls are the pure `CloudFormationPropertyToTerraformAttribute`, and
-    its only package-level `var` is a read-only slice. So the copy needs no
-    structural change for concurrency; it is copied for **ownership** (so legacy
-    can be deleted), not to fix a bug.
-  - `shared.GenerateTemplateData` — assembles `TemplateData`. Two CWD hazards to
-    fix in the copy: drop the `last_resource.txt` debug write, and resolve the
-    CWD-relative `ParseServicesFile("../identity/names/services.hcl")` via an
-    absolute config path. Adapt it to the in-memory sanitized bytes the discovery
-    sweep already holds (build the doc via `cfschema.NewResourceJsonSchemaDocument`).
-    Note it does **not** pluralize (its only `naming` call is
-    `ParseCloudFormationTypeName`).
-  - `common.Generator` — parses each template per-call (concurrency-safe) with a
-    small funcMap (`Title`, `Split`), runs `go/format.Source`, writes the file.
-  - Six templates (`schema.tmpl` + `tests.tmpl` for resource / singular-DS /
-    plural-DS), `//go:embed` in the copy.
-  - `naming.SnakeCase` (used for `PrimaryIdentifier`) — safe (local regexes) but
-    not yet in `bigdiffer/naming.go`; add it.
+    - `codegen.Emitter` (~1500 lines). Its `EmitRootPropertiesSchema` surface — the
+      one `gate.go` already drives — is **concurrency-clean**: `emitter.go`'s only
+      `naming` calls are the pure `CloudFormationPropertyToTerraformAttribute`, and
+      its only package-level `var` is a read-only slice. So the copy needs no
+      structural change for concurrency; it is copied for **ownership** (so legacy
+      can be deleted), not to fix a bug.
+    - `shared.GenerateTemplateData` — assembles `TemplateData`. Two CWD hazards to
+      fix in the copy: drop the `last_resource.txt` debug write, and resolve the
+      CWD-relative `ParseServicesFile("../identity/names/services.hcl")` via an
+      absolute config path. Adapt it to the in-memory sanitized bytes the discovery
+      sweep already holds (build the doc via `cfschema.NewResourceJsonSchemaDocument`).
+      Note it does **not** pluralize (its only `naming` call is
+      `ParseCloudFormationTypeName`).
+    - `common.Generator` — parses each template per-call (concurrency-safe) with a
+      small funcMap (`Title`, `Split`), runs `go/format.Source`, writes the file.
+    - Six templates (`schema.tmpl` + `tests.tmpl` for resource / singular-DS /
+      plural-DS), `//go:embed` in the copy.
+    - `naming.SnakeCase` (used for `PrimaryIdentifier`) — safe (local regexes) but
+      not yet in `bigdiffer/naming.go`; add it.
 - **Pluralization is the one `inflection` hazard, and it is already solved.**
   The only calls to `naming.Pluralize` / `PluralizeWithCustomNameSuffix` in the
   generation path are the index/directive emission (`schema/main.go:286`) and
@@ -109,7 +109,7 @@ Grounded by reading the generators, not assumed:
 
 ## Pipeline (the weekly `-update` path)
 
-```
+```text
 discover(ctx)                         # rows + sanitized bytes (have it)
   → detectChanges(disc, frozen, cache)  # new/changed/unchanged/frozen/missing
   → for each candidate (New|Changed), concurrently (errgroup):
@@ -220,28 +220,28 @@ time is measured to be a real bottleneck.
   7.4×; `-race` clean over 1067 concurrent artifacts.*
 - **Brick 9 — Incremental weekly pipeline. Done.** Shipped as two modes plus an
   engine fix:
-  - `9.1` `writeCorpus` (writes genResults to `internal/aws/<svc>/`) and
-    `emitRegistration` — the single blank-import file that replaces the three
-    legacy directive files; its import set is exactly the legacy union (285
-    packages).
-  - `9.2` `codegen.GenerateImportExamples` (copied `imports.tmpl`) + the
-    `emitImportExamples` aggregate, byte-identical to committed
-    `import_examples_gen.json` (`TestImportExamplesParity`).
-  - `9.3a` **`-generate`** — a full, offline, parallel regeneration of the whole
-    provider (`generateCorpus` → `writeCorpus` → both aggregates). The in-process
-    replacement for the legacy `make resources/…/schemas` directive crawl; does
-    not touch AWS.
-  - `9.3b` **`-update`** — the live weekly incremental. One discovery crawl feeds
-    both overlay reconciliation and change detection; only New/Changed types are
-    regenerated from their fresh bytes; generation success/failure drives the
-    policy (`decide`) applied to the overlay in one `normalizeWithDecisions` pass;
-    `refreshCandidate` stages fresh bytes in a temp file and **promotes files +
-    cache only on clean generation (never regress)**; the aggregates are
-    re-emitted. Requires AWS (us-east-1); the live crawl is exercised manually.
-  - **Engine fix:** `codegen.NewResource` now loads schemas in-memory via
-    `NewResourceJsonSchemaDocument` instead of `NewResourceJsonSchemaPath`, which
-    chdir'd into the schema directory without restoring — a CWD-corruption + a
-    concurrency hazard. Parity unchanged (0 drift, 8432 files).
+    - `9.1` `writeCorpus` (writes genResults to `internal/aws/<svc>/`) and
+      `emitRegistration` — the single blank-import file that replaces the three
+      legacy directive files; its import set is exactly the legacy union (285
+      packages).
+    - `9.2` `codegen.GenerateImportExamples` (copied `imports.tmpl`) + the
+      `emitImportExamples` aggregate, byte-identical to committed
+      `import_examples_gen.json` (`TestImportExamplesParity`).
+    - `9.3a` **`-generate`** — a full, offline, parallel regeneration of the whole
+      provider (`generateCorpus` → `writeCorpus` → both aggregates). The in-process
+      replacement for the legacy `make resources/…/schemas` directive crawl; does
+      not touch AWS.
+    - `9.3b` **`-update`** — the live weekly incremental. One discovery crawl feeds
+      both overlay reconciliation and change detection; only New/Changed types are
+      regenerated from their fresh bytes; generation success/failure drives the
+      policy (`decide`) applied to the overlay in one `normalizeWithDecisions` pass;
+      `refreshCandidate` stages fresh bytes in a temp file and **promotes files +
+      cache only on clean generation (never regress)**; the aggregates are
+      re-emitted. Requires AWS (us-east-1); the live crawl is exercised manually.
+    - **Engine fix:** `codegen.NewResource` now loads schemas in-memory via
+      `NewResourceJsonSchemaDocument` instead of `NewResourceJsonSchemaPath`, which
+      chdir'd into the schema directory without restoring — a CWD-corruption + a
+      concurrency hazard. Parity unchanged (0 drift, 8432 files).
 - **Brick 10 — Docs. Done.** `-docs` owns `docs-import` and orchestrates the two
   external steps of `make docs-all`. `codegen.GenerateImportExampleDocs` copies
   the legacy import-examples generator verbatim (four templates rendered through
