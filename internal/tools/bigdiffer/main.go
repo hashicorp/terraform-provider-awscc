@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: MPL-2.0
 
 // Command bigdiffer keeps internal/provider/all_schemas.hcl in sync with what
-// AWS offers, and owns generating the provider from it. Four modes:
+// AWS offers, and owns generating the provider from it. Five modes:
 //
 //   - -check: parse the overlay, verify it is normalized and anomaly-free.
-//     Offline, writes nothing; safe on every PR.
+//     Offline, writes nothing; safe on every PR. Flags any suppressed/frozen
+//     row with no suppression_reason as an advisory anomaly (never a failure).
 //   - -update: the live weekly incremental. One AWS crawl (ListTypes +
 //     DescribeType, us-east-1) feeds both overlay reconciliation (add new rows,
 //     report retained/anomalous ones) and change detection (byte-compare against
@@ -17,6 +18,11 @@
 //     from the committed overlay + schema cache. Does not touch AWS.
 //   - -docs: owns import-example docs generation from import_examples_gen.json,
 //     then orchestrates terraform fmt + tfplugindocs generate.
+//   - -heal: re-probes every suppressed/frozen row with no recorded reason (or
+//     one tagged unknown) and proposes a category + detail for it — structural
+//     check, then a real regeneration attempt, then a free-form comment
+//     migration — printed as a report, never written. Offline except reading
+//     the committed schema cache.
 //
 // There is no separate discovery or snapshot-diff mode: bigdiffer owns discovery
 // itself, so there is no need to generate and diff checked-in
@@ -74,10 +80,31 @@ func main() {
 		generate       = flag.Bool("generate", false, "regenerate the whole provider offline from the committed overlay + schema cache (writes *_gen.go, registrations_gen.go, import_examples_gen.json)")
 		update         = flag.Bool("update", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
+		heal           = flag.Bool("heal", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
+
+		// Hidden: the hidden -heal-probe-artifact mode heal.go re-execs into,
+		// so a crashy regeneration (e.g. a recursive schema) kills only this
+		// subprocess. Not part of the documented CLI surface.
+		healProbeArtifact = flag.Bool("heal-probe-artifact", false, "internal: probe one artifact's regeneration in isolation")
+		probeTFType       = flag.String("probe-tf-type", "", "internal")
+		probeCFNType      = flag.String("probe-cfn-type", "", "internal")
+		probeKind         = flag.String("probe-kind", "", "internal")
+		probeSchema       = flag.String("probe-schema", "", "internal")
+		probePrefix       = flag.String("probe-prefix", "", "internal")
+		probeCacheDir     = flag.String("probe-cache-dir", "", "internal")
+		probeServicesPath = flag.String("probe-services-path", "", "internal")
 	)
 	flag.Parse()
 
-	if err := run(*allSchemasPath, *checkoutPath, *check, *generate, *update, *docs); err != nil {
+	if *healProbeArtifact {
+		if err := runHealProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		return
+	}
+
+	if err := run(*allSchemasPath, *checkoutPath, *check, *generate, *update, *docs, *heal); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
@@ -86,7 +113,7 @@ func main() {
 // run dispatches to exactly one command. bigdiffer is the generator, not a manual
 // snapshot-diff helper: the weekly workflow is -update, offline rebuilds are
 // -generate, docs are -docs, and -check is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, check, generate, update, docs bool) error {
+func run(allSchemasPath, checkoutPath string, check, generate, update, docs, heal bool) error {
 	switch {
 	case update:
 		return runUpdate(context.Background(), allSchemasPath, checkoutPath)
@@ -104,9 +131,11 @@ func run(allSchemasPath, checkoutPath string, check, generate, update, docs bool
 		return runDocs(cfg)
 	case check:
 		return runCheck(allSchemasPath, checkoutPath)
+	case heal:
+		return runHeal(allSchemasPath)
 	default:
 		flag.Usage()
-		return fmt.Errorf("no command given; use one of -update, -generate, -docs, -check")
+		return fmt.Errorf("no command given; use one of -update, -generate, -docs, -check, -heal")
 	}
 }
 
@@ -145,6 +174,10 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 	if len(problems) > 0 {
 		return fmt.Errorf("all_schemas.hcl check failed: %s", strings.Join(problems, "; "))
 	}
+	if n := len(report.UnexplainedRetained) + len(report.ReasonlessSuppressed); n > 0 {
+		fmt.Fprintf(os.Stderr, "bigdiffer: all_schemas.hcl is normalized; %d advisory anomaly line(s) reported above (not a check failure).\n", n)
+		return nil
+	}
 	fmt.Fprintln(os.Stderr, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
 	return nil
 }
@@ -169,13 +202,14 @@ type rowRef struct {
 
 // Report summarizes what the normalization did and what a human should review.
 type Report struct {
-	AddedNew            []rowRef // in base, absent from overlay, absent from previous base
-	AddedBacklog        []rowRef // in base, absent from overlay, present in previous base
-	Retained            []rowRef // live in overlay, absent from base
-	UnexplainedRetained []rowRef // Retained rows not explained by frozen_since, non_provisionable, or a checkout pin
-	Duplicates          []string // CloudFormation type names with more than one live block
-	NamingViolate       []string
-	Total               int
+	AddedNew             []rowRef // in base, absent from overlay, absent from previous base
+	AddedBacklog         []rowRef // in base, absent from overlay, present in previous base
+	Retained             []rowRef // live in overlay, absent from base
+	UnexplainedRetained  []rowRef // Retained rows not explained by frozen_since, non_provisionable, or a checkout pin
+	Duplicates           []string // CloudFormation type names with more than one live block
+	NamingViolate        []string
+	ReasonlessSuppressed []rowRef // suppressed and/or frozen, but suppression_reason is empty (suppressed-and-frozen.md)
+	Total                int
 }
 
 func normalize(overlay string, base, previous []resourceRow, checkout map[string]bool) (string, Report, error) {
@@ -278,6 +312,25 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 		}
 	}
 	sort.Strings(report.NamingViolate)
+
+	// Reason-less suppression/freeze check (generation-punchlist.md item 8;
+	// contributing/docs/suppressed-and-frozen.md): every row bigdiffer itself
+	// suppresses or freezes carries a suppression_reason (policy.go), but a row
+	// can also be suppressed or frozen by direct hand-edit, or predate the
+	// taxonomy. Advisory only, like every other anomaly here — never a hard
+	// failure, and -heal (not this check) is what fills the gap.
+	for _, it := range items {
+		if !it.live || it.key == "" {
+			continue
+		}
+		r := overlayByCFN[it.key]
+		if isSuppressedOrFrozen(r) && r.SuppressionReason == "" {
+			report.ReasonlessSuppressed = append(report.ReasonlessSuppressed, rowRef{cfn: it.key, label: it.label})
+		}
+	}
+	sort.Slice(report.ReasonlessSuppressed, func(i, j int) bool {
+		return report.ReasonlessSuppressed[i].cfn < report.ReasonlessSuppressed[j].cfn
+	})
 
 	for cfn, n := range liveCount {
 		if n > 1 {
@@ -477,6 +530,19 @@ func expectedLabel(cfn string) (string, error) {
 	return strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + naming.CloudFormationPropertyToTerraformAttribute(res), nil
 }
 
+// isSuppressedOrFrozen reports whether a row has any suppress_* flag set or a
+// frozen_since date — the set of states suppressed-and-frozen.md requires a
+// suppression_reason for. non_provisionable is deliberately excluded: it is a
+// bare annotation about AWS's registry state, not bigdiffer's own decision, and
+// carries no reason requirement (suppressed-and-frozen.md, "What does not
+// change").
+func isSuppressedOrFrozen(r resourceRow) bool {
+	return r.SuppressResourceGeneration ||
+		r.SuppressSingularDataSourceGeneration ||
+		r.SuppressPluralDataSourceGeneration ||
+		r.FrozenSince != ""
+}
+
 // crossValidate decodes the overlay with a real HCL parser and asserts that the
 // set of live resource_schema blocks equals what the text scanner found. This
 // guards the verbatim, comment-preserving text path with a structural check.
@@ -584,6 +650,12 @@ func (r Report) write() {
 		fmt.Fprintf(os.Stderr, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
 		for _, v := range r.NamingViolate {
 			fmt.Fprintf(os.Stderr, "  ! %s\n", v)
+		}
+	}
+	if len(r.ReasonlessSuppressed) > 0 {
+		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no suppression_reason: %d (run -heal)\n", len(r.ReasonlessSuppressed))
+		for _, b := range r.ReasonlessSuppressed {
+			fmt.Fprintf(os.Stderr, "  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}
 }

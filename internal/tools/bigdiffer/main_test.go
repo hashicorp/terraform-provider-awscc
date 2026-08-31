@@ -148,6 +148,15 @@ func TestNormalize(t *testing.T) {
 	if len(report.NamingViolate) != 1 || !strings.Contains(report.NamingViolate[0], "AWS::EC2::Widget") {
 		t.Errorf("NamingViolate = %v, want one entry for AWS::EC2::Widget", report.NamingViolate)
 	}
+
+	// complexBlock suppresses two artifacts via a free-form "# Suppression
+	// Reason:" comment, not the structured suppression_reason attribute, so
+	// item 8's check must still flag it. Newthing is suppressed too, but
+	// canonicalBlock stamps a structural suppression_reason automatically, so
+	// it must NOT be flagged.
+	if len(report.ReasonlessSuppressed) != 1 || report.ReasonlessSuppressed[0].cfn != "AWS::EC2::Complex" {
+		t.Errorf("ReasonlessSuppressed = %+v, want [AWS::EC2::Complex]", report.ReasonlessSuppressed)
+	}
 }
 
 func TestNormalizeIdempotent(t *testing.T) {
@@ -355,5 +364,47 @@ func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
 	}
 	if again != out {
 		t.Errorf("not idempotent:\n--- first ---\n%s\n--- second ---\n%s", out, again)
+	}
+}
+
+// TestReasonlessSuppressionAnomaly is generation-punchlist.md item 8's
+// regression test: a row that is suppressed or frozen with no
+// suppression_reason is flagged, advisory-only (never a -check failure).
+func TestReasonlessSuppressionAnomaly(t *testing.T) {
+	t.Parallel()
+
+	reasonless := `resource_schema "aws_svc_reasonless" {
+  cloudformation_type_name = "AWS::Svc::Reasonless"
+  frozen_since              = "2023-01-01"
+}`
+	reasoned := `resource_schema "aws_svc_reasoned" {
+  cloudformation_type_name = "AWS::Svc::Reasoned"
+  suppress_resource_generation = true
+  suppression_reason           = "manual: recursive schema"
+}`
+	clean := `resource_schema "aws_svc_clean" {
+  cloudformation_type_name = "AWS::Svc::Clean"
+}`
+
+	overlay := testHead +
+		"# 3 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
+		strings.Join([]string{reasonless, reasoned, clean}, "\n\n") + "\n"
+
+	base := []resourceRow{
+		{ResourceTypeName: "aws_svc_reasonless", CloudFormationTypeName: "AWS::Svc::Reasonless", FrozenSince: "2023-01-01"},
+		{ResourceTypeName: "aws_svc_reasoned", CloudFormationTypeName: "AWS::Svc::Reasoned", SuppressResourceGeneration: true, SuppressionReason: "manual: recursive schema"},
+		{ResourceTypeName: "aws_svc_clean", CloudFormationTypeName: "AWS::Svc::Clean"},
+	}
+
+	_, report, err := normalize(overlay, base, nil, map[string]bool{})
+	if err != nil {
+		t.Fatalf("normalize: %v", err)
+	}
+
+	if len(report.ReasonlessSuppressed) != 1 || report.ReasonlessSuppressed[0].cfn != "AWS::Svc::Reasonless" {
+		t.Errorf("ReasonlessSuppressed = %+v, want [AWS::Svc::Reasonless]", report.ReasonlessSuppressed)
+	}
+	if got := report.anomalyProblems(); len(got) != 0 {
+		t.Errorf("reason-less suppression must be advisory, not a -check failure, got %v", got)
 	}
 }
