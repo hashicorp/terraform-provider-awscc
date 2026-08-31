@@ -96,10 +96,12 @@ func TestNormalize(t *testing.T) {
 		t.Errorf("complex block not preserved verbatim:\n%s", out)
 	}
 
-	// New row rendered canonically with aligned plural flag.
+	// New row rendered canonically with aligned plural flag and its structural
+	// suppression reason (canonicalBlock; contributing/docs/suppressed-and-frozen.md).
 	wantNew := `resource_schema "aws_ec2_newthing" {
   cloudformation_type_name               = "AWS::EC2::Newthing"
   suppress_plural_data_source_generation = true
+  suppression_reason                     = "structural: no list handler with zero required arguments"
 }`
 	if !strings.Contains(out, wantNew) {
 		t.Errorf("new block not rendered as expected:\n%s", out)

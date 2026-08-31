@@ -19,6 +19,33 @@ const (
 	attrSuppressionReason = "suppression_reason"
 )
 
+// reasonCategory is the taxonomy every suppression_reason bigdiffer writes is
+// tagged with, one of (contributing/docs/suppressed-and-frozen.md):
+//   - structural: the schema doesn't support this artifact; known before
+//     generation is attempted, not a failure.
+//   - generationFailed: the owned engine returned an error rendering it.
+//   - buildFailed: it rendered, but `go build` failed on it.
+//   - manual: a human suppressed it for a reason not mechanically detected.
+//   - unknown: inherited from history; no reason was ever recorded.
+type reasonCategory string
+
+const (
+	reasonStructural       reasonCategory = "structural"
+	reasonGenerationFailed reasonCategory = "generation_failed"
+	reasonBuildFailed      reasonCategory = "build_failed"
+	reasonManual           reasonCategory = "manual"
+	reasonUnknown          reasonCategory = "unknown"
+)
+
+// formatReason renders a suppression_reason value as "category: detail", the
+// taxonomy's machine-readable form. An empty detail yields a bare "category:".
+func formatReason(category reasonCategory, detail string) string {
+	if detail == "" {
+		return string(category) + ":"
+	}
+	return string(category) + ": " + detail
+}
+
 // changeClass is the reconciliation class of a type (design §3). "Absent" splits
 // into non-provisionable-live vs withdrawn after the DescribeType probe.
 type changeClass string
@@ -62,6 +89,22 @@ func decide(class changeClass, gr gateResult, today string) policyDecision {
 		if gr.ok() {
 			return policyDecision{summary: "present: refreshed OK"}
 		}
+		if gr.anyOK() {
+			// Partial failure: the artifacts that generated cleanly are
+			// promoted against the new bytes (refreshCandidate); the schema
+			// is still pinned (frozen_since) since it cannot partially
+			// advance — one JSON file backs all three artifacts — and the
+			// artifacts that failed against it are suppressed individually,
+			// each with its own reason, so the working artifacts are not held
+			// back by the broken one.
+			attrs := suppressAttrsForFailures(gr)
+			attrs[attrFrozenSince] = today
+			return policyDecision{
+				setAttrs: attrs,
+				reason:   gateFailureReason(gr),
+				summary:  "present: partial failure, schema frozen, broken artifact(s) suppressed",
+			}
+		}
 		return policyDecision{
 			setAttrs: map[string]string{attrFrozenSince: today},
 			reason:   gateFailureReason(gr),
@@ -77,6 +120,7 @@ func decide(class changeClass, gr gateResult, today string) policyDecision {
 	case classWithdrawn:
 		return policyDecision{
 			setAttrs: map[string]string{attrFrozenSince: today},
+			reason:   formatReason(reasonManual, "withdrawn from AWS, pending major-version removal"),
 			summary:  "withdrawn from AWS: frozen, kept pending major-version removal",
 		}
 
@@ -111,16 +155,18 @@ func suppressAttrsForFailures(gr gateResult) map[string]string {
 }
 
 // gateFailureReason renders a compact, deterministic suppression_reason from the
-// failed artifacts' errors.
+// failed artifacts' errors, tagged generation_failed (the only failure source a
+// gateResult carries today; a build-gate failure will get its own category once
+// the compile gate is wired — generation-punchlist.md item 1).
 func gateFailureReason(gr gateResult) string {
 	var parts []string
 	for _, a := range gr.artifacts {
 		if a.outcome != gateOK && a.err != nil {
-			parts = append(parts, fmt.Sprintf("%s %s: %s", a.kind, a.outcome, firstLine(a.err.Error())))
+			parts = append(parts, fmt.Sprintf("%s: %s", a.kind, firstLine(a.err.Error())))
 		}
 	}
 	sort.Strings(parts)
-	return strings.Join(parts, "; ")
+	return formatReason(reasonGenerationFailed, strings.Join(parts, "; "))
 }
 
 func firstLine(s string) string {

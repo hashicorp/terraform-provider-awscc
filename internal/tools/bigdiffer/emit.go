@@ -25,33 +25,46 @@ const (
 	filePerm os.FileMode = 0o644
 )
 
+// writeArtifact writes one generated artifact's code and test file to
+// cfg.outputRoot/r.a.pathSuffix/, creating directories as needed. It does not
+// check r.err — callers decide what to do with a failed result.
+func writeArtifact(cfg config, r genResult) error {
+	dir := filepath.Join(cfg.outputRoot, r.a.pathSuffix)
+	if err := os.MkdirAll(dir, dirPerm); err != nil {
+		return fmt.Errorf("creating %s: %w", dir, err)
+	}
+	for _, fw := range []struct {
+		name string
+		data []byte
+	}{
+		{r.a.codeFile, r.code},
+		{r.a.testFile, r.test},
+	} {
+		path := filepath.Join(dir, fw.name)
+		if err := os.WriteFile(path, fw.data, filePerm); err != nil {
+			return fmt.Errorf("writing %s: %w", path, err)
+		}
+	}
+	return nil
+}
+
 // writeCorpus writes each generated artifact's code and test file to
 // cfg.outputRoot/<pathSuffix>/<file>, creating directories as needed. Returns the
 // number of files written. A generate error in any result aborts before writing
-// it (never write partial/failed output over good files).
+// it (never write partial/failed output over good files). Used by the offline
+// full-corpus path (-generate), where every type in the committed overlay is
+// expected to generate cleanly and a failure is exceptional; the live
+// incremental path (-update) promotes per-artifact instead (refreshCandidate).
 func writeCorpus(cfg config, results []genResult) (int, error) {
 	written := 0
 	for _, r := range results {
 		if r.err != nil {
 			return written, fmt.Errorf("%s %s: %w", r.p.cfType, r.a.kind, r.err)
 		}
-		dir := filepath.Join(cfg.outputRoot, r.a.pathSuffix)
-		if err := os.MkdirAll(dir, dirPerm); err != nil {
-			return written, fmt.Errorf("creating %s: %w", dir, err)
+		if err := writeArtifact(cfg, r); err != nil {
+			return written, err
 		}
-		for _, fw := range []struct {
-			name string
-			data []byte
-		}{
-			{r.a.codeFile, r.code},
-			{r.a.testFile, r.test},
-		} {
-			path := filepath.Join(dir, fw.name)
-			if err := os.WriteFile(path, fw.data, filePerm); err != nil {
-				return written, fmt.Errorf("writing %s: %w", path, err)
-			}
-			written++
-		}
+		written += 2
 	}
 	return written, nil
 }

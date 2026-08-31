@@ -42,8 +42,8 @@ func TestDecide(t *testing.T) {
 		if _, ok := d.setAttrs[attrSuppressSingular]; ok {
 			t.Errorf("singular gated OK, should not be suppressed")
 		}
-		if d.reason == "" || d.reason != "resource failed-generation: recursive definition" {
-			t.Errorf("reason = %q, want first-line failure detail", d.reason)
+		if d.reason == "" || d.reason != "generation_failed: resource: recursive definition" {
+			t.Errorf("reason = %q, want generation_failed-tagged first-line failure detail", d.reason)
 		}
 	})
 
@@ -66,6 +66,25 @@ func TestDecide(t *testing.T) {
 		}
 	})
 
+	t.Run("new + singular-only failure suppresses only the singular artifact", func(t *testing.T) {
+		t.Parallel()
+		brokenSingularNew := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+			{kind: artifactSingularDataSource, outcome: gateFailedGeneration, err: errors.New("singular boom")},
+			{kind: artifactPluralDataSource, outcome: gateOK},
+		}}
+		d := decide(classNew, brokenSingularNew, today)
+		if d.setAttrs[attrSuppressSingular] != "true" {
+			t.Errorf("singular failed, should be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressResource]; ok {
+			t.Errorf("resource gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressPlural]; ok {
+			t.Errorf("plural gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+	})
+
 	t.Run("present + ok keeps the block untouched", func(t *testing.T) {
 		t.Parallel()
 		d := decide(classPresent, okRes, today)
@@ -74,17 +93,85 @@ func TestDecide(t *testing.T) {
 		}
 	})
 
-	t.Run("present + failed freezes at last-good", func(t *testing.T) {
+	t.Run("present + total failure freezes at last-good, no suppression", func(t *testing.T) {
 		t.Parallel()
-		d := decide(classPresent, brokenRes, today)
+		totalFail := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("boom")},
+			{kind: artifactSingularDataSource, outcome: gateFailedGeneration, err: errors.New("boom")},
+			{kind: artifactPluralDataSource, outcome: gateFailedGeneration, err: errors.New("boom")},
+		}}
+		d := decide(classPresent, totalFail, today)
 		if d.addBlock {
 			t.Errorf("present must not add a block")
 		}
 		if d.setAttrs[attrFrozenSince] != today {
 			t.Errorf("should freeze at today, got %+v", d.setAttrs)
 		}
+		if _, ok := d.setAttrs[attrSuppressResource]; ok {
+			t.Errorf("a total failure should not also suppress individual artifacts, got %+v", d.setAttrs)
+		}
 		if d.reason == "" {
 			t.Errorf("freeze should record a reason")
+		}
+	})
+
+	t.Run("present + resource-only failure freezes schema, suppresses only the resource", func(t *testing.T) {
+		t.Parallel()
+		d := decide(classPresent, brokenRes, today) // resource failed, singular ok
+		if d.addBlock {
+			t.Errorf("present must not add a block")
+		}
+		if d.setAttrs[attrFrozenSince] != today {
+			t.Errorf("schema can't partially advance, should still freeze, got %+v", d.setAttrs)
+		}
+		if d.setAttrs[attrSuppressResource] != "true" {
+			t.Errorf("resource failed, should be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressSingular]; ok {
+			t.Errorf("singular gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+		if d.reason == "" {
+			t.Errorf("partial failure should record a reason")
+		}
+	})
+
+	t.Run("present + singular-only failure freezes schema, suppresses only singular", func(t *testing.T) {
+		t.Parallel()
+		brokenSingular := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+			{kind: artifactSingularDataSource, outcome: gateFailedGeneration, err: errors.New("singular boom")},
+		}}
+		d := decide(classPresent, brokenSingular, today)
+		if d.setAttrs[attrFrozenSince] != today {
+			t.Errorf("schema can't partially advance, should still freeze, got %+v", d.setAttrs)
+		}
+		if d.setAttrs[attrSuppressSingular] != "true" {
+			t.Errorf("singular failed, should be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressResource]; ok {
+			t.Errorf("resource gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+	})
+
+	t.Run("present + plural-only failure freezes schema, suppresses only plural", func(t *testing.T) {
+		t.Parallel()
+		brokenPluralPresent := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+			{kind: artifactSingularDataSource, outcome: gateOK},
+			{kind: artifactPluralDataSource, outcome: gateFailedGeneration, err: errors.New("plural boom")},
+		}}
+		d := decide(classPresent, brokenPluralPresent, today)
+		if d.setAttrs[attrFrozenSince] != today {
+			t.Errorf("schema can't partially advance, should still freeze, got %+v", d.setAttrs)
+		}
+		if d.setAttrs[attrSuppressPlural] != "true" {
+			t.Errorf("plural failed, should be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressResource]; ok {
+			t.Errorf("resource gated OK, should not be suppressed, got %+v", d.setAttrs)
+		}
+		if _, ok := d.setAttrs[attrSuppressSingular]; ok {
+			t.Errorf("singular gated OK, should not be suppressed, got %+v", d.setAttrs)
 		}
 	})
 

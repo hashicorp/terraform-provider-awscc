@@ -96,4 +96,10 @@ func TestE2ELiveUpdate(t *testing.T) {
 		}
 	}
 	t.Logf("regenerated %d candidate(s): %d OK, %d frozen/suppressed", len(cands), okN, brokeN)
+
+	// Mirror runUpdate: promote the staged batch into the temp tree once,
+	// after every candidate has staged successfully.
+	if err := promoteStaged(tmpCfg, staging); err != nil {
+		t.Fatalf("promoteStaged: %v", err)
+	}
 }

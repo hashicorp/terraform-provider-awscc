@@ -39,3 +39,15 @@ func (g gateResult) ok() bool {
 	}
 	return true
 }
+
+// anyOK reports whether at least one artifact generated cleanly. Used to tell a
+// partial failure (some artifacts promoted, others suppressed) apart from a
+// total one (nothing to promote; the type is frozen/suppressed as a whole).
+func (g gateResult) anyOK() bool {
+	for _, a := range g.artifacts {
+		if a.outcome == gateOK {
+			return true
+		}
+	}
+	return false
+}

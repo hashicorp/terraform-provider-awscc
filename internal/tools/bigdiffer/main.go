@@ -451,12 +451,20 @@ func attachKeyless(items []item) []item {
 	return out
 }
 
-// canonicalBlock renders a new row in the exact format used throughout
-// all_schemas.hcl (aligned `=` when the plural-suppression flag is present).
+// canonicalBlock renders a brand-new resource_schema block for a row present in
+// the discovered base but absent from the overlay. The only suppression it ever
+// carries is the plural data source's structural determination (discover.go's
+// pluralSupported check, run before any generation is attempted), so it always
+// stamps that with the structural reason category — never a bare, unexplained
+// suppress_plural_data_source_generation (contributing/docs/suppressed-and-frozen.md).
 func canonicalBlock(label, cfn string, suppressPlural bool) string {
 	if suppressPlural {
-		width := len(pluralAttr)
-		return fmt.Sprintf("resource_schema %q {\n  %-*s = %q\n  %s = true\n}", label, width, cfnAttr, cfn, pluralAttr)
+		reason := formatReason(reasonStructural, "no list handler with zero required arguments")
+		width := max(len(pluralAttr), len(attrSuppressionReason))
+		return fmt.Sprintf("resource_schema %q {\n  %-*s = %q\n  %-*s = true\n  %-*s = %q\n}",
+			label, width, cfnAttr, cfn,
+			width, pluralAttr,
+			width, attrSuppressionReason, reason)
 	}
 	return fmt.Sprintf("resource_schema %q {\n  %s = %q\n}", label, cfnAttr, cfn)
 }

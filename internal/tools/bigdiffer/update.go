@@ -6,8 +6,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"os"
+	"path/filepath"
 	"time"
+
+	"github.com/hashicorp/cli"
 )
 
 // The incremental weekly pipeline: from a single discovery crawl, refresh only
@@ -73,13 +77,30 @@ func gateResultFromGenResults(cfType string, results []genResult) gateResult {
 }
 
 // refreshCandidate generates a candidate from its freshly discovered bytes,
-// staged in a temp schema file so a failed generation never overwrites the
-// good cached schema. Only when every artifact generates cleanly does it promote
-// the outputs — write the generated files to their real paths and the fresh
-// bytes to the schema cache. A failure leaves the last-good files and cache
-// untouched (never regress). It returns the gateResult for the policy engine.
+// refreshCandidate generates a candidate from its freshly discovered bytes and
+// stages every artifact it produces under stagingDir — mirroring cfg.outputRoot
+// and cfg.cacheDir, never writing to the real tree. Each artifact (resource,
+// singular data source, plural data source) succeeds or fails independently:
+// an artifact that generates cleanly is staged regardless of the others; one
+// that fails is simply not staged — a Present type keeps its last-good real
+// file for that artifact (untouched here), a New type simply never gets one.
+// The resource/plural ListResource coupling is preserved: if the plural data
+// source did not, in the end, succeed this pass, the resource is regenerated
+// without GenerateListResource before being staged (reconcileListResource).
+//
+// The schema cache is staged only when at least one artifact succeeded — if
+// every artifact failed, there is nothing new to keep, and the caller (decide,
+// via classPresent) treats the type as fully broken. Nothing here touches the
+// real output tree or schema cache; promoteStaged does that once, after the
+// whole candidate batch has been staged successfully (generation-punchlist.md
+// item 12: batch atomicity). It returns the gateResult for the policy engine,
+// reflecting the final per-artifact outcome (after any ListResource-driven
+// regeneration).
 func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, error) {
-	stagedSchema := schemaCachePath(stagingDir, c.cfType)
+	stagedSchema := schemaCachePath(filepath.Join(stagingDir, "input"), c.cfType)
+	if err := os.MkdirAll(filepath.Dir(stagedSchema), dirPerm); err != nil {
+		return gateResult{}, fmt.Errorf("creating staging input dir: %w", err)
+	}
 	if err := os.WriteFile(stagedSchema, c.schema, filePerm); err != nil {
 		return gateResult{}, fmt.Errorf("staging %s: %w", c.cfType, err)
 	}
@@ -88,21 +109,129 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, e
 	row.CloudFormationSchemaPath = stagedSchema // generate from the staged bytes
 
 	results := generateCorpus(cfg, []resourceRow{row}, 1, nil)
+	results, err := reconcileListResource(cfg, results)
+	if err != nil {
+		return gateResult{}, fmt.Errorf("regenerating resource for %s: %w", c.cfType, err)
+	}
 	gr := gateResultFromGenResults(c.cfType, results)
-	if !gr.ok() {
-		return gr, nil // keep last-good output and cache
+
+	// Stage successful artifacts under stagingDir/out, mirroring cfg.outputRoot.
+	stageCfg := cfg
+	stageCfg.outputRoot = filepath.Join(stagingDir, "out")
+	promoted := false
+	for _, r := range results {
+		if r.err != nil {
+			continue // leave last-good (Present) or nothing (New) for this artifact
+		}
+		if err := writeArtifact(stageCfg, r); err != nil {
+			return gr, fmt.Errorf("staging %s %s: %w", c.cfType, r.a.kind, err)
+		}
+		promoted = true
+	}
+	if !promoted {
+		return gr, nil // nothing succeeded; nothing to stage
 	}
 
-	if _, err := writeCorpus(cfg, results); err != nil {
-		return gr, fmt.Errorf("writing %s: %w", c.cfType, err)
+	// Stage the fresh schema bytes for promotion into the real cache too.
+	stagedCache := filepath.Join(stagingDir, "cache")
+	if err := os.MkdirAll(stagedCache, dirPerm); err != nil {
+		return gr, fmt.Errorf("creating staged cache dir: %w", err)
 	}
-	if err := os.MkdirAll(cfg.cacheDir, dirPerm); err != nil {
-		return gr, fmt.Errorf("creating cache dir: %w", err)
-	}
-	if err := os.WriteFile(schemaCachePath(cfg.cacheDir, c.cfType), c.schema, filePerm); err != nil {
-		return gr, fmt.Errorf("promoting cache for %s: %w", c.cfType, err)
+	if err := os.WriteFile(schemaCachePath(stagedCache, c.cfType), c.schema, filePerm); err != nil {
+		return gr, fmt.Errorf("staging cache for %s: %w", c.cfType, err)
 	}
 	return gr, nil
+}
+
+// promoteStaged copies every staged artifact and cached schema from stagingDir
+// into the real tree (cfg.outputRoot, cfg.cacheDir). Called once, after every
+// candidate in a batch has been staged successfully by refreshCandidate — this
+// is the sole place -update writes outside stagingDir, so a hard error anywhere
+// earlier in the batch (generation-punchlist.md item 12) leaves the real tree
+// and the overlay untouched: nothing is promoted, and the overlay reconcile
+// step that follows never even runs.
+func promoteStaged(cfg config, stagingDir string) error {
+	stagedOut := filepath.Join(stagingDir, "out")
+	if err := copyTree(stagedOut, cfg.outputRoot); err != nil {
+		return fmt.Errorf("promoting staged output: %w", err)
+	}
+	stagedCache := filepath.Join(stagingDir, "cache")
+	if err := copyTree(stagedCache, cfg.cacheDir); err != nil {
+		return fmt.Errorf("promoting staged cache: %w", err)
+	}
+	return nil
+}
+
+// copyTree copies every regular file under src into the identical relative
+// path under dst, creating directories as needed. A missing src (nothing was
+// staged there) is not an error.
+func copyTree(src, dst string) error {
+	if _, err := os.Stat(src); os.IsNotExist(err) {
+		return nil
+	}
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		rel, err := filepath.Rel(src, path)
+		if err != nil {
+			return err
+		}
+		target := filepath.Join(dst, rel)
+		if info.IsDir() {
+			return os.MkdirAll(target, dirPerm)
+		}
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return fmt.Errorf("reading %s: %w", path, err)
+		}
+		if err := os.MkdirAll(filepath.Dir(target), dirPerm); err != nil {
+			return err
+		}
+		return os.WriteFile(target, data, filePerm)
+	})
+}
+
+// reconcileListResource re-generates the resource artifact without
+// GenerateListResource if it was generated expecting a working plural data
+// source that isn't there in the final result — either its generation failed
+// this pass, or it was never attempted (already suppressed, so absent from
+// results). A resource promoted with ListResource: true but no working plural
+// data source would advertise a list resource with no backing data source.
+func reconcileListResource(cfg config, results []genResult) ([]genResult, error) {
+	resIdx := -1
+	pluralOK := false
+	for i, r := range results {
+		switch r.a.kind {
+		case artifactResource:
+			resIdx = i
+		case artifactPluralDataSource:
+			pluralOK = r.err == nil
+		}
+	}
+	if resIdx < 0 {
+		return results, nil // no resource artifact this pass
+	}
+	r := results[resIdx]
+	//nolint:nilerr // r.err here is the resource artifact's own outcome, not a
+	// swallowed error: if the resource already failed on its own, there is
+	// nothing to reconcile, so returning the results (including that error) is
+	// correct, not an accidental nil-out.
+	if !r.a.listResource || r.err != nil || pluralOK {
+		return results, nil // didn't ask for ListResource, already failed, or plural is fine
+	}
+
+	// The resource generated expecting a working plural data source that isn't
+	// there; regenerate it without ListResource before promoting.
+	r.a.listResource = false
+	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
+	code, test, err := generateArtifact(ui, cfg, r.p, r.a)
+	if err != nil {
+		return nil, err
+	}
+	r.code, r.test, r.err = code, test, nil
+	results[resIdx] = r
+	return results, nil
 }
 
 // runUpdate is the live weekly incremental pipeline (-update). One discovery
@@ -172,6 +301,16 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		_ = candBar.Add(1)
 	}
 	_ = candBar.Finish()
+
+	// Promote every staged artifact and cache entry into the real tree in one
+	// pass, only now that the whole batch has staged successfully. A hard error
+	// anywhere in the loop above returned before reaching here, so the real
+	// tree and the overlay (reconciled next) are left exactly as they were
+	// (generation-punchlist.md item 12).
+	stepf("Promoting staged output (%d artifact(s) refreshed)…", okN+brokeN)
+	if err := promoteStaged(cfg, stagingDir); err != nil {
+		return err
+	}
 
 	// Reconcile the overlay and apply the policy edits in one pass.
 	stepf("Reconciling all_schemas.hcl and applying policy…")
