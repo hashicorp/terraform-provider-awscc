@@ -297,7 +297,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// afterward, and nothing re-runs the reconciliation for that). Checked
 	// once, after the fixpoint settles, so a plural artifact the gate drops
 	// can never leave a promoted resource advertising a list capability with
-	// no backing data source (design doc invariant; new-generation.md §6).
+	// no backing data source (design doc invariant; bigdiffer-design.md §6).
 	var listResourceCandidates []*gateResult
 	var okN, brokeN int
 	for _, c := range cands {
@@ -356,7 +356,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// compiles clean, downgrading whatever the compiler rejects. Runs before
 	// promotion so a build failure changes what gets promoted rather than
 	// promoting something broken; never blocks the release (design doc
-	// contributing/docs/compile-gate-design.md).
+	// bigdiffer-design.md §6, "The compile gate").
 	stepf("Compile-gating %d staged artifact(s)…", len(stagedByDest))
 	if err := compileFixpoint(cfg, stagingDir, string(overlayContent), base, checkout, decisions, stagedByDest, today); err != nil {
 		return fmt.Errorf("compile gate: %w", err)

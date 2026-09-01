@@ -15,7 +15,7 @@ import (
 )
 
 // The compile gate (generation-punchlist.md item 1, design:
-// contributing/docs/compile-gate-design.md). Generated code only type-checks
+// bigdiffer-design.md §6, "The compile gate"). Generated code only type-checks
 // against the real module graph, so the gate builds in place: it overlays
 // staged files onto their real destinations, runs `go build ./...` once from
 // cfg.repoRoot, and unconditionally reverts the overlay — regardless of the
@@ -179,7 +179,7 @@ func buildOnce(repoRoot string, files map[string][]byte) (ok bool, errs []buildE
 // itself, nothing re-runs the reconciliation: the resource would promote
 // still advertising a list resource with no working plural data source
 // behind it — the exact "list resource with no backing data source" the
-// design (new-generation.md §6) rules out, and, since the candidate is
+// design (bigdiffer-design.md §6) rules out, and, since the candidate is
 // unchanged next cycle, a persistent one.
 //
 // In practice this requires the plural data source template itself to
