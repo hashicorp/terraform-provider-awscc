@@ -311,11 +311,12 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		grPtr := gr
 		for _, r := range staged {
 			dest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.codeFile)
+			testDest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.testFile)
 			// Find this artifact's index within grPtr.artifacts (staged only
 			// contains artifacts that generated OK, i.e. gateOK in grPtr).
 			for ai := range grPtr.artifacts {
 				if grPtr.artifacts[ai].kind == r.a.kind {
-					stagedByDest[dest] = stagedArtifact{class: c.class, gr: &grPtr, artifact: ai}
+					stagedByDest[dest] = stagedArtifact{class: c.class, gr: &grPtr, artifact: ai, testDest: testDest}
 					break
 				}
 			}

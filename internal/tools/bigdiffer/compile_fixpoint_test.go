@@ -25,31 +25,46 @@ func scratchRow(tfType, cfType string) resourceRow {
 }
 
 // stageBrokenArtifact writes a deliberately-broken resource artifact .go file
-// under stagingDir/out at the real relative path it would occupy, and returns
-// its real destination path (for building stagedByDest) plus a gateResult
+// plus its paired _test.go under stagingDir/out at the real relative paths
+// they would occupy, and returns their real destination paths (dest for
+// building stagedByDest, testDest for confirming the regression this fixture
+// exists for: dropping a rejected artifact must drop its paired test file
+// too, not just the code file the compiler blamed — go build never sees or
+// blames _test.go, since it excludes tests entirely) plus a gateResult
 // pre-populated as gateOK for that one artifact, mirroring what
 // refreshCandidate would have produced had generation actually succeeded.
 // Only artifactResource is needed by any test in this file today; the other
 // two kinds render identically for this purpose (a broken .go file is a
 // broken .go file to the compiler), so this is not generalized over kind.
-func stageBrokenArtifact(t *testing.T, cfg config, stagingDir string, row resourceRow, cfType string) (dest string, gr *gateResult) {
+func stageBrokenArtifact(t *testing.T, cfg config, stagingDir string, row resourceRow, cfType string) (dest, testDest string, gr *gateResult) {
 	t.Helper()
 	org, svc, res := parseForTest(t, row.ResourceTypeName)
 	pathSuffix := org + "/" + svc
 	codeFile := res + "_resource_gen.go"
+	testFile := res + "_resource_gen_test.go"
 	broken := "package " + svc + "\nfunc F() int { return \"not an int\" }\n"
+	// A real generated _gen_test.go never references anything from its
+	// paired _gen.go (confirmed against internal/aws/logs/*_resource_gen_test.go
+	// — it only calls internal/acctest helpers), so a trivial, independently
+	// valid test file is a faithful stand-in, not a simplification that hides
+	// the bug this fixture targets.
+	test := "package " + svc + "_test\nfunc TestNothing() {}\n"
 
-	stagedPath := filepath.Join(stagingDir, "out", pathSuffix, codeFile)
-	if err := os.MkdirAll(filepath.Dir(stagedPath), dirPerm); err != nil {
+	dir := filepath.Join(stagingDir, "out", pathSuffix)
+	if err := os.MkdirAll(dir, dirPerm); err != nil {
 		t.Fatal(err)
 	}
-	if err := os.WriteFile(stagedPath, []byte(broken), filePerm); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, codeFile), []byte(broken), filePerm); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, testFile), []byte(test), filePerm); err != nil {
 		t.Fatal(err)
 	}
 
 	dest = filepath.Join(cfg.outputRoot, pathSuffix, codeFile)
+	testDest = filepath.Join(cfg.outputRoot, pathSuffix, testFile)
 	gr = &gateResult{cfType: cfType, artifacts: []artifactResult{{kind: artifactResource, outcome: gateOK}}}
-	return dest, gr
+	return dest, testDest, gr
 }
 
 // parseForTest splits a test fixture's org_svc_res-shaped ResourceTypeName.
@@ -93,7 +108,7 @@ func TestCompileFixpointAttributesAndSuppressesABuildFailure(t *testing.T) {
 	stagingDir := t.TempDir()
 
 	row := scratchRow("aws_zzzcfab_thing", "AWS::ZzzCfab::Thing")
-	dest, gr := stageBrokenArtifact(t, cfg, stagingDir, row, row.CloudFormationTypeName)
+	dest, testDest, gr := stageBrokenArtifact(t, cfg, stagingDir, row, row.CloudFormationTypeName)
 	// The singular/plural data sources are modeled as already having failed
 	// generation (not merely row-suppressed — canonicalBlock, which renders a
 	// brand-new row's block, only ever honors discovery's own structural
@@ -113,7 +128,7 @@ func TestCompileFixpointAttributesAndSuppressesABuildFailure(t *testing.T) {
 		row.CloudFormationTypeName: decide(classNew, *gr, "2026-08-31"),
 	}
 	stagedByDest := map[string]stagedArtifact{
-		dest: {class: classNew, gr: gr, artifact: 0},
+		dest: {class: classNew, gr: gr, artifact: 0, testDest: testDest},
 	}
 
 	overlay, base := minimalOverlayFor([]resourceRow{row})
@@ -130,6 +145,9 @@ func TestCompileFixpointAttributesAndSuppressesABuildFailure(t *testing.T) {
 	}
 	if _, err := os.Stat(filepath.Join(stagingDir, "out", "aws", "zzzcfab", "thing_resource_gen.go")); !os.IsNotExist(err) {
 		t.Error("the rejected artifact's staged file should have been deleted so it is never promoted")
+	}
+	if _, err := os.Stat(filepath.Join(stagingDir, "out", "aws", "zzzcfab", "thing_resource_gen_test.go")); !os.IsNotExist(err) {
+		t.Error("the rejected artifact's paired staged _test.go must also be deleted — go build never blames it (tests are excluded), so it would otherwise silently survive promotion for a resource with no _gen.go")
 	}
 
 	d := decisions[row.CloudFormationTypeName]
@@ -156,7 +174,7 @@ func TestCompileFixpointRegistrationDropsFailedPackage(t *testing.T) {
 	stagingDir := t.TempDir()
 
 	row := scratchRow("aws_zzzcfrd_thing", "AWS::ZzzCfrd::Thing")
-	dest, gr := stageBrokenArtifact(t, cfg, stagingDir, row, row.CloudFormationTypeName)
+	dest, testDest, gr := stageBrokenArtifact(t, cfg, stagingDir, row, row.CloudFormationTypeName)
 	// Singular/plural modeled as already generation-failed — see the identical
 	// comment in TestCompileFixpointAttributesAndSuppressesABuildFailure for
 	// why a row-level pre-suppression does not work for a brand-new row.
@@ -170,7 +188,7 @@ func TestCompileFixpointRegistrationDropsFailedPackage(t *testing.T) {
 		row.CloudFormationTypeName: decide(classNew, *gr, "2026-08-31"),
 	}
 	stagedByDest := map[string]stagedArtifact{
-		dest: {class: classNew, gr: gr, artifact: 0},
+		dest: {class: classNew, gr: gr, artifact: 0, testDest: testDest},
 	}
 
 	overlay, base := minimalOverlayFor([]resourceRow{row})
@@ -210,7 +228,7 @@ func TestCompileFixpointUnattributableFailureHardStops(t *testing.T) {
 	stagingDir := t.TempDir()
 
 	row := scratchRow("aws_zzzcfuf_thing", "AWS::ZzzCfuf::Thing")
-	dest, gr := stageBrokenArtifact(t, cfg, stagingDir, row, row.CloudFormationTypeName)
+	dest, _, gr := stageBrokenArtifact(t, cfg, stagingDir, row, row.CloudFormationTypeName)
 	t.Cleanup(func() { _ = os.RemoveAll(filepath.Dir(dest)) })
 	_ = gr // the gateResult itself is irrelevant here; stagedByDest is left empty on purpose
 
@@ -285,7 +303,7 @@ func TestCompileGateFailureBlocksPromotion(t *testing.T) {
 	}
 
 	row2 := scratchRow("aws_zzzcgfb_thing", "AWS::ZzzCgfb::Thing")
-	dest2, _ := stageBrokenArtifact(t, cfg, stagingDir, row2, row2.CloudFormationTypeName)
+	dest2, _, _ := stageBrokenArtifact(t, cfg, stagingDir, row2, row2.CloudFormationTypeName)
 	t.Cleanup(func() { _ = os.RemoveAll(filepath.Dir(dest2)) })
 
 	overlay, base := minimalOverlayFor(append(append([]resourceRow{}, rows...), row2))

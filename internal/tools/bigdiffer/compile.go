@@ -208,7 +208,8 @@ const maxFixpointRounds = 25
 type stagedArtifact struct {
 	class    changeClass
 	gr       *gateResult
-	artifact int // index into gr.artifacts for this specific staged file
+	artifact int    // index into gr.artifacts for this specific staged file
+	testDest string // real destination path of the paired _test.go file
 }
 
 // collectStagedGoFiles walks stagingDir/out and returns every non-test .go
@@ -329,6 +330,26 @@ func compileFixpoint(cfg config, stagingDir, overlayContent string, base []resou
 			stagedPath := filepath.Join(stagingOut, rel)
 			if err := os.Remove(stagedPath); err != nil && !os.IsNotExist(err) {
 				return fmt.Errorf("compile gate: dropping rejected artifact %s: %w", stagedPath, err)
+			}
+
+			// Drop the paired staged _test.go too. go build never compiles
+			// or blames it (collectStagedGoFiles excludes _test.go, and the
+			// compiler doesn't build tests at all), so it would otherwise
+			// silently survive promotion alongside a now-suppressed artifact
+			// — a spurious committed test exercising a resource that no
+			// longer has a _gen.go, invisible to `make build` (which also
+			// excludes tests) and never cleaned up by a later run since the
+			// type is unchanged. Caught in review, not by the fixpoint tests
+			// (none of which stage a paired test file).
+			if art.testDest != "" {
+				testRel, testRelErr := filepath.Rel(cfg.outputRoot, art.testDest)
+				if testRelErr != nil {
+					return fmt.Errorf("compile gate: resolving staged test path for rejected artifact %s: %w", art.testDest, testRelErr)
+				}
+				stagedTestPath := filepath.Join(stagingOut, testRel)
+				if err := os.Remove(stagedTestPath); err != nil && !os.IsNotExist(err) {
+					return fmt.Errorf("compile gate: dropping rejected artifact's test file %s: %w", stagedTestPath, err)
+				}
 			}
 		}
 
