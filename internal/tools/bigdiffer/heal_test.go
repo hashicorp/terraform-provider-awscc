@@ -74,7 +74,7 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("migrates an existing comment to manual", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema")
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema", false)
 		if p.action != "reason" {
 			t.Errorf("action = %q, want reason", p.action)
 		}
@@ -85,9 +85,37 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("falls back to unknown with no comment", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "")
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", false)
 		if !strings.HasPrefix(p.reason, "unknown:") {
 			t.Errorf("reason = %q, want unknown: prefix", p.reason)
+		}
+	})
+
+	t.Run("multiPending offers the comment as a shared candidate, not a confirmed fact", func(t *testing.T) {
+		t.Parallel()
+		// Review resolution (suppressed-and-frozen.md, "-heal: re-probe and
+		// fill gaps"): a row-level comment cannot be assumed to
+		// describe more than one still-reason-less fact, so when more than
+		// one fact is pending it must be visibly marked as a shared
+		// candidate for a human to confirm per field, not silently
+		// duplicated into each field as if confirmed.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema", true)
+		if p.action != "reason" {
+			t.Errorf("action = %q, want reason", p.action)
+		}
+		if !strings.HasPrefix(p.reason, "manual: recursive schema") {
+			t.Errorf("reason = %q, want the manual: reason preserved verbatim as a prefix", p.reason)
+		}
+		if !strings.Contains(p.reason, "candidate") {
+			t.Errorf("reason = %q, want it visibly marked as a shared candidate when multiPending", p.reason)
+		}
+	})
+
+	t.Run("multiPending with no comment still falls back to unknown, unmarked", func(t *testing.T) {
+		t.Parallel()
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", true)
+		if !strings.HasPrefix(p.reason, "unknown:") {
+			t.Errorf("reason = %q, want unknown: prefix regardless of multiPending", p.reason)
 		}
 	})
 }
@@ -347,7 +375,7 @@ func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 			return probeArtifactWithBinary(bin, c, r, kind, s)
 		}
 
-		proposal := healArtifact(gateCfg, row, artifactResource, schema, nil, "")
+		proposal := healArtifact(gateCfg, row, healFact{kind: artifactResource, field: attrSuppressionReasonResource}, schema, nil, "", false)
 		if proposal.action != "reason" {
 			t.Fatalf("expected action=reason for a gate failure, got %q", proposal.action)
 		}
@@ -363,7 +391,7 @@ func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 		probeArtifact = func(config, resourceRow, artifactKind, []byte) error {
 			return errors.New("boom: invalid schema")
 		}
-		proposal := healArtifact(cfg, lg, artifactResource, schema, nil, "")
+		proposal := healArtifact(cfg, lg, healFact{kind: artifactResource, field: attrSuppressionReasonResource}, schema, nil, "", false)
 		if proposal.action != "reason" {
 			t.Fatalf("expected action=reason, got %q", proposal.action)
 		}
@@ -371,4 +399,148 @@ func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 			t.Errorf("expected a generation_failed-tagged reason, got %q", proposal.reason)
 		}
 	})
+}
+
+// TestHealFactsForNeedsHealing is the per-artifact gating fix itself (item
+// 9a/9b): a row's four facts (resource, singular DS, plural DS, freeze) must
+// each be judged independently — a row with a real reason on one fact and no
+// reason on another must surface only the still-reason-less one, not the
+// whole row as a unit (the pre-9b row-level gate's bug) and not silently skip
+// the still-broken one either.
+func TestHealFactsForNeedsHealing(t *testing.T) {
+	t.Parallel()
+
+	t.Run("only the still-reason-less fact needs healing", func(t *testing.T) {
+		t.Parallel()
+		row := resourceRow{
+			SuppressResourceGeneration:         true,
+			SuppressionReasonResource:          "manual: recursive schema", // already reasoned
+			SuppressPluralDataSourceGeneration: true,
+			SuppressionReasonPluralDataSource:  "", // still reason-less — this is 9a's motivating case
+		}
+		var pending []string
+		for _, f := range healFactsFor(row) {
+			if f.needsHealing() {
+				pending = append(pending, f.field)
+			}
+		}
+		if len(pending) != 1 || pending[0] != attrSuppressionReasonPlural {
+			t.Errorf("pending = %v, want only %s — the resource already has a real reason and must not be re-surfaced", pending, attrSuppressionReasonPlural)
+		}
+	})
+
+	t.Run("a fact tagged unknown still needs healing", func(t *testing.T) {
+		t.Parallel()
+		row := resourceRow{
+			SuppressResourceGeneration: true,
+			SuppressionReasonResource:  "unknown: no schema cached and no existing comment to migrate; needs a human look",
+		}
+		facts := healFactsFor(row)
+		if !facts[0].needsHealing() {
+			t.Error("an unknown:-tagged reason is still in the backlog and must need healing")
+		}
+	})
+
+	t.Run("an inactive fact never needs healing regardless of its reason field", func(t *testing.T) {
+		t.Parallel()
+		row := resourceRow{SuppressResourceGeneration: false, SuppressionReasonResource: ""}
+		facts := healFactsFor(row)
+		if facts[0].needsHealing() {
+			t.Error("a fact that isn't active (not suppressed/frozen) must never be proposed for healing")
+		}
+	})
+
+	t.Run("the freeze fact is independent of the three artifact facts", func(t *testing.T) {
+		t.Parallel()
+		row := resourceRow{
+			FrozenSince:                today2026,
+			FrozenReason:               "",
+			SuppressResourceGeneration: true,
+			SuppressionReasonResource:  "manual: recursive schema",
+		}
+		var pending []string
+		for _, f := range healFactsFor(row) {
+			if f.needsHealing() {
+				pending = append(pending, f.field)
+			}
+		}
+		if len(pending) != 1 || pending[0] != attrFrozenReason {
+			t.Errorf("pending = %v, want only %s — the freeze has its own empty reason independent of the already-reasoned resource", pending, attrFrozenReason)
+		}
+	})
+}
+
+const today2026 = "2026-01-01"
+
+// TestHealRowMultiPendingCommentCandidate is a healRow-level (not just
+// healArtifact-level) proof of the propose-don't-auto-split resolution: a row
+// with more than one still-reason-less fact and no cached schema (so every
+// fact falls through to the comment/unknown fallback) must offer the same
+// comment text to each pending fact, each visibly marked as a shared
+// candidate — not silently duplicated as if independently confirmed.
+func TestHealRowMultiPendingCommentCandidate(t *testing.T) {
+	t.Parallel()
+
+	row := resourceRow{
+		CloudFormationTypeName:             "AWS::Svc::NoSchema",
+		ResourceTypeName:                   "aws_svc_noschema",
+		CloudFormationSchemaPath:           "/nonexistent/schema.json",
+		SuppressResourceGeneration:         true,
+		SuppressPluralDataSourceGeneration: true,
+	}
+	pending := []healFact{
+		{kind: artifactResource, field: attrSuppressionReasonResource, active: true},
+		{kind: artifactPluralDataSource, field: attrSuppressionReasonPlural, active: true},
+	}
+
+	proposals := healRow(config{cacheDir: "/nonexistent/cache"}, row, pending, "some legacy free-form reason")
+	if len(proposals) != 2 {
+		t.Fatalf("got %d proposals, want 2 (one per pending fact)", len(proposals))
+	}
+	for _, p := range proposals {
+		if p.action != "reason" {
+			t.Errorf("proposal %+v: action should be reason (no schema cached, nothing to probe)", p)
+		}
+		if !strings.Contains(p.reason, "some legacy free-form reason") {
+			t.Errorf("proposal %+v: should carry the migrated comment text", p)
+		}
+		if !strings.Contains(p.reason, "candidate") {
+			t.Errorf("proposal %+v: with 2 pending facts, the comment must be marked as a shared candidate, not a confirmed fact", p)
+		}
+	}
+	fields := map[string]bool{}
+	for _, p := range proposals {
+		fields[p.field] = true
+	}
+	if !fields[attrSuppressionReasonResource] || !fields[attrSuppressionReasonPlural] {
+		t.Errorf("expected one proposal per pending field, got %+v", proposals)
+	}
+}
+
+// TestHealRowSinglePendingNoComment confirms the single-fact path is
+// unaffected by the multiPending wording change — a row with only one
+// still-reason-less fact gets a plain, unmarked reason.
+func TestHealRowSinglePendingNoComment(t *testing.T) {
+	t.Parallel()
+
+	row := resourceRow{
+		CloudFormationTypeName:     "AWS::Svc::NoSchema2",
+		ResourceTypeName:           "aws_svc_noschema2",
+		CloudFormationSchemaPath:   "/nonexistent/schema.json",
+		SuppressResourceGeneration: true,
+	}
+	pending := []healFact{
+		{kind: artifactResource, field: attrSuppressionReasonResource, active: true},
+	}
+
+	proposals := healRow(config{cacheDir: "/nonexistent/cache"}, row, pending, "")
+	if len(proposals) != 1 {
+		t.Fatalf("got %d proposals, want 1", len(proposals))
+	}
+	if !strings.HasPrefix(proposals[0].reason, "unknown:") {
+		t.Errorf("proposal reason = %q, want unknown: prefix (no comment, no schema)", proposals[0].reason)
+	}
+	if strings.Contains(proposals[0].reason, "candidate") {
+		t.Errorf("proposal reason = %q, a single pending fact must not be marked as a shared candidate", proposals[0].reason)
+	}
 }

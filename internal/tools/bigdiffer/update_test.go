@@ -21,7 +21,7 @@ func TestNormalizeWithDecisions(t *testing.T) {
 		"AWS::EC2::Newthing": {
 			addBlock: true,
 			setAttrs: map[string]string{attrSuppressResource: "true"},
-			reason:   "generation failed: boom",
+			reasons:  map[string]string{attrSuppressionReasonResource: "generation failed: boom"},
 		},
 	}
 
@@ -46,8 +46,8 @@ func TestNormalizeWithDecisions(t *testing.T) {
 	if !strings.Contains(newthing, "suppress_resource_generation") || !strings.Contains(newthing, "= true") {
 		t.Errorf("newthing missing suppress flag:\n%s", newthing)
 	}
-	if !strings.Contains(newthing, `suppression_reason`) || !strings.Contains(newthing, `"generation failed: boom"`) {
-		t.Errorf("newthing missing suppression_reason:\n%s", newthing)
+	if !strings.Contains(newthing, `suppression_reason_resource`) || !strings.Contains(newthing, `"generation failed: boom"`) {
+		t.Errorf("newthing missing suppression_reason_resource:\n%s", newthing)
 	}
 }
 

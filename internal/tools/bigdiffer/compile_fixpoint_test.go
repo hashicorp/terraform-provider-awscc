@@ -154,8 +154,8 @@ func TestCompileFixpointAttributesAndSuppressesABuildFailure(t *testing.T) {
 	if d.setAttrs[attrSuppressResource] != "true" {
 		t.Errorf("expected the resource to be suppressed after the build gate rejected it, got %+v", d)
 	}
-	if !strings.HasPrefix(d.reason, "build_failed:") {
-		t.Errorf("expected a build_failed-tagged reason, got %q", d.reason)
+	if !strings.HasPrefix(d.reasons[attrSuppressionReasonResource], "build_failed:") {
+		t.Errorf("expected a build_failed-tagged reason, got %q", d.reasons[attrSuppressionReasonResource])
 	}
 }
 

@@ -92,7 +92,7 @@ func TestE2ELiveUpdate(t *testing.T) {
 			t.Logf("  %s (%s): %s", c.cfType, c.class, d.summary)
 		} else {
 			brokeN++
-			t.Logf("  %s (%s): %s [%s]", c.cfType, c.class, d.summary, d.reason)
+			t.Logf("  %s (%s): %s [%+v]", c.cfType, c.class, d.summary, d.reasons)
 		}
 	}
 	t.Logf("regenerated %d candidate(s): %d OK, %d frozen/suppressed", len(cands), okN, brokeN)

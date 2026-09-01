@@ -101,7 +101,7 @@ func TestNormalize(t *testing.T) {
 	wantNew := `resource_schema "aws_ec2_newthing" {
   cloudformation_type_name               = "AWS::EC2::Newthing"
   suppress_plural_data_source_generation = true
-  suppression_reason                     = "structural: no list handler with zero required arguments"
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }`
 	if !strings.Contains(out, wantNew) {
 		t.Errorf("new block not rendered as expected:\n%s", out)
@@ -149,13 +149,19 @@ func TestNormalize(t *testing.T) {
 		t.Errorf("NamingViolate = %v, want one entry for AWS::EC2::Widget", report.NamingViolate)
 	}
 
-	// complexBlock suppresses two artifacts via a free-form "# Suppression
-	// Reason:" comment, not the structured suppression_reason attribute, so
-	// item 8's check must still flag it. Newthing is suppressed too, but
-	// canonicalBlock stamps a structural suppression_reason automatically, so
-	// it must NOT be flagged.
-	if len(report.ReasonlessSuppressed) != 1 || report.ReasonlessSuppressed[0].cfn != "AWS::EC2::Complex" {
-		t.Errorf("ReasonlessSuppressed = %+v, want [AWS::EC2::Complex]", report.ReasonlessSuppressed)
+	// complexBlock suppresses two artifacts (resource + plural) via a
+	// free-form "# Suppression Reason:" comment, not the structured reason
+	// fields, so item 8/9b's per-fact check must flag both independently.
+	// Newthing is suppressed too, but canonicalBlock stamps a structural
+	// suppression_reason_plural_data_source automatically, so it must NOT be
+	// flagged.
+	if len(report.ReasonlessSuppressed) != 2 {
+		t.Fatalf("ReasonlessSuppressed = %+v, want 2 entries for AWS::EC2::Complex (resource + plural)", report.ReasonlessSuppressed)
+	}
+	for _, f := range report.ReasonlessSuppressed {
+		if f.cfn != "AWS::EC2::Complex" {
+			t.Errorf("unexpected ReasonlessSuppressed entry %+v, want only AWS::EC2::Complex", f)
+		}
 	}
 }
 
@@ -368,8 +374,12 @@ func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
 }
 
 // TestReasonlessSuppressionAnomaly is generation-punchlist.md item 8's
-// regression test: a row that is suppressed or frozen with no
-// suppression_reason is flagged, advisory-only (never a -check failure).
+// regression test, updated for item 9b: a suppressed artifact or a freeze
+// with its own reason field empty is flagged per-fact, not per-row — a row
+// can have a real reason for one fact (e.g. its resource) while another of
+// its facts (e.g. its plural DS, or its freeze) is still reason-less, and
+// each is its own independent anomaly line. Advisory only (never a -check
+// failure).
 func TestReasonlessSuppressionAnomaly(t *testing.T) {
 	t.Parallel()
 
@@ -379,20 +389,27 @@ func TestReasonlessSuppressionAnomaly(t *testing.T) {
 }`
 	reasoned := `resource_schema "aws_svc_reasoned" {
   cloudformation_type_name = "AWS::Svc::Reasoned"
-  suppress_resource_generation = true
-  suppression_reason           = "manual: recursive schema"
+  suppress_resource_generation      = true
+  suppression_reason_resource       = "manual: recursive schema"
+}`
+	mixed := `resource_schema "aws_svc_mixed" {
+  cloudformation_type_name = "AWS::Svc::Mixed"
+  suppress_resource_generation      = true
+  suppression_reason_resource       = "manual: recursive schema"
+  suppress_plural_data_source_generation = true
 }`
 	clean := `resource_schema "aws_svc_clean" {
   cloudformation_type_name = "AWS::Svc::Clean"
 }`
 
 	overlay := testHead +
-		"# 3 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
-		strings.Join([]string{reasonless, reasoned, clean}, "\n\n") + "\n"
+		"# 4 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
+		strings.Join([]string{reasonless, reasoned, mixed, clean}, "\n\n") + "\n"
 
 	base := []resourceRow{
 		{ResourceTypeName: "aws_svc_reasonless", CloudFormationTypeName: "AWS::Svc::Reasonless", FrozenSince: "2023-01-01"},
-		{ResourceTypeName: "aws_svc_reasoned", CloudFormationTypeName: "AWS::Svc::Reasoned", SuppressResourceGeneration: true, SuppressionReason: "manual: recursive schema"},
+		{ResourceTypeName: "aws_svc_reasoned", CloudFormationTypeName: "AWS::Svc::Reasoned", SuppressResourceGeneration: true, SuppressionReasonResource: "manual: recursive schema"},
+		{ResourceTypeName: "aws_svc_mixed", CloudFormationTypeName: "AWS::Svc::Mixed", SuppressResourceGeneration: true, SuppressionReasonResource: "manual: recursive schema", SuppressPluralDataSourceGeneration: true},
 		{ResourceTypeName: "aws_svc_clean", CloudFormationTypeName: "AWS::Svc::Clean"},
 	}
 
@@ -401,8 +418,21 @@ func TestReasonlessSuppressionAnomaly(t *testing.T) {
 		t.Fatalf("normalize: %v", err)
 	}
 
-	if len(report.ReasonlessSuppressed) != 1 || report.ReasonlessSuppressed[0].cfn != "AWS::Svc::Reasonless" {
-		t.Errorf("ReasonlessSuppressed = %+v, want [AWS::Svc::Reasonless]", report.ReasonlessSuppressed)
+	if len(report.ReasonlessSuppressed) != 2 {
+		t.Fatalf("ReasonlessSuppressed = %+v, want 2 entries (the frozen-with-no-reason row, and the mixed row's still-reason-less plural DS)", report.ReasonlessSuppressed)
+	}
+	byCFN := map[string]reasonlessFact{}
+	for _, f := range report.ReasonlessSuppressed {
+		byCFN[f.cfn] = f
+	}
+	if f, ok := byCFN["AWS::Svc::Reasonless"]; !ok || f.field != attrFrozenReason {
+		t.Errorf("expected AWS::Svc::Reasonless flagged for its empty %s, got %+v", attrFrozenReason, byCFN)
+	}
+	if f, ok := byCFN["AWS::Svc::Mixed"]; !ok || f.field != attrSuppressionReasonPlural {
+		t.Errorf("expected AWS::Svc::Mixed flagged for its empty %s (its resource already has a real reason and must not mask the plural DS's), got %+v", attrSuppressionReasonPlural, byCFN)
+	}
+	if _, ok := byCFN["AWS::Svc::Reasoned"]; ok {
+		t.Errorf("AWS::Svc::Reasoned's only fact (its resource) has a real reason, should not be flagged, got %+v", byCFN)
 	}
 	if got := report.anomalyProblems(); len(got) != 0 {
 		t.Errorf("reason-less suppression must be advisory, not a -check failure, got %v", got)

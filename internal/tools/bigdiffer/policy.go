@@ -4,19 +4,21 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 )
 
 // Overlay attribute names the policy sets on a block.
 const (
-	attrFrozenSince       = "frozen_since"
-	attrNonProvisionable  = "non_provisionable"
-	attrSuppressResource  = "suppress_resource_generation"
-	attrSuppressSingular  = "suppress_singular_data_source_generation"
-	attrSuppressPlural    = "suppress_plural_data_source_generation"
-	attrSuppressionReason = "suppression_reason"
+	attrFrozenSince               = "frozen_since"
+	attrFrozenReason              = "frozen_reason"
+	attrNonProvisionable          = "non_provisionable"
+	attrSuppressResource          = "suppress_resource_generation"
+	attrSuppressSingular          = "suppress_singular_data_source_generation"
+	attrSuppressPlural            = "suppress_plural_data_source_generation"
+	attrSuppressionReasonResource = "suppression_reason_resource"
+	attrSuppressionReasonSingular = "suppression_reason_singular_data_source"
+	attrSuppressionReasonPlural   = "suppression_reason_plural_data_source"
 )
 
 // reasonCategory is the taxonomy every suppression_reason bigdiffer writes is
@@ -58,12 +60,13 @@ const (
 )
 
 // policyDecision is the overlay edit for one type: whether to add a new block,
-// which attributes to set on it, an optional suppression_reason, and a one-line
-// report summary. Per the design invariants, no decision blocks a release.
+// which attributes to set on it, any suppression/frozen reason text, and a
+// one-line report summary. Per the design invariants, no decision blocks a
+// release.
 type policyDecision struct {
 	addBlock bool
 	setAttrs map[string]string // attribute -> value ("true" for bools; date for frozen_since)
-	reason   string            // suppression_reason text, when suppressing/freezing
+	reasons  map[string]string // reason attribute -> text (suppression_reason_*, frozen_reason)
 	summary  string            // human-facing report line
 }
 
@@ -81,7 +84,7 @@ func decide(class changeClass, gr gateResult, today string) policyDecision {
 		return policyDecision{
 			addBlock: true,
 			setAttrs: suppressAttrsForFailures(gr),
-			reason:   gateFailureReason(gr),
+			reasons:  reasonsForFailures(gr),
 			summary:  "new: generation failed, added suppressed (backlog)",
 		}
 
@@ -96,18 +99,24 @@ func decide(class changeClass, gr gateResult, today string) policyDecision {
 			// advance — one JSON file backs all three artifacts — and the
 			// artifacts that failed against it are suppressed individually,
 			// each with its own reason, so the working artifacts are not held
-			// back by the broken one.
+			// back by the broken one. The freeze itself gets its own
+			// frozen_reason rationale (frozenReasonForFailures), distinct
+			// from the per-artifact failure text: the freeze is caused by the
+			// "can't partially advance one shared JSON" invariant, not by any
+			// one artifact's specific error.
 			attrs := suppressAttrsForFailures(gr)
 			attrs[attrFrozenSince] = today
+			reasons := reasonsForFailures(gr)
+			reasons[attrFrozenReason] = frozenReasonForFailures(gr)
 			return policyDecision{
 				setAttrs: attrs,
-				reason:   gateFailureReason(gr),
+				reasons:  reasons,
 				summary:  "present: partial failure, schema frozen, broken artifact(s) suppressed",
 			}
 		}
 		return policyDecision{
 			setAttrs: map[string]string{attrFrozenSince: today},
-			reason:   gateFailureReason(gr),
+			reasons:  map[string]string{attrFrozenReason: totalFailureReason(gr)},
 			summary:  "present: generation broke, frozen at last-good bytes",
 		}
 
@@ -120,12 +129,39 @@ func decide(class changeClass, gr gateResult, today string) policyDecision {
 	case classWithdrawn:
 		return policyDecision{
 			setAttrs: map[string]string{attrFrozenSince: today},
-			reason:   formatReason(reasonManual, "withdrawn from AWS, pending major-version removal"),
+			reasons:  map[string]string{attrFrozenReason: formatReason(reasonManual, "withdrawn from AWS, pending major-version removal")},
 			summary:  "withdrawn from AWS: frozen, kept pending major-version removal",
 		}
 
 	default:
 		return policyDecision{summary: "no action"}
+	}
+}
+
+// suppressAttrFor and reasonAttrFor map an artifact kind to its suppress_* flag
+// and suppression_reason_* attribute name, respectively — the single source of
+// truth both suppressAttrsForFailures and reasonsForFailures key from, so their
+// fallback behavior (below) cannot drift apart by one being updated without the
+// other (contributing/docs/bigdiffer-design.md).
+func suppressAttrFor(kind artifactKind) string {
+	switch kind {
+	case artifactSingularDataSource:
+		return attrSuppressSingular
+	case artifactPluralDataSource:
+		return attrSuppressPlural
+	default:
+		return attrSuppressResource
+	}
+}
+
+func reasonAttrFor(kind artifactKind) string {
+	switch kind {
+	case artifactSingularDataSource:
+		return attrSuppressionReasonSingular
+	case artifactPluralDataSource:
+		return attrSuppressionReasonPlural
+	default:
+		return attrSuppressionReasonResource
 	}
 }
 
@@ -139,14 +175,7 @@ func suppressAttrsForFailures(gr gateResult) map[string]string {
 		if a.outcome == gateOK {
 			continue
 		}
-		switch a.kind {
-		case artifactResource:
-			attrs[attrSuppressResource] = "true"
-		case artifactSingularDataSource:
-			attrs[attrSuppressSingular] = "true"
-		case artifactPluralDataSource:
-			attrs[attrSuppressPlural] = "true"
-		}
+		attrs[suppressAttrFor(a.kind)] = "true"
 	}
 	if len(attrs) == 0 {
 		attrs[attrSuppressResource] = "true"
@@ -154,20 +183,73 @@ func suppressAttrsForFailures(gr gateResult) map[string]string {
 	return attrs
 }
 
-// gateFailureReason renders a compact, deterministic suppression_reason from the
-// failed artifacts' errors. Each artifact is tagged by which stage rejected it:
-// generation_failed (the owned engine returned an error) or build_failed (it
-// generated fine but the compile gate's `go build` rejected it — item 1). A
-// gateResult with a mix of both across its artifacts renders a mixed reason;
-// each artifact's own tag is still correct individually via suppressAttrsForFailures.
-func gateFailureReason(gr gateResult) string {
+// reasonsForFailures renders one suppression_reason_* value per failed
+// artifact, keyed by the same attribute name suppressAttrsForFailures uses for
+// that artifact's suppress_* flag — so decide() can zip the two maps directly
+// when building policyDecision.setAttrs. Each artifact is tagged by which stage
+// rejected it: generation_failed (the owned engine returned an error) or
+// build_failed (it generated fine but the compile gate's `go build` rejected
+// it — item 1).
+//
+// Mirrors suppressAttrsForFailures' len(attrs) == 0 fallback exactly: if no
+// specific artifact is attributable, that function still defensively
+// suppresses the resource, so this function must still supply a matching
+// reason for it — otherwise -check's per-field reason anomaly would flag a
+// suppression this same decision just made as reason-less.
+func reasonsForFailures(gr gateResult) map[string]string {
+	reasons := make(map[string]string)
+	for _, a := range gr.artifacts {
+		if a.outcome == gateOK || a.err == nil {
+			continue
+		}
+		category := reasonGenerationFailed
+		if a.outcome == gateFailedBuild {
+			category = reasonBuildFailed
+		}
+		reasons[reasonAttrFor(a.kind)] = formatReason(category, firstLine(a.err.Error()))
+	}
+	if len(reasons) == 0 {
+		reasons[attrSuppressionReasonResource] = formatReason(reasonGenerationFailed,
+			"no attributable per-artifact failure; suppressed resource generation defensively")
+	}
+	return reasons
+}
+
+// frozenReasonForFailures renders the frozen_reason value for a classPresent
+// partial failure: the freeze there is caused by a structural invariant ("one
+// JSON backs all three artifacts, cannot partially advance"), not by any one
+// artifact's specific error, so it gets its own fixed rationale sentence
+// distinct from reasonsForFailures' per-artifact text — but its category
+// prefix must still be derived from what actually triggered the freeze (any
+// failing artifact rejected by the compile gate favors build_failed, mirroring
+// reasonsForFailures' own per-artifact rule) rather than hardcoded, since a
+// partial failure can be triggered by a build failure just as easily as a
+// generation failure.
+func frozenReasonForFailures(gr gateResult) string {
+	category := reasonGenerationFailed
+	for _, a := range gr.artifacts {
+		if a.outcome == gateFailedBuild {
+			category = reasonBuildFailed
+		}
+	}
+	return formatReason(category, "schema pinned — one JSON backs all three artifacts, cannot partially advance")
+}
+
+// totalFailureReason renders the frozen_reason for a classPresent type where
+// every artifact failed (gr.anyOK() is false): nothing is suppressed in this
+// branch (no artifact is promoted, so there is no suppress_* flag to attach a
+// per-artifact reason to), the type simply doesn't advance and is frozen at its
+// last-good bytes — so, unlike reasonsForFailures, this renders one combined,
+// artifact-labeled string (mirroring the pre-split gateFailureReason) directly
+// into frozen_reason.
+func totalFailureReason(gr gateResult) string {
 	var parts []string
 	category := reasonGenerationFailed
 	for _, a := range gr.artifacts {
 		if a.outcome == gateOK || a.err == nil {
 			continue
 		}
-		parts = append(parts, fmt.Sprintf("%s: %s", a.kind, firstLine(a.err.Error())))
+		parts = append(parts, string(a.kind)+": "+firstLine(a.err.Error()))
 		if a.outcome == gateFailedBuild {
 			category = reasonBuildFailed
 		}

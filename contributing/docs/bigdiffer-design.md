@@ -47,8 +47,9 @@ git, no dated snapshots, no manual transcription.
   Terraform type name and whether a plural data source is supported (a `list`
   handler with no required arguments).
 - Input O — the overlay: every type the provider tracks, plus per-type policy
-  (`suppress_*_generation`, `frozen_since`, `non_provisionable`,
-  `suppression_reason`).
+  (`suppress_*_generation`, `frozen_since`, `non_provisionable`, and a reason
+  per fact: `suppression_reason_resource` / `_singular_data_source` /
+  `_plural_data_source`, `frozen_reason`).
 - Output — the overlay, rewritten in place, plus a change report.
 
 The join key is the CFN type name (e.g. `AWS::S3::Bucket`); no other correlation
@@ -109,9 +110,10 @@ The overlay is the single policy surface, per block:
 - `suppress_resource_generation`, `suppress_singular_data_source_generation`,
   `suppress_plural_data_source_generation` — do not generate that artifact.
 - `non_provisionable` — cannot be provisioned via Cloud Control.
-- `suppression_reason` and free-form comments — human rationale, preserved
-  verbatim. The reason taxonomy and its enforcement live in
-  `suppressed-and-frozen.md`.
+- `suppression_reason_resource` / `_singular_data_source` / `_plural_data_source`,
+  `frozen_reason`, and free-form comments — human rationale, one field per
+  fact rather than one shared string, preserved verbatim. The reason taxonomy
+  and its enforcement live in `suppressed-and-frozen.md`.
 
 Pinning and generation-suppression are orthogonal and may co-occur, but they now
 live in one file with one mental model. (`suppressions_checkout.txt` is still
@@ -186,7 +188,9 @@ rather than shipping a list resource with no backing data source.
 Change class plus gate result determine the overlay edit. "Failed" covers both a
 generation failure and a compile (`build_failed`) failure; suppression is
 per-artifact — only the artifacts that failed are suppressed, each with its own
-categorized `suppression_reason`.
+categorized reason in its own field
+(`suppression_reason_resource`/`_singular_data_source`/`_plural_data_source`);
+a freeze, when one applies, carries its own separate `frozen_reason`.
 
 | Change class | Gate result | Overlay action |
 |--------------|-------------|----------------|
@@ -215,8 +219,9 @@ recovery automatically.
 ## 8. The one human step
 
 Everything above is mechanical. The human reviews the change report before
-commit: confirm or override auto-applied freezes/suppressions, supply
-`suppression_reason` text and issue links, and adjudicate flagged anomalies. A
+commit: confirm or override auto-applied freezes/suppressions, supply the
+appropriate per-artifact `suppression_reason_*` (or `frozen_reason`) text and
+issue links, and adjudicate flagged anomalies. A
 machine-readable report (so it can also seed release notes) is not yet built —
 see §11.
 

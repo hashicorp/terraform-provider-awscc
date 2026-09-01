@@ -5,6 +5,7 @@ package main
 
 import (
 	"errors"
+	"strings"
 	"testing"
 )
 
@@ -42,8 +43,11 @@ func TestDecide(t *testing.T) {
 		if _, ok := d.setAttrs[attrSuppressSingular]; ok {
 			t.Errorf("singular gated OK, should not be suppressed")
 		}
-		if d.reason == "" || d.reason != "generation_failed: resource: recursive definition" {
-			t.Errorf("reason = %q, want generation_failed-tagged first-line failure detail", d.reason)
+		if got := d.reasons[attrSuppressionReasonResource]; got != "generation_failed: recursive definition" {
+			t.Errorf("reasons[%s] = %q, want generation_failed-tagged first-line failure detail", attrSuppressionReasonResource, got)
+		}
+		if _, ok := d.reasons[attrSuppressionReasonSingular]; ok {
+			t.Errorf("singular gated OK, should not have a reason, got %+v", d.reasons)
 		}
 	})
 
@@ -110,8 +114,11 @@ func TestDecide(t *testing.T) {
 		if _, ok := d.setAttrs[attrSuppressResource]; ok {
 			t.Errorf("a total failure should not also suppress individual artifacts, got %+v", d.setAttrs)
 		}
-		if d.reason == "" {
-			t.Errorf("freeze should record a reason")
+		if d.reasons[attrFrozenReason] == "" {
+			t.Errorf("freeze should record a frozen_reason, got %+v", d.reasons)
+		}
+		if _, ok := d.reasons[attrSuppressionReasonResource]; ok {
+			t.Errorf("a total failure suppresses nothing, so it should not set a per-artifact reason either, got %+v", d.reasons)
 		}
 	})
 
@@ -130,8 +137,14 @@ func TestDecide(t *testing.T) {
 		if _, ok := d.setAttrs[attrSuppressSingular]; ok {
 			t.Errorf("singular gated OK, should not be suppressed, got %+v", d.setAttrs)
 		}
-		if d.reason == "" {
-			t.Errorf("partial failure should record a reason")
+		if d.reasons[attrFrozenReason] == "" {
+			t.Errorf("partial failure should record a frozen_reason, got %+v", d.reasons)
+		}
+		if d.reasons[attrSuppressionReasonResource] == "" {
+			t.Errorf("the failed resource should record its own reason too, got %+v", d.reasons)
+		}
+		if _, ok := d.reasons[attrSuppressionReasonSingular]; ok {
+			t.Errorf("singular gated OK, should not have a reason, got %+v", d.reasons)
 		}
 	})
 
@@ -192,12 +205,13 @@ func TestDecide(t *testing.T) {
 	})
 }
 
-// TestGateFailureReason covers the compile gate's taxonomy distinction (item 1):
-// a build-gate rejection (gateFailedBuild) must render build_failed, not
-// generation_failed, since they are different stages with different remediation
-// (a build failure means the compile gate's own go build rejected code the
-// engine rendered fine; a generation failure means the engine itself errored).
-func TestGateFailureReason(t *testing.T) {
+// TestReasonsForFailures covers the compile gate's taxonomy distinction (item
+// 1) now rendered per-artifact (item 9b): a build-gate rejection
+// (gateFailedBuild) must render build_failed, not generation_failed, since
+// they are different stages with different remediation (a build failure means
+// the compile gate's own go build rejected code the engine rendered fine; a
+// generation failure means the engine itself errored).
+func TestReasonsForFailures(t *testing.T) {
 	t.Parallel()
 
 	t.Run("generation failure tags generation_failed", func(t *testing.T) {
@@ -205,9 +219,9 @@ func TestGateFailureReason(t *testing.T) {
 		gr := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
 			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("boom")},
 		}}
-		got := gateFailureReason(gr)
-		if got != "generation_failed: resource: boom" {
-			t.Errorf("got %q, want generation_failed-tagged", got)
+		got := reasonsForFailures(gr)
+		if got[attrSuppressionReasonResource] != "generation_failed: boom" {
+			t.Errorf("got %+v, want generation_failed-tagged", got)
 		}
 	})
 
@@ -216,29 +230,115 @@ func TestGateFailureReason(t *testing.T) {
 		gr := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
 			{kind: artifactResource, outcome: gateFailedBuild, err: errors.New("undefined: fwvalidators.Foo")},
 		}}
-		got := gateFailureReason(gr)
-		if got != "build_failed: resource: undefined: fwvalidators.Foo" {
-			t.Errorf("got %q, want build_failed-tagged", got)
+		got := reasonsForFailures(gr)
+		if got[attrSuppressionReasonResource] != "build_failed: undefined: fwvalidators.Foo" {
+			t.Errorf("got %+v, want build_failed-tagged", got)
 		}
 	})
 
-	t.Run("a mix of build and generation failures tags build_failed", func(t *testing.T) {
+	t.Run("a mix of build and generation failures tags each artifact independently", func(t *testing.T) {
 		t.Parallel()
-		// A gateResult mixing both stages across its artifacts is an edge case
-		// (a type whose resource failed to generate and whose singular DS
-		// generated but failed the compile gate) — the render is one reason
-		// string for the whole type, so it favors the more specific
-		// build_failed tag rather than silently defaulting to
-		// generation_failed. Each artifact's own suppress_* attribute is still
-		// set correctly regardless (suppressAttrsForFailures is outcome-agnostic
-		// beyond != gateOK), so nothing is mis-suppressed by this choice.
+		// Unlike the pre-9b single combined reason string, each artifact now
+		// gets its own map entry keyed by its own reason attribute, so a
+		// gateResult mixing both stages across its artifacts renders each
+		// correctly rather than one string picking a single "more specific"
+		// category for the whole type.
 		gr := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
 			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("gen boom")},
 			{kind: artifactSingularDataSource, outcome: gateFailedBuild, err: errors.New("build boom")},
 		}}
-		got := gateFailureReason(gr)
-		if got != "build_failed: resource: gen boom; singular_data_source: build boom" {
-			t.Errorf("got %q, want build_failed-tagged with both details", got)
+		got := reasonsForFailures(gr)
+		if got[attrSuppressionReasonResource] != "generation_failed: gen boom" {
+			t.Errorf("resource reason = %q, want generation_failed-tagged", got[attrSuppressionReasonResource])
+		}
+		if got[attrSuppressionReasonSingular] != "build_failed: build boom" {
+			t.Errorf("singular reason = %q, want build_failed-tagged", got[attrSuppressionReasonSingular])
 		}
 	})
+
+	t.Run("no attributable failure still yields a matching resource reason (the len==0 fallback)", func(t *testing.T) {
+		t.Parallel()
+		// suppressAttrsForFailures' own len(attrs)==0 fallback defensively
+		// suppresses the resource when nothing in gr.artifacts is
+		// attributable; reasonsForFailures must mirror that exact condition
+		// so the fallback-suppressed resource still gets a reason — otherwise
+		// -check's per-field anomaly would flag a suppression this same
+		// decision just made as reason-less (review finding 3).
+		gr := gateResult{cfType: "AWS::Svc::Thing"} // no artifacts at all
+		attrs := suppressAttrsForFailures(gr)
+		reasons := reasonsForFailures(gr)
+		if attrs[attrSuppressResource] != "true" {
+			t.Fatalf("expected the fallback to suppress the resource, got %+v", attrs)
+		}
+		if reasons[attrSuppressionReasonResource] == "" {
+			t.Errorf("expected a matching fallback reason for the fallback-suppressed resource, got %+v", reasons)
+		}
+	})
+}
+
+// TestFrozenReasonForFailures covers review finding 4/5: the partial-failure
+// branch's frozen_reason needs its own rationale text (not the per-artifact
+// failure string), but its category prefix must still be derived from
+// whether any failing artifact was rejected by the compile gate, not
+// hardcoded — a partial failure can be triggered by a build failure just as
+// easily as a generation failure.
+func TestFrozenReasonForFailures(t *testing.T) {
+	t.Parallel()
+
+	t.Run("generation-triggered partial failure tags generation_failed", func(t *testing.T) {
+		t.Parallel()
+		gr := gateResult{artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("boom")},
+			{kind: artifactSingularDataSource, outcome: gateOK},
+		}}
+		got := frozenReasonForFailures(gr)
+		if !strings.HasPrefix(got, "generation_failed:") {
+			t.Errorf("got %q, want a generation_failed-tagged frozen_reason", got)
+		}
+	})
+
+	t.Run("build-triggered partial failure tags build_failed, not generation_failed", func(t *testing.T) {
+		t.Parallel()
+		gr := gateResult{artifacts: []artifactResult{
+			{kind: artifactPluralDataSource, outcome: gateFailedBuild, err: errors.New("undefined symbol")},
+			{kind: artifactResource, outcome: gateOK},
+		}}
+		got := frozenReasonForFailures(gr)
+		if !strings.HasPrefix(got, "build_failed:") {
+			t.Errorf("got %q, want a build_failed-tagged frozen_reason — hardcoding generation_failed here would mislabel a build-triggered freeze", got)
+		}
+		if strings.HasPrefix(got, "generation_failed:") {
+			t.Errorf("got %q, must not fall back to generation_failed for a build-triggered freeze", got)
+		}
+	})
+
+	t.Run("rationale text describes the shared-JSON invariant, not any one artifact's error", func(t *testing.T) {
+		t.Parallel()
+		gr := gateResult{artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("very specific artifact error text")},
+		}}
+		got := frozenReasonForFailures(gr)
+		if strings.Contains(got, "very specific artifact error text") {
+			t.Errorf("got %q, frozen_reason should not reuse the per-artifact failure detail", got)
+		}
+		if !strings.Contains(got, "cannot partially advance") {
+			t.Errorf("got %q, want the shared-JSON rationale", got)
+		}
+	})
+}
+
+// TestTotalFailureReason covers the classPresent branch where every artifact
+// failed: nothing is suppressed, so the combined, artifact-labeled reason
+// (mirroring the pre-9b gateFailureReason) goes directly into frozen_reason.
+func TestTotalFailureReason(t *testing.T) {
+	t.Parallel()
+
+	gr := gateResult{artifacts: []artifactResult{
+		{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("gen boom")},
+		{kind: artifactSingularDataSource, outcome: gateFailedBuild, err: errors.New("build boom")},
+	}}
+	got := totalFailureReason(gr)
+	if got != "build_failed: resource: gen boom; singular_data_source: build boom" {
+		t.Errorf("got %q, want build_failed-tagged with both details", got)
+	}
 }

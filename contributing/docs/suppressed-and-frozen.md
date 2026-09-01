@@ -42,7 +42,8 @@ them currently record *why* they were pulled. This doc has two parts:
 | `suppress_plural_data_source_generation` | bool | one artifact (+ gates `ListResource`, see below) | don't generate/emit the plural data source |
 | `frozen_since` | date string | whole type | stop refreshing this type's schema from AWS; keep last-good bytes |
 | `non_provisionable` | bool | whole type | annotation only: AWS lists the type but it cannot actually be provisioned (no generation impact) |
-| `suppression_reason` | string | whole type | **HCL field exists, but is never populated** — see below |
+| `suppression_reason_resource` / `_singular_data_source` / `_plural_data_source` | string | one artifact each | one reason per artifact, not one shared field — see below and `generation-punchlist.md` item 9b |
+| `frozen_reason` | string | whole type | why the schema is pinned; independent of any artifact's own reason |
 | `internal/update/suppressions_checkout.txt` | file, external | whole type | a separate, older mechanism: pins specific `internal/service/cloudformation/schemas/AWS_*.json` files via `git checkout` so a refresh keeps last-good bytes. Orthogonal to everything above; read-only cross-reference in bigdiffer today (see `bigdiffer-design.md` §5 and "Deferred and future work" for the planned fold into `frozen_since`) |
 
 One structural fact shapes everything else: a resource, its singular data
@@ -101,17 +102,20 @@ format bigdiffer manages, since it operates through its own parallel copy of
 the make-target flow.
 
 **bigdiffer today.** `decide()` (`policy.go`) sets suppression for a **New**
-type per the failed artifact (correctly per-artifact), and `gateFailureReason()`
-builds a `suppression_reason` string from the generation error automatically.
-This is real progress — a machine-written reason, always present for
-suppressions bigdiffer itself makes going forward. The gaps this section
-originally called out have since been closed: it now runs for **Present** types
-on a partial failure (per-artifact suppression + freeze), the reason carries a
-**taxonomy** (`category: detail`, Part 2), and the **compile gate** runs inside
-`-update` so `build_failed` is a real category, not a manual `make build`
-afterthought (`bigdiffer-design.md` §6). What remains is applying that machinery
-to the *existing* reason-less backlog — Part 2's `-check`/`-heal` and the
-one-time backfill.
+type per the failed artifact (correctly per-artifact), and `reasonsForFailures()`
+builds one reason per failed artifact automatically, into that artifact's own
+`suppression_reason_*` field — not one shared string. This is real progress — a
+machine-written, per-artifact reason, always present for suppressions bigdiffer
+itself makes going forward. The gaps this section originally called out have
+since been closed: it now runs for **Present** types on a partial failure
+(per-artifact suppression + a separately-reasoned freeze, via `frozen_reason`),
+the reason carries a **taxonomy** (`category: detail`, Part 2), the
+**compile gate** runs inside `-update` so `build_failed` is a real category, not
+a manual `make build` afterthought (`bigdiffer-design.md` §6), and the reason
+itself is now split per-artifact (`generation-punchlist.md` item 9b) rather than
+one field trying to describe more than one fact at once. What remains is
+applying that machinery to the *existing* reason-less backlog — Part 2's
+`-check`/`-heal` and the one-time backfill.
 
 ### What the real overlay looks like
 
@@ -125,7 +129,7 @@ Counted directly against the current `internal/provider/all_schemas.hcl`
 | `suppress_plural_data_source_generation = true` | 428 |
 | `frozen_since` set | 35 |
 | `non_provisionable = true` | 3 |
-| `suppression_reason` attribute set | **0** |
+| `suppression_reason` attribute set | **0** (historical count against the single field this doc's Part 1 describes, since retired — see item 9b; the four per-artifact/freeze fields that replaced it were also 0 at the time of this count, since nothing had populated them yet either) |
 
 428 plural suppressions is consistent with the structural pre-check being the
 dominant cause (most CFN types simply don't have a list handler with no
@@ -184,7 +188,9 @@ Part 2 exists to make sure this list is never this long again.
 
 ### Suppression reason taxonomy
 
-Every `suppression_reason` bigdiffer writes going forward names exactly one of
+Every reason bigdiffer writes going forward — whether into a per-artifact
+`suppression_reason_resource` / `_singular_data_source` / `_plural_data_source`
+field or into `frozen_reason` — names exactly one of
 five categories, machine-readable as a prefix (`category: detail`):
 
 | Category | Meaning | Set by |
@@ -302,20 +308,25 @@ intent.
 
 ### `-check`: enforce a reason
 
-`-check` (offline, safe on every PR) gains one more anomaly class: **any row
-with a suppressed artifact or a set `frozen_since` that has no
-`suppression_reason`** is reported the same way `UnexplainedRetained` is
-today — advisory, printed, not a hard failure (matching the existing "advisory,
-never a hard PR gate" posture for anomalies), but now visible instead of
-silent. This is what makes the 35-frozen-with-no-reason and 3-bare-suppression
-situations in Part 1 impossible to reintroduce without at least a report line
-calling it out.
+`-check` (offline, safe on every PR) gains one more anomaly class, checked
+per-fact rather than per-row (item 9b): **any suppressed artifact, or a set
+`frozen_since`, whose own reason field is empty** is reported the same way
+`UnexplainedRetained` is today — advisory, printed, not a hard failure
+(matching the existing "advisory, never a hard PR gate" posture for
+anomalies), but now visible instead of silent. A row can have a real reason
+recorded for one fact (say, its resource) while another of its facts (its
+plural DS, or its freeze) is still reason-less — each is flagged
+independently, so one reasoned fact can never mask another's gap. This is
+what makes the 35-frozen-with-no-reason and 3-bare-suppression situations in
+Part 1 impossible to reintroduce without at least a report line calling it
+out.
 
 ### `-heal`: re-probe and fill gaps
 
-A new subcommand, `-heal`, for exactly the backlog Part 1 describes. For every
-row that is suppressed or frozen **and** has no `suppression_reason` (or has
-one tagged `unknown`), `-heal`:
+A new subcommand, `-heal`, for exactly the backlog Part 1 describes. It gates
+per-fact, not per-row (item 9b): for every suppressed artifact or freeze whose
+own reason field is empty (or tagged `unknown`), independent of whether the
+row's other facts already have a real reason, `-heal`:
 
 1. **Checks structural first.** For a suppressed plural data source, re-run the
    same list-handler check the legacy transform used. If it still doesn't
@@ -325,8 +336,11 @@ one tagged `unknown`), `-heal`:
    engine for the specific suppressed artifact. If it now succeeds, propose
    lifting the suppression (report it; do not silently un-suppress without
    review — a human confirms, matching the existing "everything is a proposal,
-   the human reviews the report" posture in `bigdiffer-design.md` §8). If it
-   still fails, tag `generation_failed` with the current error text.
+   the human reviews the report" posture in `bigdiffer-design.md` §8). The
+   proposal names the exact field to set instead (e.g.
+   `suppression_reason_plural_data_source`) if the human wants to keep it
+   suppressed and stop the proposal recurring. If generation fails, tag
+   `generation_failed` with the current error text.
 3. **Re-runs the compile gate.** If generation succeeds, the probed artifact's
    generated code is also run through the compile gate (`buildOnce`,
    `bigdiffer-design.md` §6) before proposing a `lift` — a suppressed artifact
@@ -336,12 +350,20 @@ one tagged `unknown`), `-heal`:
 4. **Falls back to `manual`/`unknown`.** If none of the above apply — most
    commonly, an existing free-form `# Suppression Reason:` comment already
    explains it in prose — `-heal` does not overwrite a human's comment; it
-   leaves the row as `manual` (best-effort: if a `# Suppression Reason:`
-   comment exists, migrate its text into the `manual:` detail rather than
-   discarding it) and reports it as still needing a human look if the comment
-   doesn't parse into something confident.
+   migrates the comment's text into the `manual:` detail rather than
+   discarding it, and reports it as still needing a human look if no comment
+   exists to migrate. If more than one of the row's facts is still
+   reason-less (a row-level comment can describe more than one artifact's
+   suppression, or none of them specifically), the same comment text is
+   offered as a *candidate* to each pending fact independently, visibly
+   marked as shared/unconfirmed — never silently duplicated into multiple
+   fields as if it confirmed each one ("propose, don't auto-split", the
+   review resolution behind `generation-punchlist.md` item 9b; this also
+   directly fixes item 9a, a structurally-cannot-fail plural data source
+   re-proposing `lift` forever once a human has recorded any real reason for
+   it specifically).
 
-`-heal` never suppresses or un-suppresses anything on its own for a row that
+`-heal` never suppresses or un-suppresses anything on its own for a fact that
 already has a reason — it only targets the `unknown`/reason-less backlog, and
 every proposed change is reported for human review rather than applied silently,
 consistent with every other bigdiffer policy decision.

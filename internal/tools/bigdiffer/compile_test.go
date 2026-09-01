@@ -202,7 +202,7 @@ func TestProjectRows(t *testing.T) {
 	decisions := map[string]policyDecision{
 		"AWS::EC2::Thing": {
 			setAttrs: map[string]string{attrSuppressResource: "true"},
-			reason:   "build_failed: resource: undefined symbol",
+			reasons:  map[string]string{attrSuppressionReasonResource: "build_failed: undefined symbol"},
 		},
 	}
 
@@ -216,7 +216,7 @@ func TestProjectRows(t *testing.T) {
 	if !rows[0].SuppressResourceGeneration {
 		t.Errorf("expected the decision's suppress_resource_generation to be reflected, got %+v", rows[0])
 	}
-	if rows[0].SuppressionReason != "build_failed: resource: undefined symbol" {
+	if rows[0].SuppressionReasonResource != "build_failed: undefined symbol" {
 		t.Errorf("expected the decision's reason to be reflected, got %+v", rows[0])
 	}
 }

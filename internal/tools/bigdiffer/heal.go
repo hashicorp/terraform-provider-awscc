@@ -27,14 +27,43 @@ type healProposal struct {
 	cfn    string
 	label  string
 	kind   string // which artifact this proposal is about, or "" for the freeze itself
+	field  string // the reason attribute this proposal fills, e.g. suppression_reason_plural_data_source
 	action string // "lift" (generation now succeeds) or "reason" (a reason was determined/migrated)
-	reason string // the proposed suppression_reason value
+	reason string // the proposed reason value
 }
 
-// runHeal re-probes every suppressed or frozen row that has no
-// suppression_reason (or one tagged unknown) and proposes a reclassification.
-// Offline except for reading the committed schema cache; never touches AWS and
-// never writes all_schemas.hcl.
+// healFact is one suppressed artifact or the freeze, named by its flag/date
+// field, its own reason field, and (for artifacts) its artifactKind — the
+// four independent facts a row can carry (item 9b). runHeal only re-probes a
+// fact whose own reason is still empty or tagged unknown; a row can have a
+// real reason recorded for one fact while another of its facts is still in
+// the backlog.
+type healFact struct {
+	kind   artifactKind // "" for the freeze
+	field  string       // the reason attribute to fill
+	active bool         // is this fact true on the row (suppressed / frozen)
+	reason string       // the fact's own current reason text
+}
+
+func healFactsFor(row resourceRow) []healFact {
+	return []healFact{
+		{kind: artifactResource, field: attrSuppressionReasonResource, active: row.SuppressResourceGeneration, reason: row.SuppressionReasonResource},
+		{kind: artifactSingularDataSource, field: attrSuppressionReasonSingular, active: row.SuppressSingularDataSourceGeneration, reason: row.SuppressionReasonSingularDataSource},
+		{kind: artifactPluralDataSource, field: attrSuppressionReasonPlural, active: row.SuppressPluralDataSourceGeneration, reason: row.SuppressionReasonPluralDataSource},
+		{field: attrFrozenReason, active: row.FrozenSince != "", reason: row.FrozenReason},
+	}
+}
+
+// needsHealing is true for an active fact whose own reason is still empty or
+// tagged unknown — the reason-less/unknown backlog this fact belongs to.
+func (f healFact) needsHealing() bool {
+	return f.active && (f.reason == "" || strings.HasPrefix(f.reason, string(reasonUnknown)+":"))
+}
+
+// runHeal re-probes every suppressed artifact or freeze that has no reason (or
+// one tagged unknown) and proposes a reclassification. Offline except for
+// reading the committed schema cache; never touches AWS and never writes
+// all_schemas.hcl.
 func runHeal(allSchemasPath string) error {
 	cfg, rows, err := loadOverlay(allSchemasPath)
 	if err != nil {
@@ -60,72 +89,66 @@ func runHeal(allSchemasPath string) error {
 		}
 	}
 
-	stepf("Re-probing suppressed/frozen rows with no recorded reason…")
+	stepf("Re-probing suppressed/frozen facts with no recorded reason…")
 	var proposals []healProposal
 	needsReason := 0
 	for _, row := range rows {
-		if !isSuppressedOrFrozen(row) {
+		var pending []healFact
+		for _, f := range healFactsFor(row) {
+			if f.needsHealing() {
+				pending = append(pending, f)
+			}
+		}
+		if len(pending) == 0 {
 			continue
 		}
-		if row.SuppressionReason != "" && !strings.HasPrefix(row.SuppressionReason, string(reasonUnknown)+":") {
-			continue // already has a real reason; -heal only targets the reason-less/unknown backlog
-		}
-		needsReason++
-		proposals = append(proposals, healRow(cfg, row, commentByCFN[row.CloudFormationTypeName])...)
+		needsReason += len(pending)
+		proposals = append(proposals, healRow(cfg, row, pending, commentByCFN[row.CloudFormationTypeName])...)
 	}
 	sort.Slice(proposals, func(i, j int) bool {
 		if proposals[i].cfn != proposals[j].cfn {
 			return proposals[i].cfn < proposals[j].cfn
 		}
-		return proposals[i].kind < proposals[j].kind
+		return proposals[i].field < proposals[j].field
 	})
 
 	writeHealReport(needsReason, proposals)
 	return nil
 }
 
-// healRow probes one row's suppressed artifacts (and its freeze, if any) and
-// returns a proposal per artifact/freeze it can say something about. It never
-// mutates row or the overlay.
-func healRow(cfg config, row resourceRow, comment string) []healProposal {
+// healRow probes exactly the row's still-reason-less facts (pending) and
+// returns a proposal per fact it can say something about. It never mutates
+// row or the overlay. multiPending is true when the row has more than one
+// still-reason-less fact — used to phrase a migrated free-form comment as a
+// shared candidate rather than a confirmed per-fact reason, since the same
+// row-level comment text cannot be assumed to describe more than one fact
+// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
+// gaps").
+func healRow(cfg config, row resourceRow, pending []healFact, comment string) []healProposal {
 	var out []healProposal
-	label := row.ResourceTypeName
-	cfn := row.CloudFormationTypeName
+	multiPending := len(pending) > 1
 
 	schema, schemaErr := os.ReadFile(row.CloudFormationSchemaPath)
 	if schemaErr != nil {
-		schema, schemaErr = os.ReadFile(schemaCachePath(cfg.cacheDir, cfn))
+		schema, schemaErr = os.ReadFile(schemaCachePath(cfg.cacheDir, row.CloudFormationTypeName))
 	}
 
-	type suppressedArtifact struct {
-		kind artifactKind
-		flag bool
-	}
-	for _, sa := range []suppressedArtifact{
-		{artifactResource, row.SuppressResourceGeneration},
-		{artifactSingularDataSource, row.SuppressSingularDataSourceGeneration},
-		{artifactPluralDataSource, row.SuppressPluralDataSourceGeneration},
-	} {
-		if !sa.flag {
+	for _, f := range pending {
+		if f.field == attrFrozenReason {
+			out = append(out, freezeProposal(row, comment, multiPending))
 			continue
 		}
-		out = append(out, healArtifact(cfg, row, sa.kind, schema, schemaErr, comment))
-	}
-
-	if row.FrozenSince != "" && (len(out) == 0 || allReasonProposals(out) == 0) {
-		// The freeze itself has no reason distinct from its artifacts' causes;
-		// propose migrating the free-form comment (if any) or unknown.
-		out = append(out, freezeProposal(cfn, label, comment))
+		out = append(out, healArtifact(cfg, row, f, schema, schemaErr, comment, multiPending))
 	}
 	return out
 }
 
 // healArtifact probes one suppressed artifact: structural check first (plural
 // only), then a real regeneration attempt, then a comment-migration fallback.
-func healArtifact(cfg config, row resourceRow, kind artifactKind, schema []byte, schemaErr error, comment string) healProposal {
-	base := healProposal{cfn: row.CloudFormationTypeName, label: row.ResourceTypeName, kind: string(kind)}
+func healArtifact(cfg config, row resourceRow, f healFact, schema []byte, schemaErr error, comment string, multiPending bool) healProposal {
+	base := healProposal{cfn: row.CloudFormationTypeName, label: row.ResourceTypeName, kind: string(f.kind), field: f.field}
 
-	if kind == artifactPluralDataSource && schemaErr == nil {
+	if f.kind == artifactPluralDataSource && schemaErr == nil {
 		if !pluralSupported(string(schema)) {
 			base.action = "reason"
 			base.reason = formatReason(reasonStructural, "no list handler with zero required arguments")
@@ -134,9 +157,11 @@ func healArtifact(cfg config, row resourceRow, kind artifactKind, schema []byte,
 	}
 
 	if schemaErr == nil {
-		if err := probeArtifact(cfg, row, kind, schema); err == nil {
+		if err := probeArtifact(cfg, row, f.kind, schema); err == nil {
 			base.action = "lift"
-			base.reason = "generates cleanly now — propose lifting the suppression"
+			base.reason = fmt.Sprintf(
+				"generates cleanly now — propose lifting the suppression. To keep it suppressed and stop this proposal recurring, set %s instead (e.g. %q).",
+				f.field, formatReason(reasonManual, "<why this stays suppressed>"))
 			return base
 		} else {
 			base.action = "reason"
@@ -150,7 +175,7 @@ func healArtifact(cfg config, row resourceRow, kind artifactKind, schema []byte,
 		}
 	}
 
-	return commentOrUnknown(base, comment)
+	return commentOrUnknown(base, comment, multiPending)
 }
 
 // probeArtifact regenerates one artifact from schema bytes staged to a temp
@@ -344,35 +369,40 @@ func relativizeBuildErrors(errs []buildError, repoRoot string) []buildError {
 	return out
 }
 
-// freezeProposal handles a frozen_since with no attributable per-artifact
-// cause (e.g. every artifact is suppressed already with its own reason, or
-// none are suppressed at all — the type itself was withdrawn or held back).
-func freezeProposal(cfn, label, comment string) healProposal {
-	base := healProposal{cfn: cfn, label: label, kind: "frozen_since"}
-	return commentOrUnknown(base, comment)
+// freezeProposal handles a frozen_since with no reason of its own — the
+// freeze is an orthogonal, schema-level fact (item 9b), never derived from an
+// artifact's suppression reason, so it always falls through to the same
+// comment-migration/unknown fallback every other reason-less fact uses.
+func freezeProposal(row resourceRow, comment string, multiPending bool) healProposal {
+	base := healProposal{cfn: row.CloudFormationTypeName, label: row.ResourceTypeName, kind: "", field: attrFrozenReason}
+	return commentOrUnknown(base, comment, multiPending)
 }
 
 // commentOrUnknown is step 4 of the heal probe (suppressed-and-frozen.md): if
 // a free-form "# Suppression Reason:" comment exists, migrate its text into a
 // manual: reason; otherwise the row still needs a human look.
-func commentOrUnknown(base healProposal, comment string) healProposal {
+//
+// When multiPending is true (more than one of the row's facts is still
+// reason-less), the same row-level comment text is offered identically to
+// each — it is not auto-assigned as a confirmed per-fact reason, since a
+// single comment written for one artifact does not necessarily explain a
+// different artifact's suppression or the freeze
+// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
+// gaps"). The proposal text is worded as a shared candidate for a human
+// to assign, edit, or reject per field, rather than a confirmed fact.
+func commentOrUnknown(base healProposal, comment string, multiPending bool) healProposal {
 	base.action = "reason"
 	if comment != "" {
-		base.reason = formatReason(reasonManual, comment)
+		if multiPending {
+			base.reason = formatReason(reasonManual, comment) +
+				" (candidate: this comment is shared with other still-reason-less facts on this row; confirm or edit per field before applying)"
+		} else {
+			base.reason = formatReason(reasonManual, comment)
+		}
 		return base
 	}
 	base.reason = formatReason(reasonUnknown, "no schema cached and no existing comment to migrate; needs a human look")
 	return base
-}
-
-func allReasonProposals(proposals []healProposal) int {
-	n := 0
-	for _, p := range proposals {
-		if p.action == "reason" {
-			n++
-		}
-	}
-	return n
 }
 
 // suppressionCommentRE matches a "# Suppression Reason[:]" lead line, case-
@@ -410,18 +440,14 @@ func suppressionComment(text string) string {
 
 func writeHealReport(needsReason int, proposals []healProposal) {
 	fmt.Fprintf(os.Stderr, "== bigdiffer -heal report ==\n")
-	fmt.Fprintf(os.Stderr, "rows needing a reason: %d\n", needsReason)
+	fmt.Fprintf(os.Stderr, "facts needing a reason: %d\n", needsReason)
 	fmt.Fprintf(os.Stderr, "proposals: %d\n", len(proposals))
 	for _, p := range proposals {
-		kind := p.kind
-		if kind == "" {
-			kind = "type"
-		}
 		switch p.action {
 		case "lift":
-			fmt.Fprintf(os.Stderr, "  ~ %s (%s) [%s]: %s\n", p.cfn, p.label, kind, p.reason)
+			fmt.Fprintf(os.Stderr, "  ~ %s (%s) [%s]: %s\n", p.cfn, p.label, p.field, p.reason)
 		default:
-			fmt.Fprintf(os.Stderr, "  + %s (%s) [%s]: suppression_reason = %q\n", p.cfn, p.label, kind, p.reason)
+			fmt.Fprintf(os.Stderr, "  + %s (%s) [%s]: %s = %q\n", p.cfn, p.label, p.field, p.field, p.reason)
 		}
 	}
 	fmt.Fprintln(os.Stderr, "Nothing above was written; review and apply by hand.")

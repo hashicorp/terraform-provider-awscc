@@ -416,7 +416,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// promoted, not just what generation produced before the gate ran.
 	finalOK, finalBroken := 0, 0
 	for _, d := range decisions {
-		if d.reason == "" {
+		if len(d.reasons) == 0 {
 			finalOK++
 		} else {
 			finalBroken++

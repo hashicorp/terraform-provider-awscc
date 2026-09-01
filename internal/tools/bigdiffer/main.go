@@ -216,8 +216,20 @@ type Report struct {
 	UnexplainedRetained  []rowRef // Retained rows not explained by frozen_since, non_provisionable, or a checkout pin
 	Duplicates           []string // CloudFormation type names with more than one live block
 	NamingViolate        []string
-	ReasonlessSuppressed []rowRef // suppressed and/or frozen, but suppression_reason is empty (suppressed-and-frozen.md)
+	ReasonlessSuppressed []reasonlessFact // a suppressed artifact or a freeze with its own reason field empty (suppressed-and-frozen.md); one entry per missing fact, not per row
 	Total                int
+}
+
+// reasonlessFact is one missing reason: a specific suppressed artifact or the
+// freeze itself, named by which attribute should carry the explanation. A row
+// with, say, its resource suppressed and no frozen reason yields two entries,
+// not one — the four reason facts (suppression_reason_resource, _singular_data_source,
+// _plural_data_source, frozen_reason) are independent
+// (contributing/docs/suppressed-and-frozen.md).
+type reasonlessFact struct {
+	cfn   string
+	label string
+	field string // the empty attribute, e.g. "suppression_reason_plural_data_source"
 }
 
 func normalize(overlay string, base, previous []resourceRow, checkout map[string]bool) (string, Report, error) {
@@ -322,22 +334,39 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 	sort.Strings(report.NamingViolate)
 
 	// Reason-less suppression/freeze check (generation-punchlist.md item 8;
-	// contributing/docs/suppressed-and-frozen.md): every row bigdiffer itself
-	// suppresses or freezes carries a suppression_reason (policy.go), but a row
-	// can also be suppressed or frozen by direct hand-edit, or predate the
-	// taxonomy. Advisory only, like every other anomaly here — never a hard
-	// failure, and -heal (not this check) is what fills the gap.
+	// contributing/docs/suppressed-and-frozen.md): every artifact bigdiffer
+	// itself suppresses, and every freeze it sets, carries its own reason
+	// (policy.go), but a row can also be suppressed or frozen by direct
+	// hand-edit, or predate the taxonomy. Checked per-fact, not per-row (item
+	// 9b): a row's resource can have a real reason while its plural DS is
+	// still reason-less, or vice versa. Advisory only, like every other
+	// anomaly here — never a hard failure, and -heal (not this check) is what
+	// fills the gap.
 	for _, it := range items {
 		if !it.live || it.key == "" {
 			continue
 		}
 		r := overlayByCFN[it.key]
-		if isSuppressedOrFrozen(r) && r.SuppressionReason == "" {
-			report.ReasonlessSuppressed = append(report.ReasonlessSuppressed, rowRef{cfn: it.key, label: it.label})
+		for _, f := range []struct {
+			suppressed bool
+			reason     string
+			field      string
+		}{
+			{r.SuppressResourceGeneration, r.SuppressionReasonResource, attrSuppressionReasonResource},
+			{r.SuppressSingularDataSourceGeneration, r.SuppressionReasonSingularDataSource, attrSuppressionReasonSingular},
+			{r.SuppressPluralDataSourceGeneration, r.SuppressionReasonPluralDataSource, attrSuppressionReasonPlural},
+			{r.FrozenSince != "", r.FrozenReason, attrFrozenReason},
+		} {
+			if f.suppressed && f.reason == "" {
+				report.ReasonlessSuppressed = append(report.ReasonlessSuppressed, reasonlessFact{cfn: it.key, label: it.label, field: f.field})
+			}
 		}
 	}
 	sort.Slice(report.ReasonlessSuppressed, func(i, j int) bool {
-		return report.ReasonlessSuppressed[i].cfn < report.ReasonlessSuppressed[j].cfn
+		if report.ReasonlessSuppressed[i].cfn != report.ReasonlessSuppressed[j].cfn {
+			return report.ReasonlessSuppressed[i].cfn < report.ReasonlessSuppressed[j].cfn
+		}
+		return report.ReasonlessSuppressed[i].field < report.ReasonlessSuppressed[j].field
 	})
 
 	for cfn, n := range liveCount {
@@ -383,17 +412,17 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 	return sb.String(), report, nil
 }
 
-// decisionAttrs flattens a policy decision into the attribute set to write on its
-// block: the suppression/freeze flags plus suppression_reason when present.
+// decisionAttrs flattens a policy decision into the attribute set to write on
+// its block: the suppression/freeze flags plus any reason attributes
+// (suppression_reason_resource, _singular_data_source, _plural_data_source,
+// frozen_reason), already keyed by attribute name in d.reasons.
 func decisionAttrs(d policyDecision) map[string]string {
-	if len(d.setAttrs) == 0 && d.reason == "" {
+	if len(d.setAttrs) == 0 && len(d.reasons) == 0 {
 		return nil
 	}
-	attrs := make(map[string]string, len(d.setAttrs)+1)
+	attrs := make(map[string]string, len(d.setAttrs)+len(d.reasons))
 	maps.Copy(attrs, d.setAttrs)
-	if d.reason != "" {
-		attrs[attrSuppressionReason] = d.reason
-	}
+	maps.Copy(attrs, d.reasons)
 	return attrs
 }
 
@@ -521,11 +550,11 @@ func attachKeyless(items []item) []item {
 func canonicalBlock(label, cfn string, suppressPlural bool) string {
 	if suppressPlural {
 		reason := formatReason(reasonStructural, "no list handler with zero required arguments")
-		width := max(len(pluralAttr), len(attrSuppressionReason))
+		width := max(len(pluralAttr), len(attrSuppressionReasonPlural))
 		return fmt.Sprintf("resource_schema %q {\n  %-*s = %q\n  %-*s = true\n  %-*s = %q\n}",
 			label, width, cfnAttr, cfn,
 			width, pluralAttr,
-			width, attrSuppressionReason, reason)
+			width, attrSuppressionReasonPlural, reason)
 	}
 	return fmt.Sprintf("resource_schema %q {\n  %s = %q\n}", label, cfnAttr, cfn)
 }
@@ -536,19 +565,6 @@ func expectedLabel(cfn string) (string, error) {
 		return "", err
 	}
 	return strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + naming.CloudFormationPropertyToTerraformAttribute(res), nil
-}
-
-// isSuppressedOrFrozen reports whether a row has any suppress_* flag set or a
-// frozen_since date — the set of states suppressed-and-frozen.md requires a
-// suppression_reason for. non_provisionable is deliberately excluded: it is a
-// bare annotation about AWS's registry state, not bigdiffer's own decision, and
-// carries no reason requirement (suppressed-and-frozen.md, "What does not
-// change").
-func isSuppressedOrFrozen(r resourceRow) bool {
-	return r.SuppressResourceGeneration ||
-		r.SuppressSingularDataSourceGeneration ||
-		r.SuppressPluralDataSourceGeneration ||
-		r.FrozenSince != ""
 }
 
 // crossValidate decodes the overlay with a real HCL parser and asserts that the
@@ -661,9 +677,9 @@ func (r Report) write() {
 		}
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no suppression_reason: %d (run -heal)\n", len(r.ReasonlessSuppressed))
+		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -heal)\n", len(r.ReasonlessSuppressed))
 		for _, b := range r.ReasonlessSuppressed {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)\n", b.cfn, b.label)
+			fmt.Fprintf(os.Stderr, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
 		}
 	}
 }
