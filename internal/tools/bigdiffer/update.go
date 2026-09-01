@@ -289,6 +289,16 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	today := time.Now().Format(dateLayout)
 	decisions := make(map[string]policyDecision, len(cands))
 	stagedByDest := make(map[string]stagedArtifact)
+	// listResourceCandidates tracks every candidate whose staged resource
+	// artifact was rendered with listResource: true (baked into the file's
+	// AddListResourceFactory call at generation time — reconcileListResource
+	// already reconciled this against generation's own plural DS outcome, but
+	// only generation's; the compile gate can still drop the plural artifact
+	// afterward, and nothing re-runs the reconciliation for that). Checked
+	// once, after the fixpoint settles, so a plural artifact the gate drops
+	// can never leave a promoted resource advertising a list capability with
+	// no backing data source (design doc invariant; new-generation.md §6).
+	var listResourceCandidates []*gateResult
 	var okN, brokeN int
 	for _, c := range cands {
 		gr, staged, err := refreshCandidate(cfg, stagingDir, c)
@@ -320,6 +330,9 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 					break
 				}
 			}
+			if r.a.kind == artifactResource && r.a.listResource {
+				listResourceCandidates = append(listResourceCandidates, &grPtr)
+			}
 		}
 		_ = candBar.Add(1)
 	}
@@ -347,6 +360,15 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	stepf("Compile-gating %d staged artifact(s)…", len(stagedByDest))
 	if err := compileFixpoint(cfg, stagingDir, string(overlayContent), base, checkout, decisions, stagedByDest, today); err != nil {
 		return fmt.Errorf("compile gate: %w", err)
+	}
+
+	// The compile gate can drop a plural data source that generated fine
+	// (reconcileListResource only reconciles against generation's outcome,
+	// which ran before the gate). Refuse to promote a resource still
+	// advertising a list resource with no working plural data source behind
+	// it, rather than silently promote the inconsistency.
+	if err := checkListResourceCoupling(listResourceCandidates); err != nil {
+		return fmt.Errorf("compile gate: list resource coupling: %w", err)
 	}
 
 	// Promote the compiled core — staged code, cache, the reconciled overlay,

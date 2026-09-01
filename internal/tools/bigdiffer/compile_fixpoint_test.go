@@ -324,3 +324,63 @@ func TestCompileGateFailureBlocksPromotion(t *testing.T) {
 		t.Errorf("the clean sibling's staged file should be untouched in staging, got %v", statErr)
 	}
 }
+
+// TestCheckListResourceCoupling covers the guard added for a real review
+// finding: reconcileListResource only ever reconciles a resource's
+// GenerateListResource against its plural data source's *generation*
+// outcome, before the compile gate runs. If the plural artifact generates
+// fine but is later rejected by the compile gate itself, nothing re-runs that
+// reconciliation — the guard exists to catch exactly that combination after
+// the fixpoint has settled, rather than silently promote a resource
+// advertising a list resource with no working plural data source.
+func TestCheckListResourceCoupling(t *testing.T) {
+	t.Parallel()
+
+	t.Run("plural gate-rejected after listResource was staged true is caught", func(t *testing.T) {
+		t.Parallel()
+		gr := &gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+			{kind: artifactPluralDataSource, outcome: gateFailedBuild, err: errFakeGeneration},
+		}}
+		err := checkListResourceCoupling([]*gateResult{gr})
+		if err == nil {
+			t.Fatal("expected an error: the resource advertises a list resource with no working plural data source")
+		}
+		if !strings.Contains(err.Error(), "AWS::Svc::Thing") {
+			t.Errorf("expected the error to name the offending type, got: %v", err)
+		}
+	})
+
+	t.Run("plural still OK is not flagged", func(t *testing.T) {
+		t.Parallel()
+		gr := &gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+			{kind: artifactPluralDataSource, outcome: gateOK},
+		}}
+		if err := checkListResourceCoupling([]*gateResult{gr}); err != nil {
+			t.Errorf("plural is fine, should not be flagged, got: %v", err)
+		}
+	})
+
+	t.Run("plural never attempted (already suppressed) is not flagged", func(t *testing.T) {
+		t.Parallel()
+		// reconcileListResource already handles "plural was never attempted"
+		// by regenerating the resource without listResource before staging —
+		// a candidate reaching this guard with no plural artifact in its
+		// gateResult at all means that reconciliation already ran; the guard
+		// must not double-flag it.
+		gr := &gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateOK},
+		}}
+		if err := checkListResourceCoupling([]*gateResult{gr}); err != nil {
+			t.Errorf("plural was never attempted, should not be flagged, got: %v", err)
+		}
+	})
+
+	t.Run("empty candidate list is a no-op", func(t *testing.T) {
+		t.Parallel()
+		if err := checkListResourceCoupling(nil); err != nil {
+			t.Errorf("no candidates staged listResource: true, should not error, got: %v", err)
+		}
+	})
+}

@@ -168,6 +168,47 @@ func buildOnce(repoRoot string, files map[string][]byte) (ok bool, errs []buildE
 	return false, parsed, nil
 }
 
+// checkListResourceCoupling is the cheap guard for a gap the compile gate's
+// fixpoint does not close on its own: reconcileListResource (update.go)
+// already reconciles a resource's ListResource registration against its
+// plural data source's outcome, but only generation's outcome — it runs
+// before compileFixpoint, off generateCorpus's results alone. If the plural
+// artifact generates fine (so the resource is staged with
+// GenerateListResource: true, baked into its rendered code's
+// AddListResourceFactory call) but is later rejected by the compile gate
+// itself, nothing re-runs the reconciliation: the resource would promote
+// still advertising a list resource with no working plural data source
+// behind it — the exact "list resource with no backing data source" the
+// design (new-generation.md §6) rules out, and, since the candidate is
+// unchanged next cycle, a persistent one.
+//
+// In practice this requires the plural data source template itself to
+// regress (it renders from the CloudFormation type name alone, with no
+// schema dependency, so it essentially always compiles) — rare, but a real
+// gap against a stated invariant, not a hypothetical. Rather than the fuller
+// fix (re-running reconcileListResource mid-fixpoint, which would mean
+// regenerating and re-staging the resource and triggering another build
+// round), this is the cheap version: detect the inconsistent combination
+// after the fixpoint has settled and refuse to promote it, matching the same
+// "promote nothing rather than something known-inconsistent" posture as the
+// fixpoint's own unattributable-failure fallback.
+func checkListResourceCoupling(candidates []*gateResult) error {
+	for _, gr := range candidates {
+		pluralOK := false
+		pluralAttempted := false
+		for _, a := range gr.artifacts {
+			if a.kind == artifactPluralDataSource {
+				pluralAttempted = true
+				pluralOK = a.outcome == gateOK
+			}
+		}
+		if pluralAttempted && !pluralOK {
+			return fmt.Errorf("%s: resource was staged advertising a list resource (GenerateListResource) but its plural data source was rejected by the compile gate after generation succeeded — reconcileListResource only reconciles generation's outcome, not the compile gate's; refusing to promote a list resource with no backing data source", gr.cfType)
+		}
+	}
+	return nil
+}
+
 // projectRows derives the row set the overlay would contain if promoted right
 // now, given the current per-candidate decisions — the same rows
 // registrationPackages needs to compute the registration file's import set for
