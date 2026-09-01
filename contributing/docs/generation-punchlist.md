@@ -130,27 +130,57 @@ All detail lives in `suppressed-and-frozen.md`.
    file in the probed artifact's real destination package — no schema needs
    to be crafted to make the *engine* render invalid code, only the
    compiler needs a reason to reject the package).
+9b. **Split `suppression_reason` into one field per artifact, plus a separate
+    freeze reason** — `resourceRow.SuppressionReason` is one string per row,
+    but suppression is already per-artifact (item 4) and a freeze is an
+    orthogonal, schema-level fact; one shared field cannot describe a row with
+    more than one of these true at once (37 real rows today) and cannot
+    support lifting one artifact's suppression without disturbing another's
+    reason — a named goal (AWS adds the plural list operation to a type later;
+    lifting `suppress_plural_data_source_generation` should not require
+    touching the resource's unrelated reason). Confirmed against the real
+    overlay before designing: **zero rows currently have a non-empty
+    `suppression_reason`**, so this is a greenfield schema change, not a
+    migration — nothing to reassign. Design:
+    `suppression-reason-split-design.md` (transient, deleted once
+    implemented). Surfaced while scoping item 9a below, which cannot be
+    expressed cleanly without this. *(prereq — unblocks 9a, 11, 10)*
 9a. **Suppress recurring `lift` proposals for known-manual suppressions** —
     a plural data source manually suppressed for a semantic reason (not a
     generation failure) always re-proposes `lift` on every `-heal` run,
     because `codegen.GeneratePluralDataSource` builds from the CFN type name
-    alone and structurally cannot fail (noted during item 9's review). Once a
-    human rejects a `lift` proposal, `-heal` should not keep re-surfacing it —
-    needs a way to record "reviewed, keep suppressed" distinct from a bare
-    `manual:` reason (e.g. a sub-tag, or treating any non-taxonomy/free-form
-    `manual:` detail as already-adjudicated and skipping the regeneration
-    probe for it). Not yet designed. *(backlog)*
+    alone and structurally cannot fail (noted during item 9's review). Once
+    9b lands, the fix is a natural consequence of the per-artifact schema, not
+    a separate mechanism: `-heal`'s gate becomes per-artifact (skip probing
+    the plural DS specifically once
+    `suppression_reason_plural_data_source` is set to anything real,
+    independent of whether the resource or singular DS are still
+    reason-less) — no new adjudication marker or taxonomy sub-tag needed. On
+    top of that, a `lift` proposal's text should name the exact field to set
+    to stop it recurring (e.g. "...set suppression_reason_plural_data_source
+    instead"), keeping `-heal` stateless and putting the decision explicitly
+    in the human's hands. Also resolves a related ambiguity found in review:
+    the free-form `# Suppression Reason:` comment is row-level and populated
+    (58 rows, 41 multi-suppressed) where the structured field is not — `-heal`
+    offers it as a per-artifact *candidate* rather than auto-splitting it
+    identically into every suppressed artifact's field. Detail:
+    `suppression-reason-split-design.md`. *(backlog, depends on 9b)*
 10. **One-time reason backfill** — the bulk labor: tag the ~428 structural
     plural suppressions, and triage the 35 reason-less freezes + 3 bare
     suppressions. Includes **mining open GitHub issues** to propose reasons and
     URL links for rows that have none. Detail: `suppressed-and-frozen.md`
-    ("Mining existing issues"). *(backlog)*
+    ("Mining existing issues"). Sequenced after 9b/9a/11 so the backfill
+    targets the final four-field shape and consumes structured output instead
+    of text. *(backlog, depends on 9b, 9a, 11)*
 
 ### Reporting & robustness
 
 11. **Machine-readable report** — structured output so `-check`/`-heal`
     proposals and the issue stubs are consumable (and seed release notes).
-    Detail: `bigdiffer-design.md` §8 and "Deferred and future work". *(core)*
+    Sequenced after 9b so its schema represents four reason fields from the
+    start rather than needing a second revision once 9b lands. Detail:
+    `bigdiffer-design.md` §8 and "Deferred and future work". *(core, depends
+    on 9b)*
 12. ~~**Never-regress cross-type atomicity**~~ — ✅ **Done** (commit
     `a08072eb6`). `refreshCandidate` now stages every artifact and cached schema
     under a temp `stagingDir`, writing nothing to the real tree; `promoteStaged`
