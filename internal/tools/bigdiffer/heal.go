@@ -140,7 +140,12 @@ func healArtifact(cfg config, row resourceRow, kind artifactKind, schema []byte,
 			return base
 		} else {
 			base.action = "reason"
-			base.reason = formatReason(reasonGenerationFailed, firstLine(err.Error()))
+			var gateFailure *buildGateFailure
+			if errors.As(err, &gateFailure) {
+				base.reason = formatReason(reasonBuildFailed, firstLine(gateFailure.detail))
+			} else {
+				base.reason = formatReason(reasonGenerationFailed, firstLine(err.Error()))
+			}
 			return base
 		}
 	}
@@ -159,7 +164,13 @@ func healArtifact(cfg config, row resourceRow, kind artifactKind, schema []byte,
 // mode (runHealProbeArtifact) under a timeout and a soft memory cap, so a crash
 // or runaway probe kills only that subprocess (the same "one failure never
 // blocks the rest" principle discover.go and generateCorpus already apply).
-func probeArtifact(cfg config, row resourceRow, kind artifactKind, schema []byte) error {
+//
+// A package-level var, not a plain func: os.Executable() resolves to the
+// test binary under `go test` (a binary whose CLI is testing.Main, not
+// bigdiffer's real main()), so healArtifact-level tests that need a real
+// probe against a real built binary swap this var for the duration of the
+// test and restore it afterward.
+var probeArtifact = func(cfg config, row resourceRow, kind artifactKind, schema []byte) error {
 	self, err := os.Executable()
 	if err != nil {
 		return fmt.Errorf("locating bigdiffer binary to probe in isolation: %w", err)
@@ -209,6 +220,15 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 	if runErr != nil {
 		trimmed := strings.TrimSpace(string(out))
 		var exitErr *exec.ExitError
+		if errors.As(runErr, &exitErr) && exitErr.ExitCode() == exitCodeBuildGateFailed {
+			// The probe generated cleanly but the compile gate rejected it —
+			// runHealProbeArtifact's message is exactly buildGateFailure's
+			// Error() text, printed verbatim to stdout/stderr. Reconstruct
+			// the typed error here so healArtifact can distinguish this from
+			// a plain generation failure and tag the proposal build_failed
+			// instead of generation_failed.
+			return &buildGateFailure{detail: strings.TrimPrefix(trimmed, "generates cleanly but fails the compile gate: ")}
+		}
 		// A Go fatal runtime error (stack overflow, OOM inside the Go
 		// runtime) exits 2 and self-reports a goroutine dump to stdout/stderr
 		// — CombinedOutput captures it, so trimmed is non-empty and useful. A
@@ -235,6 +255,13 @@ const (
 	healProbeTimeout  = 30 * time.Second
 	healProbeMemLimit = "512MiB"
 )
+
+// exitCodeBuildGateFailed is runHealProbeArtifact's exit code for a
+// buildGateFailure specifically — distinct from the generic exit 1 a plain
+// generation error uses. probeArtifactWithBinary keys on this to reconstruct
+// a *buildGateFailure across the process boundary, since the parent can't
+// see the child's Go error values directly, only its exit code and output.
+const exitCodeBuildGateFailed = 3
 
 // runHealProbeArtifact is the hidden subprocess entrypoint probeArtifact
 // re-execs into. It rebuilds the plan for exactly one artifact from flags,
@@ -281,11 +308,40 @@ func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDi
 			return fmt.Errorf("compile gate: %w", buildErr)
 		}
 		if !ok {
-			return fmt.Errorf("generates cleanly but fails the compile gate: %s", formatBuildErrors(buildErrs))
+			return &buildGateFailure{detail: formatBuildErrors(relativizeBuildErrors(buildErrs, cfg.repoRoot))}
 		}
 		return nil
 	}
 	return fmt.Errorf("artifact %s not derivable from this row", kind)
+}
+
+// buildGateFailure is runHealProbeArtifact's distinct signal that an artifact
+// generated cleanly but was rejected by the compile gate — as opposed to a
+// plain error, which means generation itself failed. probeArtifactWithBinary
+// maps this to exitCodeBuildGateFailed so the parent process (running in a
+// separate binary, so it cannot see this type directly) can still tell the
+// two stages apart and healArtifact can tag the proposal's reason
+// accordingly (build_failed vs generation_failed) — the whole point of
+// wiring the compile gate into -heal.
+type buildGateFailure struct{ detail string }
+
+func (e *buildGateFailure) Error() string {
+	return "generates cleanly but fails the compile gate: " + e.detail
+}
+
+// relativizeBuildErrors rewrites each buildError's absolute file path
+// (buildError.file is always absolute, joined against repoRoot by
+// parseBuildErrors) to be repo-root-relative for a tidier proposal detail —
+// cosmetic only, does not affect attribution.
+func relativizeBuildErrors(errs []buildError, repoRoot string) []buildError {
+	out := make([]buildError, len(errs))
+	for i, e := range errs {
+		if rel, err := filepath.Rel(repoRoot, e.file); err == nil {
+			e.file = rel
+		}
+		out[i] = e
+	}
+	return out
 }
 
 // freezeProposal handles a frozen_since with no attributable per-artifact

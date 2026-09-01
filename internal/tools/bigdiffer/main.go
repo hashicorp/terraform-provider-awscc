@@ -46,6 +46,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"maps"
@@ -99,8 +100,13 @@ func main() {
 	flag.Parse()
 
 	if *healProbeArtifact {
-		if err := runHealProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot); err != nil {
+		err := runHealProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot)
+		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
+			var gateFailure *buildGateFailure
+			if errors.As(err, &gateFailure) {
+				os.Exit(exitCodeBuildGateFailed)
+			}
 			os.Exit(1)
 		}
 		return

@@ -4,6 +4,7 @@
 package main
 
 import (
+	"errors"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -291,4 +292,83 @@ func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
 	if _, statErr := os.Stat(filepath.Join(scratchDir, "log_group_resource_gen.go")); !os.IsNotExist(statErr) {
 		t.Errorf("the compile gate's build overlay must be reverted; the probed artifact's file should not exist, stat err = %v", statErr)
 	}
+}
+
+// TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed is the fix for
+// the review finding: healArtifact must tag a proposal build_failed when the
+// artifact generates cleanly but is rejected by the compile gate, and must
+// keep tagging generation_failed when generation itself fails — the two
+// stages must not collapse into the same category, which would defeat the
+// whole point of wiring the compile gate into -heal (a human reviewing
+// proposals needs to know which stage actually failed).
+func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
+	if testing.Short() {
+		t.Skip("builds a binary and runs real go build ./... against the module")
+	}
+	// Not t.Parallel() — swaps the package-level probeArtifact var and
+	// mutates the real tree via buildOnce's overlay in the gate-failure case.
+
+	cfg, rows := loadCorpus(t)
+	lg := logGroupRow(t, rows)
+	schemaPath := lg.CloudFormationSchemaPath
+	if schemaPath == "" {
+		schemaPath = schemaCachePath(cfg.cacheDir, lg.CloudFormationTypeName)
+	}
+	schema, err := os.ReadFile(schemaPath)
+	if err != nil {
+		t.Fatalf("reading schema: %v", err)
+	}
+
+	bin := filepath.Join(t.TempDir(), "bigdiffer")
+	build := exec.Command("go", "build", "-o", bin, ".")
+	if out, err := build.CombinedOutput(); err != nil {
+		t.Fatalf("building bigdiffer: %v\n%s", err, out)
+	}
+
+	origProbe := probeArtifact
+	t.Cleanup(func() { probeArtifact = origProbe })
+
+	t.Run("gate failure tags build_failed", func(t *testing.T) {
+		row := lg
+		row.ResourceTypeName = "aws_zzzhealtag_log_group"
+
+		scratchDir := filepath.Join(cfg.outputRoot, "aws", "zzzhealtag")
+		if err := os.MkdirAll(scratchDir, dirPerm); err != nil {
+			t.Fatal(err)
+		}
+		t.Cleanup(func() { _ = os.RemoveAll(scratchDir) })
+		broken := "package zzzhealtag\nfunc AlreadyBroken() int { return \"not an int\" }\n"
+		if err := os.WriteFile(filepath.Join(scratchDir, "sibling_broken.go"), []byte(broken), filePerm); err != nil {
+			t.Fatal(err)
+		}
+
+		gateCfg := cfg
+		probeArtifact = func(c config, r resourceRow, kind artifactKind, s []byte) error {
+			return probeArtifactWithBinary(bin, c, r, kind, s)
+		}
+
+		proposal := healArtifact(gateCfg, row, artifactResource, schema, nil, "")
+		if proposal.action != "reason" {
+			t.Fatalf("expected action=reason for a gate failure, got %q", proposal.action)
+		}
+		if !strings.HasPrefix(proposal.reason, string(reasonBuildFailed)+":") {
+			t.Errorf("expected a build_failed-tagged reason, got %q", proposal.reason)
+		}
+		if strings.HasPrefix(proposal.reason, string(reasonGenerationFailed)+":") {
+			t.Errorf("must not collapse a gate failure into generation_failed, got %q", proposal.reason)
+		}
+	})
+
+	t.Run("generation failure still tags generation_failed", func(t *testing.T) {
+		probeArtifact = func(config, resourceRow, artifactKind, []byte) error {
+			return errors.New("boom: invalid schema")
+		}
+		proposal := healArtifact(cfg, lg, artifactResource, schema, nil, "")
+		if proposal.action != "reason" {
+			t.Fatalf("expected action=reason, got %q", proposal.action)
+		}
+		if !strings.HasPrefix(proposal.reason, string(reasonGenerationFailed)+":") {
+			t.Errorf("expected a generation_failed-tagged reason, got %q", proposal.reason)
+		}
+	})
 }
