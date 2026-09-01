@@ -88,16 +88,23 @@ What it does, in one discovery crawl:
 2. **Detects changes** by comparing each type's freshly sanitized schema bytes
    against the committed cache, so only genuinely New or Changed types are touched.
 3. **Regenerates** only those types (resource + data sources) from the fresh
-   bytes, in parallel. Generation *is* the gate: a type that still generates is
-   refreshed; one that breaks is frozen or suppressed by policy.
-4. **Never regresses**: generated files and the schema cache are promoted only on
-   clean generation. A broken type keeps its last-good committed output and cache.
-5. **Reconciles `all_schemas.hcl`**: new resource blocks are added, blocks are
+   bytes, in parallel. Generation *is* the first gate: a type that still generates
+   is refreshed; one that breaks is frozen or suppressed by policy.
+4. **Compile-gates** the staged code before writing anything real: it builds the
+   exact set it is about to promote — every staged artifact plus the regenerated
+   `registrations_gen.go` — with `go build ./...`, and only promotes once that is
+   green. A type whose code generates but fails to type-check is suppressed
+   (`build_failed`) the same way a generation failure is, so a broken build can
+   no longer reach a commit.
+5. **Never regresses**: generated files and the schema cache are promoted only on
+   clean generation *and* a green build. A broken type keeps its last-good
+   committed output and cache.
+6. **Reconciles `all_schemas.hcl`**: new resource blocks are added, blocks are
    re-sorted by CloudFormation type name, and existing hand-annotations
    (`# Suppression Reason` comments, suppress flags) are preserved byte-for-byte.
    The policy edits (freeze/suppress + `suppression_reason`) are applied in the
    same pass.
-6. **Emits the aggregates**: `internal/provider/registrations_gen.go` and
+7. **Emits the aggregates**: `internal/provider/registrations_gen.go` and
    `internal/provider/import_examples_gen.json`.
 
 It prints a [report](#reading-the-report) of what changed and what (if anything)
@@ -126,17 +133,20 @@ Files `-update` changes (the same set the legacy process produces, plus
 
 ### 3. Build and smoke test
 
-Unchanged (legacy steps 6–7). These compile-check the regenerated provider —
-including `registrations_gen.go` — and run the smoke tests:
+`-update` already compile-gated the generated code internally (step 4 above), so
+`make build` here is a belt-and-suspenders confirmation rather than the primary
+catch it was under the legacy process, and `make smoke` adds the test compilation
+and acceptance smoke tests the compile gate deliberately does not cover:
 
 ```sh
 make build
 make smoke
 ```
 
-If `make build` fails to compile a generated file, that type's generation
-produced invalid code: add the appropriate `suppress_*` flag to its block in
-`all_schemas.hcl`, open an issue, and re-run `-update` (or `-generate`).
+If `make build` somehow still fails, that points at something the internal gate
+does not cover (e.g. a hand-edit after `-update`, or a bug in the gate itself) —
+investigate rather than routinely hand-suppressing, since `-update` would have
+already suppressed a genuinely non-compiling generated type as `build_failed`.
 
 ### 4. Documentation
 

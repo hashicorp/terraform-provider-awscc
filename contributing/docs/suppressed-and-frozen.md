@@ -43,7 +43,7 @@ them currently record *why* they were pulled. This doc has two parts:
 | `frozen_since` | date string | whole type | stop refreshing this type's schema from AWS; keep last-good bytes |
 | `non_provisionable` | bool | whole type | annotation only: AWS lists the type but it cannot actually be provisioned (no generation impact) |
 | `suppression_reason` | string | whole type | **HCL field exists, but is never populated** — see below |
-| `internal/update/suppressions_checkout.txt` | file, external | whole type | a separate, older mechanism: pins specific `internal/service/cloudformation/schemas/AWS_*.json` files via `git checkout` so a refresh keeps last-good bytes. Orthogonal to everything above; read-only cross-reference in bigdiffer today (see `bigdiffer-generation.md` §5 for the planned fold into `frozen_since`) |
+| `internal/update/suppressions_checkout.txt` | file, external | whole type | a separate, older mechanism: pins specific `internal/service/cloudformation/schemas/AWS_*.json` files via `git checkout` so a refresh keeps last-good bytes. Orthogonal to everything above; read-only cross-reference in bigdiffer today (see `bigdiffer-design.md` §5 and "Deferred and future work" for the planned fold into `frozen_since`) |
 
 One structural fact shapes everything else: a resource, its singular data
 source, and its plural data source are generated from **the same schema file**.
@@ -101,16 +101,17 @@ format bigdiffer manages, since it operates through its own parallel copy of
 the make-target flow.
 
 **bigdiffer today.** `decide()` (`policy.go`) sets suppression for a **New**
-type per the failed artifact (already correctly per-artifact, after the fix
-described in `bigdiffer-generation.md`'s "Corrections found in review"), and
-`gateFailureReason()` builds a `suppression_reason` string from the generation
-error automatically. This is real progress — a machine-written reason, always
-present for suppressions bigdiffer itself makes going forward. But: (a) it does
-not yet run for **Present** types on a partial failure the same way (see Part 2),
-(b) it has no compile-gate probe (`go build` is a separate manual step outside
-bigdiffer — `new-generation.md` §11), and (c) it has no taxonomy — the reason is
-just the raw error text, with no category a human or a future `-heal` pass can
-act on systematically.
+type per the failed artifact (correctly per-artifact), and `gateFailureReason()`
+builds a `suppression_reason` string from the generation error automatically.
+This is real progress — a machine-written reason, always present for
+suppressions bigdiffer itself makes going forward. The gaps this section
+originally called out have since been closed: it now runs for **Present** types
+on a partial failure (per-artifact suppression + freeze), the reason carries a
+**taxonomy** (`category: detail`, Part 2), and the **compile gate** runs inside
+`-update` so `build_failed` is a real category, not a manual `make build`
+afterthought (`bigdiffer-design.md` §6). What remains is applying that machinery
+to the *existing* reason-less backlog — Part 2's `-check`/`-heal` and the
+one-time backfill.
 
 ### What the real overlay looks like
 
@@ -173,8 +174,9 @@ meaningful share of the existing suppressions and every existing freeze carry
   bit.
 - We do not have a compile-gate history at all — no record of which
   suppressions, if any, exist because generated code built but failed to
-  `go build`, since bigdiffer does not run that gate today (`new-generation.md`
-  §11 tracks this as not built).
+  `go build`. The compile gate runs inside `-update` now
+  (`bigdiffer-design.md` §6), but the existing backlog predates it, so no
+  `build_failed` history exists for these old rows.
 
 Part 2 exists to make sure this list is never this long again.
 
@@ -189,7 +191,7 @@ five categories, machine-readable as a prefix (`category: detail`):
 |---|---|---|
 | `structural` | The schema itself doesn't support this artifact — known before generation is attempted, not a failure. Today's only case: a plural data source with no `list` handler, or one requiring arguments. | The planner, before generation runs |
 | `generation_failed` | The owned engine (`codegen.Generate*`) returned an error rendering this artifact. | `-update` / `-generate`, from the real generation error |
-| `build_failed` | The artifact rendered, but `go build` failed on it (or on the package it lives in, attributable to it). | The compile gate (not yet wired — `new-generation.md` §11) |
+| `build_failed` | The artifact rendered, but `go build` failed on it (or on the package it lives in, attributable to it). | The compile gate, inside `-update` (`bigdiffer-design.md` §6) |
 | `manual` | A human suppressed this for a reason not mechanically detected (e.g. a schema shape the engine accepts but that produces something wrong or undesirable). | A human, editing `all_schemas.hcl` directly |
 | `unknown` | Inherited from history; no reason was recorded, and `-heal` has not yet been able to reclassify it. | `-heal`, as a placeholder, or left over from before this taxonomy existed |
 
@@ -262,7 +264,7 @@ The taxonomy maps directly onto the decision:
 | Category | File an issue? | Why |
 |---|---|---|
 | `structural` | **No** | Upstream and common — the CFN schema simply has no qualifying `list` handler. Not our defect, nothing to track; filing here would be constant noise. |
-| `generation_failed` | **Yes** | The owned engine couldn't render the artifact from a schema AWS considers valid — a real defect (ours or the schema's) worth tracking. Validation failures fold in here (validation is the front half of generation, §6 of `new-generation.md`). |
+| `generation_failed` | **Yes** | The owned engine couldn't render the artifact from a schema AWS considers valid — a real defect (ours or the schema's) worth tracking. Validation failures fold in here (validation is the front half of generation, `bigdiffer-design.md` §6). |
 | `build_failed` | **Yes** | The artifact rendered but didn't compile — a real defect. |
 | `manual` | Human's call | Whoever suppressed it knows the reason and whether it warrants an issue. |
 | `unknown` | Triage | Reason lost to history; `-heal` reclassifies it first, and whether it then warrants an issue follows the category it lands on. |
@@ -323,10 +325,13 @@ one tagged `unknown`), `-heal`:
    engine for the specific suppressed artifact. If it now succeeds, propose
    lifting the suppression (report it; do not silently un-suppress without
    review — a human confirms, matching the existing "everything is a proposal,
-   the human reviews the report" posture in `new-generation.md` §8). If it
+   the human reviews the report" posture in `bigdiffer-design.md` §8). If it
    still fails, tag `generation_failed` with the current error text.
-3. **Re-runs the compile gate**, once built (`new-generation.md` §11) — if
-   generation succeeds but `go build` fails, retag `build_failed`.
+3. **Re-runs the compile gate** — the gate now exists (`bigdiffer-design.md`
+   §6); wiring it into this `-heal` probe (so a suppressed artifact that
+   generates but fails `go build` retags `build_failed` rather than proposing a
+   `lift`) is the remaining follow-up. If generation succeeds but the build
+   fails, retag `build_failed`.
 4. **Falls back to `manual`/`unknown`.** If none of the above apply — most
    commonly, an existing free-form `# Suppression Reason:` comment already
    explains it in prose — `-heal` does not overwrite a human's comment; it
@@ -343,7 +348,7 @@ consistent with every other bigdiffer policy decision.
 ### What does not change
 
 - The checkout file (`suppressions_checkout.txt`) remains a separate, read-only
-  cross-reference, exactly as documented in `bigdiffer-generation.md` §5. Folding
+  cross-reference, exactly as documented in `bigdiffer-design.md` §5. Folding
   it into `frozen_since` is unrelated to this spec and stays a future migration.
   `-heal` does not touch it.
 - `non_provisionable` remains a bare annotation with no generation effect and no

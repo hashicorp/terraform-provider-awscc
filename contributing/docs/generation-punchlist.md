@@ -18,19 +18,18 @@ keep, trim, or delete as the work settles.
 
 | Doc | Role | Lifespan |
 |---|---|---|
+| `bigdiffer-design.md` | The durable design reference — what bigdiffer is, how it works, and why (model, change classes, the two gates, policy, the generator surface, deferred work). | **Long-term.** The maintenance/review reference. |
 | `generating-the-provider-with-bigdiffer.md` | The current weekly release process (operational how-to). | **Long-term.** The canonical runbook. |
 | `generating-the-provider.md` | The legacy manual `make`-target process. | **Long-term while the fallback exists;** delete with the legacy generators. |
-| `new-generation.md` | The durable *design* (why reconcile-vs-live, change classes, one gate, policy) + a §11 roadmap. | **Long-term for §1–§10** (the rationale). §11 is superseded by *this* punchlist and should shrink to a pointer here. |
 | `suppressed-and-frozen.md` | Both a spec *and* the source of truth for suppression/frozen nuances. | **Long-term.** The spec sections settle into "how it works" as items land; the taxonomy, the `frozen`-means-schema-pin clarification, and the issue guidance stay permanently. |
-| `bigdiffer-generation.md` | Historical record of Bricks 6–11 (owning the engine) + the generator-surface investigation. | **Transient/historical.** Its durable nugget is the "Investigation findings (the generator surface)" section; fold that into `new-generation.md` or the tool README, then retire the rest once the legacy generators are deleted. |
 | `generation-punchlist.md` (this) | Big-picture gap tracker. | **Transient.** Delete when the list is empty. |
 
 ## The gaps
 
 ### Prerequisites
 
-1. ~~**Compile gate**~~ — ✅ **Done** (`d2d1a1a85`, design:
-   `contributing/docs/compile-gate-design.md`). `-update` now builds the exact
+1. ~~**Compile gate**~~ — ✅ **Done** (`d2d1a1a85` + follow-ups `e201fd7d8`,
+   `5055628fa`; design: `bigdiffer-design.md` §6, "The compile gate"). `-update` now builds the exact
    code it is about to promote — every staged artifact plus the registration
    file it implies — against the real module (`go build ./...` from the repo
    root, once per fixpoint round) before writing anything real, instead of
@@ -47,7 +46,8 @@ keep, trim, or delete as the work settles.
    category (previously defined but dead) and `-heal` step 3. *(prereq)*
 2. **Absent-row `DescribeType` probe** — split a type that is gone from the live
    crawl into non-provisionable-but-live vs. genuinely withdrawn. *(prereq)*
-   Unblocks the `withdrawn` freeze path. Detail: `new-generation.md` §3.
+   Unblocks the `withdrawn` freeze path. Detail: `bigdiffer-design.md` §3 and
+   "Deferred and future work".
 
 ### Suppression & frozen reasons
 
@@ -56,7 +56,7 @@ All detail lives in `suppressed-and-frozen.md`.
 3. ~~**Reason taxonomy**~~ — ✅ **Done** (commit `a08072eb6`, alongside item 4).
    `policy.go`'s `reasonCategory` (`structural` / `generation_failed` /
    `build_failed` / `manual` / `unknown`) + `formatReason` (`category: detail`).
-   `build_failed` is defined but unreachable until item 1 (compile gate) lands.
+   `build_failed` became reachable once item 1 (the compile gate) landed.
    *(core)*
 4. ~~**Per-artifact independence**~~ — ✅ **Done** (commit `a08072eb6`). A
    resource, singular DS, and plural DS now succeed or fail independently in one
@@ -138,7 +138,7 @@ All detail lives in `suppressed-and-frozen.md`.
 
 11. **Machine-readable report** — structured output so `-check`/`-heal`
     proposals and the issue stubs are consumable (and seed release notes).
-    Detail: `new-generation.md` §8, §11. *(core)*
+    Detail: `bigdiffer-design.md` §8 and "Deferred and future work". *(core)*
 12. ~~**Never-regress cross-type atomicity**~~ — ✅ **Done** (commit
     `a08072eb6`). `refreshCandidate` now stages every artifact and cached schema
     under a temp `stagingDir`, writing nothing to the real tree; `promoteStaged`
@@ -151,11 +151,12 @@ All detail lives in `suppressed-and-frozen.md`.
 ### Deferred
 
 13. **Checkout-file retirement** — fold `suppressions_checkout.txt` into
-    `frozen_since`. Detail: `new-generation.md` §5, `bigdiffer-generation.md` §5.
-    *(deferred)*
+    `frozen_since`. Detail: `bigdiffer-design.md` §5 and "Deferred and future
+    work". *(deferred)*
 14. **Parity-validated naming simplification** — replace the `isCustomName`
     regex list with the general "plural == input ⇒ suffix" rule, proven by the
-    parity harness. Detail: `bigdiffer-generation.md` ("Deferred"). *(deferred)*
+    parity harness. Detail: `bigdiffer-design.md` "Deferred and future work".
+    *(deferred)*
 15. **Delete the legacy generators, directive files, and `make` targets** — only
     after full-corpus parity has held for several real cycles. Detail:
-    `new-generation.md` §10, `bigdiffer-generation.md` ("Deferred"). *(deferred)*
+    `bigdiffer-design.md` §10 and "Deferred and future work". *(deferred)*

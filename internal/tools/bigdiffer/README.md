@@ -11,9 +11,9 @@ running a chain of `make` targets.
 
 - **Weekly release process:** `contributing/docs/generating-the-provider-with-bigdiffer.md`
   (and the legacy fallback in `generating-the-provider.md`).
-- **Design and status:** `contributing/docs/new-generation.md` (target design,
-  §11 status table) and `contributing/docs/bigdiffer-generation.md` (the
-  generation/orchestration design record — Bricks 6–11, all shipped).
+- **Design and status:** `contributing/docs/bigdiffer-design.md` (the durable
+  design reference — model, gates, policy, the generator surface, deferred work)
+  and `contributing/docs/generation-punchlist.md` (what is left to do).
 
 > Note: there is also a `make bigdiffer` target that only prints the raw `diff`
 > between two dated `available_schemas` files. It is unrelated and slated for
@@ -156,9 +156,9 @@ nothing under `internal/provider/generators/**` — enforced by
   (which supersedes the legacy `resources.go` / `singular_data_sources.go` /
   `plural_data_sources.go` directive files) and `import_examples_gen.json`.
 
-See `contributing/docs/bigdiffer-generation.md` (design record, Bricks 6–11) and
-`contributing/docs/new-generation.md` (durable design, §11 status) for the full
-picture, and `generating-the-provider-with-bigdiffer.md` for the weekly process.
+See `contributing/docs/bigdiffer-design.md` (durable design — "The generator
+surface" section covers the engine) for the full picture, and
+`generating-the-provider-with-bigdiffer.md` for the weekly process.
 
 ## Suppression model (why there are two mechanisms, for now)
 
@@ -172,7 +172,7 @@ picture, and `generating-the-provider-with-bigdiffer.md` for the weekly process.
 
 These are orthogonal today; `bigdiffer` treats the checkout list as a read-only
 cross-reference and preserves the HCL flags verbatim. The design
-(`new-generation.md` §5) folds the checkout file into `frozen_since` and retires
+(`bigdiffer-design.md` §5) folds the checkout file into `frozen_since` and retires
 it; that migration has not happened yet.
 
 See `contributing/docs/suppressed-and-frozen.md` for the full picture: exactly
