@@ -221,9 +221,13 @@ recovery automatically.
 Everything above is mechanical. The human reviews the change report before
 commit: confirm or override auto-applied freezes/suppressions, supply the
 appropriate per-artifact `suppression_reason_*` (or `frozen_reason`) text and
-issue links, and adjudicate flagged anomalies. A
-machine-readable report (so it can also seed release notes) is not yet built —
-see §11.
+issue links, and adjudicate flagged anomalies. The report is plain,
+consistently-shaped text (one fact per line: CFN type, label, field, reason) —
+a structured (JSON) form was considered and de-scoped
+(`generation-punchlist.md` item 11): the actual consumers are a human or an
+LLM agent working through proposals interactively, and both read this text
+output at least as reliably as JSON, without a second schema to keep in sync
+with every future taxonomy change.
 
 ## 9. Design decisions (proven in the tool)
 
@@ -303,10 +307,10 @@ engine is byte-identical to the legacy generators (0 drift, ~1580 types) — kep
 as a regression guard. The `-check`, `-update`, `-generate`, `-docs`, and `-heal`
 modes are all live.
 
-Remaining work — the absent-row probe (§3), GitHub-issue guidance, the one-time
-reason backfill, a machine-readable report (§8), and the deferred cleanups below
-— is tracked with priorities and current status in `generation-punchlist.md`.
-None of it blocks the weekly cycle today; see
+Remaining work — the absent-row probe (§3), GitHub-issue guidance, the
+one-time reason backfill, and the deferred cleanups below — is tracked with
+priorities and current status in `generation-punchlist.md`. None of it
+blocks the weekly cycle today; see
 `generating-the-provider-with-bigdiffer.md` for the operational process and the
 legacy fallback.
 
@@ -375,10 +379,6 @@ with status; the detail lives here.
 - **Checkout-file retirement (§5).** Fold `suppressions_checkout.txt` fully into
   `frozen_since` and stop reading the external file. Orthogonal to the reason
   taxonomy; a pure simplification once nothing else depends on the checkout list.
-- **Machine-readable report + self-heal (§7–§8).** A structured report so the
-  `-check`/`-heal` proposals and issue stubs are consumable and can seed release
-  notes; and the self-heal re-probe that proposes recovery for a frozen/suppressed
-  type AWS has since fixed.
 - **Parity-validated naming simplification.** The `isCustomName` regex list
   (`efs`/`tions`/`issions`/`windows`/`settings`/`data`) appears to approximate a
   single condition: `inflection.Plural(name) == name` (pluralization left the

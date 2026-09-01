@@ -185,17 +185,22 @@ All detail lives in `suppressed-and-frozen.md`.
     plural suppressions, and triage the 35 reason-less freezes + 3 bare
     suppressions. Includes **mining open GitHub issues** to propose reasons and
     URL links for rows that have none. Detail: `suppressed-and-frozen.md`
-    ("Mining existing issues"). Sequenced after 11 so the backfill consumes
-    structured output instead of text; 9b/9a (the four-field shape it
-    targets) are done. *(backlog, depends on 11)*
+    ("Mining existing issues"). Item 11 (its former dependency) is de-scoped;
+    9b/9a (the four-field shape it targets) are done. *(backlog)*
 
 ### Reporting & robustness
 
-11. **Machine-readable report** — structured output so `-check`/`-heal`
-    proposals and the issue stubs are consumable (and seed release notes).
-    9b is done, so this can now be designed against the final four-field
-    reason shape from the start rather than needing a second revision.
-    Detail: `bigdiffer-design.md` §8 and "Deferred and future work". *(core)*
+11. ~~**Machine-readable report**~~ — ❌ **De-scoped, closed.** The premise was
+    a structured (JSON) `-check`/`-heal` output for a downstream deterministic
+    consumer to parse. There is no such consumer: bigdiffer's proposals are
+    read and acted on by a human, or by an LLM agent working through them
+    interactively — and an agent parses the existing per-line, one-fact-per-line
+    stdout text (already consistently shaped: CFN type, label, field, reason)
+    at least as reliably as JSON, without the ongoing cost of a second schema
+    to keep in sync with every future taxonomy/field change (the exact
+    maintenance burden `gateFailureReason`/`suppression_reason` already paid
+    for once, in 9b). Revisit only if a specific deterministic (non-agent,
+    non-human) consumer is ever proposed.
 12. ~~**Never-regress cross-type atomicity**~~ — ✅ **Done** (commit
     `a08072eb6`). `refreshCandidate` now stages every artifact and cached schema
     under a temp `stagingDir`, writing nothing to the real tree; `promoteStaged`
