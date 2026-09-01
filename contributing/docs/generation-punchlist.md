@@ -209,6 +209,26 @@ All detail lives in `suppressed-and-frozen.md`.
     returns before any promotion and leaves the tree and `all_schemas.hcl`
     exactly as they started. `TestUpdateBatchAtomicity` injects a mid-batch
     failure and asserts nothing was promoted. *(core)*
+16. **CHANGELOG automation** — the weekly runbook's step 5
+    (`generating-the-provider-with-bigdiffer.md` §5) is still fully manual: a
+    human runs `git ls-files --others --exclude-standard`, eyeballs which
+    untracked website doc files are new resources/data sources/list
+    resources, hand-formats a `**New Resource:**`-style bullet with the
+    Terraform type name per one, and pastes them into `CHANGELOG.md`. Every
+    state this actually needs already exists in the `-update` command's own
+    `Report` (`AddedNew`/`AddedBacklog`) and `decide()`'s per-artifact
+    outcome — a new type's resource, singular DS, and plural DS each get
+    their own bullet line (confirmed against the real `CHANGELOG.md`: e.g.
+    `awscc_appstream_user` gets a separate "New Data Source" line from its
+    plural `awscc_appstream_users`, and a "New List Resource" line under the
+    *resource's* singular type name, driven by the same `ListResource`
+    coupling `suppressed-and-frozen.md`'s "The six levers" already
+    documents) — so this is a straightforward consumer of state
+    `-update` computes, not new discovery logic. Not yet designed: whether the
+    fragment is emitted by `-update` itself (when `AddedNew`/`AddedBacklog` are
+    freshly known) for a human to fold into `CHANGELOG.md` at the later
+    CHANGELOG/version step, or something `-docs` re-derives independently.
+    *(core)*
 
 ### Deferred
 
