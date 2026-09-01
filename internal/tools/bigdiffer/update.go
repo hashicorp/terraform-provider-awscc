@@ -95,14 +95,17 @@ func gateResultFromGenResults(cfType string, results []genResult) gateResult {
 // whole candidate batch has been staged successfully (generation-punchlist.md
 // item 12: batch atomicity). It returns the gateResult for the policy engine,
 // reflecting the final per-artifact outcome (after any ListResource-driven
-// regeneration).
-func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, error) {
+// regeneration), plus the genResults that were actually staged (r.err == nil)
+// — the compile gate's fixpoint (item 1) needs each staged artifact's
+// pathSuffix/codeFile to map a blamed real file back to the candidate and
+// artifact that produced it.
+func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, []genResult, error) {
 	stagedSchema := schemaCachePath(filepath.Join(stagingDir, "input"), c.cfType)
 	if err := os.MkdirAll(filepath.Dir(stagedSchema), dirPerm); err != nil {
-		return gateResult{}, fmt.Errorf("creating staging input dir: %w", err)
+		return gateResult{}, nil, fmt.Errorf("creating staging input dir: %w", err)
 	}
 	if err := os.WriteFile(stagedSchema, c.schema, filePerm); err != nil {
-		return gateResult{}, fmt.Errorf("staging %s: %w", c.cfType, err)
+		return gateResult{}, nil, fmt.Errorf("staging %s: %w", c.cfType, err)
 	}
 
 	row := c.row
@@ -111,36 +114,36 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, e
 	results := generateCorpus(cfg, []resourceRow{row}, 1, nil)
 	results, err := reconcileListResource(cfg, results)
 	if err != nil {
-		return gateResult{}, fmt.Errorf("regenerating resource for %s: %w", c.cfType, err)
+		return gateResult{}, nil, fmt.Errorf("regenerating resource for %s: %w", c.cfType, err)
 	}
 	gr := gateResultFromGenResults(c.cfType, results)
 
 	// Stage successful artifacts under stagingDir/out, mirroring cfg.outputRoot.
 	stageCfg := cfg
 	stageCfg.outputRoot = filepath.Join(stagingDir, "out")
-	promoted := false
+	var staged []genResult
 	for _, r := range results {
 		if r.err != nil {
 			continue // leave last-good (Present) or nothing (New) for this artifact
 		}
 		if err := writeArtifact(stageCfg, r); err != nil {
-			return gr, fmt.Errorf("staging %s %s: %w", c.cfType, r.a.kind, err)
+			return gr, nil, fmt.Errorf("staging %s %s: %w", c.cfType, r.a.kind, err)
 		}
-		promoted = true
+		staged = append(staged, r)
 	}
-	if !promoted {
-		return gr, nil // nothing succeeded; nothing to stage
+	if len(staged) == 0 {
+		return gr, nil, nil // nothing succeeded; nothing to stage
 	}
 
 	// Stage the fresh schema bytes for promotion into the real cache too.
 	stagedCache := filepath.Join(stagingDir, "cache")
 	if err := os.MkdirAll(stagedCache, dirPerm); err != nil {
-		return gr, fmt.Errorf("creating staged cache dir: %w", err)
+		return gr, staged, fmt.Errorf("creating staged cache dir: %w", err)
 	}
 	if err := os.WriteFile(schemaCachePath(stagedCache, c.cfType), c.schema, filePerm); err != nil {
-		return gr, fmt.Errorf("staging cache for %s: %w", c.cfType, err)
+		return gr, staged, fmt.Errorf("staging cache for %s: %w", c.cfType, err)
 	}
-	return gr, nil
+	return gr, staged, nil
 }
 
 // promoteStaged copies every staged artifact and cached schema from stagingDir
@@ -285,9 +288,10 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	candBar := newBar(len(cands), "regenerate")
 	today := time.Now().Format(dateLayout)
 	decisions := make(map[string]policyDecision, len(cands))
+	stagedByDest := make(map[string]stagedArtifact)
 	var okN, brokeN int
 	for _, c := range cands {
-		gr, err := refreshCandidate(cfg, stagingDir, c)
+		gr, staged, err := refreshCandidate(cfg, stagingDir, c)
 		if err != nil {
 			return err
 		}
@@ -298,22 +302,32 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 			brokeN++
 			infof("%s: %s", c.cfType, decisions[c.cfType].summary)
 		}
+		// gr is shared by pointer with every staged artifact of this
+		// candidate: the compile gate (below) downgrades one artifact's
+		// outcome in place and recomputes decide() from the same gateResult,
+		// so a build-gate rejection of, say, the plural data source does not
+		// lose the fact that the resource and singular data source are still
+		// fine.
+		grPtr := gr
+		for _, r := range staged {
+			dest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.codeFile)
+			// Find this artifact's index within grPtr.artifacts (staged only
+			// contains artifacts that generated OK, i.e. gateOK in grPtr).
+			for ai := range grPtr.artifacts {
+				if grPtr.artifacts[ai].kind == r.a.kind {
+					stagedByDest[dest] = stagedArtifact{class: c.class, gr: &grPtr, artifact: ai}
+					break
+				}
+			}
+		}
 		_ = candBar.Add(1)
 	}
 	_ = candBar.Finish()
 
-	// Promote every staged artifact and cache entry into the real tree in one
-	// pass, only now that the whole batch has staged successfully. A hard error
-	// anywhere in the loop above returned before reaching here, so the real
-	// tree and the overlay (reconciled next) are left exactly as they were
-	// (generation-punchlist.md item 12).
-	stepf("Promoting staged output (%d artifact(s) refreshed)…", okN+brokeN)
-	if err := promoteStaged(cfg, stagingDir); err != nil {
-		return err
-	}
-
-	// Reconcile the overlay and apply the policy edits in one pass.
-	stepf("Reconciling all_schemas.hcl and applying policy…")
+	// Reconcile the overlay and apply the policy edits in one pass — read now,
+	// rendered later (once the compile gate settles); recomputing decide()
+	// from a fresher on-disk overlay mid-fixpoint would fight the batch it
+	// already committed to when the candidate loop ran.
 	overlayContent, err := os.ReadFile(allSchemasPath)
 	if err != nil {
 		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
@@ -322,6 +336,30 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	if err != nil {
 		return fmt.Errorf("reading checkout %s: %w", checkoutPath, err)
 	}
+
+	// Compile gate (generation-punchlist.md item 1): build the staged code plus
+	// the registration file it implies against the real module until it
+	// compiles clean, downgrading whatever the compiler rejects. Runs before
+	// promotion so a build failure changes what gets promoted rather than
+	// promoting something broken; never blocks the release (design doc
+	// contributing/docs/compile-gate-design.md).
+	stepf("Compile-gating %d staged artifact(s)…", len(stagedByDest))
+	if err := compileFixpoint(cfg, stagingDir, string(overlayContent), base, checkout, decisions, stagedByDest, today); err != nil {
+		return fmt.Errorf("compile gate: %w", err)
+	}
+
+	// Promote the compiled core — staged code, cache, the reconciled overlay,
+	// and the gated registration file — together, only now that the whole
+	// batch has staged successfully and gone green. A hard error anywhere
+	// earlier (the candidate loop or the compile gate) returned before
+	// reaching here, so the real tree and the overlay are left exactly as they
+	// started (generation-punchlist.md item 12).
+	stepf("Promoting staged output (%d artifact(s) refreshed)…", okN+brokeN)
+	if err := promoteStaged(cfg, stagingDir); err != nil {
+		return err
+	}
+
+	stepf("Reconciling all_schemas.hcl and applying policy…")
 	out, report, err := normalizeWithDecisions(string(overlayContent), base, nil, checkout, decisions)
 	if err != nil {
 		return err
@@ -330,18 +368,15 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("writing %s: %w", allSchemasPath, err)
 	}
 
-	// Re-emit the aggregates from the reconciled overlay.
-	stepf("Emitting aggregates (registration + import examples)…")
+	// Emit import_examples_gen.json from the promoted state: unlike the
+	// registration file, it reads each resource's cached schema bytes to
+	// recover primary-identifier names, so it must run after the cache is
+	// promoted — it is not part of the compiled/gated/atomic core, it trails
+	// it as a deterministic projection of the final, promoted overlay + cache.
+	stepf("Emitting import examples…")
 	_, finalRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
-	}
-	reg, err := emitRegistration(cfg, finalRows)
-	if err != nil {
-		return err
-	}
-	if err := os.WriteFile(cfg.registrationPath, reg, filePerm); err != nil {
-		return fmt.Errorf("writing %s: %w", cfg.registrationPath, err)
 	}
 	ie, err := emitImportExamples(cfg, finalRows)
 	if err != nil {
@@ -352,7 +387,19 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 
 	report.write()
-	stepf("Done: refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), okN, brokeN)
+	// Recompute the summary counts from the settled decisions, not the
+	// mid-loop tally above: the compile gate can downgrade a candidate that
+	// generation reported OK, so okN/brokeN must reflect what was actually
+	// promoted, not just what generation produced before the gate ran.
+	finalOK, finalBroken := 0, 0
+	for _, d := range decisions {
+		if d.reason == "" {
+			finalOK++
+		} else {
+			finalBroken++
+		}
+	}
+	stepf("Done: refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), finalOK, finalBroken)
 	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`, `go run ./internal/tools/bigdiffer -docs`.")
 	return nil
 }

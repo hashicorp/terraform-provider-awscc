@@ -48,7 +48,7 @@ func TestRefreshCandidateSuccess(t *testing.T) {
 	}
 
 	c := candidate{cfType: "AWS::Logs::LogGroup", class: classPresent, row: lg, schema: schema}
-	gr, err := refreshCandidate(cfg, staging, c)
+	gr, _, err := refreshCandidate(cfg, staging, c)
 	if err != nil {
 		t.Fatalf("refreshCandidate: %v", err)
 	}
@@ -99,7 +99,7 @@ func TestRefreshCandidateNeverRegress(t *testing.T) {
 	}
 
 	c := candidate{cfType: "AWS::Logs::LogGroup", class: classPresent, row: lg, schema: []byte("{ not a valid schema }")}
-	gr, err := refreshCandidate(cfg, staging, c)
+	gr, _, err := refreshCandidate(cfg, staging, c)
 	if err != nil {
 		t.Fatalf("refreshCandidate returned error (failure should be in-band): %v", err)
 	}
@@ -147,7 +147,7 @@ func TestRefreshCandidateTotalFailureNeverRegress(t *testing.T) {
 	}
 
 	c := candidate{cfType: "AWS::Logs::LogGroup", class: classPresent, row: lg, schema: []byte("irrelevant")}
-	gr, err := refreshCandidate(cfg, staging, c)
+	gr, _, err := refreshCandidate(cfg, staging, c)
 	if err != nil {
 		t.Fatalf("refreshCandidate returned error (failure should be in-band): %v", err)
 	}
@@ -263,7 +263,7 @@ func TestUpdateBatchAtomicity(t *testing.T) {
 
 	// Candidate 1 (of what would be a larger batch) stages successfully.
 	c1 := candidate{cfType: "AWS::Logs::LogGroup", class: classPresent, row: lg, schema: schema}
-	if _, err := refreshCandidate(cfg, staging, c1); err != nil {
+	if _, _, err := refreshCandidate(cfg, staging, c1); err != nil {
 		t.Fatalf("refreshCandidate (candidate 1): %v", err)
 	}
 
@@ -283,7 +283,7 @@ func TestUpdateBatchAtomicity(t *testing.T) {
 		t.Fatal(err)
 	}
 	c2 := candidate{cfType: "AWS::Logs::LogGroup", class: classPresent, row: lg, schema: schema}
-	_, err = refreshCandidate(cfg, staging, c2)
+	_, _, err = refreshCandidate(cfg, staging, c2)
 	if err == nil {
 		t.Fatal("expected refreshCandidate to fail: the staging input dir path is occupied by a file")
 	}

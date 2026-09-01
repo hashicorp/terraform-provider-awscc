@@ -155,18 +155,25 @@ func suppressAttrsForFailures(gr gateResult) map[string]string {
 }
 
 // gateFailureReason renders a compact, deterministic suppression_reason from the
-// failed artifacts' errors, tagged generation_failed (the only failure source a
-// gateResult carries today; a build-gate failure will get its own category once
-// the compile gate is wired — generation-punchlist.md item 1).
+// failed artifacts' errors. Each artifact is tagged by which stage rejected it:
+// generation_failed (the owned engine returned an error) or build_failed (it
+// generated fine but the compile gate's `go build` rejected it — item 1). A
+// gateResult with a mix of both across its artifacts renders a mixed reason;
+// each artifact's own tag is still correct individually via suppressAttrsForFailures.
 func gateFailureReason(gr gateResult) string {
 	var parts []string
+	category := reasonGenerationFailed
 	for _, a := range gr.artifacts {
-		if a.outcome != gateOK && a.err != nil {
-			parts = append(parts, fmt.Sprintf("%s: %s", a.kind, firstLine(a.err.Error())))
+		if a.outcome == gateOK || a.err == nil {
+			continue
+		}
+		parts = append(parts, fmt.Sprintf("%s: %s", a.kind, firstLine(a.err.Error())))
+		if a.outcome == gateFailedBuild {
+			category = reasonBuildFailed
 		}
 	}
 	sort.Strings(parts)
-	return formatReason(reasonGenerationFailed, strings.Join(parts, "; "))
+	return formatReason(category, strings.Join(parts, "; "))
 }
 
 func firstLine(s string) string {

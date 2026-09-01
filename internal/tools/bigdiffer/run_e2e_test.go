@@ -82,7 +82,7 @@ func TestE2ELiveUpdate(t *testing.T) {
 	today := time.Now().Format(dateLayout)
 	var okN, brokeN int
 	for _, c := range cands {
-		gr, err := refreshCandidate(tmpCfg, staging, c)
+		gr, _, err := refreshCandidate(tmpCfg, staging, c)
 		if err != nil {
 			t.Fatalf("refreshCandidate %s: %v", c.cfType, err)
 		}

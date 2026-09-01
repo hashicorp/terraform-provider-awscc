@@ -191,3 +191,54 @@ func TestDecide(t *testing.T) {
 		}
 	})
 }
+
+// TestGateFailureReason covers the compile gate's taxonomy distinction (item 1):
+// a build-gate rejection (gateFailedBuild) must render build_failed, not
+// generation_failed, since they are different stages with different remediation
+// (a build failure means the compile gate's own go build rejected code the
+// engine rendered fine; a generation failure means the engine itself errored).
+func TestGateFailureReason(t *testing.T) {
+	t.Parallel()
+
+	t.Run("generation failure tags generation_failed", func(t *testing.T) {
+		t.Parallel()
+		gr := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("boom")},
+		}}
+		got := gateFailureReason(gr)
+		if got != "generation_failed: resource: boom" {
+			t.Errorf("got %q, want generation_failed-tagged", got)
+		}
+	})
+
+	t.Run("build failure tags build_failed", func(t *testing.T) {
+		t.Parallel()
+		gr := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedBuild, err: errors.New("undefined: fwvalidators.Foo")},
+		}}
+		got := gateFailureReason(gr)
+		if got != "build_failed: resource: undefined: fwvalidators.Foo" {
+			t.Errorf("got %q, want build_failed-tagged", got)
+		}
+	})
+
+	t.Run("a mix of build and generation failures tags build_failed", func(t *testing.T) {
+		t.Parallel()
+		// A gateResult mixing both stages across its artifacts is an edge case
+		// (a type whose resource failed to generate and whose singular DS
+		// generated but failed the compile gate) — the render is one reason
+		// string for the whole type, so it favors the more specific
+		// build_failed tag rather than silently defaulting to
+		// generation_failed. Each artifact's own suppress_* attribute is still
+		// set correctly regardless (suppressAttrsForFailures is outcome-agnostic
+		// beyond != gateOK), so nothing is mis-suppressed by this choice.
+		gr := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("gen boom")},
+			{kind: artifactSingularDataSource, outcome: gateFailedBuild, err: errors.New("build boom")},
+		}}
+		got := gateFailureReason(gr)
+		if got != "build_failed: resource: gen boom; singular_data_source: build boom" {
+			t.Errorf("got %q, want build_failed-tagged with both details", got)
+		}
+	})
+}

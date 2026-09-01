@@ -15,6 +15,7 @@ type gateOutcome string
 const (
 	gateOK               gateOutcome = "ok"
 	gateFailedGeneration gateOutcome = "failed-generation" // schema won't generate
+	gateFailedBuild      gateOutcome = "failed-build"      // generated, but go build rejects it (compile gate, item 1)
 )
 
 // artifactResult is the generation outcome for one artifact of a type.
