@@ -10,6 +10,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
@@ -196,6 +197,8 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 		"-probe-prefix", cfg.prefix,
 		"-probe-cache-dir", cfg.cacheDir,
 		"-probe-services-path", cfg.servicesPath,
+		"-probe-repo-root", cfg.repoRoot,
+		"-probe-output-root", cfg.outputRoot,
 	)
 	cmd.Env = append(os.Environ(), fmt.Sprintf("GOMEMLIMIT=%s", healProbeMemLimit))
 	out, runErr := cmd.CombinedOutput()
@@ -235,16 +238,25 @@ const (
 
 // runHealProbeArtifact is the hidden subprocess entrypoint probeArtifact
 // re-execs into. It rebuilds the plan for exactly one artifact from flags,
-// generates it (writing nothing), and reports success/failure via exit code —
-// never printed as a bigdiffer report, since this process only exists to be
-// probed by its parent.
-func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDir, servicesPath string) error {
+// generates it (writing nothing to the real output tree — only the compile
+// gate check below touches it, transiently, via buildOnce's own
+// overlay-then-revert), and, if generation succeeds, runs that one artifact
+// through the compile gate (generation-punchlist.md item 1) before reporting
+// success — so a "lift" proposal is trustworthy against both stages a real
+// -update run would have to pass, not just generation. repoRoot/outputRoot
+// are required for the compile gate step; if either is empty (a caller that
+// only wants the generation-only check, or an older binary's flag surface),
+// the compile gate step is skipped rather than erroring, so probing a type
+// with a kind that has no real destination concept yet degrades safely.
+// Reports success/failure via exit code — never printed as a bigdiffer
+// report, since this process only exists to be probed by its parent.
+func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDir, servicesPath, repoRoot, outputRoot string) error {
 	row := resourceRow{
 		ResourceTypeName:         tfType,
 		CloudFormationTypeName:   cfnType,
 		CloudFormationSchemaPath: schemaPath,
 	}
-	cfg := config{prefix: prefix, cacheDir: cacheDir, servicesPath: servicesPath}
+	cfg := config{prefix: prefix, cacheDir: cacheDir, servicesPath: servicesPath, repoRoot: repoRoot, outputRoot: outputRoot}
 
 	p, err := generationPlan(row, cfg.prefix, cfg.cacheDir)
 	if err != nil {
@@ -256,9 +268,20 @@ func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDi
 			continue
 		}
 		ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
-		_, _, genErr := generateArtifact(ui, cfg, p, a)
+		code, _, genErr := generateArtifact(ui, cfg, p, a)
 		if genErr != nil {
 			return genErr
+		}
+		if cfg.repoRoot == "" || cfg.outputRoot == "" {
+			return nil // caller didn't ask for the compile gate step
+		}
+		dest := filepath.Join(cfg.outputRoot, a.pathSuffix, a.codeFile)
+		ok, buildErrs, buildErr := buildOnce(cfg.repoRoot, map[string][]byte{dest: code})
+		if buildErr != nil {
+			return fmt.Errorf("compile gate: %w", buildErr)
+		}
+		if !ok {
+			return fmt.Errorf("generates cleanly but fails the compile gate: %s", formatBuildErrors(buildErrs))
 		}
 		return nil
 	}
@@ -345,5 +368,5 @@ func writeHealReport(needsReason int, proposals []healProposal) {
 			fmt.Fprintf(os.Stderr, "  + %s (%s) [%s]: suppression_reason = %q\n", p.cfn, p.label, kind, p.reason)
 		}
 	}
-	fmt.Fprintln(os.Stderr, "Nothing above was written; review and apply by hand (or re-run once the compile gate lands to sharpen build_failed proposals).")
+	fmt.Fprintln(os.Stderr, "Nothing above was written; review and apply by hand.")
 }

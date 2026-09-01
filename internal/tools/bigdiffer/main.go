@@ -93,11 +93,13 @@ func main() {
 		probePrefix       = flag.String("probe-prefix", "", "internal")
 		probeCacheDir     = flag.String("probe-cache-dir", "", "internal")
 		probeServicesPath = flag.String("probe-services-path", "", "internal")
+		probeRepoRoot     = flag.String("probe-repo-root", "", "internal")
+		probeOutputRoot   = flag.String("probe-output-root", "", "internal")
 	)
 	flag.Parse()
 
 	if *healProbeArtifact {
-		if err := runHealProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath); err != nil {
+		if err := runHealProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}

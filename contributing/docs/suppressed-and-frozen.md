@@ -327,11 +327,12 @@ one tagged `unknown`), `-heal`:
    review — a human confirms, matching the existing "everything is a proposal,
    the human reviews the report" posture in `bigdiffer-design.md` §8). If it
    still fails, tag `generation_failed` with the current error text.
-3. **Re-runs the compile gate** — the gate now exists (`bigdiffer-design.md`
-   §6); wiring it into this `-heal` probe (so a suppressed artifact that
-   generates but fails `go build` retags `build_failed` rather than proposing a
-   `lift`) is the remaining follow-up. If generation succeeds but the build
-   fails, retag `build_failed`.
+3. **Re-runs the compile gate.** If generation succeeds, the probed artifact's
+   generated code is also run through the compile gate (`buildOnce`,
+   `bigdiffer-design.md` §6) before proposing a `lift` — a suppressed artifact
+   that generates but fails `go build` is retagged `build_failed` instead,
+   so a `lift` proposal is only ever made for something that would actually
+   survive a real `-update` run, not just generation.
 4. **Falls back to `manual`/`unknown`.** If none of the above apply — most
    commonly, an existing free-form `# Suppression Reason:` comment already
    explains it in prose — `-heal` does not overwrite a human's comment; it

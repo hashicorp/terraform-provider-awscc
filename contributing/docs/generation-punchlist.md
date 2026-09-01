@@ -93,14 +93,15 @@ All detail lives in `suppressed-and-frozen.md`.
    `UnexplainedRetained`) were present; it now reports the advisory count.
    Verified against the real overlay: 463 reason-less rows correctly flagged,
    `-check` still exits 0, overlay untouched. *(core)*
-9. ~~**`-heal` subcommand**~~ — ✅ **Done** (`04b6a264d`). `internal/tools/bigdiffer/heal.go`:
+9. ~~**`-heal` subcommand**~~ — ✅ **Done** (`04b6a264d`; compile-gate wiring
+   added later, see below). `internal/tools/bigdiffer/heal.go`:
    for every reason-less/`unknown` row, probes each suppressed artifact
    (structural check via the existing `pluralSupported`, then a real
-   regeneration attempt) and the freeze itself, proposing `lift` (generates
-   cleanly now) or a categorized `reason`, falling back to migrating a
+   regeneration attempt, then a real compile-gate check) and the freeze
+   itself, proposing `lift` (generates cleanly *and* passes the compile gate)
+   or a categorized `reason`, falling back to migrating a
    free-form `# Suppression Reason:` comment into `manual:` or `unknown` if
-   nothing else applies. Never writes `all_schemas.hcl`. The compile-gate step
-   is deferred to item 1 landing.
+   nothing else applies. Never writes `all_schemas.hcl`.
    **Load-bearing fix found via a live run against the real overlay:** some
    rows are suppressed *because* their schema is recursive
    (`# Suppression Reason: Recursive Attribute Definitions`, issue #95), and
@@ -118,6 +119,17 @@ All detail lives in `suppressed-and-frozen.md`.
    `TestProbeArtifactIsolatesRecursiveSchema` reproduces the crash against a
    real built binary and asserts it is contained (intentionally the one slow
    bigdiffer test — skipped under `-short`). *(core)*
+   **Compile-gate wiring (follow-up once item 1 landed):** the isolated probe
+   subprocess (`runHealProbeArtifact`) now also runs a successfully-generated
+   artifact through the compile gate (`buildOnce`) before reporting success,
+   so a `lift` proposal means "passes both stages a real `-update` run would
+   enforce," not just generation. Reused `buildOnce` directly rather than the
+   full fixpoint — a single-artifact probe has no registration file or batch
+   to reconcile. Tested against a real, working type (still passes) and a
+   real generates-but-rejected-by-the-gate case (a deliberately broken sibling
+   file in the probed artifact's real destination package — no schema needs
+   to be crafted to make the *engine* render invalid code, only the
+   compiler needs a reason to reject the package).
 9a. **Suppress recurring `lift` proposals for known-manual suppressions** —
     a plural data source manually suppressed for a semantic reason (not a
     generation failure) always re-proposes `lift` on every `-heal` run,

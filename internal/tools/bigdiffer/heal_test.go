@@ -206,3 +206,89 @@ func TestProbeArtifactWithBinaryCleanFailure(t *testing.T) {
 		t.Errorf("expected the script's own error text to be preserved, got: %v", err)
 	}
 }
+
+// TestRunHealProbeArtifactPassesCompileGateForARealType is the happy path:
+// probing a real, already-working type must still report success once the
+// compile gate step (added so -heal's "lift" proposals are trustworthy
+// against both stages a real -update run enforces, not just generation) is
+// exercised against the real module.
+func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
+	if testing.Short() {
+		t.Skip("runs a real go build ./... against the module")
+	}
+	// Not t.Parallel() — see TestRunHealProbeArtifactCatchesACompileGateFailure
+	// below: both touch the real tree via buildOnce's overlay.
+
+	cfg, rows := loadCorpus(t)
+	lg := logGroupRow(t, rows)
+	schemaPath := lg.CloudFormationSchemaPath
+	if schemaPath == "" {
+		schemaPath = schemaCachePath(cfg.cacheDir, lg.CloudFormationTypeName)
+	}
+
+	err := runHealProbeArtifact(lg.ResourceTypeName, lg.CloudFormationTypeName, string(artifactResource),
+		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
+	if err != nil {
+		t.Fatalf("a real, already-working type should pass generation and the compile gate, got: %v", err)
+	}
+}
+
+// TestRunHealProbeArtifactCatchesACompileGateFailure proves the actual review
+// item: a type that *generates* fine can still be rejected by the compile
+// gate, and runHealProbeArtifact must report that as a failure rather than
+// the generation-only success -heal reported before this change. Simulated by
+// pre-placing a deliberately broken sibling file in the same real package the
+// probed artifact would land in — buildOnce's overlay of the probed artifact's
+// own (valid) code still fails the package build because of that sibling,
+// which is mechanically the same "one bad file fails the whole package"
+// reality compile-gate-design.md describes; it does not require constructing
+// a schema that makes the owned engine itself render invalid code.
+func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
+	if testing.Short() {
+		t.Skip("runs a real go build ./... against the module")
+	}
+	// Not t.Parallel() — mutates the real tree via a real go build overlay,
+	// same rule as every other real-build test in this package.
+
+	cfg, rows := loadCorpus(t)
+	lg := logGroupRow(t, rows)
+	schemaPath := lg.CloudFormationSchemaPath
+	if schemaPath == "" {
+		schemaPath = schemaCachePath(cfg.cacheDir, lg.CloudFormationTypeName)
+	}
+
+	// Point outputRoot at a scratch package under the real internal/aws tree
+	// (same technique compile_fixpoint_test.go uses) with a deliberately
+	// broken sibling file already sitting in it, then probe the real,
+	// well-formed LogGroup resource artifact "as if" it belonged to that
+	// package by aliasing its row's ResourceTypeName's service to the
+	// scratch one — generationPlan derives packageName purely from the
+	// Terraform type name, so this is a legitimate way to redirect a real,
+	// valid artifact's destination without needing a broken schema.
+	row := lg
+	row.ResourceTypeName = "aws_zzzhealcg_log_group"
+
+	scratchDir := filepath.Join(cfg.outputRoot, "aws", "zzzhealcg")
+	if err := os.MkdirAll(scratchDir, dirPerm); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { _ = os.RemoveAll(scratchDir) })
+	broken := "package zzzhealcg\nfunc AlreadyBroken() int { return \"not an int\" }\n"
+	if err := os.WriteFile(filepath.Join(scratchDir, "sibling_broken.go"), []byte(broken), filePerm); err != nil {
+		t.Fatal(err)
+	}
+
+	err := runHealProbeArtifact(row.ResourceTypeName, row.CloudFormationTypeName, string(artifactResource),
+		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
+	if err == nil {
+		t.Fatal("expected the compile gate to reject the package due to its broken sibling file")
+	}
+	if !strings.Contains(err.Error(), "compile gate") && !strings.Contains(err.Error(), "fails the compile gate") {
+		t.Errorf("expected a compile-gate-flavored error, got: %v", err)
+	}
+	// buildOnce must have reverted its overlay regardless of outcome — no
+	// trace of the probed artifact's own file should remain.
+	if _, statErr := os.Stat(filepath.Join(scratchDir, "log_group_resource_gen.go")); !os.IsNotExist(statErr) {
+		t.Errorf("the compile gate's build overlay must be reverted; the probed artifact's file should not exist, stat err = %v", statErr)
+	}
+}
