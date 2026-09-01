@@ -29,10 +29,22 @@ keep, trim, or delete as the work settles.
 
 ### Prerequisites
 
-1. **Compile gate** — bigdiffer runs `go build ./internal/...` itself and feeds
-   failures into policy, instead of leaving `make build` as a separate manual
-   step. *(prereq)* Unblocks the `build_failed` reason category and `-heal`
-   step 3. Detail: `new-generation.md` §6 tail, §11.
+1. ~~**Compile gate**~~ — ✅ **Done** (`d2d1a1a85`, design:
+   `contributing/docs/compile-gate-design.md`). `-update` now builds the exact
+   code it is about to promote — every staged artifact plus the registration
+   file it implies — against the real module (`go build ./...` from the repo
+   root, once per fixpoint round) before writing anything real, instead of
+   leaving `make build` as a separate manual step run after the fact. A build
+   failure is attributed back to the specific candidate/artifact that produced
+   the rejected file (parsing `go build`'s own `file:line:col` output),
+   downgrades only that artifact to a new `gateFailedBuild` outcome (tagged
+   `build_failed`, distinct from `generation_failed`), and the fixpoint
+   re-renders the registration file and rebuilds until clean — never blocking
+   the release, matching every other failure mode's safe-by-default policy. A
+   build error that cannot be traced to anything staged, or a small round cap,
+   promotes nothing and hard-stops rather than guessing (the design doc's
+   conservative "Attribution fallback"). Unblocks the `build_failed` reason
+   category (previously defined but dead) and `-heal` step 3. *(prereq)*
 2. **Absent-row `DescribeType` probe** — split a type that is gone from the live
    crawl into non-provisionable-but-live vs. genuinely withdrawn. *(prereq)*
    Unblocks the `withdrawn` freeze path. Detail: `new-generation.md` §3.
