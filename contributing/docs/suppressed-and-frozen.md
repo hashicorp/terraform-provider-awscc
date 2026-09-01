@@ -207,8 +207,9 @@ never silently reported as reasoned when they aren't.
 
 Every suppression/freeze bigdiffer itself sets is tagged with a category from
 day one. The `manual` category is the escape hatch for the cases the mechanical
-categories can't currently explain — anyone can still hand-edit
-`suppression_reason` directly, exactly as today.
+categories can't currently explain — anyone can still hand-edit the
+appropriate `suppression_reason_*` field or `frozen_reason` directly, exactly
+as today.
 
 ### Frozen, precisely
 
@@ -230,11 +231,14 @@ Concretely:
   `suppress_resource_generation` plus `suppress_singular_data_source_generation`
   plus `suppress_plural_data_source_generation` already expresses, with each
   suppression carrying its own reason.
-- **Freezing itself gets a reason too.** `frozen_since` is accompanied by a
-  `suppression_reason` explaining why the *schema* is pinned (typically
+- **Freezing itself gets a reason too.** `frozen_since` is accompanied by its
+  own `frozen_reason` explaining why the *schema* is pinned (typically
   `generation_failed` or `build_failed` against the newly discovered bytes, or
-  `manual` for a deliberate hold). This is new: today `frozen_since` carries no
-  reason at all (see Part 1).
+  `manual` for a deliberate hold) — a separate field from any artifact's own
+  `suppression_reason_*`, since the freeze is a schema-level fact independent
+  of which (if any) artifacts are also suppressed
+  (`generation-punchlist.md` item 9b). This is new: today `frozen_since`
+  carries no reason at all (see Part 1).
 - A **withdrawn** type (gone from AWS's live listing) is frozen with reason
   category `manual` and a fixed detail string (`withdrawn from AWS, pending
   major-version removal`) — this is the one case where the reason is about the

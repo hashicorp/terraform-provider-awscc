@@ -293,7 +293,9 @@ func collectStagedGoFiles(stagingOut, outputRoot string) (map[string][]byte, err
 //
 // decisions and stagedByDest are mutated in place: a downgraded artifact's
 // outcome moves from gateOK to gateFailedBuild within its candidate's full
-// gateResult (tagged reasonBuildFailed via gateFailureReason), that
+// gateResult (tagged reasonBuildFailed via decide()'s reasonsForFailures, the
+// per-artifact reason-map builder that replaced the old single-string
+// gateFailureReason — policy.go), that
 // candidate's decide() is recomputed from the updated gateResult, its staged
 // .go file is deleted from stagingDir/out so it is never promoted, and it is
 // removed from stagedByDest so a later round does not try to attribute the
