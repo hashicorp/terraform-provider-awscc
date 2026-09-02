@@ -65,18 +65,35 @@ The join yields three classes with mechanical default handling:
 | Present | in A and O | refresh unless frozen |
 | Absent | in O, not in A | probe, then classify (below) |
 
-Absent is not automatically "withdrawn." Because A excludes `NON_PROVISIONABLE`
-types, an absent row is resolved by one `DescribeType` probe:
+Absent is not automatically "withdrawn." Because A excludes both
+`NON_PROVISIONABLE` and `DEPRECATED` types, an absent row is resolved by one
+`DescribeType` probe (`absentTypes`/`probeAbsent`/`classifyAbsentProbe`,
+`discover.go`/`update.go`), reusing the crawl's own throttled client:
 
-- Probe succeeds, `NON_PROVISIONABLE`: still live, only filtered out. Annotate
-  `non_provisionable = true`; do not freeze.
-- Probe returns `TypeNotFoundException` (or `DEPRECATED`): genuinely withdrawn.
-  Keep cached bytes and set `frozen_since`.
+- Probe succeeds, `DeprecatedStatus == DEPRECATED`: deactivated/deregistered —
+  checked first, since a deprecated type is withdrawn regardless of what
+  provisioning type it still reports.
+- Probe succeeds, not deprecated, `ProvisioningType == NON_PROVISIONABLE`:
+  still live, only filtered out. Annotate `non_provisionable = true`; do not
+  freeze.
+- Probe fails with `TypeNotFoundException` (matched via `errors.As` through
+  the wrapped error, not a string match): genuinely withdrawn/deregistered.
+  Keep cached bytes and set `frozen_since` (`manual: withdrawn from AWS,
+  pending major-version removal`).
+- Anything else (a transient error, or a probe that succeeds live and
+  provisionable — a `ListTypes` eventual-consistency blip) resolves to no
+  decision: the row is left exactly as it was for a later run, never frozen on
+  a guess.
 
 The provider ships non-provisionable-but-live resources (e.g.
 `AWS::AppStream::StackFleetAssociation`), which a naive "absent ⇒ freeze" rule
-would wrongly freeze. Only the probe distinguishes the two. (The absent-row probe
-is not yet built — see §11.)
+would wrongly freeze. Only the probe distinguishes the two. A row already
+explained — frozen, or checkout-pinned — skips the probe entirely; it needs no
+further annotation, and a checkout pin may explain an absence the probe cannot
+see (a deliberately checked-out older version). The two classes this produces,
+`classWithdrawn` and `classNonProvisionable`, feed the same `decide()` branches
+`buildCandidates`'s New/Present classes use — no new policy, no new taxonomy,
+just the probe that was the last piece connecting them.
 
 ## 4. Selective refresh, not teardown
 
@@ -321,17 +338,17 @@ has held for several cycles ("Deferred and future work").
 
 bigdiffer is shipped and drives the weekly cycle. Built, wired, and tested:
 discovery, byte-compare change detection, per-artifact generation-as-gate, the
-compile gate, the class × gate-result policy, comment-preserving block mutation,
-the single blank-import registration file, the import-examples aggregate, and
-docs orchestration. Correctness is anchored by full-corpus parity — the owned
+compile gate, the class × gate-result policy (including the absent-row
+`DescribeType` probe, §3), comment-preserving block mutation, the single
+blank-import registration file, the import-examples aggregate, and docs
+orchestration. Correctness is anchored by full-corpus parity — the owned
 engine is byte-identical to the legacy generators (0 drift, ~1580 types) — kept
 as a regression guard. The `-check`, `-update`, `-generate`, `-docs`, and `-heal`
 modes are all live.
 
-Remaining work — the absent-row probe (§3), GitHub-issue guidance, the
-one-time reason backfill, and the deferred cleanups below — is tracked with
-priorities and current status in `generation-punchlist.md`. None of it
-blocks the weekly cycle today; see
+Remaining work — GitHub-issue guidance, the one-time reason backfill, and the
+deferred cleanups below — is tracked with priorities and current status in
+`generation-punchlist.md`. None of it blocks the weekly cycle today; see
 `generating-the-provider-with-bigdiffer.md` for the operational process and the
 legacy fallback.
 
@@ -404,10 +421,6 @@ generators — the reference for anyone touching the engine.
 Real, not-yet-done items. `generation-punchlist.md` tracks these at a high level
 with status; the detail lives here.
 
-- **Absent-row `DescribeType` probe (§3).** Split a type gone from the live crawl
-  into non-provisionable-but-live vs. genuinely withdrawn, so the `withdrawn`
-  freeze path (§7) and the `non_provisionable` annotation are driven correctly
-  rather than by a naive "absent ⇒ freeze."
 - **Checkout-file retirement (§5).** Fold `suppressions_checkout.txt` fully into
   `frozen_since` and stop reading the external file. Orthogonal to the reason
   taxonomy; a pure simplification once nothing else depends on the checkout list.

@@ -45,10 +45,18 @@ keep, trim, or delete as the work settles.
    promotes nothing and hard-stops rather than guessing (the design doc's
    conservative "Attribution fallback"). Unblocks the `build_failed` reason
    category (previously defined but dead) and `-heal` step 3. *(prereq)*
-2. **Absent-row `DescribeType` probe** — split a type that is gone from the live
-   crawl into non-provisionable-but-live vs. genuinely withdrawn. *(prereq)*
-   Unblocks the `withdrawn` freeze path. Detail: `bigdiffer-design.md` §3 and
-   "Deferred and future work".
+2. ~~**Absent-row `DescribeType` probe**~~ — ✅ **Done** (design:
+   `bigdiffer-design.md` §3). Split a type gone from the live crawl into
+   non-provisionable-but-live vs. genuinely withdrawn: `absentTypes` finds the
+   overlay rows absent from this run's discovered set and not already
+   explained (frozen or checkout-pinned); `probeAbsent`/`classifyAbsentProbe`
+   (`discover.go`) issue one `DescribeType` each and classify on
+   `DeprecatedStatus`, `ProvisioningType`, or a definitive
+   `TypeNotFoundException` — never on a transient error or silence.
+   `absentDecisions` (`update.go`) feeds the result into the two `decide()`
+   branches (`classWithdrawn`/`classNonProvisionable`) that were previously
+   dead code. Unblocks the `withdrawn` freeze path, and stops absent types
+   recurring as `UnexplainedRetained` anomalies from the next run onward.
 
 ### Suppression & frozen reasons
 
