@@ -1,3 +1,9 @@
+## 1.100.0 (Unreleased)
+
+NOTES:
+
+* provider: The client level handing for `ThrottlingException` has been reverted while keeping the retry for the `cloudcontrol` waiter. This is being tracked in an [upstream Go SDK issue](https://github.com/aws/aws-sdk-go-v2/issues/3248). Once this addressed upstream, the provider retry handling will be reverted ([#3298](https://github.com/hashicorp/terraform-provider-awscc/pull/3298))
+
 ## 1.99.0 (August 28, 2026)
 
 NOTES:
