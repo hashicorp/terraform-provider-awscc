@@ -167,8 +167,10 @@ generate` — it does not reimplement `tfplugindocs`. This changes `examples/**`
 `-update` already drafted the `FEATURES:` bullets — read straight off the
 artifacts it actually promoted this run, filtered to ones that were not
 already user-visible before it (generation-punchlist.md item 16) — into
-`CHANGELOG_PENDING.md` at the repo root (untracked, overwritten every run).
-Fold it into `CHANGELOG.md`:
+`CHANGELOG_PENDING.md` at the repo root (untracked; always reflects only
+this run — written when there is something to announce, removed
+otherwise, never left stale from a previous run). Fold it into
+`CHANGELOG.md`:
 
 1. Open `CHANGELOG_PENDING.md` and copy its `FEATURES:` block into a new
    entry at the top of `CHANGELOG.md`.
@@ -178,9 +180,9 @@ Fold it into `CHANGELOG.md`:
    and not drafted automatically.
 4. Update `version/VERSION` to match.
 5. Delete `CHANGELOG_PENDING.md` (or leave it — the next `-update` run
-   overwrites it).
+   removes or rewrites it either way).
 
-If `CHANGELOG_PENDING.md` is absent or empty, this run promoted nothing newly
+If `CHANGELOG_PENDING.md` is absent, this run promoted nothing newly
 user-visible (an ordinary refresh of already-shipped types) — nothing to add.
 
 ### 6. Commit and open a pull request

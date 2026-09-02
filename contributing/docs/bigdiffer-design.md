@@ -230,19 +230,23 @@ output at least as reliably as JSON, without a second schema to keep in sync
 with every future taxonomy change.
 
 `-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry
-itself, as `CHANGELOG_PENDING.md` (untracked, overwritten every run, never
-edited in place into `CHANGELOG.md`) — `generation-punchlist.md` item 16. The
-source of truth is the set of artifacts the run actually promotes (read from
-`stagedByDest` *after* the compile gate settles, so a gate-rejected artifact
-is never announced), filtered to artifacts that were not already
-user-visible on the pre-run overlay: every promoted artifact of a brand-new
-type, or a specific artifact whose own `suppress_*_generation` flag was set
-on the pre-run row (a backlog lift, or the "AWS added the plural list
-operation to an existing type later" case that motivated the reason split,
-item 9b — the plural data source and its `ListResource` become newly
-user-visible without touching the already-shipped resource or singular data
-source). The PR number and any `NOTES:`/breaking-change entries stay a human
-step; the fragment only emits the mechanical bullets.
+itself, as `CHANGELOG_PENDING.md` (untracked, never edited in place into
+`CHANGELOG.md`) — `generation-punchlist.md` item 16. The file always
+reflects only the current run: written when there is something to
+announce, removed when there is not, so a run of ordinary Changed-type
+refreshes clears a fragment a prior run left behind rather than leaving it
+to be mistakenly re-folded. The source of truth is the set of artifacts
+the run actually promotes (read from `stagedByDest` *after* the compile
+gate settles, so a gate-rejected artifact is never announced), filtered
+to artifacts that were not already user-visible on the pre-run overlay:
+every promoted artifact of a brand-new type, or a specific artifact whose
+own `suppress_*_generation` flag was set on the pre-run row (a backlog
+lift, or the "AWS added the plural list operation to an existing type
+later" case that motivated the reason split, item 9b — the plural data
+source and its `ListResource` become newly user-visible without touching
+the already-shipped resource or singular data source). The PR number and
+any `NOTES:`/breaking-change entries stay a human step; the fragment only
+emits the mechanical bullets.
 
 ## 9. Design decisions (proven in the tool)
 

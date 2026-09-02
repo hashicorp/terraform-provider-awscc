@@ -5,6 +5,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"sort"
 	"strings"
 )
@@ -112,6 +113,25 @@ func changelogEntries(promoted map[string]stagedArtifact, preRunOverlay map[stri
 		return entries[i].tfType < entries[j].tfType
 	})
 	return entries
+}
+
+// writeChangelogFragment makes path always reflect fragment for this run:
+// written when fragment is non-empty, removed when it is empty. A run of
+// ordinary Changed-type refreshes (a real weekly occurrence) yields no
+// entries and must clear whatever a prior run left behind — leaving a stale
+// fragment in place would cause the runbook's fold-into-CHANGELOG.md step to
+// re-add a previous release's bullets.
+func writeChangelogFragment(path, fragment string) error {
+	if fragment == "" {
+		if err := os.Remove(path); err != nil && !os.IsNotExist(err) {
+			return fmt.Errorf("removing %s: %w", path, err)
+		}
+		return nil
+	}
+	if err := os.WriteFile(path, []byte(fragment), filePerm); err != nil {
+		return fmt.Errorf("writing %s: %w", path, err)
+	}
+	return nil
 }
 
 // wasSuppressed reports whether kind's artifact was suppressed on the pre-run

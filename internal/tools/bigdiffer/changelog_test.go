@@ -4,6 +4,8 @@
 package main
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -217,5 +219,65 @@ func TestFormatChangelogFragmentUsesRealBulletSyntax(t *testing.T) {
 	got := formatChangelogFragment([]changelogEntry{{kind: changelogNewResource, tfType: "awscc_foo_bar"}})
 	if !strings.Contains(got, "* **New Resource:** `awscc_foo_bar`") {
 		t.Errorf("got %q, missing the exact CHANGELOG.md bullet syntax", got)
+	}
+}
+
+// TestWriteChangelogFragmentWrites confirms a non-empty fragment is written
+// verbatim to path.
+func TestWriteChangelogFragmentWrites(t *testing.T) {
+	t.Parallel()
+	path := filepath.Join(t.TempDir(), "CHANGELOG_PENDING.md")
+	const fragment = "FEATURES:\n\n* **New Resource:** `awscc_foo_bar`\n"
+
+	if err := writeChangelogFragment(path, fragment); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	if string(got) != fragment {
+		t.Errorf("got %q, want %q", got, fragment)
+	}
+}
+
+// TestWriteChangelogFragmentClearsStaleFile is the regression test for the
+// stale-fragment bug: a prior run's fragment must be removed, not left in
+// place, when the current run's fragment is empty (an ordinary Changed-type
+// refresh promoting nothing newly user-visible — a real weekly occurrence).
+// Leaving it would cause the runbook's fold-into-CHANGELOG.md step to
+// re-add a previous release's bullets.
+func TestWriteChangelogFragmentClearsStaleFile(t *testing.T) {
+	t.Parallel()
+	path := filepath.Join(t.TempDir(), "CHANGELOG_PENDING.md")
+
+	// A prior run left a fragment behind.
+	if err := os.WriteFile(path, []byte("FEATURES:\n\n* **New Resource:** `awscc_stale_one`\n"), filePerm); err != nil {
+		t.Fatalf("seeding stale file: %v", err)
+	}
+
+	// This run has nothing to announce.
+	if err := writeChangelogFragment(path, ""); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	if _, err := os.Stat(path); !os.IsNotExist(err) {
+		t.Fatalf("stale fragment was not removed (err=%v) — a human folding this into "+
+			"CHANGELOG.md would re-add a previous release's bullets", err)
+	}
+}
+
+// TestWriteChangelogFragmentEmptyNoPriorFileIsNoop confirms an empty fragment
+// on a path with no existing file is a clean no-op (os.Remove's not-exist
+// error must be swallowed, not surfaced).
+func TestWriteChangelogFragmentEmptyNoPriorFileIsNoop(t *testing.T) {
+	t.Parallel()
+	path := filepath.Join(t.TempDir(), "CHANGELOG_PENDING.md")
+
+	if err := writeChangelogFragment(path, ""); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+	if _, err := os.Stat(path); !os.IsNotExist(err) {
+		t.Fatalf("expected no file to be created, got err=%v", err)
 	}
 }

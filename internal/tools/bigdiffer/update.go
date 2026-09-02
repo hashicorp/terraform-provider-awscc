@@ -384,12 +384,16 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// actually be promoted below — so the changelog delta can be computed
 	// directly from it plus the pre-run overlay, with no dependency on
 	// promotion itself having happened yet
-	// (contributing/docs/bigdiffer-design.md §8).
+	// (contributing/docs/bigdiffer-design.md §8). writeChangelogFragment
+	// always makes the file reflect only this run: written when there is
+	// something to announce, removed otherwise, never left stale from a
+	// prior run.
 	changelog := changelogEntries(stagedByDest, overlayByCFN)
-	if fragment := formatChangelogFragment(changelog); fragment != "" {
-		if err := os.WriteFile(cfg.changelogPendingPath, []byte(fragment), filePerm); err != nil {
-			return fmt.Errorf("writing %s: %w", cfg.changelogPendingPath, err)
-		}
+	fragment := formatChangelogFragment(changelog)
+	if err := writeChangelogFragment(cfg.changelogPendingPath, fragment); err != nil {
+		return err
+	}
+	if fragment != "" {
 		stepf("Wrote %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPendingPath)
 	}
 
