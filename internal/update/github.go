@@ -156,10 +156,10 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 	prRequest := &github.NewPullRequest{
 		Title:               &prTitle,
 		Body:                &prBody,
-		Base:                github.Ptr("main"),
-		Head:                github.Ptr(pullRequest),
-		HeadRepo:            github.Ptr(config.Repository),
-		MaintainerCanModify: github.Ptr(true),
+		Base:                new("main"),
+		Head:                new(pullRequest),
+		HeadRepo:            new(config.Repository),
+		MaintainerCanModify: new(true),
 	}
 
 	// Submit the pull request to GitHub
@@ -308,10 +308,10 @@ func createFormattedPullRequest(ctx context.Context, config *GitHubConfig, testR
 	prRequest := &github.NewPullRequest{
 		Title:               &prTitle,
 		Body:                &prBody,
-		Base:                github.Ptr("main"),
-		Head:                github.Ptr(pullRequest),
-		HeadRepo:            github.Ptr(config.Repository),
-		MaintainerCanModify: github.Ptr(true),
+		Base:                new("main"),
+		Head:                new(pullRequest),
+		HeadRepo:            new(config.Repository),
+		MaintainerCanModify: new(true),
 	}
 
 	pr, _, err := client.PullRequests.Create(ctx, repoOwner, repoName, prRequest)

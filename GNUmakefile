@@ -175,6 +175,14 @@ importlint: ## Run importlint
 	@echo "==> Checking source code with importlint..."
 	@impi --local . --scheme stdThirdPartyLocal --ignore-generated=true ./...
 
+modern-check: prereq-go ## [CI] Check for modern Go code
+	@echo "==> Checking for modern Go code..."
+	@$(GO_VER) run golang.org/x/tools/gopls/internal/analysis/modernize/cmd/modernize@v0.21.0 -test $(TEST)
+
+modern: prereq-go ## Fix checks for modern Go code
+	@echo "==> Fixing checks for modern Go code..."
+	@$(GO_VER) run golang.org/x/tools/gopls/internal/analysis/modernize/cmd/modernize@v0.21.0 -fix -test $(TEST)
+
 tools: prereq-go ## Install tools
 	cd tools && $(GO_VER) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint
 	cd tools && $(GO_VER) install github.com/pavius/impi/cmd/impi
@@ -320,6 +328,8 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: help
 .PHONY: importlint
 .PHONY: lint
+.PHONY: modern
+.PHONY: modern-check
 .PHONY: newbranch
 .PHONY: plural-data-sources
 .PHONY: resources
