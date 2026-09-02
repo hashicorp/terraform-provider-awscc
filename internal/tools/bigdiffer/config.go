@@ -18,17 +18,18 @@ import (
 // directory (the brittle assumption the legacy generators and our own early
 // gate tests had to work around).
 type config struct {
-	overlayPath        string // all_schemas.hcl (absolute)
-	overlayDir         string // directory containing the overlay (…/internal/provider)
-	cacheDir           string // committed CloudFormation schema JSONs
-	metaSchemaPath     string // provider meta-schema JSON
-	servicesPath       string // identity/names/services.hcl (IsGlobal/HasMutableIdentity)
-	outputRoot         string // base dir for generated <svc>/… code (…/internal)
-	registrationPath   string // the single blank-import registration file bigdiffer emits
-	importExamplesPath string // import_examples_gen.json aggregate
-	repoRoot           string // repository root (…/, parent of internal)
-	examplesDir        string // examples/ (import-example docs land here)
-	docsDir            string // docs/ (tfplugindocs output)
+	overlayPath          string // all_schemas.hcl (absolute)
+	overlayDir           string // directory containing the overlay (…/internal/provider)
+	cacheDir             string // committed CloudFormation schema JSONs
+	metaSchemaPath       string // provider meta-schema JSON
+	servicesPath         string // identity/names/services.hcl (IsGlobal/HasMutableIdentity)
+	outputRoot           string // base dir for generated <svc>/… code (…/internal)
+	registrationPath     string // the single blank-import registration file bigdiffer emits
+	importExamplesPath   string // import_examples_gen.json aggregate
+	changelogPendingPath string // CHANGELOG_PENDING.md fragment (item 16)
+	repoRoot             string // repository root (…/, parent of internal)
+	examplesDir          string // examples/ (import-example docs land here)
+	docsDir              string // docs/ (tfplugindocs output)
 
 	prefix         string // terraform_type_name_prefix, e.g. "awscc"
 	region         string // CloudFormation registry region used for live discovery (-update)
@@ -48,20 +49,21 @@ func newConfig(overlayPath string, defaults defaultsBlock, meta metaSchemaBlock)
 	outputRoot := filepath.Dir(overlayDir) // …/internal/provider -> …/internal
 
 	return config{
-		overlayPath:        absOverlay,
-		overlayDir:         overlayDir,
-		cacheDir:           filepath.Clean(filepath.Join(overlayDir, defaults.SchemaCacheDirectory)),
-		metaSchemaPath:     filepath.Clean(filepath.Join(overlayDir, meta.Path)),
-		servicesPath:       filepath.Join(outputRoot, "identity", "names", "services.hcl"),
-		outputRoot:         outputRoot,
-		registrationPath:   filepath.Join(overlayDir, "registrations_gen.go"),
-		importExamplesPath: filepath.Join(overlayDir, "import_examples_gen.json"),
-		repoRoot:           filepath.Dir(outputRoot),
-		examplesDir:        filepath.Join(filepath.Dir(outputRoot), "examples"),
-		docsDir:            filepath.Join(filepath.Dir(outputRoot), "docs"),
-		prefix:             defaults.TerraformTypeNamePrefix,
-		region:             discoverRegion,
-		genConcurrency:     runtime.NumCPU(),
+		overlayPath:          absOverlay,
+		overlayDir:           overlayDir,
+		cacheDir:             filepath.Clean(filepath.Join(overlayDir, defaults.SchemaCacheDirectory)),
+		metaSchemaPath:       filepath.Clean(filepath.Join(overlayDir, meta.Path)),
+		servicesPath:         filepath.Join(outputRoot, "identity", "names", "services.hcl"),
+		outputRoot:           outputRoot,
+		registrationPath:     filepath.Join(overlayDir, "registrations_gen.go"),
+		importExamplesPath:   filepath.Join(overlayDir, "import_examples_gen.json"),
+		changelogPendingPath: filepath.Join(filepath.Dir(outputRoot), "CHANGELOG_PENDING.md"),
+		repoRoot:             filepath.Dir(outputRoot),
+		examplesDir:          filepath.Join(filepath.Dir(outputRoot), "examples"),
+		docsDir:              filepath.Join(filepath.Dir(outputRoot), "docs"),
+		prefix:               defaults.TerraformTypeNamePrefix,
+		region:               discoverRegion,
+		genConcurrency:       runtime.NumCPU(),
 	}, nil
 }
 

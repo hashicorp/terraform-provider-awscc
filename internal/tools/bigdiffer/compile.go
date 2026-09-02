@@ -251,6 +251,9 @@ type stagedArtifact struct {
 	gr       *gateResult
 	artifact int    // index into gr.artifacts for this specific staged file
 	testDest string // real destination path of the paired _test.go file
+	kind     artifactKind
+	tfType   string // awscc_… (pluralized already for the plural data source)
+	listRes  bool   // resource only: also registers a ListResource
 }
 
 // collectStagedGoFiles walks stagingDir/out and returns every non-test .go

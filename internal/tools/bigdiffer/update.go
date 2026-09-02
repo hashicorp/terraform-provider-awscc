@@ -326,7 +326,15 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 			// contains artifacts that generated OK, i.e. gateOK in grPtr).
 			for ai := range grPtr.artifacts {
 				if grPtr.artifacts[ai].kind == r.a.kind {
-					stagedByDest[dest] = stagedArtifact{class: c.class, gr: &grPtr, artifact: ai, testDest: testDest}
+					stagedByDest[dest] = stagedArtifact{
+						class:    c.class,
+						gr:       &grPtr,
+						artifact: ai,
+						testDest: testDest,
+						kind:     r.a.kind,
+						tfType:   r.a.tfType,
+						listRes:  r.a.listResource,
+					}
 					break
 				}
 			}
@@ -369,6 +377,20 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// it, rather than silently promote the inconsistency.
 	if err := checkListResourceCoupling(listResourceCandidates); err != nil {
 		return fmt.Errorf("compile gate: list resource coupling: %w", err)
+	}
+
+	// CHANGELOG fragment (generation-punchlist.md item 16): stagedByDest is
+	// now final — every remaining entry survived the compile gate and will
+	// actually be promoted below — so the changelog delta can be computed
+	// directly from it plus the pre-run overlay, with no dependency on
+	// promotion itself having happened yet
+	// (contributing/docs/bigdiffer-design.md §8).
+	changelog := changelogEntries(stagedByDest, overlayByCFN)
+	if fragment := formatChangelogFragment(changelog); fragment != "" {
+		if err := os.WriteFile(cfg.changelogPendingPath, []byte(fragment), filePerm); err != nil {
+			return fmt.Errorf("writing %s: %w", cfg.changelogPendingPath, err)
+		}
+		stepf("Wrote %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPendingPath)
 	}
 
 	// Promote the compiled core — staged code, cache, the reconciled overlay,

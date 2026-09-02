@@ -209,26 +209,32 @@ All detail lives in `suppressed-and-frozen.md`.
     returns before any promotion and leaves the tree and `all_schemas.hcl`
     exactly as they started. `TestUpdateBatchAtomicity` injects a mid-batch
     failure and asserts nothing was promoted. *(core)*
-16. **CHANGELOG automation** — the weekly runbook's step 5
-    (`generating-the-provider-with-bigdiffer.md` §5) is still fully manual: a
-    human runs `git ls-files --others --exclude-standard`, eyeballs which
-    untracked website doc files are new resources/data sources/list
-    resources, hand-formats a `**New Resource:**`-style bullet with the
-    Terraform type name per one, and pastes them into `CHANGELOG.md`. Every
-    state this actually needs already exists in the `-update` command's own
-    `Report` (`AddedNew`/`AddedBacklog`) and `decide()`'s per-artifact
-    outcome — a new type's resource, singular DS, and plural DS each get
-    their own bullet line (confirmed against the real `CHANGELOG.md`: e.g.
-    `awscc_appstream_user` gets a separate "New Data Source" line from its
-    plural `awscc_appstream_users`, and a "New List Resource" line under the
-    *resource's* singular type name, driven by the same `ListResource`
-    coupling `suppressed-and-frozen.md`'s "The six levers" already
-    documents) — so this is a straightforward consumer of state
-    `-update` computes, not new discovery logic. Not yet designed: whether the
-    fragment is emitted by `-update` itself (when `AddedNew`/`AddedBacklog` are
-    freshly known) for a human to fold into `CHANGELOG.md` at the later
-    CHANGELOG/version step, or something `-docs` re-derives independently.
-    *(core)*
+16. ~~**CHANGELOG automation**~~ — ✅ **Done.** The weekly runbook's step 5
+    (`generating-the-provider-with-bigdiffer.md` §5) was fully manual: a
+    human ran `git ls-files --others --exclude-standard`, eyeballed which
+    untracked website doc files were new resources/data sources/list
+    resources, hand-formatted a `**New Resource:**`-style bullet with the
+    Terraform type name per one, and pasted them into `CHANGELOG.md`.
+    `-update` now drafts this itself as `CHANGELOG_PENDING.md` (untracked,
+    gitignored, overwritten every run). The source of truth is **the
+    artifacts `-update` actually promotes**, read from `stagedByDest`
+    *after* the compile gate settles (so a gate-rejected artifact is never
+    announced) — not `Report.AddedNew`/`AddedBacklog` as first considered,
+    which is per-type overlay-membership state that would need correlating
+    with per-artifact outcomes and mis-handles a backlog lift and a partial
+    suppression; and not diffing the registration file, which is
+    unbuildable as a per-artifact source (it is a package-level
+    blank-import aggregate — `emitRegistration`, `emit.go` — that cannot
+    distinguish resources within one service package). An artifact is a
+    changelog entry iff it is promoted now and was not user-visible on the
+    pre-run overlay: every artifact of a brand-new type, or a specific
+    artifact whose own `suppress_*_generation` flag was `true` on the
+    pre-run row (a backlog lift, or the "AWS added the plural list
+    operation to an existing type later" case that motivated the reason
+    split, item 9b). `changelog.go`'s `changelogEntries`/
+    `formatChangelogFragment` are pure functions of two in-memory maps — no
+    AWS, generation, or live tree dependency. Detail folded into
+    `bigdiffer-design.md` §8 and the runbook's step 5. *(core)*
 
 ### Deferred
 
