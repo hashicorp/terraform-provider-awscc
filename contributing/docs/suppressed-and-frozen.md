@@ -283,7 +283,7 @@ For the issue-worthy categories (`generation_failed`, `build_failed`), bigdiffer
 should emit, in its report, a ready-to-file **issue stub** per affected type: the
 CloudFormation type name, the failed artifact(s), the category, and the captured
 error text (the `detail` half of `category: detail`) — so filing is copy-paste,
-not archaeology. This is the structured successor to the legacy process's "open
+not archeology. This is the structured successor to the legacy process's "open
 an issue with details" instruction (and to `internal/update/makes.go`'s
 `suppression_reason = "<error>:<issue URL>"` convention), except the error is
 captured automatically and the human only files it and pastes the URL back.
