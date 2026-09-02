@@ -222,62 +222,171 @@ func TestFormatChangelogFragmentUsesRealBulletSyntax(t *testing.T) {
 	}
 }
 
-// TestWriteChangelogFragmentWrites confirms a non-empty fragment is written
-// verbatim to path.
-func TestWriteChangelogFragmentWrites(t *testing.T) {
+// TestWriteChangelogFragmentInsertsAfterNotes covers the real origin/main
+// shape: a top version block with a NOTES: section and no FEATURES: section
+// yet — the common case, since the top block is retitled fresh right after
+// each release and NOTES: entries (if any) are usually added by hand before
+// -update ever runs. The new FEATURES: section must land after NOTES:'s own
+// bullets and before the next "## " heading, leaving everything else (the
+// heading text, NOTES: content, the older release below) byte-for-byte
+// untouched.
+func TestWriteChangelogFragmentInsertsAfterNotes(t *testing.T) {
 	t.Parallel()
-	path := filepath.Join(t.TempDir(), "CHANGELOG_PENDING.md")
-	const fragment = "FEATURES:\n\n* **New Resource:** `awscc_foo_bar`\n"
 
-	if err := writeChangelogFragment(path, fragment); err != nil {
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := `## 1.100.0 (Unreleased)
+
+NOTES:
+
+* provider: some prior note. ([#1111](https://example.com/1111))
+
+## 1.99.0 (August 28, 2026)
+
+NOTES:
+
+* provider: an older release's note.
+
+FEATURES:
+
+* **New Resource:** ` + "`awscc_old_thing`" + `
+`
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	entries := []changelogEntry{
+		{kind: changelogNewDataSource, tfType: "awscc_foo_bar"},
+		{kind: changelogNewResource, tfType: "awscc_foo_bar"},
+	}
+	if err := writeChangelogFragment(path, entries); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	want := `## 1.100.0 (Unreleased)
+
+NOTES:
+
+* provider: some prior note. ([#1111](https://example.com/1111))
+
+FEATURES:
+
+* **New Data Source:** ` + "`awscc_foo_bar`" + `
+* **New Resource:** ` + "`awscc_foo_bar`" + `
+
+## 1.99.0 (August 28, 2026)
+
+NOTES:
+
+* provider: an older release's note.
+
+FEATURES:
+
+* **New Resource:** ` + "`awscc_old_thing`" + `
+`
+	if string(got) != want {
+		t.Errorf("mismatch:\ngot:\n%s\nwant:\n%s", got, want)
+	}
+}
+
+// TestWriteChangelogFragmentInsertsAfterHeadingNoNotes covers a top block
+// with no NOTES: section at all — the new FEATURES: section must land
+// directly after the heading's blank line.
+func TestWriteChangelogFragmentInsertsAfterHeadingNoNotes(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\n## 1.99.0 (August 28, 2026)\n\nFEATURES:\n\n* **New Resource:** `awscc_old_thing`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	entries := []changelogEntry{{kind: changelogNewResource, tfType: "awscc_foo_bar"}}
+	if err := writeChangelogFragment(path, entries); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	want := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n* **New Resource:** `awscc_foo_bar`\n\n" +
+		"## 1.99.0 (August 28, 2026)\n\nFEATURES:\n\n* **New Resource:** `awscc_old_thing`\n"
+	if string(got) != want {
+		t.Errorf("mismatch:\ngot:\n%s\nwant:\n%s", got, want)
+	}
+}
+
+// TestWriteChangelogFragmentEmptyIsNoop confirms an empty entries list never
+// touches the file — including never erroring when the file doesn't even
+// have a recognizable heading, since there is nothing to insert.
+func TestWriteChangelogFragmentEmptyIsNoop(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	const original = "not even a changelog\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	if err := writeChangelogFragment(path, nil); err != nil {
 		t.Fatalf("writeChangelogFragment: %v", err)
 	}
 	got, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatalf("ReadFile: %v", err)
 	}
-	if string(got) != fragment {
-		t.Errorf("got %q, want %q", got, fragment)
+	if string(got) != original {
+		t.Errorf("file was modified on an empty entries list: got %q, want unchanged %q", got, original)
 	}
 }
 
-// TestWriteChangelogFragmentClearsStaleFile is the regression test for the
-// stale-fragment bug: a prior run's fragment must be removed, not left in
-// place, when the current run's fragment is empty (an ordinary Changed-type
-// refresh promoting nothing newly user-visible — a real weekly occurrence).
-// Leaving it would cause the runbook's fold-into-CHANGELOG.md step to
-// re-add a previous release's bullets.
-func TestWriteChangelogFragmentClearsStaleFile(t *testing.T) {
+// TestWriteChangelogFragmentRefusesNonEmptyExistingSection is the guard
+// against silently corrupting a human-owned file: bigdiffer normally runs
+// once per release cycle and drafts the whole entry in a single pass, so a
+// top block that already has populated FEATURES: bullets means either
+// -update ran twice without an intervening release, or the file's shape
+// isn't what was expected — either way, this must error rather than guess
+// how to merge.
+func TestWriteChangelogFragmentRefusesNonEmptyExistingSection(t *testing.T) {
 	t.Parallel()
-	path := filepath.Join(t.TempDir(), "CHANGELOG_PENDING.md")
 
-	// A prior run left a fragment behind.
-	if err := os.WriteFile(path, []byte("FEATURES:\n\n* **New Resource:** `awscc_stale_one`\n"), filePerm); err != nil {
-		t.Fatalf("seeding stale file: %v", err)
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n* **New Resource:** `awscc_already_here`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
 	}
 
-	// This run has nothing to announce.
-	if err := writeChangelogFragment(path, ""); err != nil {
-		t.Fatalf("writeChangelogFragment: %v", err)
+	entries := []changelogEntry{{kind: changelogNewResource, tfType: "awscc_foo_bar"}}
+	if err := writeChangelogFragment(path, entries); err == nil {
+		t.Fatal("want an error when the top block already has a non-empty FEATURES: section, got nil")
 	}
 
-	if _, err := os.Stat(path); !os.IsNotExist(err) {
-		t.Fatalf("stale fragment was not removed (err=%v) — a human folding this into "+
-			"CHANGELOG.md would re-add a previous release's bullets", err)
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	if string(got) != original {
+		t.Errorf("file was modified despite the error: got %q, want unchanged %q", got, original)
 	}
 }
 
-// TestWriteChangelogFragmentEmptyNoPriorFileIsNoop confirms an empty fragment
-// on a path with no existing file is a clean no-op (os.Remove's not-exist
-// error must be swallowed, not surfaced).
-func TestWriteChangelogFragmentEmptyNoPriorFileIsNoop(t *testing.T) {
+// TestWriteChangelogFragmentMissingHeadingErrors confirms a file with no
+// "## " heading at all is an error (rather than silently doing nothing or
+// panicking) when there is something to insert.
+func TestWriteChangelogFragmentMissingHeadingErrors(t *testing.T) {
 	t.Parallel()
-	path := filepath.Join(t.TempDir(), "CHANGELOG_PENDING.md")
 
-	if err := writeChangelogFragment(path, ""); err != nil {
-		t.Fatalf("writeChangelogFragment: %v", err)
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	if err := os.WriteFile(path, []byte("not even a changelog\n"), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
 	}
-	if _, err := os.Stat(path); !os.IsNotExist(err) {
-		t.Fatalf("expected no file to be created, got err=%v", err)
+
+	entries := []changelogEntry{{kind: changelogNewResource, tfType: "awscc_foo_bar"}}
+	if err := writeChangelogFragment(path, entries); err == nil {
+		t.Fatal("want an error when no version heading is found, got nil")
 	}
 }

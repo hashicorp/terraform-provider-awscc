@@ -45,9 +45,4 @@ last_resource.txt
 .make-singular-data-sources.log
 .make-startup-errors.log
 
-# bigdiffer -update's CHANGELOG fragment (generation-punchlist.md item 16):
-# overwritten every run, folded into CHANGELOG.md by hand, never committed
-# itself.
-/CHANGELOG_PENDING.md
-
 *_test.json

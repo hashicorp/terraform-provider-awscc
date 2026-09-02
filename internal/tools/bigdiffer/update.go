@@ -385,16 +385,14 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// directly from it plus the pre-run overlay, with no dependency on
 	// promotion itself having happened yet
 	// (contributing/docs/bigdiffer-design.md §8). writeChangelogFragment
-	// always makes the file reflect only this run: written when there is
-	// something to announce, removed otherwise, never left stale from a
-	// prior run.
+	// inserts the FEATURES: bullets directly into CHANGELOG.md's top,
+	// in-progress version block; a no-op when nothing was newly promoted.
 	changelog := changelogEntries(stagedByDest, overlayByCFN)
-	fragment := formatChangelogFragment(changelog)
-	if err := writeChangelogFragment(cfg.changelogPendingPath, fragment); err != nil {
+	if err := writeChangelogFragment(cfg.changelogPath, changelog); err != nil {
 		return err
 	}
-	if fragment != "" {
-		stepf("Wrote %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPendingPath)
+	if len(changelog) > 0 {
+		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
 	}
 
 	// Promote the compiled core — staged code, cache, the reconciled overlay,

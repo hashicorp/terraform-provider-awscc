@@ -215,13 +215,16 @@ All detail lives in `suppressed-and-frozen.md`.
     untracked website doc files were new resources/data sources/list
     resources, hand-formatted a `**New Resource:**`-style bullet with the
     Terraform type name per one, and pasted them into `CHANGELOG.md`.
-    `-update` now drafts this itself as `CHANGELOG_PENDING.md` (untracked,
-    gitignored, overwritten every run). The source of truth is **the
-    artifacts `-update` actually promotes**, read from `stagedByDest`
-    *after* the compile gate settles (so a gate-rejected artifact is never
-    announced) — not `Report.AddedNew`/`AddedBacklog` as first considered,
-    which is per-type overlay-membership state that would need correlating
-    with per-artifact outcomes and mis-handles a backlog lift and a partial
+    `-update` now inserts these bullets itself, directly into
+    `CHANGELOG.md`'s top, in-progress version block (e.g.
+    `## 1.100.0 (Unreleased)`) — no side file, since the PR/commit process
+    already protects the original and a human still adds the PR link and
+    any `NOTES:` before release. The source of truth is **the artifacts
+    `-update` actually promotes**, read from `stagedByDest` *after* the
+    compile gate settles (so a gate-rejected artifact is never announced)
+    — not `Report.AddedNew`/`AddedBacklog` as first considered, which is
+    per-type overlay-membership state that would need correlating with
+    per-artifact outcomes and mis-handles a backlog lift and a partial
     suppression; and not diffing the registration file, which is
     unbuildable as a per-artifact source (it is a package-level
     blank-import aggregate — `emitRegistration`, `emit.go` — that cannot
@@ -231,10 +234,15 @@ All detail lives in `suppressed-and-frozen.md`.
     artifact whose own `suppress_*_generation` flag was `true` on the
     pre-run row (a backlog lift, or the "AWS added the plural list
     operation to an existing type later" case that motivated the reason
-    split, item 9b). `changelog.go`'s `changelogEntries`/
-    `formatChangelogFragment` are pure functions of two in-memory maps — no
-    AWS, generation, or live tree dependency. Detail folded into
-    `bigdiffer-design.md` §8 and the runbook's step 5. *(core)*
+    split, item 9b). Assumes the top block's `FEATURES:` section is empty
+    or absent when `-update` runs (the normal case: it runs once per
+    release cycle and drafts the whole entry in a single pass) and errors
+    rather than guess at a merge if it is already populated.
+    `changelog.go`'s `changelogEntries`/`writeChangelogFragment` are pure
+    functions of in-memory state plus a targeted edit to `CHANGELOG.md` —
+    no AWS, generation, or live tree dependency beyond that one file.
+    Detail folded into `bigdiffer-design.md` §8 and the runbook's step 5.
+    *(core)*
 
 ### Deferred
 

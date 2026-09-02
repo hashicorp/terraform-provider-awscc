@@ -230,23 +230,25 @@ output at least as reliably as JSON, without a second schema to keep in sync
 with every future taxonomy change.
 
 `-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry
-itself, as `CHANGELOG_PENDING.md` (untracked, never edited in place into
-`CHANGELOG.md`) — `generation-punchlist.md` item 16. The file always
-reflects only the current run: written when there is something to
-announce, removed when there is not, so a run of ordinary Changed-type
-refreshes clears a fragment a prior run left behind rather than leaving it
-to be mistakenly re-folded. The source of truth is the set of artifacts
-the run actually promotes (read from `stagedByDest` *after* the compile
-gate settles, so a gate-rejected artifact is never announced), filtered
-to artifacts that were not already user-visible on the pre-run overlay:
-every promoted artifact of a brand-new type, or a specific artifact whose
-own `suppress_*_generation` flag was set on the pre-run row (a backlog
-lift, or the "AWS added the plural list operation to an existing type
-later" case that motivated the reason split, item 9b — the plural data
-source and its `ListResource` become newly user-visible without touching
-the already-shipped resource or singular data source). The PR number and
-any `NOTES:`/breaking-change entries stay a human step; the fragment only
-emits the mechanical bullets.
+itself, writing directly into the file's top, in-progress version block
+(e.g. `## 1.100.0 (Unreleased)`; a release-prep commit retitles it with the
+real date and starts a fresh one immediately after cutting a release) —
+`generation-punchlist.md` item 16. No side file: bigdiffer normally runs
+once per release cycle and drafts the whole entry in a single pass, so it
+assumes that block's `FEATURES:` section is empty or absent when it runs,
+and errors rather than guess at a merge if it already has bullets (the fix
+in that case is to add the new ones by hand). The source of truth is the
+set of artifacts the run actually promotes (read from `stagedByDest`
+*after* the compile gate settles, so a gate-rejected artifact is never
+announced), filtered to artifacts that were not already user-visible on
+the pre-run overlay: every promoted artifact of a brand-new type, or a
+specific artifact whose own `suppress_*_generation` flag was set on the
+pre-run row (a backlog lift, or the "AWS added the plural list operation
+to an existing type later" case that motivated the reason split, item 9b —
+the plural data source and its `ListResource` become newly user-visible
+without touching the already-shipped resource or singular data source).
+The PR number and any `NOTES:`/breaking-change entries stay a human step;
+`-update` only inserts the mechanical bullets.
 
 ## 9. Design decisions (proven in the tool)
 

@@ -164,26 +164,27 @@ generate` — it does not reimplement `tfplugindocs`. This changes `examples/**`
 
 ### 5. CHANGELOG and version
 
-`-update` already drafted the `FEATURES:` bullets — read straight off the
-artifacts it actually promoted this run, filtered to ones that were not
-already user-visible before it (generation-punchlist.md item 16) — into
-`CHANGELOG_PENDING.md` at the repo root (untracked; always reflects only
-this run — written when there is something to announce, removed
-otherwise, never left stale from a previous run). Fold it into
-`CHANGELOG.md`:
+`-update` already drafted the `FEATURES:` bullets directly into
+`CHANGELOG.md`'s top, in-progress version block (e.g.
+`## 1.100.0 (Unreleased)`) — read straight off the artifacts it actually
+promoted this run, filtered to ones that were not already user-visible
+before it (generation-punchlist.md item 16). All that is left by hand:
 
-1. Open `CHANGELOG_PENDING.md` and copy its `FEATURES:` block into a new
-   entry at the top of `CHANGELOG.md`.
-2. Add the PR number link (`([#1234](https://github.com/hashicorp/terraform-provider-awscc/pull/1234))`)
-   once the PR exists — the fragment cannot know this in advance.
-3. Add any `NOTES:` or breaking-change entries by hand; these are editorial
-   and not drafted automatically.
-4. Update `version/VERSION` to match.
-5. Delete `CHANGELOG_PENDING.md` (or leave it — the next `-update` run
-   removes or rewrites it either way).
+1. Add the PR number link (`([#1234](https://github.com/hashicorp/terraform-provider-awscc/pull/1234))`)
+   once the PR exists — `-update` cannot know this in advance.
+2. Add any `NOTES:` or breaking-change entries; these are editorial and not
+   drafted automatically.
+3. Update `version/VERSION` to match.
 
-If `CHANGELOG_PENDING.md` is absent, this run promoted nothing newly
-user-visible (an ordinary refresh of already-shipped types) — nothing to add.
+If this run promoted nothing newly user-visible (an ordinary refresh of
+already-shipped types), no `FEATURES:` section is added — there is nothing
+to review here.
+
+`-update` assumes the top block's `FEATURES:` section is empty or absent
+when it runs (the normal case: bigdiffer runs once per release cycle and
+drafts the whole entry in one pass) and errors rather than guess at a merge
+if it already has bullets — the fix in that case is to add the new bullets
+by hand.
 
 ### 6. Commit and open a pull request
 

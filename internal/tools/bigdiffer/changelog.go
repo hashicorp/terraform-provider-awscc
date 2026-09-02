@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"slices"
 	"sort"
 	"strings"
 )
@@ -115,23 +116,109 @@ func changelogEntries(promoted map[string]stagedArtifact, preRunOverlay map[stri
 	return entries
 }
 
-// writeChangelogFragment makes path always reflect fragment for this run:
-// written when fragment is non-empty, removed when it is empty. A run of
-// ordinary Changed-type refreshes (a real weekly occurrence) yields no
-// entries and must clear whatever a prior run left behind — leaving a stale
-// fragment in place would cause the runbook's fold-into-CHANGELOG.md step to
-// re-add a previous release's bullets.
-func writeChangelogFragment(path, fragment string) error {
-	if fragment == "" {
-		if err := os.Remove(path); err != nil && !os.IsNotExist(err) {
-			return fmt.Errorf("removing %s: %w", path, err)
-		}
+// writeChangelogFragment inserts entries as a FEATURES: section into path's
+// (CHANGELOG.md) top version block — the in-progress release entry (e.g.
+// "## 1.100.0 (Unreleased)"; a release-prep commit retitles it and starts a
+// fresh one immediately after cutting a release, confirmed against real
+// history: "Add changelog entry for v1.100.0" landed right after "Bumped
+// product version to 1.99.1"). Assumes that block's FEATURES: section is
+// empty or absent when -update runs — bigdiffer normally runs once and
+// drafts the whole entry in one pass, so there is nothing to merge with. An
+// empty entries list is a no-op.
+func writeChangelogFragment(path string, entries []changelogEntry) error {
+	if len(entries) == 0 {
 		return nil
 	}
-	if err := os.WriteFile(path, []byte(fragment), filePerm); err != nil {
+	orig, err := os.ReadFile(path)
+	if err != nil {
+		return fmt.Errorf("reading %s: %w", path, err)
+	}
+	updated, err := insertChangelogFeatures(string(orig), entries)
+	if err != nil {
+		return fmt.Errorf("updating %s: %w", path, err)
+	}
+	if err := os.WriteFile(path, []byte(updated), filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", path, err)
 	}
 	return nil
+}
+
+// insertChangelogFeatures inserts entries as a FEATURES: section into
+// content's first version block, returning the whole updated content.
+// Section order within a block, verified against every block in the real
+// file's history, is always NOTES: (optional), then FEATURES: (optional),
+// then BUG FIXES: (optional), then the next "## " heading or EOF. The new
+// section goes directly after NOTES: (or directly after the "## " heading
+// line if there is no NOTES:) and before BUG FIXES:/the next heading.
+//
+// Errors if the block already has a non-empty FEATURES: section — bigdiffer
+// normally runs once per week and drafts the whole entry in a single pass,
+// so an existing populated section means either -update ran twice without an
+// intervening release (merge by hand) or the block structure isn't what was
+// expected; guessing how to merge silently risks corrupting a human-owned
+// file.
+func insertChangelogFeatures(content string, entries []changelogEntry) (string, error) {
+	lines := strings.Split(content, "\n")
+
+	headingIdx := slices.IndexFunc(lines, func(l string) bool { return strings.HasPrefix(l, "## ") })
+	if headingIdx == -1 {
+		return "", fmt.Errorf(`no "## " version heading found`)
+	}
+
+	blockEnd := len(lines)
+	if next := slices.IndexFunc(lines[headingIdx+1:], func(l string) bool { return strings.HasPrefix(l, "## ") }); next != -1 {
+		blockEnd = headingIdx + 1 + next
+	}
+	block := lines[headingIdx+1 : blockEnd]
+
+	if idx := slices.Index(block, "FEATURES:"); idx != -1 {
+		end := len(block)
+		if next := slices.IndexFunc(block[idx+1:], func(l string) bool {
+			return l == "BUG FIXES:" || strings.HasPrefix(l, "## ")
+		}); next != -1 {
+			end = idx + 1 + next
+		}
+		if !allBlank(block[idx+1 : end]) {
+			return "", fmt.Errorf("top version block already has a non-empty FEATURES: section " +
+				"(-update normally runs once per release cycle; merge the new entries by hand)")
+		}
+	}
+
+	// Insert right after NOTES:'s section if present, else right after the
+	// heading's own blank line.
+	insertAt := headingIdx + 1
+	for insertAt < blockEnd && lines[insertAt] == "" {
+		insertAt++
+	}
+	if insertAt < blockEnd && lines[insertAt] == "NOTES:" {
+		insertAt++
+		for insertAt < blockEnd && lines[insertAt] == "" {
+			insertAt++ // past the blank line between the label and its bullets
+		}
+		for insertAt < blockEnd && lines[insertAt] != "" {
+			insertAt++ // past NOTES:'s own bullet/paragraph lines
+		}
+		if insertAt < blockEnd {
+			insertAt++ // past the blank line separating NOTES: from what follows
+		}
+	}
+
+	fragment := strings.Split(strings.TrimSuffix(formatChangelogFragment(entries), "\n"), "\n")
+	out := make([]string, 0, len(lines)+len(fragment)+1)
+	out = append(out, lines[:insertAt]...)
+	out = append(out, fragment...)
+	out = append(out, "")
+	out = append(out, lines[insertAt:]...)
+	return strings.Join(out, "\n"), nil
+}
+
+func allBlank(lines []string) bool {
+	for _, l := range lines {
+		if strings.TrimSpace(l) != "" {
+			return false
+		}
+	}
+	return true
 }
 
 // wasSuppressed reports whether kind's artifact was suppressed on the pre-run
