@@ -24,9 +24,8 @@ const (
 	ResourceType   = "Resource"
 )
 
-// GenerateTemplateData generates the template body from the Resource
-// constructed from a CloudFormation type's Schema file.
-// This method can be applied to both singular data source and resource types.
+// GenerateTemplateData builds the TemplateData for a resource or singular data
+// source from its CloudFormation schema file.
 func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, packageName, servicesPath string) (*TemplateData, error) {
 	resource, err := NewResource(tfResourceType, cfTypeSchemaFile)
 

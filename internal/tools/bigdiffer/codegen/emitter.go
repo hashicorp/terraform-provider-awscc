@@ -154,10 +154,9 @@ func (r *attributeFunctionRegistry) render() string {
 	return w.String()
 }
 
-// EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
-// and emits the generated code to the emitter's Writer. Code features and the deduplicated
-// top-level attribute function declarations are returned.
-// The root schema is the map of root property names to Attributes.
+// EmitRootPropertiesSchema emits a CloudFormation resource's root schema (the
+// map of root property names to Attributes) and returns the code features and
+// the deduplicated top-level attribute function declarations.
 func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[string]string) (Features, string, error) {
 	var features Features
 
@@ -192,8 +191,8 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 	return features, attributeFunctions, nil
 }
 
-// emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
-// and emits the generated code to the emitter's Writer. Code features are returned.
+// emitAttribute emits one CloudFormation property as a Plugin Framework
+// Attribute.
 func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly, parentComputedAndOptional bool) (Features, error) {
 	var features Features
 	var validators []string
@@ -1056,10 +1055,8 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	return features, nil
 }
 
-// emitSchema generates the Terraform Plugin SDK code for a CloudFormation property's schema.
-// and emits the generated code to the emitter's Writer. Code features are returned.
-// A schema is a map of property names to Attributes.
-// Property names are sorted prior to code generation to reduce diffs.
+// emitSchema emits a CloudFormation schema (a map of property names to
+// Attributes). Property names are sorted first to reduce diffs.
 func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
 	names := tfmaps.Keys(properties)
 	sort.Strings(names)
