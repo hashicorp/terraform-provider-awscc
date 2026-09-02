@@ -1256,22 +1256,25 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the registry containing the record.",
-		//	  "maxLength": 16,
-		//	  "minLength": 12,
-		//	  "pattern": "^[a-zA-Z0-9]{12,16}$",
+		//	  "description": "The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/)?[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
 		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the registry containing the record.",
-			Required:    true,
+			Description: "The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 16),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{12,16}$"), ""),
+				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/)?[a-zA-Z0-9]{12,16}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// RegistryId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -1463,6 +1466,9 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		"value":                              "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RegistryId",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

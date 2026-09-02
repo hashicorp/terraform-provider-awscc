@@ -220,7 +220,7 @@ func workspaceIpGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource type definition for an IP access control group for Amazon WorkSpaces.",
+		Description: "Resource Type definition for an IP access control group for Amazon WorkSpaces.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -782,6 +782,33 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: System
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ManagedBy": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ManagedBy"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ManagedBy
+				"managed_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -840,6 +867,7 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		"gateway_arn":          "GatewayArn",
 		"gateway_identifier":   "GatewayIdentifier",
 		"iam_principal":        "IamPrincipal",
+		"managed_by":           "ManagedBy",
 		"match_paths":          "MatchPaths",
 		"match_principals":     "MatchPrincipals",
 		"metadata":             "Metadata",
@@ -851,6 +879,7 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		"static_override":      "StaticOverride",
 		"static_route":         "StaticRoute",
 		"status":               "Status",
+		"system":               "System",
 		"target_name":          "TargetName",
 		"traffic_split":        "TrafficSplit",
 		"updated_at":           "UpdatedAt",
