@@ -5,6 +5,7 @@ package main
 
 import (
 	"errors"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -137,6 +138,108 @@ func TestBuildCandidates(t *testing.T) {
 	// Changed uses the overlay row (so its suppress flag is honored) and is Present.
 	if c := byCFN["AWS::EC2::Chg"]; c.class != classPresent || !c.row.SuppressResourceGeneration || string(c.schema) != "chg" {
 		t.Errorf("Changed candidate wrong: %+v", c)
+	}
+}
+
+// TestAbsentTypes covers the filtering half of the absent-row probe
+// (contributing/docs/absent-row-probe-design.md): which overlay rows need
+// probing at all. A row in A is never absent; a row already frozen or
+// checkout-pinned is already explained and needs no probe.
+func TestAbsentTypes(t *testing.T) {
+	t.Parallel()
+
+	overlayByCFN := map[string]resourceRow{
+		"AWS::EC2::Present":  {CloudFormationTypeName: "AWS::EC2::Present"},
+		"AWS::EC2::Frozen":   {CloudFormationTypeName: "AWS::EC2::Frozen"},
+		"AWS::EC2::Pinned":   {CloudFormationTypeName: "AWS::EC2::Pinned"},
+		"AWS::EC2::NeedsPro": {CloudFormationTypeName: "AWS::EC2::NeedsPro"},
+	}
+	discByCFN := map[string]discovered{
+		"AWS::EC2::Present": {row: resourceRow{CloudFormationTypeName: "AWS::EC2::Present"}},
+	}
+	frozenCFN := map[string]bool{"AWS::EC2::Frozen": true}
+	checkout := map[string]bool{"AWS::EC2::Pinned": true}
+
+	got := absentTypes(overlayByCFN, discByCFN, frozenCFN, checkout)
+	want := []string{"AWS::EC2::NeedsPro"}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("absentTypes() = %v, want %v", got, want)
+	}
+}
+
+// TestAbsentRowDecisionClearsUnexplainedRetained is the reconciliation half of
+// the absent-row probe design (contributing/docs/absent-row-probe-design.md):
+// applying the decide() outcome for a probed absent row via
+// normalizeWithDecisions must set the explaining attribute on the existing
+// block, and a subsequent normalize pass over the rewritten overlay (as the
+// next run's -check/-update would see it) must no longer flag that row as
+// UnexplainedRetained.
+//
+// testOverlay/testBase's AWS::Old::Gone is the fixture: live in the overlay,
+// absent from base, otherwise unexplained (main_test.go).
+func TestAbsentRowDecisionClearsUnexplainedRetained(t *testing.T) {
+	t.Parallel()
+
+	today := "2026-09-02"
+
+	tests := []struct {
+		name       string
+		class      changeClass
+		wantAttr   string
+		wantSuffix string // "= <value>" tail, tolerant of hclwrite's column alignment
+	}{
+		{name: "withdrawn", class: classWithdrawn, wantAttr: "frozen_since", wantSuffix: `= "` + today + `"`},
+		{name: "non-provisionable", class: classNonProvisionable, wantAttr: "non_provisionable", wantSuffix: "= true"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
+			decisions := map[string]policyDecision{
+				"AWS::Old::Gone": decide(tt.class, gateResult{}, today),
+			}
+			out, report, err := normalizeWithDecisions(testOverlay(), testBase(), nil, map[string]bool{}, decisions)
+			if err != nil {
+				t.Fatalf("normalizeWithDecisions: %v", err)
+			}
+
+			gone := blockFor(out, "aws_old_gone")
+			if !strings.Contains(gone, tt.wantAttr) || !strings.Contains(gone, tt.wantSuffix) {
+				t.Errorf("aws_old_gone missing %s %s:\n%s", tt.wantAttr, tt.wantSuffix, gone)
+			}
+
+			// This run's own report is computed from the pre-edit overlay
+			// text (crossValidate decodes the input, not the rewritten
+			// output), so it still reports AWS::Old::Gone as
+			// UnexplainedRetained here — the decision hasn't landed on disk
+			// yet from its own point of view. What must actually hold is the
+			// design doc's claim: the row is durably explained *starting next
+			// run*, checked below against the rewritten overlay.
+			found := false
+			for _, ref := range report.UnexplainedRetained {
+				if ref.cfn == "AWS::Old::Gone" {
+					found = true
+				}
+			}
+			if !found {
+				t.Errorf("expected AWS::Old::Gone in this run's own UnexplainedRetained (report reflects the pre-edit overlay): %+v", report.UnexplainedRetained)
+			}
+
+			// A second pass over the rewritten overlay (simulating the next
+			// run reading its own prior output) confirms the row is durably
+			// explained, not just coincidentally absent from this run's
+			// report ordering.
+			_, report2, err := normalize(out, testBase(), nil, map[string]bool{})
+			if err != nil {
+				t.Fatalf("second normalize pass: %v", err)
+			}
+			for _, ref := range report2.UnexplainedRetained {
+				if ref.cfn == "AWS::Old::Gone" {
+					t.Errorf("AWS::Old::Gone still UnexplainedRetained on the next run: %+v", report2.UnexplainedRetained)
+				}
+			}
+		})
 	}
 }
 

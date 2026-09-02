@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/hashicorp/cli"
 )
 
@@ -54,6 +55,43 @@ func buildCandidates(results []changeResult, discByCFN map[string]discovered, ov
 		out = append(out, c)
 	}
 	return out
+}
+
+// absentTypes returns the overlay's CloudFormation type names absent from this
+// run's discovered set (O - A) that still need the probe: not already in A,
+// and not already explained by a freeze or a checkout pin (a checkout pin may
+// explain an absence the probe cannot see — a deliberately checked-out older
+// version — so it is treated the same as an existing freeze). Pure and
+// order-independent; the caller sorts if a stable probe order matters.
+func absentTypes(overlayByCFN map[string]resourceRow, discByCFN map[string]discovered, frozenCFN map[string]bool, checkout map[string]bool) []string {
+	var out []string
+	for cfn := range overlayByCFN {
+		if _, ok := discByCFN[cfn]; ok {
+			continue // in A; not absent
+		}
+		if frozenCFN[cfn] || checkout[cfn] {
+			continue // already explained; no probe needed
+		}
+		out = append(out, cfn)
+	}
+	return out
+}
+
+// absentDecisions resolves every type absentTypes returns via one DescribeType
+// probe each, per contributing/docs/absent-row-probe-design.md. A type the
+// probe cannot resolve definitively (probeAbsent returns "") is left out of the
+// returned map entirely, so it is neither annotated nor blocked — just
+// deferred to a later run, exactly like any other transient discovery gap.
+func absentDecisions(ctx context.Context, conn *cloudformation.Client, overlayByCFN map[string]resourceRow, discByCFN map[string]discovered, frozenCFN map[string]bool, checkout map[string]bool, today string) map[string]policyDecision {
+	decisions := make(map[string]policyDecision)
+	for _, cfn := range absentTypes(overlayByCFN, discByCFN, frozenCFN, checkout) {
+		class := probeAbsent(ctx, conn, cfn)
+		if class == "" {
+			continue // probe inconclusive; leave the row as-is for a later run
+		}
+		decisions[cfn] = decide(class, gateResult{}, today)
+	}
+	return decisions
 }
 
 // gateResultFromGenResults converts a candidate's real generation outcomes into
@@ -248,7 +286,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return err
 	}
 
-	disc, err := discover(ctx)
+	disc, conn, err := discover(ctx)
 	if err != nil {
 		return fmt.Errorf("discovery: %w", err)
 	}
@@ -266,6 +304,10 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		if r.FrozenSince != "" {
 			frozenCFN[r.CloudFormationTypeName] = true
 		}
+	}
+	checkout, err := parseCheckout(checkoutPath)
+	if err != nil {
+		return fmt.Errorf("reading checkout %s: %w", checkoutPath, err)
 	}
 
 	changes, err := detectChanges(disc, frozenCFN, cfg.cacheDir)
@@ -287,7 +329,15 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	stepf("Regenerating %d changed type(s) from fresh bytes (never-regress)…", len(cands))
 	candBar := newBar(len(cands), "regenerate")
 	today := time.Now().Format(dateLayout)
-	decisions := make(map[string]policyDecision, len(cands))
+
+	// Absent-row probe (generation-punchlist.md item 2;
+	// contributing/docs/absent-row-probe-design.md): resolve every overlay row
+	// this run's crawl didn't see at all (O - A) before the candidate loop, so
+	// its decisions share the same map — the two sets are disjoint by
+	// construction (a candidate came from `changes`, which only ever covers
+	// discovered/A types). No staging or generation is needed for an absent
+	// row: it is a pure annotation of the block that already exists.
+	decisions := absentDecisions(ctx, conn, overlayByCFN, discByCFN, frozenCFN, checkout, today)
 	stagedByDest := make(map[string]stagedArtifact)
 	// listResourceCandidates tracks every candidate whose staged resource
 	// artifact was rendered with listResource: true (baked into the file's
@@ -353,10 +403,6 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	overlayContent, err := os.ReadFile(allSchemasPath)
 	if err != nil {
 		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
-	}
-	checkout, err := parseCheckout(checkoutPath)
-	if err != nil {
-		return fmt.Errorf("reading checkout %s: %w", checkoutPath, err)
 	}
 
 	// Compile gate (generation-punchlist.md item 1): build the staged code plus

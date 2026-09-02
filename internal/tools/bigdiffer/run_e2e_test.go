@@ -29,7 +29,7 @@ func TestE2ELiveUpdate(t *testing.T) {
 	defer cancel()
 
 	start := time.Now()
-	disc, err := discover(ctx)
+	disc, _, err := discover(ctx)
 	if err != nil {
 		t.Fatalf("discover: %v", err)
 	}

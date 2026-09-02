@@ -5,6 +5,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"sort"
@@ -45,17 +46,19 @@ type discovered struct {
 // (FULLY_MUTABLE + IMMUTABLE, LIVE) and, in one bounded-concurrency sweep,
 // derives per-type metadata (Terraform name, plural-DS support) and captures the
 // sanitized schema bytes. This is the "what's new" half of the mandate plus the
-// cache input, fetched once.
-func discover(ctx context.Context) ([]discovered, error) {
+// cache input, fetched once. The returned client is the same throttled,
+// region-pinned client used for the crawl, exposed so a caller (runUpdate) can
+// reuse it for the absent-row DescribeType probe without building a second one.
+func discover(ctx context.Context) ([]discovered, *cloudformation.Client, error) {
 	conn, err := newCFNClient(ctx)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	stepf("Listing available CloudFormation resource types (%s)…", discoverRegion)
 	names, err := listTypeNames(ctx, conn)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	stepf("Describing %d types (concurrency %d, DescribeType is throttled)…", len(names), discoverConcurrency)
@@ -85,7 +88,7 @@ func discover(ctx context.Context) ([]discovered, error) {
 	if failures > 0 {
 		fmt.Fprintf(os.Stderr, "bigdiffer: discovery: %d of %d types failed to describe (see per-type warnings)\n", failures, len(results))
 	}
-	return results, nil
+	return results, conn, nil
 }
 
 // newCFNClient builds a CloudFormation client pinned to the reference region with
@@ -214,4 +217,54 @@ func pluralSupported(sanitized string) bool {
 	}
 	hs := handler.HandlerSchema
 	return hs == nil || (len(hs.AllOf) == 0 && len(hs.AnyOf) == 0 && len(hs.OneOf) == 0 && len(hs.Required) == 0)
+}
+
+// probeAbsent resolves one absent overlay row (in the overlay, not returned by
+// this run's ListTypes crawl) by issuing a single DescribeType call, per
+// contributing/docs/absent-row-probe-design.md. ListTypes excludes both
+// NON_PROVISIONABLE and DEPRECATED types, so an absent type can be either —
+// this is the one call that tells them apart from a transient listing blip.
+// The classification itself is classifyAbsentProbe, kept separate so it is
+// unit-testable without a live AWS call.
+func probeAbsent(ctx context.Context, conn *cloudformation.Client, cfn string) changeClass {
+	out, err := conn.DescribeType(ctx, &cloudformation.DescribeTypeInput{
+		Type:     types.RegistryTypeResource,
+		TypeName: aws.String(cfn),
+	})
+	class := classifyAbsentProbe(out, err)
+	if class == "" && err != nil {
+		fmt.Fprintf(os.Stderr, "bigdiffer: probing absent type %s: %v\n", cfn, err)
+	}
+	return class
+}
+
+// classifyAbsentProbe is the pure decision at the heart of probeAbsent: given a
+// DescribeType outcome, which of the two dead decide() branches (design doc)
+// applies, if either.
+//
+// It returns classWithdrawn or classNonProvisionable when the probe gives a
+// definitive answer, or "" when it does not: a transient error (throttling,
+// network, anything other than TypeNotFoundException) is never treated as
+// withdrawal, so the row is simply left as-is for a later run rather than
+// frozen on a guess. DeprecatedStatus is checked before ProvisioningType on a
+// successful response: a deprecated type is withdrawn regardless of what
+// provisioning type it still reports.
+func classifyAbsentProbe(out *cloudformation.DescribeTypeOutput, err error) changeClass {
+	if err != nil {
+		var notFound *types.TypeNotFoundException
+		if errors.As(err, &notFound) {
+			return classWithdrawn
+		}
+		return ""
+	}
+	if out.DeprecatedStatus == types.DeprecatedStatusDeprecated {
+		return classWithdrawn
+	}
+	if out.ProvisioningType == types.ProvisioningTypeNonProvisionable {
+		return classNonProvisionable
+	}
+	// Succeeded, live, and provisionable: a transient ListTypes omission
+	// (eventual consistency) rather than a real absence. Nothing to annotate;
+	// it will simply re-enter the discovered set next run.
+	return ""
 }
