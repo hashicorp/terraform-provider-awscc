@@ -99,14 +99,14 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 {{- if .HasMutableIdentity }}
     opts = opts.HasMutableIdentity(true)
 {{- end }}
-{{ if .PathAwareNames }}
-	opts = opts.WithPathAwareAttributeNameMap(map[string]string{
+{{- if not .PathAwareNames }}
+	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",
 {{- end }}
 	})
-{{ else }}
-	opts = opts.WithAttributeNameMap(map[string]string{
+{{- else }}
+	opts = opts.WithPathAwareAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",
 {{- end }}
