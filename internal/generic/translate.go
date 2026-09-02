@@ -10,6 +10,7 @@ import (
 	"math/big"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -19,12 +20,14 @@ import (
 
 // Translates a Terraform Value to Cloud Control DesiredState.
 type toCloudControl struct {
-	tfToCfNameMap map[string]string
+	tfToCfNameMap     map[string]string
+	pathAwareNames    bool
+	pathTfToCfNameMap map[string]string // "CfParentPath/tfAttr" → CF property name
 }
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
 func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (map[string]any, error) {
-	v, err := t.rawFromValue(ctx, schema, nil, val)
+	v, err := t.rawFromValue(ctx, schema, nil, nil, val)
 
 	if err != nil {
 		return nil, err
@@ -60,7 +63,8 @@ func (t toCloudControl) AsString(ctx context.Context, schema typeAtTerraformPath
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (any, error) {
+// cfPath tracks the CloudFormation property path for path-aware name resolution.
+func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, cfPath []string, val tftypes.Value) (any, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -122,7 +126,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 			} else {
 				path = path.WithElementKeyInt(idx)
 			}
-			v, err := t.rawFromValue(ctx, schema, path, val)
+			v, err := t.rawFromValue(ctx, schema, path, cfPath, val)
 			if err != nil {
 				return nil, err
 			}
@@ -149,7 +153,37 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 			} else {
 				path = path.WithElementKeyString(name)
 			}
-			v, err := t.rawFromValue(ctx, schema, path, val)
+
+			// Resolve CF property name — path-aware or flat.
+			var propertyName string
+			if typ.Is(tftypes.Object{}) {
+				if t.pathAwareNames {
+					pathKey := strings.Join(append(cfPath, name), "/")
+					var ok bool
+					propertyName, ok = t.pathTfToCfNameMap[pathKey]
+					if !ok {
+						return nil, fmt.Errorf("path-aware attribute name mapping not found: %s", pathKey)
+					}
+				} else {
+					var ok bool
+					propertyName, ok = t.tfToCfNameMap[name]
+					if !ok {
+						return nil, fmt.Errorf("attribute name mapping not found: %s", name)
+					}
+				}
+			}
+
+			// Build child cfPath for recursion.
+			var childCfPath []string
+			if typ.Is(tftypes.Object{}) {
+				childCfPath = make([]string, len(cfPath)+1)
+				copy(childCfPath, cfPath)
+				childCfPath[len(cfPath)] = propertyName
+			} else {
+				childCfPath = cfPath
+			}
+
+			v, err := t.rawFromValue(ctx, schema, path, childCfPath, val)
 			if err != nil {
 				return nil, err
 			}
@@ -158,10 +192,6 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 				continue
 			}
 			if typ.Is(tftypes.Object{}) {
-				propertyName, ok := t.tfToCfNameMap[name]
-				if !ok {
-					return nil, fmt.Errorf("attribute name mapping not found: %s", name)
-				}
 				vs[propertyName] = v
 			} else {
 				vs[name] = v
@@ -178,12 +208,14 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 
 // Translates Cloud Control Properties to Terraform Value.
 type toTerraform struct {
-	cfToTfNameMap map[string]string
+	cfToTfNameMap     map[string]string
+	pathAwareNames    bool
+	pathCfToTfNameMap map[string]string // "CfParentPath/CfProp" → TF attribute name
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
 func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, resourceModel map[string]any) (tftypes.Value, error) {
-	return t.valueFromRaw(ctx, schema, nil, resourceModel)
+	return t.valueFromRaw(ctx, schema, nil, nil, resourceModel)
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
@@ -438,7 +470,7 @@ func keyFromMap(m map[string]any) string {
 	return ""
 }
 
-func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v any) (tftypes.Value, error) {
+func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, cfPath []string, v any) (tftypes.Value, error) {
 	attrType, err := schema.TypeAtTerraformPath(ctx, path)
 
 	if err != nil {
@@ -486,7 +518,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 			} else {
 				path = path.WithElementKeyInt(idx)
 			}
-			val, err := t.valueFromRaw(ctx, schema, path, v)
+			val, err := t.valueFromRaw(ctx, schema, path, cfPath, v)
 			if err != nil {
 				return tftypes.Value{}, err
 			}
@@ -510,19 +542,45 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 		isObject := typ.Is(tftypes.Object{})
 		vals := make(map[string]tftypes.Value)
 		for key, v := range v {
+			var attributeName string
 			if isObject {
-				attributeName, ok := t.cfToTfNameMap[key]
-				if !ok {
-					tflog.Info(ctx, "attribute name mapping not found", map[string]any{
-						"key": key,
-					})
-					continue
+				if t.pathAwareNames {
+					pathKey := strings.Join(append(cfPath, key), "/")
+					var ok bool
+					attributeName, ok = t.pathCfToTfNameMap[pathKey]
+					if !ok {
+						tflog.Info(ctx, "path-aware attribute name mapping not found", map[string]any{
+							"key":     key,
+							"pathKey": pathKey,
+						})
+						continue
+					}
+				} else {
+					var ok bool
+					attributeName, ok = t.cfToTfNameMap[key]
+					if !ok {
+						tflog.Info(ctx, "attribute name mapping not found", map[string]any{
+							"key": key,
+						})
+						continue
+					}
 				}
 				path = path.WithAttributeName(attributeName)
 			} else {
 				path = path.WithElementKeyString(key)
 			}
-			val, err := t.valueFromRaw(ctx, schema, path, v)
+
+			// Build child cfPath for recursion.
+			var childCfPath []string
+			if isObject {
+				childCfPath = make([]string, len(cfPath)+1)
+				copy(childCfPath, cfPath)
+				childCfPath[len(cfPath)] = key
+			} else {
+				childCfPath = cfPath
+			}
+
+			val, err := t.valueFromRaw(ctx, schema, path, childCfPath, v)
 			if err != nil {
 				if isObject {
 					tflog.Info(ctx, "not found in Terraform schema", map[string]any{
@@ -536,8 +594,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 				return tftypes.Value{}, err
 			}
 			if isObject {
-				// Attribute name mapping assured above.
-				vals[t.cfToTfNameMap[key]] = val
+				vals[attributeName] = val
 			} else {
 				vals[key] = val
 			}

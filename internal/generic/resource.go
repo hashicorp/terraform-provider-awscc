@@ -59,6 +59,74 @@ func resourceWithAttributeNameMap(v map[string]string) ResourceOptionsFunc {
 	}
 }
 
+// resourceWithPathAwareAttributeNameMap sets a path-keyed attribute name map.
+// Keys in the input map are "CfParent/CfProp" paths; values are TF attribute names.
+// This enables multiple CF properties with the same short name but different paths
+// to coexist without collision.
+func resourceWithPathAwareAttributeNameMap(v map[string]string) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		if _, ok := v["id"]; !ok {
+			v["id"] = "ID"
+		}
+
+		o.pathAwareNames = true
+		o.pathTfToCfNameMap = v
+
+		// Build the reverse map: "cf/path/CfProp" → tfAttr
+		reverse := make(map[string]string, len(v))
+		for tfPathKey, cfName := range v {
+			// tfPathKey is "CfParentPath/tfAttrName" — we need "CfParentPath/CfName" → tfAttr
+			// Extract the parent path and the CF name
+			lastSlash := strings.LastIndex(tfPathKey, "/")
+			var parentPath, tfAttr string
+			if lastSlash == -1 {
+				parentPath = ""
+				tfAttr = tfPathKey
+			} else {
+				parentPath = tfPathKey[:lastSlash]
+				tfAttr = tfPathKey[lastSlash+1:]
+			}
+
+			var cfPathKey string
+			if parentPath == "" {
+				cfPathKey = cfName
+			} else {
+				cfPathKey = parentPath + "/" + cfName
+			}
+			reverse[cfPathKey] = tfAttr
+		}
+		o.pathCfToTfNameMap = reverse
+
+		// Populate the flat maps for SetUnknownValuesFromResourceModel, which fills in
+		// computed attributes (like cluster_arn, creation_time) after Create/Update.
+		// That function uses the old flat map interface shared by all resources.
+		// The flat map is lossy for colliding properties (FSxLustreConfig vs FsxLustreConfig)
+		// but those are user-provided, never computed unknowns, so this path never resolves them.
+		flatTfToCf := make(map[string]string)
+		flatCfToTf := make(map[string]string)
+		for tfPathKey, cfName := range v {
+			lastSlash := strings.LastIndex(tfPathKey, "/")
+			var tfAttr string
+			if lastSlash == -1 {
+				tfAttr = tfPathKey
+			} else {
+				tfAttr = tfPathKey[lastSlash+1:]
+			}
+			// Only store if not already present (first wins)
+			if _, exists := flatTfToCf[tfAttr]; !exists {
+				flatTfToCf[tfAttr] = cfName
+			}
+			if _, exists := flatCfToTf[cfName]; !exists {
+				flatCfToTf[cfName] = tfAttr
+			}
+		}
+		o.tfToCfNameMap = flatTfToCf
+		o.cfToTfNameMap = flatCfToTf
+
+		return nil
+	}
+}
+
 func resourceHasMutableIdentity(v bool) ResourceOptionsFunc {
 	return func(o *genericResource) error {
 		o.hasMutableIdentity = v
@@ -237,6 +305,14 @@ func (opts ResourceOptions) WithAttributeNameMap(v map[string]string) ResourceOp
 	return append(opts, resourceWithAttributeNameMap(v))
 }
 
+// WithPathAwareAttributeNameMap is a helper function to construct functional options
+// that set a resource type's path-aware attribute name map. Keys are "CfParentPath/tfAttrName"
+// paths, values are CF property names. This resolves naming collisions where different CF
+// properties at different nesting levels produce the same TF attribute name.
+func (opts ResourceOptions) WithPathAwareAttributeNameMap(v map[string]string) ResourceOptions {
+	return append(opts, resourceWithPathAwareAttributeNameMap(v))
+}
+
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -349,6 +425,9 @@ type genericResource struct {
 	tfTypeName              string                     // Terraform type name for resource type
 	tfToCfNameMap           map[string]string          // Map of Terraform attribute name to CloudFormation property name
 	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
+	pathAwareNames          bool                       // Use path-aware attribute name translation
+	pathTfToCfNameMap       map[string]string          // Map of "cf/path/tfAttr" to CF property name (path-aware mode)
+	pathCfToTfNameMap       map[string]string          // Map of "cf/path/CfProp" to TF attribute name (path-aware mode)
 	isImmutableType         bool                       // Resources cannot be updated and must be recreated
 	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
 	createTimeout           time.Duration              // Maximum wait time for resource creation
@@ -400,7 +479,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		"value": hclog.Fmt("%v", request.Plan.Raw),
 	})
 
-	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, pathAwareNames: r.pathAwareNames, pathTfToCfNameMap: r.pathTfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
@@ -536,13 +615,13 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
+	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap}
 	schema := currentState.Schema
 	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
 	// so plan shows no diff regardless of user config order.
 	var priorMap map[string]any
 	if !currentState.Raw.IsNull() && currentState.Raw.IsKnown() {
-		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, pathAwareNames: r.pathAwareNames, pathTfToCfNameMap: r.pathTfToCfNameMap}
 		var err error
 		priorMap, err = toCC.AsRaw(ctx, schema, currentState.Raw)
 		if err != nil {
@@ -644,7 +723,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		}
 	}
 
-	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, pathAwareNames: r.pathAwareNames, pathTfToCfNameMap: r.pathTfToCfNameMap}
 	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentStateRaw)
 
 	if err != nil {
