@@ -23,7 +23,6 @@ internal/service/cloudformation/schemas/AWS_Lex_Bot.json
 internal/service/cloudformation/schemas/AWS_Logs_LogGroup.json
 internal/service/cloudformation/schemas/AWS_LookoutMetrics_Alert.json
 internal/service/cloudformation/schemas/AWS_LookoutMetrics_AnomalyDetector.json
-internal/service/cloudformation/schemas/AWS_MediaConnect_Flow.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
