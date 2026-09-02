@@ -131,6 +131,13 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Lte": {
 		//	              "type": "integer"
 		//	            },
+		//	            "Matches": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
 		//	            "Neq": {
 		//	              "items": {
 		//	                "type": "string"
@@ -139,6 +146,13 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 		//	              "uniqueItems": false
 		//	            },
 		//	            "NotEquals": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "NotMatches": {
 		//	              "items": {
 		//	                "type": "string"
 		//	              },
@@ -243,6 +257,15 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: Matches
+							"matches": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Neq
 							"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -254,6 +277,15 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: NotEquals
 							"not_equals": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NotMatches
+							"not_matches": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Optional:    true,
 								Computed:    true,
@@ -418,9 +450,11 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 		"less_than_or_equal":    "LessThanOrEqual",
 		"lt":                    "Lt",
 		"lte":                   "Lte",
+		"matches":               "Matches",
 		"name":                  "Name",
 		"neq":                   "Neq",
 		"not_equals":            "NotEquals",
+		"not_matches":           "NotMatches",
 		"rank":                  "Rank",
 		"tags":                  "Tags",
 		"value":                 "Value",

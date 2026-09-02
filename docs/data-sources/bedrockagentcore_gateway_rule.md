@@ -30,6 +30,7 @@ Data Source schema for AWS::BedrockAgentCore::GatewayRule
 - `priority` (Number)
 - `rule_id` (String)
 - `status` (String)
+- `system` (Attributes) (see [below for nested schema](#nestedatt--system))
 - `updated_at` (String)
 
 <a id="nestedatt--actions"></a>
@@ -162,3 +163,14 @@ Read-Only:
 
 - `arn` (String)
 - `operator` (String)
+
+
+
+
+
+<a id="nestedatt--system"></a>
+### Nested Schema for `system`
+
+Read-Only:
+
+- `managed_by` (String)

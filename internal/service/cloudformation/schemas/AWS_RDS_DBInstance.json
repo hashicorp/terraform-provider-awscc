@@ -164,6 +164,14 @@
         "StorageThroughput": {
           "type": "integer",
           "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type."
+        },
+        "StorageOperationStatus": {
+          "type": "string",
+          "description": ""
+        },
+        "StorageOperationPercentProgress": {
+          "type": "integer",
+          "description": ""
         }
       },
       "description": "Contains details about an additional storage volume for a DB instance. RDS support additional storage volumes for RDS for Oracle and RDS for SQL Server."
@@ -561,6 +569,14 @@
       "type": "boolean",
       "description": "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``SourceDBInstanceAutomatedBackupsArn`` property, don't specify this property. The value is inherited from the source DB instance automated backup. \n If you specify ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the snapshot.\n  *Amazon Aurora* \n Not applicable. The encryption for DB instances is managed by the DB cluster."
     },
+    "StorageOperationStatus": {
+      "type": "string",
+      "description": ""
+    },
+    "StorageOperationPercentProgress": {
+      "type": "integer",
+      "description": ""
+    },
     "StorageType": {
       "type": "string",
       "description": "The storage type to associate with the DB instance.\n If you specify ``io1``, ``io2``, or ``gp3``, you must also include a value for the ``Iops`` parameter.\n This setting doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB cluster.\n Valid Values: ``gp2 | gp3 | io1 | io2 | standard``\n Default: ``io1``, if the ``Iops`` parameter is specified. Otherwise, ``gp3``."
@@ -697,6 +713,8 @@
     "/properties/ApplyImmediately"
   ],
   "readOnlyProperties": [
+    "/properties/AdditionalStorageVolumes/*/StorageOperationStatus",
+    "/properties/AdditionalStorageVolumes/*/StorageOperationPercentProgress",
     "/properties/AutomaticRestartTime",
     "/properties/CertificateDetails",
     "/properties/CertificateDetails/CAIdentifier",
@@ -721,7 +739,9 @@
     "/properties/ReadReplicaDBInstanceIdentifiers",
     "/properties/ResumeFullAutomationModeTime",
     "/properties/SecondaryAvailabilityZone",
-    "/properties/StatusInfos"
+    "/properties/StatusInfos",
+    "/properties/StorageOperationStatus",
+    "/properties/StorageOperationPercentProgress"
   ],
   "primaryIdentifier": [
     "/properties/DBInstanceIdentifier"

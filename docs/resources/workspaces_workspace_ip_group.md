@@ -3,12 +3,12 @@
 page_title: "awscc_workspaces_workspace_ip_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource type definition for an IP access control group for Amazon WorkSpaces.
+  Resource Type definition for an IP access control group for Amazon WorkSpaces.
 ---
 
 # awscc_workspaces_workspace_ip_group (Resource)
 
-Resource type definition for an IP access control group for Amazon WorkSpaces.
+Resource Type definition for an IP access control group for Amazon WorkSpaces.
 
 
 

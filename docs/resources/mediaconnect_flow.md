@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_flow Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::MediaConnect::Flow
+  Resource Type definition for AWS::MediaConnect::Flow
 ---
 
 # awscc_mediaconnect_flow (Resource)
 
-Resource schema for AWS::MediaConnect::Flow
+Resource Type definition for AWS::MediaConnect::Flow
 
 
 
@@ -23,10 +23,14 @@ Resource schema for AWS::MediaConnect::Flow
 ### Optional
 
 - `availability_zone` (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
+- `encoding_config` (Attributes) The encoding configuration to apply to the NDI source content when transcoding it to a transport stream (TS) for downstream distribution. You can choose between several predefined encoding profiles based on common use cases. (see [below for nested schema](#nestedatt--encoding_config))
+- `flow_size` (String) Determines the processing capacity and feature set of the flow. Set this optional parameter to LARGE if you want to enable NDI sources or outputs on the flow.
 - `maintenance` (Attributes) The maintenance settings you want to use for the flow. (see [below for nested schema](#nestedatt--maintenance))
 - `media_streams` (Attributes List) The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow. (see [below for nested schema](#nestedatt--media_streams))
+- `ndi_config` (Attributes) Specifies the configuration settings for NDI sources and outputs. Required when the flow includes NDI sources or outputs. (see [below for nested schema](#nestedatt--ndi_config))
 - `source_failover_config` (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
 - `source_monitoring_config` (Attributes) The source monitoring config of the flow. (see [below for nested schema](#nestedatt--source_monitoring_config))
+- `tags` (Attributes List) Key-value pairs that can be used to tag this flow. (see [below for nested schema](#nestedatt--tags))
 - `vpc_interfaces` (Attributes List) The VPC interfaces that you added to this flow. (see [below for nested schema](#nestedatt--vpc_interfaces))
 
 ### Read-Only
@@ -34,6 +38,7 @@ Resource schema for AWS::MediaConnect::Flow
 - `egress_ip` (String) The IP address from which video will be sent to output destinations.
 - `flow_arn` (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
 - `flow_availability_zone` (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)
+- `flow_ndi_machine_name` (String) A prefix for the names of the NDI sources that the flow creates.(ReadOnly)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--source"></a>
@@ -52,12 +57,16 @@ Optional:
 - `media_stream_source_configurations` (Attributes List) The media stream that is associated with the source, and the parameters for that association. (see [below for nested schema](#nestedatt--source--media_stream_source_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the source.
+- `ndi_source_settings` (Attributes) The settings for the NDI flow source. This includes the exact name of the upstream NDI sender that you want to connect to your flow source. (see [below for nested schema](#nestedatt--source--ndi_source_settings))
 - `protocol` (String) The protocol that is used by the source.
+- `router_integration_state` (String)
+- `router_integration_transit_decryption` (Attributes) The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow. (see [below for nested schema](#nestedatt--source--router_integration_transit_decryption))
 - `sender_control_port` (Number) The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.
 - `sender_ip_address` (String) The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.
 - `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
 - `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `tags` (Attributes List) Key-value pairs that can be used to tag this source. (see [below for nested schema](#nestedatt--source--tags))
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 
@@ -127,6 +136,59 @@ Optional:
 
 
 
+<a id="nestedatt--source--ndi_source_settings"></a>
+### Nested Schema for `source.ndi_source_settings`
+
+Optional:
+
+- `source_name` (String)
+
+
+<a id="nestedatt--source--router_integration_transit_decryption"></a>
+### Nested Schema for `source.router_integration_transit_decryption`
+
+Optional:
+
+- `encryption_key_configuration` (Attributes) Configuration settings for flow transit encryption keys. (see [below for nested schema](#nestedatt--source--router_integration_transit_decryption--encryption_key_configuration))
+- `encryption_key_type` (String)
+
+<a id="nestedatt--source--router_integration_transit_decryption--encryption_key_configuration"></a>
+### Nested Schema for `source.router_integration_transit_decryption.encryption_key_configuration`
+
+Optional:
+
+- `automatic` (String) Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.
+- `secrets_manager` (Attributes) The configuration settings for transit encryption of a flow source using AWS Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--source--router_integration_transit_decryption--encryption_key_configuration--secrets_manager))
+
+<a id="nestedatt--source--router_integration_transit_decryption--encryption_key_configuration--secrets_manager"></a>
+### Nested Schema for `source.router_integration_transit_decryption.encryption_key_configuration.secrets_manager`
+
+Optional:
+
+- `role_arn` (String) The ARN of the IAM role used for transit encryption from the router output using AWS Secrets Manager.
+- `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption from the router output.
+
+
+
+
+<a id="nestedatt--source--tags"></a>
+### Nested Schema for `source.tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--encoding_config"></a>
+### Nested Schema for `encoding_config`
+
+Optional:
+
+- `encoding_profile` (String) The encoding profile to use when transcoding the NDI source to a Transport Stream. You can change this value while a flow is running.
+- `video_max_bitrate` (Number) The maximum video bitrate to use when transcoding the NDI source to a Transport Stream. This parameter enables you to override the default video bitrate within the encoding profile's supported range. The supported range is 10,000,000 - 50,000,000 bits per second (bps). If you do not specify a value, MediaConnect uses the default value of 20,000,000 bps.
+
 
 <a id="nestedatt--maintenance"></a>
 ### Nested Schema for `maintenance`
@@ -149,6 +211,7 @@ Optional:
 - `media_stream_id` (Number) A unique identifier for the media stream.
 - `media_stream_name` (String) A name that helps you distinguish one media stream from another.
 - `media_stream_type` (String) The type of media stream.
+- `tags` (Attributes List) Key-value pairs that can be used to tag this media stream. (see [below for nested schema](#nestedatt--media_streams--tags))
 - `video_format` (String) The resolution of the video.
 
 <a id="nestedatt--media_streams--attributes"></a>
@@ -172,6 +235,35 @@ Optional:
 - `scan_mode` (String) The type of compression that was used to smooth the video's appearance.
 - `tcs` (String) The transfer characteristic system (TCS) that is used in the video.
 
+
+
+<a id="nestedatt--media_streams--tags"></a>
+### Nested Schema for `media_streams.tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--ndi_config"></a>
+### Nested Schema for `ndi_config`
+
+Optional:
+
+- `machine_name` (String) A prefix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect generates a unique 12-character ID as the prefix.
+- `ndi_discovery_servers` (Attributes List) A list of up to three NDI discovery server configurations. While not required by the API, this configuration is necessary for NDI functionality to work properly. (see [below for nested schema](#nestedatt--ndi_config--ndi_discovery_servers))
+- `ndi_state` (String) A setting that controls whether NDI sources or outputs can be used in the flow. The default value is DISABLED. This value must be set as ENABLED for your flow to support NDI sources or outputs.
+
+<a id="nestedatt--ndi_config--ndi_discovery_servers"></a>
+### Nested Schema for `ndi_config.ndi_discovery_servers`
+
+Optional:
+
+- `discovery_server_address` (String) The unique network address of the NDI discovery server.
+- `discovery_server_port` (Number) The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified.
+- `vpc_interface_adapter` (String) The identifier for the Virtual Private Cloud (VPC) network interface used by the flow.
 
 
 
@@ -249,6 +341,15 @@ Optional:
 
 
 
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
 <a id="nestedatt--vpc_interfaces"></a>
 ### Nested Schema for `vpc_interfaces`
 
@@ -260,6 +361,15 @@ Optional:
 - `role_arn` (String) Role Arn MediaConnect can assume to create ENIs in customer's account.
 - `security_group_ids` (List of String) Security Group IDs to be used on ENI.
 - `subnet_id` (String) Subnet must be in the AZ of the Flow
+- `tags` (Attributes List) Key-value pairs that can be used to tag this VPC interface. (see [below for nested schema](#nestedatt--vpc_interfaces--tags))
+
+<a id="nestedatt--vpc_interfaces--tags"></a>
+### Nested Schema for `vpc_interfaces.tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

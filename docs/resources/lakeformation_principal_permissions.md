@@ -45,7 +45,7 @@ Optional:
 
 Optional:
 
-- `catalog` (String) The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.
+- `catalog` (Attributes) The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment. (see [below for nested schema](#nestedatt--resource--catalog))
 - `data_cells_filter` (Attributes) A data cell filter. (see [below for nested schema](#nestedatt--resource--data_cells_filter))
 - `data_location` (Attributes) The location of an Amazon S3 path where permissions are granted or revoked. (see [below for nested schema](#nestedatt--resource--data_location))
 - `database` (Attributes) The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal. (see [below for nested schema](#nestedatt--resource--database))
@@ -53,6 +53,14 @@ Optional:
 - `lf_tag_policy` (Attributes) A list of LF-tag conditions that define a resource's LF-tag policy. (see [below for nested schema](#nestedatt--resource--lf_tag_policy))
 - `table` (Attributes) The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. (see [below for nested schema](#nestedatt--resource--table))
 - `table_with_columns` (Attributes) The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3. (see [below for nested schema](#nestedatt--resource--table_with_columns))
+
+<a id="nestedatt--resource--catalog"></a>
+### Nested Schema for `resource.catalog`
+
+Optional:
+
+- `id` (String)
+
 
 <a id="nestedatt--resource--data_cells_filter"></a>
 ### Nested Schema for `resource.data_cells_filter`

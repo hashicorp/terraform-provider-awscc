@@ -6,7 +6,7 @@
     "CatalogIdString": {
       "type": "string",
       "minLength": 12,
-      "maxLength": 12
+      "maxLength": 255
     },
     "PathString": {
       "type": "string"
@@ -99,7 +99,13 @@
     },
     "CatalogResource": {
       "type": "object",
-      "additionalProperties": false
+      "properties": {
+        "Id": {
+          "$ref": "#/definitions/CatalogIdString"
+        }
+      },
+      "additionalProperties": false,
+      "description": ""
     },
     "DatabaseResource": {
       "type": "object",
@@ -479,6 +485,9 @@
     "/properties/PrincipalIdentifier",
     "/properties/ResourceIdentifier"
   ],
+  "writeOnlyProperties": [
+    "/properties/Catalog"
+  ],
   "replacementStrategy": "delete_then_create",
   "tagging": {
     "taggable": false
@@ -510,6 +519,23 @@
     "delete": {
       "permissions": [
         "lakeformation:RevokePermissions",
+        "lakeformation:ListPermissions",
+        "glue:GetTable",
+        "glue:GetDatabase"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "Resource": {
+            "$ref": "resource-schema.json#/properties/Resource"
+          }
+        },
+        "required": [
+          "Resource"
+        ]
+      },
+      "permissions": [
         "lakeformation:ListPermissions",
         "glue:GetTable",
         "glue:GetDatabase"

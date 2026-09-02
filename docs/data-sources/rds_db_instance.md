@@ -571,6 +571,8 @@ Data Source schema for AWS::RDS::DBInstance
  If you specify ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the snapshot.
   *Amazon Aurora* 
  Not applicable. The encryption for DB instances is managed by the DB cluster.
+- `storage_operation_percent_progress` (Number)
+- `storage_operation_status` (String)
 - `storage_throughput` (Number) Specifies the storage throughput value, in mebibyte per second (MiBps), for the DB instance. This setting applies only to the ``gp3`` storage type. 
  This setting doesn't apply to RDS Custom or Amazon Aurora.
 - `storage_type` (String) The storage type to associate with the DB instance.
@@ -607,6 +609,8 @@ Read-Only:
 - `allocated_storage` (String) The amount of storage allocated for the additional storage volume, in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).
 - `iops` (Number) The number of I/O operations per second (IOPS) provisioned for the additional storage volume.
 - `max_allocated_storage` (Number) The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.
+- `storage_operation_percent_progress` (Number)
+- `storage_operation_status` (String)
 - `storage_throughput` (Number) The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type.
 - `storage_type` (String) The storage type for the additional storage volume.
  Valid Values: ``GP3 | IO2``

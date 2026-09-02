@@ -1836,35 +1836,156 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AllocationStrategy": {
+		//	      "enum": [
+		//	        "prioritized"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CapacityReservationTarget": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CapacityReservationIds": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "CapacityReservationResourceGroupArns": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ReservationTypes": {
 		//	      "items": {
 		//	        "enum": [
+		//	          "on-demand-capacity-reservation",
+		//	          "capacity-block",
 		//	          "interruptible-capacity-reservation"
 		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array",
-		//	      "uniqueItems": false
+		//	      "uniqueItems": true
+		//	    },
+		//	    "ReservedCapacityFallbackOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MarketTypes": {
+		//	          "items": {
+		//	            "enum": [
+		//	              "on-demand"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"reserved_capacity_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllocationStrategy
+				"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"prioritized",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CapacityReservationTarget
+				"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityReservationIds
+						"capacity_reservation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.UniqueValues(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CapacityReservationResourceGroupArns
+						"capacity_reservation_resource_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.UniqueValues(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ReservationTypes
 				"reservation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
 						listvalidator.ValueStringsAre(
 							stringvalidator.OneOf(
+								"on-demand-capacity-reservation",
+								"capacity-block",
 								"interruptible-capacity-reservation",
 							),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReservedCapacityFallbackOptions
+				"reserved_capacity_fallback_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MarketTypes
+						"market_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.UniqueValues(),
+								listvalidator.ValueStringsAre(
+									stringvalidator.OneOf(
+										"on-demand",
+									),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -2453,70 +2574,74 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_count":                  "AcceleratorCount",
-		"accelerator_manufacturers":          "AcceleratorManufacturers",
-		"accelerator_names":                  "AcceleratorNames",
-		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
-		"accelerator_types":                  "AcceleratorTypes",
-		"affinity":                           "Affinity",
-		"allocation_strategy":                "AllocationStrategy",
-		"allowed_instance_types":             "AllowedInstanceTypes",
-		"arn":                                "Arn",
-		"associate_public_ip_address":        "AssociatePublicIpAddress",
-		"availability_zone":                  "AvailabilityZone",
-		"availability_zone_id":               "AvailabilityZoneId",
-		"bare_metal":                         "BareMetal",
-		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
-		"baseline_performance_factors":       "BaselinePerformanceFactors",
-		"block_device_mappings":              "BlockDeviceMappings",
-		"burstable_performance":              "BurstablePerformance",
-		"capacity_rebalance":                 "CapacityRebalance",
-		"capacity_reservation_options":       "CapacityReservationOptions",
-		"context":                            "Context",
-		"cpu":                                "Cpu",
-		"cpu_manufacturers":                  "CpuManufacturers",
-		"default_target_capacity_type":       "DefaultTargetCapacityType",
-		"delete_on_termination":              "DeleteOnTermination",
-		"description":                        "Description",
-		"device_index":                       "DeviceIndex",
-		"device_name":                        "DeviceName",
-		"ebs":                                "Ebs",
-		"encrypted":                          "Encrypted",
-		"excess_capacity_termination_policy": "ExcessCapacityTerminationPolicy",
-		"excluded_instance_types":            "ExcludedInstanceTypes",
-		"fleet_id":                           "FleetId",
-		"group_name":                         "GroupName",
-		"groups":                             "Groups",
-		"host_id":                            "HostId",
-		"host_resource_group_arn":            "HostResourceGroupArn",
-		"http_endpoint":                      "HttpEndpoint",
-		"http_put_response_hop_limit":        "HttpPutResponseHopLimit",
-		"http_tokens":                        "HttpTokens",
-		"iam_instance_profile":               "IamInstanceProfile",
-		"instance_family":                    "InstanceFamily",
-		"instance_generations":               "InstanceGenerations",
-		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
-		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
-		"instance_requirements":              "InstanceRequirements",
-		"instance_type":                      "InstanceType",
-		"interface_type":                     "InterfaceType",
-		"iops":                               "Iops",
-		"ipv_6_address":                      "Ipv6Address",
-		"ipv_6_address_count":                "Ipv6AddressCount",
-		"ipv_6_addresses":                    "Ipv6Addresses",
-		"key":                                "Key",
-		"key_name":                           "KeyName",
-		"kms_key_id":                         "KmsKeyId",
-		"launch_template_configs":            "LaunchTemplateConfigs",
-		"launch_template_id":                 "LaunchTemplateId",
-		"launch_template_name":               "LaunchTemplateName",
-		"launch_template_specification":      "LaunchTemplateSpecification",
-		"launch_template_specification_user_data": "LaunchTemplateSpecificationUserData",
-		"local_storage":          "LocalStorage",
-		"local_storage_types":    "LocalStorageTypes",
-		"maintenance_strategies": "MaintenanceStrategies",
-		"max":                    "Max",
-		"max_price":              "MaxPrice",
+		"accelerator_count":                        "AcceleratorCount",
+		"accelerator_manufacturers":                "AcceleratorManufacturers",
+		"accelerator_names":                        "AcceleratorNames",
+		"accelerator_total_memory_mi_b":            "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                        "AcceleratorTypes",
+		"affinity":                                 "Affinity",
+		"allocation_strategy":                      "AllocationStrategy",
+		"allowed_instance_types":                   "AllowedInstanceTypes",
+		"arn":                                      "Arn",
+		"associate_public_ip_address":              "AssociatePublicIpAddress",
+		"availability_zone":                        "AvailabilityZone",
+		"availability_zone_id":                     "AvailabilityZoneId",
+		"bare_metal":                               "BareMetal",
+		"baseline_ebs_bandwidth_mbps":              "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":             "BaselinePerformanceFactors",
+		"block_device_mappings":                    "BlockDeviceMappings",
+		"burstable_performance":                    "BurstablePerformance",
+		"capacity_rebalance":                       "CapacityRebalance",
+		"capacity_reservation_ids":                 "CapacityReservationIds",
+		"capacity_reservation_options":             "CapacityReservationOptions",
+		"capacity_reservation_resource_group_arns": "CapacityReservationResourceGroupArns",
+		"capacity_reservation_target":              "CapacityReservationTarget",
+		"context":                                  "Context",
+		"cpu":                                      "Cpu",
+		"cpu_manufacturers":                        "CpuManufacturers",
+		"default_target_capacity_type":             "DefaultTargetCapacityType",
+		"delete_on_termination":                    "DeleteOnTermination",
+		"description":                              "Description",
+		"device_index":                             "DeviceIndex",
+		"device_name":                              "DeviceName",
+		"ebs":                                      "Ebs",
+		"encrypted":                                "Encrypted",
+		"excess_capacity_termination_policy":       "ExcessCapacityTerminationPolicy",
+		"excluded_instance_types":                  "ExcludedInstanceTypes",
+		"fleet_id":                                 "FleetId",
+		"group_name":                               "GroupName",
+		"groups":                                   "Groups",
+		"host_id":                                  "HostId",
+		"host_resource_group_arn":                  "HostResourceGroupArn",
+		"http_endpoint":                            "HttpEndpoint",
+		"http_put_response_hop_limit":              "HttpPutResponseHopLimit",
+		"http_tokens":                              "HttpTokens",
+		"iam_instance_profile":                     "IamInstanceProfile",
+		"instance_family":                          "InstanceFamily",
+		"instance_generations":                     "InstanceGenerations",
+		"instance_interruption_behavior":           "InstanceInterruptionBehavior",
+		"instance_pools_to_use_count":              "InstancePoolsToUseCount",
+		"instance_requirements":                    "InstanceRequirements",
+		"instance_type":                            "InstanceType",
+		"interface_type":                           "InterfaceType",
+		"iops":                                     "Iops",
+		"ipv_6_address":                            "Ipv6Address",
+		"ipv_6_address_count":                      "Ipv6AddressCount",
+		"ipv_6_addresses":                          "Ipv6Addresses",
+		"key":                                      "Key",
+		"key_name":                                 "KeyName",
+		"kms_key_id":                               "KmsKeyId",
+		"launch_template_configs":                  "LaunchTemplateConfigs",
+		"launch_template_id":                       "LaunchTemplateId",
+		"launch_template_name":                     "LaunchTemplateName",
+		"launch_template_specification":            "LaunchTemplateSpecification",
+		"launch_template_specification_user_data":  "LaunchTemplateSpecificationUserData",
+		"local_storage":                            "LocalStorage",
+		"local_storage_types":                      "LocalStorageTypes",
+		"maintenance_strategies":                   "MaintenanceStrategies",
+		"market_types":                             "MarketTypes",
+		"max":                                      "Max",
+		"max_price":                                "MaxPrice",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
 		"max_total_price":         "MaxTotalPrice",
 		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",
@@ -2547,6 +2672,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"require_encryption_in_transit":               "RequireEncryptionInTransit",
 		"require_hibernate_support":                   "RequireHibernateSupport",
 		"reservation_types":                           "ReservationTypes",
+		"reserved_capacity_fallback_options":          "ReservedCapacityFallbackOptions",
 		"reserved_capacity_options":                   "ReservedCapacityOptions",
 		"resource_type":                               "ResourceType",
 		"secondary_private_ip_address_count":          "SecondaryPrivateIpAddressCount",

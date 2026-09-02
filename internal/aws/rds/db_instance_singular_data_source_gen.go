@@ -46,6 +46,14 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.",
 		//	        "type": "integer"
 		//	      },
+		//	      "StorageOperationPercentProgress": {
+		//	        "description": "",
+		//	        "type": "integer"
+		//	      },
+		//	      "StorageOperationStatus": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
 		//	      "StorageThroughput": {
 		//	        "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type.",
 		//	        "type": "integer"
@@ -79,6 +87,16 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: MaxAllocatedStorage
 					"max_allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StorageOperationPercentProgress
+					"storage_operation_percent_progress": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StorageOperationStatus
+					"storage_operation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StorageThroughput
@@ -1343,6 +1361,28 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``SourceDBInstanceAutomatedBackupsArn`` property, don't specify this property. The value is inherited from the source DB instance automated backup. \n If you specify ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the snapshot.\n  *Amazon Aurora* \n Not applicable. The encryption for DB instances is managed by the DB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StorageOperationPercentProgress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "integer"
+		//	}
+		"storage_operation_percent_progress": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StorageOperationStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"storage_operation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageThroughput
 		// CloudFormation resource type schema:
 		//
@@ -1604,6 +1644,8 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status_infos":                                  "StatusInfos",
 		"status_type":                                   "StatusType",
 		"storage_encrypted":                             "StorageEncrypted",
+		"storage_operation_percent_progress":            "StorageOperationPercentProgress",
+		"storage_operation_status":                      "StorageOperationStatus",
 		"storage_throughput":                            "StorageThroughput",
 		"storage_type":                                  "StorageType",
 		"tags":                                          "Tags",

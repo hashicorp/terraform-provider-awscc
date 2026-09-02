@@ -51,8 +51,10 @@ Read-Only:
 - `less_than_or_equal` (Number)
 - `lt` (Number)
 - `lte` (Number)
+- `matches` (List of String)
 - `neq` (List of String)
 - `not_equals` (List of String)
+- `not_matches` (List of String)
 
 
 

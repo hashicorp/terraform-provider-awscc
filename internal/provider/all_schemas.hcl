@@ -365,6 +365,11 @@ resource_schema "aws_appconfig_experiment_definition" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appconfig_experiment_run" {
+  cloudformation_type_name               = "AWS::AppConfig::ExperimentRun"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appconfig_extension" {
   cloudformation_type_name = "AWS::AppConfig::Extension"
 }
@@ -1082,6 +1087,10 @@ resource_schema "aws_chime_channel_flow" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_chime_media_pipeline_kinesis_video_stream_pool" {
+  cloudformation_type_name = "AWS::Chime::MediaPipelineKinesisVideoStreamPool"
+}
+
 resource_schema "aws_cleanrooms_analysis_template" {
   cloudformation_type_name               = "AWS::CleanRooms::AnalysisTemplate"
   suppress_plural_data_source_generation = true
@@ -1365,6 +1374,10 @@ resource_schema "aws_codeartifact_repository" {
 
 resource_schema "aws_codebuild_fleet" {
   cloudformation_type_name = "AWS::CodeBuild::Fleet"
+}
+
+resource_schema "aws_codebuild_report_group" {
+  cloudformation_type_name = "AWS::CodeBuild::ReportGroup"
 }
 
 resource_schema "aws_codebuild_source_credential" {
@@ -2374,6 +2387,10 @@ resource_schema "aws_ec2_ip_pool_route_table_association" {
   cloudformation_type_name = "AWS::EC2::IpPoolRouteTableAssociation"
 }
 
+resource_schema "aws_ec2_ipam_external_resource_verification_token" {
+  cloudformation_type_name = "AWS::EC2::IpamExternalResourceVerificationToken"
+}
+
 resource_schema "aws_ec2_key_pair" {
   cloudformation_type_name = "AWS::EC2::KeyPair"
 }
@@ -3138,6 +3155,10 @@ resource_schema "aws_fsx_data_repository_association" {
 
 resource_schema "aws_fsx_s3_access_point_attachment" {
   cloudformation_type_name = "AWS::FSx::S3AccessPointAttachment"
+}
+
+resource_schema "aws_fsx_volume" {
+  cloudformation_type_name = "AWS::FSx::Volume"
 }
 
 resource_schema "aws_finspace_environment" {
@@ -5167,6 +5188,10 @@ resource_schema "aws_pipes_pipe" {
   cloudformation_type_name = "AWS::Pipes::Pipe"
 }
 
+resource_schema "aws_pricingplanmanager_subscription" {
+  cloudformation_type_name = "AWS::PricingPlanManager::Subscription"
+}
+
 resource_schema "aws_proton_environment_account_connection" {
   cloudformation_type_name = "AWS::Proton::EnvironmentAccountConnection"
 }
@@ -6208,8 +6233,8 @@ resource_schema "aws_sagemaker_artifact" {
 }
 
 resource_schema "aws_sagemaker_cluster" {
-  cloudformation_type_name    = "AWS::SageMaker::Cluster"
-  path_aware_attribute_names  = true
+  cloudformation_type_name   = "AWS::SageMaker::Cluster"
+  path_aware_attribute_names = true
 }
 
 resource_schema "aws_sagemaker_context" {
@@ -6236,6 +6261,10 @@ resource_schema "aws_sagemaker_domain" {
 
 resource_schema "aws_sagemaker_endpoint" {
   cloudformation_type_name = "AWS::SageMaker::Endpoint"
+}
+
+resource_schema "aws_sagemaker_endpoint_config" {
+  cloudformation_type_name = "AWS::SageMaker::EndpointConfig"
 }
 
 resource_schema "aws_sagemaker_experiment" {

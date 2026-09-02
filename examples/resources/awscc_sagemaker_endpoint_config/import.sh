@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_endpoint_config.example "endpoint_config_arn"

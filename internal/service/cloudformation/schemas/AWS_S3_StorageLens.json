@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-s3-storagelens",
   "tagging": {
     "permissions": [
       "s3:PutStorageLensConfigurationTagging",
@@ -12,6 +11,22 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
+  "typeName": "AWS::S3::StorageLens",
+  "readOnlyProperties": [
+    "/properties/StorageLensConfiguration/StorageLensArn"
+  ],
+  "description": "The AWS::S3::StorageLens resource is an Amazon S3 resource type that you can use to create Storage Lens configurations.",
+  "createOnlyProperties": [
+    "/properties/StorageLensConfiguration/Id"
+  ],
+  "$comment": "This schema must be kept in sync with its regional contract-test template: aws-s3-storagelens/templates/{region.region_name}_schema.json.erb. Any property change here must be mirrored there (and vice versa).",
+  "primaryIdentifier": [
+    "/properties/StorageLensConfiguration/Id"
+  ],
+  "required": [
+    "StorageLensConfiguration"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-s3-storagelens",
   "handlers": {
     "read": {
       "permissions": [
@@ -61,18 +76,7 @@
       ]
     }
   },
-  "typeName": "AWS::S3::StorageLens",
-  "readOnlyProperties": [
-    "/properties/StorageLensConfiguration/StorageLensArn"
-  ],
-  "description": "The AWS::S3::StorageLens resource is an Amazon S3 resource type that you can use to create Storage Lens configurations.",
-  "createOnlyProperties": [
-    "/properties/StorageLensConfiguration/Id"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/StorageLensConfiguration/Id"
-  ],
   "definitions": {
     "PrefixLevel": {
       "description": "Prefix-level metrics configurations.",
@@ -544,8 +548,5 @@
         "$ref": "#/definitions/Tag"
       }
     }
-  },
-  "required": [
-    "StorageLensConfiguration"
-  ]
+  }
 }
