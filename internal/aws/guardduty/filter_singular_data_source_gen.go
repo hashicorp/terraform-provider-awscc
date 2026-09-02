@@ -106,6 +106,13 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Lte": {
 		//	              "type": "integer"
 		//	            },
+		//	            "Matches": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
 		//	            "Neq": {
 		//	              "items": {
 		//	                "type": "string"
@@ -114,6 +121,13 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "uniqueItems": false
 		//	            },
 		//	            "NotEquals": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "NotMatches": {
 		//	              "items": {
 		//	                "type": "string"
 		//	              },
@@ -178,6 +192,11 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"lte": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: Matches
+							"matches": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Neq
 							"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -185,6 +204,11 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: NotEquals
 							"not_equals": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NotMatches
+							"not_matches": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -292,9 +316,11 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"less_than_or_equal":    "LessThanOrEqual",
 		"lt":                    "Lt",
 		"lte":                   "Lte",
+		"matches":               "Matches",
 		"name":                  "Name",
 		"neq":                   "Neq",
 		"not_equals":            "NotEquals",
+		"not_matches":           "NotMatches",
 		"rank":                  "Rank",
 		"tags":                  "Tags",
 		"value":                 "Value",
