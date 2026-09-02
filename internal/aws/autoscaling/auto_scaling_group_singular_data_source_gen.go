@@ -677,6 +677,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            "description": "",
 		//	            "properties": {
 		//	              "TargetCapacityTypes": {
+		//	                "description": "",
 		//	                "insertionOrder": true,
 		//	                "items": {
 		//	                  "enum": [
@@ -1103,6 +1104,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 									// Property: TargetCapacityTypes
 									"target_capacity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
+										Description: "",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/

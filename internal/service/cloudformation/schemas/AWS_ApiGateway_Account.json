@@ -25,7 +25,7 @@
     },
     "delete": {
       "permissions": [
-        "apigateway:PATCH"
+        "apigateway:GET"
       ]
     }
   },

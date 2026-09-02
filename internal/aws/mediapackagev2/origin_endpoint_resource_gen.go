@@ -2895,6 +2895,29 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StreamNameOutputMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "INDEX",
+		//	    "PASSTHROUGH_NAME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"stream_name_output_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"INDEX",
+					"PASSTHROUGH_NAME",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3082,6 +3105,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"start":                                 "Start",
 		"start_tag":                             "StartTag",
 		"startover_window_seconds":              "StartoverWindowSeconds",
+		"stream_name_output_mode":               "StreamNameOutputMode",
 		"subtitle_configuration":                "SubtitleConfiguration",
 		"suggested_presentation_delay_seconds":  "SuggestedPresentationDelaySeconds",
 		"tags":                                  "Tags",

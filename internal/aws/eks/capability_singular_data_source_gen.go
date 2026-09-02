@@ -8,7 +8,6 @@ package eks
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -68,7 +67,25 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity Center integration, RBAC role mappings, and network access settings.",
 		//	  "properties": {
-		//	    "Ack": {},
+		//	    "Ack": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration settings for an ACK (AWS Controllers for Kubernetes) capability.",
+		//	      "properties": {
+		//	        "DisabledServices": {
+		//	          "description": "A list of ACK service names to disable. Controllers for services in this list are not installed or managed.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "EnableCrossNamespace": {
+		//	          "description": "Whether cross-namespace references are enabled for ACK controllers. When not specified, the service default applies.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ArgoCd": {
 		//	      "additionalProperties": false,
 		//	      "description": "Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration.",
@@ -183,9 +200,22 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Ack
-				"ack": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Computed:   true,
+				"ack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DisabledServices
+						"disabled_services": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of ACK service names to disable. Controllers for services in this list are not installed or managed.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableCrossNamespace
+						"enable_cross_namespace": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether cross-namespace references are enabled for ACK controllers. When not specified, the service default applies.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for an ACK (AWS Controllers for Kubernetes) capability.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ArgoCd
 				"argo_cd": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -438,6 +468,8 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"configuration":               "Configuration",
 		"created_at":                  "CreatedAt",
 		"delete_propagation_policy":   "DeletePropagationPolicy",
+		"disabled_services":           "DisabledServices",
+		"enable_cross_namespace":      "EnableCrossNamespace",
 		"id":                          "Id",
 		"idc_instance_arn":            "IdcInstanceArn",
 		"idc_managed_application_arn": "IdcManagedApplicationArn",

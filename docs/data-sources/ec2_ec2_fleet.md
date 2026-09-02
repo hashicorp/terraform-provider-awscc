@@ -338,7 +338,27 @@ Read-Only:
 
 Read-Only:
 
+- `allocation_strategy` (String)
+- `capacity_reservation_target` (Attributes) (see [below for nested schema](#nestedatt--reserved_capacity_options--capacity_reservation_target))
 - `reservation_types` (List of String)
+- `reserved_capacity_fallback_options` (Attributes) (see [below for nested schema](#nestedatt--reserved_capacity_options--reserved_capacity_fallback_options))
+
+<a id="nestedatt--reserved_capacity_options--capacity_reservation_target"></a>
+### Nested Schema for `reserved_capacity_options.capacity_reservation_target`
+
+Read-Only:
+
+- `capacity_reservation_ids` (List of String)
+- `capacity_reservation_resource_group_arns` (List of String)
+
+
+<a id="nestedatt--reserved_capacity_options--reserved_capacity_fallback_options"></a>
+### Nested Schema for `reserved_capacity_options.reserved_capacity_fallback_options`
+
+Read-Only:
+
+- `market_types` (List of String)
+
 
 
 <a id="nestedatt--spot_options"></a>

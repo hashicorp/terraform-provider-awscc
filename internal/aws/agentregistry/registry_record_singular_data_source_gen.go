@@ -870,14 +870,14 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the registry containing the record.",
-		//	  "maxLength": 16,
-		//	  "minLength": 12,
-		//	  "pattern": "^[a-zA-Z0-9]{12,16}$",
+		//	  "description": "The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/)?[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
 		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the registry containing the record.",
+			Description: "The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status

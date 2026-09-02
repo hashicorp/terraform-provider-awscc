@@ -1,0 +1,168 @@
+{
+  "typeName": "AWS::Chime::MediaPipelineKinesisVideoStreamPool",
+  "description": "Resource Type definition for an Amazon Chime SDK Media Pipeline Kinesis Video Stream Pool",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the Kinesis Video Stream Pool.",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$"
+    },
+    "PoolId": {
+      "type": "string",
+      "description": "The unique identifier of the Kinesis Video Stream Pool.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[0-9a-zA-Z._-]+$"
+    },
+    "PoolName": {
+      "type": "string",
+      "description": "The name of the Kinesis Video Stream Pool.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[0-9a-zA-Z._-]+$"
+    },
+    "PoolStatus": {
+      "type": "string",
+      "description": "The status of the Kinesis Video Stream Pool.",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "StreamConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for the Kinesis video stream.",
+      "properties": {
+        "Region": {
+          "type": "string",
+          "description": "The AWS Region of the video stream.",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^([a-z]+-){2,}\\d+$"
+        },
+        "DataRetentionInHours": {
+          "type": "integer",
+          "description": "The amount of time that data is retained, in hours.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "Region"
+      ],
+      "additionalProperties": false
+    },
+    "CreatedTimestamp": {
+      "type": "string",
+      "description": "The time at which the Kinesis Video Stream Pool was created.",
+      "format": "date-time"
+    },
+    "UpdatedTimestamp": {
+      "type": "string",
+      "description": "The time at which the Kinesis Video Stream Pool was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the Kinesis Video Stream Pool.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "PoolName",
+    "StreamConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/PoolId",
+    "/properties/PoolStatus",
+    "/properties/CreatedTimestamp",
+    "/properties/UpdatedTimestamp"
+  ],
+  "createOnlyProperties": [
+    "/properties/PoolName",
+    "/properties/StreamConfiguration/Region"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PoolName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "chime:TagResource",
+      "chime:UntagResource",
+      "chime:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "chime:CreateMediaPipelineKinesisVideoStreamPool",
+        "chime:GetMediaPipelineKinesisVideoStreamPool",
+        "chime:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "chime:GetMediaPipelineKinesisVideoStreamPool",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "chime:UpdateMediaPipelineKinesisVideoStreamPool",
+        "chime:GetMediaPipelineKinesisVideoStreamPool",
+        "chime:TagResource",
+        "chime:UntagResource",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "chime:DeleteMediaPipelineKinesisVideoStreamPool",
+        "chime:GetMediaPipelineKinesisVideoStreamPool"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "chime:ListMediaPipelineKinesisVideoStreamPools"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -248,7 +248,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "A resource schema representing a Lake Formation Data Cells Filter.",
+		Description: "Resource Type definition for AWS::LakeFormation::DataCellsFilter",
 		Version:     1,
 		Attributes:  attributes,
 	}

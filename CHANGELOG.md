@@ -1,8 +1,37 @@
-## 1.100.0 (Unreleased)
+## 1.100.0 (September 2, 2026)
 
 NOTES:
 
 * provider: The client level handing for `ThrottlingException` has been reverted while keeping the retry for the `cloudcontrol` waiter. This is being tracked in an [upstream Go SDK issue](https://github.com/aws/aws-sdk-go-v2/issues/3248). Once this addressed upstream, the provider retry handling will be reverted ([#3298](https://github.com/hashicorp/terraform-provider-awscc/pull/3298))
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_experiment_run`
+* **New Data Source:** `awscc_chime_media_pipeline_kinesis_video_stream_pool`
+* **New Data Source:** `awscc_chime_media_pipeline_kinesis_video_stream_pools`
+* **New Data Source:** `awscc_codebuild_report_group`
+* **New Data Source:** `awscc_codebuild_report_groups`
+* **New Data Source:** `awscc_ec2_ipam_external_resource_verification_token`
+* **New Data Source:** `awscc_ec2_ipam_external_resource_verification_tokens`
+* **New Data Source:** `awscc_fsx_volume`
+* **New Data Source:** `awscc_fsx_volumes`
+* **New Data Source:** `awscc_pricingplanmanager_subscription`
+* **New Data Source:** `awscc_pricingplanmanager_subscriptions`
+* **New Data Source:** `awscc_sagemaker_endpoint_config`
+* **New Data Source:** `awscc_sagemaker_endpoint_configs`
+* **New List Resource:** `awscc_chime_media_pipeline_kinesis_video_stream_pool`
+* **New List Resource:** `awscc_codebuild_report_group`
+* **New List Resource:** `awscc_ec2_ipam_external_resource_verification_token`
+* **New List Resource:** `awscc_fsx_volume`
+* **New List Resource:** `awscc_pricingplanmanager_subscription`
+* **New List Resource:** `awscc_sagemaker_endpoint_config`
+* **New Resource:** `awscc_appconfig_experiment_run`
+* **New Resource:** `awscc_chime_media_pipeline_kinesis_video_stream_pool`
+* **New Resource:** `awscc_codebuild_report_group`
+* **New Resource:** `awscc_ec2_ipam_external_resource_verification_token`
+* **New Resource:** `awscc_fsx_volume`
+* **New Resource:** `awscc_pricingplanmanager_subscription`
+* **New Resource:** `awscc_sagemaker_endpoint_config`
 
 ## 1.99.0 (August 28, 2026)
 

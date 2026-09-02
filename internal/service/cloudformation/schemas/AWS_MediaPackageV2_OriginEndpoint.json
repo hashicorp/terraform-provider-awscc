@@ -914,6 +914,13 @@
       ],
       "additionalProperties": false
     },
+    "StreamNameOutputMode": {
+      "type": "string",
+      "enum": [
+        "INDEX",
+        "PASSTHROUGH_NAME"
+      ]
+    },
     "TsEncryptionMethod": {
       "type": "string",
       "enum": [
@@ -1029,6 +1036,9 @@
       "maximum": 1209600,
       "minimum": 0,
       "description": "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>"
+    },
+    "StreamNameOutputMode": {
+      "$ref": "#/definitions/StreamNameOutputMode"
     },
     "UriSeparator": {
       "$ref": "#/definitions/UriSeparator"

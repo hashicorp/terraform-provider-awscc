@@ -304,6 +304,100 @@
       ],
       "additionalProperties": false
     },
+    "OutputColumnThreshold": {
+      "type": "object",
+      "properties": {
+        "OutputColumnName": {
+          "$ref": "#/definitions/AnalysisRuleColumnName"
+        },
+        "MinimumIdentityCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
+        }
+      },
+      "required": [
+        "OutputColumnName",
+        "MinimumIdentityCount"
+      ],
+      "additionalProperties": false
+    },
+    "AggregationThresholdType": {
+      "type": "string",
+      "enum": [
+        "COUNT_DISTINCT"
+      ]
+    },
+    "AllowedAggregateExpressionType": {
+      "type": "string",
+      "enum": [
+        "COLUMNS_ONLY",
+        "ANY_EXPRESSION"
+      ]
+    },
+    "AggregationThreshold": {
+      "type": "object",
+      "properties": {
+        "IdentityColumns": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AnalysisRuleColumnName"
+          },
+          "maxItems": 1,
+          "minItems": 1
+        },
+        "MinimumIdentityCount": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 100000
+        },
+        "Type": {
+          "$ref": "#/definitions/AggregationThresholdType"
+        },
+        "OutputColumnThresholds": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/OutputColumnThreshold"
+          }
+        },
+        "AllowedAggregateExpressionType": {
+          "$ref": "#/definitions/AllowedAggregateExpressionType"
+        }
+      },
+      "required": [
+        "IdentityColumns",
+        "MinimumIdentityCount",
+        "Type",
+        "AllowedAggregateExpressionType"
+      ],
+      "additionalProperties": false
+    },
+    "ComparisonControls": {
+      "type": "object",
+      "properties": {
+        "AllowedLiteralComparisonColumns": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AnalysisRuleColumnName"
+          }
+        },
+        "AllowedColumnComparisonColumns": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AnalysisRuleColumnName"
+          }
+        }
+      },
+      "required": [
+        "AllowedLiteralComparisonColumns",
+        "AllowedColumnComparisonColumns"
+      ],
+      "additionalProperties": false
+    },
     "AnalysisRuleCustom": {
       "type": "object",
       "properties": {
@@ -321,6 +415,18 @@
         },
         "AdditionalAnalyses": {
           "$ref": "#/definitions/AdditionalAnalyses"
+        },
+        "AggregationThresholds": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AggregationThreshold"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "ComparisonControls": {
+          "$ref": "#/definitions/ComparisonControls"
         }
       },
       "required": [

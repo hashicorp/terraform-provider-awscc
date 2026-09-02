@@ -240,6 +240,79 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
+		//	                  "AggregationThresholds": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AllowedAggregateExpressionType": {
+		//	                          "enum": [
+		//	                            "COLUMNS_ONLY",
+		//	                            "ANY_EXPRESSION"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "IdentityColumns": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "maxLength": 127,
+		//	                            "minLength": 1,
+		//	                            "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        },
+		//	                        "MinimumIdentityCount": {
+		//	                          "maximum": 100000,
+		//	                          "minimum": 2,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "OutputColumnThresholds": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "MinimumIdentityCount": {
+		//	                                "maximum": 100000,
+		//	                                "minimum": 0,
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "OutputColumnName": {
+		//	                                "maxLength": 127,
+		//	                                "minLength": 1,
+		//	                                "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "OutputColumnName",
+		//	                              "MinimumIdentityCount"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
+		//	                        },
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "COUNT_DISTINCT"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "IdentityColumns",
+		//	                        "MinimumIdentityCount",
+		//	                        "Type",
+		//	                        "AllowedAggregateExpressionType"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 1,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "AllowedAnalyses": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -261,6 +334,36 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                    },
 		//	                    "minItems": 0,
 		//	                    "type": "array"
+		//	                  },
+		//	                  "ComparisonControls": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AllowedColumnComparisonColumns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "maxLength": 127,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "AllowedLiteralComparisonColumns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "maxLength": 127,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AllowedLiteralComparisonColumns",
+		//	                      "AllowedColumnComparisonColumns"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "DifferentialPrivacy": {
 		//	                    "additionalProperties": false,
@@ -471,6 +574,47 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 											"additional_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: AggregationThresholds
+											"aggregation_thresholds": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowedAggregateExpressionType
+														"allowed_aggregate_expression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: IdentityColumns
+														"identity_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MinimumIdentityCount
+														"minimum_identity_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: OutputColumnThresholds
+														"output_column_thresholds": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MinimumIdentityCount
+																	"minimum_identity_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: OutputColumnName
+																	"output_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -480,6 +624,22 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ComparisonControls
+											"comparison_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AllowedColumnComparisonColumns
+													"allowed_column_comparison_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: AllowedLiteralComparisonColumns
+													"allowed_literal_comparison_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 											// Property: DifferentialPrivacy
 											"differential_privacy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -976,56 +1136,65 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::ConfiguredTable").WithTerraformTypeName("awscc_cleanrooms_configured_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_identifier":          "AccountIdentifier",
-		"additional_analyses":         "AdditionalAnalyses",
-		"aggregate_columns":           "AggregateColumns",
-		"aggregation":                 "Aggregation",
-		"allowed_analyses":            "AllowedAnalyses",
-		"allowed_analysis_providers":  "AllowedAnalysisProviders",
-		"allowed_columns":             "AllowedColumns",
-		"allowed_join_operators":      "AllowedJoinOperators",
-		"analysis_method":             "AnalysisMethod",
-		"analysis_rules":              "AnalysisRules",
-		"arn":                         "Arn",
-		"athena":                      "Athena",
-		"catalog_name":                "CatalogName",
-		"column_name":                 "ColumnName",
-		"column_names":                "ColumnNames",
-		"column_type":                 "ColumnType",
-		"columns":                     "Columns",
-		"configured_table_identifier": "ConfiguredTableIdentifier",
-		"custom":                      "Custom",
-		"database_name":               "DatabaseName",
-		"description":                 "Description",
-		"differential_privacy":        "DifferentialPrivacy",
-		"dimension_columns":           "DimensionColumns",
-		"disallowed_output_columns":   "DisallowedOutputColumns",
-		"function":                    "Function",
-		"glue":                        "Glue",
-		"join_columns":                "JoinColumns",
-		"join_required":               "JoinRequired",
-		"key":                         "Key",
-		"list":                        "List",
-		"list_columns":                "ListColumns",
-		"minimum":                     "Minimum",
-		"name":                        "Name",
-		"output_constraints":          "OutputConstraints",
-		"output_location":             "OutputLocation",
-		"policy":                      "Policy",
-		"region":                      "Region",
-		"scalar_functions":            "ScalarFunctions",
-		"schema_name":                 "SchemaName",
-		"secret_arn":                  "SecretArn",
-		"selected_analysis_methods":   "SelectedAnalysisMethods",
-		"snowflake":                   "Snowflake",
-		"table_name":                  "TableName",
-		"table_reference":             "TableReference",
-		"table_schema":                "TableSchema",
-		"tags":                        "Tags",
-		"type":                        "Type",
-		"v1":                          "V1",
-		"value":                       "Value",
-		"work_group":                  "WorkGroup",
+		"account_identifier":                 "AccountIdentifier",
+		"additional_analyses":                "AdditionalAnalyses",
+		"aggregate_columns":                  "AggregateColumns",
+		"aggregation":                        "Aggregation",
+		"aggregation_thresholds":             "AggregationThresholds",
+		"allowed_aggregate_expression_type":  "AllowedAggregateExpressionType",
+		"allowed_analyses":                   "AllowedAnalyses",
+		"allowed_analysis_providers":         "AllowedAnalysisProviders",
+		"allowed_column_comparison_columns":  "AllowedColumnComparisonColumns",
+		"allowed_columns":                    "AllowedColumns",
+		"allowed_join_operators":             "AllowedJoinOperators",
+		"allowed_literal_comparison_columns": "AllowedLiteralComparisonColumns",
+		"analysis_method":                    "AnalysisMethod",
+		"analysis_rules":                     "AnalysisRules",
+		"arn":                                "Arn",
+		"athena":                             "Athena",
+		"catalog_name":                       "CatalogName",
+		"column_name":                        "ColumnName",
+		"column_names":                       "ColumnNames",
+		"column_type":                        "ColumnType",
+		"columns":                            "Columns",
+		"comparison_controls":                "ComparisonControls",
+		"configured_table_identifier":        "ConfiguredTableIdentifier",
+		"custom":                             "Custom",
+		"database_name":                      "DatabaseName",
+		"description":                        "Description",
+		"differential_privacy":               "DifferentialPrivacy",
+		"dimension_columns":                  "DimensionColumns",
+		"disallowed_output_columns":          "DisallowedOutputColumns",
+		"function":                           "Function",
+		"glue":                               "Glue",
+		"identity_columns":                   "IdentityColumns",
+		"join_columns":                       "JoinColumns",
+		"join_required":                      "JoinRequired",
+		"key":                                "Key",
+		"list":                               "List",
+		"list_columns":                       "ListColumns",
+		"minimum":                            "Minimum",
+		"minimum_identity_count":             "MinimumIdentityCount",
+		"name":                               "Name",
+		"output_column_name":                 "OutputColumnName",
+		"output_column_thresholds":           "OutputColumnThresholds",
+		"output_constraints":                 "OutputConstraints",
+		"output_location":                    "OutputLocation",
+		"policy":                             "Policy",
+		"region":                             "Region",
+		"scalar_functions":                   "ScalarFunctions",
+		"schema_name":                        "SchemaName",
+		"secret_arn":                         "SecretArn",
+		"selected_analysis_methods":          "SelectedAnalysisMethods",
+		"snowflake":                          "Snowflake",
+		"table_name":                         "TableName",
+		"table_reference":                    "TableReference",
+		"table_schema":                       "TableSchema",
+		"tags":                               "Tags",
+		"type":                               "Type",
+		"v1":                                 "V1",
+		"value":                              "Value",
+		"work_group":                         "WorkGroup",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

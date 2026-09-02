@@ -1887,6 +1887,19 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StreamNameOutputMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "INDEX",
+		//	    "PASSTHROUGH_NAME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"stream_name_output_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2039,6 +2052,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"start":                                 "Start",
 		"start_tag":                             "StartTag",
 		"startover_window_seconds":              "StartoverWindowSeconds",
+		"stream_name_output_mode":               "StreamNameOutputMode",
 		"subtitle_configuration":                "SubtitleConfiguration",
 		"suggested_presentation_delay_seconds":  "SuggestedPresentationDelaySeconds",
 		"tags":                                  "Tags",

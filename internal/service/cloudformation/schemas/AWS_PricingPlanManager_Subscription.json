@@ -1,0 +1,140 @@
+{
+  "typeName": "AWS::PricingPlanManager::Subscription",
+  "description": "Resource type definition for AWS::PricingPlanManager::Subscription. Deleting an activated subscription does not terminate it immediately; it schedules a cancellation that takes effect at the end of the current billing period. Until that date the subscription remains active and billing continues. Deleting a subscription that has not yet been activated (PENDING_APPROVAL status) removes it immediately with no further charges.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-pricingplanmanager",
+  "definitions": {
+    "UsageLevel": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "CF_PREMIUM_L2",
+        "CF_PREMIUM_L3",
+        "CF_PREMIUM_L4",
+        "CF_PREMIUM_L5",
+        "CF_PREMIUM_L6",
+        "CF_PREMIUM_L7"
+      ]
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the subscription."
+    },
+    "PlanFamily": {
+      "type": "string",
+      "enum": [
+        "CloudFront"
+      ],
+      "description": "The name of the pricing plan family."
+    },
+    "PlanTier": {
+      "type": "string",
+      "description": "The tier of the pricing plan. Upgrades take effect immediately. However, rolling back an upgrade does not revert billing instantly; it schedules a downgrade to the end of the current billing period, and the higher-tier charge applies for the remainder of that month. While a downgrade is scheduled, the CurrentPlanTier property reports the tier currently being billed."
+    },
+    "UsageLevel": {
+      "$ref": "#/definitions/UsageLevel"
+    },
+    "ResourceArns": {
+      "type": "array",
+      "description": "The ARNs of resources associated with the subscription.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 10
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the subscription. PENDING_APPROVAL means a paid-tier subscription has been created but is not yet active and incurs no charges until it is approved out of band via a separate ApprovePaidSubscription call; CloudFormation never approves it. Free-tier subscriptions are activated immediately and do not use this status. ACTIVE means the subscription is in effect and, for paid tiers, billing has started. SYNC_IN_PROGRESS means a change is being applied. FAILED means provisioning did not complete; see StatusReason.",
+      "enum": [
+        "ACTIVE",
+        "SYNC_IN_PROGRESS",
+        "FAILED",
+        "PENDING_APPROVAL"
+      ]
+    },
+    "StatusReason": {
+      "type": "string",
+      "description": "A human-readable explanation of why the subscription is in its current status. Populated only when Status is FAILED, where it carries the reason the subscription could not be provisioned. Empty for all other statuses."
+    },
+    "CurrentPlanTier": {
+      "type": "string",
+      "description": "The plan tier currently active on the subscription as reported by the API. Populated by the Read handler. Diverges from PlanTier after a non-reversible CloudFormation rollback; surface via drift detection."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The time the subscription was created, in ISO 8601 format.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The time the subscription was last modified, in ISO 8601 format.",
+      "format": "date-time"
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "required": [
+    "PlanFamily",
+    "PlanTier",
+    "ResourceArns"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CurrentPlanTier",
+    "/properties/Status",
+    "/properties/StatusReason",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/PlanFamily"
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "pricingplanmanager:CreateSubscription",
+        "pricingplanmanager:GetSubscription",
+        "pricingplanmanager:ListSubscriptions",
+        "pricingplanmanager:CancelSubscriptionChange",
+        "cloudwatch:GetMetricData",
+        "shield:ListProtections"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "pricingplanmanager:GetSubscription"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "pricingplanmanager:UpdateSubscription",
+        "pricingplanmanager:GetSubscription",
+        "pricingplanmanager:CancelSubscriptionChange",
+        "pricingplanmanager:AssociateResourcesToSubscription",
+        "pricingplanmanager:DisassociateResourcesFromSubscription",
+        "cloudwatch:GetMetricData",
+        "shield:ListProtections"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "pricingplanmanager:CancelSubscription",
+        "pricingplanmanager:CancelSubscriptionChange",
+        "pricingplanmanager:GetSubscription"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "pricingplanmanager:ListSubscriptions"
+      ]
+    }
+  }
+}

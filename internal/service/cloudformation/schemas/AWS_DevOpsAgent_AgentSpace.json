@@ -184,6 +184,7 @@
         "aidevops:CreateAgentSpace",
         "aidevops:GetAgentSpace",
         "aidevops:EnableOperatorApp",
+        "aidevops:GetOperatorApp",
         "aidevops:GetOperatorAppTeams",
         "aidevops:TagResource",
         "aidevops:ListTagsForResource",
@@ -214,6 +215,7 @@
     "read": {
       "permissions": [
         "aidevops:GetAgentSpace",
+        "aidevops:GetOperatorApp",
         "aidevops:GetOperatorAppTeams",
         "aidevops:ListTagsForResource",
         "kms:Decrypt"
@@ -225,6 +227,7 @@
         "aidevops:GetAgentSpace",
         "aidevops:EnableOperatorApp",
         "aidevops:DisableOperatorApp",
+        "aidevops:GetOperatorApp",
         "aidevops:GetOperatorAppTeams",
         "aidevops:TagResource",
         "aidevops:UntagResource",

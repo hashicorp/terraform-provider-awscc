@@ -127,6 +127,20 @@
           "items": {
             "type": "string"
           }
+        },
+        "Matches": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "NotMatches": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -40,6 +40,7 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 - `origin_endpoint_name` (String)
 - `segment` (Attributes) <p>The segment configuration, including the segment name, duration, and other configuration values.</p> (see [below for nested schema](#nestedatt--segment))
 - `startover_window_seconds` (Number) <p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>
+- `stream_name_output_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `uri_separator` (String)
 

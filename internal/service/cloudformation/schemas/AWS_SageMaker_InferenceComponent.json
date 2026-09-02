@@ -23,6 +23,9 @@
     "Specification": {
       "$ref": "#/definitions/InferenceComponentSpecification"
     },
+    "Specifications": {
+      "$ref": "#/definitions/InferenceComponentSpecificationList"
+    },
     "RuntimeConfig": {
       "$ref": "#/definitions/InferenceComponentRuntimeConfig"
     },
@@ -43,8 +46,19 @@
     }
   },
   "required": [
-    "EndpointName",
-    "Specification"
+    "EndpointName"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "Specification"
+      ]
+    },
+    {
+      "required": [
+        "Specifications"
+      ]
+    }
   ],
   "additionalProperties": false,
   "definitions": {
@@ -148,6 +162,28 @@
         },
         "Environment": {
           "$ref": "#/definitions/EnvironmentMap"
+        },
+        "ContainerMetricsConfig": {
+          "$ref": "#/definitions/ContainerMetricsConfig"
+        }
+      }
+    },
+    "InferenceComponentContainerSpecificationForInstanceType": {
+      "description": "Container specification for one Specifications entry. Distinct from InferenceComponentContainerSpecification: DescribeInferenceComponent returns no per-entry DeployedImage (VERIFIED in us-west-2), so DeployedImage is intentionally omitted here and this definition can never be aggregated into a plural READ response. The singular InferenceComponentContainerSpecification keeps DeployedImage - the service DOES return it there.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Image": {
+          "$ref": "#/definitions/ContainerImage"
+        },
+        "ArtifactUrl": {
+          "$ref": "#/definitions/Url"
+        },
+        "Environment": {
+          "$ref": "#/definitions/EnvironmentMap"
+        },
+        "ContainerMetricsConfig": {
+          "$ref": "#/definitions/ContainerMetricsConfig"
         }
       }
     },
@@ -207,7 +243,7 @@
       }
     },
     "InferenceComponentSpecification": {
-      "description": "The specification for the inference component",
+      "description": "The specification for the inference component, for an endpoint with a single instance type. Specify exactly one of Specification or Specifications. InstanceType is not accepted here; use Specifications for per instance type configuration.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -225,7 +261,62 @@
         },
         "ComputeResourceRequirements": {
           "$ref": "#/definitions/InferenceComponentComputeResourceRequirements"
+        },
+        "DataCacheConfig": {
+          "$ref": "#/definitions/InferenceComponentDataCacheConfig"
+        },
+        "CurrentDataCacheConfig": {
+          "description": "The data caching configuration actually in effect, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead.",
+          "$ref": "#/definitions/InferenceComponentDataCacheConfig"
+        },
+        "SchedulingConfig": {
+          "$ref": "#/definitions/InferenceComponentSchedulingConfig"
         }
+      }
+    },
+    "InferenceComponentSpecificationForInstanceType": {
+      "description": "A specification for one instance type, for use in Specifications. InstanceType is required here, and is not accepted on the singular Specification. BaseInferenceComponentName is not accepted here either: adapter inference components are supported only on the singular Specification.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InstanceType": {
+          "$ref": "#/definitions/InstanceType"
+        },
+        "ModelName": {
+          "$ref": "#/definitions/ModelName"
+        },
+        "Container": {
+          "$ref": "#/definitions/InferenceComponentContainerSpecificationForInstanceType"
+        },
+        "StartupParameters": {
+          "$ref": "#/definitions/InferenceComponentStartupParameters"
+        },
+        "ComputeResourceRequirements": {
+          "$ref": "#/definitions/InferenceComponentComputeResourceRequirements"
+        },
+        "DataCacheConfig": {
+          "$ref": "#/definitions/InferenceComponentDataCacheConfig"
+        },
+        "CurrentDataCacheConfig": {
+          "description": "The data caching configuration actually in effect for this instance type, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead.",
+          "$ref": "#/definitions/InferenceComponentDataCacheConfig"
+        },
+        "SchedulingConfig": {
+          "$ref": "#/definitions/InferenceComponentSchedulingConfig"
+        }
+      },
+      "required": [
+        "InstanceType"
+      ]
+    },
+    "InferenceComponentSpecificationList": {
+      "description": "A list of specification objects for the inference component, one per instance type. The service requires at least two entries; use the singular Specification for a single instance type.",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InferenceComponentSpecificationForInstanceType"
       }
     },
     "InferenceComponentCopyCount": {
@@ -246,6 +337,14 @@
         },
         "CurrentCopyCount": {
           "$ref": "#/definitions/InferenceComponentCopyCount"
+        },
+        "PlacementStatus": {
+          "description": "The placement status of the inference component across instance types",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/InferenceComponentPlacementStatus"
+          }
         }
       }
     },
@@ -361,6 +460,133 @@
         "Deleting"
       ]
     },
+    "InstanceType": {
+      "description": "An ML compute instance type",
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^ml\\..*"
+    },
+    "InferenceComponentDataCacheConfig": {
+      "description": "Settings that affect how the inference component caches data",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EnableCaching": {
+          "description": "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "EnableCaching"
+      ]
+    },
+    "InferenceComponentPlacementStrategy": {
+      "type": "string",
+      "enum": [
+        "SPREAD",
+        "BINPACK"
+      ]
+    },
+    "AvailabilityZoneBalanceEnforcementMode": {
+      "type": "string",
+      "enum": [
+        "PERMISSIVE"
+      ]
+    },
+    "InferenceComponentAvailabilityZoneBalance": {
+      "description": "Configuration for balancing inference component copies across Availability Zones",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EnforcementMode": {
+          "$ref": "#/definitions/AvailabilityZoneBalanceEnforcementMode"
+        },
+        "MaxImbalance": {
+          "description": "The maximum allowed difference in the number of inference component copies between any two Availability Zones",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "EnforcementMode"
+      ]
+    },
+    "InferenceComponentSchedulingConfig": {
+      "description": "The scheduling configuration that determines how inference component copies are placed across available instances",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PlacementStrategy": {
+          "$ref": "#/definitions/InferenceComponentPlacementStrategy"
+        },
+        "AvailabilityZoneBalance": {
+          "$ref": "#/definitions/InferenceComponentAvailabilityZoneBalance"
+        }
+      },
+      "required": [
+        "PlacementStrategy",
+        "AvailabilityZoneBalance"
+      ]
+    },
+    "MetricsEndpoint": {
+      "description": "A metrics endpoint exposed by the container",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricsEndpointPath": {
+          "description": "The path to the Prometheus formatted metrics endpoint exposed by the container",
+          "type": "string",
+          "maxLength": 256,
+          "pattern": ""
+        },
+        "MetricPublishFrequencyInSeconds": {
+          "description": "The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.",
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 300
+        }
+      },
+      "required": [
+        "MetricsEndpointPath"
+      ]
+    },
+    "ContainerMetricsConfig": {
+      "description": "The configuration for container metrics scraping",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricsEndpoints": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/MetricsEndpoint"
+          }
+        }
+      },
+      "required": [
+        "MetricsEndpoints"
+      ]
+    },
+    "InferenceComponentPlacementStatus": {
+      "description": "The number of inference component copies currently placed on instances of a given type",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InstanceType": {
+          "$ref": "#/definitions/InstanceType"
+        },
+        "CurrentCopyCount": {
+          "$ref": "#/definitions/InferenceComponentCopyCount"
+        }
+      },
+      "required": [
+        "InstanceType",
+        "CurrentCopyCount"
+      ]
+    },
     "Tag": {
       "description": "A tag in the form of a key-value pair to associate with the resource",
       "type": "object",
@@ -452,8 +678,11 @@
   "readOnlyProperties": [
     "/properties/InferenceComponentArn",
     "/properties/Specification/Container/DeployedImage",
+    "/properties/Specification/CurrentDataCacheConfig",
+    "/properties/Specifications/*/CurrentDataCacheConfig",
     "/properties/RuntimeConfig/DesiredCopyCount",
     "/properties/RuntimeConfig/CurrentCopyCount",
+    "/properties/RuntimeConfig/PlacementStatus",
     "/properties/CreationTime",
     "/properties/LastModifiedTime",
     "/properties/FailureReason",
@@ -461,6 +690,9 @@
   ],
   "writeOnlyProperties": [
     "/properties/Specification/Container/Image",
+    "/properties/Specifications/*/Container/Image",
+    "/properties/Specification/DataCacheConfig",
+    "/properties/Specifications/*/DataCacheConfig",
     "/properties/RuntimeConfig/CopyCount",
     "/properties/DeploymentConfig"
   ]

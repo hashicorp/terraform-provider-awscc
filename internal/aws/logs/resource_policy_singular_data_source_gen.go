@@ -27,7 +27,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The policy document",
-		//	  "maxLength": 5120,
+		//	  "maxLength": 51200,
 		//	  "minLength": 1,
 		//	  "pattern": "",
 		//	  "type": "string"

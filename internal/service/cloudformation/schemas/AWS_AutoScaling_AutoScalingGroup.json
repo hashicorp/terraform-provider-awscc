@@ -866,6 +866,7 @@
         "TargetCapacityTypes": {
           "minItems": 1,
           "uniqueItems": true,
+          "description": "",
           "insertionOrder": true,
           "type": "array",
           "items": {

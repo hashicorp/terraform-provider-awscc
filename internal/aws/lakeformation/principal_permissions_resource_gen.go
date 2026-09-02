@@ -38,7 +38,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "The identifier for the GLUDC. By default, the account ID. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
-		//	  "maxLength": 12,
+		//	  "maxLength": 255,
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
@@ -47,12 +47,13 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.LengthBetween(12, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// Catalog is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
@@ -223,6 +224,13 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    "Catalog": {
 		//	      "additionalProperties": false,
 		//	      "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
+		//	      "properties": {
+		//	        "Id": {
+		//	          "maxLength": 255,
+		//	          "minLength": 12,
+		//	          "type": "string"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "DataCellsFilter": {
@@ -243,7 +251,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	        },
 		//	        "TableCatalogId": {
 		//	          "description": "The ID of the catalog to which the table belongs.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -268,7 +276,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "properties": {
 		//	        "CatalogId": {
 		//	          "description": "The identifier for the GLUDC where the location is registered with LFlong.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -289,7 +297,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "properties": {
 		//	        "CatalogId": {
 		//	          "description": "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -312,7 +320,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "properties": {
 		//	        "CatalogId": {
 		//	          "description": "The identifier for the GLUDC where the location is registered with GLUDC.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -348,7 +356,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "properties": {
 		//	        "CatalogId": {
 		//	          "description": "The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -406,7 +414,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "properties": {
 		//	        "CatalogId": {
 		//	          "description": "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -440,7 +448,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "properties": {
 		//	        "CatalogId": {
 		//	          "description": "The identifier for the GLUDC where the location is registered with LFlong.",
-		//	          "maxLength": 12,
+		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
@@ -497,13 +505,25 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		"resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Catalog
-				"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
+				"catalog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DataCellsFilter
@@ -541,7 +561,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -578,7 +598,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -614,7 +634,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -651,7 +671,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -706,7 +726,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -793,7 +813,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -852,7 +872,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1000,6 +1020,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		"database_name":                  "DatabaseName",
 		"excluded_column_names":          "ExcludedColumnNames",
 		"expression":                     "Expression",
+		"id":                             "Id",
 		"lf_tag":                         "LFTag",
 		"lf_tag_policy":                  "LFTagPolicy",
 		"name":                           "Name",
@@ -1020,6 +1041,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		"tag_values":                     "TagValues",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Catalog",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

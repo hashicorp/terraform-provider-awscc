@@ -255,7 +255,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "An array of key-value pairs to associate with the service.",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with the service.",

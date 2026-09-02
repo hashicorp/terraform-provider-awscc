@@ -1,0 +1,206 @@
+{
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appconfig.git",
+  "tagging": {
+    "permissions": [
+      "appconfig:TagResource",
+      "appconfig:UntagResource",
+      "appconfig:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "appconfig:GetExperimentRun",
+        "appconfig:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "appconfig:StartExperimentRun",
+        "appconfig:GetExperimentRun",
+        "appconfig:StartDeployment",
+        "appconfig:TagResource",
+        "appconfig:ListTagsForResource",
+        "kms:GenerateDataKey"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "update": {
+      "permissions": [
+        "appconfig:UpdateExperimentRun",
+        "appconfig:GetExperimentRun",
+        "appconfig:StartDeployment",
+        "appconfig:TagResource",
+        "appconfig:UntagResource",
+        "appconfig:ListTagsForResource",
+        "kms:GenerateDataKey"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "list": {
+      "permissions": [
+        "appconfig:ListExperimentRuns"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ExperimentDefinitionId": {
+            "$ref": "resource-schema.json#/properties/ExperimentDefinitionId"
+          },
+          "ApplicationId": {
+            "$ref": "resource-schema.json#/properties/ApplicationId"
+          }
+        },
+        "required": [
+          "ApplicationId",
+          "ExperimentDefinitionId"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "appconfig:StopExperimentRun",
+        "appconfig:GetExperimentRun",
+        "appconfig:StartDeployment",
+        "kms:GenerateDataKey"
+      ]
+    }
+  },
+  "typeName": "AWS::AppConfig::ExperimentRun",
+  "readOnlyProperties": [
+    "/properties/ApplicationId",
+    "/properties/ExperimentDefinitionId",
+    "/properties/Run",
+    "/properties/Status",
+    "/properties/StartedAt",
+    "/properties/UpdatedAt"
+  ],
+  "description": "Resource Type definition for AWS::AppConfig::ExperimentRun",
+  "createOnlyProperties": [
+    "/properties/ApplicationIdentifier",
+    "/properties/ExperimentDefinitionIdentifier"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/ApplicationId",
+    "/properties/ExperimentDefinitionId",
+    "/properties/Run"
+  ],
+  "definitions": {
+    "TreatmentOverrides": {
+      "description": "Treatment overrides for specific entities.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Inline": {
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "description": "Map of entity ID to treatment key (t1, t2, ..., or c for control).",
+          "additionalProperties": false,
+          "type": "object"
+        }
+      }
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "description": "The tag value.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The tag key.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "ExperimentDefinitionId": {
+      "pattern": "[a-z0-9]{4,7}",
+      "description": "The resolved experiment definition ID.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Current status of the run.",
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "DONE"
+      ]
+    },
+    "Description": {
+      "description": "Description of the experiment run.",
+      "type": "string",
+      "maxLength": 1024
+    },
+    "TreatmentOverrides": {
+      "$ref": "#/definitions/TreatmentOverrides"
+    },
+    "Run": {
+      "description": "The run number (auto-assigned by the service).",
+      "type": "string"
+    },
+    "StartedAt": {
+      "description": "ISO-8601 timestamp when the run started.",
+      "type": "string"
+    },
+    "ApplicationIdentifier": {
+      "minLength": 1,
+      "description": "The application name or ID used to create the experiment run.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "ApplicationId": {
+      "pattern": "[a-z0-9]{4,7}",
+      "description": "The resolved application ID.",
+      "type": "string"
+    },
+    "ExperimentDefinitionIdentifier": {
+      "minLength": 1,
+      "description": "The experiment definition name or ID used to create the experiment run.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "UpdatedAt": {
+      "description": "ISO-8601 timestamp when the run was last updated.",
+      "type": "string"
+    },
+    "ExposurePercentage": {
+      "description": "Percentage of traffic exposed to the experiment (0-100).",
+      "maximum": 100,
+      "type": "number",
+      "minimum": 0
+    },
+    "Tags": {
+      "uniqueItems": true,
+      "description": "Tags to associate with the experiment run.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "ApplicationIdentifier",
+    "ExperimentDefinitionIdentifier",
+    "ExposurePercentage"
+  ]
+}

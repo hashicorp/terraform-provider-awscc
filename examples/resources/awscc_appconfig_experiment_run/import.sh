@@ -1,0 +1,1 @@
+$ terraform import awscc_appconfig_experiment_run.example "application_id|experiment_definition_id|run"

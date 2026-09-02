@@ -33,6 +33,7 @@ Resource Type definition for AWS::BedrockAgentCore::GatewayRule
 - `id` (String) Uniquely identifies the resource.
 - `rule_id` (String)
 - `status` (String)
+- `system` (Attributes) (see [below for nested schema](#nestedatt--system))
 - `updated_at` (String)
 
 <a id="nestedatt--actions"></a>
@@ -165,6 +166,17 @@ Optional:
 
 - `arn` (String)
 - `operator` (String)
+
+
+
+
+
+<a id="nestedatt--system"></a>
+### Nested Schema for `system`
+
+Read-Only:
+
+- `managed_by` (String)
 
 ## Import
 

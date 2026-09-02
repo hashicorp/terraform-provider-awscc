@@ -313,6 +313,33 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "description": "The number of copies for the inference component",
 		//	      "minimum": 0,
 		//	      "type": "integer"
+		//	    },
+		//	    "PlacementStatus": {
+		//	      "description": "The placement status of the inference component across instance types",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The number of inference component copies currently placed on instances of a given type",
+		//	        "properties": {
+		//	          "CurrentCopyCount": {
+		//	            "description": "The number of copies for the inference component",
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          },
+		//	          "InstanceType": {
+		//	            "description": "An ML compute instance type",
+		//	            "maxLength": 64,
+		//	            "pattern": "^ml\\..*",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "InstanceType",
+		//	          "CurrentCopyCount"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -334,6 +361,25 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 					Description: "The number of copies for the inference component",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: PlacementStatus
+				"placement_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CurrentCopyCount
+							"current_copy_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of copies for the inference component",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InstanceType
+							"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An ML compute instance type",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The placement status of the inference component across instance types",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The runtime config for the inference component",
 			Computed:    true,
@@ -343,7 +389,7 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The specification for the inference component",
+		//	  "description": "The specification for the inference component, for an endpoint with a single instance type. Specify exactly one of Specification or Specifications. InstanceType is not accepted here; use Specifications for per instance type configuration.",
 		//	  "properties": {
 		//	    "BaseInferenceComponentName": {
 		//	      "description": "The name of the base inference component",
@@ -382,6 +428,44 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "maxLength": 1024,
 		//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 		//	          "type": "string"
+		//	        },
+		//	        "ContainerMetricsConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration for container metrics scraping",
+		//	          "properties": {
+		//	            "MetricsEndpoints": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "A metrics endpoint exposed by the container",
+		//	                "properties": {
+		//	                  "MetricPublishFrequencyInSeconds": {
+		//	                    "description": "The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.",
+		//	                    "maximum": 300,
+		//	                    "minimum": 10,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MetricsEndpointPath": {
+		//	                    "description": "The path to the Prometheus formatted metrics endpoint exposed by the container",
+		//	                    "maxLength": 256,
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MetricsEndpointPath"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 1,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricsEndpoints"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "DeployedImage": {
 		//	          "additionalProperties": false,
@@ -426,11 +510,79 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "CurrentDataCacheConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The data caching configuration actually in effect, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead.",
+		//	      "properties": {
+		//	        "EnableCaching": {
+		//	          "description": "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EnableCaching"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DataCacheConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Settings that affect how the inference component caches data",
+		//	      "properties": {
+		//	        "EnableCaching": {
+		//	          "description": "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EnableCaching"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ModelName": {
 		//	      "description": "The name of the model to use with the inference component",
 		//	      "maxLength": 63,
 		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	      "type": "string"
+		//	    },
+		//	    "SchedulingConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The scheduling configuration that determines how inference component copies are placed across available instances",
+		//	      "properties": {
+		//	        "AvailabilityZoneBalance": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for balancing inference component copies across Availability Zones",
+		//	          "properties": {
+		//	            "EnforcementMode": {
+		//	              "enum": [
+		//	                "PERMISSIVE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "MaxImbalance": {
+		//	              "description": "The maximum allowed difference in the number of inference component copies between any two Availability Zones",
+		//	              "maximum": 100,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EnforcementMode"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PlacementStrategy": {
+		//	          "enum": [
+		//	            "SPREAD",
+		//	            "BINPACK"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PlacementStrategy",
+		//	        "AvailabilityZoneBalance"
+		//	      ],
+		//	      "type": "object"
 		//	    },
 		//	    "StartupParameters": {
 		//	      "additionalProperties": false,
@@ -489,6 +641,31 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 						"artifact_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: ContainerMetricsConfig
+						"container_metrics_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricsEndpoints
+								"metrics_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MetricPublishFrequencyInSeconds
+											"metric_publish_frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MetricsEndpointPath
+											"metrics_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The path to the Prometheus formatted metrics endpoint exposed by the container",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration for container metrics scraping",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: DeployedImage
 						"deployed_image": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -526,9 +703,60 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: CurrentDataCacheConfig
+				"current_data_cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableCaching
+						"enable_caching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The data caching configuration actually in effect, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataCacheConfig
+				"data_cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableCaching
+						"enable_caching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings that affect how the inference component caches data",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ModelName
 				"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the model to use with the inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SchedulingConfig
+				"scheduling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AvailabilityZoneBalance
+						"availability_zone_balance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnforcementMode
+								"enforcement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxImbalance
+								"max_imbalance": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum allowed difference in the number of inference component copies between any two Availability Zones",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for balancing inference component copies across Availability Zones",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PlacementStrategy
+						"placement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The scheduling configuration that determines how inference component copies are placed across available instances",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StartupParameters
@@ -547,7 +775,370 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The specification for the inference component",
+			Description: "The specification for the inference component, for an endpoint with a single instance type. Specify exactly one of Specification or Specifications. InstanceType is not accepted here; use Specifications for per instance type configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Specifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of specification objects for the inference component, one per instance type. The service requires at least two entries; use the singular Specification for a single instance type.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A specification for one instance type, for use in Specifications. InstanceType is required here, and is not accepted on the singular Specification. BaseInferenceComponentName is not accepted here either: adapter inference components are supported only on the singular Specification.",
+		//	    "properties": {
+		//	      "ComputeResourceRequirements": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "MaxMemoryRequiredInMb": {
+		//	            "minimum": 128,
+		//	            "type": "integer"
+		//	          },
+		//	          "MinMemoryRequiredInMb": {
+		//	            "minimum": 128,
+		//	            "type": "integer"
+		//	          },
+		//	          "NumberOfAcceleratorDevicesRequired": {
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          },
+		//	          "NumberOfCpuCoresRequired": {
+		//	            "minimum": 0.25,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Container": {
+		//	        "additionalProperties": false,
+		//	        "description": "Container specification for one Specifications entry. Distinct from InferenceComponentContainerSpecification: DescribeInferenceComponent returns no per-entry DeployedImage (VERIFIED in us-west-2), so DeployedImage is intentionally omitted here and this definition can never be aggregated into a plural READ response. The singular InferenceComponentContainerSpecification keeps DeployedImage - the service DOES return it there.",
+		//	        "properties": {
+		//	          "ArtifactUrl": {
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          },
+		//	          "ContainerMetricsConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "The configuration for container metrics scraping",
+		//	            "properties": {
+		//	              "MetricsEndpoints": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A metrics endpoint exposed by the container",
+		//	                  "properties": {
+		//	                    "MetricPublishFrequencyInSeconds": {
+		//	                      "description": "The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.",
+		//	                      "maximum": 300,
+		//	                      "minimum": 10,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "MetricsEndpointPath": {
+		//	                      "description": "The path to the Prometheus formatted metrics endpoint exposed by the container",
+		//	                      "maxLength": 256,
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "MetricsEndpointPath"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricsEndpoints"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Environment": {
+		//	            "additionalProperties": false,
+		//	            "description": "Environment variables to specify on the container",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "maxLength": 1024,
+		//	                "pattern": "^[\\S\\s]*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Image": {
+		//	            "description": "The image to use for the container that will be materialized for the inference component",
+		//	            "maxLength": 255,
+		//	            "pattern": "[\\S]+",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "CurrentDataCacheConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "The data caching configuration actually in effect for this instance type, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead.",
+		//	        "properties": {
+		//	          "EnableCaching": {
+		//	            "description": "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "EnableCaching"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "DataCacheConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Settings that affect how the inference component caches data",
+		//	        "properties": {
+		//	          "EnableCaching": {
+		//	            "description": "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "EnableCaching"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "InstanceType": {
+		//	        "description": "An ML compute instance type",
+		//	        "maxLength": 64,
+		//	        "pattern": "^ml\\..*",
+		//	        "type": "string"
+		//	      },
+		//	      "ModelName": {
+		//	        "description": "The name of the model to use with the inference component",
+		//	        "maxLength": 63,
+		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	        "type": "string"
+		//	      },
+		//	      "SchedulingConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "The scheduling configuration that determines how inference component copies are placed across available instances",
+		//	        "properties": {
+		//	          "AvailabilityZoneBalance": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for balancing inference component copies across Availability Zones",
+		//	            "properties": {
+		//	              "EnforcementMode": {
+		//	                "enum": [
+		//	                  "PERMISSIVE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "MaxImbalance": {
+		//	                "description": "The maximum allowed difference in the number of inference component copies between any two Availability Zones",
+		//	                "maximum": 100,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "EnforcementMode"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PlacementStrategy": {
+		//	            "enum": [
+		//	              "SPREAD",
+		//	              "BINPACK"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PlacementStrategy",
+		//	          "AvailabilityZoneBalance"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "StartupParameters": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "ContainerStartupHealthCheckTimeoutInSeconds": {
+		//	            "maximum": 3600,
+		//	            "minimum": 60,
+		//	            "type": "integer"
+		//	          },
+		//	          "ModelDataDownloadTimeoutInSeconds": {
+		//	            "maximum": 3600,
+		//	            "minimum": 60,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "InstanceType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 2,
+		//	  "type": "array"
+		//	}
+		"specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComputeResourceRequirements
+					"compute_resource_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxMemoryRequiredInMb
+							"max_memory_required_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MinMemoryRequiredInMb
+							"min_memory_required_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NumberOfAcceleratorDevicesRequired
+							"number_of_accelerator_devices_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NumberOfCpuCoresRequired
+							"number_of_cpu_cores_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Container
+					"container": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ArtifactUrl
+							"artifact_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContainerMetricsConfig
+							"container_metrics_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricsEndpoints
+									"metrics_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: MetricPublishFrequencyInSeconds
+												"metric_publish_frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MetricsEndpointPath
+												"metrics_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The path to the Prometheus formatted metrics endpoint exposed by the container",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration for container metrics scraping",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Environment
+							"environment":       // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Environment variables to specify on the container",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Image
+							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The image to use for the container that will be materialized for the inference component",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Container specification for one Specifications entry. Distinct from InferenceComponentContainerSpecification: DescribeInferenceComponent returns no per-entry DeployedImage (VERIFIED in us-west-2), so DeployedImage is intentionally omitted here and this definition can never be aggregated into a plural READ response. The singular InferenceComponentContainerSpecification keeps DeployedImage - the service DOES return it there.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CurrentDataCacheConfig
+					"current_data_cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EnableCaching
+							"enable_caching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The data caching configuration actually in effect for this instance type, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataCacheConfig
+					"data_cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EnableCaching
+							"enable_caching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Settings that affect how the inference component caches data",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An ML compute instance type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ModelName
+					"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the model to use with the inference component",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SchedulingConfig
+					"scheduling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AvailabilityZoneBalance
+							"availability_zone_balance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnforcementMode
+									"enforcement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: MaxImbalance
+									"max_imbalance": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum allowed difference in the number of inference component copies between any two Availability Zones",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for balancing inference component copies across Availability Zones",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PlacementStrategy
+							"placement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The scheduling configuration that determines how inference component copies are placed across available instances",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartupParameters
+					"startup_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerStartupHealthCheckTimeoutInSeconds
+							"container_startup_health_check_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataDownloadTimeoutInSeconds
+							"model_data_download_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of specification objects for the inference component, one per instance type. The service requires at least two entries; use the singular Specification for a single instance type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -633,40 +1224,55 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		"alarms":                        "Alarms",
 		"artifact_url":                  "ArtifactUrl",
 		"auto_rollback_configuration":   "AutoRollbackConfiguration",
+		"availability_zone_balance":     "AvailabilityZoneBalance",
 		"base_inference_component_name": "BaseInferenceComponentName",
 		"compute_resource_requirements": "ComputeResourceRequirements",
 		"container":                     "Container",
+		"container_metrics_config":      "ContainerMetricsConfig",
 		"container_startup_health_check_timeout_in_seconds": "ContainerStartupHealthCheckTimeoutInSeconds",
 		"copy_count":                             "CopyCount",
 		"creation_time":                          "CreationTime",
 		"current_copy_count":                     "CurrentCopyCount",
+		"current_data_cache_config":              "CurrentDataCacheConfig",
+		"data_cache_config":                      "DataCacheConfig",
 		"deployed_image":                         "DeployedImage",
 		"deployment_config":                      "DeploymentConfig",
 		"desired_copy_count":                     "DesiredCopyCount",
+		"enable_caching":                         "EnableCaching",
 		"endpoint_arn":                           "EndpointArn",
 		"endpoint_name":                          "EndpointName",
+		"enforcement_mode":                       "EnforcementMode",
 		"environment":                            "Environment",
 		"failure_reason":                         "FailureReason",
 		"image":                                  "Image",
 		"inference_component_arn":                "InferenceComponentArn",
 		"inference_component_name":               "InferenceComponentName",
 		"inference_component_status":             "InferenceComponentStatus",
+		"instance_type":                          "InstanceType",
 		"key":                                    "Key",
 		"last_modified_time":                     "LastModifiedTime",
+		"max_imbalance":                          "MaxImbalance",
 		"max_memory_required_in_mb":              "MaxMemoryRequiredInMb",
 		"maximum_batch_size":                     "MaximumBatchSize",
 		"maximum_execution_timeout_in_seconds":   "MaximumExecutionTimeoutInSeconds",
+		"metric_publish_frequency_in_seconds":    "MetricPublishFrequencyInSeconds",
+		"metrics_endpoint_path":                  "MetricsEndpointPath",
+		"metrics_endpoints":                      "MetricsEndpoints",
 		"min_memory_required_in_mb":              "MinMemoryRequiredInMb",
 		"model_data_download_timeout_in_seconds": "ModelDataDownloadTimeoutInSeconds",
 		"model_name":                             "ModelName",
 		"number_of_accelerator_devices_required": "NumberOfAcceleratorDevicesRequired",
 		"number_of_cpu_cores_required":           "NumberOfCpuCoresRequired",
+		"placement_status":                       "PlacementStatus",
+		"placement_strategy":                     "PlacementStrategy",
 		"resolution_time":                        "ResolutionTime",
 		"resolved_image":                         "ResolvedImage",
 		"rollback_maximum_batch_size":            "RollbackMaximumBatchSize",
 		"rolling_update_policy":                  "RollingUpdatePolicy",
 		"runtime_config":                         "RuntimeConfig",
+		"scheduling_config":                      "SchedulingConfig",
 		"specification":                          "Specification",
+		"specifications":                         "Specifications",
 		"specified_image":                        "SpecifiedImage",
 		"startup_parameters":                     "StartupParameters",
 		"tags":                                   "Tags",

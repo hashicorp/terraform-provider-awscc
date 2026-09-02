@@ -300,6 +300,10 @@
         "identifier": ["ApplicationId","Id"]
     },
     {
+        "resource": "awscc_appconfig_experiment_run",
+        "identifier": ["ApplicationId","ExperimentDefinitionId","Run"]
+    },
+    {
         "resource": "awscc_appconfig_extension",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -1048,6 +1052,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_chime_media_pipeline_kinesis_video_stream_pool",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_cleanrooms_analysis_template",
         "identifier": ["AnalysisTemplateIdentifier","MembershipIdentifier"]
     },
@@ -1343,6 +1352,11 @@
     },
     {
         "resource": "awscc_codebuild_fleet",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_codebuild_report_group",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
@@ -2326,6 +2340,11 @@
         "identifier": ["AssociationId"]
     },
     {
+        "resource": "awscc_ec2_ipam_external_resource_verification_token",
+        "generateListResource": true,
+        "identifier": ["IpamExternalResourceVerificationTokenArn"]
+    },
+    {
         "resource": "awscc_ec2_key_pair",
         "generateListResource": true,
         "identifier": ["KeyName"]
@@ -3139,6 +3158,11 @@
         "resource": "awscc_fsx_s3_access_point_attachment",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_fsx_volume",
+        "generateListResource": true,
+        "identifier": ["VolumeId"]
     },
     {
         "resource": "awscc_finspace_environment",
@@ -5295,6 +5319,11 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_pricingplanmanager_subscription",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_proton_environment_account_connection",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -6425,6 +6454,11 @@
         "resource": "awscc_sagemaker_endpoint",
         "generateListResource": true,
         "identifier": ["EndpointArn"]
+    },
+    {
+        "resource": "awscc_sagemaker_endpoint_config",
+        "generateListResource": true,
+        "identifier": ["EndpointConfigArn"]
     },
     {
         "resource": "awscc_sagemaker_experiment",

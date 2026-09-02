@@ -83,11 +83,43 @@ Optional:
 Optional:
 
 - `additional_analyses` (String)
+- `aggregation_thresholds` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--aggregation_thresholds))
 - `allowed_analyses` (List of String)
 - `allowed_analysis_providers` (List of String)
 - `allowed_result_receivers` (List of String)
+- `comparison_controls` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--comparison_controls))
 - `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy))
 - `disallowed_output_columns` (List of String)
+
+<a id="nestedatt--analysis_rules--policy--v1--custom--aggregation_thresholds"></a>
+### Nested Schema for `analysis_rules.policy.v1.custom.aggregation_thresholds`
+
+Optional:
+
+- `allowed_aggregate_expression_type` (String)
+- `identity_columns` (List of String)
+- `minimum_identity_count` (Number)
+- `output_column_thresholds` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--aggregation_thresholds--output_column_thresholds))
+- `type` (String)
+
+<a id="nestedatt--analysis_rules--policy--v1--custom--aggregation_thresholds--output_column_thresholds"></a>
+### Nested Schema for `analysis_rules.policy.v1.custom.aggregation_thresholds.output_column_thresholds`
+
+Optional:
+
+- `minimum_identity_count` (Number)
+- `output_column_name` (String)
+
+
+
+<a id="nestedatt--analysis_rules--policy--v1--custom--comparison_controls"></a>
+### Nested Schema for `analysis_rules.policy.v1.custom.comparison_controls`
+
+Optional:
+
+- `allowed_column_comparison_columns` (List of String)
+- `allowed_literal_comparison_columns` (List of String)
+
 
 <a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy"></a>
 ### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy`

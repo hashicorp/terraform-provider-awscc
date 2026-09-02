@@ -10,11 +10,13 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -271,6 +273,79 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
+		//	                  "AggregationThresholds": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AllowedAggregateExpressionType": {
+		//	                          "enum": [
+		//	                            "COLUMNS_ONLY",
+		//	                            "ANY_EXPRESSION"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "IdentityColumns": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "maxLength": 127,
+		//	                            "minLength": 1,
+		//	                            "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        },
+		//	                        "MinimumIdentityCount": {
+		//	                          "maximum": 100000,
+		//	                          "minimum": 2,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "OutputColumnThresholds": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "MinimumIdentityCount": {
+		//	                                "maximum": 100000,
+		//	                                "minimum": 0,
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "OutputColumnName": {
+		//	                                "maxLength": 127,
+		//	                                "minLength": 1,
+		//	                                "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "OutputColumnName",
+		//	                              "MinimumIdentityCount"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
+		//	                        },
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "COUNT_DISTINCT"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "IdentityColumns",
+		//	                        "MinimumIdentityCount",
+		//	                        "Type",
+		//	                        "AllowedAggregateExpressionType"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 1,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "AllowedAnalyses": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -292,6 +367,36 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "minItems": 0,
 		//	                    "type": "array"
+		//	                  },
+		//	                  "ComparisonControls": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AllowedColumnComparisonColumns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "maxLength": 127,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "AllowedLiteralComparisonColumns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "maxLength": 127,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AllowedLiteralComparisonColumns",
+		//	                      "AllowedColumnComparisonColumns"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "DifferentialPrivacy": {
 		//	                    "additionalProperties": false,
@@ -683,6 +788,119 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													stringplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
+											// Property: AggregationThresholds
+											"aggregation_thresholds": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowedAggregateExpressionType
+														"allowed_aggregate_expression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"COLUMNS_ONLY",
+																	"ANY_EXPRESSION",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: IdentityColumns
+														"identity_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 1),
+																listvalidator.ValueStringsAre(
+																	stringvalidator.LengthBetween(1, 127),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
+																),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: MinimumIdentityCount
+														"minimum_identity_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.Int64{ /*START VALIDATORS*/
+																int64validator.Between(2, 100000),
+																fwvalidators.NotNullInt64(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: OutputColumnThresholds
+														"output_column_thresholds": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MinimumIdentityCount
+																	"minimum_identity_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.Int64{ /*START VALIDATORS*/
+																			int64validator.Between(0, 100000),
+																			fwvalidators.NotNullInt64(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: OutputColumnName
+																	"output_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 127),
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"COUNT_DISTINCT",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeBetween(1, 1),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -716,6 +934,50 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													generic.Multiset(),
 													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ComparisonControls
+											"comparison_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AllowedColumnComparisonColumns
+													"allowed_column_comparison_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.ValueStringsAre(
+																stringvalidator.LengthBetween(1, 127),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
+															),
+															fwvalidators.NotNullList(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: AllowedLiteralComparisonColumns
+													"allowed_literal_comparison_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.ValueStringsAre(
+																stringvalidator.LengthBetween(1, 127),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
+															),
+															fwvalidators.NotNullList(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: DifferentialPrivacy
@@ -1617,56 +1879,65 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_identifier":          "AccountIdentifier",
-		"additional_analyses":         "AdditionalAnalyses",
-		"aggregate_columns":           "AggregateColumns",
-		"aggregation":                 "Aggregation",
-		"allowed_analyses":            "AllowedAnalyses",
-		"allowed_analysis_providers":  "AllowedAnalysisProviders",
-		"allowed_columns":             "AllowedColumns",
-		"allowed_join_operators":      "AllowedJoinOperators",
-		"analysis_method":             "AnalysisMethod",
-		"analysis_rules":              "AnalysisRules",
-		"arn":                         "Arn",
-		"athena":                      "Athena",
-		"catalog_name":                "CatalogName",
-		"column_name":                 "ColumnName",
-		"column_names":                "ColumnNames",
-		"column_type":                 "ColumnType",
-		"columns":                     "Columns",
-		"configured_table_identifier": "ConfiguredTableIdentifier",
-		"custom":                      "Custom",
-		"database_name":               "DatabaseName",
-		"description":                 "Description",
-		"differential_privacy":        "DifferentialPrivacy",
-		"dimension_columns":           "DimensionColumns",
-		"disallowed_output_columns":   "DisallowedOutputColumns",
-		"function":                    "Function",
-		"glue":                        "Glue",
-		"join_columns":                "JoinColumns",
-		"join_required":               "JoinRequired",
-		"key":                         "Key",
-		"list":                        "List",
-		"list_columns":                "ListColumns",
-		"minimum":                     "Minimum",
-		"name":                        "Name",
-		"output_constraints":          "OutputConstraints",
-		"output_location":             "OutputLocation",
-		"policy":                      "Policy",
-		"region":                      "Region",
-		"scalar_functions":            "ScalarFunctions",
-		"schema_name":                 "SchemaName",
-		"secret_arn":                  "SecretArn",
-		"selected_analysis_methods":   "SelectedAnalysisMethods",
-		"snowflake":                   "Snowflake",
-		"table_name":                  "TableName",
-		"table_reference":             "TableReference",
-		"table_schema":                "TableSchema",
-		"tags":                        "Tags",
-		"type":                        "Type",
-		"v1":                          "V1",
-		"value":                       "Value",
-		"work_group":                  "WorkGroup",
+		"account_identifier":                 "AccountIdentifier",
+		"additional_analyses":                "AdditionalAnalyses",
+		"aggregate_columns":                  "AggregateColumns",
+		"aggregation":                        "Aggregation",
+		"aggregation_thresholds":             "AggregationThresholds",
+		"allowed_aggregate_expression_type":  "AllowedAggregateExpressionType",
+		"allowed_analyses":                   "AllowedAnalyses",
+		"allowed_analysis_providers":         "AllowedAnalysisProviders",
+		"allowed_column_comparison_columns":  "AllowedColumnComparisonColumns",
+		"allowed_columns":                    "AllowedColumns",
+		"allowed_join_operators":             "AllowedJoinOperators",
+		"allowed_literal_comparison_columns": "AllowedLiteralComparisonColumns",
+		"analysis_method":                    "AnalysisMethod",
+		"analysis_rules":                     "AnalysisRules",
+		"arn":                                "Arn",
+		"athena":                             "Athena",
+		"catalog_name":                       "CatalogName",
+		"column_name":                        "ColumnName",
+		"column_names":                       "ColumnNames",
+		"column_type":                        "ColumnType",
+		"columns":                            "Columns",
+		"comparison_controls":                "ComparisonControls",
+		"configured_table_identifier":        "ConfiguredTableIdentifier",
+		"custom":                             "Custom",
+		"database_name":                      "DatabaseName",
+		"description":                        "Description",
+		"differential_privacy":               "DifferentialPrivacy",
+		"dimension_columns":                  "DimensionColumns",
+		"disallowed_output_columns":          "DisallowedOutputColumns",
+		"function":                           "Function",
+		"glue":                               "Glue",
+		"identity_columns":                   "IdentityColumns",
+		"join_columns":                       "JoinColumns",
+		"join_required":                      "JoinRequired",
+		"key":                                "Key",
+		"list":                               "List",
+		"list_columns":                       "ListColumns",
+		"minimum":                            "Minimum",
+		"minimum_identity_count":             "MinimumIdentityCount",
+		"name":                               "Name",
+		"output_column_name":                 "OutputColumnName",
+		"output_column_thresholds":           "OutputColumnThresholds",
+		"output_constraints":                 "OutputConstraints",
+		"output_location":                    "OutputLocation",
+		"policy":                             "Policy",
+		"region":                             "Region",
+		"scalar_functions":                   "ScalarFunctions",
+		"schema_name":                        "SchemaName",
+		"secret_arn":                         "SecretArn",
+		"selected_analysis_methods":          "SelectedAnalysisMethods",
+		"snowflake":                          "Snowflake",
+		"table_name":                         "TableName",
+		"table_reference":                    "TableReference",
+		"table_schema":                       "TableSchema",
+		"tags":                               "Tags",
+		"type":                               "Type",
+		"v1":                                 "V1",
+		"value":                              "Value",
+		"work_group":                         "WorkGroup",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

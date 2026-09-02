@@ -936,6 +936,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "",
 		//	            "properties": {
 		//	              "TargetCapacityTypes": {
+		//	                "description": "",
 		//	                "insertionOrder": true,
 		//	                "items": {
 		//	                  "enum": [
@@ -1362,6 +1363,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 									// Property: TargetCapacityTypes
 									"target_capacity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/

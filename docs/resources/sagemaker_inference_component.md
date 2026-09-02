@@ -18,7 +18,6 @@ Resource Type definition for AWS::SageMaker::InferenceComponent
 ### Required
 
 - `endpoint_name` (String) The name of the endpoint the inference component is associated with
-- `specification` (Attributes) The specification for the inference component (see [below for nested schema](#nestedatt--specification))
 
 ### Optional
 
@@ -26,6 +25,8 @@ Resource Type definition for AWS::SageMaker::InferenceComponent
 - `endpoint_arn` (String) The Amazon Resource Name (ARN) of the endpoint the inference component is associated with
 - `inference_component_name` (String) The name of the inference component
 - `runtime_config` (Attributes) The runtime config for the inference component (see [below for nested schema](#nestedatt--runtime_config))
+- `specification` (Attributes) The specification for the inference component, for an endpoint with a single instance type. Specify exactly one of Specification or Specifications. InstanceType is not accepted here; use Specifications for per instance type configuration. (see [below for nested schema](#nestedatt--specification))
+- `specifications` (Attributes List) A list of specification objects for the inference component, one per instance type. The service requires at least two entries; use the singular Specification for a single instance type. (see [below for nested schema](#nestedatt--specifications))
 - `tags` (Attributes List) An array of tags to apply to the resource (see [below for nested schema](#nestedatt--tags))
 - `variant_name` (String) The name of the endpoint variant the inference component is associated with
 
@@ -37,62 +38,6 @@ Resource Type definition for AWS::SageMaker::InferenceComponent
 - `inference_component_arn` (String) The Amazon Resource Name (ARN) of the inference component
 - `inference_component_status` (String)
 - `last_modified_time` (String)
-
-<a id="nestedatt--specification"></a>
-### Nested Schema for `specification`
-
-Optional:
-
-- `base_inference_component_name` (String) The name of the base inference component
-- `compute_resource_requirements` (Attributes) (see [below for nested schema](#nestedatt--specification--compute_resource_requirements))
-- `container` (Attributes) (see [below for nested schema](#nestedatt--specification--container))
-- `model_name` (String) The name of the model to use with the inference component
-- `startup_parameters` (Attributes) (see [below for nested schema](#nestedatt--specification--startup_parameters))
-
-<a id="nestedatt--specification--compute_resource_requirements"></a>
-### Nested Schema for `specification.compute_resource_requirements`
-
-Optional:
-
-- `max_memory_required_in_mb` (Number)
-- `min_memory_required_in_mb` (Number)
-- `number_of_accelerator_devices_required` (Number)
-- `number_of_cpu_cores_required` (Number)
-
-
-<a id="nestedatt--specification--container"></a>
-### Nested Schema for `specification.container`
-
-Optional:
-
-- `artifact_url` (String)
-- `environment` (Map of String) Environment variables to specify on the container
-- `image` (String) The image to use for the container that will be materialized for the inference component
-
-Read-Only:
-
-- `deployed_image` (Attributes) (see [below for nested schema](#nestedatt--specification--container--deployed_image))
-
-<a id="nestedatt--specification--container--deployed_image"></a>
-### Nested Schema for `specification.container.deployed_image`
-
-Read-Only:
-
-- `resolution_time` (String)
-- `resolved_image` (String) The image to use for the container that will be materialized for the inference component
-- `specified_image` (String) The image to use for the container that will be materialized for the inference component
-
-
-
-<a id="nestedatt--specification--startup_parameters"></a>
-### Nested Schema for `specification.startup_parameters`
-
-Optional:
-
-- `container_startup_health_check_timeout_in_seconds` (Number)
-- `model_data_download_timeout_in_seconds` (Number)
-
-
 
 <a id="nestedatt--deployment_config"></a>
 ### Nested Schema for `deployment_config`
@@ -159,6 +104,227 @@ Read-Only:
 
 - `current_copy_count` (Number) The number of copies for the inference component
 - `desired_copy_count` (Number) The number of copies for the inference component
+- `placement_status` (Attributes List) The placement status of the inference component across instance types (see [below for nested schema](#nestedatt--runtime_config--placement_status))
+
+<a id="nestedatt--runtime_config--placement_status"></a>
+### Nested Schema for `runtime_config.placement_status`
+
+Read-Only:
+
+- `current_copy_count` (Number) The number of copies for the inference component
+- `instance_type` (String) An ML compute instance type
+
+
+
+<a id="nestedatt--specification"></a>
+### Nested Schema for `specification`
+
+Optional:
+
+- `base_inference_component_name` (String) The name of the base inference component
+- `compute_resource_requirements` (Attributes) (see [below for nested schema](#nestedatt--specification--compute_resource_requirements))
+- `container` (Attributes) (see [below for nested schema](#nestedatt--specification--container))
+- `data_cache_config` (Attributes) Settings that affect how the inference component caches data (see [below for nested schema](#nestedatt--specification--data_cache_config))
+- `model_name` (String) The name of the model to use with the inference component
+- `scheduling_config` (Attributes) The scheduling configuration that determines how inference component copies are placed across available instances (see [below for nested schema](#nestedatt--specification--scheduling_config))
+- `startup_parameters` (Attributes) (see [below for nested schema](#nestedatt--specification--startup_parameters))
+
+Read-Only:
+
+- `current_data_cache_config` (Attributes) The data caching configuration actually in effect, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead. (see [below for nested schema](#nestedatt--specification--current_data_cache_config))
+
+<a id="nestedatt--specification--compute_resource_requirements"></a>
+### Nested Schema for `specification.compute_resource_requirements`
+
+Optional:
+
+- `max_memory_required_in_mb` (Number)
+- `min_memory_required_in_mb` (Number)
+- `number_of_accelerator_devices_required` (Number)
+- `number_of_cpu_cores_required` (Number)
+
+
+<a id="nestedatt--specification--container"></a>
+### Nested Schema for `specification.container`
+
+Optional:
+
+- `artifact_url` (String)
+- `container_metrics_config` (Attributes) The configuration for container metrics scraping (see [below for nested schema](#nestedatt--specification--container--container_metrics_config))
+- `environment` (Map of String) Environment variables to specify on the container
+- `image` (String) The image to use for the container that will be materialized for the inference component
+
+Read-Only:
+
+- `deployed_image` (Attributes) (see [below for nested schema](#nestedatt--specification--container--deployed_image))
+
+<a id="nestedatt--specification--container--container_metrics_config"></a>
+### Nested Schema for `specification.container.container_metrics_config`
+
+Optional:
+
+- `metrics_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--specification--container--container_metrics_config--metrics_endpoints))
+
+<a id="nestedatt--specification--container--container_metrics_config--metrics_endpoints"></a>
+### Nested Schema for `specification.container.container_metrics_config.metrics_endpoints`
+
+Optional:
+
+- `metric_publish_frequency_in_seconds` (Number) The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.
+- `metrics_endpoint_path` (String) The path to the Prometheus formatted metrics endpoint exposed by the container
+
+
+
+<a id="nestedatt--specification--container--deployed_image"></a>
+### Nested Schema for `specification.container.deployed_image`
+
+Read-Only:
+
+- `resolution_time` (String)
+- `resolved_image` (String) The image to use for the container that will be materialized for the inference component
+- `specified_image` (String) The image to use for the container that will be materialized for the inference component
+
+
+
+<a id="nestedatt--specification--data_cache_config"></a>
+### Nested Schema for `specification.data_cache_config`
+
+Optional:
+
+- `enable_caching` (Boolean) Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component
+
+
+<a id="nestedatt--specification--scheduling_config"></a>
+### Nested Schema for `specification.scheduling_config`
+
+Optional:
+
+- `availability_zone_balance` (Attributes) Configuration for balancing inference component copies across Availability Zones (see [below for nested schema](#nestedatt--specification--scheduling_config--availability_zone_balance))
+- `placement_strategy` (String)
+
+<a id="nestedatt--specification--scheduling_config--availability_zone_balance"></a>
+### Nested Schema for `specification.scheduling_config.availability_zone_balance`
+
+Optional:
+
+- `enforcement_mode` (String)
+- `max_imbalance` (Number) The maximum allowed difference in the number of inference component copies between any two Availability Zones
+
+
+
+<a id="nestedatt--specification--startup_parameters"></a>
+### Nested Schema for `specification.startup_parameters`
+
+Optional:
+
+- `container_startup_health_check_timeout_in_seconds` (Number)
+- `model_data_download_timeout_in_seconds` (Number)
+
+
+<a id="nestedatt--specification--current_data_cache_config"></a>
+### Nested Schema for `specification.current_data_cache_config`
+
+Read-Only:
+
+- `enable_caching` (Boolean) Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component
+
+
+
+<a id="nestedatt--specifications"></a>
+### Nested Schema for `specifications`
+
+Optional:
+
+- `compute_resource_requirements` (Attributes) (see [below for nested schema](#nestedatt--specifications--compute_resource_requirements))
+- `container` (Attributes) Container specification for one Specifications entry. Distinct from InferenceComponentContainerSpecification: DescribeInferenceComponent returns no per-entry DeployedImage (VERIFIED in us-west-2), so DeployedImage is intentionally omitted here and this definition can never be aggregated into a plural READ response. The singular InferenceComponentContainerSpecification keeps DeployedImage - the service DOES return it there. (see [below for nested schema](#nestedatt--specifications--container))
+- `current_data_cache_config` (Attributes) The data caching configuration actually in effect for this instance type, including a value the service chose rather than the template: SageMaker enables caching automatically on instance types with more than 232 GiB of local NVMe storage, whether or not DataCacheConfig was set. Returned by Describe and not settable; set DataCacheConfig instead. (see [below for nested schema](#nestedatt--specifications--current_data_cache_config))
+- `data_cache_config` (Attributes) Settings that affect how the inference component caches data (see [below for nested schema](#nestedatt--specifications--data_cache_config))
+- `instance_type` (String) An ML compute instance type
+- `model_name` (String) The name of the model to use with the inference component
+- `scheduling_config` (Attributes) The scheduling configuration that determines how inference component copies are placed across available instances (see [below for nested schema](#nestedatt--specifications--scheduling_config))
+- `startup_parameters` (Attributes) (see [below for nested schema](#nestedatt--specifications--startup_parameters))
+
+<a id="nestedatt--specifications--compute_resource_requirements"></a>
+### Nested Schema for `specifications.compute_resource_requirements`
+
+Optional:
+
+- `max_memory_required_in_mb` (Number)
+- `min_memory_required_in_mb` (Number)
+- `number_of_accelerator_devices_required` (Number)
+- `number_of_cpu_cores_required` (Number)
+
+
+<a id="nestedatt--specifications--container"></a>
+### Nested Schema for `specifications.container`
+
+Optional:
+
+- `artifact_url` (String)
+- `container_metrics_config` (Attributes) The configuration for container metrics scraping (see [below for nested schema](#nestedatt--specifications--container--container_metrics_config))
+- `environment` (Map of String) Environment variables to specify on the container
+- `image` (String) The image to use for the container that will be materialized for the inference component
+
+<a id="nestedatt--specifications--container--container_metrics_config"></a>
+### Nested Schema for `specifications.container.container_metrics_config`
+
+Optional:
+
+- `metrics_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--specifications--container--container_metrics_config--metrics_endpoints))
+
+<a id="nestedatt--specifications--container--container_metrics_config--metrics_endpoints"></a>
+### Nested Schema for `specifications.container.container_metrics_config.metrics_endpoints`
+
+Optional:
+
+- `metric_publish_frequency_in_seconds` (Number) The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values per the SageMaker API Reference are 10, 30, 60, 120, 180, 240 and 300; the service validates the value.
+- `metrics_endpoint_path` (String) The path to the Prometheus formatted metrics endpoint exposed by the container
+
+
+
+
+<a id="nestedatt--specifications--current_data_cache_config"></a>
+### Nested Schema for `specifications.current_data_cache_config`
+
+Optional:
+
+- `enable_caching` (Boolean) Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component
+
+
+<a id="nestedatt--specifications--data_cache_config"></a>
+### Nested Schema for `specifications.data_cache_config`
+
+Optional:
+
+- `enable_caching` (Boolean) Whether the endpoint caches the model artifacts and container image on each instance it provisions for the inference component
+
+
+<a id="nestedatt--specifications--scheduling_config"></a>
+### Nested Schema for `specifications.scheduling_config`
+
+Optional:
+
+- `availability_zone_balance` (Attributes) Configuration for balancing inference component copies across Availability Zones (see [below for nested schema](#nestedatt--specifications--scheduling_config--availability_zone_balance))
+- `placement_strategy` (String)
+
+<a id="nestedatt--specifications--scheduling_config--availability_zone_balance"></a>
+### Nested Schema for `specifications.scheduling_config.availability_zone_balance`
+
+Optional:
+
+- `enforcement_mode` (String)
+- `max_imbalance` (Number) The maximum allowed difference in the number of inference component copies between any two Availability Zones
+
+
+
+<a id="nestedatt--specifications--startup_parameters"></a>
+### Nested Schema for `specifications.startup_parameters`
+
+Optional:
+
+- `container_startup_health_check_timeout_in_seconds` (Number)
+- `model_data_download_timeout_in_seconds` (Number)
+
 
 
 <a id="nestedatt--tags"></a>

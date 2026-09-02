@@ -20,13 +20,13 @@ Definition of AWS::AgentRegistry::RegistryRecord Resource Type
 - `descriptors` (Attributes) The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type. (see [below for nested schema](#nestedatt--descriptors))
 - `name` (String) The name of the registry record.
 - `record_type` (String) The type of the registry record.
-- `registry_id` (String) The identifier of the registry containing the record.
 
 ### Optional
 
 - `description` (String) The description of the registry record.
 - `display_name` (String) The human-readable display name of the registry record.
 - `record_version` (String) The version of the registry record.
+- `registry_id` (String) The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).
 - `tags` (Attributes List) Tags to assign to the registry record. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

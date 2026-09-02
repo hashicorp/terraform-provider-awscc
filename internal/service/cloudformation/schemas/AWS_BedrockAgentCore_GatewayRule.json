@@ -257,6 +257,18 @@
       ],
       "additionalProperties": false
     },
+    "SystemManagedBlock": {
+      "type": "object",
+      "properties": {
+        "ManagedBy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ManagedBy"
+      ],
+      "additionalProperties": false
+    },
     "TargetTrafficSplitEntry": {
       "type": "object",
       "properties": {
@@ -419,6 +431,9 @@
     "Status": {
       "$ref": "#/definitions/GatewayRuleStatus"
     },
+    "System": {
+      "$ref": "#/definitions/SystemManagedBlock"
+    },
     "UpdatedAt": {
       "type": "string",
       "format": "date-time"
@@ -433,6 +448,7 @@
     "/properties/GatewayArn",
     "/properties/RuleId",
     "/properties/Status",
+    "/properties/System",
     "/properties/UpdatedAt"
   ],
   "createOnlyProperties": [

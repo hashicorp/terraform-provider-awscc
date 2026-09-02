@@ -350,7 +350,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "An array of key-value pairs to associate with the service.",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with the service.",
@@ -406,6 +406,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

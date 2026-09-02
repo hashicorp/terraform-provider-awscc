@@ -1,0 +1,1 @@
+$ terraform import awscc_pricingplanmanager_subscription.example "arn"

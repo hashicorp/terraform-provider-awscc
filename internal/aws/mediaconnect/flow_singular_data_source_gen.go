@@ -8,6 +8,7 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -45,11 +46,50 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The IP address from which video will be sent to output destinations.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncodingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The encoding configuration to apply to the NDI source content when transcoding it to a transport stream (TS) for downstream distribution. You can choose between several predefined encoding profiles based on common use cases.",
+		//	  "properties": {
+		//	    "EncodingProfile": {
+		//	      "description": "The encoding profile to use when transcoding the NDI source to a Transport Stream. You can change this value while a flow is running.",
+		//	      "enum": [
+		//	        "DISTRIBUTION_H264_DEFAULT",
+		//	        "CONTRIBUTION_H264_DEFAULT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "VideoMaxBitrate": {
+		//	      "description": "The maximum video bitrate to use when transcoding the NDI source to a Transport Stream. This parameter enables you to override the default video bitrate within the encoding profile's supported range. The supported range is 10,000,000 - 50,000,000 bits per second (bps). If you do not specify a value, MediaConnect uses the default value of 20,000,000 bps.",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encoding_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncodingProfile
+				"encoding_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The encoding profile to use when transcoding the NDI source to a Transport Stream. You can change this value while a flow is running.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VideoMaxBitrate
+				"video_max_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum video bitrate to use when transcoding the NDI source to a Transport Stream. This parameter enables you to override the default video bitrate within the encoding profile's supported range. The supported range is 10,000,000 - 50,000,000 bits per second (bps). If you do not specify a value, MediaConnect uses the default value of 20,000,000 bps.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encoding configuration to apply to the NDI source content when transcoding it to a transport stream (TS) for downstream distribution. You can choose between several predefined encoding profiles based on common use cases.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -65,6 +105,33 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"flow_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FlowNdiMachineName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A prefix for the names of the NDI sources that the flow creates.(ReadOnly)",
+		//	  "type": "string"
+		//	}
+		"flow_ndi_machine_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A prefix for the names of the NDI sources that the flow creates.(ReadOnly)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FlowSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Determines the processing capacity and feature set of the flow. Set this optional parameter to LARGE if you want to enable NDI sources or outputs on the flow.",
+		//	  "enum": [
+		//	    "MEDIUM",
+		//	    "LARGE",
+		//	    "LARGE_4X"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"flow_size": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines the processing capacity and feature set of the flow. Set this optional parameter to LARGE if you want to enable NDI sources or outputs on the flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Maintenance
@@ -228,6 +295,27 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "Tags": {
+		//	        "description": "Key-value pairs that can be used to tag this media stream.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Key": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
 		//	      "VideoFormat": {
 		//	        "description": "The resolution of the video.",
 		//	        "enum": [
@@ -336,6 +424,23 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The type of media stream.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Key-value pairs that can be used to tag this media stream.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: VideoFormat
 					"video_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The resolution of the video.",
@@ -355,6 +460,95 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NdiConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the configuration settings for NDI sources and outputs. Required when the flow includes NDI sources or outputs.",
+		//	  "properties": {
+		//	    "MachineName": {
+		//	      "description": "A prefix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect generates a unique 12-character ID as the prefix.",
+		//	      "type": "string"
+		//	    },
+		//	    "NdiDiscoveryServers": {
+		//	      "description": "A list of up to three NDI discovery server configurations. While not required by the API, this configuration is necessary for NDI functionality to work properly.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the configuration settings for individual NDI discovery servers. A maximum of 3 servers is allowed.",
+		//	        "properties": {
+		//	          "DiscoveryServerAddress": {
+		//	            "description": "The unique network address of the NDI discovery server.",
+		//	            "type": "string"
+		//	          },
+		//	          "DiscoveryServerPort": {
+		//	            "description": "The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified.",
+		//	            "type": "integer"
+		//	          },
+		//	          "VpcInterfaceAdapter": {
+		//	            "description": "The identifier for the Virtual Private Cloud (VPC) network interface used by the flow.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DiscoveryServerAddress",
+		//	          "VpcInterfaceAdapter"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "NdiState": {
+		//	      "description": "A setting that controls whether NDI sources or outputs can be used in the flow. The default value is DISABLED. This value must be set as ENABLED for your flow to support NDI sources or outputs.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ndi_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MachineName
+				"machine_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A prefix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect generates a unique 12-character ID as the prefix.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NdiDiscoveryServers
+				"ndi_discovery_servers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DiscoveryServerAddress
+							"discovery_server_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The unique network address of the NDI discovery server.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DiscoveryServerPort
+							"discovery_server_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The port for the NDI discovery server. Defaults to 5959 if a custom port isn't specified.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VpcInterfaceAdapter
+							"vpc_interface_adapter": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The identifier for the Virtual Private Cloud (VPC) network interface used by the flow.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of up to three NDI discovery server configurations. While not required by the API, this configuration is necessary for NDI functionality to work properly.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NdiState
+				"ndi_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A setting that controls whether NDI sources or outputs can be used in the flow. The default value is DISABLED. This value must be set as ENABLED for your flow to support NDI sources or outputs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the configuration settings for NDI sources and outputs. Required when the flow includes NDI sources or outputs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Source
@@ -405,10 +599,12 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "RoleArn": {
 		//	          "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "SecretArn": {
 		//	          "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "Url": {
@@ -427,6 +623,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "EntitlementArn": {
 		//	      "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:entitlement:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "GatewayBridgeSource": {
@@ -435,6 +632,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "BridgeArn": {
 		//	          "description": "The ARN of the bridge feeding this flow.",
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:bridge:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "VpcInterfaceAttachment": {
@@ -544,6 +742,16 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The name of the source.",
 		//	      "type": "string"
 		//	    },
+		//	    "NdiSourceSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The settings for the NDI flow source. This includes the exact name of the upstream NDI sender that you want to connect to your flow source.",
+		//	      "properties": {
+		//	        "SourceName": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Protocol": {
 		//	      "description": "The protocol that is used by the source.",
 		//	      "enum": [
@@ -551,13 +759,69 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "rtp-fec",
 		//	        "rtp",
 		//	        "rist",
-		//	        "fujitsu-qos",
 		//	        "srt-listener",
 		//	        "srt-caller",
 		//	        "st2110-jpegxs",
-		//	        "cdi"
+		//	        "cdi",
+		//	        "ndi-speed-hq"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "RouterIntegrationState": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RouterIntegrationTransitDecryption": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+		//	      "properties": {
+		//	        "EncryptionKeyConfiguration": {
+		//	          "description": "Configuration settings for flow transit encryption keys.",
+		//	          "properties": {
+		//	            "Automatic": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+		//	              "type": "object"
+		//	            },
+		//	            "SecretsManager": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration settings for transit encryption of a flow source using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	              "properties": {
+		//	                "RoleArn": {
+		//	                  "description": "The ARN of the IAM role used for transit encryption from the router output using AWS Secrets Manager.",
+		//	                  "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "SecretArn": {
+		//	                  "description": "The ARN of the AWS Secrets Manager secret used for transit encryption from the router output.",
+		//	                  "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "RoleArn",
+		//	                "SecretArn"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "EncryptionKeyType": {
+		//	          "enum": [
+		//	            "SECRETS_MANAGER",
+		//	            "AUTOMATIC"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EncryptionKeyConfiguration"
+		//	      ],
+		//	      "type": "object"
 		//	    },
 		//	    "SenderControlPort": {
 		//	      "description": "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
@@ -569,6 +833,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "SourceArn": {
 		//	      "description": "The ARN of the source.",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:source:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "SourceIngestPort": {
@@ -586,6 +851,27 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "StreamId": {
 		//	      "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 		//	      "type": "string"
+		//	    },
+		//	    "Tags": {
+		//	      "description": "Key-value pairs that can be used to tag this source.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Key": {
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
 		//	    },
 		//	    "VpcInterfaceName": {
 		//	      "description": "The name of the VPC Interface this Source is configured with.",
@@ -766,9 +1052,65 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The name of the source.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: NdiSourceSettings
+				"ndi_source_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SourceName
+						"source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The settings for the NDI flow source. This includes the exact name of the upstream NDI sender that you want to connect to your flow source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The protocol that is used by the source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RouterIntegrationState
+				"router_integration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RouterIntegrationTransitDecryption
+				"router_integration_transit_decryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionKeyConfiguration
+						"encryption_key_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Automatic
+								"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretsManager
+								"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: RoleArn
+										"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the IAM role used for transit encryption from the router output using AWS Secrets Manager.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretArn
+										"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the AWS Secrets Manager secret used for transit encryption from the router output.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for transit encryption of a flow source using AWS Secrets Manager, including the secret ARN and role ARN.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for flow transit encryption keys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionKeyType
+						"encryption_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SenderControlPort
@@ -804,6 +1146,23 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: StreamId
 				"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Key-value pairs that can be used to tag this source.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VpcInterfaceName
@@ -1085,6 +1444,46 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The source monitoring config of the flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to tag this flow.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag this flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -1115,6 +1514,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "RoleArn": {
 		//	        "description": "Role Arn MediaConnect can assume to create ENIs in customer's account.",
+		//	        "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "SecurityGroupIds": {
@@ -1127,6 +1527,27 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "SubnetId": {
 		//	        "description": "Subnet must be in the AZ of the Flow",
 		//	        "type": "string"
+		//	      },
+		//	      "Tags": {
+		//	        "description": "Key-value pairs that can be used to tag this VPC interface.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Key": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -1174,6 +1595,23 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Subnet must be in the AZ of the Flow",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Key-value pairs that can be used to tag this VPC interface.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The VPC interfaces that you added to this flow.",
@@ -1196,88 +1634,111 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::Flow").WithTerraformTypeName("awscc_mediaconnect_flow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"algorithm":                          "Algorithm",
-		"attributes":                         "Attributes",
-		"audio_monitoring_settings":          "AudioMonitoringSettings",
-		"availability_zone":                  "AvailabilityZone",
-		"black_frames":                       "BlackFrames",
-		"bridge_arn":                         "BridgeArn",
-		"channel_order":                      "ChannelOrder",
-		"clock_rate":                         "ClockRate",
-		"colorimetry":                        "Colorimetry",
-		"constant_initialization_vector":     "ConstantInitializationVector",
-		"content_quality_analysis_state":     "ContentQualityAnalysisState",
-		"decryption":                         "Decryption",
-		"description":                        "Description",
-		"device_id":                          "DeviceId",
-		"egress_ip":                          "EgressIp",
-		"encoding_name":                      "EncodingName",
-		"entitlement_arn":                    "EntitlementArn",
-		"exact_framerate":                    "ExactFramerate",
-		"failover_mode":                      "FailoverMode",
-		"flow_arn":                           "FlowArn",
-		"flow_availability_zone":             "FlowAvailabilityZone",
-		"fmt":                                "Fmt",
-		"fmtp":                               "Fmtp",
-		"frozen_frames":                      "FrozenFrames",
-		"gateway_bridge_source":              "GatewayBridgeSource",
-		"ingest_ip":                          "IngestIp",
-		"ingest_port":                        "IngestPort",
-		"input_configurations":               "InputConfigurations",
-		"input_port":                         "InputPort",
-		"interface":                          "Interface",
-		"key_type":                           "KeyType",
-		"lang":                               "Lang",
-		"maintenance":                        "Maintenance",
-		"maintenance_day":                    "MaintenanceDay",
-		"maintenance_start_hour":             "MaintenanceStartHour",
-		"max_bitrate":                        "MaxBitrate",
-		"max_latency":                        "MaxLatency",
-		"max_sync_buffer":                    "MaxSyncBuffer",
-		"media_stream_id":                    "MediaStreamId",
-		"media_stream_name":                  "MediaStreamName",
-		"media_stream_source_configurations": "MediaStreamSourceConfigurations",
-		"media_stream_type":                  "MediaStreamType",
-		"media_streams":                      "MediaStreams",
-		"min_latency":                        "MinLatency",
-		"name":                               "Name",
-		"network_interface_ids":              "NetworkInterfaceIds",
-		"network_interface_type":             "NetworkInterfaceType",
-		"par":                                "Par",
-		"primary_source":                     "PrimarySource",
-		"protocol":                           "Protocol",
-		"range":                              "Range",
-		"recovery_window":                    "RecoveryWindow",
-		"region":                             "Region",
-		"resource_id":                        "ResourceId",
-		"role_arn":                           "RoleArn",
-		"scan_mode":                          "ScanMode",
-		"secret_arn":                         "SecretArn",
-		"security_group_ids":                 "SecurityGroupIds",
-		"sender_control_port":                "SenderControlPort",
-		"sender_ip_address":                  "SenderIpAddress",
-		"silent_audio":                       "SilentAudio",
-		"source":                             "Source",
-		"source_arn":                         "SourceArn",
-		"source_failover_config":             "SourceFailoverConfig",
-		"source_ingest_port":                 "SourceIngestPort",
-		"source_listener_address":            "SourceListenerAddress",
-		"source_listener_port":               "SourceListenerPort",
-		"source_monitoring_config":           "SourceMonitoringConfig",
-		"source_priority":                    "SourcePriority",
-		"state":                              "State",
-		"stream_id":                          "StreamId",
-		"subnet_id":                          "SubnetId",
-		"tcs":                                "Tcs",
-		"threshold_seconds":                  "ThresholdSeconds",
-		"thumbnail_state":                    "ThumbnailState",
-		"url":                                "Url",
-		"video_format":                       "VideoFormat",
-		"video_monitoring_settings":          "VideoMonitoringSettings",
-		"vpc_interface_attachment":           "VpcInterfaceAttachment",
-		"vpc_interface_name":                 "VpcInterfaceName",
-		"vpc_interfaces":                     "VpcInterfaces",
-		"whitelist_cidr":                     "WhitelistCidr",
+		"algorithm":                             "Algorithm",
+		"attributes":                            "Attributes",
+		"audio_monitoring_settings":             "AudioMonitoringSettings",
+		"automatic":                             "Automatic",
+		"availability_zone":                     "AvailabilityZone",
+		"black_frames":                          "BlackFrames",
+		"bridge_arn":                            "BridgeArn",
+		"channel_order":                         "ChannelOrder",
+		"clock_rate":                            "ClockRate",
+		"colorimetry":                           "Colorimetry",
+		"constant_initialization_vector":        "ConstantInitializationVector",
+		"content_quality_analysis_state":        "ContentQualityAnalysisState",
+		"decryption":                            "Decryption",
+		"description":                           "Description",
+		"device_id":                             "DeviceId",
+		"discovery_server_address":              "DiscoveryServerAddress",
+		"discovery_server_port":                 "DiscoveryServerPort",
+		"egress_ip":                             "EgressIp",
+		"encoding_config":                       "EncodingConfig",
+		"encoding_name":                         "EncodingName",
+		"encoding_profile":                      "EncodingProfile",
+		"encryption_key_configuration":          "EncryptionKeyConfiguration",
+		"encryption_key_type":                   "EncryptionKeyType",
+		"entitlement_arn":                       "EntitlementArn",
+		"exact_framerate":                       "ExactFramerate",
+		"failover_mode":                         "FailoverMode",
+		"flow_arn":                              "FlowArn",
+		"flow_availability_zone":                "FlowAvailabilityZone",
+		"flow_ndi_machine_name":                 "FlowNdiMachineName",
+		"flow_size":                             "FlowSize",
+		"fmt":                                   "Fmt",
+		"fmtp":                                  "Fmtp",
+		"frozen_frames":                         "FrozenFrames",
+		"gateway_bridge_source":                 "GatewayBridgeSource",
+		"ingest_ip":                             "IngestIp",
+		"ingest_port":                           "IngestPort",
+		"input_configurations":                  "InputConfigurations",
+		"input_port":                            "InputPort",
+		"interface":                             "Interface",
+		"key":                                   "Key",
+		"key_type":                              "KeyType",
+		"lang":                                  "Lang",
+		"machine_name":                          "MachineName",
+		"maintenance":                           "Maintenance",
+		"maintenance_day":                       "MaintenanceDay",
+		"maintenance_start_hour":                "MaintenanceStartHour",
+		"max_bitrate":                           "MaxBitrate",
+		"max_latency":                           "MaxLatency",
+		"max_sync_buffer":                       "MaxSyncBuffer",
+		"media_stream_id":                       "MediaStreamId",
+		"media_stream_name":                     "MediaStreamName",
+		"media_stream_source_configurations":    "MediaStreamSourceConfigurations",
+		"media_stream_type":                     "MediaStreamType",
+		"media_streams":                         "MediaStreams",
+		"min_latency":                           "MinLatency",
+		"name":                                  "Name",
+		"ndi_config":                            "NdiConfig",
+		"ndi_discovery_servers":                 "NdiDiscoveryServers",
+		"ndi_source_settings":                   "NdiSourceSettings",
+		"ndi_state":                             "NdiState",
+		"network_interface_ids":                 "NetworkInterfaceIds",
+		"network_interface_type":                "NetworkInterfaceType",
+		"par":                                   "Par",
+		"primary_source":                        "PrimarySource",
+		"protocol":                              "Protocol",
+		"range":                                 "Range",
+		"recovery_window":                       "RecoveryWindow",
+		"region":                                "Region",
+		"resource_id":                           "ResourceId",
+		"role_arn":                              "RoleArn",
+		"router_integration_state":              "RouterIntegrationState",
+		"router_integration_transit_decryption": "RouterIntegrationTransitDecryption",
+		"scan_mode":                             "ScanMode",
+		"secret_arn":                            "SecretArn",
+		"secrets_manager":                       "SecretsManager",
+		"security_group_ids":                    "SecurityGroupIds",
+		"sender_control_port":                   "SenderControlPort",
+		"sender_ip_address":                     "SenderIpAddress",
+		"silent_audio":                          "SilentAudio",
+		"source":                                "Source",
+		"source_arn":                            "SourceArn",
+		"source_failover_config":                "SourceFailoverConfig",
+		"source_ingest_port":                    "SourceIngestPort",
+		"source_listener_address":               "SourceListenerAddress",
+		"source_listener_port":                  "SourceListenerPort",
+		"source_monitoring_config":              "SourceMonitoringConfig",
+		"source_name":                           "SourceName",
+		"source_priority":                       "SourcePriority",
+		"state":                                 "State",
+		"stream_id":                             "StreamId",
+		"subnet_id":                             "SubnetId",
+		"tags":                                  "Tags",
+		"tcs":                                   "Tcs",
+		"threshold_seconds":                     "ThresholdSeconds",
+		"thumbnail_state":                       "ThumbnailState",
+		"url":                                   "Url",
+		"value":                                 "Value",
+		"video_format":                          "VideoFormat",
+		"video_max_bitrate":                     "VideoMaxBitrate",
+		"video_monitoring_settings":             "VideoMonitoringSettings",
+		"vpc_interface_adapter":                 "VpcInterfaceAdapter",
+		"vpc_interface_attachment":              "VpcInterfaceAttachment",
+		"vpc_interface_name":                    "VpcInterfaceName",
+		"vpc_interfaces":                        "VpcInterfaces",
+		"whitelist_cidr":                        "WhitelistCidr",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

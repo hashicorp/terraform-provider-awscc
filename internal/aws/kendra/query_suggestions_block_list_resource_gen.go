@@ -305,9 +305,9 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 		"value":                           "Value",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(780).WithDeleteTimeoutInMinutes(780)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(780)
 
 	v, err := generic.NewResource(ctx, opts...)
 

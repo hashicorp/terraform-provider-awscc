@@ -1,0 +1,1 @@
+$ terraform import awscc_fsx_volume.example "volume_id"

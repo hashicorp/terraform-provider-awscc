@@ -18,7 +18,7 @@
       ],
       "pattern": "",
       "minLength": 1,
-      "maxLength": 5120
+      "maxLength": 51200
     }
   },
   "additionalProperties": false,

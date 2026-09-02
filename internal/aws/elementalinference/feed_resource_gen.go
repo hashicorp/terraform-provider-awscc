@@ -138,8 +138,10 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "DataSourceConfiguration": {
 		//	                "additionalProperties": false,
+		//	                "description": "Identifies the fixture whose event data Elemental Inference maps onto the clipping metadata for an output.",
 		//	                "properties": {
 		//	                  "FixtureId": {
+		//	                    "description": "The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. To obtain this ID, use the SearchFixtures operation.",
 		//	                    "maxLength": 128,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
@@ -307,8 +309,9 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: FixtureId
 											"fixture_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
+												Description: "The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. To obtain this ID, use the SearchFixtures operation.",
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
 													fwvalidators.NotNullString(),
@@ -318,8 +321,9 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Optional: true,
-										Computed: true,
+										Description: "Identifies the fixture whose event data Elemental Inference maps onto the clipping metadata for an output.",
+										Optional:    true,
+										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/

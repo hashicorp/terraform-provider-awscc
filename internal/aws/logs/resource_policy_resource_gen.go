@@ -34,7 +34,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The policy document",
-		//	  "maxLength": 5120,
+		//	  "maxLength": 51200,
 		//	  "minLength": 1,
 		//	  "pattern": "",
 		//	  "type": "string"
@@ -43,7 +43,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The policy document",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 5120),
+				stringvalidator.LengthBetween(1, 51200),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyName

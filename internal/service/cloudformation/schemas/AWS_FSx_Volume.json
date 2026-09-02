@@ -1,0 +1,491 @@
+{
+  "typeName": "AWS::FSx::Volume",
+  "description": "Resource Type definition for AWS::FSx::Volume",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties": {
+    "ResourceARN": {
+      "description": "Returns the volume's Amazon Resource Name (ARN).",
+      "type": "string"
+    },
+    "VolumeId": {
+      "description": "Returns the volume's universally unique identifier (UUID).",
+      "type": "string"
+    },
+    "UUID": {
+      "description": "Returns the volume's ID.",
+      "type": "string"
+    },
+    "BackupId": {
+      "description": "Specifies the ID of the volume backup to use to create a new volume.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the volume.",
+      "type": "string"
+    },
+    "OntapConfiguration": {
+      "description": "The configuration of an Amazon FSx for NetApp ONTAP volume.",
+      "$ref": "#/definitions/OntapConfiguration"
+    },
+    "OpenZFSConfiguration": {
+      "description": "The configuration of an Amazon FSx for OpenZFS volume.",
+      "$ref": "#/definitions/OpenZFSConfiguration"
+    },
+    "Tags": {
+      "description": "One or more tags.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "VolumeType": {
+      "description": "The type of the volume.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/ResourceARN",
+    "/properties/VolumeId",
+    "/properties/UUID"
+  ],
+  "writeOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/OpenZFSConfiguration/Options",
+    "/properties/OntapConfiguration/AggregateConfiguration/ConstituentsPerAggregate"
+  ],
+  "createOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/VolumeType",
+    "/properties/OntapConfiguration/OntapVolumeType",
+    "/properties/OntapConfiguration/StorageVirtualMachineId",
+    "/properties/OntapConfiguration/VolumeStyle",
+    "/properties/OntapConfiguration/AggregateConfiguration",
+    "/properties/OntapConfiguration/AggregateConfiguration/Aggregates",
+    "/properties/OntapConfiguration/AggregateConfiguration/ConstituentsPerAggregate",
+    "/properties/OntapConfiguration/SnaplockConfiguration/SnaplockType",
+    "/properties/OpenZFSConfiguration/OriginSnapshot",
+    "/properties/OpenZFSConfiguration/OriginSnapshot/CopyStrategy",
+    "/properties/OpenZFSConfiguration/OriginSnapshot/SnapshotARN",
+    "/properties/OpenZFSConfiguration/ParentVolumeId"
+  ],
+  "primaryIdentifier": [
+    "/properties/VolumeId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ResourceARN"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fsx:TagResource",
+      "fsx:UntagResource",
+      "fsx:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fsx:CreateVolume",
+        "fsx:CreateVolumeFromBackup",
+        "fsx:TagResource",
+        "fsx:DescribeVolumes"
+      ],
+      "timeoutInMinutes": 510
+    },
+    "read": {
+      "permissions": [
+        "fsx:DescribeVolumes",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fsx:UpdateVolume",
+        "fsx:DescribeVolumes",
+        "fsx:TagResource",
+        "fsx:UntagResource",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fsx:DeleteVolume",
+        "fsx:DescribeVolumes",
+        "fsx:DescribeStorageVirtualMachines",
+        "fsx:TagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fsx:DescribeVolumes"
+      ]
+    }
+  },
+  "definitions": {
+    "AggregateConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Aggregates": {
+          "description": "The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": false
+        },
+        "ConstituentsPerAggregate": {
+          "description": "Used to explicitly set the number of constituents within the FlexGroup per storage aggregate. This field is optional when creating a FlexGroup volume. If unspecified, the default value will be 8. This field cannot be provided when creating a FlexVol volume.",
+          "type": "integer"
+        }
+      }
+    },
+    "OriginSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CopyStrategy": {
+          "description": "The configuration object for mounting a Network File System (NFS) file system.",
+          "type": "string"
+        },
+        "SnapshotARN": {
+          "description": "Specifies the snapshot to use when creating an OpenZFS volume from a snapshot.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "CopyStrategy",
+        "SnapshotARN"
+      ]
+    },
+    "OntapConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "JunctionPath": {
+          "description": "Specifies the location in the SVM's namespace where the volume is mounted. This parameter is required. The JunctionPath must have a leading forward slash, such as /vol3.",
+          "type": "string"
+        },
+        "StorageVirtualMachineId": {
+          "description": "Specifies the ONTAP SVM in which to create the volume.",
+          "type": "string"
+        },
+        "TieringPolicy": {
+          "description": "Describes the data tiering policy for an ONTAP volume.",
+          "$ref": "#/definitions/TieringPolicy"
+        },
+        "SizeInMegabytes": {
+          "description": "Use SizeInBytes instead. Specifies the size of the volume, in megabytes (MB), that you are creating",
+          "type": "string"
+        },
+        "VolumeStyle": {
+          "description": "Use to specify the style of an ONTAP volume.",
+          "type": "string"
+        },
+        "SizeInBytes": {
+          "description": "Specifies the configured size of the volume, in bytes.",
+          "type": "string"
+        },
+        "SecurityStyle": {
+          "description": "Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style.",
+          "type": "string"
+        },
+        "SnaplockConfiguration": {
+          "description": "The SnapLock configuration object for an FSx for ONTAP SnapLock volume.",
+          "$ref": "#/definitions/SnaplockConfiguration"
+        },
+        "AggregateConfiguration": {
+          "description": "Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates.",
+          "$ref": "#/definitions/AggregateConfiguration"
+        },
+        "SnapshotPolicy": {
+          "description": "Specifies the snapshot policy for the volume. There are three built-in snapshot policies: default, default-1weekly, none.",
+          "type": "string"
+        },
+        "StorageEfficiencyEnabled": {
+          "description": "Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume, or set to false to disable them.",
+          "type": "string"
+        },
+        "CopyTagsToBackups": {
+          "description": "A boolean flag indicating whether tags for the volume should be copied to backups.",
+          "type": "string"
+        },
+        "OntapVolumeType": {
+          "description": "Specifies the type of volume you are creating. Valid values are the following: RW or DP",
+          "type": "string"
+        }
+      },
+      "required": [
+        "StorageVirtualMachineId"
+      ]
+    },
+    "OpenZFSConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReadOnly": {
+          "description": "A Boolean value indicating whether the volume is read-only.",
+          "type": "boolean"
+        },
+        "Options": {
+          "description": "The configuration object for mounting a Network File System (NFS) file system.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": false
+        },
+        "DataCompressionType": {
+          "description": "Specifies the method used to compress the data on the volume",
+          "type": "string"
+        },
+        "NfsExports": {
+          "description": "The configuration object for mounting a Network File System (NFS) file system.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/NfsExports"
+          },
+          "insertionOrder": false
+        },
+        "StorageCapacityQuotaGiB": {
+          "description": "Sets the maximum storage size in gibibytes (GiB) for the volume. You can specify a quota that is larger than the storage on the parent volume. A volume quota limits the amount of storage that the volume can consume to the configured amount, but does not guarantee the space will be available on the parent volume. To guarantee quota space, you must also set StorageCapacityReservationGiB. To not specify a storage capacity quota, set this to -1.",
+          "type": "integer"
+        },
+        "CopyTagsToSnapshots": {
+          "description": "A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If this value is set to true, and you do not specify any tags, all tags for the original volume are copied over to snapshots. If this value is set to true, and you do specify one or more tags, only the specified tags for the original volume are copied over to snapshots. If you specify one or more tags when creating a new snapshot, no tags are copied over from the original volume, regardless of this value.",
+          "type": "boolean"
+        },
+        "ParentVolumeId": {
+          "description": "The ID of the volume to use as the parent volume of the volume that you are creating.",
+          "type": "string"
+        },
+        "StorageCapacityReservationGiB": {
+          "description": "Specifies the amount of storage in gibibytes (GiB) to reserve from the parent volume. Setting StorageCapacityReservationGiB guarantees that the specified amount of storage space on the parent volume will always be available for the volume. You can't reserve more storage than the parent volume has. To not specify a storage capacity reservation, set this to 0 or -1. For more information, see Volume properties in the Amazon FSx for OpenZFS User Guide.",
+          "type": "integer"
+        },
+        "RecordSizeKiB": {
+          "description": "Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes (KiB).",
+          "type": "integer"
+        },
+        "OriginSnapshot": {
+          "description": "The configuration of an Amazon FSx for OpenZFS volume.",
+          "$ref": "#/definitions/OriginSnapshot"
+        },
+        "UserAndGroupQuotas": {
+          "description": "Configures how much storage users and groups can use on the volume.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/UserAndGroupQuotas"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "ParentVolumeId"
+      ]
+    },
+    "NfsExports": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClientConfigurations": {
+          "description": "The configuration object for mounting a Network File System (NFS) file system.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClientConfigurations"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "ClientConfigurations"
+      ]
+    },
+    "ClientConfigurations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Clients": {
+          "description": "A value that specifies who can mount the file system. You can provide a wildcard character (*), an IP address (0.0.0.0), or a CIDR address (192.0.2.0/24). By default, Amazon FSx uses the wildcard character when specifying the client.",
+          "type": "string"
+        },
+        "Options": {
+          "description": "The configuration object for mounting a Network File System (NFS) file system.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Options",
+        "Clients"
+      ]
+    },
+    "RetentionPeriod": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "SnaplockConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AuditLogVolume": {
+          "description": "Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume",
+          "type": "string"
+        },
+        "VolumeAppendModeEnabled": {
+          "description": "Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume.",
+          "type": "string"
+        },
+        "AutocommitPeriod": {
+          "description": "The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume.",
+          "$ref": "#/definitions/AutocommitPeriod"
+        },
+        "RetentionPeriod": {
+          "$ref": "#/definitions/SnaplockRetentionPeriod",
+          "description": "Specifies the retention period of an FSx for ONTAP SnapLock volume."
+        },
+        "PrivilegedDelete": {
+          "type": "string",
+          "description": "Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock Enterprise volume."
+        },
+        "SnaplockType": {
+          "type": "string",
+          "description": "Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is set, it can't be changed."
+        }
+      },
+      "required": [
+        "SnaplockType"
+      ]
+    },
+    "TieringPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx for ONTAP's intelligent tiering automatically transitions a volume's data between the file system's primary storage and capacity pool storage based on your access patterns.",
+      "properties": {
+        "CoolingPeriod": {
+          "description": "Specifies the number of days that user data in a volume must remain inactive before it is considered \"cold\" and moved to the capacity pool.",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Specifies the tiering policy used to transition data. Default value is SNAPSHOT_ONLY.",
+          "type": "string"
+        }
+      }
+    },
+    "SnaplockRetentionPeriod": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MinimumRetention": {
+          "description": "The shortest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume.",
+          "$ref": "#/definitions/RetentionPeriod"
+        },
+        "DefaultRetention": {
+          "description": "The retention period assigned to a write once, read many (WORM) file by default if an explicit retention period is not set for an FSx for ONTAP SnapLock volume.",
+          "$ref": "#/definitions/RetentionPeriod"
+        },
+        "MaximumRetention": {
+          "description": "The longest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume.",
+          "$ref": "#/definitions/RetentionPeriod"
+        }
+      },
+      "required": [
+        "DefaultRetention",
+        "MaximumRetention",
+        "MinimumRetention"
+      ]
+    },
+    "UserAndGroupQuotas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "description": "The ID of the user or group that the quota applies to.",
+          "type": "integer"
+        },
+        "StorageCapacityQuotaGiB": {
+          "description": "The user or group's storage quota, in gibibytes (GiB).",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "Specifies whether the quota applies to a user or group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Type",
+        "Id",
+        "StorageCapacityQuotaGiB"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "AutocommitPeriod": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "description": "Defines the amount of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume.",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "Defines the type of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. Setting this value to NONE disables autocommit. The default value is NONE.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    }
+  }
+}

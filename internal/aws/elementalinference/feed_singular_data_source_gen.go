@@ -105,8 +105,10 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "DataSourceConfiguration": {
 		//	                "additionalProperties": false,
+		//	                "description": "Identifies the fixture whose event data Elemental Inference maps onto the clipping metadata for an output.",
 		//	                "properties": {
 		//	                  "FixtureId": {
+		//	                    "description": "The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. To obtain this ID, use the SearchFixtures operation.",
 		//	                    "maxLength": 128,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
@@ -255,10 +257,12 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: FixtureId
 											"fixture_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
+												Description: "The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. To obtain this ID, use the SearchFixtures operation.",
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Computed: true,
+										Description: "Identifies the fixture whose event data Elemental Inference maps onto the clipping metadata for an output.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Computed: true,

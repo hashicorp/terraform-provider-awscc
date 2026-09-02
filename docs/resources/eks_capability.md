@@ -56,8 +56,17 @@ resource "awscc_eks_capability" "example" {
 
 Optional:
 
-- `ack` (String)
+- `ack` (Attributes) Configuration settings for an ACK (AWS Controllers for Kubernetes) capability. (see [below for nested schema](#nestedatt--configuration--ack))
 - `argo_cd` (Attributes) Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration. (see [below for nested schema](#nestedatt--configuration--argo_cd))
+
+<a id="nestedatt--configuration--ack"></a>
+### Nested Schema for `configuration.ack`
+
+Optional:
+
+- `disabled_services` (List of String) A list of ACK service names to disable. Controllers for services in this list are not installed or managed.
+- `enable_cross_namespace` (Boolean) Whether cross-namespace references are enabled for ACK controllers. When not specified, the service default applies.
+
 
 <a id="nestedatt--configuration--argo_cd"></a>
 ### Nested Schema for `configuration.argo_cd`

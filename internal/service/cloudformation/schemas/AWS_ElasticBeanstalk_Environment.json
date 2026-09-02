@@ -9,7 +9,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": true
   },
   "$schema": "https://raw.githubusercontent.com/aws-cloudformation/cloudformation-resource-schema/master/src/main/resources/schema/provider.definition.schema.v1.json",
   "typeName": "AWS::ElasticBeanstalk::Environment",

@@ -47,6 +47,79 @@ func intermediateTableDataSource(ctx context.Context) (datasource.DataSource, er
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
+		//	                  "AggregationThresholds": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AllowedAggregateExpressionType": {
+		//	                          "enum": [
+		//	                            "COLUMNS_ONLY",
+		//	                            "ANY_EXPRESSION"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "IdentityColumns": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "maxLength": 127,
+		//	                            "minLength": 1,
+		//	                            "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        },
+		//	                        "MinimumIdentityCount": {
+		//	                          "maximum": 100000,
+		//	                          "minimum": 2,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "OutputColumnThresholds": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "MinimumIdentityCount": {
+		//	                                "maximum": 100000,
+		//	                                "minimum": 0,
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "OutputColumnName": {
+		//	                                "maxLength": 127,
+		//	                                "minLength": 1,
+		//	                                "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "OutputColumnName",
+		//	                              "MinimumIdentityCount"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
+		//	                        },
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "COUNT_DISTINCT"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "IdentityColumns",
+		//	                        "MinimumIdentityCount",
+		//	                        "Type",
+		//	                        "AllowedAggregateExpressionType"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 1,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "AllowedAnalyses": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -79,6 +152,36 @@ func intermediateTableDataSource(ctx context.Context) (datasource.DataSource, er
 		//	                    },
 		//	                    "minItems": 0,
 		//	                    "type": "array"
+		//	                  },
+		//	                  "ComparisonControls": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AllowedColumnComparisonColumns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "maxLength": 127,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "AllowedLiteralComparisonColumns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "maxLength": 127,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AllowedLiteralComparisonColumns",
+		//	                      "AllowedColumnComparisonColumns"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "DifferentialPrivacy": {
 		//	                    "additionalProperties": false,
@@ -165,6 +268,47 @@ func intermediateTableDataSource(ctx context.Context) (datasource.DataSource, er
 											"additional_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: AggregationThresholds
+											"aggregation_thresholds": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowedAggregateExpressionType
+														"allowed_aggregate_expression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: IdentityColumns
+														"identity_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MinimumIdentityCount
+														"minimum_identity_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: OutputColumnThresholds
+														"output_column_thresholds": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MinimumIdentityCount
+																	"minimum_identity_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: OutputColumnName
+																	"output_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -179,6 +323,22 @@ func intermediateTableDataSource(ctx context.Context) (datasource.DataSource, er
 											"allowed_result_receivers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ComparisonControls
+											"comparison_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AllowedColumnComparisonColumns
+													"allowed_column_comparison_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: AllowedLiteralComparisonColumns
+													"allowed_literal_comparison_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 											// Property: DifferentialPrivacy
 											"differential_privacy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -439,35 +599,44 @@ func intermediateTableDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::IntermediateTable").WithTerraformTypeName("awscc_cleanrooms_intermediate_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"additional_analyses":               "AdditionalAnalyses",
-		"allowed_analyses":                  "AllowedAnalyses",
-		"allowed_analysis_providers":        "AllowedAnalysisProviders",
-		"allowed_result_receivers":          "AllowedResultReceivers",
-		"analysis_rules":                    "AnalysisRules",
-		"analysis_template_arn":             "AnalysisTemplateArn",
-		"arn":                               "Arn",
-		"collaboration_arn":                 "CollaborationArn",
-		"collaboration_identifier":          "CollaborationIdentifier",
-		"columns":                           "Columns",
-		"custom":                            "Custom",
-		"description":                       "Description",
-		"differential_privacy":              "DifferentialPrivacy",
-		"disallowed_output_columns":         "DisallowedOutputColumns",
-		"intermediate_table_identifier":     "IntermediateTableIdentifier",
-		"key":                               "Key",
-		"kms_key_arn":                       "KmsKeyArn",
-		"membership_arn":                    "MembershipArn",
-		"membership_identifier":             "MembershipIdentifier",
-		"name":                              "Name",
-		"policy":                            "Policy",
-		"population_analysis_configuration": "PopulationAnalysisConfiguration",
-		"query_string":                      "QueryString",
-		"sql_parameters":                    "SqlParameters",
-		"status":                            "Status",
-		"tags":                              "Tags",
-		"type":                              "Type",
-		"v1":                                "V1",
-		"value":                             "Value",
+		"additional_analyses":                "AdditionalAnalyses",
+		"aggregation_thresholds":             "AggregationThresholds",
+		"allowed_aggregate_expression_type":  "AllowedAggregateExpressionType",
+		"allowed_analyses":                   "AllowedAnalyses",
+		"allowed_analysis_providers":         "AllowedAnalysisProviders",
+		"allowed_column_comparison_columns":  "AllowedColumnComparisonColumns",
+		"allowed_literal_comparison_columns": "AllowedLiteralComparisonColumns",
+		"allowed_result_receivers":           "AllowedResultReceivers",
+		"analysis_rules":                     "AnalysisRules",
+		"analysis_template_arn":              "AnalysisTemplateArn",
+		"arn":                                "Arn",
+		"collaboration_arn":                  "CollaborationArn",
+		"collaboration_identifier":           "CollaborationIdentifier",
+		"columns":                            "Columns",
+		"comparison_controls":                "ComparisonControls",
+		"custom":                             "Custom",
+		"description":                        "Description",
+		"differential_privacy":               "DifferentialPrivacy",
+		"disallowed_output_columns":          "DisallowedOutputColumns",
+		"identity_columns":                   "IdentityColumns",
+		"intermediate_table_identifier":      "IntermediateTableIdentifier",
+		"key":                                "Key",
+		"kms_key_arn":                        "KmsKeyArn",
+		"membership_arn":                     "MembershipArn",
+		"membership_identifier":              "MembershipIdentifier",
+		"minimum_identity_count":             "MinimumIdentityCount",
+		"name":                               "Name",
+		"output_column_name":                 "OutputColumnName",
+		"output_column_thresholds":           "OutputColumnThresholds",
+		"policy":                             "Policy",
+		"population_analysis_configuration":  "PopulationAnalysisConfiguration",
+		"query_string":                       "QueryString",
+		"sql_parameters":                     "SqlParameters",
+		"status":                             "Status",
+		"tags":                               "Tags",
+		"type":                               "Type",
+		"v1":                                 "V1",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
