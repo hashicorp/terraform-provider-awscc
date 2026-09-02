@@ -275,6 +275,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 				GeneratedCodeFileName:        res + "_singular_data_source_gen",
 				GeneratedCodePackageName:     svc,
 				GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc),
+				PathAwareAttributeNames:      schema.PathAwareAttributeNames,
 				TerraformResourceType:        tfResourceTypeName,
 			})
 		}
@@ -431,6 +432,7 @@ type DataSourceData struct {
 	GeneratedCodeFileName        string
 	GeneratedCodePackageName     string
 	GeneratedCodePathSuffix      string
+	PathAwareAttributeNames      bool
 	TerraformResourceType        string
 }
 

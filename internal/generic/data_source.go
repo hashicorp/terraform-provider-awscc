@@ -5,6 +5,7 @@ package generic
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 )
@@ -34,6 +35,60 @@ func dataSourceWithAttributeNameMap(v map[string]string) DataSourceOptionsFunc {
 		}
 
 		o.cfToTfNameMap = cfToTfNameMap
+
+		return nil
+	}
+}
+
+// dataSourceWithPathAwareAttributeNameMap sets a path-keyed attribute name map
+// for data sources. See resourceWithPathAwareAttributeNameMap for details.
+func dataSourceWithPathAwareAttributeNameMap(v map[string]string) DataSourceOptionsFunc {
+	return func(o *genericDataSource) error {
+		if _, ok := v["id"]; !ok {
+			v["id"] = "ID"
+		}
+
+		o.pathAwareNames = true
+
+		// Build the reverse map: "CfPath/CfProp" -> tfAttr
+		reverse := make(map[string]string, len(v))
+		for tfPathKey, cfName := range v {
+			lastSlash := strings.LastIndex(tfPathKey, "/")
+			var parentPath, tfAttr string
+			if lastSlash == -1 {
+				parentPath = ""
+				tfAttr = tfPathKey
+			} else {
+				parentPath = tfPathKey[:lastSlash]
+				tfAttr = tfPathKey[lastSlash+1:]
+			}
+			_ = tfAttr // used only for the flat map below
+
+			var cfPathKey string
+			if parentPath == "" {
+				cfPathKey = cfName
+			} else {
+				cfPathKey = parentPath + "/" + cfName
+			}
+			reverse[cfPathKey] = tfAttr
+		}
+		o.pathCfToTfNameMap = reverse
+
+		// Populate flat map for any code paths that still use it.
+		flatCfToTf := make(map[string]string)
+		for tfPathKey, cfName := range v {
+			lastSlash := strings.LastIndex(tfPathKey, "/")
+			var tfAttr string
+			if lastSlash == -1 {
+				tfAttr = tfPathKey
+			} else {
+				tfAttr = tfPathKey[lastSlash+1:]
+			}
+			if _, exists := flatCfToTf[cfName]; !exists {
+				flatCfToTf[cfName] = tfAttr
+			}
+		}
+		o.cfToTfNameMap = flatCfToTf
 
 		return nil
 	}
@@ -85,6 +140,12 @@ func (opts DataSourceOptions) WithAttributeNameMap(v map[string]string) DataSour
 	return append(opts, dataSourceWithAttributeNameMap(v))
 }
 
+// WithPathAwareAttributeNameMap sets a path-keyed attribute name map for data sources.
+// See ResourceOptions.WithPathAwareAttributeNameMap for details.
+func (opts DataSourceOptions) WithPathAwareAttributeNameMap(v map[string]string) DataSourceOptions {
+	return append(opts, dataSourceWithPathAwareAttributeNameMap(v))
+}
+
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -110,8 +171,10 @@ func (opts DataSourceOptions) WithTerraformTypeName(v string) DataSourceOptions 
 }
 
 type genericDataSource struct {
-	cfToTfNameMap map[string]string // Map of CloudFormation property name to Terraform attribute name
-	cfTypeName    string            // CloudFormation type name for the resource type
-	tfSchema      schema.Schema     // Terraform schema for the data source type
-	tfTypeName    string            // Terraform type name for data source type
+	cfToTfNameMap     map[string]string // Map of CloudFormation property name to Terraform attribute name
+	cfTypeName        string            // CloudFormation type name for the resource type
+	pathAwareNames    bool              // Use path-aware attribute name translation
+	pathCfToTfNameMap map[string]string // Map of "cf/path/CfProp" to TF attribute name (path-aware mode)
+	tfSchema          schema.Schema     // Terraform schema for the data source type
+	tfTypeName        string            // Terraform type name for data source type
 }

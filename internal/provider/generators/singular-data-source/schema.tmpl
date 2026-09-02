@@ -47,11 +47,19 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, err
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
+{{ if .PathAwareNames }}
+	opts = opts.WithPathAwareAttributeNameMap(map[string]string{
+{{- range $key, $value := .AttributeNameMap }}
+		"{{ $key }}": "{{ $value }}",
+{{- end }}
+	})
+{{ else }}
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",
 {{- end }}
 	})
+{{ end }}
 
     v, err := generic.NewSingularDataSource(ctx, opts...)
 

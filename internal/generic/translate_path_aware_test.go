@@ -331,3 +331,90 @@ func makePathAwareCfToTfMap() map[string]string {
 		"RestrictedInstanceGroups/EnvironmentConfig/FSxLustreConfig/PerUnitStorageThroughput": "per_unit_storage_throughput",
 	}
 }
+
+// TestPathAwareDataSourceFromString verifies that a path-aware data source can
+// correctly parse a Cloud Control API JSON response containing CF properties
+// that collide after name conversion (FSxLustreConfig vs FsxLustreConfig).
+// This is the same code path that the singular data source's Read() method uses.
+func TestPathAwareDataSourceFromString(t *testing.T) {
+	_, testSchema, _, pathCfToTfMap := makePathAwareTestFixtures()
+
+	// Simulated Cloud Control API GetResource response — a JSON string with
+	// both "FsxLustreConfig" (lowercase s) and "FSxLustreConfig" (capital S)
+	// in different parts of the tree.
+	apiResponse := `{
+		"InstanceGroups": [{
+			"InstanceGroupName": "worker-group",
+			"InstanceStorageConfigs": [{
+				"FsxLustreConfig": {
+					"DnsName": "fs-abc123.fsx.us-east-1.amazonaws.com",
+					"MountName": "lustre1"
+				}
+			}]
+		}],
+		"RestrictedInstanceGroups": [{
+			"InstanceGroupName": "restricted-group",
+			"InstanceStorageConfigs": [{
+				"FsxLustreConfig": {
+					"DnsName": "fs-def456.fsx.us-east-1.amazonaws.com",
+					"MountName": "lustre2"
+				}
+			}],
+			"EnvironmentConfig": {
+				"FSxLustreConfig": {
+					"SizeInGiB": 2400,
+					"PerUnitStorageThroughput": 250
+				}
+			}
+		}]
+	}`
+
+	translator := toTerraform{
+		pathAwareNames:    true,
+		pathCfToTfNameMap: pathCfToTfMap,
+	}
+
+	// FromString is what the singular data source's Read() calls.
+	val, err := translator.FromString(context.TODO(), testSchema, apiResponse, nil)
+	if err != nil {
+		t.Fatalf("FromString failed: %s", err)
+	}
+
+	// Verify we can roundtrip back to CF JSON with correct property name casing.
+	reverseTranslator := toCloudControl{
+		pathAwareNames:    true,
+		pathTfToCfNameMap: makePathAwareTfToCfMap(),
+	}
+
+	raw, err := reverseTranslator.AsRaw(context.TODO(), testSchema, val)
+	if err != nil {
+		t.Fatalf("roundtrip AsRaw failed: %s", err)
+	}
+
+	// Verify the CF property names have correct casing after roundtrip.
+	ig := raw["InstanceGroups"].([]any)[0].(map[string]any)
+	isc := ig["InstanceStorageConfigs"].([]any)[0].(map[string]any)
+	if _, ok := isc["FsxLustreConfig"]; !ok {
+		t.Error("expected FsxLustreConfig (lowercase s) in InstanceStorageConfigs, got keys:", keys(isc))
+	}
+	if _, ok := isc["FSxLustreConfig"]; ok {
+		t.Error("unexpected FSxLustreConfig (capital S) in InstanceStorageConfigs")
+	}
+
+	rig := raw["RestrictedInstanceGroups"].([]any)[0].(map[string]any)
+	env := rig["EnvironmentConfig"].(map[string]any)
+	if _, ok := env["FSxLustreConfig"]; !ok {
+		t.Error("expected FSxLustreConfig (capital S) in EnvironmentConfig, got keys:", keys(env))
+	}
+	if _, ok := env["FsxLustreConfig"]; ok {
+		t.Error("unexpected FsxLustreConfig (lowercase s) in EnvironmentConfig")
+	}
+}
+
+func keys(m map[string]any) []string {
+	ks := make([]string, 0, len(m))
+	for k := range m {
+		ks = append(ks, k)
+	}
+	return ks
+}
