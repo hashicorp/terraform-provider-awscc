@@ -24,6 +24,7 @@ import (
 var (
 	cfTypeSchemaFile = flag.String("cfschema", "", "CloudFormation resource type schema file; required")
 	packageName      = flag.String("package", "", "override package name for generated code")
+	pathAwareNames   = flag.Bool("path-aware-names", false, "use path-aware attribute name map for collision resolution")
 	tfDataSourceType = flag.String("data-source", "", "Terraform data source type; required")
 )
 
@@ -78,7 +79,7 @@ func NewGenerator() *Generator {
 func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
 	g.Infof("generating Terraform data source code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfDataSourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
-	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.DataSourceType, g.tfDataSourceType, packageName)
+	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.DataSourceType, g.tfDataSourceType, packageName, *pathAwareNames)
 
 	if err != nil {
 		return err

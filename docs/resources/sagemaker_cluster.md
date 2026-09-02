@@ -322,8 +322,9 @@ variable "subnet_2" {
 - `instance_groups` (Attributes List) The instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups))
 - `node_provisioning_mode` (String) Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.
 - `node_recovery` (String) If node auto-recovery is set to true, faulty nodes will be replaced or rebooted when a failure is detected. If set to false, nodes will be labelled when a fault is detected.
-- `orchestrator` (Attributes) Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster. (see [below for nested schema](#nestedatt--orchestrator))
+- `orchestrator` (Attributes) Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster or Slurm configuration. (see [below for nested schema](#nestedatt--orchestrator))
 - `restricted_instance_groups` (Attributes List) The restricted instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups))
+- `restricted_instance_groups_config` (Attributes) The cluster-level configuration for restricted instance groups, including shared environment settings for inter-RIG communication and FSx Lustre sharing. (see [below for nested schema](#nestedatt--restricted_instance_groups_config))
 - `tags` (Attributes Set) Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging. (see [below for nested schema](#nestedatt--tags))
 - `tiered_storage_config` (Attributes) Configuration for tiered storage in the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--tiered_storage_config))
 - `vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--vpc_config))
@@ -350,22 +351,89 @@ Optional:
 
 Optional:
 
+- `auto_patch_config` (Attributes) The configuration for automatic patching of the instance group. Enables workload-aware, patch-level AMI updates. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config))
 - `capacity_requirements` (Attributes) Specifies the capacity requirements configuration for an instance group (see [below for nested schema](#nestedatt--instance_groups--capacity_requirements))
 - `current_count` (Number) The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.
 - `execution_role` (String) The execution role for the instance group to assume.
 - `image_id` (String) AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId
 - `instance_count` (Number) The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.
 - `instance_group_name` (String) The name of the instance group of a SageMaker HyperPod cluster.
+- `instance_requirements` (Attributes) The instance requirements for the instance group. Specifies a list of instance types that can be used. (see [below for nested schema](#nestedatt--instance_groups--instance_requirements))
 - `instance_storage_configs` (Attributes List) The instance storage configuration for the instance group. (see [below for nested schema](#nestedatt--instance_groups--instance_storage_configs))
 - `instance_type` (String) The instance type of the instance group of a SageMaker HyperPod cluster.
 - `kubernetes_config` (Attributes) Kubernetes configuration for cluster nodes including labels and taints. (see [below for nested schema](#nestedatt--instance_groups--kubernetes_config))
-- `life_cycle_config` (Attributes) The lifecycle configuration for a SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups--life_cycle_config))
+- `life_cycle_config` (Attributes) The lifecycle configuration for a SageMaker HyperPod cluster. When omitted, the instance group uses Bootstrap mode. When provided with SourceS3Uri and OnCreate, uses Customer Managed mode. When provided with SourceS3Uri and OnInitComplete, uses Extended mode. (see [below for nested schema](#nestedatt--instance_groups--life_cycle_config))
 - `min_instance_count` (Number) The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.
+- `network_interface` (Attributes) Specifies the network interface configuration for the instance group. (see [below for nested schema](#nestedatt--instance_groups--network_interface))
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
 - `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
 - `scheduled_update_config` (Attributes) The configuration object of the schedule that SageMaker follows when updating the AMI. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config))
+- `slurm_config` (Attributes) Slurm configuration for the instance group. (see [below for nested schema](#nestedatt--instance_groups--slurm_config))
 - `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
 - `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.
+
+<a id="nestedatt--instance_groups--auto_patch_config"></a>
+### Nested Schema for `instance_groups.auto_patch_config`
+
+Optional:
+
+- `deployment_config` (Attributes) The configuration to use when updating the AMI versions. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config--deployment_config))
+- `patch_schedule` (Attributes) The schedule configuration for automatic patching. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config--patch_schedule))
+- `patching_strategy` (String) The patching strategy that determines when and how instances are patched. WhenIdle patches instances as they become idle. WhenAllIdle patches all instances when they are all idle.
+
+<a id="nestedatt--instance_groups--auto_patch_config--deployment_config"></a>
+### Nested Schema for `instance_groups.auto_patch_config.deployment_config`
+
+Optional:
+
+- `auto_rollback_configuration` (Attributes List) An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config--deployment_config--auto_rollback_configuration))
+- `rolling_update_policy` (Attributes) The policy that SageMaker uses when updating the AMI versions of the cluster. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config--deployment_config--rolling_update_policy))
+- `wait_interval_in_seconds` (Number) The duration in seconds that SageMaker waits before updating more instances in the cluster.
+
+<a id="nestedatt--instance_groups--auto_patch_config--deployment_config--auto_rollback_configuration"></a>
+### Nested Schema for `instance_groups.auto_patch_config.deployment_config.auto_rollback_configuration`
+
+Optional:
+
+- `alarm_name` (String) The name of the alarm.
+
+
+<a id="nestedatt--instance_groups--auto_patch_config--deployment_config--rolling_update_policy"></a>
+### Nested Schema for `instance_groups.auto_patch_config.deployment_config.rolling_update_policy`
+
+Optional:
+
+- `maximum_batch_size` (Attributes) The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config--deployment_config--rolling_update_policy--maximum_batch_size))
+- `rollback_maximum_batch_size` (Attributes) The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances. (see [below for nested schema](#nestedatt--instance_groups--auto_patch_config--deployment_config--rolling_update_policy--rollback_maximum_batch_size))
+
+<a id="nestedatt--instance_groups--auto_patch_config--deployment_config--rolling_update_policy--maximum_batch_size"></a>
+### Nested Schema for `instance_groups.auto_patch_config.deployment_config.rolling_update_policy.maximum_batch_size`
+
+Optional:
+
+- `type` (String) Specifies whether SageMaker should process the update by amount or percentage of instances.
+- `value` (Number) Specifies the amount or percentage of instances SageMaker updates at a time.
+
+
+<a id="nestedatt--instance_groups--auto_patch_config--deployment_config--rolling_update_policy--rollback_maximum_batch_size"></a>
+### Nested Schema for `instance_groups.auto_patch_config.deployment_config.rolling_update_policy.rollback_maximum_batch_size`
+
+Optional:
+
+- `type` (String) Specifies whether SageMaker should process the update by amount or percentage of instances.
+- `value` (Number) Specifies the amount or percentage of instances SageMaker updates at a time.
+
+
+
+
+<a id="nestedatt--instance_groups--auto_patch_config--patch_schedule"></a>
+### Nested Schema for `instance_groups.auto_patch_config.patch_schedule`
+
+Optional:
+
+- `next_patch_date` (String) The date and time of the next scheduled patch, set by the system when a patch AMI is detected.
+
+
 
 <a id="nestedatt--instance_groups--capacity_requirements"></a>
 ### Nested Schema for `instance_groups.capacity_requirements`
@@ -376,12 +444,22 @@ Optional:
 - `spot` (String) Options for Spot capacity
 
 
+<a id="nestedatt--instance_groups--instance_requirements"></a>
+### Nested Schema for `instance_groups.instance_requirements`
+
+Optional:
+
+- `instance_types` (List of String) A list of instance types that can be used for this instance group.
+
+
 <a id="nestedatt--instance_groups--instance_storage_configs"></a>
 ### Nested Schema for `instance_groups.instance_storage_configs`
 
 Optional:
 
 - `ebs_volume_config` (Attributes) Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker. (see [below for nested schema](#nestedatt--instance_groups--instance_storage_configs--ebs_volume_config))
+- `fsx_lustre_config` (Attributes) Configuration for mounting an Amazon FSx Lustre file system to the instances in the SageMaker HyperPod cluster instance group. (see [below for nested schema](#nestedatt--instance_groups--instance_storage_configs--fsx_lustre_config))
+- `fsx_open_zfs_config` (Attributes) Configuration for mounting an Amazon FSx OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group. (see [below for nested schema](#nestedatt--instance_groups--instance_storage_configs--fsx_open_zfs_config))
 
 <a id="nestedatt--instance_groups--instance_storage_configs--ebs_volume_config"></a>
 ### Nested Schema for `instance_groups.instance_storage_configs.ebs_volume_config`
@@ -391,6 +469,25 @@ Optional:
 - `root_volume` (Boolean)
 - `volume_kms_key_id` (String)
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
+
+
+<a id="nestedatt--instance_groups--instance_storage_configs--fsx_lustre_config"></a>
+### Nested Schema for `instance_groups.instance_storage_configs.fsx_lustre_config`
+
+Optional:
+
+- `dns_name` (String) The DNS name of the FSx for Lustre file system.
+- `mount_name` (String) The mount name of the FSx for Lustre file system.
+- `mount_path` (String) The mount path for the FSx for Lustre file system.
+
+
+<a id="nestedatt--instance_groups--instance_storage_configs--fsx_open_zfs_config"></a>
+### Nested Schema for `instance_groups.instance_storage_configs.fsx_open_zfs_config`
+
+Optional:
+
+- `dns_name` (String) The DNS name of the FSx for OpenZFS file system.
+- `mount_path` (String) The mount path for the FSx for OpenZFS file system.
 
 
 
@@ -418,8 +515,17 @@ Optional:
 
 Optional:
 
-- `on_create` (String) The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.
+- `on_create` (String) The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation. Mutually exclusive with OnInitComplete.
+- `on_init_complete` (String) The file name of the extension script under SourceS3Uri. This script runs after HyperPod configures the default software on the instance. Mutually exclusive with OnCreate.
 - `source_s3_uri` (String) An Amazon S3 bucket path where your lifecycle scripts are stored.
+
+
+<a id="nestedatt--instance_groups--network_interface"></a>
+### Nested Schema for `instance_groups.network_interface`
+
+Optional:
+
+- `interface_type` (String) The type of network interface.
 
 
 <a id="nestedatt--instance_groups--override_vpc_config"></a>
@@ -485,6 +591,15 @@ Optional:
 
 
 
+<a id="nestedatt--instance_groups--slurm_config"></a>
+### Nested Schema for `instance_groups.slurm_config`
+
+Optional:
+
+- `node_type` (String) The type of Slurm node for this instance group.
+- `partition_names` (List of String) The Slurm partitions that this instance group belongs to. Maximum of 1 partition.
+
+
 
 <a id="nestedatt--orchestrator"></a>
 ### Nested Schema for `orchestrator`
@@ -492,6 +607,7 @@ Optional:
 Optional:
 
 - `eks` (Attributes) Specifies parameter(s) related to EKS as orchestrator, e.g. the EKS cluster nodes will attach to, (see [below for nested schema](#nestedatt--orchestrator--eks))
+- `slurm` (Attributes) Specifies parameter(s) related to Slurm as orchestrator. (see [below for nested schema](#nestedatt--orchestrator--slurm))
 
 <a id="nestedatt--orchestrator--eks"></a>
 ### Nested Schema for `orchestrator.eks`
@@ -499,6 +615,14 @@ Optional:
 Optional:
 
 - `cluster_arn` (String) The ARN of the EKS cluster, such as arn:aws:eks:us-west-2:123456789012:cluster/my-eks-cluster
+
+
+<a id="nestedatt--orchestrator--slurm"></a>
+### Nested Schema for `orchestrator.slurm`
+
+Optional:
+
+- `slurm_config_strategy` (String) The strategy for managing Slurm configuration on the cluster.
 
 
 
@@ -542,6 +666,8 @@ Optional:
 Optional:
 
 - `ebs_volume_config` (Attributes) Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker. (see [below for nested schema](#nestedatt--restricted_instance_groups--instance_storage_configs--ebs_volume_config))
+- `fsx_lustre_config` (Attributes) Configuration for mounting an Amazon FSx Lustre file system to the instances in the SageMaker HyperPod cluster instance group. (see [below for nested schema](#nestedatt--restricted_instance_groups--instance_storage_configs--fsx_lustre_config))
+- `fsx_open_zfs_config` (Attributes) Configuration for mounting an Amazon FSx OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group. (see [below for nested schema](#nestedatt--restricted_instance_groups--instance_storage_configs--fsx_open_zfs_config))
 
 <a id="nestedatt--restricted_instance_groups--instance_storage_configs--ebs_volume_config"></a>
 ### Nested Schema for `restricted_instance_groups.instance_storage_configs.ebs_volume_config`
@@ -553,6 +679,25 @@ Optional:
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
 
 
+<a id="nestedatt--restricted_instance_groups--instance_storage_configs--fsx_lustre_config"></a>
+### Nested Schema for `restricted_instance_groups.instance_storage_configs.fsx_lustre_config`
+
+Optional:
+
+- `dns_name` (String) The DNS name of the FSx for Lustre file system.
+- `mount_name` (String) The mount name of the FSx for Lustre file system.
+- `mount_path` (String) The mount path for the FSx for Lustre file system.
+
+
+<a id="nestedatt--restricted_instance_groups--instance_storage_configs--fsx_open_zfs_config"></a>
+### Nested Schema for `restricted_instance_groups.instance_storage_configs.fsx_open_zfs_config`
+
+Optional:
+
+- `dns_name` (String) The DNS name of the FSx for OpenZFS file system.
+- `mount_path` (String) The mount path for the FSx for OpenZFS file system.
+
+
 
 <a id="nestedatt--restricted_instance_groups--override_vpc_config"></a>
 ### Nested Schema for `restricted_instance_groups.override_vpc_config`
@@ -561,6 +706,32 @@ Optional:
 
 - `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
 - `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect your training job or model.
+
+
+
+<a id="nestedatt--restricted_instance_groups_config"></a>
+### Nested Schema for `restricted_instance_groups_config`
+
+Optional:
+
+- `shared_environment_config` (Attributes) The shared environment configuration for restricted instance groups that use cluster-level shared FSx Lustre storage. (see [below for nested schema](#nestedatt--restricted_instance_groups_config--shared_environment_config))
+
+<a id="nestedatt--restricted_instance_groups_config--shared_environment_config"></a>
+### Nested Schema for `restricted_instance_groups_config.shared_environment_config`
+
+Optional:
+
+- `fsx_lustre_config` (Attributes) Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups_config--shared_environment_config--fsx_lustre_config))
+- `fsx_lustre_deletion_policy` (String) The deletion policy for the shared FSx Lustre file system. Keep retains the FSx when RIGs are deleted. DeleteIfNotUsed deletes the FSx when no RIGs reference it.
+
+<a id="nestedatt--restricted_instance_groups_config--shared_environment_config--fsx_lustre_config"></a>
+### Nested Schema for `restricted_instance_groups_config.shared_environment_config.fsx_lustre_config`
+
+Optional:
+
+- `per_unit_storage_throughput` (Number) The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.
+- `size_in_gi_b` (Number) The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).
+
 
 
 

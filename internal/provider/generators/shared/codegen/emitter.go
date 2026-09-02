@@ -77,10 +77,11 @@ var (
 const attributeFunctionHashBytes = 12
 
 type Emitter struct {
-	CfResource   *cfschema.Resource
-	IsDataSource bool
-	Ui           cli.Ui
-	Writer       io.Writer
+	CfResource     *cfschema.Resource
+	IsDataSource   bool
+	PathAwareNames bool // Emit path-keyed attribute name map for collision resolution.
+	Ui             cli.Ui
+	Writer         io.Writer
 	// Deduplicate enables the shared-attribute-helper emission introduced in
 	// #3270. It is only needed for depth-limited (de-recursed) schemas whose
 	// inline form would exceed the Go compiler's per-function limits. When
@@ -1075,38 +1076,54 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
 
-		switch {
-		case len(parent.path) == 0 && tfAttributeName == "id":
-			// Terraform uses "id" as the attribute name for the resource's primary identifier.
-			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
-			const (
-				partCount = 3
-			)
-			parts := strings.SplitN(tfType, "_", partCount)
-			// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
-			relativeTfType := parts[2]
-			tfAttributeName = relativeTfType + "_id"
-			if _, ok := attributeNameMap[tfAttributeName]; ok {
-				return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
+		if e.PathAwareNames {
+			// In path-aware mode, store "CfParentPath/tfAttr" → "CfPropertyName".
+			// No collision possible since paths are unique.
+			// Still handle top-level id/provider conflicts.
+			if len(parent.path) == 0 && tfAttributeName == "id" {
+				const partCount = 3
+				parts := strings.SplitN(tfType, "_", partCount)
+				relativeTfType := parts[2]
+				tfAttributeName = relativeTfType + "_id"
+			} else if len(parent.path) == 0 && tfAttributeName == "provider" {
+				tfAttributeName = "provider_name"
 			}
-			attributeNameMap[tfAttributeName] = name
-
-		case len(parent.path) == 0 && tfAttributeName == "provider":
-			// Map "provider" to "provider_name" to avoid conflicts with the meta-argument.
-			tfAttributeName = "provider_name"
-			if _, ok := attributeNameMap[tfAttributeName]; ok {
-				return features, fmt.Errorf("top-level property %s conflicts with provider", tfAttributeName)
-			}
-			attributeNameMap[tfAttributeName] = name
-
-		default:
-			cfPropertyName, ok := attributeNameMap[tfAttributeName]
-			if ok {
-				if cfPropertyName != name {
-					return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+			mapKey := strings.Join(append(parent.path, tfAttributeName), "/")
+			attributeNameMap[mapKey] = name
+		} else {
+			switch {
+			case len(parent.path) == 0 && tfAttributeName == "id":
+				// Terraform uses "id" as the attribute name for the resource's primary identifier.
+				// If the resource has its own "Id" property, swap in a new Terraform attribute name.
+				const (
+					partCount = 3
+				)
+				parts := strings.SplitN(tfType, "_", partCount)
+				// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
+				relativeTfType := parts[2]
+				tfAttributeName = relativeTfType + "_id"
+				if _, ok := attributeNameMap[tfAttributeName]; ok {
+					return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
 				}
-			} else {
 				attributeNameMap[tfAttributeName] = name
+
+			case len(parent.path) == 0 && tfAttributeName == "provider":
+				// Map "provider" to "provider_name" to avoid conflicts with the meta-argument.
+				tfAttributeName = "provider_name"
+				if _, ok := attributeNameMap[tfAttributeName]; ok {
+					return features, fmt.Errorf("top-level property %s conflicts with provider", tfAttributeName)
+				}
+				attributeNameMap[tfAttributeName] = name
+
+			default:
+				cfPropertyName, ok := attributeNameMap[tfAttributeName]
+				if ok {
+					if cfPropertyName != name {
+						return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+					}
+				} else {
+					attributeNameMap[tfAttributeName] = name
+				}
 			}
 		}
 

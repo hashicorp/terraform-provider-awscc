@@ -6241,8 +6241,8 @@ resource_schema "aws_sagemaker_artifact" {
 }
 
 resource_schema "aws_sagemaker_cluster" {
-  cloudformation_type_name = "AWS::SageMaker::Cluster"
-  frozen_since             = "2025-12-17"
+  cloudformation_type_name   = "AWS::SageMaker::Cluster"
+  path_aware_attribute_names = true
 }
 
 resource_schema "aws_sagemaker_context" {

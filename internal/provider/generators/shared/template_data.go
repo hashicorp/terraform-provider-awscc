@@ -34,7 +34,7 @@ const (
 // GenerateTemplateData generates the template body from the Resource
 // constructed from a CloudFormation type's Schema file.
 // This method can be applied to both singular data source and resource types.
-func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, packageName string) (*TemplateData, error) {
+func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, packageName string, pathAwareNames ...bool) (*TemplateData, error) {
 	resource, err := NewResource(tfResourceType, cfTypeSchemaFile)
 
 	if err != nil {
@@ -63,17 +63,20 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	// e.g. "TestAccAWSLogsLogGroup"
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, res)
 
+	usePathAwareNames := len(pathAwareNames) > 0 && pathAwareNames[0]
+
 	sb := strings.Builder{}
 	deduplicate, err := schemaIsDeRecursed(cfTypeSchemaFile)
 	if err != nil {
 		return nil, err
 	}
 	codeEmitter := codegen.Emitter{
-		CfResource:   resource.CfResource,
-		IsDataSource: resType == DataSourceType,
-		Ui:           ui,
-		Writer:       &sb,
-		Deduplicate:  deduplicate,
+		CfResource:     resource.CfResource,
+		IsDataSource:   resType == DataSourceType,
+		PathAwareNames: usePathAwareNames,
+		Ui:             ui,
+		Writer:         &sb,
+		Deduplicate:    deduplicate,
 	}
 
 	// Generate code for the CloudFormation root properties schema.
@@ -95,6 +98,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		FactoryFunctionName:          factoryFunctionName,
 		HasRequiredAttribute:         true,
 		PackageName:                  packageName,
+		PathAwareNames:               usePathAwareNames,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
 		TerraformTypeName:            resource.TfType,
@@ -240,6 +244,7 @@ type TemplateData struct {
 	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
+	PathAwareNames                bool
 	PrimaryIdentifier             []identity.Identifier
 	RootPropertiesSchema          string
 	SchemaDescription             string
