@@ -1,0 +1,154 @@
+{
+  "typeName": "AWS::CodeBuild::ReportGroup",
+  "description": "Resource Type definition for AWS::CodeBuild::ReportGroup",
+  "additionalProperties": false,
+  "properties": {
+    "Type": {
+      "type": "string",
+      "enum": [
+        "TEST",
+        "CODE_COVERAGE"
+      ]
+    },
+    "ExportConfig": {
+      "$ref": "#/definitions/ReportExportConfig"
+    },
+    "Arn": {
+      "type": "string"
+    },
+    "DeleteReports": {
+      "type": "boolean"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "S3ReportExportConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Path": {
+          "type": "string"
+        },
+        "Bucket": {
+          "type": "string"
+        },
+        "Packaging": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "ZIP"
+          ]
+        },
+        "EncryptionKey": {
+          "type": "string"
+        },
+        "BucketOwner": {
+          "type": "string"
+        },
+        "EncryptionDisabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Bucket"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "ReportExportConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3Destination": {
+          "$ref": "#/definitions/S3ReportExportConfig"
+        },
+        "ExportConfigType": {
+          "type": "string",
+          "enum": [
+            "S3",
+            "NO_EXPORT"
+          ]
+        }
+      },
+      "required": [
+        "ExportConfigType"
+      ]
+    }
+  },
+  "required": [
+    "Type",
+    "ExportConfig"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Type"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/DeleteReports"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": []
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "codebuild:CreateReportGroup"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "codebuild:BatchGetReportGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "codebuild:UpdateReportGroup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "codebuild:BatchGetReportGroups",
+        "codebuild:DeleteReportGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "codebuild:ListReportGroups"
+      ]
+    }
+  }
+}
