@@ -387,6 +387,17 @@ generators — the reference for anyone touching the engine.
 - **`x-derecursed`** is understood and dormant: the copy preserves
   `Emitter.Deduplicate` (via `schemaIsDeRecursed`), but zero cached schemas carry
   the key today, so it needs no special handling.
+- **`path_aware_attribute_names`** (an overlay row flag, threaded through
+  `plan.pathAwareNames` to `Emitter.PathAwareNames`) resolves a CloudFormation
+  schema that has two properties normalizing to the same Terraform attribute
+  name at different nesting levels (e.g. `AWS::SageMaker::Cluster`'s
+  `FsxLustreConfig` vs. `FSxLustreConfig`) by keying the attribute name map on
+  the full CloudFormation parent path instead of the bare name, bypassing
+  `emitSchema`'s collision check entirely for that resource. Opt-in per type;
+  every other resource keeps the flat map. Ported from the legacy generator
+  (issue #3019) with no runtime change — the translation-layer half of that fix
+  (`internal/generic/translate.go`/`resource.go`/`data_source.go`) is
+  provider-runtime code bigdiffer does not own or copy.
 
 ## Deferred and future work
 
