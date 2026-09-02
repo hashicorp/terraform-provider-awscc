@@ -36,7 +36,6 @@ internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
 internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
 internal/service/cloudformation/schemas/AWS_S3_Bucket.json
-internal/service/cloudformation/schemas/AWS_SageMaker_Cluster.json
 internal/service/cloudformation/schemas/AWS_SageMaker_ExperimentTrialComponent.json
 internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json
 internal/service/cloudformation/schemas/AWS_Synthetics_Canary.json

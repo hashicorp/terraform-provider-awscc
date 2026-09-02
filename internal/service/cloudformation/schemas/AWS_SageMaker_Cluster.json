@@ -30,6 +30,7 @@
   "primaryIdentifier": [
     "/properties/ClusterArn"
   ],
+  "required": [],
   "conditionalCreateOnlyProperties": [
     "/properties/InstanceGroups/*/CustomMetadata",
     "/properties/RestrictedInstanceGroups/*/CustomMetadata"
@@ -152,7 +153,7 @@
       "properties": {
         "AlarmName": {
           "minLength": 1,
-          "pattern": ".+",
+          "pattern": "",
           "description": "The name of the alarm.",
           "type": "string",
           "maxLength": 256
@@ -197,7 +198,7 @@
     },
     "ClusterKubernetesLabels": {
       "patternProperties": {
-        "^.+$": {
+        "": {
           "type": "string"
         }
       },
@@ -410,7 +411,7 @@
       "properties": {
         "MountPath": {
           "minLength": 1,
-          "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+          "pattern": "",
           "description": "The mount path for the FSx for Lustre file system.",
           "type": "string",
           "maxLength": 1024
@@ -707,7 +708,7 @@
       "properties": {
         "MountPath": {
           "minLength": 1,
-          "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+          "pattern": "",
           "description": "The mount path for the FSx for OpenZFS file system.",
           "type": "string",
           "maxLength": 1024
