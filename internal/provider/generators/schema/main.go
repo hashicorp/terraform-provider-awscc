@@ -1,12 +1,6 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
-// Legacy code: superseded by bigdiffer's discovery + `-update`/`-generate`/`-docs`
-// pipeline (internal/tools/bigdiffer), including
-// codegen.GenerateImportExampleDocs for the import-example docs this file also
-// generates. Kept as the deprecated `make`/go:generate fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
-
 package main
 
 import (
@@ -58,8 +52,6 @@ type ResourceSchema struct {
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
 	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
 	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
-	FrozenSince                          string `hcl:"frozen_since,optional"`
-	NonProvisionable                     bool   `hcl:"non_provisionable,optional"`
 }
 
 var (
@@ -346,13 +338,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, s
 
 	resourceSchemaFileExists := fileExists(resourceSchemaFilename)
 
-	if schema.FrozenSince != "" {
-		if !resourceSchemaFileExists {
-			return "", "", fmt.Errorf("frozen_since=%q is set for %s but no committed schema exists at %q", schema.FrozenSince, schema.CloudFormationTypeName, resourceSchemaFilename)
-		}
-
-		d.infof("frozen_since=%q; using committed CloudFormation Resource Provider Schema %q", schema.FrozenSince, resourceSchemaFilename)
-	} else if !resourceSchemaFileExists {
+	if !resourceSchemaFileExists {
 		dst := filepath.Join(d.tempDirectory, filepath.Base(resourceSchemaFilename))
 
 		d.infof("downloading CloudFormation Resource Provider Schema to %q", dst)

@@ -1,11 +1,6 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
-// Legacy code: superseded by codegen.GeneratePluralDataSource in
-// internal/tools/bigdiffer/codegen/generate.go. Kept as the deprecated
-// `make`/go:generate fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
-
 //go:build ignore
 // +build ignore
 
