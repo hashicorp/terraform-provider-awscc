@@ -195,7 +195,7 @@ func TestReconcileListResourceDropsListResourceOnFailedPlural(t *testing.T) {
 	}
 
 	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
-	code, test, err := codegen.GenerateResource(ui, p.schemaFile, resArt.tfType, resArt.packageName, cfg.servicesPath, true)
+	code, test, err := codegen.GenerateResource(ui, p.schemaFile, resArt.tfType, resArt.packageName, cfg.servicesPath, true, false)
 	if err != nil {
 		t.Fatalf("GenerateResource: %v", err)
 	}

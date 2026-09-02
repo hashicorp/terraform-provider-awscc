@@ -27,9 +27,9 @@ type genResult struct {
 func generateArtifact(ui cli.Ui, cfg config, p plan, a genArtifact) (code, test []byte, err error) {
 	switch a.kind {
 	case artifactResource:
-		return codegen.GenerateResource(ui, p.schemaFile, a.tfType, a.packageName, cfg.servicesPath, a.listResource)
+		return codegen.GenerateResource(ui, p.schemaFile, a.tfType, a.packageName, cfg.servicesPath, a.listResource, p.pathAwareNames)
 	case artifactSingularDataSource:
-		return codegen.GenerateSingularDataSource(ui, p.schemaFile, a.tfType, a.packageName, cfg.servicesPath)
+		return codegen.GenerateSingularDataSource(ui, p.schemaFile, a.tfType, a.packageName, cfg.servicesPath, p.pathAwareNames)
 	case artifactPluralDataSource:
 		return codegen.GeneratePluralDataSource(p.cfType, a.tfType, a.packageName)
 	}

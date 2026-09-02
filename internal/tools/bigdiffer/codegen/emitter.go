@@ -74,8 +74,16 @@ const attributeFunctionHashBytes = 12
 type Emitter struct {
 	CfResource   *cfschema.Resource
 	IsDataSource bool
-	Ui           cli.Ui
-	Writer       io.Writer
+	// PathAwareNames emits a path-keyed attribute name map ("CfParentPath/tfAttr"
+	// -> CfPropertyName) instead of a flat one, bypassing the same-short-name
+	// collision check emitSchema otherwise enforces. Opt-in per resource via
+	// path_aware_attribute_names in all_schemas.hcl (PR 3284, issue #3019: two
+	// CloudFormation properties that normalize to the same Terraform attribute
+	// name at different nesting levels, e.g. AWS::SageMaker::Cluster's
+	// FsxLustreConfig/FSxLustreConfig).
+	PathAwareNames bool
+	Ui             cli.Ui
+	Writer         io.Writer
 	// Deduplicate enables the shared-attribute-helper emission introduced in
 	// #3270. It is only needed for depth-limited (de-recursed) schemas whose
 	// inline form would exceed the Go compiler's per-function limits. When
@@ -1067,38 +1075,57 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
 
-		switch {
-		case len(parent.path) == 0 && tfAttributeName == "id":
-			// Terraform uses "id" as the attribute name for the resource's primary identifier.
-			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
-			const (
-				partCount = 3
-			)
-			parts := strings.SplitN(tfType, "_", partCount)
-			// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
-			relativeTfType := parts[2]
-			tfAttributeName = relativeTfType + "_id"
-			if _, ok := attributeNameMap[tfAttributeName]; ok {
-				return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
+		if e.PathAwareNames {
+			// Path-aware mode stores "CfParentPath/tfAttr" -> CfPropertyName.
+			// Paths are unique by construction, so no collision is possible;
+			// still apply the same top-level id/provider renames as the flat
+			// path so path-aware and flat resources behave identically at the
+			// root.
+			switch {
+			case len(parent.path) == 0 && tfAttributeName == "id":
+				const partCount = 3
+				parts := strings.SplitN(tfType, "_", partCount)
+				relativeTfType := parts[2]
+				tfAttributeName = relativeTfType + "_id"
+			case len(parent.path) == 0 && tfAttributeName == "provider":
+				tfAttributeName = "provider_name"
 			}
-			attributeNameMap[tfAttributeName] = name
-
-		case len(parent.path) == 0 && tfAttributeName == "provider":
-			// Map "provider" to "provider_name" to avoid conflicts with the meta-argument.
-			tfAttributeName = "provider_name"
-			if _, ok := attributeNameMap[tfAttributeName]; ok {
-				return features, fmt.Errorf("top-level property %s conflicts with provider", tfAttributeName)
-			}
-			attributeNameMap[tfAttributeName] = name
-
-		default:
-			cfPropertyName, ok := attributeNameMap[tfAttributeName]
-			if ok {
-				if cfPropertyName != name {
-					return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+			mapKey := strings.Join(append(parent.path, tfAttributeName), "/")
+			attributeNameMap[mapKey] = name
+		} else {
+			switch {
+			case len(parent.path) == 0 && tfAttributeName == "id":
+				// Terraform uses "id" as the attribute name for the resource's primary identifier.
+				// If the resource has its own "Id" property, swap in a new Terraform attribute name.
+				const (
+					partCount = 3
+				)
+				parts := strings.SplitN(tfType, "_", partCount)
+				// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
+				relativeTfType := parts[2]
+				tfAttributeName = relativeTfType + "_id"
+				if _, ok := attributeNameMap[tfAttributeName]; ok {
+					return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
 				}
-			} else {
 				attributeNameMap[tfAttributeName] = name
+
+			case len(parent.path) == 0 && tfAttributeName == "provider":
+				// Map "provider" to "provider_name" to avoid conflicts with the meta-argument.
+				tfAttributeName = "provider_name"
+				if _, ok := attributeNameMap[tfAttributeName]; ok {
+					return features, fmt.Errorf("top-level property %s conflicts with provider", tfAttributeName)
+				}
+				attributeNameMap[tfAttributeName] = name
+
+			default:
+				cfPropertyName, ok := attributeNameMap[tfAttributeName]
+				if ok {
+					if cfPropertyName != name {
+						return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+					}
+				} else {
+					attributeNameMap[tfAttributeName] = name
+				}
 			}
 		}
 

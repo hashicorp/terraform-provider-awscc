@@ -25,8 +25,10 @@ const (
 )
 
 // GenerateTemplateData builds the TemplateData for a resource or singular data
-// source from its CloudFormation schema file.
-func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, packageName, servicesPath string) (*TemplateData, error) {
+// source from its CloudFormation schema file. pathAwareNames enables path-keyed
+// attribute name resolution (path_aware_attribute_names in all_schemas.hcl; see
+// Emitter.PathAwareNames).
+func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, packageName, servicesPath string, pathAwareNames bool) (*TemplateData, error) {
 	resource, err := NewResource(tfResourceType, cfTypeSchemaFile)
 
 	if err != nil {
@@ -51,11 +53,12 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		return nil, err
 	}
 	codeEmitter := Emitter{
-		CfResource:   resource.CfResource,
-		IsDataSource: resType == DataSourceType,
-		Ui:           ui,
-		Writer:       &sb,
-		Deduplicate:  deduplicate,
+		CfResource:     resource.CfResource,
+		IsDataSource:   resType == DataSourceType,
+		PathAwareNames: pathAwareNames,
+		Ui:             ui,
+		Writer:         &sb,
+		Deduplicate:    deduplicate,
 	}
 
 	// Generate code for the CloudFormation root properties schema.
@@ -77,6 +80,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		FactoryFunctionName:          factoryFunctionName,
 		HasRequiredAttribute:         true,
 		PackageName:                  packageName,
+		PathAwareNames:               pathAwareNames,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
 		TerraformTypeName:            resource.TfType,
@@ -222,6 +226,7 @@ type TemplateData struct {
 	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
+	PathAwareNames                bool
 	PrimaryIdentifier             []identity.Identifier
 	RootPropertiesSchema          string
 	SchemaDescription             string

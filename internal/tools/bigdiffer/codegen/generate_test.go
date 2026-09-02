@@ -36,7 +36,7 @@ func TestGenerateResourceSmoke(t *testing.T) {
 	services := repoPath(t, "internal", "identity", "names", "services.hcl")
 
 	ui := &cli.BasicUi{Writer: os.Stdout, ErrorWriter: os.Stderr}
-	code, test, err := GenerateResource(ui, schema, "awscc_logs_log_group", "logs", services, true)
+	code, test, err := GenerateResource(ui, schema, "awscc_logs_log_group", "logs", services, true, false)
 	if err != nil {
 		t.Fatalf("GenerateResource: %v", err)
 	}

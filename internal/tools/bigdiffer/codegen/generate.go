@@ -55,8 +55,10 @@ func GenerateImportExamples(examples []ImportExample) ([]byte, error) {
 // equivalent of generators/resource/main.go: build the template data, snake-case
 // the primary-identifier names, honor the list-resource flag, render, and format.
 // servicesPath supplies the global/identity flags (§ services.hcl).
-func GenerateResource(ui cli.Ui, schemaFile, tfType, packageName, servicesPath string, listResource bool) (code, test []byte, err error) {
-	td, err := GenerateTemplateData(ui, schemaFile, ResourceType, tfType, packageName, servicesPath)
+// pathAwareNames enables path-keyed attribute name resolution
+// (path_aware_attribute_names in all_schemas.hcl; see Emitter.PathAwareNames).
+func GenerateResource(ui cli.Ui, schemaFile, tfType, packageName, servicesPath string, listResource, pathAwareNames bool) (code, test []byte, err error) {
+	td, err := GenerateTemplateData(ui, schemaFile, ResourceType, tfType, packageName, servicesPath, pathAwareNames)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -97,9 +99,11 @@ func renderGo(name, body string, data any) ([]byte, error) {
 
 // GenerateSingularDataSource renders a singular data source's code and test
 // in-process. servicesPath is unused for data sources (GenerateTemplateData reads
-// services.hcl only for resources) but kept for signature symmetry.
-func GenerateSingularDataSource(ui cli.Ui, schemaFile, tfType, packageName, servicesPath string) (code, test []byte, err error) {
-	td, err := GenerateTemplateData(ui, schemaFile, DataSourceType, tfType, packageName, servicesPath)
+// services.hcl only for resources) but kept for signature symmetry. pathAwareNames
+// enables path-keyed attribute name resolution (path_aware_attribute_names in
+// all_schemas.hcl; see Emitter.PathAwareNames).
+func GenerateSingularDataSource(ui cli.Ui, schemaFile, tfType, packageName, servicesPath string, pathAwareNames bool) (code, test []byte, err error) {
+	td, err := GenerateTemplateData(ui, schemaFile, DataSourceType, tfType, packageName, servicesPath, pathAwareNames)
 	if err != nil {
 		return nil, nil, err
 	}

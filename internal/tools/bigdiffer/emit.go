@@ -150,7 +150,7 @@ func emitImportExamples(cfg config, rows []resourceRow) ([]byte, error) {
 			continue // resource generation suppressed; no import example
 		}
 
-		td, err := codegen.GenerateTemplateData(ui, p.schemaFile, codegen.ResourceType, res.tfType, res.packageName, cfg.servicesPath)
+		td, err := codegen.GenerateTemplateData(ui, p.schemaFile, codegen.ResourceType, res.tfType, res.packageName, cfg.servicesPath, p.pathAwareNames)
 		if err != nil {
 			return nil, fmt.Errorf("template data %s: %w", p.cfType, err)
 		}

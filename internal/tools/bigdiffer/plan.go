@@ -33,10 +33,11 @@ type genArtifact struct {
 
 // plan is the fully-derived generation recipe for one resource_schema row.
 type plan struct {
-	cfType     string // e.g. "AWS::Logs::LogGroup"
-	tfType     string // e.g. "awscc_logs_log_group"
-	schemaFile string // cache path to the CloudFormation schema JSON
-	artifacts  []genArtifact
+	cfType         string // e.g. "AWS::Logs::LogGroup"
+	tfType         string // e.g. "awscc_logs_log_group"
+	schemaFile     string // cache path to the CloudFormation schema JSON
+	pathAwareNames bool   // row.PathAwareAttributeNames; see codegen.Emitter.PathAwareNames
+	artifacts      []genArtifact
 }
 
 // generationPlan derives, purely from an overlay row (no AWS, no I/O), the set
@@ -61,7 +62,7 @@ func generationPlan(row resourceRow, prefix, cacheDir string) (plan, error) {
 	}
 
 	pathSuffix := org + "/" + svc
-	p := plan{cfType: row.CloudFormationTypeName, tfType: tfType, schemaFile: schemaFile}
+	p := plan{cfType: row.CloudFormationTypeName, tfType: tfType, schemaFile: schemaFile, pathAwareNames: row.PathAwareAttributeNames}
 
 	if !row.SuppressResourceGeneration {
 		p.artifacts = append(p.artifacts, genArtifact{
