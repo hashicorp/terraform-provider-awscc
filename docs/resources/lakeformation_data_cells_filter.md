@@ -3,12 +3,12 @@
 page_title: "awscc_lakeformation_data_cells_filter Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  A resource schema representing a Lake Formation Data Cells Filter.
+  Resource Type definition for AWS::LakeFormation::DataCellsFilter
 ---
 
 # awscc_lakeformation_data_cells_filter (Resource)
 
-A resource schema representing a Lake Formation Data Cells Filter.
+Resource Type definition for AWS::LakeFormation::DataCellsFilter
 
 ## Example Usage
 

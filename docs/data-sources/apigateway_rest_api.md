@@ -45,6 +45,7 @@ Data Source schema for AWS::ApiGateway::RestApi
 - `root_resource_id` (String)
 - `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `version` (String)
 
 <a id="nestedatt--body_s3_location"></a>
 ### Nested Schema for `body_s3_location`

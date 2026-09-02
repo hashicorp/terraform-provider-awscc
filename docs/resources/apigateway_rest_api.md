@@ -124,6 +124,7 @@ resource "awscc_apigateway_stage" "example" {
 - `policy` (String) A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``""`` as delimiter and values of ``"execute-api:/"`` and ``"*"``.
 - `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `version` (String)
 
 ### Read-Only
 

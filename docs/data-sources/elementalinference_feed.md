@@ -54,14 +54,14 @@ Read-Only:
 Read-Only:
 
 - `callback_metadata` (String)
-- `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--clipping--data_source_configuration))
+- `data_source_configuration` (Attributes) Identifies the fixture whose event data Elemental Inference maps onto the clipping metadata for an output. (see [below for nested schema](#nestedatt--outputs--output_config--clipping--data_source_configuration))
 
 <a id="nestedatt--outputs--output_config--clipping--data_source_configuration"></a>
 ### Nested Schema for `outputs.output_config.clipping.data_source_configuration`
 
 Read-Only:
 
-- `fixture_id` (String)
+- `fixture_id` (String) The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. To obtain this ID, use the SearchFixtures operation.
 
 
 

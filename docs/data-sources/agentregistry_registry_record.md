@@ -31,7 +31,7 @@ Data Source schema for AWS::AgentRegistry::RegistryRecord
 - `record_type` (String) The type of the registry record.
 - `record_version` (String) The version of the registry record.
 - `registry_arn` (String) The Amazon Resource Name (ARN) of the registry containing the record.
-- `registry_id` (String) The identifier of the registry containing the record.
+- `registry_id` (String) The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).
 - `status` (String) The lifecycle status of the registry record.
 - `tags` (Attributes List) Tags to assign to the registry record. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) The timestamp when the registry record was last updated.
