@@ -48,9 +48,11 @@
     },
     "DataSourceConfiguration": {
       "type": "object",
+      "description": "Identifies the fixture whose event data Elemental Inference maps onto the clipping metadata for an output.",
       "properties": {
         "FixtureId": {
           "type": "string",
+          "description": "The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. To obtain this ID, use the SearchFixtures operation.",
           "maxLength": 128,
           "minLength": 1
         }

@@ -370,10 +370,10 @@
   "properties": {
     "RegistryId": {
       "type": "string",
-      "description": "The identifier of the registry containing the record.",
-      "minLength": 12,
-      "maxLength": 16,
-      "pattern": "^[a-zA-Z0-9]{12,16}$"
+      "description": "The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^(arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/)?[a-zA-Z0-9]{12,16}$"
     },
     "RecordId": {
       "type": "string",
@@ -452,7 +452,6 @@
     }
   },
   "required": [
-    "RegistryId",
     "Name",
     "RecordType",
     "Descriptors"
@@ -474,9 +473,12 @@
   ],
   "additionalIdentifiers": [
     [
-      "/properties/RegistryId",
+      "/properties/RegistryArn",
       "/properties/RecordId"
     ]
+  ],
+  "writeOnlyProperties": [
+    "/properties/RegistryId"
   ],
   "additionalProperties": false,
   "tagging": {
@@ -535,9 +537,9 @@
         "properties": {
           "RegistryId": {
             "type": "string",
-            "minLength": 12,
-            "maxLength": 16,
-            "pattern": "^[a-zA-Z0-9]{12,16}$"
+            "minLength": 1,
+            "maxLength": 2048,
+            "pattern": "^(arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/)?[a-zA-Z0-9]{12,16}$"
           }
         },
         "required": [

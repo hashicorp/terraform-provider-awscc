@@ -140,6 +140,7 @@
   },
   "handlers": {
     "create": {
+      "timeoutInMinutes": 780,
       "permissions": [
         "kendra:CreateQuerySuggestionsBlockList",
         "kendra:DescribeQuerySuggestionsBlockList",
@@ -155,6 +156,7 @@
       ]
     },
     "update": {
+      "timeoutInMinutes": 780,
       "permissions": [
         "kendra:UpdateQuerySuggestionsBlockList",
         "kendra:DescribeQuerySuggestionsBlockList",
@@ -166,6 +168,7 @@
       ]
     },
     "delete": {
+      "timeoutInMinutes": 780,
       "permissions": [
         "kendra:DeleteQuerySuggestionsBlockList",
         "kendra:DescribeQuerySuggestionsBlockList",

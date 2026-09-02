@@ -207,6 +207,10 @@
     "/properties/ResourceIdentifier",
     "/properties/TagsIdentifier"
   ],
+  "deprecatedProperties": [
+    "/properties/Resource/Catalog",
+    "/properties/Resource/Table/TableWildcard"
+  ],
   "replacementStrategy": "delete_then_create",
   "tagging": {
     "taggable": false
@@ -220,7 +224,8 @@
       "permissions": [
         "lakeformation:AddLFTagsToResource",
         "glue:GetDatabase",
-        "glue:GetTable"
+        "glue:GetTable",
+        "lakeformation:GetResourceLFTags"
       ]
     },
     "read": {
@@ -233,6 +238,24 @@
     "delete": {
       "permissions": [
         "lakeformation:RemoveLFTagsFromResource",
+        "glue:GetDatabase",
+        "glue:GetTable",
+        "lakeformation:GetResourceLFTags"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "Resource": {
+            "$ref": "resource-schema.json#/properties/Resource"
+          }
+        },
+        "required": [
+          "Resource"
+        ]
+      },
+      "permissions": [
+        "lakeformation:GetResourceLFTags",
         "glue:GetDatabase",
         "glue:GetTable"
       ]
