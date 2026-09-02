@@ -181,7 +181,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "description": "The name of the alarm.",
 		//	                      "maxLength": 256,
 		//	                      "minLength": 1,
-		//	                      "pattern": ".+",
+		//	                      "pattern": "",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -397,7 +397,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "The mount path for the FSx for Lustre file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -422,7 +422,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "The mount path for the FSx for OpenZFS file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -449,7 +449,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "additionalProperties": false,
 		//	            "description": "A map of Kubernetes labels to apply to cluster nodes.",
 		//	            "patternProperties": {
-		//	              "^.+$": {
+		//	              "": {
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -609,7 +609,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "description": "The name of the alarm.",
 		//	                      "maxLength": 256,
 		//	                      "minLength": 1,
-		//	                      "pattern": ".+",
+		//	                      "pattern": "",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -979,7 +979,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					"kubernetes_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Labels
-							"labels":            // Pattern: "^.+$"
+							"labels":            // Pattern: ""
 							schema.MapAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "A map of Kubernetes labels to apply to cluster nodes.",
@@ -1401,7 +1401,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "The mount path for the FSx for Lustre file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -1426,7 +1426,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "The mount path for the FSx for OpenZFS file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -1933,7 +1933,6 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Cluster").WithTerraformTypeName("awscc_sagemaker_cluster")
 	opts = opts.WithTerraformSchema(schema)
-
 	opts = opts.WithPathAwareAttributeNameMap(map[string]string{
 		"AutoScaling/auto_scaler_type": "AutoScalerType",
 		"AutoScaling/mode":             "Mode",

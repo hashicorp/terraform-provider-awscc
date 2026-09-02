@@ -253,7 +253,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "description": "The name of the alarm.",
 		//	                      "maxLength": 256,
 		//	                      "minLength": 1,
-		//	                      "pattern": ".+",
+		//	                      "pattern": "",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -469,7 +469,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "The mount path for the FSx for Lustre file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -494,7 +494,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "The mount path for the FSx for OpenZFS file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -521,7 +521,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "additionalProperties": false,
 		//	            "description": "A map of Kubernetes labels to apply to cluster nodes.",
 		//	            "patternProperties": {
-		//	              "^.+$": {
+		//	              "": {
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -681,7 +681,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "description": "The name of the alarm.",
 		//	                      "maxLength": 256,
 		//	                      "minLength": 1,
-		//	                      "pattern": ".+",
+		//	                      "pattern": "",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -843,7 +843,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
-														stringvalidator.RegexMatches(regexp.MustCompile(".+"), ""),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1219,7 +1218,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 1024),
-												stringvalidator.RegexMatches(regexp.MustCompile("^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1257,7 +1255,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 1024),
-												stringvalidator.RegexMatches(regexp.MustCompile("^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1297,7 +1294,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					"kubernetes_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Labels
-							"labels":            // Pattern: "^.+$"
+							"labels":            // Pattern: ""
 							schema.MapAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "A map of Kubernetes labels to apply to cluster nodes.",
@@ -1544,7 +1541,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
-														stringvalidator.RegexMatches(regexp.MustCompile(".+"), ""),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2037,7 +2033,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "The mount path for the FSx for Lustre file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2062,7 +2058,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "The mount path for the FSx for OpenZFS file system.",
 		//	                  "maxLength": 1024,
 		//	                  "minLength": 1,
-		//	                  "pattern": "^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$",
+		//	                  "pattern": "",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2343,7 +2339,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 1024),
-												stringvalidator.RegexMatches(regexp.MustCompile("^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -2381,7 +2376,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 1024),
-												stringvalidator.RegexMatches(regexp.MustCompile("^/[a-zA-Z0-9._-]+(/[a-zA-Z0-9._-]+)*$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
