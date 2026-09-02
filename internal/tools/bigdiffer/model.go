@@ -23,6 +23,7 @@ type resourceRow struct {
 	ResourceTypeName                     string `hcl:"resource_type_name,label"` // Terraform type name (block label)
 	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
+	PathAwareAttributeNames              bool   `hcl:"path_aware_attribute_names,optional"`
 	SuppressionReasonResource            string `hcl:"suppression_reason_resource,optional"`
 	SuppressionReasonSingularDataSource  string `hcl:"suppression_reason_singular_data_source,optional"`
 	SuppressionReasonPluralDataSource    string `hcl:"suppression_reason_plural_data_source,optional"`
