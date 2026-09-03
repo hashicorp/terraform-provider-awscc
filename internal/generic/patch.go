@@ -6,6 +6,7 @@ package generic
 import (
 	"encoding/json"
 	"fmt"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -68,14 +69,18 @@ func patchDocument(old, new string) (string, error) {
 // Terraform schema cannot represent) are returned by GetResource with values the
 // caller never set by definition, and must not be patched.
 func resolveEmptyReadArtifacts(patchDocument, oldState, newState, resourceModel string, isMutable func(tokens []string) bool) (string, error) {
-	var model, oldDoc, newDoc map[string]any
-	if err := json.Unmarshal([]byte(resourceModel), &model); err != nil {
+	// Unparseable input is not an error here: the caller has already validated the
+	// documents that produced patchDocument, so the patch is returned untouched.
+	model, ok := unmarshalObject(resourceModel)
+	if !ok {
 		return patchDocument, nil
 	}
-	if err := json.Unmarshal([]byte(oldState), &oldDoc); err != nil {
+	oldDoc, ok := unmarshalObject(oldState)
+	if !ok {
 		return patchDocument, nil
 	}
-	if err := json.Unmarshal([]byte(newState), &newDoc); err != nil {
+	newDoc, ok := unmarshalObject(newState)
+	if !ok {
 		return patchDocument, nil
 	}
 
@@ -90,8 +95,8 @@ func resolveEmptyReadArtifacts(patchDocument, oldState, newState, resourceModel 
 		case map[string]any:
 			for key, val := range v {
 				childPath := path + "/" + escapeJSONPointerToken(key)
-				// Full slice expression so sibling appends cannot share a backing array.
-				childTokens := append(tokens[:len(tokens):len(tokens)], key)
+				// Fresh slice so sibling children never share a backing array.
+				childTokens := slices.Concat(tokens, []string{key})
 				switch cv := val.(type) {
 				case string:
 					if cv == "" && isArtifact(childTokens) {
@@ -112,7 +117,7 @@ func resolveEmptyReadArtifacts(patchDocument, oldState, newState, resourceModel 
 		case []any:
 			for idx, val := range v {
 				token := strconv.Itoa(idx)
-				walk(val, path+"/"+token, append(tokens[:len(tokens):len(tokens)], token))
+				walk(val, path+"/"+token, slices.Concat(tokens, []string{token}))
 			}
 		}
 	}
@@ -342,4 +347,14 @@ func comparePathsNumerically(path1, path2 string) bool {
 		}
 	}
 	return len(parts1) > len(parts2)
+}
+
+// unmarshalObject decodes s as a JSON object, reporting false when s is not one.
+func unmarshalObject(s string) (map[string]any, bool) {
+	var m map[string]any
+	if err := json.Unmarshal([]byte(s), &m); err != nil {
+		return nil, false
+	}
+
+	return m, true
 }
