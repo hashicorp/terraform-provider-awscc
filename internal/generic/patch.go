@@ -135,12 +135,12 @@ func mutuallyExclusiveResolutions(patch []jsonpatch.JsonPatchOperation, doc map[
 func appendMutuallyExclusiveResolutionsForModel(patchDocument, resourceModel string) (string, error) {
 	var model map[string]any
 	if err := json.Unmarshal([]byte(resourceModel), &model); err != nil {
-		return patchDocument, nil
+		return "", fmt.Errorf("unmarshaling resource model: %w", err)
 	}
 
 	var ops []jsonpatch.JsonPatchOperation
 	if err := json.Unmarshal([]byte(patchDocument), &ops); err != nil {
-		return patchDocument, nil
+		return "", fmt.Errorf("unmarshaling patch document: %w", err)
 	}
 
 	resolutions := mutuallyExclusiveResolutions(ops, model)
