@@ -473,9 +473,13 @@ func Test_appendMutuallyExclusiveResolutionsForModel(t *testing.T) {
 		t.Errorf("expected unchanged document, got %s", got)
 	}
 
-	// Invalid inputs are a no-op.
-	got, err = appendMutuallyExclusiveResolutionsForModel("[]", "not json")
-	if err != nil || got != "[]" {
-		t.Errorf("invalid model: got %s, err %v", got, err)
+	// Invalid inputs are surfaced, not silently skipped: a model the service
+	// returned that does not parse, or a patch document the provider itself
+	// produced that does not parse, both point at a bug worth seeing.
+	if _, err = appendMutuallyExclusiveResolutionsForModel("[]", "not json"); err == nil {
+		t.Error("invalid model: expected error")
+	}
+	if _, err = appendMutuallyExclusiveResolutionsForModel("not json", model); err == nil {
+		t.Error("invalid patch document: expected error")
 	}
 }
