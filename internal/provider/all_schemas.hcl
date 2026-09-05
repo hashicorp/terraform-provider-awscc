@@ -6922,20 +6922,30 @@ resource_schema "aws_wafv2_rule_group" {
   cloudformation_type_name               = "AWS::WAFv2::RuleGroup"
   suppress_plural_data_source_generation = true
 
-  # Suppression Reason:
+  # Latest schema updates are suppressed.
+  # Local schema is de-recursed via
+  # go run internal/provider/generators/derecurse-schema/main.go --depth 4 internal/service/cloudformation/schemas/AWS_WAFv2_RuleGroup.json
+  # to 4 levels of Statement nesting = 3 chained logical statements (And/Or/Not) above a
+  # match statement - parity with terraform-provider-aws's hand-written WAFv2 schemas.
+  # Statements deeper than the schema are omitted from state on import/read (a warning
+  # diagnostic lists the dropped paths) and updates touching them are rejected.
+  # Re-apply the script after refreshing the schema.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_wafv2_web_acl" {
   cloudformation_type_name               = "AWS::WAFv2::WebACL"
   suppress_plural_data_source_generation = true
 
-  # Suppression Reason:
+  # Latest schema updates are suppressed.
+  # Local schema is de-recursed via
+  # go run internal/provider/generators/derecurse-schema/main.go --depth 4 internal/service/cloudformation/schemas/AWS_WAFv2_WebACL.json
+  # to 4 levels of Statement nesting = 3 chained logical statements (And/Or/Not) above a
+  # match statement - parity with terraform-provider-aws's hand-written WAFv2 schemas.
+  # Statements deeper than the schema are omitted from state on import/read (a warning
+  # diagnostic lists the dropped paths) and updates touching them are rejected.
+  # Re-apply the script after refreshing the schema.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_wafv2_web_acl_association" {
