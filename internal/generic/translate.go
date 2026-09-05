@@ -197,9 +197,11 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 				vs[name] = v
 			}
 		}
-		if len(vs) == 0 {
-			return nil, nil
-		}
+		// A null value has already returned nil above, so an empty map here means
+		// the object is present-but-empty in configuration (e.g. `allow = {}`).
+		// Preserve it as {}: for properties like AWS::WAFv2::WebACL's
+		// DefaultAction.Allow the presence of the empty object is the setting,
+		// and dropping it removes a required key from DesiredState.
 		return vs, nil
 	}
 
