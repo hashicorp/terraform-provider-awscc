@@ -6,6 +6,7 @@ package generic
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -757,6 +758,35 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		"value": patchDocument,
 	})
 
+	// Cloud Control's GetResource can inject properties the caller never set into the
+	// resource model (e.g. AWS::WAFv2::WebACL's "ResponseHeaders": [] and
+	// "Description": ""). UpdateResource validates the patched model as a
+	// whole, so an artifact that violates the resource type schema fails every update,
+	// even one that doesn't touch it. Resolve such artifacts against the current model.
+	// Best-effort: a failed read leaves the patch document unchanged.
+	if description, err := r.describe(ctx, conn, id); err != nil {
+		tflog.Debug(ctx, "skipping read artifact resolution", map[string]any{
+			"error": err.Error(),
+		})
+	} else if description != nil && description.Properties != nil {
+		patchDocument, err = resolveEmptyReadArtifacts(patchDocument, currentDesiredState, plannedDesiredState, aws.ToString(description.Properties), func(tokens []string) bool {
+			return r.isMutablePropertyPath(ctx, tokens)
+		})
+
+		if err != nil {
+			response.Diagnostics.AddError(
+				"Creation Of JSON Patch Unsuccessful",
+				fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+
+			return
+		}
+
+		tflog.Debug(ctx, "Cloud Control API PatchDocument after read artifact resolution", map[string]any{
+			"value": patchDocument,
+		})
+	}
+
 	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
 		Identifier:    aws.String(id),
@@ -937,6 +967,55 @@ func (r *genericResource) ConfigValidators(context.Context) []resource.ConfigVal
 // describe returns the live state of the specified resource.
 func (r *genericResource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
 	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.cfTypeName, id)
+}
+
+// isMutablePropertyPath reports whether the Cloud Control property path, given as
+// unescaped JSON Pointer reference tokens, resolves to a user-settable attribute in
+// the Terraform schema. Read-only attributes are generated as Computed-only, so an
+// attribute that is neither Optional nor Required cannot carry user intent. Paths
+// that do not resolve (unknown property names, content beyond what the schema
+// represents, structure inside JSON-string-typed attributes) return false.
+func (r *genericResource) isMutablePropertyPath(ctx context.Context, tokens []string) bool {
+	tfPath := tftypes.NewAttributePath()
+	for _, token := range tokens {
+		attrType, err := r.tfSchema.TypeAtTerraformPath(ctx, tfPath)
+		if err != nil {
+			return false
+		}
+		switch typ := attrType.TerraformType(ctx); {
+		case typ.Is(tftypes.Object{}):
+			name, ok := r.cfToTfNameMap[token]
+			if !ok {
+				return false
+			}
+			tfPath = tfPath.WithAttributeName(name)
+		case typ.Is(tftypes.Map{}):
+			tfPath = tfPath.WithElementKeyString(token)
+		case typ.Is(tftypes.Set{}):
+			// No need to worry about a specific value here.
+			tfPath = tfPath.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, nil))
+		case typ.Is(tftypes.List{}), typ.Is(tftypes.Tuple{}):
+			idx, err := strconv.Atoi(token)
+			if err != nil {
+				return false
+			}
+			tfPath = tfPath.WithElementKeyInt(idx)
+		default:
+			return false
+		}
+	}
+
+	fwPath, diags := attributePath(ctx, tfPath, r.tfSchema)
+	if diags.HasError() {
+		return false
+	}
+
+	attribute, diags := r.tfSchema.AttributeAtPath(ctx, fwPath)
+	if diags.HasError() {
+		return false
+	}
+
+	return attribute.IsOptional() || attribute.IsRequired()
 }
 
 // getId returns the resource's primary identifier value from State.
