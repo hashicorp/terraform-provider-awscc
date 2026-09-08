@@ -5,6 +5,13 @@ ACCTEST_TIMEOUT     ?= 180m
 ACCTEST_PARALLELISM ?= 20
 GO_VER              ?= go
 
+# Pin bigdiffer generation to the module's Go version so gofmt/goimports output is
+# byte-identical to CI regardless of the contributor's locally installed Go (map
+# alignment and other gofmt rules change between Go releases, and GOTOOLCHAIN=auto
+# will not downgrade a newer local Go). Sourced from the go.mod `go` directive,
+# e.g. `go 1.26.6` -> `go1.26.6`; falls back to auto if it cannot be read.
+GOTOOLCHAIN_PIN     := $(or $(addprefix go,$(shell sed -n 's/^go //p' go.mod)),auto)
+
 default: build
 
 all: schemas resources singular-data-sources plural-data-sources build docs-all ## Generate all schemas, resources, data sources, documentation, and build the provider
@@ -23,13 +30,13 @@ build: prereq-go ## Build the provider
 	$(GO_VER) install
 
 bigdiffer-update: prereq-go ## Weekly update via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
-	$(GO_VER) run ./internal/tools/bigdiffer -update
+	GOTOOLCHAIN=$(GOTOOLCHAIN_PIN) $(GO_VER) run ./internal/tools/bigdiffer -update
 
 bigdiffer-generate: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS)
-	$(GO_VER) run ./internal/tools/bigdiffer -generate
+	GOTOOLCHAIN=$(GOTOOLCHAIN_PIN) $(GO_VER) run ./internal/tools/bigdiffer -generate
 
 bigdiffer-docs: prereq-go ## Regenerate documentation via bigdiffer (docs-import + terraform fmt + tfplugindocs)
-	$(GO_VER) run ./internal/tools/bigdiffer -docs
+	GOTOOLCHAIN=$(GOTOOLCHAIN_PIN) $(GO_VER) run ./internal/tools/bigdiffer -docs
 
 plural-data-sources: prereq-go ## Generate plural data sources
 	@echo "==> Counting existing plural data source files..."
