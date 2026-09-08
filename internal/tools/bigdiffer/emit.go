@@ -6,7 +6,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"go/format"
 	"io"
 	"os"
 	"path/filepath"
@@ -117,7 +116,7 @@ func emitRegistration(cfg config, rows []resourceRow) ([]byte, error) {
 	}
 	b.WriteString(")\n")
 
-	formatted, err := format.Source(b.Bytes())
+	formatted, err := codegen.FormatGo("registrations_gen.go", b.Bytes())
 	if err != nil {
 		return nil, fmt.Errorf("formatting registration file:\n%s\n%w", b.Bytes(), err)
 	}

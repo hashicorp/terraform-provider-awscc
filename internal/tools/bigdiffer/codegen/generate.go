@@ -6,7 +6,6 @@ package codegen
 import (
 	_ "embed"
 	"fmt"
-	"go/format"
 	"strings"
 
 	"github.com/hashicorp/cli"
@@ -90,7 +89,7 @@ func renderGo(name, body string, data any) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	formatted, err := format.Source(b)
+	formatted, err := FormatGo("", b)
 	if err != nil {
 		return nil, fmt.Errorf("formatting generated %s:\n%s\n%w", name, b, err)
 	}

@@ -6,7 +6,6 @@ package codegen
 import (
 	"bytes"
 	"fmt"
-	"go/format"
 	"os"
 	"path"
 	"strconv"
@@ -62,8 +61,10 @@ type Destination interface {
 
 func (g *Generator) NewGoFileDestination(filename string) Destination {
 	return &fileDestination{
-		baseDestination: baseDestination{formatter: format.Source},
-		filename:        filename,
+		baseDestination: baseDestination{formatter: func(b []byte) ([]byte, error) {
+			return FormatGo(filename, b)
+		}},
+		filename: filename,
 	}
 }
 
