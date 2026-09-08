@@ -120,6 +120,33 @@ func TestCommentOrUnknown(t *testing.T) {
 	})
 }
 
+// TestIsIssueWorthy covers the full category table from
+// suppressed-and-frozen.md's "GitHub issues: when to file, and what to say":
+// only generation_failed and build_failed (a real defect, ours or the
+// schema's) warrant recommending an issue. structural is upstream/common
+// noise if filed; manual is the human's own call, already made; unknown is
+// unresolved and must be triaged into a real category first.
+func TestIsIssueWorthy(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		category reasonCategory
+		want     bool
+	}{
+		{reasonGenerationFailed, true},
+		{reasonBuildFailed, true},
+		{reasonStructural, false},
+		{reasonManual, false},
+		{reasonUnknown, false},
+		{"", false}, // a "lift" proposal, or any category not yet set
+	}
+	for _, tt := range tests {
+		if got := isIssueWorthy(tt.category); got != tt.want {
+			t.Errorf("isIssueWorthy(%q) = %v, want %v", tt.category, got, tt.want)
+		}
+	}
+}
+
 // TestProbeArtifactIsolatesRecursiveSchema is the item-9 regression test for
 // subprocess isolation: a schema that drives the emitter into unbounded
 // recursion must be reported as a normal (if slow) generation_failed proposal,
@@ -385,6 +412,12 @@ func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 		if strings.HasPrefix(proposal.reason, string(reasonGenerationFailed)+":") {
 			t.Errorf("must not collapse a gate failure into generation_failed, got %q", proposal.reason)
 		}
+		if proposal.category != reasonBuildFailed {
+			t.Errorf("category = %q, want %q", proposal.category, reasonBuildFailed)
+		}
+		if !isIssueWorthy(proposal.category) {
+			t.Errorf("a build_failed proposal should be issue-worthy")
+		}
 	})
 
 	t.Run("generation failure still tags generation_failed", func(t *testing.T) {
@@ -397,6 +430,12 @@ func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 		}
 		if !strings.HasPrefix(proposal.reason, string(reasonGenerationFailed)+":") {
 			t.Errorf("expected a generation_failed-tagged reason, got %q", proposal.reason)
+		}
+		if proposal.category != reasonGenerationFailed {
+			t.Errorf("category = %q, want %q", proposal.category, reasonGenerationFailed)
+		}
+		if !isIssueWorthy(proposal.category) {
+			t.Errorf("a generation_failed proposal should be issue-worthy")
 		}
 	})
 }

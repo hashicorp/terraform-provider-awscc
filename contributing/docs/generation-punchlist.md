@@ -86,10 +86,18 @@ All detail lives in `suppressed-and-frozen.md`.
    `structural: no list handler with zero required arguments` whenever it
    writes the plural-DS structural suppression the discovery crawl determined,
    instead of a bare, unexplained flag. *(core)*
-7. **GitHub-issue guidance** — for `generation_failed`/`build_failed` only,
-   emit a ready-to-file issue stub (type, artifact, category, captured error)
-   and let `suppression_reason` carry the issue URL. `structural` never warrants
-   an issue (upstream, common). *(core)*
+7. ~~**GitHub-issue guidance**~~ — ✅ **Done, deliberately simplified.**
+   Considered a ready-to-file issue stub plus `suppression_reason`-carried
+   issue-URL capture; cut both as unnecessary machinery. For
+   `generation_failed`/`build_failed` proposals only, `writeHealReport`
+   (`heal.go`) prints one extra line recommending a GitHub issue, naming the
+   type and artifact — no stub, no URL, no auto-filing. The captured error is
+   already on the line above; filing the issue and recording its URL back into
+   `suppression_reason` by hand is left to the human, reasonable once item 10's
+   backlog pass means this only fires occasionally rather than in bulk.
+   `structural`/`manual`/`unknown` never recommend an issue (`isIssueWorthy`).
+   Detail: `suppressed-and-frozen.md`, "GitHub issues: when to file, and what
+   to say."
 
 ### Enforcement & backlog
 

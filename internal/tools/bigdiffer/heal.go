@@ -24,12 +24,13 @@ import (
 // matching every other bigdiffer policy decision
 // (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill gaps").
 type healProposal struct {
-	cfn    string
-	label  string
-	kind   string // which artifact this proposal is about, or "" for the freeze itself
-	field  string // the reason attribute this proposal fills, e.g. suppression_reason_plural_data_source
-	action string // "lift" (generation now succeeds) or "reason" (a reason was determined/migrated)
-	reason string // the proposed reason value
+	cfn      string
+	label    string
+	kind     string         // which artifact this proposal is about, or "" for the freeze itself
+	field    string         // the reason attribute this proposal fills, e.g. suppression_reason_plural_data_source
+	action   string         // "lift" (generation now succeeds) or "reason" (a reason was determined/migrated)
+	reason   string         // the proposed reason value
+	category reasonCategory // the proposed reason's category, "" for a "lift" action
 }
 
 // healFact is one suppressed artifact or the freeze, named by its flag/date
@@ -151,6 +152,7 @@ func healArtifact(cfg config, row resourceRow, f healFact, schema []byte, schema
 	if f.kind == artifactPluralDataSource && schemaErr == nil {
 		if !pluralSupported(string(schema)) {
 			base.action = "reason"
+			base.category = reasonStructural
 			base.reason = formatReason(reasonStructural, "no list handler with zero required arguments")
 			return base
 		}
@@ -167,8 +169,10 @@ func healArtifact(cfg config, row resourceRow, f healFact, schema []byte, schema
 			base.action = "reason"
 			var gateFailure *buildGateFailure
 			if errors.As(err, &gateFailure) {
+				base.category = reasonBuildFailed
 				base.reason = formatReason(reasonBuildFailed, firstLine(gateFailure.detail))
 			} else {
+				base.category = reasonGenerationFailed
 				base.reason = formatReason(reasonGenerationFailed, firstLine(err.Error()))
 			}
 			return base
@@ -448,7 +452,33 @@ func writeHealReport(needsReason int, proposals []healProposal) {
 			fmt.Fprintf(os.Stderr, "  ~ %s (%s) [%s]: %s\n", p.cfn, p.label, p.field, p.reason)
 		default:
 			fmt.Fprintf(os.Stderr, "  + %s (%s) [%s]: %s = %q\n", p.cfn, p.label, p.field, p.field, p.reason)
+			if isIssueWorthy(p.category) {
+				fmt.Fprintf(os.Stderr, "    consider opening a GitHub issue for this %s (%s)\n", p.category, issueTitle(p))
+			}
 		}
 	}
 	fmt.Fprintln(os.Stderr, "Nothing above was written; review and apply by hand.")
+}
+
+// isIssueWorthy reports whether a proposal's reason category warrants
+// recommending a GitHub issue (contributing/docs/suppressed-and-frozen.md,
+// "GitHub issues: when to file, and what to say"): a real defect worth
+// tracking (generation_failed, build_failed), not upstream/structural, not a
+// human's own manual call, and not an unresolved unknown still needing
+// triage.
+func isIssueWorthy(category reasonCategory) bool {
+	return category == reasonGenerationFailed || category == reasonBuildFailed
+}
+
+// issueTitle renders a short "<type> <artifact>" label for the recommended
+// issue's title — the captured error detail is already printed on the line
+// above (part of p.reason), so this only adds what that line doesn't already
+// say. No URL, no stub, no auto-filing: bigdiffer only says an issue is
+// warranted; the human files it and records the URL by hand (appending
+// " (issue: <URL>)" to the reason value already proposed above).
+func issueTitle(p healProposal) string {
+	if p.kind != "" {
+		return p.cfn + " " + p.kind
+	}
+	return p.cfn
 }

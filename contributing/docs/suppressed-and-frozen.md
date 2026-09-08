@@ -279,20 +279,21 @@ The taxonomy maps directly onto the decision:
 | `manual` | Human's call | Whoever suppressed it knows the reason and whether it warrants an issue. |
 | `unknown` | Triage | Reason lost to history; `-heal` reclassifies it first, and whether it then warrants an issue follows the category it lands on. |
 
-For the issue-worthy categories (`generation_failed`, `build_failed`), bigdiffer
-should emit, in its report, a ready-to-file **issue stub** per affected type: the
-CloudFormation type name, the failed artifact(s), the category, and the captured
-error text (the `detail` half of `category: detail`) — so filing is copy-paste,
-not archeology. This is the structured successor to the legacy process's "open
-an issue with details" instruction (and to `internal/update/makes.go`'s
-`suppression_reason = "<error>:<issue URL>"` convention), except the error is
-captured automatically and the human only files it and pastes the URL back.
-
-Once the issue exists, its URL belongs in the row. `suppression_reason` may carry
-the issue URL alongside the category (`category: detail (issue: URL)`) — the
-structured form of the legacy `<error>:<issue URL>` intent. bigdiffer never
-invents or auto-files issues; it tells the human exactly when one is warranted
-and hands them the text.
+For the issue-worthy categories (`generation_failed`, `build_failed`), `-heal`'s
+report prints one extra line under each affected proposal: a plain
+recommendation to open a GitHub issue, naming the CloudFormation type and
+artifact. It carries no stub, no template, and no URL — the captured error
+text is already on the line above (the `detail` half of `category: detail`),
+so there is nothing further to hand over. Filing the issue, and, once it
+exists, recording its URL back into `suppression_reason`
+(`category: detail (issue: URL)` — the structured form of the legacy
+`internal/update/makes.go`'s `<error>:<issue URL>` convention) is left entirely
+to the human. bigdiffer never invents, auto-files, or links an issue; it only
+says when one is warranted. This is deliberately the simplest version of the
+original "ready-to-file issue stub" idea: mining/URL capture was cut as
+unnecessary machinery — a human reading the report and opening the issue by
+hand is a small, occasional task once the one-time backlog (below) is done, not
+worth automating further until that changes.
 
 ### Mining existing issues to backfill reasons
 
