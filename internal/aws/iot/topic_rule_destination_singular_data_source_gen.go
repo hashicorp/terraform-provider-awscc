@@ -57,6 +57,72 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 			Description: "HTTP URL destination properties.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InfluxDBProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "InfluxDB destination properties.",
+		//	  "properties": {
+		//	    "Endpoint": {
+		//	      "description": "The endpoint URL of the InfluxDB database.",
+		//	      "type": "string"
+		//	    },
+		//	    "InfluxDBVersion": {
+		//	      "description": "The version of the InfluxDB database (for example, V2 or V3).",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretId": {
+		//	      "description": "The ARN or name of the Secrets Manager secret containing the InfluxDB API token.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretKey": {
+		//	      "description": "The key name within the secret that contains the InfluxDB token.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretType": {
+		//	      "description": "The type of the secret value (SecretString or SecretBinary).",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Endpoint",
+		//	    "InfluxDBVersion",
+		//	    "SecretId"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"influx_db_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The endpoint URL of the InfluxDB database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InfluxDBVersion
+				"influx_db_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the InfluxDB database (for example, V2 or V3).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretId
+				"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN or name of the Secrets Manager secret containing the InfluxDB API token.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretKey
+				"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The key name within the secret that contains the InfluxDB token.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretType
+				"secret_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the secret value (SecretString or SecretBinary).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "InfluxDB destination properties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -155,16 +221,22 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRuleDestination").WithTerraformTypeName("awscc_iot_topic_rule_destination")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"confirmation_url":    "ConfirmationUrl",
-		"http_url_properties": "HttpUrlProperties",
-		"role_arn":            "RoleArn",
-		"security_groups":     "SecurityGroups",
-		"status":              "Status",
-		"status_reason":       "StatusReason",
-		"subnet_ids":          "SubnetIds",
-		"vpc_id":              "VpcId",
-		"vpc_properties":      "VpcProperties",
+		"arn":                  "Arn",
+		"confirmation_url":     "ConfirmationUrl",
+		"endpoint":             "Endpoint",
+		"http_url_properties":  "HttpUrlProperties",
+		"influx_db_properties": "InfluxDBProperties",
+		"influx_db_version":    "InfluxDBVersion",
+		"role_arn":             "RoleArn",
+		"secret_id":            "SecretId",
+		"secret_key":           "SecretKey",
+		"secret_type":          "SecretType",
+		"security_groups":      "SecurityGroups",
+		"status":               "Status",
+		"status_reason":        "StatusReason",
+		"subnet_ids":           "SubnetIds",
+		"vpc_id":               "VpcId",
+		"vpc_properties":       "VpcProperties",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

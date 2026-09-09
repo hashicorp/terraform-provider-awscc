@@ -1,0 +1,1 @@
+$ terraform import awscc_iotsitewise_task.example "task_arn"

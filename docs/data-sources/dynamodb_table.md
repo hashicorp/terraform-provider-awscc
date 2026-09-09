@@ -24,7 +24,7 @@ Data Source schema for AWS::DynamoDB::Table
 - `arn` (String)
 - `attribute_definitions` (Attributes List) A list of attributes that describe the key schema for the table and indexes.
  This property is required to create a DDB table.
- Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition. (see [below for nested schema](#nestedatt--attribute_definitions))
+ You can add an ``AttributeDefinition`` without interruption. Changing the type of an existing ``AttributeDefinition`` requires replacement of the table. (see [below for nested schema](#nestedatt--attribute_definitions))
 - `billing_mode` (String) Specify how you are charged for read and write throughput and how you manage capacity.
  Valid values include:
   +  ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). 
@@ -151,6 +151,7 @@ Read-Only:
   +  ``ALL`` - All of the table attributes are projected into the index.
   
  When using the DynamoDB console, ``ALL`` is selected by default.
+ You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.
 
 
 <a id="nestedatt--global_secondary_indexes--provisioned_throughput"></a>
@@ -263,6 +264,7 @@ Read-Only:
   +  ``ALL`` - All of the table attributes are projected into the index.
   
  When using the DynamoDB console, ``ALL`` is selected by default.
+ You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.
 
 
 
@@ -329,7 +331,8 @@ Read-Only:
   +  ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
   +  ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
   +  ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--stream_specification--tags))
+- `tags` (Attributes Set) Specifies the tags to apply to the DDB stream. Stream tags are independent of table tags.
+ For an overview on tagging DynamoDB resources, see [Tagging for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html) in the *Amazon DynamoDB Developer Guide*. (see [below for nested schema](#nestedatt--stream_specification--tags))
 
 <a id="nestedatt--stream_specification--resource_policy"></a>
 ### Nested Schema for `stream_specification.resource_policy`

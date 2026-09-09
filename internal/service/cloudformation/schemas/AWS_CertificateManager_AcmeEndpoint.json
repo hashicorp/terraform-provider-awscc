@@ -122,6 +122,7 @@
     "/properties/EndpointUrl"
   ],
   "createOnlyProperties": [
+    "/properties/AuthorizationBehavior",
     "/properties/CertificateTags"
   ],
   "primaryIdentifier": [

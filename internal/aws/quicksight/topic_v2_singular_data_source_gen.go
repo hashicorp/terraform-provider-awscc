@@ -127,7 +127,7 @@ func topicV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 32,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -190,7 +190,7 @@ func topicV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 32,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}

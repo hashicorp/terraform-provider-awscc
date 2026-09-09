@@ -81,6 +81,9 @@
         "Http": {
           "$ref": "#/definitions/HttpAction"
         },
+        "InfluxDB": {
+          "$ref": "#/definitions/InfluxDBAction"
+        },
         "IotAnalytics": {
           "$ref": "#/definitions/IotAnalyticsAction"
         },
@@ -546,6 +549,66 @@
       "required": [
         "TimeInSeconds"
       ]
+    },
+    "InfluxDBAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DestinationArn": {
+          "type": "string"
+        },
+        "RoleArn": {
+          "type": "string"
+        },
+        "DatabaseName": {
+          "type": "string"
+        },
+        "TableName": {
+          "type": "string"
+        },
+        "Organization": {
+          "type": "string"
+        },
+        "TimestampUnit": {
+          "type": "string"
+        },
+        "Tags": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          }
+        },
+        "BatchConfig": {
+          "$ref": "#/definitions/InfluxDBBatchConfig"
+        }
+      },
+      "required": [
+        "DestinationArn",
+        "RoleArn",
+        "DatabaseName",
+        "TableName"
+      ]
+    },
+    "InfluxDBBatchConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxBatchSize": {
+          "type": "integer"
+        },
+        "MaxBatchOpenMs": {
+          "type": "integer"
+        },
+        "MaxBatchSizeBytes": {
+          "type": "integer"
+        },
+        "BatchAcrossTopics": {
+          "type": "boolean"
+        }
+      }
     },
     "KafkaAction": {
       "type": "object",

@@ -128,6 +128,7 @@ resource "awscc_mediaconnect_router_output" "example" {
 ### Optional
 
 - `availability_zone` (String) The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.
+- `fabric_configuration` (Attributes) The fabric configuration settings for the router output. (see [below for nested schema](#nestedatt--fabric_configuration))
 - `maintenance_configuration` (Attributes) The configuration settings for maintenance operations, including preferred maintenance windows and schedules. (see [below for nested schema](#nestedatt--maintenance_configuration))
 - `region_name` (String) The Amazon Web Services Region for the router output. Defaults to the current region if not specified.
 - `tags` (Attributes List) Key-value pairs that can be used to tag this router output. (see [below for nested schema](#nestedatt--tags))
@@ -323,6 +324,14 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--fabric_configuration"></a>
+### Nested Schema for `fabric_configuration`
+
+Optional:
+
+- `recovery_latency_mode` (String)
 
 
 <a id="nestedatt--maintenance_configuration"></a>

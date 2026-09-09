@@ -18,7 +18,7 @@ Resource type definition for AWS::PricingPlanManager::Subscription. Deleting an 
 ### Required
 
 - `plan_family` (String) The name of the pricing plan family.
-- `plan_tier` (String) The tier of the pricing plan. Upgrades take effect immediately. However, rolling back an upgrade does not revert billing instantly; it schedules a downgrade to the end of the current billing period, and the higher-tier charge applies for the remainder of that month. While a downgrade is scheduled, the CurrentPlanTier property reports the tier currently being billed.
+- `plan_tier` (String) The tier of the pricing plan. CloudFormation does not change the tier of an existing subscription; a stack update that changes the tier, upgrading or downgrading it, is rejected.
 - `resource_arns` (List of String) The ARNs of resources associated with the subscription.
 
 ### Optional

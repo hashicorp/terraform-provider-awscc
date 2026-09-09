@@ -1,0 +1,267 @@
+{
+  "typeName": "AWS::IoTSiteWise::Task",
+  "description": "Resource schema for AWS::IoTSiteWise::Task. A task defines a reusable containerized compute workload that can be referenced by one or more pipeline compute nodes.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iotsitewise",
+  "definitions": {
+    "TaskConfiguration": {
+      "description": "The task execution configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ContainerTaskConfiguration": {
+          "$ref": "#/definitions/ContainerTaskConfiguration"
+        }
+      },
+      "required": [
+        "ContainerTaskConfiguration"
+      ]
+    },
+    "ContainerTaskConfiguration": {
+      "type": "object",
+      "description": "Configuration for running a custom container image on managed compute.",
+      "additionalProperties": false,
+      "properties": {
+        "EcrUri": {
+          "type": "string",
+          "description": "The Amazon ECR image URI for the task container.",
+          "pattern": "^((\\d{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.[a-z.]+)|public\\.ecr\\.aws/[a-z][a-z0-9]+([._-][a-z0-9]+)*)/[a-z0-9]+((\\.||__|__|-+)[a-z0-9]+)*(/[a-z0-9]+((\\.||__|__|-+)[a-z0-9]+)*)*(:[a-zA-Z0-9._-]+|@sha256:[a-f0-9]{64})?$",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "TaskExecutionRole": {
+          "type": "string",
+          "description": "The ARN of the IAM role that grants the containerized workload permissions to access AWS resources.",
+          "pattern": "^arn:[\\w+=\\/,.@-]+:iam::[0-9]+:role/[\\w+=,.@/-]+$",
+          "minLength": 20,
+          "maxLength": 2048
+        },
+        "ProcessingType": {
+          "type": "string",
+          "description": "The processing type for compute resources.",
+          "enum": [
+            "GENERIC_COMPUTE_PROCESSING",
+            "HARDWARE_ACCELERATED_PROCESSING"
+          ]
+        },
+        "ProcessingUnit": {
+          "type": "string",
+          "description": "The processing unit allocation that determines vCPU, memory, and GPU resources.",
+          "enum": [
+            "UNITS_2",
+            "UNITS_4",
+            "UNITS_8",
+            "UNITS_12",
+            "UNITS_16",
+            "UNITS_24",
+            "UNITS_32",
+            "UNITS_36",
+            "UNITS_48",
+            "UNITS_60",
+            "UNITS_64",
+            "UNITS_72",
+            "UNITS_84",
+            "UNITS_96"
+          ]
+        },
+        "Command": {
+          "type": "array",
+          "description": "The command to execute in the container.",
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": true
+        },
+        "TimeoutSeconds": {
+          "type": "integer",
+          "description": "The timeout in seconds for task execution. Default: 3600 (1 hour).",
+          "minimum": 60,
+          "maximum": 86400
+        },
+        "EnvironmentVariables": {
+          "$ref": "#/definitions/EnvironmentVariablesMap"
+        }
+      },
+      "required": [
+        "EcrUri",
+        "TaskExecutionRole",
+        "ProcessingType",
+        "ProcessingUnit"
+      ]
+    },
+    "EnvironmentVariablesMap": {
+      "type": "object",
+      "description": "A map of environment variable key-value pairs.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 100
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "WorkspaceName": {
+      "type": "string",
+      "description": "The name of the workspace.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "TaskName": {
+      "type": "string",
+      "description": "The name of the task. Must be unique within the workspace.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "TaskArn": {
+      "type": "string",
+      "description": "The ARN of the task.",
+      "pattern": "^arn:[\\w+=\\/,.@-]+:[\\w+=\\/,.@-]+:[\\w+=\\/,.@-]*:[0-9]+:[\\w+=\\/,.@-]+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the task.",
+      "minLength": 0,
+      "maxLength": 2048
+    },
+    "TaskConfiguration": {
+      "$ref": "#/definitions/TaskConfiguration",
+      "description": "The task execution configuration."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current lifecycle status of the task.",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "WorkspaceName",
+    "TaskName",
+    "TaskConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/TaskArn",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/WorkspaceName",
+    "/properties/TaskName"
+  ],
+  "primaryIdentifier": [
+    "/properties/TaskArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/WorkspaceName",
+      "/properties/TaskName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotsitewise:TagResource",
+      "iotsitewise:UntagResource",
+      "iotsitewise:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iotsitewise:CreateTask",
+        "iotsitewise:DescribeTask",
+        "iotsitewise:TagResource",
+        "iotsitewise:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iotsitewise:DescribeTask",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iotsitewise:UpdateTask",
+        "iotsitewise:DescribeTask",
+        "iotsitewise:TagResource",
+        "iotsitewise:UntagResource",
+        "iotsitewise:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iotsitewise:DeleteTask",
+        "iotsitewise:DescribeTask",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iotsitewise:ListTasks"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "WorkspaceName": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "WorkspaceName"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

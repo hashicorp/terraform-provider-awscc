@@ -195,12 +195,12 @@
   "writeOnlyProperties": [
     "/properties/WarmThroughputMiBps"
   ],
-  "$comment": "Do not set SystemTags to true without implementing a fail-open mechanism. It should not fail when adding systemTags for customers without AddTagsToStream Permission. Cloudformation will automatically add system tags even if customer does not have the AddTagsToStream permission. COE: https://www.coe.a2z.com/coe/236297/content",
+  "$comment": "Fail-open for system tags (aws:* prefix) is implemented in BaseHandlerStd.modifyTags() - AccessDeniedException on system tag operations is caught and silently continued. Customer tags still fail-hard. COE: https://www.coe.a2z.com/coe/236297/content",
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "kinesis:AddTagsToStream",

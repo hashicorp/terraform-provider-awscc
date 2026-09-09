@@ -25,6 +25,7 @@ Data Source schema for AWS::MediaConnect::RouterOutput
 - `availability_zone` (String) The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.
 - `configuration` (Attributes) The configuration settings for a router output. (see [below for nested schema](#nestedatt--configuration))
 - `created_at` (String) The timestamp when the router output was created.
+- `fabric_configuration` (Attributes) The fabric configuration settings for the router output. (see [below for nested schema](#nestedatt--fabric_configuration))
 - `ip_address` (String) The IP address of the router output.
 - `maintenance_configuration` (Attributes) The configuration settings for maintenance operations, including preferred maintenance windows and schedules. (see [below for nested schema](#nestedatt--maintenance_configuration))
 - `maintenance_type` (String)
@@ -218,6 +219,14 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--fabric_configuration"></a>
+### Nested Schema for `fabric_configuration`
+
+Read-Only:
+
+- `recovery_latency_mode` (String)
 
 
 <a id="nestedatt--maintenance_configuration"></a>

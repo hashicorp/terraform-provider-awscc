@@ -1777,6 +1777,11 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_dlm_lifecycle_policy",
+        "generateListResource": true,
+        "identifier": ["PolicyId"]
+    },
+    {
         "resource": "awscc_dms_certificate",
         "generateListResource": true,
         "identifier": ["CertificateArn"]
@@ -1820,6 +1825,11 @@
         "resource": "awscc_dms_replication_subnet_group",
         "generateListResource": true,
         "identifier": ["ReplicationSubnetGroupIdentifier"]
+    },
+    {
+        "resource": "awscc_dms_replication_task",
+        "generateListResource": true,
+        "identifier": ["ReplicationTaskArn"]
     },
     {
         "resource": "awscc_drs_source_network",
@@ -2201,6 +2211,11 @@
         "resource": "awscc_dynamodb_table",
         "generateListResource": true,
         "identifier": ["TableName"]
+    },
+    {
+        "resource": "awscc_ec2_application_status_check",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_ec2_capacity_manager_data_export",
@@ -3994,6 +4009,10 @@
         "identifier": ["GatewayId"]
     },
     {
+        "resource": "awscc_iotsitewise_pipeline",
+        "identifier": ["PipelineArn"]
+    },
+    {
         "resource": "awscc_iotsitewise_portal",
         "generateListResource": true,
         "identifier": ["PortalId"]
@@ -4002,6 +4021,15 @@
         "resource": "awscc_iotsitewise_project",
         "generateListResource": true,
         "identifier": ["ProjectId"]
+    },
+    {
+        "resource": "awscc_iotsitewise_task",
+        "identifier": ["TaskArn"]
+    },
+    {
+        "resource": "awscc_iotsitewise_workspace",
+        "generateListResource": true,
+        "identifier": ["WorkspaceArn"]
     },
     {
         "resource": "awscc_iottwinmaker_scene",
@@ -6834,6 +6862,11 @@
     {
         "resource": "awscc_servicecatalogappregistry_resource_association",
         "identifier": ["ApplicationArn","ResourceArn","ResourceType"]
+    },
+    {
+        "resource": "awscc_servicediscovery_http_namespace",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicediscovery_private_dns_namespace",

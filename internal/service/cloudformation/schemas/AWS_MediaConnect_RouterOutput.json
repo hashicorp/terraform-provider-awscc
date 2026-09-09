@@ -24,6 +24,26 @@
       "description": "Configuration settings for default maintenance scheduling.",
       "additionalProperties": false
     },
+    "FabricConfiguration": {
+      "type": "object",
+      "description": "The fabric configuration settings for the router output.",
+      "properties": {
+        "RecoveryLatencyMode": {
+          "$ref": "#/definitions/FabricLatencyMode"
+        }
+      },
+      "required": [
+        "RecoveryLatencyMode"
+      ],
+      "additionalProperties": false
+    },
+    "FabricLatencyMode": {
+      "type": "string",
+      "enum": [
+        "BALANCED",
+        "LOW_LATENCY"
+      ]
+    },
     "FlowTransitEncryption": {
       "type": "object",
       "description": "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
@@ -579,10 +599,6 @@
         "Value"
       ],
       "additionalProperties": false
-    },
-    "Unit": {
-      "type": "object",
-      "additionalProperties": false
     }
   },
   "properties": {
@@ -601,6 +617,9 @@
       "type": "string",
       "description": "The timestamp when the router output was created.",
       "format": "date-time"
+    },
+    "FabricConfiguration": {
+      "$ref": "#/definitions/FabricConfiguration"
     },
     "Id": {
       "type": "string",

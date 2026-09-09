@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1567 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1581 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1868,6 +1868,10 @@ resource_schema "aws_dax_subnet_group" {
   cloudformation_type_name = "AWS::DAX::SubnetGroup"
 }
 
+resource_schema "aws_dlm_lifecycle_policy" {
+  cloudformation_type_name = "AWS::DLM::LifecyclePolicy"
+}
+
 resource_schema "aws_dms_certificate" {
   cloudformation_type_name = "AWS::DMS::Certificate"
 }
@@ -1902,6 +1906,10 @@ resource_schema "aws_dms_replication_config" {
 
 resource_schema "aws_dms_replication_subnet_group" {
   cloudformation_type_name = "AWS::DMS::ReplicationSubnetGroup"
+}
+
+resource_schema "aws_dms_replication_task" {
+  cloudformation_type_name = "AWS::DMS::ReplicationTask"
 }
 
 resource_schema "aws_drs_source_network" {
@@ -2270,6 +2278,10 @@ resource_schema "aws_dynamodb_global_table" {
 
 resource_schema "aws_dynamodb_table" {
   cloudformation_type_name = "AWS::DynamoDB::Table"
+}
+
+resource_schema "aws_ec2_application_status_check" {
+  cloudformation_type_name = "AWS::EC2::ApplicationStatusCheck"
 }
 
 resource_schema "aws_ec2_capacity_manager_data_export" {
@@ -3892,12 +3904,26 @@ resource_schema "aws_iotsitewise_gateway" {
   cloudformation_type_name = "AWS::IoTSiteWise::Gateway"
 }
 
+resource_schema "aws_iotsitewise_pipeline" {
+  cloudformation_type_name               = "AWS::IoTSiteWise::Pipeline"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_iotsitewise_portal" {
   cloudformation_type_name = "AWS::IoTSiteWise::Portal"
 }
 
 resource_schema "aws_iotsitewise_project" {
   cloudformation_type_name = "AWS::IoTSiteWise::Project"
+}
+
+resource_schema "aws_iotsitewise_task" {
+  cloudformation_type_name               = "AWS::IoTSiteWise::Task"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_iotsitewise_workspace" {
+  cloudformation_type_name = "AWS::IoTSiteWise::Workspace"
 }
 
 resource_schema "aws_iottwinmaker_component_type" {
@@ -6624,6 +6650,10 @@ resource_schema "aws_servicecatalogappregistry_attribute_group_association" {
 resource_schema "aws_servicecatalogappregistry_resource_association" {
   cloudformation_type_name               = "AWS::ServiceCatalogAppRegistry::ResourceAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicediscovery_http_namespace" {
+  cloudformation_type_name = "AWS::ServiceDiscovery::HttpNamespace"
 }
 
 resource_schema "aws_servicediscovery_private_dns_namespace" {

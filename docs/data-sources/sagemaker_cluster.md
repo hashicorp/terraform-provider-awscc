@@ -323,7 +323,19 @@ Read-Only:
 
 Read-Only:
 
+- `accounting_database` (Attributes) External MySQL-compatible accounting database that a Slurm cluster's slurmdbd connects to. Database credentials are supplied out-of-band through the referenced Secrets Manager secret. Supported only with Continuous node provisioning. (see [below for nested schema](#nestedatt--orchestrator--slurm--accounting_database))
 - `slurm_config_strategy` (String) The strategy for managing Slurm configuration on the cluster.
+
+<a id="nestedatt--orchestrator--slurm--accounting_database"></a>
+### Nested Schema for `orchestrator.slurm.accounting_database`
+
+Read-Only:
+
+- `endpoint` (String) Hostname or endpoint of the accounting database, such as an RDS endpoint.
+- `name` (String) Name of the accounting database schema. Defaults to slurm_acct_db when omitted.
+- `port` (Number) TCP port of the accounting database. Defaults to 3306 when omitted.
+- `secret_arn` (String) ARN of the Secrets Manager secret holding the database credentials.
+
 
 
 

@@ -45,6 +45,37 @@
           "type": "string"
         }
       }
+    },
+    "InfluxDBDestinationProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Endpoint": {
+          "description": "The endpoint URL of the InfluxDB database.",
+          "type": "string"
+        },
+        "InfluxDBVersion": {
+          "description": "The version of the InfluxDB database (for example, V2 or V3).",
+          "type": "string"
+        },
+        "SecretId": {
+          "description": "The ARN or name of the Secrets Manager secret containing the InfluxDB API token.",
+          "type": "string"
+        },
+        "SecretType": {
+          "description": "The type of the secret value (SecretString or SecretBinary).",
+          "type": "string"
+        },
+        "SecretKey": {
+          "description": "The key name within the secret that contains the InfluxDB token.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Endpoint",
+        "InfluxDBVersion",
+        "SecretId"
+      ]
     }
   },
   "properties": {
@@ -67,6 +98,10 @@
     "VpcProperties": {
       "description": "VPC destination properties.",
       "$ref": "#/definitions/VpcDestinationProperties"
+    },
+    "InfluxDBProperties": {
+      "description": "InfluxDB destination properties.",
+      "$ref": "#/definitions/InfluxDBDestinationProperties"
     }
   },
   "tagging": {
@@ -82,7 +117,8 @@
   ],
   "createOnlyProperties": [
     "/properties/HttpUrlProperties",
-    "/properties/VpcProperties"
+    "/properties/VpcProperties",
+    "/properties/InfluxDBProperties"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
@@ -93,7 +129,8 @@
         "iam:PassRole",
         "iot:CreateTopicRuleDestination",
         "iot:GetTopicRuleDestination",
-        "iot:UpdateTopicRuleDestination"
+        "iot:UpdateTopicRuleDestination",
+        "secretsmanager:GetSecretValue"
       ]
     },
     "read": {
@@ -105,7 +142,8 @@
       "permissions": [
         "iam:PassRole",
         "iot:GetTopicRuleDestination",
-        "iot:UpdateTopicRuleDestination"
+        "iot:UpdateTopicRuleDestination",
+        "secretsmanager:GetSecretValue"
       ]
     },
     "delete": {

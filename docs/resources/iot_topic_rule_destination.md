@@ -37,6 +37,7 @@ resource "awscc_iot_topic_rule_destination" "http_destination" {
 ### Optional
 
 - `http_url_properties` (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
+- `influx_db_properties` (Attributes) InfluxDB destination properties. (see [below for nested schema](#nestedatt--influx_db_properties))
 - `status` (String) The status of the TopicRuleDestination.
 - `vpc_properties` (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
 
@@ -52,6 +53,18 @@ resource "awscc_iot_topic_rule_destination" "http_destination" {
 Optional:
 
 - `confirmation_url` (String)
+
+
+<a id="nestedatt--influx_db_properties"></a>
+### Nested Schema for `influx_db_properties`
+
+Optional:
+
+- `endpoint` (String) The endpoint URL of the InfluxDB database.
+- `influx_db_version` (String) The version of the InfluxDB database (for example, V2 or V3).
+- `secret_id` (String) The ARN or name of the Secrets Manager secret containing the InfluxDB API token.
+- `secret_key` (String) The key name within the secret that contains the InfluxDB token.
+- `secret_type` (String) The type of the secret value (SecretString or SecretBinary).
 
 
 <a id="nestedatt--vpc_properties"></a>

@@ -1,0 +1,1 @@
+$ terraform import awscc_dms_replication_task.example "replication_task_arn"

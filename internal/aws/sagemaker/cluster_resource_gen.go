@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -1843,6 +1844,45 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Specifies parameter(s) related to Slurm as orchestrator.",
 		//	      "properties": {
+		//	        "AccountingDatabase": {
+		//	          "additionalProperties": false,
+		//	          "description": "External MySQL-compatible accounting database that a Slurm cluster's slurmdbd connects to. Database credentials are supplied out-of-band through the referenced Secrets Manager secret. Supported only with Continuous node provisioning.",
+		//	          "properties": {
+		//	            "Endpoint": {
+		//	              "description": "Hostname or endpoint of the accounting database, such as an RDS endpoint.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "",
+		//	              "type": "string"
+		//	            },
+		//	            "Name": {
+		//	              "default": "slurm_acct_db",
+		//	              "description": "Name of the accounting database schema. Defaults to slurm_acct_db when omitted.",
+		//	              "maxLength": 64,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9$_]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "default": 3306,
+		//	              "description": "TCP port of the accounting database. Defaults to 3306 when omitted.",
+		//	              "maximum": 65535,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "SecretArn": {
+		//	              "description": "ARN of the Secrets Manager secret holding the database credentials.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 20,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Endpoint",
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "SlurmConfigStrategy": {
 		//	          "description": "The strategy for managing Slurm configuration on the cluster.",
 		//	          "enum": [
@@ -1887,6 +1927,70 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Slurm
 				"slurm": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccountingDatabase
+						"accounting_database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Endpoint
+								"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Hostname or endpoint of the accounting database, such as an RDS endpoint.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Name of the accounting database schema. Defaults to slurm_acct_db when omitted.",
+									Optional:    true,
+									Computed:    true,
+									Default:     stringdefault.StaticString("slurm_acct_db"),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 64),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9$_]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Port
+								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "TCP port of the accounting database. Defaults to 3306 when omitted.",
+									Optional:    true,
+									Computed:    true,
+									Default:     int64default.StaticInt64(3306),
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(1, 65535),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "ARN of the Secrets Manager secret holding the database credentials.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(20, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "External MySQL-compatible accounting database that a Slurm cluster's slurmdbd connects to. Database credentials are supplied out-of-band through the referenced Secrets Manager secret. Supported only with Continuous node provisioning.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: SlurmConfigStrategy
 						"slurm_config_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The strategy for managing Slurm configuration on the cluster.",
@@ -2981,6 +3085,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"InstanceGroups/threads_per_core":                                                                          "ThreadsPerCore",
 		"InstanceGroups/training_plan_arn":                                                                         "TrainingPlanArn",
 		"Orchestrator/Eks/cluster_arn":                                                                             "ClusterArn",
+		"Orchestrator/Slurm/AccountingDatabase/endpoint":                                                           "Endpoint",
+		"Orchestrator/Slurm/AccountingDatabase/name":                                                               "Name",
+		"Orchestrator/Slurm/AccountingDatabase/port":                                                               "Port",
+		"Orchestrator/Slurm/AccountingDatabase/secret_arn":                                                         "SecretArn",
+		"Orchestrator/Slurm/accounting_database":                                                                   "AccountingDatabase",
 		"Orchestrator/Slurm/slurm_config_strategy":                                                                 "SlurmConfigStrategy",
 		"Orchestrator/eks":   "Eks",
 		"Orchestrator/slurm": "Slurm",

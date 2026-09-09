@@ -56,6 +56,9 @@ func acmeEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"authorization_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The authorization behavior for the ACME endpoint.",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthority
 		// CloudFormation resource type schema:

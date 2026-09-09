@@ -1,0 +1,244 @@
+{
+  "typeName": "AWS::EC2::ApplicationStatusCheck",
+  "description": "An application status check monitors an HTTP or HTTPS endpoint on Amazon EC2 instances and reports application-layer health. Configure a health check with a Protocol, Port, and Path, and then associate it with EC2 instances via AWS::EC2::ApplicationStatusCheckInstanceAssociation or AWS::EC2::ApplicationStatusCheckTagAssociation.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "HealthCheckPathSource": {
+      "type": "object",
+      "properties": {
+        "SubnetId": {
+          "type": "string"
+        },
+        "SecurityGroupId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HealthCheckPathDestination": {
+      "type": "object",
+      "properties": {
+        "SubnetId": {
+          "type": "string"
+        },
+        "SecurityGroupId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HealthCheckPath": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/HealthCheckPathSource"
+        },
+        "Destinations": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/HealthCheckPathDestination"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the application status check.",
+      "pattern": "^arn:aws[a-z0-9-]*:ec2:[a-z0-9-]+:[0-9]{12}:application-status-check/asc-[0-9a-f]+$"
+    },
+    "ApplicationStatusCheckId": {
+      "type": "string",
+      "description": "The unique identifier of the application status check.",
+      "pattern": "^asc-[0-9a-f]+$"
+    },
+    "Protocol": {
+      "type": "string",
+      "description": "The network protocol used for the health check.",
+      "enum": [
+        "http",
+        "https"
+      ]
+    },
+    "Port": {
+      "type": "integer",
+      "description": "The port used for the health check.",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "Path": {
+      "type": "string",
+      "description": "The HTTP path used for the health check."
+    },
+    "Aggregation": {
+      "type": "string",
+      "description": "Whether this check is included in the rolled-up application status.",
+      "enum": [
+        "included",
+        "excluded"
+      ]
+    },
+    "IpVersion": {
+      "type": "string",
+      "description": "The IP version used for the health check.",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ]
+    },
+    "IpScope": {
+      "type": "string",
+      "description": "The IP scope used for the health check.",
+      "enum": [
+        "private"
+      ]
+    },
+    "DeviceIndex": {
+      "type": "integer",
+      "description": "The network interface device index used for the health check."
+    },
+    "Interval": {
+      "type": "integer",
+      "description": "The interval, in seconds, between health check probes."
+    },
+    "Timeout": {
+      "type": "integer",
+      "description": "The timeout, in seconds, for each health check probe."
+    },
+    "FailureThreshold": {
+      "type": "integer",
+      "description": "The number of consecutive failed probes required to mark the instance unhealthy."
+    },
+    "SuccessThreshold": {
+      "type": "integer",
+      "description": "The number of consecutive successful probes required to mark the instance healthy."
+    },
+    "StatusCodeMatcher": {
+      "type": "string",
+      "description": "The HTTP status codes considered successful (e.g., \"200-299\")."
+    },
+    "InitializationGracePeriodSeconds": {
+      "type": "integer",
+      "description": "Seconds to wait after instance launch before beginning health checks.",
+      "minimum": -1,
+      "maximum": 600
+    },
+    "HealthCheckPaths": {
+      "type": "array",
+      "description": "The source/destination network paths used for the health check.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HealthCheckPath"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to apply to the application status check.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the application status check was created (ISO 8601)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Protocol",
+    "Port"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/ApplicationStatusCheckId",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/Interval",
+    "/properties/IpScope"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ApplicationStatusCheckId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateApplicationStatusCheck",
+        "ec2:DescribeApplicationStatusChecks",
+        "ec2:CreateTags",
+        "ec2:DescribeTags",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeApplicationStatusChecks",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyApplicationStatusCheck",
+        "ec2:DescribeApplicationStatusChecks",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteApplicationStatusCheck",
+        "ec2:DescribeApplicationStatusChecks",
+        "ec2:DescribeTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeApplicationStatusChecks"
+      ]
+    }
+  }
+}

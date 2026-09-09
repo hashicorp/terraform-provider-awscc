@@ -136,7 +136,7 @@
           "items": {
             "$ref": "#/definitions/DataSetReference"
           },
-          "maxItems": 20,
+          "maxItems": 32,
           "minItems": 1
         },
         "DataSetRelations": {
@@ -144,7 +144,7 @@
           "items": {
             "$ref": "#/definitions/DataSetRelation"
           },
-          "maxItems": 20,
+          "maxItems": 32,
           "minItems": 0
         }
       },
@@ -172,7 +172,7 @@
       "items": {
         "$ref": "#/definitions/DataSetReference"
       },
-      "maxItems": 20,
+      "maxItems": 32,
       "minItems": 1
     },
     "DataSetRelations": {
@@ -180,7 +180,7 @@
       "items": {
         "$ref": "#/definitions/DataSetRelation"
       },
-      "maxItems": 20,
+      "maxItems": 32,
       "minItems": 0
     },
     "Description": {
@@ -228,8 +228,7 @@
     "/properties/Arn"
   ],
   "writeOnlyProperties": [
-    "/properties/FolderArns",
-    "/properties/DataSets/*/DataSetName"
+    "/properties/FolderArns"
   ],
   "createOnlyProperties": [
     "/properties/AwsAccountId",

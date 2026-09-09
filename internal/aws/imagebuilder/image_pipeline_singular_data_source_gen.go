@@ -117,7 +117,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Contains settings for vulnerability scans.",
+		//	  "description": "Contains settings for vulnerability scans that Amazon Inspector runs against the test instance during image creation.",
 		//	  "properties": {
 		//	    "EcrConfiguration": {
 		//	      "additionalProperties": false,
@@ -139,7 +139,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "type": "object"
 		//	    },
 		//	    "ImageScanningEnabled": {
-		//	      "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+		//	      "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -167,11 +167,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 				}, /*END ATTRIBUTE*/
 				// Property: ImageScanningEnabled
 				"image_scanning_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+					Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Contains settings for vulnerability scans.",
+			Description: "Contains settings for vulnerability scans that Amazon Inspector runs against the test instance during image creation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageTags

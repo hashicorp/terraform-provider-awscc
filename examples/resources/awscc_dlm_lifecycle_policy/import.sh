@@ -1,0 +1,1 @@
+$ terraform import awscc_dlm_lifecycle_policy.example "policy_id"

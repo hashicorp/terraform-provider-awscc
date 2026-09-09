@@ -32,6 +32,7 @@ Definition of AWS::AgentRegistry::RegistryRecord Resource Type
 ### Read-Only
 
 - `created_at` (String) The timestamp when the registry record was created.
+- `created_by` (String) The identifier of the AWS account that created the registry record.
 - `id` (String) Uniquely identifies the resource.
 - `record_arn` (String) The Amazon Resource Name (ARN) of the registry record.
 - `record_id` (String) The unique identifier of the registry record.
@@ -46,7 +47,9 @@ Optional:
 
 - `a2_a_agent_card` (Attributes) The A2A agent card descriptor, populated when the record type is AGENT. (see [below for nested schema](#nestedatt--descriptors--a2_a_agent_card))
 - `agent_skills_definition` (Attributes) The agent skills definition descriptor, populated when the record type is SKILL. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition))
+- `agui` (Attributes) The AG-UI (Agent-User Interaction) descriptor, populated for records detected from an AG-UI protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline. (see [below for nested schema](#nestedatt--descriptors--agui))
 - `custom` (Attributes) The custom descriptor, populated when the record type is CUSTOM. (see [below for nested schema](#nestedatt--descriptors--custom))
+- `http` (Attributes) The HTTP descriptor, populated for records detected from an HTTP protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline. (see [below for nested schema](#nestedatt--descriptors--http))
 - `mcp_server` (Attributes) The MCP server descriptor, populated when the record type is MCP. (see [below for nested schema](#nestedatt--descriptors--mcp_server))
 
 <a id="nestedatt--descriptors--a2_a_agent_card"></a>
@@ -159,12 +162,60 @@ Optional:
 
 
 
+<a id="nestedatt--descriptors--agui"></a>
+### Nested Schema for `descriptors.agui`
+
+Optional:
+
+- `source` (Attributes) Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers. (see [below for nested schema](#nestedatt--descriptors--agui--source))
+
+<a id="nestedatt--descriptors--agui--source"></a>
+### Nested Schema for `descriptors.agui.source`
+
+Optional:
+
+- `from_url` (Attributes) URL-based source configuration for a source-only descriptor. (see [below for nested schema](#nestedatt--descriptors--agui--source--from_url))
+
+<a id="nestedatt--descriptors--agui--source--from_url"></a>
+### Nested Schema for `descriptors.agui.source.from_url`
+
+Optional:
+
+- `url` (String) URL source for descriptor content.
+
+
+
+
 <a id="nestedatt--descriptors--custom"></a>
 ### Nested Schema for `descriptors.custom`
 
 Optional:
 
 - `data` (String) Descriptor payload data.
+
+
+<a id="nestedatt--descriptors--http"></a>
+### Nested Schema for `descriptors.http`
+
+Optional:
+
+- `source` (Attributes) Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers. (see [below for nested schema](#nestedatt--descriptors--http--source))
+
+<a id="nestedatt--descriptors--http--source"></a>
+### Nested Schema for `descriptors.http.source`
+
+Optional:
+
+- `from_url` (Attributes) URL-based source configuration for a source-only descriptor. (see [below for nested schema](#nestedatt--descriptors--http--source--from_url))
+
+<a id="nestedatt--descriptors--http--source--from_url"></a>
+### Nested Schema for `descriptors.http.source.from_url`
+
+Optional:
+
+- `url` (String) URL source for descriptor content.
+
+
 
 
 <a id="nestedatt--descriptors--mcp_server"></a>

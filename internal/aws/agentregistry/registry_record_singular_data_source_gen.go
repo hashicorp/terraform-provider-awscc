@@ -37,6 +37,20 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The timestamp when the registry record was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreatedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the AWS account that created the registry record.",
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the AWS account that created the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -267,6 +281,37 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "Agui": {
+		//	      "additionalProperties": false,
+		//	      "description": "The AG-UI (Agent-User Interaction) descriptor, populated for records detected from an AG-UI protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+		//	      "properties": {
+		//	        "Source": {
+		//	          "additionalProperties": false,
+		//	          "description": "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+		//	          "properties": {
+		//	            "FromUrl": {
+		//	              "additionalProperties": false,
+		//	              "description": "URL-based source configuration for a source-only descriptor.",
+		//	              "properties": {
+		//	                "Url": {
+		//	                  "description": "URL source for descriptor content.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^https://.*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Url"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Custom": {
 		//	      "additionalProperties": false,
 		//	      "description": "The custom descriptor, populated when the record type is CUSTOM.",
@@ -276,6 +321,37 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 102400,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Http": {
+		//	      "additionalProperties": false,
+		//	      "description": "The HTTP descriptor, populated for records detected from an HTTP protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+		//	      "properties": {
+		//	        "Source": {
+		//	          "additionalProperties": false,
+		//	          "description": "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+		//	          "properties": {
+		//	            "FromUrl": {
+		//	              "additionalProperties": false,
+		//	              "description": "URL-based source configuration for a source-only descriptor.",
+		//	              "properties": {
+		//	                "Url": {
+		//	                  "description": "URL source for descriptor content.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^https://.*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Url"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -619,6 +695,32 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 					Description: "The agent skills definition descriptor, populated when the record type is SKILL.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: Agui
+				"agui": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Source
+						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FromUrl
+								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Url
+										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "URL source for descriptor content.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "URL-based source configuration for a source-only descriptor.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AG-UI (Agent-User Interaction) descriptor, populated for records detected from an AG-UI protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Custom
 				"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -629,6 +731,32 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The custom descriptor, populated when the record type is CUSTOM.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Http
+				"http": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Source
+						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FromUrl
+								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Url
+										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "URL source for descriptor content.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "URL-based source configuration for a source-only descriptor.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The HTTP descriptor, populated for records detected from an HTTP protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: McpServer
@@ -830,7 +958,8 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "MCP",
 		//	    "AGENT",
 		//	    "SKILL",
-		//	    "CUSTOM"
+		//	    "CUSTOM",
+		//	    "GATEWAY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -987,7 +1116,9 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		"a2_a_agent_card":                    "A2aAgentCard",
 		"additional_data":                    "AdditionalData",
 		"agent_skills_definition":            "AgentSkillsDefinition",
+		"agui":                               "Agui",
 		"created_at":                         "CreatedAt",
+		"created_by":                         "CreatedBy",
 		"credential_provider":                "CredentialProvider",
 		"credential_provider_configurations": "CredentialProviderConfigurations",
 		"credential_provider_type":           "CredentialProviderType",
@@ -1000,6 +1131,7 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		"display_name":                       "DisplayName",
 		"from_url":                           "FromUrl",
 		"grant_type":                         "GrantType",
+		"http":                               "Http",
 		"iam_credential_provider":            "IamCredentialProvider",
 		"key":                                "Key",
 		"mcp_server":                         "McpServer",

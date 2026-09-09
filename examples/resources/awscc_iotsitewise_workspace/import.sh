@@ -1,0 +1,1 @@
+$ terraform import awscc_iotsitewise_workspace.example "workspace_arn"

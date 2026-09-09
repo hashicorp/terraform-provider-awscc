@@ -40,6 +40,8 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "properties": {
 		//	              "AlarmName": {
 		//	                "description": "The name of the CloudWatch alarm.",
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -49,7 +51,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "type": "array",
-		//	          "uniqueItems": true
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "required": [
@@ -63,10 +65,14 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "MaximumExecutionTimeoutInSeconds": {
 		//	          "description": "The maximum time allowed for the blue/green update, in seconds.",
+		//	          "maximum": 28800,
+		//	          "minimum": 600,
 		//	          "type": "integer"
 		//	        },
 		//	        "TerminationWaitInSeconds": {
 		//	          "description": "The wait time before terminating the old endpoint during a blue/green deployment.",
+		//	          "maximum": 3600,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        },
 		//	        "TrafficRoutingConfiguration": {
@@ -83,6 +89,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "Value": {
 		//	                  "description": "The value representing either the number of instances or the number of capacity units.",
+		//	                  "minimum": 1,
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -102,6 +109,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "Value": {
 		//	                  "description": "The value representing either the number of instances or the number of capacity units.",
+		//	                  "minimum": 1,
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -117,6 +125,8 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "WaitIntervalInSeconds": {
 		//	              "description": "Specifies the wait interval between traffic shifts, in seconds.",
+		//	              "maximum": 3600,
+		//	              "minimum": 0,
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -145,6 +155,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "Value": {
 		//	              "description": "The value representing either the number of instances or the number of capacity units.",
+		//	              "minimum": 1,
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -156,6 +167,8 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "MaximumExecutionTimeoutInSeconds": {
 		//	          "description": "The maximum time allowed for the rolling update, in seconds.",
+		//	          "maximum": 28800,
+		//	          "minimum": 600,
 		//	          "type": "integer"
 		//	        },
 		//	        "RollbackMaximumBatchSize": {
@@ -168,6 +181,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "Value": {
 		//	              "description": "The value representing either the number of instances or the number of capacity units.",
+		//	              "minimum": 1,
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -179,6 +193,8 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "WaitIntervalInSeconds": {
 		//	          "description": "The time to wait between steps during the rolling update, in seconds.",
+		//	          "maximum": 3600,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -353,6 +369,8 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the endpoint configuration for the SageMaker endpoint. This is a required property.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"endpoint_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -364,6 +382,8 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the SageMaker endpoint. This name must be unique within an AWS Region.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/

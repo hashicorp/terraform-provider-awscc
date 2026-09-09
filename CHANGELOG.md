@@ -1,4 +1,31 @@
-## 1.101.0 (Unreleased)
+## 1.101.0 (September 9, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_dlm_lifecycle_policies`
+* **New Data Source:** `awscc_dlm_lifecycle_policy`
+* **New Data Source:** `awscc_dms_replication_task`
+* **New Data Source:** `awscc_dms_replication_tasks`
+* **New Data Source:** `awscc_ec2_application_status_check`
+* **New Data Source:** `awscc_ec2_application_status_checks`
+* **New Data Source:** `awscc_iotsitewise_pipeline`
+* **New Data Source:** `awscc_iotsitewise_task`
+* **New Data Source:** `awscc_iotsitewise_workspace`
+* **New Data Source:** `awscc_iotsitewise_workspaces`
+* **New Data Source:** `awscc_servicediscovery_http_namespace`
+* **New Data Source:** `awscc_servicediscovery_http_namespaces`
+* **New List Resource:** `awscc_dlm_lifecycle_policy`
+* **New List Resource:** `awscc_dms_replication_task`
+* **New List Resource:** `awscc_ec2_application_status_check`
+* **New List Resource:** `awscc_iotsitewise_workspace`
+* **New List Resource:** `awscc_servicediscovery_http_namespace`
+* **New Resource:** `awscc_dlm_lifecycle_policy`
+* **New Resource:** `awscc_dms_replication_task`
+* **New Resource:** `awscc_ec2_application_status_check`
+* **New Resource:** `awscc_iotsitewise_pipeline`
+* **New Resource:** `awscc_iotsitewise_task`
+* **New Resource:** `awscc_iotsitewise_workspace`
+* **New Resource:** `awscc_servicediscovery_http_namespace`
 
 ## 1.100.0 (September 2, 2026)
 
