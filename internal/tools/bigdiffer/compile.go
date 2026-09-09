@@ -4,11 +4,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2/hclsimple"
@@ -79,14 +81,7 @@ func (o buildOverlay) revert() error {
 			errs = append(errs, fmt.Errorf("removing %s: %w", path, err))
 		}
 	}
-	if len(errs) == 0 {
-		return nil
-	}
-	joined := errs[0]
-	for _, e := range errs[1:] {
-		joined = fmt.Errorf("%w; %w", joined, e)
-	}
-	return joined
+	return errors.Join(errs...)
 }
 
 // buildErrorRE matches one Go compiler error line: "path/to/file.go:line:col:
@@ -117,9 +112,12 @@ func parseBuildErrors(output, repoRoot string) []buildError {
 		if !filepath.IsAbs(file) {
 			file = filepath.Join(repoRoot, file)
 		}
-		var line, col int
-		_, _ = fmt.Sscanf(m[2], "%d", &line)
-		_, _ = fmt.Sscanf(m[3], "%d", &col)
+		// buildErrorRE's (\d+) groups guarantee m[2] and m[3] are digit-only,
+		// so these conversions cannot fail; line/col simply stay 0 if they
+		// somehow did, which only affects the report's precision, not
+		// correctness.
+		line, _ := strconv.Atoi(m[2])
+		col, _ := strconv.Atoi(m[3])
 		out = append(out, buildError{file: file, line: line, col: col, message: m[4]})
 	}
 	return out
