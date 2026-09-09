@@ -235,7 +235,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Contains settings for vulnerability scans.",
+		//	  "description": "Contains settings for vulnerability scans that Amazon Inspector runs against the test instance during image creation.",
 		//	  "properties": {
 		//	    "EcrConfiguration": {
 		//	      "additionalProperties": false,
@@ -257,7 +257,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ImageScanningEnabled": {
-		//	      "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+		//	      "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -297,7 +297,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ImageScanningEnabled
 				"image_scanning_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+					Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -305,7 +305,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Contains settings for vulnerability scans.",
+			Description: "Contains settings for vulnerability scans that Amazon Inspector runs against the test instance during image creation.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

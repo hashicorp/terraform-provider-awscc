@@ -51,6 +51,23 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CreatedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the AWS account that created the registry record.",
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the AWS account that created the registry record.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -288,6 +305,37 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "Agui": {
+		//	      "additionalProperties": false,
+		//	      "description": "The AG-UI (Agent-User Interaction) descriptor, populated for records detected from an AG-UI protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+		//	      "properties": {
+		//	        "Source": {
+		//	          "additionalProperties": false,
+		//	          "description": "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+		//	          "properties": {
+		//	            "FromUrl": {
+		//	              "additionalProperties": false,
+		//	              "description": "URL-based source configuration for a source-only descriptor.",
+		//	              "properties": {
+		//	                "Url": {
+		//	                  "description": "URL source for descriptor content.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^https://.*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Url"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Custom": {
 		//	      "additionalProperties": false,
 		//	      "description": "The custom descriptor, populated when the record type is CUSTOM.",
@@ -297,6 +345,37 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxLength": 102400,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Http": {
+		//	      "additionalProperties": false,
+		//	      "description": "The HTTP descriptor, populated for records detected from an HTTP protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+		//	      "properties": {
+		//	        "Source": {
+		//	          "additionalProperties": false,
+		//	          "description": "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+		//	          "properties": {
+		//	            "FromUrl": {
+		//	              "additionalProperties": false,
+		//	              "description": "URL-based source configuration for a source-only descriptor.",
+		//	              "properties": {
+		//	                "Url": {
+		//	                  "description": "URL source for descriptor content.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^https://.*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Url"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -815,6 +894,53 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: Agui
+				"agui": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Source
+						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FromUrl
+								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Url
+										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "URL source for descriptor content.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "URL-based source configuration for a source-only descriptor.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AG-UI (Agent-User Interaction) descriptor, populated for records detected from an AG-UI protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Custom
 				"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -832,6 +958,53 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The custom descriptor, populated when the record type is CUSTOM.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Http
+				"http": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Source
+						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FromUrl
+								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Url
+										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "URL source for descriptor content.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "URL-based source configuration for a source-only descriptor.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The HTTP descriptor, populated for records detected from an HTTP protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1194,7 +1367,8 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	    "MCP",
 		//	    "AGENT",
 		//	    "SKILL",
-		//	    "CUSTOM"
+		//	    "CUSTOM",
+		//	    "GATEWAY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1207,6 +1381,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 					"AGENT",
 					"SKILL",
 					"CUSTOM",
+					"GATEWAY",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1427,7 +1602,9 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		"a2_a_agent_card":                    "A2aAgentCard",
 		"additional_data":                    "AdditionalData",
 		"agent_skills_definition":            "AgentSkillsDefinition",
+		"agui":                               "Agui",
 		"created_at":                         "CreatedAt",
+		"created_by":                         "CreatedBy",
 		"credential_provider":                "CredentialProvider",
 		"credential_provider_configurations": "CredentialProviderConfigurations",
 		"credential_provider_type":           "CredentialProviderType",
@@ -1440,6 +1617,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		"display_name":                       "DisplayName",
 		"from_url":                           "FromUrl",
 		"grant_type":                         "GrantType",
+		"http":                               "Http",
 		"iam_credential_provider":            "IamCredentialProvider",
 		"key":                                "Key",
 		"mcp_server":                         "McpServer",

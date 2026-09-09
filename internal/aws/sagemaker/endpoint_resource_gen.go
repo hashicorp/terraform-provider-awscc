@@ -8,7 +8,8 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -51,6 +52,8 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "properties": {
 		//	              "AlarmName": {
 		//	                "description": "The name of the CloudWatch alarm.",
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -60,7 +63,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "type": "array",
-		//	          "uniqueItems": true
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "required": [
@@ -74,10 +77,14 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "MaximumExecutionTimeoutInSeconds": {
 		//	          "description": "The maximum time allowed for the blue/green update, in seconds.",
+		//	          "maximum": 28800,
+		//	          "minimum": 600,
 		//	          "type": "integer"
 		//	        },
 		//	        "TerminationWaitInSeconds": {
 		//	          "description": "The wait time before terminating the old endpoint during a blue/green deployment.",
+		//	          "maximum": 3600,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        },
 		//	        "TrafficRoutingConfiguration": {
@@ -94,6 +101,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "Value": {
 		//	                  "description": "The value representing either the number of instances or the number of capacity units.",
+		//	                  "minimum": 1,
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -113,6 +121,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "Value": {
 		//	                  "description": "The value representing either the number of instances or the number of capacity units.",
+		//	                  "minimum": 1,
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -128,6 +137,8 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "WaitIntervalInSeconds": {
 		//	              "description": "Specifies the wait interval between traffic shifts, in seconds.",
+		//	              "maximum": 3600,
+		//	              "minimum": 0,
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -156,6 +167,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "Value": {
 		//	              "description": "The value representing either the number of instances or the number of capacity units.",
+		//	              "minimum": 1,
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -167,6 +179,8 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "MaximumExecutionTimeoutInSeconds": {
 		//	          "description": "The maximum time allowed for the rolling update, in seconds.",
+		//	          "maximum": 28800,
+		//	          "minimum": 600,
 		//	          "type": "integer"
 		//	        },
 		//	        "RollbackMaximumBatchSize": {
@@ -179,6 +193,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "Value": {
 		//	              "description": "The value representing either the number of instances or the number of capacity units.",
+		//	              "minimum": 1,
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -190,6 +205,8 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "WaitIntervalInSeconds": {
 		//	          "description": "The time to wait between steps during the rolling update, in seconds.",
+		//	          "maximum": 3600,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -217,6 +234,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 255),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -229,7 +247,6 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.UniqueValues(),
 								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -252,6 +269,9 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The maximum time allowed for the blue/green update, in seconds.",
 							Optional:    true,
 							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(600, 28800),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -261,6 +281,9 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The wait time before terminating the old endpoint during a blue/green deployment.",
 							Optional:    true,
 							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 3600),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -289,6 +312,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.AtLeast(1),
 												fwvalidators.NotNullInt64(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -324,6 +348,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.AtLeast(1),
 												fwvalidators.NotNullInt64(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -355,6 +380,9 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Specifies the wait interval between traffic shifts, in seconds.",
 									Optional:    true,
 									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(0, 3600),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -402,6 +430,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.AtLeast(1),
 										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -424,6 +453,9 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The maximum time allowed for the rolling update, in seconds.",
 							Optional:    true,
 							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(600, 28800),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -449,6 +481,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.AtLeast(1),
 										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -469,6 +502,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 3600),
 								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -510,25 +544,36 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the endpoint configuration for the SageMaker endpoint. This is a required property.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"endpoint_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the endpoint configuration for the SageMaker endpoint. This is a required property.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The name of the SageMaker endpoint. This name must be unique within an AWS Region.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the SageMaker endpoint. This name must be unique within an AWS Region.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ExcludeRetainedVariantProperties
@@ -726,9 +771,9 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/RetainAllVariantProperties",
 		"/properties/RetainDeploymentConfig",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(160).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(970)
 
 	v, err := generic.NewResource(ctx, opts...)
 

@@ -162,7 +162,7 @@ func topicV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 32,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -248,7 +248,7 @@ func topicV2Resource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 20),
+				listvalidator.SizeBetween(0, 32),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -276,7 +276,7 @@ func topicV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 32,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -310,7 +310,7 @@ func topicV2Resource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 20),
+				listvalidator.SizeBetween(1, 32),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -596,7 +596,6 @@ func topicV2Resource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/FolderArns",
-		"/properties/DataSets/*/DataSetName",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

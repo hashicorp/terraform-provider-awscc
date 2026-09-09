@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -71,6 +72,106 @@ func topicRuleDestinationResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "HTTP URL destination properties.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InfluxDBProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "InfluxDB destination properties.",
+		//	  "properties": {
+		//	    "Endpoint": {
+		//	      "description": "The endpoint URL of the InfluxDB database.",
+		//	      "type": "string"
+		//	    },
+		//	    "InfluxDBVersion": {
+		//	      "description": "The version of the InfluxDB database (for example, V2 or V3).",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretId": {
+		//	      "description": "The ARN or name of the Secrets Manager secret containing the InfluxDB API token.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretKey": {
+		//	      "description": "The key name within the secret that contains the InfluxDB token.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretType": {
+		//	      "description": "The type of the secret value (SecretString or SecretBinary).",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Endpoint",
+		//	    "InfluxDBVersion",
+		//	    "SecretId"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"influx_db_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The endpoint URL of the InfluxDB database.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InfluxDBVersion
+				"influx_db_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the InfluxDB database (for example, V2 or V3).",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretId
+				"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN or name of the Secrets Manager secret containing the InfluxDB API token.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretKey
+				"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The key name within the secret that contains the InfluxDB token.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretType
+				"secret_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the secret value (SecretString or SecretBinary).",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "InfluxDB destination properties.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -229,16 +330,22 @@ func topicRuleDestinationResource(ctx context.Context) (resource.Resource, error
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"confirmation_url":    "ConfirmationUrl",
-		"http_url_properties": "HttpUrlProperties",
-		"role_arn":            "RoleArn",
-		"security_groups":     "SecurityGroups",
-		"status":              "Status",
-		"status_reason":       "StatusReason",
-		"subnet_ids":          "SubnetIds",
-		"vpc_id":              "VpcId",
-		"vpc_properties":      "VpcProperties",
+		"arn":                  "Arn",
+		"confirmation_url":     "ConfirmationUrl",
+		"endpoint":             "Endpoint",
+		"http_url_properties":  "HttpUrlProperties",
+		"influx_db_properties": "InfluxDBProperties",
+		"influx_db_version":    "InfluxDBVersion",
+		"role_arn":             "RoleArn",
+		"secret_id":            "SecretId",
+		"secret_key":           "SecretKey",
+		"secret_type":          "SecretType",
+		"security_groups":      "SecurityGroups",
+		"status":               "Status",
+		"status_reason":        "StatusReason",
+		"subnet_ids":           "SubnetIds",
+		"vpc_id":               "VpcId",
+		"vpc_properties":       "VpcProperties",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
