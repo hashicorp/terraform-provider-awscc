@@ -60,6 +60,7 @@ Read-Only:
 - `elasticsearch` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--elasticsearch))
 - `firehose` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--firehose))
 - `http` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http))
+- `influx_db` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--influx_db))
 - `iot_analytics` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_analytics))
 - `iot_events` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_events))
 - `iot_site_wise` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise))
@@ -213,6 +214,32 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+
+<a id="nestedatt--topic_rule_payload--actions--influx_db"></a>
+### Nested Schema for `topic_rule_payload.actions.influx_db`
+
+Read-Only:
+
+- `batch_config` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--influx_db--batch_config))
+- `database_name` (String)
+- `destination_arn` (String)
+- `organization` (String)
+- `role_arn` (String)
+- `table_name` (String)
+- `tags` (Map of String)
+- `timestamp_unit` (String)
+
+<a id="nestedatt--topic_rule_payload--actions--influx_db--batch_config"></a>
+### Nested Schema for `topic_rule_payload.actions.influx_db.batch_config`
+
+Read-Only:
+
+- `batch_across_topics` (Boolean)
+- `max_batch_open_ms` (Number)
+- `max_batch_size` (Number)
+- `max_batch_size_bytes` (Number)
 
 
 
@@ -480,6 +507,7 @@ Read-Only:
 - `elasticsearch` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--elasticsearch))
 - `firehose` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--firehose))
 - `http` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http))
+- `influx_db` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--influx_db))
 - `iot_analytics` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_analytics))
 - `iot_events` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_events))
 - `iot_site_wise` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise))
@@ -633,6 +661,32 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+
+<a id="nestedatt--topic_rule_payload--error_action--influx_db"></a>
+### Nested Schema for `topic_rule_payload.error_action.influx_db`
+
+Read-Only:
+
+- `batch_config` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--influx_db--batch_config))
+- `database_name` (String)
+- `destination_arn` (String)
+- `organization` (String)
+- `role_arn` (String)
+- `table_name` (String)
+- `tags` (Map of String)
+- `timestamp_unit` (String)
+
+<a id="nestedatt--topic_rule_payload--error_action--influx_db--batch_config"></a>
+### Nested Schema for `topic_rule_payload.error_action.influx_db.batch_config`
+
+Read-Only:
+
+- `batch_across_topics` (Boolean)
+- `max_batch_open_ms` (Number)
+- `max_batch_size` (Number)
+- `max_batch_size_bytes` (Number)
 
 
 

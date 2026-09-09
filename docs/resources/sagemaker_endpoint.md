@@ -22,6 +22,7 @@ Resource Type definition for AWS::SageMaker::Endpoint
 ### Optional
 
 - `deployment_config` (Attributes) Specifies deployment configuration for updating the SageMaker endpoint. Includes rollback and update policies. (see [below for nested schema](#nestedatt--deployment_config))
+- `endpoint_name` (String) The name of the SageMaker endpoint. This name must be unique within an AWS Region.
 - `exclude_retained_variant_properties` (Attributes List) Specifies a list of variant properties that you want to exclude when updating an endpoint. (see [below for nested schema](#nestedatt--exclude_retained_variant_properties))
 - `retain_all_variant_properties` (Boolean) When set to true, retains all variant properties for an endpoint when it is updated.
 - `retain_deployment_config` (Boolean) When set to true, retains the deployment configuration during endpoint updates.
@@ -30,7 +31,6 @@ Resource Type definition for AWS::SageMaker::Endpoint
 ### Read-Only
 
 - `endpoint_arn` (String) The Amazon Resource Name (ARN) of the endpoint.
-- `endpoint_name` (String) The name of the SageMaker endpoint. This name must be unique within an AWS Region.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--deployment_config"></a>

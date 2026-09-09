@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_application_status_check.example "arn"
