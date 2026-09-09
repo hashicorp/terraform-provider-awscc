@@ -45,10 +45,16 @@ func atomicWriteFile(path string, data []byte) error {
 		return fmt.Errorf("creating temp file in %s: %w", dir, err)
 	}
 	tmpPath := tmp.Name()
-	defer os.Remove(tmpPath) // no-op once Rename below has succeeded
+	// Best-effort cleanup: a no-op once Rename below has succeeded (the temp
+	// file is already gone under its new name), and on any earlier return
+	// the write itself already failed, so a failed removal here would only
+	// leave a harmless stray .bigdiffer-overlay-* temp file behind, not
+	// corrupt path itself.
+	defer func() { _ = os.Remove(tmpPath) }()
 
 	if _, err := tmp.Write(data); err != nil {
-		tmp.Close()
+		_ = tmp.Close() // the write error below is what matters; a close
+		// error on an already-failed write adds nothing actionable.
 		return fmt.Errorf("writing temp file %s: %w", tmpPath, err)
 	}
 	if err := tmp.Close(); err != nil {
