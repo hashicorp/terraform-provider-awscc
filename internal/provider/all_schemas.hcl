@@ -4728,11 +4728,13 @@ resource_schema "aws_lookoutequipment_inference_scheduler" {
 resource_schema "aws_lookoutmetrics_alert" {
   cloudformation_type_name = "AWS::LookoutMetrics::Alert"
   frozen_since             = "2022-02-18"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2947)"
 }
 
 resource_schema "aws_lookoutmetrics_anomaly_detector" {
   cloudformation_type_name = "AWS::LookoutMetrics::AnomalyDetector"
   frozen_since             = "2022-02-18"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2947)"
 }
 
 resource_schema "aws_lookoutvision_project" {
@@ -5243,6 +5245,7 @@ resource_schema "aws_nimblestudio_launch_profile" {
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
   # TypeNotFoundException during schema refresh
   suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_nimblestudio_streaming_image" {
@@ -5254,6 +5257,7 @@ resource_schema "aws_nimblestudio_streaming_image" {
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
   # TypeNotFoundException during schema refresh
   suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_nimblestudio_studio" {
@@ -5263,6 +5267,7 @@ resource_schema "aws_nimblestudio_studio" {
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
   # TypeNotFoundException during schema refresh
+  frozen_reason = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_nimblestudio_studio_component" {
@@ -5274,6 +5279,7 @@ resource_schema "aws_nimblestudio_studio_component" {
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json
   # TypeNotFoundException during schema refresh
   suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_notifications_channel_association" {
@@ -5421,6 +5427,7 @@ resource_schema "aws_omics_variant_store" {
 resource_schema "aws_omics_workflow" {
   cloudformation_type_name = "AWS::Omics::Workflow"
   frozen_since             = "2025-05-15"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — Type overwrites type for Terraform attribute type (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2830)"
 }
 
 resource_schema "aws_omics_workflow_version" {
@@ -6324,6 +6331,7 @@ resource_schema "aws_s3_access_point" {
 resource_schema "aws_s3_bucket" {
   cloudformation_type_name = "AWS::S3::Bucket"
   frozen_since             = "2025-03-20"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — SseAlgorithm overwrites SSEAlgorithm for Terraform attribute sse_algorithm (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2383)"
 }
 
 resource_schema "aws_s3_bucket_policy" {
@@ -7274,6 +7282,7 @@ resource_schema "aws_supportauthz_support_permit" {
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
   frozen_since             = "2025-10-16"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — VPCConfig overwrites VpcConfig for Terraform attribute vpc_config (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3263)"
 }
 
 resource_schema "aws_synthetics_group" {
