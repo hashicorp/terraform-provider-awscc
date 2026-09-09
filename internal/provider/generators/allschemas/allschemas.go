@@ -172,6 +172,8 @@ type ResourceAllSchema struct {
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
 	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
 	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
+	FrozenSince                          string `hcl:"frozen_since,optional"`
+	NonProvisionable                     bool   `hcl:"non_provisionable,optional"`
 }
 
 type Defaults struct {

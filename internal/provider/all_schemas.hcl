@@ -389,6 +389,7 @@ resource_schema "aws_appflow_connector" {
 
 resource_schema "aws_appflow_connector_profile" {
   cloudformation_type_name = "AWS::AppFlow::ConnectorProfile"
+  frozen_since             = "2023-02-09"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
@@ -476,6 +477,7 @@ resource_schema "aws_appstream_stack" {
 resource_schema "aws_appstream_stack_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::StackFleetAssociation"
   suppress_plural_data_source_generation = true
+  non_provisionable                      = true
 }
 
 resource_schema "aws_appstream_stack_user_association" {
@@ -781,6 +783,7 @@ resource_schema "aws_bedrock_flow_alias" {
 
 resource_schema "aws_bedrock_flow_version" {
   cloudformation_type_name               = "AWS::Bedrock::FlowVersion"
+  frozen_since                           = "2025-05-29"
   suppress_plural_data_source_generation = true
 }
 
@@ -887,6 +890,7 @@ resource_schema "aws_bedrockagentcore_gateway_target" {
 
 resource_schema "aws_bedrockagentcore_harness" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Harness"
+  frozen_since             = "2026-05-27"
 }
 
 resource_schema "aws_bedrockagentcore_harness_endpoint" {
@@ -1791,6 +1795,7 @@ resource_schema "aws_controltower_enabled_baseline" {
 
 resource_schema "aws_controltower_enabled_control" {
   cloudformation_type_name               = "AWS::ControlTower::EnabledControl"
+  frozen_since                           = "2023-11-09"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -1818,6 +1823,7 @@ resource_schema "aws_customerprofiles_calculated_attribute_definition" {
 
 resource_schema "aws_customerprofiles_domain" {
   cloudformation_type_name               = "AWS::CustomerProfiles::Domain"
+  frozen_since                           = "2023-10-26"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -1866,6 +1872,7 @@ resource_schema "aws_dax_parameter_group" {
 
 resource_schema "aws_dax_subnet_group" {
   cloudformation_type_name = "AWS::DAX::SubnetGroup"
+  non_provisionable        = true
 }
 
 resource_schema "aws_dlm_lifecycle_policy" {
@@ -2013,6 +2020,7 @@ resource_schema "aws_datasync_location_smb" {
 # However we are leaving it here as we have no way currently to remove resources cleanly.
 resource_schema "aws_datasync_storage_system" {
   cloudformation_type_name = "AWS::DataSync::StorageSystem"
+  frozen_since             = "2025-05-15"
 }
 
 resource_schema "aws_datasync_task" {
@@ -2409,6 +2417,7 @@ resource_schema "aws_ec2_key_pair" {
 
 resource_schema "aws_ec2_launch_template" {
   cloudformation_type_name = "AWS::EC2::LaunchTemplate"
+  frozen_since             = "2024-11-21"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_LaunchTemplate.json
@@ -2458,6 +2467,7 @@ resource_schema "aws_ec2_network_insights_access_scope_analysis" {
 
 resource_schema "aws_ec2_network_insights_analysis" {
   cloudformation_type_name = "AWS::EC2::NetworkInsightsAnalysis"
+  frozen_since             = "2021-08-11"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
@@ -2864,6 +2874,7 @@ resource_schema "aws_eks_certificate_authority" {
 
 resource_schema "aws_eks_cluster" {
   cloudformation_type_name = "AWS::EKS::Cluster"
+  frozen_since             = "2026-08-12"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_EKS_Cluster.json
@@ -2941,6 +2952,7 @@ resource_schema "aws_emrcontainers_virtual_cluster" {
 
 resource_schema "aws_emrserverless_application" {
   cloudformation_type_name = "AWS::EMRServerless::Application"
+  frozen_since             = "2023-11-09"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
@@ -3167,6 +3179,7 @@ resource_schema "aws_fsx_data_repository_association" {
 
 resource_schema "aws_fsx_s3_access_point_attachment" {
   cloudformation_type_name = "AWS::FSx::S3AccessPointAttachment"
+  frozen_since             = "2025-12-17"
 }
 
 resource_schema "aws_fsx_volume" {
@@ -3830,6 +3843,7 @@ resource_schema "aws_iotevents_input" {
 
 resource_schema "aws_iotfleethub_application" {
   cloudformation_type_name = "AWS::IoTFleetHub::Application"
+  frozen_since             = "2022-02-18"
 }
 
 resource_schema "aws_iotfleetwise_campaign" {
@@ -3838,6 +3852,7 @@ resource_schema "aws_iotfleetwise_campaign" {
 
 resource_schema "aws_iotfleetwise_decoder_manifest" {
   cloudformation_type_name = "AWS::IoTFleetWise::DecoderManifest"
+  frozen_since             = "2024-08-08"
 
   # Suppression Reason: NetworkInterfaces is of unsupported type: list of ""
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1515
@@ -4127,6 +4142,7 @@ resource_schema "aws_lambda_event_source_mapping" {
 
 resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
+  frozen_since             = "2026-07-01"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_Lambda_Function.json
@@ -4176,6 +4192,7 @@ resource_schema "aws_launchwizard_deployment" {
 
 resource_schema "aws_lex_bot" {
   cloudformation_type_name = "AWS::Lex::Bot"
+  frozen_since             = "2023-02-09"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_Lex_Bot.json
@@ -4330,6 +4347,7 @@ resource_schema "aws_logs_log_anomaly_detector" {
 
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
+  frozen_since             = "2024-04-04"
 }
 
 resource_schema "aws_logs_log_stream" {
@@ -4378,10 +4396,12 @@ resource_schema "aws_lookoutequipment_inference_scheduler" {
 
 resource_schema "aws_lookoutmetrics_alert" {
   cloudformation_type_name = "AWS::LookoutMetrics::Alert"
+  frozen_since             = "2022-02-18"
 }
 
 resource_schema "aws_lookoutmetrics_anomaly_detector" {
   cloudformation_type_name = "AWS::LookoutMetrics::AnomalyDetector"
+  frozen_since             = "2022-02-18"
 }
 
 resource_schema "aws_lookoutvision_project" {
@@ -4501,6 +4521,7 @@ resource_schema "aws_mediaconnect_bridge_source" {
 
 resource_schema "aws_mediaconnect_flow" {
   cloudformation_type_name = "AWS::MediaConnect::Flow"
+  frozen_since             = "2025-02-26"
 }
 
 resource_schema "aws_mediaconnect_flow_entitlement" {
@@ -4850,6 +4871,7 @@ resource_schema "aws_networkmanager_vpc_attachment" {
 
 resource_schema "aws_nimblestudio_launch_profile" {
   cloudformation_type_name               = "AWS::NimbleStudio::LaunchProfile"
+  frozen_since                           = "2024-11-08"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -4859,6 +4881,7 @@ resource_schema "aws_nimblestudio_launch_profile" {
 
 resource_schema "aws_nimblestudio_streaming_image" {
   cloudformation_type_name               = "AWS::NimbleStudio::StreamingImage"
+  frozen_since                           = "2024-11-08"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -4868,6 +4891,7 @@ resource_schema "aws_nimblestudio_streaming_image" {
 
 resource_schema "aws_nimblestudio_studio" {
   cloudformation_type_name = "AWS::NimbleStudio::Studio"
+  frozen_since             = "2024-11-08"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
@@ -4876,6 +4900,7 @@ resource_schema "aws_nimblestudio_studio" {
 
 resource_schema "aws_nimblestudio_studio_component" {
   cloudformation_type_name               = "AWS::NimbleStudio::StudioComponent"
+  frozen_since                           = "2024-11-08"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -5018,10 +5043,12 @@ resource_schema "aws_omics_variant_store" {
 
 resource_schema "aws_omics_workflow" {
   cloudformation_type_name = "AWS::Omics::Workflow"
+  frozen_since             = "2025-05-15"
 }
 
 resource_schema "aws_omics_workflow_version" {
   cloudformation_type_name = "AWS::Omics::WorkflowVersion"
+  frozen_since             = "2025-05-15"
 }
 
 resource_schema "aws_opensearch_data_source" {
@@ -5087,6 +5114,7 @@ resource_schema "aws_opensearchservice_domain" {
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
+  frozen_since             = "2025-06-19"
 }
 
 resource_schema "aws_organizations_account" {
@@ -5289,6 +5317,7 @@ resource_schema "aws_quicksight_agent" {
 
 resource_schema "aws_quicksight_analysis" {
   cloudformation_type_name = "AWS::QuickSight::Analysis"
+  frozen_since             = "2022-02-18"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
@@ -5316,6 +5345,7 @@ resource_schema "aws_quicksight_dlp_setting" {
 
 resource_schema "aws_quicksight_dashboard" {
   cloudformation_type_name               = "AWS::QuickSight::Dashboard"
+  frozen_since                           = "2022-02-18"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -5326,6 +5356,7 @@ resource_schema "aws_quicksight_dashboard" {
 
 resource_schema "aws_quicksight_data_set" {
   cloudformation_type_name = "AWS::QuickSight::DataSet"
+  frozen_since             = "2023-06-01"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
@@ -5368,6 +5399,7 @@ resource_schema "aws_quicksight_space" {
 
 resource_schema "aws_quicksight_template" {
   cloudformation_type_name               = "AWS::QuickSight::Template"
+  frozen_since                           = "2022-02-18"
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
@@ -5848,6 +5880,7 @@ resource_schema "aws_s3_access_point" {
 
 resource_schema "aws_s3_bucket" {
   cloudformation_type_name = "AWS::S3::Bucket"
+  frozen_since             = "2025-03-20"
 }
 
 resource_schema "aws_s3_bucket_policy" {
@@ -6299,6 +6332,8 @@ resource_schema "aws_sagemaker_experiment" {
 
 resource_schema "aws_sagemaker_experiment_trial_component" {
   cloudformation_type_name = "AWS::SageMaker::ExperimentTrialComponent"
+  frozen_since             = "2026-07-22"
+  non_provisionable        = true
 }
 
 resource_schema "aws_sagemaker_feature_group" {
@@ -6702,6 +6737,7 @@ resource_schema "aws_stepfunctions_activity" {
 
 resource_schema "aws_stepfunctions_state_machine" {
   cloudformation_type_name = "AWS::StepFunctions::StateMachine"
+  frozen_since             = "2022-02-17"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json
@@ -6741,6 +6777,7 @@ resource_schema "aws_supportauthz_support_permit" {
 
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
+  frozen_since             = "2025-10-16"
 }
 
 resource_schema "aws_synthetics_group" {

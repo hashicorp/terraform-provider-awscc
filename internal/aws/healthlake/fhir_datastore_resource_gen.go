@@ -280,7 +280,7 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				defaults.StaticPartialObject(map[string]interface{}{
+				defaults.StaticPartialObject(map[string]any{
 					"authorization_strategy":             "AWS_AUTH",
 					"fine_grained_authorization_enabled": false,
 				}),
@@ -427,8 +427,8 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				defaults.StaticPartialObject(map[string]interface{}{
-					"kms_encryption_config": map[string]interface{}{
+				defaults.StaticPartialObject(map[string]any{
+					"kms_encryption_config": map[string]any{
 						"cmk_type": "AWS_OWNED_KMS_KEY",
 					},
 				}),

@@ -1,6 +1,11 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
+// Legacy code: superseded by the copy in
+// internal/tools/bigdiffer/codegen/emitter.go. Kept as the deprecated
+// `make`/go:generate fallback; see
+// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+
 package codegen
 
 import (
@@ -1653,7 +1658,7 @@ func writeObjectGoLiteral(w io.Writer, obj map[string]any) {
 	keys := tfmaps.Keys(obj)
 	sort.Strings(keys)
 
-	fprintf(w, "map[string]interface{}{\n")
+	fprintf(w, "map[string]any{\n")
 	for _, key := range keys {
 		fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(key))
 		switch value := obj[key]; v := value.(type) {

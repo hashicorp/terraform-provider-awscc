@@ -1,0 +1,57 @@
+# Copyright IBM Corp. 2021, 2026
+# "SPDX-License-Identifier: MPL-2.0"
+
+name: bigdiffer
+
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+  pull_request:
+    paths:
+      - .github/workflows/bigdiffer.yml
+      - go.sum
+      - GNUmakefile
+      - internal/tools/bigdiffer/**
+      - internal/provider/all_schemas.hcl
+      - internal/provider/import_examples_gen.json
+      - internal/service/cloudformation/schemas/**
+
+permissions:
+  contents: read # Needed for checkout
+
+jobs:
+  bigdiffer:
+    name: bigdiffer test + check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: tools/go.mod
+      - name: GOCACHE
+        run: |
+          echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        continue-on-error: true
+        timeout-minutes: 2
+        with:
+          # TODO: Replace with supported mechanism when it is supported
+          # https://github.com/actions/setup-go/issues/54
+          path: ${{ env.GOCACHE }}
+          key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        continue-on-error: true
+        timeout-minutes: 2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
+      # Needed to access private repositories. Unfortunately, this cannot be restricted to specific repositories
+      - run: git config --global url."https://${{ secrets.PRIVATE_GOMOD_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
+      # Unit tests plus full-corpus generation parity (bigdiffer == committed).
+      # Offline: uses the committed schema cache, never queries AWS (the live
+      # -update/e2e paths are opt-in and skipped here).
+      - run: go test ./internal/tools/bigdiffer/... -timeout 20m
+      # Verify all_schemas.hcl is normalized and anomaly-free (offline).
+      - run: go run ./internal/tools/bigdiffer -check
