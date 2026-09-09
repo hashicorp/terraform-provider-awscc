@@ -678,6 +678,36 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The timestamp when the router output was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FabricConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The fabric configuration settings for the router output.",
+		//	  "properties": {
+		//	    "RecoveryLatencyMode": {
+		//	      "enum": [
+		//	        "BALANCED",
+		//	        "LOW_LATENCY"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RecoveryLatencyMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"fabric_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RecoveryLatencyMode
+				"recovery_latency_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The fabric configuration settings for the router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -977,6 +1007,7 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"encryption_key":                 "EncryptionKey",
 		"encryption_key_configuration":   "EncryptionKeyConfiguration",
 		"encryption_key_type":            "EncryptionKeyType",
+		"fabric_configuration":           "FabricConfiguration",
 		"flow_arn":                       "FlowArn",
 		"flow_source_arn":                "FlowSourceArn",
 		"forward_error_correction":       "ForwardErrorCorrection",
@@ -997,6 +1028,7 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"preferred_day_time":             "PreferredDayTime",
 		"protocol":                       "Protocol",
 		"protocol_configuration":         "ProtocolConfiguration",
+		"recovery_latency_mode":          "RecoveryLatencyMode",
 		"region_name":                    "RegionName",
 		"rist":                           "Rist",
 		"role_arn":                       "RoleArn",

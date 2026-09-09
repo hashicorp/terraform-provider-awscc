@@ -27,38 +27,30 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the ID of the volume backup to use to create a new volume.",
 		//	  "type": "string"
 		//	}
 		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the ID of the volume backup to use to create a new volume.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the volume.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the volume.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: OntapConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The configuration of an Amazon FSx for NetApp ONTAP volume.",
 		//	  "properties": {
 		//	    "AggregateConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates.",
 		//	      "properties": {
 		//	        "Aggregates": {
-		//	          "description": "The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier.",
-		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -66,54 +58,42 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "ConstituentsPerAggregate": {
-		//	          "description": "Used to explicitly set the number of constituents within the FlexGroup per storage aggregate. This field is optional when creating a FlexGroup volume. If unspecified, the default value will be 8. This field cannot be provided when creating a FlexVol volume.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "CopyTagsToBackups": {
-		//	      "description": "A boolean flag indicating whether tags for the volume should be copied to backups.",
 		//	      "type": "string"
 		//	    },
 		//	    "JunctionPath": {
-		//	      "description": "Specifies the location in the SVM's namespace where the volume is mounted. This parameter is required. The JunctionPath must have a leading forward slash, such as /vol3.",
 		//	      "type": "string"
 		//	    },
 		//	    "OntapVolumeType": {
-		//	      "description": "Specifies the type of volume you are creating. Valid values are the following: RW or DP",
 		//	      "type": "string"
 		//	    },
 		//	    "SecurityStyle": {
-		//	      "description": "Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style.",
 		//	      "type": "string"
 		//	    },
 		//	    "SizeInBytes": {
-		//	      "description": "Specifies the configured size of the volume, in bytes.",
 		//	      "type": "string"
 		//	    },
 		//	    "SizeInMegabytes": {
-		//	      "description": "Use SizeInBytes instead. Specifies the size of the volume, in megabytes (MB), that you are creating",
 		//	      "type": "string"
 		//	    },
 		//	    "SnaplockConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "The SnapLock configuration object for an FSx for ONTAP SnapLock volume.",
 		//	      "properties": {
 		//	        "AuditLogVolume": {
-		//	          "description": "Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume",
 		//	          "type": "string"
 		//	        },
 		//	        "AutocommitPeriod": {
 		//	          "additionalProperties": false,
-		//	          "description": "The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume.",
 		//	          "properties": {
 		//	            "Type": {
-		//	              "description": "Defines the type of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. Setting this value to NONE disables autocommit. The default value is NONE.",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "Defines the amount of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -123,23 +103,18 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "PrivilegedDelete": {
-		//	          "description": "Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock Enterprise volume.",
 		//	          "type": "string"
 		//	        },
 		//	        "RetentionPeriod": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies the retention period of an FSx for ONTAP SnapLock volume.",
 		//	          "properties": {
 		//	            "DefaultRetention": {
 		//	              "additionalProperties": false,
-		//	              "description": "The retention period assigned to a write once, read many (WORM) file by default if an explicit retention period is not set for an FSx for ONTAP SnapLock volume.",
 		//	              "properties": {
 		//	                "Type": {
-		//	                  "description": "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -150,14 +125,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "MaximumRetention": {
 		//	              "additionalProperties": false,
-		//	              "description": "The longest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume.",
 		//	              "properties": {
 		//	                "Type": {
-		//	                  "description": "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -168,14 +140,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "MinimumRetention": {
 		//	              "additionalProperties": false,
-		//	              "description": "The shortest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume.",
 		//	              "properties": {
 		//	                "Type": {
-		//	                  "description": "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -193,11 +162,9 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "SnaplockType": {
-		//	          "description": "Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is set, it can't be changed.",
 		//	          "type": "string"
 		//	        },
 		//	        "VolumeAppendModeEnabled": {
-		//	          "description": "Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -207,34 +174,27 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "SnapshotPolicy": {
-		//	      "description": "Specifies the snapshot policy for the volume. There are three built-in snapshot policies: default, default-1weekly, none.",
 		//	      "type": "string"
 		//	    },
 		//	    "StorageEfficiencyEnabled": {
-		//	      "description": "Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume, or set to false to disable them.",
 		//	      "type": "string"
 		//	    },
 		//	    "StorageVirtualMachineId": {
-		//	      "description": "Specifies the ONTAP SVM in which to create the volume.",
 		//	      "type": "string"
 		//	    },
 		//	    "TieringPolicy": {
 		//	      "additionalProperties": false,
-		//	      "description": "Describes the data tiering policy for an ONTAP volume.",
 		//	      "properties": {
 		//	        "CoolingPeriod": {
-		//	          "description": "Specifies the number of days that user data in a volume must remain inactive before it is considered \"cold\" and moved to the capacity pool.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "Specifies the tiering policy used to transition data. Default value is SNAPSHOT_ONLY.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "VolumeStyle": {
-		//	      "description": "Use to specify the style of an ONTAP volume.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -251,77 +211,63 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Aggregates
 						"aggregates": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ConstituentsPerAggregate
 						"constituents_per_aggregate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Used to explicitly set the number of constituents within the FlexGroup per storage aggregate. This field is optional when creating a FlexGroup volume. If unspecified, the default value will be 8. This field cannot be provided when creating a FlexVol volume.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CopyTagsToBackups
 				"copy_tags_to_backups": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A boolean flag indicating whether tags for the volume should be copied to backups.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: JunctionPath
 				"junction_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the location in the SVM's namespace where the volume is mounted. This parameter is required. The JunctionPath must have a leading forward slash, such as /vol3.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: OntapVolumeType
 				"ontap_volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the type of volume you are creating. Valid values are the following: RW or DP",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityStyle
 				"security_style": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SizeInBytes
 				"size_in_bytes": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the configured size of the volume, in bytes.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SizeInMegabytes
 				"size_in_megabytes": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Use SizeInBytes instead. Specifies the size of the volume, in megabytes (MB), that you are creating",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SnaplockConfiguration
 				"snaplock_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AuditLogVolume
 						"audit_log_volume": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: AutocommitPeriod
 						"autocommit_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Defines the type of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. Setting this value to NONE disables autocommit. The default value is NONE.",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Defines the amount of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume.",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: PrivilegedDelete
 						"privileged_delete": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock Enterprise volume.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionPeriod
 						"retention_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -331,145 +277,114 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "The retention period assigned to a write once, read many (WORM) file by default if an explicit retention period is not set for an FSx for ONTAP SnapLock volume.",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: MaximumRetention
 								"maximum_retention": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "The longest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume.",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: MinimumRetention
 								"minimum_retention": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to INFINITE, the files are retained forever. If you set it to UNSPECIFIED, the files are retained until you set an explicit retention period.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "The shortest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume.",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Specifies the retention period of an FSx for ONTAP SnapLock volume.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: SnaplockType
 						"snaplock_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is set, it can't be changed.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: VolumeAppendModeEnabled
 						"volume_append_mode_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The SnapLock configuration object for an FSx for ONTAP SnapLock volume.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SnapshotPolicy
 				"snapshot_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the snapshot policy for the volume. There are three built-in snapshot policies: default, default-1weekly, none.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: StorageEfficiencyEnabled
 				"storage_efficiency_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume, or set to false to disable them.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: StorageVirtualMachineId
 				"storage_virtual_machine_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ONTAP SVM in which to create the volume.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: TieringPolicy
 				"tiering_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CoolingPeriod
 						"cooling_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the number of days that user data in a volume must remain inactive before it is considered \"cold\" and moved to the capacity pool.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the tiering policy used to transition data. Default value is SNAPSHOT_ONLY.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Describes the data tiering policy for an ONTAP volume.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: VolumeStyle
 				"volume_style": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Use to specify the style of an ONTAP volume.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The configuration of an Amazon FSx for NetApp ONTAP volume.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: OpenZFSConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The configuration of an Amazon FSx for OpenZFS volume.",
 		//	  "properties": {
 		//	    "CopyTagsToSnapshots": {
-		//	      "description": "A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If this value is set to true, and you do not specify any tags, all tags for the original volume are copied over to snapshots. If this value is set to true, and you do specify one or more tags, only the specified tags for the original volume are copied over to snapshots. If you specify one or more tags when creating a new snapshot, no tags are copied over from the original volume, regardless of this value.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "DataCompressionType": {
-		//	      "description": "Specifies the method used to compress the data on the volume",
 		//	      "type": "string"
 		//	    },
 		//	    "NfsExports": {
-		//	      "description": "The configuration object for mounting a Network File System (NFS) file system.",
-		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "ClientConfigurations": {
-		//	            "description": "The configuration object for mounting a Network File System (NFS) file system.",
-		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "Clients": {
-		//	                  "description": "A value that specifies who can mount the file system. You can provide a wildcard character (*), an IP address (0.0.0.0), or a CIDR address (192.0.2.0/24). By default, Amazon FSx uses the wildcard character when specifying the client.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Options": {
-		//	                  "description": "The configuration object for mounting a Network File System (NFS) file system.",
-		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
 		//	                  },
@@ -496,8 +411,6 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "Options": {
-		//	      "description": "The configuration object for mounting a Network File System (NFS) file system.",
-		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -506,14 +419,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "OriginSnapshot": {
 		//	      "additionalProperties": false,
-		//	      "description": "The configuration of an Amazon FSx for OpenZFS volume.",
 		//	      "properties": {
 		//	        "CopyStrategy": {
-		//	          "description": "The configuration object for mounting a Network File System (NFS) file system.",
 		//	          "type": "string"
 		//	        },
 		//	        "SnapshotARN": {
-		//	          "description": "Specifies the snapshot to use when creating an OpenZFS volume from a snapshot.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -524,41 +434,31 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ParentVolumeId": {
-		//	      "description": "The ID of the volume to use as the parent volume of the volume that you are creating.",
 		//	      "type": "string"
 		//	    },
 		//	    "ReadOnly": {
-		//	      "description": "A Boolean value indicating whether the volume is read-only.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "RecordSizeKiB": {
-		//	      "description": "Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes (KiB).",
 		//	      "type": "integer"
 		//	    },
 		//	    "StorageCapacityQuotaGiB": {
-		//	      "description": "Sets the maximum storage size in gibibytes (GiB) for the volume. You can specify a quota that is larger than the storage on the parent volume. A volume quota limits the amount of storage that the volume can consume to the configured amount, but does not guarantee the space will be available on the parent volume. To guarantee quota space, you must also set StorageCapacityReservationGiB. To not specify a storage capacity quota, set this to -1.",
 		//	      "type": "integer"
 		//	    },
 		//	    "StorageCapacityReservationGiB": {
-		//	      "description": "Specifies the amount of storage in gibibytes (GiB) to reserve from the parent volume. Setting StorageCapacityReservationGiB guarantees that the specified amount of storage space on the parent volume will always be available for the volume. You can't reserve more storage than the parent volume has. To not specify a storage capacity reservation, set this to 0 or -1. For more information, see Volume properties in the Amazon FSx for OpenZFS User Guide.",
 		//	      "type": "integer"
 		//	    },
 		//	    "UserAndGroupQuotas": {
-		//	      "description": "Configures how much storage users and groups can use on the volume.",
-		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "Id": {
-		//	            "description": "The ID of the user or group that the quota applies to.",
 		//	            "type": "integer"
 		//	          },
 		//	          "StorageCapacityQuotaGiB": {
-		//	            "description": "The user or group's storage quota, in gibibytes (GiB).",
 		//	            "type": "integer"
 		//	          },
 		//	          "Type": {
-		//	            "description": "Specifies whether the quota applies to a user or group.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -582,13 +482,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CopyTagsToSnapshots
 				"copy_tags_to_snapshots": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If this value is set to true, and you do not specify any tags, all tags for the original volume are copied over to snapshots. If this value is set to true, and you do specify one or more tags, only the specified tags for the original volume are copied over to snapshots. If you specify one or more tags when creating a new snapshot, no tags are copied over from the original volume, regardless of this value.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: DataCompressionType
 				"data_compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the method used to compress the data on the volume",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: NfsExports
 				"nfs_exports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -600,29 +498,24 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Clients
 										"clients": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A value that specifies who can mount the file system. You can provide a wildcard character (*), an IP address (0.0.0.0), or a CIDR address (192.0.2.0/24). By default, Amazon FSx uses the wildcard character when specifying the client.",
-											Computed:    true,
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: Options
 										"options": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "The configuration object for mounting a Network File System (NFS) file system.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "The configuration object for mounting a Network File System (NFS) file system.",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "The configuration object for mounting a Network File System (NFS) file system.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Options
 				"options": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "The configuration object for mounting a Network File System (NFS) file system.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OriginSnapshot
@@ -630,42 +523,34 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CopyStrategy
 						"copy_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The configuration object for mounting a Network File System (NFS) file system.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: SnapshotARN
 						"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the snapshot to use when creating an OpenZFS volume from a snapshot.",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The configuration of an Amazon FSx for OpenZFS volume.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ParentVolumeId
 				"parent_volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the volume to use as the parent volume of the volume that you are creating.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ReadOnly
 				"read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "A Boolean value indicating whether the volume is read-only.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: RecordSizeKiB
 				"record_size_ki_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes (KiB).",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: StorageCapacityQuotaGiB
 				"storage_capacity_quota_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Sets the maximum storage size in gibibytes (GiB) for the volume. You can specify a quota that is larger than the storage on the parent volume. A volume quota limits the amount of storage that the volume can consume to the configured amount, but does not guarantee the space will be available on the parent volume. To guarantee quota space, you must also set StorageCapacityReservationGiB. To not specify a storage capacity quota, set this to -1.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: StorageCapacityReservationGiB
 				"storage_capacity_reservation_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the amount of storage in gibibytes (GiB) to reserve from the parent volume. Setting StorageCapacityReservationGiB guarantees that the specified amount of storage space on the parent volume will always be available for the volume. You can't reserve more storage than the parent volume has. To not specify a storage capacity reservation, set this to 0 or -1. For more information, see Volume properties in the Amazon FSx for OpenZFS User Guide.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UserAndGroupQuotas
 				"user_and_group_quotas": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -673,54 +558,43 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Id
 							"id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The ID of the user or group that the quota applies to.",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: StorageCapacityQuotaGiB
 							"storage_capacity_quota_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The user or group's storage quota, in gibibytes (GiB).",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies whether the quota applies to a user or group.",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Configures how much storage users and groups can use on the volume.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The configuration of an Amazon FSx for OpenZFS volume.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceARN
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Returns the volume's Amazon Resource Name (ARN).",
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returns the volume's Amazon Resource Name (ARN).",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "One or more tags.",
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -738,51 +612,42 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: UUID
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Returns the volume's ID.",
 		//	  "type": "string"
 		//	}
 		"uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returns the volume's ID.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: VolumeId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Returns the volume's universally unique identifier (UUID).",
 		//	  "type": "string"
 		//	}
 		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returns the volume's universally unique identifier (UUID).",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: VolumeType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of the volume.",
 		//	  "type": "string"
 		//	}
 		"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the volume.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

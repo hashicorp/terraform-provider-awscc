@@ -39,7 +39,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of attributes that describe the key schema for the table and indexes.\n This property is required to create a DDB table.\n Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition.",
+		//	  "description": "A list of attributes that describe the key schema for the table and indexes.\n This property is required to create a DDB table.\n You can add an ``AttributeDefinition`` without interruption. Changing the type of an existing ``AttributeDefinition`` requires replacement of the table.",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Represents an attribute for describing the schema for the table and indexes.",
@@ -77,7 +77,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A list of attributes that describe the key schema for the table and indexes.\n This property is required to create a DDB table.\n Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition.",
+			Description: "A list of attributes that describe the key schema for the table and indexes.\n This property is required to create a DDB table.\n You can add an ``AttributeDefinition`` without interruption. Changing the type of an existing ``AttributeDefinition`` requires replacement of the table.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BillingMode
@@ -232,7 +232,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ProjectionType": {
-		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -369,7 +369,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -651,7 +651,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ProjectionType": {
-		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -706,7 +706,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -945,7 +945,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Tags": {
-		//	      "description": "",
+		//	      "description": "Specifies the tags to apply to the DDB stream. Stream tags are independent of table tags.\n For an overview on tagging DynamoDB resources, see [Tagging for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html) in the *Amazon DynamoDB Developer Guide*.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -1011,7 +1011,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "",
+					Description: "Specifies the tags to apply to the DDB stream. Stream tags are independent of table tags.\n For an overview on tagging DynamoDB resources, see [Tagging for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html) in the *Amazon DynamoDB Developer Guide*.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
