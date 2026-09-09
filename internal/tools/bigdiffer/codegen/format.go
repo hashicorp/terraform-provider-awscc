@@ -7,6 +7,10 @@ import (
 	"golang.org/x/tools/imports"
 )
 
+// goTabWidth is the standard Go source tab width, matching gofmt's own
+// convention. Named to satisfy the mnd (magic number) linter.
+const goTabWidth = 8
+
 // FormatGo applies goimports to generated Go source: it gofmt-formats and, unlike
 // go/format.Source, prunes unused imports and adds missing ones. This replicates
 // the legacy generation pipeline's `goimports -w` post-step (see GNUmakefile),
@@ -22,6 +26,6 @@ func FormatGo(filename string, src []byte) ([]byte, error) {
 	return imports.Process(filename, src, &imports.Options{
 		Comments:  true,
 		TabIndent: true,
-		TabWidth:  8,
+		TabWidth:  goTabWidth,
 	})
 }
