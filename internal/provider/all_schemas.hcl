@@ -69,6 +69,7 @@ resource_schema "aws_arcregionswitch_plan" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: HealthChecksForPlan is of unsupported type: key-value map of list of object"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: HealthChecksForPlan is of unsupported type: key-value map of list of object"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
@@ -124,6 +125,8 @@ resource_schema "aws_amazonmq_broker" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_amazonmq_configuration" {
@@ -710,6 +713,7 @@ resource_schema "aws_bcm_dashboard" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
   suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_bcmdataexports_export" {
@@ -846,6 +850,7 @@ resource_schema "aws_bedrock_flow" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
   suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_bedrock_flow_alias" {
@@ -938,6 +943,7 @@ resource_schema "aws_bedrockagentcore_dataset" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: Source/InlineExamples/Examples is of unsupported type: list of undefined schema"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Source/InlineExamples/Examples is of unsupported type: list of undefined schema"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_bedrockagentcore_evaluator" {
@@ -1335,6 +1341,8 @@ resource_schema "aws_cloudfront_anycast_ip_list" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cloudfront_cache_policy" {
@@ -1363,6 +1371,8 @@ resource_schema "aws_cloudfront_distribution" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cloudfront_distribution_tenant" {
@@ -1414,6 +1424,7 @@ resource_schema "aws_cloudfront_trust_store" {
 resource_schema "aws_cloudfront_vpc_origin" {
   cloudformation_type_name               = "AWS::CloudFront::VpcOrigin"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cloudhsm_cluster" {
@@ -1606,6 +1617,7 @@ resource_schema "aws_cognito_user_pool" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: SmsMessage overwrites SMSMessage for Terraform attribute sms_message"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: SmsMessage overwrites SMSMessage for Terraform attribute sms_message"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cognito_user_pool_client" {
@@ -1796,6 +1808,7 @@ resource_schema "aws_connect_evaluation_form" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
   suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_connect_hours_of_operation" {
@@ -1955,6 +1968,9 @@ resource_schema "aws_controltower_enabled_baseline" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_controltower_enabled_control" {
@@ -2119,6 +2135,8 @@ resource_schema "aws_databrew_recipe" {
   # Properties with anyOf indicator https://github.com/hashicorp/terraform-provider-awscc/issues/98
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_databrew_ruleset" {
@@ -2403,6 +2421,7 @@ resource_schema "aws_devopsagent_private_connection" {
 resource_schema "aws_devopsagent_service" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Service"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_devopsagent_trigger" {
@@ -3126,6 +3145,8 @@ resource_schema "aws_eks_nodegroup" {
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_eks_pod_identity_association" {
@@ -3163,6 +3184,7 @@ resource_schema "aws_emrcontainers_endpoint" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
   suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_emrcontainers_security_configuration" {
@@ -3171,6 +3193,8 @@ resource_schema "aws_emrcontainers_security_configuration" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_emrcontainers_virtual_cluster" {
@@ -3179,6 +3203,8 @@ resource_schema "aws_emrcontainers_virtual_cluster" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_emrserverless_application" {
@@ -3637,6 +3663,7 @@ resource_schema "aws_glue_usage_profile" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: Configuration/JobConfiguration is of unsupported type: key-value map of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Configuration/JobConfiguration is of unsupported type: key-value map of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_glue_user_defined_function" {
@@ -3868,6 +3895,7 @@ resource_schema "aws_identitystore_user" {
 resource_schema "aws_imagebuilder_component" {
   cloudformation_type_name               = "AWS::ImageBuilder::Component"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_imagebuilder_container_recipe" {
@@ -3881,6 +3909,7 @@ resource_schema "aws_imagebuilder_distribution_configuration" {
 resource_schema "aws_imagebuilder_image" {
   cloudformation_type_name               = "AWS::ImageBuilder::Image"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_imagebuilder_image_pipeline" {
@@ -3902,6 +3931,7 @@ resource_schema "aws_imagebuilder_lifecycle_policy" {
 resource_schema "aws_imagebuilder_workflow" {
   cloudformation_type_name               = "AWS::ImageBuilder::Workflow"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_inspector_assessment_target" {
@@ -4122,6 +4152,7 @@ resource_schema "aws_iotfleetwise_decoder_manifest" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_iotfleetwise_fleet" {
@@ -4170,6 +4201,7 @@ resource_schema "aws_iotsitewise_computation_model" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
   suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_iotsitewise_dashboard" {
@@ -4371,11 +4403,13 @@ resource_schema "aws_kinesisfirehose_delivery_stream" {
 resource_schema "aws_kinesisvideo_signaling_channel" {
   cloudformation_type_name               = "AWS::KinesisVideo::SignalingChannel"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_kinesisvideo_stream" {
   cloudformation_type_name               = "AWS::KinesisVideo::Stream"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_lakeformation_data_cells_filter" {
@@ -4679,6 +4713,9 @@ resource_schema "aws_logs_transformer" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_lookoutequipment_inference_scheduler" {
@@ -4727,6 +4764,7 @@ resource_schema "aws_mpa_approval_team" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: Policies is of unsupported type: set of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Policies is of unsupported type: set of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mpa_identity_source" {
@@ -4924,6 +4962,8 @@ resource_schema "aws_mediapackage_channel" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mediapackage_origin_endpoint" {
@@ -4932,6 +4972,8 @@ resource_schema "aws_mediapackage_origin_endpoint" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mediapackage_packaging_configuration" {
@@ -5000,6 +5042,7 @@ resource_schema "aws_mediatailor_playback_configuration" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: ConfigurationAliases is of unsupported type: key-value map of undefined schema"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: ConfigurationAliases is of unsupported type: key-value map of undefined schema"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mediatailor_prefetch_schedule" {
@@ -5278,6 +5321,8 @@ resource_schema "aws_novaact_workflow_definition" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = false
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_odb_cloud_autonomous_vm_cluster" {
@@ -5333,6 +5378,9 @@ resource_schema "aws_observabilityadmin_telemetry_pipelines" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_observabilityadmin_telemetry_rule" {
@@ -5691,6 +5739,7 @@ resource_schema "aws_quicksight_approval_policy" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: Actions is of unsupported type: list of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Actions is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_quicksight_custom_permissions" {
@@ -5710,6 +5759,7 @@ resource_schema "aws_quicksight_dashboard" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  suppression_reason_plural_data_source = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_quicksight_data_set" {
@@ -5766,6 +5816,7 @@ resource_schema "aws_quicksight_template" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  suppression_reason_plural_data_source = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_quicksight_theme" {
@@ -5994,6 +6045,7 @@ resource_schema "aws_rekognition_stream_processor" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: PolygonRegionsOfInterest is of unsupported type: set of array"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: PolygonRegionsOfInterest is of unsupported type: set of array"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_resiliencehub_app" {
@@ -6625,6 +6677,7 @@ resource_schema "aws_ssmcontacts_contact_channel" {
 resource_schema "aws_ssmcontacts_plan" {
   cloudformation_type_name               = "AWS::SSMContacts::Plan"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_ssmcontacts_rotation" {
@@ -6651,6 +6704,7 @@ resource_schema "aws_ssmquicksetup_configuration_manager" {
 resource_schema "aws_ssmquicksetup_lifecycle_automation" {
   cloudformation_type_name               = "AWS::SSMQuickSetup::LifecycleAutomation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_sso_application" {
@@ -6803,6 +6857,7 @@ resource_schema "aws_sagemaker_model_card" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
@@ -6926,6 +6981,9 @@ resource_schema "aws_securityhub_automation_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_securityhub_automation_rule_v2" {
@@ -7002,6 +7060,7 @@ resource_schema "aws_securitylake_subscriber" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: Sources is of unsupported type: list of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Sources is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_securitylake_subscriber_notification" {
@@ -7363,6 +7422,7 @@ resource_schema "aws_vpclattice_domain_verification" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: value overwrites Value for Terraform attribute value"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: value overwrites Value for Terraform attribute value"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_vpclattice_listener" {
@@ -7417,6 +7477,8 @@ resource_schema "aws_vpclattice_target_group" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_wafv2_ip_set" {
@@ -7570,6 +7632,7 @@ resource_schema "aws_workspaces_workspace" {
   suppress_plural_data_source_generation   = true
   suppression_reason_resource              = "generation_failed: emitting schema code: WorkspaceId overwrites Id for Terraform attribute workspace_id"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: WorkspaceId overwrites Id for Terraform attribute workspace_id"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_workspaces_workspace_ip_group" {
