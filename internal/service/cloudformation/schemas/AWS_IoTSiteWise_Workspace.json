@@ -1,0 +1,184 @@
+{
+  "typeName": "AWS::IoTSiteWise::Workspace",
+  "description": "Represents an AWS IoT SiteWise workspace that provides logical isolation for tasks and pipelines.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "EncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the workspace.",
+      "properties": {
+        "EncryptionType": {
+          "type": "string",
+          "description": "The type of encryption.",
+          "enum": [
+            "SITEWISE_DEFAULT_ENCRYPTION",
+            "KMS_BASED_ENCRYPTION"
+          ]
+        }
+      },
+      "required": [
+        "EncryptionType"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "WorkspaceName": {
+      "type": "string",
+      "description": "The name of the workspace.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "WorkspaceArn": {
+      "type": "string",
+      "description": "The ARN of the workspace.",
+      "minLength": 1,
+      "maxLength": 1600
+    },
+    "WorkspaceDescription": {
+      "type": "string",
+      "description": "A description of the workspace.",
+      "minLength": 0,
+      "maxLength": 2048
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The ARN of the AWS KMS key used for KMS_BASED_ENCRYPTION. Required when EncryptionConfiguration.EncryptionType is KMS_BASED_ENCRYPTION.",
+      "pattern": "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:[0-9]{12}:key/.+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current state of the workspace.",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The time the workspace was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The time the workspace was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "WorkspaceName",
+    "EncryptionConfiguration"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/WorkspaceArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/WorkspaceName",
+    "/properties/EncryptionConfiguration",
+    "/properties/KmsKeyId"
+  ],
+  "primaryIdentifier": [
+    "/properties/WorkspaceArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/WorkspaceName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotsitewise:TagResource",
+      "iotsitewise:UntagResource",
+      "iotsitewise:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iotsitewise:CreateWorkspace",
+        "iotsitewise:DescribeWorkspace",
+        "iotsitewise:TagResource",
+        "iotsitewise:ListTagsForResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iotsitewise:DescribeWorkspace",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iotsitewise:UpdateWorkspace",
+        "iotsitewise:DescribeWorkspace",
+        "iotsitewise:TagResource",
+        "iotsitewise:UntagResource",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iotsitewise:DeleteWorkspace",
+        "iotsitewise:DescribeWorkspace",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iotsitewise:ListWorkspaces"
+      ]
+    }
+  }
+}

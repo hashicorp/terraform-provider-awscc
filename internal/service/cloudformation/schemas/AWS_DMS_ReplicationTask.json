@@ -1,0 +1,164 @@
+{
+  "typeName": "AWS::DMS::ReplicationTask",
+  "description": "Resource Type definition for AWS::DMS::ReplicationTask",
+  "additionalProperties": false,
+  "properties": {
+    "ReplicationTaskSettings": {
+      "type": "string",
+      "description": "Overall settings for the task, in JSON format"
+    },
+    "CdcStartTime": {
+      "type": "number",
+      "description": "Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error."
+    },
+    "CdcStartPosition": {
+      "type": "string",
+      "description": "Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error."
+    },
+    "CdcStopPosition": {
+      "type": "string",
+      "description": "Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time."
+    },
+    "MigrationType": {
+      "type": "string",
+      "description": "The migration type.",
+      "enum": [
+        "full-load",
+        "cdc",
+        "full-load-and-cdc"
+      ]
+    },
+    "TargetEndpointArn": {
+      "type": "string",
+      "description": "An Amazon Resource Name (ARN) that uniquely identifies the target endpoint."
+    },
+    "ReplicationInstanceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of a replication instance."
+    },
+    "TaskData": {
+      "type": "string",
+      "description": "Supplemental information that the task requires to migrate the data for certain source and target endpoints."
+    },
+    "ResourceIdentifier": {
+      "type": "string",
+      "description": "A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object."
+    },
+    "TableMappings": {
+      "type": "string",
+      "description": "The table mappings for the task, in JSON format."
+    },
+    "ReplicationTaskIdentifier": {
+      "type": "string",
+      "description": "An identifier for the replication task.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9]*(?:-[a-zA-Z0-9]+)*$"
+    },
+    "SourceEndpointArn": {
+      "type": "string",
+      "description": "An Amazon Resource Name (ARN) that uniquely identifies the source endpoint."
+    },
+    "ReplicationTaskArn": {
+      "type": "string",
+      "description": "The ARN of the ReplicationTask. Also serves the purpise of Primary Identifier."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string",
+          "description": "Tag value"
+        },
+        "Key": {
+          "type": "string",
+          "description": "Tag key"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "dms:AddTagsToResource",
+      "dms:ListTagsForResource",
+      "dms:RemoveTagsFromResource"
+    ]
+  },
+  "required": [
+    "TableMappings",
+    "SourceEndpointArn",
+    "MigrationType",
+    "TargetEndpointArn",
+    "ReplicationInstanceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ReplicationTaskArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceIdentifier",
+    "/properties/TargetEndpointArn",
+    "/properties/ReplicationInstanceArn",
+    "/properties/SourceEndpointArn",
+    "/properties/MigrationType"
+  ],
+  "writeOnlyProperties": [
+    "/properties/CdcStartTime"
+  ],
+  "readOnlyProperties": [
+    "/properties/ReplicationTaskArn"
+  ],
+  "handlers": {
+    "read": {
+      "permissions": [
+        "dms:DescribeReplicationTasks",
+        "dms:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dms:DescribeReplicationTasks",
+        "dms:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "dms:CreateReplicationTask",
+        "dms:DescribeReplicationTasks",
+        "dms:AddTagsToResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dms:ModifyReplicationTask",
+        "dms:DescribeReplicationTasks",
+        "dms:ListTagsForResource",
+        "dms:AddTagsToResource",
+        "dms:RemoveTagsFromResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dms:DeleteReplicationTask",
+        "dms:DescribeReplicationTasks"
+      ]
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "typeName": "AWS::IoTSiteWise::Pipeline",
+  "description": "Resource schema for AWS::IoTSiteWise::Pipeline. A pipeline defines a directed acyclic graph (DAG) of compute nodes, where each node references a task definition and can declare dependencies on other nodes.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iotsitewise",
+  "definitions": {
+    "ComputeNode": {
+      "type": "object",
+      "description": "A single compute node in a pipeline DAG.",
+      "additionalProperties": false,
+      "properties": {
+        "ComputeNodeName": {
+          "type": "string",
+          "description": "The unique name for this compute node within the pipeline.",
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "TaskName": {
+          "type": "string",
+          "description": "The name of the task to execute for this compute node.",
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "EnvironmentVariables": {
+          "$ref": "#/definitions/EnvironmentVariablesMap"
+        },
+        "DependsOn": {
+          "type": "array",
+          "description": "A list of compute node names that must complete successfully before this node can start.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 50,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "ComputeNodeName",
+        "TaskName"
+      ]
+    },
+    "EnvironmentVariablesMap": {
+      "type": "object",
+      "description": "A map of environment variable key-value pairs.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 100
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "WorkspaceName": {
+      "type": "string",
+      "description": "The name of the workspace.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "PipelineName": {
+      "type": "string",
+      "description": "The name of the pipeline. Must be unique within the workspace.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "PipelineArn": {
+      "type": "string",
+      "description": "The ARN of the pipeline.",
+      "pattern": "^arn:[\\w+=\\/,.@-]+:[\\w+=\\/,.@-]+:[\\w+=\\/,.@-]*:[0-9]+:[\\w+=\\/,.@-]+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the pipeline.",
+      "minLength": 0,
+      "maxLength": 2048
+    },
+    "EnvironmentVariables": {
+      "$ref": "#/definitions/EnvironmentVariablesMap",
+      "description": "Environment variables shared across all compute nodes in the pipeline."
+    },
+    "Computations": {
+      "type": "array",
+      "description": "The list of compute nodes that form the pipeline DAG.",
+      "items": {
+        "$ref": "#/definitions/ComputeNode"
+      },
+      "minItems": 1,
+      "maxItems": 50,
+      "insertionOrder": false
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current lifecycle status of the pipeline.",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "WorkspaceName",
+    "PipelineName",
+    "Computations"
+  ],
+  "readOnlyProperties": [
+    "/properties/PipelineArn",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/WorkspaceName",
+    "/properties/PipelineName"
+  ],
+  "primaryIdentifier": [
+    "/properties/PipelineArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/WorkspaceName",
+      "/properties/PipelineName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotsitewise:TagResource",
+      "iotsitewise:UntagResource",
+      "iotsitewise:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iotsitewise:CreatePipeline",
+        "iotsitewise:DescribePipeline",
+        "iotsitewise:TagResource",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iotsitewise:DescribePipeline",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iotsitewise:UpdatePipeline",
+        "iotsitewise:DescribePipeline",
+        "iotsitewise:TagResource",
+        "iotsitewise:UntagResource",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iotsitewise:DeletePipeline",
+        "iotsitewise:DescribePipeline",
+        "iotsitewise:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iotsitewise:ListPipelines"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "WorkspaceName": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "WorkspaceName"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}
