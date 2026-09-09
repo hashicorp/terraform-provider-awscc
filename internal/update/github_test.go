@@ -174,7 +174,7 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 
 	// Create a new reference (branch) using the SHA from the default branch
 	newRef := &github.Reference{
-		Ref: github.Ptr("refs/heads/" + branchName),
+		Ref: new("refs/heads/" + branchName),
 		Object: &github.GitObject{
 			SHA: ref.Object.SHA,
 		},
@@ -204,8 +204,8 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 
 	// Create a blob with the test content
 	blob := &github.Blob{
-		Content:  github.Ptr(testContent),
-		Encoding: github.Ptr("utf-8"),
+		Content:  new(testContent),
+		Encoding: new("utf-8"),
 	}
 
 	createdBlob, resp, err := client.Git.CreateBlob(ctx, repoOwner, repoName, blob)
@@ -226,9 +226,9 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 	testFileName := fmt.Sprintf("test-file-%s.md", randomSuffix)
 	entries := []*github.TreeEntry{
 		{
-			Path: github.Ptr(testFileName),
-			Mode: github.Ptr("100644"),
-			Type: github.Ptr("blob"),
+			Path: new(testFileName),
+			Mode: new("100644"),
+			Type: new("blob"),
 			SHA:  createdBlob.SHA,
 		},
 	}
@@ -244,7 +244,7 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 	// Create a commit with the new tree
 	commitMessage := fmt.Sprintf("Test commit for branch %s\n\nThis commit was created for testing purposes on %s", branchName, currentDate)
 	commit := &github.Commit{
-		Message: github.Ptr(commitMessage),
+		Message: new(commitMessage),
 		Tree:    createdTree,
 		Parents: []*github.Commit{{SHA: ref.Object.SHA}},
 	}
@@ -259,7 +259,7 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 
 	// Update the branch reference to point to the new commit
 	updateRef := &github.Reference{
-		Ref: github.Ptr("refs/heads/" + branchName),
+		Ref: new("refs/heads/" + branchName),
 		Object: &github.GitObject{
 			SHA: createdCommit.SHA,
 		},
