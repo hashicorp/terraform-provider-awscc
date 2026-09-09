@@ -1983,6 +1983,7 @@ resource_schema "aws_controltower_enabled_control" {
   # Suppression Reason:  Parameters/Value is of unsupported type: .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1527
   suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: schema frozen; newer bytes fail — Parameters/Value is of unsupported type (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1527)"
 }
 
 resource_schema "aws_controltower_landing_zone" {
@@ -2013,6 +2014,7 @@ resource_schema "aws_customerprofiles_domain" {
   # Suppression Reason:  Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
   suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: schema frozen; newer bytes fail — Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1528)"
 }
 
 resource_schema "aws_customerprofiles_domain_object_type" {
@@ -4153,6 +4155,7 @@ resource_schema "aws_iotfleetwise_decoder_manifest" {
   suppression_reason_resource              = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
   suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  frozen_reason                            = "manual: schema frozen; newer bytes fail — NetworkInterfaces is of unsupported type: list of \"\" (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1515)"
 }
 
 resource_schema "aws_iotfleetwise_fleet" {
@@ -5760,6 +5763,7 @@ resource_schema "aws_quicksight_dashboard" {
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
   suppression_reason_plural_data_source = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  frozen_reason                         = "build_failed: schema frozen; newer bytes fail — internal compiler error: NewBulk too big (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1531)"
 }
 
 resource_schema "aws_quicksight_data_set" {
@@ -5817,6 +5821,7 @@ resource_schema "aws_quicksight_template" {
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
   suppression_reason_plural_data_source = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  frozen_reason                         = "build_failed: schema frozen; newer bytes fail — internal compiler error: NewBulk too big (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1531)"
 }
 
 resource_schema "aws_quicksight_theme" {
