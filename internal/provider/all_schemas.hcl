@@ -864,6 +864,7 @@ resource_schema "aws_bedrock_flow_version" {
   frozen_since                           = "2025-05-29"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+  frozen_reason                          = "manual: schema frozen; newer bytes overflow the generator (stack overflow on recursive schema) during 'make schemas' (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2323)"
 }
 
 resource_schema "aws_bedrock_guardrail" {
@@ -982,6 +983,7 @@ resource_schema "aws_bedrockagentcore_gateway_target" {
 resource_schema "aws_bedrockagentcore_harness" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Harness"
   frozen_since             = "2026-05-27"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — Model/BedrockModelConfig/AdditionalParams is of unsupported type: key-value map (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3201)"
 }
 
 resource_schema "aws_bedrockagentcore_harness_endpoint" {
@@ -2214,6 +2216,7 @@ resource_schema "aws_datasync_location_smb" {
 resource_schema "aws_datasync_storage_system" {
   cloudformation_type_name = "AWS::DataSync::StorageSystem"
   frozen_since             = "2025-05-15"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2316)"
 }
 
 resource_schema "aws_datasync_task" {
@@ -3449,6 +3452,7 @@ resource_schema "aws_fsx_data_repository_association" {
 resource_schema "aws_fsx_s3_access_point_attachment" {
   cloudformation_type_name = "AWS::FSx::S3AccessPointAttachment"
   frozen_since             = "2025-12-17"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3114)"
 }
 
 resource_schema "aws_fsx_volume" {
@@ -4137,6 +4141,7 @@ resource_schema "aws_iotevents_input" {
 resource_schema "aws_iotfleethub_application" {
   cloudformation_type_name = "AWS::IoTFleetHub::Application"
   frozen_since             = "2022-02-18"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException, service EOL), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2948)"
 }
 
 resource_schema "aws_iotfleetwise_campaign" {
@@ -5433,6 +5438,7 @@ resource_schema "aws_omics_workflow" {
 resource_schema "aws_omics_workflow_version" {
   cloudformation_type_name = "AWS::Omics::WorkflowVersion"
   frozen_since             = "2025-05-15"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — Type overwrites type for Terraform attribute type (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2831)"
 }
 
 resource_schema "aws_opensearch_data_source" {
@@ -5509,6 +5515,7 @@ resource_schema "aws_opensearchservice_domain" {
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
   frozen_since             = "2025-06-19"
+  frozen_reason            = "manual: withdrawn from AWS — ProvisioningType became NON_PROVISIONABLE, later TypeNotFoundException; last schema retained to avoid a breaking removal, pending v2.0.0 (issues: https://github.com/hashicorp/terraform-provider-awscc/issues/2340, https://github.com/hashicorp/terraform-provider-awscc/issues/2829)"
 }
 
 resource_schema "aws_organizations_account" {
@@ -6811,6 +6818,7 @@ resource_schema "aws_sagemaker_experiment_trial_component" {
   cloudformation_type_name = "AWS::SageMaker::ExperimentTrialComponent"
   frozen_since             = "2026-07-22"
   non_provisionable        = true
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3271)"
 }
 
 resource_schema "aws_sagemaker_feature_group" {
