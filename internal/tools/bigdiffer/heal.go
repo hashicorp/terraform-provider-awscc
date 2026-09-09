@@ -332,7 +332,11 @@ func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDi
 			return nil // caller didn't ask for the compile gate step
 		}
 		dest := filepath.Join(cfg.outputRoot, a.pathSuffix, a.codeFile)
-		ok, buildErrs, buildErr := buildOnce(cfg.repoRoot, map[string][]byte{dest: code})
+		// context.Background(), not a derived timeout: this whole process is
+		// already killed wholesale by the parent's exec.CommandContext once
+		// healProbeTimeout elapses (probeArtifact), which also tears down
+		// this one buildOnce call along with everything else in the process.
+		ok, buildErrs, buildErr := buildOnce(context.Background(), cfg.repoRoot, map[string][]byte{dest: code})
 		if buildErr != nil {
 			return fmt.Errorf("compile gate: %w", buildErr)
 		}

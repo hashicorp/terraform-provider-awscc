@@ -411,7 +411,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// promoting something broken; never blocks the release (design doc
 	// bigdiffer-design.md §6, "The compile gate").
 	stepf("Compile-gating %d staged artifact(s)…", len(stagedByDest))
-	if err := compileFixpoint(cfg, stagingDir, string(overlayContent), base, checkout, decisions, stagedByDest, today); err != nil {
+	if err := compileFixpoint(ctx, cfg, stagingDir, string(overlayContent), base, checkout, decisions, stagedByDest, today); err != nil {
 		return fmt.Errorf("compile gate: %w", err)
 	}
 

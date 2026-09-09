@@ -4,6 +4,7 @@
 package main
 
 import (
+	"context"
 	"os"
 	"path/filepath"
 	"testing"
@@ -131,7 +132,7 @@ func TestBuildOnceGreenOnCleanPackage(t *testing.T) {
 	// tree, which is exactly the class of hazard the design doc's "why not
 	// per-candidate concurrent" section rules out for the gate itself — the
 	// tests should not reintroduce it just to save a few seconds.
-	ok, errs, err := buildOnce(repoRootForTest(t), map[string][]byte{})
+	ok, errs, err := buildOnce(context.Background(), repoRootForTest(t), map[string][]byte{})
 	if err != nil {
 		t.Fatalf("buildOnce: %v", err)
 	}
@@ -152,7 +153,7 @@ func TestBuildOnceCatchesAnInjectedTypeError(t *testing.T) {
 	target := filepath.Join(repoRoot, "internal", "aws", "zzz_compile_gate_test_scratch", "broken.go")
 	broken := []byte("package zzz_compile_gate_test_scratch\nfunc F() int { return \"not an int\" }\n")
 
-	ok, errs, err := buildOnce(repoRoot, map[string][]byte{target: broken})
+	ok, errs, err := buildOnce(context.Background(), repoRoot, map[string][]byte{target: broken})
 	if err != nil {
 		t.Fatalf("buildOnce: %v", err)
 	}

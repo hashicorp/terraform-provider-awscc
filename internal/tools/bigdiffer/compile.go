@@ -4,6 +4,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
@@ -138,8 +139,11 @@ func blamedFiles(errs []buildError) map[string]struct{} {
 // overlay, and returns whether the build was green plus every parsed compiler
 // error (empty when green). A non-nil error is a mechanical failure (I/O,
 // failing to even invoke go build) distinct from a normal red build, which is
-// reported via the returned errors slice, not err.
-func buildOnce(repoRoot string, files map[string][]byte) (ok bool, errs []buildError, err error) {
+// reported via the returned errors slice, not err. ctx governs only the `go
+// build` invocation itself: if ctx is cancelled mid-build, the build process
+// is killed and the overlay is still reverted before returning, same as any
+// other path through this function.
+func buildOnce(ctx context.Context, repoRoot string, files map[string][]byte) (ok bool, errs []buildError, err error) {
 	overlay, oerr := overlayFiles(files)
 	defer func() {
 		if rerr := overlay.revert(); rerr != nil && err == nil {
@@ -150,9 +154,12 @@ func buildOnce(repoRoot string, files map[string][]byte) (ok bool, errs []buildE
 		return false, nil, fmt.Errorf("staging build overlay: %w", oerr)
 	}
 
-	cmd := exec.Command("go", "build", "./...")
+	cmd := exec.CommandContext(ctx, "go", "build", "./...")
 	cmd.Dir = repoRoot
 	out, runErr := cmd.CombinedOutput()
+	if ctx.Err() != nil {
+		return false, nil, fmt.Errorf("go build ./... cancelled: %w", ctx.Err())
+	}
 	if runErr == nil {
 		return true, nil, nil
 	}
@@ -290,7 +297,10 @@ func collectStagedGoFiles(stagingOut, outputRoot string) (map[string][]byte, err
 // against the real module, downgrading and dropping whatever the compiler
 // rejects, until the build goes green or the situation is unattributable, in
 // which case it promotes nothing and returns a hard error (design doc
-// "Attribution fallback").
+// "Attribution fallback"). ctx is passed through to each round's `go build`
+// invocation so a cancelled context stops an in-progress build promptly
+// instead of running it to completion; the overlay is still reverted before
+// compileFixpoint returns in that case, same as any other exit path.
 //
 // decisions and stagedByDest are mutated in place: a downgraded artifact's
 // outcome moves from gateOK to gateFailedBuild within its candidate's full
@@ -304,7 +314,7 @@ func collectStagedGoFiles(stagingOut, outputRoot string) (map[string][]byte, err
 // cfg.registrationPath under stagingDir/out) is re-rendered from the updated
 // decisions before every rebuild, since dropping an artifact can change its
 // import set.
-func compileFixpoint(cfg config, stagingDir, overlayContent string, base []resourceRow, checkout map[string]bool, decisions map[string]policyDecision, stagedByDest map[string]stagedArtifact, today string) error {
+func compileFixpoint(ctx context.Context, cfg config, stagingDir, overlayContent string, base []resourceRow, checkout map[string]bool, decisions map[string]policyDecision, stagedByDest map[string]stagedArtifact, today string) error {
 	stagingOut := filepath.Join(stagingDir, "out")
 	regRel, err := filepath.Rel(cfg.outputRoot, cfg.registrationPath)
 	if err != nil {
@@ -338,7 +348,7 @@ func compileFixpoint(cfg config, stagingDir, overlayContent string, base []resou
 		}
 		files[cfg.registrationPath] = reg
 
-		ok, buildErrs, err := buildOnce(cfg.repoRoot, files)
+		ok, buildErrs, err := buildOnce(ctx, cfg.repoRoot, files)
 		if err != nil {
 			return fmt.Errorf("compile gate: %w", err)
 		}

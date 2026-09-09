@@ -4,6 +4,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"os"
 	"path/filepath"
@@ -132,7 +133,7 @@ func TestCompileFixpointAttributesAndSuppressesABuildFailure(t *testing.T) {
 	}
 
 	overlay, base := minimalOverlayFor([]resourceRow{row})
-	err := compileFixpoint(cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31")
+	err := compileFixpoint(context.Background(), cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31")
 	if err != nil {
 		t.Fatalf("compileFixpoint should converge by suppressing the broken artifact, got error: %v", err)
 	}
@@ -192,7 +193,7 @@ func TestCompileFixpointRegistrationDropsFailedPackage(t *testing.T) {
 	}
 
 	overlay, base := minimalOverlayFor([]resourceRow{row})
-	if err := compileFixpoint(cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31"); err != nil {
+	if err := compileFixpoint(context.Background(), cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31"); err != nil {
 		t.Fatalf("compileFixpoint: %v", err)
 	}
 
@@ -236,7 +237,7 @@ func TestCompileFixpointUnattributableFailureHardStops(t *testing.T) {
 	stagedByDest := map[string]stagedArtifact{} // deliberately does not include dest
 
 	overlay, base := minimalOverlayFor([]resourceRow{row})
-	err := compileFixpoint(cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31")
+	err := compileFixpoint(context.Background(), cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31")
 	if err == nil {
 		t.Fatal("expected a hard error: the build failure cannot be attributed to any staged artifact")
 	}
@@ -310,7 +311,7 @@ func TestCompileGateFailureBlocksPromotion(t *testing.T) {
 	decisions := map[string]policyDecision{}
 	stagedByDest := map[string]stagedArtifact{} // deliberately omits dest2: unattributable
 
-	gateErr := compileFixpoint(cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31")
+	gateErr := compileFixpoint(context.Background(), cfg, stagingDir, overlay, base, map[string]bool{}, decisions, stagedByDest, "2026-08-31")
 	if gateErr == nil {
 		t.Fatal("expected the compile gate to hard-fail on the unattributable broken artifact")
 	}
