@@ -67,6 +67,8 @@ resource_schema "aws_arcregionswitch_plan" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: HealthChecksForPlan is of unsupported type: key-value map of list of object"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: HealthChecksForPlan is of unsupported type: key-value map of list of object"
 }
 
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
@@ -157,6 +159,8 @@ resource_schema "aws_amplifyuibuilder_component" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_amplifyuibuilder_form" {
@@ -168,6 +172,8 @@ resource_schema "aws_amplifyuibuilder_form" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_amplifyuibuilder_theme" {
@@ -179,6 +185,8 @@ resource_schema "aws_amplifyuibuilder_theme" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_apigateway_account" {
@@ -435,6 +443,7 @@ resource_schema "aws_appflow_connector_profile" {
   # git checkout internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
   # Suppression Reason: isSandboxEnvironment overwrites IsSandboxEnvironment for Terraform attribute is_sandbox_environment.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1526
+  frozen_reason = "manual: isSandboxEnvironment overwrites IsSandboxEnvironment for Terraform attribute is_sandbox_environment. https://github.com/hashicorp/terraform-provider-awscc/issues/1526"
 }
 
 resource_schema "aws_appflow_flow" {
@@ -699,6 +708,8 @@ resource_schema "aws_bcm_dashboard" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_bcmdataexports_export" {
@@ -833,6 +844,8 @@ resource_schema "aws_bedrock_flow" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
 }
 
 resource_schema "aws_bedrock_flow_alias" {
@@ -923,6 +936,8 @@ resource_schema "aws_bedrockagentcore_dataset" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Source/InlineExamples/Examples is of unsupported type: list of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Source/InlineExamples/Examples is of unsupported type: list of undefined schema"
 }
 
 resource_schema "aws_bedrockagentcore_evaluator" {
@@ -954,6 +969,8 @@ resource_schema "aws_bedrockagentcore_gateway_target" {
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_bedrockagentcore_harness" {
@@ -1212,6 +1229,8 @@ resource_schema "aws_cleanrooms_id_namespace_association" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema"
 }
 
 resource_schema "aws_cleanrooms_intermediate_table" {
@@ -1585,6 +1604,8 @@ resource_schema "aws_cognito_user_pool" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: SmsMessage overwrites SMSMessage for Terraform attribute sms_message"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: SmsMessage overwrites SMSMessage for Terraform attribute sms_message"
 }
 
 resource_schema "aws_cognito_user_pool_client" {
@@ -1773,6 +1794,8 @@ resource_schema "aws_connect_evaluation_form" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
 }
 
 resource_schema "aws_connect_hours_of_operation" {
@@ -1850,6 +1873,8 @@ resource_schema "aws_connect_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: Actions/AssignContactCategoryActions is of unsupported type: set of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Actions/AssignContactCategoryActions is of unsupported type: set of undefined schema"
 }
 
 resource_schema "aws_connect_security_key" {
@@ -2602,6 +2627,7 @@ resource_schema "aws_ec2_launch_template" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_LaunchTemplate.json
   # Suppression Reason:  Object has no key 'NetworkPerformanceOptions'
   # https://github.com/hashicorp/terraform-provider-awscc/issues/2133
+  frozen_reason = "manual: Object has no key 'NetworkPerformanceOptions' https://github.com/hashicorp/terraform-provider-awscc/issues/2133"
 }
 
 resource_schema "aws_ec2_local_gateway_route" {
@@ -2652,6 +2678,7 @@ resource_schema "aws_ec2_network_insights_analysis" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
   # Suppression Reason:  DestinationCidr overwrites destinationCidr for Terraform attribute destination_cidr.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1529
+  frozen_reason = "manual: DestinationCidr overwrites destinationCidr for Terraform attribute destination_cidr. https://github.com/hashicorp/terraform-provider-awscc/issues/1529"
 }
 
 resource_schema "aws_ec2_network_insights_path" {
@@ -3076,6 +3103,7 @@ resource_schema "aws_eks_cluster" {
   # git checkout internal/service/cloudformation/schemas/AWS_EKS_Cluster.json
   # Suppression Reason: tfplugindocs Error executing command:
   # unable to generate website: error rendering static website: unable to render templated website to static markdown: unable to render template "resources/eks_cluster.md.tmpl": unable to execute template: template: docTemplate:5:18: executing "docTemplate" at <plainmarkdown>: invalid value; expected string
+  frozen_reason = "manual: tfplugindocs Error executing command: unable to generate website: error rendering static website: unable to render templated website to static markdown: unable to render template \\\"resources/eks_cluster.md.tmpl\\\": unable to execute template: template: docTemplate:5:18: executing \\\"docTemplate\\\" at <plainmarkdown>: invalid value; expected string"
 }
 
 resource_schema "aws_eks_fargate_profile" {
@@ -3133,6 +3161,8 @@ resource_schema "aws_emrcontainers_endpoint" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_emrcontainers_security_configuration" {
@@ -3159,6 +3189,7 @@ resource_schema "aws_emrserverless_application" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
   # Suppression Reason:
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+  frozen_reason = "manual: Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
 }
 
 resource_schema "aws_evs_environment" {
@@ -3604,6 +3635,8 @@ resource_schema "aws_glue_usage_profile" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Configuration/JobConfiguration is of unsupported type: key-value map of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Configuration/JobConfiguration is of unsupported type: key-value map of"
 }
 
 resource_schema "aws_glue_user_defined_function" {
@@ -4087,6 +4120,8 @@ resource_schema "aws_iotfleetwise_decoder_manifest" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
 }
 
 resource_schema "aws_iotfleetwise_fleet" {
@@ -4133,6 +4168,8 @@ resource_schema "aws_iotsitewise_computation_model" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
 }
 
 resource_schema "aws_iotsitewise_dashboard" {
@@ -4180,6 +4217,8 @@ resource_schema "aws_iottwinmaker_component_type" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_iottwinmaker_entity" {
@@ -4191,6 +4230,8 @@ resource_schema "aws_iottwinmaker_entity" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_iottwinmaker_scene" {
@@ -4389,6 +4430,7 @@ resource_schema "aws_lambda_function" {
   # git checkout internal/service/cloudformation/schemas/AWS_Lambda_Function.json
   # Suppression Reason: KmsKeyArn overwrites KMSKeyArn for Terraform attribute kms_key_arn.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3229
+  frozen_reason = "manual: KmsKeyArn overwrites KMSKeyArn for Terraform attribute kms_key_arn. Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3229"
 }
 
 resource_schema "aws_lambda_layer_version" {
@@ -4443,6 +4485,7 @@ resource_schema "aws_lex_bot" {
   # git checkout internal/service/cloudformation/schemas/AWS_Lex_Bot.json
   # Suppression Reason:
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+  frozen_reason = "manual: Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
 }
 
 resource_schema "aws_lex_bot_alias" {
@@ -4682,6 +4725,8 @@ resource_schema "aws_mpa_approval_team" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Policies is of unsupported type: set of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Policies is of unsupported type: set of"
 }
 
 resource_schema "aws_mpa_identity_source" {
@@ -4953,6 +4998,8 @@ resource_schema "aws_mediatailor_playback_configuration" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: ConfigurationAliases is of unsupported type: key-value map of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: ConfigurationAliases is of unsupported type: key-value map of undefined schema"
 }
 
 resource_schema "aws_mediatailor_prefetch_schedule" {
@@ -5365,6 +5412,8 @@ resource_schema "aws_opensearchserverless_index" {
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
 }
 
 resource_schema "aws_opensearchserverless_lifecycle_policy" {
@@ -5567,6 +5616,8 @@ resource_schema "aws_qbusiness_data_accessor" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_qbusiness_data_source" {
@@ -5627,6 +5678,7 @@ resource_schema "aws_quicksight_analysis" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  frozen_reason = "manual: internal compiler error: NewBulk too big. https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
 }
 
 resource_schema "aws_quicksight_approval_policy" {
@@ -5637,6 +5689,8 @@ resource_schema "aws_quicksight_approval_policy" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Actions is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Actions is of unsupported type: list of"
 }
 
 resource_schema "aws_quicksight_custom_permissions" {
@@ -5666,6 +5720,7 @@ resource_schema "aws_quicksight_data_set" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  frozen_reason = "manual: internal compiler error: NewBulk too big. https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
 }
 
 resource_schema "aws_quicksight_data_source" {
@@ -5937,6 +5992,8 @@ resource_schema "aws_rekognition_stream_processor" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: PolygonRegionsOfInterest is of unsupported type: set of array"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: PolygonRegionsOfInterest is of unsupported type: set of array"
 }
 
 resource_schema "aws_resiliencehub_app" {
@@ -6425,6 +6482,8 @@ resource_schema "aws_ses_receipt_rule" {
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: IamRoleArn overwrites IAMRoleARN for Terraform attribute iam_role_arn"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: IamRoleArn overwrites IAMRoleARN for Terraform attribute iam_role_arn"
 }
 
 resource_schema "aws_ses_receipt_rule_set" {
@@ -6742,6 +6801,8 @@ resource_schema "aws_sagemaker_model_card" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of"
 }
 
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
@@ -6939,6 +7000,8 @@ resource_schema "aws_securitylake_subscriber" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Sources is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Sources is of unsupported type: list of"
 }
 
 resource_schema "aws_securitylake_subscriber_notification" {
@@ -7109,6 +7172,7 @@ resource_schema "aws_stepfunctions_state_machine" {
   # git checkout internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json
   # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1530
+  frozen_reason = "manual: DefinitionSubstitutions is of unsupported type: key-value map of . https://github.com/hashicorp/terraform-provider-awscc/issues/1530"
 }
 
 resource_schema "aws_stepfunctions_state_machine_alias" {
@@ -7222,6 +7286,8 @@ resource_schema "aws_transfer_user" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: PosixProfile/SecondaryGids is of unsupported type for list item validation: number"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: PosixProfile/SecondaryGids is of unsupported type for list item validation: number"
 }
 
 resource_schema "aws_transfer_web_app" {
@@ -7295,6 +7361,8 @@ resource_schema "aws_vpclattice_domain_verification" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: value overwrites Value for Terraform attribute value"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: value overwrites Value for Terraform attribute value"
 }
 
 resource_schema "aws_vpclattice_listener" {
@@ -7376,6 +7444,8 @@ resource_schema "aws_wafv2_rule_group" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_wafv2_web_acl" {
@@ -7387,6 +7457,8 @@ resource_schema "aws_wafv2_web_acl" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_wafv2_web_acl_association" {
@@ -7496,6 +7568,8 @@ resource_schema "aws_workspaces_workspace" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: WorkspaceId overwrites Id for Terraform attribute workspace_id"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: WorkspaceId overwrites Id for Terraform attribute workspace_id"
 }
 
 resource_schema "aws_workspaces_workspace_ip_group" {
