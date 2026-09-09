@@ -9,7 +9,8 @@
         "MCP",
         "AGENT",
         "SKILL",
-        "CUSTOM"
+        "CUSTOM",
+        "GATEWAY"
       ]
     },
     "RegistryRecordStatus": {
@@ -42,6 +43,12 @@
         },
         "Custom": {
           "$ref": "#/definitions/CustomDescriptor"
+        },
+        "Http": {
+          "$ref": "#/definitions/HttpDescriptor"
+        },
+        "Agui": {
+          "$ref": "#/definitions/AgUiDescriptor"
         }
       },
       "additionalProperties": false
@@ -171,6 +178,26 @@
       },
       "additionalProperties": false
     },
+    "HttpDescriptor": {
+      "type": "object",
+      "description": "The HTTP descriptor, populated for records detected from an HTTP protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/SourceOnlyDescriptorSource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgUiDescriptor": {
+      "type": "object",
+      "description": "The AG-UI (Agent-User Interaction) descriptor, populated for records detected from an AG-UI protocol source. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/SourceOnlyDescriptorSource"
+        }
+      },
+      "additionalProperties": false
+    },
     "DescriptorData": {
       "type": "string",
       "description": "Descriptor payload data.",
@@ -205,6 +232,33 @@
             "$ref": "#/definitions/RegistryRecordCredentialProviderConfiguration"
           },
           "maxItems": 1
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "SourceOnlyDescriptorSource": {
+      "type": "object",
+      "description": "Source configuration for a source-only descriptor. Unlike mcpServer/a2aAgentCard sources, source-only descriptors do not support credential providers.",
+      "properties": {
+        "FromUrl": {
+          "$ref": "#/definitions/SourceOnlyDescriptorSourceFromUrl"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceOnlyDescriptorSourceFromUrl": {
+      "type": "object",
+      "description": "URL-based source configuration for a source-only descriptor.",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "description": "URL source for descriptor content.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^https://.*$"
         }
       },
       "required": [
@@ -449,6 +503,13 @@
       },
       "maxItems": 50,
       "insertionOrder": false
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "The identifier of the AWS account that created the registry record.",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[0-9]{12}$"
     }
   },
   "required": [
@@ -462,7 +523,8 @@
     "/properties/RegistryArn",
     "/properties/Status",
     "/properties/CreatedAt",
-    "/properties/UpdatedAt"
+    "/properties/UpdatedAt",
+    "/properties/CreatedBy"
   ],
   "createOnlyProperties": [
     "/properties/RegistryId",

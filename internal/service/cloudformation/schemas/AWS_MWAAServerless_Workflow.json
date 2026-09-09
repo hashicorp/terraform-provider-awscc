@@ -5,7 +5,7 @@
   "definitions": {
     "Arn": {
       "type": "string",
-      "pattern": "^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:airflow-serverless:([a-z]{2}-[a-z]+-[0-9]{1}):([0-9]{12}):workflow\/([a-zA-Z0-9][a-zA-Z0-9\\.\\-_]{0,254}-[a-zA-z0-9]{10})$",
+      "pattern": "^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:airflow-serverless:([a-z]{2}-(?:[a-z]+-)+[0-9]{1}):([0-9]{12}):workflow\/([a-zA-Z0-9][a-zA-Z0-9\\.\\-_]{0,254}-[a-zA-Z0-9]{10})$",
       "maxLength": 2048,
       "minLength": 1
     },

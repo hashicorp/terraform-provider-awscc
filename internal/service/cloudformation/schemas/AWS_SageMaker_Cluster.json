@@ -130,6 +130,45 @@
         "ClusterArn"
       ]
     },
+    "ClusterAccountingDatabase": {
+      "description": "External MySQL-compatible accounting database that a Slurm cluster's slurmdbd connects to. Database credentials are supplied out-of-band through the referenced Secrets Manager secret. Supported only with Continuous node provisioning.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "minLength": 20,
+          "description": "ARN of the Secrets Manager secret holding the database credentials.",
+          "type": "string",
+          "maxLength": 2048
+        },
+        "Endpoint": {
+          "minLength": 1,
+          "pattern": "",
+          "description": "Hostname or endpoint of the accounting database, such as an RDS endpoint.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "Port": {
+          "default": 3306,
+          "description": "TCP port of the accounting database. Defaults to 3306 when omitted.",
+          "maximum": 65535,
+          "type": "integer",
+          "minimum": 1
+        },
+        "Name": {
+          "default": "slurm_acct_db",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9$_]+$",
+          "description": "Name of the accounting database schema. Defaults to slurm_acct_db when omitted.",
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "Endpoint",
+        "SecretArn"
+      ]
+    },
     "RollingUpdatePolicy": {
       "description": "The policy that SageMaker uses when updating the AMI versions of the cluster.",
       "additionalProperties": false,
@@ -477,6 +516,9 @@
             "Managed",
             "Merge"
           ]
+        },
+        "AccountingDatabase": {
+          "$ref": "#/definitions/ClusterAccountingDatabase"
         }
       }
     },

@@ -6,7 +6,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "permissions": [
       "ssm:AddTagsToResource",
       "ssm:RemoveTagsFromResource",
