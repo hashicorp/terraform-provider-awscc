@@ -114,7 +114,6 @@ func gateResultFromGenResults(cfType string, results []genResult) gateResult {
 	return gr
 }
 
-// refreshCandidate generates a candidate from its freshly discovered bytes,
 // refreshCandidate generates a candidate from its freshly discovered bytes and
 // stages every artifact it produces under stagingDir — mirroring cfg.outputRoot
 // and cfg.cacheDir, never writing to the real tree. Each artifact (resource,
@@ -425,21 +424,16 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("compile gate: list resource coupling: %w", err)
 	}
 
-	// CHANGELOG fragment (generation-punchlist.md item 16): stagedByDest is
-	// now final — every remaining entry survived the compile gate and will
-	// actually be promoted below — so the changelog delta can be computed
-	// directly from it plus the pre-run overlay, with no dependency on
-	// promotion itself having happened yet
-	// (contributing/docs/bigdiffer-design.md §8). writeChangelogFragment
-	// inserts the FEATURES: bullets directly into CHANGELOG.md's top,
-	// in-progress version block; a no-op when nothing was newly promoted.
+	// CHANGELOG delta: stagedByDest is now final — every remaining entry
+	// survived the compile gate and will actually be promoted below — so the
+	// changelog delta itself can be computed here, directly from stagedByDest
+	// plus the pre-run overlay, with no dependency on promotion having
+	// happened yet (contributing/docs/bigdiffer-design.md §8). The fragment
+	// is not WRITTEN until after every real-tree write below has succeeded
+	// (generation-punchlist.md item 16): writing it earlier would leave an
+	// orphan CHANGELOG.md entry for a change that never actually landed if
+	// promotion, the overlay write, or the import-examples write failed.
 	changelog := changelogEntries(stagedByDest, overlayByCFN)
-	if err := writeChangelogFragment(cfg.changelogPath, changelog); err != nil {
-		return err
-	}
-	if len(changelog) > 0 {
-		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
-	}
 
 	// Promote the compiled core — staged code, cache, the reconciled overlay,
 	// and the gated registration file — together, only now that the whole
@@ -477,6 +471,18 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 	if err := os.WriteFile(cfg.importExamplesPath, ie, filePerm); err != nil {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
+	}
+
+	// Write the CHANGELOG fragment (generation-punchlist.md item 16) last,
+	// now that every real-tree write above has actually succeeded.
+	// writeChangelogFragment inserts the FEATURES: bullets directly into
+	// CHANGELOG.md's top, in-progress version block; a no-op when nothing was
+	// newly promoted.
+	if err := writeChangelogFragment(cfg.changelogPath, changelog); err != nil {
+		return err
+	}
+	if len(changelog) > 0 {
+		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
 	}
 
 	report.write()
