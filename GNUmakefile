@@ -5,12 +5,18 @@ ACCTEST_TIMEOUT     ?= 180m
 ACCTEST_PARALLELISM ?= 20
 GO_VER              ?= go
 
-# Pin bigdiffer generation to the module's Go version so gofmt/goimports output is
-# byte-identical to CI regardless of the contributor's locally installed Go (map
-# alignment and other gofmt rules change between Go releases, and GOTOOLCHAIN=auto
-# will not downgrade a newer local Go). Sourced from the go.mod `go` directive,
-# e.g. `go 1.26.6` -> `go1.26.6`; falls back to auto if it cannot be read.
+# Pin every go invocation (generation, tests, tool installs) to the module's Go
+# version so gofmt/goimports output is byte-identical to CI regardless of the
+# contributor's locally installed Go. Map alignment and other gofmt rules change
+# between Go releases, and GOTOOLCHAIN=auto will not downgrade a newer local Go, so
+# formatting-sensitive targets (bigdiffer-*, the legacy generators, and the parity
+# test in `make test`) would otherwise drift. Sourced from the go.mod `go` directive
+# (e.g. `go 1.26.6` -> `go1.26.6`); falls back to auto if it cannot be read. Exported
+# below so it reaches every recipe; override via the environment, e.g.
+# `GOTOOLCHAIN=go1.27.1 make test`.
 GOTOOLCHAIN_PIN     := $(or $(addprefix go,$(shell sed -n 's/^go //p' go.mod)),auto)
+GOTOOLCHAIN         ?= $(GOTOOLCHAIN_PIN)
+export GOTOOLCHAIN
 
 default: build
 
@@ -30,13 +36,16 @@ build: prereq-go ## Build the provider
 	$(GO_VER) install
 
 bigdiffer-update: prereq-go ## Weekly update via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
-	GOTOOLCHAIN=$(GOTOOLCHAIN_PIN) $(GO_VER) run ./internal/tools/bigdiffer -update
+	$(GO_VER) run ./internal/tools/bigdiffer -update
 
 bigdiffer-generate: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS)
-	GOTOOLCHAIN=$(GOTOOLCHAIN_PIN) $(GO_VER) run ./internal/tools/bigdiffer -generate
+	$(GO_VER) run ./internal/tools/bigdiffer -generate
 
 bigdiffer-docs: prereq-go ## Regenerate documentation via bigdiffer (docs-import + terraform fmt + tfplugindocs)
-	GOTOOLCHAIN=$(GOTOOLCHAIN_PIN) $(GO_VER) run ./internal/tools/bigdiffer -docs
+	$(GO_VER) run ./internal/tools/bigdiffer -docs
+
+bigdiffer-test: prereq-go ## Run the bigdiffer tool's unit + full-corpus parity suite
+	$(GO_VER) test ./internal/tools/bigdiffer/... -timeout 20m
 
 plural-data-sources: prereq-go ## Generate plural data sources
 	@echo "==> Counting existing plural data source files..."
@@ -327,6 +336,7 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: bigdiffer
 .PHONY: bigdiffer-docs
 .PHONY: bigdiffer-generate
+.PHONY: bigdiffer-test
 .PHONY: bigdiffer-update
 .PHONY: biglister
 .PHONY: build
