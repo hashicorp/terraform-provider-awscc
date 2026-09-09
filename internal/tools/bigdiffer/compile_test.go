@@ -169,6 +169,87 @@ func TestBuildOnceCatchesAnInjectedTypeError(t *testing.T) {
 	}
 }
 
+func TestBuildOnceCatchesAnInjectedTypeErrorAndRestoresExistingFileContent(t *testing.T) {
+	if testing.Short() {
+		t.Skip("runs a real go build ./... against the module (~3s warm)")
+	}
+	// Not t.Parallel() — see TestBuildOnceGreenOnCleanPackage. This is the
+	// same red-build scenario as TestBuildOnceCatchesAnInjectedTypeError, but
+	// overlaying a pre-existing tracked file rather than a brand-new scratch
+	// one, so the assertion below covers byte-for-byte content restoration on
+	// the failure path — TestOverlayFilesAndRevertRestoresExisting proves
+	// this for overlay/revert alone, with no build in between; this proves it
+	// through the real buildOnce path a red compile gate round actually
+	// takes.
+	repoRoot := repoRootForTest(t)
+	target := filepath.Join(repoRoot, "internal", "tools", "bigdiffer", "codegen", "template.go")
+	original, err := os.ReadFile(target)
+	if err != nil {
+		t.Fatalf("reading %s: %v", target, err)
+	}
+	broken := []byte("package codegen\nfunc broken() int { return \"not an int\" }\n")
+
+	ok, errs, err := buildOnce(context.Background(), repoRoot, map[string][]byte{target: broken})
+	if err != nil {
+		t.Fatalf("buildOnce: %v", err)
+	}
+	if ok {
+		t.Fatal("expected the injected type error to fail the build")
+	}
+	blamed := blamedFiles(errs)
+	if _, found := blamed[target]; !found {
+		t.Errorf("expected %s to be blamed, got %v", target, blamed)
+	}
+	got, err := os.ReadFile(target)
+	if err != nil {
+		t.Fatalf("reading %s after buildOnce: %v", target, err)
+	}
+	if string(got) != string(original) {
+		t.Errorf("buildOnce must restore a pre-existing file's exact original content on a red build; got %q, want %q", got, original)
+	}
+}
+
+func TestAtomicWriteFileReplacesContentAndLeavesNoTempFile(t *testing.T) {
+	t.Parallel()
+
+	dir := t.TempDir()
+	target := filepath.Join(dir, "target.txt")
+	if err := os.WriteFile(target, []byte("original"), filePerm); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := atomicWriteFile(target, []byte("replaced")); err != nil {
+		t.Fatalf("atomicWriteFile: %v", err)
+	}
+	got, err := os.ReadFile(target)
+	if err != nil || string(got) != "replaced" {
+		t.Fatalf("got %q, err %v, want %q", got, err, "replaced")
+	}
+
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		t.Fatalf("reading dir: %v", err)
+	}
+	if len(entries) != 1 || entries[0].Name() != "target.txt" {
+		t.Fatalf("expected only target.txt in %s after atomicWriteFile, got %v", dir, entries)
+	}
+}
+
+func TestAtomicWriteFileCreatesNewFile(t *testing.T) {
+	t.Parallel()
+
+	dir := t.TempDir()
+	target := filepath.Join(dir, "new.txt")
+
+	if err := atomicWriteFile(target, []byte("content")); err != nil {
+		t.Fatalf("atomicWriteFile: %v", err)
+	}
+	got, err := os.ReadFile(target)
+	if err != nil || string(got) != "content" {
+		t.Fatalf("got %q, err %v, want %q", got, err, "content")
+	}
+}
+
 // repoRootForTest resolves the module root from the current test binary's
 // working directory (internal/tools/bigdiffer) for tests that need to run a
 // real `go build ./...` against the real module.

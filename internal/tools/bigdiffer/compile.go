@@ -9,10 +9,12 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"os/signal"
 	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
+	"syscall"
 
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
@@ -26,6 +28,41 @@ import (
 // by the gate; only compileFixpoint's caller (runUpdate) promotes for real,
 // and only after the gate has gone green.
 
+// atomicWriteFile writes data to path via a temp file in the same directory
+// followed by os.Rename, instead of truncating path in place. os.WriteFile's
+// truncate-then-write is not crash-safe: a process killed mid-write (SIGKILL,
+// a hard crash) can leave path truncated or partially overwritten. Renaming a
+// fully-written temp file into place is atomic on the same filesystem — the
+// destination is always either the old complete content or the new complete
+// content, never a partial mix of both. This matters here specifically
+// because compile.go writes into real, tracked source files (via overlayFiles
+// and revert) that a build gate run could otherwise corrupt if interrupted
+// mid-write.
+func atomicWriteFile(path string, data []byte) error {
+	dir := filepath.Dir(path)
+	tmp, err := os.CreateTemp(dir, ".bigdiffer-overlay-*")
+	if err != nil {
+		return fmt.Errorf("creating temp file in %s: %w", dir, err)
+	}
+	tmpPath := tmp.Name()
+	defer os.Remove(tmpPath) // no-op once Rename below has succeeded
+
+	if _, err := tmp.Write(data); err != nil {
+		tmp.Close()
+		return fmt.Errorf("writing temp file %s: %w", tmpPath, err)
+	}
+	if err := tmp.Close(); err != nil {
+		return fmt.Errorf("closing temp file %s: %w", tmpPath, err)
+	}
+	if err := os.Chmod(tmpPath, filePerm); err != nil {
+		return fmt.Errorf("setting permissions on temp file %s: %w", tmpPath, err)
+	}
+	if err := os.Rename(tmpPath, path); err != nil {
+		return fmt.Errorf("renaming %s to %s: %w", tmpPath, path, err)
+	}
+	return nil
+}
+
 // buildOverlay records, for each real destination path touched by one
 // overlay/build/revert cycle, the bytes to restore on revert — or nil if the
 // path did not exist beforehand, meaning revert should remove it rather than
@@ -37,11 +74,13 @@ type buildOverlay struct {
 
 // overlayFiles writes each entry of files (destination path -> new bytes) to
 // disk, first recording whatever was there before (bytes, or nothing) so
-// revert can restore it exactly. If a write fails partway through, the files
-// written so far are still recorded and will be reverted by the caller's
-// defer — overlayFiles itself does not roll back on a partial failure; it
-// returns the overlay so far plus the error, and the caller's defer must
-// still call revert on it.
+// revert can restore it exactly. Each write is atomic (see atomicWriteFile):
+// an interrupted write can leave the destination in its pre-overlay state or
+// fully overlaid, never truncated or half-written. If a write fails partway
+// through, the files written so far are still recorded and will be reverted
+// by the caller's defer — overlayFiles itself does not roll back on a partial
+// failure; it returns the overlay so far plus the error, and the caller's
+// defer must still call revert on it.
 func overlayFiles(files map[string][]byte) (buildOverlay, error) {
 	o := buildOverlay{prior: make(map[string][]byte), existed: make(map[string]bool)}
 	for path, data := range files {
@@ -58,7 +97,7 @@ func overlayFiles(files map[string][]byte) (buildOverlay, error) {
 		if err := os.MkdirAll(filepath.Dir(path), dirPerm); err != nil {
 			return o, fmt.Errorf("creating %s: %w", filepath.Dir(path), err)
 		}
-		if err := os.WriteFile(path, data, filePerm); err != nil {
+		if err := atomicWriteFile(path, data); err != nil {
 			return o, fmt.Errorf("overlaying %s: %w", path, err)
 		}
 	}
@@ -66,14 +105,15 @@ func overlayFiles(files map[string][]byte) (buildOverlay, error) {
 }
 
 // revert restores every path the overlay touched to its prior state —
-// rewriting its prior bytes, or removing it if it did not exist before —
-// regardless of the build outcome that follows overlayFiles. Errors are
-// joined so one failed revert does not abandon the rest.
+// rewriting its prior bytes (atomically, see atomicWriteFile), or removing it
+// if it did not exist before — regardless of the build outcome that follows
+// overlayFiles. Errors are joined so one failed revert does not abandon the
+// rest.
 func (o buildOverlay) revert() error {
 	var errs []error
 	for path, existed := range o.existed {
 		if existed {
-			if err := os.WriteFile(path, o.prior[path], filePerm); err != nil {
+			if err := atomicWriteFile(path, o.prior[path]); err != nil {
 				errs = append(errs, fmt.Errorf("restoring %s: %w", path, err))
 			}
 			continue
@@ -143,9 +183,36 @@ func blamedFiles(errs []buildError) map[string]struct{} {
 // build` invocation itself: if ctx is cancelled mid-build, the build process
 // is killed and the overlay is still reverted before returning, same as any
 // other path through this function.
+//
+// For the entire overlay window — from the moment files are written over
+// their real destinations to the moment revert has finished restoring them —
+// buildOnce also arms a SIGINT/SIGTERM handler that runs the same revert and
+// exits, instead of leaving that to Go's default terminate-immediately
+// behavior. Without it, a Ctrl-C or `kill` during this window would skip the
+// deferred revert entirely, leaving the real tree overlaid with generated
+// code that may not even be valid Go — recoverable via git, but not something
+// the tool should require git to recover from when the fix is cheap. revert
+// itself is idempotent (it always rewrites the same recorded prior state), so
+// running it once from the signal handler and once more from the deferred
+// call below if the handler didn't fire is safe.
 func buildOnce(ctx context.Context, repoRoot string, files map[string][]byte) (ok bool, errs []buildError, err error) {
 	overlay, oerr := overlayFiles(files)
+
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, os.Interrupt, syscall.SIGTERM)
+	done := make(chan struct{})
+	go func() {
+		select {
+		case sig := <-sigCh:
+			_ = overlay.revert()
+			fmt.Fprintf(os.Stderr, "\ncompile gate: received %s, reverted overlay before exiting\n", sig)
+			os.Exit(1)
+		case <-done:
+		}
+	}()
 	defer func() {
+		close(done)
+		signal.Stop(sigCh)
 		if rerr := overlay.revert(); rerr != nil && err == nil {
 			err = fmt.Errorf("reverting build overlay: %w", rerr)
 		}
