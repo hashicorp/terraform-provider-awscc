@@ -4679,6 +4679,7 @@ resource_schema "aws_logs_log_anomaly_detector" {
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
   frozen_since             = "2024-04-04"
+  frozen_reason            = "manual: schema pinned at last-good bytes (frozen 2024-04-04) to avoid a log group Arn regression — the read stores an invalid \":*\"-suffixed Arn (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1028)"
 }
 
 resource_schema "aws_logs_log_stream" {
@@ -4868,6 +4869,7 @@ resource_schema "aws_mediaconnect_bridge_source" {
 resource_schema "aws_mediaconnect_flow" {
   cloudformation_type_name = "AWS::MediaConnect::Flow"
   frozen_since             = "2025-02-26"
+  frozen_reason            = "manual: schema pinned at last-good bytes (frozen 2025-02-26); newer upstream refresh held back; original trigger not recorded in-tree"
 }
 
 resource_schema "aws_mediaconnect_flow_entitlement" {
@@ -6707,6 +6709,7 @@ resource_schema "aws_ssmcontacts_rotation" {
 resource_schema "aws_ssmguiconnect_preferences" {
   cloudformation_type_name               = "AWS::SSMGuiConnect::Preferences"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "build_failed: internal/aws/ssmguiconnect/preferences_singular_data_source_gen.go:23:6: preferencesDataSource redeclared in this block"
 }
 
 resource_schema "aws_ssmincidents_replication_set" {
