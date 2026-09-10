@@ -180,14 +180,20 @@ what each lever means today (including what is not currently known about the
 existing rows), and the spec for the reason taxonomy, `-check` enforcement, and
 the `-heal` subcommand.
 
-## Anomaly reports (advisory)
+## Anomaly reports
 
-The tool prints, but does not auto-fix:
+`-check` **fails** (non-zero exit) on:
 
-- **retained but not pinned** — a block that is gone from the base and has no
-  `suppressions_checkout.txt` pin (its schema bytes may be at risk on refresh).
+- **suppressed/frozen with no reason recorded** — every suppressed artifact and
+  every freeze must carry its own reason (see `suppressed-and-frozen.md`); run
+  `-heal` to propose one. Enforced since the item-10 backfill drove these to zero.
 - **duplicate live blocks** — more than one live block for the same CloudFormation
   type (a latent hand-edit error).
 - **naming-invariant violations** — `resource_type_name` does not match the
   deterministic transform of the CloudFormation type name (the classic
   copy-paste-wrong-CFN mistake).
+
+Advisory only (printed, never auto-fixed, does not fail `-check`):
+
+- **retained but not pinned** — a block that is gone from the base and has no
+  `suppressions_checkout.txt` pin (its schema bytes may be at risk on refresh).

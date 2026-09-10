@@ -5,8 +5,9 @@
 // AWS offers, and owns generating the provider from it. Five modes:
 //
 //   - -check: parse the overlay, verify it is normalized and anomaly-free.
-//     Offline, writes nothing; safe on every PR. Flags any suppressed/frozen
-//     row with no suppression_reason as an advisory anomaly (never a failure).
+//     Offline, writes nothing; safe on every PR. Fails if any suppressed/frozen
+//     fact has no reason recorded (run -heal to propose one); retained-but-
+//     unpinned rows remain advisory.
 //   - -update: the live weekly incremental. One AWS crawl (ListTypes +
 //     DescribeType, us-east-1) feeds both overlay reconciliation (add new rows,
 //     report retained/anomalous ones) and change detection (byte-compare against
@@ -182,7 +183,7 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 	if len(problems) > 0 {
 		return fmt.Errorf("all_schemas.hcl check failed: %s", strings.Join(problems, "; "))
 	}
-	if n := len(report.UnexplainedRetained) + len(report.ReasonlessSuppressed); n > 0 {
+	if n := len(report.UnexplainedRetained); n > 0 {
 		fmt.Fprintf(os.Stderr, "bigdiffer: all_schemas.hcl is normalized; %d advisory anomaly line(s) reported above (not a check failure).\n", n)
 		return nil
 	}
@@ -339,9 +340,9 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 	// (policy.go), but a row can also be suppressed or frozen by direct
 	// hand-edit, or predate the taxonomy. Checked per-fact, not per-row (item
 	// 9b): a row's resource can have a real reason while its plural DS is
-	// still reason-less, or vice versa. Advisory only, like every other
-	// anomaly here — never a hard failure, and -heal (not this check) is what
-	// fills the gap.
+	// still reason-less, or vice versa. A reason-less fact now fails -check
+	// (anomalyProblems); -heal (not this check) is what proposes the reason to
+	// fill the gap.
 	for _, it := range items {
 		if !it.live || it.key == "" {
 			continue
@@ -633,8 +634,10 @@ func parseCheckout(path string) (map[string]bool, error) {
 }
 
 // anomalyProblems returns human-readable descriptions of anomalies that should
-// fail a -check run. Retained-but-unpinned rows are intentionally excluded: they
-// are advisory and tracked for later.
+// fail a -check run: duplicate blocks, naming-invariant violations, and any
+// suppressed/frozen fact with no recorded reason (every suppression and freeze
+// must carry its own reason). Retained-but-unpinned rows are intentionally
+// excluded: they are advisory and tracked for later.
 func (r Report) anomalyProblems() []string {
 	var problems []string
 	if len(r.Duplicates) > 0 {
@@ -642,6 +645,9 @@ func (r Report) anomalyProblems() []string {
 	}
 	if len(r.NamingViolate) > 0 {
 		problems = append(problems, fmt.Sprintf("%d naming-invariant violation(s)", len(r.NamingViolate)))
+	}
+	if len(r.ReasonlessSuppressed) > 0 {
+		problems = append(problems, fmt.Sprintf("%d suppressed/frozen fact(s) with no reason recorded (run -heal)", len(r.ReasonlessSuppressed)))
 	}
 	return problems
 }
