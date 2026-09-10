@@ -147,13 +147,16 @@ func TestIsIssueWorthy(t *testing.T) {
 	}
 }
 
-// TestProbeArtifactIsolatesRecursiveSchema is the item-9 regression test for
+// TestProbeArtifactIsolatesRecursiveSchema is the regression test for
 // subprocess isolation: a schema that drives the emitter into unbounded
-// recursion must be reported as a normal (if slow) generation_failed proposal,
-// not crash the process running the probe. A real stack overflow can take
-// tens of seconds to unwind, so this is intentionally the one slow bigdiffer
-// test; it is worth the cost to prove containment against the exact failure
-// mode discovered live (AWS::WAFv2::RuleGroup/WebACL).
+// recursion must be contained and reported as a failure, not crash the process
+// running the probe. Containment has two arms — the subprocess self-crashes
+// (stack overflow / OS kill) or the watchdog timeout kills it first — and which
+// one fires depends on the runner's speed and memory, so the test accepts
+// either. A real stack overflow can take tens of seconds to unwind, so this is
+// intentionally the one slow bigdiffer test; it is worth the cost to prove
+// containment against the exact failure mode discovered live
+// (AWS::WAFv2::RuleGroup/WebACL).
 //
 // probeArtifact re-execs via os.Executable(), which under `go test` resolves
 // to the test binary — a binary whose CLI is testing.Main, not bigdiffer's
@@ -200,8 +203,17 @@ func TestProbeArtifactIsolatesRecursiveSchema(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected the recursive schema to fail generation, not succeed")
 	}
-	if !strings.Contains(err.Error(), "stack overflow") && !strings.Contains(err.Error(), "crashed") {
-		t.Errorf("expected a crash/stack-overflow signature in the error, got: %v", err)
+	// Containment has two arms and either is a pass: the subprocess self-crashes
+	// (stack overflow / OS kill) or the watchdog timeout kills it first. Which
+	// one wins depends on the runner's speed and memory — a faster/higher-memory
+	// runner can hit the 30s deadline before the stack overflows — so assert
+	// only that the runaway probe was contained and surfaced as an error, never
+	// that it took one specific route.
+	msg := err.Error()
+	if !strings.Contains(msg, "stack overflow") &&
+		!strings.Contains(msg, "crashed") &&
+		!strings.Contains(msg, "timed out") {
+		t.Errorf("expected a containment signature (crash/stack-overflow/timeout) in the error, got: %v", err)
 	}
 }
 
