@@ -109,10 +109,6 @@ func Pluralize(name string) string {
 		return pluralName
 	}
 
-	if isCustomName(pluralName) {
-		return pluralName + "_plural"
-	}
-
 	if arr := []byte(pluralName); isNumeric(arr[len(arr)-1]) {
 		return pluralName + "s" // "s3" => "s3s"
 	}
@@ -125,8 +121,8 @@ func Pluralize(name string) string {
 }
 
 // PluralizeWithCustomNameSuffix converts a name to its plural form similar to Pluralize,
-// with the exception that a suffix can be passed in as an argument to be used
-// only for names that are considered "custom" i.e. return true for isCustomName.
+// with the exception that a caller-chosen suffix is appended (instead of
+// '_plural') when inflection leaves the name unchanged.
 func PluralizeWithCustomNameSuffix(name, suffix string) string {
 	if name == "" {
 		return name
@@ -139,10 +135,6 @@ func PluralizeWithCustomNameSuffix(name, suffix string) string {
 
 	if pluralName != name {
 		return pluralName
-	}
-
-	if isCustomName(pluralName) {
-		return pluralName + suffix
 	}
 
 	if arr := []byte(pluralName); isNumeric(arr[len(arr)-1]) {
@@ -158,17 +150,6 @@ func PluralizeWithCustomNameSuffix(name, suffix string) string {
 
 func isCapitalLetter(ch byte) bool {
 	return ch >= 'A' && ch <= 'Z'
-}
-
-func isCustomName(name string) bool {
-	re1 := regexp.MustCompile(`((e|hd|n|z)fs|(E|HD|N|Z)FS)$`)
-	re2 := regexp.MustCompile(`tions$`)
-	re3 := regexp.MustCompile(`issions$`)
-	re4 := regexp.MustCompile(`(W|w)indows$`)
-	re5 := regexp.MustCompile(`(S|s)ettings$`)
-	re6 := regexp.MustCompile(`(D|d)ata$`)
-
-	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name) || re4.MatchString(name) || re5.MatchString(name) || re6.MatchString(name)
 }
 
 func isLowercaseLetter(ch byte) bool {

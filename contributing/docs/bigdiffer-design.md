@@ -424,15 +424,6 @@ with status; the detail lives here.
 - **Checkout-file retirement (§5).** Fold `suppressions_checkout.txt` fully into
   `frozen_since` and stop reading the external file. Orthogonal to the reason
   taxonomy; a pure simplification once nothing else depends on the checkout list.
-- **Parity-validated naming simplification.** The `isCustomName` regex list
-  (`efs`/`tions`/`issions`/`windows`/`settings`/`data`) appears to approximate a
-  single condition: `inflection.Plural(name) == name` (pluralization left the
-  name unchanged, so it must be disambiguated). Replacing the list with the
-  general rule "if the plural equals the input, append `_plural`" would drop the
-  hardcoded cases. It is a behavior change — it would suffix *every*
-  inflection-unchanged name — so it must be proven equivalent by flipping the
-  rule and confirming the full-corpus parity harness still shows 0 drift. Safe to
-  attempt precisely because parity now exists.
 - **Delete the legacy generators, directive files, and `make` targets.** Only
   after full-corpus parity has held for several real weekly cycles. This is what
   finally resolves the conceptual cutover into a physical one; until then the

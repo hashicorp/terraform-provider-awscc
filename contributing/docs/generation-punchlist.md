@@ -67,10 +67,6 @@ D. **Adopt — phase 2: delete the redundant legacy machinery.** After phase 1 h
 
 - **13 Checkout-file retirement** — fold `suppressions_checkout.txt` into
   `frozen_since` (`bigdiffer-design.md` §5).
-- **14 Parity-validated naming simplification** — replace the `isCustomName`
-  regex list with the general "plural == input ⇒ suffix" rule, proven by the
-  parity harness (`bigdiffer-design.md` "Deferred and future work"). Related
-  to item B.
 - **15 Delete legacy generators/directives/`make` targets**
   (`bigdiffer-design.md` §10). Delete `generating-the-provider.md` with them.
 
@@ -83,15 +79,18 @@ E. **Release-process docs → bigdiffer (Jira).** Point the release runbook in J
 
 ### Generator fix
 
-B. **Pluralizer fix for already-plural type names.** `AWS::SSMGuiConnect::Preferences`
-   is suppressed on its plural DS with a `build_failed` reason: the type name is
-   already plural, so the singular and plural data-source generators emit the
-   same Go identifier (`preferencesDataSource redeclared`). Fix the pluralizer to
-   disambiguate this **class** (already-plural type names) rather than adding a
-   one-at-a-time exception list. When it lands, un-suppress the plural DS and drop
-   its `build_failed` reason from `all_schemas.hcl`. Overlaps with item 14's
-   naming simplification — do together or sequence B before 14. Standalone
-   generator PR. *(core)*
+B. ~~**Pluralizer fix for already-plural type names.**~~ — ✅ **Done (#3325).**
+   `AWS::SSMGuiConnect::Preferences` was suppressed on its plural DS with a
+   `build_failed` reason: the type name is already plural, so the singular and
+   plural data-source generators emitted the same Go identifier
+   (`preferencesDataSource redeclared`). Fixed by disambiguating the general
+   **class** (any name `inflection.Plural` leaves unchanged) rather than adding a
+   one-at-a-time exception list — which folded in item 14's naming
+   simplification as the same change, done together rather than sequenced,
+   since the fix and the simplification are the same fallback rule. The
+   `isCustomName` regex list was deleted from both pluralizer copies
+   (`internal/naming`, `internal/tools/bigdiffer/naming`); full-corpus parity
+   still holds. `Preferences`'s plural DS is un-suppressed and generated.
 
 ### Thaw / lift (each carries generated-code diffs — its own reviewed PR, never a data-only ride-along)
 
