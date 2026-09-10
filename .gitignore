@@ -46,3 +46,7 @@ last_resource.txt
 .make-startup-errors.log
 
 *_test.json
+
+# bigdiffer tool binary
+/bigdiffer
+/internal/tools/bigdiffer/bigdiffer
