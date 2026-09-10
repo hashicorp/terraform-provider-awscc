@@ -64,16 +64,19 @@ D. **Adopt — phase 2: delete the redundant legacy machinery.** After phase 1 h
    held for several real cycles, remove the legacy generators, directive files,
    and `make` targets now redundant with bigdiffer, and land the deferred design
    items that only make sense once the legacy path is gone:
-   - **13 Checkout-file retirement** — fold `suppressions_checkout.txt` into
-     `frozen_since` (`bigdiffer-design.md` §5).
-   - **14 Parity-validated naming simplification** — replace the `isCustomName`
-     regex list with the general "plural == input ⇒ suffix" rule, proven by the
-     parity harness (`bigdiffer-design.md` "Deferred and future work"). Related
-     to item B.
-   - **15 Delete legacy generators/directives/`make` targets**
-     (`bigdiffer-design.md` §10). Delete `generating-the-provider.md` with them.
-   Branch: later (e.g. `b-bigdiffer-legacy-removal`). Highest risk → last.
-   Depends on C. *(deferred)*
+
+- **13 Checkout-file retirement** — fold `suppressions_checkout.txt` into
+  `frozen_since` (`bigdiffer-design.md` §5).
+- **14 Parity-validated naming simplification** — replace the `isCustomName`
+  regex list with the general "plural == input ⇒ suffix" rule, proven by the
+  parity harness (`bigdiffer-design.md` "Deferred and future work"). Related
+  to item B.
+- **15 Delete legacy generators/directives/`make` targets**
+  (`bigdiffer-design.md` §10). Delete `generating-the-provider.md` with them.
+
+Branch: later (e.g. `b-bigdiffer-legacy-removal`). Highest risk → last.
+Depends on C. *(deferred)*
+
 E. **Release-process docs → bigdiffer (Jira).** Point the release runbook in Jira
    at the bigdiffer process. Owner: **Dirk** (external to this repo). Sequence
    alongside phase 1 (C), once bigdiffer is the default path. *(core)*
