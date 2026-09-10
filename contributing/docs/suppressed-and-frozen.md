@@ -315,10 +315,12 @@ intent.
 
 `-check` (offline, safe on every PR) gains one more anomaly class, checked
 per-fact rather than per-row (item 9b): **any suppressed artifact, or a set
-`frozen_since`, whose own reason field is empty** is reported the same way
-`UnexplainedRetained` is today — advisory, printed, not a hard failure
-(matching the existing "advisory, never a hard PR gate" posture for
-anomalies), but now visible instead of silent. A row can have a real reason
+`frozen_since`, whose own reason field is empty**. During the one-time backfill
+this was advisory (printed, not blocking) so the existing gap could be closed
+without wedging CI; now that the backfill has driven the count to zero, a
+reason-less fact is a **hard `-check` failure** (non-zero exit) — the invariant
+is enforced going forward so the gap cannot silently reopen. (`UnexplainedRetained`
+stays advisory; it is a separate, still-open workstream.) A row can have a real reason
 recorded for one fact (say, its resource) while another of its facts (its
 plural DS, or its freeze) is still reason-less — each is flagged
 independently, so one reasoned fact can never mask another's gap. This is
@@ -382,6 +384,8 @@ consistent with every other bigdiffer policy decision.
 - `non_provisionable` remains a bare annotation with no generation effect and no
   reason requirement (it says AWS lists the type as un-provisionable, not that
   bigdiffer failed to generate it).
-- Everything here is advisory and additive: no existing suppression, freeze, or
-  comment is removed or overwritten without a human accepting a proposed change
-  (`-heal`'s report) or editing the file directly.
+- `-heal`'s proposals are advisory and additive: no existing suppression, freeze,
+  or comment is removed or overwritten without a human accepting a proposed change
+  (`-heal`'s report) or editing the file directly. (`-check`'s reason enforcement
+  is the one hard gate — it fails a PR that introduces a reason-less
+  suppression/freeze, but it never edits the file.)

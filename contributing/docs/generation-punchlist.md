@@ -2,274 +2,114 @@
 <!-- SPDX-License-Identifier: MPL-2.0 -->
 <!-- markdownlint-disable MD029 -->
 
-# Generation punchlist
+# bigdiffer punchlist: adoption & follow-ups
 
-The single big-picture list of what is left to do on bigdiffer's generation
-pipeline, with pointers to the doc that owns each item's detail. This is a
-**transient tracking doc** — it is deleted once the work lands. It does not
-restate designs; it links to them.
+The single big-picture list of what is left to do on bigdiffer, with pointers to
+the doc that owns each item's detail. This is a **transient tracking doc** — it
+is deleted once the work lands. It does not restate designs; it links to them.
+
+The generation-pipeline build-out (the original punchlist, items 1–12/16) is
+**complete**; it is summarized under "Completed" below, with full detail in git
+history and the durable docs. What remains is **adoption** (switching the weekly
+process over to bigdiffer and retiring the legacy generators) plus a few
+follow-ups the build-out surfaced.
 
 Status shorthand: **prereq** (unblocks other items) · **core** · **backlog**
-(one-time catch-up on existing data) · **deferred** (real, but not now).
+(one-time catch-up on existing data) · **deferred** (real, but not now) · **done**.
 
 ## Document map
 
-Which generation docs are durable and which are scaffolding, so we know what to
-keep, trim, or delete as the work settles.
-
 | Doc | Role | Lifespan |
 |---|---|---|
-| `bigdiffer-design.md` | The durable design reference — what bigdiffer is, how it works, and why (model, change classes, the two gates, policy, the generator surface, deferred work). | **Long-term.** The maintenance/review reference. |
+| `bigdiffer-design.md` | The durable design reference (model, change classes, the two gates, policy, the generator surface, deferred work). | **Long-term.** The maintenance/review reference. |
 | `generating-the-provider-with-bigdiffer.md` | The current weekly release process (operational how-to). | **Long-term.** The canonical runbook. |
-| `generating-the-provider.md` | The legacy manual `make`-target process. | **Long-term while the fallback exists;** delete with the legacy generators. |
-| `suppressed-and-frozen.md` | Both a spec *and* the source of truth for suppression/frozen nuances. | **Long-term.** The spec sections settle into "how it works" as items land; the taxonomy, the `frozen`-means-schema-pin clarification, and the issue guidance stay permanently. |
-| `generation-punchlist.md` (this) | Big-picture gap tracker. | **Transient.** Delete when the list is empty. |
+| `generating-the-provider.md` | The legacy manual `make`-target process. | **Long-term while the fallback exists;** delete with the legacy generators (item D). |
+| `suppressed-and-frozen.md` | Both a spec *and* the source of truth for suppression/frozen nuances. | **Long-term.** The taxonomy, the `frozen`-means-schema-pin clarification, and the issue guidance stay permanently. |
+| `generation-punchlist.md` (this) | Big-picture gap tracker. | **Transient.** Delete when the list is empty (item I). |
 
-## The gaps
+## Completed — generation pipeline build-out
 
-### Prerequisites
+All landed; detail in git history + the durable docs above.
 
-1. ~~**Compile gate**~~ — ✅ **Done** (`d2d1a1a85` + follow-ups `e201fd7d8`,
-   `5055628fa`; design: `bigdiffer-design.md` §6, "The compile gate"). `-update` now builds the exact
-   code it is about to promote — every staged artifact plus the registration
-   file it implies — against the real module (`go build ./...` from the repo
-   root, once per fixpoint round) before writing anything real, instead of
-   leaving `make build` as a separate manual step run after the fact. A build
-   failure is attributed back to the specific candidate/artifact that produced
-   the rejected file (parsing `go build`'s own `file:line:col` output),
-   downgrades only that artifact to a new `gateFailedBuild` outcome (tagged
-   `build_failed`, distinct from `generation_failed`), and the fixpoint
-   re-renders the registration file and rebuilds until clean — never blocking
-   the release, matching every other failure mode's safe-by-default policy. A
-   build error that cannot be traced to anything staged, or a small round cap,
-   promotes nothing and hard-stops rather than guessing (the design doc's
-   conservative "Attribution fallback"). Unblocks the `build_failed` reason
-   category (previously defined but dead) and `-heal` step 3. *(prereq)*
-2. ~~**Absent-row `DescribeType` probe**~~ — ✅ **Done** (design:
-   `bigdiffer-design.md` §3). Split a type gone from the live crawl into
-   non-provisionable-but-live vs. genuinely withdrawn: `absentTypes` finds the
-   overlay rows absent from this run's discovered set and not already
-   explained (frozen or checkout-pinned); `probeAbsent`/`classifyAbsentProbe`
-   (`discover.go`) issue one `DescribeType` each and classify on
-   `DeprecatedStatus`, `ProvisioningType`, or a definitive
-   `TypeNotFoundException` — never on a transient error or silence.
-   `absentDecisions` (`update.go`) feeds the result into the two `decide()`
-   branches (`classWithdrawn`/`classNonProvisionable`) that were previously
-   dead code. Unblocks the `withdrawn` freeze path, and stops absent types
-   recurring as `UnexplainedRetained` anomalies from the next run onward.
+- **1 Compile gate**, **2 Absent-row `DescribeType` probe** — prereqs (`bigdiffer-design.md` §6, §3).
+- **3 Reason taxonomy**, **4 Per-artifact independence**, **5 Reason on freeze**, **6 Tag `structural` at source**, **7 GitHub-issue guidance** — the reason machinery (`a08072eb6`; `suppressed-and-frozen.md`).
+- **9 `-heal` subcommand** (`04b6a264d`, + compile-gate wiring + subprocess-isolated probes), **9a** recurring-`lift` suppression, **9b** per-artifact reason split — all done.
+- **8 `-check` reason anomaly** (`ad401cd95`) — landed as advisory; **now upgraded to a hard `-check` failure in #3323** (item A) once the backlog hit zero.
+- **10 One-time reason backfill** — ✅ **done in #3323**: reason-less facts 558 → 0 across 8 data-only commits (structural plural, Tier A/B, deferred-lift candidates, mined + issue-verified freezes). `suppressed-and-frozen.md` ("Mining existing issues").
+- **11 Machine-readable report** — de-scoped/closed (no deterministic consumer).
+- **12 Never-regress cross-type atomicity** (`a08072eb6`), **16 CHANGELOG automation** — done.
 
-### Suppression & frozen reasons
+## Current work — adoption & follow-ups
 
-All detail lives in `suppressed-and-frozen.md`.
+### Enforcement
 
-3. ~~**Reason taxonomy**~~ — ✅ **Done** (commit `a08072eb6`, alongside item 4).
-   `policy.go`'s `reasonCategory` (`structural` / `generation_failed` /
-   `build_failed` / `manual` / `unknown`) + `formatReason` (`category: detail`).
-   `build_failed` became reachable once item 1 (the compile gate) landed.
-   *(core)*
-4. ~~**Per-artifact independence**~~ — ✅ **Done** (commit `a08072eb6`). A
-   resource, singular DS, and plural DS now succeed or fail independently in one
-   pass: `refreshCandidate` stages each successful artifact and skips failed
-   ones, `decide()`'s `classPresent` branch suppresses only the failed
-   artifact(s) (keeping `frozen_since`, since one JSON backs all three), and
-   `reconcileListResource` preserves the resource↔plural `ListResource`
-   coupling. Tested across all three single-artifact-failure combinations on
-   both New and Present. *(core)*
-5. ~~**Reason on freeze**~~ — ✅ **Done** (commit `a08072eb6`, alongside item 4).
-   Every `frozen_since`-setting branch in `decide()` (`classPresent` total
-   failure, `classPresent` partial failure, `classWithdrawn`) sets `reason` —
-   `generation_failed`-tagged for the two `classPresent` cases,
-   `manual: withdrawn from AWS, pending major-version removal` for
-   `classWithdrawn`. *(core)*
-6. ~~**Tag `structural` at the source**~~ — ✅ **Done** (commit `a08072eb6`,
-   alongside item 4). `canonicalBlock` (`main.go`) stamps
-   `structural: no list handler with zero required arguments` whenever it
-   writes the plural-DS structural suppression the discovery crawl determined,
-   instead of a bare, unexplained flag. *(core)*
-7. ~~**GitHub-issue guidance**~~ — ✅ **Done, deliberately simplified.**
-   Considered a ready-to-file issue stub plus `suppression_reason`-carried
-   issue-URL capture; cut both as unnecessary machinery. For
-   `generation_failed`/`build_failed` proposals only, `writeHealReport`
-   (`heal.go`) prints one extra line recommending a GitHub issue, naming the
-   type and artifact — no stub, no URL, no auto-filing. The captured error is
-   already on the line above; filing the issue and recording its URL back into
-   `suppression_reason` by hand is left to the human, reasonable once item 10's
-   backlog pass means this only fires occasionally rather than in bulk.
-   `structural`/`manual`/`unknown` never recommend an issue (`isIssueWorthy`).
-   Detail: `suppressed-and-frozen.md`, "GitHub issues: when to file, and what
-   to say."
+A. ~~**`-check` reason enforcement**~~ — ✅ **Done (#3323).** Now that the item-10
+   backfill drove reason-less facts to zero, a suppressed artifact or a set
+   `frozen_since` with an empty reason field is a **hard `-check` failure**
+   (non-zero exit), not an advisory line — the invariant is enforced so the gap
+   cannot silently reopen. `UnexplainedRetained` stays advisory (separate
+   workstream). Detail: `suppressed-and-frozen.md` "`-check`: enforce a reason";
+   `internal/tools/bigdiffer` README "Anomaly reports". *(core)*
 
-### Enforcement & backlog
+### Adoption (the switchover)
 
-8. ~~**`-check` reason anomaly**~~ — ✅ **Done** (`ad401cd95`). Added
-   `Report.ReasonlessSuppressed`: any live row with a suppressed artifact or a
-   set `frozen_since` and no `suppression_reason` is printed as an advisory
-   anomaly (never a `-check` failure, matching `UnexplainedRetained`). Fixed
-   `runCheck`'s success message in the same pass — it previously claimed
-   "anomaly-free" unconditionally even when advisory anomalies (this one or
-   `UnexplainedRetained`) were present; it now reports the advisory count.
-   Verified against the real overlay: 463 reason-less rows correctly flagged,
-   `-check` still exits 0, overlay untouched. *(core)*
-9. ~~**`-heal` subcommand**~~ — ✅ **Done** (`04b6a264d`; compile-gate wiring
-   added later, see below). `internal/tools/bigdiffer/heal.go`:
-   for every reason-less/`unknown` row, probes each suppressed artifact
-   (structural check via the existing `pluralSupported`, then a real
-   regeneration attempt, then a real compile-gate check) and the freeze
-   itself, proposing `lift` (generates cleanly *and* passes the compile gate)
-   or a categorized `reason`, falling back to migrating a
-   free-form `# Suppression Reason:` comment into `manual:` or `unknown` if
-   nothing else applies. Never writes `all_schemas.hcl`.
-   **Load-bearing fix found via a live run against the real overlay:** some
-   rows are suppressed *because* their schema is recursive
-   (`# Suppression Reason: Recursive Attribute Definitions`, issue #95), and
-   `codegen.Emitter` has no recursion-depth guard — re-probing one in-process
-   is a confirmed, unrecoverable Go stack overflow that would crash the whole
-   `-heal` run. Fixed by isolating every regeneration probe in a subprocess
-   (a hidden `-heal-probe-artifact` mode `-heal` re-execs itself into) under a
-   30s timeout and a 512MiB `GOMEMLIMIT`, so a crash or runaway probe kills
-   only that subprocess — the same "one failure never blocks the rest"
-   principle `discover.go` and `generateCorpus` already apply. Verified end to
-   end against the real overlay: all 463 reason-less rows processed to
-   completion (including the two confirmed-recursive `AWS::WAFv2::*` types,
-   which now report a normal `generation_failed` proposal instead of crashing),
-   549 proposals (62 `lift`, 487 `reason`), overlay untouched.
-   `TestProbeArtifactIsolatesRecursiveSchema` reproduces the crash against a
-   real built binary and asserts it is contained (intentionally the one slow
-   bigdiffer test — skipped under `-short`). *(core)*
-   **Compile-gate wiring (follow-up once item 1 landed):** the isolated probe
-   subprocess (`runHealProbeArtifact`) now also runs a successfully-generated
-   artifact through the compile gate (`buildOnce`) before reporting success,
-   so a `lift` proposal means "passes both stages a real `-update` run would
-   enforce," not just generation. Reused `buildOnce` directly rather than the
-   full fixpoint — a single-artifact probe has no registration file or batch
-   to reconcile. Tested against a real, working type (still passes) and a
-   real generates-but-rejected-by-the-gate case (a deliberately broken sibling
-   file in the probed artifact's real destination package — no schema needs
-   to be crafted to make the *engine* render invalid code, only the
-   compiler needs a reason to reject the package).
-9b. ~~**Split `suppression_reason` into one field per artifact, plus a
-    separate freeze reason**~~ — ✅ **Done.**
-    `resourceRow.SuppressionReason` was one string per row, but suppression is
-    already per-artifact (item 4) and a freeze is an orthogonal, schema-level
-    fact; one shared field could not describe a row with more than one of
-    these true at once (37 real rows at the time) and could not support
-    lifting one artifact's suppression without disturbing another's reason —
-    a named goal (AWS adds the plural list operation to a type later; lifting
-    `suppress_plural_data_source_generation` should not require touching the
-    resource's unrelated reason). Confirmed against the real overlay before
-    designing: zero rows had a non-empty `suppression_reason` at the time, so
-    this was a greenfield schema change, not a migration. Replaced with
-    `SuppressionReasonResource` / `SuppressionReasonSingularDataSource` /
-    `SuppressionReasonPluralDataSource` (`model.go`) plus a separate
-    `FrozenReason`, mirroring the existing one-flag-per-artifact shape of the
-    `suppress_*_generation` booleans. `policy.go`'s `decide()`/
-    `reasonsForFailures`/`frozenReasonForFailures`/`totalFailureReason` build a
-    `map[string]string` keyed by attribute name (zipping directly against
-    `suppressAttrsForFailures`, including mirroring its `len==0` defensive
-    fallback so a fallback-suppressed resource still gets a matching reason);
-    the partial-failure branch mints its own `frozen_reason` rationale with a
-    category *derived* from whichever artifact(s) actually triggered the
-    freeze (build vs. generation), not hardcoded — a review finding caught
-    before this landed. `-check`'s anomaly loop and `-heal`'s gate both became
-    per-fact instead of per-row as a direct consequence (folding in item 9a's
-    fix, see below). Detail folded into `bigdiffer-design.md` and
-    `suppressed-and-frozen.md`; the transient design doc
-    (`suppression-reason-split-design.md`) is deleted per its stated
-    lifecycle. Surfaced while scoping item 9a below, which could not be
-    expressed cleanly without this. *(prereq — unblocked 9a, 11, 10)*
-9a. ~~**Suppress recurring `lift` proposals for known-manual
-    suppressions**~~ — ✅ **Done, as a consequence of 9b.**
-    a plural data source manually suppressed for a semantic reason (not a
-    generation failure) always re-proposes `lift` on every `-heal` run,
-    because `codegen.GeneratePluralDataSource` builds from the CFN type name
-    alone and structurally cannot fail (noted during item 9's review). Fixed
-    with no separate mechanism: `-heal`'s gate is now per-artifact
-    (`healFactsFor`/`healFact.needsHealing`) — it skips probing the plural DS
-    specifically once `suppression_reason_plural_data_source` is set to
-    anything real, independent of whether the resource or singular DS are
-    still reason-less — no new adjudication marker or taxonomy sub-tag needed.
-    On top of that, a `lift` proposal's text names the exact field to set to
-    stop it recurring, keeping `-heal` stateless and putting the decision
-    explicitly in the human's hands. Also resolved a related ambiguity found
-    in review: the free-form `# Suppression Reason:` comment is row-level and
-    populated (58 rows, 41 multi-suppressed) where the structured field was
-    not — `-heal` offers it as a per-artifact *candidate*, visibly marked as
-    shared/unconfirmed, rather than auto-splitting it identically into every
-    still-reason-less fact's field (`commentOrUnknown`'s `multiPending`
-    parameter). Detail folded into `suppressed-and-frozen.md`'s `-heal`
-    section.
-10. **One-time reason backfill** — the bulk labor: tag the ~428 structural
-    plural suppressions, and triage the 35 reason-less freezes + 3 bare
-    suppressions. Includes **mining open GitHub issues** to propose reasons and
-    URL links for rows that have none. Detail: `suppressed-and-frozen.md`
-    ("Mining existing issues"). Item 11 (its former dependency) is de-scoped;
-    9b/9a (the four-field shape it targets) are done. *(backlog)*
+C. **Adopt — phase 1: switch to bigdiffer's generated init approach, keep the
+   legacy fallback.** Make the weekly/release process generate the provider via
+   bigdiffer, but **leave the legacy `make` targets and generators in place**
+   behind a documented "safety hatch": a short section in the runbook on how to
+   revert to the legacy process if bigdiffer output regresses. No legacy code is
+   deleted in this phase. Pairs with item E (release docs). Branch:
+   `b-bigdiffer-adopt`. Depends on A. *(core)*
+D. **Adopt — phase 2: delete the redundant legacy machinery.** After phase 1 has
+   held for several real cycles, remove the legacy generators, directive files,
+   and `make` targets now redundant with bigdiffer, and land the deferred design
+   items that only make sense once the legacy path is gone:
 
-### Reporting & robustness
+- **13 Checkout-file retirement** — fold `suppressions_checkout.txt` into
+  `frozen_since` (`bigdiffer-design.md` §5).
+- **14 Parity-validated naming simplification** — replace the `isCustomName`
+  regex list with the general "plural == input ⇒ suffix" rule, proven by the
+  parity harness (`bigdiffer-design.md` "Deferred and future work"). Related
+  to item B.
+- **15 Delete legacy generators/directives/`make` targets**
+  (`bigdiffer-design.md` §10). Delete `generating-the-provider.md` with them.
 
-11. ~~**Machine-readable report**~~ — ❌ **De-scoped, closed.** The premise was
-    a structured (JSON) `-check`/`-heal` output for a downstream deterministic
-    consumer to parse. There is no such consumer: bigdiffer's proposals are
-    read and acted on by a human, or by an LLM agent working through them
-    interactively — and an agent parses the existing per-line, one-fact-per-line
-    stdout text (already consistently shaped: CFN type, label, field, reason)
-    at least as reliably as JSON, without the ongoing cost of a second schema
-    to keep in sync with every future taxonomy/field change (the exact
-    maintenance burden `gateFailureReason`/`suppression_reason` already paid
-    for once, in 9b). Revisit only if a specific deterministic (non-agent,
-    non-human) consumer is ever proposed.
-12. ~~**Never-regress cross-type atomicity**~~ — ✅ **Done** (commit
-    `a08072eb6`). `refreshCandidate` now stages every artifact and cached schema
-    under a temp `stagingDir`, writing nothing to the real tree; `promoteStaged`
-    copies staging → real tree in one pass *after* the whole candidate batch has
-    staged successfully, so a hard error anywhere in the per-candidate loop
-    returns before any promotion and leaves the tree and `all_schemas.hcl`
-    exactly as they started. `TestUpdateBatchAtomicity` injects a mid-batch
-    failure and asserts nothing was promoted. *(core)*
-16. ~~**CHANGELOG automation**~~ — ✅ **Done.** The weekly runbook's step 5
-    (`generating-the-provider-with-bigdiffer.md` §5) was fully manual: a
-    human ran `git ls-files --others --exclude-standard`, eyeballed which
-    untracked website doc files were new resources/data sources/list
-    resources, hand-formatted a `**New Resource:**`-style bullet with the
-    Terraform type name per one, and pasted them into `CHANGELOG.md`.
-    `-update` now inserts these bullets itself, directly into
-    `CHANGELOG.md`'s top, in-progress version block (e.g.
-    `## 1.100.0 (Unreleased)`) — no side file, since the PR/commit process
-    already protects the original and a human still adds the PR link and
-    any `NOTES:` before release. The source of truth is **the artifacts
-    `-update` actually promotes**, read from `stagedByDest` *after* the
-    compile gate settles (so a gate-rejected artifact is never announced)
-    — not `Report.AddedNew`/`AddedBacklog` as first considered, which is
-    per-type overlay-membership state that would need correlating with
-    per-artifact outcomes and mis-handles a backlog lift and a partial
-    suppression; and not diffing the registration file, which is
-    unbuildable as a per-artifact source (it is a package-level
-    blank-import aggregate — `emitRegistration`, `emit.go` — that cannot
-    distinguish resources within one service package). An artifact is a
-    changelog entry iff it is promoted now and was not user-visible on the
-    pre-run overlay: every artifact of a brand-new type, or a specific
-    artifact whose own `suppress_*_generation` flag was `true` on the
-    pre-run row (a backlog lift, or the "AWS added the plural list
-    operation to an existing type later" case that motivated the reason
-    split, item 9b). Assumes the top block's `FEATURES:` section is empty
-    or absent when `-update` runs (the normal case: it runs once per
-    release cycle and drafts the whole entry in a single pass) and errors
-    rather than guess at a merge if it is already populated.
-    `changelog.go`'s `changelogEntries`/`writeChangelogFragment` are pure
-    functions of in-memory state plus a targeted edit to `CHANGELOG.md` —
-    no AWS, generation, or live tree dependency beyond that one file.
-    Detail folded into `bigdiffer-design.md` §8 and the runbook's step 5.
-    *(core)*
+Branch: later (e.g. `b-bigdiffer-legacy-removal`). Highest risk → last.
+Depends on C. *(deferred)*
 
-### Deferred
+E. **Release-process docs → bigdiffer (Jira).** Point the release runbook in Jira
+   at the bigdiffer process. Owner: **Dirk** (external to this repo). Sequence
+   alongside phase 1 (C), once bigdiffer is the default path. *(core)*
 
-13. **Checkout-file retirement** — fold `suppressions_checkout.txt` into
-    `frozen_since`. Detail: `bigdiffer-design.md` §5 and "Deferred and future
-    work". *(deferred)*
-14. **Parity-validated naming simplification** — replace the `isCustomName`
-    regex list with the general "plural == input ⇒ suffix" rule, proven by the
-    parity harness. Detail: `bigdiffer-design.md` "Deferred and future work".
-    *(deferred)*
-15. **Delete the legacy generators, directive files, and `make` targets** — only
-    after full-corpus parity has held for several real cycles. Detail:
-    `bigdiffer-design.md` §10 and "Deferred and future work". *(deferred)*
+### Generator fix
+
+B. **Pluralizer fix for already-plural type names.** `AWS::SSMGuiConnect::Preferences`
+   is suppressed on its plural DS with a `build_failed` reason: the type name is
+   already plural, so the singular and plural data-source generators emit the
+   same Go identifier (`preferencesDataSource redeclared`). Fix the pluralizer to
+   disambiguate this **class** (already-plural type names) rather than adding a
+   one-at-a-time exception list. When it lands, un-suppress the plural DS and drop
+   its `build_failed` reason from `all_schemas.hcl`. Overlaps with item 14's
+   naming simplification — do together or sequence B before 14. Standalone
+   generator PR. *(core)*
+
+### Thaw / lift (each carries generated-code diffs — its own reviewed PR, never a data-only ride-along)
+
+F. **Move dedup "tags" out of the schema bytes into a new `all_schemas.hcl`
+   argument.** Today the deduplication marker lives inside the pinned schema JSON;
+   make it a first-class overlay argument (a new `resourceRow` field + generator
+   support) so it is visible and diffable in the overlay rather than buried in
+   bytes. Enabler for G. Overlay-model PR. *(core)*
+G. **Thaw resources unlocked by the new deduplication schema approach.**
+   Re-evaluate freezes that only existed to avoid the old dedup behavior; thaw
+   where the new approach makes them generate cleanly. Depends on F. *(backlog)*
+H. **Thaw resources that now compile fine.** The 63 deferred lift-candidates
+   recorded in #3323 (`manual: lift candidate; generates and compiles cleanly …
+   pending a batched lift`) plus any freezes whose pinned bytes now generate.
+   Confirm with `-heal`, lift in batches. Sequence after C so the mechanism is
+   authoritative. *(backlog)*
+
+### Cleanup
+
+I. **Retire this punchlist.** Delete `generation-punchlist.md` once A–H (and the
+   deferred items folded into D) have landed. *(deferred)*

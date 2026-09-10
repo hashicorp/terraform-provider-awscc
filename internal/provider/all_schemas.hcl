@@ -15,6 +15,7 @@ meta_schema {
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_acmpca_certificate_authority" {
@@ -24,11 +25,13 @@ resource_schema "aws_acmpca_certificate_authority" {
 resource_schema "aws_acmpca_certificate_authority_activation" {
   cloudformation_type_name               = "AWS::ACMPCA::CertificateAuthorityActivation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_acmpca_permission" {
   cloudformation_type_name               = "AWS::ACMPCA::Permission"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_aiops_investigation_group" {
@@ -38,6 +41,7 @@ resource_schema "aws_aiops_investigation_group" {
 resource_schema "aws_aps_anomaly_detector" {
   cloudformation_type_name               = "AWS::APS::AnomalyDetector"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_aps_resource_policy" {
@@ -47,6 +51,7 @@ resource_schema "aws_aps_resource_policy" {
 resource_schema "aws_aps_rule_groups_namespace" {
   cloudformation_type_name               = "AWS::APS::RuleGroupsNamespace"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_aps_scraper" {
@@ -62,6 +67,9 @@ resource_schema "aws_arcregionswitch_plan" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: HealthChecksForPlan is of unsupported type: key-value map of list of object"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: HealthChecksForPlan is of unsupported type: key-value map of list of object"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
@@ -88,6 +96,7 @@ resource_schema "aws_accessanalyzer_analyzer" {
 resource_schema "aws_accessanalyzer_archive_rule" {
   cloudformation_type_name               = "AWS::AccessAnalyzer::ArchiveRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_accountaccess_application" {
@@ -97,6 +106,7 @@ resource_schema "aws_accountaccess_application" {
 resource_schema "aws_accountaccess_entitlement" {
   cloudformation_type_name               = "AWS::AccountAccess::Entitlement"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_agentregistry_registry" {
@@ -106,6 +116,7 @@ resource_schema "aws_agentregistry_registry" {
 resource_schema "aws_agentregistry_registry_record" {
   cloudformation_type_name               = "AWS::AgentRegistry::RegistryRecord"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_amazonmq_broker" {
@@ -114,6 +125,8 @@ resource_schema "aws_amazonmq_broker" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_amazonmq_configuration" {
@@ -127,6 +140,7 @@ resource_schema "aws_amplify_app" {
 resource_schema "aws_amplify_branch" {
   cloudformation_type_name               = "AWS::Amplify::Branch"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_amplify_domain" {
@@ -136,6 +150,7 @@ resource_schema "aws_amplify_domain" {
 resource_schema "aws_amplify_webhook" {
   cloudformation_type_name               = "AWS::Amplify::Webhook"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_amplifyuibuilder_component" {
@@ -146,6 +161,9 @@ resource_schema "aws_amplifyuibuilder_component" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_amplifyuibuilder_form" {
@@ -156,6 +174,9 @@ resource_schema "aws_amplifyuibuilder_form" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_amplifyuibuilder_theme" {
@@ -166,11 +187,15 @@ resource_schema "aws_amplifyuibuilder_theme" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_apigateway_account" {
   cloudformation_type_name               = "AWS::ApiGateway::Account"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_api_key" {
@@ -180,16 +205,19 @@ resource_schema "aws_apigateway_api_key" {
 resource_schema "aws_apigateway_authorizer" {
   cloudformation_type_name               = "AWS::ApiGateway::Authorizer"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_base_path_mapping" {
   cloudformation_type_name               = "AWS::ApiGateway::BasePathMapping"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_base_path_mapping_v2" {
   cloudformation_type_name               = "AWS::ApiGateway::BasePathMappingV2"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_client_certificate" {
@@ -199,16 +227,19 @@ resource_schema "aws_apigateway_client_certificate" {
 resource_schema "aws_apigateway_deployment" {
   cloudformation_type_name               = "AWS::ApiGateway::Deployment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_documentation_part" {
   cloudformation_type_name               = "AWS::ApiGateway::DocumentationPart"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_documentation_version" {
   cloudformation_type_name               = "AWS::ApiGateway::DocumentationVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_domain_name" {
@@ -226,26 +257,31 @@ resource_schema "aws_apigateway_domain_name_v2" {
 resource_schema "aws_apigateway_gateway_response" {
   cloudformation_type_name               = "AWS::ApiGateway::GatewayResponse"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_method" {
   cloudformation_type_name               = "AWS::ApiGateway::Method"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_model" {
   cloudformation_type_name               = "AWS::ApiGateway::Model"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_request_validator" {
   cloudformation_type_name               = "AWS::ApiGateway::RequestValidator"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_resource" {
   cloudformation_type_name               = "AWS::ApiGateway::Resource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_rest_api" {
@@ -255,6 +291,7 @@ resource_schema "aws_apigateway_rest_api" {
 resource_schema "aws_apigateway_stage" {
   cloudformation_type_name               = "AWS::ApiGateway::Stage"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_usage_plan" {
@@ -264,6 +301,7 @@ resource_schema "aws_apigateway_usage_plan" {
 resource_schema "aws_apigateway_usage_plan_key" {
   cloudformation_type_name               = "AWS::ApiGateway::UsagePlanKey"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigateway_vpc_link" {
@@ -277,6 +315,7 @@ resource_schema "aws_apigatewayv2_api" {
 resource_schema "aws_apigatewayv2_api_gateway_managed_overrides" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::ApiGatewayManagedOverrides"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_api_mapping" {
@@ -286,11 +325,13 @@ resource_schema "aws_apigatewayv2_api_mapping" {
 resource_schema "aws_apigatewayv2_authorizer" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Authorizer"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_deployment" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Deployment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_domain_name" {
@@ -308,6 +349,7 @@ resource_schema "aws_apigatewayv2_integration_response" {
 resource_schema "aws_apigatewayv2_model" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Model"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_portal_product" {
@@ -317,6 +359,7 @@ resource_schema "aws_apigatewayv2_portal_product" {
 resource_schema "aws_apigatewayv2_route" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Route"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_route_response" {
@@ -326,11 +369,13 @@ resource_schema "aws_apigatewayv2_route_response" {
 resource_schema "aws_apigatewayv2_routing_rule" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::RoutingRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_stage" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Stage"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apigatewayv2_vpc_link" {
@@ -344,11 +389,13 @@ resource_schema "aws_appconfig_application" {
 resource_schema "aws_appconfig_configuration_profile" {
   cloudformation_type_name               = "AWS::AppConfig::ConfigurationProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appconfig_deployment" {
   cloudformation_type_name               = "AWS::AppConfig::Deployment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appconfig_deployment_strategy" {
@@ -358,16 +405,19 @@ resource_schema "aws_appconfig_deployment_strategy" {
 resource_schema "aws_appconfig_environment" {
   cloudformation_type_name               = "AWS::AppConfig::Environment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appconfig_experiment_definition" {
   cloudformation_type_name               = "AWS::AppConfig::ExperimentDefinition"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appconfig_experiment_run" {
   cloudformation_type_name               = "AWS::AppConfig::ExperimentRun"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appconfig_extension" {
@@ -381,6 +431,7 @@ resource_schema "aws_appconfig_extension_association" {
 resource_schema "aws_appconfig_hosted_configuration_version" {
   cloudformation_type_name               = "AWS::AppConfig::HostedConfigurationVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appflow_connector" {
@@ -395,6 +446,7 @@ resource_schema "aws_appflow_connector_profile" {
   # git checkout internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
   # Suppression Reason: isSandboxEnvironment overwrites IsSandboxEnvironment for Terraform attribute is_sandbox_environment.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1526
+  frozen_reason = "manual: isSandboxEnvironment overwrites IsSandboxEnvironment for Terraform attribute is_sandbox_environment. https://github.com/hashicorp/terraform-provider-awscc/issues/1526"
 }
 
 resource_schema "aws_appflow_flow" {
@@ -436,6 +488,7 @@ resource_schema "aws_apprunner_vpc_ingress_connection" {
 resource_schema "aws_appstream_app_block" {
   cloudformation_type_name               = "AWS::AppStream::AppBlock"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_app_block_builder" {
@@ -445,16 +498,19 @@ resource_schema "aws_appstream_app_block_builder" {
 resource_schema "aws_appstream_application" {
   cloudformation_type_name               = "AWS::AppStream::Application"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_application_entitlement_association" {
   cloudformation_type_name               = "AWS::AppStream::ApplicationEntitlementAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_application_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::ApplicationFleetAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_directory_config" {
@@ -464,6 +520,7 @@ resource_schema "aws_appstream_directory_config" {
 resource_schema "aws_appstream_entitlement" {
   cloudformation_type_name               = "AWS::AppStream::Entitlement"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_image_builder" {
@@ -478,11 +535,13 @@ resource_schema "aws_appstream_stack_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::StackFleetAssociation"
   suppress_plural_data_source_generation = true
   non_provisionable                      = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_stack_user_association" {
   cloudformation_type_name               = "AWS::AppStream::StackUserAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appstream_user" {
@@ -496,11 +555,13 @@ resource_schema "aws_appsync_api" {
 resource_schema "aws_appsync_channel_namespace" {
   cloudformation_type_name               = "AWS::AppSync::ChannelNamespace"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appsync_data_source" {
   cloudformation_type_name               = "AWS::AppSync::DataSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appsync_domain_name" {
@@ -510,11 +571,13 @@ resource_schema "aws_appsync_domain_name" {
 resource_schema "aws_appsync_domain_name_api_association" {
   cloudformation_type_name               = "AWS::AppSync::DomainNameApiAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appsync_function_configuration" {
   cloudformation_type_name               = "AWS::AppSync::FunctionConfiguration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appsync_graph_ql_api" {
@@ -524,16 +587,19 @@ resource_schema "aws_appsync_graph_ql_api" {
 resource_schema "aws_appsync_resolver" {
   cloudformation_type_name               = "AWS::AppSync::Resolver"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appsync_source_api_association" {
   cloudformation_type_name               = "AWS::AppSync::SourceApiAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_appsync_type" {
   cloudformation_type_name               = "AWS::AppSync::Type"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_apptest_test_case" {
@@ -547,6 +613,7 @@ resource_schema "aws_applicationautoscaling_scalable_target" {
 resource_schema "aws_applicationautoscaling_scaling_policy" {
   cloudformation_type_name               = "AWS::ApplicationAutoScaling::ScalingPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_applicationinsights_application" {
@@ -580,6 +647,7 @@ resource_schema "aws_athena_named_query" {
 resource_schema "aws_athena_prepared_statement" {
   cloudformation_type_name               = "AWS::Athena::PreparedStatement"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_athena_work_group" {
@@ -617,6 +685,7 @@ resource_schema "aws_autoscaling_scheduled_action" {
 resource_schema "aws_autoscaling_warm_pool" {
   cloudformation_type_name               = "AWS::AutoScaling::WarmPool"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_b2bi_capability" {
@@ -642,6 +711,9 @@ resource_schema "aws_bcm_dashboard" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_bcmdataexports_export" {
@@ -731,6 +803,7 @@ resource_schema "aws_bedrock_agent" {
 resource_schema "aws_bedrock_agent_alias" {
   cloudformation_type_name               = "AWS::Bedrock::AgentAlias"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_application_inference_profile" {
@@ -760,6 +833,7 @@ resource_schema "aws_bedrock_data_automation_project" {
 resource_schema "aws_bedrock_data_source" {
   cloudformation_type_name               = "AWS::Bedrock::DataSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_enforced_guardrail_configuration" {
@@ -774,17 +848,23 @@ resource_schema "aws_bedrock_flow" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_bedrock_flow_alias" {
   cloudformation_type_name               = "AWS::Bedrock::FlowAlias"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_flow_version" {
   cloudformation_type_name               = "AWS::Bedrock::FlowVersion"
   frozen_since                           = "2025-05-29"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+  frozen_reason                          = "manual: schema frozen; newer bytes overflow the generator (stack overflow on recursive schema) during 'make schemas' (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2323)"
 }
 
 resource_schema "aws_bedrock_guardrail" {
@@ -794,6 +874,7 @@ resource_schema "aws_bedrock_guardrail" {
 resource_schema "aws_bedrock_guardrail_version" {
   cloudformation_type_name               = "AWS::Bedrock::GuardrailVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_intelligent_prompt_router" {
@@ -807,6 +888,7 @@ resource_schema "aws_bedrock_knowledge_base" {
 resource_schema "aws_bedrock_knowledge_base_policy" {
   cloudformation_type_name               = "AWS::Bedrock::KnowledgeBasePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_prompt" {
@@ -816,11 +898,13 @@ resource_schema "aws_bedrock_prompt" {
 resource_schema "aws_bedrock_prompt_version" {
   cloudformation_type_name               = "AWS::Bedrock::PromptVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_resource_policy" {
   cloudformation_type_name               = "AWS::Bedrock::ResourcePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrock_session" {
@@ -858,6 +942,9 @@ resource_schema "aws_bedrockagentcore_dataset" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Source/InlineExamples/Examples is of unsupported type: list of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Source/InlineExamples/Examples is of unsupported type: list of undefined schema"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_bedrockagentcore_evaluator" {
@@ -871,11 +958,13 @@ resource_schema "aws_bedrockagentcore_gateway" {
 resource_schema "aws_bedrockagentcore_gateway_rate_limit" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::GatewayRateLimit"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_gateway_rule" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::GatewayRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_gateway_target" {
@@ -886,16 +975,21 @@ resource_schema "aws_bedrockagentcore_gateway_target" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_bedrockagentcore_harness" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Harness"
   frozen_since             = "2026-05-27"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — Model/BedrockModelConfig/AdditionalParams is of unsupported type: key-value map (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3201)"
 }
 
 resource_schema "aws_bedrockagentcore_harness_endpoint" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::HarnessEndpoint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_memory" {
@@ -913,6 +1007,7 @@ resource_schema "aws_bedrockagentcore_online_evaluation_config" {
 resource_schema "aws_bedrockagentcore_payment_connector" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::PaymentConnector"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_payment_credential_provider" {
@@ -926,6 +1021,7 @@ resource_schema "aws_bedrockagentcore_payment_manager" {
 resource_schema "aws_bedrockagentcore_policy" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::Policy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_policy_engine" {
@@ -935,6 +1031,7 @@ resource_schema "aws_bedrockagentcore_policy_engine" {
 resource_schema "aws_bedrockagentcore_resource_policy" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::ResourcePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_runtime" {
@@ -944,6 +1041,7 @@ resource_schema "aws_bedrockagentcore_runtime" {
 resource_schema "aws_bedrockagentcore_runtime_endpoint" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::RuntimeEndpoint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_bedrockagentcore_workload_identity" {
@@ -1001,11 +1099,13 @@ resource_schema "aws_cur_report_definition" {
 resource_schema "aws_cases_case" {
   cloudformation_type_name               = "AWS::Cases::Case"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cases_case_rule" {
   cloudformation_type_name               = "AWS::Cases::CaseRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cases_domain" {
@@ -1015,16 +1115,19 @@ resource_schema "aws_cases_domain" {
 resource_schema "aws_cases_field" {
   cloudformation_type_name               = "AWS::Cases::Field"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cases_layout" {
   cloudformation_type_name               = "AWS::Cases::Layout"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cases_template" {
   cloudformation_type_name               = "AWS::Cases::Template"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cassandra_keyspace" {
@@ -1042,11 +1145,13 @@ resource_schema "aws_cassandra_type" {
 resource_schema "aws_certificatemanager_account" {
   cloudformation_type_name               = "AWS::CertificateManager::Account"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_certificatemanager_acme_domain_validation" {
   cloudformation_type_name               = "AWS::CertificateManager::AcmeDomainValidation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_certificatemanager_acme_endpoint" {
@@ -1084,11 +1189,13 @@ resource_schema "aws_chime_app_instance_bot" {
 resource_schema "aws_chime_app_instance_user" {
   cloudformation_type_name               = "AWS::Chime::AppInstanceUser"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_chime_channel_flow" {
   cloudformation_type_name               = "AWS::Chime::ChannelFlow"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_chime_media_pipeline_kinesis_video_stream_pool" {
@@ -1098,6 +1205,7 @@ resource_schema "aws_chime_media_pipeline_kinesis_video_stream_pool" {
 resource_schema "aws_cleanrooms_analysis_template" {
   cloudformation_type_name               = "AWS::CleanRooms::AnalysisTemplate"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cleanrooms_collaboration" {
@@ -1111,11 +1219,13 @@ resource_schema "aws_cleanrooms_configured_table" {
 resource_schema "aws_cleanrooms_configured_table_association" {
   cloudformation_type_name               = "AWS::CleanRooms::ConfiguredTableAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cleanrooms_id_mapping_table" {
   cloudformation_type_name               = "AWS::CleanRooms::IdMappingTable"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cleanrooms_id_namespace_association" {
@@ -1126,11 +1236,15 @@ resource_schema "aws_cleanrooms_id_namespace_association" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1933
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema"
 }
 
 resource_schema "aws_cleanrooms_intermediate_table" {
   cloudformation_type_name               = "AWS::CleanRooms::IntermediateTable"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cleanrooms_membership" {
@@ -1140,6 +1254,7 @@ resource_schema "aws_cleanrooms_membership" {
 resource_schema "aws_cleanrooms_privacy_budget_template" {
   cloudformation_type_name               = "AWS::CleanRooms::PrivacyBudgetTemplate"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cleanroomsml_configured_model_algorithm" {
@@ -1157,6 +1272,7 @@ resource_schema "aws_cleanroomsml_training_dataset" {
 resource_schema "aws_cloudformation_change_set" {
   cloudformation_type_name               = "AWS::CloudFormation::ChangeSet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cloudformation_generated_template" {
@@ -1190,6 +1306,7 @@ resource_schema "aws_cloudformation_module_default_version" {
 resource_schema "aws_cloudformation_module_version" {
   cloudformation_type_name               = "AWS::CloudFormation::ModuleVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cloudformation_public_type_version" {
@@ -1226,6 +1343,8 @@ resource_schema "aws_cloudfront_anycast_ip_list" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cloudfront_cache_policy" {
@@ -1254,6 +1373,8 @@ resource_schema "aws_cloudfront_distribution" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cloudfront_distribution_tenant" {
@@ -1275,6 +1396,7 @@ resource_schema "aws_cloudfront_key_value_store" {
 resource_schema "aws_cloudfront_monitoring_subscription" {
   cloudformation_type_name               = "AWS::CloudFront::MonitoringSubscription"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cloudfront_origin_access_control" {
@@ -1304,6 +1426,7 @@ resource_schema "aws_cloudfront_trust_store" {
 resource_schema "aws_cloudfront_vpc_origin" {
   cloudformation_type_name               = "AWS::CloudFront::VpcOrigin"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cloudhsm_cluster" {
@@ -1325,6 +1448,7 @@ resource_schema "aws_cloudtrail_event_data_store" {
 resource_schema "aws_cloudtrail_resource_policy" {
   cloudformation_type_name               = "AWS::CloudTrail::ResourcePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cloudtrail_trail" {
@@ -1370,6 +1494,7 @@ resource_schema "aws_codeartifact_domain" {
 resource_schema "aws_codeartifact_package_group" {
   cloudformation_type_name               = "AWS::CodeArtifact::PackageGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_codeartifact_repository" {
@@ -1411,6 +1536,7 @@ resource_schema "aws_codedeploy_deployment_config" {
 resource_schema "aws_codedeploy_deployment_group" {
   cloudformation_type_name               = "AWS::CodeDeploy::DeploymentGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_codeguruprofiler_profiling_group" {
@@ -1456,26 +1582,31 @@ resource_schema "aws_cognito_identity_pool" {
 resource_schema "aws_cognito_identity_pool_principal_tag" {
   cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_identity_pool_role_attachment" {
   cloudformation_type_name               = "AWS::Cognito::IdentityPoolRoleAttachment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_log_delivery_configuration" {
   cloudformation_type_name               = "AWS::Cognito::LogDeliveryConfiguration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_managed_login_branding" {
   cloudformation_type_name               = "AWS::Cognito::ManagedLoginBranding"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_terms" {
   cloudformation_type_name               = "AWS::Cognito::Terms"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool" {
@@ -1486,61 +1617,75 @@ resource_schema "aws_cognito_user_pool" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: SmsMessage overwrites SMSMessage for Terraform attribute sms_message"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: SmsMessage overwrites SMSMessage for Terraform attribute sms_message"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_cognito_user_pool_client" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolClient"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_domain" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolDomain"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_group" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_identity_provider" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolIdentityProvider"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_regional_configuration_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolRegionalConfigurationAttachment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_replica" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolReplica"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_resource_server" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolResourceServer"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_ui_customization_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUICustomizationAttachment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_user" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_cognito_user_pool_user_to_group_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUserToGroupAttachment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_comprehend_document_classifier" {
@@ -1590,6 +1735,7 @@ resource_schema "aws_config_stored_query" {
 resource_schema "aws_connect_agent_status" {
   cloudformation_type_name               = "AWS::Connect::AgentStatus"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_approved_origin" {
@@ -1599,16 +1745,19 @@ resource_schema "aws_connect_approved_origin" {
 resource_schema "aws_connect_contact_flow" {
   cloudformation_type_name               = "AWS::Connect::ContactFlow"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_contact_flow_module" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowModule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_contact_flow_module_alias" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowModuleAlias"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_contact_flow_module_version" {
@@ -1618,31 +1767,37 @@ resource_schema "aws_connect_contact_flow_module_version" {
 resource_schema "aws_connect_contact_flow_version" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_data_lake_association" {
   cloudformation_type_name               = "AWS::Connect::DataLakeAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_data_table" {
   cloudformation_type_name               = "AWS::Connect::DataTable"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_data_table_attribute" {
   cloudformation_type_name               = "AWS::Connect::DataTableAttribute"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_data_table_record" {
   cloudformation_type_name               = "AWS::Connect::DataTableRecord"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_email_address" {
   cloudformation_type_name               = "AWS::Connect::EmailAddress"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_evaluation_form" {
@@ -1653,11 +1808,15 @@ resource_schema "aws_connect_evaluation_form" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_connect_hours_of_operation" {
   cloudformation_type_name               = "AWS::Connect::HoursOfOperation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_instance" {
@@ -1671,6 +1830,7 @@ resource_schema "aws_connect_instance_storage_config" {
 resource_schema "aws_connect_integration_association" {
   cloudformation_type_name               = "AWS::Connect::IntegrationAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_metric" {
@@ -1680,36 +1840,43 @@ resource_schema "aws_connect_metric" {
 resource_schema "aws_connect_notification" {
   cloudformation_type_name               = "AWS::Connect::Notification"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_phone_number" {
   cloudformation_type_name               = "AWS::Connect::PhoneNumber"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_predefined_attribute" {
   cloudformation_type_name               = "AWS::Connect::PredefinedAttribute"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_prompt" {
   cloudformation_type_name               = "AWS::Connect::Prompt"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_queue" {
   cloudformation_type_name               = "AWS::Connect::Queue"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_quick_connect" {
   cloudformation_type_name               = "AWS::Connect::QuickConnect"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_routing_profile" {
   cloudformation_type_name               = "AWS::Connect::RoutingProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_rule" {
@@ -1720,6 +1887,9 @@ resource_schema "aws_connect_rule" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1510
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: Actions/AssignContactCategoryActions is of unsupported type: set of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Actions/AssignContactCategoryActions is of unsupported type: set of undefined schema"
 }
 
 resource_schema "aws_connect_security_key" {
@@ -1729,16 +1899,19 @@ resource_schema "aws_connect_security_key" {
 resource_schema "aws_connect_security_profile" {
   cloudformation_type_name               = "AWS::Connect::SecurityProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_task_template" {
   cloudformation_type_name               = "AWS::Connect::TaskTemplate"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_test_case" {
   cloudformation_type_name               = "AWS::Connect::TestCase"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_traffic_distribution_group" {
@@ -1748,26 +1921,31 @@ resource_schema "aws_connect_traffic_distribution_group" {
 resource_schema "aws_connect_user" {
   cloudformation_type_name               = "AWS::Connect::User"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_user_hierarchy_group" {
   cloudformation_type_name               = "AWS::Connect::UserHierarchyGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_user_hierarchy_structure" {
   cloudformation_type_name               = "AWS::Connect::UserHierarchyStructure"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_view" {
   cloudformation_type_name               = "AWS::Connect::View"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_view_version" {
   cloudformation_type_name               = "AWS::Connect::ViewVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_connect_workspace" {
@@ -1781,6 +1959,7 @@ resource_schema "aws_connectcampaigns_campaign" {
 resource_schema "aws_connectcampaignsv2_campaign" {
   cloudformation_type_name               = "AWS::ConnectCampaignsV2::Campaign"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_controltower_enabled_baseline" {
@@ -1791,6 +1970,9 @@ resource_schema "aws_controltower_enabled_baseline" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_controltower_enabled_control" {
@@ -1802,6 +1984,8 @@ resource_schema "aws_controltower_enabled_control" {
   # git checkout internal/service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json
   # Suppression Reason:  Parameters/Value is of unsupported type: .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1527
+  suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: schema frozen; newer bytes fail — Parameters/Value is of unsupported type (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1527)"
 }
 
 resource_schema "aws_controltower_landing_zone" {
@@ -1819,6 +2003,7 @@ resource_schema "aws_controltower_landing_zone" {
 resource_schema "aws_customerprofiles_calculated_attribute_definition" {
   cloudformation_type_name               = "AWS::CustomerProfiles::CalculatedAttributeDefinition"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_customerprofiles_domain" {
@@ -1830,31 +2015,38 @@ resource_schema "aws_customerprofiles_domain" {
   # git checkout internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
   # Suppression Reason:  Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
+  suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: schema frozen; newer bytes fail — Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1528)"
 }
 
 resource_schema "aws_customerprofiles_domain_object_type" {
   cloudformation_type_name               = "AWS::CustomerProfiles::DomainObjectType"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_customerprofiles_event_stream" {
   cloudformation_type_name               = "AWS::CustomerProfiles::EventStream"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_customerprofiles_event_trigger" {
   cloudformation_type_name               = "AWS::CustomerProfiles::EventTrigger"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_customerprofiles_integration" {
   cloudformation_type_name               = "AWS::CustomerProfiles::Integration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_customerprofiles_object_type" {
   cloudformation_type_name               = "AWS::CustomerProfiles::ObjectType"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_customerprofiles_recommender" {
@@ -1864,6 +2056,7 @@ resource_schema "aws_customerprofiles_recommender" {
 resource_schema "aws_customerprofiles_segment_definition" {
   cloudformation_type_name               = "AWS::CustomerProfiles::SegmentDefinition"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_dax_parameter_group" {
@@ -1946,6 +2139,8 @@ resource_schema "aws_databrew_recipe" {
   # Properties with anyOf indicator https://github.com/hashicorp/terraform-provider-awscc/issues/98
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_databrew_ruleset" {
@@ -2021,6 +2216,7 @@ resource_schema "aws_datasync_location_smb" {
 resource_schema "aws_datasync_storage_system" {
   cloudformation_type_name = "AWS::DataSync::StorageSystem"
   frozen_since             = "2025-05-15"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2316)"
 }
 
 resource_schema "aws_datasync_task" {
@@ -2030,11 +2226,13 @@ resource_schema "aws_datasync_task" {
 resource_schema "aws_datazone_connection" {
   cloudformation_type_name               = "AWS::DataZone::Connection"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_data_source" {
   cloudformation_type_name               = "AWS::DataZone::DataSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_domain" {
@@ -2044,41 +2242,49 @@ resource_schema "aws_datazone_domain" {
 resource_schema "aws_datazone_domain_unit" {
   cloudformation_type_name               = "AWS::DataZone::DomainUnit"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name               = "AWS::DataZone::Environment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_environment_actions" {
   cloudformation_type_name               = "AWS::DataZone::EnvironmentActions"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_environment_blueprint_configuration" {
   cloudformation_type_name               = "AWS::DataZone::EnvironmentBlueprintConfiguration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_environment_profile" {
   cloudformation_type_name               = "AWS::DataZone::EnvironmentProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_form_type" {
   cloudformation_type_name               = "AWS::DataZone::FormType"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_group_profile" {
   cloudformation_type_name               = "AWS::DataZone::GroupProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_owner" {
   cloudformation_type_name               = "AWS::DataZone::Owner"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_policy_grant" {
@@ -2088,11 +2294,13 @@ resource_schema "aws_datazone_policy_grant" {
 resource_schema "aws_datazone_project" {
   cloudformation_type_name               = "AWS::DataZone::Project"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_project_membership" {
   cloudformation_type_name               = "AWS::DataZone::ProjectMembership"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_project_profile" {
@@ -2102,16 +2310,19 @@ resource_schema "aws_datazone_project_profile" {
 resource_schema "aws_datazone_subscription_target" {
   cloudformation_type_name               = "AWS::DataZone::SubscriptionTarget"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_datazone_user_profile" {
   cloudformation_type_name               = "AWS::DataZone::UserProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_budget" {
   cloudformation_type_name               = "AWS::Deadline::Budget"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_farm" {
@@ -2121,6 +2332,7 @@ resource_schema "aws_deadline_farm" {
 resource_schema "aws_deadline_fleet" {
   cloudformation_type_name               = "AWS::Deadline::Fleet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_license_endpoint" {
@@ -2130,11 +2342,13 @@ resource_schema "aws_deadline_license_endpoint" {
 resource_schema "aws_deadline_limit" {
   cloudformation_type_name               = "AWS::Deadline::Limit"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_metered_product" {
   cloudformation_type_name               = "AWS::Deadline::MeteredProduct"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_monitor" {
@@ -2144,31 +2358,37 @@ resource_schema "aws_deadline_monitor" {
 resource_schema "aws_deadline_queue" {
   cloudformation_type_name               = "AWS::Deadline::Queue"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_queue_environment" {
   cloudformation_type_name               = "AWS::Deadline::QueueEnvironment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_queue_fleet_association" {
   cloudformation_type_name               = "AWS::Deadline::QueueFleetAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_queue_limit_association" {
   cloudformation_type_name               = "AWS::Deadline::QueueLimitAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_storage_profile" {
   cloudformation_type_name               = "AWS::Deadline::StorageProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_deadline_worker" {
   cloudformation_type_name               = "AWS::Deadline::Worker"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_detective_graph" {
@@ -2190,11 +2410,13 @@ resource_schema "aws_devopsagent_agent_space" {
 resource_schema "aws_devopsagent_asset" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Asset"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_devopsagent_association" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Association"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_devopsagent_private_connection" {
@@ -2204,11 +2426,13 @@ resource_schema "aws_devopsagent_private_connection" {
 resource_schema "aws_devopsagent_service" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Service"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_devopsagent_trigger" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Trigger"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
@@ -2234,6 +2458,7 @@ resource_schema "aws_directconnect_direct_connect_gateway" {
 resource_schema "aws_directconnect_direct_connect_gateway_association" {
   cloudformation_type_name               = "AWS::DirectConnect::DirectConnectGatewayAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_directconnect_lag" {
@@ -2347,6 +2572,7 @@ resource_schema "aws_ec2_fpga_image" {
 resource_schema "aws_ec2_gateway_route_table_association" {
   cloudformation_type_name               = "AWS::EC2::GatewayRouteTableAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_host" {
@@ -2360,6 +2586,7 @@ resource_schema "aws_ec2_ipam" {
 resource_schema "aws_ec2_ipam_allocation" {
   cloudformation_type_name               = "AWS::EC2::IPAMAllocation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_ipam_pool" {
@@ -2369,6 +2596,7 @@ resource_schema "aws_ec2_ipam_pool" {
 resource_schema "aws_ec2_ipam_pool_cidr" {
   cloudformation_type_name               = "AWS::EC2::IPAMPoolCidr"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_ipam_prefix_list_resolver" {
@@ -2423,6 +2651,7 @@ resource_schema "aws_ec2_launch_template" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_LaunchTemplate.json
   # Suppression Reason:  Object has no key 'NetworkPerformanceOptions'
   # https://github.com/hashicorp/terraform-provider-awscc/issues/2133
+  frozen_reason = "manual: Object has no key 'NetworkPerformanceOptions' https://github.com/hashicorp/terraform-provider-awscc/issues/2133"
 }
 
 resource_schema "aws_ec2_local_gateway_route" {
@@ -2473,6 +2702,7 @@ resource_schema "aws_ec2_network_insights_analysis" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
   # Suppression Reason:  DestinationCidr overwrites destinationCidr for Terraform attribute destination_cidr.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1529
+  frozen_reason = "manual: DestinationCidr overwrites destinationCidr for Terraform attribute destination_cidr. https://github.com/hashicorp/terraform-provider-awscc/issues/1529"
 }
 
 resource_schema "aws_ec2_network_insights_path" {
@@ -2502,6 +2732,7 @@ resource_schema "aws_ec2_prefix_list" {
 resource_schema "aws_ec2_route" {
   cloudformation_type_name               = "AWS::EC2::Route"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_route_server" {
@@ -2611,6 +2842,7 @@ resource_schema "aws_ec2_transit_gateway_metering_policy" {
 resource_schema "aws_ec2_transit_gateway_metering_policy_entry" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayMeteringPolicyEntry"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_transit_gateway_multicast_domain" {
@@ -2640,16 +2872,19 @@ resource_schema "aws_ec2_transit_gateway_policy_table" {
 resource_schema "aws_ec2_transit_gateway_policy_table_association" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayPolicyTableAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_transit_gateway_policy_table_entry" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayPolicyTableEntry"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_transit_gateway_route" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayRoute"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_transit_gateway_route_table" {
@@ -2659,11 +2894,13 @@ resource_schema "aws_ec2_transit_gateway_route_table" {
 resource_schema "aws_ec2_transit_gateway_route_table_association" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayRouteTableAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_transit_gateway_route_table_propagation" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayRouteTablePropagation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
@@ -2681,11 +2918,13 @@ resource_schema "aws_ec2_vpc_block_public_access_exclusion" {
 resource_schema "aws_ec2_vpc_block_public_access_options" {
   cloudformation_type_name               = "AWS::EC2::VPCBlockPublicAccessOptions"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_vpc_cidr_block" {
   cloudformation_type_name               = "AWS::EC2::VPCCidrBlock"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ec2_vpcdhcp_options_association" {
@@ -2819,11 +3058,13 @@ resource_schema "aws_ecs_daemon_task_definition" {
 resource_schema "aws_ecs_express_gateway_service" {
   cloudformation_type_name               = "AWS::ECS::ExpressGatewayService"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ecs_primary_task_set" {
   cloudformation_type_name               = "AWS::ECS::PrimaryTaskSet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ecs_service" {
@@ -2837,6 +3078,7 @@ resource_schema "aws_ecs_task_definition" {
 resource_schema "aws_ecs_task_set" {
   cloudformation_type_name               = "AWS::ECS::TaskSet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_efs_access_point" {
@@ -2850,26 +3092,31 @@ resource_schema "aws_efs_file_system" {
 resource_schema "aws_efs_mount_target" {
   cloudformation_type_name               = "AWS::EFS::MountTarget"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_access_entry" {
   cloudformation_type_name               = "AWS::EKS::AccessEntry"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_capability" {
   cloudformation_type_name               = "AWS::EKS::Capability"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_certificate_authority" {
   cloudformation_type_name               = "AWS::EKS::CertificateAuthority"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_cluster" {
@@ -2880,16 +3127,19 @@ resource_schema "aws_eks_cluster" {
   # git checkout internal/service/cloudformation/schemas/AWS_EKS_Cluster.json
   # Suppression Reason: tfplugindocs Error executing command:
   # unable to generate website: error rendering static website: unable to render templated website to static markdown: unable to render template "resources/eks_cluster.md.tmpl": unable to execute template: template: docTemplate:5:18: executing "docTemplate" at <plainmarkdown>: invalid value; expected string
+  frozen_reason = "manual: tfplugindocs Error executing command: unable to generate website: error rendering static website: unable to render templated website to static markdown: unable to render template \\\"resources/eks_cluster.md.tmpl\\\": unable to execute template: template: docTemplate:5:18: executing \\\"docTemplate\\\" at <plainmarkdown>: invalid value; expected string"
 }
 
 resource_schema "aws_eks_fargate_profile" {
   cloudformation_type_name               = "AWS::EKS::FargateProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_identity_provider_config" {
   cloudformation_type_name               = "AWS::EKS::IdentityProviderConfig"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eks_nodegroup" {
@@ -2899,11 +3149,15 @@ resource_schema "aws_eks_nodegroup" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_eks_pod_identity_association" {
   cloudformation_type_name               = "AWS::EKS::PodIdentityAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_emr_security_configuration" {
@@ -2913,6 +3167,7 @@ resource_schema "aws_emr_security_configuration" {
 resource_schema "aws_emr_step" {
   cloudformation_type_name               = "AWS::EMR::Step"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_emr_studio" {
@@ -2932,6 +3187,9 @@ resource_schema "aws_emrcontainers_endpoint" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_emrcontainers_security_configuration" {
@@ -2940,6 +3198,8 @@ resource_schema "aws_emrcontainers_security_configuration" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_emrcontainers_virtual_cluster" {
@@ -2948,6 +3208,8 @@ resource_schema "aws_emrcontainers_virtual_cluster" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_emrserverless_application" {
@@ -2958,6 +3220,7 @@ resource_schema "aws_emrserverless_application" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
   # Suppression Reason:
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+  frozen_reason = "manual: Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
 }
 
 resource_schema "aws_evs_environment" {
@@ -3048,6 +3311,7 @@ resource_schema "aws_elasticloadbalancingv2_trust_store" {
 resource_schema "aws_elasticloadbalancingv2_trust_store_revocation" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::TrustStoreRevocation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_elementalinference_dictionary" {
@@ -3073,6 +3337,7 @@ resource_schema "aws_entityresolution_matching_workflow" {
 resource_schema "aws_entityresolution_policy_statement" {
   cloudformation_type_name               = "AWS::EntityResolution::PolicyStatement"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_entityresolution_schema_mapping" {
@@ -3090,11 +3355,13 @@ resource_schema "aws_eventschemas_registry" {
 resource_schema "aws_eventschemas_registry_policy" {
   cloudformation_type_name               = "AWS::EventSchemas::RegistryPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_eventschemas_schema" {
   cloudformation_type_name               = "AWS::EventSchemas::Schema"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_events_api_destination" {
@@ -3131,21 +3398,25 @@ resource_schema "aws_events_rule" {
 resource_schema "aws_evidently_experiment" {
   cloudformation_type_name               = "AWS::Evidently::Experiment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_evidently_feature" {
   cloudformation_type_name               = "AWS::Evidently::Feature"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_evidently_launch" {
   cloudformation_type_name               = "AWS::Evidently::Launch"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_evidently_project" {
   cloudformation_type_name               = "AWS::Evidently::Project"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_evidently_segment" {
@@ -3159,6 +3430,7 @@ resource_schema "aws_fis_experiment_template" {
 resource_schema "aws_fis_target_account_configuration" {
   cloudformation_type_name               = "AWS::FIS::TargetAccountConfiguration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_fms_notification_channel" {
@@ -3180,6 +3452,7 @@ resource_schema "aws_fsx_data_repository_association" {
 resource_schema "aws_fsx_s3_access_point_attachment" {
   cloudformation_type_name = "AWS::FSx::S3AccessPointAttachment"
   frozen_since             = "2025-12-17"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3114)"
 }
 
 resource_schema "aws_fsx_volume" {
@@ -3301,6 +3574,7 @@ resource_schema "aws_glue_classifier" {
 resource_schema "aws_glue_connection" {
   cloudformation_type_name               = "AWS::Glue::Connection"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_crawler" {
@@ -3314,6 +3588,7 @@ resource_schema "aws_glue_custom_entity_type" {
 resource_schema "aws_glue_data_catalog_encryption_settings" {
   cloudformation_type_name               = "AWS::Glue::DataCatalogEncryptionSettings"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_data_quality_ruleset" {
@@ -3327,6 +3602,7 @@ resource_schema "aws_glue_database" {
 resource_schema "aws_glue_identity_center_configuration" {
   cloudformation_type_name               = "AWS::Glue::IdentityCenterConfiguration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_integration" {
@@ -3356,11 +3632,13 @@ resource_schema "aws_glue_schema" {
 resource_schema "aws_glue_schema_version" {
   cloudformation_type_name               = "AWS::Glue::SchemaVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_schema_version_metadata" {
   cloudformation_type_name               = "AWS::Glue::SchemaVersionMetadata"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_security_configuration" {
@@ -3374,6 +3652,7 @@ resource_schema "aws_glue_session" {
 resource_schema "aws_glue_table_optimizer" {
   cloudformation_type_name               = "AWS::Glue::TableOptimizer"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_trigger" {
@@ -3388,11 +3667,15 @@ resource_schema "aws_glue_usage_profile" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Configuration/JobConfiguration is of unsupported type: key-value map of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Configuration/JobConfiguration is of unsupported type: key-value map of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_glue_user_defined_function" {
   cloudformation_type_name               = "AWS::Glue::UserDefinedFunction"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_glue_workflow" {
@@ -3406,6 +3689,7 @@ resource_schema "aws_grafana_workspace" {
 resource_schema "aws_greengrassv2_component_version" {
   cloudformation_type_name               = "AWS::GreengrassV2::ComponentVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_greengrassv2_deployment" {
@@ -3479,6 +3763,7 @@ resource_schema "aws_healthimaging_datastore" {
 resource_schema "aws_healthlake_data_transformation_profile" {
   cloudformation_type_name               = "AWS::HealthLake::DataTransformationProfile"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_healthlake_fhir_datastore" {
@@ -3492,6 +3777,7 @@ resource_schema "aws_iam_group" {
 resource_schema "aws_iam_group_policy" {
   cloudformation_type_name               = "AWS::IAM::GroupPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iam_instance_profile" {
@@ -3513,6 +3799,7 @@ resource_schema "aws_iam_role" {
 resource_schema "aws_iam_role_policy" {
   cloudformation_type_name               = "AWS::IAM::RolePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iam_saml_provider" {
@@ -3526,6 +3813,7 @@ resource_schema "aws_iam_server_certificate" {
 resource_schema "aws_iam_service_linked_role" {
   cloudformation_type_name               = "AWS::IAM::ServiceLinkedRole"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iam_user" {
@@ -3535,6 +3823,7 @@ resource_schema "aws_iam_user" {
 resource_schema "aws_iam_user_policy" {
   cloudformation_type_name               = "AWS::IAM::UserPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iam_virtual_mfa_device" {
@@ -3580,6 +3869,7 @@ resource_schema "aws_ivs_storage_configuration" {
 resource_schema "aws_ivs_stream_key" {
   cloudformation_type_name               = "AWS::IVS::StreamKey"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ivschat_logging_configuration" {
@@ -3593,21 +3883,25 @@ resource_schema "aws_ivschat_room" {
 resource_schema "aws_identitystore_group" {
   cloudformation_type_name               = "AWS::IdentityStore::Group"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_identitystore_group_membership" {
   cloudformation_type_name               = "AWS::IdentityStore::GroupMembership"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_identitystore_user" {
   cloudformation_type_name               = "AWS::IdentityStore::User"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_imagebuilder_component" {
   cloudformation_type_name               = "AWS::ImageBuilder::Component"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_imagebuilder_container_recipe" {
@@ -3621,6 +3915,7 @@ resource_schema "aws_imagebuilder_distribution_configuration" {
 resource_schema "aws_imagebuilder_image" {
   cloudformation_type_name               = "AWS::ImageBuilder::Image"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_imagebuilder_image_pipeline" {
@@ -3642,6 +3937,7 @@ resource_schema "aws_imagebuilder_lifecycle_policy" {
 resource_schema "aws_imagebuilder_workflow" {
   cloudformation_type_name               = "AWS::ImageBuilder::Workflow"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_inspector_assessment_target" {
@@ -3655,6 +3951,7 @@ resource_schema "aws_inspector_assessment_template" {
 resource_schema "aws_inspector_resource_group" {
   cloudformation_type_name               = "AWS::Inspector::ResourceGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_inspectorv2_cis_scan_configuration" {
@@ -3844,6 +4141,7 @@ resource_schema "aws_iotevents_input" {
 resource_schema "aws_iotfleethub_application" {
   cloudformation_type_name = "AWS::IoTFleetHub::Application"
   frozen_since             = "2022-02-18"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException, service EOL), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2948)"
 }
 
 resource_schema "aws_iotfleetwise_campaign" {
@@ -3859,6 +4157,10 @@ resource_schema "aws_iotfleetwise_decoder_manifest" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: NetworkInterfaces is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  frozen_reason                            = "manual: schema frozen; newer bytes fail — NetworkInterfaces is of unsupported type: list of \"\" (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1515)"
 }
 
 resource_schema "aws_iotfleetwise_fleet" {
@@ -3905,6 +4207,9 @@ resource_schema "aws_iotsitewise_computation_model" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_iotsitewise_dashboard" {
@@ -3922,6 +4227,7 @@ resource_schema "aws_iotsitewise_gateway" {
 resource_schema "aws_iotsitewise_pipeline" {
   cloudformation_type_name               = "AWS::IoTSiteWise::Pipeline"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iotsitewise_portal" {
@@ -3935,6 +4241,7 @@ resource_schema "aws_iotsitewise_project" {
 resource_schema "aws_iotsitewise_task" {
   cloudformation_type_name               = "AWS::IoTSiteWise::Task"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iotsitewise_workspace" {
@@ -3949,6 +4256,9 @@ resource_schema "aws_iottwinmaker_component_type" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_iottwinmaker_entity" {
@@ -3959,16 +4269,21 @@ resource_schema "aws_iottwinmaker_entity" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_iottwinmaker_scene" {
   cloudformation_type_name               = "AWS::IoTTwinMaker::Scene"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iottwinmaker_sync_job" {
   cloudformation_type_name               = "AWS::IoTTwinMaker::SyncJob"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_iottwinmaker_workspace" {
@@ -4058,11 +4373,13 @@ resource_schema "aws_kendra_index" {
 resource_schema "aws_kendra_query_suggestions_block_list" {
   cloudformation_type_name               = "AWS::Kendra::QuerySuggestionsBlockList"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_kendra_thesaurus" {
   cloudformation_type_name               = "AWS::Kendra::Thesaurus"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_kendraranking_execution_plan" {
@@ -4072,6 +4389,7 @@ resource_schema "aws_kendraranking_execution_plan" {
 resource_schema "aws_kinesis_resource_policy" {
   cloudformation_type_name               = "AWS::Kinesis::ResourcePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_kinesis_stream" {
@@ -4093,11 +4411,13 @@ resource_schema "aws_kinesisfirehose_delivery_stream" {
 resource_schema "aws_kinesisvideo_signaling_channel" {
   cloudformation_type_name               = "AWS::KinesisVideo::SignalingChannel"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_kinesisvideo_stream" {
   cloudformation_type_name               = "AWS::KinesisVideo::Stream"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_lakeformation_data_cells_filter" {
@@ -4107,6 +4427,7 @@ resource_schema "aws_lakeformation_data_cells_filter" {
 resource_schema "aws_lakeformation_principal_permissions" {
   cloudformation_type_name               = "AWS::LakeFormation::PrincipalPermissions"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lakeformation_tag" {
@@ -4116,11 +4437,13 @@ resource_schema "aws_lakeformation_tag" {
 resource_schema "aws_lakeformation_tag_association" {
   cloudformation_type_name               = "AWS::LakeFormation::TagAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lambda_alias" {
   cloudformation_type_name               = "AWS::Lambda::Alias"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lambda_capacity_provider" {
@@ -4134,6 +4457,7 @@ resource_schema "aws_lambda_code_signing_config" {
 resource_schema "aws_lambda_event_invoke_config" {
   cloudformation_type_name               = "AWS::Lambda::EventInvokeConfig"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lambda_event_source_mapping" {
@@ -4148,6 +4472,7 @@ resource_schema "aws_lambda_function" {
   # git checkout internal/service/cloudformation/schemas/AWS_Lambda_Function.json
   # Suppression Reason: KmsKeyArn overwrites KMSKeyArn for Terraform attribute kms_key_arn.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3229
+  frozen_reason = "manual: KmsKeyArn overwrites KMSKeyArn for Terraform attribute kms_key_arn. Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3229"
 }
 
 resource_schema "aws_lambda_layer_version" {
@@ -4169,21 +4494,25 @@ resource_schema "aws_lambda_network_connector" {
 resource_schema "aws_lambda_permission" {
   cloudformation_type_name               = "AWS::Lambda::Permission"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lambda_resource_policy" {
   cloudformation_type_name               = "AWS::Lambda::ResourcePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lambda_url" {
   cloudformation_type_name               = "AWS::Lambda::Url"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_lambda_version" {
   cloudformation_type_name               = "AWS::Lambda::Version"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_launchwizard_deployment" {
@@ -4198,6 +4527,7 @@ resource_schema "aws_lex_bot" {
   # git checkout internal/service/cloudformation/schemas/AWS_Lex_Bot.json
   # Suppression Reason:
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+  frozen_reason = "manual: Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
 }
 
 resource_schema "aws_lex_bot_alias" {
@@ -4319,6 +4649,7 @@ resource_schema "aws_location_tracker_consumer" {
 resource_schema "aws_logs_account_policy" {
   cloudformation_type_name               = "AWS::Logs::AccountPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_logs_delivery" {
@@ -4348,11 +4679,13 @@ resource_schema "aws_logs_log_anomaly_detector" {
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
   frozen_since             = "2024-04-04"
+  frozen_reason            = "manual: schema pinned at last-good bytes (frozen 2024-04-04) to avoid a log group Arn regression — the read stores an invalid \":*\"-suffixed Arn (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1028)"
 }
 
 resource_schema "aws_logs_log_stream" {
   cloudformation_type_name               = "AWS::Logs::LogStream"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_logs_metric_filter" {
@@ -4378,6 +4711,7 @@ resource_schema "aws_logs_storage_tier_policy" {
 resource_schema "aws_logs_subscription_filter" {
   cloudformation_type_name               = "AWS::Logs::SubscriptionFilter"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_logs_transformer" {
@@ -4388,6 +4722,9 @@ resource_schema "aws_logs_transformer" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_lookoutequipment_inference_scheduler" {
@@ -4397,11 +4734,13 @@ resource_schema "aws_lookoutequipment_inference_scheduler" {
 resource_schema "aws_lookoutmetrics_alert" {
   cloudformation_type_name = "AWS::LookoutMetrics::Alert"
   frozen_since             = "2022-02-18"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2947)"
 }
 
 resource_schema "aws_lookoutmetrics_anomaly_detector" {
   cloudformation_type_name = "AWS::LookoutMetrics::AnomalyDetector"
   frozen_since             = "2022-02-18"
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2947)"
 }
 
 resource_schema "aws_lookoutvision_project" {
@@ -4415,6 +4754,7 @@ resource_schema "aws_m2_application" {
 resource_schema "aws_m2_deployment" {
   cloudformation_type_name               = "AWS::M2::Deployment"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_m2_environment" {
@@ -4433,6 +4773,9 @@ resource_schema "aws_mpa_approval_team" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Policies is of unsupported type: set of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Policies is of unsupported type: set of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mpa_identity_source" {
@@ -4442,6 +4785,7 @@ resource_schema "aws_mpa_identity_source" {
 resource_schema "aws_msk_batch_scram_secret" {
   cloudformation_type_name               = "AWS::MSK::BatchScramSecret"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_msk_channel" {
@@ -4455,6 +4799,7 @@ resource_schema "aws_msk_cluster" {
 resource_schema "aws_msk_cluster_policy" {
   cloudformation_type_name               = "AWS::MSK::ClusterPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_msk_configuration" {
@@ -4512,16 +4857,19 @@ resource_schema "aws_mediaconnect_bridge" {
 resource_schema "aws_mediaconnect_bridge_output" {
   cloudformation_type_name               = "AWS::MediaConnect::BridgeOutput"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediaconnect_bridge_source" {
   cloudformation_type_name               = "AWS::MediaConnect::BridgeSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediaconnect_flow" {
   cloudformation_type_name = "AWS::MediaConnect::Flow"
   frozen_since             = "2025-02-26"
+  frozen_reason            = "manual: schema pinned at last-good bytes (frozen 2025-02-26); newer upstream refresh held back; original trigger not recorded in-tree"
 }
 
 resource_schema "aws_mediaconnect_flow_entitlement" {
@@ -4539,6 +4887,7 @@ resource_schema "aws_mediaconnect_flow_source" {
 resource_schema "aws_mediaconnect_flow_vpc_interface" {
   cloudformation_type_name               = "AWS::MediaConnect::FlowVpcInterface"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediaconnect_gateway" {
@@ -4564,6 +4913,7 @@ resource_schema "aws_mediaconvert_preset" {
 resource_schema "aws_medialive_channel_placement_group" {
   cloudformation_type_name               = "AWS::MediaLive::ChannelPlacementGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_medialive_cloudwatch_alarm_template" {
@@ -4593,6 +4943,7 @@ resource_schema "aws_medialive_multiplex" {
 resource_schema "aws_medialive_multiplexprogram" {
   cloudformation_type_name               = "AWS::MediaLive::Multiplexprogram"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_medialive_network" {
@@ -4602,6 +4953,7 @@ resource_schema "aws_medialive_network" {
 resource_schema "aws_medialive_node" {
   cloudformation_type_name               = "AWS::MediaLive::Node"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_medialive_sdi_source" {
@@ -4622,6 +4974,8 @@ resource_schema "aws_mediapackage_channel" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mediapackage_origin_endpoint" {
@@ -4630,6 +4984,8 @@ resource_schema "aws_mediapackage_origin_endpoint" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mediapackage_packaging_configuration" {
@@ -4643,6 +4999,7 @@ resource_schema "aws_mediapackage_packaging_group" {
 resource_schema "aws_mediapackagev2_channel" {
   cloudformation_type_name               = "AWS::MediaPackageV2::Channel"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediapackagev2_channel_group" {
@@ -4652,16 +5009,19 @@ resource_schema "aws_mediapackagev2_channel_group" {
 resource_schema "aws_mediapackagev2_channel_policy" {
   cloudformation_type_name               = "AWS::MediaPackageV2::ChannelPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediapackagev2_origin_endpoint" {
   cloudformation_type_name               = "AWS::MediaPackageV2::OriginEndpoint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediapackagev2_origin_endpoint_policy" {
   cloudformation_type_name               = "AWS::MediaPackageV2::OriginEndpointPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediatailor_channel" {
@@ -4671,6 +5031,7 @@ resource_schema "aws_mediatailor_channel" {
 resource_schema "aws_mediatailor_channel_policy" {
   cloudformation_type_name               = "AWS::MediaTailor::ChannelPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediatailor_function" {
@@ -4680,6 +5041,7 @@ resource_schema "aws_mediatailor_function" {
 resource_schema "aws_mediatailor_live_source" {
   cloudformation_type_name               = "AWS::MediaTailor::LiveSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediatailor_playback_configuration" {
@@ -4690,11 +5052,15 @@ resource_schema "aws_mediatailor_playback_configuration" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: ConfigurationAliases is of unsupported type: key-value map of undefined schema"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: ConfigurationAliases is of unsupported type: key-value map of undefined schema"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_mediatailor_prefetch_schedule" {
   cloudformation_type_name               = "AWS::MediaTailor::PrefetchSchedule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_mediatailor_source_location" {
@@ -4704,6 +5070,7 @@ resource_schema "aws_mediatailor_source_location" {
 resource_schema "aws_mediatailor_vod_source" {
   cloudformation_type_name               = "AWS::MediaTailor::VodSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_memorydb_acl" {
@@ -4813,16 +5180,19 @@ resource_schema "aws_networkmanager_core_network" {
 resource_schema "aws_networkmanager_core_network_prefix_list_association" {
   cloudformation_type_name               = "AWS::NetworkManager::CoreNetworkPrefixListAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_customer_gateway_association" {
   cloudformation_type_name               = "AWS::NetworkManager::CustomerGatewayAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_device" {
   cloudformation_type_name               = "AWS::NetworkManager::Device"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_direct_connect_gateway_attachment" {
@@ -4836,16 +5206,19 @@ resource_schema "aws_networkmanager_global_network" {
 resource_schema "aws_networkmanager_link" {
   cloudformation_type_name               = "AWS::NetworkManager::Link"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_link_association" {
   cloudformation_type_name               = "AWS::NetworkManager::LinkAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_site" {
   cloudformation_type_name               = "AWS::NetworkManager::Site"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_site_to_site_vpn_attachment" {
@@ -4859,6 +5232,7 @@ resource_schema "aws_networkmanager_transit_gateway_peering" {
 resource_schema "aws_networkmanager_transit_gateway_registration" {
   cloudformation_type_name               = "AWS::NetworkManager::TransitGatewayRegistration"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_transit_gateway_route_table_attachment" {
@@ -4877,6 +5251,8 @@ resource_schema "aws_nimblestudio_launch_profile" {
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
   # TypeNotFoundException during schema refresh
+  suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_nimblestudio_streaming_image" {
@@ -4887,6 +5263,8 @@ resource_schema "aws_nimblestudio_streaming_image" {
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
   # TypeNotFoundException during schema refresh
+  suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_nimblestudio_studio" {
@@ -4896,6 +5274,7 @@ resource_schema "aws_nimblestudio_studio" {
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
   # TypeNotFoundException during schema refresh
+  frozen_reason = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_nimblestudio_studio_component" {
@@ -4906,16 +5285,20 @@ resource_schema "aws_nimblestudio_studio_component" {
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json
   # TypeNotFoundException during schema refresh
+  suppression_reason_plural_data_source = "structural: no list handler with zero required arguments"
+  frozen_reason                         = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2320)"
 }
 
 resource_schema "aws_notifications_channel_association" {
   cloudformation_type_name               = "AWS::Notifications::ChannelAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_notifications_event_rule" {
   cloudformation_type_name               = "AWS::Notifications::EventRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_notifications_managed_notification_account_contact_association" {
@@ -4925,6 +5308,7 @@ resource_schema "aws_notifications_managed_notification_account_contact_associat
 resource_schema "aws_notifications_managed_notification_additional_channel_association" {
   cloudformation_type_name               = "AWS::Notifications::ManagedNotificationAdditionalChannelAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_notifications_notification_configuration" {
@@ -4938,6 +5322,7 @@ resource_schema "aws_notifications_notification_hub" {
 resource_schema "aws_notifications_organizational_unit_association" {
   cloudformation_type_name               = "AWS::Notifications::OrganizationalUnitAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_notificationscontacts_email_contact" {
@@ -4952,6 +5337,8 @@ resource_schema "aws_novaact_workflow_definition" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = false
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_odb_cloud_autonomous_vm_cluster" {
@@ -5007,6 +5394,9 @@ resource_schema "aws_observabilityadmin_telemetry_pipelines" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_observabilityadmin_telemetry_rule" {
@@ -5044,21 +5434,25 @@ resource_schema "aws_omics_variant_store" {
 resource_schema "aws_omics_workflow" {
   cloudformation_type_name = "AWS::Omics::Workflow"
   frozen_since             = "2025-05-15"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — Type overwrites type for Terraform attribute type (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2830)"
 }
 
 resource_schema "aws_omics_workflow_version" {
   cloudformation_type_name = "AWS::Omics::WorkflowVersion"
   frozen_since             = "2025-05-15"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — Type overwrites type for Terraform attribute type (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2831)"
 }
 
 resource_schema "aws_opensearch_data_source" {
   cloudformation_type_name               = "AWS::OpenSearch::DataSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opensearchserverless_access_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::AccessPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opensearchserverless_collection" {
@@ -5072,6 +5466,7 @@ resource_schema "aws_opensearchserverless_collection_group" {
 resource_schema "aws_opensearchserverless_collection_index" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::CollectionIndex"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opensearchserverless_index" {
@@ -5082,21 +5477,27 @@ resource_schema "aws_opensearchserverless_index" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
 }
 
 resource_schema "aws_opensearchserverless_lifecycle_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::LifecyclePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opensearchserverless_security_config" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::SecurityConfig"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opensearchserverless_security_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::SecurityPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opensearchserverless_vpc_endpoint" {
@@ -5110,11 +5511,13 @@ resource_schema "aws_opensearchservice_application" {
 resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name               = "AWS::OpenSearchService::Domain"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
   frozen_since             = "2025-06-19"
+  frozen_reason            = "manual: withdrawn from AWS — ProvisioningType became NON_PROVISIONABLE, later TypeNotFoundException; last schema retained to avoid a breaking removal, pending v2.0.0 (issues: https://github.com/hashicorp/terraform-provider-awscc/issues/2340, https://github.com/hashicorp/terraform-provider-awscc/issues/2829)"
 }
 
 resource_schema "aws_organizations_account" {
@@ -5128,11 +5531,13 @@ resource_schema "aws_organizations_organization" {
 resource_schema "aws_organizations_organizational_unit" {
   cloudformation_type_name               = "AWS::Organizations::OrganizationalUnit"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_organizations_policy" {
   cloudformation_type_name               = "AWS::Organizations::Policy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_organizations_resource_policy" {
@@ -5154,21 +5559,25 @@ resource_schema "aws_pcaconnectorad_directory_registration" {
 resource_schema "aws_pcaconnectorad_service_principal_name" {
   cloudformation_type_name               = "AWS::PCAConnectorAD::ServicePrincipalName"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_pcaconnectorad_template" {
   cloudformation_type_name               = "AWS::PCAConnectorAD::Template"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_pcaconnectorad_template_group_access_control_entry" {
   cloudformation_type_name               = "AWS::PCAConnectorAD::TemplateGroupAccessControlEntry"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_pcaconnectorscep_challenge" {
   cloudformation_type_name               = "AWS::PCAConnectorSCEP::Challenge"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_pcaconnectorscep_connector" {
@@ -5182,11 +5591,13 @@ resource_schema "aws_pcs_cluster" {
 resource_schema "aws_pcs_compute_node_group" {
   cloudformation_type_name               = "AWS::PCS::ComputeNodeGroup"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_pcs_queue" {
   cloudformation_type_name               = "AWS::PCS::Queue"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_panorama_application_instance" {
@@ -5200,6 +5611,7 @@ resource_schema "aws_panorama_package" {
 resource_schema "aws_panorama_package_version" {
   cloudformation_type_name               = "AWS::Panorama::PackageVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_paymentcryptography_alias" {
@@ -5270,36 +5682,45 @@ resource_schema "aws_qbusiness_data_accessor" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/2134
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_qbusiness_data_source" {
   cloudformation_type_name               = "AWS::QBusiness::DataSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_qbusiness_index" {
   cloudformation_type_name               = "AWS::QBusiness::Index"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_qbusiness_permission" {
   cloudformation_type_name               = "AWS::QBusiness::Permission"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_qbusiness_plugin" {
   cloudformation_type_name               = "AWS::QBusiness::Plugin"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_qbusiness_retriever" {
   cloudformation_type_name               = "AWS::QBusiness::Retriever"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_qbusiness_web_experience" {
   cloudformation_type_name               = "AWS::QBusiness::WebExperience"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_qldb_stream" {
@@ -5313,6 +5734,7 @@ resource_schema "aws_quicksight_action_connector" {
 resource_schema "aws_quicksight_agent" {
   cloudformation_type_name               = "AWS::QuickSight::Agent"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_quicksight_analysis" {
@@ -5323,6 +5745,7 @@ resource_schema "aws_quicksight_analysis" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  frozen_reason = "manual: internal compiler error: NewBulk too big. https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
 }
 
 resource_schema "aws_quicksight_approval_policy" {
@@ -5333,6 +5756,9 @@ resource_schema "aws_quicksight_approval_policy" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Actions is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Actions is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_quicksight_custom_permissions" {
@@ -5352,6 +5778,8 @@ resource_schema "aws_quicksight_dashboard" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  suppression_reason_plural_data_source = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  frozen_reason                         = "build_failed: schema frozen; newer bytes fail — internal compiler error: NewBulk too big (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1531)"
 }
 
 resource_schema "aws_quicksight_data_set" {
@@ -5362,6 +5790,7 @@ resource_schema "aws_quicksight_data_set" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  frozen_reason = "manual: internal compiler error: NewBulk too big. https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
 }
 
 resource_schema "aws_quicksight_data_source" {
@@ -5395,6 +5824,7 @@ resource_schema "aws_quicksight_refresh_schedule" {
 resource_schema "aws_quicksight_space" {
   cloudformation_type_name               = "AWS::QuickSight::Space"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_quicksight_template" {
@@ -5406,11 +5836,14 @@ resource_schema "aws_quicksight_template" {
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
   # Suppression Reason: internal compiler error: NewBulk too big.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
+  suppression_reason_plural_data_source = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  frozen_reason                         = "build_failed: schema frozen; newer bytes fail — internal compiler error: NewBulk too big (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/1531)"
 }
 
 resource_schema "aws_quicksight_theme" {
   cloudformation_type_name               = "AWS::QuickSight::Theme"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_quicksight_topic" {
@@ -5500,21 +5933,25 @@ resource_schema "aws_rds_option_group" {
 resource_schema "aws_rtbfabric_inbound_external_link" {
   cloudformation_type_name               = "AWS::RTBFabric::InboundExternalLink"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rtbfabric_link" {
   cloudformation_type_name               = "AWS::RTBFabric::Link"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rtbfabric_link_routing_rule" {
   cloudformation_type_name               = "AWS::RTBFabric::LinkRoutingRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rtbfabric_outbound_external_link" {
   cloudformation_type_name               = "AWS::RTBFabric::OutboundExternalLink"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rtbfabric_requester_gateway" {
@@ -5532,6 +5969,7 @@ resource_schema "aws_rum_app_monitor" {
 resource_schema "aws_rbin_rule" {
   cloudformation_type_name               = "AWS::Rbin::Rule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_redshift_cluster" {
@@ -5585,6 +6023,7 @@ resource_schema "aws_redshiftserverless_workgroup" {
 resource_schema "aws_refactorspaces_application" {
   cloudformation_type_name               = "AWS::RefactorSpaces::Application"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_refactorspaces_environment" {
@@ -5594,11 +6033,13 @@ resource_schema "aws_refactorspaces_environment" {
 resource_schema "aws_refactorspaces_route" {
   cloudformation_type_name               = "AWS::RefactorSpaces::Route"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_refactorspaces_service" {
   cloudformation_type_name               = "AWS::RefactorSpaces::Service"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rekognition_collection" {
@@ -5608,6 +6049,7 @@ resource_schema "aws_rekognition_collection" {
 resource_schema "aws_rekognition_dataset" {
   cloudformation_type_name               = "AWS::Rekognition::Dataset"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rekognition_project" {
@@ -5622,6 +6064,9 @@ resource_schema "aws_rekognition_stream_processor" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: PolygonRegionsOfInterest is of unsupported type: set of array"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: PolygonRegionsOfInterest is of unsupported type: set of array"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_resiliencehub_app" {
@@ -5643,6 +6088,7 @@ resource_schema "aws_resiliencehubv2_service" {
 resource_schema "aws_resiliencehubv2_service_function" {
   cloudformation_type_name               = "AWS::ResilienceHubV2::ServiceFunction"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_resiliencehubv2_system" {
@@ -5652,11 +6098,13 @@ resource_schema "aws_resiliencehubv2_system" {
 resource_schema "aws_resiliencehubv2_user_journey" {
   cloudformation_type_name               = "AWS::ResilienceHubV2::UserJourney"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_resourceexplorer2_default_view_association" {
   cloudformation_type_name               = "AWS::ResourceExplorer2::DefaultViewAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_resourceexplorer2_index" {
@@ -5690,6 +6138,7 @@ resource_schema "aws_robomaker_robot_application" {
 resource_schema "aws_robomaker_robot_application_version" {
   cloudformation_type_name               = "AWS::RoboMaker::RobotApplicationVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_robomaker_simulation_application" {
@@ -5699,6 +6148,7 @@ resource_schema "aws_robomaker_simulation_application" {
 resource_schema "aws_robomaker_simulation_application_version" {
   cloudformation_type_name               = "AWS::RoboMaker::SimulationApplicationVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_rolesanywhere_crl" {
@@ -5736,21 +6186,25 @@ resource_schema "aws_route53_key_signing_key" {
 resource_schema "aws_route53_record_set" {
   cloudformation_type_name               = "AWS::Route53::RecordSet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53globalresolver_access_source" {
   cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessSource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53globalresolver_access_token" {
   cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessToken"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53globalresolver_dns_view" {
   cloudformation_type_name               = "AWS::Route53GlobalResolver::DnsView"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53globalresolver_firewall_domain_list" {
@@ -5760,6 +6214,7 @@ resource_schema "aws_route53globalresolver_firewall_domain_list" {
 resource_schema "aws_route53globalresolver_firewall_rule" {
   cloudformation_type_name               = "AWS::Route53GlobalResolver::FirewallRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53globalresolver_global_resolver" {
@@ -5769,6 +6224,7 @@ resource_schema "aws_route53globalresolver_global_resolver" {
 resource_schema "aws_route53globalresolver_hosted_zone_association" {
   cloudformation_type_name               = "AWS::Route53GlobalResolver::HostedZoneAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53profiles_profile" {
@@ -5782,6 +6238,7 @@ resource_schema "aws_route53profiles_profile_association" {
 resource_schema "aws_route53profiles_profile_resource_association" {
   cloudformation_type_name               = "AWS::Route53Profiles::ProfileResourceAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53recoverycontrol_cluster" {
@@ -5795,11 +6252,13 @@ resource_schema "aws_route53recoverycontrol_control_panel" {
 resource_schema "aws_route53recoverycontrol_routing_control" {
   cloudformation_type_name               = "AWS::Route53RecoveryControl::RoutingControl"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53recoverycontrol_safety_rule" {
   cloudformation_type_name               = "AWS::Route53RecoveryControl::SafetyRule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_route53recoveryreadiness_cell" {
@@ -5881,6 +6340,7 @@ resource_schema "aws_s3_access_point" {
 resource_schema "aws_s3_bucket" {
   cloudformation_type_name = "AWS::S3::Bucket"
   frozen_since             = "2025-03-20"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — SseAlgorithm overwrites SSEAlgorithm for Terraform attribute sse_algorithm (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/2383)"
 }
 
 resource_schema "aws_s3_bucket_policy" {
@@ -5918,6 +6378,7 @@ resource_schema "aws_s3express_directory_bucket" {
 resource_schema "aws_s3files_access_point" {
   cloudformation_type_name               = "AWS::S3Files::AccessPoint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3files_file_system" {
@@ -5931,6 +6392,7 @@ resource_schema "aws_s3files_file_system_policy" {
 resource_schema "aws_s3files_mount_target" {
   cloudformation_type_name               = "AWS::S3Files::MountTarget"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3objectlambda_access_point" {
@@ -5940,6 +6402,7 @@ resource_schema "aws_s3objectlambda_access_point" {
 resource_schema "aws_s3objectlambda_access_point_policy" {
   cloudformation_type_name               = "AWS::S3ObjectLambda::AccessPointPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3outposts_access_point" {
@@ -5949,11 +6412,13 @@ resource_schema "aws_s3outposts_access_point" {
 resource_schema "aws_s3outposts_bucket" {
   cloudformation_type_name               = "AWS::S3Outposts::Bucket"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3outposts_bucket_policy" {
   cloudformation_type_name               = "AWS::S3Outposts::BucketPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3outposts_endpoint" {
@@ -5963,11 +6428,13 @@ resource_schema "aws_s3outposts_endpoint" {
 resource_schema "aws_s3tables_namespace" {
   cloudformation_type_name               = "AWS::S3Tables::Namespace"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3tables_table" {
   cloudformation_type_name               = "AWS::S3Tables::Table"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3tables_table_bucket" {
@@ -5981,11 +6448,13 @@ resource_schema "aws_s3tables_table_bucket_policy" {
 resource_schema "aws_s3tables_table_policy" {
   cloudformation_type_name               = "AWS::S3Tables::TablePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3vectors_index" {
   cloudformation_type_name               = "AWS::S3Vectors::Index"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_s3vectors_vector_bucket" {
@@ -5999,11 +6468,13 @@ resource_schema "aws_s3vectors_vector_bucket_policy" {
 resource_schema "aws_scn_dataset" {
   cloudformation_type_name               = "AWS::SCN::Dataset"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_scn_namespace" {
   cloudformation_type_name               = "AWS::SCN::Namespace"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sdb_domain" {
@@ -6017,6 +6488,7 @@ resource_schema "aws_ses_configuration_set" {
 resource_schema "aws_ses_configuration_set_event_destination" {
   cloudformation_type_name               = "AWS::SES::ConfigurationSetEventDestination"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ses_contact_list" {
@@ -6083,6 +6555,9 @@ resource_schema "aws_ses_receipt_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: IamRoleArn overwrites IAMRoleARN for Terraform attribute iam_role_arn"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: IamRoleArn overwrites IAMRoleARN for Terraform attribute iam_role_arn"
 }
 
 resource_schema "aws_ses_receipt_rule_set" {
@@ -6100,6 +6575,7 @@ resource_schema "aws_ses_tenant" {
 resource_schema "aws_ses_vdm_attributes" {
   cloudformation_type_name               = "AWS::SES::VdmAttributes"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_smsvoice_configuration_set" {
@@ -6145,6 +6621,7 @@ resource_schema "aws_sns_topic" {
 resource_schema "aws_sns_topic_inline_policy" {
   cloudformation_type_name               = "AWS::SNS::TopicInlinePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sqs_queue" {
@@ -6154,6 +6631,7 @@ resource_schema "aws_sqs_queue" {
 resource_schema "aws_sqs_queue_inline_policy" {
   cloudformation_type_name               = "AWS::SQS::QueueInlinePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ssm_association" {
@@ -6175,11 +6653,13 @@ resource_schema "aws_ssm_maintenance_window" {
 resource_schema "aws_ssm_maintenance_window_target" {
   cloudformation_type_name               = "AWS::SSM::MaintenanceWindowTarget"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ssm_maintenance_window_task" {
   cloudformation_type_name               = "AWS::SSM::MaintenanceWindowTask"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ssm_ops_item" {
@@ -6205,6 +6685,7 @@ resource_schema "aws_ssm_resource_policy" {
 resource_schema "aws_ssm_service_setting" {
   cloudformation_type_name               = "AWS::SSM::ServiceSetting"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_ssmcontacts_contact" {
@@ -6218,6 +6699,7 @@ resource_schema "aws_ssmcontacts_contact_channel" {
 resource_schema "aws_ssmcontacts_plan" {
   cloudformation_type_name               = "AWS::SSMContacts::Plan"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_ssmcontacts_rotation" {
@@ -6227,6 +6709,7 @@ resource_schema "aws_ssmcontacts_rotation" {
 resource_schema "aws_ssmguiconnect_preferences" {
   cloudformation_type_name               = "AWS::SSMGuiConnect::Preferences"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "build_failed: internal/aws/ssmguiconnect/preferences_singular_data_source_gen.go:23:6: preferencesDataSource redeclared in this block"
 }
 
 resource_schema "aws_ssmincidents_replication_set" {
@@ -6244,11 +6727,13 @@ resource_schema "aws_ssmquicksetup_configuration_manager" {
 resource_schema "aws_ssmquicksetup_lifecycle_automation" {
   cloudformation_type_name               = "AWS::SSMQuickSetup::LifecycleAutomation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_sso_application" {
   cloudformation_type_name               = "AWS::SSO::Application"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sso_application_assignment" {
@@ -6307,11 +6792,13 @@ resource_schema "aws_sagemaker_data_quality_job_definition" {
 resource_schema "aws_sagemaker_device" {
   cloudformation_type_name               = "AWS::SageMaker::Device"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sagemaker_device_fleet" {
   cloudformation_type_name               = "AWS::SageMaker::DeviceFleet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sagemaker_domain" {
@@ -6334,6 +6821,7 @@ resource_schema "aws_sagemaker_experiment_trial_component" {
   cloudformation_type_name = "AWS::SageMaker::ExperimentTrialComponent"
   frozen_since             = "2026-07-22"
   non_provisionable        = true
+  frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3271)"
 }
 
 resource_schema "aws_sagemaker_feature_group" {
@@ -6355,6 +6843,7 @@ resource_schema "aws_sagemaker_image" {
 resource_schema "aws_sagemaker_image_version" {
   cloudformation_type_name               = "AWS::SageMaker::ImageVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sagemaker_inference_component" {
@@ -6390,6 +6879,9 @@ resource_schema "aws_sagemaker_model_card" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
@@ -6483,11 +6975,13 @@ resource_schema "aws_securityagent_application" {
 resource_schema "aws_securityagent_artifact" {
   cloudformation_type_name               = "AWS::SecurityAgent::Artifact"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_securityagent_pentest" {
   cloudformation_type_name               = "AWS::SecurityAgent::Pentest"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_securityagent_security_requirement_pack" {
@@ -6511,6 +7005,9 @@ resource_schema "aws_securityhub_automation_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_securityhub_automation_rule_v2" {
@@ -6585,6 +7082,9 @@ resource_schema "aws_securitylake_subscriber" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Sources is of unsupported type: list of"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Sources is of unsupported type: list of"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_securitylake_subscriber_notification" {
@@ -6606,6 +7106,7 @@ resource_schema "aws_servicecatalog_cloudformation_product" {
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name               = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_launch_notification_constraint" {
@@ -6615,11 +7116,13 @@ resource_schema "aws_servicecatalog_launch_notification_constraint" {
 resource_schema "aws_servicecatalog_launch_role_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::LaunchRoleConstraint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_launch_template_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::LaunchTemplateConstraint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_portfolio" {
@@ -6629,21 +7132,25 @@ resource_schema "aws_servicecatalog_portfolio" {
 resource_schema "aws_servicecatalog_portfolio_principal_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioPrincipalAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_portfolio_product_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioProductAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_portfolio_share" {
   cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioShare"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_resource_update_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::ResourceUpdateConstraint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_service_action" {
@@ -6653,11 +7160,13 @@ resource_schema "aws_servicecatalog_service_action" {
 resource_schema "aws_servicecatalog_service_action_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::ServiceActionAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_stack_set_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::StackSetConstraint"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalog_tag_option" {
@@ -6667,6 +7176,7 @@ resource_schema "aws_servicecatalog_tag_option" {
 resource_schema "aws_servicecatalog_tag_option_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::TagOptionAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalogappregistry_application" {
@@ -6680,11 +7190,13 @@ resource_schema "aws_servicecatalogappregistry_attribute_group" {
 resource_schema "aws_servicecatalogappregistry_attribute_group_association" {
   cloudformation_type_name               = "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicecatalogappregistry_resource_association" {
   cloudformation_type_name               = "AWS::ServiceCatalogAppRegistry::ResourceAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_servicediscovery_http_namespace" {
@@ -6743,16 +7255,19 @@ resource_schema "aws_stepfunctions_state_machine" {
   # git checkout internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json
   # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1530
+  frozen_reason = "manual: DefinitionSubstitutions is of unsupported type: key-value map of . https://github.com/hashicorp/terraform-provider-awscc/issues/1530"
 }
 
 resource_schema "aws_stepfunctions_state_machine_alias" {
   cloudformation_type_name               = "AWS::StepFunctions::StateMachineAlias"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_stepfunctions_state_machine_version" {
   cloudformation_type_name               = "AWS::StepFunctions::StateMachineVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_storagegateway_tape_pool" {
@@ -6778,6 +7293,7 @@ resource_schema "aws_supportauthz_support_permit" {
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
   frozen_since             = "2025-10-16"
+  frozen_reason            = "manual: schema frozen; newer bytes fail generation — VPCConfig overwrites VpcConfig for Terraform attribute vpc_config (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3263)"
 }
 
 resource_schema "aws_synthetics_group" {
@@ -6819,6 +7335,7 @@ resource_schema "aws_transcribe_vocabulary_filter" {
 resource_schema "aws_transfer_agreement" {
   cloudformation_type_name               = "AWS::Transfer::Agreement"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_transfer_certificate" {
@@ -6832,6 +7349,7 @@ resource_schema "aws_transfer_connector" {
 resource_schema "aws_transfer_host_key" {
   cloudformation_type_name               = "AWS::Transfer::HostKey"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_transfer_profile" {
@@ -6851,6 +7369,9 @@ resource_schema "aws_transfer_user" {
   # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2095
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: emitting schema code: PosixProfile/SecondaryGids is of unsupported type for list item validation: number"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: PosixProfile/SecondaryGids is of unsupported type for list item validation: number"
 }
 
 resource_schema "aws_transfer_web_app" {
@@ -6868,16 +7389,19 @@ resource_schema "aws_translate_parallel_data" {
 resource_schema "aws_uxc_account_customization" {
   cloudformation_type_name               = "AWS::UXC::AccountCustomization"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_verifiedpermissions_identity_source" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::IdentitySource"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_verifiedpermissions_policy" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::Policy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_verifiedpermissions_policy_store" {
@@ -6891,6 +7415,7 @@ resource_schema "aws_verifiedpermissions_policy_store_alias" {
 resource_schema "aws_verifiedpermissions_policy_template" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::PolicyTemplate"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_voiceid_domain" {
@@ -6900,11 +7425,13 @@ resource_schema "aws_voiceid_domain" {
 resource_schema "aws_vpclattice_access_log_subscription" {
   cloudformation_type_name               = "AWS::VpcLattice::AccessLogSubscription"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_vpclattice_auth_policy" {
   cloudformation_type_name               = "AWS::VpcLattice::AuthPolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_vpclattice_domain_verification" {
@@ -6918,11 +7445,15 @@ resource_schema "aws_vpclattice_domain_verification" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: value overwrites Value for Terraform attribute value"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: value overwrites Value for Terraform attribute value"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_vpclattice_listener" {
   cloudformation_type_name               = "AWS::VpcLattice::Listener"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_vpclattice_resource_configuration" {
@@ -6936,11 +7467,13 @@ resource_schema "aws_vpclattice_resource_gateway" {
 resource_schema "aws_vpclattice_resource_policy" {
   cloudformation_type_name               = "AWS::VpcLattice::ResourcePolicy"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_vpclattice_rule" {
   cloudformation_type_name               = "AWS::VpcLattice::Rule"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_vpclattice_service" {
@@ -6969,11 +7502,14 @@ resource_schema "aws_vpclattice_target_group" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
+  suppression_reason_singular_data_source  = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_wafv2_ip_set" {
   cloudformation_type_name               = "AWS::WAFv2::IPSet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wafv2_logging_configuration" {
@@ -6983,6 +7519,7 @@ resource_schema "aws_wafv2_logging_configuration" {
 resource_schema "aws_wafv2_regex_pattern_set" {
   cloudformation_type_name               = "AWS::WAFv2::RegexPatternSet"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wafv2_rule_group" {
@@ -6993,6 +7530,9 @@ resource_schema "aws_wafv2_rule_group" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_wafv2_web_acl" {
@@ -7003,11 +7543,15 @@ resource_schema "aws_wafv2_web_acl" {
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "structural: no list handler with zero required arguments"
+  suppression_reason_resource              = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
+  suppression_reason_singular_data_source  = "generation_failed: runtime: goroutine stack exceeds 1000000000-byte limit"
 }
 
 resource_schema "aws_wafv2_web_acl_association" {
   cloudformation_type_name               = "AWS::WAFv2::WebACLAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wellarchitected_lens" {
@@ -7033,31 +7577,37 @@ resource_schema "aws_wickr_network" {
 resource_schema "aws_wisdom_ai_agent" {
   cloudformation_type_name               = "AWS::Wisdom::AIAgent"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_ai_agent_version" {
   cloudformation_type_name               = "AWS::Wisdom::AIAgentVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_ai_guardrail" {
   cloudformation_type_name               = "AWS::Wisdom::AIGuardrail"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_ai_guardrail_version" {
   cloudformation_type_name               = "AWS::Wisdom::AIGuardrailVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_ai_prompt" {
   cloudformation_type_name               = "AWS::Wisdom::AIPrompt"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_ai_prompt_version" {
   cloudformation_type_name               = "AWS::Wisdom::AIPromptVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_assistant" {
@@ -7067,6 +7617,7 @@ resource_schema "aws_wisdom_assistant" {
 resource_schema "aws_wisdom_assistant_association" {
   cloudformation_type_name               = "AWS::Wisdom::AssistantAssociation"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_knowledge_base" {
@@ -7076,16 +7627,19 @@ resource_schema "aws_wisdom_knowledge_base" {
 resource_schema "aws_wisdom_message_template" {
   cloudformation_type_name               = "AWS::Wisdom::MessageTemplate"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_message_template_version" {
   cloudformation_type_name               = "AWS::Wisdom::MessageTemplateVersion"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wisdom_quick_response" {
   cloudformation_type_name               = "AWS::Wisdom::QuickResponse"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_workspaces_connection_alias" {
@@ -7101,6 +7655,9 @@ resource_schema "aws_workspaces_workspace" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: WorkspaceId overwrites Id for Terraform attribute workspace_id"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: WorkspaceId overwrites Id for Terraform attribute workspace_id"
+  suppression_reason_plural_data_source    = "manual: lift candidate; generates and compiles cleanly as of 2026-09-09 (bigdiffer -heal); suppression retained pending a batched lift"
 }
 
 resource_schema "aws_workspaces_workspace_ip_group" {
@@ -7126,6 +7683,7 @@ resource_schema "aws_workspacesweb_data_protection_settings" {
 resource_schema "aws_workspacesweb_identity_provider" {
   cloudformation_type_name               = "AWS::WorkSpacesWeb::IdentityProvider"
   suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_workspacesweb_ip_access_settings" {

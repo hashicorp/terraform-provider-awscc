@@ -327,6 +327,13 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	if got := r.anomalyProblems(); len(got) != 2 {
 		t.Errorf("anomalyProblems() = %v, want 2 problems", got)
 	}
+
+	// A suppressed/frozen fact with no recorded reason is blocking: every
+	// suppression and freeze must carry its own reason.
+	r = Report{ReasonlessSuppressed: []reasonlessFact{{cfn: "AWS::Svc::Thing", field: attrFrozenReason}}}
+	if got := r.anomalyProblems(); len(got) != 1 {
+		t.Errorf("reason-less fact should block -check, got %v", got)
+	}
 }
 
 func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
@@ -434,7 +441,7 @@ func TestReasonlessSuppressionAnomaly(t *testing.T) {
 	if _, ok := byCFN["AWS::Svc::Reasoned"]; ok {
 		t.Errorf("AWS::Svc::Reasoned's only fact (its resource) has a real reason, should not be flagged, got %+v", byCFN)
 	}
-	if got := report.anomalyProblems(); len(got) != 0 {
-		t.Errorf("reason-less suppression must be advisory, not a -check failure, got %v", got)
+	if got := report.anomalyProblems(); len(got) != 1 {
+		t.Errorf("a reason-less suppression/freeze must fail -check, got %v", got)
 	}
 }
