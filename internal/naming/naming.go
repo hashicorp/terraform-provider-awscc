@@ -91,8 +91,10 @@ func SnakeCase(s string) string {
 // Pluralize converts a name to its plural form.
 // The inflection package is used as a first attempt to pluralize names,
 // but exceptions to the rule are handled as follows:
-//   - '_plural' is appended to a name ending in 's' e.g. 'windows'
-//   - 's' is appended to a name ending in a number
+//   - 's' is appended to a name ending in a number, e.g. 's3' => 's3s'
+//   - '_plural' is appended to any name the inflection package leaves unchanged
+//     (i.e. already plural, e.g. 'windows', 'settings', 'preferences') so the
+//     plural name never collides with the singular
 func Pluralize(name string) string {
 	if name == "" {
 		return name
@@ -111,14 +113,15 @@ func Pluralize(name string) string {
 		return pluralName + "_plural"
 	}
 
-	arr := []byte(pluralName)
-	lastChar := arr[len(arr)-1]
-
-	if isNumeric(lastChar) {
-		pluralName += "s" // "s3" => "s3s"
+	if arr := []byte(pluralName); isNumeric(arr[len(arr)-1]) {
+		return pluralName + "s" // "s3" => "s3s"
 	}
 
-	return pluralName
+	// inflection left the name unchanged and no digit rule applied: the name is
+	// already plural (e.g. "preferences"), so returning it unchanged would make
+	// the plural data source name identical to the singular and collide. Append
+	// the plural suffix to keep the two names distinct.
+	return pluralName + "_plural"
 }
 
 // PluralizeWithCustomNameSuffix converts a name to its plural form similar to Pluralize,
@@ -142,14 +145,15 @@ func PluralizeWithCustomNameSuffix(name, suffix string) string {
 		return pluralName + suffix
 	}
 
-	arr := []byte(pluralName)
-	lastChar := arr[len(arr)-1]
-
-	if isNumeric(lastChar) {
-		pluralName += "s" // "s3" => "s3s"
+	if arr := []byte(pluralName); isNumeric(arr[len(arr)-1]) {
+		return pluralName + "s" // "s3" => "s3s"
 	}
 
-	return pluralName
+	// inflection left the name unchanged and no digit rule applied: the name is
+	// already plural (e.g. "preferences"), so returning it unchanged would make
+	// the plural data source name identical to the singular and collide. Append
+	// the caller's suffix to keep the two names distinct.
+	return pluralName + suffix
 }
 
 func isCapitalLetter(ch byte) bool {
