@@ -24,6 +24,7 @@ Status shorthand: **prereq** (unblocks other items) · **core** · **backlog**
 | `bigdiffer-design.md` | The durable design reference (model, change classes, the two gates, policy, the generator surface, deferred work). | **Long-term.** The maintenance/review reference. |
 | `generating-the-provider-with-bigdiffer.md` | The current weekly release process (operational how-to). | **Long-term.** The canonical runbook. |
 | `generating-the-provider.md` | The legacy manual `make`-target process. | **Long-term while the fallback exists;** delete with the legacy generators (item D). |
+| `removing-the-legacy-generation-process.md` | Step-by-step checklist for item D — when and how to delete the legacy fallback. | **Transient.** Delete once item D is done. |
 | `suppressed-and-frozen.md` | Both a spec *and* the source of truth for suppression/frozen nuances. | **Long-term.** The taxonomy, the `frozen`-means-schema-pin clarification, and the issue guidance stay permanently. |
 | `generation-punchlist.md` (this) | Big-picture gap tracker. | **Transient.** Delete when the list is empty (item I). |
 
@@ -60,10 +61,23 @@ C. **Adopt — phase 1: switch to bigdiffer's generated init approach, keep the
    revert to the legacy process if bigdiffer output regresses. No legacy code is
    deleted in this phase. Pairs with item E (release docs). Branch:
    `b-bigdiffer-adopt`. Depends on A. *(core)*
+   — The safety hatch is documented: `generating-the-provider-with-bigdiffer.md`
+   "Fallback: the legacy process" covers reverting (both processes read/write the
+   identical `all_schemas.hcl`/schema-cache format; `rm -f
+   internal/provider/registrations_gen.go` then re-run the legacy `make`
+   targets). `bigdiffer -check` (CI-enforced) fails if `registrations_gen.go`
+   drifts from the overlay — but, deliberately, *not* if it is absent, so the
+   revert path above still passes `-check` during the transition
+   (`checkRegistrationUpToDate`'s doc comment in `main.go` spells this out).
 D. **Adopt — phase 2: delete the redundant legacy machinery.** After phase 1 has
    held for several real cycles, remove the legacy generators, directive files,
    and `make` targets now redundant with bigdiffer, and land the deferred design
-   items that only make sense once the legacy path is gone:
+   items that only make sense once the legacy path is gone. Follow
+   `removing-the-legacy-generation-process.md` step by step — it includes the one
+   behavior change that's easy to forget (tightening
+   `checkRegistrationUpToDate` to require `registrations_gen.go`'s presence once
+   the legacy fallback it was tolerating is gone) alongside the deferred design
+   items:
 
 - **13 Checkout-file retirement** — fold `suppressions_checkout.txt` into
   `frozen_since` (`bigdiffer-design.md` §5).

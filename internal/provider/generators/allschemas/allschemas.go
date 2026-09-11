@@ -3,6 +3,13 @@ package allschemas
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
+// Legacy code: part of the legacy schema-tracking path, used only by the
+// legacy internal/update automation and the `make biglister` target. Not
+// superseded by a single bigdiffer file — bigdiffer's discovery +
+// `all_schemas.hcl` overlay model replaces the dated-snapshot approach this
+// package implements. Slated for deletion alongside internal/update; see
+// contributing/docs/removing-the-legacy-generation-process.md.
+
 import (
 	"context"
 	"sort"
