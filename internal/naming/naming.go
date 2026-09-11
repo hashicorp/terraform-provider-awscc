@@ -91,8 +91,10 @@ func SnakeCase(s string) string {
 // Pluralize converts a name to its plural form.
 // The inflection package is used as a first attempt to pluralize names,
 // but exceptions to the rule are handled as follows:
-//   - '_plural' is appended to a name ending in 's' e.g. 'windows'
-//   - 's' is appended to a name ending in a number
+//   - 's' is appended to a name ending in a number, e.g. 's3' => 's3s'
+//   - '_plural' is appended to any name the inflection package leaves unchanged
+//     (i.e. already plural, e.g. 'windows', 'settings', 'preferences') so the
+//     plural name never collides with the singular
 func Pluralize(name string) string {
 	if name == "" {
 		return name
@@ -107,23 +109,20 @@ func Pluralize(name string) string {
 		return pluralName
 	}
 
-	if isCustomName(pluralName) {
-		return pluralName + "_plural"
+	if arr := []byte(pluralName); isNumeric(arr[len(arr)-1]) {
+		return pluralName + "s" // "s3" => "s3s"
 	}
 
-	arr := []byte(pluralName)
-	lastChar := arr[len(arr)-1]
-
-	if isNumeric(lastChar) {
-		pluralName += "s" // "s3" => "s3s"
-	}
-
-	return pluralName
+	// inflection left the name unchanged and no digit rule applied: the name is
+	// already plural (e.g. "preferences"), so returning it unchanged would make
+	// the plural data source name identical to the singular and collide. Append
+	// the plural suffix to keep the two names distinct.
+	return pluralName + "_plural"
 }
 
 // PluralizeWithCustomNameSuffix converts a name to its plural form similar to Pluralize,
-// with the exception that a suffix can be passed in as an argument to be used
-// only for names that are considered "custom" i.e. return true for isCustomName.
+// with the exception that a caller-chosen suffix is appended (instead of
+// '_plural') when inflection leaves the name unchanged.
 func PluralizeWithCustomNameSuffix(name, suffix string) string {
 	if name == "" {
 		return name
@@ -138,33 +137,19 @@ func PluralizeWithCustomNameSuffix(name, suffix string) string {
 		return pluralName
 	}
 
-	if isCustomName(pluralName) {
-		return pluralName + suffix
+	if arr := []byte(pluralName); isNumeric(arr[len(arr)-1]) {
+		return pluralName + "s" // "s3" => "s3s"
 	}
 
-	arr := []byte(pluralName)
-	lastChar := arr[len(arr)-1]
-
-	if isNumeric(lastChar) {
-		pluralName += "s" // "s3" => "s3s"
-	}
-
-	return pluralName
+	// inflection left the name unchanged and no digit rule applied: the name is
+	// already plural (e.g. "preferences"), so returning it unchanged would make
+	// the plural data source name identical to the singular and collide. Append
+	// the caller's suffix to keep the two names distinct.
+	return pluralName + suffix
 }
 
 func isCapitalLetter(ch byte) bool {
 	return ch >= 'A' && ch <= 'Z'
-}
-
-func isCustomName(name string) bool {
-	re1 := regexp.MustCompile(`((e|hd|n|z)fs|(E|HD|N|Z)FS)$`)
-	re2 := regexp.MustCompile(`tions$`)
-	re3 := regexp.MustCompile(`issions$`)
-	re4 := regexp.MustCompile(`(W|w)indows$`)
-	re5 := regexp.MustCompile(`(S|s)ettings$`)
-	re6 := regexp.MustCompile(`(D|d)ata$`)
-
-	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name) || re4.MatchString(name) || re5.MatchString(name) || re6.MatchString(name)
 }
 
 func isLowercaseLetter(ch byte) bool {

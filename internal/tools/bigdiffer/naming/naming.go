@@ -143,13 +143,15 @@ func inflectPlural(name string) string {
 }
 
 // Pluralize converts a Terraform type name to its plural form, matching the
-// legacy behavior: '_plural' for custom names, trailing 's' after a digit.
+// legacy behavior: trailing 's' after a digit, and '_plural' for any name the
+// inflection package leaves unchanged (already plural, e.g. "preferences") so
+// the plural name never collides with the singular.
 func Pluralize(name string) string {
 	return pluralizeWithSuffix(name, "_plural")
 }
 
-// PluralizeWithCustomNameSuffix is Pluralize with a caller-chosen suffix for
-// names that are "custom" (isCustomName), used by the plural-data-source path.
+// PluralizeWithCustomNameSuffix is Pluralize with a caller-chosen suffix,
+// used by the plural-data-source path.
 func PluralizeWithCustomNameSuffix(name, suffix string) string {
 	return pluralizeWithSuffix(name, suffix)
 }
@@ -163,31 +165,14 @@ func pluralizeWithSuffix(name, suffix string) string {
 	if plural != name {
 		return plural
 	}
-	if isCustomName(plural) {
-		return plural + suffix
-	}
 	if b := []byte(plural); isNumeric(b[len(b)-1]) {
 		return plural + "s"
 	}
-	return plural
-}
-
-var (
-	customNameRE1 = regexp.MustCompile(`((e|hd|n|z)fs|(E|HD|N|Z)FS)$`)
-	customNameRE2 = regexp.MustCompile(`tions$`)
-	customNameRE3 = regexp.MustCompile(`issions$`)
-	customNameRE4 = regexp.MustCompile(`(W|w)indows$`)
-	customNameRE5 = regexp.MustCompile(`(S|s)ettings$`)
-	customNameRE6 = regexp.MustCompile(`(D|d)ata$`)
-)
-
-func isCustomName(name string) bool {
-	return customNameRE1.MatchString(name) ||
-		customNameRE2.MatchString(name) ||
-		customNameRE3.MatchString(name) ||
-		customNameRE4.MatchString(name) ||
-		customNameRE5.MatchString(name) ||
-		customNameRE6.MatchString(name)
+	// inflection left the name unchanged and no digit rule applied: the name is
+	// already plural (e.g. "preferences"), so returning it unchanged would make
+	// the plural data source name identical to the singular and collide. Append
+	// the suffix to keep the two names distinct.
+	return plural + suffix
 }
 
 func isCapitalLetter(ch byte) bool   { return ch >= 'A' && ch <= 'Z' }

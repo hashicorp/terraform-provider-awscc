@@ -6707,9 +6707,7 @@ resource_schema "aws_ssmcontacts_rotation" {
 }
 
 resource_schema "aws_ssmguiconnect_preferences" {
-  cloudformation_type_name               = "AWS::SSMGuiConnect::Preferences"
-  suppress_plural_data_source_generation = true
-  suppression_reason_plural_data_source  = "build_failed: internal/aws/ssmguiconnect/preferences_singular_data_source_gen.go:23:6: preferencesDataSource redeclared in this block"
+  cloudformation_type_name = "AWS::SSMGuiConnect::Preferences"
 }
 
 resource_schema "aws_ssmincidents_replication_set" {

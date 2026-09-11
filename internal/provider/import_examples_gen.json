@@ -6375,6 +6375,7 @@
     },
     {
         "resource": "awscc_ssmguiconnect_preferences",
+        "generateListResource": true,
         "identifier": ["AccountId"]
     },
     {

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssmguiconnect_preferences", preferencesResource)
+	registry.AddListResourceFactory("awscc_ssmguiconnect_preferences", generic.NewListResource(preferencesResource))
 }
 
 // preferencesResource returns the Terraform awscc_ssmguiconnect_preferences resource.

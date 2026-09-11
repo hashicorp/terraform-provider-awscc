@@ -61,6 +61,15 @@ type ResourceSchema struct {
 	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
 	FrozenSince                          string `hcl:"frozen_since,optional"`
 	NonProvisionable                     bool   `hcl:"non_provisionable,optional"`
+
+	// Per-artifact suppression/freeze reason annotations are consumed by
+	// bigdiffer's overlay model and its -check reason enforcement. The legacy
+	// generator accepts them so it can still parse the overlay, but does not act
+	// on them.
+	FrozenReason                        string `hcl:"frozen_reason,optional"`
+	SuppressionReasonResource           string `hcl:"suppression_reason_resource,optional"`
+	SuppressionReasonSingularDataSource string `hcl:"suppression_reason_singular_data_source,optional"`
+	SuppressionReasonPluralDataSource   string `hcl:"suppression_reason_plural_data_source,optional"`
 }
 
 var (

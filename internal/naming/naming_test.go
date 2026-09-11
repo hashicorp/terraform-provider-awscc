@@ -113,7 +113,7 @@ func TestPluralize(t *testing.T) {
 		{
 			TestName:      "name ending in 'xfs'",
 			Value:         "aws_example_xfs",
-			ExpectedValue: "aws_example_xfs",
+			ExpectedValue: "aws_example_xfs_plural",
 		},
 		{
 			TestName:      "name ending in 'tion'",
@@ -149,6 +149,16 @@ func TestPluralize(t *testing.T) {
 			TestName:      "name ending in 'hdfs'",
 			Value:         "awscc_datasync_location_hdfs",
 			ExpectedValue: "awscc_datasync_location_hdfs_plural",
+		},
+		{
+			TestName:      "already-plural type name",
+			Value:         "awscc_ssmguiconnect_preferences",
+			ExpectedValue: "awscc_ssmguiconnect_preferences_plural",
+		},
+		{
+			TestName:      "already-plural bare word not in the custom list",
+			Value:         "aws_example_series",
+			ExpectedValue: "aws_example_series_plural",
 		},
 	}
 
