@@ -9,6 +9,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
@@ -74,13 +75,42 @@ func TestUnknowns(t *testing.T) {
 
 func TestUnknownsSetValue(t *testing.T) {
 	testCases := []struct {
-		TestName      string
-		State         tfsdk.State
-		ResourceModel string
-		CfToTfNameMap map[string]string
-		ExpectedError bool
-		ExpectedState tfsdk.State
+		TestName          string
+		State             tfsdk.State
+		ResourceModel     string
+		CfToTfNameMap     map[string]string
+		PathCfToTfNameMap map[string]string
+		ExpectedError     bool
+		ExpectedState     tfsdk.State
 	}{
+		{
+			// A computed top-level "Id" (renamed to thing_id) colliding with a nested "Id":
+			// only the path-aware map can fill the top-level unknown correctly.
+			TestName: "path-aware State with colliding computed Id",
+			State: tfsdk.State{
+				Raw:    makePathAwareValueWithUnknowns(),
+				Schema: testPathAwareSchema,
+			},
+			ResourceModel: `{"Id": "E123", "Origins": [{"Id": "origin-a"}]}`,
+			CfToTfNameMap: map[string]string{"Id": "id", "Origins": "origins"},
+			PathCfToTfNameMap: map[string]string{
+				"Id":         "thing_id",
+				"Origins":    "origins",
+				"Origins/Id": "id",
+			},
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(pathAwareObjectType, map[string]tftypes.Value{
+					"id":       tftypes.NewValue(tftypes.String, "E123"),
+					"thing_id": tftypes.NewValue(tftypes.String, "E123"),
+					"origins": tftypes.NewValue(tftypes.List{ElementType: originElementType}, []tftypes.Value{
+						tftypes.NewValue(originElementType, map[string]tftypes.Value{
+							"id": tftypes.NewValue(tftypes.String, "origin-a"),
+						}),
+					}),
+				}),
+				Schema: testPathAwareSchema,
+			},
+		},
 		{
 			TestName: "simple State",
 			State: tfsdk.State{
@@ -232,7 +262,12 @@ func TestUnknownsSetValue(t *testing.T) {
 				t.Fatalf("unexpected error: %s", err)
 			}
 
-			err = SetUnknownValuesFromResourceModel(context.TODO(), &testCase.State, unknowns, testCase.ResourceModel, testCase.CfToTfNameMap)
+			translator := toTerraform{cfToTfNameMap: testCase.CfToTfNameMap}
+			if testCase.PathCfToTfNameMap != nil {
+				translator.pathAwareNames = true
+				translator.pathCfToTfNameMap = testCase.PathCfToTfNameMap
+			}
+			err = SetUnknownValuesFromResourceModel(context.TODO(), &testCase.State, unknowns, testCase.ResourceModel, translator)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
@@ -249,4 +284,53 @@ func TestUnknownsSetValue(t *testing.T) {
 			}
 		})
 	}
+}
+
+var originElementType = tftypes.Object{
+	AttributeTypes: map[string]tftypes.Type{
+		"id": tftypes.String,
+	},
+}
+
+var pathAwareObjectType = tftypes.Object{
+	AttributeTypes: map[string]tftypes.Type{
+		"id":       tftypes.String,
+		"thing_id": tftypes.String,
+		"origins":  tftypes.List{ElementType: originElementType},
+	},
+}
+
+// testPathAwareSchema models a resource whose top-level CloudFormation "Id" property is
+// computed (renamed to thing_id) and whose nested Origins items also carry an "Id".
+var testPathAwareSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"id": schema.StringAttribute{
+			Computed: true,
+		},
+		"thing_id": schema.StringAttribute{
+			Computed: true,
+		},
+		"origins": schema.ListNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.StringAttribute{
+						Required: true,
+					},
+				},
+			},
+			Required: true,
+		},
+	},
+}
+
+func makePathAwareValueWithUnknowns() tftypes.Value {
+	return tftypes.NewValue(pathAwareObjectType, map[string]tftypes.Value{
+		"id":       tftypes.NewValue(tftypes.String, "E123"),
+		"thing_id": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"origins": tftypes.NewValue(tftypes.List{ElementType: originElementType}, []tftypes.Value{
+			tftypes.NewValue(originElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.String, "origin-a"),
+			}),
+		}),
+	})
 }
