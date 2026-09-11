@@ -122,7 +122,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 	{{- end }}
 	})
 {{- end }}
-{{ if .UnrepresentableProperties }}
+{{- if .UnrepresentableProperties }}
 	opts = opts.WithUnrepresentableProperties([]string{
 	{{- range .UnrepresentableProperties }}
 		"{{ . }}",
