@@ -130,6 +130,8 @@ Files `-update` changes (the same set the legacy process produces, plus
 > may be present: duplicate blank imports are legal Go and each package's `init()`
 > runs once, so registration is correct. Commit `registrations_gen.go`; the legacy
 > three files are now redundant and will be removed after a few clean cycles.
+> `bigdiffer -check` (run in CI) re-emits this file and fails if the committed
+> copy is stale, so an overlay change that was not regenerated cannot merge.
 
 ### 3. Build and smoke test
 
