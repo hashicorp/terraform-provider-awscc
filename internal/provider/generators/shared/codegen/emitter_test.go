@@ -1,6 +1,11 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
+// Legacy code: tests the copy in internal/provider/generators/shared/codegen,
+// superseded by internal/tools/bigdiffer/codegen/emitter.go. Kept as the
+// deprecated make/go:generate fallback; see
+// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+
 package codegen
 
 import (

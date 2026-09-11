@@ -1,6 +1,11 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
+// Legacy code: tests the legacy naming package, superseded by
+// internal/tools/bigdiffer/naming. Kept as the deprecated fallback; see
+// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process
+// and contributing/docs/removing-the-legacy-generation-process.md.
+
 package naming_test
 
 import (
