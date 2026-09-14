@@ -46,6 +46,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"flag"
@@ -152,7 +153,7 @@ func run(allSchemasPath, checkoutPath string, check, generate, update, docs, hea
 // correct count header) and anomaly-free, using the overlay as its own base so no
 // AWS query or snapshot file is needed. It writes nothing and is suitable for CI.
 func runCheck(allSchemasPath, checkoutPath string) error {
-	_, rows, err := loadOverlay(allSchemasPath)
+	cfg, rows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
 	}
@@ -180,6 +181,9 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 	if countLineRE.ReplaceAllString(out, "#") != countLineRE.ReplaceAllString(string(overlayContent), "#") {
 		problems = append([]string{"not normalized (sorting/formatting; re-run `-update`, or fix by hand)"}, problems...)
 	}
+	if regProblem := checkRegistrationUpToDate(cfg, rows); regProblem != "" {
+		problems = append(problems, regProblem)
+	}
 	if len(problems) > 0 {
 		return fmt.Errorf("all_schemas.hcl check failed: %s", strings.Join(problems, "; "))
 	}
@@ -189,6 +193,34 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 	}
 	fmt.Fprintln(os.Stderr, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
 	return nil
+}
+
+// checkRegistrationUpToDate guards the committed registrations_gen.go against
+// drift: it re-emits the registration file from the overlay and compares. A
+// stale file (a resource added or removed without regenerating) would silently
+// change the set of registered resources and data sources, so it must fail
+// -check. It returns a problem description, or "" when the file is up to date.
+//
+// Absence is not a failure: while the legacy directive files
+// (resources.go/singular_data_sources.go/plural_data_sources.go) still register
+// every type, this file is additive, and the documented legacy fallback deletes
+// it. Once the legacy files are removed, presence should be required here.
+func checkRegistrationUpToDate(cfg config, rows []resourceRow) string {
+	committed, err := os.ReadFile(cfg.registrationPath)
+	if errors.Is(err, os.ErrNotExist) {
+		return ""
+	}
+	if err != nil {
+		return fmt.Sprintf("reading %s: %v", filepath.Base(cfg.registrationPath), err)
+	}
+	want, err := emitRegistration(cfg, rows)
+	if err != nil {
+		return fmt.Sprintf("re-emitting registrations: %v", err)
+	}
+	if !bytes.Equal(committed, want) {
+		return fmt.Sprintf("%s is stale (re-run `bigdiffer -generate` or `-update`)", filepath.Base(cfg.registrationPath))
+	}
+	return ""
 }
 
 // item is a blank-line-delimited chunk of the resource region, retained as

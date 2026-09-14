@@ -15,6 +15,7 @@ on:
       - GNUmakefile
       - internal/tools/bigdiffer/**
       - internal/provider/all_schemas.hcl
+      - internal/provider/registrations_gen.go
       - internal/provider/import_examples_gen.json
       - internal/service/cloudformation/schemas/**
 
