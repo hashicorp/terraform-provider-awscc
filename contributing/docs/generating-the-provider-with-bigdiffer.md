@@ -3,22 +3,12 @@
 
 # Generating the Provider with bigdiffer
 
-This is the **current** weekly process for generating the Terraform AWS Cloud
-Control Provider from [CloudFormation resource type schemas](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html).
-
-It replaces the long, manual, multi-`make`-target process in
-[generating-the-provider.md](generating-the-provider.md), which is retained as a
-[fallback](#fallback-the-legacy-process) should it ever be needed.
-
-`bigdiffer` (`internal/tools/bigdiffer`) reconciles the live CloudFormation
-registry directly against `internal/provider/all_schemas.hcl`, regenerates only
-the resources whose schema changed, and applies one declarative policy so a
-broken schema never blocks a release. The end result — the set of files changed —
-is the same as the legacy process; you just reach it with two commands instead of
-~15 `make` targets and manual editing.
+This is the weekly runbook for generating the Terraform AWS Cloud Control
+Provider from the live CloudFormation registry using `bigdiffer`
+(`internal/tools/bigdiffer`). For why it's built this way, see
+[bigdiffer-design.md](bigdiffer-design.md).
 
 <!--mdtoc: begin-->
-* [What bigdiffer replaces](#what-bigdiffer-replaces)
 * [The weekly release](#the-weekly-release)
     * [1. Setup](#1-setup)
     * [2. Update](#2-update)
@@ -29,26 +19,8 @@ is the same as the legacy process; you just reach it with two commands instead o
 * [Reading the report](#reading-the-report)
 * [Full regeneration (offline)](#full-regeneration-offline)
 * [Fallback: the legacy process](#fallback-the-legacy-process)
+* [How it works](#how-it-works)
 <!--mdtoc: end-->
-
-## What bigdiffer replaces
-
-| Legacy step (generating-the-provider.md) | Legacy commands | bigdiffer |
-| --- | --- | --- |
-| 2. Schema Refresh | `make cleanschemas suppressions schemas` (repeat), `make commitrefresh` | `-update` |
-| 3. Track New Schemas | `make biglister bigdiffer`, hand-edit `all_schemas.hcl`, `make schemas commitschemas` | `-update` |
-| 4. Generate Resources | `make resources commitresources` | `-update` |
-| 5. Generate Data Sources | `make singular-data-sources plural-data-sources commitdatas` | `-update` |
-| 8. Documentation | `make docs-all` | `-docs` |
-
-Steps 1 (Setup), 6 (Build), 7 (Smoke), 9 (CHANGELOG), and 10 (Pull Request) are
-unchanged.
-
-The manual "run, hit an error, hand-add a suppression, re-run" loops are gone:
-when a type fails to generate, bigdiffer's policy freezes it (if it already
-existed, keeping the last-good output) or adds it suppressed (if it is new), with
-a `suppression_reason`, so the run always completes. You review what was
-frozen/suppressed afterward and open issues as before.
 
 ## The weekly release
 
@@ -57,8 +29,6 @@ frozen/suppressed afterward and open issues as before.
 > shortcuts for the `go run ./internal/tools/bigdiffer …` commands used below.
 
 ### 1. Setup
-
-Unchanged from the legacy process:
 
 ```sh
 git switch main
@@ -72,129 +42,84 @@ Ensure valid AWS credentials are set in the environment.
 
 ### 2. Update
 
-One command does the schema refresh, new-schema tracking, resource generation, and
-data-source generation:
-
 ```sh
 go run ./internal/tools/bigdiffer -update
 ```
 
-What it does, in one discovery crawl:
+This refreshes the schema cache, tracks new CloudFormation types, regenerates
+every changed resource and data source, and rewrites `all_schemas.hcl` — all in
+one pass, taking roughly 13 minutes (dominated by the AWS discovery crawl; a
+progress bar shows it). It prints a [report](#reading-the-report) of what
+changed and what, if anything, was frozen or suppressed.
 
-1. **Discovers** every provisionable public CloudFormation type in `us-east-1`
-   (`ListTypes` + `DescribeType`). This is rate-limited and takes roughly 13
-   minutes; a progress bar shows describe progress. There is no need to repeat it
-   until clean — per-type failures are handled in-band.
-2. **Detects changes** by comparing each type's freshly sanitized schema bytes
-   against the committed cache, so only genuinely New or Changed types are touched.
-3. **Regenerates** only those types (resource + data sources) from the fresh
-   bytes, in parallel. Generation *is* the first gate: a type that still generates
-   is refreshed; one that breaks is frozen or suppressed by policy.
-4. **Compile-gates** the staged code before writing anything real: it builds the
-   exact set it is about to promote — every staged artifact plus the regenerated
-   `registrations_gen.go` — with `go build ./...`, and only promotes once that is
-   green. A type whose code generates but fails to type-check is suppressed
-   (`build_failed`) the same way a generation failure is, so a broken build can
-   no longer reach a commit.
-5. **Never regresses**: generated files and the schema cache are promoted only on
-   clean generation *and* a green build. A broken type keeps its last-good
-   committed output and cache.
-6. **Reconciles `all_schemas.hcl`**: new resource blocks are added, blocks are
-   re-sorted by CloudFormation type name, and existing hand-annotations
-   (`# Suppression Reason` comments, suppress flags) are preserved byte-for-byte.
-   The policy edits (freeze/suppress + `suppression_reason`) are applied in the
-   same pass.
-7. **Emits the aggregates**: `internal/provider/registrations_gen.go` and
-   `internal/provider/import_examples_gen.json`.
-
-It prints a [report](#reading-the-report) of what changed and what (if anything)
-was frozen or suppressed. Review it together with `git diff`. For each
-frozen/suppressed type, open a GitHub issue with the reason (see
+Review the report together with `git diff`. For each frozen/suppressed type,
+open a GitHub issue with the reason (see
 [example issue #2070](https://github.com/hashicorp/terraform-provider-awscc/issues/2070));
-the `internal/update/suppressions_checkout.txt` pins are still honored.
+`internal/update/suppressions_checkout.txt` pins are still honored.
 
-Files `-update` changes (the same set the legacy process produces, plus
-`registrations_gen.go`):
+Files this changes:
 
 * `internal/service/cloudformation/schemas/*.json` — refreshed schema cache
 * `internal/provider/all_schemas.hcl` — new blocks + policy annotations
 * `internal/aws/**/*_gen.go` — regenerated code for changed types only
 * `internal/provider/import_examples_gen.json` — import-examples aggregate
-* `internal/provider/registrations_gen.go` — see the note below
+* `internal/provider/registrations_gen.go` — the blank-import registration file
 
 > [!NOTE]
-> **`registrations_gen.go`** is bigdiffer's single blank-import file that
-> registers every generated resource and data source. It supersedes the legacy
+> `registrations_gen.go` supersedes the legacy
 > `internal/provider/{resources,singular_data_sources,plural_data_sources}.go`
-> directive files, which bigdiffer does **not** touch. During the transition both
-> may be present: duplicate blank imports are legal Go and each package's `init()`
-> runs once, so registration is correct. Commit `registrations_gen.go`; the legacy
-> three files are now redundant and will be removed after a few clean cycles.
-> `bigdiffer -check` (run in CI) re-emits this file and fails if the committed
-> copy is stale, so an overlay change that was not regenerated cannot merge.
+> directive files, which bigdiffer does **not** touch. Both may be present
+> during the transition — duplicate blank imports are legal Go. Commit
+> `registrations_gen.go`. `bigdiffer -check` (run in CI) re-emits this file and
+> fails if the committed copy is stale.
 
 ### 3. Build and smoke test
-
-`-update` already compile-gated the generated code internally (step 4 above), so
-`make build` here is a belt-and-suspenders confirmation rather than the primary
-catch it was under the legacy process, and `make smoke` adds the test compilation
-and acceptance smoke tests the compile gate deliberately does not cover:
 
 ```sh
 make build
 make smoke
 ```
 
-If `make build` somehow still fails, that points at something the internal gate
-does not cover (e.g. a hand-edit after `-update`, or a bug in the gate itself) —
-investigate rather than routinely hand-suppressing, since `-update` would have
-already suppressed a genuinely non-compiling generated type as `build_failed`.
+`-update` already compiled the generated code before writing it, so `make
+build` here is a confirmation, and `make smoke` adds test compilation and
+acceptance smoke tests. If `make build` fails here, investigate rather than
+hand-suppressing — `-update` would already have suppressed a genuinely
+non-compiling type.
 
 ### 4. Documentation
 
-Replaces `make docs-all`. Requires Terraform `v1.14`+ (for list-resource support)
-and `tfplugindocs` on `PATH` (both installed by `make tools`):
+Requires Terraform `v1.14`+ and `tfplugindocs` on `PATH` (both installed by
+`make tools`):
 
 ```sh
 go run ./internal/tools/bigdiffer -docs
 ```
 
-bigdiffer owns the import-example docs (generated from `import_examples_gen.json`)
-and orchestrates the two external steps — `terraform fmt` and `tfplugindocs
-generate` — it does not reimplement `tfplugindocs`. This changes `examples/**` and
-`docs/**`.
+This regenerates import-example docs, runs `terraform fmt`, and runs
+`tfplugindocs generate`. Changes `examples/**` and `docs/**`.
 
 ### 5. CHANGELOG and version
 
-`-update` already drafted the `FEATURES:` bullets directly into
-`CHANGELOG.md`'s top, in-progress version block (e.g.
-`## 1.100.0 (Unreleased)`) — read straight off the artifacts it actually
-promoted this run, filtered to ones that were not already user-visible
-before it (generation-punchlist.md item 16). All that is left by hand:
+`-update` already drafted the `FEATURES:` bullets into `CHANGELOG.md`'s top,
+in-progress version block (e.g. `## 1.100.0 (Unreleased)`). By hand:
 
-1. Add the PR number link (`([#1234](https://github.com/hashicorp/terraform-provider-awscc/pull/1234))`)
-   once the PR exists — `-update` cannot know this in advance.
-2. Add any `NOTES:` or breaking-change entries; these are editorial and not
-   drafted automatically.
+1. Add the PR number link
+   (`([#1234](https://github.com/hashicorp/terraform-provider-awscc/pull/1234))`)
+   once the PR exists.
+2. Add any `NOTES:` or breaking-change entries.
 3. Update `version/VERSION` to match.
 
-If this run promoted nothing newly user-visible (an ordinary refresh of
-already-shipped types), no `FEATURES:` section is added — there is nothing
-to review here.
+If this run promoted nothing newly user-visible, no `FEATURES:` section is
+added.
 
-`-update` assumes the top block's `FEATURES:` section is empty or absent
-when it runs (the normal case: bigdiffer runs once per release cycle and
-drafts the whole entry in one pass) and errors rather than guess at a merge
-if it already has bullets — the fix in that case is to add the new bullets
-by hand.
+`-update` assumes the top block's `FEATURES:` section is empty or absent when
+it runs and errors instead of guessing at a merge if it already has bullets —
+add the new bullets by hand in that case.
 
 ### 6. Commit and open a pull request
 
-This is the one place the workflow differs mechanically. The legacy process
-committed in stages via `make commitrefresh/commitschemas/commitresources/commitdatas/commitdocs`.
-bigdiffer instead leaves the entire result in your working tree in one pass. Review
-`git status` and `git diff`, then commit — either as a single commit or grouped
-logically, for example:
+Review `git status` and `git diff`, then commit — either as a single commit or
+grouped logically, for example:
 
 ```sh
 git add internal/service/cloudformation/schemas internal/provider/all_schemas.hcl
@@ -207,7 +132,6 @@ git add examples docs CHANGELOG.md version/VERSION
 git commit -m "Regenerate documentation and update changelog"
 ```
 
-The resulting file set matches the legacy process (plus `registrations_gen.go`).
 Open a pull request and verify CI passes; once merged, cut the release.
 
 ## Reading the report
@@ -235,18 +159,18 @@ go run ./internal/tools/bigdiffer -generate
 ```
 
 This writes every `*_gen.go`, `registrations_gen.go`, and
-`import_examples_gen.json` in parallel, in seconds. It does not query AWS and does
-not change `all_schemas.hcl`.
+`import_examples_gen.json` in parallel, in seconds. It does not query AWS and
+does not change `all_schemas.hcl`.
 
 ## Fallback: the legacy process
 
 The legacy machinery is intact and unaffected by bigdiffer; it produces the same
 result. If bigdiffer is ever unavailable or misbehaving, follow
-[generating-the-provider.md](generating-the-provider.md) as before
+[generating-the-provider.md](generating-the-provider.md) instead
 (`make cleanschemas suppressions schemas`, `make biglister`, `make resources`,
 `make singular-data-sources plural-data-sources`, `make docs-all`, …).
 
-Interoperating between the two is seamless:
+Interoperating between the two:
 
 * The **schema cache** (`internal/service/cloudformation/schemas/*.json`) and the
   **overlay** (`all_schemas.hcl`) use the identical on-disk format, so a cache and
@@ -267,3 +191,13 @@ Interoperating between the two is seamless:
 > The legacy `make bigdiffer` target is an unrelated helper that `diff`s dated
 > `available_schemas.<date>.hcl` snapshots — it is **not** the
 > `internal/tools/bigdiffer` tool described here.
+
+## How it works
+
+Briefly: bigdiffer reconciles the live CloudFormation registry against
+`internal/provider/all_schemas.hcl` in memory, regenerates only what changed,
+compile-gates the result before writing anything, and lets one policy decide
+what to freeze or suppress so a broken schema never blocks a release.
+
+For the full design — why it's built this way, what it replaces, and what's
+still open — see [bigdiffer-design.md](bigdiffer-design.md).
