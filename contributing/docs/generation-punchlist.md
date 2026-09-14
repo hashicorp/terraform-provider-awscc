@@ -54,21 +54,22 @@ A. ~~**`-check` reason enforcement**~~ — ✅ **Done (#3323).** Now that the it
 
 ### Adoption (the switchover)
 
-C. **Adopt — phase 1: switch to bigdiffer's generated init approach, keep the
-   legacy fallback.** Make the weekly/release process generate the provider via
-   bigdiffer, but **leave the legacy `make` targets and generators in place**
-   behind a documented "safety hatch": a short section in the runbook on how to
-   revert to the legacy process if bigdiffer output regresses. No legacy code is
-   deleted in this phase. Pairs with item E (release docs). Branch:
-   `b-bigdiffer-adopt`. Depends on A. *(core)*
-   — The safety hatch is documented: `generating-the-provider-with-bigdiffer.md`
-   "Fallback: the legacy process" covers reverting (both processes read/write the
-   identical `all_schemas.hcl`/schema-cache format; `rm -f
-   internal/provider/registrations_gen.go` then re-run the legacy `make`
-   targets). `bigdiffer -check` (CI-enforced) fails if `registrations_gen.go`
-   drifts from the overlay — but, deliberately, *not* if it is absent, so the
-   revert path above still passes `-check` during the transition
-   (`checkRegistrationUpToDate`'s doc comment in `main.go` spells this out).
+C. ~~**Adopt — phase 1: switch to bigdiffer's generated init approach, keep the
+   legacy fallback.**~~ — ✅ **Done (#3326).** The weekly/release process now
+   generates the provider via bigdiffer: `internal/provider/registrations_gen.go`
+   — bigdiffer's single blank-import file — is committed as the source of
+   registration, importing the same service packages as the union of the legacy
+   `resources.go` / `singular_data_sources.go` / `plural_data_sources.go`
+   directive files, so the registered set is unchanged. The legacy `make` targets
+   and generators stay in place as a documented safety hatch
+   (`generating-the-provider-with-bigdiffer.md` "Fallback: the legacy process":
+   `rm -f internal/provider/registrations_gen.go`, then re-run the legacy `make`
+   targets; both processes share the identical `all_schemas.hcl`/schema-cache
+   format). `bigdiffer -check` (CI-enforced) fails if `registrations_gen.go`
+   drifts from the overlay but, deliberately, *not* if it is absent, so the
+   revert path still passes `-check` during the transition
+   (`checkRegistrationUpToDate`'s doc comment in `main.go`). Pairs with item E
+   (release docs). *(core)*
 D. **Adopt — phase 2: delete the redundant legacy machinery.** After phase 1 has
    held for several real cycles, remove the legacy generators, directive files,
    and `make` targets now redundant with bigdiffer, and land the deferred design
@@ -84,8 +85,8 @@ D. **Adopt — phase 2: delete the redundant legacy machinery.** After phase 1 h
 - **15 Delete legacy generators/directives/`make` targets**
   (`bigdiffer-design.md` §10). Delete `generating-the-provider.md` with them.
 
-Branch: later (e.g. `b-bigdiffer-legacy-removal`). Highest risk → last.
-Depends on C. *(deferred)*
+Branch: later (e.g. `b-bigdiffer-legacy-removal`). Tracked by #3330. Highest
+risk → last. Depends on C. *(deferred)*
 
 E. **Release-process docs → bigdiffer (Jira).** Point the release runbook in Jira
    at the bigdiffer process. Owner: **Dirk** (external to this repo). Sequence
