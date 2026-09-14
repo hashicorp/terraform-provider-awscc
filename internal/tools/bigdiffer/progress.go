@@ -37,7 +37,10 @@ func newBar(total int, label string) *progressbar.ProgressBar {
 		progressbar.OptionSetWriter(os.Stderr),
 		progressbar.OptionShowCount(),
 		progressbar.OptionShowElapsedTimeOnFinish(),
-		progressbar.OptionSetPredictTime(true),
+		// Predicted "time remaining" is meaningless for this workload: artifacts
+		// vary in cost and 16 workers saturate after a slow start, so a linear
+		// ETA drifts up early then lurches down. Show elapsed only.
+		progressbar.OptionSetPredictTime(false),
 		progressbar.OptionThrottle(barThrottle),
 		progressbar.OptionClearOnFinish(),
 	)
