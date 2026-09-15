@@ -180,6 +180,88 @@ to promote a resource still advertising a list resource whose plural data
 source the gate rejected, rather than shipping a list resource with no
 backing data source.
 
+### Gap: the unchanged corpus is never gated (skeleton design, not yet implemented)
+
+Both gates above only run on New/Changed types (§4) — a type whose schema
+bytes are byte-identical to the cache is skipped entirely (`statusUnchanged`,
+`change.go`). That is correct for schema drift, but it means a change to the
+*machinery itself* — a template, `codegen/`, the naming package, or the Go
+toolchain — is never exercised against the ~1580 types whose schema didn't
+move this week. Today the only thing that would ever catch such a regression
+is `TestFullCorpusParity`, and only for as long as that test's legacy-engine
+comparison exists (it is itself slated for removal once the legacy engine is
+deleted, per §10). Once that guard is gone, a machinery regression on an
+unchanged-schema type would go undetected until something downstream actually
+breaks — silent, not surfaced.
+
+**Design.** Run every type through generate-then-compile every `-update`, not
+just New/Changed — the gate already exists and is deterministic and fast
+(§6's compile gate alone measures in seconds; running generation for the full
+corpus is the same order of magnitude). A schema-unchanged type that now fails
+either gate is a machinery regression by construction: nothing about the type
+itself changed, so the failure's only possible cause is the tool. This needs a
+result distinct from both existing outcomes:
+
+- **Not `frozen_since`.** Freezing means "the *schema* is pinned" (§7,
+  `suppressed-and-frozen.md`, "Frozen, precisely") — it also stops future
+  schema refresh for that type. A machinery regression has nothing wrong with
+  the schema; freezing it would be both the wrong claim and the wrong
+  behavior (the type should keep refreshing normally the moment the schema
+  actually changes, independent of whether the machinery currently compiles
+  it).
+- **Not `suppress_*_generation`.** Suppression means "don't generate this
+  artifact" as a standing, reason-carrying decision about the artifact.
+  `machinery_held` is the tool failing to keep a promise it already made last
+  week (the artifact generated and compiled fine then) — the intent is still
+  "generate this," the tool just currently can't.
+
+**Proposed: `machinery_held`, a new per-artifact status, orthogonal to both.**
+A schema-unchanged type whose regenerated output now fails to generate or
+compile keeps its **last-good committed files on disk untouched** (never
+regress, same invariant §7 already guarantees for schema breaks) and gets a
+new overlay marker recording *why the committed output no longer matches what
+the current machinery would produce*:
+
+- A new per-artifact attribute, alongside the existing `suppress_*_generation`
+  / `suppression_reason_*` pairs — provisionally
+  `machinery_held_resource` / `_singular_data_source` / `_plural_data_source`
+  (bool) plus `machinery_held_reason_resource` / `_singular_data_source` /
+  `_plural_data_source` (string, same `category: detail` shape as today,
+  §7 — likely a sixth taxonomy category, `machinery_regression`, alongside
+  `suppressed-and-frozen.md`'s existing five).
+- **Self-clearing.** Because the full corpus is re-attempted every `-update`
+  (not just on a schema change), the marker is re-evaluated every run: the run
+  after the machinery is fixed, that artifact generates/compiles cleanly
+  again, is promoted, and the marker is cleared automatically — no `-heal`
+  step needed for this category specifically, unlike `unknown`/`manual` rows.
+- **Distinguishable from a real suppression in the report and the overlay.**
+  A `machinery_held` row is not backlog (nobody needs to open a "fix this
+  resource's schema" issue — the resource is fine) and not something a human
+  approves; it is bigdiffer telling its own maintainers "the last engine
+  change broke this, and I refused to ship a regression, but this needs a
+  code fix, not an overlay edit." The change report gets a distinct section
+  for it (parallel to the existing frozen/suppressed section, printed by
+  `main.go`'s report path) so it cannot be mistaken for a schema problem at a
+  glance, and `-check` flags any `machinery_held` row as an anomaly (parallel
+  to today's `anomalyProblems()`) rather than passing silently — a
+  `machinery_held` marker surviving past the PR that introduced the
+  regression is itself a signal that the fix didn't land.
+- **Attribution stays clean.** Only schema-unchanged types are eligible for
+  this category — a schema-changed type that fails is already covered by the
+  existing freeze/suppress branches in §7's policy table (the schema itself
+  is the newest variable there, so `generation_failed`/`build_failed` under a
+  freeze or suppression remains the right call, not `machinery_held`).
+
+This keeps all three of bigdiffer's guarantees simultaneously once
+implemented: never regress a shipped artifact, always reflect the latest
+schema, and always reflect the latest machinery wherever it can — with every
+place it can't recorded per-artifact, never silent. It also removes
+`TestFullCorpusParity`'s role as the only engine-change guard, unblocking that
+test's own retirement (§10, "Deferred and future work").
+
+Design only — not yet implemented. Tracked as the next `machinery_held` work
+item in "Deferred and future work."
+
 ## 7. Policy: results become overlay edits
 
 Change class plus gate result determine the overlay edit. "Failed" covers both a
@@ -199,6 +281,7 @@ a freeze, when one applies, carries its own separate `frozen_reason`.
 | Non-provisionable (live) | n/a | keep block; set `non_provisionable = true` |
 | Withdrawn | n/a | set `frozen_since`; keep bytes |
 | Frozen / suppressed | ok on re-probe | propose un-freeze / un-suppress |
+| Unchanged (schema) | failed *(design, §6, not yet implemented)* | set `machinery_held_*` on the failed artifact(s) + reason; keep last-good bytes; never `frozen_since` |
 
 Two invariants keep every row safe by default:
 
@@ -211,7 +294,8 @@ The reason taxonomy (`structural` / `generation_failed` / `build_failed` /
 `manual` / `unknown`), the `-check` reason anomaly, and the `-heal` re-probe are
 specified in `suppressed-and-frozen.md`. The last table row is self-healing:
 policy is recomputed every cycle, so a type AWS has since fixed is proposed for
-recovery automatically.
+recovery automatically. A sixth category, `machinery_regression`, is proposed
+in §6 ("Gap: the unchanged corpus is never gated") but not yet implemented.
 
 ## 8. The one human step
 
@@ -385,26 +469,15 @@ The durable list of remaining work — this section is the single tracker now th
 the standalone generation punchlist is retired. Each item is either tracked by a
 linked GitHub issue or described in enough detail here to act on.
 
-- **Full-corpus regeneration + `machinery_held` (engine-change safety).** Today
-  `-update` regenerates only New/Changed *schema* types, so a change to the
-  generation machinery (templates, codegen, naming, or the Go toolchain) never
-  reaches schema-unchanged types — their committed output silently goes stale
-  (drift `TestFullCorpusParity` can only flag, not prevent). Fix: run the **whole
-  corpus** through the existing generate-then-compile gate every `-update`
-  (deterministic, ~30s), so machinery changes propagate under the same
-  never-regress protection schema changes already get. This needs a new
-  per-resource policy category — provisionally **`machinery_held`** — distinct
-  from `frozen` (schema pinned) and `suppress` (deliberate omission): it means
-  *the schema is current but the current machinery cannot compile this resource,
-  so its last-good bytes are kept*. Because the corpus is re-attempted every run,
-  the marker is **self-clearing** — it disappears the run after the codegen gap is
-  fixed. It keeps all three guarantees: (a) never regress, (b) latest schema,
-  (c) latest machinery — where (c) becomes "reflected wherever it compiles, every
-  exception recorded per-resource, never silent." Attribution is clean only for
-  schema-unchanged failures (the sole new variable is the machinery); changed-
-  schema failures stay in the freeze/suppress bucket. This replaces the parity
-  test as the engine-change guard (so it also unblocks retiring the parity test's
-  dependency on the legacy engine). *The one medium item outstanding.*
+- **`machinery_held`: gate the unchanged corpus too (engine-change safety).**
+  Full skeleton design in §6 ("Gap: the unchanged corpus is never gated") and
+  §7's policy table. Implementation: run generate-then-compile over the whole
+  corpus every `-update`, not just New/Changed; add the `machinery_held_*`
+  per-artifact attributes and `machinery_regression` reason category
+  (`policy.go`, `suppressed-and-frozen.md`); surface held rows as a distinct
+  report section and a `-check` anomaly. Replaces `TestFullCorpusParity` as
+  the engine-change guard, unblocking that test's own retirement. *The one
+  medium item outstanding.*
 - **Move dedup "tags" out of the schema bytes into an `all_schemas.hcl`
   argument.** The deduplication marker currently lives inside the pinned schema
   JSON; make it a first-class overlay argument (a `resourceRow` field + generator
