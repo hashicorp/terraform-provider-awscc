@@ -238,13 +238,19 @@ suppression implies.
 **Proposed: a new `held` per-artifact status, orthogonal to `frozen_since` and
 `suppress_*`.**
 
-- A new per-artifact attribute, alongside the existing `suppress_*_generation`
-  / `suppression_reason_*` pairs — provisionally `held_resource` /
-  `_singular_data_source` / `_plural_data_source` (bool) plus
-  `held_reason_resource` / `_singular_data_source` / `_plural_data_source`
-  (string, `category: detail` shape, category one of `codegen_error` /
-  `toolchain_error` — a proposed addition to `suppressed-and-frozen.md`'s
-  existing five-category taxonomy, §7).
+- **Three-way per-artifact split, matching `suppress_*_generation` exactly.**
+  `held_resource` / `held_singular_data_source` / `held_plural_data_source`
+  (bool) plus `held_reason_resource` / `_singular_data_source` /
+  `_plural_data_source` (string, `category: detail` shape, category one of
+  `codegen_error` / `toolchain_error` — a proposed addition to
+  `suppressed-and-frozen.md`'s existing five-category taxonomy, §7). List
+  resource is not a fourth bucket, for the same reason it isn't one for
+  `suppress_*_generation` today: it isn't an independent artifact, it's an
+  attribute of the resource artifact (`-listresource`, gated by whether the
+  plural data source is suppressed — §6's "list-resource coupling guard").
+  A list-resource-specific compile failure is the *resource* artifact's own
+  `held`, with the reason text naming the list resource specifically, not a
+  separate `held_list_resource`.
 - **Self-clearing.** Because the full corpus is re-attempted every `-update`
   (not just on a schema change), a held artifact is re-evaluated every run:
   the run after the regression is fixed (in codegen, or by the environment
@@ -297,19 +303,20 @@ instead of by an unmappable blame. Below the threshold, held rows are exactly
 as noisy, clear, and informative as the per-artifact report already makes
 them, and the release proceeds.
 
-**Noted, not designed here: unifying the taxonomy.** `suppress_*_generation` +
-`suppression_reason_*`, `frozen_since` + `frozen_reason`, and this proposal's
-`held_*` + `held_reason_*` are three separate boolean-plus-reason pairs
-expressing "excluded, and why." A cleaner long-term shape would be a single
-state-carrying attribute per fact — e.g. `resource_state = "held:
-toolchain_error: <detail>"` — collapsing the boolean into the presence of the
-key itself, which also removes the class of anomaly `-check` currently has to
-guard against (a flag set with no reason, or a reason with no flag). That is
-a breaking change to the overlay format across every existing row and every
-consumer of `resourceRow`, well beyond this feature's scope — noted here so
-`held`'s shape is chosen to be additive toward that eventual unification
-rather than another format to migrate away from later, not designed or
-scheduled now.
+**Noted, not designed here: unifying the taxonomy.** `held_*` above still
+follows today's two-attribute-per-fact convention (a bool plus a separate
+`_reason` string), matching `suppress_*_generation`/`suppression_reason_*`
+and `frozen_since`/`frozen_reason` as they exist now, so `held` ships
+consistent with the levers already in the overlay. Collapsing all three into
+one self-describing attribute per fact (dropping the boolean *and* the
+`_reason` suffix — the value already reads as an explanation on its own,
+e.g. `resource_suppressed = "structural: <detail>"` conveys everything
+`suppress_resource_generation = true` + `suppression_reason_resource = "..."`
+does today) is a separate, larger design problem, called out as its own item
+in "Deferred and future work" rather than folded into `held` here — `held`'s
+shape is chosen to be additive toward that eventual unification, not another
+format to migrate away from later, but the unification itself needs its own
+design pass before scheduling.
 
 This keeps all three of bigdiffer's guarantees simultaneously once
 implemented: never regress a shipped artifact, always reflect the latest
@@ -540,6 +547,25 @@ linked GitHub issue or described in enough detail here to act on.
   stops the run instead of completing as a large held batch. Replaces
   `TestFullCorpusParity` as the engine-change guard, unblocking that test's
   own retirement. *The one medium item outstanding.*
+- **Unify the overlay's exclusion levers into one self-describing attribute
+  per fact.** Needs its own design pass — not scheduled, no skeleton yet.
+  Today (and in `held`'s design above, §6) every exclusion is a
+  boolean-plus-separate-reason-string pair:
+  `suppress_resource_generation` + `suppression_reason_resource`,
+  `frozen_since` + `frozen_reason`, and (once implemented) `held_resource` +
+  `held_reason_resource` — three levers, six-plus attributes per artifact.
+  Collapsing each pair into one attribute whose value carries both state and
+  reason — e.g. `resource_suppressed = "structural: <detail>"` conveys
+  everything the current pair does, and the `_reason` suffix is redundant
+  once the value already reads as an explanation — removes a whole class of
+  anomaly `-check` currently has to guard against (a flag set with no reason,
+  or vice versa) and halves the attribute count. This is a breaking change to
+  the overlay format across every existing row (~1580+) and every consumer of
+  `resourceRow`, `-check`, `-heal`, and the HCL schema itself — well beyond a
+  point release. Whether `frozen_since`'s *date* (not just a reason) survives
+  unification, whether the three per-artifact facts (resource/singular/plural)
+  each still need their own attribute name or can nest, and a migration path
+  for existing rows all need designing before this is scheduled.
 - **Move dedup "tags" out of the schema bytes into an `all_schemas.hcl`
   argument.** The deduplication marker currently lives inside the pinned schema
   JSON; make it a first-class overlay argument (a `resourceRow` field + generator
