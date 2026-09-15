@@ -10,7 +10,7 @@ provider from additions and updates that would break it.
 This is the durable design reference — what bigdiffer is, how it works, and *why*
 it is shaped this way — for maintenance and for reviewing the tool. It is not a
 runbook (see `generating-the-provider-with-bigdiffer.md` for the weekly process)
-and not a task tracker (see `generation-punchlist.md` for what is left to do).
+and not a task tracker (see "Deferred and future work" below for what is left to do).
 
 bigdiffer is shipped and drives the weekly cycle today; §11 summarizes what is
 built and what remains. Scope: generate resources, data sources, and list
@@ -240,8 +240,8 @@ commit: confirm or override auto-applied freezes/suppressions, supply the
 appropriate per-artifact `suppression_reason_*` (or `frozen_reason`) text and
 issue links, and adjudicate flagged anomalies. The report is plain,
 consistently-shaped text (one fact per line: CFN type, label, field, reason) —
-a structured (JSON) form was considered and de-scoped
-(`generation-punchlist.md` item 11): the actual consumers are a human or an
+a structured (JSON) form was considered and de-scoped — the actual consumers
+are a human or an
 LLM agent working through proposals interactively, and both read this text
 output at least as reliably as JSON, without a second schema to keep in sync
 with every future taxonomy change.
@@ -249,8 +249,8 @@ with every future taxonomy change.
 `-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry
 itself, writing directly into the file's top, in-progress version block
 (e.g. `## 1.100.0 (Unreleased)`; a release-prep commit retitles it with the
-real date and starts a fresh one immediately after cutting a release) —
-`generation-punchlist.md` item 16. No side file: bigdiffer normally runs
+real date and starts a fresh one immediately after cutting a release). No side
+file: bigdiffer normally runs
 once per release cycle and drafts the whole entry in a single pass, so it
 assumes that block's `FEATURES:` section is empty or absent when it runs,
 and errors rather than guess at a merge if it already has bullets (the fix
@@ -347,8 +347,8 @@ as a regression guard. The `-check`, `-update`, `-generate`, `-docs`, and `-heal
 modes are all live.
 
 Remaining work — GitHub-issue guidance, the one-time reason backfill, and the
-deferred cleanups below — is tracked with priorities and current status in
-`generation-punchlist.md`. None of it blocks the weekly cycle today; see
+deferred cleanups below — is listed under "Deferred and future work" below.
+None of it blocks the weekly cycle today; see
 `generating-the-provider-with-bigdiffer.md` for the operational process and the
 legacy fallback.
 
@@ -418,13 +418,44 @@ generators — the reference for anyone touching the engine.
 
 ## Deferred and future work
 
-Real, not-yet-done items. `generation-punchlist.md` tracks these at a high level
-with status; the detail lives here.
+The durable list of remaining work — this section is the single tracker now that
+the standalone generation punchlist is retired. Each item is either tracked by a
+linked GitHub issue or described in enough detail here to act on.
 
+- **Full-corpus regeneration + `machinery_held` (engine-change safety).** Today
+  `-update` regenerates only New/Changed *schema* types, so a change to the
+  generation machinery (templates, codegen, naming, or the Go toolchain) never
+  reaches schema-unchanged types — their committed output silently goes stale
+  (drift `TestFullCorpusParity` can only flag, not prevent). Fix: run the **whole
+  corpus** through the existing generate-then-compile gate every `-update`
+  (deterministic, ~30s), so machinery changes propagate under the same
+  never-regress protection schema changes already get. This needs a new
+  per-resource policy category — provisionally **`machinery_held`** — distinct
+  from `frozen` (schema pinned) and `suppress` (deliberate omission): it means
+  *the schema is current but the current machinery cannot compile this resource,
+  so its last-good bytes are kept*. Because the corpus is re-attempted every run,
+  the marker is **self-clearing** — it disappears the run after the codegen gap is
+  fixed. It keeps all three guarantees: (a) never regress, (b) latest schema,
+  (c) latest machinery — where (c) becomes "reflected wherever it compiles, every
+  exception recorded per-resource, never silent." Attribution is clean only for
+  schema-unchanged failures (the sole new variable is the machinery); changed-
+  schema failures stay in the freeze/suppress bucket. This replaces the parity
+  test as the engine-change guard (so it also unblocks retiring the parity test's
+  dependency on the legacy engine). *The one medium item outstanding.*
+- **Move dedup "tags" out of the schema bytes into an `all_schemas.hcl`
+  argument.** The deduplication marker currently lives inside the pinned schema
+  JSON; make it a first-class overlay argument (a `resourceRow` field + generator
+  support) so it is visible and diffable in the overlay. Enabler for the dedup
+  thaw below.
+- **Thaw resources that now generate cleanly.** The ~63 deferred lift-candidates
+  recorded in #3323 (`manual: lift candidate; generates and compiles cleanly …
+  pending a batched lift`), plus resources unlocked by the new dedup approach and
+  any freezes whose pinned bytes now generate. Confirm with `-heal`; lift in
+  batches, each its own reviewed PR (generated-code diffs, never a data-only
+  ride-along).
 - **Checkout-file retirement (§5).** Fold `suppressions_checkout.txt` fully into
-  `frozen_since` and stop reading the external file. Orthogonal to the reason
-  taxonomy; a pure simplification once nothing else depends on the checkout list.
-- **Delete the legacy generators, directive files, and `make` targets.** Only
-  after full-corpus parity has held for several real weekly cycles. This is what
-  finally resolves the conceptual cutover into a physical one; until then the
-  legacy path is the documented fallback (§10).
+  `frozen_since` and stop reading the external file. Part of legacy removal below.
+- **Delete the legacy generators, directive files, and `make` targets** — after
+  the engine has driven several clean weekly cycles with no fallback. Tracked by
+  #3330 and `removing-the-legacy-generation-process.md`; resolves the cutover from
+  conceptual to physical (§10).
