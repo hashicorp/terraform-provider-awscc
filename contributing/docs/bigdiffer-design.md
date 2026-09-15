@@ -580,21 +580,21 @@ linked GitHub issue or described in enough detail here to act on.
   The realization that shapes this: these facts live on **two different
   granularities**, so "unify" cannot mean "one attribute per row."
 
-  - **Output disposition — per-artifact (the trio).** `suppress` and `held`
-    are both "what happened to this artifact's output," and each of the three
-    artifacts (resource / singular data source / plural data source) carries it
-    independently. *Candidate:* one self-describing attribute per artifact —
-    `resource = "held: codegen_error: <detail>"`,
-    `singular_data_source = "suppressed: manual: <detail> (issue: URL)"`; absent
-    means "generate normally." The `state:` prefix (`suppressed` vs `held`) is
-    how consumers route — `held:` is always a `-check` anomaly; a `suppressed:`
-    with no `category: detail` is the reason-less anomaly — collapsing two
-    levers into one and removing the flag/reason mismatch.
-  - **Schema input state — per-type.** `frozen_since` pins the *shared* schema
-    JSON (one file backs all three artifacts — the "cannot partially advance"
-    invariant), so it is inherently whole-type and does not belong in the trio;
-    forcing it in would triplicate it and break that invariant. It also carries
-    a *date*, which resists the "one self-describing string" collapse.
+    - **Output disposition — per-artifact (the trio).** `suppress` and `held`
+      are both "what happened to this artifact's output," and each of the three
+      artifacts (resource / singular data source / plural data source) carries it
+      independently. *Candidate:* one self-describing attribute per artifact —
+      `resource = "held: codegen_error: <detail>"`,
+      `singular_data_source = "suppressed: manual: <detail> (issue: URL)"`; absent
+      means "generate normally." The `state:` prefix (`suppressed` vs `held`) is
+      how consumers route — `held:` is always a `-check` anomaly; a `suppressed:`
+      with no `category: detail` is the reason-less anomaly — collapsing two
+      levers into one and removing the flag/reason mismatch.
+    - **Schema input state — per-type.** `frozen_since` pins the *shared* schema
+      JSON (one file backs all three artifacts — the "cannot partially advance"
+      invariant), so it is inherently whole-type and does not belong in the trio;
+      forcing it in would triplicate it and break that invariant. It also carries
+      a *date*, which resists the "one self-describing string" collapse.
 
   This is one candidate, not a plan. **Open questions, and reasons it may land
   differently:** whether `frozen_since`'s date folds into a value or stays a
