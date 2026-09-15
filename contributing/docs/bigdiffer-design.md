@@ -8,7 +8,9 @@ provider from the current live CloudFormation (CFN) types while protecting the
 provider from additions and updates that would break it.
 
 This is the durable design reference — what bigdiffer is, how it works, and *why*
-it is shaped this way — for maintenance and for reviewing the tool. It is not a
+it is shaped this way — for maintenance and for reviewing the tool. For a plain
+overview and the available commands, see
+[the tool's README](../../internal/tools/bigdiffer/README.md). It is not a
 runbook (see `generating-the-provider-with-bigdiffer.md` for the weekly process)
 and not a task tracker (see "Deferred and future work" below for what is left to do).
 
@@ -25,14 +27,12 @@ changelog, PRs) are out of scope.
 
 The provider already records what it is — `internal/provider/all_schemas.hcl`
 (the "overlay") — and AWS already records what exists — the live CFN registry.
-Updating the provider is just reconciling those two facts.
+Updating the provider is reconciling those two facts directly: read the overlay,
+ask AWS what exists, reconcile, generate resiliently, write the overlay back.
 
-The legacy process did not reconcile them directly: AWS's live list was
-serialized to a dated `available_schemas.<date>.hcl`, `git diff`ed against last
-week's copy, and a human hand-transcribed the result into the overlay. The dated
-files fed nothing but the diff. bigdiffer removes that detour — read the overlay,
-ask AWS what exists, reconcile, generate resiliently, write the overlay back. No
-git, no dated snapshots, no manual transcription.
+The legacy process reconciled them indirectly instead, through a dated,
+git-diffed snapshot a human hand-transcribed into the overlay (see §10 for the
+full comparison).
 
 ## 2. Model: two inputs, one output
 
@@ -67,8 +67,7 @@ The join yields three classes with mechanical default handling:
 
 Absent is not automatically "withdrawn." Because A excludes both
 `NON_PROVISIONABLE` and `DEPRECATED` types, an absent row is resolved by one
-`DescribeType` probe (`absentTypes`/`probeAbsent`/`classifyAbsentProbe`,
-`discover.go`/`update.go`), reusing the crawl's own throttled client:
+`DescribeType` probe, reusing the crawl's own throttled client:
 
 - Probe succeeds, `DeprecatedStatus == DEPRECATED`: deactivated/deregistered —
   checked first, since a deprecated type is withdrawn regardless of what
@@ -88,24 +87,16 @@ Absent is not automatically "withdrawn." Because A excludes both
 The provider ships non-provisionable-but-live resources (e.g.
 `AWS::AppStream::StackFleetAssociation`), which a naive "absent ⇒ freeze" rule
 would wrongly freeze. Only the probe distinguishes the two. A row already
-explained — frozen, or checkout-pinned — skips the probe entirely; it needs no
-further annotation, and a checkout pin may explain an absence the probe cannot
-see (a deliberately checked-out older version). The two classes this produces,
-`classWithdrawn` and `classNonProvisionable`, feed the same `decide()` branches
-`buildCandidates`'s New/Present classes use — no new policy, no new taxonomy,
-just the probe that was the last piece connecting them.
+explained — frozen, or checkout-pinned — skips the probe entirely, since a
+checkout pin may explain an absence the probe cannot see (a deliberately
+checked-out older version). Withdrawn and non-provisionable rows feed the same
+policy table as the New/Present classes (§7) — no separate taxonomy.
 
 ## 4. Selective refresh, not teardown
 
-The legacy `make schemas` downloaded only schemas that were *missing*, then
-validated — it never compared against or replaced an existing file. An update was
-forced by deletion: `make cleanschemas` removed every `AWS_*.json` so the next
-`make schemas` re-downloaded them all, and pinning fell out of the same mechanism
-(`make suppressions` git-restored frozen JSONs first, so `make schemas` found
-them present and skipped them). A clunky stand-in for compare → replace.
-
 bigdiffer does a direct compare — download a type only when AWS's bytes differ
-from the cache, and skip frozen types outright:
+from the cache, and skip frozen types outright (the legacy equivalent forced a
+refresh by deleting every cached schema and re-downloading; see §10):
 
 - Frozen types: not re-downloaded during the normal refresh — last-good bytes
   stay (no delete/restore). The self-heal probe (§7) may re-fetch them to a
@@ -114,8 +105,6 @@ from the cache, and skip frozen types outright:
 - Present, non-frozen: downloaded only if AWS's bytes differ; a byte-identical
   refresh is a no-op that skips the gate.
 - New types: downloaded once.
-
-So `cleanschemas` and `suppressions` cease to exist as steps.
 
 ## 5. One declarative suppression surface
 
@@ -144,61 +133,52 @@ ever blocks a release.
 
 ### Generation is the gate
 
-The legacy flow had two global gates (validate, then generate), each traversing
-the whole corpus (10–15 min) and surfacing one failure at a time, forcing a rerun
-per broken schema. bigdiffer replaces them with a single pass:
-
-1. Validation is the front half of generation — generating a type for real *is*
-   validating it, so there is no separate emission-only pass to keep in sync.
-2. The pass is per-artifact and resilient — a resource, its singular data source,
-   and its plural data source each succeed or fail independently, and one
-   failure never aborts the others. Independent types run concurrently.
+Generation and validation are the same pass: generating a type for real *is*
+validating it, so there is no separate emission-only pass to keep in sync. The
+pass is per-artifact and resilient — a resource, its singular data source, and
+its plural data source each succeed or fail independently, and one failure
+never aborts the others. Independent types run concurrently.
 
 Only New and Changed types enter the gate (a byte-identical refresh is a no-op,
-§4), so a typical week gates a handful of types, not the corpus.
+§4), so a typical week gates a handful of types, not the corpus. (The legacy
+flow's two whole-corpus gates and per-failure rerun loop are gone; see §10.)
 
 ### The compile gate
 
 Generation catches schemas that won't render; it cannot catch generated code that
 renders but fails to **type-check** — a bad cross-file reference, a collision with
 a sibling in the same service package, a broken import, or a stale registration
-file. `go build` is that check. bigdiffer runs it itself, inside `-update`, before
-promoting anything — not as a separate manual `make build` afterward — so a build
-failure routes through the same policy (§7) as a generation failure, before a
-broken commit can happen.
+file. `go build` is that check. bigdiffer runs it itself, inside `-update`,
+before promoting anything, so a build failure routes through the same policy
+(§7) as a generation failure, before a broken commit can happen.
 
-It is **not** per-artifact like generation, because Go's unit of build
-success is the package, not the file: one bad file fails its whole service
-package, and building a package while a co-package candidate concurrently mutates
-it is unsafe. So the compile gate is whole-module, serial, once per batch —
-`go build ./...` from the repo root (measured: a flat ~3.1s once warm, dominated
-by the module walk across ~200 packages, not recompilation).
+It is whole-module and serial, not per-artifact like generation, because Go's
+unit of build success is the package, not the file: one bad file fails its
+whole service package, and building a package while a co-package candidate
+concurrently mutates it is unsafe. It runs by overlaying the staged files onto
+the real tree, building, and **unconditionally reverting** — the real tree is
+bit-for-bit unchanged whether the build passes or fails; only promotion, after
+a green build, writes for real.
 
-It runs by overlaying the staged files onto the real tree, building, and
-**unconditionally reverting** — the real tree is bit-for-bit unchanged whether the
-build passes or fails; only promotion, after a green build, writes for real.
-
-**Build until green (fixpoint).** On failure it parses `go build`'s
-`file:line:col` output, maps each blamed file back to the candidate/artifact that
-staged it, downgrades only those to a `build_failed` outcome, drops their staged
-files (code *and* the paired `_test.go`), re-renders the registration file from
-the updated decisions, and rebuilds — until the build is green or a small round
-cap trips. Each non-green round drops at least one artifact, so it terminates. A
-blamed file that maps to nothing staged — a pre-existing base-tree break, or a
-bug in bigdiffer's own emitted registration file — is unattributable: promote
-nothing and hard-error rather than guess.
+**Build until green.** On failure, bigdiffer maps each file `go build` blames
+back to the candidate that staged it, downgrades only those to a
+`build_failed` outcome, drops their staged files, and rebuilds — until the
+build is green or a small round cap trips. Each non-green round drops at least
+one artifact, so it terminates. A blamed file that maps to nothing staged (a
+pre-existing base-tree break, or a bug in bigdiffer's own emitted registration
+file) is unattributable: promote nothing and hard-error rather than guess.
 
 **Scope.** The compile gate covers every generated package and the registration
-file. It does **not** cover `*_gen_test.go`: `go build` never compiles test files,
-matching `make build` (`go install ./...`); a generated test that fails to compile
-is caught by `make smoke`/`make test`, as before.
+file. It does **not** cover `*_gen_test.go`: `go build` never compiles test
+files; a generated test that fails to compile is caught by `make
+smoke`/`make test`.
 
 **List-resource coupling guard.** A resource is generated advertising a list
-resource only when its plural data source is not suppressed. `reconcileListResource`
-reconciles that against generation's outcome, but the compile gate can drop the
-plural data source afterward. A post-fixpoint check refuses to promote a resource
-still advertising a list resource whose plural data source the gate rejected,
-rather than shipping a list resource with no backing data source.
+resource only when its plural data source is not suppressed, but the compile
+gate can drop the plural data source afterward. A post-fixpoint check refuses
+to promote a resource still advertising a list resource whose plural data
+source the gate rejected, rather than shipping a list resource with no
+backing data source.
 
 ## 7. Policy: results become overlay edits
 
@@ -239,33 +219,18 @@ Everything above is mechanical. The human reviews the change report before
 commit: confirm or override auto-applied freezes/suppressions, supply the
 appropriate per-artifact `suppression_reason_*` (or `frozen_reason`) text and
 issue links, and adjudicate flagged anomalies. The report is plain,
-consistently-shaped text (one fact per line: CFN type, label, field, reason) —
-a structured (JSON) form was considered and de-scoped — the actual consumers
-are a human or an
-LLM agent working through proposals interactively, and both read this text
-output at least as reliably as JSON, without a second schema to keep in sync
-with every future taxonomy change.
+consistently-shaped text (one fact per line: CFN type, label, field, reason),
+readable by a human or an LLM agent working through proposals interactively.
 
-`-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry
-itself, writing directly into the file's top, in-progress version block
-(e.g. `## 1.100.0 (Unreleased)`; a release-prep commit retitles it with the
-real date and starts a fresh one immediately after cutting a release). No side
-file: bigdiffer normally runs
-once per release cycle and drafts the whole entry in a single pass, so it
-assumes that block's `FEATURES:` section is empty or absent when it runs,
-and errors rather than guess at a merge if it already has bullets (the fix
-in that case is to add the new ones by hand). The source of truth is the
-set of artifacts the run actually promotes (read from `stagedByDest`
-*after* the compile gate settles, so a gate-rejected artifact is never
-announced), filtered to artifacts that were not already user-visible on
-the pre-run overlay: every promoted artifact of a brand-new type, or a
-specific artifact whose own `suppress_*_generation` flag was set on the
-pre-run row (a backlog lift, or the "AWS added the plural list operation
-to an existing type later" case that motivated the reason split, item 9b —
-the plural data source and its `ListResource` become newly user-visible
-without touching the already-shipped resource or singular data source).
-The PR number and any `NOTES:`/breaking-change entries stay a human step;
-`-update` only inserts the mechanical bullets.
+`-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry,
+writing directly into the file's top, in-progress version block (e.g.
+`## 1.100.0 (Unreleased)`). The bullets come from what the run actually
+promoted, filtered to artifacts not already user-visible before this run — a
+brand-new type, or a specific artifact whose suppression was just lifted. It
+assumes that block's `FEATURES:` section is empty or absent when it runs (the
+normal case — bigdiffer runs once per release cycle) and errors rather than
+guess at a merge if it already has bullets; add the new ones by hand in that
+case. The PR number and any `NOTES:`/breaking-change entries stay a human step.
 
 ## 9. Design decisions (proven in the tool)
 
@@ -296,16 +261,14 @@ These choices are settled in `internal/tools/bigdiffer`:
   import-boundary test forbids any bigdiffer file from importing
   `internal/provider/generators/**` or the legacy `internal/naming`.
 - **Resilient, concurrent discovery.** `DescribeType` fans out over a bounded
-  worker pool (`errgroup`); a per-type failure is captured in-band, not aborting
-  the crawl — the same "one failure never blocks the rest" principle the gates use.
-- **Concurrency is proven, not assumed, and required a real fix.** The data race
-  the detector caught was localized to the shared pluralizer — the legacy
-  `internal/naming.Pluralize` calls `inflection.AddIrregular` on every
-  invocation, mutating that library's global rules. bigdiffer owns a copy of the
-  naming logic (`internal/tools/bigdiffer/naming`) that registers the irregular
-  once behind a mutex, eliminating the race at its source. `codegen.Emitter`
-  itself has no mutable package-level state and is driven concurrently in
-  production (`-race`-clean, ~7× over serial).
+  worker pool; a per-type failure is captured in-band, not aborting the crawl —
+  the same "one failure never blocks the rest" principle the gates use.
+- **The shared pluralizer is not shared.** The legacy `internal/naming.Pluralize`
+  mutates the `inflection` library's global rules on every call, making it
+  unsafe under concurrency. bigdiffer owns a copy (`internal/tools/bigdiffer/naming`)
+  that registers the irregular once behind a mutex. `codegen.Emitter` itself
+  has no mutable package-level state and is driven concurrently in production
+  (`-race`-clean, ~7× over serial).
 - **Generation and runtime are separate; generated output is not relocated.**
   bigdiffer (the tool + its `codegen` copy) is generation; the emitted
   `internal/aws/**`, the registration file, and the runtime packages they
@@ -326,7 +289,7 @@ These choices are settled in `internal/tools/bigdiffer`:
 | `make resources`, `make singular-data-sources`, `make plural-data-sources` | bigdiffer owns the engine and generates in-process and in parallel, only for New + Changed types (§6, "The generator surface"). |
 | `make docs-all` | bigdiffer orchestrates it — owns `docs-import`, invokes the standard `tfplugindocs` + `docs-fmt`; it does not reimplement `tfplugindocs`. |
 | 3000+ `//go:generate` directives + the three `resources.go` / `*_data_sources.go` directive files | Replaced by in-process parallel generation and a single blank-import registration file ("The generator surface"). |
-| `make build` as the manual compile check | bigdiffer runs the compile gate itself, in `-update`, before promotion (§6). `make build` remains a fine belt-and-suspenders confirmation, no longer the primary catch. |
+| `make build` as the manual compile check | bigdiffer runs the compile gate itself, in `-update`, before promotion (§6); `make build` afterward is a confirmation, not the primary catch. |
 
 Nothing above is deleted in the cutover. The legacy generators, directive files,
 and `make` targets stay as a documented, deprecated fallback. The cutover is
@@ -364,8 +327,8 @@ file, the teardown, the double gate, and manual transcription all disappear.
 
 ## The generator surface (reference)
 
-How generation and registration actually work, grounded by reading the
-generators — the reference for anyone touching the engine.
+How generation and registration work — reference for anyone touching the
+engine.
 
 - **Registration is self-contained.** Each generated file self-registers in its
   own `func init()` via `registry.AddResourceFactory` / `AddListResourceFactory`

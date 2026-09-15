@@ -5,8 +5,9 @@
 
 This is the weekly runbook for generating the Terraform AWS Cloud Control
 Provider from the live CloudFormation registry using `bigdiffer`
-(`internal/tools/bigdiffer`). For why it's built this way, see
-[bigdiffer-design.md](bigdiffer-design.md).
+(`internal/tools/bigdiffer`). For what bigdiffer is and the available commands,
+see [the tool's README](../../internal/tools/bigdiffer/README.md); for why it's
+built this way, see [bigdiffer-design.md](bigdiffer-design.md).
 
 <!--mdtoc: begin-->
 * [The weekly release](#the-weekly-release)
