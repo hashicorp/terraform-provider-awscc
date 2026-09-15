@@ -129,8 +129,8 @@ func gateResultFromGenResults(cfType string, results []genResult) gateResult {
 // every artifact failed, there is nothing new to keep, and the caller (decide,
 // via classPresent) treats the type as fully broken. Nothing here touches the
 // real output tree or schema cache; promoteStaged does that once, after the
-// whole candidate batch has been staged successfully (generation-punchlist.md
-// item 12: batch atomicity). It returns the gateResult for the policy engine,
+// whole candidate batch has been staged successfully (never-regress batch
+// atomicity). It returns the gateResult for the policy engine,
 // reflecting the final per-artifact outcome (after any ListResource-driven
 // regeneration), plus the genResults that were actually staged (r.err == nil)
 // — the compile gate's fixpoint (item 1) needs each staged artifact's
@@ -187,7 +187,7 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, [
 // into the real tree (cfg.outputRoot, cfg.cacheDir). Called once, after every
 // candidate in a batch has been staged successfully by refreshCandidate — this
 // is the sole place -update writes outside stagingDir, so a hard error anywhere
-// earlier in the batch (generation-punchlist.md item 12) leaves the real tree
+// earlier in the batch (never-regress batch atomicity) leaves the real tree
 // and the overlay untouched: nothing is promoted, and the overlay reconcile
 // step that follows never even runs.
 func promoteStaged(cfg config, stagingDir string) error {
@@ -329,8 +329,8 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	candBar := newBar(len(cands), "regenerate")
 	today := time.Now().Format(dateLayout)
 
-	// Absent-row probe (generation-punchlist.md item 2;
-	// contributing/docs/absent-row-probe-design.md): resolve every overlay row
+	// Absent-row probe
+	// (contributing/docs/absent-row-probe-design.md): resolve every overlay row
 	// this run's crawl didn't see at all (O - A) before the candidate loop, so
 	// its decisions share the same map — the two sets are disjoint by
 	// construction (a candidate came from `changes`, which only ever covers
@@ -404,7 +404,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
 	}
 
-	// Compile gate (generation-punchlist.md item 1): build the staged code plus
+	// Compile gate (bigdiffer-design.md §6): build the staged code plus
 	// the registration file it implies against the real module until it
 	// compiles clean, downgrading whatever the compiler rejects. Runs before
 	// promotion so a build failure changes what gets promoted rather than
@@ -430,7 +430,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// plus the pre-run overlay, with no dependency on promotion having
 	// happened yet (contributing/docs/bigdiffer-design.md §8). The fragment
 	// is not WRITTEN until after every real-tree write below has succeeded
-	// (generation-punchlist.md item 16): writing it earlier would leave an
+	// (the fragment is written last on purpose): writing it earlier would leave an
 	// orphan CHANGELOG.md entry for a change that never actually landed if
 	// promotion, the overlay write, or the import-examples write failed.
 	changelog := changelogEntries(stagedByDest, overlayByCFN)
@@ -440,7 +440,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// batch has staged successfully and gone green. A hard error anywhere
 	// earlier (the candidate loop or the compile gate) returned before
 	// reaching here, so the real tree and the overlay are left exactly as they
-	// started (generation-punchlist.md item 12).
+	// started (never-regress batch atomicity).
 	stepf("Promoting staged output (%d artifact(s) refreshed)…", okN+brokeN)
 	if err := promoteStaged(cfg, stagingDir); err != nil {
 		return err
@@ -473,7 +473,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
 	}
 
-	// Write the CHANGELOG fragment (generation-punchlist.md item 16) last,
+	// Write the CHANGELOG fragment (bigdiffer-design.md §8) last,
 	// now that every real-tree write above has actually succeeded.
 	// writeChangelogFragment inserts the FEATURES: bullets directly into
 	// CHANGELOG.md's top, in-progress version block; a no-op when nothing was

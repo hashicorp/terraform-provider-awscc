@@ -380,8 +380,8 @@ func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
 	}
 }
 
-// TestReasonlessSuppressionAnomaly is generation-punchlist.md item 8's
-// regression test, updated for item 9b: a suppressed artifact or a freeze
+// TestReasonlessSuppressionAnomaly is the reason-less-suppression
+// regression test: a suppressed artifact or a freeze
 // with its own reason field empty is flagged per-fact, not per-row — a row
 // can have a real reason for one fact (e.g. its resource) while another of
 // its facts (e.g. its plural DS, or its freeze) is still reason-less, and

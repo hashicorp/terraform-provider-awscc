@@ -8,9 +8,11 @@ provider from the current live CloudFormation (CFN) types while protecting the
 provider from additions and updates that would break it.
 
 This is the durable design reference — what bigdiffer is, how it works, and *why*
-it is shaped this way — for maintenance and for reviewing the tool. It is not a
+it is shaped this way — for maintenance and for reviewing the tool. For a plain
+overview and the available commands, see
+[the tool's README](../../internal/tools/bigdiffer/README.md). It is not a
 runbook (see `generating-the-provider-with-bigdiffer.md` for the weekly process)
-and not a task tracker (see `generation-punchlist.md` for what is left to do).
+and not a task tracker (see "Deferred and future work" below for what is left to do).
 
 bigdiffer is shipped and drives the weekly cycle today; §11 summarizes what is
 built and what remains. Scope: generate resources, data sources, and list
@@ -25,14 +27,12 @@ changelog, PRs) are out of scope.
 
 The provider already records what it is — `internal/provider/all_schemas.hcl`
 (the "overlay") — and AWS already records what exists — the live CFN registry.
-Updating the provider is just reconciling those two facts.
+Updating the provider is reconciling those two facts directly: read the overlay,
+ask AWS what exists, reconcile, generate resiliently, write the overlay back.
 
-The legacy process did not reconcile them directly: AWS's live list was
-serialized to a dated `available_schemas.<date>.hcl`, `git diff`ed against last
-week's copy, and a human hand-transcribed the result into the overlay. The dated
-files fed nothing but the diff. bigdiffer removes that detour — read the overlay,
-ask AWS what exists, reconcile, generate resiliently, write the overlay back. No
-git, no dated snapshots, no manual transcription.
+The legacy process reconciled them indirectly instead, through a dated,
+git-diffed snapshot a human hand-transcribed into the overlay (see §10 for the
+full comparison).
 
 ## 2. Model: two inputs, one output
 
@@ -67,8 +67,7 @@ The join yields three classes with mechanical default handling:
 
 Absent is not automatically "withdrawn." Because A excludes both
 `NON_PROVISIONABLE` and `DEPRECATED` types, an absent row is resolved by one
-`DescribeType` probe (`absentTypes`/`probeAbsent`/`classifyAbsentProbe`,
-`discover.go`/`update.go`), reusing the crawl's own throttled client:
+`DescribeType` probe, reusing the crawl's own throttled client:
 
 - Probe succeeds, `DeprecatedStatus == DEPRECATED`: deactivated/deregistered —
   checked first, since a deprecated type is withdrawn regardless of what
@@ -88,24 +87,16 @@ Absent is not automatically "withdrawn." Because A excludes both
 The provider ships non-provisionable-but-live resources (e.g.
 `AWS::AppStream::StackFleetAssociation`), which a naive "absent ⇒ freeze" rule
 would wrongly freeze. Only the probe distinguishes the two. A row already
-explained — frozen, or checkout-pinned — skips the probe entirely; it needs no
-further annotation, and a checkout pin may explain an absence the probe cannot
-see (a deliberately checked-out older version). The two classes this produces,
-`classWithdrawn` and `classNonProvisionable`, feed the same `decide()` branches
-`buildCandidates`'s New/Present classes use — no new policy, no new taxonomy,
-just the probe that was the last piece connecting them.
+explained — frozen, or checkout-pinned — skips the probe entirely, since a
+checkout pin may explain an absence the probe cannot see (a deliberately
+checked-out older version). Withdrawn and non-provisionable rows feed the same
+policy table as the New/Present classes (§7) — no separate taxonomy.
 
 ## 4. Selective refresh, not teardown
 
-The legacy `make schemas` downloaded only schemas that were *missing*, then
-validated — it never compared against or replaced an existing file. An update was
-forced by deletion: `make cleanschemas` removed every `AWS_*.json` so the next
-`make schemas` re-downloaded them all, and pinning fell out of the same mechanism
-(`make suppressions` git-restored frozen JSONs first, so `make schemas` found
-them present and skipped them). A clunky stand-in for compare → replace.
-
 bigdiffer does a direct compare — download a type only when AWS's bytes differ
-from the cache, and skip frozen types outright:
+from the cache, and skip frozen types outright (the legacy equivalent forced a
+refresh by deleting every cached schema and re-downloading; see §10):
 
 - Frozen types: not re-downloaded during the normal refresh — last-good bytes
   stay (no delete/restore). The self-heal probe (§7) may re-fetch them to a
@@ -114,8 +105,6 @@ from the cache, and skip frozen types outright:
 - Present, non-frozen: downloaded only if AWS's bytes differ; a byte-identical
   refresh is a no-op that skips the gate.
 - New types: downloaded once.
-
-So `cleanschemas` and `suppressions` cease to exist as steps.
 
 ## 5. One declarative suppression surface
 
@@ -144,61 +133,220 @@ ever blocks a release.
 
 ### Generation is the gate
 
-The legacy flow had two global gates (validate, then generate), each traversing
-the whole corpus (10–15 min) and surfacing one failure at a time, forcing a rerun
-per broken schema. bigdiffer replaces them with a single pass:
-
-1. Validation is the front half of generation — generating a type for real *is*
-   validating it, so there is no separate emission-only pass to keep in sync.
-2. The pass is per-artifact and resilient — a resource, its singular data source,
-   and its plural data source each succeed or fail independently, and one
-   failure never aborts the others. Independent types run concurrently.
+Generation and validation are the same pass: generating a type for real *is*
+validating it, so there is no separate emission-only pass to keep in sync. The
+pass is per-artifact and resilient — a resource, its singular data source, and
+its plural data source each succeed or fail independently, and one failure
+never aborts the others. Independent types run concurrently.
 
 Only New and Changed types enter the gate (a byte-identical refresh is a no-op,
-§4), so a typical week gates a handful of types, not the corpus.
+§4), so a typical week gates a handful of types, not the corpus. (The legacy
+flow's two whole-corpus gates and per-failure rerun loop are gone; see §10.)
 
 ### The compile gate
 
 Generation catches schemas that won't render; it cannot catch generated code that
 renders but fails to **type-check** — a bad cross-file reference, a collision with
 a sibling in the same service package, a broken import, or a stale registration
-file. `go build` is that check. bigdiffer runs it itself, inside `-update`, before
-promoting anything — not as a separate manual `make build` afterward — so a build
-failure routes through the same policy (§7) as a generation failure, before a
-broken commit can happen.
+file. `go build` is that check. bigdiffer runs it itself, inside `-update`,
+before promoting anything, so a build failure routes through the same policy
+(§7) as a generation failure, before a broken commit can happen.
 
-It is **not** per-artifact like generation, because Go's unit of build
-success is the package, not the file: one bad file fails its whole service
-package, and building a package while a co-package candidate concurrently mutates
-it is unsafe. So the compile gate is whole-module, serial, once per batch —
-`go build ./...` from the repo root (measured: a flat ~3.1s once warm, dominated
-by the module walk across ~200 packages, not recompilation).
+It is whole-module and serial, not per-artifact like generation, because Go's
+unit of build success is the package, not the file: one bad file fails its
+whole service package, and building a package while a co-package candidate
+concurrently mutates it is unsafe. It runs by overlaying the staged files onto
+the real tree, building, and **unconditionally reverting** — the real tree is
+bit-for-bit unchanged whether the build passes or fails; only promotion, after
+a green build, writes for real.
 
-It runs by overlaying the staged files onto the real tree, building, and
-**unconditionally reverting** — the real tree is bit-for-bit unchanged whether the
-build passes or fails; only promotion, after a green build, writes for real.
-
-**Build until green (fixpoint).** On failure it parses `go build`'s
-`file:line:col` output, maps each blamed file back to the candidate/artifact that
-staged it, downgrades only those to a `build_failed` outcome, drops their staged
-files (code *and* the paired `_test.go`), re-renders the registration file from
-the updated decisions, and rebuilds — until the build is green or a small round
-cap trips. Each non-green round drops at least one artifact, so it terminates. A
-blamed file that maps to nothing staged — a pre-existing base-tree break, or a
-bug in bigdiffer's own emitted registration file — is unattributable: promote
-nothing and hard-error rather than guess.
+**Build until green.** On failure, bigdiffer maps each file `go build` blames
+back to the candidate that staged it, downgrades only those to a
+`build_failed` outcome, drops their staged files, and rebuilds — until the
+build is green or a small round cap trips. Each non-green round drops at least
+one artifact, so it terminates. A blamed file that maps to nothing staged (a
+pre-existing base-tree break, or a bug in bigdiffer's own emitted registration
+file) is unattributable: promote nothing and hard-error rather than guess.
 
 **Scope.** The compile gate covers every generated package and the registration
-file. It does **not** cover `*_gen_test.go`: `go build` never compiles test files,
-matching `make build` (`go install ./...`); a generated test that fails to compile
-is caught by `make smoke`/`make test`, as before.
+file. It does **not** cover `*_gen_test.go`: `go build` never compiles test
+files; a generated test that fails to compile is caught by `make
+smoke`/`make test`.
 
 **List-resource coupling guard.** A resource is generated advertising a list
-resource only when its plural data source is not suppressed. `reconcileListResource`
-reconciles that against generation's outcome, but the compile gate can drop the
-plural data source afterward. A post-fixpoint check refuses to promote a resource
-still advertising a list resource whose plural data source the gate rejected,
-rather than shipping a list resource with no backing data source.
+resource only when its plural data source is not suppressed, but the compile
+gate can drop the plural data source afterward. A post-fixpoint check refuses
+to promote a resource still advertising a list resource whose plural data
+source the gate rejected, rather than shipping a list resource with no
+backing data source.
+
+### Gap: the unchanged corpus is never gated (skeleton design, not yet implemented)
+
+Both gates above only run on New/Changed types (§4) — a type whose schema
+bytes are byte-identical to the cache is skipped entirely (`statusUnchanged`,
+`change.go`). That is correct for schema drift, but it means a change to the
+*machinery itself* — a template, `codegen/`, the naming package, or the Go
+toolchain — is never exercised against the ~1580 types whose schema didn't
+move this week. Today the only thing that would ever catch such a regression
+is `TestFullCorpusParity`, and only for as long as that test's legacy-engine
+comparison exists (it is itself slated for removal once the legacy engine is
+deleted, per §10). Once that guard is gone, a machinery regression on an
+unchanged-schema type would go undetected until something downstream actually
+breaks — silent, not surfaced.
+
+**Design.** Run every type through generate-then-compile every `-update`, not
+just New/Changed — the gate already exists and is deterministic and fast
+(§6's compile gate alone measures in seconds; running generation for the full
+corpus is the same order of magnitude). A schema-unchanged type that now
+fails either gate needs a result distinct from both existing outcomes:
+
+- **Not `frozen_since`.** Freezing means "the *schema* is pinned" (§7,
+  `suppressed-and-frozen.md`, "Frozen, precisely") — it also stops future
+  schema refresh for that type. A machinery regression has nothing wrong with
+  the schema; freezing it would be both the wrong claim and the wrong
+  behavior (the type should keep refreshing normally the moment the schema
+  actually changes, independent of whether the machinery currently compiles
+  it).
+- **Not `suppress_*_generation`.** Suppression means "don't generate this
+  artifact" as a standing, reason-carrying decision about the artifact. A
+  machinery regression is the tool failing to keep a promise it already made
+  last week (the artifact generated and compiled fine then) — the intent is
+  still "generate this," the tool just currently can't.
+
+**Two causes, one outcome.** A schema-unchanged failure is not automatically
+a codegen defect. Compare the freshly regenerated bytes against the committed
+file — bigdiffer already has both, no second compile pass needed — and two
+distinct causes emerge, but both resolve to the *same* thing happening to the
+artifact: it keeps its last-good committed file, unpromoted, with a reason
+attached.
+
+| Cause | Generated bytes vs. committed | What it means |
+|---|---|---|
+| `codegen_error` | **Changed**, and the new output fails | This run's codegen/plan output is different from what's shipping, and the different output is what broke. The committed file — unmodified, still what's running in production — is known-good. |
+| `toolchain_error` | **Unchanged** (byte-identical to committed), and that same file now fails | Codegen produced the exact same file it always has; the environment around it (Go version, a dependency bump, a shared runtime package) is what changed. The committed file is not "known-good" in the same sense as `codegen_error` — it was good under the *previous* environment, and might fail too if it were ever rebuilt from scratch — but it is what's *already shipping*, so leaving it in place changes nothing about the *already-released* provider — though the tree this run would commit still won't build (see disposition below). |
+
+Both are **held** for detection and reporting — the committed file is not
+replaced, and the overlay records why — under one mechanism with two reason
+categories rather than two different mechanisms. But they part ways on *release
+disposition*, and the byte-diff is the wrong thing to decide that on. The
+invariant that must hold is "the committed tree builds," and §6's fixpoint
+already computes exactly that when it reverts a failed artifact to its
+committed file and rebuilds:
+
+- `codegen_error`: reverting to the committed file goes **green** — that file
+  is genuinely known-good — so the artifact is held, its marker persisted, and
+  the release proceeds.
+- `toolchain_error`: the committed file *is* the file that failed (the
+  regenerated bytes were byte-identical), so reverting to it stays **red** —
+  the tree this run would commit does not build under the current environment.
+  That cannot ship, so a `toolchain_error` **blocks the run** (hard-error,
+  reported per-artifact) rather than completing with a held marker. "Nothing
+  changes about the *already-released* provider" is true; "the release proceeds"
+  is not.
+
+So the byte-diff still labels the cause for the report, but the hold-vs-block
+decision keys on the fixpoint's post-revert build result — which also correctly
+handles the case the byte-diff would mislabel: regenerated bytes differ, yet the
+committed file *also* fails under a bumped toolchain (labeled `codegen_error`,
+but post-revert red, so blocked). Only `codegen_error` ever reaches the overlay
+as a persisted `held` marker; `toolchain_error` is a transient, run-blocking
+report artifact. This also sidesteps needing to treat either as a suppression:
+nothing is removed from the provider, so there is no "backlog" framing to force
+onto it the way an actual suppression implies.
+
+**Proposed: a new `held` per-artifact status, orthogonal to `frozen_since` and
+`suppress_*`.**
+
+- **Three-way per-artifact split, matching `suppress_*_generation` exactly.**
+  `held_resource` / `held_singular_data_source` / `held_plural_data_source`
+  (bool) plus `held_reason_resource` / `_singular_data_source` /
+  `_plural_data_source` (string, `category: detail` shape, category one of
+  `codegen_error` / `toolchain_error` — a proposed addition to
+  `suppressed-and-frozen.md`'s existing five-category taxonomy, §7). List
+  resource is not a fourth bucket, for the same reason it isn't one for
+  `suppress_*_generation` today: it isn't an independent artifact, it's an
+  attribute of the resource artifact (`-listresource`, gated by whether the
+  plural data source is suppressed — §6's "list-resource coupling guard").
+  A list-resource-specific compile failure is the *resource* artifact's own
+  `held`, with the reason text naming the list resource specifically, not a
+  separate `held_list_resource`.
+- **Self-clearing.** Because the full corpus is re-attempted every `-update`
+  (not just on a schema change), a held artifact is re-evaluated every run:
+  the run after the regression is fixed (in codegen, or by the environment
+  moving again — a further dependency bump, a template fix, etc.), that
+  artifact generates/compiles cleanly, is promoted, and the marker clears
+  automatically — no `-heal` step needed for this category specifically,
+  unlike `unknown`/`manual` rows.
+- **Distinguishable from a real suppression in the report and the overlay.**
+  A held row is not backlog (nobody needs to open a "fix this resource's
+  schema" issue — the resource's schema is fine) and not something a human
+  approves; it is bigdiffer telling its own maintainers "the last cycle's
+  output changed or the environment changed, either way this needs a code
+  fix, not an overlay edit." The change report gets a distinct section for
+  it (parallel to the existing frozen/suppressed section), grouped by reason
+  category so a `toolchain_error` spike after a dependency bump is
+  immediately visible as one event, not scattered among unrelated
+  `codegen_error` rows — and `-check` flags any held row as an anomaly
+  (parallel to today's `anomalyProblems()`) rather than passing silently, so
+  a held marker surviving past the PR that should have fixed it is itself a
+  signal the fix didn't land.
+- **Only schema-unchanged failures are eligible.** A schema-changed type that
+  fails is already covered by the existing freeze/suppress branches in §7's
+  policy table — the schema itself is the newest variable there, so
+  `generation_failed`/`build_failed` under a freeze or suppression remains
+  the right call, not `held`.
+
+**Attribution, and when to give up on attribution.** A build failure is
+attributable when `go build`'s blame maps cleanly to a staged artifact/package
+(exactly the mapping §6's fixpoint loop already does) — that covers both
+causes above, including a dependency bump that breaks some resources and not
+others: each affected resource is held individually, with its own
+`toolchain_error` reason, and the rest of the corpus proceeds unaffected. A
+blamed file that maps to nothing staged is unattributable exactly as §6
+already defines it (a pre-existing base-tree break, or a bug in bigdiffer's
+own emitted registration file) — that case is not "held," it hard-errors the
+run today and should continue to.
+
+**A wide `codegen_error` batch should still stop the run.** The systemic
+dependency-bump case is already caught — its committed files stay red on
+revert, so `toolchain_error` blocks regardless of count. What a volume
+threshold still guards is a large `codegen_error` batch: each is individually
+holdable and shippable (post-revert green), but a run that holds hundreds of
+them is a systemic codegen regression, and completing "successfully" while
+silently skipping a large fraction of the corpus would bury the signal in a
+huge, technically-accurate report. Proposed: track the held count as a fraction
+of the gated corpus during the full-corpus sweep, and above a threshold
+(illustrative, not committed: something like 10–20% of attempted types, or a
+held count over N in the low hundreds), hard-error instead of completing — the
+same "abort on aggregate" instinct §6 already has, triggered by volume instead
+of by an unmappable blame. Below the threshold, held rows are exactly the
+clear, per-artifact signal the report already makes them, and the release
+proceeds.
+
+**Noted, not designed here: unifying the taxonomy.** `held_*` above still
+follows today's two-attribute-per-fact convention (a bool plus a separate
+`_reason` string), matching `suppress_*_generation`/`suppression_reason_*`
+and `frozen_since`/`frozen_reason` as they exist now, so `held` ships
+consistent with the levers already in the overlay. Collapsing all three into
+one self-describing attribute per fact (dropping the boolean *and* the
+`_reason` suffix — the value already reads as an explanation on its own,
+e.g. `resource_suppressed = "structural: <detail>"` conveys everything
+`suppress_resource_generation = true` + `suppression_reason_resource = "..."`
+does today) is a separate, larger design problem, called out as its own item
+in "Deferred and future work" rather than folded into `held` here — `held`'s
+shape is chosen to be additive toward a possible future unification, not another
+format to migrate away from later, but the unification itself needs its own
+design pass before scheduling.
+
+This keeps all three of bigdiffer's guarantees simultaneously once
+implemented: never regress a shipped artifact, always reflect the latest
+schema, and always reflect the latest machinery wherever it can — with every
+place it can't recorded per-artifact, never silent. It also removes
+`TestFullCorpusParity`'s role as the only engine-change guard, unblocking that
+test's own retirement (§10, "Deferred and future work").
+
+Design only — not yet implemented. Tracked as the next `held`/machinery-gap
+work item in "Deferred and future work."
 
 ## 7. Policy: results become overlay edits
 
@@ -219,6 +367,8 @@ a freeze, when one applies, carries its own separate `frozen_reason`.
 | Non-provisionable (live) | n/a | keep block; set `non_provisionable = true` |
 | Withdrawn | n/a | set `frozen_since`; keep bytes |
 | Frozen / suppressed | ok on re-probe | propose un-freeze / un-suppress |
+| Unchanged (schema) | failed, committed file still builds (`codegen_error`) | hold the failed artifact(s): keep last-good bytes, persist `held_*` marker, ship; never `frozen_since` *(design, §6, not yet implemented)* |
+| Unchanged (schema) | failed, committed file also fails (`toolchain_error`) | block the run — the committed tree won't build; report per-artifact, persist nothing *(design, §6, not yet implemented)* |
 
 Two invariants keep every row safe by default:
 
@@ -231,7 +381,9 @@ The reason taxonomy (`structural` / `generation_failed` / `build_failed` /
 `manual` / `unknown`), the `-check` reason anomaly, and the `-heal` re-probe are
 specified in `suppressed-and-frozen.md`. The last table row is self-healing:
 policy is recomputed every cycle, so a type AWS has since fixed is proposed for
-recovery automatically.
+recovery automatically. Two more categories, `codegen_error` and
+`toolchain_error`, are proposed in §6 ("Gap: the unchanged corpus is never
+gated") but not yet implemented.
 
 ## 8. The one human step
 
@@ -239,33 +391,18 @@ Everything above is mechanical. The human reviews the change report before
 commit: confirm or override auto-applied freezes/suppressions, supply the
 appropriate per-artifact `suppression_reason_*` (or `frozen_reason`) text and
 issue links, and adjudicate flagged anomalies. The report is plain,
-consistently-shaped text (one fact per line: CFN type, label, field, reason) —
-a structured (JSON) form was considered and de-scoped
-(`generation-punchlist.md` item 11): the actual consumers are a human or an
-LLM agent working through proposals interactively, and both read this text
-output at least as reliably as JSON, without a second schema to keep in sync
-with every future taxonomy change.
+consistently-shaped text (one fact per line: CFN type, label, field, reason),
+readable by a human or an LLM agent working through proposals interactively.
 
-`-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry
-itself, writing directly into the file's top, in-progress version block
-(e.g. `## 1.100.0 (Unreleased)`; a release-prep commit retitles it with the
-real date and starts a fresh one immediately after cutting a release) —
-`generation-punchlist.md` item 16. No side file: bigdiffer normally runs
-once per release cycle and drafts the whole entry in a single pass, so it
-assumes that block's `FEATURES:` section is empty or absent when it runs,
-and errors rather than guess at a merge if it already has bullets (the fix
-in that case is to add the new ones by hand). The source of truth is the
-set of artifacts the run actually promotes (read from `stagedByDest`
-*after* the compile gate settles, so a gate-rejected artifact is never
-announced), filtered to artifacts that were not already user-visible on
-the pre-run overlay: every promoted artifact of a brand-new type, or a
-specific artifact whose own `suppress_*_generation` flag was set on the
-pre-run row (a backlog lift, or the "AWS added the plural list operation
-to an existing type later" case that motivated the reason split, item 9b —
-the plural data source and its `ListResource` become newly user-visible
-without touching the already-shipped resource or singular data source).
-The PR number and any `NOTES:`/breaking-change entries stay a human step;
-`-update` only inserts the mechanical bullets.
+`-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry,
+writing directly into the file's top, in-progress version block (e.g.
+`## 1.100.0 (Unreleased)`). The bullets come from what the run actually
+promoted, filtered to artifacts not already user-visible before this run — a
+brand-new type, or a specific artifact whose suppression was just lifted. It
+assumes that block's `FEATURES:` section is empty or absent when it runs (the
+normal case — bigdiffer runs once per release cycle) and errors rather than
+guess at a merge if it already has bullets; add the new ones by hand in that
+case. The PR number and any `NOTES:`/breaking-change entries stay a human step.
 
 ## 9. Design decisions (proven in the tool)
 
@@ -296,16 +433,14 @@ These choices are settled in `internal/tools/bigdiffer`:
   import-boundary test forbids any bigdiffer file from importing
   `internal/provider/generators/**` or the legacy `internal/naming`.
 - **Resilient, concurrent discovery.** `DescribeType` fans out over a bounded
-  worker pool (`errgroup`); a per-type failure is captured in-band, not aborting
-  the crawl — the same "one failure never blocks the rest" principle the gates use.
-- **Concurrency is proven, not assumed, and required a real fix.** The data race
-  the detector caught was localized to the shared pluralizer — the legacy
-  `internal/naming.Pluralize` calls `inflection.AddIrregular` on every
-  invocation, mutating that library's global rules. bigdiffer owns a copy of the
-  naming logic (`internal/tools/bigdiffer/naming`) that registers the irregular
-  once behind a mutex, eliminating the race at its source. `codegen.Emitter`
-  itself has no mutable package-level state and is driven concurrently in
-  production (`-race`-clean, ~7× over serial).
+  worker pool; a per-type failure is captured in-band, not aborting the crawl —
+  the same "one failure never blocks the rest" principle the gates use.
+- **The shared pluralizer is not shared.** The legacy `internal/naming.Pluralize`
+  mutates the `inflection` library's global rules on every call, making it
+  unsafe under concurrency. bigdiffer owns a copy (`internal/tools/bigdiffer/naming`)
+  that registers the irregular once behind a mutex. `codegen.Emitter` itself
+  has no mutable package-level state and is driven concurrently in production
+  (`-race`-clean, ~7× over serial).
 - **Generation and runtime are separate; generated output is not relocated.**
   bigdiffer (the tool + its `codegen` copy) is generation; the emitted
   `internal/aws/**`, the registration file, and the runtime packages they
@@ -326,7 +461,7 @@ These choices are settled in `internal/tools/bigdiffer`:
 | `make resources`, `make singular-data-sources`, `make plural-data-sources` | bigdiffer owns the engine and generates in-process and in parallel, only for New + Changed types (§6, "The generator surface"). |
 | `make docs-all` | bigdiffer orchestrates it — owns `docs-import`, invokes the standard `tfplugindocs` + `docs-fmt`; it does not reimplement `tfplugindocs`. |
 | 3000+ `//go:generate` directives + the three `resources.go` / `*_data_sources.go` directive files | Replaced by in-process parallel generation and a single blank-import registration file ("The generator surface"). |
-| `make build` as the manual compile check | bigdiffer runs the compile gate itself, in `-update`, before promotion (§6). `make build` remains a fine belt-and-suspenders confirmation, no longer the primary catch. |
+| `make build` as the manual compile check | bigdiffer runs the compile gate itself, in `-update`, before promotion (§6); `make build` afterward is a confirmation, not the primary catch. |
 
 Nothing above is deleted in the cutover. The legacy generators, directive files,
 and `make` targets stay as a documented, deprecated fallback. The cutover is
@@ -347,8 +482,8 @@ as a regression guard. The `-check`, `-update`, `-generate`, `-docs`, and `-heal
 modes are all live.
 
 Remaining work — GitHub-issue guidance, the one-time reason backfill, and the
-deferred cleanups below — is tracked with priorities and current status in
-`generation-punchlist.md`. None of it blocks the weekly cycle today; see
+deferred cleanups below — is listed under "Deferred and future work" below.
+None of it blocks the weekly cycle today; see
 `generating-the-provider-with-bigdiffer.md` for the operational process and the
 legacy fallback.
 
@@ -364,8 +499,8 @@ file, the teardown, the double gate, and manual transcription all disappear.
 
 ## The generator surface (reference)
 
-How generation and registration actually work, grounded by reading the
-generators — the reference for anyone touching the engine.
+How generation and registration work — reference for anyone touching the
+engine.
 
 - **Registration is self-contained.** Each generated file self-registers in its
   own `func init()` via `registry.AddResourceFactory` / `AddListResourceFactory`
@@ -418,13 +553,78 @@ generators — the reference for anyone touching the engine.
 
 ## Deferred and future work
 
-Real, not-yet-done items. `generation-punchlist.md` tracks these at a high level
-with status; the detail lives here.
+The durable list of remaining work — this section is the single tracker now that
+the standalone generation punchlist is retired. Each item is either tracked by a
+linked GitHub issue or described in enough detail here to act on.
 
+- **`held`: gate the unchanged corpus too (engine-change safety).** Full
+  skeleton design in §6 ("Gap: the unchanged corpus is never gated") and §7's
+  policy table. Implementation: run generate-then-compile over the whole
+  corpus every `-update`, not just New/Changed; add the `held_*` per-artifact
+  attributes and the `codegen_error` / `toolchain_error` reason categories
+  (`policy.go`, `suppressed-and-frozen.md`); surface held rows as a distinct,
+  category-grouped report section and a `-check` anomaly; add the
+  volume-based abort threshold (§6) so a wide, attributable regression still
+  stops the run instead of completing as a large held batch. Replaces
+  `TestFullCorpusParity` as the engine-change guard, unblocking that test's
+  own retirement. *The one medium item outstanding.*
+- **Unify the overlay's exclusion levers — candidate shape, needs its own
+  design pass.** Not scheduled, not decided; documented so the next design step
+  has a starting point, not a conclusion. Today every exclusion is a
+  boolean-plus-separate-reason-string pair — `suppress_resource_generation` +
+  `suppression_reason_resource`, `frozen_since` + `frozen_reason`, and (once
+  implemented) `held_resource` + `held_reason_resource` — three levers,
+  six-plus attributes per artifact, with a flag/reason-mismatch class `-check`
+  has to guard against.
+
+  The realization that shapes this: these facts live on **two different
+  granularities**, so "unify" cannot mean "one attribute per row."
+
+    - **Output disposition — per-artifact (the trio).** `suppress` and `held`
+      are both "what happened to this artifact's output," and each of the three
+      artifacts (resource / singular data source / plural data source) carries it
+      independently. *Candidate:* one self-describing attribute per artifact —
+      `resource = "held: codegen_error: <detail>"`,
+      `singular_data_source = "suppressed: manual: <detail> (issue: URL)"`; absent
+      means "generate normally." The `state:` prefix (`suppressed` vs `held`) is
+      how consumers route — `held:` is always a `-check` anomaly; a `suppressed:`
+      with no `category: detail` is the reason-less anomaly — collapsing two
+      levers into one and removing the flag/reason mismatch.
+    - **Schema input state — per-type.** `frozen_since` pins the *shared* schema
+      JSON (one file backs all three artifacts — the "cannot partially advance"
+      invariant), so it is inherently whole-type and does not belong in the trio;
+      forcing it in would triplicate it and break that invariant. It also carries
+      a *date*, which resists the "one self-describing string" collapse.
+
+  This is one candidate, not a plan. **Open questions, and reasons it may land
+  differently:** whether `frozen_since`'s date folds into a value or stays a
+  distinct field; whether the trio is three flat attributes or a nested
+  `artifacts {}` block; how the intra-trio coupling (a suppressed/held
+  `plural_data_source` forces the `resource` to drop its list-resource
+  capability — §6's guard) is represented, if at all, versus left as a
+  generation-time rule; and a migration path for ~1580+ existing rows and every
+  consumer (`resourceRow`, `-check`, `-heal`, the HCL schema). It is a breaking
+  change to the overlay format, well beyond a point release, and worth weighing
+  against simpler alternatives — e.g. keeping today's pairs but adding a single
+  `-check` invariant for the mismatch class — before committing to a rewrite.
+  `held` (§6) is being designed to sit *additively* toward this direction, not
+  to foreclose it; because it has no existing rows it could serve as a low-risk
+  pilot for the disposition shape, but that too is a call for the dedicated
+  design pass, not this work.
+- **Move dedup "tags" out of the schema bytes into an `all_schemas.hcl`
+  argument.** The deduplication marker currently lives inside the pinned schema
+  JSON; make it a first-class overlay argument (a `resourceRow` field + generator
+  support) so it is visible and diffable in the overlay. Enabler for the dedup
+  thaw below.
+- **Thaw resources that now generate cleanly.** The ~63 deferred lift-candidates
+  recorded in #3323 (`manual: lift candidate; generates and compiles cleanly …
+  pending a batched lift`), plus resources unlocked by the new dedup approach and
+  any freezes whose pinned bytes now generate. Confirm with `-heal`; lift in
+  batches, each its own reviewed PR (generated-code diffs, never a data-only
+  ride-along).
 - **Checkout-file retirement (§5).** Fold `suppressions_checkout.txt` fully into
-  `frozen_since` and stop reading the external file. Orthogonal to the reason
-  taxonomy; a pure simplification once nothing else depends on the checkout list.
-- **Delete the legacy generators, directive files, and `make` targets.** Only
-  after full-corpus parity has held for several real weekly cycles. This is what
-  finally resolves the conceptual cutover into a physical one; until then the
-  legacy path is the documented fallback (§10).
+  `frozen_since` and stop reading the external file. Part of legacy removal below.
+- **Delete the legacy generators, directive files, and `make` targets** — after
+  the engine has driven several clean weekly cycles with no fallback. Tracked by
+  #3330 and `removing-the-legacy-generation-process.md`; resolves the cutover from
+  conceptual to physical (§10).

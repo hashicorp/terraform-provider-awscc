@@ -3,15 +3,14 @@
 
 # Removing the legacy generation process
 
-A checklist for punchlist item D ("Adopt — phase 2: delete the redundant legacy
-machinery"), including the folded-in design items 13 (checkout-file retirement)
-and 15 (delete legacy generators/directives/`make` targets). Follow this once
-bigdiffer has been the weekly driver for several clean release cycles and nobody
-has needed the
+A checklist for deleting the redundant legacy generation machinery (adopt phase
+2), including the folded-in design items 13 (checkout-file retirement) and 15
+(delete legacy generators/directives/`make` targets). Tracked by #3330 and
+`bigdiffer-design.md` "Deferred and future work". Follow this once bigdiffer has
+been the weekly driver for several clean release cycles and nobody has needed the
 [legacy fallback](generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process).
 
-This is a **transient tracking doc**, like `generation-punchlist.md` — delete it
-once the checklist below is done.
+This is a **transient tracking doc** — delete it once the checklist below is done.
 
 ## Before you start
 
@@ -140,8 +139,7 @@ on.
 7. **Delete `generating-the-provider.md`** (the legacy runbook), then sweep for
    dangling links: `grep -rl 'generating-the-provider.md' .` currently matches
    `contributing/CONTRIBUTING.md`, `contributing/docs/resource-behavior.md`,
-   `contributing/docs/suppressed-and-frozen.md`,
-   `contributing/docs/generation-punchlist.md`, and
+   `contributing/docs/suppressed-and-frozen.md`, and
    `internal/tools/bigdiffer/README.md` (plus
    `generating-the-provider-with-bigdiffer.md`, handled in step 8, and this doc,
    deleted in step 12). Fix or remove every referrer.
@@ -185,8 +183,8 @@ on.
     crawl, needs credentials) and adds nothing the offline checks do not cover
     for a deletion-only change.
 
-11. **Update `generation-punchlist.md`:** mark item D (and the folded-in items
-    13/15) done, then delete the punchlist entirely per its own stated lifecycle
-    once nothing else is outstanding.
+11. **Close out the tracking:** mark the legacy-removal item done in
+    `bigdiffer-design.md` "Deferred and future work" (and the folded-in items
+    13/15), and close #3330.
 
 12. **Delete this doc.**

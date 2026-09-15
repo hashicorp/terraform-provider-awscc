@@ -69,7 +69,7 @@ func TestRefreshCandidateSuccess(t *testing.T) {
 
 // TestRefreshCandidateNeverRegress feeds unparseable schema bytes for a type
 // whose plural data source is real (AWS::Logs::LogGroup). Per-artifact
-// independence (generation-punchlist.md item 4) means this is a *partial*
+// independence means this is a *partial*
 // failure, not a total one: the plural data source generates from the
 // CloudFormation type name alone (codegen.GeneratePluralDataSource never reads
 // the schema file), so it succeeds regardless of the garbage bytes, while the
@@ -168,8 +168,8 @@ func TestRefreshCandidateTotalFailureNeverRegress(t *testing.T) {
 }
 
 // TestReconcileListResourceDropsListResourceOnFailedPlural exercises the
-// resource↔plural ListResource coupling directly (generation-punchlist.md item
-// 4's "Done when": a New/Present type whose resource succeeds but whose plural
+// resource↔plural ListResource coupling directly: a New/Present type whose
+// resource succeeds but whose plural
 // data source fails must not be promoted advertising a list resource with no
 // working plural data source behind it).
 func TestReconcileListResourceDropsListResourceOnFailedPlural(t *testing.T) {
@@ -239,7 +239,7 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 }
 
 // TestUpdateBatchAtomicity is the item-12 regression test
-// (generation-punchlist.md "Never-regress cross-type atomicity"): it drives the
+// (never-regress cross-type atomicity): it drives the
 // same stage-everything-then-promote-once sequence runUpdate uses across a
 // multi-candidate batch, injects a hard failure partway through (a candidate
 // whose staging write fails outright, mirroring what a disk error mid-batch

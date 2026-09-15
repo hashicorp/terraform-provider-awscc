@@ -18,6 +18,8 @@ ability to merge PRs and respond to issues.
 - [Resource Behavior](./docs/resource-behavior.md)
 - [Adding Examples to Generated Documentation](./docs/adding-examples-to-documentation.md)
 - [Generating the Provider (with bigdiffer)](./docs/generating-the-provider-with-bigdiffer.md)
+  ([bigdiffer overview](../internal/tools/bigdiffer/README.md),
+  [bigdiffer design](./docs/bigdiffer-design.md))
 - [Generating the Provider (legacy fallback)](./docs/generating-the-provider.md)
 - [Issue Reporting and Lifecycle](./docs/issue-reporting-and-lifecycle.md)
 - [Pull Request Submission and Lifecycle](./docs/pull-request-submission-and-lifecycle.md)

@@ -42,7 +42,7 @@ them currently record *why* they were pulled. This doc has two parts:
 | `suppress_plural_data_source_generation` | bool | one artifact (+ gates `ListResource`, see below) | don't generate/emit the plural data source |
 | `frozen_since` | date string | whole type | stop refreshing this type's schema from AWS; keep last-good bytes |
 | `non_provisionable` | bool | whole type | annotation only: AWS lists the type but it cannot actually be provisioned (no generation impact) |
-| `suppression_reason_resource` / `_singular_data_source` / `_plural_data_source` | string | one artifact each | one reason per artifact, not one shared field — see below and `generation-punchlist.md` item 9b |
+| `suppression_reason_resource` / `_singular_data_source` / `_plural_data_source` | string | one artifact each | one reason per artifact, not one shared field — see below |
 | `frozen_reason` | string | whole type | why the schema is pinned; independent of any artifact's own reason |
 | `internal/update/suppressions_checkout.txt` | file, external | whole type | a separate, older mechanism: pins specific `internal/service/cloudformation/schemas/AWS_*.json` files via `git checkout` so a refresh keeps last-good bytes. Orthogonal to everything above; read-only cross-reference in bigdiffer today (see `bigdiffer-design.md` §5 and "Deferred and future work" for the planned fold into `frozen_since`) |
 
@@ -112,7 +112,7 @@ since been closed: it now runs for **Present** types on a partial failure
 the reason carries a **taxonomy** (`category: detail`, Part 2), the
 **compile gate** runs inside `-update` so `build_failed` is a real category, not
 a manual `make build` afterthought (`bigdiffer-design.md` §6), and the reason
-itself is now split per-artifact (`generation-punchlist.md` item 9b) rather than
+itself is now split per-artifact rather than
 one field trying to describe more than one fact at once. What remains is
 applying that machinery to the *existing* reason-less backlog — Part 2's
 `-check`/`-heal` and the one-time backfill.
@@ -237,7 +237,7 @@ Concretely:
   `manual` for a deliberate hold) — a separate field from any artifact's own
   `suppression_reason_*`, since the freeze is a schema-level fact independent
   of which (if any) artifacts are also suppressed
-  (`generation-punchlist.md` item 9b). This is new: today `frozen_since`
+  (one reason per artifact). This is new: today `frozen_since`
   carries no reason at all (see Part 1).
 - A **withdrawn** type (gone from AWS's live listing) is frozen with reason
   category `manual` and a fixed detail string (`withdrawn from AWS, pending
@@ -250,7 +250,7 @@ of a frozen (or live) schema version is what determines what actually builds.
 
 ### Per-artifact independence
 
-This is the behavior change tracked in `generation-punchlist.md` (implementation,
+This is a behavior change (an implementation detail,
 not this doc):
 a resource, its singular data source, and its plural data source succeed or
 fail **independently** within one generation pass against one schema version,
@@ -365,8 +365,8 @@ row's other facts already have a real reason, `-heal`:
    offered as a *candidate* to each pending fact independently, visibly
    marked as shared/unconfirmed — never silently duplicated into multiple
    fields as if it confirmed each one ("propose, don't auto-split", the
-   review resolution behind `generation-punchlist.md` item 9b; this also
-   directly fixes item 9a, a structurally-cannot-fail plural data source
+   review resolution behind the per-artifact reason split; this also
+   directly fixes the case of a structurally-cannot-fail plural data source
    re-proposing `lift` forever once a human has recorded any real reason for
    it specifically).
 
