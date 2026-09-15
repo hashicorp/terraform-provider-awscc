@@ -12,8 +12,8 @@ running a chain of `make` targets.
 - **Weekly release process:** `contributing/docs/generating-the-provider-with-bigdiffer.md`
   (and the legacy fallback in `generating-the-provider.md`).
 - **Design and status:** `contributing/docs/bigdiffer-design.md` (the durable
-  design reference — model, gates, policy, the generator surface, deferred work)
-  and `contributing/docs/generation-punchlist.md` (what is left to do).
+  design reference — model, gates, policy, the generator surface, and the
+  "Deferred and future work" list of what is left to do).
 
 > Note: there is also a `make bigdiffer` target that only prints the raw `diff`
 > between two dated `available_schemas` files. It is unrelated and slated for
