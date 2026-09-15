@@ -25,52 +25,63 @@ changelog, PRs) are out of scope.
 
 ## 0. User stories: the paths through bigdiffer
 
-Six needs drive every command bigdiffer has (or should have). Stated first,
+Five needs drive every command bigdiffer has (or should have). Stated first,
 before the model and the gates, because the paths a maintainer actually walks
 should shape the design, not fall out of it after the fact — this section
 should have existed from the start.
 
-1. **Weekly release prep.** Crawl AWS, refresh what changed, gate it, promote,
-   open a PR. (Today's `-update`.)
-2. **"Did my codegen/toolchain change just break something?"** — a human,
-   locally, after touching a template, `codegen/`, naming, or bumping a
-   dependency/Go version. No AWS involved; nothing should be promoted just to
-   answer the question. Today's gap: nothing runs this check at all (§6,
-   "Gap: the unchanged corpus is never gated") — a dependency bump today gets
-   effectively no verification beyond whatever `go build ./...` already
-   catches for code that happens to be touched.
-3. **The same check, in CI, on every PR that could have broken generation.**
-   Identical operation to story 2 — different caller (CI, not a human),
-   gating a merge instead of informing a person before one.
-4. **Actually land a machinery fix without an AWS crawl.** Same gated pass as
-   2/3, but this time promote: write the regenerated files, clear any `held`
-   markers that now resolve, commit.
-5. **"Is the overlay itself healthy right now?"** Including whether anything
-   is currently `held`. Offline, structural, no generation attempted — today's
-   `-check`, extended to treat a `held` marker as an anomaly the same way a
-   reason-less suppression already is.
-6. **Revisit an old suppression, freeze, or hold and see if it still holds
-   up.** Today's `-heal` only proposes reasons for reason-less/`unknown` rows;
-   this story is different — a human going back to a year-old, *already
-   reasoned* decision and asking bigdiffer to re-attempt it, on demand, to see
-   if the underlying problem is still real (queued: "Deferred and future
-   work").
+Told plainly, with no tool-specific words — no command names, no "overlay,"
+no "gate," no "promote" — to get down to what each one actually *is* before
+any of that vocabulary gets attached to it:
 
-Stories 2 and 3 are the identical operation; so are 1 and 4, up to whether AWS
-is consulted. That collapses six *needs* into three *operations* —
-crawl-and-promote, gate-and-report, gate-and-promote — each runnable with or
-without an AWS crawl, plus the two read-only paths (5, 6) that never generate
-anything. The exact command surface for these three operations (today's
-`-update` and `-generate`, plus a currently-missing gate-and-report path) is
-not yet settled — see "Deferred and future work." `held` is the one state distinct from `suppress`/`frozen` in exactly
-this respect: `suppress_*`/`frozen_since` are inputs the gate honors (skip this,
-don't refresh that); `held` is only ever an *output* of an attempt, so it must
-be re-attempted, not just skipped, every time one of these paths runs against
-that artifact — and cleared the moment the attempt succeeds. A `held` marker
-that outlives its cause is a bug in the removal step, not an acceptable steady
-state, the same way a stale `frozen_since` on a type AWS un-deprecated would be
-(§7's self-healing row already handles that case for `frozen`; `held` needs
-the equivalent guarantee, actively enforced, not just implied by "self-clearing").
+1. **"It's been a week. Go see what's new and bring the provider up to
+   date."** Somebody (or something, on a schedule) needs to go ask AWS what
+   changed, update everything that needs updating, and get it ready to ship.
+2. **"I just changed how the code gets written. Redo everything with the new
+   way, and don't ask AWS anything — I just want today's version of
+   everything, generated fresh."** This is what actually makes the fix real:
+   after the tool's own machinery changes, someone has to re-run it against
+   what's already known and end up with the new, current output on disk.
+3. **"Before I do that — will changing how the code gets written break
+   anything? Just tell me, don't change anything yet."** The cautious,
+   look-before-you-leap version of #2: try it, see what would happen, report
+   it, touch nothing. Somebody should be able to ask this before making a
+   change, and a robot should be able to ask this automatically every time
+   somebody proposes one — same question, asked by a person once in a while
+   or by a machine every single time, no difference between the two askers.
+4. **"Never mind the code-writing machinery — is everything else in good
+   shape right now?"** A completely different worry: not "would regenerating
+   break," but "is the bookkeeping itself consistent, sensible, and
+   explained" — are there duplicates, contradictions, unexplained gaps,
+   things marked as broken with no note about why.
+5. **"Someone decided a while back that this one thing was broken or
+   excluded. Is that still true, or has it quietly become fine?"** Old
+   judgment calls rot. Something declared unfixable a year ago may not be
+   anymore, and nothing today goes back and asks.
+
+Two pairs among these are really one idea wearing two hats: #2 and #3 are the
+identical action — try the machinery against what's already known, no AWS —
+differing only in whether the result is kept or thrown away after being
+reported. #1 is that same action's bigger sibling, with "ask AWS first" bolted
+on the front. So underneath five stories are really three distinct actions —
+*ask AWS and bring current, redo-without-asking-and-keep, redo-without-asking-
+and-only-report* — plus two that never touch generation at all (#4 reads the
+bookkeeping; #5 revisits an old, specific decision on demand). The exact
+command surface for these — names, flags, whether #2/#3 share one verb with a
+flag or not — is not yet settled; see "Deferred and future work."
+
+`held` (§6, the feature this design is being written for) only makes sense
+against this list once one distinction is drawn: `suppress_*`/`frozen_since`
+are things a person already decided (inputs the machinery is told to honor —
+skip this, don't touch that); `held` is never decided by a person, it only
+ever comes *out of* an attempt that was made and failed. That means every one
+of stories #1–#3 must re-attempt a held thing, not skip it, every single time
+— and the moment an attempt on it succeeds, the mark must come off on its own.
+A mark that outlives the problem it recorded is a bug in whatever removes it,
+not an acceptable resting state — the same standard already expected of an
+old freeze once AWS un-deprecates a type (§7's self-healing row); `held` needs
+that same guarantee, actively enforced, not just assumed from "it clears
+itself eventually."
 
 ## 1. Core insight
 
