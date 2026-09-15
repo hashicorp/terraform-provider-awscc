@@ -3,6 +3,18 @@
 
 # bigdiffer: design
 
+> **Out of sync with an in-progress redesign.** `held-artifacts-design.md` and
+> `redesign-punchlist.md` describe a command-surface redesign (`sync` /
+> `reconcile` / `check` / `lint` / `recheck`) currently being implemented on
+> this branch. This file intentionally is **not** being updated incrementally
+> alongside that work — it still describes today's `-update`/`-generate`/
+> `-check`/`-heal` commands and gates. It will be brought current in one pass
+> once the redesign's implementation is complete (`redesign-punchlist.md`
+> tracks that as its own item), rather than drifting through many partial
+> updates while the design is still settling. Until then, treat
+> `held-artifacts-design.md` as the current source of truth for anything it
+> covers.
+
 **bigdiffer** (`internal/tools/bigdiffer`) regenerates the Terraform AWSCC
 provider from the current live CloudFormation (CFN) types while protecting the
 provider from additions and updates that would break it.

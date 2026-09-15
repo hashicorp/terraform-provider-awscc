@@ -356,11 +356,15 @@ Ordered so each step is independently mergeable and leaves the tool working:
    New/Changed) — the one behavior change to `sync` beyond its rename.
 7. **`lint`'s new anomaly** + **`recheck`'s reasoned-row flag**: small,
    independent, no dependency on 2–6.
-8. **Reporting** (§4.4) and **`suppressed-and-frozen.md`** documentation of
-   the two new reason categories.
-9. **Docs**: fold the durable parts into `bigdiffer-design.md` (§0's command
-   table, §6, §7), update the README and runbook for the new command names,
-   delete this file.
+8. **Reporting** (§4.4) — the end-of-run held summary and its presence in
+   the PR diff. Code/behavior only; no doc changes here (see step 9).
+9. **Reconcile every other doc in one pass, last.** Decided explicitly:
+   this file and `redesign-punchlist.md` are the only docs touched while
+   steps 1–8 are in progress. Once they're done, update
+   `bigdiffer-design.md` (drop its out-of-sync notice; fold in §0's command
+   table, §6, §7), the README, the runbook, and `suppressed-and-frozen.md`
+   (the two new reason categories) together in one pass — not incrementally
+   alongside steps 1–8 — then delete this file and `redesign-punchlist.md`.
 
 ## 7. Open questions
 

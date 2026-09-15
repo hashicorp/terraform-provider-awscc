@@ -62,14 +62,18 @@ item below is independently mergeable and leaves the tool working.
    headline first if the run blocked or tripped the threshold); `held`
    markers appearing in the `sync`/`reconcile` PR diff. *(core)* Detail:
    `held-artifacts-design.md` §4.4, §6 step 8.
-10. **`suppressed-and-frozen.md`.** Document the two new reason categories
-    (`codegen_error`, `toolchain_error`) alongside the existing five. *(core)*
-    Detail: `held-artifacts-design.md` §6 step 8.
-11. **Fold into the durable docs, then delete this file and
-    `held-artifacts-design.md`.** `bigdiffer-design.md` §0's command table,
-    §6 (the gates), §7 (the policy table); the README and runbook's command
-    names and examples. *(core, last)* Detail: `held-artifacts-design.md` §6
-    step 9.
+10. **Reconcile every other doc in one pass, last — not incrementally.**
+    Decided explicitly: `held-artifacts-design.md` and this file are the
+    *only* docs that change while implementation is in progress. Everything
+    else — `bigdiffer-design.md` (its out-of-sync notice, §0's command table,
+    §6 the gates, §7 the policy table), the README, the runbook, and
+    `suppressed-and-frozen.md` (the two new reason categories) — gets updated
+    together, once, after the redesign is fully implemented and working, not
+    piecemeal alongside each step above. Avoids reviewing docs against a
+    design that's still moving. *(core, last, before item 11)*
+11. **Delete this file and `held-artifacts-design.md`.** Once item 10's
+    reconciliation is committed, both transient docs have nothing left to
+    track. *(core, last)*
 
 ## Open questions (not gaps — need a decision, not just work)
 
