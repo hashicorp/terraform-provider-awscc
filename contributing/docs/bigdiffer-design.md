@@ -23,6 +23,55 @@ changelog, PRs) are out of scope.
 > dated `available_schemas` files, slated for removal. Here "bigdiffer" always
 > means `internal/tools/bigdiffer`.
 
+## 0. User stories: the paths through bigdiffer
+
+Six needs drive every command bigdiffer has (or should have). Stated first,
+before the model and the gates, because the paths a maintainer actually walks
+should shape the design, not fall out of it after the fact — this section
+should have existed from the start.
+
+1. **Weekly release prep.** Crawl AWS, refresh what changed, gate it, promote,
+   open a PR. (Today's `-update`.)
+2. **"Did my codegen/toolchain change just break something?"** — a human,
+   locally, after touching a template, `codegen/`, naming, or bumping a
+   dependency/Go version. No AWS involved; nothing should be promoted just to
+   answer the question. Today's gap: nothing runs this check at all (§6,
+   "Gap: the unchanged corpus is never gated") — a dependency bump today gets
+   effectively no verification beyond whatever `go build ./...` already
+   catches for code that happens to be touched.
+3. **The same check, in CI, on every PR that could have broken generation.**
+   Identical operation to story 2 — different caller (CI, not a human),
+   gating a merge instead of informing a person before one.
+4. **Actually land a machinery fix without an AWS crawl.** Same gated pass as
+   2/3, but this time promote: write the regenerated files, clear any `held`
+   markers that now resolve, commit.
+5. **"Is the overlay itself healthy right now?"** Including whether anything
+   is currently `held`. Offline, structural, no generation attempted — today's
+   `-check`, extended to treat a `held` marker as an anomaly the same way a
+   reason-less suppression already is.
+6. **Revisit an old suppression, freeze, or hold and see if it still holds
+   up.** Today's `-heal` only proposes reasons for reason-less/`unknown` rows;
+   this story is different — a human going back to a year-old, *already
+   reasoned* decision and asking bigdiffer to re-attempt it, on demand, to see
+   if the underlying problem is still real (queued: "Deferred and future
+   work").
+
+Stories 2 and 3 are the identical operation; so are 1 and 4, up to whether AWS
+is consulted. That collapses six *needs* into three *operations* —
+crawl-and-promote, gate-and-report, gate-and-promote — each runnable with or
+without an AWS crawl, plus the two read-only paths (5, 6) that never generate
+anything. The exact command surface for these three operations (today's
+`-update` and `-generate`, plus a currently-missing gate-and-report path) is
+not yet settled — see "Deferred and future work." `held` is the one state distinct from `suppress`/`frozen` in exactly
+this respect: `suppress_*`/`frozen_since` are inputs the gate honors (skip this,
+don't refresh that); `held` is only ever an *output* of an attempt, so it must
+be re-attempted, not just skipped, every time one of these paths runs against
+that artifact — and cleared the moment the attempt succeeds. A `held` marker
+that outlives its cause is a bug in the removal step, not an acceptable steady
+state, the same way a stale `frozen_since` on a type AWS un-deprecated would be
+(§7's self-healing row already handles that case for `frozen`; `held` needs
+the equivalent guarantee, actively enforced, not just implied by "self-clearing").
+
 ## 1. Core insight
 
 The provider already records what it is — `internal/provider/all_schemas.hcl`
@@ -557,6 +606,10 @@ The durable list of remaining work — this section is the single tracker now th
 the standalone generation punchlist is retired. Each item is either tracked by a
 linked GitHub issue or described in enough detail here to act on.
 
+- **`-heal`: add an opt-in mode to re-probe rows that already have a reason,**
+  not just reason-less/`unknown` ones. Real story: revisit a year-old
+  suppression/freeze to see if it's still deserved, not just fill gaps.
+  Quick note only — not designed.
 - **`held`: gate the unchanged corpus too (engine-change safety).** Full
   skeleton design in §6 ("Gap: the unchanged corpus is never gated") and §7's
   policy table. Implementation: run generate-then-compile over the whole
@@ -568,6 +621,17 @@ linked GitHub issue or described in enough detail here to act on.
   stops the run instead of completing as a large held batch. Replaces
   `TestFullCorpusParity` as the engine-change guard, unblocking that test's
   own retirement. *The one medium item outstanding.*
+- **Settle the command surface around one unified gate/policy pipeline.**
+  §0 collapses six user stories into three operations (crawl-and-promote,
+  gate-and-report, gate-and-promote), each with/without an AWS crawl. Today's
+  `-generate` is a second, gate-less code path (`run_generate.go`) — it
+  regenerates the whole corpus but never compile-gates and never applies
+  policy, so it cannot produce a `held` marker and cannot back stories 2/3/4.
+  That gate-less shortcut needs to be eliminated, not preserved alongside the
+  gated pipeline `-update` uses — same underlying engine, parameterized by
+  whether rows/schema bytes come from an AWS crawl or the committed base, and
+  by whether the result is promoted or only reported. Exact flag/command
+  names not decided.
 - **Unify the overlay's exclusion levers — candidate shape, needs its own
   design pass.** Not scheduled, not decided; documented so the next design step
   has a starting point, not a conclusion. Today every exclusion is a
