@@ -59,7 +59,8 @@ Flags:
 - `-docs` — import-example docs from `import_examples_gen.json`, then orchestrate
   `terraform fmt` and `tfplugindocs generate` (does not reimplement `tfplugindocs`)
 - `-check` — verify `all_schemas.hcl` is normalized (sorted, canonical, correct
-  count header) and anomaly-free; offline, writes nothing, suitable for CI
+  count header) and anomaly-free, and that `registrations_gen.go` is up to date;
+  offline, writes nothing, suitable for CI
 - `-all-schemas` — overlay path (default `internal/provider/all_schemas.hcl`)
 - `-checkout` — `suppressions_checkout.txt` path (cross-referenced, never modified)
 
