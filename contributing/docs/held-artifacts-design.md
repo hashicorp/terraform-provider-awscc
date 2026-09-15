@@ -8,7 +8,9 @@
 > implemented. When they land, the durable parts fold into `bigdiffer-design.md`
 > (§0's stories, §6 "The gates," §7's policy table) and this file is deleted.
 > It exists so the gap, the five target commands, and what each one is missing
-> today are stated cleanly in one place before code is written.
+> today are stated cleanly in one place before code is written. See
+> `redesign-punchlist.md` for the tracked, checkable-off list of what's left;
+> that file links back here for every item's detail rather than restating it.
 
 ## 0. The five user stories (north star)
 
