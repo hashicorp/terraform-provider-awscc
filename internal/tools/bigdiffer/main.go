@@ -366,8 +366,8 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 	}
 	sort.Strings(report.NamingViolate)
 
-	// Reason-less suppression/freeze check (generation-punchlist.md item 8;
-	// contributing/docs/suppressed-and-frozen.md): every artifact bigdiffer
+	// Reason-less suppression/freeze check
+	// (contributing/docs/suppressed-and-frozen.md): every artifact bigdiffer
 	// itself suppresses, and every freeze it sets, carries its own reason
 	// (policy.go), but a row can also be suppressed or frozen by direct
 	// hand-edit, or predate the taxonomy. Checked per-fact, not per-row (item

@@ -297,7 +297,7 @@ const exitCodeBuildGateFailed = 3
 // generates it (writing nothing to the real output tree — only the compile
 // gate check below touches it, transiently, via buildOnce's own
 // overlay-then-revert), and, if generation succeeds, runs that one artifact
-// through the compile gate (generation-punchlist.md item 1) before reporting
+// through the compile gate (bigdiffer-design.md §6) before reporting
 // success — so a "lift" proposal is trustworthy against both stages a real
 // -update run would have to pass, not just generation. repoRoot/outputRoot
 // are required for the compile gate step; if either is empty (a caller that

@@ -19,8 +19,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
-// The compile gate (generation-punchlist.md item 1, design:
-// bigdiffer-design.md §6, "The compile gate"). Generated code only type-checks
+// The compile gate (bigdiffer-design.md §6, "The compile gate"). Generated code only type-checks
 // against the real module graph, so the gate builds in place: it overlays
 // staged files onto their real destinations, runs `go build ./...` once from
 // cfg.repoRoot, and unconditionally reverts the overlay — regardless of the
@@ -364,7 +363,7 @@ func collectStagedGoFiles(stagingOut, outputRoot string) (map[string][]byte, err
 	return files, err
 }
 
-// compileFixpoint is the compile gate (generation-punchlist.md item 1): it
+// compileFixpoint is the compile gate (bigdiffer-design.md §6): it
 // builds the exact set of code the batch is about to promote — every staged
 // artifact plus the registration file computed from the current decisions —
 // against the real module, downgrading and dropping whatever the compiler
