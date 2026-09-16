@@ -244,15 +244,15 @@ Ordered so each step is independently mergeable and leaves the tool working.
    right after `settleBatch` returns, before any promotion, and aborts with
    full per-artifact blame on any hit, promoting nothing that run. Two
    forward-looking notes from review, both minor, neither blocking:
-   - **Reporting asymmetry.** The formatted, per-artifact `machineryFailures`
-     report only appears when `compileFixpoint` itself reaches green (the
-     committed fallback compiles). In the broad-toolchain shape, where the
-     committed files also won't build, the fixpoint can't reach green and
-     `runSync` returns the raw `compile gate: ...` error instead of the
-     formatted report — both abort correctly, and `go build` in CI backstops
-     that case regardless, so this is a message-quality nuance, not a
-     correctness hole. Worth a future polish if the raw error proves hard to
-     read in practice; not urgent.
+   - **Reporting asymmetry — resolved in step 7.** The formatted, per-artifact
+     `machineryFailures` report only appears when `compileFixpoint` itself
+     reaches green (the committed fallback compiles). In the broad-toolchain
+     shape, where the committed files also won't build, the fixpoint can't
+     reach green and used to return the raw `compile gate: ...` error with
+     absolute file paths instead of the formatted report. Step 7 relativized
+     that raw error's paths (there is no per-artifact structure to add —
+     that is what "unattributable" means — so the fix is readability, not
+     new attribution); `go build` in CI backstops that case regardless.
    - **Frozen-row exclusion, pinned ahead of item 4** — see "The routing this
      still requires," above: `reconcile`'s offline row source must exclude
      frozen rows explicitly (or treat their pinned bytes as authoritative),
@@ -292,8 +292,14 @@ Ordered so each step is independently mergeable and leaves the tool working.
    running `-recheck -recheck-all` against the real repo (34 real rows hit
    this path). `lint` needed no code change beyond its step-1 rename, as
    expected. Full writeup in punchlist item 6.
-7. **Reporting**: per-artifact blame on a hard-errored run (types, artifacts,
-   `go build` errors) — the failing run's own output; no overlay writes.
+7. **Reporting** *(done)*: the common case (types, artifacts, `go build`
+   errors) was already covered by `machineryFailures` (item 3). The one
+   remaining gap — the "reporting asymmetry" noted in step 3 above and in
+   the open questions — was `compileFixpoint`'s unattributable-failure
+   hard-stop surfacing raw, absolute-path `go build` output. Fixed by
+   relativizing it (`relativizeBuildErrors`, already existing in `heal.go`)
+   before formatting, a single fix in `compileFixpoint` that benefits
+   `sync`/`reconcile`/`check` uniformly. Full writeup in punchlist item 7.
 8. **Doc reconciliation, one pass, last.** This file and `redesign-punchlist.md`
    are the only docs touched during steps 1–7. Then update `bigdiffer-design.md`
    (§0 command table, §6, and a §7 note that a `statusUnchanged` failure fails

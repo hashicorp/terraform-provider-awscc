@@ -244,6 +244,22 @@ func TestCompileFixpointUnattributableFailureHardStops(t *testing.T) {
 	if !strings.Contains(err.Error(), "not attributable") && !strings.Contains(err.Error(), "promoting nothing") {
 		t.Errorf("expected the conservative-fallback error, got: %v", err)
 	}
+	// Reporting-polish item (held-artifacts-design.md §5 step 3/
+	// punchlist item 7): this hard-stop's raw go build output is the only
+	// report available (there is no per-type attribution to fall back to,
+	// by definition of how this path is reached), so it must at least be
+	// readable — relativized against repoRoot rather than the long absolute
+	// paths buildOnce's overlay produces internally.
+	if strings.Contains(err.Error(), cfg.repoRoot) {
+		t.Errorf("expected file paths relativized against repoRoot, but the absolute repoRoot prefix is still present: %v", err)
+	}
+	rel, relErr := filepath.Rel(cfg.repoRoot, dest)
+	if relErr != nil {
+		t.Fatalf("computing expected relative path: %v", relErr)
+	}
+	if !strings.Contains(err.Error(), rel) {
+		t.Errorf("expected the relativized path %q in the error, got: %v", rel, err)
+	}
 	if _, err := os.Stat(dest); !os.IsNotExist(err) {
 		t.Errorf("the build overlay must still be reverted even on the hard-stop path, stat err = %v", err)
 	}

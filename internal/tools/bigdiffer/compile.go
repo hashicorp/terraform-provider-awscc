@@ -484,7 +484,20 @@ func compileFixpoint(ctx context.Context, cfg config, stagingDir, overlayContent
 			// already broken before this run, or bigdiffer's own
 			// registrations_gen.go has a bug. Neither is safe to guess at —
 			// promote nothing (design doc "Attribution fallback").
-			return fmt.Errorf("compile gate: build failed but no blamed file is attributable to this batch (base tree or registration bug?); promoting nothing:\n%s", formatBuildErrors(buildErrs))
+			//
+			// This is the "reporting asymmetry" case noted in
+			// held-artifacts-design.md §5 step 3/punchlist item 7: unlike
+			// machineryFailures' per-type-and-artifact blame (only reachable
+			// once the fixpoint reaches green with some decisions flagged),
+			// a genuinely unattributable failure has no candidate to blame
+			// at all — there is no per-type structure to report, by
+			// definition of how it got here. The honest, most useful report
+			// available is the raw go build output itself, so this at least
+			// relativizes file paths against repoRoot (matching
+			// relativizeBuildErrors' existing convention, heal.go) rather
+			// than the absolute paths buildOnce's overlay produces, which
+			// are long and mostly noise to a human reading the failure.
+			return fmt.Errorf("compile gate: build failed but no blamed file is attributable to this batch (base tree or registration bug?); promoting nothing:\n%s", formatBuildErrors(relativizeBuildErrors(buildErrs, cfg.repoRoot)))
 		}
 	}
 }

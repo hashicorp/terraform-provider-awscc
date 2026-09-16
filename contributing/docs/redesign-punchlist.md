@@ -275,9 +275,37 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    against the real repo, confirmed to write nothing to `all_schemas.hcl`.
    *(additive)* Detail: `held-artifacts-design.md` §4, §5 step 6; §0
    story 5.
-7. **Reporting.** Per-artifact blame on a hard-errored run (types, artifacts,
-   `go build` errors) — the failing run's own output, no overlay writes.
-   *(core)* Detail: `held-artifacts-design.md` §5 step 7.
+7. **DONE. Reporting.** Per-artifact blame on a hard-errored run was already
+   fully in place for the common case (types, artifacts, `go build` errors)
+   via `machineryFailures` (item 3) — every promoting/reporting caller
+   (`sync`/`reconcile`/`check`) already surfaces exactly this when
+   `compileFixpoint` reaches green with a `machineryFailure` decision
+   flagged. The one remaining gap was the "reporting asymmetry" deferred in
+   item 3's review and re-raised in `held-artifacts-design.md`'s open
+   questions: the `downgraded == 0` hard-stop in `compileFixpoint`
+   (`compile.go`) — reached when a build failure can't be attributed to any
+   staged artifact at all (base tree already broken, or bigdiffer's own
+   `registrations_gen.go` has a bug) — surfaced the raw `go build` output
+   with absolute file paths, unlike every other report in the tool, which
+   relativizes against `repoRoot`. Fixed by routing that message through
+   `relativizeBuildErrors` (already existing, `heal.go`) before formatting.
+   This is a single fix in `compileFixpoint` itself, so it benefits `sync`,
+   `reconcile`, and `check` uniformly with no per-caller change needed —
+   exactly the payoff the shared `settleBatch` pipeline (item 2) was
+   designed for. There genuinely is no per-type/per-artifact structure to
+   report in this specific case (that is what "unattributable" means), so
+   the fix is scoped to making the one report that exists readable, not
+   inventing attribution that doesn't exist. Left the separate
+   `maxFixpointRounds`-exceeded circuit breaker unchanged — its message
+   already states the failure mode plainly and accumulating every round's
+   downgrades would mostly repeat information, not add new signal.
+
+   Verified: `gofmt`/`vet`/`build` (whole module) clean, updated
+   `TestCompileFixpointUnattributableFailureHardStops` with a new assertion
+   confirming the error is relativized (no absolute `repoRoot` path present,
+   the expected relative path is), full suite `-race -short` and
+   `-timeout 20m` both pass, `impi` clean. *(core)* Detail:
+   `held-artifacts-design.md` §5 step 7.
 8. **Reconcile every other doc in one pass, last — not incrementally.**
    `held-artifacts-design.md` and this file are the *only* docs that change
    during implementation. Everything else — `bigdiffer-design.md` (its
@@ -315,10 +343,11 @@ Tracked in `held-artifacts-design.md` §6:
   hasn't been exhaustively ruled out either.
 - How `check` (item 5) is wired into CI, and how it's scoped to engine-touching
   PRs rather than every PR.
-- **Deferred polish, from review (item 3):** `runSync`'s abort message is the
+- ~~**Deferred polish, from review (item 3):** `runSync`'s abort message is the
   formatted, per-artifact `machineryFailures` report only when
   `compileFixpoint` reaches green; in the broad-toolchain shape (committed
   files also won't build), the fixpoint hard-errors first and `runSync`
-  surfaces that raw `compile gate: ...` error instead. Both abort correctly;
-  `go build` in CI backstops the broad case regardless. Not urgent — revisit
-  if the raw error proves hard to read in practice.
+  surfaces that raw `compile gate: ...` error instead.~~ — **resolved, item
+  7**: relativized the raw error's file paths against `repoRoot`
+  (`relativizeBuildErrors`), fixed once in `compileFixpoint` so `sync`,
+  `reconcile`, and `check` all benefit uniformly.
