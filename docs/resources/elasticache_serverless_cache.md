@@ -116,6 +116,7 @@ variable "kms_key_arn" {
 - `final_snapshot_name` (String) The final snapshot name which is taken before Serverless Cache is deleted.
 - `kms_key_id` (String) The ID of the KMS key used to encrypt the cluster.
 - `major_engine_version` (String) The major engine version of the Serverless Cache.
+- `network_type` (String) The network type for the serverless cache. Valid values are ipv4, ipv6, or dual_stack.
 - `reader_endpoint` (Attributes) The address and the port. (see [below for nested schema](#nestedatt--reader_endpoint))
 - `security_group_ids` (Set of String) One or more Amazon VPC security groups associated with this Serverless Cache.
 - `snapshot_arns_to_restore` (Set of String) The ARN's of snapshot to restore Serverless Cache.

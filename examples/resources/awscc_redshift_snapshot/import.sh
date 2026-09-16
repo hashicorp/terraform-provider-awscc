@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_snapshot.example "snapshot_arn"

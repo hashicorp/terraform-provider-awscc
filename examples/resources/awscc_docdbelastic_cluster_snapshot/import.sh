@@ -1,0 +1,1 @@
+$ terraform import awscc_docdbelastic_cluster_snapshot.example "snapshot_arn"

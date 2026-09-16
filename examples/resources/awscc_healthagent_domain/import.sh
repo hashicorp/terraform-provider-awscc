@@ -1,0 +1,1 @@
+$ terraform import awscc_healthagent_domain.example "arn"

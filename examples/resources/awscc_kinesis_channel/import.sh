@@ -1,0 +1,1 @@
+$ terraform import awscc_kinesis_channel.example "channel_arn"

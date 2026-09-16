@@ -20,6 +20,10 @@ Resource Type definition for ManagedNotificationAccountContactAssociation
 - `contact_identifier` (String) This unique identifier for Contact
 - `managed_notification_configuration_arn` (String) The managed notification configuration ARN, against which the account contact association will be created
 
+### Optional
+
+- `is_sensitive_events_subscribed` (Boolean) Whether the account contact association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.

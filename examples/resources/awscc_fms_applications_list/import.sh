@@ -1,0 +1,1 @@
+$ terraform import awscc_fms_applications_list.example "arn"

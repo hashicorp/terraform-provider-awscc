@@ -24,6 +24,7 @@ Data Source schema for AWS::AppStream::ImageBuilder
 - `access_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--access_endpoints))
 - `appstream_agent_version` (String)
 - `description` (String)
+- `disable_imdsv1` (Boolean)
 - `display_name` (String)
 - `domain_join_info` (Attributes) (see [below for nested schema](#nestedatt--domain_join_info))
 - `enable_default_internet_access` (Boolean)

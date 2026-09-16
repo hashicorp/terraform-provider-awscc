@@ -1,0 +1,1 @@
+$ terraform import awscc_route53_traffic_policy_instance.example "arn"

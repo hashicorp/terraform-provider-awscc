@@ -162,6 +162,7 @@ Optional:
 
 Optional:
 
+- `gres_custom_settings` (List of Map of String) Additional Slurm gres.conf records for the compute node group. Each item is a map of gres.conf attribute names to values describing one gres.conf record (for example a GPU topology, MIG, MPS, or custom GRES entry). AWS PCS adds the NodeName= prefix and merges these records with the GPU record it derives from the instance type.
 - `scale_down_idle_time_in_seconds` (Number) The time before an idle node is scaled down.
 - `slurm_custom_settings` (Attributes List) Additional Slurm-specific configuration that directly maps to Slurm settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
 

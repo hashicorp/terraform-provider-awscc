@@ -1,0 +1,1 @@
+$ terraform import awscc_chime_sip_media_application.example "sip_media_application_arn"

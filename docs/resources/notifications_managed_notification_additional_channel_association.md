@@ -77,6 +77,10 @@ Example: arn:aws:chatbot::123456789012:chat-configuration/slack-channel/security
 - `managed_notification_configuration_arn` (String) ARN identifier of the Managed Notification.
 Example: arn:aws:notifications::381491923782:managed-notification-configuration/category/AWS-Health/sub-category/Billing
 
+### Optional
+
+- `is_sensitive_events_subscribed` (Boolean) Whether the channel association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.

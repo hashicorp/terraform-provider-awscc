@@ -32,6 +32,7 @@ Data Source schema for AWS::ElastiCache::ServerlessCache
 - `full_engine_version` (String) The full engine version of the Serverless Cache.
 - `kms_key_id` (String) The ID of the KMS key used to encrypt the cluster.
 - `major_engine_version` (String) The major engine version of the Serverless Cache.
+- `network_type` (String) The network type for the serverless cache. Valid values are ipv4, ipv6, or dual_stack.
 - `reader_endpoint` (Attributes) The address and the port. (see [below for nested schema](#nestedatt--reader_endpoint))
 - `security_group_ids` (Set of String) One or more Amazon VPC security groups associated with this Serverless Cache.
 - `serverless_cache_name` (String) The name of the Serverless Cache. This value must be unique.
