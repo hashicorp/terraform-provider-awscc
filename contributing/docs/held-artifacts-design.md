@@ -244,7 +244,21 @@ Ordered so each step is independently mergeable and leaves the tool working.
      `statusFrozen` short-circuit upstream of `buildCandidates`. Missing this
      would make `reconcile` hit `machineryFailure` on every frozen type,
      every run, with no path to ever completing.
-4. **`reconcile`**: wire the shared pipeline to promotion, offline row source.
+4. **`reconcile`** *(done)*: wired the shared pipeline to promotion, offline
+   row source (`run_reconcile.go`). Both pinned conventions honored exactly
+   as specified above. Found only by actually running `-reconcile` against
+   the real repo, not by any unit test written first: the count-header line
+   silently changed (1581 → 1593) because `normalizeWithDecisions` computes
+   it from `len(base)`, correct for `sync` (a live AWS count) but wrong for
+   `reconcile` (its own `overlayRows`, which includes frozen/retained rows
+   the header's "available from AWS" sense never counted) — fixed by
+   restoring the committed line verbatim, mirroring `lint`'s existing
+   "unknowable offline" treatment of the same line. Re-verified with a real
+   `-reconcile` run afterward: byte-for-byte no-op diff. Punchlist item 4 has
+   the fuller writeup, including the three smaller review points (no
+   isolated e2e test — infeasible, the compile gate always builds the real
+   module; a vacuous always-zero tally fixed; cache-miss rows now counted
+   and reported like frozen ones).
 5. **`check`**: wire the same pipeline, report-only, exit non-zero on any
    failure or output-diff.
 6. **`recheck`'s reasoned-row flag** (small, independent). `lint` needs no code

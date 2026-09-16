@@ -95,24 +95,61 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    classNew path, full suite `-race -short` and `-timeout 20m` (full parity)
    both pass, `impi` clean. *(prereq for items 4/5, core)* Detail:
    `held-artifacts-design.md` §2, §3, §5 step 3; §0 story 1.
-4. **`reconcile`.** Wire the shared pipeline (item 2), now source-routed
-   (item 3), to promotion + overlay write, offline, no AWS — `-generate`'s
-   replacement. **Convention, pinned now:** every offline row is classed
-   `classPresentUnchanged`, never `classPresent` — `reconcile` has no
-   discovery diff at all (it never calls `discover()`), so there is no
-   "the schema moved" case to distinguish; every failure it produces must
-   route through `machineryFailure`, never the freeze/suppress branch. This
-   is the actual fix for the original mis-freeze bug the review found; the
-   offline row-building code must not reuse `classPresent` by copy-paste
-   convenience from `buildCandidates`. **Second pinned convention, from
-   review:** the offline row source must exclude frozen rows (skip any row
-   with `frozen_since` set, or generate from its pinned bytes rather than
-   attempting a fresh one) — `sync` gets this for free via `classifyChange`'s
-   `statusFrozen` short-circuit, which `reconcile` has no equivalent call to
-   inherit it from. Missing this makes `reconcile` hit `machineryFailure` on
-   every frozen type, every run, with no path to ever completing — cheap to
-   get right now, ugly to discover later as "reconcile never succeeds."
-   *(core)* Detail: `held-artifacts-design.md` §4, §5 step 4; §0 story 2.
+4. **DONE. `reconcile`.** Wired the shared pipeline (item 2), now
+   source-routed (item 3), to promotion + overlay write, offline, no AWS —
+   `-generate`'s replacement (`run_reconcile.go`, `runReconcile` +
+   `reconcileCandidates`). Both pinned conventions honored:
+   `reconcileCandidates` classes every candidate `classPresentUnchanged`
+   (never `classPresent`) and excludes frozen rows entirely before they ever
+   become candidates. `runReconcile` mirrors `runSync`'s structure exactly:
+   builds candidates → `settleBatch` → `machineryFailures` check (abort,
+   promote nothing, on any hit) → promote → reconcile the overlay → emit
+   aggregates → write the CHANGELOG fragment (reused unchanged;
+   `classPresentUnchanged`'s candidates never trigger the `classNew` "every
+   promoted artifact is new" branch, so only a genuine backlog lift — a
+   previously-suppressed artifact reconcile just fixed — gets a changelog
+   entry, never a routine re-promotion).
+
+   **A real bug found only by actually running `-reconcile` against the repo
+   (not caught by any unit test written first):** the count-header line
+   ("# N CloudFormation resource types schemas are available...") silently
+   changed from 1581 to 1593 on a real run — `normalizeWithDecisions`
+   computes that line from `len(base)`, correct for `sync` (`base` is the
+   live AWS-discovered set) but wrong for `reconcile`, which has no live set
+   and passes its own `overlayRows` as `base` — a structurally different,
+   larger count once any row is frozen/retained/non-provisionable. Fixed by
+   restoring the committed count-header line verbatim after
+   `normalizeWithDecisions` runs, mirroring `runLint`'s own established
+   principle that this line is unknowable offline (its count-header
+   comparison already excludes it). Re-ran `-reconcile` against the real
+   repo after the fix: clean, byte-for-byte no-op diff (confirmed via
+   `git status`/`git diff` — zero changes to `internal/provider/`,
+   `internal/service/`, `CHANGELOG.md`).
+
+   Three additional review points, all addressed: (1) no fully-isolated
+   end-to-end `runReconcile` test exists — infeasible in isolation, since the
+   compile gate always builds `cfg.repoRoot` for real (documented precedent:
+   `compile_fixpoint_test.go`'s `TestCompileGateFailureBlocksPromotion`) and
+   `runReconcile` derives `outputRoot`/`repoRoot` entirely from the overlay's
+   own on-disk location with no injection point — the underlying pipeline is
+   already covered end to end elsewhere, and the manual real-repo run above
+   is the practical substitute; (2) the final "Done" tally no longer reports
+   an always-zero "N frozen/suppressed" (reconcile never freezes/suppresses;
+   frozen rows are excluded before candidate-building) — now reports "all
+   generated OK," since every decision still standing after the
+   `machineryFailures` check is, by construction, clean; (3) `reconcileCandidates`
+   now returns and reports `cacheMissSkipped` alongside `frozenSkipped`, so a
+   cache-miss row is visible in the progress line instead of silently
+   vanishing.
+
+   Verified: `gofmt`/`vet`/`build` (whole module) clean, new
+   `TestReconcileCandidates*` (five tests: class assignment, frozen
+   exclusion, cache-path convention, all-frozen edge case, cache-miss
+   counted separately from frozen) and `TestReconcileCountHeaderIsNeverTrustedFromRecompute`
+   (the count-header regression, exercising the actual fix logic directly)
+   pass, full suite `-race -short` and `-timeout 20m` both pass, `impi`
+   clean, and the real `-reconcile` run above. *(core)* Detail:
+   `held-artifacts-design.md` §4, §5 step 4; §0 story 2.
 5. **`check`.** Wire the same pipeline, stop before promotion, report every
    failure, exit non-zero on any failure **or** any output-diff (regenerated ≠
    committed, even when it compiles — the "changed the engine, didn't reconcile
