@@ -5,7 +5,7 @@ package main
 
 // Generation outcome types consumed by the policy engine. Generation itself is
 // the gate: refreshCandidate generates a type and gateResultFromGenResults
-// (update.go) maps the per-artifact success/failure into a gateResult, which
+// (sync.go) maps the per-artifact success/failure into a gateResult, which
 // decide() (policy.go) turns into an overlay edit. (An earlier standalone
 // front-half gate that re-emitted schemas to pass/fail types was superseded by
 // this generate-for-real approach and removed.)

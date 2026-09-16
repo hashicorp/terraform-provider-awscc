@@ -14,13 +14,12 @@ import (
 // runReconcile regenerates the whole corpus offline, from the committed
 // overlay + schema cache, through the same generate -> compile -> decide
 // pipeline runSync uses, and promotes the clean result
-// (contributing/docs/held-artifacts-design.md §4, §5 step 4). It is
-// -generate's replacement: -generate never gated at all (any generation
-// error aborted the whole run before even compile-checking; run_generate.go,
-// deleted per §5 step 1), so it could not back "land a machinery fix" once
-// holding broken artifacts, rather than aborting on the first one, was the
-// requirement. reconcile has no AWS, no discovery diff, and no New/Absent
-// concept at all — every committed row is simply "attempt it."
+// (contributing/docs/bigdiffer-design.md §6, "One engine, three callers").
+// Unlike a plain offline generator, it compile-gates: any failure aborts the
+// whole run rather than holding broken artifacts and shipping the rest, so
+// it can back "land a machinery fix, no AWS crawl" (§0 story 2). reconcile
+// has no AWS, no discovery diff, and no New/Absent concept at all — every
+// committed row is simply "attempt it."
 func runReconcile(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
@@ -164,14 +163,14 @@ func runReconcile(ctx context.Context, allSchemasPath, checkoutPath string) erro
 // caller's progress line.
 //
 // Two conventions pinned ahead of this implementation
-// (contributing/docs/held-artifacts-design.md "The routing this still
-// requires"; redesign-punchlist.md item 4), both load-bearing:
+// (contributing/docs/bigdiffer-design.md §6, "Routing a failure to the
+// right branch"), both load-bearing:
 //   - Every candidate is classed classPresentUnchanged, never classPresent.
 //     reconcile has no discovery diff at all (it never calls discover()), so
 //     there is no "the schema moved" case classPresent exists to
 //     distinguish; every failure a candidate produces must route through
 //     machineryFailure. Reusing classPresent here by copy-paste convenience
-//     from buildCandidates (update.go) would silently reintroduce the exact
+//     from buildCandidates (sync.go) would silently reintroduce the exact
 //     mis-freeze bug item 3 fixed.
 //   - Frozen rows are excluded entirely, mirroring the exclusion sync gets
 //     for free via classifyChange's statusFrozen short-circuit (change.go),

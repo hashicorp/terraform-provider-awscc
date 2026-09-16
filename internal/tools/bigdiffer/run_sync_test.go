@@ -238,7 +238,7 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 	}
 }
 
-// TestUpdateBatchAtomicity is the item-12 regression test
+// TestSyncBatchAtomicity is the item-12 regression test
 // (never-regress cross-type atomicity): it drives the
 // same stage-everything-then-promote-once sequence runSync uses across a
 // multi-candidate batch, injects a hard failure partway through (a candidate
@@ -247,7 +247,7 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 // before promoteStaged is ever called, the real tree is left exactly as it
 // started — nothing from the earlier, successfully staged candidates leaks
 // through, and there is nothing to reconcile into the overlay.
-func TestUpdateBatchAtomicity(t *testing.T) {
+func TestSyncBatchAtomicity(t *testing.T) {
 	t.Parallel()
 	cfg, rows := loadCorpus(t)
 	lg := logGroupRow(t, rows)

@@ -244,12 +244,11 @@ func TestCompileFixpointUnattributableFailureHardStops(t *testing.T) {
 	if !strings.Contains(err.Error(), "not attributable") && !strings.Contains(err.Error(), "promoting nothing") {
 		t.Errorf("expected the conservative-fallback error, got: %v", err)
 	}
-	// Reporting-polish item (held-artifacts-design.md §5 step 3/
-	// punchlist item 7): this hard-stop's raw go build output is the only
-	// report available (there is no per-type attribution to fall back to,
-	// by definition of how this path is reached), so it must at least be
-	// readable — relativized against repoRoot rather than the long absolute
-	// paths buildOnce's overlay produces internally.
+	// This hard-stop's raw go build output is the only report available
+	// (there is no per-type attribution to fall back to, by definition of
+	// how this path is reached), so it must at least be readable —
+	// relativized against repoRoot rather than the long absolute paths
+	// buildOnce's overlay produces internally.
 	if strings.Contains(err.Error(), cfg.repoRoot) {
 		t.Errorf("expected file paths relativized against repoRoot, but the absolute repoRoot prefix is still present: %v", err)
 	}
@@ -293,7 +292,7 @@ func TestCompileFixpointRoundCapIsBounded(t *testing.T) {
 // rule out the sibling's presence changing the outcome), and (2) runSync's
 // own source unconditionally returns before promoteStaged on a compile-gate
 // error (`if err := compileFixpoint(...); err != nil { return ... }`,
-// update.go) — the same short-circuit TestUpdateBatchAtomicity already relies
+// sync.go) — the same short-circuit TestSyncBatchAtomicity already relies
 // on for a staging-time failure, just triggered by the gate instead.
 func TestCompileGateFailureBlocksPromotion(t *testing.T) {
 	if testing.Short() {

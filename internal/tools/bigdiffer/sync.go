@@ -35,9 +35,10 @@ type candidate struct {
 }
 
 // buildCandidates selects every discovered type as a gate candidate — not just
-// New/Changed (contributing/docs/held-artifacts-design.md §2: gating only
-// New/Changed left the ~1580 schema-unchanged types' committed output aging
-// silently, with no guard once the legacy TestFullCorpusParity retires). For
+// New/Changed (contributing/docs/bigdiffer-design.md §6, "The whole corpus is
+// gated every run": gating only New/Changed left the ~1580 schema-unchanged
+// types' committed output aging silently, with no guard once the legacy
+// TestFullCorpusParity retires). For
 // each, it attaches the policy class (new to the overlay vs already present,
 // further split by whether its schema bytes actually moved) and the row to
 // generate from (the overlay row when present so its suppress_* flags are
@@ -359,10 +360,10 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 
 	// The shared generate -> stage -> compile-gate pipeline
-	// (contributing/docs/held-artifacts-design.md §2, §6 step 2): everything
-	// from generating each candidate through the compile gate settling and
-	// the list-resource coupling check is common to sync/reconcile/check, so
-	// it lives in settleBatch, not here.
+	// (contributing/docs/bigdiffer-design.md §6, "One engine, three
+	// callers"): everything from generating each candidate through the
+	// compile gate settling and the list-resource coupling check is common
+	// to sync/reconcile/check, so it lives in settleBatch, not here.
 	settled, err := settleBatch(ctx, cfg, cands, baseDecisions, string(overlayContent), base, checkout, today)
 	if err != nil {
 		return err

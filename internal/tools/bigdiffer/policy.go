@@ -52,15 +52,17 @@ func formatReason(category reasonCategory, detail string) string {
 // into non-provisionable-live vs withdrawn after the DescribeType probe.
 //
 // classPresentUnchanged is classPresent's source-routed sibling
-// (contributing/docs/held-artifacts-design.md §3, "The routing this still
-// requires"): a failure on this class means the schema itself did not change
-// — only the machinery (codegen/templates/toolchain) could be at fault — so
-// it must never take classPresent's freeze/suppress-and-pin branch (pinning a
-// schema that never moved makes no sense, and previously masked exactly this
-// bug). decide() itself does not fail the run for this class; that decision
+// (contributing/docs/bigdiffer-design.md §6, "Routing a failure to the
+// right branch"): a failure on this class means the schema itself did not
+// change — only the machinery (codegen/templates/toolchain) could be at
+// fault — so it must never take classPresent's freeze/suppress-and-pin
+// branch (pinning a schema that never moved makes no sense, and previously
+// masked exactly this bug). decide() itself does not fail the run for this
+// class; that decision
 // belongs to the caller (settleBatch/runSync), which aborts the whole batch,
 // promoting nothing, the moment any classPresentUnchanged candidate fails —
-// see §3's "Why all-or-nothing, precisely." classPresentUnchanged exists so
+// see bigdiffer-design.md §6, "The whole corpus is gated every run."
+// classPresentUnchanged exists so
 // two different callers can each get the routing they need:
 //   - reconcile/check have no discovery diff at all (they never call
 //     discover()), so every candidate they feed decide() is

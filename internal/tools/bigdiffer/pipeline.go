@@ -12,13 +12,14 @@ import (
 	"time"
 )
 
-// The shared candidate-settling pipeline (contributing/docs/held-artifacts-design.md
-// §1, §5 step 2): candidate-build -> refreshCandidate -> compileFixpoint ->
-// decide(), extracted out of runSync's AWS-specific version so an offline row
-// source (every overlay row, no discover() call) can drive the identical
-// generate-compile-decide sequence for -reconcile and -check (§5 steps 4/5).
-// runSync, -reconcile, and -check differ only in how candidates are built
-// (AWS-diffed vs. every overlay row) and what happens once the batch has
+// The shared candidate-settling pipeline (contributing/docs/bigdiffer-design.md
+// §6, "One engine, three callers"): candidate-build -> refreshCandidate ->
+// compileFixpoint -> decide(), extracted out of runSync's AWS-specific
+// version so an offline row source (every overlay row, no discover() call)
+// can drive the identical generate-compile-decide sequence for -reconcile
+// and -check. runSync, -reconcile, and -check differ only in how candidates
+// are built (AWS-diffed vs. every overlay row) and what happens once the
+// batch has
 // settled (promote vs. report) — settleBatch is the one piece both share
 // unchanged.
 //
@@ -174,8 +175,8 @@ type machineryFailure struct {
 // runSync's absent-row probe results — are never machineryFailure and have no
 // gateResults entry, so they are skipped, not a lookup bug). It must be
 // checked after every settleBatch call, before any promotion step
-// (contributing/docs/held-artifacts-design.md §3, "Why all-or-nothing,
-// precisely"): compileFixpoint can legitimately reach a green build while
+// (contributing/docs/bigdiffer-design.md §6, "The whole corpus is gated
+// every run"): compileFixpoint can legitimately reach a green build while
 // still leaving one or more classPresentUnchanged decisions flagged — a
 // schema-unchanged type whose broken new output got dropped and reverted to
 // its still-compiling committed file settles the fixpoint cleanly, but the

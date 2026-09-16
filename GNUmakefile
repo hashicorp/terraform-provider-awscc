@@ -38,11 +38,8 @@ build: prereq-go ## Build the provider
 bigdiffer-sync: prereq-go ## Weekly sync via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
 	$(GO_VER) run ./internal/tools/bigdiffer -sync
 
-# NOTE: bigdiffer-generate (offline whole-corpus regeneration) is temporarily
-# unavailable: -generate was deleted along with its ungated implementation
-# (contributing/docs/held-artifacts-design.md §1 story 2; §6 step 1) and its
-# gated replacement, -reconcile, has not landed yet (§6 step 4). This target
-# will come back once -reconcile exists.
+bigdiffer-reconcile: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS; promotes on a clean gate)
+	$(GO_VER) run ./internal/tools/bigdiffer -reconcile
 
 bigdiffer-docs: prereq-go ## Regenerate documentation via bigdiffer (docs-import + terraform fmt + tfplugindocs)
 	$(GO_VER) run ./internal/tools/bigdiffer -docs
@@ -346,6 +343,7 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: all
 .PHONY: bigdiffer
 .PHONY: bigdiffer-docs
+.PHONY: bigdiffer-reconcile
 .PHONY: bigdiffer-sync
 .PHONY: bigdiffer-test
 .PHONY: biglister

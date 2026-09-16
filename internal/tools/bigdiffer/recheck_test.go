@@ -93,7 +93,7 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("multiPending offers the comment as a shared candidate, not a confirmed fact", func(t *testing.T) {
 		t.Parallel()
-		// Review resolution (suppressed-and-frozen.md, "-heal: re-probe and
+		// Review resolution (suppressed-and-frozen.md, "-recheck: re-probe and
 		// fill gaps"): a row-level comment cannot be assumed to
 		// describe more than one still-reason-less fact, so when more than
 		// one fact is pending it must be visibly marked as a shared

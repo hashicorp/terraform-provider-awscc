@@ -14,8 +14,8 @@ import (
 // compileFixpoint error at all (a broken new artifact reverted to its
 // still-compiling committed file, so the fixpoint itself goes green) — so
 // every caller must scan decisions for machineryFailure explicitly, not just
-// check compileFixpoint's own error return (contributing/docs/held-artifacts-design.md
-// §3, "Why all-or-nothing, precisely").
+// check compileFixpoint's own error return (contributing/docs/bigdiffer-design.md
+// §6, "The whole corpus is gated every run").
 func TestMachineryFailures(t *testing.T) {
 	t.Parallel()
 

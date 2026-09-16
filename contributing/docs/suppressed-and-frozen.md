@@ -11,8 +11,8 @@ them currently record *why* they were pulled. This doc has two parts:
   overlay and the real code — including what we don't know, because
   reconstructing intent after the fact is the problem this doc exists to stop.
 - **Part 2** is the spec: a taxonomy for *why*, a clarified meaning for
-  `frozen_since`, a `-heal` subcommand that re-probes ungrounded rows, and
-  `-check` enforcement so the gap cannot silently reopen.
+  `frozen_since`, a `-recheck` subcommand that re-probes ungrounded rows, and
+  `-lint` enforcement so the gap cannot silently reopen.
 
 <!--mdtoc: begin-->
 - [Part 1 — Where we are](#part-1--where-we-are)
@@ -26,8 +26,8 @@ them currently record *why* they were pulled. This doc has two parts:
     - [Per-artifact independence](#per-artifact-independence)
     - [GitHub issues: when to file, and what to say](#github-issues-when-to-file-and-what-to-say)
     - [Mining existing issues to backfill reasons](#mining-existing-issues-to-backfill-reasons)
-    - [`-check`: enforce a reason](#-check-enforce-a-reason)
-    - [`-heal`: re-probe and fill gaps](#-heal-re-probe-and-fill-gaps)
+    - [`-lint`: enforce a reason](#-lint-enforce-a-reason)
+    - [`-recheck`: re-probe and fill gaps](#-recheck-re-probe-and-fill-gaps)
     - [What does not change](#what-does-not-change)
 <!--mdtoc: end-->
 
@@ -110,12 +110,13 @@ itself makes going forward. The gaps this section originally called out have
 since been closed: it now runs for **Present** types on a partial failure
 (per-artifact suppression + a separately-reasoned freeze, via `frozen_reason`),
 the reason carries a **taxonomy** (`category: detail`, Part 2), the
-**compile gate** runs inside `-update` so `build_failed` is a real category, not
+**compile gate** runs inside `-sync` (and `-reconcile`/`-check`, which share
+the same pipeline) so `build_failed` is a real category, not
 a manual `make build` afterthought (`bigdiffer-design.md` §6), and the reason
 itself is now split per-artifact rather than
 one field trying to describe more than one fact at once. What remains is
 applying that machinery to the *existing* reason-less backlog — Part 2's
-`-check`/`-heal` and the one-time backfill.
+`-lint`/`-recheck` and the one-time backfill.
 
 ### What the real overlay looks like
 
@@ -178,7 +179,7 @@ meaningful share of the existing suppressions and every existing freeze carry
   bit.
 - We do not have a compile-gate history at all — no record of which
   suppressions, if any, exist because generated code built but failed to
-  `go build`. The compile gate runs inside `-update` now
+  `go build`. The compile gate runs inside `-sync` now
   (`bigdiffer-design.md` §6), but the existing backlog predates it, so no
   `build_failed` history exists for these old rows.
 
@@ -196,13 +197,13 @@ five categories, machine-readable as a prefix (`category: detail`):
 | Category | Meaning | Set by |
 |---|---|---|
 | `structural` | The schema itself doesn't support this artifact — known before generation is attempted, not a failure. Today's only case: a plural data source with no `list` handler, or one requiring arguments. | The planner, before generation runs |
-| `generation_failed` | The owned engine (`codegen.Generate*`) returned an error rendering this artifact. | `-update` / `-generate`, from the real generation error |
-| `build_failed` | The artifact rendered, but `go build` failed on it (or on the package it lives in, attributable to it). | The compile gate, inside `-update` (`bigdiffer-design.md` §6) |
+| `generation_failed` | The owned engine (`codegen.Generate*`) returned an error rendering this artifact. | `-sync` / `-reconcile`, from the real generation error |
+| `build_failed` | The artifact rendered, but `go build` failed on it (or on the package it lives in, attributable to it). | The compile gate, inside `-sync`/`-reconcile`/`-check` (`bigdiffer-design.md` §6) |
 | `manual` | A human suppressed this for a reason not mechanically detected (e.g. a schema shape the engine accepts but that produces something wrong or undesirable). | A human, editing `all_schemas.hcl` directly |
-| `unknown` | Inherited from history; no reason was recorded, and `-heal` has not yet been able to reclassify it. | `-heal`, as a placeholder, or left over from before this taxonomy existed |
+| `unknown` | Inherited from history; no reason was recorded, and `-recheck` has not yet been able to reclassify it. | `-recheck`, as a placeholder, or left over from before this taxonomy existed |
 
-`unknown` is not a permanent category — it exists so `-heal` and `-check` (next
-two sections) have something to grab onto, and so that pre-existing rows are
+`unknown` is not a permanent category — it exists so `-recheck` and `-lint`
+(next two sections) have something to grab onto, and so that pre-existing rows are
 never silently reported as reasoned when they aren't.
 
 Every suppression/freeze bigdiffer itself sets is tagged with a category from
@@ -277,9 +278,9 @@ The taxonomy maps directly onto the decision:
 | `generation_failed` | **Yes** | The owned engine couldn't render the artifact from a schema AWS considers valid — a real defect (ours or the schema's) worth tracking. Validation failures fold in here (validation is the front half of generation, `bigdiffer-design.md` §6). |
 | `build_failed` | **Yes** | The artifact rendered but didn't compile — a real defect. |
 | `manual` | Human's call | Whoever suppressed it knows the reason and whether it warrants an issue. |
-| `unknown` | Triage | Reason lost to history; `-heal` reclassifies it first, and whether it then warrants an issue follows the category it lands on. |
+| `unknown` | Triage | Reason lost to history; `-recheck` reclassifies it first, and whether it then warrants an issue follows the category it lands on. |
 
-For the issue-worthy categories (`generation_failed`, `build_failed`), `-heal`'s
+For the issue-worthy categories (`generation_failed`, `build_failed`), `-recheck`'s
 report prints one extra line under each affected proposal: a plain
 recommendation to open a GitHub issue, naming the CloudFormation type and
 artifact. It carries no stub, no template, and no URL — the captured error
@@ -300,25 +301,25 @@ worth automating further until that changes.
 The reason-less backlog (Part 1) predates all of this, but the reasons often
 already exist — in open GitHub issues filed by the legacy process, which mandated
 one per suppression. Those issues carry the error detail and the type name. A
-one-time (or `-heal`-assisted) pass can mine the repo's open issues — matching on
+one-time (or `-recheck`-assisted) pass can mine the repo's open issues — matching on
 CloudFormation type name and error signatures — to *propose* `suppression_reason`
 values and issue-URL links for rows that have none today.
 
-This is best-effort and advisory, like every `-heal` proposal: a mined reason is
+This is best-effort and advisory, like every `-recheck` proposal: a mined reason is
 reported for human confirmation, never written silently. It won't cover every
 row, but it can convert a meaningful share of the 35 reason-less freezes and the
 bare suppressions from `unknown` into a categorized reason with an issue link,
 cheaply — turning the "what we don't know" list in Part 1 back into recorded
 intent.
 
-### `-check`: enforce a reason
+### `-lint`: enforce a reason
 
-`-check` (offline, safe on every PR) gains one more anomaly class, checked
+`-lint` (offline, safe on every PR) gains one more anomaly class, checked
 per-fact rather than per-row (item 9b): **any suppressed artifact, or a set
 `frozen_since`, whose own reason field is empty**. During the one-time backfill
 this was advisory (printed, not blocking) so the existing gap could be closed
 without wedging CI; now that the backfill has driven the count to zero, a
-reason-less fact is a **hard `-check` failure** (non-zero exit) — the invariant
+reason-less fact is a **hard `-lint` failure** (non-zero exit) — the invariant
 is enforced going forward so the gap cannot silently reopen. (`UnexplainedRetained`
 stays advisory; it is a separate, still-open workstream.) A row can have a real reason
 recorded for one fact (say, its resource) while another of its facts (its
@@ -328,12 +329,15 @@ what makes the 35-frozen-with-no-reason and 3-bare-suppression situations in
 Part 1 impossible to reintroduce without at least a report line calling it
 out.
 
-### `-heal`: re-probe and fill gaps
+### `-recheck`: re-probe and fill gaps
 
-A new subcommand, `-heal`, for exactly the backlog Part 1 describes. It gates
-per-fact, not per-row (item 9b): for every suppressed artifact or freeze whose
-own reason field is empty (or tagged `unknown`), independent of whether the
-row's other facts already have a real reason, `-heal`:
+A subcommand, `-recheck`, for exactly the backlog Part 1 describes (with an
+opt-in `-recheck-all` modifier that widens scope to every active fact,
+regardless of whether it already has a reason, to revisit an old decision on
+demand). By default it gates per-fact, not per-row (item 9b): for every
+suppressed artifact or freeze whose own reason field is empty (or tagged
+`unknown`), independent of whether the
+row's other facts already have a real reason, `-recheck`:
 
 1. **Checks structural first.** For a suppressed plural data source, re-run the
    same list-handler check the legacy transform used. If it still doesn't
@@ -353,10 +357,10 @@ row's other facts already have a real reason, `-heal`:
    `bigdiffer-design.md` §6) before proposing a `lift` — a suppressed artifact
    that generates but fails `go build` is retagged `build_failed` instead,
    so a `lift` proposal is only ever made for something that would actually
-   survive a real `-update` run, not just generation.
+   survive a real `-sync`/`-reconcile` run, not just generation.
 4. **Falls back to `manual`/`unknown`.** If none of the above apply — most
    commonly, an existing free-form `# Suppression Reason:` comment already
-   explains it in prose — `-heal` does not overwrite a human's comment; it
+   explains it in prose — `-recheck` does not overwrite a human's comment; it
    migrates the comment's text into the `manual:` detail rather than
    discarding it, and reports it as still needing a human look if no comment
    exists to migrate. If more than one of the row's facts is still
@@ -370,22 +374,25 @@ row's other facts already have a real reason, `-heal`:
    re-proposing `lift` forever once a human has recorded any real reason for
    it specifically).
 
-`-heal` never suppresses or un-suppresses anything on its own for a fact that
-already has a reason — it only targets the `unknown`/reason-less backlog, and
-every proposed change is reported for human review rather than applied silently,
-consistent with every other bigdiffer policy decision.
+`-recheck` never suppresses or un-suppresses anything on its own — every
+proposed change is reported for human review rather than applied silently,
+consistent with every other bigdiffer policy decision. By default it only
+targets the `unknown`/reason-less backlog; `-recheck-all` widens that to every
+active fact, including one with a real reason already recorded, but even
+then a real, non-`unknown` reason is kept as-is when there is no schema to
+re-probe against, never silently guessed over.
 
 ### What does not change
 
 - The checkout file (`suppressions_checkout.txt`) remains a separate, read-only
   cross-reference, exactly as documented in `bigdiffer-design.md` §5. Folding
   it into `frozen_since` is unrelated to this spec and stays a future migration.
-  `-heal` does not touch it.
+  `-recheck` does not touch it.
 - `non_provisionable` remains a bare annotation with no generation effect and no
   reason requirement (it says AWS lists the type as un-provisionable, not that
   bigdiffer failed to generate it).
-- `-heal`'s proposals are advisory and additive: no existing suppression, freeze,
+- `-recheck`'s proposals are advisory and additive: no existing suppression, freeze,
   or comment is removed or overwritten without a human accepting a proposed change
-  (`-heal`'s report) or editing the file directly. (`-check`'s reason enforcement
+  (`-recheck`'s report) or editing the file directly. (`-lint`'s reason enforcement
   is the one hard gate — it fails a PR that introduces a reason-less
   suppression/freeze, but it never edits the file.)

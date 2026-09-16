@@ -3,18 +3,6 @@
 
 # bigdiffer: design
 
-> **Out of sync with an in-progress redesign.** `held-artifacts-design.md` and
-> `redesign-punchlist.md` describe a command-surface redesign (`sync` /
-> `reconcile` / `check` / `lint` / `recheck`) currently being implemented on
-> this branch. This file intentionally is **not** being updated incrementally
-> alongside that work — it still describes today's `-update`/`-generate`/
-> `-check`/`-heal` commands and gates. It will be brought current in one pass
-> once the redesign's implementation is complete (`redesign-punchlist.md`
-> tracks that as its own item), rather than drifting through many partial
-> updates while the design is still settling. Until then, treat
-> `held-artifacts-design.md` as the current source of truth for anything it
-> covers.
-
 **bigdiffer** (`internal/tools/bigdiffer`) regenerates the Terraform AWSCC
 provider from the current live CloudFormation (CFN) types while protecting the
 provider from additions and updates that would break it.
@@ -27,9 +15,13 @@ runbook (see `generating-the-provider-with-bigdiffer.md` for the weekly process)
 and not a task tracker (see "Deferred and future work" below for what is left to do).
 
 bigdiffer is shipped and drives the weekly cycle today; §11 summarizes what is
-built and what remains. Scope: generate resources, data sources, and list
-resources from current CFN schemas, plus docs. Release mechanics (tagging,
-changelog, PRs) are out of scope.
+built and what remains. Five commands cover the full surface: `-sync` (the live
+weekly incremental), `-reconcile` (offline whole-corpus regeneration),
+`-check` (the same pipeline as `-reconcile`, read-only, for CI), `-lint`
+(overlay hygiene, no generation), and `-recheck` (re-probe a reason-less or,
+with `-recheck-all`, any suppressed/frozen fact). Scope: generate resources,
+data sources, and list resources from current CFN schemas, plus docs. Release
+mechanics (tagging, changelog, PRs) are out of scope.
 
 > Naming note: the legacy `make bigdiffer` target is an unrelated `git diff` of
 > dated `available_schemas` files, slated for removal. Here "bigdiffer" always
@@ -78,22 +70,22 @@ reported. #1 is that same action's bigger sibling, with "ask AWS first" bolted
 on the front. So underneath five stories are really three distinct actions —
 *ask AWS and bring current, redo-without-asking-and-keep, redo-without-asking-
 and-only-report* — plus two that never touch generation at all (#4 reads the
-bookkeeping; #5 revisits an old, specific decision on demand). The exact
-command surface for these — names, flags, whether #2/#3 share one verb with a
-flag or not — is not yet settled; see "Deferred and future work."
+bookkeeping; #5 revisits an old, specific decision on demand). The final
+command surface settles this exactly along those lines:
 
-`held` (§6, the feature this design is being written for) only makes sense
-against this list once one distinction is drawn: `suppress_*`/`frozen_since`
-are things a person already decided (inputs the machinery is told to honor —
-skip this, don't touch that); `held` is never decided by a person, it only
-ever comes *out of* an attempt that was made and failed. That means every one
-of stories #1–#3 must re-attempt a held thing, not skip it, every single time
-— and the moment an attempt on it succeeds, the mark must come off on its own.
-A mark that outlives the problem it recorded is a bug in whatever removes it,
-not an acceptable resting state — the same standard already expected of an
-old freeze once AWS un-deprecates a type (§7's self-healing row); `held` needs
-that same guarantee, actively enforced, not just assumed from "it clears
-itself eventually."
+| Story | Command |
+|---|---|
+| #1 — bring current from AWS | `-sync` |
+| #2 — redo, keep the result | `-reconcile` |
+| #3 — redo, only report | `-check` |
+| #4 — is the bookkeeping healthy | `-lint` |
+| #5 — revisit an old decision | `-recheck` (`-recheck-all` widens scope to every active fact, not just reason-less ones) |
+
+`-sync`, `-reconcile`, and `-check` share one pipeline (`settleBatch`):
+candidate build → generate → compile-gate → decide, differing only in where
+candidates come from (a live AWS crawl vs. the committed overlay + cache) and
+whether the result is promoted or only reported. `-lint` and `-recheck` never
+enter that pipeline — they are read-only overlay operations.
 
 ## 1. Core insight
 
@@ -171,9 +163,9 @@ from the cache, and skip frozen types outright (the legacy equivalent forced a
 refresh by deleting every cached schema and re-downloading; see §10):
 
 - Frozen types: not re-downloaded during the normal refresh — last-good bytes
-  stay (no delete/restore). The self-heal probe (§7) may re-fetch them to a
-  scratch location to test recovery, but never disturbs the pinned bytes unless
-  recovery is accepted.
+  stay (no delete/restore). `-recheck`'s re-probe (§7, `suppressed-and-frozen.md`)
+  may re-fetch them to a scratch location to test recovery, but never disturbs
+  the pinned bytes unless recovery is accepted.
 - Present, non-frozen: downloaded only if AWS's bytes differ; a byte-identical
   refresh is a no-op that skips the gate.
 - New types: downloaded once.
@@ -200,8 +192,22 @@ deferred — see "Deferred and future work.")
 
 ## 6. The gates: generation, then compile
 
-bigdiffer has two gates. Both route failures through one policy (§7), and neither
-ever blocks a release.
+bigdiffer has two gates. Both route failures through one policy (§7). A
+schema-changed failure never blocks a release — it freezes or suppresses just
+the affected type and ships everything else. A schema-unchanged failure is
+the one exception: it means the machinery itself regressed, so it blocks the
+whole run rather than papering over it (see "The whole corpus is gated every
+run," below).
+
+**One engine, three callers.** `-sync`, `-reconcile`, and `-check` run
+through the identical generate → compile → decide pipeline (`settleBatch`)
+over the corpus. They differ only in where candidates come from — `-sync`
+crawls AWS and diffs against the cache; `-reconcile`/`-check` read the
+committed overlay + cache directly, every row a candidate, since offline
+there is no "changed," only "attempt it" — and in what happens after the
+batch settles: `-sync`/`-reconcile` promote, `-check` only reports. `-lint`
+and `-recheck` never enter this pipeline at all; they are small, read-only
+overlay operations.
 
 ### Generation is the gate
 
@@ -211,18 +217,20 @@ pass is per-artifact and resilient — a resource, its singular data source, and
 its plural data source each succeed or fail independently, and one failure
 never aborts the others. Independent types run concurrently.
 
-Only New and Changed types enter the gate (a byte-identical refresh is a no-op,
-§4), so a typical week gates a handful of types, not the corpus. (The legacy
-flow's two whole-corpus gates and per-failure rerun loop are gone; see §10.)
+Every type in the corpus enters the gate every run (not just New/Changed —
+see "The whole corpus is gated every run," below); a byte-identical schema
+refresh still regenerates and compile-gates, it just skips the AWS download
+(§4).
 
 ### The compile gate
 
 Generation catches schemas that won't render; it cannot catch generated code that
 renders but fails to **type-check** — a bad cross-file reference, a collision with
 a sibling in the same service package, a broken import, or a stale registration
-file. `go build` is that check. bigdiffer runs it itself, inside `-update`,
-before promoting anything, so a build failure routes through the same policy
-(§7) as a generation failure, before a broken commit can happen.
+file. `go build` is that check. bigdiffer runs it itself, inside `-sync`
+(and `-reconcile`/`-check`, which share the same pipeline), before promoting
+anything, so a build failure routes through the same policy (§7) as a
+generation failure, before a broken commit can happen.
 
 It is whole-module and serial, not per-artifact like generation, because Go's
 unit of build success is the package, not the file: one bad file fails its
@@ -252,173 +260,130 @@ to promote a resource still advertising a list resource whose plural data
 source the gate rejected, rather than shipping a list resource with no
 backing data source.
 
-### Gap: the unchanged corpus is never gated (skeleton design, not yet implemented)
+### The whole corpus is gated every run
 
-Both gates above only run on New/Changed types (§4) — a type whose schema
-bytes are byte-identical to the cache is skipped entirely (`statusUnchanged`,
-`change.go`). That is correct for schema drift, but it means a change to the
-*machinery itself* — a template, `codegen/`, the naming package, or the Go
-toolchain — is never exercised against the ~1580 types whose schema didn't
-move this week. Today the only thing that would ever catch such a regression
-is `TestFullCorpusParity`, and only for as long as that test's legacy-engine
-comparison exists (it is itself slated for removal once the legacy engine is
-deleted, per §10). Once that guard is gone, a machinery regression on an
-unchanged-schema type would go undetected until something downstream actually
-breaks — silent, not surfaced.
+Both gates above run on every type every run, not just New/Changed. Earlier,
+only New/Changed types entered the gate at all — a type whose schema bytes
+were byte-identical to the cache was skipped entirely. That was correct for
+schema drift, but it meant a change to the *machinery itself* — a template,
+`codegen/`, the naming package, or the Go toolchain — was never exercised
+against the bulk of the corpus whose schema hadn't moved that week. Only
+`TestFullCorpusParity`'s legacy-engine comparison caught such a regression,
+and only for as long as that test (and the legacy engine it compares against)
+exists (§10).
 
-**Design.** Run every type through generate-then-compile every `-update`, not
-just New/Changed — the gate already exists and is deterministic and fast
-(§6's compile gate alone measures in seconds; running generation for the full
-corpus is the same order of magnitude). A schema-unchanged type that now
-fails either gate needs a result distinct from both existing outcomes:
+A gate failure is now handled by **why** it failed, which is fully determined
+by whether the schema changed:
 
-- **Not `frozen_since`.** Freezing means "the *schema* is pinned" (§7,
-  `suppressed-and-frozen.md`, "Frozen, precisely") — it also stops future
-  schema refresh for that type. A machinery regression has nothing wrong with
-  the schema; freezing it would be both the wrong claim and the wrong
-  behavior (the type should keep refreshing normally the moment the schema
-  actually changes, independent of whether the machinery currently compiles
-  it).
-- **Not `suppress_*_generation`.** Suppression means "don't generate this
-  artifact" as a standing, reason-carrying decision about the artifact. A
-  machinery regression is the tool failing to keep a promise it already made
-  last week (the artifact generated and compiled fine then) — the intent is
-  still "generate this," the tool just currently can't.
+- **Schema-changed failure:** the existing freeze/suppress policy, unchanged
+  (§7's `Present`/`New` rows). AWS handed bigdiffer a schema that won't
+  generate or compile — external breakage — so bigdiffer defends the shipped
+  provider (keep last-good, pin the schema) and ships everything else.
+- **Schema-unchanged failure:** the whole run fails, loudly, with per-artifact
+  blame (which types, which artifacts, the `go build` error), and **promotes
+  nothing at all — not even the schema-changed types that compiled cleanly
+  this same run.** Nothing is written to the overlay; no new overlay state is
+  introduced for this case.
 
-**Two causes, one outcome.** A schema-unchanged failure is not automatically
-a codegen defect. Compare the freshly regenerated bytes against the committed
-file — bigdiffer already has both, no second compile pass needed — and two
-distinct causes emerge, but both resolve to the *same* thing happening to the
-artifact: it keeps its last-good committed file, unpromoted, with a reason
-attached.
+The asymmetry is the point. A schema break is **external** — bigdiffer can't
+fix AWS's schema, only pin it — so it freezes and moves on. A machinery break
+is **self-inflicted** — a template/codegen/toolchain change bigdiffer's own
+maintainers made — so the honest response is to fix it or revert it, not to
+have the tool paper over it.
 
-| Cause | Generated bytes vs. committed | What it means |
-|---|---|---|
-| `codegen_error` | **Changed**, and the new output fails | This run's codegen/plan output is different from what's shipping, and the different output is what broke. The committed file — unmodified, still what's running in production — is known-good. |
-| `toolchain_error` | **Unchanged** (byte-identical to committed), and that same file now fails | Codegen produced the exact same file it always has; the environment around it (Go version, a dependency bump, a shared runtime package) is what changed. The committed file is not "known-good" in the same sense as `codegen_error` — it was good under the *previous* environment, and might fail too if it were ever rebuilt from scratch — but it is what's *already shipping*, so leaving it in place changes nothing about the *already-released* provider — though the tree this run would commit still won't build (see disposition below). |
+The all-or-nothing scope (rather than just failing the individual
+schema-unchanged type) is deliberate, not a simplification: a schema-unchanged
+failure means the *engine* regressed, and every schema-changed type this same
+run was generated by that same engine. Those types "compiled," but an engine
+bug that breaks one schema shape can equally produce output that compiles yet
+is subtly wrong for another — a compile failure alone can't tell you whether
+the regression is narrow or broad. Once it can't be told apart, shipping the
+schema-changed half ships this week's new/updated schemas out of a generator
+just caught being broken. Don't ship anything a known-suspect engine produced
+this run — that is not a weakened invariant, it is what "never ship broken
+output" actually requires once the gate can see a self-inflicted failure at
+all (which it couldn't before the whole corpus was gated, so the question
+never came up).
 
-Both are **held** for detection and reporting — the committed file is not
-replaced, and the overlay records why — under one mechanism with two reason
-categories rather than two different mechanisms. But they part ways on *release
-disposition*, and the byte-diff is the wrong thing to decide that on. The
-invariant that must hold is "the committed tree builds," and §6's fixpoint
-already computes exactly that when it reverts a failed artifact to its
-committed file and rebuilds:
+**Why not a per-artifact `held` status instead.** An earlier draft proposed
+marking a schema-unchanged failure `held` — keep the last-good file, persist
+a marker, ship, self-clear once the regression resolves — rather than
+blocking the run outright. Designed, then dropped, for two reasons: if the
+regenerated bytes are byte-identical to the committed file and that same
+file now fails (a toolchain/dependency break, not a codegen change), there is
+nothing to fall back to — the committed file *is* the failing file, so
+`held` would have to block the run anyway (`go build`, a required CI check,
+fails regardless of any marker). And even in the one case a `held` marker
+*could* let a run proceed — a codegen change whose previous output still
+compiles — CI still has to block on the regression once caught, so `held`
+reduced to "fail the run, plus a self-clearing marker and a byte-diff
+classifier" — bookkeeping around an outcome that was always just *blocked
+until a human fixes the machinery*, with no behavioral payoff over failing
+the run directly and adding no new overlay state at all.
 
-- `codegen_error`: reverting to the committed file goes **green** — that file
-  is genuinely known-good — so the artifact is held, its marker persisted, and
-  the release proceeds.
-- `toolchain_error`: the committed file *is* the file that failed (the
-  regenerated bytes were byte-identical), so reverting to it stays **red** —
-  the tree this run would commit does not build under the current environment.
-  That cannot ship, so a `toolchain_error` **blocks the run** (hard-error,
-  reported per-artifact) rather than completing with a held marker. "Nothing
-  changes about the *already-released* provider" is true; "the release proceeds"
-  is not.
+The escape hatch for a genuinely hard straggler under a new engine is the
+same one that already exists: a human `suppress`s that one artifact
+deliberately, with a reason — a standing, human-owned decision, not a state
+the tool invents.
 
-So the byte-diff still labels the cause for the report, but the hold-vs-block
-decision keys on the fixpoint's post-revert build result — which also correctly
-handles the case the byte-diff would mislabel: regenerated bytes differ, yet the
-committed file *also* fails under a bumped toolchain (labeled `codegen_error`,
-but post-revert red, so blocked). Only `codegen_error` ever reaches the overlay
-as a persisted `held` marker; `toolchain_error` is a transient, run-blocking
-report artifact. This also sidesteps needing to treat either as a suppression:
-nothing is removed from the provider, so there is no "backlog" framing to force
-onto it the way an actual suppression implies.
+### Routing a failure to the right branch
 
-**Proposed: a new `held` per-artifact status, orthogonal to `frozen_since` and
-`suppress_*`.**
+`decide()` (`policy.go`) has to tell a schema-changed failure (→
+freeze/suppress, §7) from a schema-unchanged one (→ abort the whole run,
+above) — without this, a whole-corpus gate would route every failure through
+the schema-changed branch regardless, silently freezing schema-fine types on
+a pure machinery break (the wrong lever, the worst outcome, since freezing
+also stops that type's future schema refresh for no reason). The routing
+signal is `classPresentUnchanged`, a `changeClass` value distinct from the
+existing `classPresent`: `-sync`'s candidate-building step classes a row
+`classPresentUnchanged` when its schema bytes are unchanged from the cache,
+and `classPresent` when they changed. `-reconcile`/`-check` are offline and
+have no discovery diff at all — every row they attempt is, by construction,
+`classPresentUnchanged`, since there is no "the schema moved" case to
+distinguish offline.
 
-- **Three-way per-artifact split, matching `suppress_*_generation` exactly.**
-  `held_resource` / `held_singular_data_source` / `held_plural_data_source`
-  (bool) plus `held_reason_resource` / `_singular_data_source` /
-  `_plural_data_source` (string, `category: detail` shape, category one of
-  `codegen_error` / `toolchain_error` — a proposed addition to
-  `suppressed-and-frozen.md`'s existing five-category taxonomy, §7). List
-  resource is not a fourth bucket, for the same reason it isn't one for
-  `suppress_*_generation` today: it isn't an independent artifact, it's an
-  attribute of the resource artifact (`-listresource`, gated by whether the
-  plural data source is suppressed — §6's "list-resource coupling guard").
-  A list-resource-specific compile failure is the *resource* artifact's own
-  `held`, with the reason text naming the list resource specifically, not a
-  separate `held_list_resource`.
-- **Self-clearing.** Because the full corpus is re-attempted every `-update`
-  (not just on a schema change), a held artifact is re-evaluated every run:
-  the run after the regression is fixed (in codegen, or by the environment
-  moving again — a further dependency bump, a template fix, etc.), that
-  artifact generates/compiles cleanly, is promoted, and the marker clears
-  automatically — no `-heal` step needed for this category specifically,
-  unlike `unknown`/`manual` rows.
-- **Distinguishable from a real suppression in the report and the overlay.**
-  A held row is not backlog (nobody needs to open a "fix this resource's
-  schema" issue — the resource's schema is fine) and not something a human
-  approves; it is bigdiffer telling its own maintainers "the last cycle's
-  output changed or the environment changed, either way this needs a code
-  fix, not an overlay edit." The change report gets a distinct section for
-  it (parallel to the existing frozen/suppressed section), grouped by reason
-  category so a `toolchain_error` spike after a dependency bump is
-  immediately visible as one event, not scattered among unrelated
-  `codegen_error` rows — and `-check` flags any held row as an anomaly
-  (parallel to today's `anomalyProblems()`) rather than passing silently, so
-  a held marker surviving past the PR that should have fixed it is itself a
-  signal the fix didn't land.
-- **Only schema-unchanged failures are eligible.** A schema-changed type that
-  fails is already covered by the existing freeze/suppress branches in §7's
-  policy table — the schema itself is the newest variable there, so
-  `generation_failed`/`build_failed` under a freeze or suppression remains
-  the right call, not `held`.
+**Frozen rows are excluded from the gate entirely, upstream of this
+routing.** `-sync` gets this for free: change classification returns a
+distinct `statusFrozen` before any byte comparison, so a frozen row never
+becomes a candidate at all — a type is frozen precisely because its schema
+is authoritative at its pinned bytes, not because bigdiffer should keep
+re-attempting it. `-reconcile`/`-check`'s offline row source has no
+equivalent classification step to inherit that exclusion from, so it applies
+the same exclusion explicitly before building candidates. Skipping this
+would not be a cosmetic gap: a frozen type is frozen *because* it fails to
+generate or compile at its pinned bytes, so feeding it through
+`classPresentUnchanged` would abort every single `-reconcile`/`-check` run,
+unconditionally, with no path to ever completing — not even in the best case
+where a machinery fix resolved everything else.
 
-**Attribution, and when to give up on attribution.** A build failure is
-attributable when `go build`'s blame maps cleanly to a staged artifact/package
-(exactly the mapping §6's fixpoint loop already does) — that covers both
-causes above, including a dependency bump that breaks some resources and not
-others: each affected resource is held individually, with its own
-`toolchain_error` reason, and the rest of the corpus proceeds unaffected. A
-blamed file that maps to nothing staged is unattributable exactly as §6
-already defines it (a pre-existing base-tree break, or a bug in bigdiffer's
-own emitted registration file) — that case is not "held," it hard-errors the
-run today and should continue to.
+### `-check`: the same gate, read-only
 
-**A wide `codegen_error` batch should still stop the run.** The systemic
-dependency-bump case is already caught — its committed files stay red on
-revert, so `toolchain_error` blocks regardless of count. What a volume
-threshold still guards is a large `codegen_error` batch: each is individually
-holdable and shippable (post-revert green), but a run that holds hundreds of
-them is a systemic codegen regression, and completing "successfully" while
-silently skipping a large fraction of the corpus would bury the signal in a
-huge, technically-accurate report. Proposed: track the held count as a fraction
-of the gated corpus during the full-corpus sweep, and above a threshold
-(illustrative, not committed: something like 10–20% of attempted types, or a
-held count over N in the low hundreds), hard-error instead of completing — the
-same "abort on aggregate" instinct §6 already has, triggered by volume instead
-of by an unmappable blame. Below the threshold, held rows are exactly the
-clear, per-artifact signal the report already makes them, and the release
-proceeds.
+`-check` runs the identical `-reconcile` pipeline (candidates from the
+committed overlay + cache, through generate → compile → decide) but never
+promotes. It reports every failure exactly as `-reconcile` would, then exits
+non-zero on either a failure **or** any output-diff — regenerated bytes that
+differ from the committed ones even though they compile cleanly. That second
+condition is the "changed the engine but didn't `-reconcile` and commit"
+case: a non-engine change touches nothing `-check` would regenerate
+differently, so it passes with zero diff; an engine change must be followed
+by `-reconcile` + commit until `-check` is clean again. This is the intended
+CI gate on engine-touching changes, and takes over `TestFullCorpusParity`'s
+role as the self-referential (current engine vs. committed output) guard
+once the legacy engine is deleted (§10).
 
-**Noted, not designed here: unifying the taxonomy.** `held_*` above still
-follows today's two-attribute-per-fact convention (a bool plus a separate
-`_reason` string), matching `suppress_*_generation`/`suppression_reason_*`
-and `frozen_since`/`frozen_reason` as they exist now, so `held` ships
-consistent with the levers already in the overlay. Collapsing all three into
-one self-describing attribute per fact (dropping the boolean *and* the
-`_reason` suffix — the value already reads as an explanation on its own,
-e.g. `resource_suppressed = "structural: <detail>"` conveys everything
-`suppress_resource_generation = true` + `suppression_reason_resource = "..."`
-does today) is a separate, larger design problem, called out as its own item
-in "Deferred and future work" rather than folded into `held` here — `held`'s
-shape is chosen to be additive toward a possible future unification, not another
-format to migrate away from later, but the unification itself needs its own
-design pass before scheduling.
-
-This keeps all three of bigdiffer's guarantees simultaneously once
-implemented: never regress a shipped artifact, always reflect the latest
-schema, and always reflect the latest machinery wherever it can — with every
-place it can't recorded per-artifact, never silent. It also removes
-`TestFullCorpusParity`'s role as the only engine-change guard, unblocking that
-test's own retirement (§10, "Deferred and future work").
-
-Design only — not yet implemented. Tracked as the next `held`/machinery-gap
-work item in "Deferred and future work."
+**Neither `-reconcile` nor `-check` removes orphaned output.** Both walk
+staged → committed, never the reverse: `-reconcile`'s promotion (`copyTree`)
+overwrites files present in the staged tree but never deletes a committed
+file the current templates/codegen no longer emit at all (a renamed
+artifact, a dropped code path). `-check`'s output-diff scan mirrors that walk
+direction deliberately, precisely so its contract — *`-check` passes if and
+only if running `-reconcile` and committing the result would be a no-op* —
+holds exactly; scanning the other direction too would make `-check` fail on
+a state `-reconcile` itself cannot fix. This is a corpus-wide property of
+both commands, not a gap specific to `-check`'s scan: if orphan cleanup is
+ever wanted, that is a new `-reconcile`-level capability (an explicit "remove
+any committed file not in this run's staged set" pass), and `-check`'s scan
+would need the reverse walk added at the same time, not before.
 
 ## 7. Policy: results become overlay edits
 
@@ -439,8 +404,14 @@ a freeze, when one applies, carries its own separate `frozen_reason`.
 | Non-provisionable (live) | n/a | keep block; set `non_provisionable = true` |
 | Withdrawn | n/a | set `frozen_since`; keep bytes |
 | Frozen / suppressed | ok on re-probe | propose un-freeze / un-suppress |
-| Unchanged (schema) | failed, committed file still builds (`codegen_error`) | hold the failed artifact(s): keep last-good bytes, persist `held_*` marker, ship; never `frozen_since` *(design, §6, not yet implemented)* |
-| Unchanged (schema) | failed, committed file also fails (`toolchain_error`) | block the run — the committed tree won't build; report per-artifact, persist nothing *(design, §6, not yet implemented)* |
+| Unchanged (schema) | failed | abort the **whole run**, promote nothing — not a per-row overlay edit; see note below |
+
+Note on the last row: a schema-unchanged failure means the generation/compile
+*machinery* regressed, not the schema — freezing or suppressing would claim
+the wrong thing and wouldn't even be safe, since every schema-changed type
+this run was generated by that same suspect engine (§6, "The whole corpus is
+gated every run"). Nothing is written to the overlay for this case; the run's
+own error output, naming every affected type and artifact, is the report.
 
 Two invariants keep every row safe by default:
 
@@ -450,12 +421,10 @@ Two invariants keep every row safe by default:
   suppressed and becomes backlog.
 
 The reason taxonomy (`structural` / `generation_failed` / `build_failed` /
-`manual` / `unknown`), the `-check` reason anomaly, and the `-heal` re-probe are
-specified in `suppressed-and-frozen.md`. The last table row is self-healing:
-policy is recomputed every cycle, so a type AWS has since fixed is proposed for
-recovery automatically. Two more categories, `codegen_error` and
-`toolchain_error`, are proposed in §6 ("Gap: the unchanged corpus is never
-gated") but not yet implemented.
+`manual` / `unknown`), the `-lint` reason anomaly, and the `-recheck` re-probe
+are specified in `suppressed-and-frozen.md`. The `Frozen / suppressed` row is
+self-healing: policy is recomputed every cycle, so a type AWS has since fixed
+is proposed for recovery automatically.
 
 ## 8. The one human step
 
@@ -466,7 +435,7 @@ issue links, and adjudicate flagged anomalies. The report is plain,
 consistently-shaped text (one fact per line: CFN type, label, field, reason),
 readable by a human or an LLM agent working through proposals interactively.
 
-`-update` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry,
+`-sync` also drafts the `FEATURES:` half of the weekly `CHANGELOG.md` entry,
 writing directly into the file's top, in-progress version block (e.g.
 `## 1.100.0 (Unreleased)`). The bullets come from what the run actually
 promoted, filtered to artifacts not already user-visible before this run — a
@@ -496,7 +465,7 @@ These choices are settled in `internal/tools/bigdiffer`:
 - **Deterministic output.** Blocks are sorted by CFN type name (matching the
   generator) and the header count updated, giving a stable, reviewable file.
 - **Idempotent, two check modes.** Running twice changes nothing. A structural
-  `-check` verifies normalization and anomalies with no AWS access (safe on every
+  `-lint` verifies normalization and anomalies with no AWS access (safe on every
   PR); the live drift report drives the weekly run and is advisory, never a hard
   PR gate (the overlay is expected to lag live AWS).
 - **Self-contained.** The tool owns the overlay's shape, its own discovery, its
@@ -530,10 +499,10 @@ These choices are settled in `internal/tools/bigdiffer`:
 | `make bigdiffer` (git diff of dated files) | Removed — nothing to diff (§1). |
 | Manual overlay edit | Automated — the reconciler writes blocks (§3, §7). |
 | Validate + generate gates + rerun loops | Collapsed into the resilient per-artifact generation-is-the-gate pass (§6). |
-| `make resources`, `make singular-data-sources`, `make plural-data-sources` | bigdiffer owns the engine and generates in-process and in parallel, only for New + Changed types (§6, "The generator surface"). |
+| `make resources`, `make singular-data-sources`, `make plural-data-sources` | bigdiffer owns the engine and generates in-process and in parallel, over the whole corpus every run (§6, "The generator surface"). |
 | `make docs-all` | bigdiffer orchestrates it — owns `docs-import`, invokes the standard `tfplugindocs` + `docs-fmt`; it does not reimplement `tfplugindocs`. |
 | 3000+ `//go:generate` directives + the three `resources.go` / `*_data_sources.go` directive files | Replaced by in-process parallel generation and a single blank-import registration file ("The generator surface"). |
-| `make build` as the manual compile check | bigdiffer runs the compile gate itself, in `-update`, before promotion (§6); `make build` afterward is a confirmation, not the primary catch. |
+| `make build` as the manual compile check | bigdiffer runs the compile gate itself, in `-sync` (and `-reconcile`/`-check`), before promotion (§6); `make build` afterward is a confirmation, not the primary catch. |
 
 Nothing above is deleted in the cutover. The legacy generators, directive files,
 and `make` targets stay as a documented, deprecated fallback. The cutover is
@@ -548,10 +517,15 @@ discovery, byte-compare change detection, per-artifact generation-as-gate, the
 compile gate, the class × gate-result policy (including the absent-row
 `DescribeType` probe, §3), comment-preserving block mutation, the single
 blank-import registration file, the import-examples aggregate, and docs
-orchestration. Correctness is anchored by full-corpus parity — the owned
-engine is byte-identical to the legacy generators (0 drift, ~1580 types) — kept
-as a regression guard. The `-check`, `-update`, `-generate`, `-docs`, and `-heal`
-modes are all live.
+orchestration. Every type is gated (generate + compile) every run, not just
+New/Changed, with a schema-unchanged failure aborting the whole run rather
+than promoting a partial result (§6) — the one behavior change the
+`sync`/`reconcile`/`check`/`lint`/`recheck` command redesign carries.
+Correctness is anchored by full-corpus parity — the owned engine is
+byte-identical to the legacy generators (0 drift, ~1580 types) — kept as a
+regression guard until `-check` fully takes over that role (§6, §10).
+`-sync`, `-reconcile`, `-check`, `-lint`, `-recheck` (with `-recheck-all`),
+and `-docs` are all live.
 
 Remaining work — GitHub-issue guidance, the one-time reason backfill, and the
 deferred cleanups below — is listed under "Deferred and future work" below.
@@ -629,54 +603,26 @@ The durable list of remaining work — this section is the single tracker now th
 the standalone generation punchlist is retired. Each item is either tracked by a
 linked GitHub issue or described in enough detail here to act on.
 
-- **`-heal`: add an opt-in mode to re-probe rows that already have a reason,**
-  not just reason-less/`unknown` ones. Real story: revisit a year-old
-  suppression/freeze to see if it's still deserved, not just fill gaps.
-  Quick note only — not designed.
-- **`held`: gate the unchanged corpus too (engine-change safety).** Full
-  skeleton design in §6 ("Gap: the unchanged corpus is never gated") and §7's
-  policy table. Implementation: run generate-then-compile over the whole
-  corpus every `-update`, not just New/Changed; add the `held_*` per-artifact
-  attributes and the `codegen_error` / `toolchain_error` reason categories
-  (`policy.go`, `suppressed-and-frozen.md`); surface held rows as a distinct,
-  category-grouped report section and a `-check` anomaly; add the
-  volume-based abort threshold (§6) so a wide, attributable regression still
-  stops the run instead of completing as a large held batch. Replaces
-  `TestFullCorpusParity` as the engine-change guard, unblocking that test's
-  own retirement. *The one medium item outstanding.*
-- **Settle the command surface around one unified gate/policy pipeline.**
-  §0 collapses six user stories into three operations (crawl-and-promote,
-  gate-and-report, gate-and-promote), each with/without an AWS crawl. Today's
-  `-generate` is a second, gate-less code path (`run_generate.go`) — it
-  regenerates the whole corpus but never compile-gates and never applies
-  policy, so it cannot produce a `held` marker and cannot back stories 2/3/4.
-  That gate-less shortcut needs to be eliminated, not preserved alongside the
-  gated pipeline `-update` uses — same underlying engine, parameterized by
-  whether rows/schema bytes come from an AWS crawl or the committed base, and
-  by whether the result is promoted or only reported. Exact flag/command
-  names not decided.
 - **Unify the overlay's exclusion levers — candidate shape, needs its own
   design pass.** Not scheduled, not decided; documented so the next design step
   has a starting point, not a conclusion. Today every exclusion is a
   boolean-plus-separate-reason-string pair — `suppress_resource_generation` +
-  `suppression_reason_resource`, `frozen_since` + `frozen_reason`, and (once
-  implemented) `held_resource` + `held_reason_resource` — three levers,
-  six-plus attributes per artifact, with a flag/reason-mismatch class `-check`
+  `suppression_reason_resource`, `frozen_since` + `frozen_reason` — two levers,
+  four-plus attributes per artifact, with a flag/reason-mismatch class `-lint`
   has to guard against.
 
   The realization that shapes this: these facts live on **two different
   granularities**, so "unify" cannot mean "one attribute per row."
 
-    - **Output disposition — per-artifact (the trio).** `suppress` and `held`
-      are both "what happened to this artifact's output," and each of the three
-      artifacts (resource / singular data source / plural data source) carries it
+    - **Output disposition — per-artifact (the trio).** `suppress` is "what
+      happened to this artifact's output," and each of the three artifacts
+      (resource / singular data source / plural data source) carries it
       independently. *Candidate:* one self-describing attribute per artifact —
-      `resource = "held: codegen_error: <detail>"`,
-      `singular_data_source = "suppressed: manual: <detail> (issue: URL)"`; absent
-      means "generate normally." The `state:` prefix (`suppressed` vs `held`) is
-      how consumers route — `held:` is always a `-check` anomaly; a `suppressed:`
-      with no `category: detail` is the reason-less anomaly — collapsing two
-      levers into one and removing the flag/reason mismatch.
+      `resource = "suppressed: manual: <detail> (issue: URL)"`; absent means
+      "generate normally." A `suppressed:` value with no `category: detail` is
+      the reason-less anomaly `-lint` already flags — collapsing the boolean
+      and the reason string into one attribute and removing the
+      flag/reason-mismatch class entirely, rather than guarding against it.
     - **Schema input state — per-type.** `frozen_since` pins the *shared* schema
       JSON (one file backs all three artifacts — the "cannot partially advance"
       invariant), so it is inherently whole-type and does not belong in the trio;
@@ -686,18 +632,14 @@ linked GitHub issue or described in enough detail here to act on.
   This is one candidate, not a plan. **Open questions, and reasons it may land
   differently:** whether `frozen_since`'s date folds into a value or stays a
   distinct field; whether the trio is three flat attributes or a nested
-  `artifacts {}` block; how the intra-trio coupling (a suppressed/held
+  `artifacts {}` block; how the intra-trio coupling (a suppressed
   `plural_data_source` forces the `resource` to drop its list-resource
   capability — §6's guard) is represented, if at all, versus left as a
   generation-time rule; and a migration path for ~1580+ existing rows and every
-  consumer (`resourceRow`, `-check`, `-heal`, the HCL schema). It is a breaking
+  consumer (`resourceRow`, `-lint`, `-recheck`, the HCL schema). It is a breaking
   change to the overlay format, well beyond a point release, and worth weighing
   against simpler alternatives — e.g. keeping today's pairs but adding a single
-  `-check` invariant for the mismatch class — before committing to a rewrite.
-  `held` (§6) is being designed to sit *additively* toward this direction, not
-  to foreclose it; because it has no existing rows it could serve as a low-risk
-  pilot for the disposition shape, but that too is a call for the dedicated
-  design pass, not this work.
+  `-lint` invariant for the mismatch class — before committing to a rewrite.
 - **Move dedup "tags" out of the schema bytes into an `all_schemas.hcl`
   argument.** The deduplication marker currently lives inside the pinned schema
   JSON; make it a first-class overlay argument (a `resourceRow` field + generator
@@ -706,7 +648,7 @@ linked GitHub issue or described in enough detail here to act on.
 - **Thaw resources that now generate cleanly.** The ~63 deferred lift-candidates
   recorded in #3323 (`manual: lift candidate; generates and compiles cleanly …
   pending a batched lift`), plus resources unlocked by the new dedup approach and
-  any freezes whose pinned bytes now generate. Confirm with `-heal`; lift in
+  any freezes whose pinned bytes now generate. Confirm with `-recheck`; lift in
   batches, each its own reviewed PR (generated-code diffs, never a data-only
   ride-along).
 - **Checkout-file retirement (§5).** Fold `suppressions_checkout.txt` fully into
@@ -715,3 +657,15 @@ linked GitHub issue or described in enough detail here to act on.
   the engine has driven several clean weekly cycles with no fallback. Tracked by
   #3330 and `removing-the-legacy-generation-process.md`; resolves the cutover from
   conceptual to physical (§10).
+- **Wire `-check` into CI, scoped to engine-touching changes.** `-check` (§6) is
+  designed as the CI gate for a machinery change (`codegen/`, templates,
+  naming, `go.mod`/`go.sum`) — catch a regression before it reaches a
+  `-sync`/`-reconcile` PR — but the workflow does not run it yet (only
+  `go test ./internal/tools/bigdiffer/...` and `-lint` run today). Open:
+  whether it runs on every PR (simplest, but pays the whole-corpus generation
+  cost on unrelated changes) or is scoped to paths that can plausibly affect
+  generation output. `-check`'s "fail on any output-diff" relies on
+  generation being deterministic; two separate real runs against an untouched
+  corpus produced zero diffs both times, which is evidence, not a formal
+  proof — worth keeping in mind if a future run ever surfaces spurious drift
+  (timestamps, map order) with no real cause.

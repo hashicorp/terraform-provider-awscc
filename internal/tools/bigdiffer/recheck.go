@@ -22,7 +22,7 @@ import (
 // healProposal is one row -recheck has something to say about. -recheck never
 // mutates all_schemas.hcl; every proposal is reported for a human to apply,
 // matching every other bigdiffer policy decision
-// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill gaps").
+// (contributing/docs/suppressed-and-frozen.md, "-recheck: re-probe and fill gaps").
 type healProposal struct {
 	cfn      string
 	label    string
@@ -143,7 +143,7 @@ func runRecheck(allSchemasPath string, all bool) error {
 // fact this run — used to phrase a migrated free-form comment as a shared
 // candidate rather than a confirmed per-fact reason, since the same
 // row-level comment text cannot be assumed to describe more than one fact
-// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
+// (contributing/docs/suppressed-and-frozen.md, "-recheck: re-probe and fill
 // gaps").
 func healRow(cfg config, row resourceRow, pending []healFact, comment string) []healProposal {
 	var out []healProposal
@@ -233,7 +233,7 @@ var probeArtifact = func(cfg config, row resourceRow, kind artifactKind, schema 
 // the test binary under `go test` — a binary whose CLI is testing.Main, not
 // bigdiffer's real main(), and so can't be probed directly).
 func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artifactKind, schema []byte) error {
-	tmp, err := os.CreateTemp("", "bigdiffer-heal-*.json")
+	tmp, err := os.CreateTemp("", "bigdiffer-recheck-*.json")
 	if err != nil {
 		return err
 	}
@@ -410,7 +410,7 @@ func freezeProposal(row resourceRow, f healFact, comment string, multiPending bo
 	return commentOrUnknown(base, f.reason, comment, multiPending)
 }
 
-// commentOrUnknown is step 4 of the heal probe (suppressed-and-frozen.md): if
+// commentOrUnknown is step 4 of the recheck probe (suppressed-and-frozen.md): if
 // the fact already carries a real, specific reason (only reachable at all
 // under -recheck-all, since the default scope excludes these), that reason
 // is kept — there is no schema to re-probe with, so there is nothing to
@@ -430,7 +430,7 @@ func freezeProposal(row resourceRow, f healFact, comment string, multiPending bo
 // each — it is not auto-assigned as a confirmed per-fact reason, since a
 // single comment written for one artifact does not necessarily explain a
 // different artifact's suppression or the freeze
-// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
+// (contributing/docs/suppressed-and-frozen.md, "-recheck: re-probe and fill
 // gaps"). The proposal text is worded as a shared candidate for a human
 // to assign, edit, or reject per field, rather than a confirmed fact.
 func commentOrUnknown(base healProposal, existingReason, comment string, multiPending bool) healProposal {

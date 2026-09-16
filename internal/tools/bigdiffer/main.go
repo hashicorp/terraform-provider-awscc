@@ -15,8 +15,9 @@
 //     New/Changed — a schema-changed failure freezes/suppresses as before; a
 //     schema-unchanged failure means the machinery itself regressed, so the
 //     whole run fails and promotes nothing at all, not even the schema-changed
-//     types that compiled cleanly this run (contributing/docs/held-artifacts-design.md
-//     §3). Never regresses otherwise: a type's files + cache are promoted only
+//     types that compiled cleanly this run (contributing/docs/bigdiffer-design.md
+//     §6, "The whole corpus is gated every run"). Never regresses otherwise:
+//     a type's files + cache are promoted only
 //     once the whole batch has staged and compiled cleanly.
 //   - -reconcile: the same generate-compile-decide pipeline -sync uses, offline
 //     from the committed overlay + schema cache, no AWS. Every row is a
@@ -63,7 +64,6 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"errors"
 	"flag"
@@ -104,7 +104,7 @@ func main() {
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
 		recheckAll     = flag.Bool("recheck-all", false, "with -recheck: widen the scope to every active suppression/freeze, not just the reason-less/unknown backlog — revisit an old, already-explained decision on demand")
 
-		// Hidden: the hidden -recheck-probe-artifact mode heal.go re-execs into,
+		// Hidden: the hidden -recheck-probe-artifact mode recheck.go re-execs into,
 		// so a crashy regeneration (e.g. a recursive schema) kills only this
 		// subprocess. Not part of the documented CLI surface.
 		recheckProbeArtifact = flag.Bool("recheck-probe-artifact", false, "internal: probe one artifact's regeneration in isolation")
@@ -165,80 +165,6 @@ func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs
 		flag.Usage()
 		return fmt.Errorf("no command given; use one of -sync, -reconcile, -check, -docs, -lint, -recheck")
 	}
-}
-
-// runLint verifies all_schemas.hcl is normalized (sorted, canonical formatting,
-// correct count header) and anomaly-free, using the overlay as its own base so no
-// AWS query or snapshot file is needed. It writes nothing and is suitable for CI.
-func runLint(allSchemasPath, checkoutPath string) error {
-	cfg, rows, err := loadOverlay(allSchemasPath)
-	if err != nil {
-		return err
-	}
-	overlayContent, err := os.ReadFile(allSchemasPath)
-	if err != nil {
-		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
-	}
-	checkout, err := parseCheckout(checkoutPath)
-	if err != nil {
-		return fmt.Errorf("reading checkout %s: %w", checkoutPath, err)
-	}
-
-	// Reconcile the overlay against itself: no rows are added, so this only
-	// re-sorts and re-formats, surfacing any hand-edit that left it un-normalized.
-	out, report, err := normalize(string(overlayContent), rows, nil, checkout)
-	if err != nil {
-		return err
-	}
-	report.write()
-
-	problems := report.anomalyProblems()
-	// The count-header value counts schemas *available from AWS*, which an offline
-	// run cannot know, so compare everything except that line: sorting, canonical
-	// formatting, and byte-preservation of blocks.
-	if countLineRE.ReplaceAllString(out, "#") != countLineRE.ReplaceAllString(string(overlayContent), "#") {
-		problems = append([]string{"not normalized (sorting/formatting; re-run `-sync`, or fix by hand)"}, problems...)
-	}
-	if regProblem := checkRegistrationUpToDate(cfg, rows); regProblem != "" {
-		problems = append(problems, regProblem)
-	}
-	if len(problems) > 0 {
-		return fmt.Errorf("all_schemas.hcl check failed: %s", strings.Join(problems, "; "))
-	}
-	if n := len(report.UnexplainedRetained); n > 0 {
-		fmt.Fprintf(os.Stderr, "bigdiffer: all_schemas.hcl is normalized; %d advisory anomaly line(s) reported above (not a check failure).\n", n)
-		return nil
-	}
-	fmt.Fprintln(os.Stderr, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
-	return nil
-}
-
-// checkRegistrationUpToDate guards the committed registrations_gen.go against
-// drift: it re-emits the registration file from the overlay and compares. A
-// stale file (a resource added or removed without regenerating) would silently
-// change the set of registered resources and data sources, so it must fail
-// -lint. It returns a problem description, or "" when the file is up to date.
-//
-// Absence is not a failure: while the legacy directive files
-// (resources.go/singular_data_sources.go/plural_data_sources.go) still register
-// every type, this file is additive, and the documented legacy fallback deletes
-// it. Once the legacy files are removed, presence should be required here.
-func checkRegistrationUpToDate(cfg config, rows []resourceRow) string {
-	committed, err := os.ReadFile(cfg.registrationPath)
-	if errors.Is(err, os.ErrNotExist) {
-		return ""
-	}
-	if err != nil {
-		return fmt.Sprintf("reading %s: %v", filepath.Base(cfg.registrationPath), err)
-	}
-	want, err := emitRegistration(cfg, rows)
-	if err != nil {
-		return fmt.Sprintf("re-emitting registrations: %v", err)
-	}
-	if !bytes.Equal(committed, want) {
-		return fmt.Sprintf("%s is stale (re-run `bigdiffer -reconcile` or `-sync`)", filepath.Base(cfg.registrationPath))
-	}
-	return ""
 }
 
 // item is a blank-line-delimited chunk of the resource region, retained as

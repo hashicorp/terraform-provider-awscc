@@ -21,9 +21,9 @@ func writeSchemaCache(t *testing.T, dir, cfn string, bytes []byte) {
 }
 
 // TestReconcileCandidates covers both conventions pinned ahead of this
-// implementation (contributing/docs/held-artifacts-design.md "The routing
-// this still requires"; redesign-punchlist.md item 4): every candidate must
-// be classPresentUnchanged, never classPresent, and every frozen row must be
+// implementation (contributing/docs/bigdiffer-design.md §6, "Routing a
+// failure to the right branch"): every candidate must be
+// classPresentUnchanged, never classPresent, and every frozen row must be
 // excluded entirely.
 func TestReconcileCandidates(t *testing.T) {
 	t.Parallel()
@@ -150,7 +150,7 @@ func TestReconcileCandidatesCacheMissIsCountedSeparatelyFromFrozen(t *testing.T)
 // committed line after normalizeWithDecisions runs), not the underlying
 // normalizeWithDecisions call itself — that function's own count-header
 // behavior is correct for its primary caller, sync, and is exhaustively
-// covered by update_test.go/the full-corpus parity suite; the bug lived
+// covered by sync_test.go/the full-corpus parity suite; the bug lived
 // entirely in reconcile trusting that output instead of restoring its own
 // committed line, mirroring runLint's already-established "the count header
 // is unknowable offline" principle (its own count-header comparison already
@@ -215,5 +215,5 @@ func TestReconcileCandidatesFilePath(t *testing.T) {
 // untested at the runReconcile level specifically — its own read/dispatch/
 // write sequencing — is exercised in practice via a real
 // `go run ./internal/tools/bigdiffer -reconcile` against the committed
-// overlay (verified manually; see the punchlist item's commit message for
-// the exact command and its clean-diff result).
+// overlay, confirmed to produce a byte-for-byte no-op diff on an
+// already-up-to-date corpus.

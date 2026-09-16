@@ -124,9 +124,10 @@ func TestBuildCandidates(t *testing.T) {
 		"AWS::EC2::Same": {ResourceTypeName: "aws_ec2_same", CloudFormationTypeName: "AWS::EC2::Same"},
 	}
 
-	// Whole-corpus gate (contributing/docs/held-artifacts-design.md §2):
-	// New, Changed, and Unchanged all become candidates now — only Frozen is
-	// excluded (its pinned bytes are authoritative, never re-evaluated).
+	// Whole-corpus gate (contributing/docs/bigdiffer-design.md §6, "The
+	// whole corpus is gated every run"): New, Changed, and Unchanged all
+	// become candidates now — only Frozen is excluded (its pinned bytes are
+	// authoritative, never re-evaluated).
 	cands := buildCandidates(results, discByCFN, overlayByCFN)
 	if len(cands) != 3 {
 		t.Fatalf("want 3 candidates, got %d", len(cands))

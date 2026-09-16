@@ -14,8 +14,9 @@ import (
 	"strings"
 )
 
-// runCheck is reconcile's pipeline with promotion switched off (§0 story 3;
-// §4; §5 step 5): the same generate -> compile -> decide gate as -reconcile,
+// runCheck is reconcile's pipeline with promotion switched off
+// (bigdiffer-design.md §0, story 3; §6): the same generate -> compile ->
+// decide gate as -reconcile,
 // against the same offline row source (reconcileCandidates), but nothing is
 // ever written to internal/, the schema cache, all_schemas.hcl, or the
 // CHANGELOG — check is read-only end to end. It reports every failure and
@@ -80,7 +81,7 @@ func runCheck(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	}
 
 	// Output-diff scan: everything settleBatch staged under stagingDir/out
-	// and stagingDir/cache mirrors what promoteStaged (update.go) would copy
+	// and stagingDir/cache mirrors what promoteStaged (sync.go) would copy
 	// onto cfg.outputRoot/cfg.cacheDir if this were a -reconcile run instead
 	// -- compare bytes directly against the real, committed trees rather
 	// than actually promoting, so check stays read-only. Only staged files
@@ -114,15 +115,15 @@ func runCheck(ctx context.Context, allSchemasPath, checkoutPath string) error {
 // sorted for a deterministic report.
 //
 // Deliberately one-directional (staged -> committed, never the reverse):
-// this mirrors promoteStaged's own copyTree (update.go), which overwrites
+// this mirrors promoteStaged's own copyTree (sync.go), which overwrites
 // files present in the staged tree but never deletes a committed file the
 // current templates/codegen no longer emit at all. check's contract is
 // "passes iff running -reconcile and committing the result would be a
 // no-op" -- scanning the other direction too would make check fail on a
 // state -reconcile itself cannot fix (an orphaned file neither command
 // removes), which is a corpus-wide property of both commands, not a gap
-// specific to this scan (held-artifacts-design.md §4, "Neither reconcile
-// nor check removes orphaned output"). If orphan cleanup is ever added to
+// specific to this scan (bigdiffer-design.md §6, "Neither -reconcile nor
+// -check removes orphaned output"). If orphan cleanup is ever added to
 // -reconcile, this scan needs the reverse walk added at the same time.
 func diffStagedTrees(cfg config, stagingDir string) ([]string, error) {
 	var diffs []string

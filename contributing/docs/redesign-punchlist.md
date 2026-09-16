@@ -306,24 +306,111 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    the expected relative path is), full suite `-race -short` and
    `-timeout 20m` both pass, `impi` clean. *(core)* Detail:
    `held-artifacts-design.md` §5 step 7.
-8. **Reconcile every other doc in one pass, last — not incrementally.**
-   `held-artifacts-design.md` and this file are the *only* docs that change
-   during implementation. Everything else — `bigdiffer-design.md` (its
-   out-of-sync notice, §0's command table, §6 the gates, §7 the policy note
-   that a `statusUnchanged` failure fails the whole `sync` run and promotes
-   nothing — including the `statusChanged` half that compiled — because an
-   engine regression makes every type it touched this run untrustworthy, not
-   just the one that failed), the README, and the runbook — is updated
-   together, once, after the redesign works. **Also fold in the file-name
-   rename, pinned now (from review, after item 4) rather than left as silent
-   drift:** entry points no longer track the locked command names —
-   `runSync` lives in `update.go`, `runRecheck` in `heal.go`, `runLint` has
-   no file of its own (orphaned in `main.go`), while the newer `runReconcile`
-   follows a `run_reconcile.go` convention. Three naming conventions
-   currently coexist. Rename `update.go`→`sync.go`, `heal.go`→`recheck.go`,
-   extract `runLint`→`lint.go`, and reconcile the `run_*_test.go`/bare
-   `*_test.go` test-file split to match, once `check` (item 5) has landed and
-   its own file-naming choice is known. *(core, last)*
+8. **DONE. Reconciled every other doc in one pass, plus the file-name
+   rename.**
+
+   **File rename** (`update.go`→`sync.go`, `update_test.go`→`sync_test.go`,
+   `run_update_test.go`→`run_sync_test.go` with `TestUpdateBatchAtomicity`→
+   `TestSyncBatchAtomicity`, `heal.go`→`recheck.go`, `heal_test.go`→
+   `recheck_test.go`, and `runLint`/`checkRegistrationUpToDate` extracted
+   from `main.go` into new `lint.go`/`lint_test.go`, moving
+   `TestCheckRegistrationUpToDate` with it) — pure rename, zero behavior
+   change, no function renames (`runSync`/`runRecheck`/`runLint` already had
+   correct names from earlier items). Zero remaining stale file-name/old-
+   command references confirmed via project-wide grep.
+
+   **`bigdiffer-design.md`** fully reconciled: removed the "out of sync"
+   banner; §0 gained a story→command mapping table and dropped the dead
+   `held` paragraph; §6's entire "Gap: the unchanged corpus is never gated"
+   held proposal (the two-cause table, the per-artifact `held_*` status, the
+   volume threshold) replaced with "The whole corpus is gated every run"
+   (the actual shipped all-or-nothing abort) and a new "`-check`: the same
+   gate, read-only" subsection; §7's policy table lost its two
+   `held`/`codegen_error`/`toolchain_error` rows for a single all-or-nothing
+   abort row + footnote; §11 updated to list all five live commands; three
+   deferred-work bullets removed outright (`-heal`'s opt-in mode — shipped
+   as item 6; `held` — designed then dropped; "settle the command surface"
+   — exactly what `settleBatch` now is), and the "unify overlay levers"
+   bullet reduced from three levers to two (`held_*` never existed to unify).
+
+   **README.md and the runbook** (`generating-the-provider-with-bigdiffer.md`)
+   rewritten for the five-command surface, including a new "Checking an
+   engine change" section for `-check` and a corrected "Full regeneration"
+   section for `-reconcile` (which, unlike the deleted `-generate`, *does*
+   compile-gate and can abort the whole run).
+
+   **A real, independent bug found and fixed along the way, not part of the
+   original scope but discovered by reading `GNUmakefile` while updating the
+   docs' shortcut references:** `bigdiffer-generate`'s removal (item 1) left
+   behind a comment claiming the target was "temporarily unavailable...
+   will come back once `-reconcile` exists" — but `-reconcile` landed back
+   in item 4 and no `bigdiffer-reconcile` target was ever added to replace
+   it, so the promise the comment made was never kept. Added the missing
+   `bigdiffer-reconcile` target + `.PHONY` entry, removed the stale comment;
+   verified via `make help`. Also confirmed (not changed, since it's outside
+   this pass's scope and is already tracked as an open design question) that
+   `.github/workflows/bigdiffer.yml` does not yet run `-check` at all — only
+   `go test .../bigdiffer/... -timeout 20m` and `go run .../bigdiffer -lint`
+   — leaving `-check`'s intended CI-gate role unwired for now.
+
+   **Second review round, after the first pass above was presented as
+   done — four real gaps found, all fixed within this same item rather
+   than left for item 9 to break:**
+
+   1. **16 code citations to the two transient docs, across 11 `.go`
+      files** — the largest gap. Every comment citing
+      `held-artifacts-design.md §N`/`redesign-punchlist.md item N` would
+      have become a dangling reference to a deleted file the moment item 9
+      ran. Fixed by first folding the durable content those citations
+      actually depended on into `bigdiffer-design.md` §6 — "One engine,
+      three callers" (the shared-pipeline framing), the full "why not a
+      `held` status" rationale (inlined, not just cross-referenced), a new
+      "Routing a failure to the right branch" subsection (`classPresentUnchanged`
+      as the routing signal, and the frozen-row-exclusion convention), and
+      "Neither `-reconcile` nor `-check` removes orphaned output" — then
+      re-pointing all 16 citations (plus several more implicit `§N`/`item N`
+      references the same grep pattern didn't catch, found by a follow-up
+      sweep for bare section numbers) at the new, permanent section names in
+      `bigdiffer-design.md`, not at numbers (numbers move; section titles in
+      quotes are what every other citation in the codebase already uses).
+   2. **`suppressed-and-frozen.md` was still fully on the old command
+      names** — genuinely missed in the first pass, not deferred
+      deliberately. Full pass: `-heal`→`-recheck` (plus a note on
+      `-recheck-all`'s widened scope and how it interacts with an
+      already-reasoned fact), `-check`→`-lint`, `-update`→`-sync`/`-reconcile`
+      depending on context, mdtoc and section headings renamed to match
+      (`` `-heal`: re-probe and fill gaps `` → `` `-recheck`: re-probe and
+      fill gaps ``, etc.).
+   3. **Two historical-narration comments**, against the standing
+      timeless-comment convention: `lint_test.go`'s "Moved here from the
+      now-deleted `run_generate_test.go`..." provenance paragraph dropped,
+      keeping only the timeless description of what the test verifies;
+      `run_reconcile.go`'s doc comment reworded to describe `-reconcile`'s
+      actual behavior (it compile-gates, unlike a plain offline generator)
+      rather than narrating `-generate`'s deletion history. A third,
+      matching case surfaced by the same sweep (`compile.go`'s "reporting-
+      polish item... noted in... item 7" comment) fixed the same way.
+   4. **Two `-heal` leftovers the rename pass missed**: `recheck.go`'s
+      isolated-probe temp-file prefix was still `bigdiffer-heal-*.json`
+      (functionally harmless, fixed to `bigdiffer-recheck-*.json` for
+      consistency); five code comments in `recheck.go`/`recheck_test.go`
+      cited `suppressed-and-frozen.md`'s section by its old title
+      (`` "-heal: re-probe and fill gaps" ``), now updated to match finding
+      2's rename.
+
+   Re-verified after all of the above: `gofmt`/`vet`/`build` clean, `go test
+   ./internal/tools/bigdiffer/... -race -short` and `-timeout 20m` both
+   pass again, `impi` clean, `markdownlint` clean on the newly-touched
+   `suppressed-and-frozen.md` too, and a project-wide grep confirms zero
+   remaining references to either transient doc's filename, and zero
+   remaining `-heal`/`bigdiffer-heal` fragments, anywhere in
+   `internal/tools/bigdiffer/*.go`.
+
+   Verified: `gofmt`/`vet`/`build` (whole module) clean, `go test
+   ./internal/tools/bigdiffer/... -race -short` and `-timeout 20m` both
+   pass, `impi` clean, `markdownlint` clean on all three touched docs, and a
+   real `go run ./internal/tools/bigdiffer -lint` confirms the binary works
+   end to end post-rename. *(core, last)*
 9. **Delete this file and `held-artifacts-design.md`.** Once item 8 is
    committed, both transient docs have nothing left to track. *(core, last)*
 
