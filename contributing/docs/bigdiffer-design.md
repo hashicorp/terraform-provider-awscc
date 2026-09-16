@@ -81,6 +81,14 @@ command surface settles this exactly along those lines:
 | #4 — is the bookkeeping healthy | `-lint` |
 | #5 — revisit an old decision | `-recheck` (`-recheck-all` widens scope to every active fact, not just reason-less ones) |
 
+Naming: `-sync` and `-recheck` (from `update`/`heal`) keep the spirit of the
+commands they replace; `-check` frees up from its old, narrower meaning to
+cover story #3; `-reconcile` is new. `reconcile` was checked against this
+doc's other, durable use of the word (§12's AWS-facing reconciliation) before
+being chosen, and kept deliberately: story #2 reconciles the committed
+overlay against fresh generation output — the same kind of operation, bring
+two things into agreement, just without AWS in the loop for this one.
+
 `-sync`, `-reconcile`, and `-check` share one pipeline (`settleBatch`):
 candidate build → generate → compile-gate → decide, differing only in where
 candidates come from (a live AWS crawl vs. the committed overlay + cache) and
