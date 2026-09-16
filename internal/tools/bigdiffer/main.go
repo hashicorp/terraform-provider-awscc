@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 // Command bigdiffer keeps internal/provider/all_schemas.hcl in sync with what
-// AWS offers, and owns generating the provider from it. Five modes today:
+// AWS offers, and owns generating the provider from it. Six modes today:
 //
 //   - -lint: parse the overlay, verify it is normalized and anomaly-free.
 //     Offline, writes nothing; safe on every PR. Fails if any suppressed/frozen
@@ -25,6 +25,15 @@
 //     and promotes nothing, identically to -sync's schema-unchanged case.
 //     Replaces the old -generate, which never gated at all (deleted outright,
 //     not carried forward under this name).
+//   - -check: -reconcile's identical pipeline with promotion switched off —
+//     read-only end to end. Reports every failure, then exits non-zero on any
+//     failure or on any regenerated output that differs from the committed
+//     files even though it compiles (an engine change that was never
+//     -reconcile'd and committed). A non-engine PR touches no
+//     template/codegen/naming path, so regeneration is a no-op and -check
+//     passes with zero diff; an engine PR must -reconcile and commit until
+//     -check is clean. Replaces TestFullCorpusParity's guard role once the
+//     legacy engine retires (bigdiffer-design.md §10).
 //   - -docs: owns import-example docs generation from import_examples_gen.json,
 //     then orchestrates terraform fmt + tfplugindocs generate.
 //   - -recheck: re-probes every suppressed/frozen row with no recorded reason (or
@@ -32,11 +41,6 @@
 //     check, then a real regeneration attempt, then a free-form comment
 //     migration — printed as a report, never written. Offline except reading
 //     the committed schema cache.
-//
-// A sixth mode, -check, is designed but not yet implemented
-// (contributing/docs/held-artifacts-design.md §1, story 3): -reconcile's same
-// pipeline with promotion switched off, for CI to run on engine changes before
-// they reach a -sync/-reconcile PR.
 //
 // There is no separate discovery or snapshot-diff mode: bigdiffer owns discovery
 // itself, so there is no need to generate and diff checked-in
@@ -95,6 +99,7 @@ func main() {
 		lint           = flag.Bool("lint", false, "verify all_schemas.hcl is normalized and anomaly-free (offline; writes nothing)")
 		sync           = flag.Bool("sync", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
 		reconcile      = flag.Bool("reconcile", false, "regenerate the whole provider offline from the committed overlay + schema cache through the same gate -sync uses, and promote the clean result (no AWS; fails the run on any machinery regression)")
+		check          = flag.Bool("check", false, "reconcile's pipeline with promotion off: report every failure, exit non-zero on any failure or on any regenerated output that differs from committed (no AWS; writes nothing)")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
 
@@ -127,7 +132,7 @@ func main() {
 		return
 	}
 
-	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *docs, *recheck); err != nil {
+	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *docs, *recheck); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
@@ -135,16 +140,16 @@ func main() {
 
 // run dispatches to exactly one command. bigdiffer is the generator, not a manual
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
-// landings are -reconcile, docs are -docs, and -lint is an offline hygiene
-// guard for CI. -check (story 3 of the command redesign,
-// contributing/docs/held-artifacts-design.md §1) does not exist yet —
-// -reconcile's pipeline with promotion switched off, §5 step 5.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, docs, recheck bool) error {
+// landings are -reconcile, the read-only preview of that same landing is
+// -check, docs are -docs, and -lint is an offline hygiene guard for CI.
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs, recheck bool) error {
 	switch {
 	case sync:
 		return runSync(context.Background(), allSchemasPath, checkoutPath)
 	case reconcile:
 		return runReconcile(context.Background(), allSchemasPath, checkoutPath)
+	case check:
+		return runCheck(context.Background(), allSchemasPath, checkoutPath)
 	case docs:
 		cfg, _, err := loadOverlay(allSchemasPath)
 		if err != nil {
@@ -157,7 +162,7 @@ func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, docs, reche
 		return runRecheck(allSchemasPath)
 	default:
 		flag.Usage()
-		return fmt.Errorf("no command given; use one of -sync, -reconcile, -docs, -lint, -recheck")
+		return fmt.Errorf("no command given; use one of -sync, -reconcile, -check, -docs, -lint, -recheck")
 	}
 }
 

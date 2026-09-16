@@ -150,11 +150,75 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    pass, full suite `-race -short` and `-timeout 20m` both pass, `impi`
    clean, and the real `-reconcile` run above. *(core)* Detail:
    `held-artifacts-design.md` §4, §5 step 4; §0 story 2.
-5. **`check`.** Wire the same pipeline, stop before promotion, report every
-   failure, exit non-zero on any failure **or** any output-diff (regenerated ≠
-   committed, even when it compiles — the "changed the engine, didn't reconcile
-   and commit" case). Genuinely new. *(core)* Detail: `held-artifacts-design.md`
-   §4, §5 step 5; §0 story 3.
+5. **DONE. `check`.** Wired the same pipeline (`reconcileCandidates` +
+   `settleBatch`, unchanged from item 4), promotion switched off
+   (`run_check.go`, `runCheck`). Reports every failure via the identical
+   `machineryFailures` scan `reconcile`/`sync` use, then scans everything
+   `settleBatch` staged (`stagingDir/out`, `stagingDir/cache`) against the
+   real, committed trees (`cfg.outputRoot`, `cfg.cacheDir`) byte-for-byte —
+   `diffStagedTrees`, a new helper — and exits non-zero on either a failure
+   or any byte diff, even though `check` never calls `promoteStaged` at all
+   (it only ever reads the real tree, never writes it; the staging dir is
+   `os.RemoveAll`'d either way). A file staged with no committed counterpart
+   at all (a suppressed type a machinery fix just recovered) still counts as
+   a diff — there is genuinely new output to `-reconcile` and commit, not a
+   false "no diff."
+
+   Verified against the real repo, not just synthetic fixtures: a clean
+   `go run ./internal/tools/bigdiffer -check` passes with exit 0 and zero
+   diffs (confirming, empirically, the open determinism question below —
+   the real corpus regenerates byte-identical to committed output, twice,
+   across two separate real runs). Deliberately corrupted a real,
+   **non-frozen** committed file (`internal/aws/acmpca/certificate_resource_gen.go`)
+   and re-ran `-check`: correctly detected the diff, named the exact file,
+   and exited 1; reverted the corruption and re-ran clean. The first two
+   manual attempts at this picked `AWS::Logs::LogGroup` and `AWS::S3::Bucket`
+   — both frozen, so both are silently excluded from `reconcileCandidates`
+   before ever reaching the diff scan, which produced a false-negative
+   "check passed" the first two times and would have shipped a broken test
+   if not caught by manually reading the overlay to confirm each candidate's
+   `frozen_since` status before concluding the corruption should have been
+   detected.
+
+   That false start became `TestRunCheckAgainstRealRepo`
+   (`run_check_test.go`) — a genuine end-to-end test against the real repo,
+   feasible here in a way `TestRunReconcile` never was (`run_reconcile_test.go`'s
+   doc comment): `check` never promotes, so pointing it at the real repo from
+   within a test carries none of `reconcile`'s risk. Two subtests: a clean
+   pass, and a corruption case that sources its target file's real path from
+   an actual `settleBatch` call on one dynamically chosen non-frozen
+   candidate (never a hand-picked type name) specifically so a future frozen
+   row can never repeat the false-negative mistake above — the corrupted
+   file is restored via `t.Cleanup` unconditionally, including on failure or
+   panic. Gated behind `testing.Short()` (skipped in `-race -short`, which
+   exists precisely to stay fast) since it costs ~4 minutes of real,
+   full-corpus generation on top of the existing full-suite run — raises the
+   full `-timeout 20m` suite from ~205s to ~455s. Also added focused,
+   fast, synthetic-tree unit tests for `diffStagedTrees` itself (no-diff,
+   byte-diff, missing-committed-counterpart, cache-tree coverage, empty
+   staging dir) that do not pay this cost.
+
+   Updated `main.go`'s package doc comment (was still "five modes today,"
+   with `-check` listed as "designed but not yet implemented") and `run`'s
+   dispatch doc comment/error message to include `-check`.
+
+   One review point confirmed as an existing, consistent property rather
+   than a gap: `diffStagedTrees` walks staged → committed only, never the
+   reverse, so it cannot see a committed file the current templates/codegen
+   no longer emit at all — but neither can `reconcile`'s own promotion
+   (`copyTree` overwrites, never deletes), so `check`'s "passes iff a
+   `reconcile` + commit would be a no-op" contract holds exactly as stated.
+   Pinned as its own subsection in `held-artifacts-design.md` §4 ("Neither
+   `reconcile` nor `check` removes orphaned output") since it is a
+   corpus-wide property of both commands, not specific to this scan.
+
+   Verified: `gofmt`/`vet`/`build` (whole module) clean, new
+   `TestDiffStagedTrees*` (five tests) and `TestRunCheckAgainstRealRepo`
+   (two subtests, full-corpus, real repo) pass, full suite `-race -short`
+   and `-timeout 20m` both pass, `impi` clean, and the manual real
+   `-check` runs above (clean pass, corruption detection, re-confirmed
+   clean after reverting). *(core)* Detail: `held-artifacts-design.md` §4,
+   §5 step 5; §0 story 3.
 6. **`recheck`'s reasoned-row mode.** An opt-in flag (name TBD) widening
    `needsHealing`'s predicate from "reason empty/`unknown`" to "active,
    regardless of reason" — revisit a year-old suppress/freeze on demand. `lint`
@@ -171,7 +235,16 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    nothing — including the `statusChanged` half that compiled — because an
    engine regression makes every type it touched this run untrustworthy, not
    just the one that failed), the README, and the runbook — is updated
-   together, once, after the redesign works. *(core, last)*
+   together, once, after the redesign works. **Also fold in the file-name
+   rename, pinned now (from review, after item 4) rather than left as silent
+   drift:** entry points no longer track the locked command names —
+   `runSync` lives in `update.go`, `runRecheck` in `heal.go`, `runLint` has
+   no file of its own (orphaned in `main.go`), while the newer `runReconcile`
+   follows a `run_reconcile.go` convention. Three naming conventions
+   currently coexist. Rename `update.go`→`sync.go`, `heal.go`→`recheck.go`,
+   extract `runLint`→`lint.go`, and reconcile the `run_*_test.go`/bare
+   `*_test.go` test-file split to match, once `check` (item 5) has landed and
+   its own file-naming choice is known. *(core, last)*
 9. **Delete this file and `held-artifacts-design.md`.** Once item 8 is
    committed, both transient docs have nothing left to track. *(core, last)*
 
@@ -183,9 +256,11 @@ Tracked in `held-artifacts-design.md` §6:
 - ~~The shape of `decide()`'s discovery-diff signal (item 3)~~ — **resolved**:
   a new `changeClass` value, `classPresentUnchanged`, not a separate parameter.
 - Item 5's "fail on any output-diff" relies on deterministic generation
-  (`TestFullCorpusParity` already does); confirm no incidental non-determinism
-  (timestamps, map order) could make an unrelated PR fail `check` on spurious
-  diff.
+  (`TestFullCorpusParity` already does); **empirically observed clean,
+  item 5**: two separate real `-check` runs against the untouched corpus
+  both produced zero diffs. Not a formal proof for all time — no
+  incidental non-determinism (timestamps, map order) has been *seen*, but
+  hasn't been exhaustively ruled out either.
 - How `check` (item 5) is wired into CI, and how it's scoped to engine-touching
   PRs rather than every PR.
 - **Deferred polish, from review (item 3):** `runSync`'s abort message is the

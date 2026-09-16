@@ -208,6 +208,22 @@ best case of "the engine change fixed everything else."
   to "active, regardless of reason," to revisit a year-old suppress/freeze on
   demand.
 
+### Neither `reconcile` nor `check` removes orphaned output (pinned, from review)
+
+Both walk **staged → committed**, never the reverse: `reconcile`'s promotion
+is `copyTree` (`update.go`), which overwrites files present in the staged
+tree but never deletes a committed file the current templates/codegen no
+longer emit at all (a renamed artifact, a dropped code path). `check`'s
+`diffStagedTrees` mirrors that walk direction deliberately, precisely so its
+contract — *`check` passes if and only if running `reconcile` and committing
+the result would be a no-op* — holds exactly; scanning the other direction
+too would make `check` fail on a state `reconcile` itself cannot fix. This is
+a corpus-wide property, not a gap specific to either command: if orphaned
+output ever needs cleaning up, that is a new `reconcile`-level capability
+(an explicit "remove any committed file not in this run's staged set" pass),
+and `check`'s scan would need the reverse walk added symmetrically at the
+same time, not before.
+
 ## 5. Implementation plan
 
 Ordered so each step is independently mergeable and leaves the tool working.
@@ -259,8 +275,15 @@ Ordered so each step is independently mergeable and leaves the tool working.
    isolated e2e test — infeasible, the compile gate always builds the real
    module; a vacuous always-zero tally fixed; cache-miss rows now counted
    and reported like frozen ones).
-5. **`check`**: wire the same pipeline, report-only, exit non-zero on any
-   failure or output-diff.
+5. **`check`** *(done)*: wired the same pipeline, promotion off
+   (`run_check.go`). Reports failures via `machineryFailures`, then a new
+   `diffStagedTrees` helper scans everything `settleBatch` staged against
+   the real committed trees and reports any byte diff, without ever calling
+   `promoteStaged`. Verified against the real repo (clean pass, and a
+   deliberately corrupted real file correctly detected and named) — the
+   full writeup, including a false start with two frozen candidates
+   producing a silent false-negative before the real bug was found, is in
+   punchlist item 5.
 6. **`recheck`'s reasoned-row flag** (small, independent). `lint` needs no code
    change beyond its step-1 rename.
 7. **Reporting**: per-artifact blame on a hard-errored run (types, artifacts,
