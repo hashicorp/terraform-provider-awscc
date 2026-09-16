@@ -212,25 +212,20 @@ overlay against itself, checks sort order/formatting, flags duplicate blocks,
 naming-invariant violations, and reason-less suppressed/frozen facts
 (`anomalyProblems()`). Never attempts generation.
 
-**Gap:** small and additive, but not quite as simple as originally stated —
-see the resolved §4.1/§4.4 contradiction. `lint` is `-check` renamed, plus a
-new anomaly class: a **stale** `held_*` marker (older than a grace window,
-via a new `held_since_*` date, mirroring `frozen_since`) is reported and
-fails `lint`; a `held_*` marker that just landed this cycle does not — a
-`codegen_error` is designed to ship without blocking (§4.1), so `lint` failing
-on it the moment it's created would contradict that guarantee. A stale hold
-is exactly the kind of thing `anomalyProblems()` already exists to catch
-(parallel to today's reason-less-suppression check), so this is one more case
-in that same function, not a new mechanism.
+**Gap:** small and additive. `lint` is `-check` renamed, plus one new anomaly
+class: any populated per-artifact slot (`resource` / `singular_data_source` /
+`plural_data_source`) is reported and fails `lint`, immediately — no grace, no
+waiting. That immediacy is the point: a machinery regression should fail the
+first `lint` that sees it. It is exactly the kind of thing `anomalyProblems()`
+already catches (parallel to today's reason-less-suppression check), so it is
+one more case in that same function, not a new mechanism.
 
 **To do:**
 
 - Rename `-check` → `lint`, `runCheck` → `runLint`.
-- Add a `held` case to `Report`/`anomalyProblems()`: any row with
-  `held_resource`/`held_singular_data_source`/`held_plural_data_source` set
-  **and** its paired `held_since_*` older than the grace window (§4.1, §4.3's
-  sibling — exact window TBD, §7) is reported and fails `lint`. A fresh hold
-  is not an anomaly by itself.
+- Add a case to `Report`/`anomalyProblems()`: any row with a populated
+  `resource` / `singular_data_source` / `plural_data_source` slot is reported
+  and fails `lint`.
 
 ### Story 5 → `recheck` (rename of `-heal`, plus a scope expansion)
 
@@ -368,42 +363,19 @@ Two more points of nuance:
 
 ## 4. How `sync`/`reconcile`/`check` should behave on a hold
 
-### 4.1 `codegen_error`: hold, mark, proceed — loudly
+### 4.1 `codegen_error`: hold, record, surface immediately
 
-- `sync`/`reconcile`: keep the committed file (never regress); set
-  `held_<artifact>` + `held_reason_<artifact> = "codegen_error: <detail>"` on
-  the overlay row; let the run complete — the committed tree builds — but
-  surface the hold prominently (§4.4). `check` computes and reports the
-  identical decision, promotes nothing.
-
-**This creates a direct contradiction with §4.4/item 3 below as originally
-stated, and it needs a pinned resolution, not just a note.** §4.1 says a
-`codegen_error` hold ships without blocking the run. §4.4 item 3 says `lint`
-fails on any `held_*` marker. But the `sync`/`reconcile` run that *creates*
-the hold is what writes `held_*` into `all_schemas.hcl` in the first place —
-so the very next `lint` (plausibly run in CI on that same `sync`/`reconcile`
-PR) fails immediately on the marker the run just correctly, deliberately,
-non-blockingly produced. "A hold surviving past the PR that should have fixed
-it" implicitly assumed a hold is created and cleared within one flow; a
-codegen fix is a *separate* engine PR from the weekly `sync` PR that first
-records the hold, so the hold necessarily rides in the `sync` PR and would
-trip `lint` on arrival, not after it lingers.
-
-**Resolution: `held` gets a since-date, mirroring `frozen_since`.** A new
-`held_since_<artifact>` (date, set alongside `held_<artifact>` the run a hold
-is first created) lets `lint` distinguish a hold that just landed from one
-that has lingered: `lint` fails only on a `held_*` marker older than some
-grace window (illustrative: one release cycle), not on one created this run.
-This was chosen over making `lint` merely advisory on `held_*`, because
-advisory would blunt the "impossible to miss" property §4.4 exists to
-guarantee — a since-date keeps `lint` a hard, unconditional gate while giving
-a just-landed hold the same kind of grace `frozen_since` implicitly gets
-today (nothing today fails `lint`/`check` merely for being frozen; only a
-reason-less freeze does). The real preventive gate against ever landing a
-`codegen_error` in the first place is `check`, run on the *engine* PR, before
-it ever reaches `sync` — `lint`'s job on `held_since` is to catch a hold that
-*should* have been fixed by now and wasn't, not to block the `sync` PR that
-correctly, safely shipped one.
+- `sync`/`reconcile`: keep the committed file (never regress); set the failed
+  artifact's slot (`resource` / `singular_data_source` / `plural_data_source`)
+  to `reason = "codegen_error: <detail>"`. The run completes — the committed
+  tree still builds, so unlike a `toolchain_error` (§4.2) it does not
+  hard-abort — but the slot is surfaced at once, never shipped silently: it
+  lands in the end-of-run banner (§4.4) and the PR diff, and it fails `lint`
+  (§1, story 4). `check` computes and reports the identical decision, promotes
+  nothing. Note `go build` — a required CI check — cannot catch this case on
+  its own: the kept committed file still compiles, so the build stays green;
+  only regeneration reveals the break, which is exactly why
+  `held`/`lint`/`check` exist for it.
 
 ### 4.2 `toolchain_error`: block the run
 
@@ -432,14 +404,18 @@ An engine regression must be impossible to miss, across all three commands:
    blocked or tripped the threshold, that headline comes first.
 2. **The committed diff** (`sync`/`reconcile` only): `codegen_error` markers
    land in `all_schemas.hcl`, so they appear in the PR diff.
-3. **`lint` fails on a stale `held_*` marker**: past the §4.1 grace window
-   (`held_since_*` older than the grace period), a hold is an anomaly — it
-   survived past the PR that should have fixed it.
-4. **`check` is the real preventive gate**, run on the engine PR itself,
-   before a `codegen_error` ever reaches a `sync`/`reconcile` PR at all (§1,
-   story 3) — catching the regression at its source is strictly better than
-   catching it after it ships, which `lint`'s grace-windowed check (item 3)
-   exists only to backstop.
+3. **`lint` fails on any populated slot**, immediately — no grace, no waiting.
+   A machinery regression should fail the first `lint` that sees it.
+4. **`check` is the preventive gate**, run on the engine PR itself, before a
+   `codegen_error` ever reaches a `sync`/`reconcile` PR at all (§1, story 3) —
+   catching the regression at its source, in addition to `lint` catching any
+   that slip through.
+5. **`go build` backstops the compiling-committed case for free.** Already a
+   required CI check, it catches any regression that reaches non-compiling
+   *committed* code — the `toolchain_error` case (§4.2), where the committed
+   file itself won't build. It cannot see a `codegen_error` (the kept committed
+   file still compiles), which is exactly the half `held`/`lint`/`check` exist
+   to cover.
 
 ### 4.5 Self-clearing
 
@@ -451,37 +427,48 @@ category (§1, story 5's "why not held too" note).
 
 ## 5. Overlay markers (near-term shape)
 
-`held` follows today's two-attribute-per-fact convention (bool + separate
-`_reason` string), matching `suppress_*_generation`/`suppression_reason_*` and
-`frozen_since`/`frozen_reason` — plus one addition, `held_since_*`, needed for
-`lint`'s grace-window check (§4.1, §4.4) that those two levers don't otherwise
-require:
+The per-artifact output disposition lives in three slots — `resource`,
+`singular_data_source`, `plural_data_source`, one per artifact:
 
-- `held_resource` / `held_singular_data_source` / `held_plural_data_source`
-  (bool).
-- `held_reason_resource` / `_singular_data_source` / `_plural_data_source`
-  (string, `category: detail`; category is `codegen_error` only —
-  `toolchain_error` blocks and is never persisted, §4.2).
-- `held_since_resource` / `_singular_data_source` / `_plural_data_source`
-  (date, set the run a hold first appears, mirroring `frozen_since`'s own
-  shape). This is what lets `lint` (§1, story 4) distinguish a hold that just
-  landed from one that has lingered past the grace window — without it,
-  `lint` would have to treat every hold as equally urgent, reintroducing the
-  §4.1/§4.4 contradiction a since-date exists to resolve.
+- A slot's **presence is the exception**; its **value is the reason**
+  (`category: detail`). There is no separate boolean (presence carries it) and
+  no separate `state` field (the reason category is the state). A slot cannot
+  exist without a reason, so there is no flag/reason pair for `lint` to police
+  for drift.
+- The only categories are `codegen_error` and `toolchain_error`; since
+  `toolchain_error` blocks and is never persisted (§4.2), the only value ever
+  written today is `codegen_error: <detail>`. The slots are added now for this
+  one purpose — folding `suppress_*` into the same slots is separate, later
+  work.
+- `list_resource` is not a fourth slot — it rides on the `resource` artifact
+  (§6's coupling guard), so a list-resource-specific failure is the `resource`
+  slot's reason, its detail naming the list resource.
+- No date, no grace window: a populated slot is surfaced immediately (§4.4) —
+  the whole point of `held` is to make a machinery regression impossible to
+  miss the moment it appears, not to tolerate it for a while.
 
-Orthogonal to both existing levers:
+Idiomatically (HCL), a slot is a small block carrying its reason; an absent
+slot means the artifact generated normally:
+
+```hcl
+plural_data_source {
+  reason = "codegen_error: template change dropped the Filters block"
+}
+```
+
+Orthogonal to the existing levers:
 
 - **Not `frozen_since`** — freezing pins the *schema*; a held type's schema is
-  fine and keeps refreshing normally under `sync`. A held artifact never sets
+  fine and keeps refreshing normally under `sync`. A slot never sets
   `frozen_since`.
-- **Not `suppress_*`** — suppression is a standing, human-owned decision to
-  not generate; `held` is the tool temporarily unable to keep a promise it
+- **Not `suppress_*`** — suppression is a standing, human-owned decision not to
+  generate; a held slot is the tool temporarily unable to keep a promise it
   already kept, intent unchanged.
 
-> Collapsing `suppress`/`held`/`frozen` into one self-describing attribute per
-> fact is **out of scope here** — tracked separately in `bigdiffer-design.md`
-> "Deferred and future work." `held`'s shape is chosen to be additive toward
-> that direction, not to prejudge it.
+> Folding `suppress`/`held`/`frozen` into one self-describing attribute per fact
+> (and renaming `frozen` → `schema_pin`) is **out of scope here** — tracked
+> separately in `bigdiffer-design.md` "Deferred and future work." These slots
+> are chosen to be additive toward that direction, not to prejudge it.
 
 ## 6. Implementation plan
 
@@ -566,12 +553,6 @@ routing now lands with (not after) the pipeline that first needs it.
   (e.g. `decide(class, byteStatus, gr, today)`)? Either closes the routing
   bug; not yet decided which reads more clearly at the call sites in
   `runUpdate`/the new shared pipeline (§6 item 2/3).
-- **New, from review — `lint`'s exact grace-window length (§4.1, §4.4).**
-  Illustrative only so far ("one release cycle"); needs a real value before
-  `held_since_*`'s anomaly check (§1 story 4, §5) can be implemented. Should
-  probably match or relate to whatever cadence `sync` runs on, so a hold has
-  a bounded number of `sync` cycles to either self-clear (§4.5) or get a
-  human fix before `lint` flags it.
 - **New, from review — is `check`'s "fail on any output-diff, not just
   holds" widening (§1 story 3) actually pinned, or does it need its own
   volume/noise consideration the way `held` got one (§4.3)?** A non-engine PR

@@ -63,13 +63,12 @@ item 3).
    discovery-diff status (found in review: `sync` must self-heal valid drift
    on unchanged rows, not just gate it). *(core)* Detail:
    `held-artifacts-design.md` §1 story 1, §6 step 6.
-7. **`lint`'s new anomaly.** A **stale** `held_*` marker — `held_since_*`
-   (new, mirrors `frozen_since`) older than a grace window — is reported and
-   fails `lint`; a hold that just landed does not (found in review: failing
-   on any hold immediately would contradict `codegen_error`'s "ships without
-   blocking" guarantee, §4.1). One more case in `anomalyProblems()`, parallel
-   to today's reason-less-suppression check. *(additive)* Detail:
-   `held-artifacts-design.md` §1 story 4, §4.1, §4.4, §5, §6 step 7.
+7. **`lint`'s new anomaly.** Any populated per-artifact slot (`resource` /
+   `singular_data_source` / `plural_data_source`) is reported and fails
+   `lint`, immediately — surfacing a machinery regression the moment it
+   appears is the point. One more case in `anomalyProblems()`, parallel to
+   today's reason-less-suppression check. *(additive)* Detail:
+   `held-artifacts-design.md` §1 story 4, §4.4, §5, §6 step 7.
 8. **`recheck`'s reasoned-row mode.** An opt-in flag (name TBD) that widens
    `needsHealing`'s predicate from "reason is empty/unknown" to "active,
    regardless of reason" — revisit a year-old, already-reasoned
@@ -84,8 +83,8 @@ item 3).
     *only* docs that change while implementation is in progress. Everything
     else — `bigdiffer-design.md` (its out-of-sync notice, §0's command table,
     §6 the gates, §7 the policy table), the README, the runbook, and
-    `suppressed-and-frozen.md` (the two new reason categories, plus
-    `held_since_*`) — gets updated together, once, after the redesign is
+    `suppressed-and-frozen.md` (the two new reason categories) — gets updated
+    together, once, after the redesign is
     fully implemented and working, not piecemeal alongside each step above.
     Avoids reviewing docs against a design that's still moving. *(core, last,
     before item 11)*
@@ -105,8 +104,6 @@ Tracked in `held-artifacts-design.md` §7:
   that plausibly touch the engine.
 - **New, from review** — the exact shape of `decide()`'s signature change for
   item 3's routing: a new `changeClass` value, or a separate parameter.
-- **New, from review** — `lint`'s exact grace-window length (item 7) before a
-  `held_since_*` marker becomes a `lint` anomaly.
 - **New, from review** — whether item 5's "fail on any output-diff" widening
   needs its own noise/volume consideration, or whether zero-diff-by-default
   for non-engine PRs already makes that moot; check for any incidental,
