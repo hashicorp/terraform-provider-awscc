@@ -176,7 +176,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "InstanceArn"
+    "InstanceArn",
+    "Name",
+    "MetricCalculation",
+    "Unit",
+    "Status"
   ],
   "createOnlyProperties": [
     "/properties/InstanceArn",

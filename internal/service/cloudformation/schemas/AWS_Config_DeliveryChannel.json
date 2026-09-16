@@ -1,0 +1,91 @@
+{
+  "typeName": "AWS::Config::DeliveryChannel",
+  "description": "Resource type definition for AWS::Config::DeliveryChannel",
+  "additionalProperties": false,
+  "properties": {
+    "Name": {
+      "description": "The name of the delivery channel. By default, AWS Config assigns the name \"default\" when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.",
+      "type": "string"
+    },
+    "S3KeyPrefix": {
+      "description": "The prefix for the specified Amazon S3 bucket.",
+      "type": "string"
+    },
+    "ConfigSnapshotDeliveryProperties": {
+      "description": "The options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket.",
+      "$ref": "#/definitions/ConfigSnapshotDeliveryProperties"
+    },
+    "S3BucketName": {
+      "description": "The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files.",
+      "type": "string"
+    },
+    "SnsTopicARN": {
+      "description": "The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes.",
+      "type": "string"
+    },
+    "S3KmsKeyArn": {
+      "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS ) AWS KMS key (KMS key) used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "ConfigSnapshotDeliveryProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DeliveryFrequency": {
+          "description": "The frequency with which AWS Config delivers configuration snapshots.",
+          "type": "string",
+          "enum": [
+            "One_Hour",
+            "Three_Hours",
+            "Six_Hours",
+            "Twelve_Hours",
+            "TwentyFour_Hours"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "S3BucketName"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "config:DescribeDeliveryChannels",
+        "config:PutDeliveryChannel"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "config:DescribeDeliveryChannels"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "config:DescribeDeliveryChannels",
+        "config:PutDeliveryChannel"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "config:DeleteDeliveryChannel"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "config:DescribeDeliveryChannels"
+      ]
+    }
+  }
+}

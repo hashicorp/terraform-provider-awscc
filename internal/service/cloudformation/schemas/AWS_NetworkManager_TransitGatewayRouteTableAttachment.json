@@ -181,8 +181,7 @@
   ],
   "createOnlyProperties": [
     "/properties/PeeringId",
-    "/properties/TransitGatewayRouteTableArn",
-    "/properties/RoutingPolicyLabel"
+    "/properties/TransitGatewayRouteTableArn"
   ],
   "writeOnlyProperties": [
     "/properties/RoutingPolicyLabel"
@@ -200,7 +199,9 @@
     "/properties/EdgeLocation",
     "/properties/AttachmentPolicyRuleNumber",
     "/properties/SegmentName",
-    "/properties/LastModificationErrors"
+    "/properties/LastModificationErrors",
+    "/properties/ProposedSegmentChange",
+    "/properties/ProposedNetworkFunctionGroupChange"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"
@@ -226,6 +227,9 @@
         "networkmanager:ListTagsForResource",
         "networkmanager:TagResource",
         "networkmanager:UntagResource",
+        "networkmanager:PutAttachmentRoutingPolicyLabel",
+        "networkmanager:RemoveAttachmentRoutingPolicyLabel",
+        "networkmanager:ListAttachmentRoutingPolicyAssociations",
         "ec2:DescribeRegions"
       ]
     },

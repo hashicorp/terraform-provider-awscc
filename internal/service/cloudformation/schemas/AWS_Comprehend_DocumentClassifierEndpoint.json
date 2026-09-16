@@ -1,0 +1,149 @@
+{
+  "typeName": "AWS::Comprehend::DocumentClassifierEndpoint",
+  "description": "An Amazon Comprehend endpoint that hosts a custom document classification model for real-time inference.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The initial part of a key-value pair that forms a tag associated with a given resource.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The second part of a key-value pair that forms a tag associated with a given resource.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the document classifier endpoint.",
+      "maxLength": 256,
+      "pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+    },
+    "EndpointName": {
+      "type": "string",
+      "description": "The name of the endpoint. The name must be unique within the AWS Region and account.",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+    },
+    "ModelArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the document classifier model to which the endpoint is attached.",
+      "maxLength": 256,
+      "pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?$"
+    },
+    "DesiredInferenceUnits": {
+      "type": "integer",
+      "description": "The desired number of inference units to be used by the model. Each inference unit represents throughput of 100 characters per second.",
+      "minimum": 1
+    },
+    "CurrentInferenceUnits": {
+      "type": "integer",
+      "description": "The number of inference units currently used by the model using this endpoint.",
+      "minimum": 1
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The creation date and time of the endpoint.",
+      "format": "date-time"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The date and time that the endpoint was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags associated with the endpoint being created.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "EndpointName",
+    "ModelArn",
+    "DesiredInferenceUnits"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CurrentInferenceUnits",
+    "/properties/CreationTime",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/EndpointName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/EndpointName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "comprehend:TagResource",
+      "comprehend:UntagResource",
+      "comprehend:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "comprehend:CreateEndpoint",
+        "comprehend:DescribeEndpoint",
+        "comprehend:TagResource",
+        "comprehend:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "comprehend:DescribeEndpoint",
+        "comprehend:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "comprehend:UpdateEndpoint",
+        "comprehend:DescribeEndpoint",
+        "comprehend:TagResource",
+        "comprehend:UntagResource",
+        "comprehend:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "comprehend:DeleteEndpoint",
+        "comprehend:DescribeEndpoint",
+        "comprehend:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "comprehend:ListEndpoints"
+      ]
+    }
+  }
+}

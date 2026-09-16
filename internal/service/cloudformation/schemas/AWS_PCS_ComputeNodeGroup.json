@@ -39,7 +39,7 @@
         "pcs:ListTagsForResource",
         "pcs:TagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 160
     },
     "update": {
       "permissions": [
@@ -62,7 +62,7 @@
         "pcs:TagResource",
         "pcs:UntagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 160
     },
     "list": {
       "permissions": [
@@ -101,7 +101,7 @@
         "pcs:TagResource",
         "pcs:UntagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 160
     }
   },
   "typeName": "AWS::PCS::ComputeNodeGroup",
@@ -362,6 +362,14 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "GresCustomSettings": {
+          "description": "Additional Slurm gres.conf records for the compute node group. Each item is a map of gres.conf attribute names to values describing one gres.conf record (for example a GPU topology, MIG, MPS, or custom GRES entry). AWS PCS adds the NodeName= prefix and merges these records with the GPU record it derives from the instance type.",
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GresCustomSetting"
+          }
+        },
         "ScaleDownIdleTimeInSeconds": {
           "description": "The time before an idle node is scaled down.",
           "maximum": 10000000,

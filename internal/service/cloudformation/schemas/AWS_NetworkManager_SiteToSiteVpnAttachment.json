@@ -172,8 +172,7 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
-    "/properties/VpnConnectionArn",
-    "/properties/RoutingPolicyLabel"
+    "/properties/VpnConnectionArn"
   ],
   "writeOnlyProperties": [
     "/properties/RoutingPolicyLabel"
@@ -190,7 +189,9 @@
     "/properties/EdgeLocation",
     "/properties/AttachmentPolicyRuleNumber",
     "/properties/SegmentName",
-    "/properties/LastModificationErrors"
+    "/properties/LastModificationErrors",
+    "/properties/ProposedSegmentChange",
+    "/properties/ProposedNetworkFunctionGroupChange"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"
@@ -226,6 +227,9 @@
         "networkmanager:ListTagsForResource",
         "networkmanager:TagResource",
         "networkmanager:UntagResource",
+        "networkmanager:PutAttachmentRoutingPolicyLabel",
+        "networkmanager:RemoveAttachmentRoutingPolicyLabel",
+        "networkmanager:ListAttachmentRoutingPolicyAssociations",
         "ec2:DescribeRegions"
       ]
     },

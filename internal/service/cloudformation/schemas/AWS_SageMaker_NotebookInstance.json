@@ -1,0 +1,226 @@
+{
+  "typeName": "AWS::SageMaker::NotebookInstance",
+  "description": "Resource Type definition for AWS::SageMaker::NotebookInstance",
+  "definitions": {
+    "InstanceMetadataServiceConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Information on the IMDS configuration of the notebook instance",
+      "properties": {
+        "MinimumInstanceMetadataServiceVersion": {
+          "type": "string",
+          "description": "Indicates the minimum IMDS version that the notebook instance supports. When passed as part of CreateNotebookInstance, if no value is selected, then it defaults to IMDSv1. This means that both IMDSv1 and IMDSv2 are supported. If passed as part of UpdateNotebookInstance, there is no default."
+        }
+      },
+      "required": [
+        "MinimumInstanceMetadataServiceVersion"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A tag object that consists of a key and an optional value, used to manage metadata for SageMaker AWS resources.",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "description": "The tag value."
+        },
+        "Key": {
+          "type": "string",
+          "description": "The tag key. Tag keys must be unique per resource."
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "AcceleratorTypes": {
+      "type": "array",
+      "description": "A list of Amazon Elastic Inference (EI) instance types to associate with the notebook instance. Currently, only one instance type can be associated with a notebook instance.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "AdditionalCodeRepositories": {
+      "type": "array",
+      "description": "An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "DefaultCodeRepository": {
+      "type": "string",
+      "description": "The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository."
+    },
+    "DirectInternetAccess": {
+      "type": "string",
+      "description": "Sets whether SageMaker AI provides internet access to the notebook instance. If you set this to Disabled this notebook instance is able to access resources only in your VPC, and is not be able to connect to SageMaker AI training and endpoint services unless you configure a NAT Gateway in your VPC. You can set the value of this parameter to Disabled only if you set a value for the SubnetId parameter."
+    },
+    "InstanceMetadataServiceConfiguration": {
+      "$ref": "#/definitions/InstanceMetadataServiceConfiguration",
+      "description": "Information on the IMDS configuration of the notebook instance."
+    },
+    "InstanceType": {
+      "type": "string",
+      "description": "The type of ML compute instance to launch for the notebook instance. Expect some interruption of service if this parameter is changed as CloudFormation stops a notebook instance and starts it up again to update it."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of a AWS Key Management Service key that SageMaker AI uses to encrypt data on the storage volume attached to your notebook instance. The KMS key you provide must be enabled."
+    },
+    "LifecycleConfigName": {
+      "type": "string",
+      "description": "The name of a lifecycle configuration to associate with the notebook instance."
+    },
+    "NotebookInstanceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the notebook instance."
+    },
+    "NotebookInstanceName": {
+      "type": "string",
+      "description": "The name of the new notebook instance.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "PlatformIdentifier": {
+      "type": "string",
+      "description": "The platform identifier of the notebook instance runtime environment. The default value is notebook-al2023-v1."
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "When you send any requests to AWS resources from the notebook instance, SageMaker AI assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so SageMaker AI can perform these tasks. The policy must allow the SageMaker AI service principal (sagemaker.amazonaws.com) permissions to assume this role. To be able to pass this role to SageMaker AI, the caller of this API must have the iam:PassRole permission."
+    },
+    "RootAccess": {
+      "type": "string",
+      "description": "Whether root access is enabled or disabled for users of the notebook instance. The default value is Enabled. Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users."
+    },
+    "SubnetId": {
+      "type": "string",
+      "description": "The ID of the subnet in a VPC to which you would like to have a connectivity from your ML compute instance."
+    },
+    "SecurityGroupIds": {
+      "type": "array",
+      "description": "The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of key-value pairs to apply to this resource.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "VolumeSizeInGB": {
+      "type": "integer",
+      "description": "The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB. Expect some interruption of service if this parameter is changed as CloudFormation stops a notebook instance and starts it up again to update it.",
+      "minimum": 5,
+      "maximum": 16384
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "InstanceType",
+    "RoleArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/DirectInternetAccess",
+    "/properties/KmsKeyId",
+    "/properties/NotebookInstanceName",
+    "/properties/PlatformIdentifier",
+    "/properties/SecurityGroupIds",
+    "/properties/SubnetId"
+  ],
+  "primaryIdentifier": [
+    "/properties/NotebookInstanceArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/NotebookInstanceArn"
+  ],
+  "deprecatedProperties": [
+    "/properties/AcceleratorTypes"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:ListTags",
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "sagemaker:AddTags",
+        "sagemaker:CreateNotebookInstance",
+        "sagemaker:DescribeNotebookInstance",
+        "sagemaker:ListTags",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeNotebookInstance",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:DescribeNotebookInstance",
+        "sagemaker:StartNotebookInstance",
+        "sagemaker:StopNotebookInstance",
+        "sagemaker:UpdateNotebookInstance",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "sagemaker:DeleteNotebookInstance",
+        "sagemaker:DescribeNotebookInstance",
+        "sagemaker:StopNotebookInstance"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListNotebookInstances"
+      ]
+    }
+  }
+}

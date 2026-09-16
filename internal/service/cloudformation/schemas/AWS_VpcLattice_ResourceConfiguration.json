@@ -123,6 +123,26 @@
       "type": "string",
       "maxLength": 1224
     },
+    "CidrResource": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CidrRanges": {
+          "minItems": 1,
+          "maxItems": 10,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 50
+          }
+        }
+      },
+      "required": [
+        "CidrRanges"
+      ]
+    },
     "Tag": {
       "additionalProperties": false,
       "type": "object",
@@ -202,6 +222,19 @@
           "required": [
             "DnsResource"
           ]
+        },
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "CidrResource",
+          "properties": {
+            "CidrResource": {
+              "$ref": "#/definitions/CidrResource"
+            }
+          },
+          "required": [
+            "CidrResource"
+          ]
         }
       ],
       "type": "object"
@@ -242,7 +275,8 @@
         "GROUP",
         "CHILD",
         "SINGLE",
-        "ARN"
+        "ARN",
+        "CIDR"
       ]
     },
     "DomainVerificationId": {

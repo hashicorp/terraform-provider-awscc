@@ -155,7 +155,7 @@
         "pcs:ListTagsForResource",
         "pcs:TagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 160
     },
     "read": {
       "permissions": [
@@ -171,14 +171,14 @@
         "pcs:TagResource",
         "pcs:UntagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 160
     },
     "delete": {
       "permissions": [
         "pcs:DeleteQueue",
         "pcs:GetQueue"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 160
     },
     "list": {
       "handlerSchema": {

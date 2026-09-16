@@ -1,0 +1,377 @@
+{
+  "typeName": "AWS::FSx::FileCache",
+  "description": "Resource Type definition for AWS::FSx::FileCache",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "DataRepositoryAssociation": {
+      "type": "object",
+      "properties": {
+        "FileCachePath": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "DataRepositoryPath": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 4357
+        }
+      },
+      "required": [
+        "FileCachePath",
+        "DataRepositoryPath"
+      ],
+      "additionalProperties": false
+    },
+    "LustreConfiguration": {
+      "type": "object",
+      "properties": {
+        "PerUnitStorageThroughput": {
+          "type": "integer",
+          "minimum": 12,
+          "maximum": 1000
+        },
+        "DeploymentType": {
+          "type": "string",
+          "enum": [
+            "CACHE_1"
+          ]
+        },
+        "WeeklyMaintenanceStartTime": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 7,
+          "pattern": "^[1-7]:([01]\\d|2[0-3]):?([0-5]\\d)$"
+        },
+        "MetadataConfiguration": {
+          "$ref": "#/definitions/MetadataConfiguration"
+        },
+        "MountName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8,
+          "pattern": "^([A-Za-z0-9_-]{1,8})$"
+        },
+        "LogConfiguration": {
+          "$ref": "#/definitions/LogConfiguration"
+        }
+      },
+      "required": [
+        "PerUnitStorageThroughput",
+        "DeploymentType",
+        "MetadataConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "MetadataConfiguration": {
+      "type": "object",
+      "properties": {
+        "StorageCapacity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "StorageCapacity"
+      ],
+      "additionalProperties": false
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "properties": {
+        "Level": {
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "WARN_ONLY",
+            "ERROR_ONLY",
+            "WARN_ERROR"
+          ]
+        },
+        "Destination": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "Level"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ResourceARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the file cache",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": ""
+    },
+    "FileCacheId": {
+      "type": "string",
+      "description": "The ID of the file cache",
+      "minLength": 11,
+      "maxLength": 21,
+      "pattern": "^(fc-[0-9a-f]{8,})$"
+    },
+    "FileCacheType": {
+      "type": "string",
+      "description": "The type of cache, which must be LUSTRE",
+      "enum": [
+        "LUSTRE"
+      ]
+    },
+    "FileCacheTypeVersion": {
+      "type": "string",
+      "description": "The Lustre version of the cache, which must be 2.12",
+      "minLength": 1,
+      "maxLength": 20,
+      "pattern": "^[0-9](\\.[0-9]*)*$"
+    },
+    "StorageCapacity": {
+      "type": "integer",
+      "description": "The storage capacity of the cache in gibibytes (GiB)",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "SubnetIds": {
+      "type": "array",
+      "description": "A list of subnet IDs for the cache",
+      "items": {
+        "type": "string",
+        "minLength": 15,
+        "maxLength": 24,
+        "pattern": "^(subnet-[0-9a-f]{8,})$"
+      },
+      "maxItems": 50
+    },
+    "SecurityGroupIds": {
+      "type": "array",
+      "description": "A list of security group IDs for the cache",
+      "items": {
+        "type": "string",
+        "minLength": 11,
+        "maxLength": 20,
+        "pattern": "^(sg-[0-9a-f]{8,})$"
+      },
+      "maxItems": 50
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to associate with the file cache",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    },
+    "CopyTagsToDataRepositoryAssociations": {
+      "type": "boolean",
+      "description": "Whether tags should be copied to data repository associations"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The KMS key ID for encrypting data",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "LustreConfiguration": {
+      "$ref": "#/definitions/LustreConfiguration",
+      "description": "The Lustre configuration for the file cache"
+    },
+    "DataRepositoryAssociations": {
+      "type": "array",
+      "description": "Data repository associations for the cache",
+      "items": {
+        "$ref": "#/definitions/DataRepositoryAssociation"
+      },
+      "maxItems": 8
+    },
+    "DNSName": {
+      "type": "string",
+      "description": "The DNS name for the cache"
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The VPC ID of the cache"
+    },
+    "NetworkInterfaceIds": {
+      "type": "array",
+      "description": "Network interface IDs for the cache",
+      "items": {
+        "type": "string"
+      }
+    },
+    "DataRepositoryAssociationIds": {
+      "type": "array",
+      "description": "A list of IDs of data repository associations that are associated with this cache",
+      "items": {
+        "type": "string"
+      }
+    },
+    "OwnerId": {
+      "type": "string",
+      "description": "The AWS account ID of the cache owner",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^\\d{12}$"
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The time the cache was created",
+      "format": "date-time"
+    },
+    "Lifecycle": {
+      "type": "string",
+      "description": "The lifecycle status of the cache",
+      "enum": [
+        "AVAILABLE",
+        "CREATING",
+        "DELETING",
+        "UPDATING",
+        "FAILED"
+      ]
+    }
+  },
+  "required": [
+    "FileCacheType",
+    "FileCacheTypeVersion",
+    "StorageCapacity",
+    "SubnetIds"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ResourceARN",
+    "/properties/FileCacheId",
+    "/properties/DNSName",
+    "/properties/VpcId",
+    "/properties/NetworkInterfaceIds",
+    "/properties/DataRepositoryAssociationIds",
+    "/properties/OwnerId",
+    "/properties/CreationTime",
+    "/properties/Lifecycle",
+    "/properties/LustreConfiguration/MountName",
+    "/properties/LustreConfiguration/LogConfiguration"
+  ],
+  "writeOnlyProperties": [
+    "/properties/SecurityGroupIds",
+    "/properties/DataRepositoryAssociations",
+    "/properties/CopyTagsToDataRepositoryAssociations"
+  ],
+  "createOnlyProperties": [
+    "/properties/FileCacheType",
+    "/properties/FileCacheTypeVersion",
+    "/properties/StorageCapacity",
+    "/properties/SubnetIds",
+    "/properties/SecurityGroupIds",
+    "/properties/KmsKeyId",
+    "/properties/CopyTagsToDataRepositoryAssociations",
+    "/properties/DataRepositoryAssociations",
+    "/properties/LustreConfiguration/PerUnitStorageThroughput",
+    "/properties/LustreConfiguration/DeploymentType",
+    "/properties/LustreConfiguration/MetadataConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/FileCacheId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fsx:TagResource",
+      "fsx:UntagResource",
+      "fsx:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fsx:CreateFileCache",
+        "fsx:DescribeFileCaches",
+        "fsx:CreateDataRepositoryAssociation",
+        "fsx:TagResource",
+        "fsx:ListTagsForResource",
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:GetBucketAcl",
+        "s3:HeadBucket",
+        "s3:GetEncryptionConfiguration",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:GetSecurityGroupsForVpc",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:DescribeRouteTables",
+        "ec2:CreateTags",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fsx:DescribeFileCaches",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fsx:UpdateFileCache",
+        "fsx:DescribeFileCaches",
+        "fsx:TagResource",
+        "fsx:UntagResource",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fsx:DeleteFileCache",
+        "fsx:DescribeFileCaches",
+        "fsx:DeleteDataRepositoryAssociation"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fsx:DescribeFileCaches"
+      ]
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "typeName": "AWS::Lightsail::KeyPair",
+  "description": "Resource Type definition for AWS::Lightsail::KeyPair",
+  "properties": {
+    "KeyPairName": {
+      "type": "string",
+      "description": "The name of the key pair.",
+      "pattern": "^\\w[\\w\\-]*\\w$"
+    },
+    "KeyPairArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the key pair."
+    },
+    "Fingerprint": {
+      "type": "string",
+      "description": "The RSA fingerprint of the key pair."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the key pair was created."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tag keys and optional values to add to the resource during create.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "SupportCode": {
+      "type": "string",
+      "description": "The support code. Include this code in your email to support when you have questions about a key pair in Lightsail."
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The Lightsail resource type (KeyPair)."
+    },
+    "Location": {
+      "$ref": "#/definitions/ResourceLocation"
+    }
+  },
+  "definitions": {
+    "ResourceLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AvailabilityZone": {
+          "type": "string",
+          "description": "The Availability Zone. Follows the format us-east-2a (case-sensitive)."
+        },
+        "RegionName": {
+          "type": "string",
+          "description": "The AWS Region name."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag key-value pair.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "KeyPairName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/KeyPairArn",
+    "/properties/Fingerprint",
+    "/properties/CreatedAt",
+    "/properties/SupportCode",
+    "/properties/ResourceType",
+    "/properties/Location"
+  ],
+  "createOnlyProperties": [
+    "/properties/KeyPairName"
+  ],
+  "primaryIdentifier": [
+    "/properties/KeyPairName"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "lightsail:TagResource",
+      "lightsail:UntagResource",
+      "lightsail:GetKeyPair"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "lightsail:CreateKeyPair",
+        "lightsail:GetKeyPair",
+        "lightsail:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "lightsail:GetKeyPair"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "lightsail:GetKeyPair",
+        "lightsail:TagResource",
+        "lightsail:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "lightsail:DeleteKeyPair",
+        "lightsail:GetKeyPair"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "lightsail:GetKeyPairs"
+      ]
+    }
+  }
+}

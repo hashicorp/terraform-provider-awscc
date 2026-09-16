@@ -1,0 +1,151 @@
+{
+  "typeName": "AWS::FMS::ProtocolsList",
+  "description": "Creates an AWS Firewall Manager protocols list.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-fms.git",
+  "definitions": {
+    "Tag": {
+      "description": "A tag to associate with the protocols list. A tag is a key-value pair.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The tag key.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "description": "The tag value.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the protocols list.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^arn:aws(-[a-z0-9-]+)?:fms:[a-z0-9-]*:[0-9]{12}:protocols-list/[a-z0-9A-Z-]{36}$"
+    },
+    "ListId": {
+      "description": "The ID of the Firewall Manager protocols list.",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-z0-9A-Z-]{36}$"
+    },
+    "ListName": {
+      "description": "The name of the Firewall Manager protocols list.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "ProtocolsList": {
+      "description": "An array of protocols in the Firewall Manager protocols list.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "description": "The IP protocol name or number. The name can be one of tcp, udp, or icmp. For information on possible numbers, see Protocol Numbers (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).",
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 20,
+        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      }
+    },
+    "CreateTime": {
+      "description": "The time that the Firewall Manager protocols list was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastUpdateTime": {
+      "description": "The time that the Firewall Manager protocols list was last updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to the protocols list.",
+      "type": "array",
+      "maxItems": 200,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ListName",
+    "ProtocolsList"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/ListId",
+    "/properties/CreateTime",
+    "/properties/LastUpdateTime"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ListId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fms:TagResource",
+      "fms:UntagResource",
+      "fms:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fms:PutProtocolsList",
+        "fms:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fms:GetProtocolsList",
+        "fms:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fms:PutProtocolsList",
+        "fms:GetProtocolsList",
+        "fms:TagResource",
+        "fms:UntagResource",
+        "fms:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fms:DeleteProtocolsList"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fms:ListProtocolsLists"
+      ]
+    }
+  }
+}

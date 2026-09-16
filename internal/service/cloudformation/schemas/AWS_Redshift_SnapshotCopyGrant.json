@@ -1,0 +1,118 @@
+{
+  "typeName": "AWS::Redshift::SnapshotCopyGrant",
+  "description": "Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted symmetric key from AWS Key Management Service (KMS) to encrypt copied snapshots in a destination region.",
+  "properties": {
+    "SnapshotCopyGrantName": {
+      "type": "string",
+      "description": "The name of the snapshot copy grant. This name must be unique in the region for the AWS account.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the snapshot copy grant."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission. If no key is specified, the default key is used. Marked writeOnly because Create accepts aliases/key-ids but Describe returns the resolved key ARN, which would fail drift detection."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tag instances.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key, or name, for the resource tag.",
+          "minLength": 1,
+          "maxLength": 127
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the resource tag.",
+          "minLength": 0,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "SnapshotCopyGrantName"
+  ],
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/SnapshotCopyGrantName",
+    "/properties/KmsKeyId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/KmsKeyId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SnapshotCopyGrantName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "redshift:CreateTags",
+      "redshift:DeleteTags",
+      "redshift:DescribeSnapshotCopyGrants"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "redshift:CreateSnapshotCopyGrant",
+        "redshift:DescribeSnapshotCopyGrants",
+        "redshift:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "redshift:DescribeSnapshotCopyGrants"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "redshift:DescribeSnapshotCopyGrants",
+        "redshift:CreateTags",
+        "redshift:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "redshift:DeleteSnapshotCopyGrant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "redshift:DescribeSnapshotCopyGrants"
+      ]
+    }
+  }
+}

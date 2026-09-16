@@ -1,0 +1,227 @@
+{
+  "typeName": "AWS::Redshift::Snapshot",
+  "description": "Resource Type definition for AWS::Redshift::Snapshot. Creates a manual snapshot of the specified cluster. The cluster must be in the available state.",
+  "properties": {
+    "SnapshotArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the snapshot.",
+      "pattern": "^arn:aws[a-zA-Z-]*:redshift:[a-z0-9-]+:[0-9]{12}:snapshot:[^:]+/[^:]+$"
+    },
+    "SnapshotIdentifier": {
+      "type": "string",
+      "description": "A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the Amazon Web Services account.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ClusterIdentifier": {
+      "type": "string",
+      "description": "The cluster identifier for which you want a snapshot.",
+      "minLength": 1,
+      "maxLength": 63
+    },
+    "ManualSnapshotRetentionPeriod": {
+      "type": "integer",
+      "description": "The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3653.",
+      "minimum": -1,
+      "maximum": 3653
+    },
+    "Status": {
+      "type": "string",
+      "description": "The snapshot status. The value of the status depends on the API operation used: CreateClusterSnapshot and CopyClusterSnapshot returns status as creating. DescribeClusterSnapshots returns status as creating, available, final snapshot, or failed. DeleteClusterSnapshot returns status as deleted."
+    },
+    "SnapshotType": {
+      "type": "string",
+      "description": "The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot are of type manual."
+    },
+    "AvailabilityZone": {
+      "type": "string",
+      "description": "The Availability Zone in which the cluster was created."
+    },
+    "ClusterCreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time (UTC) when the cluster was originally created."
+    },
+    "MasterUsername": {
+      "type": "string",
+      "description": "The admin user name for the cluster."
+    },
+    "ClusterVersion": {
+      "type": "string",
+      "description": "The version ID of the Amazon Redshift engine that is running on the cluster."
+    },
+    "EngineFullVersion": {
+      "type": "string",
+      "description": "The engine full version of the cluster at the time the snapshot was taken."
+    },
+    "SnapshotCreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time (in UTC format) when Amazon Redshift began the snapshot."
+    },
+    "NodeType": {
+      "type": "string",
+      "description": "The node type that the cluster is provisioned with."
+    },
+    "NumberOfNodes": {
+      "type": "integer",
+      "description": "The number of nodes in the cluster."
+    },
+    "DBName": {
+      "type": "string",
+      "description": "The name of the database that was created when the cluster was created."
+    },
+    "Port": {
+      "type": "integer",
+      "description": "The port that the cluster is listening on."
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The VPC identifier of the cluster if the snapshot is from a cluster in a VPC."
+    },
+    "Encrypted": {
+      "type": "boolean",
+      "description": "If true, the data in the snapshot is encrypted at rest."
+    },
+    "EncryptedWithHSM": {
+      "type": "boolean",
+      "description": "A boolean that indicates whether the snapshot data is encrypted using the HSM keys of the source cluster."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken."
+    },
+    "EnhancedVpcRouting": {
+      "type": "boolean",
+      "description": "An option that specifies whether to create the cluster with enhanced VPC routing enabled."
+    },
+    "MaintenanceTrackName": {
+      "type": "string",
+      "description": "The name of the maintenance track for the snapshot."
+    },
+    "OwnerAccount": {
+      "type": "string",
+      "description": "The Amazon Web Services account that owns the snapshot."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tag instances.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key, or name, for the resource tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the resource tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "SnapshotIdentifier",
+    "ClusterIdentifier"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/SnapshotArn",
+    "/properties/Status",
+    "/properties/SnapshotType",
+    "/properties/AvailabilityZone",
+    "/properties/ClusterCreateTime",
+    "/properties/MasterUsername",
+    "/properties/ClusterVersion",
+    "/properties/EngineFullVersion",
+    "/properties/SnapshotCreateTime",
+    "/properties/NodeType",
+    "/properties/NumberOfNodes",
+    "/properties/DBName",
+    "/properties/Port",
+    "/properties/VpcId",
+    "/properties/Encrypted",
+    "/properties/EncryptedWithHSM",
+    "/properties/KmsKeyId",
+    "/properties/EnhancedVpcRouting",
+    "/properties/MaintenanceTrackName",
+    "/properties/OwnerAccount"
+  ],
+  "createOnlyProperties": [
+    "/properties/SnapshotIdentifier",
+    "/properties/ClusterIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/SnapshotArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ClusterIdentifier",
+      "/properties/SnapshotIdentifier"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "redshift:CreateTags",
+      "redshift:DeleteTags",
+      "redshift:DescribeClusterSnapshots"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "redshift:CreateClusterSnapshot",
+        "redshift:DescribeClusterSnapshots",
+        "redshift:CreateTags",
+        "redshift:DescribeClusters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "redshift:DescribeClusterSnapshots"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "redshift:ModifyClusterSnapshot",
+        "redshift:DescribeClusterSnapshots",
+        "redshift:CreateTags",
+        "redshift:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "redshift:DeleteClusterSnapshot",
+        "redshift:DescribeClusterSnapshots",
+        "redshift:DescribeClusters"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "redshift:DescribeClusterSnapshots"
+      ]
+    }
+  }
+}
