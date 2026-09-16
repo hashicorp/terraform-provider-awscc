@@ -102,6 +102,7 @@ func main() {
 		check          = flag.Bool("check", false, "reconcile's pipeline with promotion off: report every failure, exit non-zero on any failure or on any regenerated output that differs from committed (no AWS; writes nothing)")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
+		recheckAll     = flag.Bool("recheck-all", false, "with -recheck: widen the scope to every active suppression/freeze, not just the reason-less/unknown backlog — revisit an old, already-explained decision on demand")
 
 		// Hidden: the hidden -recheck-probe-artifact mode heal.go re-execs into,
 		// so a crashy regeneration (e.g. a recursive schema) kills only this
@@ -132,7 +133,7 @@ func main() {
 		return
 	}
 
-	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *docs, *recheck); err != nil {
+	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *docs, *recheck, *recheckAll); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
@@ -142,7 +143,7 @@ func main() {
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs, recheck bool) error {
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs, recheck, recheckAll bool) error {
 	switch {
 	case sync:
 		return runSync(context.Background(), allSchemasPath, checkoutPath)
@@ -159,7 +160,7 @@ func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs
 	case lint:
 		return runLint(allSchemasPath, checkoutPath)
 	case recheck:
-		return runRecheck(allSchemasPath)
+		return runRecheck(allSchemasPath, recheckAll)
 	default:
 		flag.Usage()
 		return fmt.Errorf("no command given; use one of -sync, -reconcile, -check, -docs, -lint, -recheck")

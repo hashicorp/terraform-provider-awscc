@@ -219,11 +219,62 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    `-check` runs above (clean pass, corruption detection, re-confirmed
    clean after reverting). *(core)* Detail: `held-artifacts-design.md` §4,
    §5 step 5; §0 story 3.
-6. **`recheck`'s reasoned-row mode.** An opt-in flag (name TBD) widening
-   `needsHealing`'s predicate from "reason empty/`unknown`" to "active,
-   regardless of reason" — revisit a year-old suppress/freeze on demand. `lint`
-   needs no code change beyond its item-1 rename. *(additive)* Detail:
-   `held-artifacts-design.md` §4, §5 step 6; §0 story 5.
+6. **DONE. `recheck`'s reasoned-row mode.** New opt-in flag, `-recheck-all`
+   (resolves the "name TBD" open question below: chosen as a modifier on
+   `-recheck` — meaningless alone — mirroring `-recheck-probe-artifact`'s
+   existing `-recheck-*` naming pattern for `recheck`-related flags).
+   Widened `needsHealing` from a plain predicate to `needsHealing(all bool)`:
+   with `all` false (the default), unchanged — active and reason-less/`unknown`.
+   With `all` true, every active fact is in scope regardless of its existing
+   reason, so a year-old suppress/freeze — even one with a real, specific
+   reason already recorded — can be revisited on demand (§0 story 5).
+   Threaded `all` through `runRecheck` into the candidate-selection loop and
+   into `writeHealReport`'s tally line (`"facts re-probed (every active
+   fact, -recheck-all): N"` instead of the now-inapplicable "facts needing a
+   reason" label).
+
+   **A real bug, found by actually running `-recheck -recheck-all` against
+   the real repo, not by any unit test written first:** widening the scope
+   to include already-reasoned facts meant `commentOrUnknown` — the
+   no-cached-schema fallback every fact still falls through to — could now
+   receive a fact with a real, meaningful reason already recorded (only
+   possible under `-recheck-all`, since the default scope excludes these).
+   Its original behavior would have silently proposed *overwriting* that
+   real reason with either a same-row comment-migration guess (which may
+   describe a different fact on the same row entirely) or a bare "needs a
+   human look" — actively destructive, not just unhelpful. Fixed by
+   threading each fact's existing reason (`f.reason`) through
+   `healArtifact`/`freezeProposal` into `commentOrUnknown`, which now keeps
+   a real, non-`unknown:`-tagged existing reason as-is (appending a short
+   note that there was no cached schema to weigh it against) rather than
+   falling through to the comment/unknown path at all. Confirmed empirically
+   against the real corpus: a real `-recheck -recheck-all` run surfaced
+   **34 real rows** that hit exactly this path (frozen, with a real,
+   carefully-written reason, no cached schema since a frozen row's bytes
+   are never refreshed) — without the fix, all 34 would have had their real
+   reasons proposed for silent replacement.
+
+   Also confirmed the intended behavior fires correctly on the same real
+   run: two genuine "lift" proposals surfaced for rows that generate cleanly
+   now despite being suppressed a while back (`AWS::ARCRegionSwitch::Plan`'s
+   plural data source, `AWS::AmazonMQ::Broker`'s resource and singular data
+   source) — exactly story 5's "is that still true?" case. `lint` needed no
+   code change beyond its item-1 rename, as anticipated.
+
+   Verified: `gofmt`/`vet`/`build` (whole module) clean, updated
+   `TestCommentOrUnknown` (two new subtests: a real existing reason kept
+   verbatim and never overwritten by an unrelated comment; an existing
+   reason still tagged `unknown:` correctly still falls through, not kept)
+   and `TestHealFactsForNeedsHealing` (two new subtests: `-recheck-all`
+   widens scope to an already-reasoned active fact; an inactive fact is
+   still excluded regardless), full suite `-race -short` and `-timeout 20m`
+   both pass, `impi` clean, and real `go run ./internal/tools/bigdiffer
+   -recheck` (0 facts — the reason-less backlog is currently empty) and
+   `-recheck -recheck-all` (557 facts re-probed, including the 34-row
+   existing-reason-kept case and the two genuine lift proposals above) runs
+   against the real repo, confirmed to write nothing to `all_schemas.hcl`.
+   *(additive)* Detail: `held-artifacts-design.md` §4, §5 step 6; §0
+   story 5.
 7. **Reporting.** Per-artifact blame on a hard-errored run (types, artifacts,
    `go build` errors) — the failing run's own output, no overlay writes.
    *(core)* Detail: `held-artifacts-design.md` §5 step 7.
@@ -252,7 +303,8 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
 
 Tracked in `held-artifacts-design.md` §6:
 
-- Exact flag name for item 6's reasoned-row mode.
+- ~~Exact flag name for item 6's reasoned-row mode.~~ — **resolved**:
+  `-recheck-all`.
 - ~~The shape of `decide()`'s discovery-diff signal (item 3)~~ — **resolved**:
   a new `changeClass` value, `classPresentUnchanged`, not a separate parameter.
 - Item 5's "fail on any output-diff" relies on deterministic generation

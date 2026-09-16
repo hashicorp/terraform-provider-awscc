@@ -284,8 +284,14 @@ Ordered so each step is independently mergeable and leaves the tool working.
    full writeup, including a false start with two frozen candidates
    producing a silent false-negative before the real bug was found, is in
    punchlist item 5.
-6. **`recheck`'s reasoned-row flag** (small, independent). `lint` needs no code
-   change beyond its step-1 rename.
+6. **`recheck`'s reasoned-row flag** *(done)*: `-recheck-all`, widening
+   `needsHealing` to every active fact regardless of existing reason.
+   `commentOrUnknown` now carries each fact's existing reason through and
+   keeps it as-is rather than falling through to a comment-migration guess
+   — a real bug the widened scope newly exposed, found only by actually
+   running `-recheck -recheck-all` against the real repo (34 real rows hit
+   this path). `lint` needed no code change beyond its step-1 rename, as
+   expected. Full writeup in punchlist item 6.
 7. **Reporting**: per-artifact blame on a hard-errored run (types, artifacts,
    `go build` errors) — the failing run's own output; no overlay writes.
 8. **Doc reconciliation, one pass, last.** This file and `redesign-punchlist.md`
@@ -300,7 +306,8 @@ Ordered so each step is independently mergeable and leaves the tool working.
 
 ## 6. Open questions
 
-- Exact flag name for `recheck`'s reasoned-row mode.
+- ~~Exact flag name for `recheck`'s reasoned-row mode.~~ — **resolved**:
+  `-recheck-all`.
 - The shape of the discovery-diff signal into `decide()`: a new `changeClass`
   (e.g. `classUnchanged`), or a `byteStatus` parameter alongside `changeClass`.
 - `check`'s "fail on any output-diff" relies on generation being deterministic

@@ -74,7 +74,7 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("migrates an existing comment to manual", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema", false)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "recursive schema", false)
 		if p.action != "reason" {
 			t.Errorf("action = %q, want reason", p.action)
 		}
@@ -85,7 +85,7 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("falls back to unknown with no comment", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", false)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "", false)
 		if !strings.HasPrefix(p.reason, "unknown:") {
 			t.Errorf("reason = %q, want unknown: prefix", p.reason)
 		}
@@ -99,7 +99,7 @@ func TestCommentOrUnknown(t *testing.T) {
 		// one fact is pending it must be visibly marked as a shared
 		// candidate for a human to confirm per field, not silently
 		// duplicated into each field as if confirmed.
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema", true)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "recursive schema", true)
 		if p.action != "reason" {
 			t.Errorf("action = %q, want reason", p.action)
 		}
@@ -113,9 +113,42 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("multiPending with no comment still falls back to unknown, unmarked", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", true)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "", true)
 		if !strings.HasPrefix(p.reason, "unknown:") {
 			t.Errorf("reason = %q, want unknown: prefix regardless of multiPending", p.reason)
+		}
+	})
+
+	t.Run("a real existing reason is kept, never overwritten by a comment guess", func(t *testing.T) {
+		t.Parallel()
+		// Only reachable under -recheck-all: the default scope
+		// (needsHealing) excludes any fact with a real reason already, so
+		// commentOrUnknown only ever sees one here when -recheck-all widened
+		// the scope. With no cached schema to actually re-probe against,
+		// there is nothing to weigh against the existing answer, so it must
+		// win over a same-row free-form comment that might describe a
+		// different fact entirely.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "manual: schema frozen, known upstream Arn bug", "unrelated comment text", false)
+		if p.action != "reason" {
+			t.Errorf("action = %q, want reason", p.action)
+		}
+		if !strings.HasPrefix(p.reason, "manual: schema frozen, known upstream Arn bug") {
+			t.Errorf("reason = %q, want the existing reason preserved verbatim as a prefix, not overwritten by the comment", p.reason)
+		}
+		if strings.Contains(p.reason, "unrelated comment text") {
+			t.Errorf("reason = %q, must not incorporate the unrelated comment when a real existing reason is kept", p.reason)
+		}
+	})
+
+	t.Run("an existing reason still tagged unknown is treated as reason-less, not kept", func(t *testing.T) {
+		t.Parallel()
+		// unknown: is the explicit "still needs a human look" marker
+		// (formatReason(reasonUnknown, ...)), not a real answer — it must
+		// still fall through to the comment-migration/unknown fallback like
+		// a genuinely empty reason would, regardless of scope.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "unknown: needs a human look", "recursive schema", false)
+		if p.reason != "manual: recursive schema" {
+			t.Errorf("reason = %q, want the comment migrated (existing unknown: reason must not be kept as-is)", p.reason)
 		}
 	})
 }
@@ -471,7 +504,7 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 		}
 		var pending []string
 		for _, f := range healFactsFor(row) {
-			if f.needsHealing() {
+			if f.needsHealing(false) {
 				pending = append(pending, f.field)
 			}
 		}
@@ -487,7 +520,7 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 			SuppressionReasonResource:  "unknown: no schema cached and no existing comment to migrate; needs a human look",
 		}
 		facts := healFactsFor(row)
-		if !facts[0].needsHealing() {
+		if !facts[0].needsHealing(false) {
 			t.Error("an unknown:-tagged reason is still in the backlog and must need healing")
 		}
 	})
@@ -496,7 +529,7 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 		t.Parallel()
 		row := resourceRow{SuppressResourceGeneration: false, SuppressionReasonResource: ""}
 		facts := healFactsFor(row)
-		if facts[0].needsHealing() {
+		if facts[0].needsHealing(false) {
 			t.Error("a fact that isn't active (not suppressed/frozen) must never be proposed for healing")
 		}
 	})
@@ -511,12 +544,46 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 		}
 		var pending []string
 		for _, f := range healFactsFor(row) {
-			if f.needsHealing() {
+			if f.needsHealing(false) {
 				pending = append(pending, f.field)
 			}
 		}
 		if len(pending) != 1 || pending[0] != attrFrozenReason {
 			t.Errorf("pending = %v, want only %s — the freeze has its own empty reason independent of the already-reasoned resource", pending, attrFrozenReason)
+		}
+	})
+
+	t.Run("-recheck-all widens scope to every active fact, including an already-reasoned one", func(t *testing.T) {
+		t.Parallel()
+		// §0 story 5: "someone decided a while back this was broken — is
+		// that still true?" applies just as much to a fact with a real,
+		// specific reason recorded as to a reason-less one.
+		row := resourceRow{
+			FrozenSince:                today2026,
+			FrozenReason:               "manual: schema frozen, known upstream Arn bug",
+			SuppressResourceGeneration: true,
+			SuppressionReasonResource:  "manual: recursive schema",
+		}
+		var pending []string
+		for _, f := range healFactsFor(row) {
+			if f.needsHealing(true) {
+				pending = append(pending, f.field)
+			}
+		}
+		if len(pending) != 2 {
+			t.Fatalf("pending = %v, want both active facts in scope under -recheck-all, regardless of their existing reasons", pending)
+		}
+	})
+
+	t.Run("-recheck-all still excludes an inactive fact", func(t *testing.T) {
+		t.Parallel()
+		// Widening scope means "every active fact regardless of reason," not
+		// "every fact regardless of whether it's even active" — an inactive
+		// fact (not suppressed/frozen at all) is never in scope either way.
+		row := resourceRow{SuppressResourceGeneration: false, SuppressionReasonResource: ""}
+		facts := healFactsFor(row)
+		if facts[0].needsHealing(true) {
+			t.Error("an inactive fact must never need healing, even under -recheck-all")
 		}
 	})
 }

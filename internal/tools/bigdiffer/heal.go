@@ -55,17 +55,32 @@ func healFactsFor(row resourceRow) []healFact {
 	}
 }
 
-// needsHealing is true for an active fact whose own reason is still empty or
-// tagged unknown — the reason-less/unknown backlog this fact belongs to.
-func (f healFact) needsHealing() bool {
-	return f.active && (f.reason == "" || strings.HasPrefix(f.reason, string(reasonUnknown)+":"))
+// needsHealing reports whether a fact belongs in -recheck's current scope.
+// By default (all false) that scope is the reason-less/unknown backlog: an
+// active fact whose own reason is still empty or tagged unknown. With all
+// set (the -recheck-all flag), the scope widens to every active fact
+// regardless of its existing reason — including one with a real, specific
+// reason already recorded — so a year-old judgment call can be revisited on
+// demand (§0 story 5) rather than only ever a still-open one.
+func (f healFact) needsHealing(all bool) bool {
+	if !f.active {
+		return false
+	}
+	if all {
+		return true
+	}
+	return f.reason == "" || strings.HasPrefix(f.reason, string(reasonUnknown)+":")
 }
 
-// runRecheck re-probes every suppressed artifact or freeze that has no reason (or
-// one tagged unknown) and proposes a reclassification. Offline except for
-// reading the committed schema cache; never touches AWS and never writes
+// runRecheck re-probes every active fact in scope and proposes a
+// reclassification. By default that scope is the reason-less/unknown
+// backlog; with all set (the -recheck-all flag), every active fact is
+// in scope regardless of its existing reason, so a year-old suppress/freeze
+// decision — even one with a specific, already-recorded reason — can be
+// revisited on demand (§0 story 5). Offline except for reading the
+// committed schema cache; never touches AWS and never writes
 // all_schemas.hcl.
-func runRecheck(allSchemasPath string) error {
+func runRecheck(allSchemasPath string, all bool) error {
 	cfg, rows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -90,13 +105,17 @@ func runRecheck(allSchemasPath string) error {
 		}
 	}
 
-	stepf("Re-probing suppressed/frozen facts with no recorded reason…")
+	if all {
+		stepf("Re-probing every suppressed/frozen fact, regardless of its existing reason…")
+	} else {
+		stepf("Re-probing suppressed/frozen facts with no recorded reason…")
+	}
 	var proposals []healProposal
 	needsReason := 0
 	for _, row := range rows {
 		var pending []healFact
 		for _, f := range healFactsFor(row) {
-			if f.needsHealing() {
+			if f.needsHealing(all) {
 				pending = append(pending, f)
 			}
 		}
@@ -113,15 +132,16 @@ func runRecheck(allSchemasPath string) error {
 		return proposals[i].field < proposals[j].field
 	})
 
-	writeHealReport(needsReason, proposals)
+	writeHealReport(needsReason, proposals, all)
 	return nil
 }
 
-// healRow probes exactly the row's still-reason-less facts (pending) and
-// returns a proposal per fact it can say something about. It never mutates
-// row or the overlay. multiPending is true when the row has more than one
-// still-reason-less fact — used to phrase a migrated free-form comment as a
-// shared candidate rather than a confirmed per-fact reason, since the same
+// healRow probes exactly the row's in-scope facts (pending — reason-less/
+// unknown by default, or every active fact under -recheck-all) and returns a
+// proposal per fact it can say something about. It never mutates row or the
+// overlay. multiPending is true when the row has more than one in-scope
+// fact this run — used to phrase a migrated free-form comment as a shared
+// candidate rather than a confirmed per-fact reason, since the same
 // row-level comment text cannot be assumed to describe more than one fact
 // (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
 // gaps").
@@ -136,7 +156,7 @@ func healRow(cfg config, row resourceRow, pending []healFact, comment string) []
 
 	for _, f := range pending {
 		if f.field == attrFrozenReason {
-			out = append(out, freezeProposal(row, comment, multiPending))
+			out = append(out, freezeProposal(row, f, comment, multiPending))
 			continue
 		}
 		out = append(out, healArtifact(cfg, row, f, schema, schemaErr, comment, multiPending))
@@ -179,7 +199,7 @@ func healArtifact(cfg config, row resourceRow, f healFact, schema []byte, schema
 		}
 	}
 
-	return commentOrUnknown(base, comment, multiPending)
+	return commentOrUnknown(base, f.reason, comment, multiPending)
 }
 
 // probeArtifact regenerates one artifact from schema bytes staged to a temp
@@ -377,29 +397,42 @@ func relativizeBuildErrors(errs []buildError, repoRoot string) []buildError {
 	return out
 }
 
-// freezeProposal handles a frozen_since with no reason of its own — the
-// freeze is an orthogonal, schema-level fact (item 9b), never derived from an
-// artifact's suppression reason, so it always falls through to the same
-// comment-migration/unknown fallback every other reason-less fact uses.
-func freezeProposal(row resourceRow, comment string, multiPending bool) healProposal {
+// freezeProposal handles a frozen_since fact — the freeze is an orthogonal,
+// schema-level fact (item 9b), never derived from an artifact's suppression
+// reason, so it always falls through to the same comment-migration/unknown
+// fallback every other in-scope fact uses (commentOrUnknown), carrying its
+// own existing reason (f.reason) through so a real, already-recorded reason
+// is never overwritten with a guess when there is no schema to re-probe with
+// (only reachable under -recheck-all, since the default scope excludes
+// facts with a real reason already).
+func freezeProposal(row resourceRow, f healFact, comment string, multiPending bool) healProposal {
 	base := healProposal{cfn: row.CloudFormationTypeName, label: row.ResourceTypeName, kind: "", field: attrFrozenReason}
-	return commentOrUnknown(base, comment, multiPending)
+	return commentOrUnknown(base, f.reason, comment, multiPending)
 }
 
 // commentOrUnknown is step 4 of the heal probe (suppressed-and-frozen.md): if
-// a free-form "# Suppression Reason:" comment exists, migrate its text into a
-// manual: reason; otherwise the row still needs a human look.
+// the fact already carries a real, specific reason (only reachable at all
+// under -recheck-all, since the default scope excludes these), that reason
+// is kept — there is no schema to re-probe with, so there is nothing to
+// weigh against it, and a comment-migration guess must never overwrite a
+// real, already-recorded answer. Otherwise: if a free-form
+// "# Suppression Reason:" comment exists, migrate its text into a manual:
+// reason; otherwise the row still needs a human look.
 //
-// When multiPending is true (more than one of the row's facts is still
-// reason-less), the same row-level comment text is offered identically to
+// When multiPending is true (more than one of the row's facts is in scope
+// this run), the same row-level comment text is offered identically to
 // each — it is not auto-assigned as a confirmed per-fact reason, since a
 // single comment written for one artifact does not necessarily explain a
 // different artifact's suppression or the freeze
 // (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
 // gaps"). The proposal text is worded as a shared candidate for a human
 // to assign, edit, or reject per field, rather than a confirmed fact.
-func commentOrUnknown(base healProposal, comment string, multiPending bool) healProposal {
+func commentOrUnknown(base healProposal, existingReason, comment string, multiPending bool) healProposal {
 	base.action = "reason"
+	if existingReason != "" && !strings.HasPrefix(existingReason, string(reasonUnknown)+":") {
+		base.reason = existingReason + " (no cached schema to re-probe against; existing reason kept as-is — re-run once the schema cache has this type, or verify by hand)"
+		return base
+	}
 	if comment != "" {
 		if multiPending {
 			base.reason = formatReason(reasonManual, comment) +
@@ -446,9 +479,13 @@ func suppressionComment(text string) string {
 	return ""
 }
 
-func writeHealReport(needsReason int, proposals []healProposal) {
+func writeHealReport(needsReason int, proposals []healProposal, all bool) {
 	fmt.Fprintf(os.Stderr, "== bigdiffer -recheck report ==\n")
-	fmt.Fprintf(os.Stderr, "facts needing a reason: %d\n", needsReason)
+	if all {
+		fmt.Fprintf(os.Stderr, "facts re-probed (every active fact, -recheck-all): %d\n", needsReason)
+	} else {
+		fmt.Fprintf(os.Stderr, "facts needing a reason: %d\n", needsReason)
+	}
 	fmt.Fprintf(os.Stderr, "proposals: %d\n", len(proposals))
 	for _, p := range proposals {
 		switch p.action {
