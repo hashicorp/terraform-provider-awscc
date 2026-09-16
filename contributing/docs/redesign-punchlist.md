@@ -50,10 +50,27 @@ item 3).
    and a real `go run ./internal/tools/bigdiffer -lint` against the committed
    overlay all pass. *(prereq)* Detail: `held-artifacts-design.md` §1 (all five
    stories), §6 step 1.
-2. **Extract the shared offline pipeline.** Candidate-build →
+2. **DONE. Extract the shared offline pipeline.** Candidate-build →
    `refreshCandidate` → `compileFixpoint` → `decide()`, factored out of
-   `runUpdate`'s AWS-specific version so an offline row source (every overlay
-   row, no `discover()` call) can drive it too. *(prereq)* Unblocks items 3
+   `runSync`'s AWS-specific version into a new `pipeline.go`/`settleBatch`
+   so an offline row source (every overlay row, no `discover()` call) can
+   drive it too. Pure extraction: `decide()`'s signature and behavior are
+   byte-for-byte unchanged — the freeze-vs-held routing fix (§3) is item 3's
+   scope, not this one's, so `-reconcile`/`-check` still cannot safely call
+   `settleBatch` until item 3 lands (they would mis-freeze on their first
+   failure exactly as before). `runSync` now builds `baseDecisions` (the
+   absent-row probe results) and the pre-fixpoint overlay read, then calls
+   `settleBatch` for everything from the candidate loop through the compile
+   gate and the list-resource coupling check, receiving a `settledBatch`
+   (decisions, staged artifacts, staging dir to promote from, and the
+   generation-time ok/broke tally) instead of six separately-threaded local
+   variables. Verified: `gofmt -l` and `go vet` clean, `go build ./...`
+   clean, `go test ./internal/tools/bigdiffer/... -race -short` and again
+   with `-timeout 20m` (full corpus parity, plus `run_e2e_test.go`'s and
+   `run_update_test.go`'s batch-atomicity tests, which exercise this exact
+   code path) both pass unchanged, `impi` clean, and a real
+   `go run ./internal/tools/bigdiffer -lint` against the committed overlay
+   still passes. *(prereq)* Unblocks items 3
    and 4. Detail: `held-artifacts-design.md` §2, §6 step 2.
 3. **`held` policy + `codegen_error`/`toolchain_error` classification +
    freeze-vs-held routing — must land with `reconcile` (item 4), not after
