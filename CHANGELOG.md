@@ -1,5 +1,7 @@
 ## 1.102.0 (September 16, 2026)
 
+Release PR: [#3332](https://github.com/hashicorp/terraform-provider-awscc/pull/3332)
+
 FEATURES:
 
 * **New Data Source:** `awscc_chime_media_insights_pipeline_configuration`
