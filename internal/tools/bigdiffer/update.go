@@ -5,10 +5,12 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/hashicorp/cli"
@@ -32,20 +34,37 @@ type candidate struct {
 	schema []byte // freshly discovered, sanitized bytes to generate from
 }
 
-// buildCandidates selects the New+Changed types and attaches, for each, its
-// policy class (new to the overlay vs already present), the row to generate from
-// (the overlay row when present so its suppress_* flags are honored, else the
-// discovered row), and the fresh discovered bytes.
+// buildCandidates selects every discovered type as a gate candidate — not just
+// New/Changed (contributing/docs/held-artifacts-design.md §2: gating only
+// New/Changed left the ~1580 schema-unchanged types' committed output aging
+// silently, with no guard once the legacy TestFullCorpusParity retires). For
+// each, it attaches the policy class (new to the overlay vs already present,
+// further split by whether its schema bytes actually moved) and the row to
+// generate from (the overlay row when present so its suppress_* flags are
+// honored, else the discovered row), and the fresh discovered bytes.
+//
+// Class assignment is keyed on two independent facts, not one: overlay
+// presence decides New vs Present; byte status further splits Present into
+// classPresent (statusChanged — the schema moved, so a failure freezes/
+// suppresses as always) vs classPresentUnchanged (statusUnchanged — the
+// schema is identical, so a failure can only be the machinery's fault; see
+// decide()'s doc comment, policy.go). A statusChanged type absent from the
+// overlay (rare — e.g. a previously checkout-pinned type) still lands on
+// classNew exactly as before: byte status only refines Present, it never
+// overrides New.
 func buildCandidates(results []changeResult, discByCFN map[string]discovered, overlayByCFN map[string]resourceRow) []candidate {
 	var out []candidate
 	for _, r := range results {
-		if r.status != statusNew && r.status != statusChanged {
+		if r.status != statusNew && r.status != statusChanged && r.status != statusUnchanged {
 			continue
 		}
 		d := discByCFN[r.cfType]
 		c := candidate{cfType: r.cfType, schema: d.schema}
 		if row, ok := overlayByCFN[r.cfType]; ok {
 			c.class = classPresent
+			if r.status == statusUnchanged {
+				c.class = classPresentUnchanged
+			}
 			c.row = row
 		} else {
 			c.class = classNew
@@ -349,6 +368,32 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return err
 	}
 	defer func() { _ = os.RemoveAll(settled.stagingDir) }()
+
+	// The whole-corpus gate's one real behavior change (§2, §3): a
+	// schema-unchanged failure is self-inflicted (the machinery, not the
+	// schema, broke), and a machinery bug that produces broken output for one
+	// type can equally produce compiling-but-subtly-wrong output for another
+	// type this same run — so nothing from this run is trustworthy, and
+	// nothing is promoted, not even the schema-changed types that compiled
+	// cleanly (§3, "Why all-or-nothing, precisely"). compileFixpoint can
+	// legitimately reach green here (a broken new artifact reverted to its
+	// still-compiling committed file settles the fixpoint cleanly) while
+	// still leaving a machineryFailure decision behind — checking
+	// compileFixpoint's own error return is not enough; every failure must be
+	// scanned for and reported before promotion, not just the first one
+	// (loud, complete surfacing is the point of gating the whole corpus).
+	if failures := machineryFailures(settled); len(failures) > 0 {
+		var b strings.Builder
+		fmt.Fprintf(&b, "%d type(s) failed with the schema unchanged — machinery regression, promoting nothing this run:\n", len(failures))
+		for _, f := range failures {
+			fmt.Fprintf(&b, "  %s\n", f.cfType)
+			for _, a := range f.artifacts {
+				fmt.Fprintf(&b, "    %s\n", a)
+			}
+		}
+		return errors.New(b.String())
+	}
+
 	decisions := settled.decisions
 	stagedByDest := settled.stagedByDest
 

@@ -54,23 +54,58 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    -short` and `-timeout 20m` (full parity + the batch-atomicity e2e tests that
    exercise this path) pass, `impi` clean, `-lint` passes. *(prereq)* Unblocks
    items 3–5. Detail: `held-artifacts-design.md` §1, §5 step 2.
-3. **Whole-corpus gate + source routing — the one behavior change.** Extend
-   `buildCandidates` (or its replacement) so `statusUnchanged` rows also become
-   candidates, not just New/Changed — the actual gap the redesign closes. Thread
-   the discovery-diff signal (`statusChanged` vs `statusUnchanged`) into
-   `decide()` so: a `statusChanged` failure still takes today's freeze/suppress
-   path (unchanged), while a `statusUnchanged` failure **fails the run** with
-   per-artifact blame instead of falling into `classPresent`→`frozen_since`
-   (which would silently freeze schema-fine types — the worst outcome). Offline,
-   `reconcile`/`check` have no discovery diff, so every failure they see is a
-   machinery failure → fail the run; they never freeze/suppress. `sync` also
-   promotes any type whose regenerated output differs from committed and
-   compiles (valid drift self-heals). *(prereq for items 4/5, core)* Detail:
+3. **DONE. Whole-corpus gate + source routing — the one behavior change.**
+   Extended `buildCandidates` so `statusUnchanged` rows also become
+   candidates, not just New/Changed — the actual gap the redesign closes —
+   classed `classPresentUnchanged` (a new `changeClass`) when the row is
+   already in the overlay, distinct from `classPresent`. `decide()` gained a
+   `classPresentUnchanged` branch: on failure it sets no overlay attributes
+   at all (no freeze, no suppress — there is no safe partial action once the
+   schema is proven unchanged and generation/build still broke) and instead
+   returns `machineryFailure: true` on the `policyDecision`. First attempt
+   used a per-artifact `held` state (`codegen_error`/`toolchain_error`
+   markers, a byte-diff classifier, self-clearing, a new `lint` anomaly) —
+   dropped after review found it added real mechanism for no behavioral
+   payoff: the only case `held` could let a run proceed is exactly the case
+   `lint`/`check` must still hard-fail on eventually, so `held` reduced to
+   "fail later, with more bookkeeping," not "don't fail." `held-artifacts-design.md`
+   §3 has the full write-up, including why the failure is all-or-nothing (a
+   `statusUnchanged` failure means the engine itself regressed, which makes
+   every `statusChanged` type this same run compiled *by that same engine*
+   untrustworthy too — not just the type that happened to fail).
+   `machineryFailures` (`pipeline.go`) is the load-bearing piece: it scans
+   `settleBatch`'s returned decisions for `machineryFailure` and must be
+   called by every promoting caller, because `compileFixpoint` can reach a
+   green build while still leaving a `machineryFailure` decision behind (a
+   broken new artifact reverted to its still-compiling committed file settles
+   the fixpoint cleanly) — checking only `compileFixpoint`'s own error return
+   would silently promote everything else while that one type sits at
+   last-good, exactly the bug this item exists to remove. `runSync` calls it
+   immediately after `settleBatch` returns, before `changelogEntries`/
+   promotion, and aborts with per-type-and-artifact blame on any hit — never
+   promoting even the `statusChanged` half that compiled. `settleBatch`
+   itself stays caller-agnostic (surfaces the flag, never aborts on its own),
+   so `check` (item 5, no promote step) can reuse the identical scan for its
+   own report/exit-code. Verified: `gofmt`/`vet`/`build` clean, new
+   `TestDecide` cases for all three `classPresentUnchanged` shapes (ok,
+   partial failure, total failure) and a new `TestMachineryFailures` (five
+   cases, including the load-bearing "flagged but no compileFixpoint error"
+   one) pass, `TestBuildCandidates` updated for the widened gate plus a new
+   edge-case test for the rare statusChanged-but-absent-from-overlay ->
+   classNew path, full suite `-race -short` and `-timeout 20m` (full parity)
+   both pass, `impi` clean. *(prereq for items 4/5, core)* Detail:
    `held-artifacts-design.md` §2, §3, §5 step 3; §0 story 1.
 4. **`reconcile`.** Wire the shared pipeline (item 2), now source-routed
    (item 3), to promotion + overlay write, offline, no AWS — `-generate`'s
-   replacement. *(core)* Detail: `held-artifacts-design.md` §4, §5 step 4;
-   §0 story 2.
+   replacement. **Convention, pinned now:** every offline row is classed
+   `classPresentUnchanged`, never `classPresent` — `reconcile` has no
+   discovery diff at all (it never calls `discover()`), so there is no
+   "the schema moved" case to distinguish; every failure it produces must
+   route through `machineryFailure`, never the freeze/suppress branch. This
+   is the actual fix for the original mis-freeze bug the review found; the
+   offline row-building code must not reuse `classPresent` by copy-paste
+   convenience from `buildCandidates`. *(core)* Detail:
+   `held-artifacts-design.md` §4, §5 step 4; §0 story 2.
 5. **`check`.** Wire the same pipeline, stop before promotion, report every
    failure, exit non-zero on any failure **or** any output-diff (regenerated ≠
    committed, even when it compiles — the "changed the engine, didn't reconcile
@@ -88,8 +123,11 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    `held-artifacts-design.md` and this file are the *only* docs that change
    during implementation. Everything else — `bigdiffer-design.md` (its
    out-of-sync notice, §0's command table, §6 the gates, §7 the policy note
-   that unchanged-schema failures hard-error), the README, and the runbook —
-   is updated together, once, after the redesign works. *(core, last)*
+   that a `statusUnchanged` failure fails the whole `sync` run and promotes
+   nothing — including the `statusChanged` half that compiled — because an
+   engine regression makes every type it touched this run untrustworthy, not
+   just the one that failed), the README, and the runbook — is updated
+   together, once, after the redesign works. *(core, last)*
 9. **Delete this file and `held-artifacts-design.md`.** Once item 8 is
    committed, both transient docs have nothing left to track. *(core, last)*
 

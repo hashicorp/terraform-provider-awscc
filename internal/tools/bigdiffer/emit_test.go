@@ -12,42 +12,6 @@ import (
 	"testing"
 )
 
-// TestWriteCorpus generates one type and writes it to a temp output root,
-// checking the files land at the expected paths with content.
-func TestWriteCorpus(t *testing.T) {
-	t.Parallel()
-	cfg, rows := loadCorpus(t)
-	cfg.outputRoot = t.TempDir()
-
-	var logGroup []resourceRow
-	for _, r := range rows {
-		if r.CloudFormationTypeName == "AWS::Logs::LogGroup" {
-			logGroup = append(logGroup, r)
-		}
-	}
-	if len(logGroup) != 1 {
-		t.Skipf("AWS::Logs::LogGroup not in overlay (%d)", len(logGroup))
-	}
-
-	results := generateCorpus(cfg, logGroup, 1, nil)
-	n, err := writeCorpus(cfg, results)
-	if err != nil {
-		t.Fatalf("writeCorpus: %v", err)
-	}
-	if n == 0 {
-		t.Fatal("wrote 0 files")
-	}
-
-	code := filepath.Join(cfg.outputRoot, "aws", "logs", "log_group_resource_gen.go")
-	b, err := os.ReadFile(code)
-	if err != nil {
-		t.Fatalf("expected written file %s: %v", code, err)
-	}
-	if !strings.Contains(string(b), "package logs") {
-		t.Errorf("written resource file missing package declaration")
-	}
-}
-
 // TestRegistrationParity asserts the single registration file bigdiffer emits
 // imports exactly the set of service packages that the three committed directive
 // files (resources.go, singular_data_sources.go, plural_data_sources.go) import

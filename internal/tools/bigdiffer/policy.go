@@ -50,24 +50,48 @@ func formatReason(category reasonCategory, detail string) string {
 
 // changeClass is the reconciliation class of a type (design §3). "Absent" splits
 // into non-provisionable-live vs withdrawn after the DescribeType probe.
+//
+// classPresentUnchanged is classPresent's source-routed sibling
+// (contributing/docs/held-artifacts-design.md §3, "The routing this still
+// requires"): a failure on this class means the schema itself did not change
+// — only the machinery (codegen/templates/toolchain) could be at fault — so
+// it must never take classPresent's freeze/suppress-and-pin branch (pinning a
+// schema that never moved makes no sense, and previously masked exactly this
+// bug). decide() itself does not fail the run for this class; that decision
+// belongs to the caller (settleBatch/runSync), which aborts the whole batch,
+// promoting nothing, the moment any classPresentUnchanged candidate fails —
+// see §3's "Why all-or-nothing, precisely." classPresentUnchanged exists so
+// two different callers can each get the routing they need:
+//   - reconcile/check have no discovery diff at all (they never call
+//     discover()), so every candidate they feed decide() is
+//     classPresentUnchanged, never classPresent — by construction, every
+//     failure they produce is a machinery failure, never a schema one.
+//   - sync, which does have a discovery diff, uses classPresentUnchanged for
+//     exactly the statusUnchanged rows once it gates the whole corpus: a
+//     statusChanged row (the schema itself moved) still uses classPresent and
+//     takes today's freeze/suppress path unchanged.
 type changeClass string
 
 const (
 	classNew              changeClass = "new"
 	classPresent          changeClass = "present"
+	classPresentUnchanged changeClass = "present_unchanged"
 	classNonProvisionable changeClass = "non_provisionable"
 	classWithdrawn        changeClass = "withdrawn"
 )
 
 // policyDecision is the overlay edit for one type: whether to add a new block,
 // which attributes to set on it, any suppression/frozen reason text, and a
-// one-line report summary. Per the design invariants, no decision blocks a
-// release.
+// one-line report summary. Per the design invariants, neither gate ever
+// blocks a release on its own — except machineryFailure (below), the one
+// case that legitimately must, because bigdiffer has no safe fallback left to
+// apply (§3, "Why not a held state").
 type policyDecision struct {
-	addBlock bool
-	setAttrs map[string]string // attribute -> value ("true" for bools; date for frozen_since)
-	reasons  map[string]string // reason attribute -> text (suppression_reason_*, frozen_reason)
-	summary  string            // human-facing report line
+	addBlock         bool
+	setAttrs         map[string]string // attribute -> value ("true" for bools; date for frozen_since)
+	reasons          map[string]string // reason attribute -> text (suppression_reason_*, frozen_reason)
+	machineryFailure bool              // classPresentUnchanged's failure branch only (§3): schema unchanged, generation/build still broke — the caller (settleBatch/runSync) must abort the whole batch, promoting nothing, rather than apply setAttrs/reasons to the overlay at all
+	summary          string            // human-facing report line
 }
 
 // decide maps a change class and gate result to the overlay edit (design §7).
@@ -118,6 +142,30 @@ func decide(class changeClass, gr gateResult, today string) policyDecision {
 			setAttrs: map[string]string{attrFrozenSince: today},
 			reasons:  map[string]string{attrFrozenReason: totalFailureReason(gr)},
 			summary:  "present: generation broke, frozen at last-good bytes",
+		}
+
+	case classPresentUnchanged:
+		if gr.ok() {
+			return policyDecision{summary: "present (unchanged): refreshed OK"}
+		}
+		// The schema did not change, yet generation or the compile gate still
+		// broke — self-inflicted, not external (§3): bigdiffer has no
+		// last-good schema bytes to fall back to that differ from what it
+		// just tried (there is nothing to freeze), and no way to tell whether
+		// this failure is narrow (one schema shape) or symptomatic of a
+		// broader engine regression that also produced compiling-but-wrong
+		// output elsewhere in this same run. So this never sets setAttrs/
+		// reasons at all — there is no safe partial action — and instead
+		// signals machineryFailure: the caller aborts the whole batch,
+		// promoting nothing (§3, "Why all-or-nothing, precisely"). The one
+		// legitimate way to keep shipping past a persistent failure here is a
+		// human suppress_*-ing the specific artifact deliberately (§3,
+		// "Escape hatch"), which is a different, later decide() call once
+		// that suppression is already on the row — not a distinct branch in
+		// this function.
+		return policyDecision{
+			machineryFailure: true,
+			summary:          "present (unchanged): generation or build broke — machinery regression, failing the run",
 		}
 
 	case classNonProvisionable:

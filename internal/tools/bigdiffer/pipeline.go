@@ -8,24 +8,26 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"time"
 )
 
 // The shared candidate-settling pipeline (contributing/docs/held-artifacts-design.md
-// §2, §6 step 2): candidate-build -> refreshCandidate -> compileFixpoint ->
+// §1, §5 step 2): candidate-build -> refreshCandidate -> compileFixpoint ->
 // decide(), extracted out of runSync's AWS-specific version so an offline row
 // source (every overlay row, no discover() call) can drive the identical
-// generate-compile-decide sequence for -reconcile and -check (§6 steps 4/5).
+// generate-compile-decide sequence for -reconcile and -check (§5 steps 4/5).
 // runSync, -reconcile, and -check differ only in how candidates are built
 // (AWS-diffed vs. every overlay row) and what happens once the batch has
 // settled (promote vs. report) — settleBatch is the one piece both share
 // unchanged.
 //
-// This step is a pure extraction: decide()'s signature and behavior are
-// unchanged. The freeze-vs-held routing fix decide() needs (§3) is item 3's
-// scope, not this one's — settleBatch calls decide() exactly as runSync always
-// has, so -reconcile/-check cannot safely call it yet (they would mis-freeze
-// on their first failure, per §3's routing bug) until item 3 lands.
+// settleBatch is deliberately caller-agnostic about machineryFailure (§3):
+// it surfaces the flag on each affected decision (via decide()) but never
+// aborts or promotes on its own — that disposition differs per caller
+// (sync/reconcile abort; check only needs to report and exit non-zero, with
+// no promote step to skip). Callers scan the returned decisions with
+// machineryFailures (below) and act on it themselves.
 
 // settledBatch is what settleBatch produces once every candidate has been
 // generated, staged, and compile-gated: the final per-type policy decisions,
@@ -36,6 +38,7 @@ import (
 type settledBatch struct {
 	stagingDir             string // caller must os.RemoveAll this when done
 	decisions              map[string]policyDecision
+	gateResults            map[string]*gateResult // every candidate's final gateResult, keyed by cfType — not just staged artifacts' (stagedByDest only covers what survived the gate); machineryFailures uses this for per-artifact blame
 	stagedByDest           map[string]stagedArtifact
 	listResourceCandidates []*gateResult
 	okN, brokeN            int // generation-time tally (pre-compile-gate); see runSync's comment on why the final count is recomputed from decisions instead
@@ -74,6 +77,7 @@ func settleBatch(ctx context.Context, cfg config, cands []candidate, baseDecisio
 	// no backing data source (design doc invariant; bigdiffer-design.md §6).
 	var listResourceCandidates []*gateResult
 	var okN, brokeN int
+	gateResults := make(map[string]*gateResult, len(cands))
 	candBar := newBar(len(cands), "regenerate")
 	for _, c := range cands {
 		gr, staged, err := refreshCandidate(cfg, stagingDir, c)
@@ -95,6 +99,7 @@ func settleBatch(ctx context.Context, cfg config, cands []candidate, baseDecisio
 		// lose the fact that the resource and singular data source are still
 		// fine.
 		grPtr := gr
+		gateResults[c.cfType] = &grPtr
 		for _, r := range staged {
 			dest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.codeFile)
 			testDest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.testFile)
@@ -147,11 +152,65 @@ func settleBatch(ctx context.Context, cfg config, cands []candidate, baseDecisio
 	return settledBatch{
 		stagingDir:             stagingDir,
 		decisions:              decisions,
+		gateResults:            gateResults,
 		stagedByDest:           stagedByDest,
 		listResourceCandidates: listResourceCandidates,
 		okN:                    okN,
 		brokeN:                 brokeN,
 	}, nil
+}
+
+// machineryFailure is one type's machinery-failure detail: its CloudFormation
+// type name and a one-line-per-artifact blame (kind: error), for a caller's
+// abort/report message. artifacts is sorted by kind for deterministic output.
+type machineryFailure struct {
+	cfType    string
+	artifacts []string // "<kind>: <first line of error>", sorted
+}
+
+// machineryFailures returns every decision with machineryFailure set, sorted
+// by CloudFormation type name for deterministic reporting, each with its
+// gateResult's per-artifact blame attached (baseDecisions entries — e.g.
+// runSync's absent-row probe results — are never machineryFailure and have no
+// gateResults entry, so they are skipped, not a lookup bug). It must be
+// checked after every settleBatch call, before any promotion step
+// (contributing/docs/held-artifacts-design.md §3, "Why all-or-nothing,
+// precisely"): compileFixpoint can legitimately reach a green build while
+// still leaving one or more classPresentUnchanged decisions flagged — a
+// schema-unchanged type whose broken new output got dropped and reverted to
+// its still-compiling committed file settles the fixpoint cleanly, but the
+// decision decide() returned for it is still machineryFailure, not "refreshed
+// OK." A caller that only checks compileFixpoint's error would miss this
+// entirely and silently promote everything else while that one type sits at
+// last-good — exactly the silent keep-last-good behavior the whole-corpus
+// gate exists to end. Every caller (sync, reconcile; check has no promote
+// step but still reports this) must call this and abort/report on any
+// non-empty result; settleBatch itself deliberately never does (its own doc
+// comment).
+func machineryFailures(b settledBatch) []machineryFailure {
+	var out []machineryFailure
+	for cfType, d := range b.decisions {
+		if !d.machineryFailure {
+			continue
+		}
+		mf := machineryFailure{cfType: cfType}
+		if gr, ok := b.gateResults[cfType]; ok {
+			for _, a := range gr.artifacts {
+				if a.outcome == gateOK {
+					continue
+				}
+				detail := "rejected"
+				if a.err != nil {
+					detail = firstLine(a.err.Error())
+				}
+				mf.artifacts = append(mf.artifacts, string(a.kind)+": "+detail)
+			}
+			sort.Strings(mf.artifacts)
+		}
+		out = append(out, mf)
+	}
+	sort.Slice(out, func(i, j int) bool { return out[i].cfType < out[j].cfType })
+	return out
 }
 
 // todayString returns the current date in dateLayout (YYYY-MM-DD), the form
