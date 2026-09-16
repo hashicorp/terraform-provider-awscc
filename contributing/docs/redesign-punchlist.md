@@ -63,12 +63,16 @@ item 3).
    discovery-diff status (found in review: `sync` must self-heal valid drift
    on unchanged rows, not just gate it). *(core)* Detail:
    `held-artifacts-design.md` §1 story 1, §6 step 6.
-7. **`lint`'s new anomaly.** Any populated per-artifact slot (`resource` /
-   `singular_data_source` / `plural_data_source`) is reported and fails
-   `lint`, immediately — surfacing a machinery regression the moment it
-   appears is the point. One more case in `anomalyProblems()`, parallel to
-   today's reason-less-suppression check. *(additive)* Detail:
-   `held-artifacts-design.md` §1 story 4, §4.4, §5, §6 step 7.
+7. **`lint`'s new anomaly.** A `resource` / `singular_data_source` /
+   `plural_data_source` slot whose `category` is `codegen_error` or
+   `toolchain_error` is reported and fails `lint`, immediately — surfacing a
+   machinery regression the moment it appears is the point. Keyed on
+   category, not on the slot merely being populated, since the same slot
+   shape is meant to carry other, non-machinery reasons later (e.g. a folded
+   `suppress_*`) that must not trip this check. One more case in
+   `anomalyProblems()`, parallel to today's reason-less-suppression check.
+   *(additive)* Detail: `held-artifacts-design.md` §1 story 4, §4.1, §4.4,
+   §5, §6 step 7.
 8. **`recheck`'s reasoned-row mode.** An opt-in flag (name TBD) that widens
    `needsHealing`'s predicate from "reason is empty/unknown" to "active,
    regardless of reason" — revisit a year-old, already-reasoned

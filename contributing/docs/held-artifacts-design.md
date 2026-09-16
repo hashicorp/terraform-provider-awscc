@@ -213,19 +213,32 @@ naming-invariant violations, and reason-less suppressed/frozen facts
 (`anomalyProblems()`). Never attempts generation.
 
 **Gap:** small and additive. `lint` is `-check` renamed, plus one new anomaly
-class: any populated per-artifact slot (`resource` / `singular_data_source` /
-`plural_data_source`) is reported and fails `lint`, immediately — no grace, no
-waiting. That immediacy is the point: a machinery regression should fail the
-first `lint` that sees it. It is exactly the kind of thing `anomalyProblems()`
-already catches (parallel to today's reason-less-suppression check), so it is
-one more case in that same function, not a new mechanism.
+class: a slot (`resource` / `singular_data_source` / `plural_data_source`)
+whose reason is `codegen_error` or `toolchain_error` is reported and fails
+`lint`, immediately — no grace, no waiting. That immediacy is the point: a
+machinery regression should fail the first `lint` that sees it. **The check
+keys on the reason category, not on slot presence** — a slot is a
+general-purpose "this artifact's output disposition is exceptional" marker
+(§5), and `codegen_error`/`toolchain_error` are only the two categories that
+exist *today*; a future reason (e.g. once `suppress_*` folds into the same
+slot shape, §5's closing note) would be a legitimate, standing, human-owned
+state, not a machinery regression, and must not trip this check just because
+the slot is populated. Matching on the category keeps `lint`'s new anomaly
+scoped to the actual gap this redesign closes, not to "any slot at all,"
+which would silently start misfiring the day a second, unrelated use of the
+slot shape ships. It is exactly the kind of thing `anomalyProblems()` already
+catches (parallel to today's reason-less-suppression check), so it is one
+more case in that same function, not a new mechanism.
 
 **To do:**
 
 - Rename `-check` → `lint`, `runCheck` → `runLint`.
-- Add a case to `Report`/`anomalyProblems()`: any row with a populated
-  `resource` / `singular_data_source` / `plural_data_source` slot is reported
-  and fails `lint`.
+- Add a case to `Report`/`anomalyProblems()`: any row with a `resource` /
+  `singular_data_source` / `plural_data_source` slot whose reason category is
+  `codegen_error` or `toolchain_error` is reported and fails `lint`. A slot
+  populated with some other, future reason category is not this anomaly (and
+  is not `lint`'s concern here at all unless a separate check is written for
+  it later).
 
 ### Story 5 → `recheck` (rename of `-heal`, plus a scope expansion)
 
@@ -371,11 +384,14 @@ Two more points of nuance:
   tree still builds, so unlike a `toolchain_error` (§4.2) it does not
   hard-abort — but the slot is surfaced at once, never shipped silently: it
   lands in the end-of-run banner (§4.4) and the PR diff, and it fails `lint`
-  (§1, story 4). `check` computes and reports the identical decision, promotes
-  nothing. Note `go build` — a required CI check — cannot catch this case on
-  its own: the kept committed file still compiles, so the build stays green;
-  only regeneration reveals the break, which is exactly why
-  `held`/`lint`/`check` exist for it.
+  because its reason category is `codegen_error` (§1, story 4 — `lint` keys
+  on the category, not on the slot merely being populated, since the same
+  slot shape is meant to carry other, non-machinery reasons later). `check`
+  computes and reports the identical decision, promotes nothing. Note
+  `go build` — a required CI check — cannot catch this case on its own: the
+  kept committed file still compiles, so the build stays green; only
+  regeneration reveals the break, which is exactly why `held`/`lint`/`check`
+  exist for it.
 
 ### 4.2 `toolchain_error`: block the run
 
@@ -404,8 +420,11 @@ An engine regression must be impossible to miss, across all three commands:
    blocked or tripped the threshold, that headline comes first.
 2. **The committed diff** (`sync`/`reconcile` only): `codegen_error` markers
    land in `all_schemas.hcl`, so they appear in the PR diff.
-3. **`lint` fails on any populated slot**, immediately — no grace, no waiting.
-   A machinery regression should fail the first `lint` that sees it.
+3. **`lint` fails on a `codegen_error`/`toolchain_error` slot**, immediately —
+   no grace, no waiting. A machinery regression should fail the first `lint`
+   that sees it. The check keys on those two reason categories specifically,
+   not on slot presence (§1, story 4; §5) — a slot populated with some other,
+   future, non-machinery reason is not this anomaly.
 4. **`check` is the preventive gate**, run on the engine PR itself, before a
    `codegen_error` ever reaches a `sync`/`reconcile` PR at all (§1, story 3) —
    catching the regression at its source, in addition to `lint` catching any
@@ -439,7 +458,12 @@ The per-artifact output disposition lives in three slots — `resource`,
   `toolchain_error` blocks and is never persisted (§4.2), the only value ever
   written today is `codegen_error: <detail>`. The slots are added now for this
   one purpose — folding `suppress_*` into the same slots is separate, later
-  work.
+  work. **Because of that future, `lint`'s anomaly check (§1, story 4; §4.4)
+  matches on `category` being `codegen_error`/`toolchain_error` specifically,
+  never on a slot merely being present** — a slot populated by a folded-in
+  `suppress_*` reason later would be a standing, human-owned, legitimate
+  state, not a machinery regression, and matching on presence alone would
+  make `lint` fail every such row the day that folding ships.
 - `list_resource` is not a fourth slot — it rides on the `resource` artifact
   (§6's coupling guard), so a list-resource-specific failure is the `resource`
   slot's reason, its detail naming the list resource.
