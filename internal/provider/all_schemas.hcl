@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1581 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1610 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1198,8 +1198,20 @@ resource_schema "aws_chime_channel_flow" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_chime_media_insights_pipeline_configuration" {
+  cloudformation_type_name = "AWS::Chime::MediaInsightsPipelineConfiguration"
+}
+
 resource_schema "aws_chime_media_pipeline_kinesis_video_stream_pool" {
   cloudformation_type_name = "AWS::Chime::MediaPipelineKinesisVideoStreamPool"
+}
+
+resource_schema "aws_chime_sip_media_application" {
+  cloudformation_type_name = "AWS::Chime::SipMediaApplication"
+}
+
+resource_schema "aws_chime_voice_connector" {
+  cloudformation_type_name = "AWS::Chime::VoiceConnector"
 }
 
 resource_schema "aws_cleanrooms_analysis_template" {
@@ -1507,6 +1519,7 @@ resource_schema "aws_codebuild_fleet" {
 
 resource_schema "aws_codebuild_report_group" {
   cloudformation_type_name = "AWS::CodeBuild::ReportGroup"
+  non_provisionable        = true
 }
 
 resource_schema "aws_codebuild_source_credential" {
@@ -1692,6 +1705,10 @@ resource_schema "aws_comprehend_document_classifier" {
   cloudformation_type_name = "AWS::Comprehend::DocumentClassifier"
 }
 
+resource_schema "aws_comprehend_document_classifier_endpoint" {
+  cloudformation_type_name = "AWS::Comprehend::DocumentClassifierEndpoint"
+}
+
 resource_schema "aws_comprehend_flywheel" {
   cloudformation_type_name = "AWS::Comprehend::Flywheel"
 }
@@ -1718,6 +1735,10 @@ resource_schema "aws_config_conformance_pack" {
 
 resource_schema "aws_config_connector" {
   cloudformation_type_name = "AWS::Config::Connector"
+}
+
+resource_schema "aws_config_delivery_channel" {
+  cloudformation_type_name = "AWS::Config::DeliveryChannel"
 }
 
 resource_schema "aws_config_organization_conformance_pack" {
@@ -2112,6 +2133,10 @@ resource_schema "aws_dms_replication_task" {
   cloudformation_type_name = "AWS::DMS::ReplicationTask"
 }
 
+resource_schema "aws_drs_launch_configuration_template" {
+  cloudformation_type_name = "AWS::DRS::LaunchConfigurationTemplate"
+}
+
 resource_schema "aws_drs_source_network" {
   cloudformation_type_name = "AWS::DRS::SourceNetwork"
 }
@@ -2501,8 +2526,14 @@ resource_schema "aws_docdbelastic_cluster" {
   cloudformation_type_name = "AWS::DocDBElastic::Cluster"
 }
 
+resource_schema "aws_docdbelastic_cluster_snapshot" {
+  cloudformation_type_name = "AWS::DocDBElastic::ClusterSnapshot"
+}
+
 resource_schema "aws_dynamodb_backup" {
   cloudformation_type_name = "AWS::DynamoDB::Backup"
+  frozen_reason            = "manual: withdrawn from AWS, pending major-version removal"
+  frozen_since             = "2026-09-16"
 }
 
 resource_schema "aws_dynamodb_global_table" {
@@ -3433,6 +3464,10 @@ resource_schema "aws_fis_target_account_configuration" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_fms_applications_list" {
+  cloudformation_type_name = "AWS::FMS::ApplicationsList"
+}
+
 resource_schema "aws_fms_notification_channel" {
   cloudformation_type_name = "AWS::FMS::NotificationChannel"
 }
@@ -3441,12 +3476,32 @@ resource_schema "aws_fms_policy" {
   cloudformation_type_name = "AWS::FMS::Policy"
 }
 
+resource_schema "aws_fms_protocols_list" {
+  cloudformation_type_name = "AWS::FMS::ProtocolsList"
+}
+
 resource_schema "aws_fms_resource_set" {
   cloudformation_type_name = "AWS::FMS::ResourceSet"
 }
 
+resource_schema "aws_fsx_backup" {
+  cloudformation_type_name                 = "AWS::FSx::Backup"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+}
+
 resource_schema "aws_fsx_data_repository_association" {
   cloudformation_type_name = "AWS::FSx::DataRepositoryAssociation"
+}
+
+resource_schema "aws_fsx_file_cache" {
+  cloudformation_type_name                 = "AWS::FSx::FileCache"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
 }
 
 resource_schema "aws_fsx_s3_access_point_attachment" {
@@ -3457,6 +3512,7 @@ resource_schema "aws_fsx_s3_access_point_attachment" {
 
 resource_schema "aws_fsx_volume" {
   cloudformation_type_name = "AWS::FSx::Volume"
+  non_provisionable        = true
 }
 
 resource_schema "aws_finspace_environment" {
@@ -3575,6 +3631,10 @@ resource_schema "aws_glue_connection" {
   cloudformation_type_name               = "AWS::Glue::Connection"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_glue_connection_type" {
+  cloudformation_type_name = "AWS::Glue::ConnectionType"
 }
 
 resource_schema "aws_glue_crawler" {
@@ -3754,6 +3814,10 @@ resource_schema "aws_guardduty_threat_intel_set" {
 
 resource_schema "aws_guardduty_trusted_entity_set" {
   cloudformation_type_name = "AWS::GuardDuty::TrustedEntitySet"
+}
+
+resource_schema "aws_healthagent_domain" {
+  cloudformation_type_name = "AWS::HealthAgent::Domain"
 }
 
 resource_schema "aws_healthimaging_datastore" {
@@ -3984,6 +4048,10 @@ resource_schema "aws_internetmonitor_monitor" {
 
 resource_schema "aws_invoicing_invoice_unit" {
   cloudformation_type_name = "AWS::Invoicing::InvoiceUnit"
+}
+
+resource_schema "aws_invoicing_procurement_portal_preference" {
+  cloudformation_type_name = "AWS::Invoicing::ProcurementPortalPreference"
 }
 
 resource_schema "aws_iot_account_audit_configuration" {
@@ -4366,6 +4434,12 @@ resource_schema "aws_kendra_faq" {
   cloudformation_type_name = "AWS::Kendra::Faq"
 }
 
+resource_schema "aws_kendra_featured_results_set" {
+  cloudformation_type_name               = "AWS::Kendra::FeaturedResultsSet"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_kendra_index" {
   cloudformation_type_name = "AWS::Kendra::Index"
 }
@@ -4384,6 +4458,10 @@ resource_schema "aws_kendra_thesaurus" {
 
 resource_schema "aws_kendraranking_execution_plan" {
   cloudformation_type_name = "AWS::KendraRanking::ExecutionPlan"
+}
+
+resource_schema "aws_kinesis_channel" {
+  cloudformation_type_name = "AWS::Kinesis::Channel"
 }
 
 resource_schema "aws_kinesis_resource_policy" {
@@ -4604,6 +4682,10 @@ resource_schema "aws_lightsail_instance" {
 
 resource_schema "aws_lightsail_instance_snapshot" {
   cloudformation_type_name = "AWS::Lightsail::InstanceSnapshot"
+}
+
+resource_schema "aws_lightsail_key_pair" {
+  cloudformation_type_name = "AWS::Lightsail::KeyPair"
 }
 
 resource_schema "aws_lightsail_load_balancer" {
@@ -4840,6 +4922,10 @@ resource_schema "aws_macie_custom_data_identifier" {
 
 resource_schema "aws_macie_findings_filter" {
   cloudformation_type_name = "AWS::Macie::FindingsFilter"
+}
+
+resource_schema "aws_macie_member" {
+  cloudformation_type_name = "AWS::Macie::Member"
 }
 
 resource_schema "aws_macie_session" {
@@ -5087,6 +5173,10 @@ resource_schema "aws_memorydb_multi_region_cluster" {
 
 resource_schema "aws_memorydb_parameter_group" {
   cloudformation_type_name = "AWS::MemoryDB::ParameterGroup"
+}
+
+resource_schema "aws_memorydb_snapshot" {
+  cloudformation_type_name = "AWS::MemoryDB::Snapshot"
 }
 
 resource_schema "aws_memorydb_subnet_group" {
@@ -5542,6 +5632,10 @@ resource_schema "aws_organizations_policy" {
 
 resource_schema "aws_organizations_resource_policy" {
   cloudformation_type_name = "AWS::Organizations::ResourcePolicy"
+}
+
+resource_schema "aws_outposts_outpost" {
+  cloudformation_type_name = "AWS::Outposts::Outpost"
 }
 
 resource_schema "aws_outposts_site" {
@@ -6000,12 +6094,28 @@ resource_schema "aws_redshift_integration" {
   cloudformation_type_name = "AWS::Redshift::Integration"
 }
 
+resource_schema "aws_redshift_qev2_idc_application" {
+  cloudformation_type_name = "AWS::Redshift::QEV2IdcApplication"
+}
+
 resource_schema "aws_redshift_scheduled_action" {
   cloudformation_type_name = "AWS::Redshift::ScheduledAction"
 }
 
+resource_schema "aws_redshift_snapshot" {
+  cloudformation_type_name = "AWS::Redshift::Snapshot"
+}
+
+resource_schema "aws_redshift_snapshot_copy_grant" {
+  cloudformation_type_name = "AWS::Redshift::SnapshotCopyGrant"
+}
+
 resource_schema "aws_redshift_snapshot_schedule" {
   cloudformation_type_name = "AWS::Redshift::SnapshotSchedule"
+}
+
+resource_schema "aws_redshift_usage_limit" {
+  cloudformation_type_name = "AWS::Redshift::UsageLimit"
 }
 
 resource_schema "aws_redshiftserverless_namespace" {
@@ -6187,6 +6297,14 @@ resource_schema "aws_route53_record_set" {
   cloudformation_type_name               = "AWS::Route53::RecordSet"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_route53_traffic_policy" {
+  cloudformation_type_name = "AWS::Route53::TrafficPolicy"
+}
+
+resource_schema "aws_route53_traffic_policy_instance" {
+  cloudformation_type_name = "AWS::Route53::TrafficPolicyInstance"
 }
 
 resource_schema "aws_route53globalresolver_access_source" {
@@ -6754,6 +6872,10 @@ resource_schema "aws_sso_permission_set" {
   cloudformation_type_name = "AWS::SSO::PermissionSet"
 }
 
+resource_schema "aws_sagemaker_ai_workload_config" {
+  cloudformation_type_name = "AWS::SageMaker::AIWorkloadConfig"
+}
+
 resource_schema "aws_sagemaker_action" {
   cloudformation_type_name = "AWS::SageMaker::Action"
 }
@@ -6900,6 +7022,10 @@ resource_schema "aws_sagemaker_model_quality_job_definition" {
 
 resource_schema "aws_sagemaker_monitoring_schedule" {
   cloudformation_type_name = "AWS::SageMaker::MonitoringSchedule"
+}
+
+resource_schema "aws_sagemaker_notebook_instance" {
+  cloudformation_type_name = "AWS::SageMaker::NotebookInstance"
 }
 
 resource_schema "aws_sagemaker_partner_app" {
@@ -7201,6 +7327,12 @@ resource_schema "aws_servicediscovery_http_namespace" {
   cloudformation_type_name = "AWS::ServiceDiscovery::HttpNamespace"
 }
 
+resource_schema "aws_servicediscovery_instance" {
+  cloudformation_type_name               = "AWS::ServiceDiscovery::Instance"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_servicediscovery_private_dns_namespace" {
   cloudformation_type_name = "AWS::ServiceDiscovery::PrivateDnsNamespace"
 }
@@ -7268,6 +7400,10 @@ resource_schema "aws_stepfunctions_state_machine_version" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_storagegateway_tape" {
+  cloudformation_type_name = "AWS::StorageGateway::Tape"
+}
+
 resource_schema "aws_storagegateway_tape_pool" {
   cloudformation_type_name = "AWS::StorageGateway::TapePool"
 }
@@ -7324,6 +7460,14 @@ resource_schema "aws_timestream_scheduled_query" {
 
 resource_schema "aws_timestream_table" {
   cloudformation_type_name = "AWS::Timestream::Table"
+}
+
+resource_schema "aws_transcribe_call_analytics_category" {
+  cloudformation_type_name = "AWS::Transcribe::CallAnalyticsCategory"
+}
+
+resource_schema "aws_transcribe_vocabulary" {
+  cloudformation_type_name = "AWS::Transcribe::Vocabulary"
 }
 
 resource_schema "aws_transcribe_vocabulary_filter" {

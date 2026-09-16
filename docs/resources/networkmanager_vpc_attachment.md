@@ -123,8 +123,6 @@ resource "awscc_networkmanager_vpc_attachment" "example" {
 ### Optional
 
 - `options` (Attributes) Vpc options of the attachment. (see [below for nested schema](#nestedatt--options))
-- `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
-- `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
 - `routing_policy_label` (String) Routing policy label
 - `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 
@@ -140,6 +138,8 @@ resource "awscc_networkmanager_vpc_attachment" "example" {
 - `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `owner_account_id` (String) Owner account of the attachment.
+- `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
+- `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
 - `resource_arn` (String) The ARN of the Resource.
 - `segment_name` (String) The name of the segment attachment..
 - `state` (String) State of the attachment.
@@ -156,10 +156,19 @@ Optional:
 - `security_group_referencing_support` (Boolean) Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false
 
 
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
 <a id="nestedatt--proposed_network_function_group_change"></a>
 ### Nested Schema for `proposed_network_function_group_change`
 
-Optional:
+Read-Only:
 
 - `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
 - `network_function_group_name` (String) The name of the network function group to change.
@@ -168,7 +177,7 @@ Optional:
 <a id="nestedatt--proposed_network_function_group_change--tags"></a>
 ### Nested Schema for `proposed_network_function_group_change.tags`
 
-Optional:
+Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -178,7 +187,7 @@ Optional:
 <a id="nestedatt--proposed_segment_change"></a>
 ### Nested Schema for `proposed_segment_change`
 
-Optional:
+Read-Only:
 
 - `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
 - `segment_name` (String) The name of the segment to change.
@@ -187,17 +196,7 @@ Optional:
 <a id="nestedatt--proposed_segment_change--tags"></a>
 ### Nested Schema for `proposed_segment_change.tags`
 
-Optional:
-
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-
-
-<a id="nestedatt--tags"></a>
-### Nested Schema for `tags`
-
-Optional:
+Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

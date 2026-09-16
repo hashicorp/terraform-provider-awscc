@@ -1,0 +1,195 @@
+{
+  "typeName": "AWS::Kendra::FeaturedResultsSet",
+  "description": "Resource Type definition for AWS::Kendra::FeaturedResultsSet. A set of featured results that are displayed at the top of your search results. Featured results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the featured results set.",
+      "pattern": "^arn:[a-z0-9-]+:kendra:[a-z0-9-]+:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9-]*/featured-results-set/[a-zA-Z-0-9]+$"
+    },
+    "IndexId": {
+      "type": "string",
+      "description": "The identifier of the index that you want to use for featuring results.",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+    },
+    "FeaturedResultsSetId": {
+      "type": "string",
+      "description": "The identifier of the set of featured results.",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-zA-Z-0-9]*$"
+    },
+    "FeaturedResultsSetName": {
+      "type": "string",
+      "description": "A name for the set of featured results.",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^[a-zA-Z0-9][ a-zA-Z0-9_-]*$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description for the set of featured results.",
+      "minLength": 0,
+      "maxLength": 1000,
+      "pattern": "^\\P{C}*$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the set of featured results. When the value is ACTIVE, featured results are ready for use.",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "QueryTexts": {
+      "type": "array",
+      "description": "A list of queries for featuring results.",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0,
+      "maxItems": 49
+    },
+    "FeaturedDocuments": {
+      "type": "array",
+      "description": "A list of document IDs for the documents you want to feature at the top of the search results page.",
+      "items": {
+        "$ref": "#/definitions/FeaturedDocument"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of key-value pairs that identify or categorize the featured results set.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 200
+    }
+  },
+  "definitions": {
+    "FeaturedDocument": {
+      "type": "object",
+      "description": "A featured document. This document is displayed at the top of the search results page.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The identifier of the document to feature in the search results.",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair that identifies or categorizes a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key for the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value associated with the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "IndexId",
+    "FeaturedResultsSetName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/FeaturedResultsSetId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/FeaturedDocuments"
+  ],
+  "createOnlyProperties": [
+    "/properties/IndexId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/IndexId",
+      "/properties/FeaturedResultsSetId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "kendra:TagResource",
+      "kendra:UntagResource",
+      "kendra:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "kendra:CreateFeaturedResultsSet",
+        "kendra:DescribeFeaturedResultsSet",
+        "kendra:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "kendra:DescribeFeaturedResultsSet",
+        "kendra:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "kendra:UpdateFeaturedResultsSet",
+        "kendra:DescribeFeaturedResultsSet",
+        "kendra:TagResource",
+        "kendra:UntagResource",
+        "kendra:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "kendra:BatchDeleteFeaturedResultsSet",
+        "kendra:DescribeFeaturedResultsSet",
+        "kendra:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "kendra:ListFeaturedResultsSets"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "IndexId": {
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+          }
+        },
+        "required": [
+          "IndexId"
+        ]
+      }
+    }
+  }
+}

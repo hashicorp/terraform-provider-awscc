@@ -139,7 +139,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "Environment": {
-		//	      "insertionOrder": true,
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -557,6 +557,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1278,7 +1279,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": false
 		//	                },
 		//	                "Environment": {
-		//	                  "insertionOrder": true,
+		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "additionalProperties": false,
 		//	                    "properties": {
@@ -1779,6 +1780,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
 												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -3714,7 +3716,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "boolean"
 		//	              },
 		//	              "Environment": {
-		//	                "insertionOrder": true,
+		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "additionalProperties": false,
 		//	                  "properties": {
@@ -4116,7 +4118,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "uniqueItems": false
 		//	                          },
 		//	                          "Environment": {
-		//	                            "insertionOrder": true,
+		//	                            "insertionOrder": false,
 		//	                            "items": {
 		//	                              "additionalProperties": false,
 		//	                              "properties": {
@@ -5034,6 +5036,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -5761,6 +5764,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 																Optional: true,
 																Computed: true,
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
 																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/

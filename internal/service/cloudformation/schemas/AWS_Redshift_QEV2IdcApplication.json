@@ -1,0 +1,139 @@
+{
+  "typeName": "AWS::Redshift::QEV2IdcApplication",
+  "description": "Creates an Amazon Redshift Query Editor (QEV2) IAM Identity Center application.",
+  "definitions": {
+    "Tag": {
+      "description": "A tag consisting of a name/value pair for a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key, or name, for the resource tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the resource tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "IdcInstanceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM Identity Center instance used to create the Amazon Redshift Query Editor (QEV2) managed application."
+    },
+    "Qev2IdcApplicationName": {
+      "type": "string",
+      "description": "The name of the Amazon Redshift Query Editor (QEV2) application in IAM Identity Center.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "IdcDisplayName": {
+      "type": "string",
+      "description": "The display name for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application. It appears in the console.",
+      "minLength": 1,
+      "maxLength": 127,
+      "pattern": "^[\\w+=,.@-]+$"
+    },
+    "Qev2IdcApplicationArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center."
+    },
+    "IdcManagedApplicationArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) IAM Identity Center managed application."
+    },
+    "IdcOnboardStatus": {
+      "type": "string",
+      "description": "The onboarding status for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags associated with the application. Tags are key-value pairs that you can use to organize and identify your resources.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "replacementStrategy": "delete_then_create",
+  "required": [
+    "IdcInstanceArn",
+    "Qev2IdcApplicationName",
+    "IdcDisplayName"
+  ],
+  "createOnlyProperties": [
+    "/properties/IdcInstanceArn",
+    "/properties/Qev2IdcApplicationName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Qev2IdcApplicationArn",
+    "/properties/IdcManagedApplicationArn",
+    "/properties/IdcOnboardStatus"
+  ],
+  "primaryIdentifier": [
+    "/properties/Qev2IdcApplicationArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "redshift:CreateTags",
+      "redshift:DeleteTags",
+      "redshift:DescribeQev2IdcApplications"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "redshift:CreateQev2IdcApplication",
+        "redshift:CreateTags",
+        "sso:CreateApplication",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "redshift:DescribeQev2IdcApplications"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "redshift:ModifyQev2IdcApplication",
+        "redshift:CreateTags",
+        "redshift:DeleteTags",
+        "sso:UpdateApplication"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "redshift:DeleteQev2IdcApplication",
+        "sso:DeleteApplication"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "redshift:DescribeQev2IdcApplications"
+      ]
+    }
+  }
+}

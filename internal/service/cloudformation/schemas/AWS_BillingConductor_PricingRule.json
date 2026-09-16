@@ -35,6 +35,32 @@
       "required": [
         "Activated"
       ]
+    },
+    "CustomTier": {
+      "description": "A custom volume tier that defines the rate applied to usage within the given range.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BeginRangeInclusive": {
+          "description": "The inclusive beginning of the tier's usage range.",
+          "type": "number",
+          "minimum": 0
+        },
+        "EndRangeExclusive": {
+          "description": "The exclusive end of the tier's usage range. Omit for the last tier (infinity).",
+          "type": "number",
+          "minimum": 0
+        },
+        "RateValue": {
+          "description": "The custom rate applied to usage within the tier's range.",
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "BeginRangeInclusive",
+        "RateValue"
+      ]
     }
   },
   "properties": {
@@ -102,6 +128,16 @@
       "properties": {
         "FreeTier": {
           "$ref": "#/definitions/FreeTier"
+        },
+        "CustomTiers": {
+          "description": "The set of custom volume tiers for a SKU-scoped TIERING pricing rule. Tiers must start at 0, be contiguous, and the last tier must have no end range.",
+          "type": "array",
+          "insertionOrder": true,
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/CustomTier"
+          }
         }
       }
     },

@@ -99,7 +99,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "type": "boolean"
 		//	    },
 		//	    "Environment": {
-		//	      "insertionOrder": true,
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -883,7 +883,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "uniqueItems": false
 		//	                },
 		//	                "Environment": {
-		//	                  "insertionOrder": true,
+		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "additionalProperties": false,
 		//	                    "properties": {
@@ -2569,7 +2569,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                "type": "boolean"
 		//	              },
 		//	              "Environment": {
-		//	                "insertionOrder": true,
+		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "additionalProperties": false,
 		//	                  "properties": {
@@ -2971,7 +2971,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                            "uniqueItems": false
 		//	                          },
 		//	                          "Environment": {
-		//	                            "insertionOrder": true,
+		//	                            "insertionOrder": false,
 		//	                            "items": {
 		//	                              "additionalProperties": false,
 		//	                              "properties": {

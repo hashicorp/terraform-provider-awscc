@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_connection_type.example "connection_type_arn"

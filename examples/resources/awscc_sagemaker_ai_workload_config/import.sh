@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_ai_workload_config.example "ai_workload_config_arn"

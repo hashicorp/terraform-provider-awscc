@@ -154,6 +154,26 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	      "pattern": "^arn.*",
 		//	      "type": "string"
 		//	    },
+		//	    "CidrResource": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CidrRanges": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CidrRanges"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "DnsResource": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -189,6 +209,17 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ArnResource
 				"arn_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CidrResource
+				"cidr_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CidrRanges
+						"cidr_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: DnsResource
@@ -232,7 +263,8 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	    "GROUP",
 		//	    "CHILD",
 		//	    "SINGLE",
-		//	    "ARN"
+		//	    "ARN",
+		//	    "CIDR"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -312,6 +344,8 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		"allow_association_to_sharable_service_network": "AllowAssociationToSharableServiceNetwork",
 		"arn":                               "Arn",
 		"arn_resource":                      "ArnResource",
+		"cidr_ranges":                       "CidrRanges",
+		"cidr_resource":                     "CidrResource",
 		"custom_domain_name":                "CustomDomainName",
 		"dns_resource":                      "DnsResource",
 		"domain_name":                       "DomainName",

@@ -1,4 +1,127 @@
-## 1.102.0 (Unreleased)
+## 1.102.0 (September 16, 2026)
+
+Release PR: [#3332](https://github.com/hashicorp/terraform-provider-awscc/pull/3332)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_media_insights_pipeline_configuration`
+* **New Data Source:** `awscc_chime_media_insights_pipeline_configurations`
+* **New Data Source:** `awscc_chime_sip_media_application`
+* **New Data Source:** `awscc_chime_sip_media_applications`
+* **New Data Source:** `awscc_chime_voice_connector`
+* **New Data Source:** `awscc_chime_voice_connectors`
+* **New Data Source:** `awscc_comprehend_document_classifier_endpoint`
+* **New Data Source:** `awscc_comprehend_document_classifier_endpoints`
+* **New Data Source:** `awscc_config_delivery_channel`
+* **New Data Source:** `awscc_config_delivery_channels`
+* **New Data Source:** `awscc_docdbelastic_cluster_snapshot`
+* **New Data Source:** `awscc_docdbelastic_cluster_snapshots`
+* **New Data Source:** `awscc_drs_launch_configuration_template`
+* **New Data Source:** `awscc_drs_launch_configuration_templates`
+* **New Data Source:** `awscc_fms_applications_list`
+* **New Data Source:** `awscc_fms_applications_lists`
+* **New Data Source:** `awscc_fms_protocols_list`
+* **New Data Source:** `awscc_fms_protocols_lists`
+* **New Data Source:** `awscc_fsx_backups`
+* **New Data Source:** `awscc_fsx_file_caches`
+* **New Data Source:** `awscc_glue_connection_type`
+* **New Data Source:** `awscc_glue_connection_types`
+* **New Data Source:** `awscc_healthagent_domain`
+* **New Data Source:** `awscc_healthagent_domains`
+* **New Data Source:** `awscc_invoicing_procurement_portal_preference`
+* **New Data Source:** `awscc_invoicing_procurement_portal_preferences`
+* **New Data Source:** `awscc_kendra_featured_results_set`
+* **New Data Source:** `awscc_kinesis_channel`
+* **New Data Source:** `awscc_kinesis_channels`
+* **New Data Source:** `awscc_lightsail_key_pair`
+* **New Data Source:** `awscc_lightsail_key_pairs`
+* **New Data Source:** `awscc_macie_member`
+* **New Data Source:** `awscc_macie_members`
+* **New Data Source:** `awscc_memorydb_snapshot`
+* **New Data Source:** `awscc_memorydb_snapshots`
+* **New Data Source:** `awscc_outposts_outpost`
+* **New Data Source:** `awscc_outposts_outposts`
+* **New Data Source:** `awscc_redshift_qev2_idc_application`
+* **New Data Source:** `awscc_redshift_qev2_idc_applications`
+* **New Data Source:** `awscc_redshift_snapshot`
+* **New Data Source:** `awscc_redshift_snapshot_copy_grant`
+* **New Data Source:** `awscc_redshift_snapshot_copy_grants`
+* **New Data Source:** `awscc_redshift_snapshots`
+* **New Data Source:** `awscc_redshift_usage_limit`
+* **New Data Source:** `awscc_redshift_usage_limits`
+* **New Data Source:** `awscc_route53_traffic_policies`
+* **New Data Source:** `awscc_route53_traffic_policy`
+* **New Data Source:** `awscc_route53_traffic_policy_instance`
+* **New Data Source:** `awscc_route53_traffic_policy_instances`
+* **New Data Source:** `awscc_sagemaker_ai_workload_config`
+* **New Data Source:** `awscc_sagemaker_ai_workload_configs`
+* **New Data Source:** `awscc_sagemaker_notebook_instance`
+* **New Data Source:** `awscc_sagemaker_notebook_instances`
+* **New Data Source:** `awscc_servicediscovery_instance`
+* **New Data Source:** `awscc_storagegateway_tape`
+* **New Data Source:** `awscc_storagegateway_tapes`
+* **New Data Source:** `awscc_transcribe_call_analytics_categories`
+* **New Data Source:** `awscc_transcribe_call_analytics_category`
+* **New Data Source:** `awscc_transcribe_vocabularies`
+* **New Data Source:** `awscc_transcribe_vocabulary`
+* **New List Resource:** `awscc_chime_media_insights_pipeline_configuration`
+* **New List Resource:** `awscc_chime_sip_media_application`
+* **New List Resource:** `awscc_chime_voice_connector`
+* **New List Resource:** `awscc_comprehend_document_classifier_endpoint`
+* **New List Resource:** `awscc_config_delivery_channel`
+* **New List Resource:** `awscc_docdbelastic_cluster_snapshot`
+* **New List Resource:** `awscc_drs_launch_configuration_template`
+* **New List Resource:** `awscc_fms_applications_list`
+* **New List Resource:** `awscc_fms_protocols_list`
+* **New List Resource:** `awscc_glue_connection_type`
+* **New List Resource:** `awscc_healthagent_domain`
+* **New List Resource:** `awscc_invoicing_procurement_portal_preference`
+* **New List Resource:** `awscc_kinesis_channel`
+* **New List Resource:** `awscc_lightsail_key_pair`
+* **New List Resource:** `awscc_macie_member`
+* **New List Resource:** `awscc_memorydb_snapshot`
+* **New List Resource:** `awscc_outposts_outpost`
+* **New List Resource:** `awscc_redshift_qev2_idc_application`
+* **New List Resource:** `awscc_redshift_snapshot`
+* **New List Resource:** `awscc_redshift_snapshot_copy_grant`
+* **New List Resource:** `awscc_redshift_usage_limit`
+* **New List Resource:** `awscc_route53_traffic_policy`
+* **New List Resource:** `awscc_route53_traffic_policy_instance`
+* **New List Resource:** `awscc_sagemaker_ai_workload_config`
+* **New List Resource:** `awscc_sagemaker_notebook_instance`
+* **New List Resource:** `awscc_storagegateway_tape`
+* **New List Resource:** `awscc_transcribe_call_analytics_category`
+* **New List Resource:** `awscc_transcribe_vocabulary`
+* **New Resource:** `awscc_chime_media_insights_pipeline_configuration`
+* **New Resource:** `awscc_chime_sip_media_application`
+* **New Resource:** `awscc_chime_voice_connector`
+* **New Resource:** `awscc_comprehend_document_classifier_endpoint`
+* **New Resource:** `awscc_config_delivery_channel`
+* **New Resource:** `awscc_docdbelastic_cluster_snapshot`
+* **New Resource:** `awscc_drs_launch_configuration_template`
+* **New Resource:** `awscc_fms_applications_list`
+* **New Resource:** `awscc_fms_protocols_list`
+* **New Resource:** `awscc_glue_connection_type`
+* **New Resource:** `awscc_healthagent_domain`
+* **New Resource:** `awscc_invoicing_procurement_portal_preference`
+* **New Resource:** `awscc_kendra_featured_results_set`
+* **New Resource:** `awscc_kinesis_channel`
+* **New Resource:** `awscc_lightsail_key_pair`
+* **New Resource:** `awscc_macie_member`
+* **New Resource:** `awscc_memorydb_snapshot`
+* **New Resource:** `awscc_outposts_outpost`
+* **New Resource:** `awscc_redshift_qev2_idc_application`
+* **New Resource:** `awscc_redshift_snapshot`
+* **New Resource:** `awscc_redshift_snapshot_copy_grant`
+* **New Resource:** `awscc_redshift_usage_limit`
+* **New Resource:** `awscc_route53_traffic_policy`
+* **New Resource:** `awscc_route53_traffic_policy_instance`
+* **New Resource:** `awscc_sagemaker_ai_workload_config`
+* **New Resource:** `awscc_sagemaker_notebook_instance`
+* **New Resource:** `awscc_servicediscovery_instance`
+* **New Resource:** `awscc_storagegateway_tape`
+* **New Resource:** `awscc_transcribe_call_analytics_category`
+* **New Resource:** `awscc_transcribe_vocabulary`
 
 ## 1.101.0 (September 9, 2026)
 

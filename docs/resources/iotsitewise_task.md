@@ -53,7 +53,46 @@ Optional:
 
 - `command` (List of String) The command to execute in the container.
 - `environment_variables` (Map of String) A map of environment variable key-value pairs.
+- `ephemeral_storage_configuration` (Attributes) Configuration for ephemeral storage attached to the container task. (see [below for nested schema](#nestedatt--task_configuration--container_task_configuration--ephemeral_storage_configuration))
+- `mounts` (Attributes List) Mounts attached to the container filesystem. Each mount exposes an external data source as a local directory inside the container. (see [below for nested schema](#nestedatt--task_configuration--container_task_configuration--mounts))
 - `timeout_seconds` (Number) The timeout in seconds for task execution. Default: 3600 (1 hour).
+
+<a id="nestedatt--task_configuration--container_task_configuration--ephemeral_storage_configuration"></a>
+### Nested Schema for `task_configuration.container_task_configuration.ephemeral_storage_configuration`
+
+Optional:
+
+- `storage_class` (String) The storage type that determines I/O performance characteristics. Family name indicates workload pattern, level number indicates performance within that family.
+- `storage_size_in_gi_b` (Number) Storage volume size in GiB.
+
+
+<a id="nestedatt--task_configuration--container_task_configuration--mounts"></a>
+### Nested Schema for `task_configuration.container_task_configuration.mounts`
+
+Optional:
+
+- `name` (String) A unique name for the mount within the task.
+- `relative_path` (String) The relative path under the service-owned mount root where this mount is attached inside the container.
+- `source` (Attributes) The data source configuration for a mount. (see [below for nested schema](#nestedatt--task_configuration--container_task_configuration--mounts--source))
+- `storage_type` (String) The type of storage used for the mount inside the container.
+
+<a id="nestedatt--task_configuration--container_task_configuration--mounts--source"></a>
+### Nested Schema for `task_configuration.container_task_configuration.mounts.source`
+
+Optional:
+
+- `s3_access_point` (Attributes) Configures a mount that reads from an Amazon S3 access point. (see [below for nested schema](#nestedatt--task_configuration--container_task_configuration--mounts--source--s3_access_point))
+
+<a id="nestedatt--task_configuration--container_task_configuration--mounts--source--s3_access_point"></a>
+### Nested Schema for `task_configuration.container_task_configuration.mounts.source.s3_access_point`
+
+Optional:
+
+- `access_point_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 access point. The mount reads objects from the bucket associated with this access point. Access is governed by the access point policy and the task execution role's IAM permissions.
+- `prefix` (String) An object key name prefix. If specified, the mount includes only objects whose keys begin with this prefix. To include all objects at the access point, omit this field.
+
+
+
 
 
 

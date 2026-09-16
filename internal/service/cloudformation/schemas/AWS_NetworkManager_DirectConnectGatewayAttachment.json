@@ -181,8 +181,7 @@
   ],
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
-    "/properties/DirectConnectGatewayArn",
-    "/properties/RoutingPolicyLabel"
+    "/properties/DirectConnectGatewayArn"
   ],
   "writeOnlyProperties": [
     "/properties/RoutingPolicyLabel"
@@ -199,7 +198,9 @@
     "/properties/SegmentName",
     "/properties/NetworkFunctionGroupName",
     "/properties/ResourceArn",
-    "/properties/LastModificationErrors"
+    "/properties/LastModificationErrors",
+    "/properties/ProposedSegmentChange",
+    "/properties/ProposedNetworkFunctionGroupChange"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"
@@ -233,6 +234,9 @@
         "networkmanager:ListTagsForResource",
         "networkmanager:TagResource",
         "networkmanager:UntagResource",
+        "networkmanager:PutAttachmentRoutingPolicyLabel",
+        "networkmanager:RemoveAttachmentRoutingPolicyLabel",
+        "networkmanager:ListAttachmentRoutingPolicyAssociations",
         "ec2:DescribeRegions"
       ],
       "timeoutInMinutes": 60

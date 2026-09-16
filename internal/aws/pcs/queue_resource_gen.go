@@ -350,9 +350,9 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                              "Tags",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)
+	opts = opts.WithCreateTimeoutInMinutes(160).WithDeleteTimeoutInMinutes(160)
 
-	opts = opts.WithUpdateTimeoutInMinutes(60)
+	opts = opts.WithUpdateTimeoutInMinutes(160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

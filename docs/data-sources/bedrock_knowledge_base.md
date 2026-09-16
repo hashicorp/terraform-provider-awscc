@@ -62,6 +62,7 @@ Read-Only:
 - `embedding_model_configuration` (Attributes) The embeddings model configuration details for the vector model used in Knowledge Base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration))
 - `embedding_model_type` (String) The type of embedding model to use for the managed knowledge base.
 - `server_side_encryption_configuration` (Attributes) Contains details about the server-side encryption for the managed knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--server_side_encryption_configuration))
+- `supplemental_data_storage_configuration` (Attributes) Configurations for supplemental data storage. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--supplemental_data_storage_configuration))
 
 <a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration`
@@ -78,6 +79,7 @@ Read-Only:
 - `audio` (Attributes List) List of audio configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio))
 - `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
 - `embedding_data_type` (String) The data type for the vectors when using a model to convert text into vector embeddings.
+- `model_configuration` (String) Model-specific configuration for the embedding model.
 - `video` (Attributes List) List of video configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video))
 
 <a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio"></a>
@@ -120,6 +122,31 @@ Read-Only:
 Read-Only:
 
 - `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the managed knowledge base.
+
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--supplemental_data_storage_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration`
+
+Read-Only:
+
+- `supplemental_data_storage_locations` (Attributes List) List of supplemental data storage locations. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations))
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations`
+
+Read-Only:
+
+- `s3_location` (Attributes) An Amazon S3 location. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location))
+- `supplemental_data_storage_location_type` (String) Supplemental data storage location type.
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations.s3_location`
+
+Read-Only:
+
+- `uri` (String) The location's URI
+
+
 
 
 
@@ -287,6 +314,7 @@ Read-Only:
 - `audio` (Attributes List) List of audio configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio))
 - `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
 - `embedding_data_type` (String) The data type for the vectors when using a model to convert text into vector embeddings.
+- `model_configuration` (String) Model-specific configuration for the embedding model.
 - `video` (Attributes List) List of video configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video))
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio"></a>

@@ -1,0 +1,152 @@
+{
+  "typeName": "AWS::Macie::Member",
+  "description": "Represents the association between an Amazon Macie administrator account and a member account. Creating this resource associates the specified account with the Macie administrator account that performs the operation; deleting it removes the association.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the Amazon Macie member account.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag. The maximum length of a tag key is 128 characters.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag. The maximum length of a tag value is 256 characters.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the association between the member account and the Amazon Macie administrator account."
+    },
+    "AccountId": {
+      "type": "string",
+      "description": "The AWS account ID for the account to associate with the Amazon Macie administrator account.",
+      "pattern": "^[0-9]{12}$"
+    },
+    "Email": {
+      "type": "string",
+      "description": "The email address for the account to associate with the Amazon Macie administrator account. Required by the Amazon Macie CreateMember API at creation time; it is write-only because the service does not return it (it is null when the account is associated through AWS Organizations)."
+    },
+    "AdministratorAccountId": {
+      "type": "string",
+      "description": "The AWS account ID for the Amazon Macie administrator account."
+    },
+    "RelationshipStatus": {
+      "type": "string",
+      "description": "The current status of the relationship between the account and the Amazon Macie administrator account.",
+      "enum": [
+        "Enabled",
+        "Paused",
+        "Invited",
+        "Created",
+        "Removed",
+        "Resigned",
+        "EmailVerificationInProgress",
+        "EmailVerificationFailed",
+        "RegionDisabled",
+        "AccountSuspended"
+      ]
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the Amazon Macie administrator account.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags to associate with the member account in Amazon Macie.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AccountId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AdministratorAccountId",
+    "/properties/RelationshipStatus",
+    "/properties/UpdatedAt"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Email"
+  ],
+  "createOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/Email"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AccountId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "macie2:TagResource",
+      "macie2:UntagResource",
+      "macie2:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "macie2:CreateMember",
+        "macie2:GetMember",
+        "macie2:TagResource",
+        "macie2:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "macie2:GetMember",
+        "macie2:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "macie2:GetMember",
+        "macie2:TagResource",
+        "macie2:UntagResource",
+        "macie2:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "macie2:DeleteMember",
+        "macie2:GetMember",
+        "macie2:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "macie2:ListMembers"
+      ]
+    }
+  }
+}

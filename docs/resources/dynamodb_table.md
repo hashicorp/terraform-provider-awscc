@@ -182,6 +182,7 @@ resource "awscc_dynamodb_table" "example" {
  For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
 - `time_to_live_specification` (Attributes) Specifies the Time to Live (TTL) settings for the table.
   For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide. (see [below for nested schema](#nestedatt--time_to_live_specification))
+- `vector_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--vector_indexes))
 - `warm_throughput` (Attributes) Represents the warm throughput (in read units per second and write units per second) for creating a table. (see [below for nested schema](#nestedatt--warm_throughput))
 
 ### Read-Only
@@ -496,6 +497,52 @@ Optional:
    +  The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.
   +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.
 - `enabled` (Boolean) Indicates whether TTL is to be enabled (true) or disabled (false) on the table.
+
+
+<a id="nestedatt--vector_indexes"></a>
+### Nested Schema for `vector_indexes`
+
+Optional:
+
+- `dimensions` (Number)
+- `distance_function` (String)
+- `index_name` (String)
+- `projection` (Attributes) Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. (see [below for nested schema](#nestedatt--vector_indexes--projection))
+- `search_schema` (Attributes Set) (see [below for nested schema](#nestedatt--vector_indexes--search_schema))
+- `vector_attribute` (Attributes) (see [below for nested schema](#nestedatt--vector_indexes--vector_attribute))
+
+<a id="nestedatt--vector_indexes--projection"></a>
+### Nested Schema for `vector_indexes.projection`
+
+Optional:
+
+- `non_key_attributes` (List of String) Represents the non-key attribute names which will be projected into the index.
+ For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.
+- `projection_type` (String) The set of attributes that are projected into the index:
+  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
+  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
+  +  ``ALL`` - All of the table attributes are projected into the index.
+  
+ When using the DynamoDB console, ``ALL`` is selected by default.
+ You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.
+
+
+<a id="nestedatt--vector_indexes--search_schema"></a>
+### Nested Schema for `vector_indexes.search_schema`
+
+Optional:
+
+- `attribute_name` (String)
+- `search_schema_element_type` (String)
+
+
+<a id="nestedatt--vector_indexes--vector_attribute"></a>
+### Nested Schema for `vector_indexes.vector_attribute`
+
+Optional:
+
+- `attribute_name` (String)
+
 
 
 <a id="nestedatt--warm_throughput"></a>

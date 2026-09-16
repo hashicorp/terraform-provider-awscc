@@ -61,6 +61,7 @@ _Default_: If not specified, the default value is true.
 If you don't specify a name, we generate a unique Graph Name using a combination of Stack Name and a UUID comprising of 4 characters.
 
 _Important_: If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
+- `import_task` (Attributes) The details of the import task to use to create the graph. When specified, the graph is created using CreateGraphUsingImportTask and data is imported from the supplied source. (see [below for nested schema](#nestedatt--import_task))
 - `kms_key_identifier` (String) The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.
 - `public_connectivity` (Boolean) Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.
 
@@ -83,6 +84,41 @@ _Default_: If not specified, the default value is 1.
 - `graph_arn` (String) Graph resource ARN
 - `graph_id` (String) The auto-generated id assigned by the service.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--import_task"></a>
+### Nested Schema for `import_task`
+
+Optional:
+
+- `blank_node_handling` (String) The method to handle blank nodes in the dataset. Currently, only convertToIri is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is NTRIPLES
+- `fail_on_error` (Boolean) If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that caused the error and continues if possible.
+- `format` (String) Specifies the format of S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format, OPEN_CYPHER, which identifies the openCypher load format, or NTRIPLES, which identifies the RDF n-triples format.
+- `import_options` (Attributes) Contains options for controlling the import process. For example, if the failOnError key is set to false, the import skips the data that caused the error and continues if possible (whereas if set to true, the default, or if omitted, the import operation halts immediately when an error is encountered). (see [below for nested schema](#nestedatt--import_task--import_options))
+- `max_provisioned_memory` (Number) The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024, or the approved upper limit for your account. If both the minimum and maximum values are specified, the final provisioned-memory will be chosen per the actual size of your imported data. If neither value is specified, 128 m-NCUs are used.
+- `min_provisioned_memory` (Number) The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 16
+- `parquet_type` (String) The parquet type of the import task. Required when Format is PARQUET.
+- `role_arn` (String) The ARN of the IAM role that will allow access to the data that is to be imported.
+- `source` (String) A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.
+
+<a id="nestedatt--import_task--import_options"></a>
+### Nested Schema for `import_task.import_options`
+
+Optional:
+
+- `neptune` (Attributes) Options for importing data from a Neptune database. (see [below for nested schema](#nestedatt--import_task--import_options--neptune))
+
+<a id="nestedatt--import_task--import_options--neptune"></a>
+### Nested Schema for `import_task.import_options.neptune`
+
+Optional:
+
+- `preserve_default_vertex_labels` (Boolean) Neptune Analytics supports label-less vertices and no labels are assigned unless one is explicitly provided. Neptune assigns default labels when none is explicitly provided. When importing the data into Neptune Analytics, the default vertex labels can be omitted by setting preserveDefaultVertexLabels to false. Note that if the vertex only has default labels, and has no other properties or edges, then the vertex will effectively not get imported into Neptune Analytics when preserveDefaultVertexLabels is set to false.
+- `preserve_edge_ids` (Boolean) Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by default. They are imported if preserveEdgeIds is set to true, and ids are stored as properties on the relationships with the property name neptuneEdgeId.
+- `s3_export_kms_key_id` (String) The KMS key to use to encrypt data in the S3 bucket where the graph data is exported.
+- `s3_export_path` (String) The path to an S3 bucket from which to import data.
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

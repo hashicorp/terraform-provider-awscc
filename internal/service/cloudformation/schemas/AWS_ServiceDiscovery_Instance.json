@@ -1,0 +1,81 @@
+{
+  "typeName": "AWS::ServiceDiscovery::Instance",
+  "description": "Resource Type definition for AWS::ServiceDiscovery::Instance",
+  "additionalProperties": false,
+  "properties": {
+    "InstanceAttributes": {
+      "type": "object",
+      "description": "A string map that contains information for the service that is specified in ServiceId."
+    },
+    "InstanceId": {
+      "type": "string",
+      "description": "An identifier that you want to associate with the instance.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "ServiceId": {
+      "type": "string",
+      "description": "The ID or Amazon Resource Name (ARN) of the service that you want to use for settings for the instance.",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "InstanceAttributes",
+    "ServiceId"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/ServiceId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ServiceId",
+    "/properties/InstanceId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicediscovery:RegisterInstance",
+        "servicediscovery:GetInstance",
+        "servicediscovery:GetOperation"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicediscovery:GetInstance"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicediscovery:RegisterInstance",
+        "servicediscovery:GetInstance",
+        "servicediscovery:GetOperation"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicediscovery:DeregisterInstance",
+        "servicediscovery:GetInstance",
+        "servicediscovery:GetOperation"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "servicediscovery:ListInstances"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ServiceId": {
+            "$ref": "resource-schema.json#/properties/ServiceId"
+          }
+        },
+        "required": [
+          "ServiceId"
+        ]
+      }
+    }
+  }
+}

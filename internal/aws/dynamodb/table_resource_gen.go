@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -1605,6 +1606,258 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VectorIndexes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Dimensions": {
+		//	        "maximum": 4096,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "DistanceFunction": {
+		//	        "enum": [
+		//	          "COSINE",
+		//	          "DOT_PRODUCT",
+		//	          "EUCLIDEAN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "IndexName": {
+		//	        "type": "string"
+		//	      },
+		//	      "Projection": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.",
+		//	        "properties": {
+		//	          "NonKeyAttributes": {
+		//	            "description": "Represents the non-key attribute names which will be projected into the index.\n For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.",
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "ProjectionType": {
+		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "SearchSchema": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "AttributeName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SearchSchemaElementType": {
+		//	              "enum": [
+		//	                "HASH",
+		//	                "INLINE_FILTER"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AttributeName",
+		//	            "SearchSchemaElementType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "VectorAttribute": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AttributeName": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AttributeName"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "IndexName",
+		//	      "VectorAttribute",
+		//	      "Projection",
+		//	      "Dimensions",
+		//	      "DistanceFunction"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"vector_indexes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Dimensions
+					"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(1, 4096),
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DistanceFunction
+					"distance_function": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"COSINE",
+								"DOT_PRODUCT",
+								"EUCLIDEAN",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IndexName
+					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Projection
+					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NonKeyAttributes
+							"non_key_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Represents the non-key attribute names which will be projected into the index.\n For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProjectionType
+							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SearchSchema
+					"search_schema": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AttributeName
+								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SearchSchemaElementType
+								"search_schema_element_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"HASH",
+											"INLINE_FILTER",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VectorAttribute
+					"vector_attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AttributeName
+							"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WarmThroughput
 		// CloudFormation resource type schema:
 		//
@@ -1710,6 +1963,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"csv":                                  "Csv",
 		"deletion_protection_enabled":          "DeletionProtectionEnabled",
 		"delimiter":                            "Delimiter",
+		"dimensions":                           "Dimensions",
+		"distance_function":                    "DistanceFunction",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",
 		"header_list":                          "HeaderList",
@@ -1743,6 +1998,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"s3_bucket_owner":                      "S3BucketOwner",
 		"s3_bucket_source":                     "S3BucketSource",
 		"s3_key_prefix":                        "S3KeyPrefix",
+		"search_schema":                        "SearchSchema",
+		"search_schema_element_type":           "SearchSchemaElementType",
 		"sse_enabled":                          "SSEEnabled",
 		"sse_specification":                    "SSESpecification",
 		"sse_type":                             "SSEType",
@@ -1754,6 +2011,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                                 "Tags",
 		"time_to_live_specification":           "TimeToLiveSpecification",
 		"value":                                "Value",
+		"vector_attribute":                     "VectorAttribute",
+		"vector_indexes":                       "VectorIndexes",
 		"warm_throughput":                      "WarmThroughput",
 		"write_capacity_units":                 "WriteCapacityUnits",
 		"write_units_per_second":               "WriteUnitsPerSecond",

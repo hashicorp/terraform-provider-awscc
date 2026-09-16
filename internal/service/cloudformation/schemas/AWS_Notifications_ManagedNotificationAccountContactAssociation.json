@@ -17,6 +17,10 @@
         "ACCOUNT_ALTERNATE_OPERATIONS",
         "ACCOUNT_ALTERNATE_BILLING"
       ]
+    },
+    "IsSensitiveEventsSubscribed": {
+      "description": "Whether the account contact association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.",
+      "type": "boolean"
     }
   },
   "required": [
@@ -32,6 +36,9 @@
     },
     "ContactIdentifier": {
       "$ref": "#/definitions/ContactIdentifier"
+    },
+    "IsSensitiveEventsSubscribed": {
+      "$ref": "#/definitions/IsSensitiveEventsSubscribed"
     }
   },
   "additionalProperties": false,
@@ -47,6 +54,7 @@
     "create": {
       "permissions": [
         "notifications:AssociateManagedNotificationAccountContact",
+        "notifications:SubscribeSensitiveEvents",
         "notifications:ListManagedNotificationChannelAssociations"
       ]
     },
@@ -57,6 +65,8 @@
     },
     "update": {
       "permissions": [
+        "notifications:UpdateManagedNotificationChannelAssociation",
+        "notifications:SubscribeSensitiveEvents",
         "notifications:ListManagedNotificationChannelAssociations"
       ]
     },

@@ -216,8 +216,7 @@
   ],
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
-    "/properties/VpcArn",
-    "/properties/RoutingPolicyLabel"
+    "/properties/VpcArn"
   ],
   "readOnlyProperties": [
     "/properties/CoreNetworkArn",
@@ -232,7 +231,9 @@
     "/properties/SegmentName",
     "/properties/NetworkFunctionGroupName",
     "/properties/ResourceArn",
-    "/properties/LastModificationErrors"
+    "/properties/LastModificationErrors",
+    "/properties/ProposedSegmentChange",
+    "/properties/ProposedNetworkFunctionGroupChange"
   ],
   "writeOnlyProperties": [
     "/properties/RoutingPolicyLabel"
@@ -269,6 +270,9 @@
         "networkmanager:ListTagsForResource",
         "networkmanager:TagResource",
         "networkmanager:UntagResource",
+        "networkmanager:PutAttachmentRoutingPolicyLabel",
+        "networkmanager:RemoveAttachmentRoutingPolicyLabel",
+        "networkmanager:ListAttachmentRoutingPolicyAssociations",
         "ec2:DescribeRegions"
       ],
       "timeoutInMinutes": 60

@@ -114,9 +114,28 @@ Optional:
 - `encrypted` (Boolean)
 - `iops` (Number)
 - `kms_key_id` (String)
+- `multi_availability_zone_configuration` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings--ebs--multi_availability_zone_configuration))
 - `snapshot_id` (String)
 - `volume_size` (Number)
 - `volume_type` (String)
+
+<a id="nestedatt--launch_template_configs--overrides--block_device_mappings--ebs--multi_availability_zone_configuration"></a>
+### Nested Schema for `launch_template_configs.overrides.block_device_mappings.ebs.multi_availability_zone_configuration`
+
+Optional:
+
+- `configuration_type` (String)
+- `standby_availability_zones` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings--ebs--multi_availability_zone_configuration--standby_availability_zones))
+
+<a id="nestedatt--launch_template_configs--overrides--block_device_mappings--ebs--multi_availability_zone_configuration--standby_availability_zones"></a>
+### Nested Schema for `launch_template_configs.overrides.block_device_mappings.ebs.multi_availability_zone_configuration.standby_availability_zones`
+
+Optional:
+
+- `availability_zone` (String)
+- `availability_zone_id` (String)
+
+
 
 
 

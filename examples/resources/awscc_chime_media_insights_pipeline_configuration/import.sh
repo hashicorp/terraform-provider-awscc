@@ -1,0 +1,1 @@
+$ terraform import awscc_chime_media_insights_pipeline_configuration.example "media_insights_pipeline_configuration_arn"

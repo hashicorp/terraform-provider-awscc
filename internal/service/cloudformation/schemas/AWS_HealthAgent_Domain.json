@@ -1,0 +1,153 @@
+{
+  "typeName": "AWS::HealthAgent::Domain",
+  "description": "Resource Type definition for AWS::HealthAgent::Domain. Creates and manages a HealthAgent Domain resource.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the Domain.",
+      "pattern": "^arn:aws[-a-z]*:health-agent:[a-z0-9-]+:[0-9]{12}:domain/(hai-|dom-)[a-z0-9]+$"
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The unique identifier of the Domain.",
+      "minLength": 20,
+      "maxLength": 25,
+      "pattern": "^(hai-|dom-)[a-z0-9]+$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the Domain.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "EncryptionContext": {
+      "type": "object",
+      "description": "Encryption context for the Domain.",
+      "properties": {
+        "EncryptionType": {
+          "type": "string",
+          "description": "The type of encryption key used.",
+          "enum": [
+            "AWS_OWNED_KEY",
+            "CUSTOMER_MANAGED_KEY"
+          ]
+        }
+      },
+      "required": [
+        "EncryptionType"
+      ],
+      "additionalProperties": false
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the Domain.",
+      "enum": [
+        "ACTIVE",
+        "DELETING",
+        "DELETED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the Domain was created.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags associated with the Domain.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/DomainId",
+    "/properties/Status",
+    "/properties/EncryptionContext",
+    "/properties/CreatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "health-agent:TagResource",
+      "health-agent:UntagResource",
+      "health-agent:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "health-agent:CreateDomain",
+        "health-agent:GetDomain",
+        "health-agent:TagResource",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "health-agent:GetDomain",
+        "health-agent:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "health-agent:GetDomain",
+        "health-agent:TagResource",
+        "health-agent:UntagResource",
+        "health-agent:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "health-agent:DeleteDomain",
+        "health-agent:GetDomain"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "health-agent:ListDomains"
+      ]
+    }
+  }
+}

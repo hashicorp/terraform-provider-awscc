@@ -1,0 +1,168 @@
+{
+  "typeName": "AWS::DocDBElastic::ClusterSnapshot",
+  "description": "Resource Type definition for AWS::DocDBElastic::ClusterSnapshot. Creates a manual snapshot of an Amazon DocumentDB elastic cluster.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key of the tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "description": "The value of the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "SnapshotArn": {
+      "description": "The Amazon Resource Name (ARN) of the elastic cluster snapshot.",
+      "type": "string"
+    },
+    "SnapshotName": {
+      "description": "The name of the elastic cluster snapshot.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63
+    },
+    "ClusterArn": {
+      "description": "The ARN of the elastic cluster of which to create a snapshot.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the elastic cluster snapshot.",
+      "type": "string"
+    },
+    "SnapshotType": {
+      "description": "The type of the elastic cluster snapshot (manual or automated).",
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "AUTOMATED"
+      ]
+    },
+    "SnapshotCreationTime": {
+      "description": "The time when the elastic cluster snapshot was created, in Universal Coordinated Time (UTC).",
+      "type": "string"
+    },
+    "ClusterCreationTime": {
+      "description": "The time when the source elastic cluster was created, in Universal Coordinated Time (UTC).",
+      "type": "string"
+    },
+    "SubnetIds": {
+      "description": "The Amazon EC2 subnet IDs associated with the source elastic cluster.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "VpcSecurityGroupIds": {
+      "description": "The Amazon EC2 security group IDs associated with the source elastic cluster.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "AdminUserName": {
+      "description": "The name of the elastic cluster administrator.",
+      "type": "string"
+    },
+    "KmsKeyId": {
+      "description": "The KMS key identifier used to encrypt the source elastic cluster.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to the elastic cluster snapshot.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ClusterArn",
+    "SnapshotName"
+  ],
+  "readOnlyProperties": [
+    "/properties/SnapshotArn",
+    "/properties/Status",
+    "/properties/SnapshotType",
+    "/properties/SnapshotCreationTime",
+    "/properties/ClusterCreationTime",
+    "/properties/SubnetIds",
+    "/properties/VpcSecurityGroupIds",
+    "/properties/AdminUserName",
+    "/properties/KmsKeyId"
+  ],
+  "createOnlyProperties": [
+    "/properties/ClusterArn",
+    "/properties/SnapshotName"
+  ],
+  "primaryIdentifier": [
+    "/properties/SnapshotArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "docdb-elastic:TagResource",
+      "docdb-elastic:UntagResource",
+      "docdb-elastic:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "docdb-elastic:CreateClusterSnapshot",
+        "docdb-elastic:GetClusterSnapshot",
+        "docdb-elastic:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "docdb-elastic:GetClusterSnapshot",
+        "docdb-elastic:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "docdb-elastic:GetClusterSnapshot",
+        "docdb-elastic:TagResource",
+        "docdb-elastic:UntagResource",
+        "docdb-elastic:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "docdb-elastic:DeleteClusterSnapshot",
+        "docdb-elastic:GetClusterSnapshot"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "docdb-elastic:ListClusterSnapshots"
+      ]
+    }
+  }
+}

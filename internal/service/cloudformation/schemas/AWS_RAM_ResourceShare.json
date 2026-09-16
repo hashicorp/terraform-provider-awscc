@@ -76,6 +76,29 @@
   ],
   "additionalProperties": false,
   "definitions": {
+    "PermissionTemplateParameter": {
+      "description": "A single template parameter name and its values for a managed permission.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Values": {
+          "description": "The values for the template parameter.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Name": {
+          "description": "The name of the template parameter.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Values"
+      ]
+    },
     "ResourceShareConfiguration": {
       "description": "The configuration for a resource share.",
       "additionalProperties": false,
@@ -90,6 +113,28 @@
           "type": "boolean"
         }
       }
+    },
+    "PermissionArnTemplateParameters": {
+      "description": "Specifies a permission ARN and its template parameters for a resource share.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "PermissionArn": {
+          "description": "The Amazon Resource Name (ARN) of the permission.",
+          "type": "string"
+        },
+        "PermissionTemplateParameters": {
+          "description": "The template parameters for the permission.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PermissionTemplateParameter"
+          }
+        }
+      },
+      "required": [
+        "PermissionArn"
+      ]
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",

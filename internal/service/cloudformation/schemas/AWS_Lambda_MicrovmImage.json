@@ -422,7 +422,9 @@
         "lambda:UntagResource",
         "lambda:UntagResource20170331v2",
         "lambda:PassNetworkConnector",
-        "iam:PassRole"
+        "iam:PassRole",
+        "lambda:DeleteMicrovmImageVersion",
+        "lambda:GetMicrovmImageVersion"
       ]
     },
     "read": {

@@ -43,8 +43,17 @@ Data Source schema for AWS::VpcLattice::ResourceConfiguration
 Read-Only:
 
 - `arn_resource` (String)
+- `cidr_resource` (Attributes) (see [below for nested schema](#nestedatt--resource_configuration_definition--cidr_resource))
 - `dns_resource` (Attributes) (see [below for nested schema](#nestedatt--resource_configuration_definition--dns_resource))
 - `ip_resource` (String)
+
+<a id="nestedatt--resource_configuration_definition--cidr_resource"></a>
+### Nested Schema for `resource_configuration_definition.cidr_resource`
+
+Read-Only:
+
+- `cidr_ranges` (List of String)
+
 
 <a id="nestedatt--resource_configuration_definition--dns_resource"></a>
 ### Nested Schema for `resource_configuration_definition.dns_resource`

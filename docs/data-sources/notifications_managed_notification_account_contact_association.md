@@ -22,4 +22,5 @@ Data Source schema for AWS::Notifications::ManagedNotificationAccountContactAsso
 ### Read-Only
 
 - `contact_identifier` (String) This unique identifier for Contact
+- `is_sensitive_events_subscribed` (Boolean) Whether the account contact association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.
 - `managed_notification_configuration_arn` (String) The managed notification configuration ARN, against which the account contact association will be created

@@ -77,6 +77,7 @@
         "ecs:DescribeServiceDeployments",
         "ecs:DescribeServiceRevisions",
         "ecs:DescribeServices",
+        "ecs:DescribeTaskDefinition",
         "ecs:ListServiceDeployments",
         "ecs:RegisterTaskDefinition",
         "iam:PassRole"
@@ -300,20 +301,8 @@
         "ServiceRevisionArn": {
           "type": "string"
         },
-        "ExecutionRoleArn": {
-          "type": "string"
-        },
         "TaskRoleArn": {
           "type": "string"
-        },
-        "ScalingTarget": {
-          "$ref": "#/definitions/ExpressGatewayScalingTarget"
-        },
-        "IngressPaths": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IngressPathSummary"
-          }
         },
         "PrimaryContainer": {
           "$ref": "#/definitions/ExpressGatewayContainer"
@@ -330,6 +319,18 @@
         },
         "Cpu": {
           "type": "string"
+        },
+        "ExecutionRoleArn": {
+          "type": "string"
+        },
+        "ScalingTarget": {
+          "$ref": "#/definitions/ExpressGatewayScalingTarget"
+        },
+        "IngressPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngressPathSummary"
+          }
         },
         "NetworkConfiguration": {
           "$ref": "#/definitions/ExpressGatewayServiceNetworkConfiguration"

@@ -10,12 +10,14 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -322,6 +324,39 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The set of tiering configurations for the pricing rule.",
 		//	  "properties": {
+		//	    "CustomTiers": {
+		//	      "description": "The set of custom volume tiers for a SKU-scoped TIERING pricing rule. Tiers must start at 0, be contiguous, and the last tier must have no end range.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A custom volume tier that defines the rate applied to usage within the given range.",
+		//	        "properties": {
+		//	          "BeginRangeInclusive": {
+		//	            "description": "The inclusive beginning of the tier's usage range.",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "EndRangeExclusive": {
+		//	            "description": "The exclusive end of the tier's usage range. Omit for the last tier (infinity).",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "RateValue": {
+		//	            "description": "The custom rate applied to usage within the tier's range.",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "BeginRangeInclusive",
+		//	          "RateValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "FreeTier": {
 		//	      "additionalProperties": false,
 		//	      "description": "The possible customizable free tier configurations.",
@@ -340,6 +375,60 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"tiering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomTiers
+				"custom_tiers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BeginRangeInclusive
+							"begin_range_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The inclusive beginning of the tier's usage range.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.AtLeast(0.000000),
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: EndRangeExclusive
+							"end_range_exclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The exclusive end of the tier's usage range. Omit for the last tier (infinity).",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.AtLeast(0.000000),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RateValue
+							"rate_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The custom rate applied to usage within the tier's range.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.AtLeast(0.000000),
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The set of custom volume tiers for a SKU-scoped TIERING pricing rule. Tiers must start at 0, be contiguous, and the last tier must have no end range.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: FreeTier
 				"free_tier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -449,15 +538,19 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 		"activated":                     "Activated",
 		"arn":                           "Arn",
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
+		"begin_range_inclusive":         "BeginRangeInclusive",
 		"billing_entity":                "BillingEntity",
 		"creation_time":                 "CreationTime",
+		"custom_tiers":                  "CustomTiers",
 		"description":                   "Description",
+		"end_range_exclusive":           "EndRangeExclusive",
 		"free_tier":                     "FreeTier",
 		"key":                           "Key",
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
 		"name":                          "Name",
 		"operation":                     "Operation",
+		"rate_value":                    "RateValue",
 		"scope":                         "Scope",
 		"service":                       "Service",
 		"tags":                          "Tags",

@@ -577,6 +577,21 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "additionalProperties": false,
 		//	  "description": "Additional options related to the Slurm scheduler.",
 		//	  "properties": {
+		//	    "GresCustomSettings": {
+		//	      "description": "Additional Slurm gres.conf records for the compute node group. Each item is a map of gres.conf attribute names to values describing one gres.conf record (for example a GPU topology, MIG, MPS, or custom GRES entry). AWS PCS adds the NodeName= prefix and merges these records with the GPU record it derives from the instance type.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A single Slurm gres.conf record, expressed as a map of gres.conf attribute names to their values (for example, {\"Name\": \"gpu\", \"Type\": \"a100\", \"File\": \"/dev/nvidia[0-7]\"} or {\"AutoDetect\": \"nvml\"}). AWS PCS adds the NodeName= prefix for the compute node group.",
+		//	        "patternProperties": {
+		//	          "": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
 		//	    "ScaleDownIdleTimeInSeconds": {
 		//	      "description": "The time before an idle node is scaled down.",
 		//	      "maximum": 10000000,
@@ -612,6 +627,12 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GresCustomSettings
+				"gres_custom_settings": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.MapType{ElemType: types.StringType},
+					Description: "Additional Slurm gres.conf records for the compute node group. Each item is a map of gres.conf attribute names to values describing one gres.conf record (for example a GPU topology, MIG, MPS, or custom GRES entry). AWS PCS adds the NodeName= prefix and merges these records with the GPU record it derives from the instance type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ScaleDownIdleTimeInSeconds
 				"scale_down_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The time before an idle node is scaled down.",
@@ -753,6 +774,7 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"custom_launch_template":          "CustomLaunchTemplate",
 		"error_info":                      "ErrorInfo",
 		"execution_policy":                "ExecutionPolicy",
+		"gres_custom_settings":            "GresCustomSettings",
 		"iam_instance_profile_arn":        "IamInstanceProfileArn",
 		"instance_configs":                "InstanceConfigs",
 		"instance_type":                   "InstanceType",

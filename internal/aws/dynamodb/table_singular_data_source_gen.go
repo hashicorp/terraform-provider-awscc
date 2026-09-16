@@ -1122,6 +1122,170 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the Time to Live (TTL) settings for the table.\n  For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VectorIndexes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Dimensions": {
+		//	        "maximum": 4096,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "DistanceFunction": {
+		//	        "enum": [
+		//	          "COSINE",
+		//	          "DOT_PRODUCT",
+		//	          "EUCLIDEAN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "IndexName": {
+		//	        "type": "string"
+		//	      },
+		//	      "Projection": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.",
+		//	        "properties": {
+		//	          "NonKeyAttributes": {
+		//	            "description": "Represents the non-key attribute names which will be projected into the index.\n For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.",
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "ProjectionType": {
+		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "SearchSchema": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "AttributeName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SearchSchemaElementType": {
+		//	              "enum": [
+		//	                "HASH",
+		//	                "INLINE_FILTER"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AttributeName",
+		//	            "SearchSchemaElementType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "VectorAttribute": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AttributeName": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AttributeName"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "IndexName",
+		//	      "VectorAttribute",
+		//	      "Projection",
+		//	      "Dimensions",
+		//	      "DistanceFunction"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"vector_indexes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Dimensions
+					"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DistanceFunction
+					"distance_function": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: IndexName
+					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Projection
+					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NonKeyAttributes
+							"non_key_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Represents the non-key attribute names which will be projected into the index.\n For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProjectionType
+							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.\n You can't modify the projection of an existing index. To change the projected attributes, you must delete the index and create a new one with the projection that you want.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SearchSchema
+					"search_schema": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AttributeName
+								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SearchSchemaElementType
+								"search_schema_element_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: VectorAttribute
+					"vector_attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AttributeName
+							"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WarmThroughput
 		// CloudFormation resource type schema:
 		//
@@ -1197,6 +1361,8 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"csv":                                  "Csv",
 		"deletion_protection_enabled":          "DeletionProtectionEnabled",
 		"delimiter":                            "Delimiter",
+		"dimensions":                           "Dimensions",
+		"distance_function":                    "DistanceFunction",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",
 		"header_list":                          "HeaderList",
@@ -1230,6 +1396,8 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_bucket_owner":                      "S3BucketOwner",
 		"s3_bucket_source":                     "S3BucketSource",
 		"s3_key_prefix":                        "S3KeyPrefix",
+		"search_schema":                        "SearchSchema",
+		"search_schema_element_type":           "SearchSchemaElementType",
 		"sse_enabled":                          "SSEEnabled",
 		"sse_specification":                    "SSESpecification",
 		"sse_type":                             "SSEType",
@@ -1241,6 +1409,8 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                                 "Tags",
 		"time_to_live_specification":           "TimeToLiveSpecification",
 		"value":                                "Value",
+		"vector_attribute":                     "VectorAttribute",
+		"vector_indexes":                       "VectorIndexes",
 		"warm_throughput":                      "WarmThroughput",
 		"write_capacity_units":                 "WriteCapacityUnits",
 		"write_units_per_second":               "WriteUnitsPerSecond",

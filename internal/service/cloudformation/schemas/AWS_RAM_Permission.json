@@ -1,108 +1,47 @@
 {
-  "typeName": "AWS::RAM::Permission",
-  "description": "Resource type definition for AWS::RAM::Permission",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ram",
-  "additionalProperties": false,
-  "properties": {
-    "Arn": {
-      "type": "string"
-    },
-    "Name": {
-      "description": "The name of the permission.",
-      "type": "string"
-    },
-    "Version": {
-      "description": "Version of the permission.",
-      "type": "string"
-    },
-    "IsResourceTypeDefault": {
-      "description": "Set to true to use this as the default permission.",
-      "type": "boolean"
-    },
-    "PermissionType": {
-      "type": "string"
-    },
-    "ResourceType": {
-      "description": "The resource type this permission can be used with.",
-      "type": "string"
-    },
-    "PolicyTemplate": {
-      "description": "Policy template for the permission.",
-      "type": "object"
-    },
-    "Tags": {
-      "type": "array",
-      "uniqueItems": false,
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    }
+  "tagging": {
+    "permissions": [
+      "ram:TagResource",
+      "ram:UntagResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
   },
-  "required": [
-    "Name",
-    "ResourceType",
-    "PolicyTemplate"
-  ],
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
+  "typeName": "AWS::RAM::Permission",
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/Version",
     "/properties/IsResourceTypeDefault",
     "/properties/PermissionType"
   ],
+  "description": "Resource type definition for AWS::RAM::Permission",
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/ResourceType",
     "/properties/PolicyTemplate"
   ],
-  "definitions": {
-    "Tag": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Key": {
-          "type": "string",
-          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "Value": {
-          "type": "string",
-          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "minLength": 0,
-          "maxLength": 256
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
-      ]
-    }
-  },
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags",
-    "permissions": [
-      "ram:TagResource",
-      "ram:UntagResource"
-    ]
-  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "required": [
+    "Name",
+    "ResourceType",
+    "PolicyTemplate"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ram",
   "handlers": {
+    "read": {
+      "permissions": [
+        "ram:GetPermission"
+      ]
+    },
     "create": {
       "permissions": [
         "ram:CreatePermission",
         "ram:TagResource"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "ram:GetPermission"
       ]
     },
     "update": {
@@ -118,17 +57,106 @@
         "ram:TagResource"
       ]
     },
-    "delete": {
-      "permissions": [
-        "ram:DeletePermissionVersion",
-        "ram:DeletePermission"
-      ]
-    },
     "list": {
       "permissions": [
         "ram:ListPermissions",
         "ram:ListPermissionVersions"
       ]
+    },
+    "delete": {
+      "permissions": [
+        "ram:DeletePermissionVersion",
+        "ram:DeletePermission"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "PermissionTemplateParameterDeclaration": {
+      "description": "A template parameter declared by a customer managed permission's policy template. The name is used as the placeholder in the policy template using the syntax @{parameterName}.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "description": "The type of the template parameter. STRING substitutes a single string value directly into the template; STRING_LIST expands one or more string values to an array in the rendered policy.",
+          "type": "string",
+          "enum": [
+            "STRING",
+            "STRING_LIST"
+          ]
+        },
+        "Description": {
+          "description": "A description of the template parameter that helps consumers understand what value to provide.",
+          "type": "string"
+        },
+        "Name": {
+          "description": "The name of the template parameter.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Type",
+        "Description"
+      ]
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "Version": {
+      "description": "Version of the permission.",
+      "type": "string"
+    },
+    "PermissionType": {
+      "type": "string"
+    },
+    "ResourceType": {
+      "description": "The resource type this permission can be used with.",
+      "type": "string"
+    },
+    "Arn": {
+      "type": "string"
+    },
+    "IsResourceTypeDefault": {
+      "description": "Set to true to use this as the default permission.",
+      "type": "boolean"
+    },
+    "PolicyTemplate": {
+      "description": "Policy template for the permission.",
+      "type": "object"
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Name": {
+      "description": "The name of the permission.",
+      "type": "string"
     }
   }
 }

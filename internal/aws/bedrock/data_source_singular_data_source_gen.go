@@ -1635,7 +1635,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "enum": [
 		//	            "BEDROCK_FOUNDATION_MODEL",
 		//	            "BEDROCK_DATA_AUTOMATION",
-		//	            "SMART_PARSING"
+		//	            "SMART_PARSING",
+		//	            "MULTI_MODAL_EMBEDDINGS"
 		//	          ],
 		//	          "type": "string"
 		//	        }

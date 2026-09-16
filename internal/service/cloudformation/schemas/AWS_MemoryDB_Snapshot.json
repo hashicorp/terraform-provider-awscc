@@ -1,0 +1,213 @@
+{
+  "typeName": "AWS::MemoryDB::Snapshot",
+  "description": "Resource Type definition for AWS::MemoryDB::Snapshot. Represents a copy of an entire cluster as of the time when the snapshot was taken.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ClusterConfiguration": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the cluster."
+        },
+        "Description": {
+          "type": "string",
+          "description": "The description of the cluster configuration."
+        },
+        "NodeType": {
+          "type": "string",
+          "description": "The node type used for the cluster."
+        },
+        "Engine": {
+          "type": "string",
+          "description": "The name of the engine used by the cluster configuration."
+        },
+        "EngineVersion": {
+          "type": "string",
+          "description": "The Redis OSS engine version used by the cluster."
+        },
+        "MaintenanceWindow": {
+          "type": "string",
+          "description": "The specified maintenance window for the cluster."
+        },
+        "TopicArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the SNS notification topic for the cluster."
+        },
+        "Port": {
+          "type": "integer",
+          "description": "The port used by the cluster."
+        },
+        "ParameterGroupName": {
+          "type": "string",
+          "description": "The name of parameter group used by the cluster."
+        },
+        "SubnetGroupName": {
+          "type": "string",
+          "description": "The name of the subnet group used by the cluster."
+        },
+        "VpcId": {
+          "type": "string",
+          "description": "The ID of the VPC the cluster belongs to."
+        },
+        "SnapshotRetentionLimit": {
+          "type": "integer",
+          "description": "The snapshot retention limit set by the cluster."
+        },
+        "SnapshotWindow": {
+          "type": "string",
+          "description": "The snapshot window set by the cluster."
+        },
+        "NumShards": {
+          "type": "integer",
+          "description": "The number of shards in the cluster."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "SnapshotName": {
+      "type": "string",
+      "description": "The name of the snapshot."
+    },
+    "ClusterName": {
+      "type": "string",
+      "description": "The name of the cluster from which the snapshot was taken."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the snapshot. Valid values: creating | available | restoring | copying | deleting."
+    },
+    "Source": {
+      "type": "string",
+      "description": "Indicates whether the snapshot is from an automatic backup (automated) or was created manually (manual)."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The ID of the KMS key used to encrypt the snapshot."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN (Amazon Resource Name) of the snapshot."
+    },
+    "ClusterConfiguration": {
+      "$ref": "#/definitions/ClusterConfiguration",
+      "description": "The configuration of the cluster from which the snapshot was taken."
+    },
+    "DataTiering": {
+      "type": "string",
+      "description": "Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.",
+      "enum": [
+        "true",
+        "false"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to be added to this resource.",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "SnapshotName",
+    "ClusterName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/Source",
+    "/properties/ClusterConfiguration",
+    "/properties/DataTiering"
+  ],
+  "createOnlyProperties": [
+    "/properties/SnapshotName",
+    "/properties/ClusterName",
+    "/properties/KmsKeyId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SnapshotName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "memorydb:TagResource",
+      "memorydb:UntagResource",
+      "memorydb:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "memorydb:CreateSnapshot",
+        "memorydb:DescribeSnapshots",
+        "memorydb:TagResource",
+        "memorydb:ListTags",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "memorydb:DescribeSnapshots",
+        "memorydb:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "memorydb:DescribeSnapshots",
+        "memorydb:TagResource",
+        "memorydb:UntagResource",
+        "memorydb:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "memorydb:DeleteSnapshot",
+        "memorydb:DescribeSnapshots"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "memorydb:DescribeSnapshots"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

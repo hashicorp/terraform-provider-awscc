@@ -364,14 +364,15 @@ Optional:
 Optional:
 
 - `instances_distribution` (Attributes) The instances distribution. (see [below for nested schema](#nestedatt--mixed_instances_policy--instances_distribution))
-- `launch_template` (Attributes) One or more launch templates and the instance types (overrides) that are used to launch EC2 instances to fulfill On-Demand and Spot capacities. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template))
+- `launch_template` (Attributes) One or more launch templates and the instance types (overrides) that are used to launch EC2 instances to fulfill the configured capacities. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template))
 
 <a id="nestedatt--mixed_instances_policy--instances_distribution"></a>
 ### Nested Schema for `mixed_instances_policy.instances_distribution`
 
 Optional:
 
-- `distribution_segments` (Attributes List) (see [below for nested schema](#nestedatt--mixed_instances_policy--instances_distribution--distribution_segments))
+- `distribution_segments` (Attributes List) The Distribution Segments configuration. Each segment contains an ordered list of capacity types to prioritize.
+ For more information, see [Use Distribution Segments to target multiple capacity types](https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html) in the *Amazon EC2 Auto Scaling User Guide*. (see [below for nested schema](#nestedatt--mixed_instances_policy--instances_distribution--distribution_segments))
 - `on_demand_allocation_strategy` (String) The allocation strategy to apply to your On-Demand Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.
  The following lists the valid values:
   + lowest-price Uses price to determine which instance types are the highest priority, launching the lowest priced instance types within an Availability Zone first. This is the default value for Auto Scaling groups that specify InstanceRequirements. + prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling launches your highest priority instance types first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance type, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. This is the default value for Auto Scaling groups that don't specify InstanceRequirements and cannot be used for groups that do.
@@ -396,7 +397,9 @@ Optional:
 
 Optional:
 
-- `target_capacity_types` (List of String)
+- `target_capacity_types` (List of String) The capacity types to prioritize, in order. Amazon EC2 Auto Scaling attempts to launch instances in the priority order of the capacity types, and within each capacity type, in the order of instance types listed in your launch template ``Overrides``.
+ The following lists the valid values:
+  + on-demand-capacity-reservation On-Demand Capacity Reservations. + capacity-block Capacity Blocks. + interruptible-capacity-reservation Interruptible Capacity Reservations. + on-demand On-Demand capacity. Include this value to allow the group to fall back to On-Demand capacity when the preceding capacity types are unavailable.
 
 
 

@@ -1,0 +1,167 @@
+{
+  "typeName": "AWS::DRS::LaunchConfigurationTemplate",
+  "description": "Account level Launch Configuration Template for AWS Elastic Disaster Recovery.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "ARN of the Launch Configuration Template.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": ""
+    },
+    "LaunchConfigurationTemplateID": {
+      "type": "string",
+      "description": "ID of the Launch Configuration Template.",
+      "minLength": 21,
+      "maxLength": 21,
+      "pattern": "^lct-[0-9a-zA-Z]{17}$"
+    },
+    "LaunchDisposition": {
+      "type": "string",
+      "description": "Launch disposition.",
+      "enum": [
+        "STOPPED",
+        "STARTED"
+      ]
+    },
+    "TargetInstanceTypeRightSizingMethod": {
+      "type": "string",
+      "description": "Target instance type right-sizing method.",
+      "enum": [
+        "NONE",
+        "BASIC",
+        "IN_AWS"
+      ]
+    },
+    "CopyPrivateIp": {
+      "type": "boolean",
+      "description": "Copy private IP."
+    },
+    "CopyTags": {
+      "type": "boolean",
+      "description": "Copy tags."
+    },
+    "Licensing": {
+      "$ref": "#/definitions/Licensing"
+    },
+    "ExportBucketArn": {
+      "type": "string",
+      "description": "S3 bucket ARN to export Source Network templates.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": ""
+    },
+    "PostLaunchEnabled": {
+      "type": "boolean",
+      "description": "Whether we want to activate post-launch actions."
+    },
+    "LaunchIntoSourceInstance": {
+      "type": "boolean",
+      "description": "DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A set of tags associated with the Launch Configuration Template.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Licensing": {
+      "type": "object",
+      "description": "Configuration of a machine's license.",
+      "properties": {
+        "OsByol": {
+          "type": "boolean",
+          "description": "Whether to enable Bring your own license or not."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the Launch Configuration Template.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/LaunchConfigurationTemplateID"
+  ],
+  "createOnlyProperties": [
+    "/properties/Tags"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/LaunchConfigurationTemplateID"
+    ]
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "drs:CreateLaunchConfigurationTemplate",
+      "drs:DescribeLaunchConfigurationTemplates"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "drs:CreateLaunchConfigurationTemplate",
+        "drs:DescribeLaunchConfigurationTemplates"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "drs:DescribeLaunchConfigurationTemplates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "drs:UpdateLaunchConfigurationTemplate",
+        "drs:DescribeLaunchConfigurationTemplates",
+        "drs:TagResource",
+        "drs:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "drs:DeleteLaunchConfigurationTemplate",
+        "drs:DescribeLaunchConfigurationTemplates"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "drs:DescribeLaunchConfigurationTemplates"
+      ]
+    }
+  }
+}

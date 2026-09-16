@@ -108,6 +108,7 @@ resource "awscc_dynamodb_global_table" "example" {
 - `stream_specification` (Attributes) (see [below for nested schema](#nestedatt--stream_specification))
 - `table_name` (String)
 - `time_to_live_specification` (Attributes) (see [below for nested schema](#nestedatt--time_to_live_specification))
+- `vector_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--vector_indexes))
 - `warm_throughput` (Attributes) (see [below for nested schema](#nestedatt--warm_throughput))
 - `write_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--write_on_demand_throughput_settings))
 - `write_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--write_provisioned_throughput_settings))
@@ -509,6 +510,45 @@ Optional:
 
 - `attribute_name` (String)
 - `enabled` (Boolean)
+
+
+<a id="nestedatt--vector_indexes"></a>
+### Nested Schema for `vector_indexes`
+
+Optional:
+
+- `dimensions` (Number)
+- `distance_function` (String)
+- `index_name` (String)
+- `projection` (Attributes) (see [below for nested schema](#nestedatt--vector_indexes--projection))
+- `search_schema` (Attributes Set) (see [below for nested schema](#nestedatt--vector_indexes--search_schema))
+- `vector_attribute` (Attributes) (see [below for nested schema](#nestedatt--vector_indexes--vector_attribute))
+
+<a id="nestedatt--vector_indexes--projection"></a>
+### Nested Schema for `vector_indexes.projection`
+
+Optional:
+
+- `non_key_attributes` (Set of String)
+- `projection_type` (String)
+
+
+<a id="nestedatt--vector_indexes--search_schema"></a>
+### Nested Schema for `vector_indexes.search_schema`
+
+Optional:
+
+- `attribute_name` (String)
+- `search_schema_element_type` (String)
+
+
+<a id="nestedatt--vector_indexes--vector_attribute"></a>
+### Nested Schema for `vector_indexes.vector_attribute`
+
+Optional:
+
+- `attribute_name` (String)
+
 
 
 <a id="nestedatt--warm_throughput"></a>
