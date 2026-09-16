@@ -163,6 +163,21 @@ in. `reconcile` and `check` are offline and have no discovery diff at all: every
 failure they see is, by construction, a machinery failure → fail the run. They
 never freeze or suppress.
 
+**`reconcile`/`check` must exclude frozen rows (pinned now, before item 4).**
+`sync` already excludes frozen types from the gate entirely — `classifyChange`
+returns `statusFrozen` before any byte comparison, upstream of and prior to
+`buildCandidates`, so a frozen row never becomes a candidate at all (a type is
+frozen precisely because its schema is authoritative at its pinned bytes, not
+because the tool should keep re-attempting it). `reconcile`'s offline row
+source has no `classifyChange` call to inherit that exclusion from for free —
+it must apply the same exclusion explicitly (skip any row with `frozen_since`
+set, or generate from its pinned bytes and treat that as authoritative rather
+than a fresh attempt). Missing this is not a cosmetic gap: a frozen type is
+frozen *because* it fails to generate/compile, so feeding it through
+`classPresentUnchanged` would hit `machineryFailure` on every single
+`reconcile` run — the command would never succeed at all, not even in the
+best case of "the engine change fixed everything else."
+
 ## 4. Per-command behavior
 
 - **`sync`** (AWS, writes): crawl, diff, gate the **whole** corpus.
@@ -204,11 +219,31 @@ Ordered so each step is independently mergeable and leaves the tool working.
    `refreshCandidate` → `compileFixpoint` → `decide()`, factored out of
    `runSync`. Pure extraction; `decide()` unchanged, so `reconcile`/`check`
    cannot call it safely until step 3's routing lands.
-3. **Whole-corpus gate + source routing.** Gate `statusUnchanged` rows too, and
-   thread the discovery-diff signal into `decide()` so `statusChanged` failures
-   freeze/suppress and `statusUnchanged` failures hard-error. `reconcile`/`check`
-   (offline) hard-error on any failure. This is the one real behavior change,
-   and what makes `reconcile` safe to wire (no silent offline freeze).
+3. **Whole-corpus gate + source routing** *(done)*. Gated `statusUnchanged`
+   rows too (`buildCandidates`), and gave `decide()` a `classPresentUnchanged`
+   branch so a `statusChanged` failure still freezes/suppresses while a
+   `statusUnchanged` failure sets `machineryFailure` instead (no overlay
+   attributes at all — nothing safe to write). `machineryFailures`
+   (`pipeline.go`) scans a settled batch for the flag; `runSync` calls it
+   right after `settleBatch` returns, before any promotion, and aborts with
+   full per-artifact blame on any hit, promoting nothing that run. Two
+   forward-looking notes from review, both minor, neither blocking:
+   - **Reporting asymmetry.** The formatted, per-artifact `machineryFailures`
+     report only appears when `compileFixpoint` itself reaches green (the
+     committed fallback compiles). In the broad-toolchain shape, where the
+     committed files also won't build, the fixpoint can't reach green and
+     `runSync` returns the raw `compile gate: ...` error instead of the
+     formatted report — both abort correctly, and `go build` in CI backstops
+     that case regardless, so this is a message-quality nuance, not a
+     correctness hole. Worth a future polish if the raw error proves hard to
+     read in practice; not urgent.
+   - **Frozen-row exclusion, pinned ahead of item 4** — see "The routing this
+     still requires," above: `reconcile`'s offline row source must exclude
+     frozen rows explicitly (or treat their pinned bytes as authoritative),
+     the same outcome `sync` gets for free via `classifyChange`'s
+     `statusFrozen` short-circuit upstream of `buildCandidates`. Missing this
+     would make `reconcile` hit `machineryFailure` on every frozen type,
+     every run, with no path to ever completing.
 4. **`reconcile`**: wire the shared pipeline to promotion, offline row source.
 5. **`check`**: wire the same pipeline, report-only, exit non-zero on any
    failure or output-diff.

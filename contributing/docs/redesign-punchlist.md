@@ -104,8 +104,15 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
    route through `machineryFailure`, never the freeze/suppress branch. This
    is the actual fix for the original mis-freeze bug the review found; the
    offline row-building code must not reuse `classPresent` by copy-paste
-   convenience from `buildCandidates`. *(core)* Detail:
-   `held-artifacts-design.md` §4, §5 step 4; §0 story 2.
+   convenience from `buildCandidates`. **Second pinned convention, from
+   review:** the offline row source must exclude frozen rows (skip any row
+   with `frozen_since` set, or generate from its pinned bytes rather than
+   attempting a fresh one) — `sync` gets this for free via `classifyChange`'s
+   `statusFrozen` short-circuit, which `reconcile` has no equivalent call to
+   inherit it from. Missing this makes `reconcile` hit `machineryFailure` on
+   every frozen type, every run, with no path to ever completing — cheap to
+   get right now, ugly to discover later as "reconcile never succeeds."
+   *(core)* Detail: `held-artifacts-design.md` §4, §5 step 4; §0 story 2.
 5. **`check`.** Wire the same pipeline, stop before promotion, report every
    failure, exit non-zero on any failure **or** any output-diff (regenerated ≠
    committed, even when it compiles — the "changed the engine, didn't reconcile
@@ -136,11 +143,18 @@ Status shorthand: **prereq** (unblocks others) · **core** · **additive**
 Tracked in `held-artifacts-design.md` §6:
 
 - Exact flag name for item 6's reasoned-row mode.
-- The shape of `decide()`'s discovery-diff signal (item 3): a new `changeClass`
-  value, or a `byteStatus` parameter alongside it.
+- ~~The shape of `decide()`'s discovery-diff signal (item 3)~~ — **resolved**:
+  a new `changeClass` value, `classPresentUnchanged`, not a separate parameter.
 - Item 5's "fail on any output-diff" relies on deterministic generation
   (`TestFullCorpusParity` already does); confirm no incidental non-determinism
   (timestamps, map order) could make an unrelated PR fail `check` on spurious
   diff.
 - How `check` (item 5) is wired into CI, and how it's scoped to engine-touching
   PRs rather than every PR.
+- **Deferred polish, from review (item 3):** `runSync`'s abort message is the
+  formatted, per-artifact `machineryFailures` report only when
+  `compileFixpoint` reaches green; in the broad-toolchain shape (committed
+  files also won't build), the fixpoint hard-errors first and `runSync`
+  surfaces that raw `compile gate: ...` error instead. Both abort correctly;
+  `go build` in CI backstops the broad case regardless. Not urgent — revisit
+  if the raw error proves hard to read in practice.
