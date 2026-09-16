@@ -128,7 +128,7 @@ func TestCommentOrUnknown(t *testing.T) {
 		// there is nothing to weigh against the existing answer, so it must
 		// win over a same-row free-form comment that might describe a
 		// different fact entirely.
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "manual: schema frozen, known upstream Arn bug", "unrelated comment text", false)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y", field: attrSuppressionReasonResource}, "manual: schema frozen, known upstream Arn bug", "unrelated comment text", false)
 		if p.action != "reason" {
 			t.Errorf("action = %q, want reason", p.action)
 		}
@@ -137,6 +137,30 @@ func TestCommentOrUnknown(t *testing.T) {
 		}
 		if strings.Contains(p.reason, "unrelated comment text") {
 			t.Errorf("reason = %q, must not incorporate the unrelated comment when a real existing reason is kept", p.reason)
+		}
+		if !strings.Contains(p.reason, "schema cache has this type") {
+			t.Errorf("reason = %q, an artifact fact's kept-reason note should mention the schema cache", p.reason)
+		}
+	})
+
+	t.Run("a real existing freeze reason is kept with freeze-specific wording, not the artifact-oriented cache note", func(t *testing.T) {
+		t.Parallel()
+		// Review finding: the freeze is a schema-level fact, never
+		// re-probed regardless of cache state (that is what "frozen"
+		// means) — the artifact-oriented "re-run once the schema cache has
+		// this type" wording is misleading here, since nothing about a
+		// freeze changes on a future run without a human lifting it by
+		// hand. base.field == attrFrozenReason (set by freezeProposal) is
+		// what distinguishes this case.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y", field: attrFrozenReason}, "manual: schema frozen, known upstream Arn bug", "unrelated comment text", false)
+		if !strings.HasPrefix(p.reason, "manual: schema frozen, known upstream Arn bug") {
+			t.Errorf("reason = %q, want the existing freeze reason preserved verbatim as a prefix", p.reason)
+		}
+		if strings.Contains(p.reason, "schema cache has this type") {
+			t.Errorf("reason = %q, a freeze's kept-reason note must not use the artifact-oriented cache wording", p.reason)
+		}
+		if !strings.Contains(p.reason, "no schema re-probe applies to a freeze") {
+			t.Errorf("reason = %q, want the freeze-specific note explaining why a re-probe never applies", p.reason)
 		}
 	})
 

@@ -415,7 +415,13 @@ func freezeProposal(row resourceRow, f healFact, comment string, multiPending bo
 // under -recheck-all, since the default scope excludes these), that reason
 // is kept — there is no schema to re-probe with, so there is nothing to
 // weigh against it, and a comment-migration guess must never overwrite a
-// real, already-recorded answer. Otherwise: if a free-form
+// real, already-recorded answer. The appended note differs for the freeze
+// (base.field == attrFrozenReason): a freeze is a schema-level fact, never
+// re-probed regardless of cache state (that is what "frozen" means), so it
+// gets its own wording rather than the artifact-oriented "re-run once the
+// schema cache has this type" — that phrasing would misleadingly imply a
+// future run could resolve a freeze differently, when nothing does without
+// a human lifting it by hand. Otherwise: if a free-form
 // "# Suppression Reason:" comment exists, migrate its text into a manual:
 // reason; otherwise the row still needs a human look.
 //
@@ -430,6 +436,19 @@ func freezeProposal(row resourceRow, f healFact, comment string, multiPending bo
 func commentOrUnknown(base healProposal, existingReason, comment string, multiPending bool) healProposal {
 	base.action = "reason"
 	if existingReason != "" && !strings.HasPrefix(existingReason, string(reasonUnknown)+":") {
+		if base.field == attrFrozenReason {
+			// The freeze is a schema-level fact, not a per-artifact
+			// generation attempt (healFactsFor) — there is no schema cache
+			// state that would ever change this note's applicability, unlike
+			// an artifact fact where a schema simply hasn't been cached yet.
+			// A frozen row's schema is deliberately never refreshed (that is
+			// what "frozen" means), so "re-run once the cache has this type"
+			// would be actively misleading here: it implies a future run
+			// might resolve this differently, when nothing about a freeze
+			// changes without a human lifting it by hand.
+			base.reason = existingReason + " (no schema re-probe applies to a freeze; existing reason kept as-is — verify by hand)"
+			return base
+		}
 		base.reason = existingReason + " (no cached schema to re-probe against; existing reason kept as-is — re-run once the schema cache has this type, or verify by hand)"
 		return base
 	}
