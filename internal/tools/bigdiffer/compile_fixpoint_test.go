@@ -270,11 +270,11 @@ func TestCompileFixpointRoundCapIsBounded(t *testing.T) {
 // extended to the compile gate (item 1). The compile gate always builds the
 // real module (cfg.repoRoot) — it cannot be pointed at a temp tree the way
 // pure-generation tests point cfg.outputRoot at one — so this does not
-// reconstruct a full runUpdate batch. It instead confirms the two halves of
+// reconstruct a full runSync batch. It instead confirms the two halves of
 // the guarantee directly: (1) compileFixpoint itself never leaves a trace on
 // the real tree when it hard-fails (proven again here, chained with a real,
 // otherwise-successful sibling candidate staged alongside the broken one, to
-// rule out the sibling's presence changing the outcome), and (2) runUpdate's
+// rule out the sibling's presence changing the outcome), and (2) runSync's
 // own source unconditionally returns before promoteStaged on a compile-gate
 // error (`if err := compileFixpoint(...); err != nil { return ... }`,
 // update.go) — the same short-circuit TestUpdateBatchAtomicity already relies

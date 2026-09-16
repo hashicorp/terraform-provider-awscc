@@ -59,10 +59,10 @@ jobs:
       - run: git config --global url."https://${{ secrets.PRIVATE_GOMOD_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
       # Unit tests plus full-corpus generation parity (bigdiffer == committed).
       # Offline: uses the committed schema cache, never queries AWS (the live
-      # -update/e2e paths are opt-in and skipped here).
+      # -sync/e2e paths are opt-in and skipped here).
       - run: go test ./internal/tools/bigdiffer/... -timeout 20m
       # Verify all_schemas.hcl is normalized and anomaly-free (offline).
-      - run: go run ./internal/tools/bigdiffer -check
+      - run: go run ./internal/tools/bigdiffer -lint
       # Trim test binaries and stale entries so the saved cache stays small
       # enough to extract reliably on the next run.
       - name: Cleanup Go build cache before save

@@ -12,7 +12,7 @@ import (
 
 // staged is a small helper for building a synthetic promoted map in tests:
 // one stagedArtifact per artifact, each wired to its own gateResult (mirroring
-// how runUpdate shares one *gateResult per candidate across all of that
+// how runSync shares one *gateResult per candidate across all of that
 // candidate's staged artifacts).
 func staged(cfType string, kind artifactKind, tfType string, listRes bool) stagedArtifact {
 	gr := &gateResult{cfType: cfType}
@@ -190,7 +190,7 @@ func TestFormatChangelogFragmentGolden(t *testing.T) {
 
 // TestFormatChangelogFragmentEmpty confirms an empty entry set produces an
 // empty fragment (no bare "FEATURES:" header with nothing under it), so
-// runUpdate's caller can use an empty string as "don't write the file."
+// runSync's caller can use an empty string as "don't write the file."
 func TestFormatChangelogFragmentEmpty(t *testing.T) {
 	t.Parallel()
 	if got := formatChangelogFragment(nil); got != "" {
@@ -226,7 +226,7 @@ func TestFormatChangelogFragmentUsesRealBulletSyntax(t *testing.T) {
 // shape: a top version block with a NOTES: section and no FEATURES: section
 // yet — the common case, since the top block is retitled fresh right after
 // each release and NOTES: entries (if any) are usually added by hand before
-// -update ever runs. The new FEATURES: section must land after NOTES:'s own
+// -sync ever runs. The new FEATURES: section must land after NOTES:'s own
 // bullets and before the next "## " heading, leaving everything else (the
 // heading text, NOTES: content, the older release below) byte-for-byte
 // untouched.
@@ -348,7 +348,7 @@ func TestWriteChangelogFragmentEmptyIsNoop(t *testing.T) {
 // against silently corrupting a human-owned file: bigdiffer normally runs
 // once per release cycle and drafts the whole entry in a single pass, so a
 // top block that already has populated FEATURES: bullets means either
-// -update ran twice without an intervening release, or the file's shape
+// -sync ran twice without an intervening release, or the file's shape
 // isn't what was expected — either way, this must error rather than guess
 // how to merge.
 func TestWriteChangelogFragmentRefusesNonEmptyExistingSection(t *testing.T) {

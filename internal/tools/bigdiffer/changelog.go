@@ -28,7 +28,7 @@ type changelogEntry struct {
 }
 
 // changelogEntries classifies the post-gate promoted artifacts into
-// CHANGELOG.md bullets. promoted is -update's stagedByDest *after*
+// CHANGELOG.md bullets. promoted is -sync's stagedByDest *after*
 // compileFixpoint and checkListResourceCoupling have settled — every
 // remaining entry is, by construction, an artifact that survived the compile
 // gate and will actually be promoted (compileFixpoint deletes a rejected
@@ -57,7 +57,7 @@ type changelogEntry struct {
 // existed all along.
 //
 // Pure: no I/O, no AWS, no live tree — a direct function of two maps already
-// held in memory by the time -update reaches this point.
+// held in memory by the time -sync reaches this point.
 func changelogEntries(promoted map[string]stagedArtifact, preRunOverlay map[string]resourceRow) []changelogEntry {
 	var entries []changelogEntry
 	seen := make(map[changelogEntry]bool)
@@ -122,7 +122,7 @@ func changelogEntries(promoted map[string]stagedArtifact, preRunOverlay map[stri
 // fresh one immediately after cutting a release, confirmed against real
 // history: "Add changelog entry for v1.100.0" landed right after "Bumped
 // product version to 1.99.1"). Assumes that block's FEATURES: section is
-// empty or absent when -update runs — bigdiffer normally runs once and
+// empty or absent when -sync runs — bigdiffer normally runs once and
 // drafts the whole entry in one pass, so there is nothing to merge with. An
 // empty entries list is a no-op.
 func writeChangelogFragment(path string, entries []changelogEntry) error {
@@ -153,7 +153,7 @@ func writeChangelogFragment(path string, entries []changelogEntry) error {
 //
 // Errors if the block already has a non-empty FEATURES: section — bigdiffer
 // normally runs once per week and drafts the whole entry in a single pass,
-// so an existing populated section means either -update ran twice without an
+// so an existing populated section means either -sync ran twice without an
 // intervening release (merge by hand) or the block structure isn't what was
 // expected; guessing how to merge silently risks corrupting a human-owned
 // file.
@@ -180,7 +180,7 @@ func insertChangelogFeatures(content string, entries []changelogEntry) (string, 
 		}
 		if !allBlank(block[idx+1 : end]) {
 			return "", fmt.Errorf("top version block already has a non-empty FEATURES: section " +
-				"(-update normally runs once per release cycle; merge the new entries by hand)")
+				"(-sync normally runs once per release cycle; merge the new entries by hand)")
 		}
 	}
 

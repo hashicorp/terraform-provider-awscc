@@ -4,6 +4,8 @@
 package main
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -316,7 +318,7 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	// Unpinned-retained is advisory only and must NOT be a blocking problem.
 	r := Report{UnexplainedRetained: []rowRef{{cfn: "AWS::Svc::Gone"}}}
 	if got := r.anomalyProblems(); len(got) != 0 {
-		t.Errorf("unpinned-retained should not block -check, got %v", got)
+		t.Errorf("unpinned-retained should not block -lint, got %v", got)
 	}
 
 	// Duplicates and naming violations are blocking.
@@ -332,7 +334,7 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	// suppression and freeze must carry its own reason.
 	r = Report{ReasonlessSuppressed: []reasonlessFact{{cfn: "AWS::Svc::Thing", field: attrFrozenReason}}}
 	if got := r.anomalyProblems(); len(got) != 1 {
-		t.Errorf("reason-less fact should block -check, got %v", got)
+		t.Errorf("reason-less fact should block -lint, got %v", got)
 	}
 }
 
@@ -385,7 +387,7 @@ func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
 // with its own reason field empty is flagged per-fact, not per-row — a row
 // can have a real reason for one fact (e.g. its resource) while another of
 // its facts (e.g. its plural DS, or its freeze) is still reason-less, and
-// each is its own independent anomaly line. Advisory only (never a -check
+// each is its own independent anomaly line. Advisory only (never a -lint
 // failure).
 func TestReasonlessSuppressionAnomaly(t *testing.T) {
 	t.Parallel()
@@ -442,6 +444,45 @@ func TestReasonlessSuppressionAnomaly(t *testing.T) {
 		t.Errorf("AWS::Svc::Reasoned's only fact (its resource) has a real reason, should not be flagged, got %+v", byCFN)
 	}
 	if got := report.anomalyProblems(); len(got) != 1 {
-		t.Errorf("a reason-less suppression/freeze must fail -check, got %v", got)
+		t.Errorf("a reason-less suppression/freeze must fail -lint, got %v", got)
+	}
+}
+
+// TestCheckRegistrationUpToDate exercises the -lint drift guard: a fresh emit
+// passes, a drifted file is reported, and an absent file is allowed (the
+// transition state, where the legacy directive files still register everything).
+//
+// Moved here from the now-deleted run_generate_test.go: this test exercises
+// checkRegistrationUpToDate (defined in main.go), not runGenerate, so it has
+// no dependency on -generate/-reconcile's implementation and survives
+// run_generate.go's deletion unchanged.
+func TestCheckRegistrationUpToDate(t *testing.T) {
+	cfg, rows := loadCorpus(t)
+
+	reg, err := emitRegistration(cfg, rows)
+	if err != nil {
+		t.Fatalf("emitRegistration: %v", err)
+	}
+	cfg.registrationPath = filepath.Join(t.TempDir(), "registrations_gen.go")
+
+	// Absent: allowed during the transition.
+	if got := checkRegistrationUpToDate(cfg, rows); got != "" {
+		t.Errorf("absent registration: got problem %q, want none", got)
+	}
+
+	// Fresh: up to date, no problem.
+	if err := os.WriteFile(cfg.registrationPath, reg, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if got := checkRegistrationUpToDate(cfg, rows); got != "" {
+		t.Errorf("fresh registration: got problem %q, want none", got)
+	}
+
+	// Stale: a drifted committed file must be reported.
+	if err := os.WriteFile(cfg.registrationPath, append(reg, "\n// drift\n"...), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if got := checkRegistrationUpToDate(cfg, rows); got == "" {
+		t.Error("stale registration: got no problem, want a staleness report")
 	}
 }

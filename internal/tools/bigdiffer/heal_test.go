@@ -277,8 +277,8 @@ func TestProbeArtifactWithBinaryCleanFailure(t *testing.T) {
 
 // TestRunHealProbeArtifactPassesCompileGateForARealType is the happy path:
 // probing a real, already-working type must still report success once the
-// compile gate step (added so -heal's "lift" proposals are trustworthy
-// against both stages a real -update run enforces, not just generation) is
+// compile gate step (added so -recheck's "lift" proposals are trustworthy
+// against both stages a real -sync run enforces, not just generation) is
 // exercised against the real module.
 func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 	if testing.Short() {
@@ -294,7 +294,7 @@ func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 		schemaPath = schemaCachePath(cfg.cacheDir, lg.CloudFormationTypeName)
 	}
 
-	err := runHealProbeArtifact(lg.ResourceTypeName, lg.CloudFormationTypeName, string(artifactResource),
+	err := runRecheckProbeArtifact(lg.ResourceTypeName, lg.CloudFormationTypeName, string(artifactResource),
 		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
 	if err != nil {
 		t.Fatalf("a real, already-working type should pass generation and the compile gate, got: %v", err)
@@ -303,8 +303,8 @@ func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 
 // TestRunHealProbeArtifactCatchesACompileGateFailure proves the actual review
 // item: a type that *generates* fine can still be rejected by the compile
-// gate, and runHealProbeArtifact must report that as a failure rather than
-// the generation-only success -heal reported before this change. Simulated by
+// gate, and runRecheckProbeArtifact must report that as a failure rather than
+// the generation-only success -recheck reported before this change. Simulated by
 // pre-placing a deliberately broken sibling file in the same real package the
 // probed artifact would land in — buildOnce's overlay of the probed artifact's
 // own (valid) code still fails the package build because of that sibling,
@@ -346,7 +346,7 @@ func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err := runHealProbeArtifact(row.ResourceTypeName, row.CloudFormationTypeName, string(artifactResource),
+	err := runRecheckProbeArtifact(row.ResourceTypeName, row.CloudFormationTypeName, string(artifactResource),
 		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
 	if err == nil {
 		t.Fatal("expected the compile gate to reject the package due to its broken sibling file")
@@ -366,7 +366,7 @@ func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
 // artifact generates cleanly but is rejected by the compile gate, and must
 // keep tagging generation_failed when generation itself fails — the two
 // stages must not collapse into the same category, which would defeat the
-// whole point of wiring the compile gate into -heal (a human reviewing
+// whole point of wiring the compile gate into -recheck (a human reviewing
 // proposals needs to know which stage actually failed).
 func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 	if testing.Short() {

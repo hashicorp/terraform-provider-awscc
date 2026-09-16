@@ -2,28 +2,34 @@
 // SPDX-License-Identifier: MPL-2.0
 
 // Command bigdiffer keeps internal/provider/all_schemas.hcl in sync with what
-// AWS offers, and owns generating the provider from it. Five modes:
+// AWS offers, and owns generating the provider from it. Four modes today:
 //
-//   - -check: parse the overlay, verify it is normalized and anomaly-free.
+//   - -lint: parse the overlay, verify it is normalized and anomaly-free.
 //     Offline, writes nothing; safe on every PR. Fails if any suppressed/frozen
-//     fact has no reason recorded (run -heal to propose one); retained-but-
+//     fact has no reason recorded (run -recheck to propose one); retained-but-
 //     unpinned rows remain advisory.
-//   - -update: the live weekly incremental. One AWS crawl (ListTypes +
+//   - -sync: the live weekly incremental. One AWS crawl (ListTypes +
 //     DescribeType, us-east-1) feeds both overlay reconciliation (add new rows,
 //     report retained/anomalous ones) and change detection (byte-compare against
 //     the schema cache). Only New/Changed types are regenerated from their fresh
 //     bytes; generation success/failure drives policy (frozen_since / suppress_*)
 //     applied to the overlay in one pass. Never regresses: a type's files + cache
 //     are promoted only on clean generation.
-//   - -generate: a full, offline, parallel regeneration of the whole provider
-//     from the committed overlay + schema cache. Does not touch AWS.
 //   - -docs: owns import-example docs generation from import_examples_gen.json,
 //     then orchestrates terraform fmt + tfplugindocs generate.
-//   - -heal: re-probes every suppressed/frozen row with no recorded reason (or
+//   - -recheck: re-probes every suppressed/frozen row with no recorded reason (or
 //     one tagged unknown) and proposes a category + detail for it — structural
 //     check, then a real regeneration attempt, then a free-form comment
 //     migration — printed as a report, never written. Offline except reading
 //     the committed schema cache.
+//
+// A fifth and sixth mode, -reconcile and -check, are designed but not yet
+// implemented (contributing/docs/held-artifacts-design.md §1, stories 2/3):
+// -reconcile replaces the old -generate's ungated, all-or-nothing whole-corpus
+// regeneration (deleted outright, not carried forward under this name) with a
+// gated one, sharing -sync's compile-and-decide pipeline offline; -check is the
+// same pipeline with promotion switched off, for CI to run on engine changes
+// before they reach a -sync/-reconcile PR.
 //
 // There is no separate discovery or snapshot-diff mode: bigdiffer owns discovery
 // itself, so there is no need to generate and diff checked-in
@@ -79,30 +85,29 @@ func main() {
 	var (
 		allSchemasPath = flag.String("all-schemas", defaultAllSchemas, "path to the curated all_schemas.hcl overlay")
 		checkoutPath   = flag.String("checkout", defaultCheckout, "path to suppressions_checkout.txt (cross-referenced, never modified)")
-		check          = flag.Bool("check", false, "verify all_schemas.hcl is normalized and anomaly-free (offline; writes nothing)")
-		generate       = flag.Bool("generate", false, "regenerate the whole provider offline from the committed overlay + schema cache (writes *_gen.go, registrations_gen.go, import_examples_gen.json)")
-		update         = flag.Bool("update", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
+		lint           = flag.Bool("lint", false, "verify all_schemas.hcl is normalized and anomaly-free (offline; writes nothing)")
+		sync           = flag.Bool("sync", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
-		heal           = flag.Bool("heal", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
+		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
 
-		// Hidden: the hidden -heal-probe-artifact mode heal.go re-execs into,
+		// Hidden: the hidden -recheck-probe-artifact mode heal.go re-execs into,
 		// so a crashy regeneration (e.g. a recursive schema) kills only this
 		// subprocess. Not part of the documented CLI surface.
-		healProbeArtifact = flag.Bool("heal-probe-artifact", false, "internal: probe one artifact's regeneration in isolation")
-		probeTFType       = flag.String("probe-tf-type", "", "internal")
-		probeCFNType      = flag.String("probe-cfn-type", "", "internal")
-		probeKind         = flag.String("probe-kind", "", "internal")
-		probeSchema       = flag.String("probe-schema", "", "internal")
-		probePrefix       = flag.String("probe-prefix", "", "internal")
-		probeCacheDir     = flag.String("probe-cache-dir", "", "internal")
-		probeServicesPath = flag.String("probe-services-path", "", "internal")
-		probeRepoRoot     = flag.String("probe-repo-root", "", "internal")
-		probeOutputRoot   = flag.String("probe-output-root", "", "internal")
+		recheckProbeArtifact = flag.Bool("recheck-probe-artifact", false, "internal: probe one artifact's regeneration in isolation")
+		probeTFType          = flag.String("probe-tf-type", "", "internal")
+		probeCFNType         = flag.String("probe-cfn-type", "", "internal")
+		probeKind            = flag.String("probe-kind", "", "internal")
+		probeSchema          = flag.String("probe-schema", "", "internal")
+		probePrefix          = flag.String("probe-prefix", "", "internal")
+		probeCacheDir        = flag.String("probe-cache-dir", "", "internal")
+		probeServicesPath    = flag.String("probe-services-path", "", "internal")
+		probeRepoRoot        = flag.String("probe-repo-root", "", "internal")
+		probeOutputRoot      = flag.String("probe-output-root", "", "internal")
 	)
 	flag.Parse()
 
-	if *healProbeArtifact {
-		err := runHealProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot)
+	if *recheckProbeArtifact {
+		err := runRecheckProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			var gateFailure *buildGateFailure
@@ -114,45 +119,43 @@ func main() {
 		return
 	}
 
-	if err := run(*allSchemasPath, *checkoutPath, *check, *generate, *update, *docs, *heal); err != nil {
+	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *docs, *recheck); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
 
 // run dispatches to exactly one command. bigdiffer is the generator, not a manual
-// snapshot-diff helper: the weekly workflow is -update, offline rebuilds are
-// -generate, docs are -docs, and -check is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, check, generate, update, docs, heal bool) error {
+// snapshot-diff helper: the weekly workflow is -sync, docs are -docs, and -lint
+// is an offline hygiene guard for CI. -reconcile and -check (story 2/3 of the
+// command redesign, contributing/docs/held-artifacts-design.md §1) do not exist
+// yet — -generate's old ungated whole-corpus regeneration was deleted outright
+// rather than carried forward under a new name (§6 step 1); reconcile's real,
+// held-aware replacement lands in a later step.
+func run(allSchemasPath, checkoutPath string, lint, sync, docs, recheck bool) error {
 	switch {
-	case update:
-		return runUpdate(context.Background(), allSchemasPath, checkoutPath)
-	case generate:
-		cfg, rows, err := loadOverlay(allSchemasPath)
-		if err != nil {
-			return err
-		}
-		return runGenerate(cfg, rows)
+	case sync:
+		return runSync(context.Background(), allSchemasPath, checkoutPath)
 	case docs:
 		cfg, _, err := loadOverlay(allSchemasPath)
 		if err != nil {
 			return err
 		}
 		return runDocs(cfg)
-	case check:
-		return runCheck(allSchemasPath, checkoutPath)
-	case heal:
-		return runHeal(allSchemasPath)
+	case lint:
+		return runLint(allSchemasPath, checkoutPath)
+	case recheck:
+		return runRecheck(allSchemasPath)
 	default:
 		flag.Usage()
-		return fmt.Errorf("no command given; use one of -update, -generate, -docs, -check, -heal")
+		return fmt.Errorf("no command given; use one of -sync, -docs, -lint, -recheck")
 	}
 }
 
-// runCheck verifies all_schemas.hcl is normalized (sorted, canonical formatting,
+// runLint verifies all_schemas.hcl is normalized (sorted, canonical formatting,
 // correct count header) and anomaly-free, using the overlay as its own base so no
 // AWS query or snapshot file is needed. It writes nothing and is suitable for CI.
-func runCheck(allSchemasPath, checkoutPath string) error {
+func runLint(allSchemasPath, checkoutPath string) error {
 	cfg, rows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -179,7 +182,7 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 	// run cannot know, so compare everything except that line: sorting, canonical
 	// formatting, and byte-preservation of blocks.
 	if countLineRE.ReplaceAllString(out, "#") != countLineRE.ReplaceAllString(string(overlayContent), "#") {
-		problems = append([]string{"not normalized (sorting/formatting; re-run `-update`, or fix by hand)"}, problems...)
+		problems = append([]string{"not normalized (sorting/formatting; re-run `-sync`, or fix by hand)"}, problems...)
 	}
 	if regProblem := checkRegistrationUpToDate(cfg, rows); regProblem != "" {
 		problems = append(problems, regProblem)
@@ -199,7 +202,7 @@ func runCheck(allSchemasPath, checkoutPath string) error {
 // drift: it re-emits the registration file from the overlay and compares. A
 // stale file (a resource added or removed without regenerating) would silently
 // change the set of registered resources and data sources, so it must fail
-// -check. It returns a problem description, or "" when the file is up to date.
+// -lint. It returns a problem description, or "" when the file is up to date.
 //
 // Absence is not a failure: while the legacy directive files
 // (resources.go/singular_data_sources.go/plural_data_sources.go) still register
@@ -218,7 +221,7 @@ func checkRegistrationUpToDate(cfg config, rows []resourceRow) string {
 		return fmt.Sprintf("re-emitting registrations: %v", err)
 	}
 	if !bytes.Equal(committed, want) {
-		return fmt.Sprintf("%s is stale (re-run `bigdiffer -generate` or `-update`)", filepath.Base(cfg.registrationPath))
+		return fmt.Sprintf("%s is stale (re-run `bigdiffer -sync`)", filepath.Base(cfg.registrationPath))
 	}
 	return ""
 }
@@ -372,8 +375,8 @@ func normalizeWithDecisions(overlay string, base, previous []resourceRow, checko
 	// (policy.go), but a row can also be suppressed or frozen by direct
 	// hand-edit, or predate the taxonomy. Checked per-fact, not per-row (item
 	// 9b): a row's resource can have a real reason while its plural DS is
-	// still reason-less, or vice versa. A reason-less fact now fails -check
-	// (anomalyProblems); -heal (not this check) is what proposes the reason to
+	// still reason-less, or vice versa. A reason-less fact now fails -lint
+	// (anomalyProblems); -recheck (not this check) is what proposes the reason to
 	// fill the gap.
 	for _, it := range items {
 		if !it.live || it.key == "" {
@@ -666,7 +669,7 @@ func parseCheckout(path string) (map[string]bool, error) {
 }
 
 // anomalyProblems returns human-readable descriptions of anomalies that should
-// fail a -check run: duplicate blocks, naming-invariant violations, and any
+// fail a -lint run: duplicate blocks, naming-invariant violations, and any
 // suppressed/frozen fact with no recorded reason (every suppression and freeze
 // must carry its own reason). Retained-but-unpinned rows are intentionally
 // excluded: they are advisory and tracked for later.
@@ -679,7 +682,7 @@ func (r Report) anomalyProblems() []string {
 		problems = append(problems, fmt.Sprintf("%d naming-invariant violation(s)", len(r.NamingViolate)))
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		problems = append(problems, fmt.Sprintf("%d suppressed/frozen fact(s) with no reason recorded (run -heal)", len(r.ReasonlessSuppressed)))
+		problems = append(problems, fmt.Sprintf("%d suppressed/frozen fact(s) with no reason recorded (run -recheck)", len(r.ReasonlessSuppressed)))
 	}
 	return problems
 }
@@ -715,7 +718,7 @@ func (r Report) write() {
 		}
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -heal)\n", len(r.ReasonlessSuppressed))
+		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
 		for _, b := range r.ReasonlessSuppressed {
 			fmt.Fprintf(os.Stderr, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
 		}

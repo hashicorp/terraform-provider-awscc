@@ -262,7 +262,7 @@ func TestReasonsForFailures(t *testing.T) {
 		// suppresses the resource when nothing in gr.artifacts is
 		// attributable; reasonsForFailures must mirror that exact condition
 		// so the fallback-suppressed resource still gets a reason — otherwise
-		// -check's per-field anomaly would flag a suppression this same
+		// -lint's per-field anomaly would flag a suppression this same
 		// decision just made as reason-less (review finding 3).
 		gr := gateResult{cfType: "AWS::Svc::Thing"} // no artifacts at all
 		attrs := suppressAttrsForFailures(gr)

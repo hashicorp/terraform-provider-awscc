@@ -186,7 +186,7 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, [
 // promoteStaged copies every staged artifact and cached schema from stagingDir
 // into the real tree (cfg.outputRoot, cfg.cacheDir). Called once, after every
 // candidate in a batch has been staged successfully by refreshCandidate — this
-// is the sole place -update writes outside stagingDir, so a hard error anywhere
+// is the sole place -sync writes outside stagingDir, so a hard error anywhere
 // earlier in the batch (never-regress batch atomicity) leaves the real tree
 // and the overlay untouched: nothing is promoted, and the overlay reconcile
 // step that follows never even runs.
@@ -274,12 +274,12 @@ func reconcileListResource(cfg config, results []genResult) ([]genResult, error)
 	return results, nil
 }
 
-// runUpdate is the live weekly incremental pipeline (-update). One discovery
+// runSync is the live weekly incremental pipeline (-sync). One discovery
 // crawl feeds both overlay reconciliation and change detection; only New/Changed
 // types are regenerated from their fresh bytes; generation success/failure drives
 // the policy written back to the overlay (never regressing broken types); and the
 // aggregates are re-emitted. Requires AWS credentials (queried in us-east-1).
-func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
+func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err

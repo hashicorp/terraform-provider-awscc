@@ -105,7 +105,7 @@ func runDocs(cfg config) error {
 		return fmt.Errorf("tfplugindocs: %w", err)
 	}
 	stepf("Done: documentation regenerated.")
-	infof("Add the PR link and any NOTES: to the CHANGELOG.md entry -update just drafted, update version/VERSION, then commit.")
+	infof("Add the PR link and any NOTES: to the CHANGELOG.md entry -sync just drafted, update version/VERSION, then commit.")
 	return nil
 }
 

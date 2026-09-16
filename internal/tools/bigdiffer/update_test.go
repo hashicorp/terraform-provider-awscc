@@ -172,7 +172,7 @@ func TestAbsentTypes(t *testing.T) {
 // applying the decide() outcome for a probed absent row via
 // normalizeWithDecisions must set the explaining attribute on the existing
 // block, and a subsequent normalize pass over the rewritten overlay (as the
-// next run's -check/-update would see it) must no longer flag that row as
+// next run's -lint/-sync would see it) must no longer flag that row as
 // UnexplainedRetained.
 //
 // testOverlay/testBase's AWS::Old::Gone is the fixture: live in the overlay,

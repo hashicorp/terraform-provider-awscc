@@ -32,7 +32,7 @@ type config struct {
 	docsDir            string // docs/ (tfplugindocs output)
 
 	prefix         string // terraform_type_name_prefix, e.g. "awscc"
-	region         string // CloudFormation registry region used for live discovery (-update)
+	region         string // CloudFormation registry region used for live discovery (-sync)
 	genConcurrency int    // bounded worker count for in-process generation
 }
 

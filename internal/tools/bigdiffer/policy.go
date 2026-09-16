@@ -194,7 +194,7 @@ func suppressAttrsForFailures(gr gateResult) map[string]string {
 // Mirrors suppressAttrsForFailures' len(attrs) == 0 fallback exactly: if no
 // specific artifact is attributable, that function still defensively
 // suppresses the resource, so this function must still supply a matching
-// reason for it — otherwise -check's per-field reason anomaly would flag a
+// reason for it — otherwise -lint's per-field reason anomaly would flag a
 // suppression this same decision just made as reason-less.
 func reasonsForFailures(gr gateResult) map[string]string {
 	reasons := make(map[string]string)

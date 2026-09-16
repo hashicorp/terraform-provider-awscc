@@ -25,7 +25,7 @@ all: schemas resources singular-data-sources plural-data-sources build docs-all 
 # NOTE: The schema/generation targets below (schemas, resources,
 # singular-data-sources, plural-data-sources, cleanschemas, suppressions,
 # biglister, docs-*) are the LEGACY generation path. The current weekly process
-# uses `go run ./internal/tools/bigdiffer -update` (+ `-docs`); see
+# uses `go run ./internal/tools/bigdiffer -sync` (+ `-docs`); see
 # contributing/docs/generating-the-provider-with-bigdiffer.md. These targets are
 # retained as a fallback and are slated for removal after a few clean cycles.
 
@@ -35,11 +35,14 @@ help: ## Display this help
 build: prereq-go ## Build the provider
 	$(GO_VER) install
 
-bigdiffer-update: prereq-go ## Weekly update via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
-	$(GO_VER) run ./internal/tools/bigdiffer -update
+bigdiffer-sync: prereq-go ## Weekly sync via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
+	$(GO_VER) run ./internal/tools/bigdiffer -sync
 
-bigdiffer-generate: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS)
-	$(GO_VER) run ./internal/tools/bigdiffer -generate
+# NOTE: bigdiffer-generate (offline whole-corpus regeneration) is temporarily
+# unavailable: -generate was deleted along with its ungated implementation
+# (contributing/docs/held-artifacts-design.md §1 story 2; §6 step 1) and its
+# gated replacement, -reconcile, has not landed yet (§6 step 4). This target
+# will come back once -reconcile exists.
 
 bigdiffer-docs: prereq-go ## Regenerate documentation via bigdiffer (docs-import + terraform fmt + tfplugindocs)
 	$(GO_VER) run ./internal/tools/bigdiffer -docs
@@ -343,9 +346,8 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: all
 .PHONY: bigdiffer
 .PHONY: bigdiffer-docs
-.PHONY: bigdiffer-generate
+.PHONY: bigdiffer-sync
 .PHONY: bigdiffer-test
-.PHONY: bigdiffer-update
 .PHONY: biglister
 .PHONY: build
 .PHONY: check-startup-error

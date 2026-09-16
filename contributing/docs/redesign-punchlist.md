@@ -18,14 +18,37 @@ item 3).
 
 ## The gaps
 
-1. **Rename pass, no behavior change.** `update`→`sync`, `heal`→`recheck`,
+1. **DONE. Rename pass, no behavior change.** `update`→`sync`, `heal`→`recheck`,
    today's `check`→`lint` — flags, functions (`runUpdate`→`runSync`,
    `runHeal`→`runRecheck`, `runCheck`→`runLint`), doc strings, `make
-   bigdiffer-*` targets, README, runbook. Delete `run_generate.go`'s
+   bigdiffer-*` targets. Deleted `run_generate.go`'s
    `runGenerate` in the same pass (replaced, not carried forward — see item 3)
-   **and** delete/rewrite `run_generate_test.go` (calls `runGenerate`
-   directly at line 29; `generateCorpus`'s own coverage elsewhere is
-   unaffected). *(prereq)* Detail: `held-artifacts-design.md` §1 (all five
+   **and** deleted `run_generate_test.go` (called `runGenerate`
+   directly at line 29; moved its one unrelated test, `TestCheckRegistrationUpToDate`
+   — which exercises `checkRegistrationUpToDate` in `main.go`, not `runGenerate` —
+   into `main_test.go` rather than losing its coverage). Also renamed the
+   hidden probe re-exec surface for consistency (`-heal-probe-artifact` →
+   `-recheck-probe-artifact`, `runHealProbeArtifact` → `runRecheckProbeArtifact`),
+   not explicitly called out in the design but a natural extension of the same
+   rename. **`-reconcile` does not exist as a flag yet** — per the design's own
+   instruction not to carry `-generate`'s behavior forward under a new name,
+   there is deliberately no `reconcile`/`check` case in `run()`'s dispatch
+   until item 4/5 lands the real, `held`-aware implementation; `GNUmakefile`'s
+   `bigdiffer-generate` target was removed for the same reason (left as a
+   comment noting why) rather than pointing at a flag that doesn't exist.
+   README/runbook/other narrative docs were deliberately left un-updated this
+   pass (explicit instruction: docs stay out of sync until the final
+   reconciliation step, item 10) — only this file and `held-artifacts-design.md`
+   change during implementation, per the standing rule. `GNUmakefile` and
+   `.github/workflows/bigdiffer.yml` were updated anyway since they are
+   executable configuration the rename mechanically invalidates (CI literally
+   ran `-check`; `make bigdiffer-update` literally invoked `-update`), not
+   narrative documentation — leaving them stale would break CI and `make`,
+   not just read oddly. Verified: `gofmt -l`, `go build ./...`, `go vet
+   ./internal/tools/bigdiffer/...`, `go test ./internal/tools/bigdiffer/...
+   -race -short` and again with `-timeout 20m` (full corpus parity), `impi`,
+   and a real `go run ./internal/tools/bigdiffer -lint` against the committed
+   overlay all pass. *(prereq)* Detail: `held-artifacts-design.md` §1 (all five
    stories), §6 step 1.
 2. **Extract the shared offline pipeline.** Candidate-build →
    `refreshCandidate` → `compileFixpoint` → `decide()`, factored out of

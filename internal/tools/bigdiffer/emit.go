@@ -50,10 +50,13 @@ func writeArtifact(cfg config, r genResult) error {
 // writeCorpus writes each generated artifact's code and test file to
 // cfg.outputRoot/<pathSuffix>/<file>, creating directories as needed. Returns the
 // number of files written. A generate error in any result aborts before writing
-// it (never write partial/failed output over good files). Used by the offline
-// full-corpus path (-generate), where every type in the committed overlay is
-// expected to generate cleanly and a failure is exceptional; the live
-// incremental path (-update) promotes per-artifact instead (refreshCandidate).
+// it (never write partial/failed output over good files). Written for the
+// offline full-corpus path (the old -generate, deleted along with its ungated
+// caller runGenerate; contributing/docs/held-artifacts-design.md §1 story 2),
+// where every type in the committed overlay is expected to generate cleanly
+// and a failure is exceptional; -reconcile's future implementation is expected
+// to reuse it. The live incremental path (-sync) promotes per-artifact instead
+// (refreshCandidate).
 func writeCorpus(cfg config, results []genResult) (int, error) {
 	written := 0
 	for _, r := range results {

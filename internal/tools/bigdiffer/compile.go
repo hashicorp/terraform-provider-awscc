@@ -24,7 +24,7 @@ import (
 // staged files onto their real destinations, runs `go build ./...` once from
 // cfg.repoRoot, and unconditionally reverts the overlay — regardless of the
 // build's outcome — before returning. The real tree is bit-for-bit unchanged
-// by the gate; only compileFixpoint's caller (runUpdate) promotes for real,
+// by the gate; only compileFixpoint's caller (runSync) promotes for real,
 // and only after the gate has gone green.
 
 // atomicWriteFile writes data to path via a temp file in the same directory
