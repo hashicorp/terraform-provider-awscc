@@ -297,8 +297,12 @@ func reconcileListResource(cfg config, results []genResult) ([]genResult, error)
 // crawl feeds both overlay reconciliation and change detection; only New/Changed
 // types are regenerated from their fresh bytes; generation success/failure drives
 // the policy written back to the overlay (never regressing broken types); and the
-// aggregates are re-emitted. Requires AWS credentials (queried in us-east-1).
-func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
+// aggregates are re-emitted. Documentation (import-example docs, terraform fmt,
+// tfplugindocs) runs as the last step of the same tail by default — noDocs
+// (-no-docs) skips it for a fast codegen inner loop
+// (contributing/docs/docs-pipeline-punchlist.md item 1). Requires AWS
+// credentials (queried in us-east-1).
+func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bool) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -447,11 +451,12 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
 	}
 
-	// Write the CHANGELOG fragment (bigdiffer-design.md §8) last,
-	// now that every real-tree write above has actually succeeded.
-	// writeChangelogFragment inserts the FEATURES: bullets directly into
-	// CHANGELOG.md's top, in-progress version block; a no-op when nothing was
-	// newly promoted.
+	// Write the CHANGELOG fragment (bigdiffer-design.md §8), now that every
+	// other real-tree write above has actually succeeded. writeChangelogFragment
+	// inserts the FEATURES: bullets directly into CHANGELOG.md's top,
+	// in-progress version block; a no-op when nothing was newly promoted.
+	// Docs (below) trails even this, so the CHANGELOG entry for
+	// already-promoted code is written regardless of whether docs succeed.
 	if err := writeChangelogFragment(cfg.changelogPath, changelog); err != nil {
 		return err
 	}
@@ -459,6 +464,16 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
 	}
 
+	// Documentation, last in the tail (contributing/docs/docs-pipeline-punchlist.md
+	// item 1): everything above has already promoted, so a docs failure here
+	// is never a broken commit — bigdiffer never commits on its own, and the
+	// promoted code changes are left in place either way. See runDocsTail's
+	// doc comment for the recovery-oriented error this returns on failure.
+	//
+	// The change report and promotion summary print before this, not after:
+	// if docs fail, the run still returns an error below, but the human
+	// running it has already seen exactly what code landed, rather than
+	// losing that summary behind a docs-only failure.
 	report.write()
 	// Recompute the summary counts from the settled decisions, not the
 	// mid-loop tally above: the compile gate can downgrade a candidate that
@@ -472,7 +487,13 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string) error {
 			finalBroken++
 		}
 	}
-	stepf("Done: refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), finalOK, finalBroken)
-	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`, `go run ./internal/tools/bigdiffer -docs`.")
+	stepf("Refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), finalOK, finalBroken)
+
+	if err := runDocsTail(cfg, noDocs); err != nil {
+		return err
+	}
+
+	stepf("Done.")
+	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`.")
 	return nil
 }

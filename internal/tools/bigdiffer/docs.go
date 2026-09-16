@@ -78,6 +78,33 @@ func generateImportExampleDocs(importExamplesPath, examplesDir string) (int, err
 	return written, nil
 }
 
+// runDocsTail is the docs step of the shared sync/reconcile post-promote tail
+// (contributing/docs/docs-pipeline-punchlist.md item 1): by default it runs
+// runDocs right after code promotion, so a maintainer no longer has to
+// remember a separate -docs pass — the same silent-drift class the command
+// redesign already closed for code. noDocs (the -no-docs flag) skips it for a
+// fast codegen inner loop, since tfplugindocs on the whole provider is slow.
+//
+// A docs failure here is never a broken commit: promotion (code, cache,
+// overlay, aggregates) has already completed by the time this runs, and
+// bigdiffer never commits on its own, so the failure surfaces as a loud,
+// recoverable error over an otherwise-valid, uncommitted working tree — the
+// promoted code changes are left exactly as they are (they are valid; only
+// docs failed) rather than rolled back, and the error message points
+// directly at the fix: re-run `-docs` alone once the underlying problem
+// (a missing tool, a template bug) is resolved, with no need to redo the
+// whole pipeline.
+func runDocsTail(cfg config, noDocs bool) error {
+	if noDocs {
+		infof("Skipping documentation (-no-docs): run `go run ./internal/tools/bigdiffer -docs` before committing.")
+		return nil
+	}
+	if err := runDocs(cfg); err != nil {
+		return fmt.Errorf("code regenerated and promoted successfully; documentation failed: %w\n(no need to redo the pipeline — fix the problem above, then re-run `go run ./internal/tools/bigdiffer -docs` alone to finish)", err)
+	}
+	return nil
+}
+
 // runDocs runs the full documentation pipeline: own docs-import, then orchestrate
 // terraform fmt (docs-fmt) and tfplugindocs (docs), matching `make docs-all`.
 func runDocs(cfg config) error {

@@ -19,8 +19,10 @@ import (
 // whole run rather than holding broken artifacts and shipping the rest, so
 // it can back "land a machinery fix, no AWS crawl" (§0 story 2). reconcile
 // has no AWS, no discovery diff, and no New/Absent concept at all — every
-// committed row is simply "attempt it."
-func runReconcile(ctx context.Context, allSchemasPath, checkoutPath string) error {
+// committed row is simply "attempt it." Documentation runs as the last step
+// of the same tail by default — noDocs (-no-docs) skips it for a fast
+// codegen inner loop (contributing/docs/docs-pipeline-punchlist.md item 1).
+func runReconcile(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bool) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -140,6 +142,16 @@ func runReconcile(ctx context.Context, allSchemasPath, checkoutPath string) erro
 		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
 	}
 
+	// Documentation, last in the tail (contributing/docs/docs-pipeline-punchlist.md
+	// item 1): everything above has already promoted, so a docs failure here
+	// is never a broken commit — bigdiffer never commits on its own, and the
+	// promoted code changes are left in place either way. See runDocsTail's
+	// doc comment for the recovery-oriented error this returns on failure.
+	//
+	// The change report and summary print before this, not after: if docs
+	// fail, the run still returns an error below, but the human running it
+	// has already seen exactly what code landed, rather than losing that
+	// summary behind a docs-only failure.
 	report.write()
 	// Unlike runSync's equivalent tally, this is never split into "OK" vs
 	// "frozen/suppressed": reconcile never freezes or suppresses at all (its
@@ -149,8 +161,14 @@ func runReconcile(ctx context.Context, allSchemasPath, checkoutPath string) erro
 	// (reconcileCandidates). So every decision still standing here is, by
 	// construction, a clean generation — reporting a second, always-zero
 	// number would be vacuous, not just uninformative.
-	stepf("Done: reconciled %d type(s) — all generated OK.", len(cands))
-	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`, `go run ./internal/tools/bigdiffer -docs`.")
+	stepf("Reconciled %d type(s) — all generated OK.", len(cands))
+
+	if err := runDocsTail(cfg, noDocs); err != nil {
+		return err
+	}
+
+	stepf("Done.")
+	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`.")
 	return nil
 }
 

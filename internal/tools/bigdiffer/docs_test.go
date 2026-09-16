@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/codegen"
@@ -153,5 +154,45 @@ func TestGenerateImportExampleDocsWrites(t *testing.T) {
 	}
 	if _, err := os.Stat(filepath.Join(tmp, "resources", "awscc_logs_log_group", "import.sh")); err != nil {
 		t.Errorf("expected import.sh for awscc_logs_log_group: %v", err)
+	}
+}
+
+// TestRunDocsTailSkipsOnNoDocs confirms -no-docs short-circuits before runDocs
+// is ever called: cfg deliberately points importExamplesPath at a path that
+// does not exist, which would fail loadImportExamples immediately if runDocs
+// ran — a clean way to prove the skip happens with no i/o at all, without
+// needing terraform/tfplugindocs on PATH.
+func TestRunDocsTailSkipsOnNoDocs(t *testing.T) {
+	t.Parallel()
+	cfg := config{importExamplesPath: filepath.Join(t.TempDir(), "does-not-exist.json")}
+	if err := runDocsTail(cfg, true); err != nil {
+		t.Fatalf("runDocsTail(noDocs=true) should skip cleanly, got: %v", err)
+	}
+}
+
+// TestRunDocsTailWrapsFailureForRecovery confirms a real runDocs failure
+// (forced cheaply via a missing import_examples_gen.json, before any external
+// tool is invoked) surfaces as the recovery-oriented error runDocsTail's doc
+// comment promises: it must name the failure, and it must point at re-running
+// -docs alone rather than the whole pipeline.
+func TestRunDocsTailWrapsFailureForRecovery(t *testing.T) {
+	t.Parallel()
+	cfg := config{
+		importExamplesPath: filepath.Join(t.TempDir(), "does-not-exist.json"),
+		examplesDir:        t.TempDir(),
+	}
+	err := runDocsTail(cfg, false)
+	if err == nil {
+		t.Fatal("expected an error: import_examples_gen.json does not exist")
+	}
+	msg := err.Error()
+	if !strings.Contains(msg, "documentation failed") {
+		t.Errorf("expected the error to say documentation failed, got: %s", msg)
+	}
+	if !strings.Contains(msg, "-docs") {
+		t.Errorf("expected the error to point at re-running -docs alone, got: %s", msg)
+	}
+	if !strings.Contains(msg, "does-not-exist.json") {
+		t.Errorf("expected the underlying runDocs error to be preserved, got: %s", msg)
 	}
 }

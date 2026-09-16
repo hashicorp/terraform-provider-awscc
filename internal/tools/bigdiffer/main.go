@@ -18,14 +18,18 @@
 //     types that compiled cleanly this run (contributing/docs/bigdiffer-design.md
 //     §6, "The whole corpus is gated every run"). Never regresses otherwise:
 //     a type's files + cache are promoted only
-//     once the whole batch has staged and compiled cleanly.
+//     once the whole batch has staged and compiled cleanly. Documentation
+//     (import-example docs, terraform fmt, tfplugindocs) runs as the last step
+//     of the same run by default; -no-docs skips it for a fast codegen inner
+//     loop.
 //   - -reconcile: the same generate-compile-decide pipeline -sync uses, offline
 //     from the committed overlay + schema cache, no AWS. Every row is a
 //     candidate (there is no New/Changed without a live AWS set); any failure
 //     is, by construction, a machinery regression, so it fails the whole run
 //     and promotes nothing, identically to -sync's schema-unchanged case.
 //     Replaces the old -generate, which never gated at all (deleted outright,
-//     not carried forward under this name).
+//     not carried forward under this name). Also runs documentation last by
+//     default, skippable with -no-docs, exactly like -sync.
 //   - -check: -reconcile's identical pipeline with promotion switched off —
 //     read-only end to end. Reports every failure, then exits non-zero on any
 //     failure or on any regenerated output that differs from the committed
@@ -36,7 +40,10 @@
 //     -check is clean. Replaces TestFullCorpusParity's guard role once the
 //     legacy engine retires (bigdiffer-design.md §10).
 //   - -docs: owns import-example docs generation from import_examples_gen.json,
-//     then orchestrates terraform fmt + tfplugindocs generate.
+//     then orchestrates terraform fmt + tfplugindocs generate. -sync and
+//     -reconcile already run this as their last step by default; use -docs
+//     directly for an examples-only or doc-template change, or to finish a
+//     prior run that failed only at the docs step.
 //   - -recheck: re-probes every suppressed/frozen row with no recorded reason (or
 //     one tagged unknown) and proposes a category + detail for it — structural
 //     check, then a real regeneration attempt, then a free-form comment
@@ -101,6 +108,7 @@ func main() {
 		reconcile      = flag.Bool("reconcile", false, "regenerate the whole provider offline from the committed overlay + schema cache through the same gate -sync uses, and promote the clean result (no AWS; fails the run on any machinery regression)")
 		check          = flag.Bool("check", false, "reconcile's pipeline with promotion off: report every failure, exit non-zero on any failure or on any regenerated output that differs from committed (no AWS; writes nothing)")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
+		noDocs         = flag.Bool("no-docs", false, "with -sync/-reconcile: skip the trailing documentation step for a fast codegen inner loop (run -docs separately before committing)")
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
 		recheckAll     = flag.Bool("recheck-all", false, "with -recheck: widen the scope to every active suppression/freeze, not just the reason-less/unknown backlog — revisit an old, already-explained decision on demand")
 
@@ -133,7 +141,7 @@ func main() {
 		return
 	}
 
-	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *docs, *recheck, *recheckAll); err != nil {
+	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *docs, *noDocs, *recheck, *recheckAll); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
@@ -143,12 +151,12 @@ func main() {
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs, recheck, recheckAll bool) error {
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs, noDocs, recheck, recheckAll bool) error {
 	switch {
 	case sync:
-		return runSync(context.Background(), allSchemasPath, checkoutPath)
+		return runSync(context.Background(), allSchemasPath, checkoutPath, noDocs)
 	case reconcile:
-		return runReconcile(context.Background(), allSchemasPath, checkoutPath)
+		return runReconcile(context.Background(), allSchemasPath, checkoutPath, noDocs)
 	case check:
 		return runCheck(context.Background(), allSchemasPath, checkoutPath)
 	case docs:
