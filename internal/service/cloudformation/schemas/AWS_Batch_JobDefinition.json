@@ -18,7 +18,7 @@
         "Environment": {
           "type": "array",
           "uniqueItems": false,
-          "insertionOrder": true,
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/Environment"
           }
@@ -137,7 +137,7 @@
         "Environment": {
           "type": "array",
           "uniqueItems": false,
-          "insertionOrder": true,
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/Environment"
           }
@@ -1105,7 +1105,7 @@
         "Environment": {
           "type": "array",
           "uniqueItems": false,
-          "insertionOrder": true,
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/Environment"
           }

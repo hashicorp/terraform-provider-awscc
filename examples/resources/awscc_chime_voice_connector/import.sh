@@ -1,0 +1,1 @@
+$ terraform import awscc_chime_voice_connector.example "voice_connector_arn"

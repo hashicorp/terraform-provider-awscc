@@ -196,14 +196,15 @@
     "/properties/OwnerAccountId",
     "/properties/AttachmentPolicyRuleNumber",
     "/properties/SegmentName",
-    "/properties/LastModificationErrors"
+    "/properties/LastModificationErrors",
+    "/properties/ProposedSegmentChange",
+    "/properties/ProposedNetworkFunctionGroupChange"
   ],
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
     "/properties/EdgeLocation",
     "/properties/TransportAttachmentId",
-    "/properties/Options",
-    "/properties/RoutingPolicyLabel"
+    "/properties/Options"
   ],
   "writeOnlyProperties": [
     "/properties/RoutingPolicyLabel"
@@ -237,6 +238,9 @@
         "networkmanager:ListTagsForResource",
         "networkmanager:TagResource",
         "networkmanager:UntagResource",
+        "networkmanager:PutAttachmentRoutingPolicyLabel",
+        "networkmanager:RemoveAttachmentRoutingPolicyLabel",
+        "networkmanager:ListAttachmentRoutingPolicyAssociations",
         "ec2:DescribeRegions"
       ]
     },

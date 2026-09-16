@@ -170,6 +170,22 @@
         }
       }
     },
+    "MultiAvailabilityZoneConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ConfigurationType": {
+          "type": "string"
+        },
+        "StandbyAvailabilityZones": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandbyAvailabilityZone"
+          }
+        }
+      }
+    },
     "TotalLocalStorageGBRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -452,6 +468,18 @@
         },
         "DeleteOnTermination": {
           "type": "boolean"
+        }
+      }
+    },
+    "StandbyAvailabilityZone": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AvailabilityZoneId": {
+          "type": "string"
+        },
+        "AvailabilityZone": {
+          "type": "string"
         }
       }
     },
@@ -924,6 +952,9 @@
         },
         "Encrypted": {
           "type": "boolean"
+        },
+        "MultiAvailabilityZoneConfiguration": {
+          "$ref": "#/definitions/MultiAvailabilityZoneConfiguration"
         },
         "Iops": {
           "type": "integer"

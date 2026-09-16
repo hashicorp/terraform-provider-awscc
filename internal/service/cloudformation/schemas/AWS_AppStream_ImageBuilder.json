@@ -67,6 +67,9 @@
     },
     "RootVolumeConfig": {
       "$ref": "#/definitions/VolumeConfig"
+    },
+    "DisableIMDSV1": {
+      "type": "boolean"
     }
   },
   "definitions": {
@@ -175,7 +178,7 @@
     }
   ],
   "tagging": {
-    "taggable": false,
+    "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": true,

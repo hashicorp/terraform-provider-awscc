@@ -1,0 +1,1 @@
+$ terraform import awscc_transcribe_call_analytics_category.example "arn"

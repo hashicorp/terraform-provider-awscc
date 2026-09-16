@@ -260,7 +260,10 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "APPLICATION_LOGS",
 		//	                  "USAGE_LOGS",
-		//	                  "SECURITY_FINDING_LOGS"
+		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "ALB_ACCESS_LOGS",
+		//	                  "ALB_CONNECTION_LOGS",
+		//	                  "ALB_HEALTH_CHECK_LOGS"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -737,6 +740,9 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 												"APPLICATION_LOGS",
 												"USAGE_LOGS",
 												"SECURITY_FINDING_LOGS",
+												"ALB_ACCESS_LOGS",
+												"ALB_CONNECTION_LOGS",
+												"ALB_HEALTH_CHECK_LOGS",
 											),
 										),
 									}, /*END VALIDATORS*/

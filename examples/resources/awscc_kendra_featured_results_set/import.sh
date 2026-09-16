@@ -1,0 +1,1 @@
+$ terraform import awscc_kendra_featured_results_set.example "arn"

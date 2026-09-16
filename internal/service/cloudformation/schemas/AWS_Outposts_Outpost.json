@@ -1,0 +1,185 @@
+{
+  "typeName": "AWS::Outposts::Outpost",
+  "description": "Definition of AWS::Outposts::Outpost Resource Type",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^[\\S \\n]+$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "OutpostId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 180,
+      "pattern": "^op-[a-f0-9]{17}$"
+    },
+    "OutpostArn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
+    },
+    "OwnerId": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^\\d{12}$"
+    },
+    "SiteId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^os-[a-f0-9]{17}$"
+    },
+    "SiteArn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:site/(os-[a-f0-9]{17})$"
+    },
+    "Name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[\\S ]+$"
+    },
+    "Description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^[\\S ]*$"
+    },
+    "LifeCycleStatus": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20,
+      "pattern": "^[ A-Za-z]+$"
+    },
+    "AvailabilityZone": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\\d+[a-zA-Z]?)?$"
+    },
+    "AvailabilityZoneId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z]+\\d-[a-zA-Z]+\\d$"
+    },
+    "SupportedHardwareType": {
+      "type": "string",
+      "enum": [
+        "RACK",
+        "SERVER"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "Name",
+    "SiteId"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "AvailabilityZone"
+      ]
+    },
+    {
+      "required": [
+        "AvailabilityZoneId"
+      ]
+    }
+  ],
+  "readOnlyProperties": [
+    "/properties/OutpostId",
+    "/properties/OutpostArn",
+    "/properties/OwnerId",
+    "/properties/SiteArn",
+    "/properties/LifeCycleStatus"
+  ],
+  "createOnlyProperties": [
+    "/properties/SiteId",
+    "/properties/AvailabilityZone",
+    "/properties/AvailabilityZoneId"
+  ],
+  "primaryIdentifier": [
+    "/properties/OutpostArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/OutpostId"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "outposts:TagResource",
+      "outposts:UntagResource",
+      "outposts:GetOutpost"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "outposts:CreateOutpost",
+        "outposts:GetOutpost",
+        "outposts:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "outposts:GetOutpost"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "outposts:UpdateOutpost",
+        "outposts:GetOutpost",
+        "outposts:TagResource",
+        "outposts:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "outposts:DeleteOutpost"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "outposts:ListOutposts"
+      ]
+    }
+  }
+}

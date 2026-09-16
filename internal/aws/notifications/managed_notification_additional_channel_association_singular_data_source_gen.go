@@ -34,6 +34,17 @@ func managedNotificationAdditionalChannelAssociationDataSource(ctx context.Conte
 			Description: "ARN identifier of the channel.\nExample: arn:aws:chatbot::123456789012:chat-configuration/slack-channel/security-ops",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IsSensitiveEventsSubscribed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the channel association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.",
+		//	  "type": "boolean"
+		//	}
+		"is_sensitive_events_subscribed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the channel association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedNotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -64,6 +75,7 @@ func managedNotificationAdditionalChannelAssociationDataSource(ctx context.Conte
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"channel_arn":                            "ChannelArn",
+		"is_sensitive_events_subscribed":         "IsSensitiveEventsSubscribed",
 		"managed_notification_configuration_arn": "ManagedNotificationConfigurationArn",
 	})
 

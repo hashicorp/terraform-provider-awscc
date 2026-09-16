@@ -80,6 +80,189 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Contains a user-supplied name for the Graph. \n\nIf you don't specify a name, we generate a unique Graph Name using a combination of Stack Name and a UUID comprising of 4 characters.\n\n_Important_: If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ImportTask
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The details of the import task to use to create the graph. When specified, the graph is created using CreateGraphUsingImportTask and data is imported from the supplied source.",
+		//	  "properties": {
+		//	    "BlankNodeHandling": {
+		//	      "description": "The method to handle blank nodes in the dataset. Currently, only convertToIri is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is NTRIPLES",
+		//	      "enum": [
+		//	        "convertToIri"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "FailOnError": {
+		//	      "description": "If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that caused the error and continues if possible.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Format": {
+		//	      "description": "Specifies the format of S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format, OPEN_CYPHER, which identifies the openCypher load format, or NTRIPLES, which identifies the RDF n-triples format.",
+		//	      "enum": [
+		//	        "CSV",
+		//	        "OPEN_CYPHER",
+		//	        "PARQUET",
+		//	        "NTRIPLES"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ImportOptions": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains options for controlling the import process. For example, if the failOnError key is set to false, the import skips the data that caused the error and continues if possible (whereas if set to true, the default, or if omitted, the import operation halts immediately when an error is encountered).",
+		//	      "properties": {
+		//	        "Neptune": {
+		//	          "additionalProperties": false,
+		//	          "description": "Options for importing data from a Neptune database.",
+		//	          "properties": {
+		//	            "PreserveDefaultVertexLabels": {
+		//	              "description": "Neptune Analytics supports label-less vertices and no labels are assigned unless one is explicitly provided. Neptune assigns default labels when none is explicitly provided. When importing the data into Neptune Analytics, the default vertex labels can be omitted by setting preserveDefaultVertexLabels to false. Note that if the vertex only has default labels, and has no other properties or edges, then the vertex will effectively not get imported into Neptune Analytics when preserveDefaultVertexLabels is set to false.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "PreserveEdgeIds": {
+		//	              "description": "Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by default. They are imported if preserveEdgeIds is set to true, and ids are stored as properties on the relationships with the property name neptuneEdgeId.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "S3ExportKmsKeyId": {
+		//	              "description": "The KMS key to use to encrypt data in the S3 bucket where the graph data is exported.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "S3ExportPath": {
+		//	              "description": "The path to an S3 bucket from which to import data.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3ExportPath",
+		//	            "S3ExportKmsKeyId"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "MaxProvisionedMemory": {
+		//	      "description": "The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024, or the approved upper limit for your account. If both the minimum and maximum values are specified, the final provisioned-memory will be chosen per the actual size of your imported data. If neither value is specified, 128 m-NCUs are used.",
+		//	      "maximum": 24576,
+		//	      "minimum": 16,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinProvisionedMemory": {
+		//	      "description": "The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 16",
+		//	      "maximum": 24576,
+		//	      "minimum": 16,
+		//	      "type": "integer"
+		//	    },
+		//	    "ParquetType": {
+		//	      "description": "The parquet type of the import task. Required when Format is PARQUET.",
+		//	      "enum": [
+		//	        "COLUMNAR"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "The ARN of the IAM role that will allow access to the data that is to be imported.",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:aws[^:]*:iam::[0-9]{12}:(role|role/service-role)(/[\\w+=,.@-]+)+",
+		//	      "type": "string"
+		//	    },
+		//	    "Source": {
+		//	      "description": "A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Source",
+		//	    "RoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"import_task": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlankNodeHandling
+				"blank_node_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The method to handle blank nodes in the dataset. Currently, only convertToIri is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is NTRIPLES",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailOnError
+				"fail_on_error": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that caused the error and continues if possible.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Format
+				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the format of S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format, OPEN_CYPHER, which identifies the openCypher load format, or NTRIPLES, which identifies the RDF n-triples format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImportOptions
+				"import_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Neptune
+						"neptune": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PreserveDefaultVertexLabels
+								"preserve_default_vertex_labels": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Neptune Analytics supports label-less vertices and no labels are assigned unless one is explicitly provided. Neptune assigns default labels when none is explicitly provided. When importing the data into Neptune Analytics, the default vertex labels can be omitted by setting preserveDefaultVertexLabels to false. Note that if the vertex only has default labels, and has no other properties or edges, then the vertex will effectively not get imported into Neptune Analytics when preserveDefaultVertexLabels is set to false.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PreserveEdgeIds
+								"preserve_edge_ids": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by default. They are imported if preserveEdgeIds is set to true, and ids are stored as properties on the relationships with the property name neptuneEdgeId.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3ExportKmsKeyId
+								"s3_export_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key to use to encrypt data in the S3 bucket where the graph data is exported.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3ExportPath
+								"s3_export_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The path to an S3 bucket from which to import data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Options for importing data from a Neptune database.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains options for controlling the import process. For example, if the failOnError key is set to false, the import skips the data that caused the error and continues if possible (whereas if set to true, the default, or if omitted, the import operation halts immediately when an error is encountered).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxProvisionedMemory
+				"max_provisioned_memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024, or the approved upper limit for your account. If both the minimum and maximum values are specified, the final provisioned-memory will be chosen per the actual size of your imported data. If neither value is specified, 128 m-NCUs are used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinProvisionedMemory
+				"min_provisioned_memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 16",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParquetType
+				"parquet_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The parquet type of the import task. Required when Format is PARQUET.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that will allow access to the data that is to be imported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Source
+				"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The details of the import task to use to create the graph. When specified, the graph is created using CreateGraphUsingImportTask and data is imported from the supplied source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +270,7 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
 		//	  "maxLength": 1024,
 		//	  "minLength": 1,
-		//	  "pattern": "arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}",
+		//	  "pattern": "arn:aws(|-cn|-us-gov|-iso|-iso-b|-iso-e|-iso-f|-eusc):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}",
 		//	  "type": "string"
 		//	}
 		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -222,20 +405,35 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NeptuneGraph::Graph").WithTerraformTypeName("awscc_neptunegraph_graph")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"deletion_protection":         "DeletionProtection",
-		"endpoint":                    "Endpoint",
-		"graph_arn":                   "GraphArn",
-		"graph_id":                    "GraphId",
-		"graph_name":                  "GraphName",
-		"key":                         "Key",
-		"kms_key_identifier":          "KmsKeyIdentifier",
-		"provisioned_memory":          "ProvisionedMemory",
-		"public_connectivity":         "PublicConnectivity",
-		"replica_count":               "ReplicaCount",
-		"tags":                        "Tags",
-		"value":                       "Value",
-		"vector_search_configuration": "VectorSearchConfiguration",
-		"vector_search_dimension":     "VectorSearchDimension",
+		"blank_node_handling":            "BlankNodeHandling",
+		"deletion_protection":            "DeletionProtection",
+		"endpoint":                       "Endpoint",
+		"fail_on_error":                  "FailOnError",
+		"format":                         "Format",
+		"graph_arn":                      "GraphArn",
+		"graph_id":                       "GraphId",
+		"graph_name":                     "GraphName",
+		"import_options":                 "ImportOptions",
+		"import_task":                    "ImportTask",
+		"key":                            "Key",
+		"kms_key_identifier":             "KmsKeyIdentifier",
+		"max_provisioned_memory":         "MaxProvisionedMemory",
+		"min_provisioned_memory":         "MinProvisionedMemory",
+		"neptune":                        "Neptune",
+		"parquet_type":                   "ParquetType",
+		"preserve_default_vertex_labels": "PreserveDefaultVertexLabels",
+		"preserve_edge_ids":              "PreserveEdgeIds",
+		"provisioned_memory":             "ProvisionedMemory",
+		"public_connectivity":            "PublicConnectivity",
+		"replica_count":                  "ReplicaCount",
+		"role_arn":                       "RoleArn",
+		"s3_export_kms_key_id":           "S3ExportKmsKeyId",
+		"s3_export_path":                 "S3ExportPath",
+		"source":                         "Source",
+		"tags":                           "Tags",
+		"value":                          "Value",
+		"vector_search_configuration":    "VectorSearchConfiguration",
+		"vector_search_dimension":        "VectorSearchDimension",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

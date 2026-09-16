@@ -217,6 +217,39 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The set of tiering configurations for the pricing rule.",
 		//	  "properties": {
+		//	    "CustomTiers": {
+		//	      "description": "The set of custom volume tiers for a SKU-scoped TIERING pricing rule. Tiers must start at 0, be contiguous, and the last tier must have no end range.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A custom volume tier that defines the rate applied to usage within the given range.",
+		//	        "properties": {
+		//	          "BeginRangeInclusive": {
+		//	            "description": "The inclusive beginning of the tier's usage range.",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "EndRangeExclusive": {
+		//	            "description": "The exclusive end of the tier's usage range. Omit for the last tier (infinity).",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "RateValue": {
+		//	            "description": "The custom rate applied to usage within the tier's range.",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "BeginRangeInclusive",
+		//	          "RateValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "FreeTier": {
 		//	      "additionalProperties": false,
 		//	      "description": "The possible customizable free tier configurations.",
@@ -235,6 +268,30 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"tiering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomTiers
+				"custom_tiers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BeginRangeInclusive
+							"begin_range_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The inclusive beginning of the tier's usage range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EndRangeExclusive
+							"end_range_exclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The exclusive end of the tier's usage range. Omit for the last tier (infinity).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RateValue
+							"rate_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The custom rate applied to usage within the tier's range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The set of custom volume tiers for a SKU-scoped TIERING pricing rule. Tiers must start at 0, be contiguous, and the last tier must have no end range.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: FreeTier
 				"free_tier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -300,15 +357,19 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"activated":                     "Activated",
 		"arn":                           "Arn",
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
+		"begin_range_inclusive":         "BeginRangeInclusive",
 		"billing_entity":                "BillingEntity",
 		"creation_time":                 "CreationTime",
+		"custom_tiers":                  "CustomTiers",
 		"description":                   "Description",
+		"end_range_exclusive":           "EndRangeExclusive",
 		"free_tier":                     "FreeTier",
 		"key":                           "Key",
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
 		"name":                          "Name",
 		"operation":                     "Operation",
+		"rate_value":                    "RateValue",
 		"scope":                         "Scope",
 		"service":                       "Service",
 		"tags":                          "Tags",

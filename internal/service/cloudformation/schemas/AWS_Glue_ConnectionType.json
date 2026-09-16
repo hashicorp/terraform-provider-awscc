@@ -1,0 +1,882 @@
+{
+  "typeName": "AWS::Glue::ConnectionType",
+  "description": "Registers a custom connection type in Glue based on the configuration provided. This enables customers to configure custom connectors for any data source with REST-based APIs.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorProperty": {
+      "type": "object",
+      "description": "Defines a property configuration for connection types.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the property.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "KeyOverride": {
+          "type": "string",
+          "description": "A key name to use when sending this property in API requests.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Required": {
+          "type": "boolean",
+          "description": "Indicates whether the property is required."
+        },
+        "DefaultValue": {
+          "type": "string",
+          "description": "The default value for the property."
+        },
+        "AllowedValues": {
+          "type": "array",
+          "description": "A list of allowed values for the property.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PropertyLocation": {
+          "type": "string",
+          "description": "Specifies where this property should be included in REST requests.",
+          "enum": [
+            "HEADER",
+            "BODY",
+            "QUERY_PARAM",
+            "PATH"
+          ]
+        },
+        "PropertyType": {
+          "type": "string",
+          "description": "The data type of this property.",
+          "enum": [
+            "USER_INPUT",
+            "SECRET",
+            "READ_ONLY",
+            "UNUSED",
+            "SECRET_OR_USER_INPUT"
+          ]
+        }
+      },
+      "required": [
+        "Name",
+        "Required",
+        "PropertyType"
+      ],
+      "additionalProperties": false
+    },
+    "SecretConnectorProperty": {
+      "type": "object",
+      "description": "Defines a secret property configuration. SECRET-type properties cannot have DefaultValue or AllowedValues.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the property.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "KeyOverride": {
+          "type": "string",
+          "description": "A key name to use when sending this property in API requests.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Required": {
+          "type": "boolean",
+          "description": "Indicates whether the property is required."
+        },
+        "PropertyLocation": {
+          "type": "string",
+          "description": "Specifies where this property should be included in REST requests.",
+          "enum": [
+            "HEADER",
+            "BODY",
+            "QUERY_PARAM",
+            "PATH"
+          ]
+        },
+        "PropertyType": {
+          "type": "string",
+          "description": "The data type of this property. Must be SECRET for secret properties.",
+          "enum": [
+            "SECRET"
+          ]
+        }
+      },
+      "required": [
+        "Name",
+        "Required",
+        "PropertyType"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectionPropertiesConfiguration": {
+      "type": "object",
+      "description": "Configuration that defines the base URL and additional request parameters needed during connection creation.",
+      "properties": {
+        "Url": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "AdditionalRequestParameters": {
+          "type": "array",
+          "description": "Key-value pairs of additional request parameters.",
+          "items": {
+            "$ref": "#/definitions/ConnectorProperty"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "BasicAuthenticationProperties": {
+      "type": "object",
+      "description": "Basic authentication configuration.",
+      "properties": {
+        "Username": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        },
+        "Password": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClientCredentialsProperties": {
+      "type": "object",
+      "description": "OAuth2 client credentials configuration.",
+      "properties": {
+        "TokenUrl": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "RequestMethod": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "ContentType": {
+          "type": "string",
+          "enum": [
+            "APPLICATION_JSON",
+            "URL_ENCODED"
+          ]
+        },
+        "ClientId": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        },
+        "ClientSecret": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        },
+        "Scope": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "TokenUrlParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorProperty"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "JWTBearerProperties": {
+      "type": "object",
+      "description": "JWT bearer token configuration.",
+      "properties": {
+        "TokenUrl": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "RequestMethod": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "ContentType": {
+          "type": "string",
+          "enum": [
+            "APPLICATION_JSON",
+            "URL_ENCODED"
+          ]
+        },
+        "JwtToken": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        },
+        "TokenUrlParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorProperty"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConnectorAuthorizationCodeProperties": {
+      "type": "object",
+      "description": "OAuth2 authorization code configuration.",
+      "properties": {
+        "AuthorizationCodeUrl": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "AuthorizationCode": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "RedirectUri": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "TokenUrl": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "RequestMethod": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "ContentType": {
+          "type": "string",
+          "enum": [
+            "APPLICATION_JSON",
+            "URL_ENCODED"
+          ]
+        },
+        "ClientId": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        },
+        "ClientSecret": {
+          "$ref": "#/definitions/SecretConnectorProperty"
+        },
+        "Scope": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "Prompt": {
+          "$ref": "#/definitions/ConnectorProperty"
+        },
+        "TokenUrlParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorProperty"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConnectorOAuth2Properties": {
+      "type": "object",
+      "description": "OAuth2 configuration container.",
+      "properties": {
+        "OAuth2GrantType": {
+          "type": "string",
+          "description": "The OAuth2 grant type to use.",
+          "enum": [
+            "CLIENT_CREDENTIALS",
+            "JWT_BEARER",
+            "AUTHORIZATION_CODE"
+          ]
+        },
+        "ClientCredentialsProperties": {
+          "$ref": "#/definitions/ClientCredentialsProperties"
+        },
+        "JWTBearerProperties": {
+          "$ref": "#/definitions/JWTBearerProperties"
+        },
+        "AuthorizationCodeProperties": {
+          "$ref": "#/definitions/ConnectorAuthorizationCodeProperties"
+        }
+      },
+      "required": [
+        "OAuth2GrantType"
+      ],
+      "additionalProperties": false
+    },
+    "CustomAuthenticationProperties": {
+      "type": "object",
+      "description": "Custom authentication configuration.",
+      "properties": {
+        "AuthenticationParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretConnectorProperty"
+          }
+        }
+      },
+      "required": [
+        "AuthenticationParameters"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorAuthenticationConfiguration": {
+      "type": "object",
+      "description": "Configuration that defines supported authentication types and required properties.",
+      "properties": {
+        "AuthenticationTypes": {
+          "type": "array",
+          "description": "A list of authentication types supported.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "BASIC",
+              "OAUTH2",
+              "CUSTOM",
+              "IAM"
+            ]
+          }
+        },
+        "OAuth2Properties": {
+          "$ref": "#/definitions/ConnectorOAuth2Properties"
+        },
+        "BasicAuthenticationProperties": {
+          "$ref": "#/definitions/BasicAuthenticationProperties"
+        },
+        "CustomAuthenticationProperties": {
+          "$ref": "#/definitions/CustomAuthenticationProperties"
+        }
+      },
+      "required": [
+        "AuthenticationTypes"
+      ],
+      "additionalProperties": false
+    },
+    "ResponseExtractionMapping": {
+      "type": "object",
+      "description": "Defines how to extract values from HTTP responses.",
+      "properties": {
+        "ContentPath": {
+          "type": "string",
+          "description": "A JSON path expression to extract a value from response body.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^\\$(\\.[a-zA-Z0-9_.@\\[\\]\\(\\)-]+)*$"
+        },
+        "HeaderKey": {
+          "type": "string",
+          "description": "The name of an HTTP response header from which to extract the value.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExtractedParameter": {
+      "type": "object",
+      "description": "Parameter extraction configuration.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The parameter key name.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "DefaultValue": {
+          "type": "string",
+          "description": "The default value.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "PropertyLocation": {
+          "type": "string",
+          "description": "Specifies where to place the parameter in requests.",
+          "enum": [
+            "HEADER",
+            "BODY",
+            "QUERY_PARAM",
+            "PATH"
+          ]
+        },
+        "Value": {
+          "$ref": "#/definitions/ResponseExtractionMapping"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResponseConfiguration": {
+      "type": "object",
+      "description": "Configuration for parsing JSON responses from REST API calls.",
+      "properties": {
+        "ResultPath": {
+          "type": "string",
+          "description": "JSON path expression for result data location.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^\\$(\\.[a-zA-Z0-9_.@\\[\\]\\(\\)-]+)*$"
+        },
+        "ErrorPath": {
+          "type": "string",
+          "description": "JSON path expression for error information location.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^\\$(\\.[a-zA-Z0-9_.@\\[\\]\\(\\)-]+)*$"
+        }
+      },
+      "required": [
+        "ResultPath"
+      ],
+      "additionalProperties": false
+    },
+    "CursorConfiguration": {
+      "type": "object",
+      "description": "Cursor-based pagination configuration.",
+      "properties": {
+        "NextPage": {
+          "$ref": "#/definitions/ExtractedParameter"
+        },
+        "LimitParameter": {
+          "$ref": "#/definitions/ExtractedParameter"
+        }
+      },
+      "required": [
+        "NextPage"
+      ],
+      "additionalProperties": false
+    },
+    "OffsetConfiguration": {
+      "type": "object",
+      "description": "Offset-based pagination configuration.",
+      "properties": {
+        "OffsetParameter": {
+          "$ref": "#/definitions/ExtractedParameter"
+        },
+        "LimitParameter": {
+          "$ref": "#/definitions/ExtractedParameter"
+        }
+      },
+      "required": [
+        "OffsetParameter",
+        "LimitParameter"
+      ],
+      "additionalProperties": false
+    },
+    "PaginationConfiguration": {
+      "type": "object",
+      "description": "Configuration for handling paginated responses.",
+      "properties": {
+        "CursorConfiguration": {
+          "$ref": "#/definitions/CursorConfiguration"
+        },
+        "OffsetConfiguration": {
+          "$ref": "#/definitions/OffsetConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BetweenConfiguration": {
+      "type": "object",
+      "description": "Configuration that defines how BETWEEN range filter operations are translated into REST API request parameters.",
+      "properties": {
+        "LowBoundKey": {
+          "type": "string",
+          "description": "The parameter name used for the lower bound value in a BETWEEN filter operation."
+        },
+        "HighBoundKey": {
+          "type": "string",
+          "description": "The parameter name used for the upper bound value in a BETWEEN filter operation."
+        },
+        "Template": {
+          "type": "string",
+          "description": "A template string for constructing the BETWEEN filter expression."
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilterStringConfiguration": {
+      "type": "object",
+      "description": "Configuration for constructing filter expression strings when using the FILTER_STRING filter mode.",
+      "properties": {
+        "QueryParameterName": {
+          "type": "string",
+          "description": "The query parameter name used to send the constructed filter expression string in API requests."
+        },
+        "QuoteStringValues": {
+          "type": "boolean",
+          "description": "Indicates whether string and date values should be wrapped with a quote character in the filter expression."
+        },
+        "QuoteCharacter": {
+          "type": "string",
+          "description": "The character used to quote values when QuoteStringValues is true. Defaults to double quotes if not specified."
+        }
+      },
+      "required": [
+        "QueryParameterName"
+      ],
+      "additionalProperties": false
+    },
+    "FilterConfiguration": {
+      "type": "object",
+      "description": "Configuration that defines how filter predicates are applied to REST API requests, supporting both query parameter and filter string strategies.",
+      "properties": {
+        "FilterMode": {
+          "type": "string",
+          "description": "The strategy for applying filters to requests.",
+          "enum": [
+            "QUERY_PARAMS",
+            "FILTER_STRING"
+          ]
+        },
+        "OperatorMappings": {
+          "type": "object",
+          "description": "A map of logical filter operators to their API-specific string representations.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "DateTimeFormat": {
+          "type": "string",
+          "description": "The global date and time format for filter expressions."
+        },
+        "StripQuotes": {
+          "type": "boolean",
+          "description": "Indicates whether surrounding double quotes should be stripped from filter values before processing."
+        },
+        "BetweenConfiguration": {
+          "$ref": "#/definitions/BetweenConfiguration"
+        },
+        "FilterStringConfiguration": {
+          "$ref": "#/definitions/FilterStringConfiguration"
+        }
+      },
+      "required": [
+        "FilterMode"
+      ],
+      "additionalProperties": false
+    },
+    "FilterOverrides": {
+      "type": "object",
+      "description": "Configuration that defines per-field overrides for filter behavior, allowing individual fields to customize how filter operations are applied.",
+      "properties": {
+        "FieldName": {
+          "type": "string",
+          "description": "An override for the field name to use in filter expressions, if different from the schema field name."
+        },
+        "OperatorMappings": {
+          "type": "object",
+          "description": "A map of logical filter operators to their field-specific API representations, overriding the global operator mappings.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "BetweenConfiguration": {
+          "$ref": "#/definitions/BetweenConfiguration"
+        },
+        "DateTimeFormat": {
+          "type": "string",
+          "description": "The date and time format for filter expressions on this field, overriding the global DateTimeFormat."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceConfiguration": {
+      "type": "object",
+      "description": "Configuration that defines how to make requests to endpoints.",
+      "properties": {
+        "RequestMethod": {
+          "type": "string",
+          "description": "The HTTP method to use.",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "RequestPath": {
+          "type": "string",
+          "description": "The URL path for the REST endpoint.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^/[a-zA-Z0-9._~:/?#\\[\\]@!$&'()*+,;={}-]*$"
+        },
+        "RequestParameters": {
+          "type": "array",
+          "description": "Request parameters configuration.",
+          "items": {
+            "$ref": "#/definitions/ConnectorProperty"
+          }
+        },
+        "ResponseConfiguration": {
+          "$ref": "#/definitions/ResponseConfiguration"
+        },
+        "PaginationConfiguration": {
+          "$ref": "#/definitions/PaginationConfiguration"
+        },
+        "FilterConfiguration": {
+          "$ref": "#/definitions/FilterConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FieldDefinition": {
+      "type": "object",
+      "description": "Defines a field in an entity schema.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the field."
+        },
+        "FieldDataType": {
+          "type": "string",
+          "description": "The data type of the field.",
+          "enum": [
+            "INT",
+            "SMALLINT",
+            "BIGINT",
+            "FLOAT",
+            "LONG",
+            "DATE",
+            "BOOLEAN",
+            "MAP",
+            "ARRAY",
+            "STRING",
+            "TIMESTAMP",
+            "DECIMAL",
+            "BYTE",
+            "SHORT",
+            "DOUBLE",
+            "STRUCT",
+            "BINARY",
+            "UNION"
+          ]
+        },
+        "ResponseDateFormat": {
+          "type": "string",
+          "description": "The format pattern for parsing date values from API responses. Accepts Java DateTimeFormatter patterns, EPOCH_SECONDS, or EPOCH_MILLIS."
+        },
+        "IsPartitionable": {
+          "type": "boolean",
+          "description": "Indicates whether this field can be used for partitioning queries to the data source."
+        },
+        "IsNullable": {
+          "type": "boolean",
+          "description": "Indicates whether this field can contain null values."
+        },
+        "IsQueryable": {
+          "type": "boolean",
+          "description": "Indicates whether this field can be used in filter predicates when querying data."
+        },
+        "IsOrderable": {
+          "type": "boolean",
+          "description": "Indicates whether this field can be used for ordering results."
+        },
+        "FilterOverrides": {
+          "$ref": "#/definitions/FilterOverrides"
+        }
+      },
+      "required": [
+        "Name",
+        "FieldDataType"
+      ],
+      "additionalProperties": false
+    },
+    "EntityConfiguration": {
+      "type": "object",
+      "description": "Configuration for interacting with a specific data entity.",
+      "properties": {
+        "SourceConfiguration": {
+          "$ref": "#/definitions/SourceConfiguration"
+        },
+        "Schema": {
+          "type": "object",
+          "description": "The schema definition for this entity.",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/FieldDefinition"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "RestConfiguration": {
+      "type": "object",
+      "description": "Configuration for HTTP request and response handling.",
+      "properties": {
+        "GlobalSourceConfiguration": {
+          "$ref": "#/definitions/SourceConfiguration"
+        },
+        "ValidationEndpointConfiguration": {
+          "type": "object",
+          "description": "Configuration for the validation endpoint. Only supports RequestMethod and RequestPath.",
+          "properties": {
+            "RequestMethod": {
+              "type": "string",
+              "description": "The HTTP method to use.",
+              "enum": [
+                "GET",
+                "POST"
+              ]
+            },
+            "RequestPath": {
+              "type": "string",
+              "description": "The URL path for the REST endpoint.",
+              "minLength": 1,
+              "maxLength": 512,
+              "pattern": "^/[a-zA-Z0-9._~:/?#\\[\\]@!$&'()*+,;={}-]*$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "EntityConfigurations": {
+          "type": "object",
+          "description": "A map of entity configurations.",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/EntityConfiguration"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ConnectionType": {
+      "type": "string",
+      "description": "The name of the connection type. Must be prefixed with REST-.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ConnectionTypeArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the registered connection type.",
+      "minLength": 1,
+      "maxLength": 10240,
+      "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:"
+    },
+    "IntegrationType": {
+      "type": "string",
+      "description": "The integration type for the connection. Currently only REST is supported.",
+      "enum": [
+        "REST"
+      ]
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the connection type.",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "ConnectionProperties": {
+      "$ref": "#/definitions/ConnectionPropertiesConfiguration"
+    },
+    "ConnectorAuthenticationConfiguration": {
+      "$ref": "#/definitions/ConnectorAuthenticationConfiguration"
+    },
+    "RestConfiguration": {
+      "$ref": "#/definitions/RestConfiguration"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the connection type.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "ConnectionType",
+    "RestConfiguration"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ConnectionTypeArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ConnectionProperties",
+    "/properties/ConnectorAuthenticationConfiguration",
+    "/properties/IntegrationType"
+  ],
+  "createOnlyProperties": [
+    "/properties/ConnectionType",
+    "/properties/IntegrationType",
+    "/properties/Description",
+    "/properties/RestConfiguration",
+    "/properties/ConnectionProperties",
+    "/properties/ConnectorAuthenticationConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/ConnectionTypeArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ConnectionType"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "glue:TagResource",
+      "glue:UntagResource",
+      "glue:GetTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:RegisterConnectionType",
+        "glue:DescribeConnectionType",
+        "glue:GetTags",
+        "glue:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:DescribeConnectionType",
+        "glue:GetTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:DescribeConnectionType",
+        "glue:GetTags",
+        "glue:TagResource",
+        "glue:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteConnectionType",
+        "glue:DescribeConnectionType",
+        "glue:GetTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "glue:ListConnectionTypes"
+      ]
+    }
+  }
+}

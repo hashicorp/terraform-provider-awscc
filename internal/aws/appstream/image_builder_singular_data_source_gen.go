@@ -79,6 +79,15 @@ func imageBuilderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DisableIMDSV1
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"disable_imdsv1": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -323,6 +332,7 @@ func imageBuilderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"appstream_agent_version":                "AppstreamAgentVersion",
 		"description":                            "Description",
 		"directory_name":                         "DirectoryName",
+		"disable_imdsv1":                         "DisableIMDSV1",
 		"display_name":                           "DisplayName",
 		"domain_join_info":                       "DomainJoinInfo",
 		"enable_default_internet_access":         "EnableDefaultInternetAccess",

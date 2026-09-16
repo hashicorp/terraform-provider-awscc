@@ -1,0 +1,428 @@
+{
+  "typeName": "AWS::Invoicing::ProcurementPortalPreference",
+  "description": "Creates and manages a procurement portal preference configuration for e-invoice delivery and purchase order retrieval.",
+  "properties": {
+    "ProcurementPortalPreferenceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the procurement portal preference.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^arn:aws:invoicing::[0-9]{12}:procurement-portal-preference/[-a-zA-Z0-9]+$"
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "description": "The AWS account ID associated with this procurement portal preference.",
+      "pattern": "^\\d{12}$"
+    },
+    "ProcurementPortalName": {
+      "type": "string",
+      "description": "The name of the procurement portal.",
+      "enum": [
+        "SAP_BUSINESS_NETWORK",
+        "COUPA"
+      ]
+    },
+    "BuyerDomain": {
+      "type": "string",
+      "description": "The domain identifier for the buyer in the procurement portal.",
+      "enum": [
+        "NetworkID"
+      ]
+    },
+    "BuyerIdentifier": {
+      "type": "string",
+      "description": "The unique identifier for the buyer in the procurement portal.",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": "^\\S+$"
+    },
+    "SupplierDomain": {
+      "type": "string",
+      "description": "The domain identifier for the supplier in the procurement portal.",
+      "enum": [
+        "NetworkID"
+      ]
+    },
+    "SupplierIdentifier": {
+      "type": "string",
+      "description": "The unique identifier for the supplier in the procurement portal.",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": "^\\S+$"
+    },
+    "Selector": {
+      "$ref": "#/definitions/ProcurementPortalPreferenceSelector"
+    },
+    "ProcurementPortalSharedSecret": {
+      "type": "string",
+      "description": "The shared secret or authentication credential used for secure communication with the procurement portal.",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": "^\\S+$"
+    },
+    "ProcurementPortalInstanceEndpoint": {
+      "type": "string",
+      "description": "The endpoint URL where e-invoices are delivered to the procurement portal.",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": "^\\S+$"
+    },
+    "PurchaseOrderRetrievalEndpoint": {
+      "type": "string",
+      "description": "The endpoint URL used for retrieving purchase orders from the procurement portal.",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": "^\\S+$"
+    },
+    "TestEnvPreference": {
+      "$ref": "#/definitions/TestEnvPreference"
+    },
+    "EinvoiceDeliveryEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether e-invoice delivery is enabled for this procurement portal preference."
+    },
+    "EinvoiceDeliveryPreference": {
+      "$ref": "#/definitions/EinvoiceDeliveryPreference"
+    },
+    "PurchaseOrderRetrievalEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether purchase order retrieval is enabled for this procurement portal preference."
+    },
+    "Contacts": {
+      "type": "array",
+      "description": "List of contact information for portal administrators and technical contacts.",
+      "items": {
+        "$ref": "#/definitions/Contact"
+      },
+      "minItems": 1,
+      "maxItems": 1
+    },
+    "EinvoiceDeliveryPreferenceStatus": {
+      "type": "string",
+      "description": "The current status of the e-invoice delivery preference.",
+      "enum": [
+        "PENDING_VERIFICATION",
+        "TEST_INITIALIZED",
+        "TEST_INITIALIZATION_FAILED",
+        "TEST_FAILED",
+        "ACTIVE",
+        "SUSPENDED"
+      ]
+    },
+    "PurchaseOrderRetrievalPreferenceStatus": {
+      "type": "string",
+      "description": "The current status of the purchase order retrieval preference.",
+      "enum": [
+        "PENDING_VERIFICATION",
+        "TEST_INITIALIZED",
+        "TEST_INITIALIZATION_FAILED",
+        "TEST_FAILED",
+        "ACTIVE",
+        "SUSPENDED"
+      ]
+    },
+    "Version": {
+      "type": "integer",
+      "description": "The version number of the procurement portal preference configuration."
+    },
+    "CreateDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the procurement portal preference was created."
+    },
+    "LastUpdateDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the procurement portal preference was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with this procurement portal preference.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 200
+    }
+  },
+  "definitions": {
+    "ProcurementPortalPreferenceSelector": {
+      "type": "object",
+      "description": "Specifies criteria for selecting which invoices should be processed.",
+      "properties": {
+        "InvoiceUnitArns": {
+          "type": "array",
+          "description": "The Amazon Resource Name (ARN) of invoice unit identifiers to which this preference applies.",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "EinvoiceDeliveryPreference": {
+      "type": "object",
+      "description": "Specifies the preferences for e-invoice delivery.",
+      "properties": {
+        "EinvoiceDeliveryDocumentTypes": {
+          "type": "array",
+          "description": "The types of e-invoice documents to be delivered.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AWS_CLOUD_INVOICE",
+              "AWS_CLOUD_CREDIT_MEMO",
+              "AWS_MARKETPLACE_INVOICE",
+              "AWS_MARKETPLACE_CREDIT_MEMO",
+              "AWS_REQUEST_FOR_PAYMENT"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 10
+        },
+        "EinvoiceDeliveryAttachmentTypes": {
+          "type": "array",
+          "description": "The types of attachments to include with the e-invoice delivery.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "INVOICE_PDF",
+              "RFP_PDF"
+            ]
+          }
+        },
+        "Protocol": {
+          "type": "string",
+          "description": "The communication protocol to use for e-invoice delivery.",
+          "enum": [
+            "CXML"
+          ]
+        },
+        "PurchaseOrderDataSources": {
+          "type": "array",
+          "description": "The sources of purchase order data.",
+          "items": {
+            "$ref": "#/definitions/PurchaseOrderDataSource"
+          }
+        },
+        "ConnectionTestingMethod": {
+          "type": "string",
+          "description": "The method to use for testing the connection to the procurement portal.",
+          "enum": [
+            "PROD_ENV_DOLLAR_TEST",
+            "TEST_ENV_REPLAY_TEST"
+          ]
+        },
+        "EinvoiceDeliveryActivationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The ISO 8601 date-time when e-invoice delivery should be activated."
+        }
+      },
+      "additionalProperties": false
+    },
+    "PurchaseOrderDataSource": {
+      "type": "object",
+      "description": "Specifies the source configuration for retrieving purchase order data.",
+      "properties": {
+        "EinvoiceDeliveryDocumentType": {
+          "type": "string",
+          "description": "The type of e-invoice document that requires purchase order data.",
+          "enum": [
+            "AWS_CLOUD_INVOICE",
+            "AWS_CLOUD_CREDIT_MEMO",
+            "AWS_MARKETPLACE_INVOICE",
+            "AWS_MARKETPLACE_CREDIT_MEMO",
+            "AWS_REQUEST_FOR_PAYMENT"
+          ]
+        },
+        "PurchaseOrderDataSourceType": {
+          "type": "string",
+          "description": "The type of source for purchase order data.",
+          "enum": [
+            "ASSOCIATED_PURCHASE_ORDER_REQUIRED",
+            "PURCHASE_ORDER_NOT_REQUIRED"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "TestEnvPreference": {
+      "type": "object",
+      "description": "Configuration settings for the test environment of the procurement portal.",
+      "properties": {
+        "BuyerDomain": {
+          "type": "string",
+          "description": "The domain identifier for the buyer in the test environment.",
+          "enum": [
+            "NetworkID"
+          ]
+        },
+        "BuyerIdentifier": {
+          "type": "string",
+          "description": "The unique identifier for the buyer in the test environment.",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^\\S+$"
+        },
+        "SupplierDomain": {
+          "type": "string",
+          "description": "The domain identifier for the supplier in the test environment.",
+          "enum": [
+            "NetworkID"
+          ]
+        },
+        "SupplierIdentifier": {
+          "type": "string",
+          "description": "The unique identifier for the supplier in the test environment.",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^\\S+$"
+        },
+        "ProcurementPortalSharedSecret": {
+          "type": "string",
+          "description": "The shared secret for secure communication in the test environment.",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^\\S+$"
+        },
+        "ProcurementPortalInstanceEndpoint": {
+          "type": "string",
+          "description": "The endpoint URL for e-invoice delivery in the test environment.",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^\\S+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Contact": {
+      "type": "object",
+      "description": "Contact information for a person or role associated with the procurement portal preference.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the contact person or role.",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "Email": {
+          "type": "string",
+          "description": "The email address of the contact person or role.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag key-value pair.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "ProcurementPortalName",
+    "BuyerDomain",
+    "BuyerIdentifier",
+    "SupplierDomain",
+    "SupplierIdentifier",
+    "EinvoiceDeliveryEnabled",
+    "PurchaseOrderRetrievalEnabled",
+    "Contacts"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ProcurementPortalPreferenceArn",
+    "/properties/AwsAccountId",
+    "/properties/CreateDate",
+    "/properties/LastUpdateDate",
+    "/properties/Version",
+    "/properties/EinvoiceDeliveryPreferenceStatus",
+    "/properties/PurchaseOrderRetrievalPreferenceStatus",
+    "/properties/PurchaseOrderRetrievalEndpoint"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProcurementPortalName",
+    "/properties/BuyerDomain",
+    "/properties/BuyerIdentifier",
+    "/properties/SupplierDomain",
+    "/properties/SupplierIdentifier"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ProcurementPortalSharedSecret"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProcurementPortalPreferenceArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "invoicing:TagResource",
+      "invoicing:UntagResource",
+      "invoicing:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "invoicing:CreateProcurementPortalPreference",
+        "invoicing:GetProcurementPortalPreference",
+        "invoicing:TagResource",
+        "invoicing:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "invoicing:GetProcurementPortalPreference",
+        "invoicing:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "invoicing:PutProcurementPortalPreference",
+        "invoicing:GetProcurementPortalPreference",
+        "invoicing:TagResource",
+        "invoicing:UntagResource",
+        "invoicing:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "invoicing:DeleteProcurementPortalPreference",
+        "invoicing:GetProcurementPortalPreference",
+        "invoicing:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "invoicing:ListProcurementPortalPreferences"
+      ]
+    }
+  }
+}

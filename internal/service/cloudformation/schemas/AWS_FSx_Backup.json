@@ -1,0 +1,157 @@
+{
+  "typeName": "AWS::FSx::Backup",
+  "description": "Creates a backup of an existing Amazon FSx for Windows File Server file system, Amazon FSx for Lustre file system, Amazon FSx for NetApp ONTAP volume, or Amazon FSx for OpenZFS file system.",
+  "properties": {
+    "BackupId": {
+      "type": "string",
+      "description": "The ID of the backup.",
+      "minLength": 12,
+      "maxLength": 128,
+      "pattern": "^(backup-[0-9a-f]{8,})$"
+    },
+    "ResourceARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the backup.",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": ""
+    },
+    "FileSystemId": {
+      "type": "string",
+      "description": "The ID of the file system to back up.",
+      "minLength": 11,
+      "maxLength": 21,
+      "pattern": "^(fs-[0-9a-f]{8,})$"
+    },
+    "Lifecycle": {
+      "type": "string",
+      "description": "The lifecycle status of the backup.",
+      "enum": [
+        "AVAILABLE",
+        "CREATING",
+        "TRANSFERRING",
+        "DELETED",
+        "FAILED",
+        "PENDING",
+        "COPYING"
+      ]
+    },
+    "Type": {
+      "type": "string",
+      "description": "The type of the backup.",
+      "enum": [
+        "AUTOMATIC",
+        "USER_INITIATED",
+        "AWS_BACKUP"
+      ]
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The time when the backup was created.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags to apply to the backup at backup creation.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "FileSystemId"
+  ],
+  "createOnlyProperties": [
+    "/properties/FileSystemId"
+  ],
+  "readOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/ResourceARN",
+    "/properties/Lifecycle",
+    "/properties/Type",
+    "/properties/CreationTime"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/BackupId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fsx:TagResource",
+      "fsx:UntagResource",
+      "fsx:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fsx:CreateBackup",
+        "fsx:DescribeBackups",
+        "fsx:TagResource",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fsx:DescribeBackups",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fsx:DescribeBackups",
+        "fsx:TagResource",
+        "fsx:UntagResource",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fsx:DeleteBackup",
+        "fsx:DescribeBackups",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fsx:DescribeBackups"
+      ]
+    }
+  }
+}

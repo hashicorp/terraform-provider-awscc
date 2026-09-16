@@ -118,6 +118,31 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "KmsKeyId": {
 		//	                        "type": "string"
 		//	                      },
+		//	                      "MultiAvailabilityZoneConfiguration": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ConfigurationType": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "StandbyAvailabilityZones": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "AvailabilityZone": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "AvailabilityZoneId": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": true
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
 		//	                      "SnapshotId": {
 		//	                        "type": "string"
 		//	                      },
@@ -667,6 +692,32 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 													}, /*END ATTRIBUTE*/
 													// Property: KmsKeyId
 													"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MultiAvailabilityZoneConfiguration
+													"multi_availability_zone_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ConfigurationType
+															"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: StandbyAvailabilityZones
+															"standby_availability_zones": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AvailabilityZone
+																		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: AvailabilityZoneId
+																		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
 														Computed: true,
 													}, /*END ATTRIBUTE*/
 													// Property: SnapshotId
@@ -1671,6 +1722,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"capacity_reservation_options":             "CapacityReservationOptions",
 		"capacity_reservation_resource_group_arns": "CapacityReservationResourceGroupArns",
 		"capacity_reservation_target":              "CapacityReservationTarget",
+		"configuration_type":                       "ConfigurationType",
 		"context":                                  "Context",
 		"cpu":                                      "Cpu",
 		"cpu_manufacturers":                        "CpuManufacturers",
@@ -1718,19 +1770,20 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max":                                      "Max",
 		"max_price":                                "MaxPrice",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
-		"max_total_price":         "MaxTotalPrice",
-		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",
-		"memory_mi_b":             "MemoryMiB",
-		"metadata_options":        "MetadataOptions",
-		"min":                     "Min",
-		"min_target_capacity":     "MinTargetCapacity",
-		"name":                    "Name",
-		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
-		"network_card_index":      "NetworkCardIndex",
-		"network_interface_count": "NetworkInterfaceCount",
-		"network_interface_id":    "NetworkInterfaceId",
-		"network_interfaces":      "NetworkInterfaces",
-		"no_device":               "NoDevice",
+		"max_total_price":                       "MaxTotalPrice",
+		"memory_gi_b_per_v_cpu":                 "MemoryGiBPerVCpu",
+		"memory_mi_b":                           "MemoryMiB",
+		"metadata_options":                      "MetadataOptions",
+		"min":                                   "Min",
+		"min_target_capacity":                   "MinTargetCapacity",
+		"multi_availability_zone_configuration": "MultiAvailabilityZoneConfiguration",
+		"name":                                  "Name",
+		"network_bandwidth_gbps":                "NetworkBandwidthGbps",
+		"network_card_index":                    "NetworkCardIndex",
+		"network_interface_count":               "NetworkInterfaceCount",
+		"network_interface_id":                  "NetworkInterfaceId",
+		"network_interfaces":                    "NetworkInterfaces",
+		"no_device":                             "NoDevice",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":                           "OnDemandOptions",
 		"on_demand_target_capacity":                   "OnDemandTargetCapacity",
@@ -1758,6 +1811,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"spot_options":                                "SpotOptions",
 		"spot_target_capacity":                        "SpotTargetCapacity",
 		"spread_domain":                               "SpreadDomain",
+		"standby_availability_zones":                  "StandbyAvailabilityZones",
 		"subnet_id":                                   "SubnetId",
 		"tag_specifications":                          "TagSpecifications",
 		"tags":                                        "Tags",

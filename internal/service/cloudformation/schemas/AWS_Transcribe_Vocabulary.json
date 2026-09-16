@@ -1,0 +1,177 @@
+{
+  "typeName": "AWS::Transcribe::Vocabulary",
+  "description": "Creates a custom vocabulary that you can use to improve the transcription accuracy of domain-specific words and phrases.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the custom vocabulary.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws(-[^:]+)?:transcribe:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z-]*/[0-9a-zA-Z._-]+$"
+    },
+    "VocabularyName": {
+      "type": "string",
+      "description": "A unique name, chosen by you, for your custom vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an AWS account.",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[0-9a-zA-Z._-]+$"
+    },
+    "LanguageCode": {
+      "type": "string",
+      "description": "The language code that represents the language of the entries in your custom vocabulary. Each custom vocabulary must contain terms in only one language."
+    },
+    "Phrases": {
+      "type": "array",
+      "description": "Use this parameter if you want to create your custom vocabulary by including all desired terms, as comma-separated values, within your request. You cannot use this parameter together with VocabularyFileUri.",
+      "items": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 256,
+        "pattern": "^.+$"
+      },
+      "insertionOrder": false
+    },
+    "VocabularyFileUri": {
+      "type": "string",
+      "description": "The Amazon S3 location of the text file that contains your custom vocabulary. You cannot use this parameter together with Phrases.",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "^(s3://|http(s*)://).+$"
+    },
+    "DataAccessRoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input file.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": ""
+    },
+    "VocabularyState": {
+      "type": "string",
+      "description": "The processing state of your custom vocabulary. If the state is READY, you can use the custom vocabulary in a StartTranscriptionJob request.",
+      "enum": [
+        "PENDING",
+        "READY",
+        "FAILED"
+      ]
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The date and time the specified custom vocabulary was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Adds one or more custom tags, each in the form of a key:value pair, to the custom vocabulary.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "VocabularyName",
+    "LanguageCode"
+  ],
+  "additionalProperties": false,
+  "replacementStrategy": "delete_then_create",
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/VocabularyState",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/VocabularyName",
+    "/properties/LanguageCode"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Phrases",
+    "/properties/VocabularyFileUri",
+    "/properties/DataAccessRoleArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/VocabularyName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "transcribe:TagResource",
+      "transcribe:UntagResource",
+      "transcribe:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transcribe:CreateVocabulary",
+        "transcribe:GetVocabulary",
+        "transcribe:TagResource",
+        "transcribe:ListTagsForResource",
+        "iam:PassRole",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transcribe:GetVocabulary",
+        "transcribe:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transcribe:UpdateVocabulary",
+        "transcribe:GetVocabulary",
+        "transcribe:TagResource",
+        "transcribe:UntagResource",
+        "transcribe:ListTagsForResource",
+        "iam:PassRole",
+        "s3:GetObject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transcribe:DeleteVocabulary",
+        "transcribe:GetVocabulary",
+        "transcribe:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transcribe:ListVocabularies"
+      ]
+    }
+  }
+}

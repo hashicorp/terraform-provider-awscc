@@ -1,0 +1,1 @@
+$ terraform import awscc_macie_member.example "arn"

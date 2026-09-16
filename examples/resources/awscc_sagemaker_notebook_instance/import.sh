@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_notebook_instance.example "notebook_instance_arn"

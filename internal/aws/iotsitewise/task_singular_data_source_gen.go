@@ -155,6 +155,107 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "EphemeralStorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for ephemeral storage attached to the container task.",
+		//	          "properties": {
+		//	            "StorageClass": {
+		//	              "description": "The storage type that determines I/O performance characteristics. Family name indicates workload pattern, level number indicates performance within that family.",
+		//	              "enum": [
+		//	                "STANDARD_1",
+		//	                "STANDARD_2",
+		//	                "THROUGHPUT_1",
+		//	                "THROUGHPUT_2"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "StorageSizeInGiB": {
+		//	              "description": "Storage volume size in GiB.",
+		//	              "maximum": 16384,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "StorageClass",
+		//	            "StorageSizeInGiB"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Mounts": {
+		//	          "description": "Mounts attached to the container filesystem. Each mount exposes an external data source as a local directory inside the container.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Attaches a data source to the container filesystem for a task at a customer-supplied relative path under the service-owned mount root.",
+		//	            "properties": {
+		//	              "Name": {
+		//	                "description": "A unique name for the mount within the task.",
+		//	                "maxLength": 64,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9_-]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "RelativePath": {
+		//	                "description": "The relative path under the service-owned mount root where this mount is attached inside the container.",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              },
+		//	              "Source": {
+		//	                "additionalProperties": false,
+		//	                "description": "The data source configuration for a mount.",
+		//	                "properties": {
+		//	                  "S3AccessPoint": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configures a mount that reads from an Amazon S3 access point.",
+		//	                    "properties": {
+		//	                      "AccessPointArn": {
+		//	                        "description": "The Amazon Resource Name (ARN) of the Amazon S3 access point. The mount reads objects from the bucket associated with this access point. Access is governed by the access point policy and the task execution role's IAM permissions.",
+		//	                        "maxLength": 128,
+		//	                        "minLength": 4,
+		//	                        "pattern": "^arn:aws(-cn|-us-gov)?:s3:[a-z0-9-]*:\\d{12}:accesspoint[/:][a-zA-Z0-9._-]+$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Prefix": {
+		//	                        "description": "An object key name prefix. If specified, the mount includes only objects whose keys begin with this prefix. To include all objects at the access point, omit this field.",
+		//	                        "maxLength": 1024,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AccessPointArn"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "S3AccessPoint"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "StorageType": {
+		//	                "description": "The type of storage used for the mount inside the container.",
+		//	                "enum": [
+		//	                  "SHARED_STORAGE"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "RelativePath",
+		//	              "Source",
+		//	              "StorageType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
 		//	        "ProcessingType": {
 		//	          "description": "The processing type for compute resources.",
 		//	          "enum": [
@@ -234,6 +335,71 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "A map of environment variable key-value pairs.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: EphemeralStorageConfiguration
+						"ephemeral_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageClass
+								"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The storage type that determines I/O performance characteristics. Family name indicates workload pattern, level number indicates performance within that family.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StorageSizeInGiB
+								"storage_size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Storage volume size in GiB.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for ephemeral storage attached to the container task.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Mounts
+						"mounts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A unique name for the mount within the task.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RelativePath
+									"relative_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The relative path under the service-owned mount root where this mount is attached inside the container.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Source
+									"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: S3AccessPoint
+											"s3_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AccessPointArn
+													"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of the Amazon S3 access point. The mount reads objects from the bucket associated with this access point. Access is governed by the access point policy and the task execution role's IAM permissions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Prefix
+													"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "An object key name prefix. If specified, the mount includes only objects whose keys begin with this prefix. To include all objects at the access point, omit this field.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configures a mount that reads from an Amazon S3 access point.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The data source configuration for a mount.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StorageType
+									"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The type of storage used for the mount inside the container.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Mounts attached to the container filesystem. Each mount exposes an external data source as a local directory inside the container.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: ProcessingType
 						"processing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The processing type for compute resources.",
@@ -307,23 +473,34 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Task").WithTerraformTypeName("awscc_iotsitewise_task")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"command":                      "Command",
-		"container_task_configuration": "ContainerTaskConfiguration",
-		"description":                  "Description",
-		"ecr_uri":                      "EcrUri",
-		"environment_variables":        "EnvironmentVariables",
-		"key":                          "Key",
-		"processing_type":              "ProcessingType",
-		"processing_unit":              "ProcessingUnit",
-		"status":                       "Status",
-		"tags":                         "Tags",
-		"task_arn":                     "TaskArn",
-		"task_configuration":           "TaskConfiguration",
-		"task_execution_role":          "TaskExecutionRole",
-		"task_name":                    "TaskName",
-		"timeout_seconds":              "TimeoutSeconds",
-		"value":                        "Value",
-		"workspace_name":               "WorkspaceName",
+		"access_point_arn":                "AccessPointArn",
+		"command":                         "Command",
+		"container_task_configuration":    "ContainerTaskConfiguration",
+		"description":                     "Description",
+		"ecr_uri":                         "EcrUri",
+		"environment_variables":           "EnvironmentVariables",
+		"ephemeral_storage_configuration": "EphemeralStorageConfiguration",
+		"key":                             "Key",
+		"mounts":                          "Mounts",
+		"name":                            "Name",
+		"prefix":                          "Prefix",
+		"processing_type":                 "ProcessingType",
+		"processing_unit":                 "ProcessingUnit",
+		"relative_path":                   "RelativePath",
+		"s3_access_point":                 "S3AccessPoint",
+		"source":                          "Source",
+		"status":                          "Status",
+		"storage_class":                   "StorageClass",
+		"storage_size_in_gi_b":            "StorageSizeInGiB",
+		"storage_type":                    "StorageType",
+		"tags":                            "Tags",
+		"task_arn":                        "TaskArn",
+		"task_configuration":              "TaskConfiguration",
+		"task_execution_role":             "TaskExecutionRole",
+		"task_name":                       "TaskName",
+		"timeout_seconds":                 "TimeoutSeconds",
+		"value":                           "Value",
+		"workspace_name":                  "WorkspaceName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

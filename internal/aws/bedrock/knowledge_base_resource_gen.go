@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -199,6 +200,10 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
+		//	                "ModelConfiguration": {
+		//	                  "description": "Model-specific configuration for the embedding model.",
+		//	                  "type": "object"
+		//	                },
 		//	                "Video": {
 		//	                  "description": "List of video configurations for multi modal ingestion.",
 		//	                  "insertionOrder": false,
@@ -258,6 +263,57 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            }
 		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SupplementalDataStorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configurations for supplemental data storage.",
+		//	          "properties": {
+		//	            "SupplementalDataStorageLocations": {
+		//	              "description": "List of supplemental data storage locations.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Supplemental data storage location.",
+		//	                "properties": {
+		//	                  "S3Location": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "An Amazon S3 location.",
+		//	                    "properties": {
+		//	                      "URI": {
+		//	                        "description": "The location's URI",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "pattern": "^s3://.{1,128}$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "URI"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SupplementalDataStorageLocationType": {
+		//	                    "description": "Supplemental data storage location type.",
+		//	                    "enum": [
+		//	                      "S3"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SupplementalDataStorageLocationType"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 1,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SupplementalDataStorageLocations"
+		//	          ],
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -650,6 +706,10 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
+		//	                "ModelConfiguration": {
+		//	                  "description": "Model-specific configuration for the embedding model.",
+		//	                  "type": "object"
+		//	                },
 		//	                "Video": {
 		//	                  "description": "List of video configurations for multi modal ingestion.",
 		//	                  "insertionOrder": false,
@@ -872,6 +932,16 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
+										// Property: ModelConfiguration
+										"model_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "Model-specific configuration for the embedding model.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
 										// Property: Video
 										"video": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -965,6 +1035,75 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Contains details about the server-side encryption for the managed knowledge base.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SupplementalDataStorageConfiguration
+						"supplemental_data_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SupplementalDataStorageLocations
+								"supplemental_data_storage_locations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: S3Location
+											"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: URI
+													"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The location's URI",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+															stringvalidator.RegexMatches(regexp.MustCompile("^s3://.{1,128}$"), ""),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "An Amazon S3 location.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SupplementalDataStorageLocationType
+											"supplemental_data_storage_location_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Supplemental data storage location type.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"S3",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of supplemental data storage locations.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 1),
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configurations for supplemental data storage.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1573,6 +1712,16 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 													"BINARY",
 												),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ModelConfiguration
+										"model_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "Model-specific configuration for the embedding model.",
+											Optional:    true,
+											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
@@ -3118,6 +3267,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_base_id":                        "KnowledgeBaseId",
 		"managed_knowledge_base_configuration":     "ManagedKnowledgeBaseConfiguration",
 		"metadata_field":                           "MetadataField",
+		"model_configuration":                      "ModelConfiguration",
 		"mongo_db_atlas_configuration":             "MongoDbAtlasConfiguration",
 		"name":                                     "Name",
 		"namespace":                                "Namespace",

@@ -565,13 +565,15 @@
         "iam:PassRole",
         "bedrock-agentcore:GetWorkloadAccessToken",
         "bedrock-agentcore:GetResourceOauth2Token",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
         "agent-registry:GetRegistryRecord",
-        "agent-registry:ListTagsForResource"
+        "agent-registry:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -584,14 +586,16 @@
         "iam:PassRole",
         "bedrock-agentcore:GetWorkloadAccessToken",
         "bedrock-agentcore:GetResourceOauth2Token",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
         "agent-registry:DeleteRegistryRecord",
         "agent-registry:GetRegistryRecord",
-        "agent-registry:ListTagsForResource"
+        "agent-registry:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "list": {

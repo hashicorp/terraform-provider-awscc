@@ -1,0 +1,1 @@
+$ terraform import awscc_invoicing_procurement_portal_preference.example "procurement_portal_preference_arn"

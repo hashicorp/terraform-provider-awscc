@@ -49,7 +49,6 @@ func coreNetworkPrefixListAssociationDataSource(ctx context.Context) (datasource
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the prefix list.",
-		//	  "pattern": "^arn:[a-z0-9-]+:ec2:[a-z]+-[a-z]+-[0-9]:([0-9]{12}):prefix-list/pl-[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"prefix_list_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

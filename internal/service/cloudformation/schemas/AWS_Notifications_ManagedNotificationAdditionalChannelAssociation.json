@@ -11,6 +11,10 @@
       "type": "string",
       "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration\/category\/[a-zA-Z0-9\\-]{3,64}\/sub-category\/[a-zA-Z0-9\\-]{3,64}$",
       "description": "ARN identifier of the Managed Notification.\nExample: arn:aws:notifications::381491923782:managed-notification-configuration/category/AWS-Health/sub-category/Billing"
+    },
+    "IsSensitiveEventsSubscribed": {
+      "type": "boolean",
+      "description": "Whether the channel association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action."
     }
   },
   "required": [
@@ -29,6 +33,7 @@
     "create": {
       "permissions": [
         "notifications:AssociateManagedNotificationAdditionalChannel",
+        "notifications:SubscribeSensitiveEvents",
         "notifications:ListManagedNotificationChannelAssociations"
       ]
     },
@@ -55,6 +60,13 @@
     },
     "read": {
       "permissions": [
+        "notifications:ListManagedNotificationChannelAssociations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "notifications:UpdateManagedNotificationChannelAssociation",
+        "notifications:SubscribeSensitiveEvents",
         "notifications:ListManagedNotificationChannelAssociations"
       ]
     }

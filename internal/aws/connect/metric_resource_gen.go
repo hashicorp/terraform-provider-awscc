@@ -455,15 +455,10 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Calculation
 				"calculation": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The calculation formula",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 1024),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CalculationComponents
 				"calculation_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -472,16 +467,11 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Alias
 							"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Metric calculation component alias for use within a calculation",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z_][a-zA-Z0-9_]*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: MetricFilters
 							"metric_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -645,23 +635,14 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "The calculation components for the metric",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 5),
-						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The calculation configuration for the metric",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -674,14 +655,10 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the custom metric",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PositiveTrendIndicator
 		// CloudFormation resource type schema:
@@ -767,8 +744,7 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the custom metric",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"SAVED",
@@ -776,8 +752,7 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SupportedStats
@@ -933,8 +908,7 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Display unit for the metric data",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"INTEGER",
@@ -943,9 +917,6 @@ func metricResource(ctx context.Context) (resource.Resource, error) {
 					"SECONDS",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

@@ -20,6 +20,24 @@
     "ISO8601DateString": {
       "type": "string",
       "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$"
+    },
+    "NetworkScanning": {
+      "description": "Configuration for the Network Scanning opt-in feature of Security Hub V2. Network Scanning is available in the AWS commercial partition only; specifying this property in another partition, such as AWS GovCloud (US) or China, fails. This property is desired state: if you remove it from a stack that previously set it, the feature is disabled. If a stack has never set it, the feature is left as-is, so a stack that does not manage Network Scanning will not disable it. Network Scanning requires Security Hub V2 to be enabled in the same account and Region.",
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "Whether the Network Scanning feature is enabled for this account and Region.",
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -33,6 +51,9 @@
     },
     "Tags": {
       "$ref": "#/definitions/Tags"
+    },
+    "NetworkScanning": {
+      "$ref": "#/definitions/NetworkScanning"
     }
   },
   "replacementStrategy": "delete_then_create",
@@ -61,6 +82,8 @@
       "permissions": [
         "securityhub:EnableSecurityHubV2",
         "securityhub:DescribeSecurityHubV2",
+        "securityhub:EnableSecurityHubFeatureV2",
+        "securityhub:DisableSecurityHubFeatureV2",
         "securityhub:TagResource",
         "iam:CreateServiceLinkedRole"
       ]
@@ -74,6 +97,8 @@
     "update": {
       "permissions": [
         "securityhub:DescribeSecurityHubV2",
+        "securityhub:EnableSecurityHubFeatureV2",
+        "securityhub:DisableSecurityHubFeatureV2",
         "securityhub:TagResource",
         "securityhub:UntagResource",
         "securityhub:ListTagsForResource"

@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_usage_limit.example "arn"

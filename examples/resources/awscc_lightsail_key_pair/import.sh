@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_key_pair.example "key_pair_name"

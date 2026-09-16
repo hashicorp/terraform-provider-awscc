@@ -2262,7 +2262,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "enum": [
 		//	            "BEDROCK_FOUNDATION_MODEL",
 		//	            "BEDROCK_DATA_AUTOMATION",
-		//	            "SMART_PARSING"
+		//	            "SMART_PARSING",
+		//	            "MULTI_MODAL_EMBEDDINGS"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -2758,6 +2759,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									"BEDROCK_FOUNDATION_MODEL",
 									"BEDROCK_DATA_AUTOMATION",
 									"SMART_PARSING",
+									"MULTI_MODAL_EMBEDDINGS",
 								),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/

@@ -127,6 +127,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/greengrassv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/groundstation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/guardduty"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthagent"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthimaging"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthlake"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iam"

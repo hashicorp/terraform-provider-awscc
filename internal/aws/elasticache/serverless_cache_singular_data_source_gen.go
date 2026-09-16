@@ -251,6 +251,22 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The major engine version of the Serverless Cache.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type for the serverless cache. Valid values are ipv4, ipv6, or dual_stack.",
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "ipv6",
+		//	    "dual_stack"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type for the serverless cache. Valid values are ipv4, ipv6, or dual_stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReaderEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -465,6 +481,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		"major_engine_version":     "MajorEngineVersion",
 		"maximum":                  "Maximum",
 		"minimum":                  "Minimum",
+		"network_type":             "NetworkType",
 		"port":                     "Port",
 		"reader_endpoint":          "ReaderEndpoint",
 		"security_group_ids":       "SecurityGroupIds",

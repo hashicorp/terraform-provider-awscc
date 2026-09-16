@@ -1,0 +1,1 @@
+$ terraform import awscc_drs_launch_configuration_template.example "arn"

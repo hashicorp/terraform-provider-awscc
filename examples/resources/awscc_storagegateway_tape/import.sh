@@ -1,0 +1,1 @@
+$ terraform import awscc_storagegateway_tape.example "tape_arn"

@@ -2125,6 +2125,251 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VectorIndexes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Dimensions": {
+		//	        "maximum": 4096,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "DistanceFunction": {
+		//	        "enum": [
+		//	          "COSINE",
+		//	          "DOT_PRODUCT",
+		//	          "EUCLIDEAN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "IndexName": {
+		//	        "type": "string"
+		//	      },
+		//	      "Projection": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "NonKeyAttributes": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 20,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ProjectionType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "SearchSchema": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AttributeName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SearchSchemaElementType": {
+		//	              "enum": [
+		//	                "HASH",
+		//	                "INLINE_FILTER"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AttributeName",
+		//	            "SearchSchemaElementType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "VectorAttribute": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AttributeName": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AttributeName"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "IndexName",
+		//	      "VectorAttribute",
+		//	      "Projection",
+		//	      "Dimensions",
+		//	      "DistanceFunction"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"vector_indexes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Dimensions
+					"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(1, 4096),
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DistanceFunction
+					"distance_function": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"COSINE",
+								"DOT_PRODUCT",
+								"EUCLIDEAN",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IndexName
+					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Projection
+					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NonKeyAttributes
+							"non_key_attributes": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.SizeAtMost(20),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProjectionType
+							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SearchSchema
+					"search_schema": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AttributeName
+								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SearchSchemaElementType
+								"search_schema_element_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"HASH",
+											"INLINE_FILTER",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VectorAttribute
+					"vector_attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AttributeName
+							"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WarmThroughput
 		// CloudFormation resource type schema:
 		//
@@ -2419,7 +2664,9 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"billing_mode":                           "BillingMode",
 		"contributor_insights_specification":     "ContributorInsightsSpecification",
 		"deletion_protection_enabled":            "DeletionProtectionEnabled",
+		"dimensions":                             "Dimensions",
 		"disable_scale_in":                       "DisableScaleIn",
+		"distance_function":                      "DistanceFunction",
 		"enabled":                                "Enabled",
 		"global_secondary_indexes":               "GlobalSecondaryIndexes",
 		"global_table_settings_replication_mode": "GlobalTableSettingsReplicationMode",
@@ -2456,6 +2703,8 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"resource_policy":                        "ResourcePolicy",
 		"scale_in_cooldown":                      "ScaleInCooldown",
 		"scale_out_cooldown":                     "ScaleOutCooldown",
+		"search_schema":                          "SearchSchema",
+		"search_schema_element_type":             "SearchSchemaElementType",
 		"seed_capacity":                          "SeedCapacity",
 		"sse_enabled":                            "SSEEnabled",
 		"sse_specification":                      "SSESpecification",
@@ -2471,6 +2720,8 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"target_value":                          "TargetValue",
 		"time_to_live_specification":            "TimeToLiveSpecification",
 		"value":                                 "Value",
+		"vector_attribute":                      "VectorAttribute",
+		"vector_indexes":                        "VectorIndexes",
 		"warm_throughput":                       "WarmThroughput",
 		"write_capacity_auto_scaling_settings":  "WriteCapacityAutoScalingSettings",
 		"write_on_demand_throughput_settings":   "WriteOnDemandThroughputSettings",

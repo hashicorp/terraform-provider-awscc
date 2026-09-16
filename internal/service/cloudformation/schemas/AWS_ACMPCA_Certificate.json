@@ -516,7 +516,8 @@
     },
     "read": {
       "permissions": [
-        "acm-pca:GetCertificate"
+        "acm-pca:GetCertificate",
+        "acm-pca:DescribeCertificateAuthority"
       ]
     },
     "delete": {

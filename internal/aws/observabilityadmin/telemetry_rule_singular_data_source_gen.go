@@ -241,7 +241,10 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                "enum": [
 		//	                  "APPLICATION_LOGS",
 		//	                  "USAGE_LOGS",
-		//	                  "SECURITY_FINDING_LOGS"
+		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "ALB_ACCESS_LOGS",
+		//	                  "ALB_CONNECTION_LOGS",
+		//	                  "ALB_HEALTH_CHECK_LOGS"
 		//	                ],
 		//	                "type": "string"
 		//	              },

@@ -1,0 +1,342 @@
+{
+  "typeName": "AWS::Transcribe::CallAnalyticsCategory",
+  "description": "Resource type definition for AWS::Transcribe::CallAnalyticsCategory",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the Call Analytics category.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws(-[^:]+)?:transcribe:[a-zA-Z0-9-]*:[0-9]{12}:analytics-category/[0-9a-zA-Z._-]+$"
+    },
+    "CategoryName": {
+      "type": "string",
+      "description": "A unique name, chosen by you, for your Call Analytics category.",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[0-9a-zA-Z._-]+$"
+    },
+    "Rules": {
+      "type": "array",
+      "description": "Rules define a Call Analytics category.",
+      "items": {
+        "$ref": "#/definitions/Rule"
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "InputType": {
+      "type": "string",
+      "description": "The input type associated with the specified category.",
+      "enum": [
+        "REAL_TIME",
+        "POST_CALL"
+      ]
+    },
+    "CreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Call Analytics category was created."
+    },
+    "LastUpdateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Call Analytics category was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags associated with the Call Analytics category.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "NonTalkTimeFilter": {
+          "$ref": "#/definitions/NonTalkTimeFilter"
+        },
+        "InterruptionFilter": {
+          "$ref": "#/definitions/InterruptionFilter"
+        },
+        "TranscriptFilter": {
+          "$ref": "#/definitions/TranscriptFilter"
+        },
+        "SentimentFilter": {
+          "$ref": "#/definitions/SentimentFilter"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NonTalkTimeFilter": {
+      "type": "object",
+      "properties": {
+        "Threshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14400000
+        },
+        "AbsoluteTimeRange": {
+          "$ref": "#/definitions/AbsoluteTimeRange"
+        },
+        "RelativeTimeRange": {
+          "$ref": "#/definitions/RelativeTimeRange"
+        },
+        "Negate": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InterruptionFilter": {
+      "type": "object",
+      "properties": {
+        "Threshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14400000
+        },
+        "ParticipantRole": {
+          "type": "string",
+          "enum": [
+            "AGENT",
+            "CUSTOMER"
+          ]
+        },
+        "AbsoluteTimeRange": {
+          "$ref": "#/definitions/AbsoluteTimeRange"
+        },
+        "RelativeTimeRange": {
+          "$ref": "#/definitions/RelativeTimeRange"
+        },
+        "Negate": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TranscriptFilter": {
+      "type": "object",
+      "properties": {
+        "TranscriptFilterType": {
+          "type": "string",
+          "enum": [
+            "EXACT"
+          ]
+        },
+        "AbsoluteTimeRange": {
+          "$ref": "#/definitions/AbsoluteTimeRange"
+        },
+        "RelativeTimeRange": {
+          "$ref": "#/definitions/RelativeTimeRange"
+        },
+        "ParticipantRole": {
+          "type": "string",
+          "enum": [
+            "AGENT",
+            "CUSTOMER"
+          ]
+        },
+        "Negate": {
+          "type": "boolean"
+        },
+        "Targets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "TranscriptFilterType",
+        "Targets"
+      ],
+      "additionalProperties": false
+    },
+    "SentimentFilter": {
+      "type": "object",
+      "properties": {
+        "Sentiments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "POSITIVE",
+              "NEGATIVE",
+              "NEUTRAL",
+              "MIXED"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "AbsoluteTimeRange": {
+          "$ref": "#/definitions/AbsoluteTimeRange"
+        },
+        "RelativeTimeRange": {
+          "$ref": "#/definitions/RelativeTimeRange"
+        },
+        "ParticipantRole": {
+          "type": "string",
+          "enum": [
+            "AGENT",
+            "CUSTOMER"
+          ]
+        },
+        "Negate": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Sentiments"
+      ],
+      "additionalProperties": false
+    },
+    "AbsoluteTimeRange": {
+      "type": "object",
+      "properties": {
+        "StartTime": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14400000
+        },
+        "EndTime": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14400000
+        },
+        "First": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14400000
+        },
+        "Last": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14400000
+        }
+      },
+      "additionalProperties": false
+    },
+    "RelativeTimeRange": {
+      "type": "object",
+      "properties": {
+        "StartPercentage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "EndPercentage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "First": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "Last": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "CategoryName",
+    "Rules"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreateTime",
+    "/properties/LastUpdateTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/CategoryName",
+    "/properties/InputType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/CategoryName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "transcribe:TagResource",
+      "transcribe:UntagResource",
+      "transcribe:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transcribe:CreateCallAnalyticsCategory",
+        "transcribe:GetCallAnalyticsCategory",
+        "transcribe:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transcribe:GetCallAnalyticsCategory",
+        "transcribe:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transcribe:UpdateCallAnalyticsCategory",
+        "transcribe:GetCallAnalyticsCategory",
+        "transcribe:TagResource",
+        "transcribe:UntagResource",
+        "transcribe:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transcribe:DeleteCallAnalyticsCategory"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transcribe:ListCallAnalyticsCategories"
+      ]
+    }
+  }
+}

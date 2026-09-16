@@ -51,7 +51,18 @@ Read-Only:
 
 Read-Only:
 
+- `custom_tiers` (Attributes List) The set of custom volume tiers for a SKU-scoped TIERING pricing rule. Tiers must start at 0, be contiguous, and the last tier must have no end range. (see [below for nested schema](#nestedatt--tiering--custom_tiers))
 - `free_tier` (Attributes) The possible customizable free tier configurations. (see [below for nested schema](#nestedatt--tiering--free_tier))
+
+<a id="nestedatt--tiering--custom_tiers"></a>
+### Nested Schema for `tiering.custom_tiers`
+
+Read-Only:
+
+- `begin_range_inclusive` (Number) The inclusive beginning of the tier's usage range.
+- `end_range_exclusive` (Number) The exclusive end of the tier's usage range. Omit for the last tier (infinity).
+- `rate_value` (Number) The custom rate applied to usage within the tier's range.
+
 
 <a id="nestedatt--tiering--free_tier"></a>
 ### Nested Schema for `tiering.free_tier`

@@ -18,16 +18,16 @@ Resource Type definition for AWS::Connect::Metric, a custom metric configured fo
 ### Required
 
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `metric_calculation` (Attributes) The calculation configuration for the metric (see [below for nested schema](#nestedatt--metric_calculation))
+- `name` (String) The name of the custom metric
+- `status` (String) The status of the custom metric
+- `unit` (String) Display unit for the metric data
 
 ### Optional
 
 - `description` (String) The description of the custom metric
-- `metric_calculation` (Attributes) The calculation configuration for the metric (see [below for nested schema](#nestedatt--metric_calculation))
-- `name` (String) The name of the custom metric
 - `positive_trend_indicator` (String) Indicates how to classify a positive trend in metric data on the UI
-- `status` (String) The status of the custom metric
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
-- `unit` (String) Display unit for the metric data
 
 ### Read-Only
 
@@ -54,7 +54,7 @@ Resource Type definition for AWS::Connect::Metric, a custom metric configured fo
 <a id="nestedatt--metric_calculation"></a>
 ### Nested Schema for `metric_calculation`
 
-Optional:
+Required:
 
 - `calculation` (String) The calculation formula
 - `calculation_components` (Attributes List) The calculation components for the metric (see [below for nested schema](#nestedatt--metric_calculation--calculation_components))
@@ -62,9 +62,12 @@ Optional:
 <a id="nestedatt--metric_calculation--calculation_components"></a>
 ### Nested Schema for `metric_calculation.calculation_components`
 
-Optional:
+Required:
 
 - `alias` (String) Metric calculation component alias for use within a calculation
+
+Optional:
+
 - `metric_filters` (Attributes List) (see [below for nested schema](#nestedatt--metric_calculation--calculation_components--metric_filters))
 - `metric_id` (String)
 - `metric_name` (String)

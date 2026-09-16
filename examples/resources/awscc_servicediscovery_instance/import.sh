@@ -1,0 +1,1 @@
+$ terraform import awscc_servicediscovery_instance.example "service_id|instance_id"

@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_qev2_idc_application.example "qev2_idc_application_arn"

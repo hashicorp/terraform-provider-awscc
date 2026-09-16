@@ -650,6 +650,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "ContainerInsights": {
+		//	      "description": "The CloudWatch Container Insights setting applied to the Amazon ECS cluster that backs this compute environment. After you set this property, you can't revert it to the default (unset) state in which the setting is managed outside of AWS Batch. If you remove this property after previously setting it, AWS Batch treats the omission as DISABLED, because the underlying API has no way to unset the value. Because of this, if a stack rollback would return this property to its previous unset state, AWS Batch sets it to DISABLED instead.",
 		//	      "enum": [
 		//	        "ENABLED",
 		//	        "ENHANCED",
@@ -664,7 +665,8 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ContainerInsights
 				"container_insights": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The CloudWatch Container Insights setting applied to the Amazon ECS cluster that backs this compute environment. After you set this property, you can't revert it to the default (unset) state in which the setting is managed outside of AWS Batch. If you remove this property after previously setting it, AWS Batch treats the omission as DISABLED, because the underlying API has no way to unset the value. Because of this, if a stack rollback would return this property to its previous unset state, AWS Batch sets it to DISABLED instead.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
