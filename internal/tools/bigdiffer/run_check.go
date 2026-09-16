@@ -96,12 +96,80 @@ func runCheck(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		problems = append(problems, fmt.Sprintf("%d file(s) differ from committed output (engine change not yet -reconcile'd and committed):\n  %s", len(diffs), strings.Join(diffs, "\n  ")))
 	}
 
+	// Docs freshness, cheap tier (contributing/docs/docs-pipeline-punchlist.md
+	// item 2): import_examples_gen.json is a pure function of the row set a
+	// -reconcile would promote (projectRows, the same in-memory projection
+	// the compile gate's own fixpoint uses — never a hand-rolled parallel
+	// reimplementation) plus the cached schema bytes each row's plan reads,
+	// so it can be recomputed and diffed here with no external tools and no
+	// disk writes at all — catching "code changed (or the engine that reads
+	// schemas to build it did), the aggregate was not regenerated" without
+	// needing tfplugindocs or a built provider binary (that is the full
+	// tier's job, item 2). Deliberately checked even when cands and diffs
+	// above are both clean: the aggregate is a function of the *whole* row
+	// set, not just this run's candidates, so a stale copy can exist even
+	// when every candidate this run regenerates byte-identical.
+	//
+	// Must run after diffStagedTrees, not before: diffImportExamples reads
+	// the committed schema cache (cfg.cacheDir), not settleBatch's staged
+	// one, which is only a safe substitute because diffStagedTrees above has
+	// already gated on committed-vs-staged cache drift — see
+	// diffImportExamples' own doc comment for why that makes the two
+	// equivalent whenever this line is even reached.
+	if diff, err := diffImportExamples(cfg, string(overlayContent), overlayRows, checkout, settled.decisions); err != nil {
+		return fmt.Errorf("checking import examples freshness: %w", err)
+	} else if diff != "" {
+		problems = append(problems, diff)
+	}
+
 	if len(problems) > 0 {
 		return errors.New(strings.Join(problems, "\n"))
 	}
 
 	infof("bigdiffer: -check passed; %d type(s) regenerate byte-identical to committed output.", len(cands))
 	return nil
+}
+
+// diffImportExamples recomputes import_examples_gen.json from the row set a
+// -reconcile would promote right now (projectRows, the identical projection
+// the compile gate's fixpoint already uses) and compares it byte-for-byte
+// against the committed file. Returns a non-empty problem description on any
+// difference (including a missing committed file, which counts as a diff —
+// there is a genuine aggregate to -reconcile and commit), or "" when the
+// committed copy is already current. Never writes anything; cfg is only used
+// to resolve cfg.importExamplesPath and each row's cached schema bytes.
+//
+// Reads cfg.cacheDir — the committed cache, not settleBatch's staged cache —
+// via emitImportExamples's own generationPlan calls. That is deliberately
+// safe rather than an oversight: diffStagedTrees (the caller, run first)
+// already fails the check on any committed-vs-staged cache drift, so by the
+// time this runs, either the check has already failed for that reason, or
+// committed cache == staged cache == what -reconcile would promote, and
+// recomputing from either is equivalent. The only visible effect of reading
+// committed instead of staged is cosmetic: in a run where the cache itself
+// also drifted, this diff will not additionally enumerate the import-examples
+// mismatch that round (diffStagedTrees' cache diff already reported it) —
+// both converge to clean after one real -reconcile + commit either way.
+func diffImportExamples(cfg config, overlayContent string, base []resourceRow, checkout map[string]bool, decisions map[string]policyDecision) (string, error) {
+	rows, err := projectRows(overlayContent, base, checkout, decisions)
+	if err != nil {
+		return "", fmt.Errorf("projecting rows: %w", err)
+	}
+	want, err := emitImportExamples(cfg, rows)
+	if err != nil {
+		return "", fmt.Errorf("recomputing import examples: %w", err)
+	}
+	got, err := os.ReadFile(cfg.importExamplesPath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return fmt.Sprintf("%s does not exist (engine change not yet -reconcile'd and committed)", relToRepoRoot(cfg, cfg.importExamplesPath)), nil
+		}
+		return "", fmt.Errorf("reading committed %s: %w", cfg.importExamplesPath, err)
+	}
+	if !bytes.Equal(want, got) {
+		return fmt.Sprintf("%s differs from committed output (engine change not yet -reconcile'd and committed)", relToRepoRoot(cfg, cfg.importExamplesPath)), nil
+	}
+	return "", nil
 }
 
 // diffStagedTrees compares every file staged under stagingDir/out and

@@ -139,6 +139,102 @@ func TestDiffStagedTreesEmptyStagingIsNoError(t *testing.T) {
 	}
 }
 
+// TestDiffImportExamplesNoDiff confirms an up-to-date committed
+// import_examples_gen.json against the real, untouched corpus produces no
+// diff -- the common case for check on a PR that didn't change anything
+// affecting the aggregate.
+func TestDiffImportExamplesNoDiff(t *testing.T) {
+	if testing.Short() {
+		t.Skip("recomputes the whole corpus's import examples; run without -short")
+	}
+	t.Parallel()
+	cfg, rows := loadCorpus(t)
+	overlayContent, err := os.ReadFile(cfg.overlayPath)
+	if err != nil {
+		t.Fatalf("reading overlay: %v", err)
+	}
+	checkout, err := parseCheckout(defaultCheckout)
+	if err != nil {
+		t.Fatalf("parsing checkout: %v", err)
+	}
+
+	diff, err := diffImportExamples(cfg, string(overlayContent), rows, checkout, nil)
+	if err != nil {
+		t.Fatalf("diffImportExamples: %v", err)
+	}
+	if diff != "" {
+		t.Errorf("want no diff against the untouched, committed corpus, got: %s", diff)
+	}
+}
+
+// TestDiffImportExamplesDetectsStaleCommittedFile confirms a committed
+// import_examples_gen.json that no longer matches what the current overlay +
+// cache would produce is reported -- the "engine (or the row set) changed,
+// the aggregate was not regenerated" case item 2's cheap tier exists to
+// catch. Points cfg at a temp importExamplesPath with deliberately stale
+// content rather than touching the real committed file.
+func TestDiffImportExamplesDetectsStaleCommittedFile(t *testing.T) {
+	if testing.Short() {
+		t.Skip("recomputes the whole corpus's import examples; run without -short")
+	}
+	t.Parallel()
+	cfg, rows := loadCorpus(t)
+	overlayContent, err := os.ReadFile(cfg.overlayPath)
+	if err != nil {
+		t.Fatalf("reading overlay: %v", err)
+	}
+	checkout, err := parseCheckout(defaultCheckout)
+	if err != nil {
+		t.Fatalf("parsing checkout: %v", err)
+	}
+
+	cfg.importExamplesPath = filepath.Join(t.TempDir(), "import_examples_gen.json")
+	writeFile(t, cfg.importExamplesPath, `[{"resource": "this_is_deliberately_stale"}]`)
+
+	diff, err := diffImportExamples(cfg, string(overlayContent), rows, checkout, nil)
+	if err != nil {
+		t.Fatalf("diffImportExamples: %v", err)
+	}
+	if diff == "" {
+		t.Fatal("want a diff against a deliberately stale committed file, got none")
+	}
+	if !strings.Contains(diff, "differs from committed") {
+		t.Errorf("want a 'differs from committed' problem description, got: %s", diff)
+	}
+}
+
+// TestDiffImportExamplesDetectsMissingCommittedFile confirms a missing
+// import_examples_gen.json is reported as a diff, not a silent pass or an
+// error -- there is genuinely new output to -reconcile and commit.
+func TestDiffImportExamplesDetectsMissingCommittedFile(t *testing.T) {
+	if testing.Short() {
+		t.Skip("recomputes the whole corpus's import examples; run without -short")
+	}
+	t.Parallel()
+	cfg, rows := loadCorpus(t)
+	overlayContent, err := os.ReadFile(cfg.overlayPath)
+	if err != nil {
+		t.Fatalf("reading overlay: %v", err)
+	}
+	checkout, err := parseCheckout(defaultCheckout)
+	if err != nil {
+		t.Fatalf("parsing checkout: %v", err)
+	}
+
+	cfg.importExamplesPath = filepath.Join(t.TempDir(), "does-not-exist.json")
+
+	diff, err := diffImportExamples(cfg, string(overlayContent), rows, checkout, nil)
+	if err != nil {
+		t.Fatalf("diffImportExamples: %v", err)
+	}
+	if diff == "" {
+		t.Fatal("want a diff for a missing committed file, got none")
+	}
+	if !strings.Contains(diff, "does not exist") {
+		t.Errorf("want a 'does not exist' problem description, got: %s", diff)
+	}
+}
+
 // TestRunCheckAgainstRealRepo is check's own end-to-end wiring test, run
 // against the real committed corpus -- feasible here in a way
 // TestRunReconcile never was (see run_reconcile_test.go's doc comment for
