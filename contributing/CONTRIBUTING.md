@@ -17,7 +17,7 @@ ability to merge PRs and respond to issues.
 - [Development Environment Setup](./docs/development-environment-setup.md)
 - [Resource Behavior](./docs/resource-behavior.md)
 - [Adding Examples to Generated Documentation](./docs/adding-examples-to-documentation.md)
-- [Generating the Provider (with bigdiffer)](./docs/generating-the-provider-with-bigdiffer.md)
+- [bigdiffer runbooks](./docs/bigdiffer-runbooks.md)
   ([bigdiffer overview](../internal/tools/bigdiffer/README.md),
   [bigdiffer design](./docs/bigdiffer-design.md))
 - [Generating the Provider (legacy fallback)](./docs/generating-the-provider.md)

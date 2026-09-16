@@ -6,7 +6,7 @@
 > [!IMPORTANT]
 > This is the **legacy** weekly process, retained as a fallback. The current
 > process uses `bigdiffer` and is documented in
-> [generating-the-provider-with-bigdiffer.md](generating-the-provider-with-bigdiffer.md).
+> [bigdiffer-runbooks.md](bigdiffer-runbooks.md).
 > Use the steps here only if bigdiffer is unavailable or misbehaving. The schema
 > cache and `all_schemas.hcl` formats are identical between the two paths, so they
 > interoperate; before committing a legacy-only run, remove bigdiffer's

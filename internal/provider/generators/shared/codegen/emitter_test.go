@@ -4,7 +4,7 @@
 // Legacy code: tests the copy in internal/provider/generators/shared/codegen,
 // superseded by internal/tools/bigdiffer/codegen/emitter.go. Kept as the
 // deprecated make/go:generate fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process.
 
 package codegen
 

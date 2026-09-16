@@ -17,7 +17,7 @@ a schema break is external and gets frozen; a machinery break is self-inflicted
 and gets fixed, not papered over.
 
 - **To run the weekly release:** see
-  [generating-the-provider-with-bigdiffer.md](../../../contributing/docs/generating-the-provider-with-bigdiffer.md).
+  [bigdiffer-runbooks.md](../../../contributing/docs/bigdiffer-runbooks.md).
 - **For the full design — why it's built this way, the gates, the policy, and
   what's left to do:** see
   [bigdiffer-design.md](../../../contributing/docs/bigdiffer-design.md).
@@ -132,8 +132,8 @@ for the full reason taxonomy and `-recheck`.
   model, the two gates, the policy table, settled design decisions, and the
   deferred-work list.
 - **Weekly runbook:**
-  [generating-the-provider-with-bigdiffer.md](../../../contributing/docs/generating-the-provider-with-bigdiffer.md) —
-  step-by-step release process, plus the legacy fallback.
+  [bigdiffer-runbooks.md](../../../contributing/docs/bigdiffer-runbooks.md) —
+  task-oriented runbooks, plus the legacy fallback.
 - **Suppression/freeze spec:**
   [suppressed-and-frozen.md](../../../contributing/docs/suppressed-and-frozen.md).
 - **Legacy removal plan:**

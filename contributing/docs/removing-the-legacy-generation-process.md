@@ -8,7 +8,7 @@ A checklist for deleting the redundant legacy generation machinery (adopt phase
 (delete legacy generators/directives/`make` targets). Tracked by #3330 and
 `bigdiffer-design.md` "Deferred and future work". Follow this once bigdiffer has
 been the weekly driver for several clean release cycles and nobody has needed the
-[legacy fallback](generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process).
+[legacy fallback](bigdiffer-runbooks.md#fallback-the-legacy-process).
 
 This is a **transient tracking doc** — delete it once the checklist below is done.
 
@@ -141,10 +141,10 @@ on.
    `contributing/CONTRIBUTING.md`, `contributing/docs/resource-behavior.md`,
    `contributing/docs/suppressed-and-frozen.md`, and
    `internal/tools/bigdiffer/README.md` (plus
-   `generating-the-provider-with-bigdiffer.md`, handled in step 8, and this doc,
+   `bigdiffer-runbooks.md`, handled in step 8, and this doc,
    deleted in step 12). Fix or remove every referrer.
 
-8. **Update `generating-the-provider-with-bigdiffer.md`:**
+8. **Update `bigdiffer-runbooks.md`:**
    - Delete the entire "Fallback: the legacy process" section — there is no
      fallback anymore.
    - Delete the "What bigdiffer replaces" table's framing as a *replacement*

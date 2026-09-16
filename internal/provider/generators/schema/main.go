@@ -5,7 +5,7 @@
 // pipeline (internal/tools/bigdiffer), including
 // codegen.GenerateImportExampleDocs for the import-example docs this file also
 // generates. Kept as the deprecated `make`/go:generate fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process.
 
 package main
 

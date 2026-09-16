@@ -11,7 +11,7 @@ This is the durable design reference — what bigdiffer is, how it works, and *w
 it is shaped this way — for maintenance and for reviewing the tool. For a plain
 overview and the available commands, see
 [the tool's README](../../internal/tools/bigdiffer/README.md). It is not a
-runbook (see `generating-the-provider-with-bigdiffer.md` for the weekly process)
+runbook (see `bigdiffer-runbooks.md` for the operational runbooks)
 and not a task tracker (see "Deferred and future work" below for what is left to do).
 
 bigdiffer is shipped and drives the weekly cycle today; §11 summarizes what is
@@ -538,7 +538,7 @@ and `-docs` are all live.
 Remaining work — GitHub-issue guidance, the one-time reason backfill, and the
 deferred cleanups below — is listed under "Deferred and future work" below.
 None of it blocks the weekly cycle today; see
-`generating-the-provider-with-bigdiffer.md` for the operational process and the
+`bigdiffer-runbooks.md` for the operational runbooks and the
 legacy fallback.
 
 ## 12. Thesis

@@ -26,7 +26,7 @@ all: schemas resources singular-data-sources plural-data-sources build docs-all 
 # singular-data-sources, plural-data-sources, cleanschemas, suppressions,
 # biglister, docs-*) are the LEGACY generation path. The current weekly process
 # uses `go run ./internal/tools/bigdiffer -sync` (+ `-docs`); see
-# contributing/docs/generating-the-provider-with-bigdiffer.md. These targets are
+# contributing/docs/bigdiffer-runbooks.md. These targets are
 # retained as a fallback and are slated for removal after a few clean cycles.
 
 help: ## Display this help

@@ -4,7 +4,7 @@
 // Legacy code: superseded by codegen.GenerateImportExamples and
 // codegen.GenerateImportExampleDocs in internal/tools/bigdiffer/codegen. Kept
 // as the deprecated `make`/go:generate fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process.
 
 //go:build generate
 // +build generate
