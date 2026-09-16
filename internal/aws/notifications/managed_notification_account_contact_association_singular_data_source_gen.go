@@ -39,6 +39,17 @@ func managedNotificationAccountContactAssociationDataSource(ctx context.Context)
 			Description: "This unique identifier for Contact",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IsSensitiveEventsSubscribed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the account contact association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.",
+		//	  "type": "boolean"
+		//	}
+		"is_sensitive_events_subscribed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the account contact association is subscribed to sensitive events. Access to sensitive events is gated by the SubscribeSensitiveEvents virtual IAM action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedNotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -69,6 +80,7 @@ func managedNotificationAccountContactAssociationDataSource(ctx context.Context)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"contact_identifier":                     "ContactIdentifier",
+		"is_sensitive_events_subscribed":         "IsSensitiveEventsSubscribed",
 		"managed_notification_configuration_arn": "ManagedNotificationConfigurationArn",
 	})
 

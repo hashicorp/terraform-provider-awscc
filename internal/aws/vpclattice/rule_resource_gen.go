@@ -527,14 +527,14 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maximum": 100,
+		//	  "maximum": 2000,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(1, 100),
+				int64validator.Between(1, 2000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceIdentifier

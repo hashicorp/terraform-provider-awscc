@@ -341,6 +341,34 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type for the serverless cache. Valid values are ipv4, ipv6, or dual_stack.",
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "ipv6",
+		//	    "dual_stack"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type for the serverless cache. Valid values are ipv4, ipv6, or dual_stack.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ipv4",
+					"ipv6",
+					"dual_stack",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReaderEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -626,6 +654,7 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		"major_engine_version":     "MajorEngineVersion",
 		"maximum":                  "Maximum",
 		"minimum":                  "Minimum",
+		"network_type":             "NetworkType",
 		"port":                     "Port",
 		"reader_endpoint":          "ReaderEndpoint",
 		"security_group_ids":       "SecurityGroupIds",

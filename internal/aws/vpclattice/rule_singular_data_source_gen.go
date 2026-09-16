@@ -349,7 +349,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maximum": 100,
+		//	  "maximum": 2000,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}

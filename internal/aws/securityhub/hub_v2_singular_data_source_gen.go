@@ -35,6 +35,38 @@ func hubV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name of the Security Hub V2 resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkScanning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for the Network Scanning opt-in feature of Security Hub V2. Network Scanning is available in the AWS commercial partition only; specifying this property in another partition, such as AWS GovCloud (US) or China, fails. This property is desired state: if you remove it from a stack that previously set it, the feature is disabled. If a stack has never set it, the feature is left as-is, so a stack that does not manage Network Scanning will not disable it. Network Scanning requires Security Hub V2 to be enabled in the same account and Region.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "Whether the Network Scanning feature is enabled for this account and Region.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"network_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether the Network Scanning feature is enabled for this account and Region.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for the Network Scanning opt-in feature of Security Hub V2. Network Scanning is available in the AWS commercial partition only; specifying this property in another partition, such as AWS GovCloud (US) or China, fails. This property is desired state: if you remove it from a stack that previously set it, the feature is disabled. If a stack has never set it, the feature is left as-is, so a stack that does not manage Network Scanning will not disable it. Network Scanning requires Security Hub V2 to be enabled in the same account and Region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubscribedAt
 		// CloudFormation resource type schema:
 		//
@@ -84,9 +116,11 @@ func hubV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SecurityHub::HubV2").WithTerraformTypeName("awscc_securityhub_hub_v2")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"hub_v2_arn":    "HubV2Arn",
-		"subscribed_at": "SubscribedAt",
-		"tags":          "Tags",
+		"hub_v2_arn":       "HubV2Arn",
+		"network_scanning": "NetworkScanning",
+		"status":           "Status",
+		"subscribed_at":    "SubscribedAt",
+		"tags":             "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

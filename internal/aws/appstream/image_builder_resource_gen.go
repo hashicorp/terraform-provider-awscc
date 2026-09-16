@@ -115,6 +115,19 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DisableIMDSV1
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"disable_imdsv1": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -457,6 +470,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 		"appstream_agent_version":                "AppstreamAgentVersion",
 		"description":                            "Description",
 		"directory_name":                         "DirectoryName",
+		"disable_imdsv1":                         "DisableIMDSV1",
 		"display_name":                           "DisplayName",
 		"domain_join_info":                       "DomainJoinInfo",
 		"enable_default_internet_access":         "EnableDefaultInternetAccess",

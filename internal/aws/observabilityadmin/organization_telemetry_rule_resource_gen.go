@@ -258,7 +258,10 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "enum": [
-		//	                  "SECURITY_FINDING_LOGS"
+		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "ALB_ACCESS_LOGS",
+		//	                  "ALB_CONNECTION_LOGS",
+		//	                  "ALB_HEALTH_CHECK_LOGS"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -733,6 +736,9 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 										setvalidator.ValueStringsAre(
 											stringvalidator.OneOf(
 												"SECURITY_FINDING_LOGS",
+												"ALB_ACCESS_LOGS",
+												"ALB_CONNECTION_LOGS",
+												"ALB_HEALTH_CHECK_LOGS",
 											),
 										),
 									}, /*END VALIDATORS*/

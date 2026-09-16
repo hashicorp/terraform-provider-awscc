@@ -239,6 +239,26 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 		//	      "pattern": "^arn.*",
 		//	      "type": "string"
 		//	    },
+		//	    "CidrResource": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CidrRanges": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CidrRanges"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "DnsResource": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -282,6 +302,33 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CidrResource
+				"cidr_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CidrRanges
+						"cidr_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 10),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 50),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DnsResource
@@ -369,7 +416,8 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 		//	    "GROUP",
 		//	    "CHILD",
 		//	    "SINGLE",
-		//	    "ARN"
+		//	    "ARN",
+		//	    "CIDR"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -381,6 +429,7 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 					"CHILD",
 					"SINGLE",
 					"ARN",
+					"CIDR",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -498,6 +547,8 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 		"allow_association_to_sharable_service_network": "AllowAssociationToSharableServiceNetwork",
 		"arn":                               "Arn",
 		"arn_resource":                      "ArnResource",
+		"cidr_ranges":                       "CidrRanges",
+		"cidr_resource":                     "CidrResource",
 		"custom_domain_name":                "CustomDomainName",
 		"dns_resource":                      "DnsResource",
 		"domain_name":                       "DomainName",
