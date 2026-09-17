@@ -344,18 +344,18 @@ func TestWriteChangelogFragmentEmptyIsNoop(t *testing.T) {
 	}
 }
 
-// TestWriteChangelogFragmentRefusesNonEmptyExistingSection is the guard
-// against silently corrupting a human-owned file: bigdiffer normally runs
-// once per release cycle and drafts the whole entry in a single pass, so a
-// top block that already has populated FEATURES: bullets means either
-// -sync ran twice without an intervening release, or the file's shape
-// isn't what was expected — either way, this must error rather than guess
-// how to merge.
-func TestWriteChangelogFragmentRefusesNonEmptyExistingSection(t *testing.T) {
+// TestWriteChangelogFragmentRefusesUnrecognizedExistingSection is the guard
+// against silently corrupting a human-owned file: a FEATURES: section with
+// anything that is not bigdiffer's own exact bullet syntax (a hand-written
+// note, an older release's prose-style entry) cannot be safely reconstructed
+// from parsed parts, so this must still error rather than guess — merging
+// (below) only ever applies to a section made entirely of recognized
+// bullets.
+func TestWriteChangelogFragmentRefusesUnrecognizedExistingSection(t *testing.T) {
 	t.Parallel()
 
 	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
-	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n* **New Resource:** `awscc_already_here`\n"
+	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n* provider: a hand-written note.\n"
 	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
 		t.Fatalf("seeding CHANGELOG.md: %v", err)
 	}
@@ -371,6 +371,163 @@ func TestWriteChangelogFragmentRefusesNonEmptyExistingSection(t *testing.T) {
 	}
 	if string(got) != original {
 		t.Errorf("file was modified despite the error: got %q, want unchanged %q", got, original)
+	}
+}
+
+// TestWriteChangelogFragmentMergesExistingBullets is the main new-behavior
+// case: a second -sync within the same still-open release cycle (no release
+// cut between them) must accumulate onto the first sync's bullets rather
+// than error, since the existing section is made entirely of recognized
+// bullets. The merged section must be indistinguishable from what a single
+// -sync run producing the union of both entry sets would have written —
+// same bullets, same sort order, no duplicate.
+func TestWriteChangelogFragmentMergesExistingBullets(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n" +
+		"* **New Data Source:** `awscc_alpha`\n" +
+		"* **New Resource:** `awscc_alpha`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	entries := []changelogEntry{
+		{kind: changelogNewResource, tfType: "awscc_beta"},
+		{kind: changelogNewListResource, tfType: "awscc_beta"},
+	}
+	if err := writeChangelogFragment(path, entries); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	// Sort order matches sortChangelogEntries: Data Source, then List
+	// Resource, then Resource; alphabetical by tfType within each.
+	want := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n" +
+		"* **New Data Source:** `awscc_alpha`\n" +
+		"* **New List Resource:** `awscc_beta`\n" +
+		"* **New Resource:** `awscc_alpha`\n" +
+		"* **New Resource:** `awscc_beta`\n"
+	if string(got) != want {
+		t.Errorf("mismatch:\ngot:\n%s\nwant:\n%s", got, want)
+	}
+}
+
+// TestWriteChangelogFragmentMergeDedups confirms a second sync re-promoting
+// (or re-proposing) a bullet the first sync already wrote does not duplicate
+// it — the identical (kind, tfType) dedup changelogEntries itself already
+// guarantees within one run, now also holding across a merge of two runs'
+// entries.
+func TestWriteChangelogFragmentMergeDedups(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n* **New Resource:** `awscc_alpha`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	// Same entry the file already has, plus one genuinely new one.
+	entries := []changelogEntry{
+		{kind: changelogNewResource, tfType: "awscc_alpha"},
+		{kind: changelogNewResource, tfType: "awscc_beta"},
+	}
+	if err := writeChangelogFragment(path, entries); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	want := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n" +
+		"* **New Resource:** `awscc_alpha`\n" +
+		"* **New Resource:** `awscc_beta`\n"
+	if string(got) != want {
+		t.Errorf("mismatch (want no duplicate awscc_alpha bullet):\ngot:\n%s\nwant:\n%s", got, want)
+	}
+}
+
+// TestWriteChangelogFragmentMergePreservesNotesAndOlderReleases confirms the
+// merge path only touches the top block's FEATURES: section — NOTES:,
+// everything below the top block, and heading text are untouched — the same
+// guarantee TestWriteChangelogFragmentInsertsAfterNotes already established
+// for the empty-section path, now re-verified for the merge path (which
+// takes a different, splice-then-reinsert code path internally).
+func TestWriteChangelogFragmentMergePreservesNotesAndOlderReleases(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\nNOTES:\n\n* provider: some note.\n\nFEATURES:\n\n" +
+		"* **New Resource:** `awscc_alpha`\n\n" +
+		"## 1.99.0 (August 28, 2026)\n\nFEATURES:\n\n* **New Resource:** `awscc_old_thing`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	entries := []changelogEntry{{kind: changelogNewResource, tfType: "awscc_beta"}}
+	if err := writeChangelogFragment(path, entries); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	want := "## 1.100.0 (Unreleased)\n\nNOTES:\n\n* provider: some note.\n\nFEATURES:\n\n" +
+		"* **New Resource:** `awscc_alpha`\n" +
+		"* **New Resource:** `awscc_beta`\n\n" +
+		"## 1.99.0 (August 28, 2026)\n\nFEATURES:\n\n* **New Resource:** `awscc_old_thing`\n"
+	if string(got) != want {
+		t.Errorf("mismatch:\ngot:\n%s\nwant:\n%s", got, want)
+	}
+}
+
+// TestParseChangelogBulletRejectsUnrecognized confirms parseChangelogBullet
+// is strict about the exact syntax — anything not byte-for-byte
+// formatChangelogFragment's own output (a missing backtick, prose, a
+// "BUG FIXES:"-style label) must report ok=false, the signal the merge path
+// uses to refuse rather than guess.
+func TestParseChangelogBulletRejectsUnrecognized(t *testing.T) {
+	t.Parallel()
+
+	for _, line := range []string{
+		"* provider: a hand-written note.",
+		"* No new data sources, list resources, or resources.",
+		"* **New Resource:** awscc_missing_backticks",
+		"* **Unknown Kind:** `awscc_thing`",
+		"FEATURES:",
+		"",
+	} {
+		if _, ok := parseChangelogBullet(line); ok {
+			t.Errorf("parseChangelogBullet(%q): want ok=false, got ok=true", line)
+		}
+	}
+}
+
+// TestParseChangelogBulletAcceptsRealSyntax confirms the three real bullet
+// kinds all round-trip.
+func TestParseChangelogBulletAcceptsRealSyntax(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		line string
+		want changelogEntry
+	}{
+		{"* **New Resource:** `awscc_foo_bar`", changelogEntry{kind: changelogNewResource, tfType: "awscc_foo_bar"}},
+		{"* **New Data Source:** `awscc_foo_bar`", changelogEntry{kind: changelogNewDataSource, tfType: "awscc_foo_bar"}},
+		{"* **New List Resource:** `awscc_foo_bar`", changelogEntry{kind: changelogNewListResource, tfType: "awscc_foo_bar"}},
+	} {
+		got, ok := parseChangelogBullet(tc.line)
+		if !ok {
+			t.Fatalf("parseChangelogBullet(%q): want ok=true, got ok=false", tc.line)
+		}
+		if got != tc.want {
+			t.Errorf("parseChangelogBullet(%q) = %+v, want %+v", tc.line, got, tc.want)
+		}
 	}
 }
 

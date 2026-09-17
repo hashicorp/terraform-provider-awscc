@@ -132,9 +132,13 @@ in-progress version block (e.g. `## 1.100.0 (Unreleased)`). By hand:
 If this run promoted nothing newly user-visible, no `FEATURES:` section is
 added.
 
-`-sync` assumes the top block's `FEATURES:` section is empty or absent when
-it runs and errors instead of guessing at a merge if it already has bullets —
-add the new bullets by hand in that case.
+Running `-sync` again within the same still-open cycle (no release cut in
+between) is safe: the new run's bullets merge into the top block's
+`FEATURES:` section — deduplicated, re-sorted — rather than requiring a
+release between every sync. If that section has anything that isn't one of
+bigdiffer's own bullets (a hand-written note, an older-style entry),
+`-sync` still errors rather than guess how to merge; add the new bullets by
+hand in that case.
 
 ### 5. Commit and open a pull request
 

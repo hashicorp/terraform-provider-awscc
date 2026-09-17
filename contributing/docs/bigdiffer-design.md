@@ -490,10 +490,13 @@ readable by a human or an LLM agent working through proposals interactively.
 writing directly into the file's top, in-progress version block (e.g.
 `## 1.100.0 (Unreleased)`). The bullets come from what the run actually
 promoted, filtered to artifacts not already user-visible before this run — a
-brand-new type, or a specific artifact whose suppression was just lifted. It
-assumes that block's `FEATURES:` section is empty or absent when it runs (the
-normal case — bigdiffer runs once per release cycle) and errors rather than
-guess at a merge if it already has bullets; add the new ones by hand in that
+brand-new type, or a specific artifact whose suppression was just lifted. If
+that block's `FEATURES:` section already has bullets from an earlier `-sync`
+this same still-open cycle, the new entries are merged in — deduplicated,
+re-sorted — rather than requiring a release to cut between every run;
+anything in the section that is not one of bigdiffer's own bullets (a
+hand-written note, an older-style entry) still blocks with an error rather
+than guess how to merge, and the human adds the new bullets by hand in that
 case. The PR number and any `NOTES:`/breaking-change entries stay a human step.
 
 ## 9. Design decisions (proven in the tool)

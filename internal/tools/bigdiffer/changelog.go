@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"slices"
 	"sort"
 	"strings"
@@ -107,13 +108,23 @@ func changelogEntries(promoted map[string]stagedArtifact, preRunOverlay map[stri
 		}
 	}
 
+	sortChangelogEntries(entries)
+	return entries
+}
+
+// sortChangelogEntries sorts entries in place by the real CHANGELOG.md
+// ordering convention (verified against committed history, not the design
+// doc's own illustrative example): alphabetical by kind string — Data
+// Source, then List Resource, then Resource — then alphabetical by tfType
+// within each kind. Shared by changelogEntries and mergeChangelogBullets so
+// a merged section sorts identically to a single-pass one.
+func sortChangelogEntries(entries []changelogEntry) {
 	sort.Slice(entries, func(i, j int) bool {
 		if entries[i].kind != entries[j].kind {
 			return entries[i].kind < entries[j].kind
 		}
 		return entries[i].tfType < entries[j].tfType
 	})
-	return entries
 }
 
 // writeChangelogFragment inserts entries as a FEATURES: section into path's
@@ -121,10 +132,11 @@ func changelogEntries(promoted map[string]stagedArtifact, preRunOverlay map[stri
 // "## 1.100.0 (Unreleased)"; a release-prep commit retitles it and starts a
 // fresh one immediately after cutting a release, confirmed against real
 // history: "Add changelog entry for v1.100.0" landed right after "Bumped
-// product version to 1.99.1"). Assumes that block's FEATURES: section is
-// empty or absent when -sync runs — bigdiffer normally runs once and
-// drafts the whole entry in one pass, so there is nothing to merge with. An
-// empty entries list is a no-op.
+// product version to 1.99.1"). If that block's FEATURES: section already has
+// content from an earlier -sync this same still-open cycle, entries are
+// merged with it rather than requiring a release to cut between every run
+// (see insertChangelogFeatures/mergeChangelogBullets); an empty entries list
+// is a no-op.
 func writeChangelogFragment(path string, entries []changelogEntry) error {
 	if len(entries) == 0 {
 		return nil
@@ -143,6 +155,62 @@ func writeChangelogFragment(path string, entries []changelogEntry) error {
 	return nil
 }
 
+// changelogBulletRE matches one recognized FEATURES: bullet line exactly —
+// the same syntax formatChangelogFragment emits, and the only shape
+// insertChangelogFeatures' merge (below) knows how to parse back into a
+// changelogEntry safely.
+var changelogBulletRE = regexp.MustCompile("^\\* \\*\\*(New Data Source|New List Resource|New Resource):\\*\\* `([^`]+)`$")
+
+// parseChangelogBullet parses one existing FEATURES: line back into a
+// changelogEntry, or reports ok=false for anything that is not byte-for-byte
+// the exact bullet syntax bigdiffer itself emits (a hand-written note, an
+// older release's prose-style entry, a blank separator line). ok=false is
+// the caller's signal to fall back to erroring rather than merging — a
+// section mixing recognized bullets with anything else is not safe to
+// reconstruct verbatim from parsed parts alone.
+func parseChangelogBullet(line string) (changelogEntry, bool) {
+	m := changelogBulletRE.FindStringSubmatch(line)
+	if m == nil {
+		return changelogEntry{}, false
+	}
+	return changelogEntry{kind: changelogKind(m[1]), tfType: m[2]}, true
+}
+
+// mergeChangelogBullets parses existing (the current FEATURES: section's
+// lines, sans the "FEATURES:" label itself) and merges it with newEntries,
+// deduplicating on (kind, tfType) and re-sorting by sortChangelogEntries'
+// convention. ok is false, and merged is nil, the moment any line in
+// existing fails to parse as a recognized bullet (parseChangelogBullet) —
+// the caller must fall back to erroring rather than guessing at a partial
+// merge. A blank line is tolerated (it separates the section from whatever
+// preceded the FEATURES: label, or is simply a stray blank -- either way,
+// skipping it loses nothing, since sortChangelogEntries+formatChangelogFragment
+// re-render the section's spacing from scratch regardless).
+func mergeChangelogBullets(existing []string, newEntries []changelogEntry) (merged []changelogEntry, ok bool) {
+	seen := make(map[changelogEntry]bool)
+	add := func(e changelogEntry) {
+		if !seen[e] {
+			seen[e] = true
+			merged = append(merged, e)
+		}
+	}
+	for _, line := range existing {
+		if line == "" {
+			continue
+		}
+		entry, entryOK := parseChangelogBullet(line)
+		if !entryOK {
+			return nil, false
+		}
+		add(entry)
+	}
+	for _, e := range newEntries {
+		add(e)
+	}
+	sortChangelogEntries(merged)
+	return merged, true
+}
+
 // insertChangelogFeatures inserts entries as a FEATURES: section into
 // content's first version block, returning the whole updated content.
 // Section order within a block, verified against every block in the real
@@ -151,12 +219,24 @@ func writeChangelogFragment(path string, entries []changelogEntry) error {
 // section goes directly after NOTES: (or directly after the "## " heading
 // line if there is no NOTES:) and before BUG FIXES:/the next heading.
 //
-// Errors if the block already has a non-empty FEATURES: section — bigdiffer
-// normally runs once per week and drafts the whole entry in a single pass,
-// so an existing populated section means either -sync ran twice without an
-// intervening release (merge by hand) or the block structure isn't what was
-// expected; guessing how to merge silently risks corrupting a human-owned
-// file.
+// If the block already has a non-empty FEATURES: section, and every one of
+// its lines is a recognized bullet (parseChangelogBullet), the existing
+// entries are merged with the new ones — deduplicated on (kind, tfType) via
+// the identical seen-set changelogEntries itself uses, then re-sorted by the
+// same convention — rather than erroring, so a second -sync within the same
+// still-open release cycle (a genuinely common case: nothing requires a
+// release to cut between every sync) accumulates correctly instead of
+// blocking on a manual merge every time. This is safe specifically because
+// every recognized bullet round-trips losslessly through changelogEntry — a
+// merged, re-sorted, re-rendered section is byte-for-byte what a single
+// -sync run producing the union of both entry sets would have written, not
+// an approximation.
+//
+// If the existing section has anything else at all — a hand-written note,
+// an older release's prose-style bullet, blank separator lines beyond the
+// header — the merge is refused and this still errors exactly as before:
+// mixed recognized/unrecognized content cannot be safely reconstructed from
+// parsed parts alone, and guessing risks corrupting a human-owned file.
 func insertChangelogFeatures(content string, entries []changelogEntry) (string, error) {
 	lines := strings.Split(content, "\n")
 
@@ -178,9 +258,32 @@ func insertChangelogFeatures(content string, entries []changelogEntry) (string, 
 		}); next != -1 {
 			end = idx + 1 + next
 		}
-		if !allBlank(block[idx+1 : end]) {
-			return "", fmt.Errorf("top version block already has a non-empty FEATURES: section " +
-				"(-sync normally runs once per release cycle; merge the new entries by hand)")
+		existing := block[idx+1 : end]
+		if !allBlank(existing) {
+			merged, ok := mergeChangelogBullets(existing, entries)
+			if !ok {
+				return "", fmt.Errorf("top version block already has a non-empty FEATURES: section " +
+					"with unrecognized content (not bigdiffer's own bullet syntax); merge the new entries by hand")
+			}
+			entries = merged
+			// Splice the merged, re-rendered section over the existing
+			// FEATURES: bullets in place, then fall through to the normal
+			// "insert a fresh FEATURES: section" path below with an empty
+			// existing section (rewritten headingIdx/blockEnd/block to
+			// reflect the splice) — reusing one insertion code path for
+			// both the empty and non-empty cases rather than duplicating
+			// the NOTES:-skip logic.
+			absoluteIdx := headingIdx + 1 + idx
+			absoluteEnd := headingIdx + 1 + end
+			newLines := make([]string, 0, len(lines)-(absoluteEnd-absoluteIdx))
+			newLines = append(newLines, lines[:absoluteIdx]...)
+			newLines = append(newLines, lines[absoluteEnd:]...)
+			lines = newLines
+			headingIdx = slices.IndexFunc(lines, func(l string) bool { return strings.HasPrefix(l, "## ") })
+			blockEnd = len(lines)
+			if next := slices.IndexFunc(lines[headingIdx+1:], func(l string) bool { return strings.HasPrefix(l, "## ") }); next != -1 {
+				blockEnd = headingIdx + 1 + next
+			}
 		}
 	}
 
