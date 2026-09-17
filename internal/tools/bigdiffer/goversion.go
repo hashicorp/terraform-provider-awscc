@@ -11,7 +11,7 @@ import (
 	"runtime"
 )
 
-// goModVersionRE matches go.mod's "go 1.26.6" directive line, capturing the
+// goModVersionRE matches go.mod's "go 1.26.8" directive line, capturing the
 // version number. Go has required a full three-component version there
 // (matching what actions/setup-go's go-version-file and GNUmakefile's
 // GOTOOLCHAIN_PIN both read) since the toolchain-selection feature shipped;
@@ -20,7 +20,7 @@ import (
 var goModVersionRE = regexp.MustCompile(`(?m)^go\s+(\S+)\s*$`)
 
 // verifyGoToolchain confirms the running go toolchain (runtime.Version(),
-// e.g. "go1.26.6") exactly matches go.mod's "go" directive, and returns a
+// e.g. "go1.26.8") exactly matches go.mod's "go" directive, and returns a
 // descriptive error if not. Go's own toolchain selection (GOTOOLCHAIN=auto,
 // the default) only ever auto-*upgrades* a too-old local Go to satisfy a
 // go.mod requirement — it never downgrades a newer one — so running
@@ -34,9 +34,9 @@ var goModVersionRE = regexp.MustCompile(`(?m)^go\s+(\S+)\s*$`)
 // schema or bigdiffer's own logic changed. This exact failure mode broke
 // PR #3334's -check CI step: six files (network_interface, delivery_stream,
 // cloud_autonomous_vm_cluster resource + singular data source) were last
-// regenerated and committed under a newer local Go than CI's pinned 1.26.6,
-// bypassing GNUmakefile's guard by being run directly rather than via `make
-// bigdiffer-reconcile`.
+// regenerated and committed under a newer local Go than CI's then-pinned
+// 1.26.6, bypassing GNUmakefile's guard by being run directly rather than
+// via `make bigdiffer-reconcile`.
 //
 // Checked once, at startup, for every command that writes or verifies
 // generated Go source (-sync, -reconcile, -check): -lint, -recheck, and

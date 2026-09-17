@@ -72,7 +72,7 @@ func TestVerifyGoToolchainMalformedGoModTolerated(t *testing.T) {
 // upward-walk resolution `go` itself uses.
 func TestFindGoModWalksUpward(t *testing.T) {
 	dir := t.TempDir()
-	if err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("go 1.26.6\n"), filePerm); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("go 1.26.8\n"), filePerm); err != nil {
 		t.Fatalf("writing scratch go.mod: %v", err)
 	}
 	nested := filepath.Join(dir, "a", "b", "c")

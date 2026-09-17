@@ -11,7 +11,7 @@ GO_VER              ?= go
 # between Go releases, and GOTOOLCHAIN=auto will not downgrade a newer local Go, so
 # formatting-sensitive targets (bigdiffer-*, the legacy generators, and the parity
 # test in `make test`) would otherwise drift. Sourced from the go.mod `go` directive
-# (e.g. `go 1.26.6` -> `go1.26.6`); falls back to auto if it cannot be read. Exported
+# (e.g. `go 1.26.8` -> `go1.26.8`); falls back to auto if it cannot be read. Exported
 # below so it reaches every recipe; override via the environment, e.g.
 # `GOTOOLCHAIN=go1.27.1 make test`.
 #
