@@ -300,8 +300,8 @@ func reconcileListResource(cfg config, results []genResult) ([]genResult, error)
 // aggregates are re-emitted. Documentation (import-example docs, terraform fmt,
 // tfplugindocs) runs as the last step of the same tail by default — noDocs
 // (-no-docs) skips it for a fast codegen inner loop
-// (contributing/docs/docs-pipeline-punchlist.md item 1). Requires AWS
-// credentials (queried in us-east-1).
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline"). Requires AWS credentials (queried in us-east-1).
 func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bool) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
@@ -464,11 +464,12 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bo
 		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
 	}
 
-	// Documentation, last in the tail (contributing/docs/docs-pipeline-punchlist.md
-	// item 1): everything above has already promoted, so a docs failure here
-	// is never a broken commit — bigdiffer never commits on its own, and the
-	// promoted code changes are left in place either way. See runDocsTail's
-	// doc comment for the recovery-oriented error this returns on failure.
+	// Documentation, last in the tail (bigdiffer-design.md §6,
+	// "Documentation is part of the same gated pipeline"): everything above
+	// has already promoted, so a docs failure here is never a broken commit
+	// — bigdiffer never commits on its own, and the promoted code changes
+	// are left in place either way. See runDocsTail's doc comment for the
+	// recovery-oriented error this returns on failure.
 	//
 	// The change report and promotion summary print before this, not after:
 	// if docs fail, the run still returns an error below, but the human

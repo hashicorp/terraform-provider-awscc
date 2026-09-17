@@ -393,6 +393,49 @@ ever wanted, that is a new `-reconcile`-level capability (an explicit "remove
 any committed file not in this run's staged set" pass), and `-check`'s scan
 would need the reverse walk added at the same time, not before.
 
+### Documentation is part of the same gated pipeline
+
+Documentation used to be a separate, easy-to-forget manual step (`-docs`,
+run by hand after `-sync`/`-reconcile`) with nothing to catch drift the way
+the compile gate catches broken code. It is now folded into the same
+pipeline, on the same "produce, then enforce" split as everything else:
+
+- **`-sync`/`-reconcile` produce it.** Once code has promoted, both commands
+  run the same steps `-docs` runs (import-example rendering, `terraform fmt`,
+  `tfplugindocs generate`) as the last step of the same invocation, on by
+  default. `-no-docs` skips this for a fast codegen inner loop. A docs
+  failure here is never a broken commit — promotion has already completed,
+  and bigdiffer never commits on its own — so it surfaces as a loud,
+  recoverable error over an otherwise-valid, uncommitted tree; re-running
+  `-docs` alone finishes the job without redoing generation. This step is
+  early feedback, not the enforcement: a human can still commit past a
+  failed trailing step.
+- **`-check` enforces it,** in two tiers of a different kind:
+    - **Cheap, unconditional:** `import_examples_gen.json` is recomputed from
+      the row set a `-reconcile` would promote (the identical in-memory
+      projection the compile gate's own fixpoint uses) and diffed against the
+      committed file — no external tools, no disk writes. This runs on every
+      `-check`, including in CI.
+    - **Full, opt-in (`-check-docs-full`):** the registry docs themselves are
+      rendered and diffed against committed `docs/`. `tfplugindocs` is not
+      static analysis — by default it builds the provider and drives
+      `terraform providers schema -json` against a real running binary — so
+      this tier builds a real binary from the staged tree (reusing the compile
+      gate's own overlay-onto-the-real-tree-then-revert mechanism, just
+      producing a runnable binary instead of a pass/fail signal) and extracts
+      its schema once, then renders through `tfplugindocs generate
+      --providers-schema <path>`, a flag that makes the render a pure function
+      of (schema, templates, examples) with no further build or Terraform CLI
+      call. This tier is markedly heavier than everything else `-check` does —
+      a real whole-provider build plus a schema-extraction call — so it stays
+      opt-in, run locally or on demand, rather than part of the CI gate, until
+      proven fast/stable enough to run on every PR.
+
+The same "`-check` passes iff `-reconcile` + commit would be a no-op"
+contract applies to docs exactly as it does to code: both tiers compare
+strictly one-directionally (recomputed/rendered → committed, never the
+reverse), for the identical orphan-output reason above.
+
 ## 7. Policy: results become overlay edits
 
 Change class plus gate result determine the overlay edit. "Failed" covers both a
@@ -529,11 +572,17 @@ orchestration. Every type is gated (generate + compile) every run, not just
 New/Changed, with a schema-unchanged failure aborting the whole run rather
 than promoting a partial result (§6) — the one behavior change the
 `sync`/`reconcile`/`check`/`lint`/`recheck` command redesign carries.
+Documentation is part of the same gated pipeline, not a separate step to
+remember: `-sync`/`-reconcile` render it automatically as their last step
+(`-no-docs` skips this for a fast inner loop), and `-check` enforces
+freshness — unconditionally for the import-examples aggregate, and via the
+opt-in `-check-docs-full` flag for the rendered registry docs themselves
+(§6, "Documentation is part of the same gated pipeline").
 Correctness is anchored by full-corpus parity — the owned engine is
 byte-identical to the legacy generators (0 drift, ~1580 types) — kept as a
 regression guard until `-check` fully takes over that role (§6, §10).
-`-sync`, `-reconcile`, `-check`, `-lint`, `-recheck` (with `-recheck-all`),
-and `-docs` are all live.
+`-sync`, `-reconcile`, `-check` (with `-check-docs-full`), `-lint`, `-recheck`
+(with `-recheck-all`), and `-docs` are all live.
 
 Remaining work — GitHub-issue guidance, the one-time reason backfill, and the
 deferred cleanups below — is listed under "Deferred and future work" below.
@@ -665,15 +714,19 @@ linked GitHub issue or described in enough detail here to act on.
   the engine has driven several clean weekly cycles with no fallback. Tracked by
   #3330 and `removing-the-legacy-generation-process.md`; resolves the cutover from
   conceptual to physical (§10).
-- **Wire `-check` into CI, scoped to engine-touching changes.** `-check` (§6) is
-  designed as the CI gate for a machinery change (`codegen/`, templates,
-  naming, `go.mod`/`go.sum`) — catch a regression before it reaches a
-  `-sync`/`-reconcile` PR — but the workflow does not run it yet (only
-  `go test ./internal/tools/bigdiffer/...` and `-lint` run today). Open:
-  whether it runs on every PR (simplest, but pays the whole-corpus generation
-  cost on unrelated changes) or is scoped to paths that can plausibly affect
-  generation output. `-check`'s "fail on any output-diff" relies on
-  generation being deterministic; two separate real runs against an untouched
-  corpus produced zero diffs both times, which is evidence, not a formal
-  proof — worth keeping in mind if a future run ever surfaces spurious drift
-  (timestamps, map order) with no real cause.
+- **Wiring `-check-docs-full` into CI, if the cost is ever worth it.** `-check`
+  itself is wired into CI (`.github/workflows/bigdiffer.yml`) and runs on
+  every PR alongside the existing test suite and `-lint`, including the
+  cheap, unconditional import-examples freshness check — no longer deferred.
+  `-check-docs-full` (§6, "Documentation is part of the same gated pipeline"),
+  the heavier tier that renders the registry docs themselves via a real
+  built binary, is deliberately **not** part of that CI step: a real run
+  against the whole repo took ~2m8s, meaningfully more than `-check`'s
+  otherwise-offline cost, so it stays a local/on-demand tool rather than an
+  every-PR cost until there is real appetite for that budget. `-check`'s
+  "fail on any output-diff" (for code and for the full-tier docs render
+  alike) relies on generation being deterministic; several separate real
+  runs against an untouched corpus have produced zero diffs every time,
+  which is evidence, not a formal proof — worth keeping in mind if a future
+  run ever surfaces spurious drift (timestamps, map order) with no real
+  cause.

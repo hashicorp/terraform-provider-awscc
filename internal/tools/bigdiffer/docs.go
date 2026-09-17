@@ -89,11 +89,12 @@ func writeImportExampleDocs(examples []codegen.ImportExample, examplesDir string
 }
 
 // runDocsTail is the docs step of the shared sync/reconcile post-promote tail
-// (contributing/docs/docs-pipeline-punchlist.md item 1): by default it runs
-// runDocs right after code promotion, so a maintainer no longer has to
-// remember a separate -docs pass — the same silent-drift class the command
-// redesign already closed for code. noDocs (the -no-docs flag) skips it for a
-// fast codegen inner loop, since tfplugindocs on the whole provider is slow.
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline"): by default it runs runDocs right after code promotion, so a
+// maintainer no longer has to remember a separate -docs pass — the same
+// silent-drift class the command redesign already closed for code. noDocs
+// (the -no-docs flag) skips it for a fast codegen inner loop, since
+// tfplugindocs on the whole provider is slow.
 //
 // A docs failure here is never a broken commit: promotion (code, cache,
 // overlay, aggregates) has already completed by the time this runs, and

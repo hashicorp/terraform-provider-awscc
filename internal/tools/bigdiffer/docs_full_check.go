@@ -3,11 +3,13 @@
 
 package main
 
-// Item 2's full tier (contributing/docs/docs-pipeline-punchlist.md): render
-// the registry docs (tfplugindocs) themselves and diff against committed
-// docs/, the same "-check passes iff running -reconcile and committing the
-// result would be a no-op" contract diffStagedTrees/diffImportExamples
-// already extend to code and the import-examples aggregate.
+// The full tier of -check's docs freshness enforcement
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline"): render the registry docs (tfplugindocs) themselves and diff
+// against committed docs/, the same "-check passes iff running -reconcile
+// and committing the result would be a no-op" contract
+// diffStagedTrees/diffImportExamples already extend to code and the
+// import-examples aggregate.
 //
 // tfplugindocs is not static analysis of source: by default it builds the
 // provider and drives `terraform providers schema -json` against a real

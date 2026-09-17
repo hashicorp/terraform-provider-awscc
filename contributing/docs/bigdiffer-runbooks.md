@@ -192,6 +192,20 @@ committed, even if it compiles: the "you changed the engine but haven't
 `-reconcile`'d and committed yet" case. A non-engine change touches nothing
 `-check` would regenerate differently, so it passes with a clean diff.
 
+If the change might affect the rendered registry docs themselves — a
+template, a schema-description path, anything `tfplugindocs` reads — add
+`-check-docs-full` to also render `docs/` (via a real built binary) and diff
+against committed:
+
+```sh
+go run ./internal/tools/bigdiffer -check -check-docs-full
+```
+
+This is markedly heavier than plain `-check` (a real whole-provider build
+plus a schema-extraction call, a couple of minutes rather than under a
+minute), so reach for it when the change plausibly touches docs rendering,
+not as a routine step every time.
+
 Once `-check` finds a real diff (or you already know you changed something),
 land it:
 

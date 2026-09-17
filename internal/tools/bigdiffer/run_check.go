@@ -31,7 +31,8 @@ import (
 // fullDocs (the -check-docs-full flag) additionally renders the registry
 // docs themselves (tfplugindocs, via a real built binary extracted from the
 // staged tree) and diffs them against committed docs/
-// (contributing/docs/docs-pipeline-punchlist.md item 2, the full tier).
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline").
 // Off by default: it is markedly heavier than everything else -check does
 // (a real `go build` of the whole provider plus a `terraform providers
 // schema -json` call, vs. -check's otherwise offline, no-extra-build
@@ -107,19 +108,20 @@ func runCheck(ctx context.Context, allSchemasPath, checkoutPath string, fullDocs
 		problems = append(problems, fmt.Sprintf("%d file(s) differ from committed output (engine change not yet -reconcile'd and committed):\n  %s", len(diffs), strings.Join(diffs, "\n  ")))
 	}
 
-	// Docs freshness, cheap tier (contributing/docs/docs-pipeline-punchlist.md
-	// item 2): import_examples_gen.json is a pure function of the row set a
-	// -reconcile would promote (projectRows, the same in-memory projection
-	// the compile gate's own fixpoint uses — never a hand-rolled parallel
-	// reimplementation) plus the cached schema bytes each row's plan reads,
-	// so it can be recomputed and diffed here with no external tools and no
-	// disk writes at all — catching "code changed (or the engine that reads
-	// schemas to build it did), the aggregate was not regenerated" without
-	// needing tfplugindocs or a built provider binary (that is the full
-	// tier's job, item 2). Deliberately checked even when cands and diffs
-	// above are both clean: the aggregate is a function of the *whole* row
-	// set, not just this run's candidates, so a stale copy can exist even
-	// when every candidate this run regenerates byte-identical.
+	// Docs freshness, cheap tier (bigdiffer-design.md §6, "Documentation is
+	// part of the same gated pipeline"): import_examples_gen.json is a pure
+	// function of the row set a -reconcile would promote (projectRows, the
+	// same in-memory projection the compile gate's own fixpoint uses — never
+	// a hand-rolled parallel reimplementation) plus the cached schema bytes
+	// each row's plan reads, so it can be recomputed and diffed here with no
+	// external tools and no disk writes at all — catching "code changed (or
+	// the engine that reads schemas to build it did), the aggregate was not
+	// regenerated" without needing tfplugindocs or a built provider binary
+	// (that is the full tier's job, below). Deliberately checked even when
+	// cands and diffs above are both clean: the aggregate is a function of
+	// the *whole* row set, not just this run's candidates, so a stale copy
+	// can exist even when every candidate this run regenerates
+	// byte-identical.
 	//
 	// Must run after diffStagedTrees, not before: diffImportExamples reads
 	// the committed schema cache (cfg.cacheDir), not settleBatch's staged
@@ -133,14 +135,14 @@ func runCheck(ctx context.Context, allSchemasPath, checkoutPath string, fullDocs
 		problems = append(problems, diff)
 	}
 
-	// Docs freshness, full tier (contributing/docs/docs-pipeline-punchlist.md
-	// item 2), opt-in via -check-docs-full: renders the registry docs
-	// themselves (tfplugindocs, via a real built binary extracted from the
-	// staged tree — docs_full_check.go) and diffs against committed docs/.
-	// Deliberately last: it is the heaviest of every check -check runs (a
-	// real go build of the whole provider plus a terraform providers
-	// schema -json call), so every cheaper, offline check above gets a
-	// chance to fail first and skip paying for it.
+	// Docs freshness, full tier (bigdiffer-design.md §6, "Documentation is
+	// part of the same gated pipeline"), opt-in via -check-docs-full:
+	// renders the registry docs themselves (tfplugindocs, via a real built
+	// binary extracted from the staged tree — docs_full_check.go) and diffs
+	// against committed docs/. Deliberately last: it is the heaviest of
+	// every check -check runs (a real go build of the whole provider plus a
+	// terraform providers schema -json call), so every cheaper, offline
+	// check above gets a chance to fail first and skip paying for it.
 	if fullDocs {
 		rows, err := projectRows(string(overlayContent), overlayRows, checkout, settled.decisions)
 		if err != nil {

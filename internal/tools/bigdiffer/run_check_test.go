@@ -307,10 +307,11 @@ func TestDiffDocsTreesDetectsMissingCommitted(t *testing.T) {
 }
 
 // TestDiffRenderedDocsNoDiff confirms the full-tier docs check
-// (contributing/docs/docs-pipeline-punchlist.md item 2) renders byte-identical
-// docs against the real, untouched corpus: builds a real provider binary
-// from the staged tree, extracts its schema via a real `terraform providers
-// schema -json` call, and renders through tfplugindocs — exercising the
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline") renders byte-identical docs against the real, untouched
+// corpus: builds a real provider binary from the staged tree, extracts its
+// schema via a real `terraform providers schema -json` call, and renders
+// through tfplugindocs — exercising the
 // whole extraction + render + diff path end to end, not a synthetic tree.
 // Requires `terraform` and `tfplugindocs` on PATH (both installed by
 // `make tools`); skipped if either is missing, and in -short mode regardless

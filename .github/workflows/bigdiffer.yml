@@ -63,8 +63,8 @@ jobs:
       - run: go test ./internal/tools/bigdiffer/... -timeout 20m
       # Verify all_schemas.hcl is normalized and anomaly-free (offline).
       - run: go run ./internal/tools/bigdiffer -lint
-      # Engine-drift gate (contributing/docs/docs-pipeline-punchlist.md item 5):
-      # regenerate the whole corpus offline from the committed overlay + cache
+      # Engine-drift gate: regenerate the whole corpus offline from the
+      # committed overlay + cache
       # through the same generate -> compile -> decide pipeline -reconcile
       # uses, promotion switched off, and fail on any regeneration/compile
       # failure or any output (including import_examples_gen.json) that
