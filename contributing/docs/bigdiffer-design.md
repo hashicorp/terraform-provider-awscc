@@ -454,7 +454,7 @@ pipeline, on the same "produce, then enforce" split as everything else:
       gate's own overlay-onto-the-real-tree-then-revert mechanism, just
       producing a runnable binary instead of a pass/fail signal) and extracts
       its schema once, then renders through `tfplugindocs generate
-      --providers-schema <path>`, a flag that makes the render a pure function
+      --providers-schema` `<path>`, a flag that makes the render a pure function
       of (schema, templates, examples) with no further build or Terraform CLI
       call. This tier is markedly heavier than everything else `-check` does —
       a real whole-provider build plus a schema-extraction call — so it stays
