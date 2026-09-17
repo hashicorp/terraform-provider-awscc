@@ -393,6 +393,36 @@ ever wanted, that is a new `-reconcile`-level capability (an explicit "remove
 any committed file not in this run's staged set" pass), and `-check`'s scan
 would need the reverse walk added at the same time, not before.
 
+### The Go toolchain itself is part of what `-check` verifies
+
+`-check`'s "byte-diff from committed" contract (above) is only meaningful if
+regeneration is deterministic across environments — but `gofmt`/`goimports`
+formatting rules (e.g. map-literal key/value alignment width) have changed
+between Go releases, and `FormatGo` (`codegen/format.go`) calls into
+whichever Go toolchain actually built and is running the bigdiffer binary,
+not a version pinned by a Go module dependency. `GOTOOLCHAIN=auto` (Go's
+default) only ever auto-*upgrades* a too-old local Go to satisfy `go.mod`'s
+`go` directive — it never downgrades a newer one — so running
+`go run ./internal/tools/bigdiffer ...` directly on a contributor's newer
+local Go silently succeeds but generates or "verifies" Go source formatted
+by that newer toolchain's rules, byte-diffing from what CI's pinned
+toolchain would produce. `GNUmakefile` already pins `GOTOOLCHAIN` for every
+`make` recipe, but that pin only takes effect through `make` — this exact
+gap (a direct, non-`make` invocation under a newer local Go) produced six
+committed files (`network_interface`, `delivery_stream`,
+`cloud_autonomous_vm_cluster` resource + singular data source) that
+byte-diffed under CI's pinned toolchain while passing clean locally, when
+`-check` was first wired into CI (PR #3334).
+
+`-sync`, `-reconcile`, and `-check` now verify at startup
+(`verifyGoToolchain`, `goversion.go`) that `runtime.Version()` exactly
+matches `go.mod`'s `go` directive, refusing to run at all otherwise — a
+backstop independent of whether the command was reached through `make` or
+invoked directly, which the runbooks document as the normal way to run
+these commands. `-lint`, `-recheck`, and `-docs` never touch `gofmt`'d Go
+source (docs are prose/Terraform, not Go — `codegen/importdocs.go`) and are
+exempt.
+
 ### Documentation is part of the same gated pipeline
 
 Documentation used to be a separate, easy-to-forget manual step (`-docs`,

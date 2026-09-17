@@ -14,6 +14,11 @@ GO_VER              ?= go
 # (e.g. `go 1.26.6` -> `go1.26.6`); falls back to auto if it cannot be read. Exported
 # below so it reaches every recipe; override via the environment, e.g.
 # `GOTOOLCHAIN=go1.27.1 make test`.
+#
+# This pin only takes effect through `make`; bigdiffer -sync/-reconcile/-check
+# also verify their own running toolchain directly (goversion.go), as a
+# backstop for a contributor invoking `go run ./internal/tools/bigdiffer ...`
+# without going through a make target at all.
 GOTOOLCHAIN_PIN     := $(or $(addprefix go,$(shell sed -n 's/^go //p' go.mod)),auto)
 GOTOOLCHAIN         ?= $(GOTOOLCHAIN_PIN)
 export GOTOOLCHAIN

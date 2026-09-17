@@ -55,6 +55,17 @@
 //     migration — printed as a report, never written. Offline except reading
 //     the committed schema cache.
 //
+// -sync/-reconcile/-check all verify the running Go toolchain exactly matches
+// go.mod's "go" directive before doing anything else (goversion.go):
+// gofmt/goimports formatting rules (e.g. map-literal key/value alignment)
+// have changed between Go releases, and GOTOOLCHAIN=auto only ever
+// auto-upgrades a too-old local Go, never downgrades a newer one — so a
+// contributor running these commands directly (bypassing GNUmakefile's own
+// GOTOOLCHAIN pin, which only takes effect through `make`) on a newer local
+// Go would otherwise silently generate or "verify" output formatted by the
+// wrong toolchain, byte-diffing from what CI's pinned toolchain produces.
+// -lint, -recheck, and -docs never touch gofmt'd Go source and are exempt.
+//
 // There is no separate discovery or snapshot-diff mode: bigdiffer owns discovery
 // itself, so there is no need to generate and diff checked-in
 // available_schemas.<date>.hcl snapshots, and no need for git or dated files.
@@ -158,6 +169,16 @@ func main() {
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
 func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) error {
+	switch {
+	case sync, reconcile, check:
+		// Only the three commands that generate or verify gofmt'd Go source
+		// need the toolchain pinned — a version mismatch here would silently
+		// produce or "verify" output formatted by the wrong gofmt rules (see
+		// verifyGoToolchain).
+		if err := verifyGoToolchain(); err != nil {
+			return err
+		}
+	}
 	switch {
 	case sync:
 		return runSync(context.Background(), allSchemasPath, checkoutPath, noDocs)
