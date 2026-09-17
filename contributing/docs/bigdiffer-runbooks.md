@@ -25,9 +25,18 @@ sequential steps of one bigger process:
 <!--mdtoc: end-->
 
 > [!TIP]
-> `make bigdiffer-sync`, `make bigdiffer-reconcile`, and `make bigdiffer-docs`
+> `make bigdiffer-sync`, `make bigdiffer-reconcile`, `make bigdiffer-check`,
+> `make bigdiffer-docs`, `make bigdiffer-lint`, and `make bigdiffer-recheck`
 > are shortcuts for the `go run ./internal/tools/bigdiffer …` commands used
-> below.
+> below — prefer them over the bare `go run` form: `make` pins `GOTOOLCHAIN`
+> to `go.mod`'s version for every recipe (see `GNUmakefile`), so generated Go
+> source is formatted identically to CI regardless of your locally installed
+> Go. A flag combination with no dedicated target (`-no-docs`,
+> `-check-docs-full`, `-recheck-all`) still needs the bare `go run` form,
+> shown where used below; `-sync`/`-reconcile`/`-check` verify the toolchain
+> themselves either way (`goversion.go`), so a mismatch is refused rather
+> than silently producing CI-diverging output, but matching `make`'s pin
+> from the start avoids hitting that refusal at all.
 
 ## Weekly release prep
 
@@ -49,7 +58,7 @@ Ensure valid AWS credentials are set in the environment.
 ### 2. Sync
 
 ```sh
-go run ./internal/tools/bigdiffer -sync
+make bigdiffer-sync
 ```
 
 This refreshes the schema cache, tracks new CloudFormation types, gates and
@@ -59,7 +68,11 @@ immediately instead of aging silently), rewrites `all_schemas.hcl`, and
 regenerates documentation (import-example docs, `terraform fmt`,
 `tfplugindocs generate`) — all in one pass, taking roughly 13 minutes
 (dominated by the AWS discovery crawl; a progress bar shows it). Pass
-`-no-docs` to skip the documentation step for a faster inner loop; run
+`-no-docs` (there's no dedicated target for a flag, only for a command, so
+use `go run ./internal/tools/bigdiffer -sync -no-docs` directly, or
+`GOTOOLCHAIN=go$(cat .go-version) go run ./internal/tools/bigdiffer -sync
+-no-docs` to pin the toolchain the way `make` would) to
+skip the documentation step for a faster inner loop; run
 [`-docs`](#adding-an-example-or-changing-a-doc-template) separately before
 committing in that case. It prints a [report](#reading-the-report) of what
 changed and what, if anything, was frozen or suppressed.
@@ -78,8 +91,8 @@ A documentation failure is different in kind: it happens *after* everything
 above has already promoted successfully, and bigdiffer never commits on its
 own, so a docs failure is a loud, recoverable error over an otherwise-valid,
 uncommitted working tree, not a broken commit. Fix the underlying problem
-(a missing tool, a template bug), then re-run `go run ./internal/tools/bigdiffer
--docs` alone to finish — no need to redo the sync.
+(a missing tool, a template bug), then re-run `make bigdiffer-docs` alone to
+finish — no need to redo the sync.
 
 Review the report together with `git diff`. For each frozen/suppressed type,
 open a GitHub issue with the reason (see
@@ -171,7 +184,7 @@ Requires Terraform `v1.14`+ and `tfplugindocs` on `PATH` (both installed by
 `make tools`):
 
 ```sh
-go run ./internal/tools/bigdiffer -docs
+make bigdiffer-docs
 ```
 
 This regenerates import-example docs, runs `terraform fmt`, and runs
@@ -189,7 +202,7 @@ to see what it would break before landing it, then land it.
 First, preview the change without writing anything:
 
 ```sh
-go run ./internal/tools/bigdiffer -check
+make bigdiffer-check
 ```
 
 This runs the same generate → compile → decide gate `-sync`/`-reconcile` use,
@@ -203,10 +216,11 @@ committed, even if it compiles: the "you changed the engine but haven't
 If the change might affect the rendered registry docs themselves — a
 template, a schema-description path, anything `tfplugindocs` reads — add
 `-check-docs-full` to also render `docs/` (via a real built binary) and diff
-against committed:
+against committed (no dedicated target for a flag, so use `go run` directly,
+or pin the toolchain yourself the way `make` would):
 
 ```sh
-go run ./internal/tools/bigdiffer -check -check-docs-full
+GOTOOLCHAIN=go$(cat .go-version) go run ./internal/tools/bigdiffer -check -check-docs-full
 ```
 
 This is markedly heavier than plain `-check` (a real whole-provider build
@@ -218,7 +232,7 @@ Once `-check` finds a real diff (or you already know you changed something),
 land it:
 
 ```sh
-go run ./internal/tools/bigdiffer -reconcile
+make bigdiffer-reconcile
 ```
 
 This runs every committed type through the identical gate, offline, and
@@ -238,18 +252,33 @@ this week in the same pass — see [Weekly release prep](#weekly-release-prep).
 
 ## Testing after a Go dependency or version bump
 
-The job: confirm a `go.mod`/`go.sum` or Go toolchain change didn't alter
-generated output or break the build, with nothing else changing.
+The job: confirm a `go.mod`/`go.sum` dependency change, or a bump to the Go
+version pinned in `go.mod`/`tools/go.mod`/`.go-version`, didn't alter
+generated output or break the build.
+
+If you already updated the pin (the usual order — bump the version files
+first, matching whatever `terraform-provider-aws` or upstream Go itself just
+shipped, then verify), `make` will pick it up automatically:
 
 ```sh
-go run ./internal/tools/bigdiffer -check
+make bigdiffer-check
+```
+
+If you're instead trial-running a *prospective* bump before touching the
+pin, run under that candidate version explicitly so `make`'s own
+`GOTOOLCHAIN` pin (still the old, committed version) doesn't mask the very
+thing you're testing:
+
+```sh
+GOTOOLCHAIN=go1.27.0 go run ./internal/tools/bigdiffer -check
 ```
 
 A clean pass with a zero diff means the bump changed nothing bigdiffer can
 see. If it reports a diff or a failure, treat it exactly like
 [Changing the codegen](#changing-the-codegen): a dependency/toolchain bump is a
 machinery change from bigdiffer's point of view, whether or not any of your
-own template/codegen code moved. Run `-reconcile` to land the (hopefully
+own template/codegen code moved. Run `make bigdiffer-reconcile` (after
+updating the pin, if you were trial-running one) to land the (hopefully
 inert) regeneration, then commit — a real diff here is worth understanding
 before committing, since it means the bump changed what the provider emits.
 
@@ -260,7 +289,7 @@ The job: not "would regenerating break anything," but "is
 no live AWS check, no regeneration at all.
 
 ```sh
-go run ./internal/tools/bigdiffer -lint
+make bigdiffer-lint
 ```
 
 This re-sorts and re-formats the overlay against itself (no rows are added,
@@ -286,7 +315,7 @@ find out whether that's still true, or has quietly become fine, without
 guessing or trusting stale memory.
 
 ```sh
-go run ./internal/tools/bigdiffer -recheck
+make bigdiffer-recheck
 ```
 
 By default this re-probes every suppressed/frozen fact that has **no**
@@ -300,10 +329,12 @@ automatically. Offline except reading the already-committed schema cache —
 no AWS, no live discovery.
 
 To revisit a decision that already has a real, specific reason recorded —
-not just the reason-less backlog — widen the scope:
+not just the reason-less backlog — widen the scope (no dedicated target for
+a flag, so use `go run` directly, or pin the toolchain yourself the way
+`make` would):
 
 ```sh
-go run ./internal/tools/bigdiffer -recheck -recheck-all
+GOTOOLCHAIN=go$(cat .go-version) go run ./internal/tools/bigdiffer -recheck -recheck-all
 ```
 
 Useful after a schema-generating engine change, a suppression whose

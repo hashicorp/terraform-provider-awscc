@@ -72,8 +72,13 @@ go run ./internal/tools/bigdiffer -recheck -recheck-all
 ```
 
 Exactly one command runs per invocation; with no command, usage is printed.
-`make bigdiffer-sync`, `make bigdiffer-reconcile`, and `make bigdiffer-docs` are
-shortcuts.
+`make bigdiffer-sync`, `make bigdiffer-reconcile`, `make bigdiffer-check`,
+`make bigdiffer-docs`, `make bigdiffer-lint`, and `make bigdiffer-recheck` are
+shortcuts — prefer them over the bare `go run` form, since `make` pins
+`GOTOOLCHAIN` to `go.mod`'s version for every recipe (`GNUmakefile`), which a
+bare `go run` on a newer local Go would not (see `goversion.go` and
+[bigdiffer-design.md](../../../contributing/docs/bigdiffer-design.md)'s "The
+Go toolchain itself is part of what `-check` verifies").
 
 Flags:
 

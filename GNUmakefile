@@ -46,8 +46,17 @@ bigdiffer-sync: prereq-go ## Weekly sync via bigdiffer (discover, regenerate cha
 bigdiffer-reconcile: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS; promotes on a clean gate)
 	$(GO_VER) run ./internal/tools/bigdiffer -reconcile
 
+bigdiffer-check: prereq-go ## Preview a bigdiffer engine change offline, read-only (no AWS; writes nothing)
+	$(GO_VER) run ./internal/tools/bigdiffer -check
+
 bigdiffer-docs: prereq-go ## Regenerate documentation via bigdiffer (docs-import + terraform fmt + tfplugindocs)
 	$(GO_VER) run ./internal/tools/bigdiffer -docs
+
+bigdiffer-lint: prereq-go ## Verify all_schemas.hcl is normalized and anomaly-free (offline; writes nothing)
+	$(GO_VER) run ./internal/tools/bigdiffer -lint
+
+bigdiffer-recheck: prereq-go ## Re-probe reason-less suppressed/frozen rows and propose a reclassification (writes nothing)
+	$(GO_VER) run ./internal/tools/bigdiffer -recheck
 
 bigdiffer-test: prereq-go ## Run the bigdiffer tool's unit + full-corpus parity suite
 	$(GO_VER) test ./internal/tools/bigdiffer/... -timeout 20m
@@ -347,8 +356,11 @@ biglister: prereq-go ## List all resources and data sources
 
 .PHONY: all
 .PHONY: bigdiffer
+.PHONY: bigdiffer-check
 .PHONY: bigdiffer-docs
+.PHONY: bigdiffer-lint
 .PHONY: bigdiffer-reconcile
+.PHONY: bigdiffer-recheck
 .PHONY: bigdiffer-sync
 .PHONY: bigdiffer-test
 .PHONY: biglister
