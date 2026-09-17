@@ -61,11 +61,11 @@ func TestFullCorpusParity(t *testing.T) {
 
 	// Measure serial vs parallel to record the speedup; check the parallel output.
 	serialStart := time.Now()
-	_ = generateCorpus(cfg, rows, 1, nil)
+	_ = generateCorpus(cfg, rows, 1)
 	serialDur := time.Since(serialStart)
 
 	parStart := time.Now()
-	results := generateCorpus(cfg, rows, cfg.genConcurrency, nil)
+	results := generateCorpus(cfg, rows, cfg.genConcurrency)
 	parDur := time.Since(parStart)
 
 	var checked, drift, stale, genErrors int

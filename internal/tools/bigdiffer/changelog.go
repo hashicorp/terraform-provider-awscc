@@ -192,8 +192,8 @@ func changelogBulletRun(existing []string) (start, end int, ok bool) {
 	start, end = -1, -1
 	inRun := false
 	for i, line := range existing {
-		switch {
-		case line == "":
+		switch line {
+		case "":
 			continue // blank lines don't end a run; handled by the next non-blank check
 		default:
 			if _, bulletOK := parseChangelogBullet(line); bulletOK {

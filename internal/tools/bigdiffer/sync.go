@@ -167,7 +167,7 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, [
 	row := c.row
 	row.CloudFormationSchemaPath = stagedSchema // generate from the staged bytes
 
-	results := generateCorpus(cfg, []resourceRow{row}, 1, nil)
+	results := generateCorpus(cfg, []resourceRow{row}, 1)
 	results, err := reconcileListResource(cfg, results)
 	if err != nil {
 		return gateResult{}, nil, fmt.Errorf("regenerating resource for %s: %w", c.cfType, err)

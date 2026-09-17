@@ -225,7 +225,7 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 	t.Parallel()
 	cfg, rows := loadCorpus(t)
 	lg := logGroupRow(t, rows)
-	results := generateCorpus(cfg, []resourceRow{lg}, 1, nil)
+	results := generateCorpus(cfg, []resourceRow{lg}, 1)
 
 	reconciled, err := reconcileListResource(cfg, results)
 	if err != nil {

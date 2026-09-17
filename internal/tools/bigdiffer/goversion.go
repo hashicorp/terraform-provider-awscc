@@ -45,14 +45,17 @@ var goModVersionRE = regexp.MustCompile(`(?m)^go\s+(\S+)\s*$`)
 func verifyGoToolchain() error {
 	modPath, err := findGoMod()
 	if err != nil {
-		// go.mod is unreadable/unfindable — do not block the run on that; the
-		// compile gate will catch a genuinely broken environment regardless,
-		// and this check is a formatting-drift guard, not a hard requirement
-		// for bigdiffer to run at all.
+		//nolint:nilerr // go.mod is unreadable/unfindable — do not block the
+		// run on that; the compile gate will catch a genuinely broken
+		// environment regardless, and this check is a formatting-drift
+		// guard, not a hard requirement for bigdiffer to run at all.
 		return nil
 	}
 	modBytes, err := os.ReadFile(modPath)
 	if err != nil {
+		//nolint:nilerr // same tolerance as above: an unreadable go.mod
+		// should not block every bigdiffer command over an environment
+		// quirk this check was never meant to enforce.
 		return nil
 	}
 	m := goModVersionRE.FindSubmatch(modBytes)
