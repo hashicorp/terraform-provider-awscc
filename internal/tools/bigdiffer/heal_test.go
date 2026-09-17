@@ -171,16 +171,20 @@ func TestProbeArtifactIsolatesRecursiveSchema(t *testing.T) {
 	t.Parallel()
 	cfg, rows := loadCorpus(t)
 
+	// Any row whose resource is suppressed because generation overflowed the
+	// stack is a genuinely recursive schema. Pick one from the overlay instead of
+	// naming a type: the historical example (AWS::WAFv2::WebACL) now ships a
+	// depth-limited local schema that generates cleanly.
 	var recursive resourceRow
 	found := false
 	for _, r := range rows {
-		if r.CloudFormationTypeName == "AWS::WAFv2::WebACL" {
+		if strings.HasPrefix(r.SuppressionReasonResource, "generation_failed: runtime: goroutine stack exceeds") {
 			recursive, found = r, true
 			break
 		}
 	}
 	if !found {
-		t.Skip("AWS::WAFv2::WebACL not in overlay")
+		t.Skip("no stack-overflowing (recursive) schema in overlay")
 	}
 
 	path := recursive.CloudFormationSchemaPath
