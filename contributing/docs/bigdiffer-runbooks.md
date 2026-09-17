@@ -17,6 +17,8 @@ sequential steps of one bigger process:
 * [Adding an example or changing a doc template](#adding-an-example-or-changing-a-doc-template)
 * [Changing the codegen](#changing-the-codegen)
 * [Testing after a Go dependency or version bump](#testing-after-a-go-dependency-or-version-bump)
+* [Checking the overlay's bookkeeping](#checking-the-overlays-bookkeeping)
+* [Revisiting an old suppression or freeze](#revisiting-an-old-suppression-or-freeze)
 * [Fallback: the legacy process](#fallback-the-legacy-process)
 * [Reading the report](#reading-the-report)
 * [How it works](#how-it-works)
@@ -250,6 +252,72 @@ machinery change from bigdiffer's point of view, whether or not any of your
 own template/codegen code moved. Run `-reconcile` to land the (hopefully
 inert) regeneration, then commit — a real diff here is worth understanding
 before committing, since it means the bump changed what the provider emits.
+
+## Checking the overlay's bookkeeping
+
+The job: not "would regenerating break anything," but "is
+`all_schemas.hcl` itself consistent, sensible, and explained right now" —
+no live AWS check, no regeneration at all.
+
+```sh
+go run ./internal/tools/bigdiffer -lint
+```
+
+This re-sorts and re-formats the overlay against itself (no rows are added,
+since there is no discovery here) and fails if the committed file is not
+already exactly that normalized shape, if `registrations_gen.go` is stale
+relative to the overlay, or if any suppressed/frozen fact has no reason
+recorded. It also reports (advisory, not a failure) any row retained in the
+overlay with nothing explaining why it's still there. Offline, writes
+nothing — this is the check CI runs on every PR.
+
+If it fails on formatting/registration staleness, running `-sync` or
+`-reconcile` re-normalizes and re-emits both as a side effect of any real
+run; there is no separate "just fix the formatting" command, since
+`-lint`'s whole point is that the overlay should already be in the shape
+those commands leave it in. If it fails on a reason-less suppression/freeze,
+see [Revisiting an old suppression or freeze](#revisiting-an-old-suppression-or-freeze)
+below.
+
+## Revisiting an old suppression or freeze
+
+The job: something was marked broken, excluded, or frozen a while back —
+find out whether that's still true, or has quietly become fine, without
+guessing or trusting stale memory.
+
+```sh
+go run ./internal/tools/bigdiffer -recheck
+```
+
+By default this re-probes every suppressed/frozen fact that has **no**
+recorded reason (or one tagged `unknown`): a structural check first (does
+the schema shape still justify the suppression), then a real, isolated
+regeneration-and-compile attempt against the committed schema cache, then —
+for whatever's left — migrating any existing free-form comment into a
+proper reason rather than guessing one. Every result is a **proposal**,
+printed to the report; nothing is ever written to `all_schemas.hcl`
+automatically. Offline except reading the already-committed schema cache —
+no AWS, no live discovery.
+
+To revisit a decision that already has a real, specific reason recorded —
+not just the reason-less backlog — widen the scope:
+
+```sh
+go run ./internal/tools/bigdiffer -recheck -recheck-all
+```
+
+Useful after a schema-generating engine change, a suppression whose
+underlying AWS issue you believe was fixed, or a periodic audit of old
+freezes — `-recheck-all` re-probes everything active, including facts a
+human already explained, on the same "propose, never guess-and-write"
+terms.
+
+Review the proposals, then apply the ones you accept by hand-editing
+`all_schemas.hcl` (clearing `suppress_*_generation`/`frozen_since`, or just
+updating the `*_reason`/`frozen_reason` text) — `-recheck` never edits the
+file itself. See
+[suppressed-and-frozen.md](suppressed-and-frozen.md#-recheck-re-probe-and-fill-gaps)
+for the full reason taxonomy and exactly what each proposal category means.
 
 ## Fallback: the legacy process
 

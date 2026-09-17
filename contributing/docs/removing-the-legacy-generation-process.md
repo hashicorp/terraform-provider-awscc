@@ -45,7 +45,7 @@ boundary is what makes the deletions below safe. In scope:
   blank-import directive files. `internal/provider/registrations_gen.go` is
   bigdiffer's replacement and already carries every registration.
 - `internal/update/` — the legacy updater (`makes.go`, `changelog.go`,
-  `hcl_parser.go`, `github.go`, `main.go`), superseded by `bigdiffer -update`.
+  `hcl_parser.go`, `github.go`, `main.go`), superseded by `bigdiffer -sync`.
   It imports the legacy generators and `internal/naming`; nothing else imports
   it.
 - `internal/naming/` — the legacy naming/pluralization package. Once the two
@@ -128,7 +128,7 @@ on.
    `commitschemas`, `commitresources`, `commitdatas`, `commitdocs`.
    - Update the `all:` target (it lists `schemas resources
      singular-data-sources plural-data-sources … docs-all`, all being removed) —
-     redefine it in terms of `bigdiffer-generate` + `build`, or delete it.
+     redefine it in terms of `bigdiffer-reconcile` + `build`, or delete it.
    - Grep the `GNUmakefile` for any deleted target used as a dependency of one
      you're keeping, and fix those chains.
    - **Keep:** `build`, `test`, `testacc`, `lint`/`golangci-lint`/`importlint`,
@@ -178,8 +178,8 @@ on.
     (`go clean -testcache` first, including the rewritten `TestFullCorpusParity`
     and `TestCheckRegistrationUpToDate`), `-race -short`, `impi` with CI's actual
     flags (`impi --local . --scheme stdThirdPartyLocal --ignore-generated=true
-    ./...`), and offline `go run ./internal/tools/bigdiffer -generate` +
-    `-check`. A live `-update` run is optional here — it hits AWS (~13-minute
+    ./...`), and offline `go run ./internal/tools/bigdiffer -reconcile` +
+    `-check`. A live `-sync` run is optional here — it hits AWS (~13-minute
     crawl, needs credentials) and adds nothing the offline checks do not cover
     for a deletion-only change.
 

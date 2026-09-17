@@ -158,7 +158,7 @@ for the full reason taxonomy and `-recheck`.
   [bigdiffer-design.md](../../../contributing/docs/bigdiffer-design.md) — the
   model, the two gates, the policy table, settled design decisions, and the
   deferred-work list.
-- **Weekly runbook:**
+- **Runbooks:**
   [bigdiffer-runbooks.md](../../../contributing/docs/bigdiffer-runbooks.md) —
   task-oriented runbooks, plus the legacy fallback.
 - **Suppression/freeze spec:**
