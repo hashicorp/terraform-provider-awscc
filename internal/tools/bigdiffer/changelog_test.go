@@ -486,6 +486,123 @@ func TestWriteChangelogFragmentMergePreservesNotesAndOlderReleases(t *testing.T)
 	}
 }
 
+// TestWriteChangelogFragmentMergesAfterProviderNote covers the real-world
+// shape verified throughout CHANGELOG.md's history: a "provider: ..." note
+// always precedes the New Resource/Data Source/List Resource bullets within
+// the same FEATURES: section, never interleaved with them. A re-sync must
+// merge into the contiguous bullet run and leave the note itself completely
+// untouched, in its original position.
+func TestWriteChangelogFragmentMergesAfterProviderNote(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n" +
+		"* provider: Add `endpoints` argument\n" +
+		"* **New Data Source:** `awscc_alpha`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	entries := []changelogEntry{{kind: changelogNewResource, tfType: "awscc_beta"}}
+	if err := writeChangelogFragment(path, entries); err != nil {
+		t.Fatalf("writeChangelogFragment: %v", err)
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	want := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n" +
+		"* provider: Add `endpoints` argument\n" +
+		"* **New Data Source:** `awscc_alpha`\n" +
+		"* **New Resource:** `awscc_beta`\n"
+	if string(got) != want {
+		t.Errorf("mismatch:\ngot:\n%s\nwant:\n%s", got, want)
+	}
+}
+
+// TestWriteChangelogFragmentRefusesScatteredBullets confirms that when
+// recognized bullets appear in more than one separate run — split apart by
+// unrecognized content in between, an arrangement never observed in real
+// history but not impossible to construct by hand — the merge is refused
+// rather than guessing which run is "the new-artifacts list."
+func TestWriteChangelogFragmentRefusesScatteredBullets(t *testing.T) {
+	t.Parallel()
+
+	path := filepath.Join(t.TempDir(), "CHANGELOG.md")
+	original := "## 1.100.0 (Unreleased)\n\nFEATURES:\n\n" +
+		"* **New Resource:** `awscc_alpha`\n" +
+		"* provider: a note stuck in the middle.\n" +
+		"* **New Resource:** `awscc_gamma`\n"
+	if err := os.WriteFile(path, []byte(original), filePerm); err != nil {
+		t.Fatalf("seeding CHANGELOG.md: %v", err)
+	}
+
+	entries := []changelogEntry{{kind: changelogNewResource, tfType: "awscc_beta"}}
+	if err := writeChangelogFragment(path, entries); err == nil {
+		t.Fatal("want an error for scattered (non-contiguous) recognized bullets, got nil")
+	}
+
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	if string(got) != original {
+		t.Errorf("file was modified despite the error: got %q, want unchanged %q", got, original)
+	}
+}
+
+// TestChangelogBulletRunFindsSingleRun is a direct unit test of
+// changelogBulletRun's boundary behavior: no bullets, one contiguous run
+// (with a tolerated blank line inside it), a run preceded by unrecognized
+// content, and two separate runs (refused).
+func TestChangelogBulletRunFindsSingleRun(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		name    string
+		lines   []string
+		wantOK  bool
+		wantLen int // number of non-blank bullets expected in the run, only checked if wantOK
+	}{
+		{name: "no bullets at all", lines: []string{"* provider: just a note."}, wantOK: false},
+		{
+			name:    "single contiguous run",
+			lines:   []string{"* **New Resource:** `awscc_a`", "* **New Resource:** `awscc_b`"},
+			wantOK:  true,
+			wantLen: 2,
+		},
+		{
+			name: "run preceded by a note",
+			lines: []string{
+				"* provider: a note.",
+				"* **New Resource:** `awscc_a`",
+			},
+			wantOK:  true,
+			wantLen: 1,
+		},
+		{
+			name: "two separate runs split by a note",
+			lines: []string{
+				"* **New Resource:** `awscc_a`",
+				"* provider: a note in between.",
+				"* **New Resource:** `awscc_b`",
+			},
+			wantOK: false,
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			start, end, ok := changelogBulletRun(tc.lines)
+			if ok != tc.wantOK {
+				t.Fatalf("changelogBulletRun(%v) ok = %v, want %v", tc.lines, ok, tc.wantOK)
+			}
+			if ok && end-start != tc.wantLen {
+				t.Errorf("changelogBulletRun(%v) run length = %d, want %d", tc.lines, end-start, tc.wantLen)
+			}
+		})
+	}
+}
+
 // TestParseChangelogBulletRejectsUnrecognized confirms parseChangelogBullet
 // is strict about the exact syntax — anything not byte-for-byte
 // formatChangelogFragment's own output (a missing backtick, prose, a

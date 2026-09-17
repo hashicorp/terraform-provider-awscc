@@ -134,11 +134,13 @@ added.
 
 Running `-sync` again within the same still-open cycle (no release cut in
 between) is safe: the new run's bullets merge into the top block's
-`FEATURES:` section — deduplicated, re-sorted — rather than requiring a
-release between every sync. If that section has anything that isn't one of
-bigdiffer's own bullets (a hand-written note, an older-style entry),
-`-sync` still errors rather than guess how to merge; add the new bullets by
-hand in that case.
+`FEATURES:` section's existing contiguous run of recognized bullets —
+deduplicated, re-sorted — rather than requiring a release between every
+sync. A `provider: ...` note ahead of the bullets (the common shape
+throughout `CHANGELOG.md`'s history) is left exactly where it was. Only if
+the recognized bullets are split into more than one group by unrecognized
+content in between does `-sync` still error rather than guess which group to
+merge into; add the new bullets by hand in that case.
 
 ### 5. Commit and open a pull request
 

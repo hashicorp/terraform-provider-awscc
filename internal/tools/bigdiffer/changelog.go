@@ -176,17 +176,70 @@ func parseChangelogBullet(line string) (changelogEntry, bool) {
 	return changelogEntry{kind: changelogKind(m[1]), tfType: m[2]}, true
 }
 
-// mergeChangelogBullets parses existing (the current FEATURES: section's
-// lines, sans the "FEATURES:" label itself) and merges it with newEntries,
-// deduplicating on (kind, tfType) and re-sorting by sortChangelogEntries'
-// convention. ok is false, and merged is nil, the moment any line in
-// existing fails to parse as a recognized bullet (parseChangelogBullet) —
-// the caller must fall back to erroring rather than guessing at a partial
-// merge. A blank line is tolerated (it separates the section from whatever
-// preceded the FEATURES: label, or is simply a stray blank -- either way,
-// skipping it loses nothing, since sortChangelogEntries+formatChangelogFragment
-// re-render the section's spacing from scratch regardless).
-func mergeChangelogBullets(existing []string, newEntries []changelogEntry) (merged []changelogEntry, ok bool) {
+// changelogBulletRun locates the maximal contiguous run of recognized
+// bullets (parseChangelogBullet) within existing (the current FEATURES:
+// section's lines, sans the "FEATURES:" label itself), tolerating blank
+// lines inside the run. ok is false if existing has no recognized bullets
+// at all, or has recognized bullets in more than one separate run (i.e.
+// non-recognized content — a hand-written note, an older-style entry —
+// appears both before and after some recognized bullets, or recognized runs
+// are separated by non-recognized content in between): with the bullets
+// scattered, it is ambiguous which run represents "the new-artifacts list"
+// bigdiffer should merge into, so the caller must refuse rather than guess.
+// start and end are indices into existing such that existing[start:end] is
+// exactly the run (blank lines at its edges are trimmed out of the range).
+func changelogBulletRun(existing []string) (start, end int, ok bool) {
+	start, end = -1, -1
+	inRun := false
+	for i, line := range existing {
+		switch {
+		case line == "":
+			continue // blank lines don't end a run; handled by the next non-blank check
+		default:
+			if _, bulletOK := parseChangelogBullet(line); bulletOK {
+				if start == -1 {
+					start = i
+				} else if !inRun {
+					// A recognized bullet after a prior run had already
+					// closed (by hitting unrecognized content) means two
+					// separate runs — ambiguous.
+					return 0, 0, false
+				}
+				end = i + 1
+				inRun = true
+			} else if start != -1 {
+				// Unrecognized content after a run has started: closes
+				// that run. A further recognized bullet after this point
+				// triggers the ambiguity check above.
+				inRun = false
+			}
+		}
+	}
+	if start == -1 {
+		return 0, 0, false
+	}
+	return start, end, true
+}
+
+// mergeChangelogBullets locates the single contiguous run of recognized
+// bullets (changelogBulletRun) within existing (the current FEATURES:
+// section's lines, sans the "FEATURES:" label itself) and merges it with
+// newEntries, deduplicating on (kind, tfType) and re-sorting by
+// sortChangelogEntries' convention. ok is false, and merged/runStart/runEnd
+// are zero, if existing has no recognized bullets or has them scattered
+// across more than one run — the caller must fall back to erroring rather
+// than guessing at a partial merge. runStart/runEnd (indices into existing)
+// tell the caller exactly which lines the run occupied, so only that run —
+// not the whole section — gets replaced; any non-bullet content before or
+// after the run (e.g. a "provider: ..." note, always observed to precede
+// the bullets in real CHANGELOG.md history, never interleaved with them) is
+// left in place untouched.
+func mergeChangelogBullets(existing []string, newEntries []changelogEntry) (merged []changelogEntry, runStart, runEnd int, ok bool) {
+	runStart, runEnd, ok = changelogBulletRun(existing)
+	if !ok {
+		return nil, 0, 0, false
+	}
+
 	seen := make(map[changelogEntry]bool)
 	add := func(e changelogEntry) {
 		if !seen[e] {
@@ -194,21 +247,18 @@ func mergeChangelogBullets(existing []string, newEntries []changelogEntry) (merg
 			merged = append(merged, e)
 		}
 	}
-	for _, line := range existing {
+	for _, line := range existing[runStart:runEnd] {
 		if line == "" {
 			continue
 		}
-		entry, entryOK := parseChangelogBullet(line)
-		if !entryOK {
-			return nil, false
-		}
+		entry, _ := parseChangelogBullet(line) // guaranteed ok by changelogBulletRun
 		add(entry)
 	}
 	for _, e := range newEntries {
 		add(e)
 	}
 	sortChangelogEntries(merged)
-	return merged, true
+	return merged, runStart, runEnd, true
 }
 
 // insertChangelogFeatures inserts entries as a FEATURES: section into
@@ -219,24 +269,30 @@ func mergeChangelogBullets(existing []string, newEntries []changelogEntry) (merg
 // section goes directly after NOTES: (or directly after the "## " heading
 // line if there is no NOTES:) and before BUG FIXES:/the next heading.
 //
-// If the block already has a non-empty FEATURES: section, and every one of
-// its lines is a recognized bullet (parseChangelogBullet), the existing
-// entries are merged with the new ones — deduplicated on (kind, tfType) via
+// If the block already has a non-empty FEATURES: section, and that section
+// contains a single contiguous run of recognized bullets
+// (parseChangelogBullet/changelogBulletRun) — whether that run is the whole
+// section or just part of it, e.g. following a "provider: ..." note, the
+// real-world shape observed throughout CHANGELOG.md's history — that run's
+// entries are merged with the new ones (deduplicated on (kind, tfType) via
 // the identical seen-set changelogEntries itself uses, then re-sorted by the
-// same convention — rather than erroring, so a second -sync within the same
-// still-open release cycle (a genuinely common case: nothing requires a
-// release to cut between every sync) accumulates correctly instead of
-// blocking on a manual merge every time. This is safe specifically because
-// every recognized bullet round-trips losslessly through changelogEntry — a
-// merged, re-sorted, re-rendered section is byte-for-byte what a single
+// same convention) and only that run is replaced; anything else in the
+// section (the note, blank lines) stays exactly where it was. This lets a
+// second -sync within the same still-open release cycle (a genuinely common
+// case: nothing requires a release to cut between every sync) accumulate
+// correctly instead of blocking on a manual merge every time. This is safe
+// specifically because every recognized bullet round-trips losslessly
+// through changelogEntry — the replaced run is byte-for-byte what a single
 // -sync run producing the union of both entry sets would have written, not
 // an approximation.
 //
-// If the existing section has anything else at all — a hand-written note,
-// an older release's prose-style bullet, blank separator lines beyond the
-// header — the merge is refused and this still errors exactly as before:
-// mixed recognized/unrecognized content cannot be safely reconstructed from
-// parsed parts alone, and guessing risks corrupting a human-owned file.
+// The merge is refused, and this errors exactly as the pre-merge behavior
+// did, if the section's recognized bullets are not all contiguous (e.g. a
+// note sits between two separate bullet groups, or one appears both before
+// and after some bullets) — with the bullets scattered, it is ambiguous
+// which run represents "the new-artifacts list," and guessing risks
+// corrupting a human-owned file. A section with no recognized bullets at
+// all (pure prose) is refused the same way.
 func insertChangelogFeatures(content string, entries []changelogEntry) (string, error) {
 	lines := strings.Split(content, "\n")
 
@@ -260,30 +316,26 @@ func insertChangelogFeatures(content string, entries []changelogEntry) (string, 
 		}
 		existing := block[idx+1 : end]
 		if !allBlank(existing) {
-			merged, ok := mergeChangelogBullets(existing, entries)
+			merged, runStart, runEnd, ok := mergeChangelogBullets(existing, entries)
 			if !ok {
 				return "", fmt.Errorf("top version block already has a non-empty FEATURES: section " +
-					"with unrecognized content (not bigdiffer's own bullet syntax); merge the new entries by hand")
+					"with unrecognized content (not bigdiffer's own bullet syntax) that isn't a single " +
+					"contiguous run of recognized bullets; merge the new entries by hand")
 			}
-			entries = merged
-			// Splice the merged, re-rendered section over the existing
-			// FEATURES: bullets in place, then fall through to the normal
-			// "insert a fresh FEATURES: section" path below with an empty
-			// existing section (rewritten headingIdx/blockEnd/block to
-			// reflect the splice) — reusing one insertion code path for
-			// both the empty and non-empty cases rather than duplicating
-			// the NOTES:-skip logic.
-			absoluteIdx := headingIdx + 1 + idx
-			absoluteEnd := headingIdx + 1 + end
-			newLines := make([]string, 0, len(lines)-(absoluteEnd-absoluteIdx))
-			newLines = append(newLines, lines[:absoluteIdx]...)
-			newLines = append(newLines, lines[absoluteEnd:]...)
-			lines = newLines
-			headingIdx = slices.IndexFunc(lines, func(l string) bool { return strings.HasPrefix(l, "## ") })
-			blockEnd = len(lines)
-			if next := slices.IndexFunc(lines[headingIdx+1:], func(l string) bool { return strings.HasPrefix(l, "## ") }); next != -1 {
-				blockEnd = headingIdx + 1 + next
-			}
+			// Replace only the recognized-bullet run (existing[runStart:runEnd])
+			// with the merged, re-sorted, re-rendered bullets — anything before
+			// or after the run (e.g. a "provider: ..." note, or blank lines)
+			// stays exactly where it was, byte-for-byte. Since this fully
+			// satisfies the FEATURES: section already, return directly rather
+			// than falling through to the fresh-section insertion path below.
+			fragment := strings.Split(strings.TrimSuffix(strings.TrimPrefix(formatChangelogFragment(merged), "FEATURES:\n\n"), "\n"), "\n")
+			absoluteStart := headingIdx + 1 + idx + 1 + runStart
+			absoluteEnd := headingIdx + 1 + idx + 1 + runEnd
+			out := make([]string, 0, len(lines)-(absoluteEnd-absoluteStart)+len(fragment))
+			out = append(out, lines[:absoluteStart]...)
+			out = append(out, fragment...)
+			out = append(out, lines[absoluteEnd:]...)
+			return strings.Join(out, "\n"), nil
 		}
 	}
 
