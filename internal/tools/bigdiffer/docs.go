@@ -57,7 +57,17 @@ func generateImportExampleDocs(importExamplesPath, examplesDir string) (int, err
 	if err != nil {
 		return 0, err
 	}
+	return writeImportExampleDocs(examples, examplesDir)
+}
 
+// writeImportExampleDocs is generateImportExampleDocs' shared write core,
+// factored out so item 2's full-tier docs check (docs_full_check.go) can
+// render straight from an in-memory []codegen.ImportExample — the same slice
+// buildImportExamples (emit.go) derives from a projected row set — into a
+// scratch directory, without a round trip through import_examples_gen.json on
+// disk (there may not even be a committed copy worth trusting yet; that
+// freshness question is item 2's cheap tier's job, a separate check).
+func writeImportExampleDocs(examples []codegen.ImportExample, examplesDir string) (int, error) {
 	written := 0
 	for _, ex := range examples {
 		files, err := codegen.GenerateImportExampleDocs(ex)

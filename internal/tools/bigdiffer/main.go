@@ -34,11 +34,16 @@
 //     read-only end to end. Reports every failure, then exits non-zero on any
 //     failure or on any regenerated output that differs from the committed
 //     files even though it compiles (an engine change that was never
-//     -reconcile'd and committed). A non-engine PR touches no
-//     template/codegen/naming path, so regeneration is a no-op and -check
-//     passes with zero diff; an engine PR must -reconcile and commit until
-//     -check is clean. Replaces TestFullCorpusParity's guard role once the
-//     legacy engine retires (bigdiffer-design.md §10).
+//     -reconcile'd and committed). Also checks that import_examples_gen.json
+//     matches what the current row set would produce, unconditionally; pass
+//     -check-docs-full to additionally render the registry docs themselves
+//     (via a real built binary — markedly heavier, opt-in until proven
+//     fast/stable enough for every PR) and diff against committed docs/. A
+//     non-engine PR touches no template/codegen/naming path, so regeneration
+//     is a no-op and -check passes with zero diff; an engine PR must
+//     -reconcile and commit until -check is clean. Replaces
+//     TestFullCorpusParity's guard role once the legacy engine retires
+//     (bigdiffer-design.md §10).
 //   - -docs: owns import-example docs generation from import_examples_gen.json,
 //     then orchestrates terraform fmt + tfplugindocs generate. -sync and
 //     -reconcile already run this as their last step by default; use -docs
@@ -107,6 +112,7 @@ func main() {
 		sync           = flag.Bool("sync", false, "live weekly incremental: discover, refresh only changed types from fresh bytes, apply policy to the overlay, write cache + aggregates (needs AWS, us-east-1)")
 		reconcile      = flag.Bool("reconcile", false, "regenerate the whole provider offline from the committed overlay + schema cache through the same gate -sync uses, and promote the clean result (no AWS; fails the run on any machinery regression)")
 		check          = flag.Bool("check", false, "reconcile's pipeline with promotion off: report every failure, exit non-zero on any failure or on any regenerated output that differs from committed (no AWS; writes nothing)")
+		checkDocsFull  = flag.Bool("check-docs-full", false, "with -check: also render the registry docs (tfplugindocs, via a real built binary) and diff against committed docs/ — heavier than -check's default checks, opt-in until proven fast/stable enough for every PR")
 		docs           = flag.Bool("docs", false, "regenerate documentation: own import-example docs from import_examples_gen.json, then orchestrate terraform fmt + tfplugindocs")
 		noDocs         = flag.Bool("no-docs", false, "with -sync/-reconcile: skip the trailing documentation step for a fast codegen inner loop (run -docs separately before committing)")
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
@@ -141,7 +147,7 @@ func main() {
 		return
 	}
 
-	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *docs, *noDocs, *recheck, *recheckAll); err != nil {
+	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *checkDocsFull, *docs, *noDocs, *recheck, *recheckAll); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
@@ -151,14 +157,14 @@ func main() {
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, docs, noDocs, recheck, recheckAll bool) error {
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) error {
 	switch {
 	case sync:
 		return runSync(context.Background(), allSchemasPath, checkoutPath, noDocs)
 	case reconcile:
 		return runReconcile(context.Background(), allSchemasPath, checkoutPath, noDocs)
 	case check:
-		return runCheck(context.Background(), allSchemasPath, checkoutPath)
+		return runCheck(context.Background(), allSchemasPath, checkoutPath, checkDocsFull)
 	case docs:
 		cfg, _, err := loadOverlay(allSchemasPath)
 		if err != nil {

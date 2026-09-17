@@ -6,9 +6,11 @@ package main
 import (
 	"context"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 )
 
 // writeFile is a small test helper: creates path (and its parent dirs) with
@@ -235,6 +237,129 @@ func TestDiffImportExamplesDetectsMissingCommittedFile(t *testing.T) {
 	}
 }
 
+// TestDiffDocsTreesNoDiff confirms a rendered tree byte-identical to the
+// committed docs/ it mirrors produces zero diffs — diffDocsTrees' own logic,
+// exercised on a cheap synthetic tree rather than a real provider build
+// (that full exercise is TestDiffRenderedDocsNoDiff, below).
+func TestDiffDocsTreesNoDiff(t *testing.T) {
+	t.Parallel()
+
+	renderedDir := t.TempDir()
+	docsDir := t.TempDir()
+
+	writeFile(t, filepath.Join(renderedDir, "resources", "thing.md"), "# thing\n")
+	writeFile(t, filepath.Join(docsDir, "resources", "thing.md"), "# thing\n")
+
+	cfg := config{docsDir: docsDir, repoRoot: filepath.Dir(docsDir)}
+	diffs, err := diffDocsTrees(cfg, renderedDir)
+	if err != nil {
+		t.Fatalf("diffDocsTrees: %v", err)
+	}
+	if len(diffs) != 0 {
+		t.Errorf("want 0 diffs, got %v", diffs)
+	}
+}
+
+// TestDiffDocsTreesDetectsByteDiff confirms a rendered file whose bytes
+// differ from the committed file it mirrors is reported — the "engine or
+// docs-template change not yet -reconcile'd/-docs'd and committed" case the
+// full tier exists to catch.
+func TestDiffDocsTreesDetectsByteDiff(t *testing.T) {
+	t.Parallel()
+
+	renderedDir := t.TempDir()
+	docsDir := t.TempDir()
+
+	writeFile(t, filepath.Join(renderedDir, "resources", "thing.md"), "# thing (new template output)\n")
+	writeFile(t, filepath.Join(docsDir, "resources", "thing.md"), "# thing (old template output)\n")
+
+	cfg := config{docsDir: docsDir, repoRoot: filepath.Dir(docsDir)}
+	diffs, err := diffDocsTrees(cfg, renderedDir)
+	if err != nil {
+		t.Fatalf("diffDocsTrees: %v", err)
+	}
+	if len(diffs) != 1 {
+		t.Fatalf("want exactly 1 diff, got %v", diffs)
+	}
+}
+
+// TestDiffDocsTreesDetectsMissingCommitted confirms a rendered file with no
+// committed counterpart at all is still reported as a diff — there is
+// genuinely new documentation to -reconcile/-docs and commit, not a false
+// "no diff."
+func TestDiffDocsTreesDetectsMissingCommitted(t *testing.T) {
+	t.Parallel()
+
+	renderedDir := t.TempDir()
+	docsDir := t.TempDir()
+
+	writeFile(t, filepath.Join(renderedDir, "resources", "newly_recovered.md"), "# newly recovered\n")
+	// Deliberately nothing written under docsDir for this file.
+
+	cfg := config{docsDir: docsDir, repoRoot: filepath.Dir(docsDir)}
+	diffs, err := diffDocsTrees(cfg, renderedDir)
+	if err != nil {
+		t.Fatalf("diffDocsTrees: %v", err)
+	}
+	if len(diffs) != 1 {
+		t.Fatalf("want exactly 1 diff (the file with no committed counterpart), got %v", diffs)
+	}
+}
+
+// TestDiffRenderedDocsNoDiff confirms the full-tier docs check
+// (contributing/docs/docs-pipeline-punchlist.md item 2) renders byte-identical
+// docs against the real, untouched corpus: builds a real provider binary
+// from the staged tree, extracts its schema via a real `terraform providers
+// schema -json` call, and renders through tfplugindocs — exercising the
+// whole extraction + render + diff path end to end, not a synthetic tree.
+// Requires `terraform` and `tfplugindocs` on PATH (both installed by
+// `make tools`); skipped if either is missing, and in -short mode regardless
+// (a real go build of the whole provider plus a schema-extraction call is
+// the heaviest single check in the whole bigdiffer suite).
+func TestDiffRenderedDocsNoDiff(t *testing.T) {
+	if testing.Short() {
+		t.Skip("builds a real provider binary and extracts its schema; run without -short")
+	}
+	if _, err := exec.LookPath("terraform"); err != nil {
+		t.Skip("terraform not on PATH")
+	}
+	if _, err := exec.LookPath("tfplugindocs"); err != nil {
+		t.Skip("tfplugindocs not on PATH")
+	}
+
+	cfg, rows := loadCorpus(t)
+	overlayContent, err := os.ReadFile(cfg.overlayPath)
+	if err != nil {
+		t.Fatalf("reading overlay: %v", err)
+	}
+	checkout, err := parseCheckout(defaultCheckout)
+	if err != nil {
+		t.Fatalf("parsing checkout: %v", err)
+	}
+
+	cands, _, _ := reconcileCandidates(rows, cfg.cacheDir)
+	settled, err := settleBatch(context.Background(), cfg, cands, nil, string(overlayContent), rows, checkout, todayString())
+	if err != nil {
+		t.Fatalf("settleBatch: %v", err)
+	}
+	defer func() { _ = os.RemoveAll(settled.stagingDir) }()
+
+	projected, err := projectRows(string(overlayContent), rows, checkout, settled.decisions)
+	if err != nil {
+		t.Fatalf("projectRows: %v", err)
+	}
+
+	start := time.Now()
+	diffs, err := diffRenderedDocs(context.Background(), cfg, settled.stagingDir, projected)
+	if err != nil {
+		t.Fatalf("diffRenderedDocs: %v", err)
+	}
+	t.Logf("diffRenderedDocs against the untouched corpus took %s", time.Since(start).Round(time.Second))
+	if len(diffs) != 0 {
+		t.Errorf("want 0 diffs against the untouched, committed corpus, got %d:\n%s", len(diffs), strings.Join(diffs, "\n"))
+	}
+}
+
 // TestRunCheckAgainstRealRepo is check's own end-to-end wiring test, run
 // against the real committed corpus -- feasible here in a way
 // TestRunReconcile never was (see run_reconcile_test.go's doc comment for
@@ -273,7 +398,7 @@ func TestRunCheckAgainstRealRepo(t *testing.T) {
 	}
 
 	t.Run("clean pass", func(t *testing.T) {
-		if err := runCheck(context.Background(), allSchemasPath, defaultCheckout); err != nil {
+		if err := runCheck(context.Background(), allSchemasPath, defaultCheckout, false); err != nil {
 			t.Fatalf("runCheck on an untouched corpus: %v", err)
 		}
 	})
@@ -327,7 +452,7 @@ func TestRunCheckAgainstRealRepo(t *testing.T) {
 			t.Fatalf("corrupting %s: %v", path, err)
 		}
 
-		err = runCheck(context.Background(), allSchemasPath, defaultCheckout)
+		err = runCheck(context.Background(), allSchemasPath, defaultCheckout, false)
 		if err == nil {
 			t.Fatalf("runCheck did not detect a corrupted, committed file at %s for %s", path, target.CloudFormationTypeName)
 		}

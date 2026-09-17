@@ -27,7 +27,18 @@ import (
 // non-engine PR touches no template/codegen/naming path, so regeneration is
 // a no-op and check passes with zero diff; an engine PR must run -reconcile
 // and commit the result until check is clean.
-func runCheck(ctx context.Context, allSchemasPath, checkoutPath string) error {
+//
+// fullDocs (the -check-docs-full flag) additionally renders the registry
+// docs themselves (tfplugindocs, via a real built binary extracted from the
+// staged tree) and diffs them against committed docs/
+// (contributing/docs/docs-pipeline-punchlist.md item 2, the full tier).
+// Off by default: it is markedly heavier than everything else -check does
+// (a real `go build` of the whole provider plus a `terraform providers
+// schema -json` call, vs. -check's otherwise offline, no-extra-build
+// diffing), so it stays opt-in until proven fast/stable enough to run on
+// every PR — the cheap tier (import_examples_gen.json freshness) already
+// runs unconditionally and is what -check's CI wiring (item 5) uses today.
+func runCheck(ctx context.Context, allSchemasPath, checkoutPath string, fullDocs bool) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -120,6 +131,28 @@ func runCheck(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("checking import examples freshness: %w", err)
 	} else if diff != "" {
 		problems = append(problems, diff)
+	}
+
+	// Docs freshness, full tier (contributing/docs/docs-pipeline-punchlist.md
+	// item 2), opt-in via -check-docs-full: renders the registry docs
+	// themselves (tfplugindocs, via a real built binary extracted from the
+	// staged tree — docs_full_check.go) and diffs against committed docs/.
+	// Deliberately last: it is the heaviest of every check -check runs (a
+	// real go build of the whole provider plus a terraform providers
+	// schema -json call), so every cheaper, offline check above gets a
+	// chance to fail first and skip paying for it.
+	if fullDocs {
+		rows, err := projectRows(string(overlayContent), overlayRows, checkout, settled.decisions)
+		if err != nil {
+			return fmt.Errorf("projecting rows for the full-tier docs check: %w", err)
+		}
+		diffs, err := diffRenderedDocs(ctx, cfg, settled.stagingDir, rows)
+		if err != nil {
+			return fmt.Errorf("checking rendered docs freshness: %w", err)
+		}
+		if len(diffs) > 0 {
+			problems = append(problems, fmt.Sprintf("%d rendered doc file(s) differ from committed output (engine or docs-template change not yet -reconcile'd/-docs'd and committed):\n  %s", len(diffs), strings.Join(diffs, "\n  ")))
+		}
 	}
 
 	if len(problems) > 0 {
