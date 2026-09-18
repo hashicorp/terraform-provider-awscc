@@ -57,7 +57,17 @@ func generateImportExampleDocs(importExamplesPath, examplesDir string) (int, err
 	if err != nil {
 		return 0, err
 	}
+	return writeImportExampleDocs(examples, examplesDir)
+}
 
+// writeImportExampleDocs is generateImportExampleDocs' shared write core,
+// factored out so item 2's full-tier docs check (docs_full_check.go) can
+// render straight from an in-memory []codegen.ImportExample — the same slice
+// buildImportExamples (emit.go) derives from a projected row set — into a
+// scratch directory, without a round trip through import_examples_gen.json on
+// disk (there may not even be a committed copy worth trusting yet; that
+// freshness question is item 2's cheap tier's job, a separate check).
+func writeImportExampleDocs(examples []codegen.ImportExample, examplesDir string) (int, error) {
 	written := 0
 	for _, ex := range examples {
 		files, err := codegen.GenerateImportExampleDocs(ex)
@@ -76,6 +86,34 @@ func generateImportExampleDocs(importExamplesPath, examplesDir string) (int, err
 		}
 	}
 	return written, nil
+}
+
+// runDocsTail is the docs step of the shared sync/reconcile post-promote tail
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline"): by default it runs runDocs right after code promotion, so a
+// maintainer no longer has to remember a separate -docs pass — the same
+// silent-drift class the command redesign already closed for code. noDocs
+// (the -no-docs flag) skips it for a fast codegen inner loop, since
+// tfplugindocs on the whole provider is slow.
+//
+// A docs failure here is never a broken commit: promotion (code, cache,
+// overlay, aggregates) has already completed by the time this runs, and
+// bigdiffer never commits on its own, so the failure surfaces as a loud,
+// recoverable error over an otherwise-valid, uncommitted working tree — the
+// promoted code changes are left exactly as they are (they are valid; only
+// docs failed) rather than rolled back, and the error message points
+// directly at the fix: re-run `-docs` alone once the underlying problem
+// (a missing tool, a template bug) is resolved, with no need to redo the
+// whole pipeline.
+func runDocsTail(cfg config, noDocs bool) error {
+	if noDocs {
+		infof("Skipping documentation (-no-docs): run `go run ./internal/tools/bigdiffer -docs` before committing.")
+		return nil
+	}
+	if err := runDocs(cfg); err != nil {
+		return fmt.Errorf("code regenerated and promoted successfully; documentation failed: %w\n(no need to redo the pipeline — fix the problem above, then re-run `go run ./internal/tools/bigdiffer -docs` alone to finish)", err)
+	}
+	return nil
 }
 
 // runDocs runs the full documentation pipeline: own docs-import, then orchestrate
@@ -105,7 +143,7 @@ func runDocs(cfg config) error {
 		return fmt.Errorf("tfplugindocs: %w", err)
 	}
 	stepf("Done: documentation regenerated.")
-	infof("Add the PR link and any NOTES: to the CHANGELOG.md entry -update just drafted, update version/VERSION, then commit.")
+	infof("Add the PR link and any NOTES: to the CHANGELOG.md entry -sync just drafted, update version/VERSION, then commit.")
 	return nil
 }
 

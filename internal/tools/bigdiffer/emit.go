@@ -47,27 +47,6 @@ func writeArtifact(cfg config, r genResult) error {
 	return nil
 }
 
-// writeCorpus writes each generated artifact's code and test file to
-// cfg.outputRoot/<pathSuffix>/<file>, creating directories as needed. Returns the
-// number of files written. A generate error in any result aborts before writing
-// it (never write partial/failed output over good files). Used by the offline
-// full-corpus path (-generate), where every type in the committed overlay is
-// expected to generate cleanly and a failure is exceptional; the live
-// incremental path (-update) promotes per-artifact instead (refreshCandidate).
-func writeCorpus(cfg config, results []genResult) (int, error) {
-	written := 0
-	for _, r := range results {
-		if r.err != nil {
-			return written, fmt.Errorf("%s %s: %w", r.p.cfType, r.a.kind, r.err)
-		}
-		if err := writeArtifact(cfg, r); err != nil {
-			return written, err
-		}
-		written += 2
-	}
-	return written, nil
-}
-
 const registrationHeader = `// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
@@ -123,12 +102,14 @@ func emitRegistration(cfg config, rows []resourceRow) ([]byte, error) {
 	return formatted, nil
 }
 
-// emitImportExamples renders import_examples_gen.json: one entry per resource
-// that generates a resource artifact, carrying its primary-identifier names (the
-// raw, non-snake-cased names, as the legacy aggregate uses) and its
-// list-resource flag. Mirrors schema/main.go's GenerateResourceImportExamples,
-// which likewise re-derives the identifiers via the template data.
-func emitImportExamples(cfg config, rows []resourceRow) ([]byte, error) {
+// buildImportExamples derives the []codegen.ImportExample slice for rows —
+// the shared core emitImportExamples (the JSON aggregate) and
+// renderImportExampleDocs (the rendered .tf/.sh files, item 2's full-tier docs
+// check) both build on, so the two never drift into two different notions of
+// "what an import example is" for the same row set. Mirrors schema/main.go's
+// GenerateResourceImportExamples, which likewise re-derives the identifiers
+// via the template data.
+func buildImportExamples(cfg config, rows []resourceRow) ([]codegen.ImportExample, error) {
 	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
 
 	var examples []codegen.ImportExample
@@ -165,6 +146,17 @@ func emitImportExamples(cfg config, rows []resourceRow) ([]byte, error) {
 			Identifier:           identifier,
 		})
 	}
+	return examples, nil
+}
 
+// emitImportExamples renders import_examples_gen.json: one entry per resource
+// that generates a resource artifact, carrying its primary-identifier names (the
+// raw, non-snake-cased names, as the legacy aggregate uses) and its
+// list-resource flag.
+func emitImportExamples(cfg config, rows []resourceRow) ([]byte, error) {
+	examples, err := buildImportExamples(cfg, rows)
+	if err != nil {
+		return nil, err
+	}
 	return codegen.GenerateImportExamples(examples)
 }

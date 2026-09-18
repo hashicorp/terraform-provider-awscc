@@ -11,9 +11,14 @@ GO_VER              ?= go
 # between Go releases, and GOTOOLCHAIN=auto will not downgrade a newer local Go, so
 # formatting-sensitive targets (bigdiffer-*, the legacy generators, and the parity
 # test in `make test`) would otherwise drift. Sourced from the go.mod `go` directive
-# (e.g. `go 1.26.6` -> `go1.26.6`); falls back to auto if it cannot be read. Exported
+# (e.g. `go 1.26.8` -> `go1.26.8`); falls back to auto if it cannot be read. Exported
 # below so it reaches every recipe; override via the environment, e.g.
 # `GOTOOLCHAIN=go1.27.1 make test`.
+#
+# This pin only takes effect through `make`; bigdiffer -sync/-reconcile/-check
+# also verify their own running toolchain directly (goversion.go), as a
+# backstop for a contributor invoking `go run ./internal/tools/bigdiffer ...`
+# without going through a make target at all.
 GOTOOLCHAIN_PIN     := $(or $(addprefix go,$(shell sed -n 's/^go //p' go.mod)),auto)
 GOTOOLCHAIN         ?= $(GOTOOLCHAIN_PIN)
 export GOTOOLCHAIN
@@ -25,8 +30,8 @@ all: schemas resources singular-data-sources plural-data-sources build docs-all 
 # NOTE: The schema/generation targets below (schemas, resources,
 # singular-data-sources, plural-data-sources, cleanschemas, suppressions,
 # biglister, docs-*) are the LEGACY generation path. The current weekly process
-# uses `go run ./internal/tools/bigdiffer -update` (+ `-docs`); see
-# contributing/docs/generating-the-provider-with-bigdiffer.md. These targets are
+# uses `go run ./internal/tools/bigdiffer -sync` (+ `-docs`); see
+# contributing/docs/bigdiffer-runbooks.md. These targets are
 # retained as a fallback and are slated for removal after a few clean cycles.
 
 help: ## Display this help
@@ -35,14 +40,23 @@ help: ## Display this help
 build: prereq-go ## Build the provider
 	$(GO_VER) install
 
-bigdiffer-update: prereq-go ## Weekly update via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
-	$(GO_VER) run ./internal/tools/bigdiffer -update
+bigdiffer-sync: prereq-go ## Weekly sync via bigdiffer (discover, regenerate changed types, reconcile all_schemas.hcl)
+	$(GO_VER) run ./internal/tools/bigdiffer -sync
 
-bigdiffer-generate: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS)
-	$(GO_VER) run ./internal/tools/bigdiffer -generate
+bigdiffer-reconcile: prereq-go ## Regenerate the whole provider offline via bigdiffer (no AWS; promotes on a clean gate)
+	$(GO_VER) run ./internal/tools/bigdiffer -reconcile
+
+bigdiffer-check: prereq-go ## Preview a bigdiffer engine change offline, read-only (no AWS; writes nothing)
+	$(GO_VER) run ./internal/tools/bigdiffer -check
 
 bigdiffer-docs: prereq-go ## Regenerate documentation via bigdiffer (docs-import + terraform fmt + tfplugindocs)
 	$(GO_VER) run ./internal/tools/bigdiffer -docs
+
+bigdiffer-lint: prereq-go ## Verify all_schemas.hcl is normalized and anomaly-free (offline; writes nothing)
+	$(GO_VER) run ./internal/tools/bigdiffer -lint
+
+bigdiffer-recheck: prereq-go ## Re-probe reason-less suppressed/frozen rows and propose a reclassification (writes nothing)
+	$(GO_VER) run ./internal/tools/bigdiffer -recheck
 
 bigdiffer-test: prereq-go ## Run the bigdiffer tool's unit + full-corpus parity suite
 	$(GO_VER) test ./internal/tools/bigdiffer/... -timeout 20m
@@ -342,10 +356,13 @@ biglister: prereq-go ## List all resources and data sources
 
 .PHONY: all
 .PHONY: bigdiffer
+.PHONY: bigdiffer-check
 .PHONY: bigdiffer-docs
-.PHONY: bigdiffer-generate
+.PHONY: bigdiffer-lint
+.PHONY: bigdiffer-reconcile
+.PHONY: bigdiffer-recheck
+.PHONY: bigdiffer-sync
 .PHONY: bigdiffer-test
-.PHONY: bigdiffer-update
 .PHONY: biglister
 .PHONY: build
 .PHONY: check-startup-error

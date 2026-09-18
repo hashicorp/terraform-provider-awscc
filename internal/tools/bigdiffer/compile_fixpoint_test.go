@@ -244,6 +244,21 @@ func TestCompileFixpointUnattributableFailureHardStops(t *testing.T) {
 	if !strings.Contains(err.Error(), "not attributable") && !strings.Contains(err.Error(), "promoting nothing") {
 		t.Errorf("expected the conservative-fallback error, got: %v", err)
 	}
+	// This hard-stop's raw go build output is the only report available
+	// (there is no per-type attribution to fall back to, by definition of
+	// how this path is reached), so it must at least be readable —
+	// relativized against repoRoot rather than the long absolute paths
+	// buildOnce's overlay produces internally.
+	if strings.Contains(err.Error(), cfg.repoRoot) {
+		t.Errorf("expected file paths relativized against repoRoot, but the absolute repoRoot prefix is still present: %v", err)
+	}
+	rel, relErr := filepath.Rel(cfg.repoRoot, dest)
+	if relErr != nil {
+		t.Fatalf("computing expected relative path: %v", relErr)
+	}
+	if !strings.Contains(err.Error(), rel) {
+		t.Errorf("expected the relativized path %q in the error, got: %v", rel, err)
+	}
 	if _, err := os.Stat(dest); !os.IsNotExist(err) {
 		t.Errorf("the build overlay must still be reverted even on the hard-stop path, stat err = %v", err)
 	}
@@ -270,14 +285,14 @@ func TestCompileFixpointRoundCapIsBounded(t *testing.T) {
 // extended to the compile gate (item 1). The compile gate always builds the
 // real module (cfg.repoRoot) — it cannot be pointed at a temp tree the way
 // pure-generation tests point cfg.outputRoot at one — so this does not
-// reconstruct a full runUpdate batch. It instead confirms the two halves of
+// reconstruct a full runSync batch. It instead confirms the two halves of
 // the guarantee directly: (1) compileFixpoint itself never leaves a trace on
 // the real tree when it hard-fails (proven again here, chained with a real,
 // otherwise-successful sibling candidate staged alongside the broken one, to
-// rule out the sibling's presence changing the outcome), and (2) runUpdate's
+// rule out the sibling's presence changing the outcome), and (2) runSync's
 // own source unconditionally returns before promoteStaged on a compile-gate
 // error (`if err := compileFixpoint(...); err != nil { return ... }`,
-// update.go) — the same short-circuit TestUpdateBatchAtomicity already relies
+// sync.go) — the same short-circuit TestSyncBatchAtomicity already relies
 // on for a staging-time failure, just triggered by the gate instead.
 func TestCompileGateFailureBlocksPromotion(t *testing.T) {
 	if testing.Short() {

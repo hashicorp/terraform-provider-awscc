@@ -6,7 +6,7 @@
 // Legacy code: superseded by internal/provider/registrations_gen.go, bigdiffer's
 // blank-import registration file. Kept as the deprecated make/go:generate
 // fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process
 // and contributing/docs/removing-the-legacy-generation-process.md.
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_acmpca_certificate_authorities -cftype AWS::ACMPCA::CertificateAuthority -package acmpca ../aws/acmpca/certificate_authority_plural_data_source_gen.go ../aws/acmpca/certificate_authority_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_aiops_investigation_groups -cftype AWS::AIOps::InvestigationGroup -package aiops ../aws/aiops/investigation_group_plural_data_source_gen.go ../aws/aiops/investigation_group_plural_data_source_gen_test.go

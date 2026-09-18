@@ -4,7 +4,7 @@
 // Legacy code: superseded by internal/tools/bigdiffer/naming, bigdiffer's
 // owned copy. Kept as the deprecated fallback, used only by the legacy
 // generators and internal/update; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process
 // and contributing/docs/removing-the-legacy-generation-process.md.
 
 package naming

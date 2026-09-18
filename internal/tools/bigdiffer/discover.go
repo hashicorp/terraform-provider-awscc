@@ -47,7 +47,7 @@ type discovered struct {
 // derives per-type metadata (Terraform name, plural-DS support) and captures the
 // sanitized schema bytes. This is the "what's new" half of the mandate plus the
 // cache input, fetched once. The returned client is the same throttled,
-// region-pinned client used for the crawl, exposed so a caller (runUpdate) can
+// region-pinned client used for the crawl, exposed so a caller (runSync) can
 // reuse it for the absent-row DescribeType probe without building a second one.
 func discover(ctx context.Context) ([]discovered, *cloudformation.Client, error) {
 	conn, err := newCFNClient(ctx)

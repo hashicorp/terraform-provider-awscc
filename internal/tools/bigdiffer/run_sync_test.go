@@ -225,7 +225,7 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 	t.Parallel()
 	cfg, rows := loadCorpus(t)
 	lg := logGroupRow(t, rows)
-	results := generateCorpus(cfg, []resourceRow{lg}, 1, nil)
+	results := generateCorpus(cfg, []resourceRow{lg}, 1)
 
 	reconciled, err := reconcileListResource(cfg, results)
 	if err != nil {
@@ -238,16 +238,16 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 	}
 }
 
-// TestUpdateBatchAtomicity is the item-12 regression test
+// TestSyncBatchAtomicity is the item-12 regression test
 // (never-regress cross-type atomicity): it drives the
-// same stage-everything-then-promote-once sequence runUpdate uses across a
+// same stage-everything-then-promote-once sequence runSync uses across a
 // multi-candidate batch, injects a hard failure partway through (a candidate
 // whose staging write fails outright, mirroring what a disk error mid-batch
 // looks like to the loop), and asserts that once that error aborts the batch
 // before promoteStaged is ever called, the real tree is left exactly as it
 // started — nothing from the earlier, successfully staged candidates leaks
 // through, and there is nothing to reconcile into the overlay.
-func TestUpdateBatchAtomicity(t *testing.T) {
+func TestSyncBatchAtomicity(t *testing.T) {
 	t.Parallel()
 	cfg, rows := loadCorpus(t)
 	lg := logGroupRow(t, rows)
@@ -270,7 +270,7 @@ func TestUpdateBatchAtomicity(t *testing.T) {
 	// Candidate 2 hits a hard I/O error while staging — simulated by occupying
 	// the staging input directory's own path with a plain file, so
 	// os.MkdirAll fails outright, the same shape of failure a disk error
-	// mid-batch would produce. This mirrors runUpdate's
+	// mid-batch would produce. This mirrors runSync's
 	// `if err != nil { return err }`: the batch loop aborts immediately.
 	badStagingDir := filepath.Join(staging, "input")
 	if err := os.MkdirAll(filepath.Dir(badStagingDir), dirPerm); err != nil {
@@ -288,7 +288,7 @@ func TestUpdateBatchAtomicity(t *testing.T) {
 		t.Fatal("expected refreshCandidate to fail: the staging input dir path is occupied by a file")
 	}
 
-	// The batch loop aborts here (runUpdate: `if err != nil { return err }`),
+	// The batch loop aborts here (runSync: `if err != nil { return err }`),
 	// so promoteStaged is never reached, and the overlay reconcile step after
 	// it never runs. Confirm the real tree — which candidate 1 alone would have
 	// left non-empty, had it been promoted — is untouched.

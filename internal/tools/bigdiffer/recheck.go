@@ -19,10 +19,10 @@ import (
 	"github.com/hashicorp/cli"
 )
 
-// healProposal is one row -heal has something to say about. -heal never
+// healProposal is one row -recheck has something to say about. -recheck never
 // mutates all_schemas.hcl; every proposal is reported for a human to apply,
 // matching every other bigdiffer policy decision
-// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill gaps").
+// (contributing/docs/suppressed-and-frozen.md, "-recheck: re-probe and fill gaps").
 type healProposal struct {
 	cfn      string
 	label    string
@@ -35,7 +35,7 @@ type healProposal struct {
 
 // healFact is one suppressed artifact or the freeze, named by its flag/date
 // field, its own reason field, and (for artifacts) its artifactKind — the
-// four independent facts a row can carry (item 9b). runHeal only re-probes a
+// four independent facts a row can carry (item 9b). runRecheck only re-probes a
 // fact whose own reason is still empty or tagged unknown; a row can have a
 // real reason recorded for one fact while another of its facts is still in
 // the backlog.
@@ -55,17 +55,32 @@ func healFactsFor(row resourceRow) []healFact {
 	}
 }
 
-// needsHealing is true for an active fact whose own reason is still empty or
-// tagged unknown — the reason-less/unknown backlog this fact belongs to.
-func (f healFact) needsHealing() bool {
-	return f.active && (f.reason == "" || strings.HasPrefix(f.reason, string(reasonUnknown)+":"))
+// needsHealing reports whether a fact belongs in -recheck's current scope.
+// By default (all false) that scope is the reason-less/unknown backlog: an
+// active fact whose own reason is still empty or tagged unknown. With all
+// set (the -recheck-all flag), the scope widens to every active fact
+// regardless of its existing reason — including one with a real, specific
+// reason already recorded — so a year-old judgment call can be revisited on
+// demand (§0 story 5) rather than only ever a still-open one.
+func (f healFact) needsHealing(all bool) bool {
+	if !f.active {
+		return false
+	}
+	if all {
+		return true
+	}
+	return f.reason == "" || strings.HasPrefix(f.reason, string(reasonUnknown)+":")
 }
 
-// runHeal re-probes every suppressed artifact or freeze that has no reason (or
-// one tagged unknown) and proposes a reclassification. Offline except for
-// reading the committed schema cache; never touches AWS and never writes
+// runRecheck re-probes every active fact in scope and proposes a
+// reclassification. By default that scope is the reason-less/unknown
+// backlog; with all set (the -recheck-all flag), every active fact is
+// in scope regardless of its existing reason, so a year-old suppress/freeze
+// decision — even one with a specific, already-recorded reason — can be
+// revisited on demand (§0 story 5). Offline except for reading the
+// committed schema cache; never touches AWS and never writes
 // all_schemas.hcl.
-func runHeal(allSchemasPath string) error {
+func runRecheck(allSchemasPath string, all bool) error {
 	cfg, rows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -90,13 +105,17 @@ func runHeal(allSchemasPath string) error {
 		}
 	}
 
-	stepf("Re-probing suppressed/frozen facts with no recorded reason…")
+	if all {
+		stepf("Re-probing every suppressed/frozen fact, regardless of its existing reason…")
+	} else {
+		stepf("Re-probing suppressed/frozen facts with no recorded reason…")
+	}
 	var proposals []healProposal
 	needsReason := 0
 	for _, row := range rows {
 		var pending []healFact
 		for _, f := range healFactsFor(row) {
-			if f.needsHealing() {
+			if f.needsHealing(all) {
 				pending = append(pending, f)
 			}
 		}
@@ -113,17 +132,18 @@ func runHeal(allSchemasPath string) error {
 		return proposals[i].field < proposals[j].field
 	})
 
-	writeHealReport(needsReason, proposals)
+	writeHealReport(needsReason, proposals, all)
 	return nil
 }
 
-// healRow probes exactly the row's still-reason-less facts (pending) and
-// returns a proposal per fact it can say something about. It never mutates
-// row or the overlay. multiPending is true when the row has more than one
-// still-reason-less fact — used to phrase a migrated free-form comment as a
-// shared candidate rather than a confirmed per-fact reason, since the same
+// healRow probes exactly the row's in-scope facts (pending — reason-less/
+// unknown by default, or every active fact under -recheck-all) and returns a
+// proposal per fact it can say something about. It never mutates row or the
+// overlay. multiPending is true when the row has more than one in-scope
+// fact this run — used to phrase a migrated free-form comment as a shared
+// candidate rather than a confirmed per-fact reason, since the same
 // row-level comment text cannot be assumed to describe more than one fact
-// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
+// (contributing/docs/suppressed-and-frozen.md, "-recheck: re-probe and fill
 // gaps").
 func healRow(cfg config, row resourceRow, pending []healFact, comment string) []healProposal {
 	var out []healProposal
@@ -136,7 +156,7 @@ func healRow(cfg config, row resourceRow, pending []healFact, comment string) []
 
 	for _, f := range pending {
 		if f.field == attrFrozenReason {
-			out = append(out, freezeProposal(row, comment, multiPending))
+			out = append(out, freezeProposal(row, f, comment, multiPending))
 			continue
 		}
 		out = append(out, healArtifact(cfg, row, f, schema, schemaErr, comment, multiPending))
@@ -179,7 +199,7 @@ func healArtifact(cfg config, row resourceRow, f healFact, schema []byte, schema
 		}
 	}
 
-	return commentOrUnknown(base, comment, multiPending)
+	return commentOrUnknown(base, f.reason, comment, multiPending)
 }
 
 // probeArtifact regenerates one artifact from schema bytes staged to a temp
@@ -188,9 +208,9 @@ func healArtifact(cfg config, row resourceRow, f healFact, schema []byte, schema
 // their schema is recursive (e.g. the free-form "Recursive Attribute
 // Definitions" comments, issue #95), and codegen.Emitter has no recursion-depth
 // guard, so re-probing one in-process is a confirmed stack overflow — a fatal,
-// unrecoverable crash that would take the whole -heal run down with it. Instead
-// probeArtifact re-execs bigdiffer itself into the hidden -heal-probe-artifact
-// mode (runHealProbeArtifact) under a timeout and a soft memory cap, so a crash
+// unrecoverable crash that would take the whole -recheck run down with it. Instead
+// probeArtifact re-execs bigdiffer itself into the hidden -recheck-probe-artifact
+// mode (runRecheckProbeArtifact) under a timeout and a soft memory cap, so a crash
 // or runaway probe kills only that subprocess (the same "one failure never
 // blocks the rest" principle discover.go and generateCorpus already apply).
 //
@@ -213,7 +233,7 @@ var probeArtifact = func(cfg config, row resourceRow, kind artifactKind, schema 
 // the test binary under `go test` — a binary whose CLI is testing.Main, not
 // bigdiffer's real main(), and so can't be probed directly).
 func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artifactKind, schema []byte) error {
-	tmp, err := os.CreateTemp("", "bigdiffer-heal-*.json")
+	tmp, err := os.CreateTemp("", "bigdiffer-recheck-*.json")
 	if err != nil {
 		return err
 	}
@@ -229,7 +249,7 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 	defer cancel()
 
 	cmd := exec.CommandContext(ctx, bin,
-		"-heal-probe-artifact",
+		"-recheck-probe-artifact",
 		"-probe-tf-type", row.ResourceTypeName,
 		"-probe-cfn-type", row.CloudFormationTypeName,
 		"-probe-kind", string(kind),
@@ -251,7 +271,7 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 		var exitErr *exec.ExitError
 		if errors.As(runErr, &exitErr) && exitErr.ExitCode() == exitCodeBuildGateFailed {
 			// The probe generated cleanly but the compile gate rejected it —
-			// runHealProbeArtifact's message is exactly buildGateFailure's
+			// runRecheckProbeArtifact's message is exactly buildGateFailure's
 			// Error() text, printed verbatim to stdout/stderr. Reconstruct
 			// the typed error here so healArtifact can distinguish this from
 			// a plain generation failure and tag the proposal build_failed
@@ -279,34 +299,34 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 	return nil
 }
 
-// healProbeTimeout and healProbeMemLimit bound one isolated -heal probe.
+// healProbeTimeout and healProbeMemLimit bound one isolated -recheck probe.
 const (
 	healProbeTimeout  = 30 * time.Second
 	healProbeMemLimit = "512MiB"
 )
 
-// exitCodeBuildGateFailed is runHealProbeArtifact's exit code for a
+// exitCodeBuildGateFailed is runRecheckProbeArtifact's exit code for a
 // buildGateFailure specifically — distinct from the generic exit 1 a plain
 // generation error uses. probeArtifactWithBinary keys on this to reconstruct
 // a *buildGateFailure across the process boundary, since the parent can't
 // see the child's Go error values directly, only its exit code and output.
 const exitCodeBuildGateFailed = 3
 
-// runHealProbeArtifact is the hidden subprocess entrypoint probeArtifact
+// runRecheckProbeArtifact is the hidden subprocess entrypoint probeArtifact
 // re-execs into. It rebuilds the plan for exactly one artifact from flags,
 // generates it (writing nothing to the real output tree — only the compile
 // gate check below touches it, transiently, via buildOnce's own
 // overlay-then-revert), and, if generation succeeds, runs that one artifact
 // through the compile gate (bigdiffer-design.md §6) before reporting
 // success — so a "lift" proposal is trustworthy against both stages a real
-// -update run would have to pass, not just generation. repoRoot/outputRoot
+// -sync run would have to pass, not just generation. repoRoot/outputRoot
 // are required for the compile gate step; if either is empty (a caller that
 // only wants the generation-only check, or an older binary's flag surface),
 // the compile gate step is skipped rather than erroring, so probing a type
 // with a kind that has no real destination concept yet degrades safely.
 // Reports success/failure via exit code — never printed as a bigdiffer
 // report, since this process only exists to be probed by its parent.
-func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDir, servicesPath, repoRoot, outputRoot string) error {
+func runRecheckProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDir, servicesPath, repoRoot, outputRoot string) error {
 	row := resourceRow{
 		ResourceTypeName:         tfType,
 		CloudFormationTypeName:   cfnType,
@@ -348,14 +368,14 @@ func runHealProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDi
 	return fmt.Errorf("artifact %s not derivable from this row", kind)
 }
 
-// buildGateFailure is runHealProbeArtifact's distinct signal that an artifact
+// buildGateFailure is runRecheckProbeArtifact's distinct signal that an artifact
 // generated cleanly but was rejected by the compile gate — as opposed to a
 // plain error, which means generation itself failed. probeArtifactWithBinary
 // maps this to exitCodeBuildGateFailed so the parent process (running in a
 // separate binary, so it cannot see this type directly) can still tell the
 // two stages apart and healArtifact can tag the proposal's reason
 // accordingly (build_failed vs generation_failed) — the whole point of
-// wiring the compile gate into -heal.
+// wiring the compile gate into -recheck.
 type buildGateFailure struct{ detail string }
 
 func (e *buildGateFailure) Error() string {
@@ -377,29 +397,61 @@ func relativizeBuildErrors(errs []buildError, repoRoot string) []buildError {
 	return out
 }
 
-// freezeProposal handles a frozen_since with no reason of its own — the
-// freeze is an orthogonal, schema-level fact (item 9b), never derived from an
-// artifact's suppression reason, so it always falls through to the same
-// comment-migration/unknown fallback every other reason-less fact uses.
-func freezeProposal(row resourceRow, comment string, multiPending bool) healProposal {
+// freezeProposal handles a frozen_since fact — the freeze is an orthogonal,
+// schema-level fact (item 9b), never derived from an artifact's suppression
+// reason, so it always falls through to the same comment-migration/unknown
+// fallback every other in-scope fact uses (commentOrUnknown), carrying its
+// own existing reason (f.reason) through so a real, already-recorded reason
+// is never overwritten with a guess when there is no schema to re-probe with
+// (only reachable under -recheck-all, since the default scope excludes
+// facts with a real reason already).
+func freezeProposal(row resourceRow, f healFact, comment string, multiPending bool) healProposal {
 	base := healProposal{cfn: row.CloudFormationTypeName, label: row.ResourceTypeName, kind: "", field: attrFrozenReason}
-	return commentOrUnknown(base, comment, multiPending)
+	return commentOrUnknown(base, f.reason, comment, multiPending)
 }
 
-// commentOrUnknown is step 4 of the heal probe (suppressed-and-frozen.md): if
-// a free-form "# Suppression Reason:" comment exists, migrate its text into a
-// manual: reason; otherwise the row still needs a human look.
+// commentOrUnknown is step 4 of the recheck probe (suppressed-and-frozen.md): if
+// the fact already carries a real, specific reason (only reachable at all
+// under -recheck-all, since the default scope excludes these), that reason
+// is kept — there is no schema to re-probe with, so there is nothing to
+// weigh against it, and a comment-migration guess must never overwrite a
+// real, already-recorded answer. The appended note differs for the freeze
+// (base.field == attrFrozenReason): a freeze is a schema-level fact, never
+// re-probed regardless of cache state (that is what "frozen" means), so it
+// gets its own wording rather than the artifact-oriented "re-run once the
+// schema cache has this type" — that phrasing would misleadingly imply a
+// future run could resolve a freeze differently, when nothing does without
+// a human lifting it by hand. Otherwise: if a free-form
+// "# Suppression Reason:" comment exists, migrate its text into a manual:
+// reason; otherwise the row still needs a human look.
 //
-// When multiPending is true (more than one of the row's facts is still
-// reason-less), the same row-level comment text is offered identically to
+// When multiPending is true (more than one of the row's facts is in scope
+// this run), the same row-level comment text is offered identically to
 // each — it is not auto-assigned as a confirmed per-fact reason, since a
 // single comment written for one artifact does not necessarily explain a
 // different artifact's suppression or the freeze
-// (contributing/docs/suppressed-and-frozen.md, "-heal: re-probe and fill
+// (contributing/docs/suppressed-and-frozen.md, "-recheck: re-probe and fill
 // gaps"). The proposal text is worded as a shared candidate for a human
 // to assign, edit, or reject per field, rather than a confirmed fact.
-func commentOrUnknown(base healProposal, comment string, multiPending bool) healProposal {
+func commentOrUnknown(base healProposal, existingReason, comment string, multiPending bool) healProposal {
 	base.action = "reason"
+	if existingReason != "" && !strings.HasPrefix(existingReason, string(reasonUnknown)+":") {
+		if base.field == attrFrozenReason {
+			// The freeze is a schema-level fact, not a per-artifact
+			// generation attempt (healFactsFor) — there is no schema cache
+			// state that would ever change this note's applicability, unlike
+			// an artifact fact where a schema simply hasn't been cached yet.
+			// A frozen row's schema is deliberately never refreshed (that is
+			// what "frozen" means), so "re-run once the cache has this type"
+			// would be actively misleading here: it implies a future run
+			// might resolve this differently, when nothing about a freeze
+			// changes without a human lifting it by hand.
+			base.reason = existingReason + " (no schema re-probe applies to a freeze; existing reason kept as-is — verify by hand)"
+			return base
+		}
+		base.reason = existingReason + " (no cached schema to re-probe against; existing reason kept as-is — re-run once the schema cache has this type, or verify by hand)"
+		return base
+	}
 	if comment != "" {
 		if multiPending {
 			base.reason = formatReason(reasonManual, comment) +
@@ -446,9 +498,13 @@ func suppressionComment(text string) string {
 	return ""
 }
 
-func writeHealReport(needsReason int, proposals []healProposal) {
-	fmt.Fprintf(os.Stderr, "== bigdiffer -heal report ==\n")
-	fmt.Fprintf(os.Stderr, "facts needing a reason: %d\n", needsReason)
+func writeHealReport(needsReason int, proposals []healProposal, all bool) {
+	fmt.Fprintf(os.Stderr, "== bigdiffer -recheck report ==\n")
+	if all {
+		fmt.Fprintf(os.Stderr, "facts re-probed (every active fact, -recheck-all): %d\n", needsReason)
+	} else {
+		fmt.Fprintf(os.Stderr, "facts needing a reason: %d\n", needsReason)
+	}
 	fmt.Fprintf(os.Stderr, "proposals: %d\n", len(proposals))
 	for _, p := range proposals {
 		switch p.action {

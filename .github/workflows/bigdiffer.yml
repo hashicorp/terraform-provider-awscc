@@ -59,9 +59,18 @@ jobs:
       - run: git config --global url."https://${{ secrets.PRIVATE_GOMOD_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
       # Unit tests plus full-corpus generation parity (bigdiffer == committed).
       # Offline: uses the committed schema cache, never queries AWS (the live
-      # -update/e2e paths are opt-in and skipped here).
+      # -sync/e2e paths are opt-in and skipped here).
       - run: go test ./internal/tools/bigdiffer/... -timeout 20m
       # Verify all_schemas.hcl is normalized and anomaly-free (offline).
+      - run: go run ./internal/tools/bigdiffer -lint
+      # Engine-drift gate: regenerate the whole corpus offline from the
+      # committed overlay + cache
+      # through the same generate -> compile -> decide pipeline -reconcile
+      # uses, promotion switched off, and fail on any regeneration/compile
+      # failure or any output (including import_examples_gen.json) that
+      # differs from committed. Takes over TestFullCorpusParity's
+      # self-referential guard role (bigdiffer-design.md §6, §10) once the
+      # legacy engine is removed; offline like -lint, no AWS access needed.
       - run: go run ./internal/tools/bigdiffer -check
       # Trim test binaries and stale entries so the saved cache stays small
       # enough to extract reliably on the next run.

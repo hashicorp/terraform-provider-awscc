@@ -115,16 +115,22 @@ func TestBuildCandidates(t *testing.T) {
 		{cfType: "AWS::EC2::Froze", status: statusFrozen},
 	}
 	discByCFN := map[string]discovered{
-		"AWS::EC2::New": {row: resourceRow{ResourceTypeName: "aws_ec2_new", CloudFormationTypeName: "AWS::EC2::New"}, schema: []byte("new")},
-		"AWS::EC2::Chg": {schema: []byte("chg")},
+		"AWS::EC2::New":  {row: resourceRow{ResourceTypeName: "aws_ec2_new", CloudFormationTypeName: "AWS::EC2::New"}, schema: []byte("new")},
+		"AWS::EC2::Chg":  {schema: []byte("chg")},
+		"AWS::EC2::Same": {schema: []byte("same")},
 	}
 	overlayByCFN := map[string]resourceRow{
-		"AWS::EC2::Chg": {ResourceTypeName: "aws_ec2_chg", CloudFormationTypeName: "AWS::EC2::Chg", SuppressResourceGeneration: true},
+		"AWS::EC2::Chg":  {ResourceTypeName: "aws_ec2_chg", CloudFormationTypeName: "AWS::EC2::Chg", SuppressResourceGeneration: true},
+		"AWS::EC2::Same": {ResourceTypeName: "aws_ec2_same", CloudFormationTypeName: "AWS::EC2::Same"},
 	}
 
+	// Whole-corpus gate (contributing/docs/bigdiffer-design.md §6, "The
+	// whole corpus is gated every run"): New, Changed, and Unchanged all
+	// become candidates now — only Frozen is excluded (its pinned bytes are
+	// authoritative, never re-evaluated).
 	cands := buildCandidates(results, discByCFN, overlayByCFN)
-	if len(cands) != 2 {
-		t.Fatalf("want 2 candidates, got %d", len(cands))
+	if len(cands) != 3 {
+		t.Fatalf("want 3 candidates, got %d", len(cands))
 	}
 
 	byCFN := map[string]candidate{}
@@ -138,6 +144,39 @@ func TestBuildCandidates(t *testing.T) {
 	// Changed uses the overlay row (so its suppress flag is honored) and is Present.
 	if c := byCFN["AWS::EC2::Chg"]; c.class != classPresent || !c.row.SuppressResourceGeneration || string(c.schema) != "chg" {
 		t.Errorf("Changed candidate wrong: %+v", c)
+	}
+	// Unchanged, present in the overlay, must be classPresentUnchanged — never
+	// classPresent — so a failure on it routes to machineryFailure (policy.go)
+	// instead of freeze/suppress: the schema did not move, so freezing it
+	// would be the exact bug §3 identifies.
+	if c := byCFN["AWS::EC2::Same"]; c.class != classPresentUnchanged || c.row.ResourceTypeName != "aws_ec2_same" || string(c.schema) != "same" {
+		t.Errorf("Unchanged candidate wrong: %+v", c)
+	}
+	if _, ok := byCFN["AWS::EC2::Froze"]; ok {
+		t.Errorf("frozen type must never become a candidate, got %+v", byCFN["AWS::EC2::Froze"])
+	}
+}
+
+// TestBuildCandidatesStatusChangedAbsentFromOverlayIsClassNew covers the rare
+// edge case buildCandidates' own doc comment calls out: a statusChanged type
+// with no corresponding overlay row (e.g. a previously checkout-pinned type
+// that got un-pinned) must still land on classNew, not classPresent — byte
+// status only refines the Present branch, it never overrides New.
+func TestBuildCandidatesStatusChangedAbsentFromOverlayIsClassNew(t *testing.T) {
+	t.Parallel()
+
+	results := []changeResult{{cfType: "AWS::EC2::Ghost", status: statusChanged}}
+	discByCFN := map[string]discovered{
+		"AWS::EC2::Ghost": {row: resourceRow{ResourceTypeName: "aws_ec2_ghost", CloudFormationTypeName: "AWS::EC2::Ghost"}, schema: []byte("ghost")},
+	}
+	overlayByCFN := map[string]resourceRow{} // absent from the overlay
+
+	cands := buildCandidates(results, discByCFN, overlayByCFN)
+	if len(cands) != 1 {
+		t.Fatalf("want 1 candidate, got %d", len(cands))
+	}
+	if cands[0].class != classNew {
+		t.Errorf("statusChanged absent from the overlay should still be classNew, got %v", cands[0].class)
 	}
 }
 
@@ -172,7 +211,7 @@ func TestAbsentTypes(t *testing.T) {
 // applying the decide() outcome for a probed absent row via
 // normalizeWithDecisions must set the explaining attribute on the existing
 // block, and a subsequent normalize pass over the rewritten overlay (as the
-// next run's -check/-update would see it) must no longer flag that row as
+// next run's -lint/-sync would see it) must no longer flag that row as
 // UnexplainedRetained.
 //
 // testOverlay/testBase's AWS::Old::Gone is the fixture: live in the overlay,

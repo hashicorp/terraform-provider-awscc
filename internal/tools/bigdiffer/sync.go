@@ -5,11 +5,12 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
-	"time"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/hashicorp/cli"
@@ -33,20 +34,38 @@ type candidate struct {
 	schema []byte // freshly discovered, sanitized bytes to generate from
 }
 
-// buildCandidates selects the New+Changed types and attaches, for each, its
-// policy class (new to the overlay vs already present), the row to generate from
-// (the overlay row when present so its suppress_* flags are honored, else the
-// discovered row), and the fresh discovered bytes.
+// buildCandidates selects every discovered type as a gate candidate — not just
+// New/Changed (contributing/docs/bigdiffer-design.md §6, "The whole corpus is
+// gated every run": gating only New/Changed left the ~1580 schema-unchanged
+// types' committed output aging silently, with no guard once the legacy
+// TestFullCorpusParity retires). For
+// each, it attaches the policy class (new to the overlay vs already present,
+// further split by whether its schema bytes actually moved) and the row to
+// generate from (the overlay row when present so its suppress_* flags are
+// honored, else the discovered row), and the fresh discovered bytes.
+//
+// Class assignment is keyed on two independent facts, not one: overlay
+// presence decides New vs Present; byte status further splits Present into
+// classPresent (statusChanged — the schema moved, so a failure freezes/
+// suppresses as always) vs classPresentUnchanged (statusUnchanged — the
+// schema is identical, so a failure can only be the machinery's fault; see
+// decide()'s doc comment, policy.go). A statusChanged type absent from the
+// overlay (rare — e.g. a previously checkout-pinned type) still lands on
+// classNew exactly as before: byte status only refines Present, it never
+// overrides New.
 func buildCandidates(results []changeResult, discByCFN map[string]discovered, overlayByCFN map[string]resourceRow) []candidate {
 	var out []candidate
 	for _, r := range results {
-		if r.status != statusNew && r.status != statusChanged {
+		if r.status != statusNew && r.status != statusChanged && r.status != statusUnchanged {
 			continue
 		}
 		d := discByCFN[r.cfType]
 		c := candidate{cfType: r.cfType, schema: d.schema}
 		if row, ok := overlayByCFN[r.cfType]; ok {
 			c.class = classPresent
+			if r.status == statusUnchanged {
+				c.class = classPresentUnchanged
+			}
 			c.row = row
 		} else {
 			c.class = classNew
@@ -148,7 +167,7 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, [
 	row := c.row
 	row.CloudFormationSchemaPath = stagedSchema // generate from the staged bytes
 
-	results := generateCorpus(cfg, []resourceRow{row}, 1, nil)
+	results := generateCorpus(cfg, []resourceRow{row}, 1)
 	results, err := reconcileListResource(cfg, results)
 	if err != nil {
 		return gateResult{}, nil, fmt.Errorf("regenerating resource for %s: %w", c.cfType, err)
@@ -186,7 +205,7 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, [
 // promoteStaged copies every staged artifact and cached schema from stagingDir
 // into the real tree (cfg.outputRoot, cfg.cacheDir). Called once, after every
 // candidate in a batch has been staged successfully by refreshCandidate — this
-// is the sole place -update writes outside stagingDir, so a hard error anywhere
+// is the sole place -sync writes outside stagingDir, so a hard error anywhere
 // earlier in the batch (never-regress batch atomicity) leaves the real tree
 // and the overlay untouched: nothing is promoted, and the overlay reconcile
 // step that follows never even runs.
@@ -274,12 +293,16 @@ func reconcileListResource(cfg config, results []genResult) ([]genResult, error)
 	return results, nil
 }
 
-// runUpdate is the live weekly incremental pipeline (-update). One discovery
+// runSync is the live weekly incremental pipeline (-sync). One discovery
 // crawl feeds both overlay reconciliation and change detection; only New/Changed
 // types are regenerated from their fresh bytes; generation success/failure drives
 // the policy written back to the overlay (never regressing broken types); and the
-// aggregates are re-emitted. Requires AWS credentials (queried in us-east-1).
-func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
+// aggregates are re-emitted. Documentation (import-example docs, terraform fmt,
+// tfplugindocs) runs as the last step of the same tail by default — noDocs
+// (-no-docs) skips it for a fast codegen inner loop
+// (bigdiffer-design.md §6, "Documentation is part of the same gated
+// pipeline"). Requires AWS credentials (queried in us-east-1).
+func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bool) error {
 	cfg, overlayRows, err := loadOverlay(allSchemasPath)
 	if err != nil {
 		return err
@@ -319,15 +342,8 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 
 	cands := buildCandidates(changes, discByCFN, overlayByCFN)
 
-	stagingDir, err := os.MkdirTemp("", "bigdiffer-staging-")
-	if err != nil {
-		return fmt.Errorf("creating staging dir: %w", err)
-	}
-	defer func() { _ = os.RemoveAll(stagingDir) }()
-
 	stepf("Regenerating %d changed type(s) from fresh bytes (never-regress)…", len(cands))
-	candBar := newBar(len(cands), "regenerate")
-	today := time.Now().Format(dateLayout)
+	today := todayString()
 
 	// Absent-row probe
 	// (contributing/docs/absent-row-probe-design.md): resolve every overlay row
@@ -336,64 +352,7 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// construction (a candidate came from `changes`, which only ever covers
 	// discovered/A types). No staging or generation is needed for an absent
 	// row: it is a pure annotation of the block that already exists.
-	decisions := absentDecisions(ctx, conn, overlayByCFN, discByCFN, frozenCFN, checkout, today)
-	stagedByDest := make(map[string]stagedArtifact)
-	// listResourceCandidates tracks every candidate whose staged resource
-	// artifact was rendered with listResource: true (baked into the file's
-	// AddListResourceFactory call at generation time — reconcileListResource
-	// already reconciled this against generation's own plural DS outcome, but
-	// only generation's; the compile gate can still drop the plural artifact
-	// afterward, and nothing re-runs the reconciliation for that). Checked
-	// once, after the fixpoint settles, so a plural artifact the gate drops
-	// can never leave a promoted resource advertising a list capability with
-	// no backing data source (design doc invariant; bigdiffer-design.md §6).
-	var listResourceCandidates []*gateResult
-	var okN, brokeN int
-	for _, c := range cands {
-		gr, staged, err := refreshCandidate(cfg, stagingDir, c)
-		if err != nil {
-			return err
-		}
-		decisions[c.cfType] = decide(c.class, gr, today)
-		if gr.ok() {
-			okN++
-		} else {
-			brokeN++
-			infof("%s: %s", c.cfType, decisions[c.cfType].summary)
-		}
-		// gr is shared by pointer with every staged artifact of this
-		// candidate: the compile gate (below) downgrades one artifact's
-		// outcome in place and recomputes decide() from the same gateResult,
-		// so a build-gate rejection of, say, the plural data source does not
-		// lose the fact that the resource and singular data source are still
-		// fine.
-		grPtr := gr
-		for _, r := range staged {
-			dest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.codeFile)
-			testDest := filepath.Join(cfg.outputRoot, r.a.pathSuffix, r.a.testFile)
-			// Find this artifact's index within grPtr.artifacts (staged only
-			// contains artifacts that generated OK, i.e. gateOK in grPtr).
-			for ai := range grPtr.artifacts {
-				if grPtr.artifacts[ai].kind == r.a.kind {
-					stagedByDest[dest] = stagedArtifact{
-						class:    c.class,
-						gr:       &grPtr,
-						artifact: ai,
-						testDest: testDest,
-						kind:     r.a.kind,
-						tfType:   r.a.tfType,
-						listRes:  r.a.listResource,
-					}
-					break
-				}
-			}
-			if r.a.kind == artifactResource && r.a.listResource {
-				listResourceCandidates = append(listResourceCandidates, &grPtr)
-			}
-		}
-		_ = candBar.Add(1)
-	}
-	_ = candBar.Finish()
+	baseDecisions := absentDecisions(ctx, conn, overlayByCFN, discByCFN, frozenCFN, checkout, today)
 
 	// Reconcile the overlay and apply the policy edits in one pass — read now,
 	// rendered later (once the compile gate settles); recomputing decide()
@@ -404,25 +363,44 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("reading overlay %s: %w", allSchemasPath, err)
 	}
 
-	// Compile gate (bigdiffer-design.md §6): build the staged code plus
-	// the registration file it implies against the real module until it
-	// compiles clean, downgrading whatever the compiler rejects. Runs before
-	// promotion so a build failure changes what gets promoted rather than
-	// promoting something broken; never blocks the release (design doc
-	// bigdiffer-design.md §6, "The compile gate").
-	stepf("Compile-gating %d staged artifact(s)…", len(stagedByDest))
-	if err := compileFixpoint(ctx, cfg, stagingDir, string(overlayContent), base, checkout, decisions, stagedByDest, today); err != nil {
-		return fmt.Errorf("compile gate: %w", err)
+	// The shared generate -> stage -> compile-gate pipeline
+	// (contributing/docs/bigdiffer-design.md §6, "One engine, three
+	// callers"): everything from generating each candidate through the
+	// compile gate settling and the list-resource coupling check is common
+	// to sync/reconcile/check, so it lives in settleBatch, not here.
+	settled, err := settleBatch(ctx, cfg, cands, baseDecisions, string(overlayContent), base, checkout, today)
+	if err != nil {
+		return err
+	}
+	defer func() { _ = os.RemoveAll(settled.stagingDir) }()
+
+	// The whole-corpus gate's one real behavior change (§2, §3): a
+	// schema-unchanged failure is self-inflicted (the machinery, not the
+	// schema, broke), and a machinery bug that produces broken output for one
+	// type can equally produce compiling-but-subtly-wrong output for another
+	// type this same run — so nothing from this run is trustworthy, and
+	// nothing is promoted, not even the schema-changed types that compiled
+	// cleanly (§3, "Why all-or-nothing, precisely"). compileFixpoint can
+	// legitimately reach green here (a broken new artifact reverted to its
+	// still-compiling committed file settles the fixpoint cleanly) while
+	// still leaving a machineryFailure decision behind — checking
+	// compileFixpoint's own error return is not enough; every failure must be
+	// scanned for and reported before promotion, not just the first one
+	// (loud, complete surfacing is the point of gating the whole corpus).
+	if failures := machineryFailures(settled); len(failures) > 0 {
+		var b strings.Builder
+		fmt.Fprintf(&b, "%d type(s) failed with the schema unchanged — machinery regression, promoting nothing this run:\n", len(failures))
+		for _, f := range failures {
+			fmt.Fprintf(&b, "  %s\n", f.cfType)
+			for _, a := range f.artifacts {
+				fmt.Fprintf(&b, "    %s\n", a)
+			}
+		}
+		return errors.New(b.String())
 	}
 
-	// The compile gate can drop a plural data source that generated fine
-	// (reconcileListResource only reconciles against generation's outcome,
-	// which ran before the gate). Refuse to promote a resource still
-	// advertising a list resource with no working plural data source behind
-	// it, rather than silently promote the inconsistency.
-	if err := checkListResourceCoupling(listResourceCandidates); err != nil {
-		return fmt.Errorf("compile gate: list resource coupling: %w", err)
-	}
+	decisions := settled.decisions
+	stagedByDest := settled.stagedByDest
 
 	// CHANGELOG delta: stagedByDest is now final — every remaining entry
 	// survived the compile gate and will actually be promoted below — so the
@@ -441,8 +419,8 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 	// earlier (the candidate loop or the compile gate) returned before
 	// reaching here, so the real tree and the overlay are left exactly as they
 	// started (never-regress batch atomicity).
-	stepf("Promoting staged output (%d artifact(s) refreshed)…", okN+brokeN)
-	if err := promoteStaged(cfg, stagingDir); err != nil {
+	stepf("Promoting staged output (%d artifact(s) refreshed)…", settled.okN+settled.brokeN)
+	if err := promoteStaged(cfg, settled.stagingDir); err != nil {
 		return err
 	}
 
@@ -473,11 +451,12 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("writing %s: %w", cfg.importExamplesPath, err)
 	}
 
-	// Write the CHANGELOG fragment (bigdiffer-design.md §8) last,
-	// now that every real-tree write above has actually succeeded.
-	// writeChangelogFragment inserts the FEATURES: bullets directly into
-	// CHANGELOG.md's top, in-progress version block; a no-op when nothing was
-	// newly promoted.
+	// Write the CHANGELOG fragment (bigdiffer-design.md §8), now that every
+	// other real-tree write above has actually succeeded. writeChangelogFragment
+	// inserts the FEATURES: bullets directly into CHANGELOG.md's top,
+	// in-progress version block; a no-op when nothing was newly promoted.
+	// Docs (below) trails even this, so the CHANGELOG entry for
+	// already-promoted code is written regardless of whether docs succeed.
 	if err := writeChangelogFragment(cfg.changelogPath, changelog); err != nil {
 		return err
 	}
@@ -485,6 +464,17 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 		stepf("Added %d CHANGELOG entries to %s.", len(changelog), cfg.changelogPath)
 	}
 
+	// Documentation, last in the tail (bigdiffer-design.md §6,
+	// "Documentation is part of the same gated pipeline"): everything above
+	// has already promoted, so a docs failure here is never a broken commit
+	// — bigdiffer never commits on its own, and the promoted code changes
+	// are left in place either way. See runDocsTail's doc comment for the
+	// recovery-oriented error this returns on failure.
+	//
+	// The change report and promotion summary print before this, not after:
+	// if docs fail, the run still returns an error below, but the human
+	// running it has already seen exactly what code landed, rather than
+	// losing that summary behind a docs-only failure.
 	report.write()
 	// Recompute the summary counts from the settled decisions, not the
 	// mid-loop tally above: the compile gate can downgrade a candidate that
@@ -498,7 +488,13 @@ func runUpdate(ctx context.Context, allSchemasPath, checkoutPath string) error {
 			finalBroken++
 		}
 	}
-	stepf("Done: refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), finalOK, finalBroken)
-	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`, `go run ./internal/tools/bigdiffer -docs`.")
+	stepf("Refreshed %d changed type(s) — %d generated OK, %d frozen/suppressed.", len(cands), finalOK, finalBroken)
+
+	if err := runDocsTail(cfg, noDocs); err != nil {
+		return err
+	}
+
+	stepf("Done.")
+	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`.")
 	return nil
 }

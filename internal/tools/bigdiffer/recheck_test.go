@@ -74,7 +74,7 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("migrates an existing comment to manual", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema", false)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "recursive schema", false)
 		if p.action != "reason" {
 			t.Errorf("action = %q, want reason", p.action)
 		}
@@ -85,7 +85,7 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("falls back to unknown with no comment", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", false)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "", false)
 		if !strings.HasPrefix(p.reason, "unknown:") {
 			t.Errorf("reason = %q, want unknown: prefix", p.reason)
 		}
@@ -93,13 +93,13 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("multiPending offers the comment as a shared candidate, not a confirmed fact", func(t *testing.T) {
 		t.Parallel()
-		// Review resolution (suppressed-and-frozen.md, "-heal: re-probe and
+		// Review resolution (suppressed-and-frozen.md, "-recheck: re-probe and
 		// fill gaps"): a row-level comment cannot be assumed to
 		// describe more than one still-reason-less fact, so when more than
 		// one fact is pending it must be visibly marked as a shared
 		// candidate for a human to confirm per field, not silently
 		// duplicated into each field as if confirmed.
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "recursive schema", true)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "recursive schema", true)
 		if p.action != "reason" {
 			t.Errorf("action = %q, want reason", p.action)
 		}
@@ -113,9 +113,66 @@ func TestCommentOrUnknown(t *testing.T) {
 
 	t.Run("multiPending with no comment still falls back to unknown, unmarked", func(t *testing.T) {
 		t.Parallel()
-		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", true)
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "", "", true)
 		if !strings.HasPrefix(p.reason, "unknown:") {
 			t.Errorf("reason = %q, want unknown: prefix regardless of multiPending", p.reason)
+		}
+	})
+
+	t.Run("a real existing reason is kept, never overwritten by a comment guess", func(t *testing.T) {
+		t.Parallel()
+		// Only reachable under -recheck-all: the default scope
+		// (needsHealing) excludes any fact with a real reason already, so
+		// commentOrUnknown only ever sees one here when -recheck-all widened
+		// the scope. With no cached schema to actually re-probe against,
+		// there is nothing to weigh against the existing answer, so it must
+		// win over a same-row free-form comment that might describe a
+		// different fact entirely.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y", field: attrSuppressionReasonResource}, "manual: schema frozen, known upstream Arn bug", "unrelated comment text", false)
+		if p.action != "reason" {
+			t.Errorf("action = %q, want reason", p.action)
+		}
+		if !strings.HasPrefix(p.reason, "manual: schema frozen, known upstream Arn bug") {
+			t.Errorf("reason = %q, want the existing reason preserved verbatim as a prefix, not overwritten by the comment", p.reason)
+		}
+		if strings.Contains(p.reason, "unrelated comment text") {
+			t.Errorf("reason = %q, must not incorporate the unrelated comment when a real existing reason is kept", p.reason)
+		}
+		if !strings.Contains(p.reason, "schema cache has this type") {
+			t.Errorf("reason = %q, an artifact fact's kept-reason note should mention the schema cache", p.reason)
+		}
+	})
+
+	t.Run("a real existing freeze reason is kept with freeze-specific wording, not the artifact-oriented cache note", func(t *testing.T) {
+		t.Parallel()
+		// Review finding: the freeze is a schema-level fact, never
+		// re-probed regardless of cache state (that is what "frozen"
+		// means) — the artifact-oriented "re-run once the schema cache has
+		// this type" wording is misleading here, since nothing about a
+		// freeze changes on a future run without a human lifting it by
+		// hand. base.field == attrFrozenReason (set by freezeProposal) is
+		// what distinguishes this case.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y", field: attrFrozenReason}, "manual: schema frozen, known upstream Arn bug", "unrelated comment text", false)
+		if !strings.HasPrefix(p.reason, "manual: schema frozen, known upstream Arn bug") {
+			t.Errorf("reason = %q, want the existing freeze reason preserved verbatim as a prefix", p.reason)
+		}
+		if strings.Contains(p.reason, "schema cache has this type") {
+			t.Errorf("reason = %q, a freeze's kept-reason note must not use the artifact-oriented cache wording", p.reason)
+		}
+		if !strings.Contains(p.reason, "no schema re-probe applies to a freeze") {
+			t.Errorf("reason = %q, want the freeze-specific note explaining why a re-probe never applies", p.reason)
+		}
+	})
+
+	t.Run("an existing reason still tagged unknown is treated as reason-less, not kept", func(t *testing.T) {
+		t.Parallel()
+		// unknown: is the explicit "still needs a human look" marker
+		// (formatReason(reasonUnknown, ...)), not a real answer — it must
+		// still fall through to the comment-migration/unknown fallback like
+		// a genuinely empty reason would, regardless of scope.
+		p := commentOrUnknown(healProposal{cfn: "AWS::X::Y"}, "unknown: needs a human look", "recursive schema", false)
+		if p.reason != "manual: recursive schema" {
+			t.Errorf("reason = %q, want the comment migrated (existing unknown: reason must not be kept as-is)", p.reason)
 		}
 	})
 }
@@ -277,8 +334,8 @@ func TestProbeArtifactWithBinaryCleanFailure(t *testing.T) {
 
 // TestRunHealProbeArtifactPassesCompileGateForARealType is the happy path:
 // probing a real, already-working type must still report success once the
-// compile gate step (added so -heal's "lift" proposals are trustworthy
-// against both stages a real -update run enforces, not just generation) is
+// compile gate step (added so -recheck's "lift" proposals are trustworthy
+// against both stages a real -sync run enforces, not just generation) is
 // exercised against the real module.
 func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 	if testing.Short() {
@@ -294,7 +351,7 @@ func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 		schemaPath = schemaCachePath(cfg.cacheDir, lg.CloudFormationTypeName)
 	}
 
-	err := runHealProbeArtifact(lg.ResourceTypeName, lg.CloudFormationTypeName, string(artifactResource),
+	err := runRecheckProbeArtifact(lg.ResourceTypeName, lg.CloudFormationTypeName, string(artifactResource),
 		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
 	if err != nil {
 		t.Fatalf("a real, already-working type should pass generation and the compile gate, got: %v", err)
@@ -303,8 +360,8 @@ func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 
 // TestRunHealProbeArtifactCatchesACompileGateFailure proves the actual review
 // item: a type that *generates* fine can still be rejected by the compile
-// gate, and runHealProbeArtifact must report that as a failure rather than
-// the generation-only success -heal reported before this change. Simulated by
+// gate, and runRecheckProbeArtifact must report that as a failure rather than
+// the generation-only success -recheck reported before this change. Simulated by
 // pre-placing a deliberately broken sibling file in the same real package the
 // probed artifact would land in — buildOnce's overlay of the probed artifact's
 // own (valid) code still fails the package build because of that sibling,
@@ -346,7 +403,7 @@ func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err := runHealProbeArtifact(row.ResourceTypeName, row.CloudFormationTypeName, string(artifactResource),
+	err := runRecheckProbeArtifact(row.ResourceTypeName, row.CloudFormationTypeName, string(artifactResource),
 		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
 	if err == nil {
 		t.Fatal("expected the compile gate to reject the package due to its broken sibling file")
@@ -366,7 +423,7 @@ func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
 // artifact generates cleanly but is rejected by the compile gate, and must
 // keep tagging generation_failed when generation itself fails — the two
 // stages must not collapse into the same category, which would defeat the
-// whole point of wiring the compile gate into -heal (a human reviewing
+// whole point of wiring the compile gate into -recheck (a human reviewing
 // proposals needs to know which stage actually failed).
 func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 	if testing.Short() {
@@ -471,7 +528,7 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 		}
 		var pending []string
 		for _, f := range healFactsFor(row) {
-			if f.needsHealing() {
+			if f.needsHealing(false) {
 				pending = append(pending, f.field)
 			}
 		}
@@ -487,7 +544,7 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 			SuppressionReasonResource:  "unknown: no schema cached and no existing comment to migrate; needs a human look",
 		}
 		facts := healFactsFor(row)
-		if !facts[0].needsHealing() {
+		if !facts[0].needsHealing(false) {
 			t.Error("an unknown:-tagged reason is still in the backlog and must need healing")
 		}
 	})
@@ -496,7 +553,7 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 		t.Parallel()
 		row := resourceRow{SuppressResourceGeneration: false, SuppressionReasonResource: ""}
 		facts := healFactsFor(row)
-		if facts[0].needsHealing() {
+		if facts[0].needsHealing(false) {
 			t.Error("a fact that isn't active (not suppressed/frozen) must never be proposed for healing")
 		}
 	})
@@ -511,12 +568,46 @@ func TestHealFactsForNeedsHealing(t *testing.T) {
 		}
 		var pending []string
 		for _, f := range healFactsFor(row) {
-			if f.needsHealing() {
+			if f.needsHealing(false) {
 				pending = append(pending, f.field)
 			}
 		}
 		if len(pending) != 1 || pending[0] != attrFrozenReason {
 			t.Errorf("pending = %v, want only %s — the freeze has its own empty reason independent of the already-reasoned resource", pending, attrFrozenReason)
+		}
+	})
+
+	t.Run("-recheck-all widens scope to every active fact, including an already-reasoned one", func(t *testing.T) {
+		t.Parallel()
+		// §0 story 5: "someone decided a while back this was broken — is
+		// that still true?" applies just as much to a fact with a real,
+		// specific reason recorded as to a reason-less one.
+		row := resourceRow{
+			FrozenSince:                today2026,
+			FrozenReason:               "manual: schema frozen, known upstream Arn bug",
+			SuppressResourceGeneration: true,
+			SuppressionReasonResource:  "manual: recursive schema",
+		}
+		var pending []string
+		for _, f := range healFactsFor(row) {
+			if f.needsHealing(true) {
+				pending = append(pending, f.field)
+			}
+		}
+		if len(pending) != 2 {
+			t.Fatalf("pending = %v, want both active facts in scope under -recheck-all, regardless of their existing reasons", pending)
+		}
+	})
+
+	t.Run("-recheck-all still excludes an inactive fact", func(t *testing.T) {
+		t.Parallel()
+		// Widening scope means "every active fact regardless of reason," not
+		// "every fact regardless of whether it's even active" — an inactive
+		// fact (not suppressed/frozen at all) is never in scope either way.
+		row := resourceRow{SuppressResourceGeneration: false, SuppressionReasonResource: ""}
+		facts := healFactsFor(row)
+		if facts[0].needsHealing(true) {
+			t.Error("an inactive fact must never need healing, even under -recheck-all")
 		}
 	})
 }

@@ -4,7 +4,7 @@
 // Legacy code: tests the legacy schema generator, superseded by bigdiffer's
 // discovery + `-update`/`-generate`/`-docs` pipeline. Kept as the deprecated
 // make/go:generate fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process.
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process.
 
 package main
 

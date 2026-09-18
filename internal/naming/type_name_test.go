@@ -3,7 +3,7 @@
 
 // Legacy code: tests the legacy naming package, superseded by
 // internal/tools/bigdiffer/naming. Kept as the deprecated fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process
 // and contributing/docs/removing-the-legacy-generation-process.md.
 
 package naming_test

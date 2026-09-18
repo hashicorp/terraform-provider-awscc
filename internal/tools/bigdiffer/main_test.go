@@ -316,7 +316,7 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	// Unpinned-retained is advisory only and must NOT be a blocking problem.
 	r := Report{UnexplainedRetained: []rowRef{{cfn: "AWS::Svc::Gone"}}}
 	if got := r.anomalyProblems(); len(got) != 0 {
-		t.Errorf("unpinned-retained should not block -check, got %v", got)
+		t.Errorf("unpinned-retained should not block -lint, got %v", got)
 	}
 
 	// Duplicates and naming violations are blocking.
@@ -332,7 +332,7 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	// suppression and freeze must carry its own reason.
 	r = Report{ReasonlessSuppressed: []reasonlessFact{{cfn: "AWS::Svc::Thing", field: attrFrozenReason}}}
 	if got := r.anomalyProblems(); len(got) != 1 {
-		t.Errorf("reason-less fact should block -check, got %v", got)
+		t.Errorf("reason-less fact should block -lint, got %v", got)
 	}
 }
 
@@ -385,7 +385,7 @@ func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
 // with its own reason field empty is flagged per-fact, not per-row — a row
 // can have a real reason for one fact (e.g. its resource) while another of
 // its facts (e.g. its plural DS, or its freeze) is still reason-less, and
-// each is its own independent anomaly line. Advisory only (never a -check
+// each is its own independent anomaly line. Advisory only (never a -lint
 // failure).
 func TestReasonlessSuppressionAnomaly(t *testing.T) {
 	t.Parallel()
@@ -442,6 +442,6 @@ func TestReasonlessSuppressionAnomaly(t *testing.T) {
 		t.Errorf("AWS::Svc::Reasoned's only fact (its resource) has a real reason, should not be flagged, got %+v", byCFN)
 	}
 	if got := report.anomalyProblems(); len(got) != 1 {
-		t.Errorf("a reason-less suppression/freeze must fail -check, got %v", got)
+		t.Errorf("a reason-less suppression/freeze must fail -lint, got %v", got)
 	}
 }

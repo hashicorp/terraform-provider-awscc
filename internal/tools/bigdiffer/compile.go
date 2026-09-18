@@ -24,7 +24,7 @@ import (
 // staged files onto their real destinations, runs `go build ./...` once from
 // cfg.repoRoot, and unconditionally reverts the overlay — regardless of the
 // build's outcome — before returning. The real tree is bit-for-bit unchanged
-// by the gate; only compileFixpoint's caller (runUpdate) promotes for real,
+// by the gate; only compileFixpoint's caller (runSync) promotes for real,
 // and only after the gate has gone green.
 
 // atomicWriteFile writes data to path via a temp file in the same directory
@@ -246,7 +246,7 @@ func buildOnce(ctx context.Context, repoRoot string, files map[string][]byte) (o
 }
 
 // checkListResourceCoupling is the cheap guard for a gap the compile gate's
-// fixpoint does not close on its own: reconcileListResource (update.go)
+// fixpoint does not close on its own: reconcileListResource (sync.go)
 // already reconciles a resource's ListResource registration against its
 // plural data source's outcome, but only generation's outcome — it runs
 // before compileFixpoint, off generateCorpus's results alone. If the plural
@@ -307,8 +307,8 @@ func projectRows(overlayContent string, base []resourceRow, checkout map[string]
 	return f.Resources, nil
 }
 
-// maxFixpointRounds bounds the compile-gate fixpoint (design doc "The
-// fixpoint: build until clean"). Each non-green round is already guaranteed to
+// maxFixpointRounds bounds the compile-gate fixpoint (bigdiffer-design.md §6,
+// "Build until green"). Each non-green round is already guaranteed to
 // remove at least one staged artifact, so the loop cannot exceed the staged
 // count regardless — this cap exists purely as a clean, conservative
 // terminator for the one situation that should never arise (attribution
@@ -483,8 +483,20 @@ func compileFixpoint(ctx context.Context, cfg config, stagingDir, overlayContent
 			// Nothing blamed maps to a staged file: either the base tree was
 			// already broken before this run, or bigdiffer's own
 			// registrations_gen.go has a bug. Neither is safe to guess at —
-			// promote nothing (design doc "Attribution fallback").
-			return fmt.Errorf("compile gate: build failed but no blamed file is attributable to this batch (base tree or registration bug?); promoting nothing:\n%s", formatBuildErrors(buildErrs))
+			// promote nothing.
+			//
+			// There is no per-type structure to report here: a genuinely
+			// unattributable failure has no candidate to blame at all, by
+			// definition of how this path is reached, unlike
+			// machineryFailures' per-type-and-artifact blame (only reachable
+			// once the fixpoint reaches green with some decisions flagged).
+			// The honest, most useful report available is the raw go build
+			// output itself, so this at least relativizes file paths against
+			// repoRoot (matching relativizeBuildErrors' existing convention,
+			// recheck.go) rather than the absolute paths buildOnce's overlay
+			// produces, which are long and mostly noise to a human reading
+			// the failure.
+			return fmt.Errorf("compile gate: build failed but no blamed file is attributable to this batch (base tree or registration bug?); promoting nothing:\n%s", formatBuildErrors(relativizeBuildErrors(buildErrs, cfg.repoRoot)))
 		}
 	}
 }

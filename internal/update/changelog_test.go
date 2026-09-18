@@ -3,7 +3,7 @@
 
 // Legacy code: tests the legacy weekly-update automation, superseded by
 // `bigdiffer -update`. Kept as the deprecated fallback; see
-// contributing/docs/generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process
+// contributing/docs/bigdiffer-runbooks.md#fallback-the-legacy-process
 // and contributing/docs/removing-the-legacy-generation-process.md.
 
 package main

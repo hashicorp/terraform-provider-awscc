@@ -8,7 +8,7 @@ A checklist for deleting the redundant legacy generation machinery (adopt phase
 (delete legacy generators/directives/`make` targets). Tracked by #3330 and
 `bigdiffer-design.md` "Deferred and future work". Follow this once bigdiffer has
 been the weekly driver for several clean release cycles and nobody has needed the
-[legacy fallback](generating-the-provider-with-bigdiffer.md#fallback-the-legacy-process).
+[legacy fallback](bigdiffer-runbooks.md#fallback-the-legacy-process).
 
 This is a **transient tracking doc** — delete it once the checklist below is done.
 
@@ -45,7 +45,7 @@ boundary is what makes the deletions below safe. In scope:
   blank-import directive files. `internal/provider/registrations_gen.go` is
   bigdiffer's replacement and already carries every registration.
 - `internal/update/` — the legacy updater (`makes.go`, `changelog.go`,
-  `hcl_parser.go`, `github.go`, `main.go`), superseded by `bigdiffer -update`.
+  `hcl_parser.go`, `github.go`, `main.go`), superseded by `bigdiffer -sync`.
   It imports the legacy generators and `internal/naming`; nothing else imports
   it.
 - `internal/naming/` — the legacy naming/pluralization package. Once the two
@@ -128,7 +128,7 @@ on.
    `commitschemas`, `commitresources`, `commitdatas`, `commitdocs`.
    - Update the `all:` target (it lists `schemas resources
      singular-data-sources plural-data-sources … docs-all`, all being removed) —
-     redefine it in terms of `bigdiffer-generate` + `build`, or delete it.
+     redefine it in terms of `bigdiffer-reconcile` + `build`, or delete it.
    - Grep the `GNUmakefile` for any deleted target used as a dependency of one
      you're keeping, and fix those chains.
    - **Keep:** `build`, `test`, `testacc`, `lint`/`golangci-lint`/`importlint`,
@@ -141,10 +141,10 @@ on.
    `contributing/CONTRIBUTING.md`, `contributing/docs/resource-behavior.md`,
    `contributing/docs/suppressed-and-frozen.md`, and
    `internal/tools/bigdiffer/README.md` (plus
-   `generating-the-provider-with-bigdiffer.md`, handled in step 8, and this doc,
+   `bigdiffer-runbooks.md`, handled in step 8, and this doc,
    deleted in step 12). Fix or remove every referrer.
 
-8. **Update `generating-the-provider-with-bigdiffer.md`:**
+8. **Update `bigdiffer-runbooks.md`:**
    - Delete the entire "Fallback: the legacy process" section — there is no
      fallback anymore.
    - Delete the "What bigdiffer replaces" table's framing as a *replacement*
@@ -178,8 +178,8 @@ on.
     (`go clean -testcache` first, including the rewritten `TestFullCorpusParity`
     and `TestCheckRegistrationUpToDate`), `-race -short`, `impi` with CI's actual
     flags (`impi --local . --scheme stdThirdPartyLocal --ignore-generated=true
-    ./...`), and offline `go run ./internal/tools/bigdiffer -generate` +
-    `-check`. A live `-update` run is optional here — it hits AWS (~13-minute
+    ./...`), and offline `go run ./internal/tools/bigdiffer -reconcile` +
+    `-check`. A live `-sync` run is optional here — it hits AWS (~13-minute
     crawl, needs credentials) and adds nothing the offline checks do not cover
     for a deletion-only change.
 

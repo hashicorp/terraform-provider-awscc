@@ -188,6 +188,46 @@ func TestDecide(t *testing.T) {
 		}
 	})
 
+	t.Run("present_unchanged + ok keeps the block untouched, same as present", func(t *testing.T) {
+		t.Parallel()
+		d := decide(classPresentUnchanged, okRes, today)
+		if d.addBlock || len(d.setAttrs) != 0 || d.machineryFailure {
+			t.Errorf("got %+v, want no add, no attrs, no machinery failure", d)
+		}
+	})
+
+	t.Run("present_unchanged + partial failure signals machineryFailure, never freezes or suppresses", func(t *testing.T) {
+		t.Parallel()
+		d := decide(classPresentUnchanged, brokenRes, today) // resource failed, singular ok — same gateResult classPresent's own partial-failure test uses
+		if !d.machineryFailure {
+			t.Errorf("schema-unchanged failure must signal machineryFailure, got %+v", d)
+		}
+		if d.addBlock {
+			t.Errorf("present_unchanged must not add a block")
+		}
+		if len(d.setAttrs) != 0 {
+			t.Errorf("schema did not change — nothing to freeze, and no safe partial suppress; got setAttrs=%+v", d.setAttrs)
+		}
+		if len(d.reasons) != 0 {
+			t.Errorf("no overlay reason should be written for a machinery failure, got %+v", d.reasons)
+		}
+	})
+
+	t.Run("present_unchanged + total failure also signals machineryFailure, never freezes", func(t *testing.T) {
+		t.Parallel()
+		totalFailUnchanged := gateResult{cfType: "AWS::Svc::Thing", artifacts: []artifactResult{
+			{kind: artifactResource, outcome: gateFailedGeneration, err: errors.New("boom")},
+			{kind: artifactSingularDataSource, outcome: gateFailedGeneration, err: errors.New("boom")},
+		}}
+		d := decide(classPresentUnchanged, totalFailUnchanged, today)
+		if !d.machineryFailure {
+			t.Errorf("schema-unchanged total failure must signal machineryFailure, got %+v", d)
+		}
+		if _, ok := d.setAttrs[attrFrozenSince]; ok {
+			t.Errorf("the schema is unchanged — freezing it is exactly the bug this class exists to avoid; got %+v", d.setAttrs)
+		}
+	})
+
 	t.Run("non-provisionable annotates", func(t *testing.T) {
 		t.Parallel()
 		d := decide(classNonProvisionable, gateResult{}, today)
@@ -262,7 +302,7 @@ func TestReasonsForFailures(t *testing.T) {
 		// suppresses the resource when nothing in gr.artifacts is
 		// attributable; reasonsForFailures must mirror that exact condition
 		// so the fallback-suppressed resource still gets a reason — otherwise
-		// -check's per-field anomaly would flag a suppression this same
+		// -lint's per-field anomaly would flag a suppression this same
 		// decision just made as reason-less (review finding 3).
 		gr := gateResult{cfType: "AWS::Svc::Thing"} // no artifacts at all
 		attrs := suppressAttrsForFailures(gr)
