@@ -1,4 +1,6 @@
-## 1.103.0 (Unreleased)
+## 1.103.0 (September 24, 2026)
+
+Release PR: [#3339](https://github.com/hashicorp/terraform-provider-awscc/pull/3339)
 
 FEATURES:
 
