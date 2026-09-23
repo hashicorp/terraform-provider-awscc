@@ -345,6 +345,9 @@ func reconcileListResource(cfg config, row resourceRow, results []genResult) ([]
 	if err != nil {
 		return nil, fmt.Errorf("reading staged schema %s: %w", r.p.schemaFile, err)
 	}
+	// Clear repoRoot/outputRoot for the same reason as generateCandidateIsolated:
+	// this single-artifact path forwards them to the child, which would otherwise
+	// run its ad-hoc compile gate and create outputRoot on disk (TestSyncBatchAtomicity).
 	genCfg := cfg
 	genCfg.repoRoot = ""
 	genCfg.outputRoot = ""
