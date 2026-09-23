@@ -1,4 +1,4 @@
-## 1.103.0 (Unreleased)
+## 1.103.0 (September 24, 2026)
 
 FEATURES:
 
