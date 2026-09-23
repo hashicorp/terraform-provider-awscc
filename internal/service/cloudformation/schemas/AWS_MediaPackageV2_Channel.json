@@ -38,7 +38,52 @@
       "type": "string",
       "enum": [
         "HLS",
-        "CMAF"
+        "CMAF",
+        "MULTIVIEW"
+      ]
+    },
+    "MultiviewConfiguration": {
+      "type": "object",
+      "description": "<p>The multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>",
+      "properties": {
+        "AvailableSources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "maxItems": 10,
+          "minItems": 1,
+          "description": "<p>The channels that players can use as tiles in this multiview channel's output. Each source channel must be in the same channel group as the multiview channel, and must have an <code>InputType</code> of <code>CMAF</code>. Only the channels that you list here are available as tiles.</p>"
+        },
+        "AvailableLayouts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiviewLayoutType"
+          },
+          "maxItems": 6,
+          "minItems": 1,
+          "description": "<p>The tile layouts that players can request from this multiview channel's origin endpoints. Only the layouts that you list here are available. Each layout must appear at most once.</p>"
+        }
+      },
+      "required": [
+        "AvailableLayouts",
+        "AvailableSources"
+      ],
+      "additionalProperties": false
+    },
+    "MultiviewLayoutType": {
+      "type": "string",
+      "description": "<p>A tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>LAYOUT_SINGLE</code> ? One tile at full resolution. Use this to serve a single source as a standard stream.</p> </li> <li> <p> <code>LAYOUT_2EH</code> ? Two tiles of equal size, arranged horizontally.</p> </li> <li> <p> <code>LAYOUT_2PL</code> ? Two tiles, with one larger primary tile.</p> </li> <li> <p> <code>LAYOUT_3EB</code> ? Three tiles of equal size, with two on top and one below.</p> </li> <li> <p> <code>LAYOUT_3EL</code> ? Three tiles of equal size, arranged in two columns.</p> </li> <li> <p> <code>LAYOUT_3PL</code> ? Three tiles, with one larger primary tile on the left and two stacked on the right.</p> </li> <li> <p> <code>LAYOUT_4E</code> ? Four tiles of equal size, arranged in a two-by-two grid.</p> </li> <li> <p> <code>LAYOUT_4PL</code> ? Four tiles, with one larger primary tile on the left and three stacked on the right.</p> </li> </ul>",
+      "enum": [
+        "LAYOUT_2EH",
+        "LAYOUT_2PL",
+        "LAYOUT_3EL",
+        "LAYOUT_3PL",
+        "LAYOUT_4E",
+        "LAYOUT_4PL"
       ]
     },
     "OutputHeaderConfiguration": {
@@ -76,6 +121,16 @@
     "Arn": {
       "type": "string",
       "description": "<p>The Amazon Resource Name (ARN) associated with the resource.</p>"
+    },
+    "AttachedMultiviewChannels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^[a-zA-Z0-9_-]+$"
+      },
+      "description": "<p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>"
     },
     "ChannelGroupName": {
       "type": "string",
@@ -118,6 +173,9 @@
       "description": "<p>The date and time the channel was modified.</p>",
       "format": "date-time"
     },
+    "MultiviewConfiguration": {
+      "$ref": "#/definitions/MultiviewConfiguration"
+    },
     "OutputHeaderConfiguration": {
       "$ref": "#/definitions/OutputHeaderConfiguration"
     },
@@ -143,7 +201,8 @@
     "/properties/CreatedAt",
     "/properties/IngestEndpoints",
     "/properties/IngestEndpointUrls",
-    "/properties/ModifiedAt"
+    "/properties/ModifiedAt",
+    "/properties/AttachedMultiviewChannels"
   ],
   "createOnlyProperties": [
     "/properties/ChannelGroupName",

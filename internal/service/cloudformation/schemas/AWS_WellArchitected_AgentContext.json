@@ -1,0 +1,178 @@
+{
+  "typeName": "AWS::WellArchitected::AgentContext",
+  "description": "Resource schema for AWS::WellArchitected::AgentContext. An Agent Context provides supplemental application context (free-form content) within an Agent Profile, used to improve the quality of Well-Architected Agent recommendations.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "ContextType": {
+      "description": "The type of the Agent Context.",
+      "type": "string",
+      "enum": [
+        "APPLICATION"
+      ]
+    },
+    "ApplicationType": {
+      "description": "Type of the application described by this context. Mirrors the value stored in `Content.applicationType` and is surfaced as a typed read-only attribute by the service for discoverability.",
+      "type": "string",
+      "enum": [
+        "SAS",
+        "DESKTOP_APPLICATION",
+        "OTHER"
+      ]
+    },
+    "Criticality": {
+      "description": "Business criticality of the application described by this context. Mirrors the value stored in `Content.criticality` and is surfaced as a typed read-only attribute by the service for discoverability.",
+      "type": "string",
+      "enum": [
+        "MISSION_CRITICAL",
+        "BUSINESS_CRITICAL",
+        "NON_CRITICAL",
+        "TEST_DEVELOPMENT"
+      ]
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The synthetic Amazon Resource Name (ARN) of the Agent Context, composed of the parent profile ARN and the context id.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+/agent-context/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ProfileArn": {
+      "description": "The Amazon Resource Name (ARN) of the parent Agent Profile that owns this context. Pass `!Ref` of the parent AWS::WellArchitected::AgentProfile to flow its ARN here.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+$"
+    },
+    "Id": {
+      "description": "The service-generated unique identifier of the Agent Context.",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Title": {
+      "description": "The title of the Agent Context.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^[\\P{C}]+$"
+    },
+    "ContextType": {
+      "$ref": "#/definitions/ContextType"
+    },
+    "ApplicationType": {
+      "$ref": "#/definitions/ApplicationType"
+    },
+    "Criticality": {
+      "$ref": "#/definitions/Criticality"
+    },
+    "Content": {
+      "description": "The free-form content of the Agent Context, supplied as an arbitrary JSON object.",
+      "type": "object"
+    },
+    "CreatedBy": {
+      "description": "The identifier of the system or user that created this context.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the context was created.",
+      "type": "string",
+      "format": "date-time",
+      "minLength": 20,
+      "maxLength": 64
+    },
+    "LastModifiedBy": {
+      "description": "The identifier of the system or user that last modified this context.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "LastModifiedAt": {
+      "description": "The timestamp when the context was last modified.",
+      "type": "string",
+      "format": "date-time",
+      "minLength": 20,
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ProfileArn",
+    "Title",
+    "ContextType",
+    "Content"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/ApplicationType",
+    "/properties/Criticality",
+    "/properties/CreatedBy",
+    "/properties/CreatedAt",
+    "/properties/LastModifiedBy",
+    "/properties/LastModifiedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProfileArn",
+    "/properties/ContextType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ProfileArn",
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wellarchitected:CreateAgentContext",
+        "wellarchitected:GetAgentContext"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wellarchitected:GetAgentContext"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wellarchitected:UpdateAgentContext",
+        "wellarchitected:GetAgentContext"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wellarchitected:DeleteAgentContext",
+        "wellarchitected:GetAgentContext"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ProfileArn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048,
+            "pattern": "^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+$"
+          }
+        },
+        "required": [
+          "ProfileArn"
+        ]
+      },
+      "permissions": [
+        "wellarchitected:ListAgentContexts"
+      ]
+    }
+  }
+}

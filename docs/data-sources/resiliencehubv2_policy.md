@@ -31,6 +31,7 @@ Data Source schema for AWS::ResilienceHubV2::Policy
 - `multi_region` (Attributes) (see [below for nested schema](#nestedatt--multi_region))
 - `name` (String) The name of the policy.
 - `policy_arn` (String) The ARN of the policy.
+- `sharing_enabled` (Boolean) Whether the policy is enabled to be shared with other members of the Organization. Only applicable if the policy owner is a management account or delegated admin.
 - `tags` (Attributes List) Tags assigned to the policy. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) The timestamp when the policy was last updated.
 

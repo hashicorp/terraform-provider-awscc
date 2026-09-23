@@ -254,6 +254,28 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "EarlySuccessCriteria": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "Enable": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "HealthyPercent": {
+		//	          "maximum": 100,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "SourceServiceRevisionCleanup": {
+		//	          "enum": [
+		//	            "BLOCKING",
+		//	            "DEFERRED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "LifecycleHooks": {
 		//	      "description": "An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle.",
 		//	      "items": {
@@ -542,6 +564,50 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.\n  The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EarlySuccessCriteria
+				"early_success_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enable
+						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HealthyPercent
+						"healthy_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceServiceRevisionCleanup
+						"source_service_revision_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"BLOCKING",
+									"DEFERRED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2751,6 +2817,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"desired_count":                     "DesiredCount",
 		"discovery_name":                    "DiscoveryName",
 		"dns_name":                          "DnsName",
+		"early_success_criteria":            "EarlySuccessCriteria",
 		"enable":                            "Enable",
 		"enable_ecs_managed_tags":           "EnableECSManagedTags",
 		"enable_execute_command":            "EnableExecuteCommand",
@@ -2766,6 +2833,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"format":                            "Format",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"healthy_percent":                   "HealthyPercent",
 		"hook_details":                      "HookDetails",
 		"hook_target_arn":                   "HookTargetArn",
 		"idle_timeout_seconds":              "IdleTimeoutSeconds",
@@ -2819,6 +2887,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"services":                          "Services",
 		"size_in_gi_b":                      "SizeInGiB",
 		"snapshot_id":                       "SnapshotId",
+		"source_service_revision_cleanup":   "SourceServiceRevisionCleanup",
 		"step_bake_time_in_minutes":         "StepBakeTimeInMinutes",
 		"step_percent":                      "StepPercent",
 		"strategy":                          "Strategy",

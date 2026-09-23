@@ -172,6 +172,19 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of an AWS managed customer master key (CMK) for SNS or a custom CMK. For more information, see [Key terms](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms). For more examples, see ``KeyId`` in the *API Reference*.\n This property applies only to [server-side-encryption](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaximumMessageSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maximum": 1048576,
+		//	  "minimum": 1024,
+		//	  "type": "integer"
+		//	}
+		"maximum_message_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SignatureVersion
 		// CloudFormation resource type schema:
 		//
@@ -336,6 +349,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fifo_topic":                   "FifoTopic",
 		"key":                          "Key",
 		"kms_master_key_id":            "KmsMasterKeyId",
+		"maximum_message_size":         "MaximumMessageSize",
 		"protocol":                     "Protocol",
 		"signature_version":            "SignatureVersion",
 		"subscription":                 "Subscription",

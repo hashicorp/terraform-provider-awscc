@@ -27,6 +27,7 @@ Creates a resilience policy that defines availability and disaster recovery requ
 - `kms_key_id` (String) The KMS key ID for encrypting policy data.
 - `multi_az` (Attributes) (see [below for nested schema](#nestedatt--multi_az))
 - `multi_region` (Attributes) (see [below for nested schema](#nestedatt--multi_region))
+- `sharing_enabled` (Boolean) Whether the policy is enabled to be shared with other members of the Organization. Only applicable if the policy owner is a management account or delegated admin.
 - `tags` (Attributes List) Tags assigned to the policy. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

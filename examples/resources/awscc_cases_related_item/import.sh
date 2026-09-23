@@ -1,0 +1,1 @@
+$ terraform import awscc_cases_related_item.example "related_item_arn"

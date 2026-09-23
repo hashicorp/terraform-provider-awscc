@@ -1,0 +1,1 @@
+$ terraform import awscc_bcmpricingcalculator_workload_estimate.example "arn"

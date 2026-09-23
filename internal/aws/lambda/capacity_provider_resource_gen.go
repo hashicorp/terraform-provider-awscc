@@ -231,7 +231,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "maxLength": 30,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\.\\-]+$",
+		//	        "pattern": "^[a-zA-Z0-9\\.\\*\\-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 400,
@@ -259,7 +259,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "maxLength": 30,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\.\\-]+$",
+		//	        "pattern": "^[a-zA-Z0-9\\.\\*\\-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 400,
@@ -281,7 +281,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(0, 400),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 30),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\-]+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\*\\-]+$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -319,7 +319,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(0, 400),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 30),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\-]+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\*\\-]+$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

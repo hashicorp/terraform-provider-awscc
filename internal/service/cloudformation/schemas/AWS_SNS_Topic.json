@@ -41,6 +41,12 @@
       "description": "Specifies the throughput quota and deduplication behavior to apply for the FIFO topic. Valid values are ``Topic`` or ``MessageGroup``.",
       "type": "string"
     },
+    "MaximumMessageSize": {
+      "description": "",
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 1048576
+    },
     "Tags": {
       "type": "array",
       "uniqueItems": false,

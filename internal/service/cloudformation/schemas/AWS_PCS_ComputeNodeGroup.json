@@ -388,7 +388,7 @@
     },
     "SubnetIds": {
       "description": "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
-      "insertionOrder": false,
+      "insertionOrder": true,
       "type": "array",
       "items": {
         "$ref": "#/definitions/SubnetId"

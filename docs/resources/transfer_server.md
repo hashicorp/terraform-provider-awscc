@@ -148,8 +148,17 @@ Optional:
 
 - `as_2_transports` (List of String)
 - `passive_ip` (String)
+- `proxy_config` (Attributes) (see [below for nested schema](#nestedatt--protocol_details--proxy_config))
 - `set_stat_option` (String)
 - `tls_session_resumption_mode` (String)
+
+<a id="nestedatt--protocol_details--proxy_config"></a>
+### Nested Schema for `protocol_details.proxy_config`
+
+Optional:
+
+- `sftp_mode` (String)
+
 
 
 <a id="nestedatt--s3_storage_options"></a>

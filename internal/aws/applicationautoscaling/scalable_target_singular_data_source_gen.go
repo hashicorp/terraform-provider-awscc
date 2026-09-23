@@ -247,6 +247,52 @@ func scalableTargetDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "An embedded object that contains attributes and attribute values that are used to suspend and resume automatic scaling. Setting the value of an attribute to ``true`` suspends the specified scaling activities. Setting it to ``false`` (default) resumes the specified scaling activities. \n  *Suspension Outcomes* \n  +  For ``DynamicScalingInSuspended``, while a suspension is in effect, all scale-in activities that are triggered by a scaling policy are suspended.\n  +  For ``DynamicScalingOutSuspended``, while a suspension is in effect, all scale-out activities that are triggered by a scaling policy are suspended.\n  +  For ``ScheduledScalingSuspended``, while a suspension is in effect, all scaling activities that involve scheduled actions are suspended.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -267,6 +313,7 @@ func scalableTargetDataSource(ctx context.Context) (datasource.DataSource, error
 		"dynamic_scaling_in_suspended":  "DynamicScalingInSuspended",
 		"dynamic_scaling_out_suspended": "DynamicScalingOutSuspended",
 		"end_time":                      "EndTime",
+		"key":                           "Key",
 		"max_capacity":                  "MaxCapacity",
 		"min_capacity":                  "MinCapacity",
 		"resource_id":                   "ResourceId",
@@ -281,7 +328,9 @@ func scalableTargetDataSource(ctx context.Context) (datasource.DataSource, error
 		"service_namespace":             "ServiceNamespace",
 		"start_time":                    "StartTime",
 		"suspended_state":               "SuspendedState",
+		"tags":                          "Tags",
 		"timezone":                      "Timezone",
+		"value":                         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -1,0 +1,97 @@
+{
+  "typeName": "AWS::MediaConvert::Queue",
+  "description": "Resource Type definition for AWS::MediaConvert::Queue",
+  "additionalProperties": false,
+  "properties": {
+    "Status": {
+      "type": "string",
+      "description": "Initial state of the queue. Queues can be either ACTIVE or PAUSED. If you create a paused queue, then jobs that you send to that queue won't begin."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the queue that you are creating."
+    },
+    "PricingPlan": {
+      "type": "string",
+      "description": "When you use CloudFormation, you can create only on-demand queues. Therefore, always set PricingPlan to the value ON_DEMAND when declaring an AWS::MediaConvert::Queue in your CloudFormation template. To create a reserved queue, use the AWS Elemental MediaConvert console at https://console.aws.amazon.com/mediaconvert to set up a contract. For more information, see Working with AWS Elemental MediaConvert Queues in the AWS Elemental MediaConvert User Guide."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the queue, such as arn:aws:mediaconvert:us-west-2:123456789012.",
+      "pattern": "arn:(aws|aws-cn|aws-us-gov):mediaconvert:\\w+(?:-\\w+)+:[0-9]*(:queues\/.*)?"
+    },
+    "Tags": {
+      "type": "object",
+      "description": "An array of key-value pairs to apply to this resource."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the queue that you are creating."
+    },
+    "ConcurrentJobs": {
+      "type": "integer",
+      "description": "Specify the maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead."
+    },
+    "MaximumConcurrentFeeds": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Specify the maximum number of Elemental Inference feeds MediaConvert can process concurrently."
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediaconvert:TagResource",
+      "mediaconvert:ListTagsForResource",
+      "mediaconvert:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediaconvert:CreateQueue",
+        "mediaconvert:GetQueue",
+        "mediaconvert:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mediaconvert:GetQueue",
+        "mediaconvert:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mediaconvert:UpdateQueue",
+        "mediaconvert:TagResource",
+        "mediaconvert:UntagResource",
+        "mediaconvert:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediaconvert:GetQueue",
+        "mediaconvert:DeleteQueue"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mediaconvert:ListQueues"
+      ]
+    }
+  }
+}
+

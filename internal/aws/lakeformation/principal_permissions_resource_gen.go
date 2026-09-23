@@ -226,6 +226,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 		//	      "properties": {
 		//	        "Id": {
+		//	          "description": "An identifier for the catalog resource.",
 		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
@@ -509,8 +510,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Id
 						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "An identifier for the catalog resource.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 255),
 							}, /*END VALIDATORS*/

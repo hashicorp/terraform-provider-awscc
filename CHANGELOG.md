@@ -1,5 +1,108 @@
 ## 1.103.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_appsync_api_key`
+* **New Data Source:** `awscc_bcm_scheduled_report`
+* **New Data Source:** `awscc_bcm_scheduled_reports`
+* **New Data Source:** `awscc_bcmpricingcalculator_workload_estimate`
+* **New Data Source:** `awscc_bcmpricingcalculator_workload_estimates`
+* **New Data Source:** `awscc_cases_related_item`
+* **New Data Source:** `awscc_chime_channel`
+* **New Data Source:** `awscc_connect_vocabulary`
+* **New Data Source:** `awscc_drs_replication_configuration_template`
+* **New Data Source:** `awscc_drs_replication_configuration_templates`
+* **New Data Source:** `awscc_ec2_i_pv_4_pool`
+* **New Data Source:** `awscc_ec2_i_pv_4_pools`
+* **New Data Source:** `awscc_ec2_instance_event_window`
+* **New Data Source:** `awscc_ec2_instance_event_windows`
+* **New Data Source:** `awscc_ec2_subnet_cidr_reservation`
+* **New Data Source:** `awscc_glue_partition`
+* **New Data Source:** `awscc_iot_thing_principal_attachment`
+* **New Data Source:** `awscc_iotsitewise_application`
+* **New Data Source:** `awscc_iotsitewise_applications`
+* **New Data Source:** `awscc_licensemanager_license_asset_group`
+* **New Data Source:** `awscc_licensemanager_license_asset_groups`
+* **New Data Source:** `awscc_mediaconvert_job_template`
+* **New Data Source:** `awscc_mediaconvert_job_templates`
+* **New Data Source:** `awscc_mediaconvert_queue`
+* **New Data Source:** `awscc_mediaconvert_queues`
+* **New Data Source:** `awscc_mgn_connector`
+* **New Data Source:** `awscc_mgn_connectors`
+* **New Data Source:** `awscc_networkfirewall_container_association`
+* **New Data Source:** `awscc_networkfirewall_container_associations`
+* **New Data Source:** `awscc_personalize_filter`
+* **New Data Source:** `awscc_personalize_filters`
+* **New Data Source:** `awscc_pi_perf_reports`
+* **New Data Source:** `awscc_quicksight_customization`
+* **New Data Source:** `awscc_route53_delegation_set`
+* **New Data Source:** `awscc_route53_delegation_sets`
+* **New Data Source:** `awscc_route53_query_logging_config`
+* **New Data Source:** `awscc_route53_query_logging_configs`
+* **New Data Source:** `awscc_sagemaker_cluster_scheduler_config`
+* **New Data Source:** `awscc_sagemaker_cluster_scheduler_configs`
+* **New Data Source:** `awscc_sagemaker_code_repositories`
+* **New Data Source:** `awscc_sagemaker_code_repository`
+* **New Data Source:** `awscc_sagemaker_notebook_instance_lifecycle_config`
+* **New Data Source:** `awscc_sagemaker_notebook_instance_lifecycle_configs`
+* **New Data Source:** `awscc_smsvoice_verified_destination_number`
+* **New Data Source:** `awscc_smsvoice_verified_destination_numbers`
+* **New Data Source:** `awscc_storagegateway_volume`
+* **New Data Source:** `awscc_wellarchitected_agent_context`
+* **New Data Source:** `awscc_wellarchitected_agent_goal`
+* **New Data Source:** `awscc_wellarchitected_agent_profile`
+* **New Data Source:** `awscc_wellarchitected_agent_profiles`
+* **New List Resource:** `awscc_bcm_scheduled_report`
+* **New List Resource:** `awscc_bcmpricingcalculator_workload_estimate`
+* **New List Resource:** `awscc_drs_replication_configuration_template`
+* **New List Resource:** `awscc_ec2_i_pv_4_pool`
+* **New List Resource:** `awscc_ec2_instance_event_window`
+* **New List Resource:** `awscc_iotsitewise_application`
+* **New List Resource:** `awscc_licensemanager_license_asset_group`
+* **New List Resource:** `awscc_mediaconvert_job_template`
+* **New List Resource:** `awscc_mediaconvert_queue`
+* **New List Resource:** `awscc_mgn_connector`
+* **New List Resource:** `awscc_networkfirewall_container_association`
+* **New List Resource:** `awscc_personalize_filter`
+* **New List Resource:** `awscc_route53_delegation_set`
+* **New List Resource:** `awscc_route53_query_logging_config`
+* **New List Resource:** `awscc_sagemaker_cluster_scheduler_config`
+* **New List Resource:** `awscc_sagemaker_code_repository`
+* **New List Resource:** `awscc_sagemaker_notebook_instance_lifecycle_config`
+* **New List Resource:** `awscc_smsvoice_verified_destination_number`
+* **New List Resource:** `awscc_wellarchitected_agent_profile`
+* **New Resource:** `awscc_appsync_api_key`
+* **New Resource:** `awscc_bcm_scheduled_report`
+* **New Resource:** `awscc_bcmpricingcalculator_workload_estimate`
+* **New Resource:** `awscc_cases_related_item`
+* **New Resource:** `awscc_chime_channel`
+* **New Resource:** `awscc_connect_vocabulary`
+* **New Resource:** `awscc_drs_replication_configuration_template`
+* **New Resource:** `awscc_ec2_i_pv_4_pool`
+* **New Resource:** `awscc_ec2_instance_event_window`
+* **New Resource:** `awscc_ec2_subnet_cidr_reservation`
+* **New Resource:** `awscc_glue_partition`
+* **New Resource:** `awscc_iot_thing_principal_attachment`
+* **New Resource:** `awscc_iotsitewise_application`
+* **New Resource:** `awscc_licensemanager_license_asset_group`
+* **New Resource:** `awscc_mediaconvert_job_template`
+* **New Resource:** `awscc_mediaconvert_queue`
+* **New Resource:** `awscc_mgn_connector`
+* **New Resource:** `awscc_networkfirewall_container_association`
+* **New Resource:** `awscc_personalize_filter`
+* **New Resource:** `awscc_pi_perf_reports`
+* **New Resource:** `awscc_quicksight_customization`
+* **New Resource:** `awscc_route53_delegation_set`
+* **New Resource:** `awscc_route53_query_logging_config`
+* **New Resource:** `awscc_sagemaker_cluster_scheduler_config`
+* **New Resource:** `awscc_sagemaker_code_repository`
+* **New Resource:** `awscc_sagemaker_notebook_instance_lifecycle_config`
+* **New Resource:** `awscc_smsvoice_verified_destination_number`
+* **New Resource:** `awscc_storagegateway_volume`
+* **New Resource:** `awscc_wellarchitected_agent_context`
+* **New Resource:** `awscc_wellarchitected_agent_goal`
+* **New Resource:** `awscc_wellarchitected_agent_profile`
+
 ## 1.102.0 (September 16, 2026)
 
 Release PR: [#3332](https://github.com/hashicorp/terraform-provider-awscc/pull/3332)

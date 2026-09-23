@@ -36,6 +36,7 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 - `last_updated_at` (String) When resource was last updated
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
+- `platform_version` (String) The version of the runtime platform
 - `protocol_configuration` (String) Protocol configuration for the agent runtime
 - `request_header_configuration` (Attributes) Configuration for HTTP request headers (see [below for nested schema](#nestedatt--request_header_configuration))
 - `role_arn` (String) Amazon Resource Name (ARN) of an IAM role

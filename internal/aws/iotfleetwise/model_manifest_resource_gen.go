@@ -144,6 +144,9 @@ func modelManifestResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"signal_catalog_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:

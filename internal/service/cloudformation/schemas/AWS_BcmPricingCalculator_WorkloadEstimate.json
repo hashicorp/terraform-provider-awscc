@@ -1,0 +1,188 @@
+{
+  "typeName": "AWS::BcmPricingCalculator::WorkloadEstimate",
+  "description": "Resource Type definition for AWS::BcmPricingCalculator::WorkloadEstimate",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-bcm-pricing-calculator",
+  "definitions": {
+    "WorkloadEstimateStatus": {
+      "type": "string",
+      "enum": [
+        "UPDATING",
+        "VALID",
+        "INVALID",
+        "ACTION_NEEDED"
+      ]
+    },
+    "WorkloadEstimateRateType": {
+      "type": "string",
+      "enum": [
+        "BEFORE_DISCOUNTS",
+        "AFTER_DISCOUNTS",
+        "AFTER_DISCOUNTS_AND_COMMITMENTS"
+      ]
+    },
+    "CurrencyCode": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the workload estimate.",
+      "pattern": "^arn:aws[-a-z]*:bcm-pricing-calculator::[0-9]{12}:workload-estimate/[a-f0-9-]+$"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier of the workload estimate.",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the workload estimate.",
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "RateType": {
+      "$ref": "#/definitions/WorkloadEstimateRateType",
+      "description": "The type of pricing rates used for the estimate."
+    },
+    "Status": {
+      "$ref": "#/definitions/WorkloadEstimateStatus",
+      "description": "The current status of the workload estimate."
+    },
+    "TotalCost": {
+      "type": "number",
+      "description": "The total estimated cost for the workload."
+    },
+    "CostCurrency": {
+      "$ref": "#/definitions/CurrencyCode",
+      "description": "The currency of the estimated cost."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the workload estimate was created."
+    },
+    "ExpiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the workload estimate will expire."
+    },
+    "RateTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of the pricing rates used for the estimate."
+    },
+    "FailureMessage": {
+      "type": "string",
+      "description": "An error message if the workload estimate failed."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/Status",
+    "/properties/TotalCost",
+    "/properties/CostCurrency",
+    "/properties/CreatedAt",
+    "/properties/RateTimestamp",
+    "/properties/FailureMessage"
+  ],
+  "createOnlyProperties": [
+    "/properties/RateType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bcm-pricing-calculator:TagResource",
+      "bcm-pricing-calculator:UntagResource",
+      "bcm-pricing-calculator:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bcm-pricing-calculator:CreateWorkloadEstimate",
+        "bcm-pricing-calculator:UpdateWorkloadEstimate",
+        "bcm-pricing-calculator:GetWorkloadEstimate",
+        "bcm-pricing-calculator:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bcm-pricing-calculator:GetWorkloadEstimate",
+        "bcm-pricing-calculator:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bcm-pricing-calculator:UpdateWorkloadEstimate",
+        "bcm-pricing-calculator:GetWorkloadEstimate",
+        "bcm-pricing-calculator:TagResource",
+        "bcm-pricing-calculator:UntagResource",
+        "bcm-pricing-calculator:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bcm-pricing-calculator:DeleteWorkloadEstimate",
+        "bcm-pricing-calculator:GetWorkloadEstimate",
+        "bcm-pricing-calculator:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bcm-pricing-calculator:ListWorkloadEstimates"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

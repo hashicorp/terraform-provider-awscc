@@ -120,7 +120,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The ECR URI of the container",
 		//	          "maxLength": 1024,
 		//	          "minLength": 1,
-		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
+		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.(amazonaws\\.com\\.cn|csp\\.hci\\.ic\\.gov|cloud\\.adc-e\\.uk|cloud\\.adc-g\\.au|sc2s\\.sgov\\.gov|amazonaws\\.com|amazonaws\\.eu|c2s\\.ic\\.gov)|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1230,6 +1230,20 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Network access configuration for the Agent",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PlatformVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the runtime platform",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[^\\s]+$",
+		//	  "type": "string"
+		//	}
+		"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the runtime platform",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProtocolConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1307,7 +1321,8 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "UPDATING",
 		//	    "UPDATE_FAILED",
 		//	    "READY",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "DELETE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1434,6 +1449,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"network_configuration":             "NetworkConfiguration",
 		"network_mode":                      "NetworkMode",
 		"network_mode_config":               "NetworkModeConfig",
+		"platform_version":                  "PlatformVersion",
 		"prefix":                            "Prefix",
 		"private_endpoint":                  "PrivateEndpoint",
 		"private_endpoint_overrides":        "PrivateEndpointOverrides",

@@ -102,20 +102,57 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
 		//	      "properties": {
+		//	        "Background": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Color": {
+		//	              "description": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+		//	              "type": "string"
+		//	            },
+		//	            "Gradient": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Tile": {
 		//	          "additionalProperties": false,
 		//	          "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
 		//	          "properties": {
+		//	            "BackgroundColor": {
+		//	              "description": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+		//	              "type": "string"
+		//	            },
 		//	            "Border": {
 		//	              "additionalProperties": false,
 		//	              "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
 		//	              "properties": {
+		//	                "Color": {
+		//	                  "description": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+		//	                  "type": "string"
+		//	                },
 		//	                "Show": {
 		//	                  "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
 		//	                  "type": "boolean"
+		//	                },
+		//	                "Width": {
+		//	                  "description": "String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)",
+		//	                  "maxLength": 50,
+		//	                  "minLength": 0,
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "BorderRadius": {
+		//	              "maxLength": 50,
+		//	              "minLength": 0,
+		//	              "type": "string"
+		//	            },
+		//	            "Padding": {
+		//	              "maxLength": 200,
+		//	              "minLength": 0,
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -155,6 +192,159 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Typography": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AxisLabelFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontColor": {
+		//	              "pattern": "^#[A-F0-9]{6}$",
+		//	              "type": "string"
+		//	            },
+		//	            "FontDecoration": {
+		//	              "enum": [
+		//	                "UNDERLINE",
+		//	                "NONE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontFamily": {
+		//	              "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	              "type": "string"
+		//	            },
+		//	            "FontSize": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Absolute": {
+		//	                  "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "FontStyle": {
+		//	              "enum": [
+		//	                "NORMAL",
+		//	                "ITALIC"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontWeight": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "BOLD"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "AxisTitleFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontColor": {
+		//	              "pattern": "^#[A-F0-9]{6}$",
+		//	              "type": "string"
+		//	            },
+		//	            "FontDecoration": {
+		//	              "enum": [
+		//	                "UNDERLINE",
+		//	                "NONE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontFamily": {
+		//	              "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	              "type": "string"
+		//	            },
+		//	            "FontSize": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Absolute": {
+		//	                  "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "FontStyle": {
+		//	              "enum": [
+		//	                "NORMAL",
+		//	                "ITALIC"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontWeight": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "BOLD"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "DataLabelFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontColor": {
+		//	              "pattern": "^#[A-F0-9]{6}$",
+		//	              "type": "string"
+		//	            },
+		//	            "FontDecoration": {
+		//	              "enum": [
+		//	                "UNDERLINE",
+		//	                "NONE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontFamily": {
+		//	              "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	              "type": "string"
+		//	            },
+		//	            "FontSize": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Absolute": {
+		//	                  "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "FontStyle": {
+		//	              "enum": [
+		//	                "NORMAL",
+		//	                "ITALIC"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontWeight": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "BOLD"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "FontFamilies": {
 		//	          "items": {
 		//	            "additionalProperties": false,
@@ -168,13 +358,259 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "maxItems": 5,
 		//	          "minItems": 0,
 		//	          "type": "array"
+		//	        },
+		//	        "LegendTitleFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontColor": {
+		//	              "pattern": "^#[A-F0-9]{6}$",
+		//	              "type": "string"
+		//	            },
+		//	            "FontDecoration": {
+		//	              "enum": [
+		//	                "UNDERLINE",
+		//	                "NONE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontFamily": {
+		//	              "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	              "type": "string"
+		//	            },
+		//	            "FontSize": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Absolute": {
+		//	                  "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "FontStyle": {
+		//	              "enum": [
+		//	                "NORMAL",
+		//	                "ITALIC"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontWeight": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "BOLD"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "LegendValueFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontColor": {
+		//	              "pattern": "^#[A-F0-9]{6}$",
+		//	              "type": "string"
+		//	            },
+		//	            "FontDecoration": {
+		//	              "enum": [
+		//	                "UNDERLINE",
+		//	                "NONE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontFamily": {
+		//	              "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	              "type": "string"
+		//	            },
+		//	            "FontSize": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Absolute": {
+		//	                  "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "FontStyle": {
+		//	              "enum": [
+		//	                "NORMAL",
+		//	                "ITALIC"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "FontWeight": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "BOLD"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "VisualSubtitleFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "TextAlignment": {
+		//	              "enum": [
+		//	                "LEFT",
+		//	                "CENTER",
+		//	                "RIGHT",
+		//	                "AUTO"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "TextTransform": {
+		//	              "enum": [
+		//	                "CAPITALIZE"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "VisualTitleFontConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "TextAlignment": {
+		//	              "enum": [
+		//	                "LEFT",
+		//	                "CENTER",
+		//	                "RIGHT",
+		//	                "AUTO"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "TextTransform": {
+		//	              "enum": [
+		//	                "CAPITALIZE"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "UIColorPalette": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n         \u003c/p\u003e",
+		//	      "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon Quick\u003c/a\u003e in the \u003ci\u003eAmazon Quick User\n                Guide.\u003c/i\u003e\n         \u003c/p\u003e",
 		//	      "properties": {
 		//	        "Accent": {
 		//	          "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
@@ -291,20 +727,58 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Sheet
 				"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Background
+						"background": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Color
+								"color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Gradient
+								"gradient": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Tile
 						"tile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BackgroundColor
+								"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Border
 								"border": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Color
+										"color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
 										// Property: Show
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The option to enable display of borders for visuals.</p>",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
+										// Property: Width
+										"width": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>The display options for tile borders for visuals.</p>",
 									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BorderRadius
+								"border_radius": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Padding
+								"padding": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>Display options related to tiles on a sheet.</p>",
@@ -348,6 +822,138 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Typography
 				"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AxisLabelFontConfiguration
+						"axis_label_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontColor
+								"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontDecoration
+								"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontFamily
+								"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The font family that you want to use.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontSize
+								"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Absolute
+										"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font size that you want to use in px.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontStyle
+								"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontWeight
+								"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AxisTitleFontConfiguration
+						"axis_title_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontColor
+								"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontDecoration
+								"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontFamily
+								"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The font family that you want to use.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontSize
+								"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Absolute
+										"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font size that you want to use in px.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontStyle
+								"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontWeight
+								"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataLabelFontConfiguration
+						"data_label_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontColor
+								"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontDecoration
+								"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontFamily
+								"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The font family that you want to use.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontSize
+								"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Absolute
+										"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font size that you want to use in px.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontStyle
+								"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontWeight
+								"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: FontFamilies
 						"font_families": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -358,6 +964,210 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LegendTitleFontConfiguration
+						"legend_title_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontColor
+								"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontDecoration
+								"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontFamily
+								"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The font family that you want to use.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontSize
+								"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Absolute
+										"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font size that you want to use in px.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontStyle
+								"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontWeight
+								"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LegendValueFontConfiguration
+						"legend_value_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontColor
+								"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontDecoration
+								"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontFamily
+								"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The font family that you want to use.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontSize
+								"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Absolute
+										"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font size that you want to use in px.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontStyle
+								"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FontWeight
+								"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VisualSubtitleFontConfiguration
+						"visual_subtitle_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontConfiguration
+								"font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextAlignment
+								"text_alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextTransform
+								"text_transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VisualTitleFontConfiguration
+						"visual_title_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontConfiguration
+								"font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextAlignment
+								"text_alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextTransform
+								"text_transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -447,7 +1257,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+					Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon Quick</a> in the <i>Amazon Quick User\n                Guide.</i>\n         </p>",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -504,12 +1314,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 20,
+		//	        "maxItems": 30,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },
 		//	      "Principal": {
-		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Quick user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Quick user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -536,7 +1346,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
 					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon Quick user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Quick user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -629,7 +1439,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "BaseThemeId": {
-		//	      "description": "\u003cp\u003eThe Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.\u003c/p\u003e",
+		//	      "description": "\u003cp\u003eThe Amazon Quick-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Quick theme.\u003c/p\u003e",
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "^[\\w\\-]+$",
@@ -675,20 +1485,57 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "additionalProperties": false,
 		//	          "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
 		//	          "properties": {
+		//	            "Background": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Color": {
+		//	                  "description": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+		//	                  "type": "string"
+		//	                },
+		//	                "Gradient": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "Tile": {
 		//	              "additionalProperties": false,
 		//	              "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
 		//	              "properties": {
+		//	                "BackgroundColor": {
+		//	                  "description": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+		//	                  "type": "string"
+		//	                },
 		//	                "Border": {
 		//	                  "additionalProperties": false,
 		//	                  "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
 		//	                  "properties": {
+		//	                    "Color": {
+		//	                      "description": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Show": {
 		//	                      "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
 		//	                      "type": "boolean"
+		//	                    },
+		//	                    "Width": {
+		//	                      "description": "String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)",
+		//	                      "maxLength": 50,
+		//	                      "minLength": 0,
+		//	                      "type": "string"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
+		//	                },
+		//	                "BorderRadius": {
+		//	                  "maxLength": 50,
+		//	                  "minLength": 0,
+		//	                  "type": "string"
+		//	                },
+		//	                "Padding": {
+		//	                  "maxLength": 200,
+		//	                  "minLength": 0,
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "type": "object"
@@ -728,6 +1575,159 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "Typography": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "AxisLabelFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "AxisTitleFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "DataLabelFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "FontFamilies": {
 		//	              "items": {
 		//	                "additionalProperties": false,
@@ -741,13 +1741,259 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "maxItems": 5,
 		//	              "minItems": 0,
 		//	              "type": "array"
+		//	            },
+		//	            "LegendTitleFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "LegendValueFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontColor": {
+		//	                  "pattern": "^#[A-F0-9]{6}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontDecoration": {
+		//	                  "enum": [
+		//	                    "UNDERLINE",
+		//	                    "NONE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontFamily": {
+		//	                  "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                },
+		//	                "FontSize": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Absolute": {
+		//	                      "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FontStyle": {
+		//	                  "enum": [
+		//	                    "NORMAL",
+		//	                    "ITALIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "FontWeight": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "BOLD"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "VisualSubtitleFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "FontColor": {
+		//	                      "pattern": "^#[A-F0-9]{6}$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontDecoration": {
+		//	                      "enum": [
+		//	                        "UNDERLINE",
+		//	                        "NONE"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontFamily": {
+		//	                      "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontSize": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Absolute": {
+		//	                          "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "FontStyle": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "ITALIC"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontWeight": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "enum": [
+		//	                            "NORMAL",
+		//	                            "BOLD"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "TextAlignment": {
+		//	                  "enum": [
+		//	                    "LEFT",
+		//	                    "CENTER",
+		//	                    "RIGHT",
+		//	                    "AUTO"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TextTransform": {
+		//	                  "enum": [
+		//	                    "CAPITALIZE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "VisualTitleFontConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FontConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "FontColor": {
+		//	                      "pattern": "^#[A-F0-9]{6}$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontDecoration": {
+		//	                      "enum": [
+		//	                        "UNDERLINE",
+		//	                        "NONE"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontFamily": {
+		//	                      "description": "\u003cp\u003eThe font family that you want to use.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontSize": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Absolute": {
+		//	                          "description": "\u003cp\u003eThe font size that you want to use in px.\u003c/p\u003e",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "FontStyle": {
+		//	                      "enum": [
+		//	                        "NORMAL",
+		//	                        "ITALIC"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FontWeight": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "enum": [
+		//	                            "NORMAL",
+		//	                            "BOLD"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "TextAlignment": {
+		//	                  "enum": [
+		//	                    "LEFT",
+		//	                    "CENTER",
+		//	                    "RIGHT",
+		//	                    "AUTO"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TextTransform": {
+		//	                  "enum": [
+		//	                    "CAPITALIZE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "UIColorPalette": {
 		//	          "additionalProperties": false,
-		//	          "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n         \u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon Quick\u003c/a\u003e in the \u003ci\u003eAmazon Quick User\n                Guide.\u003c/i\u003e\n         \u003c/p\u003e",
 		//	          "properties": {
 		//	            "Accent": {
 		//	              "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
@@ -899,7 +2145,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BaseThemeId
 				"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.</p>",
+					Description: "<p>The Amazon Quick-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Quick theme.</p>",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Configuration
@@ -932,20 +2178,58 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Sheet
 						"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Background
+								"background": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Color
+										"color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Gradient
+										"gradient": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: Tile
 								"tile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BackgroundColor
+										"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
 										// Property: Border
 										"border": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Color
+												"color": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The option to enable display of borders for visuals.</p>",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
+												// Property: Width
+												"width": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "<p>The display options for tile borders for visuals.</p>",
 											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: BorderRadius
+										"border_radius": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Padding
+										"padding": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>Display options related to tiles on a sheet.</p>",
@@ -989,6 +2273,138 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Typography
 						"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AxisLabelFontConfiguration
+								"axis_label_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AxisTitleFontConfiguration
+								"axis_title_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataLabelFontConfiguration
+								"data_label_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: FontFamilies
 								"font_families": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -999,6 +2415,210 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LegendTitleFontConfiguration
+								"legend_title_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LegendValueFontConfiguration
+								"legend_value_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontColor
+										"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontDecoration
+										"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontFamily
+										"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The font family that you want to use.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontSize
+										"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Absolute
+												"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font size that you want to use in px.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontStyle
+										"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FontWeight
+										"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: VisualSubtitleFontConfiguration
+								"visual_subtitle_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontConfiguration
+										"font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FontColor
+												"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontDecoration
+												"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontFamily
+												"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font family that you want to use.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontSize
+												"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Absolute
+														"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "<p>The font size that you want to use in px.</p>",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontStyle
+												"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontWeight
+												"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextAlignment
+										"text_alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextTransform
+										"text_transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: VisualTitleFontConfiguration
+								"visual_title_font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FontConfiguration
+										"font_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FontColor
+												"font_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontDecoration
+												"font_decoration": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontFamily
+												"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The font family that you want to use.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontSize
+												"font_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Absolute
+														"absolute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "<p>The font size that you want to use in px.</p>",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontStyle
+												"font_style": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FontWeight
+												"font_weight": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextAlignment
+										"text_alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextTransform
+										"text_transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1088,7 +2708,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+							Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon Quick</a> in the <i>Amazon Quick User\n                Guide.</i>\n         </p>",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1165,59 +2785,82 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Theme").WithTerraformTypeName("awscc_quicksight_theme")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accent":               "Accent",
-		"accent_foreground":    "AccentForeground",
-		"actions":              "Actions",
-		"arn":                  "Arn",
-		"aws_account_id":       "AwsAccountId",
-		"base_theme_id":        "BaseThemeId",
-		"border":               "Border",
-		"colors":               "Colors",
-		"configuration":        "Configuration",
-		"created_time":         "CreatedTime",
-		"danger":               "Danger",
-		"danger_foreground":    "DangerForeground",
-		"data_color_palette":   "DataColorPalette",
-		"description":          "Description",
-		"dimension":            "Dimension",
-		"dimension_foreground": "DimensionForeground",
-		"empty_fill_color":     "EmptyFillColor",
-		"errors":               "Errors",
-		"font_families":        "FontFamilies",
-		"font_family":          "FontFamily",
-		"gutter":               "Gutter",
-		"key":                  "Key",
-		"last_updated_time":    "LastUpdatedTime",
-		"margin":               "Margin",
-		"measure":              "Measure",
-		"measure_foreground":   "MeasureForeground",
-		"message":              "Message",
-		"min_max_gradient":     "MinMaxGradient",
-		"name":                 "Name",
-		"permissions":          "Permissions",
-		"primary_background":   "PrimaryBackground",
-		"primary_foreground":   "PrimaryForeground",
-		"principal":            "Principal",
-		"secondary_background": "SecondaryBackground",
-		"secondary_foreground": "SecondaryForeground",
-		"sheet":                "Sheet",
-		"show":                 "Show",
-		"status":               "Status",
-		"success":              "Success",
-		"success_foreground":   "SuccessForeground",
-		"tags":                 "Tags",
-		"theme_id":             "ThemeId",
-		"tile":                 "Tile",
-		"tile_layout":          "TileLayout",
-		"type":                 "Type",
-		"typography":           "Typography",
-		"ui_color_palette":     "UIColorPalette",
-		"value":                "Value",
-		"version":              "Version",
-		"version_description":  "VersionDescription",
-		"version_number":       "VersionNumber",
-		"warning":              "Warning",
-		"warning_foreground":   "WarningForeground",
+		"absolute":                           "Absolute",
+		"accent":                             "Accent",
+		"accent_foreground":                  "AccentForeground",
+		"actions":                            "Actions",
+		"arn":                                "Arn",
+		"aws_account_id":                     "AwsAccountId",
+		"axis_label_font_configuration":      "AxisLabelFontConfiguration",
+		"axis_title_font_configuration":      "AxisTitleFontConfiguration",
+		"background":                         "Background",
+		"background_color":                   "BackgroundColor",
+		"base_theme_id":                      "BaseThemeId",
+		"border":                             "Border",
+		"border_radius":                      "BorderRadius",
+		"color":                              "Color",
+		"colors":                             "Colors",
+		"configuration":                      "Configuration",
+		"created_time":                       "CreatedTime",
+		"danger":                             "Danger",
+		"danger_foreground":                  "DangerForeground",
+		"data_color_palette":                 "DataColorPalette",
+		"data_label_font_configuration":      "DataLabelFontConfiguration",
+		"description":                        "Description",
+		"dimension":                          "Dimension",
+		"dimension_foreground":               "DimensionForeground",
+		"empty_fill_color":                   "EmptyFillColor",
+		"errors":                             "Errors",
+		"font_color":                         "FontColor",
+		"font_configuration":                 "FontConfiguration",
+		"font_decoration":                    "FontDecoration",
+		"font_families":                      "FontFamilies",
+		"font_family":                        "FontFamily",
+		"font_size":                          "FontSize",
+		"font_style":                         "FontStyle",
+		"font_weight":                        "FontWeight",
+		"gradient":                           "Gradient",
+		"gutter":                             "Gutter",
+		"key":                                "Key",
+		"last_updated_time":                  "LastUpdatedTime",
+		"legend_title_font_configuration":    "LegendTitleFontConfiguration",
+		"legend_value_font_configuration":    "LegendValueFontConfiguration",
+		"margin":                             "Margin",
+		"measure":                            "Measure",
+		"measure_foreground":                 "MeasureForeground",
+		"message":                            "Message",
+		"min_max_gradient":                   "MinMaxGradient",
+		"name":                               "Name",
+		"padding":                            "Padding",
+		"permissions":                        "Permissions",
+		"primary_background":                 "PrimaryBackground",
+		"primary_foreground":                 "PrimaryForeground",
+		"principal":                          "Principal",
+		"secondary_background":               "SecondaryBackground",
+		"secondary_foreground":               "SecondaryForeground",
+		"sheet":                              "Sheet",
+		"show":                               "Show",
+		"status":                             "Status",
+		"success":                            "Success",
+		"success_foreground":                 "SuccessForeground",
+		"tags":                               "Tags",
+		"text_alignment":                     "TextAlignment",
+		"text_transform":                     "TextTransform",
+		"theme_id":                           "ThemeId",
+		"tile":                               "Tile",
+		"tile_layout":                        "TileLayout",
+		"type":                               "Type",
+		"typography":                         "Typography",
+		"ui_color_palette":                   "UIColorPalette",
+		"value":                              "Value",
+		"version":                            "Version",
+		"version_description":                "VersionDescription",
+		"version_number":                     "VersionNumber",
+		"visual_subtitle_font_configuration": "VisualSubtitleFontConfiguration",
+		"visual_title_font_configuration":    "VisualTitleFontConfiguration",
+		"warning":                            "Warning",
+		"warning_foreground":                 "WarningForeground",
+		"width":                              "Width",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

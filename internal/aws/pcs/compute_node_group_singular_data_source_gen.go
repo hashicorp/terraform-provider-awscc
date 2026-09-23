@@ -716,7 +716,7 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "description": "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
-		//	  "insertionOrder": false,
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "description": "A VPC subnet ID.",
 		//	    "type": "string"

@@ -102,6 +102,28 @@
         }
       }
     },
+    "DeploymentEarlySuccessCriteria": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SourceServiceRevisionCleanup": {
+          "type": "string",
+          "enum": [
+            "BLOCKING",
+            "DEFERRED"
+          ]
+        },
+        "HealthyPercent": {
+          "maximum": 100,
+          "type": "integer",
+          "minimum": 0
+        },
+        "Enable": {
+          "type": "boolean"
+        }
+      }
+    },
     "ServiceConnectTlsCertificateAuthority": {
       "description": "The certificate root authority that secures your service.",
       "additionalProperties": false,
@@ -939,6 +961,10 @@
           "items": {
             "$ref": "#/definitions/DeploymentLifecycleHook"
           }
+        },
+        "EarlySuccessCriteria": {
+          "description": "",
+          "$ref": "#/definitions/DeploymentEarlySuccessCriteria"
         },
         "Alarms": {
           "description": "Information about the CloudWatch alarms.",

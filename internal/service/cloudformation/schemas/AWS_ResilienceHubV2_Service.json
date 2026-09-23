@@ -352,11 +352,85 @@
             "type": "string"
           },
           "insertionOrder": false
+        },
+        "LabelSelector": {
+          "$ref": "#/definitions/EksLabelSelector"
         }
       },
       "required": [
         "ClusterArn",
         "Namespaces"
+      ]
+    },
+    "EksLabelSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Kubernetes label selector that scopes discovery to matching objects in the specified namespaces. An object must satisfy both MatchLabels and MatchExpressions. Specify at least one of them; a selector carrying neither is treated as though no selector were supplied, and all supported objects in the specified namespaces are discovered.",
+      "properties": {
+        "MatchLabels": {
+          "type": "object",
+          "description": "Label key/value pairs an object must carry to be discovered. Up to 20 pairs.",
+          "minProperties": 1,
+          "maxProperties": 20,
+          "patternProperties": {
+            "": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 63
+            }
+          },
+          "additionalProperties": false
+        },
+        "MatchExpressions": {
+          "type": "array",
+          "description": "Label selector requirements an object must satisfy to be discovered. Up to 20 requirements, all of which must match.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/EksLabelSelectorRequirement"
+          },
+          "insertionOrder": false
+        }
+      }
+    },
+    "EksLabelSelectorRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A single label selector requirement. Specify Values when Operator is IN or NOT_IN, and omit Values when Operator is EXISTS or DOES_NOT_EXIST.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Label key the requirement applies to.",
+          "minLength": 1,
+          "maxLength": 317,
+          "pattern": "^([a-z0-9]([-a-z0-9.]{0,251}[a-z0-9])?/)?[a-zA-Z0-9]([-a-zA-Z0-9_.]{0,61}[a-zA-Z0-9])?$"
+        },
+        "Operator": {
+          "type": "string",
+          "description": "Operator applied to the label key.",
+          "enum": [
+            "IN",
+            "NOT_IN",
+            "EXISTS",
+            "DOES_NOT_EXIST"
+          ]
+        },
+        "Values": {
+          "type": "array",
+          "description": "Label values the requirement compares against. Up to 20 values. Required for IN and NOT_IN; omit for EXISTS and DOES_NOT_EXIST.",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 63
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Key",
+        "Operator"
       ]
     },
     "AssertionDefinition": {

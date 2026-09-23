@@ -25,6 +25,7 @@ Resource Type definition for AWS::DataSync::LocationAzureBlob.
 - `azure_blob_type` (String) Specifies a blob type for the objects you're transferring into your Azure Blob Storage container.
 - `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
 - `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
+- `federated_identity` (Attributes) Specifies the identity federation configuration that DataSync uses to access your Azure Blob Storage container using an OpenID Connect (OIDC) token. (see [below for nested schema](#nestedatt--federated_identity))
 - `subdirectory` (String) The subdirectory in the Azure Blob Container that is used to read data from the Azure Blob Source Location.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -62,6 +63,24 @@ Optional:
 
 - `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
 - `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
+
+<a id="nestedatt--federated_identity"></a>
+### Nested Schema for `federated_identity`
+
+Optional:
+
+- `aws_iam_role` (String) Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.
+- `azure_oidc` (Attributes) Specifies the Microsoft Entra (Azure AD) identity that DataSync federates with to obtain an access token for your Azure Blob Storage container. (see [below for nested schema](#nestedatt--federated_identity--azure_oidc))
+
+<a id="nestedatt--federated_identity--azure_oidc"></a>
+### Nested Schema for `federated_identity.azure_oidc`
+
+Optional:
+
+- `client_id` (String) Specifies the client ID of the Microsoft Entra (Azure AD) identity that DataSync uses to obtain an access token.
+- `tenant_id` (String) Specifies the Microsoft Entra (Azure AD) tenant ID that the identity belongs to.
+
 
 
 <a id="nestedatt--tags"></a>

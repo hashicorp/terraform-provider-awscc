@@ -501,6 +501,14 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "ObjectMetadata": {
+		//	      "description": "A value that determines whether source object metadata should be copied to the destination. PRESERVE copies metadata; NONE copies only file-mtime.",
+		//	      "enum": [
+		//	        "PRESERVE",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ObjectTags": {
 		//	      "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
 		//	      "enum": [
@@ -659,6 +667,21 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"NONE",
 							"PRESERVE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectMetadata
+				"object_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether source object metadata should be copied to the destination. PRESERVE copies metadata; NONE copies only file-mtime.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PRESERVE",
+							"NONE",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1494,6 +1517,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		"manifest_object_version_id":         "ManifestObjectVersionId",
 		"mtime":                              "Mtime",
 		"name":                               "Name",
+		"object_metadata":                    "ObjectMetadata",
 		"object_tags":                        "ObjectTags",
 		"object_version_ids":                 "ObjectVersionIds",
 		"options":                            "Options",

@@ -445,7 +445,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "insertionOrder": false,
 		//	                        "items": {
 		//	                          "description": "Namespace for the memory strategy",
-		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "minItems": 1,
@@ -456,7 +456,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "insertionOrder": false,
 		//	                        "items": {
 		//	                          "description": "Namespace for the memory strategy",
-		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "minItems": 1,
@@ -807,7 +807,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -818,7 +818,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1013,7 +1013,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1024,7 +1024,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1167,7 +1167,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "description": "Namespace for the memory strategy",
-		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                  "type": "string"
 		//	                },
 		//	                "minItems": 1,
@@ -1178,7 +1178,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "description": "Namespace for the memory strategy",
-		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                  "type": "string"
 		//	                },
 		//	                "minItems": 1,
@@ -1376,7 +1376,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1387,7 +1387,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1582,7 +1582,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1593,7 +1593,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1788,7 +1788,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1799,7 +1799,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -2175,7 +2175,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 														Validators: []validator.List{ /*START VALIDATORS*/
 															listvalidator.SizeAtLeast(1),
 															listvalidator.ValueStringsAre(
-																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 															),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2192,7 +2192,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 														Validators: []validator.List{ /*START VALIDATORS*/
 															listvalidator.SizeAtLeast(1),
 															listvalidator.ValueStringsAre(
-																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 															),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2803,7 +2803,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2820,7 +2820,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3148,7 +3148,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3165,7 +3165,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3396,7 +3396,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtLeast(1),
 											listvalidator.ValueStringsAre(
-												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3413,7 +3413,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtLeast(1),
 											listvalidator.ValueStringsAre(
-												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3748,7 +3748,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3765,7 +3765,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -4093,7 +4093,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -4110,7 +4110,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -4438,7 +4438,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -4455,7 +4455,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -4554,6 +4554,130 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NamespaceKeys
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of namespace variable key definitions for a memory resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A namespace variable key definition with optional validation rules",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A namespace variable key name. Must start with a lowercase letter and contain only lowercase alphanumeric characters. Cannot be a built-in variable (memoryStrategyId, sessionId, actorId).",
+		//	        "maxLength": 32,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Validation": {
+		//	        "additionalProperties": false,
+		//	        "description": "Validation rules for namespace variable values. Multiple rules can be specified and all must pass.",
+		//	        "properties": {
+		//	          "AllowedValues": {
+		//	            "description": "List of allowed values for this namespace variable",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "A single allowed value for a namespace variable",
+		//	              "maxLength": 64,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-z0-9][a-z0-9-_]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 10,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "RegexPattern": {
+		//	            "description": "A regex pattern that a namespace variable value must match",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"namespace_keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A namespace variable key name. Must start with a lowercase letter and contain only lowercase alphanumeric characters. Cannot be a built-in variable (memoryStrategyId, sessionId, actorId).",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 32),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Validation
+					"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of allowed values for this namespace variable",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 10),
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthBetween(1, 64),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9-_]*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RegexPattern
+							"regex_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A regex pattern that a namespace variable value must match",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 64),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Validation rules for namespace variable values. Multiple rules can be specified and all must pass.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of namespace variable key definitions for a memory resource",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 5),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -4849,12 +4973,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"min_value":                       "MinValue",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
+		"namespace_keys":                  "NamespaceKeys",
 		"namespace_templates":             "NamespaceTemplates",
 		"namespaces":                      "Namespaces",
 		"number_validation":               "NumberValidation",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
 		"reflection":                      "Reflection",
 		"reflection_configuration":        "ReflectionConfiguration",
+		"regex_pattern":                   "RegexPattern",
 		"resources":                       "Resources",
 		"self_managed_configuration":      "SelfManagedConfiguration",
 		"semantic_memory_strategy":        "SemanticMemoryStrategy",

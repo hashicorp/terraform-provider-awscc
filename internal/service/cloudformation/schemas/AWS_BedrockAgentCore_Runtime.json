@@ -42,13 +42,20 @@
         "UPDATING",
         "UPDATE_FAILED",
         "READY",
-        "DELETING"
+        "DELETING",
+        "DELETE_FAILED"
       ]
     },
     "Description": {
       "type": "string",
       "maxLength": 1200,
       "minLength": 1
+    },
+    "PlatformVersion": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[^\\s]+$"
     },
     "NetworkConfiguration": {
       "type": "object",
@@ -499,7 +506,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
+      "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.(amazonaws\\.com\\.cn|csp\\.hci\\.ic\\.gov|cloud\\.adc-e\\.uk|cloud\\.adc-g\\.au|sc2s\\.sgov\\.gov|amazonaws\\.com|amazonaws\\.eu|c2s\\.ic\\.gov)|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
       "description": "The ECR URI of the container"
     },
     "RoleArn": {
@@ -894,6 +901,10 @@
     "ProtocolConfiguration": {
       "$ref": "#/definitions/ProtocolConfiguration",
       "description": "Protocol configuration for the agent runtime"
+    },
+    "PlatformVersion": {
+      "$ref": "#/definitions/PlatformVersion",
+      "description": "The version of the runtime platform"
     },
     "EnvironmentVariables": {
       "$ref": "#/definitions/EnvironmentVariablesMap",

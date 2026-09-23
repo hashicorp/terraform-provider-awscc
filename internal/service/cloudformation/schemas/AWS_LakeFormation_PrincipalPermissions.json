@@ -101,11 +101,12 @@
       "type": "object",
       "properties": {
         "Id": {
-          "$ref": "#/definitions/CatalogIdString"
+          "$ref": "#/definitions/CatalogIdString",
+          "description": "An identifier for the catalog resource."
         }
       },
       "additionalProperties": false,
-      "description": ""
+      "description": "A structure for the catalog object.\n  This is an object with no properties that effectively behaves as a true or false. A valid input for this property type in both yaml or json is null or ``{}``."
     },
     "DatabaseResource": {
       "type": "object",

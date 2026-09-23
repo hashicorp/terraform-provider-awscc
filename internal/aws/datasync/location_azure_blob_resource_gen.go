@@ -106,7 +106,8 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The specific authentication type that you want DataSync to use to access your Azure Blob Container.",
 		//	  "enum": [
 		//	    "SAS",
-		//	    "NONE"
+		//	    "NONE",
+		//	    "OIDC"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -119,6 +120,7 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"SAS",
 					"NONE",
+					"OIDC",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -335,6 +337,109 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FederatedIdentity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the identity federation configuration that DataSync uses to access your Azure Blob Storage container using an OpenID Connect (OIDC) token.",
+		//	  "properties": {
+		//	    "AwsIamRole": {
+		//	      "description": "Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "AzureOidc": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies the Microsoft Entra (Azure AD) identity that DataSync federates with to obtain an access token for your Azure Blob Storage container.",
+		//	      "properties": {
+		//	        "ClientId": {
+		//	          "description": "Specifies the client ID of the Microsoft Entra (Azure AD) identity that DataSync uses to obtain an access token.",
+		//	          "maxLength": 36,
+		//	          "minLength": 36,
+		//	          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+		//	          "type": "string"
+		//	        },
+		//	        "TenantId": {
+		//	          "description": "Specifies the Microsoft Entra (Azure AD) tenant ID that the identity belongs to.",
+		//	          "maxLength": 36,
+		//	          "minLength": 36,
+		//	          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TenantId",
+		//	        "ClientId"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"federated_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsIamRole
+				"aws_iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AzureOidc
+				"azure_oidc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the client ID of the Microsoft Entra (Azure AD) identity that DataSync uses to obtain an access token.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(36, 36),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TenantId
+						"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the Microsoft Entra (Azure AD) tenant ID that the identity belongs to.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(36, 36),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the Microsoft Entra (Azure AD) identity that DataSync federates with to obtain an access token for your Azure Blob Storage container.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the identity federation configuration that DataSync uses to access your Azure Blob Storage container using an OpenID Connect (OIDC) token.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -530,14 +635,18 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"agent_arns":                     "AgentArns",
+		"aws_iam_role":                   "AwsIamRole",
 		"azure_access_tier":              "AzureAccessTier",
 		"azure_blob_authentication_type": "AzureBlobAuthenticationType",
 		"azure_blob_container_url":       "AzureBlobContainerUrl",
 		"azure_blob_sas_configuration":   "AzureBlobSasConfiguration",
 		"azure_blob_sas_token":           "AzureBlobSasToken",
 		"azure_blob_type":                "AzureBlobType",
+		"azure_oidc":                     "AzureOidc",
+		"client_id":                      "ClientId",
 		"cmk_secret_config":              "CmkSecretConfig",
 		"custom_secret_config":           "CustomSecretConfig",
+		"federated_identity":             "FederatedIdentity",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"location_arn":                   "LocationArn",
@@ -547,6 +656,7 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 		"secret_arn":                     "SecretArn",
 		"subdirectory":                   "Subdirectory",
 		"tags":                           "Tags",
+		"tenant_id":                      "TenantId",
 		"value":                          "Value",
 	})
 

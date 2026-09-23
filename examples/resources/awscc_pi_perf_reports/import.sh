@@ -1,0 +1,1 @@
+$ terraform import awscc_pi_perf_reports.example "arn"

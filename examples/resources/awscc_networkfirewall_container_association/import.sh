@@ -1,0 +1,1 @@
+$ terraform import awscc_networkfirewall_container_association.example "container_association_arn"

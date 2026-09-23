@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_notebook_instance_lifecycle_config.example "notebook_instance_lifecycle_config_arn"

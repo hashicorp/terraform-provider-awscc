@@ -1,0 +1,206 @@
+{
+  "typeName": "AWS::Connect::Vocabulary",
+  "description": "Resource type definition for AWS::Connect::Vocabulary",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the custom vocabulary."
+    },
+    "VocabularyId": {
+      "type": "string",
+      "description": "The identifier of the custom vocabulary.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "InstanceId": {
+      "type": "string",
+      "description": "The identifier of the Amazon Connect instance.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "VocabularyName": {
+      "type": "string",
+      "description": "A unique name of the custom vocabulary.",
+      "minLength": 1,
+      "maxLength": 140,
+      "pattern": "^[0-9a-zA-Z._-]+$"
+    },
+    "LanguageCode": {
+      "type": "string",
+      "description": "The language code of the vocabulary entries.",
+      "enum": [
+        "ar-AE",
+        "de-CH",
+        "de-DE",
+        "en-AB",
+        "en-AU",
+        "en-GB",
+        "en-IE",
+        "en-IN",
+        "en-US",
+        "en-WL",
+        "es-ES",
+        "es-US",
+        "fr-CA",
+        "fr-FR",
+        "hi-IN",
+        "it-IT",
+        "ja-JP",
+        "ko-KR",
+        "pt-BR",
+        "pt-PT",
+        "zh-CN",
+        "en-NZ",
+        "en-ZA",
+        "ca-ES",
+        "da-DK",
+        "fi-FI",
+        "id-ID",
+        "ms-MY",
+        "nl-NL",
+        "no-NO",
+        "pl-PL",
+        "sv-SE",
+        "tl-PH"
+      ]
+    },
+    "Content": {
+      "type": "string",
+      "description": "The content of the custom vocabulary in plain-text format with a table of values.",
+      "minLength": 1,
+      "maxLength": 60000
+    },
+    "State": {
+      "type": "string",
+      "description": "The current state of the custom vocabulary.",
+      "enum": [
+        "CREATION_IN_PROGRESS",
+        "ACTIVE",
+        "CREATION_FAILED",
+        "DELETE_IN_PROGRESS"
+      ]
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The timestamp when the custom vocabulary was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "InstanceId",
+    "VocabularyName",
+    "LanguageCode",
+    "Content"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/VocabularyId",
+    "/properties/State",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/VocabularyName",
+    "/properties/LanguageCode",
+    "/properties/Content"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/InstanceId",
+      "/properties/VocabularyId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource",
+      "connect:DescribeVocabulary"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateVocabulary",
+        "connect:DescribeVocabulary",
+        "connect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeVocabulary"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:DescribeVocabulary",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteVocabulary",
+        "connect:DescribeVocabulary"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "required": [
+          "InstanceId"
+        ]
+      },
+      "permissions": [
+        "connect:SearchVocabularies"
+      ]
+    }
+  }
+}

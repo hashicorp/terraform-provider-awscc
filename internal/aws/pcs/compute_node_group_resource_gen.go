@@ -1016,7 +1016,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
-		//	  "insertionOrder": false,
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "description": "A VPC subnet ID.",
 		//	    "type": "string"
@@ -1027,9 +1027,6 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Description: "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
 			Required:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:

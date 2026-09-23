@@ -250,6 +250,18 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SharingEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Whether the policy is enabled to be shared with other members of the Organization. Only applicable if the policy owner is a management account or delegated admin.",
+		//	  "type": "boolean"
+		//	}
+		"sharing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the policy is enabled to be shared with other members of the Organization. Only applicable if the policy owner is a management account or delegated admin.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -343,6 +355,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policy_arn":                      "PolicyArn",
 		"rpo_in_minutes":                  "RpoInMinutes",
 		"rto_in_minutes":                  "RtoInMinutes",
+		"sharing_enabled":                 "SharingEnabled",
 		"tags":                            "Tags",
 		"target":                          "Target",
 		"time_between_backups_in_minutes": "TimeBetweenBackupsInMinutes",

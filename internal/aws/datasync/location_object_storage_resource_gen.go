@@ -233,6 +233,169 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FederatedIdentity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the identity federation configuration that DataSync uses to access your object storage location using an OpenID Connect (OIDC) token.",
+		//	  "properties": {
+		//	    "AwsIamRole": {
+		//	      "description": "Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "ExternalIdentity": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies the external (non-AWS) identity provider that DataSync federates with to access your object storage location.",
+		//	      "properties": {
+		//	        "GoogleOidc": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the Google Cloud workload identity federation configuration that DataSync uses to obtain an access token for your Google Cloud Storage bucket.",
+		//	          "properties": {
+		//	            "IdentityPoolName": {
+		//	              "description": "The name of the Google Cloud workload identity pool that DataSync federates with.",
+		//	              "maxLength": 32,
+		//	              "minLength": 4,
+		//	              "pattern": "",
+		//	              "type": "string"
+		//	            },
+		//	            "IdentityProviderName": {
+		//	              "description": "The name of the OIDC identity provider configured in the Google Cloud workload identity pool.",
+		//	              "maxLength": 32,
+		//	              "minLength": 4,
+		//	              "pattern": "",
+		//	              "type": "string"
+		//	            },
+		//	            "ProjectName": {
+		//	              "description": "The human-readable Google Cloud project name.",
+		//	              "maxLength": 30,
+		//	              "minLength": 6,
+		//	              "pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$",
+		//	              "type": "string"
+		//	            },
+		//	            "ProjectNumber": {
+		//	              "description": "The numeric Google Cloud project ID, as a string.",
+		//	              "maxLength": 20,
+		//	              "minLength": 1,
+		//	              "pattern": "^[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ProjectName",
+		//	            "ProjectNumber",
+		//	            "IdentityPoolName",
+		//	            "IdentityProviderName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"federated_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsIamRole
+				"aws_iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExternalIdentity
+				"external_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GoogleOidc
+						"google_oidc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityPoolName
+								"identity_pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Google Cloud workload identity pool that DataSync federates with.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(4, 32),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityProviderName
+								"identity_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the OIDC identity provider configured in the Google Cloud workload identity pool.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(4, 32),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ProjectName
+								"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The human-readable Google Cloud project name.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(6, 30),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9-]{4,28}[a-z0-9]$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ProjectNumber
+								"project_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The numeric Google Cloud project ID, as a string.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 20),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the Google Cloud workload identity federation configuration that DataSync uses to obtain an access token for your Google Cloud Storage bucket.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the external (non-AWS) identity provider that DataSync federates with to access your object storage location.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the identity federation configuration that DataSync uses to access your object storage location using an OpenID Connect (OIDC) token.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -538,14 +701,22 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_key":             "AccessKey",
 		"agent_arns":             "AgentArns",
+		"aws_iam_role":           "AwsIamRole",
 		"bucket_name":            "BucketName",
 		"cmk_secret_config":      "CmkSecretConfig",
 		"custom_secret_config":   "CustomSecretConfig",
+		"external_identity":      "ExternalIdentity",
+		"federated_identity":     "FederatedIdentity",
+		"google_oidc":            "GoogleOidc",
+		"identity_pool_name":     "IdentityPoolName",
+		"identity_provider_name": "IdentityProviderName",
 		"key":                    "Key",
 		"kms_key_arn":            "KmsKeyArn",
 		"location_arn":           "LocationArn",
 		"location_uri":           "LocationUri",
 		"managed_secret_config":  "ManagedSecretConfig",
+		"project_name":           "ProjectName",
+		"project_number":         "ProjectNumber",
 		"secret_access_role_arn": "SecretAccessRoleArn",
 		"secret_arn":             "SecretArn",
 		"secret_key":             "SecretKey",
