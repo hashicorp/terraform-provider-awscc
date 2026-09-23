@@ -205,7 +205,13 @@ schemas: prereq-go ## Generate schemas
 	fi
 
 test: prereq-go ## Run unit tests
-	$(GO_VER) test $(TEST) $(TESTARGS) -timeout=5m
+	# -short: internal/tools/bigdiffer has a handful of tests that build a
+	# real binary and drive a genuinely-slow real recursive-schema crash
+	# (tens of seconds each) — they gate themselves on testing.Short() and
+	# are already covered by .github/workflows/bigdiffer.yml's own 20m-
+	# timeout job; this target's 5m timeout is shared with every other
+	# package in the module and was never meant to also carry them.
+	$(GO_VER) test $(TEST) $(TESTARGS) -short -timeout=5m
 
 # make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccAWSLogsLogGroup_basic'
 testacc: prereq-go ## Run acceptance tests
