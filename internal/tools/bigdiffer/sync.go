@@ -7,13 +7,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	"github.com/hashicorp/cli"
 )
 
 // The incremental weekly pipeline: from a single discovery crawl, refresh only
@@ -155,6 +153,12 @@ func gateResultFromGenResults(cfType string, results []genResult) gateResult {
 // — the compile gate's fixpoint (item 1) needs each staged artifact's
 // pathSuffix/codeFile to map a blamed real file back to the candidate and
 // artifact that produced it.
+//
+// Generates each candidate in a subprocess (generateCandidateIsolated), not
+// in-process: codegen.Emitter has no recursion-depth guard, so a recursive
+// schema is a Go stack overflow, a fatal error no in-process recover() can
+// catch. "One failure never blocks the rest" was always the intent here —
+// this closes the gap where it didn't hold.
 func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, []genResult, error) {
 	stagedSchema := schemaCachePath(filepath.Join(stagingDir, "input"), c.cfType)
 	if err := os.MkdirAll(filepath.Dir(stagedSchema), dirPerm); err != nil {
@@ -167,8 +171,11 @@ func refreshCandidate(cfg config, stagingDir string, c candidate) (gateResult, [
 	row := c.row
 	row.CloudFormationSchemaPath = stagedSchema // generate from the staged bytes
 
-	results := generateCorpus(cfg, []resourceRow{row}, 1)
-	results, err := reconcileListResource(cfg, results)
+	results, err := generateCandidateIsolated(cfg, row)
+	if err != nil {
+		return gateResult{}, nil, fmt.Errorf("regenerating %s: %w", c.cfType, err)
+	}
+	results, err = reconcileListResource(cfg, row, results)
 	if err != nil {
 		return gateResult{}, nil, fmt.Errorf("regenerating resource for %s: %w", c.cfType, err)
 	}
@@ -251,13 +258,55 @@ func copyTree(src, dst string) error {
 	})
 }
 
+// generateCandidateIsolated builds the generation plan for row and generates
+// every artifact in one subprocess call (generateCandidateArtifacts), not
+// one per artifact — cheaper at whole-corpus scale, at the cost that a crash
+// in one artifact marks its siblings failed too (see runRecheckProbeArtifact's
+// manifest-mode comment). A plan error (e.g. an unparseable Terraform type
+// name) is reported in-band as a failed genResult, matching generateCorpus's
+// own planErrs handling: it's a row problem to freeze/suppress, not an
+// infrastructure error that should abort the batch.
+//
+// repoRoot/outputRoot are cleared before calling out: those fields opt into
+// runRecheckProbeArtifact's single-artifact ad-hoc compile gate
+// (-recheck's own use case), which generation-only calls must not trigger —
+// left set, it silently created cfg.outputRoot on disk via buildOnce's
+// overlay even when nothing was promoted (TestSyncBatchAtomicity).
+func generateCandidateIsolated(cfg config, row resourceRow) ([]genResult, error) {
+	p, err := generationPlan(row, cfg.prefix, cfg.cacheDir)
+	if err != nil {
+		return []genResult{{
+			p:   plan{cfType: row.CloudFormationTypeName},
+			err: fmt.Errorf("plan: %w", err),
+		}}, nil
+	}
+	schema, err := os.ReadFile(p.schemaFile)
+	if err != nil {
+		return nil, fmt.Errorf("reading staged schema %s: %w", p.schemaFile, err)
+	}
+	genCfg := cfg
+	genCfg.repoRoot = ""
+	genCfg.outputRoot = ""
+	results, err := generateCandidateArtifacts(genCfg, row, p.artifacts, schema)
+	if err != nil {
+		return nil, err
+	}
+	for i := range results {
+		results[i].p = p
+	}
+	return results, nil
+}
+
 // reconcileListResource re-generates the resource artifact without
 // GenerateListResource if it was generated expecting a working plural data
 // source that isn't there in the final result — either its generation failed
 // this pass, or it was never attempted (already suppressed, so absent from
 // results). A resource promoted with ListResource: true but no working plural
 // data source would advertise a list resource with no backing data source.
-func reconcileListResource(cfg config, results []genResult) ([]genResult, error) {
+// row must be the same row refreshCandidate generated results from (its
+// CloudFormationSchemaPath already points at the staged schema bytes) so the
+// re-generation below reads the identical schema, not a fresh cache lookup.
+func reconcileListResource(cfg config, row resourceRow, results []genResult) ([]genResult, error) {
 	resIdx := -1
 	pluralOK := false
 	for i, r := range results {
@@ -281,12 +330,30 @@ func reconcileListResource(cfg config, results []genResult) ([]genResult, error)
 	}
 
 	// The resource generated expecting a working plural data source that isn't
-	// there; regenerate it without ListResource before promoting.
+	// there; regenerate it without ListResource before promoting, via the
+	// same subprocess isolation (same schema, same crash risk as the first
+	// attempt).
+	//
+	// The subprocess re-derives its own plan from row, so mutating a local
+	// copy of r.a.listResource has no effect on it — forcing
+	// SuppressPluralDataSourceGeneration true on the row is what actually
+	// makes generationPlan derive listResource: false there.
 	r.a.listResource = false
-	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
-	code, test, err := generateArtifact(ui, cfg, r.p, r.a)
+	noListResourceRow := row
+	noListResourceRow.SuppressPluralDataSourceGeneration = true
+	schema, err := os.ReadFile(r.p.schemaFile)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("reading staged schema %s: %w", r.p.schemaFile, err)
+	}
+	// Clear repoRoot/outputRoot for the same reason as generateCandidateIsolated:
+	// this single-artifact path forwards them to the child, which would otherwise
+	// run its ad-hoc compile gate and create outputRoot on disk (TestSyncBatchAtomicity).
+	genCfg := cfg
+	genCfg.repoRoot = ""
+	genCfg.outputRoot = ""
+	code, test, genErr := generateArtifactIsolated(genCfg, noListResourceRow, r.a.kind, schema)
+	if genErr != nil {
+		return nil, genErr
 	}
 	r.code, r.test, r.err = code, test, nil
 	results[resIdx] = r

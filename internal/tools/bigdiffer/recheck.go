@@ -5,6 +5,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -233,22 +234,219 @@ var probeArtifact = func(cfg config, row resourceRow, kind artifactKind, schema 
 // the test binary under `go test` — a binary whose CLI is testing.Main, not
 // bigdiffer's real main(), and so can't be probed directly).
 func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artifactKind, schema []byte) error {
+	_, _, err := runIsolatedProbe(bin, cfg, row, kind, schema, false)
+	return err
+}
+
+// generateArtifactIsolated regenerates one artifact the same way probeArtifact
+// does — re-exec'd into the hidden -recheck-probe-artifact subprocess mode,
+// under the same timeout and memory cap, so a schema nobody has ever safely
+// generated before (a brand-new CloudFormation type discovered by -sync,
+// with no suppression entry yet to protect it — unlike -recheck's backlog,
+// which by construction only probes rows already known to the overlay) can
+// never take the parent -sync/-reconcile/-check process down with it.
+//
+// Unlike probeArtifact/probeArtifactWithBinary (a read-only pass/fail check
+// for -recheck's own purposes), this also asks the subprocess to write the
+// generated code/test bytes to two temp files and reads them back on
+// success, so a real caller like refreshCandidate that needs to stage the
+// actual artifact — not just learn whether generation still fails — can use
+// the same isolation. row's suppress_*/path_aware_attribute_names fields are
+// passed through as flags so the child's generationPlan reconstructs the
+// exact same artifact shape (file names, ListResource-or-not) the parent's
+// own plan already computed, not a fresh guess from bare tfType/cfnType.
+var generateArtifactIsolated = func(cfg config, row resourceRow, kind artifactKind, schema []byte) (code, test []byte, err error) {
+	self, err := os.Executable()
+	if err != nil {
+		return nil, nil, fmt.Errorf("locating bigdiffer binary to generate in isolation: %w", err)
+	}
+	return generateArtifactIsolatedWithBinary(self, cfg, row, kind, schema)
+}
+
+// generateArtifactIsolatedWithBinary is generateArtifactIsolated's
+// implementation, parameterized on the binary to re-exec — see
+// probeArtifactWithBinary's identical rationale (os.Executable() resolves to
+// the `go test` binary, not bigdiffer's real main(), under tests).
+func generateArtifactIsolatedWithBinary(bin string, cfg config, row resourceRow, kind artifactKind, schema []byte) (code, test []byte, err error) {
+	return runIsolatedProbe(bin, cfg, row, kind, schema, true)
+}
+
+// generateCandidateArtifacts regenerates every artifact in row's plan in one
+// subprocess call (runRecheckProbeArtifact's manifest mode) instead of one
+// per artifact. A crash still only takes down that one candidate, never the
+// parent, but now also marks any sibling artifact sharing that subprocess
+// as failed, even one that would have generated cleanly alone.
+// reconcileListResource's rare single-artifact correction uses
+// generateArtifactIsolated directly instead, since it only regenerates one
+// artifact.
+//
+// artifacts (the parent's own plan.artifacts) is used to know which kinds
+// to expect back and to attach each manifest entry to its full genArtifact.
+// The subprocess still recomputes its own plan via generationPlan; what
+// keeps the two in agreement is that every input generationPlan reads is
+// forwarded identically on both sides.
+var generateCandidateArtifacts = func(cfg config, row resourceRow, artifacts []genArtifact, schema []byte) ([]genResult, error) {
+	self, err := os.Executable()
+	if err != nil {
+		return nil, fmt.Errorf("locating bigdiffer binary to generate in isolation: %w", err)
+	}
+	return generateCandidateArtifactsWithBinary(self, cfg, row, artifacts, schema)
+}
+
+// generateCandidateArtifactsWithBinary is generateCandidateArtifacts's
+// implementation, parameterized on the binary to re-exec — see
+// probeArtifactWithBinary's identical rationale (os.Executable() resolves to
+// the `go test` binary, not bigdiffer's real main(), under tests).
+func generateCandidateArtifactsWithBinary(bin string, cfg config, row resourceRow, artifacts []genArtifact, schema []byte) ([]genResult, error) {
 	tmp, err := os.CreateTemp("", "bigdiffer-recheck-*.json")
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer func() { _ = os.Remove(tmp.Name()) }()
 	if _, err := tmp.Write(schema); err != nil {
-		return err
+		return nil, err
 	}
 	if err := tmp.Close(); err != nil {
-		return err
+		return nil, err
+	}
+
+	manifestTmp, err := os.CreateTemp("", "bigdiffer-probe-manifest-*")
+	if err != nil {
+		return nil, err
+	}
+	manifestPath := manifestTmp.Name()
+	_ = manifestTmp.Close()
+	_ = os.Remove(manifestPath) // runProbeCandidate creates it fresh; a stray empty file would confuse a crash-vs-no-output check
+	defer func() {
+		_ = os.Remove(manifestPath)
+		for _, a := range artifacts {
+			_ = os.Remove(manifestPath + "." + string(a.kind) + ".code")
+			_ = os.Remove(manifestPath + "." + string(a.kind) + ".test")
+		}
+	}()
+
+	args := []string{
+		"-recheck-probe-artifact",
+		"-probe-tf-type", row.ResourceTypeName,
+		"-probe-cfn-type", row.CloudFormationTypeName,
+		"-probe-schema", tmp.Name(),
+		"-probe-prefix", cfg.prefix,
+		"-probe-cache-dir", cfg.cacheDir,
+		"-probe-services-path", cfg.servicesPath,
+		"-probe-out-manifest", manifestPath,
+	}
+	// This mode always wants the real artifact bytes, so the row's real
+	// suppress_* flags are always forwarded (unlike probeArtifact's
+	// recheck-style use, which deliberately ignores them).
+	if row.SuppressResourceGeneration {
+		args = append(args, "-probe-suppress-resource")
+	}
+	if row.SuppressSingularDataSourceGeneration {
+		args = append(args, "-probe-suppress-singular")
+	}
+	if row.SuppressPluralDataSourceGeneration {
+		args = append(args, "-probe-suppress-plural")
+	}
+	if row.PathAwareAttributeNames {
+		args = append(args, "-probe-path-aware-names")
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), healProbeTimeout)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, bin,
+	cmd := exec.CommandContext(ctx, bin, args...)
+	cmd.Env = append(os.Environ(), fmt.Sprintf("GOMEMLIMIT=%s", healProbeMemLimit))
+	out, runErr := cmd.CombinedOutput()
+
+	if ctx.Err() == context.DeadlineExceeded || runErr != nil {
+		// No manifest to read (timeout, or the subprocess died outright) —
+		// every artifact in this candidate is reported failed with the same
+		// signal.
+		var crashMsg string
+		switch {
+		case ctx.Err() == context.DeadlineExceeded:
+			crashMsg = fmt.Sprintf("probe timed out after %s (possible runaway/recursive schema)", healProbeTimeout)
+		default:
+			trimmed := strings.TrimSpace(string(out))
+			if trimmed == "" {
+				trimmed = "no output captured"
+			}
+			// Not truncated — a real stack overflow's self-report can be
+			// tens of KB, but every overlay-write site truncates to
+			// firstLine(err.Error()) before persisting, so this only
+			// affects an in-memory value a caller might log.
+			crashMsg = fmt.Sprintf("probe crashed (signal/OOM/no self-reported error), output: %s", trimmed)
+		}
+		results := make([]genResult, len(artifacts))
+		for i, a := range artifacts {
+			results[i] = genResult{a: a, err: errors.New(crashMsg)}
+		}
+		return results, nil
+	}
+
+	manifestBytes, err := os.ReadFile(manifestPath)
+	if err != nil {
+		return nil, fmt.Errorf("reading probe manifest: %w", err)
+	}
+	var manifest probeCandidateManifest
+	if err := json.Unmarshal(manifestBytes, &manifest); err != nil {
+		return nil, fmt.Errorf("decoding probe manifest: %w", err)
+	}
+	byKind := make(map[artifactKind]probeManifestArtifact, len(manifest.Artifacts))
+	for _, ma := range manifest.Artifacts {
+		byKind[ma.Kind] = ma
+	}
+	results := make([]genResult, len(artifacts))
+	for i, a := range artifacts {
+		ma, ok := byKind[a.kind]
+		if !ok {
+			results[i] = genResult{a: a, err: fmt.Errorf("probe manifest has no entry for artifact %s", a.kind)}
+			continue
+		}
+		if ma.Err != "" {
+			results[i] = genResult{a: a, err: errors.New(ma.Err)}
+			continue
+		}
+		// An unreadable code/test file (vanishingly unlikely — just written
+		// by the subprocess) is folded into a generation failure below
+		// rather than a separate infra-error class.
+		code, err := os.ReadFile(ma.CodePath)
+		if err != nil {
+			results[i] = genResult{a: a, err: fmt.Errorf("reading manifest code output: %w", err)}
+			continue
+		}
+		test, err := os.ReadFile(ma.TestPath)
+		if err != nil {
+			results[i] = genResult{a: a, err: fmt.Errorf("reading manifest test output: %w", err)}
+			continue
+		}
+		results[i] = genResult{a: a, code: code, test: test}
+	}
+	return results, nil
+}
+
+// runIsolatedProbe is the shared core of probeArtifactWithBinary and
+// generateArtifactIsolatedWithBinary: stage the schema to a temp file, re-exec
+// bin into -recheck-probe-artifact under a timeout and memory cap, and
+// classify the result. wantBytes selects whether the two -probe-out-* flags
+// are set and the resulting files read back (generateArtifactIsolated's
+// case) or omitted entirely (probeArtifact's read-only case, which never
+// needs the generated bytes and would otherwise pay for two needless temp
+// files on every one of -recheck's backlog probes).
+func runIsolatedProbe(bin string, cfg config, row resourceRow, kind artifactKind, schema []byte, wantBytes bool) (code, test []byte, err error) {
+	tmp, err := os.CreateTemp("", "bigdiffer-recheck-*.json")
+	if err != nil {
+		return nil, nil, err
+	}
+	defer func() { _ = os.Remove(tmp.Name()) }()
+	if _, err := tmp.Write(schema); err != nil {
+		return nil, nil, err
+	}
+	if err := tmp.Close(); err != nil {
+		return nil, nil, err
+	}
+
+	args := []string{
 		"-recheck-probe-artifact",
 		"-probe-tf-type", row.ResourceTypeName,
 		"-probe-cfn-type", row.CloudFormationTypeName,
@@ -259,12 +457,62 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 		"-probe-services-path", cfg.servicesPath,
 		"-probe-repo-root", cfg.repoRoot,
 		"-probe-output-root", cfg.outputRoot,
-	)
+	}
+	// The row's real suppress_*/path_aware_attribute_names flags are only
+	// passed through for generateArtifactIsolated's case (wantBytes: it
+	// needs the exact same artifact shape refreshCandidate's own plan
+	// already computed). probeArtifact's read-only recheck case deliberately
+	// does not: -recheck's whole purpose is asking "would this kind still
+	// fail if attempted" for a row that may already be suppressed for that
+	// very kind — passing the real suppress flag through would make
+	// generationPlan drop the artifact entirely and fail every re-probe of
+	// an already-suppressed row with "not derivable from this row" instead
+	// of actually re-attempting generation.
+	if wantBytes {
+		if row.SuppressResourceGeneration {
+			args = append(args, "-probe-suppress-resource")
+		}
+		if row.SuppressSingularDataSourceGeneration {
+			args = append(args, "-probe-suppress-singular")
+		}
+		if row.SuppressPluralDataSourceGeneration {
+			args = append(args, "-probe-suppress-plural")
+		}
+		if row.PathAwareAttributeNames {
+			args = append(args, "-probe-path-aware-names")
+		}
+	}
+
+	var codePath, testPath string
+	if wantBytes {
+		codeTmp, err := os.CreateTemp("", "bigdiffer-probe-code-*")
+		if err != nil {
+			return nil, nil, err
+		}
+		codePath = codeTmp.Name()
+		_ = codeTmp.Close()
+		defer func() { _ = os.Remove(codePath) }()
+
+		testTmp, err := os.CreateTemp("", "bigdiffer-probe-test-*")
+		if err != nil {
+			return nil, nil, err
+		}
+		testPath = testTmp.Name()
+		_ = testTmp.Close()
+		defer func() { _ = os.Remove(testPath) }()
+
+		args = append(args, "-probe-out-code", codePath, "-probe-out-test", testPath)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), healProbeTimeout)
+	defer cancel()
+
+	cmd := exec.CommandContext(ctx, bin, args...)
 	cmd.Env = append(os.Environ(), fmt.Sprintf("GOMEMLIMIT=%s", healProbeMemLimit))
 	out, runErr := cmd.CombinedOutput()
 
 	if ctx.Err() == context.DeadlineExceeded {
-		return fmt.Errorf("probe timed out after %s (possible runaway/recursive schema)", healProbeTimeout)
+		return nil, nil, fmt.Errorf("probe timed out after %s (possible runaway/recursive schema)", healProbeTimeout)
 	}
 	if runErr != nil {
 		trimmed := strings.TrimSpace(string(out))
@@ -276,7 +524,7 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 			// the typed error here so healArtifact can distinguish this from
 			// a plain generation failure and tag the proposal build_failed
 			// instead of generation_failed.
-			return &buildGateFailure{detail: strings.TrimPrefix(trimmed, "generates cleanly but fails the compile gate: ")}
+			return nil, nil, &buildGateFailure{detail: strings.TrimPrefix(trimmed, "generates cleanly but fails the compile gate: ")}
 		}
 		// A Go fatal runtime error (stack overflow, OOM inside the Go
 		// runtime) exits 2 and self-reports a goroutine dump to stdout/stderr
@@ -289,14 +537,25 @@ func probeArtifactWithBinary(bin string, cfg config, row resourceRow, kind artif
 			// A clean, reported generation failure: the probe printed the
 			// error to stdout/stderr and exited non-zero on purpose (or a Go
 			// fatal error that self-reported before dying).
-			return errors.New(trimmed)
+			return nil, nil, errors.New(trimmed)
 		}
 		if trimmed == "" {
 			trimmed = "no output captured"
 		}
-		return fmt.Errorf("probe crashed (signal/OOM/no self-reported error), output: %s: %w", trimmed, runErr)
+		return nil, nil, fmt.Errorf("probe crashed (signal/OOM/no self-reported error), output: %s: %w", trimmed, runErr)
 	}
-	return nil
+	if !wantBytes {
+		return nil, nil, nil
+	}
+	code, err = os.ReadFile(codePath)
+	if err != nil {
+		return nil, nil, fmt.Errorf("reading probe code output: %w", err)
+	}
+	test, err = os.ReadFile(testPath)
+	if err != nil {
+		return nil, nil, fmt.Errorf("reading probe test output: %w", err)
+	}
+	return code, test, nil
 }
 
 // healProbeTimeout and healProbeMemLimit bound one isolated -recheck probe.
@@ -326,11 +585,29 @@ const exitCodeBuildGateFailed = 3
 // with a kind that has no real destination concept yet degrades safely.
 // Reports success/failure via exit code — never printed as a bigdiffer
 // report, since this process only exists to be probed by its parent.
-func runRecheckProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDir, servicesPath, repoRoot, outputRoot string) error {
+//
+// suppressResource/suppressSingular/suppressPlural/pathAwareNames mirror the
+// same-named resourceRow fields so the child's generationPlan matches the
+// parent's plan exactly (file names, ListResource or not). outCodePath/
+// outTestPath, when non-empty, write the generated code/test bytes on
+// success (probeArtifact's own recheck use only needs pass/fail, so leaves
+// these empty).
+//
+// outManifestPath, when non-empty, switches to whole-candidate mode:
+// kindFlag/outCodePath/outTestPath are ignored, every artifact in the row's
+// plan is generated in-band in this process, and results are described in a
+// JSON probeCandidateManifest written to outManifestPath. This lets
+// generateCandidateArtifacts isolate a whole candidate (2-3 artifacts) in
+// one subprocess instead of one per artifact.
+func runRecheckProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cacheDir, servicesPath, repoRoot, outputRoot string, suppressResource, suppressSingular, suppressPlural, pathAwareNames bool, outCodePath, outTestPath, outManifestPath string) error {
 	row := resourceRow{
-		ResourceTypeName:         tfType,
-		CloudFormationTypeName:   cfnType,
-		CloudFormationSchemaPath: schemaPath,
+		ResourceTypeName:                     tfType,
+		CloudFormationTypeName:               cfnType,
+		CloudFormationSchemaPath:             schemaPath,
+		SuppressResourceGeneration:           suppressResource,
+		SuppressSingularDataSourceGeneration: suppressSingular,
+		SuppressPluralDataSourceGeneration:   suppressPlural,
+		PathAwareAttributeNames:              pathAwareNames,
 	}
 	cfg := config{prefix: prefix, cacheDir: cacheDir, servicesPath: servicesPath, repoRoot: repoRoot, outputRoot: outputRoot}
 
@@ -338,34 +615,101 @@ func runRecheckProbeArtifact(tfType, cfnType, kindFlag, schemaPath, prefix, cach
 	if err != nil {
 		return fmt.Errorf("plan: %w", err)
 	}
+
+	if outManifestPath != "" {
+		return runProbeCandidate(cfg, p, outManifestPath)
+	}
+
 	kind := artifactKind(kindFlag)
 	for _, a := range p.artifacts {
 		if a.kind != kind {
 			continue
 		}
 		ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
-		code, _, genErr := generateArtifact(ui, cfg, p, a)
+		code, test, genErr := generateArtifact(ui, cfg, p, a)
 		if genErr != nil {
 			return genErr
 		}
-		if cfg.repoRoot == "" || cfg.outputRoot == "" {
-			return nil // caller didn't ask for the compile gate step
+		if cfg.repoRoot != "" && cfg.outputRoot != "" {
+			dest := filepath.Join(cfg.outputRoot, a.pathSuffix, a.codeFile)
+			// context.Background(), not a derived timeout: this whole process is
+			// already killed wholesale by the parent's exec.CommandContext once
+			// healProbeTimeout elapses (probeArtifact), which also tears down
+			// this one buildOnce call along with everything else in the process.
+			ok, buildErrs, buildErr := buildOnce(context.Background(), cfg.repoRoot, map[string][]byte{dest: code})
+			if buildErr != nil {
+				return fmt.Errorf("compile gate: %w", buildErr)
+			}
+			if !ok {
+				return &buildGateFailure{detail: formatBuildErrors(relativizeBuildErrors(buildErrs, cfg.repoRoot))}
+			}
 		}
-		dest := filepath.Join(cfg.outputRoot, a.pathSuffix, a.codeFile)
-		// context.Background(), not a derived timeout: this whole process is
-		// already killed wholesale by the parent's exec.CommandContext once
-		// healProbeTimeout elapses (probeArtifact), which also tears down
-		// this one buildOnce call along with everything else in the process.
-		ok, buildErrs, buildErr := buildOnce(context.Background(), cfg.repoRoot, map[string][]byte{dest: code})
-		if buildErr != nil {
-			return fmt.Errorf("compile gate: %w", buildErr)
+		if outCodePath != "" {
+			if err := os.WriteFile(outCodePath, code, filePerm); err != nil {
+				return fmt.Errorf("writing probe code output: %w", err)
+			}
 		}
-		if !ok {
-			return &buildGateFailure{detail: formatBuildErrors(relativizeBuildErrors(buildErrs, cfg.repoRoot))}
+		if outTestPath != "" {
+			if err := os.WriteFile(outTestPath, test, filePerm); err != nil {
+				return fmt.Errorf("writing probe test output: %w", err)
+			}
 		}
 		return nil
 	}
 	return fmt.Errorf("artifact %s not derivable from this row", kind)
+}
+
+// probeManifestArtifact is one artifact's outcome in a probeCandidateManifest
+// — the whole-candidate mode's wire format back to the parent process.
+// CodePath/TestPath are only meaningful when Err == "". Err carries only
+// firstLine(original error), not a raw crash dump.
+type probeManifestArtifact struct {
+	Kind     artifactKind `json:"kind"`
+	CodePath string       `json:"codePath,omitempty"`
+	TestPath string       `json:"testPath,omitempty"`
+	Err      string       `json:"err,omitempty"`
+}
+
+// probeCandidateManifest is runProbeCandidate's JSON report, one entry per
+// artifact in the row's plan. A whole-process crash means there is no
+// manifest to read at all; the parent (generateCandidateArtifacts) treats
+// that as every artifact failed.
+type probeCandidateManifest struct {
+	Artifacts []probeManifestArtifact `json:"artifacts"`
+}
+
+// runProbeCandidate is runRecheckProbeArtifact's whole-candidate mode:
+// generate every artifact in p in this process, one artifact's error
+// captured in-band and never stopping the others, and write the result to
+// manifestPath. Never runs the compile gate — that's pipeline.go's job over
+// the whole staged batch.
+func runProbeCandidate(cfg config, p plan, manifestPath string) error {
+	manifest := probeCandidateManifest{Artifacts: make([]probeManifestArtifact, len(p.artifacts))}
+	ui := &cli.BasicUi{Writer: io.Discard, ErrorWriter: io.Discard}
+	for i, a := range p.artifacts {
+		code, test, genErr := generateArtifact(ui, cfg, p, a)
+		if genErr != nil {
+			manifest.Artifacts[i] = probeManifestArtifact{Kind: a.kind, Err: firstLine(genErr.Error())}
+			continue
+		}
+		codePath := manifestPath + "." + string(a.kind) + ".code"
+		testPath := manifestPath + "." + string(a.kind) + ".test"
+		if err := os.WriteFile(codePath, code, filePerm); err != nil {
+			return fmt.Errorf("writing manifest code output for %s: %w", a.kind, err)
+		}
+		if err := os.WriteFile(testPath, test, filePerm); err != nil {
+			return fmt.Errorf("writing manifest test output for %s: %w", a.kind, err)
+		}
+		manifest.Artifacts[i] = probeManifestArtifact{Kind: a.kind, CodePath: codePath, TestPath: testPath}
+	}
+	out, err := json.Marshal(manifest)
+	if err != nil {
+		return fmt.Errorf("encoding probe manifest: %w", err)
+	}
+	if err := os.WriteFile(manifestPath, out, filePerm); err != nil {
+		return fmt.Errorf("writing probe manifest: %w", err)
+	}
+	return nil
 }
 
 // buildGateFailure is runRecheckProbeArtifact's distinct signal that an artifact

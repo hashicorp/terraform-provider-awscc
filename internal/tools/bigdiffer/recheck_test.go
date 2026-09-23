@@ -352,7 +352,8 @@ func TestRunHealProbeArtifactPassesCompileGateForARealType(t *testing.T) {
 	}
 
 	err := runRecheckProbeArtifact(lg.ResourceTypeName, lg.CloudFormationTypeName, string(artifactResource),
-		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
+		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot,
+		false, false, false, false, "", "", "")
 	if err != nil {
 		t.Fatalf("a real, already-working type should pass generation and the compile gate, got: %v", err)
 	}
@@ -404,7 +405,8 @@ func TestRunHealProbeArtifactCatchesACompileGateFailure(t *testing.T) {
 	}
 
 	err := runRecheckProbeArtifact(row.ResourceTypeName, row.CloudFormationTypeName, string(artifactResource),
-		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot)
+		schemaPath, cfg.prefix, cfg.cacheDir, cfg.servicesPath, cfg.repoRoot, cfg.outputRoot,
+		false, false, false, false, "", "", "")
 	if err == nil {
 		t.Fatal("expected the compile gate to reject the package due to its broken sibling file")
 	}
@@ -507,6 +509,119 @@ func TestHealArtifactTagsBuildFailedDistinctFromGenerationFailed(t *testing.T) {
 			t.Errorf("a generation_failed proposal should be issue-worthy")
 		}
 	})
+}
+
+// TestManifestModeSuppressedSiblingRecoveryRequiresRecheckAll is the
+// confirmation that a sibling swept into a whole-candidate crash suppression
+// is not automatically recovered by plain -recheck: needsHealing(false)
+// only re-probes a fact whose reason is empty or "unknown:", but a
+// candidate-crash-suppressed sibling gets a real "generation_failed: ..."
+// reason (reasonsForFailures, policy.go), so plain -recheck skips it. Only
+// -recheck-all (needsHealing(true)) revisits it and, via healArtifact's
+// probeArtifact call, correctly finds it clean and proposes lifting it.
+func TestManifestModeSuppressedSiblingRecoveryRequiresRecheckAll(t *testing.T) {
+	if testing.Short() {
+		t.Skip("builds a binary and spawns a subprocess that can take tens of seconds to stack-overflow")
+	}
+	cfg, rows := loadCorpus(t)
+
+	var recursive resourceRow
+	found := false
+	for _, r := range rows {
+		if r.CloudFormationTypeName == "AWS::WAFv2::WebACL" {
+			recursive, found = r, true
+			break
+		}
+	}
+	if !found {
+		t.Skip("AWS::WAFv2::WebACL not in overlay")
+	}
+	path := recursive.CloudFormationSchemaPath
+	if path == "" {
+		path = schemaCachePath(cfg.cacheDir, recursive.CloudFormationTypeName)
+	}
+	schema, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("reading schema: %v", err)
+	}
+
+	// Fresh, unsuppressed row, matching a brand-new type -sync would see.
+	fresh := resourceRow{ResourceTypeName: recursive.ResourceTypeName, CloudFormationTypeName: recursive.CloudFormationTypeName}
+
+	bin := filepath.Join(t.TempDir(), "bigdiffer")
+	build := exec.Command("go", "build", "-o", bin, ".")
+	if out, err := build.CombinedOutput(); err != nil {
+		t.Fatalf("building bigdiffer: %v\n%s", err, out)
+	}
+	origGenCandidate := generateCandidateArtifacts
+	origProbe := probeArtifact
+	t.Cleanup(func() {
+		generateCandidateArtifacts = origGenCandidate
+		probeArtifact = origProbe
+	})
+	generateCandidateArtifacts = func(c config, r resourceRow, artifacts []genArtifact, s []byte) ([]genResult, error) {
+		return generateCandidateArtifactsWithBinary(bin, c, r, artifacts, s)
+	}
+	probeArtifact = func(c config, r resourceRow, kind artifactKind, s []byte) error {
+		return probeArtifactWithBinary(bin, c, r, kind, s)
+	}
+
+	results, err := generateCandidateIsolated(cfg, fresh)
+	if err != nil {
+		t.Fatalf("generateCandidateIsolated: %v", err)
+	}
+
+	var pluralResult *genResult
+	for i, r := range results {
+		if r.a.kind == artifactPluralDataSource {
+			pluralResult = &results[i]
+		}
+	}
+	if pluralResult == nil {
+		t.Fatal("expected a plural_data_source artifact in the plan")
+	}
+	if pluralResult.err == nil {
+		t.Fatal("expected the plural artifact to be marked failed too, swept up by its crashing sibling")
+	}
+
+	// Simulate what reasonsForFailures (policy.go) writes to the overlay
+	// for this partial failure.
+	suppressed := fresh
+	suppressed.SuppressPluralDataSourceGeneration = true
+	suppressed.SuppressionReasonPluralDataSource = formatReason(reasonGenerationFailed, firstLine(pluralResult.err.Error()))
+
+	pluralFact := healFactsFor(suppressed)[2] // artifactPluralDataSource, per healFactsFor's fixed order
+	if pluralFact.kind != artifactPluralDataSource {
+		t.Fatalf("healFactsFor's order changed; test assumes index 2 is the plural fact, got %+v", pluralFact)
+	}
+
+	if pluralFact.needsHealing(false) {
+		t.Error("plain -recheck should skip this fact: its reason is a real generation_failed, not empty/unknown:")
+	}
+	if !pluralFact.needsHealing(true) {
+		t.Fatal("-recheck-all should still pick this fact up regardless of its existing reason")
+	}
+
+	// Recovery leg: healArtifact must re-probe and propose "lift" once the
+	// probe succeeds. WAFv2::WebACL's own plural artifact fails
+	// healArtifact's earlier structural pre-check (pluralSupported) for an
+	// unrelated reason, so this uses the resource kind with probeArtifact
+	// stubbed to succeed instead.
+	probeArtifact = func(config, resourceRow, artifactKind, []byte) error { return nil }
+	resourceSuppressed := fresh
+	resourceSuppressed.SuppressResourceGeneration = true
+	resourceSuppressed.SuppressionReasonResource = formatReason(reasonGenerationFailed, "runtime: goroutine stack exceeds 1000000000-byte limit")
+	resourceFact := healFactsFor(resourceSuppressed)[0] // artifactResource, per healFactsFor's fixed order
+	if resourceFact.kind != artifactResource {
+		t.Fatalf("healFactsFor's order changed; test assumes index 0 is the resource fact, got %+v", resourceFact)
+	}
+	if resourceFact.needsHealing(false) {
+		t.Fatal("sanity check: this fact's reason must also be recheck-all-only, matching the plural fact above")
+	}
+	proposal := healArtifact(cfg, resourceSuppressed, resourceFact, schema, nil, "", false)
+	if proposal.action != "lift" {
+		t.Fatalf("expected -recheck-all to propose lifting a wrongly-suppressed sibling once probeArtifact reports it clean, got action=%q reason=%q", proposal.action, proposal.reason)
+	}
 }
 
 // TestHealFactsForNeedsHealing is the per-artifact gating fix itself (item
