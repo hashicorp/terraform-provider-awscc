@@ -139,7 +139,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The ECR URI of the container",
 		//	          "maxLength": 1024,
 		//	          "minLength": 1,
-		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
+		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.(amazonaws\\.com\\.cn|csp\\.hci\\.ic\\.gov|cloud\\.adc-e\\.uk|cloud\\.adc-g\\.au|sc2s\\.sgov\\.gov|amazonaws\\.com|amazonaws\\.eu|c2s\\.ic\\.gov)|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -271,7 +271,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1024),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.(amazonaws\\.com\\.cn|csp\\.hci\\.ic\\.gov|cloud\\.adc-e\\.uk|cloud\\.adc-g\\.au|sc2s\\.sgov\\.gov|amazonaws\\.com|amazonaws\\.eu|c2s\\.ic\\.gov)|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1797,6 +1797,28 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PlatformVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the runtime platform",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[^\\s]+$",
+		//	  "type": "string"
+		//	}
+		"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the runtime platform",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProtocolConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1904,7 +1926,8 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	    "UPDATING",
 		//	    "UPDATE_FAILED",
 		//	    "READY",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "DELETE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2053,6 +2076,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"network_configuration":             "NetworkConfiguration",
 		"network_mode":                      "NetworkMode",
 		"network_mode_config":               "NetworkModeConfig",
+		"platform_version":                  "PlatformVersion",
 		"prefix":                            "Prefix",
 		"private_endpoint":                  "PrivateEndpoint",
 		"private_endpoint_overrides":        "PrivateEndpointOverrides",

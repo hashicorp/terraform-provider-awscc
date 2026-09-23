@@ -1,0 +1,1 @@
+$ terraform import awscc_licensemanager_license_asset_group.example "license_asset_group_arn"

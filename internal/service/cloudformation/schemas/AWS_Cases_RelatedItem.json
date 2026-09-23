@@ -1,0 +1,205 @@
+{
+  "typeName": "AWS::Cases::RelatedItem",
+  "description": "Resource Type definition for AWS::Cases::RelatedItem. Creates a related item (comments) and associates it with a case.",
+  "properties": {
+    "RelatedItemArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the related item.",
+      "pattern": "^arn:aws[-a-z]*:cases:[-a-z0-9]*:[0-9]{12}:domain/[-a-z0-9]*/case/[-a-z0-9]*/related-item/[-a-z0-9]*$",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "RelatedItemId": {
+      "type": "string",
+      "description": "The unique identifier of the related item.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The unique identifier of the Cases domain.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "CaseId": {
+      "type": "string",
+      "description": "A unique identifier of the case.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "Type": {
+      "type": "string",
+      "description": "The type of a related item.",
+      "enum": [
+        "Contact",
+        "Comment",
+        "File",
+        "Sla",
+        "ConnectCase",
+        "Custom"
+      ]
+    },
+    "Content": {
+      "description": "The content of a related item to be created.",
+      "$ref": "#/definitions/RelatedItemContent"
+    },
+    "Tags": {
+      "description": "A list of tags on the related item.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "RelatedItemContent": {
+      "type": "object",
+      "description": "Represents the content of a related item.",
+      "additionalProperties": false,
+      "properties": {
+        "Comment": {
+          "$ref": "#/definitions/CommentContent"
+        }
+      }
+    },
+    "CommentContent": {
+      "type": "object",
+      "description": "Represents a comment.",
+      "additionalProperties": false,
+      "properties": {
+        "Body": {
+          "type": "string",
+          "description": "Text in the body of a comment.",
+          "minLength": 1,
+          "maxLength": 15000
+        },
+        "ContentType": {
+          "type": "string",
+          "description": "Type of the text in the comment.",
+          "enum": [
+            "Text/Plain"
+          ]
+        }
+      },
+      "required": [
+        "Body",
+        "ContentType"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag associated with the resource.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "DomainId",
+    "CaseId",
+    "Type",
+    "Content"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/RelatedItemArn",
+    "/properties/RelatedItemId"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/CaseId",
+    "/properties/Type",
+    "/properties/Content"
+  ],
+  "primaryIdentifier": [
+    "/properties/RelatedItemArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainId",
+      "/properties/CaseId",
+      "/properties/RelatedItemId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cases:TagResource",
+      "cases:UntagResource",
+      "cases:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cases:CreateRelatedItem",
+        "cases:SearchRelatedItems",
+        "cases:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cases:SearchRelatedItems",
+        "cases:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cases:UpdateRelatedItem",
+        "cases:TagResource",
+        "cases:UntagResource",
+        "cases:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cases:DeleteRelatedItem"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cases:SearchRelatedItems"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "DomainId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "CaseId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "DomainId",
+          "CaseId"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_cluster_scheduler_config.example "cluster_scheduler_config_arn"

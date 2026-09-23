@@ -206,7 +206,8 @@
     },
     "read": {
       "permissions": [
-        "cognito-idp:DescribeUserPoolClient"
+        "cognito-idp:DescribeUserPoolClient",
+        "cognito-idp:ListUserPoolClientSecrets"
       ]
     },
     "update": {

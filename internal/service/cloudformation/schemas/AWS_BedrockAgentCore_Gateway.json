@@ -114,7 +114,7 @@
           "type": "string",
           "maxLength": 255,
           "minLength": 1,
-          "pattern": "^[A-Za-z0-9_.-:]+$"
+          "pattern": "^[A-Za-z0-9_.:-]+$"
         },
         "InboundTokenClaimValueType": {
           "$ref": "#/definitions/InboundTokenClaimValueType"
@@ -435,6 +435,9 @@
           "type": "string",
           "maxLength": 255,
           "minLength": 3
+        },
+        "Tags": {
+          "$ref": "#/definitions/TagsMap"
         }
       },
       "required": [
@@ -683,6 +686,9 @@
     "/properties/UpdatedAt",
     "/properties/WebAclArn",
     "/properties/WorkloadIdentityDetails"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AuthorizerConfiguration/CustomJWTAuthorizer/PrivateEndpoint/ManagedVpcResource/Tags"
   ],
   "primaryIdentifier": [
     "/properties/GatewayIdentifier"

@@ -127,6 +127,22 @@
         "AS2"
       ]
     },
+    "ProxyMode": {
+      "type": "string",
+      "enum": [
+        "PROXY_PROTOCOL_V2_ENFORCED",
+        "NONE"
+      ]
+    },
+    "ProxyConfig": {
+      "type": "object",
+      "properties": {
+        "SftpMode": {
+          "$ref": "#/definitions/ProxyMode"
+        }
+      },
+      "additionalProperties": false
+    },
     "ProtocolDetails": {
       "type": "object",
       "properties": {
@@ -149,6 +165,9 @@
           },
           "maxItems": 1,
           "minItems": 1
+        },
+        "ProxyConfig": {
+          "$ref": "#/definitions/ProxyConfig"
         }
       },
       "additionalProperties": false

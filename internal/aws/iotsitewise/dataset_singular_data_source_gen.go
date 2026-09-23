@@ -33,6 +33,58 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the dataset.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DatasetConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the dataset.",
+		//	  "properties": {
+		//	    "Session": {
+		//	      "additionalProperties": false,
+		//	      "description": "The session configuration for a SESSION dataset.",
+		//	      "properties": {
+		//	        "SessionEndTime": {
+		//	          "description": "The end time of the session as an ISO 8601 UTC instant, for example 2024-12-31T23:59:59Z.",
+		//	          "type": "string"
+		//	        },
+		//	        "SessionStartTime": {
+		//	          "description": "The start time of the session as an ISO 8601 UTC instant, for example 2024-01-01T00:00:00Z.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SessionStartTime",
+		//	        "SessionEndTime"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dataset_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Session
+				"session": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SessionEndTime
+						"session_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The end time of the session as an ISO 8601 UTC instant, for example 2024-12-31T23:59:59Z.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SessionStartTime
+						"session_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The start time of the session as an ISO 8601 UTC instant, for example 2024-01-01T00:00:00Z.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The session configuration for a SESSION dataset.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatasetDescription
 		// CloudFormation resource type schema:
 		//
@@ -48,14 +100,14 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the dataset.",
-		//	  "maxLength": 36,
+		//	  "description": "The ID of the dataset. For workspace-scoped datasets this is the workspace name and dataset ID joined by a slash, for example my-workspace/123e4567-e89b-42d3-a456-426614174000.",
+		//	  "maxLength": 101,
 		//	  "minLength": 36,
-		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	  "pattern": "^([a-zA-Z0-9_-]{1,64}/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"dataset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the dataset.",
+			Description: "The ID of the dataset. For workspace-scoped datasets this is the workspace name and dataset ID joined by a slash, for example my-workspace/123e4567-e89b-42d3-a456-426614174000.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DatasetName
@@ -105,14 +157,16 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SourceFormat": {
 		//	      "description": "The format of the dataset source associated with the dataset.",
 		//	      "enum": [
-		//	        "KNOWLEDGE_BASE"
+		//	        "KNOWLEDGE_BASE",
+		//	        "TIMESERIES"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SourceType": {
 		//	      "description": "The type of data source for the dataset.",
 		//	      "enum": [
-		//	        "KENDRA"
+		//	        "KENDRA",
+		//	        "SITEWISE"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -163,6 +217,22 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The data source for the dataset.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DatasetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the dataset.",
+		//	  "enum": [
+		//	    "SESSION",
+		//	    "CURATED",
+		//	    "EXTERNAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"dataset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -204,6 +274,20 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WorkspaceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the workspace associated with the dataset.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_-]+$",
+		//	  "type": "string"
+		//	}
+		"workspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workspace associated with the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -222,19 +306,25 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"dataset_arn":         "DatasetArn",
+		"dataset_config":      "DatasetConfig",
 		"dataset_description": "DatasetDescription",
 		"dataset_id":          "DatasetId",
 		"dataset_name":        "DatasetName",
 		"dataset_source":      "DatasetSource",
+		"dataset_type":        "DatasetType",
 		"kendra":              "Kendra",
 		"key":                 "Key",
 		"knowledge_base_arn":  "KnowledgeBaseArn",
 		"role_arn":            "RoleArn",
+		"session":             "Session",
+		"session_end_time":    "SessionEndTime",
+		"session_start_time":  "SessionStartTime",
 		"source_detail":       "SourceDetail",
 		"source_format":       "SourceFormat",
 		"source_type":         "SourceType",
 		"tags":                "Tags",
 		"value":               "Value",
+		"workspace_name":      "WorkspaceName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

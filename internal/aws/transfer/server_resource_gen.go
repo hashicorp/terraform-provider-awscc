@@ -488,6 +488,19 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
+		//	    "ProxyConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SftpMode": {
+		//	          "enum": [
+		//	            "PROXY_PROTOCOL_V2_ENFORCED",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SetStatOption": {
 		//	      "enum": [
 		//	        "DEFAULT",
@@ -535,6 +548,30 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProxyConfig
+				"proxy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SftpMode
+						"sftp_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PROXY_PROTOCOL_V2_ENFORCED",
+									"NONE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SetStatOption
@@ -1015,12 +1052,14 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"pre_authentication_login_banner":          "PreAuthenticationLoginBanner",
 		"protocol_details":                         "ProtocolDetails",
 		"protocols":                                "Protocols",
+		"proxy_config":                             "ProxyConfig",
 		"s3_storage_options":                       "S3StorageOptions",
 		"security_group_ids":                       "SecurityGroupIds",
 		"security_policy_name":                     "SecurityPolicyName",
 		"server_id":                                "ServerId",
 		"set_stat_option":                          "SetStatOption",
 		"sftp_authentication_methods":              "SftpAuthenticationMethods",
+		"sftp_mode":                                "SftpMode",
 		"state":                                    "State",
 		"structured_log_destinations":              "StructuredLogDestinations",
 		"subnet_ids":                               "SubnetIds",

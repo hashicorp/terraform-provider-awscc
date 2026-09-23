@@ -230,6 +230,7 @@ Optional:
 - `canary_configuration` (Attributes) Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period. (see [below for nested schema](#nestedatt--deployment_configuration--canary_configuration))
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
+- `early_success_criteria` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--early_success_criteria))
 - `lifecycle_hooks` (Attributes List) An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
 - `linear_configuration` (Attributes) Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step. (see [below for nested schema](#nestedatt--deployment_configuration--linear_configuration))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
@@ -296,6 +297,16 @@ Optional:
 - `type` (String) Determines how Amazon ECS uses ``value`` to calculate the failure threshold. For the percentage types (``BOUNDED_PERCENT`` and ``UNBOUNDED_PERCENT``), Amazon ECS multiplies ``value`` by the latest service desired count. For ``COUNT``, Amazon ECS uses ``value`` directly as the threshold. The default is ``BOUNDED_PERCENT``.
 - `value` (Number) Specifies the integer that Amazon ECS uses to calculate the failure threshold. When ``type`` is ``COUNT``, this value is the failure threshold itself. When ``type`` is a percentage type, Amazon ECS multiplies this value by the latest service desired count to produce the failure threshold. The default is ``50``.
 
+
+
+<a id="nestedatt--deployment_configuration--early_success_criteria"></a>
+### Nested Schema for `deployment_configuration.early_success_criteria`
+
+Optional:
+
+- `enable` (Boolean)
+- `healthy_percent` (Number)
+- `source_service_revision_cleanup` (String)
 
 
 <a id="nestedatt--deployment_configuration--lifecycle_hooks"></a>

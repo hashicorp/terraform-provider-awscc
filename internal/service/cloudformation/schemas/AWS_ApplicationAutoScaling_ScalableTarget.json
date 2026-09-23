@@ -1,8 +1,14 @@
 {
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
+    "permissions": [
+      "application-autoscaling:TagResource",
+      "application-autoscaling:UntagResource",
+      "application-autoscaling:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
   "typeName": "AWS::ApplicationAutoScaling::ScalableTarget",
@@ -32,7 +38,8 @@
     "read": {
       "permissions": [
         "application-autoscaling:DescribeScalableTargets",
-        "application-autoscaling:DescribeScheduledActions"
+        "application-autoscaling:DescribeScheduledActions",
+        "application-autoscaling:ListTagsForResource"
       ]
     },
     "create": {
@@ -41,6 +48,8 @@
         "application-autoscaling:RegisterScalableTarget",
         "application-autoscaling:DescribeScheduledActions",
         "application-autoscaling:PutScheduledAction",
+        "application-autoscaling:TagResource",
+        "application-autoscaling:ListTagsForResource",
         "iam:PassRole",
         "iam:CreateServiceLinkedRole",
         "cloudwatch:PutMetricAlarm",
@@ -58,6 +67,9 @@
         "application-autoscaling:DescribeScheduledActions",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:PutScheduledAction",
+        "application-autoscaling:TagResource",
+        "application-autoscaling:UntagResource",
+        "application-autoscaling:ListTagsForResource",
         "cloudwatch:PutMetricAlarm",
         "cloudwatch:DeleteAlarms",
         "cloudwatch:DescribeAlarms",
@@ -136,6 +148,27 @@
         "Schedule"
       ]
     },
+    "Tag": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
     "ScalableTargetAction": {
       "description": "``ScalableTargetAction`` specifies the minimum and maximum capacity for the ``ScalableTargetAction`` property of the [AWS::ApplicationAutoScaling::ScalableTarget ScheduledAction](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html) property type.",
       "additionalProperties": false,
@@ -189,6 +222,15 @@
     "RoleARN": {
       "description": "Specify the Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role that allows Application Auto Scaling to modify the scalable target on your behalf. This can be either an IAM service role that Application Auto Scaling can assume to make calls to other AWS resources on your behalf, or a service-linked role for the specified service. For more information, see [How Application Auto Scaling works with IAM](https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html) in the *Application Auto Scaling User Guide*.\n To automatically create a service-linked role (recommended), specify the full ARN of the service-linked role in your stack template. To find the exact ARN of the service-linked role for your AWS or custom resource, see the [Service-linked roles](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html) topic in the *Application Auto Scaling User Guide*. Look for the ARN in the table at the bottom of the page.",
       "type": "string"
+    },
+    "Tags": {
+      "uniqueItems": true,
+      "description": "",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     },
     "MaxCapacity": {
       "description": "The maximum value that you plan to scale out to. When a scaling policy is in effect, Application Auto Scaling can scale out (expand) as needed to the maximum capacity limit in response to changing demand.",

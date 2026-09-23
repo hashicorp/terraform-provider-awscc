@@ -373,7 +373,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "insertionOrder": false,
 		//	                        "items": {
 		//	                          "description": "Namespace for the memory strategy",
-		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "minItems": 1,
@@ -384,7 +384,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "insertionOrder": false,
 		//	                        "items": {
 		//	                          "description": "Namespace for the memory strategy",
-		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "minItems": 1,
@@ -735,7 +735,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -746,7 +746,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -941,7 +941,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -952,7 +952,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1095,7 +1095,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "description": "Namespace for the memory strategy",
-		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                  "type": "string"
 		//	                },
 		//	                "minItems": 1,
@@ -1106,7 +1106,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "description": "Namespace for the memory strategy",
-		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	                  "type": "string"
 		//	                },
 		//	                "minItems": 1,
@@ -1304,7 +1304,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1315,7 +1315,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1510,7 +1510,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1521,7 +1521,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1716,7 +1716,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -1727,7 +1727,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "description": "Namespace for the memory strategy",
-		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "minItems": 1,
@@ -3000,6 +3000,91 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Name of the Memory resource",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NamespaceKeys
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of namespace variable key definitions for a memory resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A namespace variable key definition with optional validation rules",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A namespace variable key name. Must start with a lowercase letter and contain only lowercase alphanumeric characters. Cannot be a built-in variable (memoryStrategyId, sessionId, actorId).",
+		//	        "maxLength": 32,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Validation": {
+		//	        "additionalProperties": false,
+		//	        "description": "Validation rules for namespace variable values. Multiple rules can be specified and all must pass.",
+		//	        "properties": {
+		//	          "AllowedValues": {
+		//	            "description": "List of allowed values for this namespace variable",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "A single allowed value for a namespace variable",
+		//	              "maxLength": 64,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-z0-9][a-z0-9-_]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 10,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "RegexPattern": {
+		//	            "description": "A regex pattern that a namespace variable value must match",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"namespace_keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A namespace variable key name. Must start with a lowercase letter and contain only lowercase alphanumeric characters. Cannot be a built-in variable (memoryStrategyId, sessionId, actorId).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Validation
+					"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of allowed values for this namespace variable",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RegexPattern
+							"regex_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A regex pattern that a namespace variable value must match",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Validation rules for namespace variable values. Multiple rules can be specified and all must pass.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of namespace variable key definitions for a memory resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -3218,12 +3303,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_value":                       "MinValue",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
+		"namespace_keys":                  "NamespaceKeys",
 		"namespace_templates":             "NamespaceTemplates",
 		"namespaces":                      "Namespaces",
 		"number_validation":               "NumberValidation",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
 		"reflection":                      "Reflection",
 		"reflection_configuration":        "ReflectionConfiguration",
+		"regex_pattern":                   "RegexPattern",
 		"resources":                       "Resources",
 		"self_managed_configuration":      "SelfManagedConfiguration",
 		"semantic_memory_strategy":        "SemanticMemoryStrategy",

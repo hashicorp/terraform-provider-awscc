@@ -82,7 +82,27 @@ Optional:
 Optional:
 
 - `cluster_arn` (String) ARN of the EKS cluster.
+- `label_selector` (Attributes) Kubernetes label selector that scopes discovery to matching objects in the specified namespaces. An object must satisfy both MatchLabels and MatchExpressions. Specify at least one of them; a selector carrying neither is treated as though no selector were supplied, and all supported objects in the specified namespaces are discovered. (see [below for nested schema](#nestedatt--input_sources--resource_configuration--eks--label_selector))
 - `namespaces` (List of String) EKS namespaces.
+
+<a id="nestedatt--input_sources--resource_configuration--eks--label_selector"></a>
+### Nested Schema for `input_sources.resource_configuration.eks.label_selector`
+
+Optional:
+
+- `match_expressions` (Attributes List) Label selector requirements an object must satisfy to be discovered. Up to 20 requirements, all of which must match. (see [below for nested schema](#nestedatt--input_sources--resource_configuration--eks--label_selector--match_expressions))
+- `match_labels` (Map of String) Label key/value pairs an object must carry to be discovered. Up to 20 pairs.
+
+<a id="nestedatt--input_sources--resource_configuration--eks--label_selector--match_expressions"></a>
+### Nested Schema for `input_sources.resource_configuration.eks.label_selector.match_expressions`
+
+Optional:
+
+- `key` (String) Label key the requirement applies to.
+- `operator` (String) Operator applied to the label key.
+- `values` (List of String) Label values the requirement compares against. Up to 20 values. Required for IN and NOT_IN; omit for EXISTS and DOES_NOT_EXIST.
+
+
 
 
 <a id="nestedatt--input_sources--resource_configuration--resource_tags"></a>

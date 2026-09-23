@@ -1,0 +1,173 @@
+{
+  "typeName": "AWS::MGN::Connector",
+  "description": "Resource schema for AWS::MGN::Connector. A Connector provides connectivity between a source environment and Application Migration Service (MGN) via AWS Systems Manager (SSM).",
+  "definitions": {
+    "ConnectorSsmCommandConfig": {
+      "type": "object",
+      "description": "SSM command configuration for the connector.",
+      "properties": {
+        "S3OutputEnabled": {
+          "type": "boolean",
+          "description": "Whether SSM command output is stored in S3."
+        },
+        "OutputS3BucketName": {
+          "type": "string",
+          "description": "The S3 bucket name for SSM command output.",
+          "pattern": "^[a-zA-Z0-9.\\-_]{1,255}$"
+        },
+        "CloudWatchOutputEnabled": {
+          "type": "boolean",
+          "description": "Whether SSM command output is sent to CloudWatch Logs."
+        },
+        "CloudWatchLogGroupName": {
+          "type": "string",
+          "description": "The CloudWatch Logs group name for SSM command output.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[.\\-_/#A-Za-z0-9]+$"
+        }
+      },
+      "required": [
+        "S3OutputEnabled",
+        "CloudWatchOutputEnabled"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ConnectorID": {
+      "type": "string",
+      "description": "The unique identifier of the connector.",
+      "minLength": 27,
+      "maxLength": 27,
+      "pattern": "^connector-[0-9a-zA-Z]{17}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the connector.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the connector.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "SsmInstanceID": {
+      "type": "string",
+      "description": "The SSM instance ID associated with this connector.",
+      "minLength": 19,
+      "maxLength": 20,
+      "pattern": "(^i-[0-9a-zA-Z]{17}$)|(^mi-[0-9a-zA-Z]{17}$)"
+    },
+    "SsmCommandConfig": {
+      "$ref": "#/definitions/ConnectorSsmCommandConfig"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the connector.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "Name",
+    "SsmInstanceID"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConnectorID",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/SsmInstanceID"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ConnectorID"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mgn:TagResource",
+      "mgn:UntagResource",
+      "mgn:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mgn:CreateConnector",
+        "mgn:InitializeService",
+        "mgn:TagResource",
+        "ssm:GetCommandInvocation",
+        "ssm:SendCommand",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mgn:ListConnectors",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mgn:UpdateConnector",
+        "mgn:ListConnectors",
+        "mgn:TagResource",
+        "mgn:UntagResource",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mgn:DeleteConnector",
+        "mgn:ListConnectors",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mgn:ListConnectors"
+      ]
+    }
+  }
+}

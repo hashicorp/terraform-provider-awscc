@@ -1,0 +1,1 @@
+$ terraform import awscc_bcm_scheduled_report.example "arn"

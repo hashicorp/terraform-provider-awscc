@@ -1,0 +1,244 @@
+{
+  "typeName": "AWS::SageMaker::ClusterSchedulerConfig",
+  "description": "Resource Type definition for AWS::SageMaker::ClusterSchedulerConfig. Cluster policy configuration used for task prioritization and fair-share allocation of idle compute.",
+  "properties": {
+    "ClusterSchedulerConfigArn": {
+      "type": "string",
+      "description": "ARN of the cluster policy.",
+      "maxLength": 256,
+      "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:cluster-scheduler-config/[a-z0-9]{12}$"
+    },
+    "ClusterSchedulerConfigId": {
+      "type": "string",
+      "description": "ID of the cluster policy.",
+      "maxLength": 12,
+      "pattern": "^[a-z0-9]{12}$"
+    },
+    "ClusterSchedulerConfigVersion": {
+      "type": "integer",
+      "description": "Version of the cluster policy."
+    },
+    "Name": {
+      "type": "string",
+      "description": "Name for the cluster policy.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+    },
+    "ClusterArn": {
+      "type": "string",
+      "description": "ARN of the cluster.",
+      "maxLength": 256,
+      "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Description of the cluster policy.",
+      "maxLength": 1024,
+      "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*$"
+    },
+    "SchedulerConfig": {
+      "$ref": "#/definitions/SchedulerConfig"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status of the cluster policy.",
+      "enum": [
+        "Creating",
+        "CreateFailed",
+        "CreateRollbackFailed",
+        "Created",
+        "Updating",
+        "UpdateFailed",
+        "UpdateRollbackFailed",
+        "Updated",
+        "Deleting",
+        "DeleteFailed",
+        "DeleteRollbackFailed",
+        "Deleted"
+      ]
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation time of the cluster policy."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags of the cluster policy.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "SchedulerConfig": {
+      "type": "object",
+      "description": "Cluster policy configuration.",
+      "properties": {
+        "PriorityClasses": {
+          "type": "array",
+          "description": "List of priority class configurations.",
+          "items": {
+            "$ref": "#/definitions/PriorityClass"
+          },
+          "minItems": 0,
+          "maxItems": 10,
+          "insertionOrder": false
+        },
+        "FairShare": {
+          "type": "string",
+          "description": "When enabled, entities borrow idle compute based on assigned FairShareWeight.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "IdleResourceSharing": {
+          "type": "string",
+          "description": "Configuration for sharing idle compute resources across entities.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PriorityClass": {
+      "type": "object",
+      "description": "Priority class configuration.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the priority class.",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9]){0,39}?$"
+        },
+        "Weight": {
+          "type": "integer",
+          "description": "Weight of the priority class. Range 0-100, default 0.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "Name",
+        "Weight"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "Name",
+    "ClusterArn",
+    "SchedulerConfig"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ClusterSchedulerConfigArn",
+    "/properties/ClusterSchedulerConfigId",
+    "/properties/ClusterSchedulerConfigVersion",
+    "/properties/Status",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/ClusterArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ClusterSchedulerConfigArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ClusterSchedulerConfigId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags",
+      "sagemaker:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:CreateClusterSchedulerConfig",
+        "sagemaker:DescribeClusterSchedulerConfig",
+        "sagemaker:DescribeCluster",
+        "eks:DescribeCluster",
+        "eks:AssociateAccessPolicy",
+        "eks:DescribeAccessEntry",
+        "eks:ListAssociatedAccessPolicies",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeClusterSchedulerConfig",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateClusterSchedulerConfig",
+        "sagemaker:DescribeClusterSchedulerConfig",
+        "sagemaker:DescribeCluster",
+        "eks:DescribeCluster",
+        "eks:AssociateAccessPolicy",
+        "eks:DisassociateAccessPolicy",
+        "eks:DescribeAccessEntry",
+        "eks:ListAssociatedAccessPolicies",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:DeleteClusterSchedulerConfig",
+        "sagemaker:DescribeClusterSchedulerConfig",
+        "sagemaker:ListTags",
+        "sagemaker:DescribeCluster",
+        "eks:DescribeCluster",
+        "eks:DisassociateAccessPolicy",
+        "eks:DescribeAccessEntry",
+        "eks:ListAssociatedAccessPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListClusterSchedulerConfigs"
+      ]
+    }
+  }
+}

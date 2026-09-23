@@ -1,0 +1,164 @@
+{
+  "typeName": "AWS::WellArchitected::AgentGoal",
+  "description": "Resource schema for AWS::WellArchitected::AgentGoal. An Agent Goal expresses a Well-Architected objective (a title, optional description, and the pillars it targets) within an Agent Profile, used to focus Well-Architected Agent recommendations.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Pillar": {
+      "description": "A Well-Architected pillar the Agent Goal targets.",
+      "type": "string",
+      "enum": [
+        "COST_OPTIMIZATION",
+        "SECURITY",
+        "RESILIENCE",
+        "PERFORMANCE",
+        "OPERATIONAL_EXCELLENCE"
+      ]
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The synthetic Amazon Resource Name (ARN) of the Agent Goal, composed of the parent profile ARN and the goal id.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+/agent-goal/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ProfileArn": {
+      "description": "The Amazon Resource Name (ARN) of the parent Agent Profile that owns this goal. Pass `!Ref` of the parent AWS::WellArchitected::AgentProfile to flow its ARN here.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+$"
+    },
+    "Id": {
+      "description": "The service-generated unique identifier of the Agent Goal.",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Pillars": {
+      "description": "The list of Well-Architected pillars this goal targets.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/definitions/Pillar"
+      }
+    },
+    "Title": {
+      "description": "The title of the Agent Goal.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": ""
+    },
+    "Description": {
+      "description": "A description of the Agent Goal.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000,
+      "pattern": ""
+    },
+    "CreatedBy": {
+      "description": "The identifier of the system or user that created this goal.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the goal was created.",
+      "type": "string",
+      "format": "date-time",
+      "minLength": 20,
+      "maxLength": 64
+    },
+    "LastModifiedBy": {
+      "description": "The identifier of the system or user that last modified this goal.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "LastModifiedAt": {
+      "description": "The timestamp when the goal was last modified.",
+      "type": "string",
+      "format": "date-time",
+      "minLength": 20,
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ProfileArn",
+    "Pillars",
+    "Title"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/CreatedBy",
+    "/properties/CreatedAt",
+    "/properties/LastModifiedBy",
+    "/properties/LastModifiedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProfileArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ProfileArn",
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wellarchitected:CreateAgentGoal",
+        "wellarchitected:GetAgentGoal"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wellarchitected:GetAgentGoal"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wellarchitected:UpdateAgentGoal",
+        "wellarchitected:GetAgentGoal"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wellarchitected:DeleteAgentGoal",
+        "wellarchitected:GetAgentGoal"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ProfileArn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048,
+            "pattern": "^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+$"
+          }
+        },
+        "required": [
+          "ProfileArn"
+        ]
+      },
+      "permissions": [
+        "wellarchitected:ListAgentGoals"
+      ]
+    }
+  }
+}

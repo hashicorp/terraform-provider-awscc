@@ -1,0 +1,184 @@
+{
+  "typeName": "AWS::PI::PerfReports",
+  "description": "Creates and manages a Performance Insights performance analysis report for a specified DB instance.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the performance analysis report.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.*:pi:.*$"
+    },
+    "ServiceType": {
+      "type": "string",
+      "description": "The AWS service for which Performance Insights returns metrics. Valid values are RDS and DOCDB.",
+      "enum": [
+        "RDS",
+        "DOCDB"
+      ]
+    },
+    "Identifier": {
+      "type": "string",
+      "description": "An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source. To use an Amazon RDS instance as a data source, specify its DbiResourceId value.",
+      "minLength": 0,
+      "maxLength": 256,
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "AnalysisReportId": {
+      "type": "string",
+      "description": "A unique identifier for the analysis report.",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^report-[0-9a-f]{17}$"
+    },
+    "StartTime": {
+      "type": "string",
+      "description": "The start time defined for the analysis report in ISO 8601 format.",
+      "format": "date-time"
+    },
+    "EndTime": {
+      "type": "string",
+      "description": "The end time defined for the analysis report in ISO 8601 format.",
+      "format": "date-time"
+    },
+    "CreateTime": {
+      "type": "string",
+      "description": "The time the analysis report was created in ISO 8601 format.",
+      "format": "date-time"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the analysis report.",
+      "enum": [
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200
+    }
+  },
+  "required": [
+    "ServiceType",
+    "Identifier",
+    "StartTime",
+    "EndTime"
+  ],
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ServiceType",
+    "/properties/Identifier",
+    "/properties/StartTime",
+    "/properties/EndTime",
+    "/properties/Tags"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AnalysisReportId",
+    "/properties/CreateTime",
+    "/properties/Status"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ServiceType",
+      "/properties/Identifier",
+      "/properties/AnalysisReportId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "pi:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "pi:CreatePerformanceAnalysisReport",
+        "pi:GetPerformanceAnalysisReport",
+        "pi:ListTagsForResource",
+        "pi:TagResource",
+        "pi:GetResourceMetadata",
+        "rds:DescribeDBInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "pi:GetPerformanceAnalysisReport",
+        "pi:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "pi:DeletePerformanceAnalysisReport",
+        "pi:GetPerformanceAnalysisReport",
+        "pi:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ServiceType": {
+            "type": "string",
+            "enum": [
+              "RDS",
+              "DOCDB"
+            ]
+          },
+          "Identifier": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256,
+            "pattern": "^[a-zA-Z0-9-]+$"
+          }
+        },
+        "required": [
+          "ServiceType",
+          "Identifier"
+        ]
+      },
+      "permissions": [
+        "pi:ListPerformanceAnalysisReports"
+      ]
+    }
+  }
+}

@@ -102,6 +102,47 @@
       "required": [
         "SecretArn"
       ]
+    },
+    "AzureFederatedIdentityConfig": {
+      "additionalProperties": false,
+      "description": "Specifies the identity federation configuration that DataSync uses to access your Azure Blob Storage container using an OpenID Connect (OIDC) token.",
+      "type": "object",
+      "properties": {
+        "AwsIamRole": {
+          "description": "Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+          "maxLength": 2048
+        },
+        "AzureOidc": {
+          "$ref": "#/definitions/AzureOidcConfig"
+        }
+      }
+    },
+    "AzureOidcConfig": {
+      "additionalProperties": false,
+      "description": "Specifies the Microsoft Entra (Azure AD) identity that DataSync federates with to obtain an access token for your Azure Blob Storage container.",
+      "type": "object",
+      "properties": {
+        "TenantId": {
+          "description": "Specifies the Microsoft Entra (Azure AD) tenant ID that the identity belongs to.",
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "ClientId": {
+          "description": "Specifies the client ID of the Microsoft Entra (Azure AD) identity that DataSync uses to obtain an access token.",
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "minLength": 36,
+          "maxLength": 36
+        }
+      },
+      "required": [
+        "TenantId",
+        "ClientId"
+      ]
     }
   },
   "properties": {
@@ -122,7 +163,8 @@
       "type": "string",
       "enum": [
         "SAS",
-        "NONE"
+        "NONE",
+        "OIDC"
       ],
       "default": "SAS"
     },
@@ -189,6 +231,9 @@
     },
     "ManagedSecretConfig": {
       "$ref": "#/definitions/ManagedSecretConfig"
+    },
+    "FederatedIdentity": {
+      "$ref": "#/definitions/AzureFederatedIdentityConfig"
     }
   },
   "tagging": {

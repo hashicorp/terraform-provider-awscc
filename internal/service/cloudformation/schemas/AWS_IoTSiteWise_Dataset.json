@@ -15,14 +15,16 @@
           "type": "string",
           "description": "The format of the dataset source associated with the dataset.",
           "enum": [
-            "KNOWLEDGE_BASE"
+            "KNOWLEDGE_BASE",
+            "TIMESERIES"
           ]
         },
         "SourceType": {
           "type": "string",
           "description": "The type of data source for the dataset.",
           "enum": [
-            "KENDRA"
+            "KENDRA",
+            "SITEWISE"
           ]
         },
         "SourceDetail": {
@@ -59,6 +61,34 @@
         }
       }
     },
+    "DatasetConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Session": {
+          "description": "The session configuration for a SESSION dataset.",
+          "$ref": "#/definitions/SessionConfig"
+        }
+      }
+    },
+    "SessionConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "SessionStartTime",
+        "SessionEndTime"
+      ],
+      "properties": {
+        "SessionStartTime": {
+          "type": "string",
+          "description": "The start time of the session as an ISO 8601 UTC instant, for example 2024-01-01T00:00:00Z."
+        },
+        "SessionEndTime": {
+          "type": "string",
+          "description": "The end time of the session as an ISO 8601 UTC instant, for example 2024-12-31T23:59:59Z."
+        }
+      }
+    },
     "Tag": {
       "type": "object",
       "additionalProperties": false,
@@ -78,11 +108,11 @@
   },
   "properties": {
     "DatasetId": {
-      "description": "The ID of the dataset.",
+      "description": "The ID of the dataset. For workspace-scoped datasets this is the workspace name and dataset ID joined by a slash, for example my-workspace/123e4567-e89b-42d3-a456-426614174000.",
       "type": "string",
       "minLength": 36,
-      "maxLength": 36,
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      "maxLength": 101,
+      "pattern": "^([a-zA-Z0-9_-]{1,64}/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "DatasetArn": {
       "description": "The ARN of the dataset.",
@@ -99,6 +129,26 @@
     "DatasetSource": {
       "description": "The data source for the dataset.",
       "$ref": "#/definitions/DatasetSource"
+    },
+    "DatasetType": {
+      "description": "The type of the dataset.",
+      "type": "string",
+      "enum": [
+        "SESSION",
+        "CURATED",
+        "EXTERNAL"
+      ]
+    },
+    "WorkspaceName": {
+      "description": "The name of the workspace associated with the dataset.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "DatasetConfig": {
+      "description": "The configuration for the dataset.",
+      "$ref": "#/definitions/DatasetConfig"
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
@@ -124,12 +174,15 @@
     ]
   },
   "required": [
-    "DatasetName",
-    "DatasetSource"
+    "DatasetName"
   ],
   "readOnlyProperties": [
     "/properties/DatasetArn",
     "/properties/DatasetId"
+  ],
+  "createOnlyProperties": [
+    "/properties/DatasetType",
+    "/properties/WorkspaceName"
   ],
   "primaryIdentifier": [
     "/properties/DatasetId"
@@ -170,6 +223,7 @@
     "list": {
       "permissions": [
         "iotsitewise:ListDatasets",
+        "iotsitewise:ListWorkspaces",
         "iotsitewise:ListTagsForResource"
       ]
     }

@@ -1,0 +1,1 @@
+$ terraform import awscc_appsync_api_key.example "api_id|api_key_id"

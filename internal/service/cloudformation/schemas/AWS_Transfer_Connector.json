@@ -262,6 +262,17 @@
           "minimum": 1,
           "maximum": 5,
           "default": 1
+        },
+        "OrderedUserSecretVersionStages": {
+          "description": "Specifies the order in which the connector attempts to use secret versions during authentication. This enables fallback to alternative credentials if the primary version fails.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 2
         }
       },
       "additionalProperties": false

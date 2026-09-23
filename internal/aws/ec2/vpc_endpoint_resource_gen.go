@@ -509,7 +509,8 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Gateway",
 		//	    "GatewayLoadBalancer",
 		//	    "ServiceNetwork",
-		//	    "Resource"
+		//	    "Resource",
+		//	    "Tunnel"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -524,6 +525,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					"GatewayLoadBalancer",
 					"ServiceNetwork",
 					"Resource",
+					"Tunnel",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

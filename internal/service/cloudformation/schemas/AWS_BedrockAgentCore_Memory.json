@@ -544,7 +544,7 @@
     },
     "Namespace": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+      "pattern": "^[a-zA-Z0-9\\-_/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_/]*)*$",
       "description": "Namespace for the memory strategy"
     },
     "NamespacesList": {
@@ -975,6 +975,72 @@
       "insertionOrder": false,
       "description": "List of indexed keys for the memory"
     },
+    "NamespaceVariableKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "",
+      "description": "A namespace variable key name. Must start with a lowercase letter and contain only lowercase alphanumeric characters. Cannot be a built-in variable (memoryStrategyId, sessionId, actorId)."
+    },
+    "NamespaceAllowedValue": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-_]*$",
+      "description": "A single allowed value for a namespace variable"
+    },
+    "NamespaceRegexPattern": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "A regex pattern that a namespace variable value must match"
+    },
+    "NamespaceKeyValidation": {
+      "type": "object",
+      "properties": {
+        "AllowedValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceAllowedValue"
+          },
+          "minItems": 1,
+          "maxItems": 10,
+          "insertionOrder": false,
+          "description": "List of allowed values for this namespace variable"
+        },
+        "RegexPattern": {
+          "$ref": "#/definitions/NamespaceRegexPattern"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Validation rules for namespace variable values. Multiple rules can be specified and all must pass."
+    },
+    "NamespaceKeyEntry": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/NamespaceVariableKey"
+        },
+        "Validation": {
+          "$ref": "#/definitions/NamespaceKeyValidation"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false,
+      "description": "A namespace variable key definition with optional validation rules"
+    },
+    "NamespaceKeysList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NamespaceKeyEntry"
+      },
+      "minItems": 1,
+      "maxItems": 5,
+      "insertionOrder": false,
+      "description": "List of namespace variable key definitions for a memory resource"
+    },
     "Definition": {
       "type": "string",
       "minLength": 1,
@@ -1192,6 +1258,9 @@
     },
     "IndexedKeys": {
       "$ref": "#/definitions/IndexedKeysList"
+    },
+    "NamespaceKeys": {
+      "$ref": "#/definitions/NamespaceKeysList"
     },
     "StreamDeliveryResources": {
       "$ref": "#/definitions/StreamDeliveryResources"

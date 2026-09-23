@@ -102,30 +102,47 @@ resource "awscc_iotsitewise_dataset" "example" {
 ### Required
 
 - `dataset_name` (String) The name of the dataset.
-- `dataset_source` (Attributes) The data source for the dataset. (see [below for nested schema](#nestedatt--dataset_source))
 
 ### Optional
 
+- `dataset_config` (Attributes) The configuration for the dataset. (see [below for nested schema](#nestedatt--dataset_config))
 - `dataset_description` (String) A description about the dataset, and its functionality.
+- `dataset_source` (Attributes) The data source for the dataset. (see [below for nested schema](#nestedatt--dataset_source))
+- `dataset_type` (String) The type of the dataset.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `workspace_name` (String) The name of the workspace associated with the dataset.
 
 ### Read-Only
 
 - `dataset_arn` (String) The ARN of the dataset.
-- `dataset_id` (String) The ID of the dataset.
+- `dataset_id` (String) The ID of the dataset. For workspace-scoped datasets this is the workspace name and dataset ID joined by a slash, for example my-workspace/123e4567-e89b-42d3-a456-426614174000.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--dataset_config"></a>
+### Nested Schema for `dataset_config`
+
+Optional:
+
+- `session` (Attributes) The session configuration for a SESSION dataset. (see [below for nested schema](#nestedatt--dataset_config--session))
+
+<a id="nestedatt--dataset_config--session"></a>
+### Nested Schema for `dataset_config.session`
+
+Optional:
+
+- `session_end_time` (String) The end time of the session as an ISO 8601 UTC instant, for example 2024-12-31T23:59:59Z.
+- `session_start_time` (String) The start time of the session as an ISO 8601 UTC instant, for example 2024-01-01T00:00:00Z.
+
+
 
 <a id="nestedatt--dataset_source"></a>
 ### Nested Schema for `dataset_source`
 
-Required:
-
-- `source_format` (String) The format of the dataset source associated with the dataset.
-- `source_type` (String) The type of data source for the dataset.
-
 Optional:
 
 - `source_detail` (Attributes) The details of the dataset source associated with the dataset. (see [below for nested schema](#nestedatt--dataset_source--source_detail))
+- `source_format` (String) The format of the dataset source associated with the dataset.
+- `source_type` (String) The type of data source for the dataset.
 
 <a id="nestedatt--dataset_source--source_detail"></a>
 ### Nested Schema for `dataset_source.source_detail`

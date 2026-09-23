@@ -84,22 +84,34 @@
   "handlers": {
     "create": {
       "permissions": [
-        "logs:CreateLogAnomalyDetector"
+        "logs:CreateLogAnomalyDetector",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
       ]
     },
     "read": {
       "permissions": [
-        "logs:GetLogAnomalyDetector"
+        "logs:GetLogAnomalyDetector",
+        "kms:Decrypt",
+        "kms:DescribeKey"
       ]
     },
     "update": {
       "permissions": [
-        "logs:UpdateLogAnomalyDetector"
+        "logs:UpdateLogAnomalyDetector",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
       ]
     },
     "delete": {
       "permissions": [
-        "logs:DeleteLogAnomalyDetector"
+        "logs:DeleteLogAnomalyDetector",
+        "kms:Decrypt",
+        "kms:DescribeKey"
       ]
     },
     "list": {

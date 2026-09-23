@@ -131,7 +131,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	              "InboundTokenClaimName": {
 		//	                "maxLength": 255,
 		//	                "minLength": 1,
-		//	                "pattern": "^[A-Za-z0-9_.-:]+$",
+		//	                "pattern": "^[A-Za-z0-9_.:-]+$",
 		//	                "type": "string"
 		//	              },
 		//	              "InboundTokenClaimValueType": {
@@ -188,6 +188,18 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "type": "array"
+		//	                },
+		//	                "Tags": {
+		//	                  "additionalProperties": false,
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "maxLength": 256,
+		//	                      "minLength": 0,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
 		//	                },
 		//	                "VpcIdentifier": {
 		//	                  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
@@ -360,7 +372,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 255),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.-:]+$"), ""),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.:-]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -466,6 +478,17 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags":              // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+											// Tags is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: VpcIdentifier
 										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1386,6 +1409,9 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"workload_identity_details":         "WorkloadIdentityDetails",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AuthorizerConfiguration/CustomJWTAuthorizer/PrivateEndpoint/ManagedVpcResource/Tags",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

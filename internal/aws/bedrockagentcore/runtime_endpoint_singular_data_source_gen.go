@@ -171,7 +171,8 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    "UPDATING",
 		//	    "UPDATE_FAILED",
 		//	    "READY",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "DELETE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}

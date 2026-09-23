@@ -154,7 +154,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "items": {
 		//	        "maxLength": 30,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\.\\-]+$",
+		//	        "pattern": "^[a-zA-Z0-9\\.\\*\\-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 400,
@@ -182,7 +182,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "items": {
 		//	        "maxLength": 30,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\.\\-]+$",
+		//	        "pattern": "^[a-zA-Z0-9\\.\\*\\-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 400,
