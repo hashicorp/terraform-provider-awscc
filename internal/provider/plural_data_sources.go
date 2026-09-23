@@ -1234,6 +1234,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backupgateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmdataexports"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmpricingcalculator"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrock"
