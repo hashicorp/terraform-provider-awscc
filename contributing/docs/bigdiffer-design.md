@@ -230,6 +230,23 @@ see "The whole corpus is gated every run," below); a byte-identical schema
 refresh still regenerates and compile-gates, it just skips the AWS download
 (§4).
 
+**Isolation gap, fixed.** "One failure never aborts the others" was the
+intent from day one — bigdiffer replaces a manual process where a crash
+meant someone went and hand-added a suppression, so the automated version
+failing to capture a crash and freeze/suppress the type on its own defeats
+the point. It did not hold for one case: `codegen.Emitter` has no
+recursion-depth guard, so a recursive schema is a Go stack overflow, a
+fatal runtime error no in-process `recover()` catches — it took the whole
+run down instead of being frozen/suppressed like any other failure. Fixed
+by running each candidate's generation in a re-exec'd subprocess (the same
+mechanism `-recheck`'s backlog probe already used for rows already
+suspected of this); a crash now only kills that subprocess and is reported
+as an ordinary generation failure. To keep this cheap at whole-corpus scale,
+a candidate's 2-3 artifacts share one subprocess rather than one each, so a
+crash in one can mark a sibling failed too even if it would have generated
+cleanly alone; `-recheck-all` (not plain `-recheck`, which skips facts that
+already have a recorded reason) re-probes and would catch that.
+
 ### The compile gate
 
 Generation catches schemas that won't render; it cannot catch generated code that

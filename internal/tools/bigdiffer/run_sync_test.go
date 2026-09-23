@@ -9,6 +9,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/hashicorp/cli"
@@ -204,7 +205,7 @@ func TestReconcileListResourceDropsListResourceOnFailedPlural(t *testing.T) {
 		{p: p, a: pluralArt, err: errors.New("plural boom")}, // simulate a failed plural artifact
 	}
 
-	reconciled, err := reconcileListResource(cfg, results)
+	reconciled, err := reconcileListResource(cfg, lg, results)
 	if err != nil {
 		t.Fatalf("reconcileListResource: %v", err)
 	}
@@ -227,7 +228,7 @@ func TestReconcileListResourceLeavesWorkingPairAlone(t *testing.T) {
 	lg := logGroupRow(t, rows)
 	results := generateCorpus(cfg, []resourceRow{lg}, 1)
 
-	reconciled, err := reconcileListResource(cfg, results)
+	reconciled, err := reconcileListResource(cfg, lg, results)
 	if err != nil {
 		t.Fatalf("reconcileListResource: %v", err)
 	}
@@ -298,4 +299,87 @@ func TestSyncBatchAtomicity(t *testing.T) {
 	if _, statErr := os.Stat(cfg.cacheDir); !os.IsNotExist(statErr) {
 		t.Errorf("real cache dir should not exist: promotion must not have happened, got %v", statErr)
 	}
+}
+
+// TestRefreshCandidateContainsRecursiveSchemaCrash is the regression test
+// for the real incident: `make bigdiffer-sync` crashed outright with
+// "runtime: goroutine stack exceeds 1000000000-byte limit" instead of
+// freezing/suppressing the offending type, because refreshCandidate
+// generated a brand-new, never-before-suppressed type in-process and
+// codegen.Emitter has no recursion-depth guard. Drives the real
+// refreshCandidate entry point directly, not just the underlying probe
+// mechanism (already covered by TestProbeArtifactIsolatesRecursiveSchema).
+func TestRefreshCandidateContainsRecursiveSchemaCrash(t *testing.T) {
+	if testing.Short() {
+		t.Skip("spawns a subprocess that can take tens of seconds to stack-overflow")
+	}
+	t.Parallel()
+	cfg, rows := loadCorpus(t)
+
+	var recursive resourceRow
+	found := false
+	for _, r := range rows {
+		if r.CloudFormationTypeName == "AWS::WAFv2::WebACL" {
+			recursive, found = r, true
+			break
+		}
+	}
+	if !found {
+		t.Skip("AWS::WAFv2::WebACL not in overlay")
+	}
+
+	path := recursive.CloudFormationSchemaPath
+	if path == "" {
+		path = schemaCachePath(cfg.cacheDir, recursive.CloudFormationTypeName)
+	}
+	schema, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("reading schema: %v", err)
+	}
+
+	// AWS::WAFv2::WebACL is already suppressed in the real overlay, so a
+	// fully suppressed row generates zero artifacts and this test would
+	// pass vacuously. Simulate the real incident instead: the same
+	// recursive schema, on a fresh, unsuppressed row, matching what
+	// -sync's live discovery hands refreshCandidate for a brand-new type.
+	fresh := resourceRow{
+		ResourceTypeName:       recursive.ResourceTypeName,
+		CloudFormationTypeName: recursive.CloudFormationTypeName,
+	}
+
+	tmp := t.TempDir()
+	cfg.outputRoot = filepath.Join(tmp, "out")
+	cfg.cacheDir = filepath.Join(tmp, "cache")
+	staging := filepath.Join(tmp, "staging")
+	if err := os.MkdirAll(staging, 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	c := candidate{cfType: fresh.CloudFormationTypeName, class: classNew, row: fresh, schema: schema}
+	gr, _, err := refreshCandidate(cfg, staging, c)
+	if err != nil {
+		t.Fatalf("refreshCandidate returned a hard error (should be in-band): %v", err)
+	}
+	// The plural template doesn't recurse the way resource/singular do for
+	// this schema, so only assert at least one artifact shows the
+	// crash-containment signature, not that every artifact failed.
+	var sawContained bool
+	for _, a := range gr.artifacts {
+		if a.err == nil {
+			continue
+		}
+		msg := a.err.Error()
+		if strings.Contains(msg, "stack overflow") || strings.Contains(msg, "crashed") || strings.Contains(msg, "timed out") {
+			sawContained = true
+		}
+	}
+	if !sawContained {
+		t.Fatalf("expected at least one artifact to report a contained crash/timeout, got %+v", gr.artifacts)
+	}
+	if len(gr.artifacts) == 0 {
+		t.Fatal("expected at least one attempted (and failed) artifact, not a suppression no-op")
+	}
+	// Reaching this line at all is most of the assertion: the old
+	// generateCorpus-based path would have taken this whole test binary down
+	// with a Go runtime fatal error before ever returning to the caller.
 }

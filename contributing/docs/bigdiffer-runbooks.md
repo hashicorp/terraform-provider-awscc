@@ -338,8 +338,11 @@ GOTOOLCHAIN=go$(cat .go-version) go run ./internal/tools/bigdiffer -recheck -rec
 ```
 
 Useful after a schema-generating engine change, a suppression whose
-underlying AWS issue you believe was fixed, or a periodic audit of old
-freezes — `-recheck-all` re-probes everything active, including facts a
+underlying AWS issue you believe was fixed, a periodic audit of old
+freezes, or after any `-sync`/`-reconcile` run reports a new
+`generation_failed` suppression on a type with more than one artifact (see
+bigdiffer-design.md's "Isolation gap, fixed" for why a multi-artifact type
+can need this). `-recheck-all` re-probes everything active, including facts a
 human already explained, on the same "propose, never guess-and-write"
 terms.
 

@@ -129,9 +129,10 @@ func main() {
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
 		recheckAll     = flag.Bool("recheck-all", false, "with -recheck: widen the scope to every active suppression/freeze, not just the reason-less/unknown backlog — revisit an old, already-explained decision on demand")
 
-		// Hidden: the hidden -recheck-probe-artifact mode recheck.go re-execs into,
-		// so a crashy regeneration (e.g. a recursive schema) kills only this
-		// subprocess. Not part of the documented CLI surface.
+		// Hidden: the subprocess mode recheck.go re-execs into so a crash
+		// (e.g. a recursive schema) only kills that subprocess. Used by
+		// -recheck's own backlog probe and by every real -sync/-reconcile/
+		// -check artifact generation.
 		recheckProbeArtifact = flag.Bool("recheck-probe-artifact", false, "internal: probe one artifact's regeneration in isolation")
 		probeTFType          = flag.String("probe-tf-type", "", "internal")
 		probeCFNType         = flag.String("probe-cfn-type", "", "internal")
@@ -142,11 +143,18 @@ func main() {
 		probeServicesPath    = flag.String("probe-services-path", "", "internal")
 		probeRepoRoot        = flag.String("probe-repo-root", "", "internal")
 		probeOutputRoot      = flag.String("probe-output-root", "", "internal")
+		probeSuppressRes     = flag.Bool("probe-suppress-resource", false, "internal")
+		probeSuppressSing    = flag.Bool("probe-suppress-singular", false, "internal")
+		probeSuppressPlural  = flag.Bool("probe-suppress-plural", false, "internal")
+		probePathAwareNames  = flag.Bool("probe-path-aware-names", false, "internal")
+		probeOutCode         = flag.String("probe-out-code", "", "internal")
+		probeOutTest         = flag.String("probe-out-test", "", "internal")
+		probeOutManifest     = flag.String("probe-out-manifest", "", "internal: generate every artifact the row's plan calls for (ignoring -probe-kind) and write a JSON manifest instead of single code/test files")
 	)
 	flag.Parse()
 
 	if *recheckProbeArtifact {
-		err := runRecheckProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot)
+		err := runRecheckProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot, *probeSuppressRes, *probeSuppressSing, *probeSuppressPlural, *probePathAwareNames, *probeOutCode, *probeOutTest, *probeOutManifest)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			var gateFailure *buildGateFailure
