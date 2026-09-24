@@ -158,6 +158,13 @@ func runDocs(cfg config) error {
 }
 
 // runTool runs an external command in dir, streaming its output.
+// Scanner and liveness bounds for streaming an external tool's output.
+const (
+	toolScanInitialBuf   = 64 * 1024       // initial line-scan buffer
+	toolScanMaxLine      = 4 * 1024 * 1024 // largest single line accepted (tool dumps can be long)
+	toolLivenessInterval = 5 * time.Second // re-render the console indicator during silent stretches
+)
+
 // toolBar configures the console progress indicator for a runTool call. When
 // total > 0 it is a determinate bar advanced once per isUnit-matching output
 // line (with a spinner fallback if total comes out zero); otherwise a spinner
@@ -195,10 +202,10 @@ func runTool(dir, name string, tb toolBar, args ...string) error {
 	go func() {
 		defer close(scanned)
 		sc := bufio.NewScanner(pr)
-		sc.Buffer(make([]byte, 0, 64*1024), 4*1024*1024)
+		sc.Buffer(make([]byte, 0, toolScanInitialBuf), toolScanMaxLine)
 		for sc.Scan() {
 			line := sc.Text()
-			fmt.Fprintln(logOnly, line)
+			_, _ = fmt.Fprintln(logOnly, line)
 			if tb.total > 0 {
 				if tb.isUnit == nil || tb.isUnit(line) {
 					_ = bar.Add(1)
@@ -213,7 +220,7 @@ func runTool(dir, name string, tb toolBar, args ...string) error {
 	// pause with no output while it exports schema and compiles the provider.
 	stop := make(chan struct{})
 	go func() {
-		t := time.NewTicker(5 * time.Second)
+		t := time.NewTicker(toolLivenessInterval)
 		defer t.Stop()
 		for {
 			select {

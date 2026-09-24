@@ -48,8 +48,11 @@ func inProcessArtifact(cfg config, row resourceRow, kind artifactKind, _ []byte)
 
 // inProcessCandidateArtifacts is inProcessArtifact's whole-candidate analogue,
 // mirroring runProbeCandidate's in-band per-artifact error capture without the
-// subprocess. Reads the schema from the plan's staged path, so the schema-byte
-// argument the subprocess form ships is unused here.
+// subprocess. Like the subprocess child, it recomputes the plan from row
+// (generationPlan) rather than honoring the passed artifact slice, and reads
+// the schema from the plan's staged path — so both the artifacts and schema
+// arguments the subprocess form ships are unused here. The sole caller
+// (generateCandidateIsolated) always passes that same plan, so the two agree.
 func inProcessCandidateArtifacts(cfg config, row resourceRow, _ []genArtifact, _ []byte) ([]genResult, error) {
 	p, err := generationPlan(row, cfg.prefix, cfg.cacheDir)
 	if err != nil {

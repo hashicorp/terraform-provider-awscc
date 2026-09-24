@@ -14,15 +14,18 @@ import (
 // barThrottle bounds how often the progress bar re-renders.
 const barThrottle = 100 * time.Millisecond
 
+// toolSpinnerType selects the schollz/progressbar spinner glyph set.
+const toolSpinnerType = 14
+
 // stepf prints a top-level step header to stderr (e.g. "==> Discovering…"), so a
 // maintainer can follow what bigdiffer is doing at each stage.
 func stepf(format string, a ...any) {
-	fmt.Fprintf(structOut, "==> "+format+"\n", a...)
+	_, _ = fmt.Fprintf(structOut, "==> "+format+"\n", a...)
 }
 
 // infof prints an indented detail line beneath the current step.
 func infof(format string, a ...any) {
-	fmt.Fprintf(structOut, "    "+format+"\n", a...)
+	_, _ = fmt.Fprintf(structOut, "    "+format+"\n", a...)
 }
 
 // newBar returns a labelled progress bar on stderr. When stderr is not a terminal
@@ -61,7 +64,7 @@ func newToolBar(label string) *progressbar.ProgressBar {
 	return progressbar.NewOptions(-1,
 		progressbar.OptionSetDescription(label),
 		progressbar.OptionSetWriter(os.Stderr),
-		progressbar.OptionSpinnerType(14),
+		progressbar.OptionSpinnerType(toolSpinnerType),
 		progressbar.OptionShowIts(),
 		progressbar.OptionSetItsString("lines"),
 		progressbar.OptionSetElapsedTime(true),

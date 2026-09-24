@@ -675,39 +675,40 @@ func (r Report) anomalyProblems() []string {
 }
 
 func (r Report) write() {
-	fmt.Fprintf(structOut, "== bigdiffer report ==\n")
-	fmt.Fprintf(structOut, "available (base) resources: %d\n", r.Total)
-	fmt.Fprintf(structOut, "added (new this week):      %d\n", len(r.AddedNew))
+	w := func(format string, a ...any) { _, _ = fmt.Fprintf(structOut, format, a...) }
+	w("== bigdiffer report ==\n")
+	w("available (base) resources: %d\n", r.Total)
+	w("added (new this week):      %d\n", len(r.AddedNew))
 	for _, b := range r.AddedNew {
-		fmt.Fprintf(structOut, "  + %s  (%s)\n", b.cfn, b.label)
+		w("  + %s  (%s)\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(structOut, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
+	w("added (recovered backlog):  %d\n", len(r.AddedBacklog))
 	for _, b := range r.AddedBacklog {
-		fmt.Fprintf(structOut, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
+		w("  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(structOut, "retained (gone from AWS):    %d\n", len(r.Retained))
+	w("retained (gone from AWS):    %d\n", len(r.Retained))
 	if len(r.UnexplainedRetained) > 0 {
-		fmt.Fprintf(structOut, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
+		w("ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
 		for _, b := range r.UnexplainedRetained {
-			fmt.Fprintf(structOut, "  ! %s  (%s)\n", b.cfn, b.label)
+			w("  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}
 	if len(r.Duplicates) > 0 {
-		fmt.Fprintf(structOut, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
+		w("ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
 		for _, d := range r.Duplicates {
-			fmt.Fprintf(structOut, "  ! %s\n", d)
+			w("  ! %s\n", d)
 		}
 	}
 	if len(r.NamingViolate) > 0 {
-		fmt.Fprintf(structOut, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
+		w("ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
 		for _, v := range r.NamingViolate {
-			fmt.Fprintf(structOut, "  ! %s\n", v)
+			w("  ! %s\n", v)
 		}
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		fmt.Fprintf(structOut, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
+		w("ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
 		for _, b := range r.ReasonlessSuppressed {
-			fmt.Fprintf(structOut, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
+			w("  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
 		}
 	}
 }
