@@ -167,7 +167,6 @@ func main() {
 	}
 
 	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *checkDocsFull, *docs, *noDocs, *recheck, *recheckAll); err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
@@ -176,19 +175,34 @@ func main() {
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) error {
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) (err error) {
+	// Keep the run log open through top-level error reporting: emit the final
+	// "bigdiffer: ..." diagnostic through the tee (so a failed command's
+	// .bigdiffer-<command>.log ends with it, not only the console) and close
+	// only after. closeLog is nil for a usage error or a pre-log failure
+	// (e.g. the toolchain check), where the diagnostic falls back to the
+	// console-only structOut default.
+	var closeLog func()
+	defer func() {
+		if err != nil {
+			_, _ = fmt.Fprintf(structOut, "bigdiffer: %v\n", err)
+		}
+		if closeLog != nil {
+			closeLog()
+		}
+	}()
 	switch {
 	case sync, reconcile, check:
 		// Only the three commands that generate or verify gofmt'd Go source
 		// need the toolchain pinned — a version mismatch here would silently
 		// produce or "verify" output formatted by the wrong gofmt rules (see
 		// verifyGoToolchain).
-		if err := verifyGoToolchain(); err != nil {
+		if err = verifyGoToolchain(); err != nil {
 			return err
 		}
 	}
 	if name := commandName(sync, reconcile, check, docs, lint, recheck); name != "" {
-		defer startRunLog(name)()
+		closeLog = startRunLog(name)
 	}
 	switch {
 	case sync:

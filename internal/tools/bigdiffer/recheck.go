@@ -843,25 +843,26 @@ func suppressionComment(text string) string {
 }
 
 func writeHealReport(needsReason int, proposals []healProposal, all bool) {
-	fmt.Fprintf(os.Stderr, "== bigdiffer -recheck report ==\n")
+	w := func(format string, a ...any) { _, _ = fmt.Fprintf(structOut, format, a...) }
+	w("== bigdiffer -recheck report ==\n")
 	if all {
-		fmt.Fprintf(os.Stderr, "facts re-probed (every active fact, -recheck-all): %d\n", needsReason)
+		w("facts re-probed (every active fact, -recheck-all): %d\n", needsReason)
 	} else {
-		fmt.Fprintf(os.Stderr, "facts needing a reason: %d\n", needsReason)
+		w("facts needing a reason: %d\n", needsReason)
 	}
-	fmt.Fprintf(os.Stderr, "proposals: %d\n", len(proposals))
+	w("proposals: %d\n", len(proposals))
 	for _, p := range proposals {
 		switch p.action {
 		case "lift":
-			fmt.Fprintf(os.Stderr, "  ~ %s (%s) [%s]: %s\n", p.cfn, p.label, p.field, p.reason)
+			w("  ~ %s (%s) [%s]: %s\n", p.cfn, p.label, p.field, p.reason)
 		default:
-			fmt.Fprintf(os.Stderr, "  + %s (%s) [%s]: %s = %q\n", p.cfn, p.label, p.field, p.field, p.reason)
+			w("  + %s (%s) [%s]: %s = %q\n", p.cfn, p.label, p.field, p.field, p.reason)
 			if isIssueWorthy(p.category) {
-				fmt.Fprintf(os.Stderr, "    consider opening a GitHub issue for this %s (%s)\n", p.category, issueTitle(p))
+				w("    consider opening a GitHub issue for this %s (%s)\n", p.category, issueTitle(p))
 			}
 		}
 	}
-	fmt.Fprintln(os.Stderr, "Nothing above was written; review and apply by hand.")
+	w("Nothing above was written; review and apply by hand.\n")
 }
 
 // isIssueWorthy reports whether a proposal's reason category warrants

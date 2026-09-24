@@ -21,7 +21,7 @@ Pick the runbook for the job you're doing — they are independent, not sequenti
 > [!TIP]
 > Prefer the `make bigdiffer-*` targets shown below: they pin `GOTOOLCHAIN` to the `go.mod` Go version, so generated code matches CI. For a flag with no target, use bare `go run ./internal/tools/bigdiffer …` (shown where needed) and pin the toolchain yourself with `GOTOOLCHAIN=go$(cat .go-version)` — a different local Go produces false diffs.
 >
-> Whole-corpus commands (`-check`, `-reconcile`) launch ~1600 short-lived subprocesses; if endpoint security interrupts a local run, rely on CI's `bigdiffer` workflow for full-corpus verification. The test suite itself runs its generation sweeps in-process (no subprocess burst) — only one test, the crash-containment regression, spawns a single real subprocess to prove a stack-overflowing schema is actually contained.
+> Whole-corpus commands (`-sync`, `-check`, and `-reconcile`) launch ~1600 short-lived subprocesses; if endpoint security interrupts a local run, rely on CI's `bigdiffer` workflow for full-corpus verification. The test suite runs its whole-corpus generation sweeps in-process (without the subprocess burst), while targeted isolation tests still use real subprocesses to verify crash containment.
 
 ## Weekly release prep
 
