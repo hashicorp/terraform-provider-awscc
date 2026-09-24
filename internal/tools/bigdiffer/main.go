@@ -187,6 +187,9 @@ func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, chec
 			return err
 		}
 	}
+	if name := commandName(sync, reconcile, check, docs, lint, recheck); name != "" {
+		defer startRunLog(name)()
+	}
 	switch {
 	case sync:
 		return runSync(context.Background(), allSchemasPath, checkoutPath, noDocs)
@@ -672,39 +675,39 @@ func (r Report) anomalyProblems() []string {
 }
 
 func (r Report) write() {
-	fmt.Fprintf(os.Stderr, "== bigdiffer report ==\n")
-	fmt.Fprintf(os.Stderr, "available (base) resources: %d\n", r.Total)
-	fmt.Fprintf(os.Stderr, "added (new this week):      %d\n", len(r.AddedNew))
+	fmt.Fprintf(structOut, "== bigdiffer report ==\n")
+	fmt.Fprintf(structOut, "available (base) resources: %d\n", r.Total)
+	fmt.Fprintf(structOut, "added (new this week):      %d\n", len(r.AddedNew))
 	for _, b := range r.AddedNew {
-		fmt.Fprintf(os.Stderr, "  + %s  (%s)\n", b.cfn, b.label)
+		fmt.Fprintf(structOut, "  + %s  (%s)\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(os.Stderr, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
+	fmt.Fprintf(structOut, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
 	for _, b := range r.AddedBacklog {
-		fmt.Fprintf(os.Stderr, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
+		fmt.Fprintf(structOut, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(os.Stderr, "retained (gone from AWS):    %d\n", len(r.Retained))
+	fmt.Fprintf(structOut, "retained (gone from AWS):    %d\n", len(r.Retained))
 	if len(r.UnexplainedRetained) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
+		fmt.Fprintf(structOut, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
 		for _, b := range r.UnexplainedRetained {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)\n", b.cfn, b.label)
+			fmt.Fprintf(structOut, "  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}
 	if len(r.Duplicates) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
+		fmt.Fprintf(structOut, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
 		for _, d := range r.Duplicates {
-			fmt.Fprintf(os.Stderr, "  ! %s\n", d)
+			fmt.Fprintf(structOut, "  ! %s\n", d)
 		}
 	}
 	if len(r.NamingViolate) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
+		fmt.Fprintf(structOut, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
 		for _, v := range r.NamingViolate {
-			fmt.Fprintf(os.Stderr, "  ! %s\n", v)
+			fmt.Fprintf(structOut, "  ! %s\n", v)
 		}
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
+		fmt.Fprintf(structOut, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
 		for _, b := range r.ReasonlessSuppressed {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
+			fmt.Fprintf(structOut, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
 		}
 	}
 }

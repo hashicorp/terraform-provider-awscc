@@ -10,11 +10,15 @@ package main
 // tfplugindocs.
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
+	"time"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/codegen"
 )
@@ -128,18 +132,24 @@ func runDocs(cfg config) error {
 
 	// docs-fmt: format the generated Terraform example files.
 	stepf("docs-fmt: terraform fmt -recursive…")
-	if err := runTool(cfg.examplesDir, "terraform", "fmt", "-recursive"); err != nil {
+	if err := runTool(cfg.examplesDir, "terraform", toolBar{label: "terraform fmt"}, "fmt", "-recursive"); err != nil {
 		return fmt.Errorf("docs-fmt: %w", err)
 	}
 
 	// docs: regenerate the registry docs with tfplugindocs (external tool).
 	stepf("docs: tfplugindocs generate…")
+	docTotal := countDocs(cfg.docsDir) // count before removeMarkdown clears them
 	for _, sub := range []string{"data-sources", "resources", "list-resources"} {
 		if err := removeMarkdown(filepath.Join(cfg.docsDir, sub)); err != nil {
 			return fmt.Errorf("clearing docs/%s: %w", sub, err)
 		}
 	}
-	if err := runTool(cfg.repoRoot, "tfplugindocs", "generate", "--provider-name", "terraform-provider-awscc"); err != nil {
+	tb := toolBar{
+		label:  "tfplugindocs",
+		total:  docTotal,
+		isUnit: func(line string) bool { return strings.Contains(line, ".md.tmpl") },
+	}
+	if err := runTool(cfg.repoRoot, "tfplugindocs", tb, "generate", "--provider-name", "terraform-provider-awscc"); err != nil {
 		return fmt.Errorf("tfplugindocs: %w", err)
 	}
 	stepf("Done: documentation regenerated.")
@@ -148,15 +158,103 @@ func runDocs(cfg config) error {
 }
 
 // runTool runs an external command in dir, streaming its output.
-func runTool(dir, name string, args ...string) error {
+// toolBar configures the console progress indicator for a runTool call. When
+// total > 0 it is a determinate bar advanced once per isUnit-matching output
+// line (with a spinner fallback if total comes out zero); otherwise a spinner
+// advanced per line. Either way every output line is written to the run log,
+// never the console.
+type toolBar struct {
+	label  string
+	total  int
+	isUnit func(line string) bool
+}
+
+func runTool(dir, name string, tb toolBar, args ...string) error {
 	if _, err := exec.LookPath(name); err != nil {
 		return fmt.Errorf("%s not found on PATH (install it via `make prereq`): %w", name, err)
 	}
 	cmd := exec.Command(name, args...)
 	cmd.Dir = dir
-	cmd.Stdout = os.Stderr
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	pr, pw := io.Pipe()
+	// Same writer for both streams: os/exec then serializes writes, so lines
+	// stay intact in the log.
+	cmd.Stdout = pw
+	cmd.Stderr = pw
+	if err := cmd.Start(); err != nil {
+		return fmt.Errorf("starting %s: %w", name, err)
+	}
+
+	// Every line of the tool's output goes to the run log; the console shows
+	// only a progress indicator, so thousands of per-file lines never bury the
+	// structural output.
+	bar := newToolBar(tb.label)
+	if tb.total > 0 {
+		bar = newBar(tb.total, tb.label)
+	}
+	scanned := make(chan struct{})
+	go func() {
+		defer close(scanned)
+		sc := bufio.NewScanner(pr)
+		sc.Buffer(make([]byte, 0, 64*1024), 4*1024*1024)
+		for sc.Scan() {
+			line := sc.Text()
+			fmt.Fprintln(logOnly, line)
+			if tb.total > 0 {
+				if tb.isUnit == nil || tb.isUnit(line) {
+					_ = bar.Add(1)
+				}
+			} else {
+				_ = bar.Add(1)
+			}
+		}
+	}()
+
+	// Keep the indicator visibly alive during silent stretches: tfplugindocs can
+	// pause with no output while it exports schema and compiles the provider.
+	stop := make(chan struct{})
+	go func() {
+		t := time.NewTicker(5 * time.Second)
+		defer t.Stop()
+		for {
+			select {
+			case <-stop:
+				return
+			case <-t.C:
+				_ = bar.RenderBlank()
+			}
+		}
+	}()
+
+	waitErr := cmd.Wait()
+	_ = pw.Close() // unblock the scanner
+	<-scanned
+	close(stop)
+	_ = bar.Finish()
+
+	if waitErr != nil {
+		return fmt.Errorf("%s: %w", name, waitErr)
+	}
+	return nil
+}
+
+// countDocs counts the existing rendered markdown files under docsDir — the
+// determinate denominator for the tfplugindocs bar. It must be called before
+// the docs subdirectories are cleared. An approximate count is fine: the
+// corpus changes slowly week to week, and the bar caps at total.
+func countDocs(docsDir string) int {
+	n := 0
+	for _, sub := range []string{"resources", "data-sources", "list-resources"} {
+		entries, err := os.ReadDir(filepath.Join(docsDir, sub))
+		if err != nil {
+			continue
+		}
+		for _, e := range entries {
+			if !e.IsDir() && strings.HasSuffix(e.Name(), ".md") {
+				n++
+			}
+		}
+	}
+	return n
 }
 
 // removeMarkdown deletes the *.md files in dir (if it exists), matching the

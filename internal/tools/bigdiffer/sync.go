@@ -563,5 +563,6 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bo
 
 	stepf("Done.")
 	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`.")
+	printActionItems(decisions)
 	return nil
 }
