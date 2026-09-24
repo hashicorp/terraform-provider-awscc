@@ -123,7 +123,44 @@ func TestPrintActionItemsShowsEveryQualifyingArtifactReason(t *testing.T) {
 	printActionItems(decisions)
 
 	got := buf.String()
-	for _, want := range []string{"resource broke", "singular data source broke"} {
+	for _, want := range []string{
+		"failed generation or build:",
+		"(resource) — generation_failed: resource broke",
+		"(singular data source) — build_failed: singular data source broke",
+	} {
+		if !strings.Contains(got, want) {
+			t.Errorf("expected %q in the recap, got %q", want, got)
+		}
+	}
+}
+
+// TestPrintActionItemsDistinguishesArtifactsWithIdenticalReason confirms two
+// artifacts of the same type that fail with the *same* reason text still
+// produce distinct, identifiable lines: the recap tags each with its artifact
+// kind, so the operator can tell which issue(s) to file rather than seeing
+// indistinguishable duplicates.
+func TestPrintActionItemsDistinguishesArtifactsWithIdenticalReason(t *testing.T) {
+	var buf bytes.Buffer
+	origStructOut, origLogOnly := structOut, logOnly
+	structOut, logOnly = &buf, io.Discard
+	t.Cleanup(func() { structOut, logOnly = origStructOut, origLogOnly })
+
+	const reason = "generation_failed: shared schema rejected"
+	decisions := map[string]policyDecision{
+		"AWS::Test::Widget": {
+			reasons: map[string]string{
+				attrSuppressionReasonResource: reason,
+				attrSuppressionReasonPlural:   reason,
+			},
+		},
+	}
+	printActionItems(decisions)
+
+	got := buf.String()
+	for _, want := range []string{
+		"AWS::Test::Widget (resource) — " + reason,
+		"AWS::Test::Widget (plural data source) — " + reason,
+	} {
 		if !strings.Contains(got, want) {
 			t.Errorf("expected %q in the recap, got %q", want, got)
 		}

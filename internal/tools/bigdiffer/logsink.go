@@ -68,7 +68,7 @@ func commandName(sync, reconcile, check, docs, lint, recheck bool) string {
 
 // printActionItems prints the end-of-run to-do list: every issue-worthy
 // suppression this run (a real generation or build failure worth a GitHub
-// issue), each with the one-line reason to paste into the issue. It surfaces
+// issue), each with the artifact kind and one-line reason. It surfaces
 // at the bottom of the console, where it survives however long the run's
 // output was. Prints nothing when there is nothing to act on.
 //
@@ -83,33 +83,34 @@ func commandName(sync, reconcile, check, docs, lint, recheck bool) string {
 // type (a total failure, policy.go's non-anyOK branch), where it's the only
 // explanation there is.
 func printActionItems(decisions map[string]policyDecision) {
-	type item struct{ cfType, reason string }
+	issueWorthy := func(reason string) bool {
+		return strings.HasPrefix(reason, string(reasonGenerationFailed)+":") ||
+			strings.HasPrefix(reason, string(reasonBuildFailed)+":")
+	}
+	type item struct{ cfType, kind, reason string }
+	artifactKinds := []struct{ attr, label string }{
+		{attrSuppressionReasonResource, "resource"},
+		{attrSuppressionReasonSingular, "singular data source"},
+		{attrSuppressionReasonPlural, "plural data source"},
+	}
 	var items []item
 	for cfType, d := range decisions {
-		var artifactReasons, frozenReason []string
-		for _, attr := range []string{attrSuppressionReasonResource, attrSuppressionReasonSingular, attrSuppressionReasonPlural} {
-			reason, ok := d.reasons[attr]
-			if !ok {
-				continue
-			}
-			if strings.HasPrefix(reason, string(reasonGenerationFailed)+":") ||
-				strings.HasPrefix(reason, string(reasonBuildFailed)+":") {
-				artifactReasons = append(artifactReasons, reason)
+		var artifact, frozen []item
+		for _, k := range artifactKinds {
+			if reason, ok := d.reasons[k.attr]; ok && issueWorthy(reason) {
+				artifact = append(artifact, item{cfType: cfType, kind: k.label, reason: reason})
 			}
 		}
-		if reason, ok := d.reasons[attrFrozenReason]; ok &&
-			(strings.HasPrefix(reason, string(reasonGenerationFailed)+":") ||
-				strings.HasPrefix(reason, string(reasonBuildFailed)+":")) {
-			frozenReason = append(frozenReason, reason)
+		if reason, ok := d.reasons[attrFrozenReason]; ok && issueWorthy(reason) {
+			frozen = append(frozen, item{cfType: cfType, kind: "shared schema", reason: reason})
 		}
-		reasons := artifactReasons
-		if len(reasons) == 0 {
-			reasons = frozenReason
+		// A partial failure lists the specific broken artifact(s); a total
+		// failure has only the shared-schema freeze to point at.
+		chosen := artifact
+		if len(chosen) == 0 {
+			chosen = frozen
 		}
-		sort.Strings(reasons)
-		for _, reason := range reasons {
-			items = append(items, item{cfType: cfType, reason: reason})
-		}
+		items = append(items, chosen...)
 	}
 	if len(items) == 0 {
 		return
@@ -118,10 +119,13 @@ func printActionItems(decisions map[string]policyDecision) {
 		if items[i].cfType != items[j].cfType {
 			return items[i].cfType < items[j].cfType
 		}
+		if items[i].kind != items[j].kind {
+			return items[i].kind < items[j].kind
+		}
 		return items[i].reason < items[j].reason
 	})
-	stepf("Action items — open a GitHub issue for each failed generation:")
+	stepf("Action items — open a GitHub issue for each failed generation or build:")
 	for _, it := range items {
-		infof("%s — %s", it.cfType, it.reason)
+		infof("%s (%s) — %s", it.cfType, it.kind, it.reason)
 	}
 }
