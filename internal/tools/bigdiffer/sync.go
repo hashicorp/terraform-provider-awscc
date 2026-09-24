@@ -467,6 +467,13 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bo
 	}
 
 	decisions := settled.decisions
+	// Deferred, not called at the tail's end: the action-item recap is about
+	// generation/build failures already captured in decisions, unrelated to
+	// documentation — a docs failure below returns early (runDocsTail's own
+	// error explicitly says the promoted code needs no rework), and the
+	// operator dealing with that still needs this list. Defer here, right
+	// where decisions becomes final, so every return path below prints it.
+	defer printActionItems(decisions)
 	stagedByDest := settled.stagedByDest
 
 	// CHANGELOG delta: stagedByDest is now final — every remaining entry
@@ -563,6 +570,5 @@ func runSync(ctx context.Context, allSchemasPath, checkoutPath string, noDocs bo
 
 	stepf("Done.")
 	infof("Review `git status`/`git diff`, then: `make build`, `make smoke`.")
-	printActionItems(decisions)
 	return nil
 }

@@ -59,7 +59,7 @@ bigdiffer-recheck: prereq-go ## Re-probe reason-less suppressed/frozen rows and 
 	$(GO_VER) run ./internal/tools/bigdiffer -recheck
 
 bigdiffer-commit: ## Commit a bigdiffer run's output as reviewable, path-grouped commits (feature branch only; never pushes)
-	@branch=$$(git rev-parse --abbrev-ref HEAD); \
+	@branch=$$(git symbolic-ref --short HEAD 2>/dev/null) || { echo "==> refusing: HEAD is not on a branch (detached HEAD?) — switch to a feature branch first"; exit 1; }; \
 	case "$$branch" in \
 		main|master|release/*) echo "==> refusing to commit on '$$branch' — switch to a feature branch first"; exit 1;; \
 	esac; \
@@ -68,11 +68,19 @@ bigdiffer-commit: ## Commit a bigdiffer run's output as reviewable, path-grouped
 	fi; \
 	commit_group() { \
 		msg="$$1"; shift; \
-		for p in "$$@"; do git add -- "$$p" 2>/dev/null || :; done; \
+		for p in "$$@"; do \
+			err=$$(git add -- "$$p" 2>&1) || { \
+				case "$$err" in \
+					*"did not match any files"*) ;; \
+					*) echo "==> aborting: git add failed for '$$p':"; echo "$$err" | sed 's/^/      /'; exit 1;; \
+				esac; \
+			}; \
+		done; \
 		if git diff --cached --quiet; then \
 			echo "    (no changes) $$msg"; \
 		else \
-			git commit -q -m "$$msg" && echo "==> committed: $$msg"; \
+			git commit -q -m "$$msg" || { echo "==> aborting: git commit failed for '$$msg' — staged changes are left as-is"; exit 1; }; \
+			echo "==> committed: $$msg"; \
 		fi; \
 	}; \
 	commit_group "Refresh CloudFormation schemas" \

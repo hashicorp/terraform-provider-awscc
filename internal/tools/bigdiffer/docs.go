@@ -198,9 +198,8 @@ func runTool(dir, name string, tb toolBar, args ...string) error {
 	if tb.total > 0 {
 		bar = newBar(tb.total, tb.label)
 	}
-	scanned := make(chan struct{})
+	scanned := make(chan error, 1)
 	go func() {
-		defer close(scanned)
 		sc := bufio.NewScanner(pr)
 		sc.Buffer(make([]byte, 0, toolScanInitialBuf), toolScanMaxLine)
 		for sc.Scan() {
@@ -214,6 +213,17 @@ func runTool(dir, name string, tb toolBar, args ...string) error {
 				_ = bar.Add(1)
 			}
 		}
+		scanErr := sc.Err()
+		// A scan error (e.g. a line over toolScanMaxLine) leaves pr unread past
+		// this point. os/exec's own goroutine keeps copying the child's
+		// stdout/stderr into pw, and an io.Pipe write blocks until it's read —
+		// so cmd.Wait() below would hang forever waiting for that copy to
+		// finish. Drain pr the rest of the way (discarding content) so the
+		// pipe never blocks, regardless of how the run ends.
+		if scanErr != nil {
+			_, _ = io.Copy(io.Discard, pr)
+		}
+		scanned <- scanErr
 	}()
 
 	// Keep the indicator visibly alive during silent stretches: tfplugindocs can
@@ -234,12 +244,15 @@ func runTool(dir, name string, tb toolBar, args ...string) error {
 
 	waitErr := cmd.Wait()
 	_ = pw.Close() // unblock the scanner
-	<-scanned
+	scanErr := <-scanned
 	close(stop)
 	_ = bar.Finish()
 
 	if waitErr != nil {
 		return fmt.Errorf("%s: %w", name, waitErr)
+	}
+	if scanErr != nil {
+		return fmt.Errorf("%s: reading output: %w", name, scanErr)
 	}
 	return nil
 }
