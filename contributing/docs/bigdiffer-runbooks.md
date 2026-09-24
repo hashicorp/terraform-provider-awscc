@@ -68,11 +68,13 @@ Re-running `-sync` within the same open cycle is safe: new bullets merge into th
 
 ### 5. Commit and open a pull request
 
+Review the working tree before committing — `git status` for the file set, `git diff` for the contents, including your hand-edits to `CHANGELOG.md` and `version/VERSION`. Then:
+
 ```sh
 make bigdiffer-commit
 ```
 
-Commits the run's output as reviewable, path-grouped commits (schemas, resources, data sources, docs), skipping empty groups and refusing to run on `main`. Then review `git status`/`git diff`, push, and open a PR; once CI passes and it merges, cut the release.
+Commits the run's output as reviewable, path-grouped commits (schemas, resources, data sources, docs), skipping empty groups and refusing to run on `main`. Inspect the resulting commits (`git log --stat`), push, and open a PR; once CI passes and it merges, cut the release.
 
 **End of runbook.**
 
