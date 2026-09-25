@@ -313,7 +313,10 @@ func TestRefreshCandidateContainsRecursiveSchemaCrash(t *testing.T) {
 	if testing.Short() {
 		t.Skip("spawns a subprocess that can take tens of seconds to stack-overflow")
 	}
-	t.Parallel()
+	// Not t.Parallel: realIsolation swaps package-level executor vars back to
+	// the real re-exec'd subprocess path, which this test needs to prove a
+	// fresh recursive schema is contained rather than crashing the run.
+	realIsolation(t)
 	cfg, rows := loadCorpus(t)
 
 	var recursive resourceRow

@@ -7,7 +7,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"os"
 	"sort"
 	"strings"
 
@@ -86,7 +85,7 @@ func discover(ctx context.Context) ([]discovered, *cloudformation.Client, error)
 		}
 	}
 	if failures > 0 {
-		fmt.Fprintf(os.Stderr, "bigdiffer: discovery: %d of %d types failed to describe (see per-type warnings)\n", failures, len(results))
+		_, _ = fmt.Fprintf(structOut, "bigdiffer: discovery: %d of %d types failed to describe (see per-type warnings)\n", failures, len(results))
 	}
 	return results, conn, nil
 }
@@ -167,7 +166,7 @@ func describeOne(ctx context.Context, conn *cloudformation.Client, cfn string) d
 
 	schema, pluralSupported, err := describeSchema(ctx, conn, cfn)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
+		_, _ = fmt.Fprintf(structOut, "bigdiffer: %v\n", err)
 		return discovered{
 			row: resourceRow{ResourceTypeName: label, CloudFormationTypeName: cfn},
 			err: err,
@@ -233,7 +232,7 @@ func probeAbsent(ctx context.Context, conn *cloudformation.Client, cfn string) c
 	})
 	class := classifyAbsentProbe(out, err)
 	if class == "" && err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: probing absent type %s: %v\n", cfn, err)
+		_, _ = fmt.Fprintf(structOut, "bigdiffer: probing absent type %s: %v\n", cfn, err)
 	}
 	return class
 }

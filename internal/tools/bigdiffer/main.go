@@ -167,7 +167,6 @@ func main() {
 	}
 
 	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *checkDocsFull, *docs, *noDocs, *recheck, *recheckAll); err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
@@ -176,16 +175,34 @@ func main() {
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) error {
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) (err error) {
+	// Keep the run log open through top-level error reporting: emit the final
+	// "bigdiffer: ..." diagnostic through the tee (so a failed command's
+	// .bigdiffer-<command>.log ends with it, not only the console) and close
+	// only after. closeLog is nil for a usage error or a pre-log failure
+	// (e.g. the toolchain check), where the diagnostic falls back to the
+	// console-only structOut default.
+	var closeLog func()
+	defer func() {
+		if err != nil {
+			_, _ = fmt.Fprintf(structOut, "bigdiffer: %v\n", err)
+		}
+		if closeLog != nil {
+			closeLog()
+		}
+	}()
 	switch {
 	case sync, reconcile, check:
 		// Only the three commands that generate or verify gofmt'd Go source
 		// need the toolchain pinned — a version mismatch here would silently
 		// produce or "verify" output formatted by the wrong gofmt rules (see
 		// verifyGoToolchain).
-		if err := verifyGoToolchain(); err != nil {
+		if err = verifyGoToolchain(); err != nil {
 			return err
 		}
+	}
+	if name := commandName(sync, reconcile, check, docs, lint, recheck); name != "" {
+		closeLog = startRunLog(name)
 	}
 	switch {
 	case sync:
@@ -672,39 +689,40 @@ func (r Report) anomalyProblems() []string {
 }
 
 func (r Report) write() {
-	fmt.Fprintf(os.Stderr, "== bigdiffer report ==\n")
-	fmt.Fprintf(os.Stderr, "available (base) resources: %d\n", r.Total)
-	fmt.Fprintf(os.Stderr, "added (new this week):      %d\n", len(r.AddedNew))
+	w := func(format string, a ...any) { _, _ = fmt.Fprintf(structOut, format, a...) }
+	w("== bigdiffer report ==\n")
+	w("available (base) resources: %d\n", r.Total)
+	w("added (new this week):      %d\n", len(r.AddedNew))
 	for _, b := range r.AddedNew {
-		fmt.Fprintf(os.Stderr, "  + %s  (%s)\n", b.cfn, b.label)
+		w("  + %s  (%s)\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(os.Stderr, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
+	w("added (recovered backlog):  %d\n", len(r.AddedBacklog))
 	for _, b := range r.AddedBacklog {
-		fmt.Fprintf(os.Stderr, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
+		w("  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(os.Stderr, "retained (gone from AWS):    %d\n", len(r.Retained))
+	w("retained (gone from AWS):    %d\n", len(r.Retained))
 	if len(r.UnexplainedRetained) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
+		w("ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
 		for _, b := range r.UnexplainedRetained {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)\n", b.cfn, b.label)
+			w("  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}
 	if len(r.Duplicates) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
+		w("ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
 		for _, d := range r.Duplicates {
-			fmt.Fprintf(os.Stderr, "  ! %s\n", d)
+			w("  ! %s\n", d)
 		}
 	}
 	if len(r.NamingViolate) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
+		w("ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
 		for _, v := range r.NamingViolate {
-			fmt.Fprintf(os.Stderr, "  ! %s\n", v)
+			w("  ! %s\n", v)
 		}
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
+		w("ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
 		for _, b := range r.ReasonlessSuppressed {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
+			w("  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
 		}
 	}
 }
