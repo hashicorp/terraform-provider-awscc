@@ -61,9 +61,11 @@ func UnknownValuePaths(_ context.Context, val tftypes.Value) ([]*tftypes.Attribu
 // The unknown value paths are obtained from the State via a previous call to UnknownValuePaths.
 // Functionality is split between these 2 functions, rather than calling UnknownValuePaths from within this function,
 // so as to avoid unnecessary Cloud Control API calls to obtain the current ResourceModel.
-func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, unknowns []*tftypes.AttributePath, resourceModel string, cfToTfNameMap map[string]string) error {
+// The translator must be the resource's own toTerraform translator so that path-aware
+// attribute name maps are honoured: a flat name map cannot distinguish a colliding
+// property (e.g. a top-level computed "Id" and a nested "Id") and would fill the wrong one.
+func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, unknowns []*tftypes.AttributePath, resourceModel string, translator toTerraform) error {
 	// Get the Terraform Value of the ResourceModel.
-	translator := toTerraform{cfToTfNameMap: cfToTfNameMap}
 	schema := state.Schema
 	val, err := translator.FromString(ctx, schema, resourceModel, nil)
 
