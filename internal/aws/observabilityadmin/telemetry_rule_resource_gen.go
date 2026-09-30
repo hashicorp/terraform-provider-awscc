@@ -261,6 +261,9 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "APPLICATION_LOGS",
 		//	                  "USAGE_LOGS",
 		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "S3_SERVER_ACCESS_LOGS",
+		//	                  "ACCESS_LOGS",
+		//	                  "CONNECTION_LOGS",
 		//	                  "ALB_ACCESS_LOGS",
 		//	                  "ALB_CONNECTION_LOGS",
 		//	                  "ALB_HEALTH_CHECK_LOGS"
@@ -270,6 +273,23 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	              "minItems": 1,
 		//	              "type": "array",
 		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MskMonitoringParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration parameters for Amazon MSK cluster monitoring.",
+		//	          "properties": {
+		//	            "EnhancedMonitoring": {
+		//	              "description": "The level of enhanced monitoring for the MSK cluster.",
+		//	              "enum": [
+		//	                "DEFAULT",
+		//	                "PER_BROKER",
+		//	                "PER_TOPIC_PER_BROKER",
+		//	                "PER_TOPIC_PER_PARTITION"
+		//	              ],
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -462,7 +482,16 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AWS::BedrockAgentCore::Runtime",
 		//	        "AWS::BedrockAgentCore::Browser",
 		//	        "AWS::BedrockAgentCore::CodeInterpreter",
-		//	        "AWS::SecurityHub::Hub"
+		//	        "AWS::SecurityHub::Hub",
+		//	        "AWS::SecurityHub::HubV2",
+		//	        "AWS::S3::Bucket",
+		//	        "AWS::MSK::Cluster",
+		//	        "AWS::CloudFront::Distribution",
+		//	        "AWS::CloudWatch::OTelEnrichment",
+		//	        "AWS::Bedrock::KnowledgeBase",
+		//	        "AWS::BedrockAgentCore::Memory",
+		//	        "AWS::BedrockAgentCore::Gateway",
+		//	        "AWS::BedrockAgentCore::WorkloadIdentity"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -740,6 +769,9 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 												"APPLICATION_LOGS",
 												"USAGE_LOGS",
 												"SECURITY_FINDING_LOGS",
+												"S3_SERVER_ACCESS_LOGS",
+												"ACCESS_LOGS",
+												"CONNECTION_LOGS",
 												"ALB_ACCESS_LOGS",
 												"ALB_CONNECTION_LOGS",
 												"ALB_HEALTH_CHECK_LOGS",
@@ -752,6 +784,34 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Parameters for log delivery configuration",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MskMonitoringParameters
+						"msk_monitoring_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnhancedMonitoring
+								"enhanced_monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The level of enhanced monitoring for the MSK cluster.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DEFAULT",
+											"PER_BROKER",
+											"PER_TOPIC_PER_BROKER",
+											"PER_TOPIC_PER_PARTITION",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration parameters for Amazon MSK cluster monitoring.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1050,6 +1110,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Regions is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ResourceType
 				"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1067,6 +1128,15 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 							"AWS::BedrockAgentCore::Browser",
 							"AWS::BedrockAgentCore::CodeInterpreter",
 							"AWS::SecurityHub::Hub",
+							"AWS::SecurityHub::HubV2",
+							"AWS::S3::Bucket",
+							"AWS::MSK::Cluster",
+							"AWS::CloudFront::Distribution",
+							"AWS::CloudWatch::OTelEnrichment",
+							"AWS::Bedrock::KnowledgeBase",
+							"AWS::BedrockAgentCore::Memory",
+							"AWS::BedrockAgentCore::Gateway",
+							"AWS::BedrockAgentCore::WorkloadIdentity",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -1269,6 +1339,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		"destination_type":                     "DestinationType",
 		"elb_load_balancer_logging_parameters": "ELBLoadBalancerLoggingParameters",
 		"ends_with":                            "EndsWith",
+		"enhanced_monitoring":                  "EnhancedMonitoring",
 		"equals":                               "Equals",
 		"field":                                "Field",
 		"field_delimiter":                      "FieldDelimiter",
@@ -1285,6 +1356,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		"logging_filter":                       "LoggingFilter",
 		"max_aggregation_interval":             "MaxAggregationInterval",
 		"method":                               "Method",
+		"msk_monitoring_parameters":            "MskMonitoringParameters",
 		"name":                                 "Name",
 		"not_ends_with":                        "NotEndsWith",
 		"not_equals":                           "NotEquals",
@@ -1315,6 +1387,9 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		"waf_logging_parameters":               "WAFLoggingParameters",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Rule/Regions",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

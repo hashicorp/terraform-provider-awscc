@@ -181,6 +181,32 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ConnectionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The connection type for the serverless cache. Valid values are vpc or public.",
+		//	  "enum": [
+		//	    "vpc",
+		//	    "public"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection type for the serverless cache. Valid values are vpc or public.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"vpc",
+					"public",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -640,6 +666,7 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		"address":                  "Address",
 		"arn":                      "ARN",
 		"cache_usage_limits":       "CacheUsageLimits",
+		"connection_type":          "ConnectionType",
 		"create_time":              "CreateTime",
 		"daily_snapshot_time":      "DailySnapshotTime",
 		"data_storage":             "DataStorage",

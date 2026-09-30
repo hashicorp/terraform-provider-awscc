@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -315,6 +316,39 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Preferences
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Preferences that configure behavior of this AgentSpace. This container fully owns the AgentSpace preferences: the properties supplied here replace the stored preferences in their entirety, and omitting the Preferences container reverts all preferences to their service defaults.",
+		//	  "properties": {
+		//	    "ElevatedActionsEnabled": {
+		//	      "description": "Indicates whether elevated directed actions are permitted in this AgentSpace. Defaults to false when not set.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"preferences": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ElevatedActionsEnabled
+				"elevated_actions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether elevated directed actions are permitted in this AgentSpace. Defaults to false when not set.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Preferences that configure behavior of this AgentSpace. This container fully owns the AgentSpace preferences: the properties supplied here replace the stored preferences in their entirety, and omitting the Preferences container reverts all preferences to their service defaults.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -430,23 +464,25 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_space_id":        "AgentSpaceId",
-		"arn":                   "Arn",
-		"created_at":            "CreatedAt",
-		"description":           "Description",
-		"iam":                   "Iam",
-		"idc":                   "Idc",
-		"idc_application_arn":   "IdcApplicationArn",
-		"idc_instance_arn":      "IdcInstanceArn",
-		"key":                   "Key",
-		"kms_key_arn":           "KmsKeyArn",
-		"locale":                "Locale",
-		"name":                  "Name",
-		"operator_app":          "OperatorApp",
-		"operator_app_role_arn": "OperatorAppRoleArn",
-		"tags":                  "Tags",
-		"updated_at":            "UpdatedAt",
-		"value":                 "Value",
+		"agent_space_id":           "AgentSpaceId",
+		"arn":                      "Arn",
+		"created_at":               "CreatedAt",
+		"description":              "Description",
+		"elevated_actions_enabled": "ElevatedActionsEnabled",
+		"iam":                      "Iam",
+		"idc":                      "Idc",
+		"idc_application_arn":      "IdcApplicationArn",
+		"idc_instance_arn":         "IdcInstanceArn",
+		"key":                      "Key",
+		"kms_key_arn":              "KmsKeyArn",
+		"locale":                   "Locale",
+		"name":                     "Name",
+		"operator_app":             "OperatorApp",
+		"operator_app_role_arn":    "OperatorAppRoleArn",
+		"preferences":              "Preferences",
+		"tags":                     "Tags",
+		"updated_at":               "UpdatedAt",
+		"value":                    "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -812,7 +812,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "TokenValue": {
 		//	          "description": "GitLab access token value",
-		//	          "pattern": "^glpat-[a-zA-Z0-9._-]+$",
+		//	          "pattern": "^[a-zA-Z0-9._-]+$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1113,8 +1113,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "RoleArn": {
-		//	              "description": "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
-		//	              "pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
+		//	              "description": "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing. Set to an empty string to remove a previously configured role and make the server role-less (cross-account).",
+		//	              "pattern": "^$|^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
 		//	              "type": "string"
 		//	            },
 		//	            "Service": {
@@ -1520,7 +1520,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^glpat-[a-zA-Z0-9._-]+$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2058,11 +2058,11 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
+									Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing. Set to an empty string to remove a previously configured role and make the server role-less (cross-account).",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^$|^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),

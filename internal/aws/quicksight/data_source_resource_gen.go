@@ -85,6 +85,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "ConsumerAccountRoleArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "type": "string"
+		//	          },
 		//	          "IdentityCenterConfiguration": {
 		//	            "additionalProperties": false,
 		//	            "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
@@ -869,6 +874,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AthenaParameters
 					"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConsumerAccountRoleArn
+							"consumer_account_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(20, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: IdentityCenterConfiguration
 							"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2204,6 +2220,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "ConsumerAccountRoleArn": {
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 20,
+		//	                    "type": "string"
+		//	                  },
 		//	                  "IdentityCenterConfiguration": {
 		//	                    "additionalProperties": false,
 		//	                    "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
@@ -3061,6 +3082,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: AthenaParameters
 									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ConsumerAccountRoleArn
+											"consumer_account_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(20, 2048),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: IdentityCenterConfiguration
 											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -4445,6 +4477,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "ConsumerAccountRoleArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "type": "string"
+		//	        },
 		//	        "IdentityCenterConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
@@ -5224,6 +5261,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AthenaParameters
 				"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConsumerAccountRoleArn
+						"consumer_account_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(20, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: IdentityCenterConfiguration
 						"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -6832,13 +6880,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "APPFLOW",
 		//	    "IMPALA",
 		//	    "GLUE",
+		//	    "GLUE_DATA_CATALOG",
 		//	    "GOOGLE_DRIVE",
 		//	    "CONFLUENCE",
 		//	    "SHAREPOINT",
 		//	    "ONE_DRIVE",
 		//	    "WEB_CRAWLER",
 		//	    "BOX",
-		//	    "GOOGLESHEETS"
+		//	    "GOOGLESHEETS",
+		//	    "ATLAN"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -6894,6 +6944,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"APPFLOW",
 					"IMPALA",
 					"GLUE",
+					"GLUE_DATA_CATALOG",
 					"GOOGLE_DRIVE",
 					"CONFLUENCE",
 					"SHAREPOINT",
@@ -6901,6 +6952,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"WEB_CRAWLER",
 					"BOX",
 					"GOOGLESHEETS",
+					"ATLAN",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6992,6 +7044,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"bucket":                           "Bucket",
 		"catalog":                          "Catalog",
 		"cluster_id":                       "ClusterId",
+		"consumer_account_role_arn":        "ConsumerAccountRoleArn",
 		"copy_source_arn":                  "CopySourceArn",
 		"created_time":                     "CreatedTime",
 		"credential_pair":                  "CredentialPair",

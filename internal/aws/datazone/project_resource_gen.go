@@ -207,10 +207,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "The project membership assignment.",
 		//	    "properties": {
 		//	      "Designation": {
-		//	        "enum": [
-		//	          "PROJECT_OWNER",
-		//	          "PROJECT_CONTRIBUTOR"
-		//	        ],
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	        "type": "string"
 		//	      },
 		//	      "Member": {
@@ -243,10 +240,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"PROJECT_OWNER",
-								"PROJECT_CONTRIBUTOR",
-							),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
