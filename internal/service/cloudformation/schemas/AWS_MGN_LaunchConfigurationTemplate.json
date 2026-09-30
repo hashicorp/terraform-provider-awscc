@@ -1,0 +1,405 @@
+{
+  "typeName": "AWS::MGN::LaunchConfigurationTemplate",
+  "description": "Account level Launch Configuration Template for AWS Application Migration Service.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "ARN of the Launch Configuration Template.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "LaunchConfigurationTemplateID": {
+      "type": "string",
+      "description": "ID of the Launch Configuration Template.",
+      "minLength": 21,
+      "maxLength": 21,
+      "pattern": "^lct-[0-9a-zA-Z]{17}$"
+    },
+    "Ec2LaunchTemplateID": {
+      "type": "string",
+      "description": "ID of the EC2 launch template backing the Launch Configuration Template.",
+      "minLength": 20,
+      "maxLength": 20,
+      "pattern": "^lt-[0-9a-z]{17}$"
+    },
+    "PostLaunchActions": {
+      "$ref": "#/definitions/PostLaunchActions"
+    },
+    "EnableMapAutoTagging": {
+      "type": "boolean",
+      "description": "Whether to enable map auto tagging."
+    },
+    "MapAutoTaggingMpeID": {
+      "type": "string",
+      "description": "Launch configuration template map auto tagging MPE ID.",
+      "minLength": 0,
+      "maxLength": 256
+    },
+    "LaunchDisposition": {
+      "type": "string",
+      "description": "Launch disposition.",
+      "enum": [
+        "STOPPED",
+        "STARTED"
+      ]
+    },
+    "TargetInstanceTypeRightSizingMethod": {
+      "type": "string",
+      "description": "Target instance type right-sizing method.",
+      "enum": [
+        "NONE",
+        "BASIC"
+      ]
+    },
+    "CopyPrivateIp": {
+      "type": "boolean",
+      "description": "Whether to copy the private IP of the source server."
+    },
+    "AssociatePublicIpAddress": {
+      "type": "boolean",
+      "description": "Whether to associate a public IP address with the launched instance."
+    },
+    "CopyTags": {
+      "type": "boolean",
+      "description": "Whether to copy the tags of the source server."
+    },
+    "Licensing": {
+      "$ref": "#/definitions/Licensing"
+    },
+    "BootMode": {
+      "type": "string",
+      "description": "Launch configuration template boot mode.",
+      "enum": [
+        "LEGACY_BIOS",
+        "UEFI",
+        "USE_SOURCE"
+      ]
+    },
+    "SmallVolumeMaxSize": {
+      "type": "integer",
+      "description": "Small volume maximum size, in GiB.",
+      "minimum": 0
+    },
+    "SmallVolumeConf": {
+      "$ref": "#/definitions/LaunchTemplateDiskConf"
+    },
+    "LargeVolumeConf": {
+      "$ref": "#/definitions/LaunchTemplateDiskConf"
+    },
+    "EnableParametersEncryption": {
+      "type": "boolean",
+      "description": "Whether to enable encryption of the AWS Systems Manager parameters used by post launch actions."
+    },
+    "ParametersEncryptionKey": {
+      "type": "string",
+      "description": "ARN of the KMS key used to encrypt the AWS Systems Manager parameters used by post launch actions.",
+      "minLength": 20,
+      "maxLength": 276,
+      "pattern": "^((arn:[\\w-]+:kms:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:((alias|key)/[a-zA-Z0-9:/_-]{1,256}))|())$"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A set of tags to be associated with the Launch Configuration Template.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "PostLaunchActions": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Post launch actions to execute on the Test or Cutover instance.",
+      "properties": {
+        "Deployment": {
+          "type": "string",
+          "description": "Deployment type in which AWS Systems Manager Documents will be executed.",
+          "enum": [
+            "TEST_AND_CUTOVER",
+            "CUTOVER_ONLY",
+            "TEST_ONLY"
+          ]
+        },
+        "S3LogBucket": {
+          "type": "string",
+          "description": "AWS Systems Manager Command's logs S3 log bucket.",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "S3OutputKeyPrefix": {
+          "type": "string",
+          "description": "AWS Systems Manager Command's logs S3 output key prefix.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "CloudWatchLogGroupName": {
+          "type": "string",
+          "description": "AWS Systems Manager Command's CloudWatch log group name.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+        },
+        "SsmDocuments": {
+          "type": "array",
+          "description": "AWS Systems Manager Documents to execute, in order.",
+          "items": {
+            "$ref": "#/definitions/SsmDocument"
+          },
+          "minItems": 0,
+          "maxItems": 10
+        }
+      },
+      "additionalProperties": false
+    },
+    "SsmDocument": {
+      "type": "object",
+      "description": "An AWS Systems Manager Document to execute as a post launch action.",
+      "properties": {
+        "ActionName": {
+          "type": "string",
+          "description": "User-friendly name for the AWS Systems Manager Document.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "SsmDocumentName": {
+          "type": "string",
+          "description": "AWS Systems Manager Document name or full ARN.",
+          "minLength": 3,
+          "maxLength": 172,
+          "pattern": "^([A-Za-z0-9/:_\\.-])+$"
+        },
+        "TimeoutSeconds": {
+          "type": "integer",
+          "description": "AWS Systems Manager Document timeout, in seconds.",
+          "minimum": 1
+        },
+        "MustSucceedForCutover": {
+          "type": "boolean",
+          "description": "Whether Cutover is blocked when the document has failed."
+        },
+        "Parameters": {
+          "$ref": "#/definitions/SsmDocumentParameters"
+        },
+        "ExternalParameters": {
+          "$ref": "#/definitions/SsmDocumentExternalParameters"
+        }
+      },
+      "required": [
+        "ActionName",
+        "SsmDocumentName"
+      ],
+      "additionalProperties": false
+    },
+    "SsmDocumentParameters": {
+      "type": "object",
+      "description": "AWS Systems Manager Document parameters, each resolved from AWS Systems Manager Parameter Store.",
+      "minProperties": 0,
+      "maxProperties": 20,
+      "patternProperties": {
+        "": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SsmParameterStoreParameter"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "additionalProperties": false
+    },
+    "SsmParameterStoreParameter": {
+      "type": "object",
+      "description": "An AWS Systems Manager Parameter Store parameter.",
+      "properties": {
+        "ParameterType": {
+          "type": "string",
+          "description": "AWS Systems Manager Parameter Store parameter type.",
+          "enum": [
+            "STRING",
+            "SECURE_STRING"
+          ]
+        },
+        "ParameterName": {
+          "type": "string",
+          "description": "AWS Systems Manager Parameter Store parameter name.",
+          "minLength": 1,
+          "maxLength": 1011,
+          "pattern": "^([A-Za-z0-9_\\.-])+$"
+        }
+      },
+      "required": [
+        "ParameterType",
+        "ParameterName"
+      ],
+      "additionalProperties": false
+    },
+    "SsmDocumentExternalParameters": {
+      "type": "object",
+      "description": "AWS Systems Manager Document external parameters.",
+      "minProperties": 0,
+      "maxProperties": 20,
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/SsmExternalParameter"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SsmExternalParameter": {
+      "type": "object",
+      "description": "An AWS Systems Manager Document external parameter.",
+      "properties": {
+        "DynamicPath": {
+          "type": "string",
+          "description": "AWS Systems Manager Document external parameter dynamic path.",
+          "minLength": 1,
+          "maxLength": 1011,
+          "pattern": "^[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_\\[\\]]+)*$"
+        }
+      },
+      "required": [
+        "DynamicPath"
+      ],
+      "additionalProperties": false
+    },
+    "Licensing": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Configuration of a machine's license.",
+      "properties": {
+        "OsByol": {
+          "type": "boolean",
+          "description": "Whether to configure BYOL OS licensing."
+        }
+      },
+      "additionalProperties": false
+    },
+    "LaunchTemplateDiskConf": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Launch template disk configuration.",
+      "properties": {
+        "VolumeType": {
+          "type": "string",
+          "description": "Launch template disk volume type configuration.",
+          "enum": [
+            "io1",
+            "io2",
+            "gp3",
+            "gp2",
+            "st1",
+            "sc1",
+            "standard"
+          ]
+        },
+        "Iops": {
+          "type": "integer",
+          "description": "Launch template disk IOPS configuration.",
+          "minimum": 100,
+          "maximum": 64000
+        },
+        "Throughput": {
+          "type": "integer",
+          "description": "Launch template disk throughput configuration, in MiB/s.",
+          "minimum": 125,
+          "maximum": 1000
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the Launch Configuration Template.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/LaunchConfigurationTemplateID",
+    "/properties/Ec2LaunchTemplateID"
+  ],
+  "createOnlyProperties": [
+    "/properties/Tags"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/LaunchConfigurationTemplateID"
+    ]
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mgn:CreateLaunchConfigurationTemplate",
+      "mgn:DescribeLaunchConfigurationTemplates"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mgn:CreateLaunchConfigurationTemplate",
+        "mgn:TagResource",
+        "mgn:DescribeLaunchConfigurationTemplates",
+        "ec2:CreateLaunchTemplate",
+        "ec2:CreateTags",
+        "kms:DescribeKey",
+        "ec2:GetEbsDefaultKmsKeyId"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mgn:DescribeLaunchConfigurationTemplates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mgn:UpdateLaunchConfigurationTemplate",
+        "mgn:DescribeLaunchConfigurationTemplates",
+        "ec2:DescribeLaunchTemplates",
+        "kms:DescribeKey",
+        "ec2:GetEbsDefaultKmsKeyId",
+        "mgn:TagResource",
+        "mgn:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mgn:DeleteLaunchConfigurationTemplate",
+        "ec2:DeleteLaunchTemplate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mgn:DescribeLaunchConfigurationTemplates"
+      ]
+    }
+  }
+}

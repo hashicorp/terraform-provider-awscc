@@ -437,11 +437,7 @@
     },
     "ProjectDesignation": {
       "type": "string",
-      "enum": [
-        "OWNER",
-        "CONTRIBUTOR",
-        "PROJECT_CATALOG_STEWARD"
-      ]
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
     },
     "ProjectGrantFilter": {
       "oneOf": [
@@ -562,7 +558,9 @@
     "DomainIdentifier",
     "EntityIdentifier",
     "EntityType",
-    "PolicyType"
+    "PolicyType",
+    "Principal",
+    "Detail"
   ],
   "readOnlyProperties": [
     "/properties/GrantId",

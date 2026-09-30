@@ -150,10 +150,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "description": "The project membership assignment.",
 		//	    "properties": {
 		//	      "Designation": {
-		//	        "enum": [
-		//	          "PROJECT_OWNER",
-		//	          "PROJECT_CONTRIBUTOR"
-		//	        ],
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	        "type": "string"
 		//	      },
 		//	      "Member": {

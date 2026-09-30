@@ -28,7 +28,16 @@
         "AWS::BedrockAgentCore::Runtime",
         "AWS::BedrockAgentCore::Browser",
         "AWS::BedrockAgentCore::CodeInterpreter",
-        "AWS::SecurityHub::Hub"
+        "AWS::SecurityHub::Hub",
+        "AWS::SecurityHub::HubV2",
+        "AWS::S3::Bucket",
+        "AWS::MSK::Cluster",
+        "AWS::CloudFront::Distribution",
+        "AWS::CloudWatch::OTelEnrichment",
+        "AWS::Bedrock::KnowledgeBase",
+        "AWS::BedrockAgentCore::Memory",
+        "AWS::BedrockAgentCore::Gateway",
+        "AWS::BedrockAgentCore::WorkloadIdentity"
       ]
     },
     "TelemetryType": {
@@ -170,6 +179,23 @@
         }
       }
     },
+    "MskMonitoringParameters": {
+      "description": "Configuration parameters for Amazon MSK cluster monitoring.",
+      "type": "object",
+      "properties": {
+        "EnhancedMonitoring": {
+          "description": "The level of enhanced monitoring for the MSK cluster.",
+          "type": "string",
+          "enum": [
+            "DEFAULT",
+            "PER_BROKER",
+            "PER_TOPIC_PER_BROKER",
+            "PER_TOPIC_PER_PARTITION"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "TelemetryDestinationConfiguration": {
       "description": "The destination configuration for telemetry data",
       "type": "object",
@@ -198,6 +224,9 @@
         "WAFLoggingParameters": {
           "$ref": "#/definitions/WAFLoggingParameters"
         },
+        "MskMonitoringParameters": {
+          "$ref": "#/definitions/MskMonitoringParameters"
+        },
         "LogDeliveryParameters": {
           "description": "Parameters for log delivery configuration",
           "type": "object",
@@ -214,6 +243,9 @@
                   "APPLICATION_LOGS",
                   "USAGE_LOGS",
                   "SECURITY_FINDING_LOGS",
+                  "S3_SERVER_ACCESS_LOGS",
+                  "ACCESS_LOGS",
+                  "CONNECTION_LOGS",
                   "ALB_ACCESS_LOGS",
                   "ALB_CONNECTION_LOGS",
                   "ALB_HEALTH_CHECK_LOGS"
@@ -608,6 +640,9 @@
     "/properties/RuleName",
     "/properties/Rule/AllRegions"
   ],
+  "writeOnlyProperties": [
+    "/properties/Rule/Regions"
+  ],
   "readOnlyProperties": [
     "/properties/RuleArn",
     "/properties/RegionStatuses"
@@ -650,6 +685,7 @@
     "delete": {
       "permissions": [
         "observabilityadmin:DeleteTelemetryRule",
+        "observabilityadmin:GetTelemetryRule",
         "observabilityadmin:GetTelemetryEvaluationStatus"
       ]
     },

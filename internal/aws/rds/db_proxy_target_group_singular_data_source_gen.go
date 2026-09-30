@@ -132,6 +132,57 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The identifier for the proxy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with the DB proxy target group.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -180,11 +231,14 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		"db_instance_identifiers":            "DBInstanceIdentifiers",
 		"db_proxy_name":                      "DBProxyName",
 		"init_query":                         "InitQuery",
+		"key":                                "Key",
 		"max_connections_percent":            "MaxConnectionsPercent",
 		"max_idle_connections_percent":       "MaxIdleConnectionsPercent",
 		"session_pinning_filters":            "SessionPinningFilters",
+		"tags":                               "Tags",
 		"target_group_arn":                   "TargetGroupArn",
 		"target_group_name":                  "TargetGroupName",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

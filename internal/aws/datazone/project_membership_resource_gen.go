@@ -33,25 +33,13 @@ func projectMembershipResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "enum": [
-		//	    "PROJECT_OWNER",
-		//	    "PROJECT_CONTRIBUTOR",
-		//	    "PROJECT_CATALOG_VIEWER",
-		//	    "PROJECT_CATALOG_CONSUMER",
-		//	    "PROJECT_CATALOG_STEWARD"
-		//	  ],
+		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"designation": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"PROJECT_OWNER",
-					"PROJECT_CONTRIBUTOR",
-					"PROJECT_CATALOG_VIEWER",
-					"PROJECT_CATALOG_CONSUMER",
-					"PROJECT_CATALOG_STEWARD",
-				),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
 			}, /*END VALIDATORS*/
 			// Designation is a write-only property.
 		}, /*END ATTRIBUTE*/

@@ -222,6 +222,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// NoRemoveEndDate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RemoveEndDate
 		// CloudFormation resource type schema:
@@ -235,6 +236,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// RemoveEndDate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TagSpecifications
 		// CloudFormation resource type schema:
@@ -327,7 +329,6 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tenancy
@@ -421,6 +422,10 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 		"weight":                        "Weight",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RemoveEndDate",
+		"/properties/NoRemoveEndDate",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -1,0 +1,86 @@
+{
+  "typeName": "AWS::EventsV2::ResourcePolicy",
+  "description": "Resource type definition for AWS::EventsV2::ResourcePolicy, the resource policy of an Amazon EventBridge event bus. This manages only the resource policy named \"default\", which the bus owner writes. It does not manage the policy named \"AWS_RAM\", which AWS Resource Access Manager owns on behalf of the bus owner. If the bus already has a default policy, creating this resource fails. Deleting this resource removes all permissions granted by it. An explicit Deny in this policy takes precedence over an Allow in the \"AWS_RAM\" policy, so deleting this resource can widen access. Set DeletionPolicy: Retain if the policy carries a Deny that you rely on. Required permissions: events:PutResourcePolicy, events:GetResourcePolicy, and events:DeleteResourcePolicy. Listing resources of this type also requires events:ListEventBuses and events:ListResourcePolicies.",
+  "properties": {
+    "EventBusArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the event bus whose resource policy this is. The bus must already exist. This resource does not create it.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws(-[a-z0-9]+)*:events:[a-z][a-z0-9]*(-[a-z0-9]+)*:([0-9]{12}):event-busv2\\/[A-Za-z0-9][\\.\\-_A-Za-z0-9]{0,255}\\/[a-z0-9]{25}$"
+    },
+    "PolicyDocument": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "The resource policy document, as a JSON object. The document can be up to 20 KB. This quota is adjustable. An empty object is not a valid policy. To remove the policy, delete this resource. The principals in the document must exist and be visible to the service when the policy is written. When you create a new IAM role or user, that principal might not be immediately visible to the service. You might need to enforce a delay before you include it in the document. For more information, see \"Changes that I make are not always immediately visible\" in the IAM User Guide. Declare Version. Write AWS account and role principals as ARNs rather than as account IDs. Write a single Action, Resource, or principal value as a scalar rather than as a one-element list. The service returns these forms as you wrote them. It normalizes other forms, and a normalized value can appear as drift. A stack update replaces the whole policy with this document, including any change made outside CloudFormation. For more information about event bus resource policies, see the Amazon EventBridge User Guide."
+    },
+    "RevisionId": {
+      "type": "string",
+      "description": "The revision identifier the service assigned to the stored policy. The identifier changes on every successful write.",
+      "minLength": 1,
+      "maxLength": 1024
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "EventBusArn",
+    "PolicyDocument"
+  ],
+  "readOnlyProperties": [
+    "/properties/RevisionId"
+  ],
+  "createOnlyProperties": [
+    "/properties/EventBusArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/EventBusArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "events:GetResourcePolicy",
+        "events:PutResourcePolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "events:GetResourcePolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "events:PutResourcePolicy",
+        "events:GetResourcePolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "events:DeleteResourcePolicy",
+        "events:GetResourcePolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "events:ListEventBuses",
+        "events:ListResourcePolicies"
+      ]
+    }
+  },
+  "typeConfiguration": {
+    "properties": {
+      "DeploymentStage": {
+        "description": "Which deployment of the EventsV2 service this registration targets. Prod resolves the production endpoint for the handler's AWS Region. When the property is absent, the handler uses a non-empty EVENTSV2_ENDPOINT override if one is configured and otherwise Prod. The handler accepts Beta and Gamma only in us-east-1; setting either in another Region fails the operation with InvalidRequest.",
+        "type": "string",
+        "enum": [
+          "Beta",
+          "Gamma",
+          "Prod"
+        ]
+      }
+    },
+    "additionalProperties": false
+  }
+}

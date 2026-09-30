@@ -88,7 +88,32 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "CloudWatchLogs": {
 		//	      "additionalProperties": false,
 		//	      "description": "The configuration for reading agent traces from CloudWatch logs.",
+		//	      "oneOf": [
+		//	        {
+		//	          "required": [
+		//	            "LogGroupNames"
+		//	          ]
+		//	        },
+		//	        {
+		//	          "required": [
+		//	            "LogGroupNamePrefixes"
+		//	          ]
+		//	        }
+		//	      ],
 		//	      "properties": {
+		//	        "LogGroupNamePrefixes": {
+		//	          "description": "The list of CloudWatch log group name prefixes to monitor for agent traces. Mutually exclusive with LogGroupNames; specify exactly one of the two selectors.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 512,
+		//	            "minLength": 1,
+		//	            "pattern": "^[.\\-_/#A-Za-z0-9]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
 		//	        "LogGroupNames": {
 		//	          "description": "The list of CloudWatch log group names to monitor for agent traces.",
 		//	          "insertionOrder": false,
@@ -98,7 +123,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	            "pattern": "^[.\\-_/#A-Za-z0-9]+$",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 5,
+		//	          "maxItems": 10,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
@@ -117,7 +142,6 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "LogGroupNames",
 		//	        "ServiceNames"
 		//	      ],
 		//	      "type": "object"
@@ -133,6 +157,12 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 				// Property: CloudWatchLogs
 				"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroupNamePrefixes
+						"log_group_name_prefixes": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of CloudWatch log group name prefixes to monitor for agent traces. Mutually exclusive with LogGroupNames; specify exactly one of the two selectors.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: LogGroupNames
 						"log_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
@@ -321,7 +351,25 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	      "description": "The CloudWatch configuration for writing evaluation results.",
 		//	      "properties": {
 		//	        "LogGroupName": {
-		//	          "description": "The CloudWatch log group name for evaluation results.",
+		//	          "description": "The CloudWatch log group name for evaluation results. Omit to use the service-managed default log group.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "^[.\\-_/#A-Za-z0-9]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "MetricsNamespace": {
+		//	          "description": "The CloudWatch metrics namespace for evaluation result metrics. Omit to use the service-managed default namespace.",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9._#/:-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ResultDestination": {
+		//	          "description": "Where evaluation results are written. DEDICATED_LOG_GROUP, the default when omitted, writes to a dedicated result log group. SOURCE_LOG_GROUP writes results back to the trace source log group; LogGroupName must not be specified with SOURCE_LOG_GROUP.",
+		//	          "enum": [
+		//	            "DEDICATED_LOG_GROUP",
+		//	            "SOURCE_LOG_GROUP"
+		//	          ],
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -337,7 +385,17 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogGroupName
 						"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The CloudWatch log group name for evaluation results.",
+							Description: "The CloudWatch log group name for evaluation results. Omit to use the service-managed default log group.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricsNamespace
+						"metrics_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The CloudWatch metrics namespace for evaluation result metrics. Omit to use the service-managed default namespace.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ResultDestination
+						"result_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Where evaluation results are written. DEDICATED_LOG_GROUP, the default when omitted, writes to a dedicated result log group. SOURCE_LOG_GROUP writes results back to the trace source log group; LogGroupName must not be specified with SOURCE_LOG_GROUP.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -636,12 +694,15 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		"insights":                      "Insights",
 		"key":                           "Key",
 		"log_group_name":                "LogGroupName",
+		"log_group_name_prefixes":       "LogGroupNamePrefixes",
 		"log_group_names":               "LogGroupNames",
+		"metrics_namespace":             "MetricsNamespace",
 		"online_evaluation_config_arn":  "OnlineEvaluationConfigArn",
 		"online_evaluation_config_id":   "OnlineEvaluationConfigId",
 		"online_evaluation_config_name": "OnlineEvaluationConfigName",
 		"operator":                      "Operator",
 		"output_config":                 "OutputConfig",
+		"result_destination":            "ResultDestination",
 		"rule":                          "Rule",
 		"sampling_config":               "SamplingConfig",
 		"sampling_percentage":           "SamplingPercentage",

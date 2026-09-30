@@ -25,6 +25,7 @@ Resource schema for AWS::RDS::DBProxyTargetGroup
 - `connection_pool_configuration_info` (Attributes) (see [below for nested schema](#nestedatt--connection_pool_configuration_info))
 - `db_cluster_identifiers` (List of String)
 - `db_instance_identifiers` (List of String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -41,6 +42,15 @@ Optional:
 - `max_connections_percent` (Number) The maximum size of the connection pool for each target in a target group.
 - `max_idle_connections_percent` (Number) Controls how actively the proxy closes idle database connections in the connection pool.
 - `session_pinning_filters` (List of String) Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

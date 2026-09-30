@@ -84,6 +84,17 @@
         "OperatorAppRoleArn",
         "IdcInstanceArn"
       ]
+    },
+    "Preferences": {
+      "description": "Preferences that configure behavior of this AgentSpace. This container fully owns the AgentSpace preferences: the properties supplied here replace the stored preferences in their entirety, and omitting the Preferences container reverts all preferences to their service defaults.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ElevatedActionsEnabled": {
+          "description": "Indicates whether elevated directed actions are permitted in this AgentSpace. Defaults to false when not set.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "properties": {
@@ -117,6 +128,9 @@
       "minLength": 2,
       "maxLength": 35,
       "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$"
+    },
+    "Preferences": {
+      "$ref": "#/definitions/Preferences"
     },
     "OperatorApp": {
       "$ref": "#/definitions/OperatorApp"

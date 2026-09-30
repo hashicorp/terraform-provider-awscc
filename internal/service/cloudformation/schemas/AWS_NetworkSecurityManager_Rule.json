@@ -1,0 +1,160 @@
+{
+  "typeName": "AWS::NetworkSecurityManager::Rule",
+  "description": "Resource Type definition for AWS::NetworkSecurityManager::Rule. Creates and manages a Network Security Manager rule.",
+  "properties": {
+    "RuleId": {
+      "description": "The unique identifier of the rule.",
+      "type": "string"
+    },
+    "RuleArn": {
+      "description": "The Amazon Resource Name (ARN) of the rule.",
+      "type": "string"
+    },
+    "RuleName": {
+      "description": "The name of the rule.",
+      "type": "string"
+    },
+    "FirewallType": {
+      "description": "The type of firewall for this rule.",
+      "type": "string",
+      "enum": [
+        "WAF"
+      ]
+    },
+    "RuleType": {
+      "description": "The type of rule.",
+      "type": "string",
+      "enum": [
+        "CONFIGURATION",
+        "INSPECTION"
+      ]
+    },
+    "RuleDescription": {
+      "description": "A description of the rule.",
+      "type": "string"
+    },
+    "Configuration": {
+      "description": "The rule configuration as a JSON string.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the rule.",
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE"
+      ]
+    },
+    "Version": {
+      "description": "The version number of the rule.",
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$",
+      "minLength": 1,
+      "maxLength": 10
+    },
+    "Tags": {
+      "description": "The tags associated with the rule.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RuleName"
+  ],
+  "createOnlyProperties": [
+    "/properties/RuleName",
+    "/properties/FirewallType",
+    "/properties/RuleType"
+  ],
+  "readOnlyProperties": [
+    "/properties/RuleId",
+    "/properties/RuleArn",
+    "/properties/Status",
+    "/properties/Version"
+  ],
+  "primaryIdentifier": [
+    "/properties/RuleArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RuleId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-security-manager:TagResource",
+      "network-security-manager:UntagResource",
+      "network-security-manager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "network-security-manager:CreateRule",
+        "network-security-manager:GetRule",
+        "network-security-manager:TagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "network-security-manager:GetRule",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "network-security-manager:UpdateRule",
+        "network-security-manager:GetRule",
+        "network-security-manager:TagResource",
+        "network-security-manager:UntagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "network-security-manager:DeleteRule",
+        "network-security-manager:GetRule",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "network-security-manager:ListRules"
+      ]
+    }
+  }
+}

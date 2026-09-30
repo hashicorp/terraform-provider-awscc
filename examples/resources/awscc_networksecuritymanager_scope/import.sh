@@ -1,0 +1,1 @@
+$ terraform import awscc_networksecuritymanager_scope.example "scope_arn"

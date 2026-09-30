@@ -17,14 +17,11 @@ Policy Grant in AWS DataZone is an explicit authorization assignment that allows
 
 ### Required
 
+- `detail` (Attributes) (see [below for nested schema](#nestedatt--detail))
 - `domain_identifier` (String)
 - `entity_identifier` (String)
 - `entity_type` (String)
 - `policy_type` (String)
-
-### Optional
-
-- `detail` (Attributes) (see [below for nested schema](#nestedatt--detail))
 - `principal` (Attributes) (see [below for nested schema](#nestedatt--principal))
 
 ### Read-Only

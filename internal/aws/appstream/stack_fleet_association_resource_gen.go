@@ -29,31 +29,29 @@ func stackFleetAssociationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.",
 		//	  "type": "string"
 		//	}
 		"fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"stack_fleet_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.",
 		//	  "type": "string"
 		//	}
 		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -78,19 +76,24 @@ func stackFleetAssociationResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "id",
+			Name:              "fleet_name",
+			Description:       "The name of the fleet",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "stack_name",
+			Description:       "The name of the stack",
 			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"fleet_name":                 "FleetName",
-		"stack_fleet_association_id": "Id",
-		"stack_name":                 "StackName",
+		"fleet_name": "FleetName",
+		"stack_name": "StackName",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

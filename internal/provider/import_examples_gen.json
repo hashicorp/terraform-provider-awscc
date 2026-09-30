@@ -403,6 +403,11 @@
         "identifier": ["StackName","Name"]
     },
     {
+        "resource": "awscc_appstream_fleet",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
         "resource": "awscc_appstream_image_builder",
         "generateListResource": true,
         "identifier": ["Name"]
@@ -414,7 +419,7 @@
     },
     {
         "resource": "awscc_appstream_stack_fleet_association",
-        "identifier": ["Id"]
+        "identifier": ["FleetName","StackName"]
     },
     {
         "resource": "awscc_appstream_stack_user_association",
@@ -429,6 +434,10 @@
         "resource": "awscc_appsync_api",
         "generateListResource": true,
         "identifier": ["ApiArn"]
+    },
+    {
+        "resource": "awscc_appsync_api_cache",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_appsync_api_key",
@@ -1144,6 +1153,11 @@
         "identifier": ["TrainingDatasetArn"]
     },
     {
+        "resource": "awscc_cloud9_environment_ec2",
+        "generateListResource": true,
+        "identifier": ["EnvironmentId"]
+    },
+    {
         "resource": "awscc_cloudformation_change_set",
         "identifier": ["ChangeSetId"]
     },
@@ -1250,6 +1264,11 @@
         "resource": "awscc_cloudfront_distribution_tenant",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_cloudfront_field_level_encryption_profile",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_cloudfront_function",
@@ -1372,6 +1391,11 @@
         "resource": "awscc_cloudwatch_otel_enrichment",
         "generateListResource": true,
         "identifier": ["AccountId"]
+    },
+    {
+        "resource": "awscc_cloudwatch_view",
+        "generateListResource": true,
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_codeartifact_domain",
@@ -1556,6 +1580,16 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_comprehend_entity_recognizer",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_comprehend_entity_recognizer_endpoint",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_comprehend_flywheel",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -1579,6 +1613,11 @@
         "resource": "awscc_config_configuration_aggregator",
         "generateListResource": true,
         "identifier": ["ConfigurationAggregatorName"]
+    },
+    {
+        "resource": "awscc_config_configuration_recorder",
+        "generateListResource": true,
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_config_conformance_pack",
@@ -1732,6 +1771,10 @@
         "resource": "awscc_connect_traffic_distribution_group",
         "generateListResource": true,
         "identifier": ["TrafficDistributionGroupArn"]
+    },
+    {
+        "resource": "awscc_connect_use_case",
+        "identifier": ["InstanceId","IntegrationAssociationId","UseCaseId"]
     },
     {
         "resource": "awscc_connect_user",
@@ -3044,6 +3087,11 @@
         "identifier": ["ARN"]
     },
     {
+        "resource": "awscc_elasticache_snapshot",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_elasticache_subnet_group",
         "generateListResource": true,
         "identifier": ["CacheSubnetGroupName"]
@@ -3198,6 +3246,26 @@
         "resource": "awscc_events_rule",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_eventsv2_event_bus",
+        "generateListResource": true,
+        "identifier": ["EventBusArn"]
+    },
+    {
+        "resource": "awscc_eventsv2_event_source",
+        "generateListResource": true,
+        "identifier": ["EventSourceArn"]
+    },
+    {
+        "resource": "awscc_eventsv2_resource_policy",
+        "generateListResource": true,
+        "identifier": ["EventBusArn"]
+    },
+    {
+        "resource": "awscc_eventsv2_subscriber",
+        "generateListResource": true,
+        "identifier": ["SubscriberArn"]
     },
     {
         "resource": "awscc_evidently_experiment",
@@ -4791,6 +4859,10 @@
         "identifier": ["EntitlementArn"]
     },
     {
+        "resource": "awscc_mediaconnect_flow_media_stream",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_mediaconnect_flow_output",
         "generateListResource": true,
         "identifier": ["OutputArn"]
@@ -4955,6 +5027,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_mediatailor_program",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_mediatailor_source_location",
         "generateListResource": true,
         "identifier": ["SourceLocationName"]
@@ -5089,6 +5165,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_networkflowmonitor_scope",
+        "generateListResource": true,
+        "identifier": ["ScopeArn"]
+    },
+    {
         "resource": "awscc_networkmanager_connect_attachment",
         "generateListResource": true,
         "identifier": ["AttachmentId"]
@@ -5160,6 +5241,21 @@
         "resource": "awscc_networkmanager_vpc_attachment",
         "generateListResource": true,
         "identifier": ["AttachmentId"]
+    },
+    {
+        "resource": "awscc_networkmonitor_monitor",
+        "generateListResource": true,
+        "identifier": ["MonitorArn"]
+    },
+    {
+        "resource": "awscc_networksecuritymanager_rule",
+        "generateListResource": true,
+        "identifier": ["RuleArn"]
+    },
+    {
+        "resource": "awscc_networksecuritymanager_scope",
+        "generateListResource": true,
+        "identifier": ["ScopeArn"]
     },
     {
         "resource": "awscc_nimblestudio_launch_profile",
@@ -5251,6 +5347,11 @@
     },
     {
         "resource": "awscc_oam_sink",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_observabilityadmin_dataset_integration",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
@@ -5686,9 +5787,29 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_ram_permission_association",
+        "generateListResource": true,
+        "identifier": ["ResourceShareArn","PermissionArn"]
+    },
+    {
+        "resource": "awscc_ram_principal_association",
+        "generateListResource": true,
+        "identifier": ["ResourceShareArn","Principal"]
+    },
+    {
+        "resource": "awscc_ram_resource_association",
+        "generateListResource": true,
+        "identifier": ["ResourceShareArn","ResourceArn"]
+    },
+    {
         "resource": "awscc_ram_resource_share",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_ram_source_association",
+        "generateListResource": true,
+        "identifier": ["ResourceShareArn","SourceId"]
     },
     {
         "resource": "awscc_rds_cluster_snapshot",
@@ -5844,6 +5965,11 @@
         "resource": "awscc_redshift_qev2_idc_application",
         "generateListResource": true,
         "identifier": ["Qev2IdcApplicationArn"]
+    },
+    {
+        "resource": "awscc_redshift_redshift_idc_application",
+        "generateListResource": true,
+        "identifier": ["RedshiftIdcApplicationArn"]
     },
     {
         "resource": "awscc_redshift_scheduled_action",
@@ -6349,6 +6475,10 @@
         "identifier": ["VectorBucketArn"]
     },
     {
+        "resource": "awscc_scn_data_integration_flow",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_scn_dataset",
         "identifier": ["Arn"]
     },
@@ -6389,6 +6519,10 @@
         "resource": "awscc_ses_email_identity",
         "generateListResource": true,
         "identifier": ["EmailIdentity"]
+    },
+    {
+        "resource": "awscc_ses_email_identity_certificate",
+        "identifier": ["EmailIdentity","FromAddress"]
     },
     {
         "resource": "awscc_ses_mail_manager_addon_instance",
@@ -6488,6 +6622,11 @@
         "resource": "awscc_smsvoice_registration",
         "generateListResource": true,
         "identifier": ["RegistrationArn"]
+    },
+    {
+        "resource": "awscc_smsvoice_registration_attachment",
+        "generateListResource": true,
+        "identifier": ["RegistrationAttachmentArn"]
     },
     {
         "resource": "awscc_smsvoice_resource_policy",
@@ -6877,6 +7016,11 @@
         "resource": "awscc_sagemaker_workforce",
         "generateListResource": true,
         "identifier": ["WorkforceArn"]
+    },
+    {
+        "resource": "awscc_sagemaker_workteam",
+        "generateListResource": true,
+        "identifier": ["WorkteamArn"]
     },
     {
         "resource": "awscc_scheduler_schedule",
@@ -7281,6 +7425,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_transcribe_medical_vocabulary",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_transcribe_vocabulary",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -7506,6 +7655,14 @@
     {
         "resource": "awscc_wisdom_assistant_association",
         "identifier": ["AssistantAssociationId","AssistantId"]
+    },
+    {
+        "resource": "awscc_wisdom_content",
+        "identifier": ["ContentArn"]
+    },
+    {
+        "resource": "awscc_wisdom_content_association",
+        "identifier": ["ContentAssociationArn"]
     },
     {
         "resource": "awscc_wisdom_knowledge_base",

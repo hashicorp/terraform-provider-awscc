@@ -205,7 +205,8 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            "RTP",
 		//	            "RIST",
 		//	            "SRT_CALLER",
-		//	            "SRT_LISTENER"
+		//	            "SRT_LISTENER",
+		//	            "RTMP_PUSH"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -230,6 +231,64 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "required": [
 		//	                "DestinationAddress",
 		//	                "DestinationPort"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "RtmpPush": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.",
+		//	              "properties": {
+		//	                "ApplicationName": {
+		//	                  "description": "The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName.",
+		//	                  "type": "string"
+		//	                },
+		//	                "DestinationAddress": {
+		//	                  "description": "The IP address or hostname of the destination RTMP server that the router output pushes the stream to. Provide only the server address; specify the application and stream names separately.",
+		//	                  "type": "string"
+		//	                },
+		//	                "DestinationPort": {
+		//	                  "description": "The TCP port on the destination RTMP server. For RTMP, valid values range from 1024 to 65535. For RTMPS (RTMP over TLS), valid values are 443 or 1024 to 65535. RTMP typically uses port 1935, and RTMPS typically uses port 443.",
+		//	                  "maximum": 65535,
+		//	                  "minimum": 443,
+		//	                  "type": "integer"
+		//	                },
+		//	                "StreamName": {
+		//	                  "description": "The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.",
+		//	                  "type": "string"
+		//	                },
+		//	                "TlsEncryption": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.",
+		//	                  "properties": {
+		//	                    "EncryptionConfiguration": {
+		//	                      "description": "The configuration settings for TLS encryption.",
+		//	                      "properties": {
+		//	                        "Public": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.",
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "EncryptionType": {
+		//	                      "enum": [
+		//	                        "PUBLIC"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "EncryptionConfiguration"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ApplicationName",
+		//	                "DestinationAddress",
+		//	                "DestinationPort",
+		//	                "StreamName"
 		//	              ],
 		//	              "type": "object"
 		//	            },
@@ -538,6 +597,57 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration settings for a router output using the RIST (Reliable Internet Stream Transport) protocol, including the destination address and port.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RtmpPush
+								"rtmp_push": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ApplicationName
+										"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DestinationAddress
+										"destination_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The IP address or hostname of the destination RTMP server that the router output pushes the stream to. Provide only the server address; specify the application and stream names separately.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DestinationPort
+										"destination_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The TCP port on the destination RTMP server. For RTMP, valid values range from 1024 to 65535. For RTMPS (RTMP over TLS), valid values are 443 or 1024 to 65535. RTMP typically uses port 1935, and RTMPS typically uses port 443.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StreamName
+										"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TlsEncryption
+										"tls_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: EncryptionConfiguration
+												"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Public
+														"public": schema.StringAttribute{ /*START ATTRIBUTE*/
+															CustomType:  jsontypes.NormalizedType{},
+															Description: "The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The configuration settings for TLS encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: EncryptionType
+												"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Rtp
@@ -993,6 +1103,7 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::RouterOutput").WithTerraformTypeName("awscc_mediaconnect_router_output")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_name":               "ApplicationName",
 		"arn":                            "Arn",
 		"automatic":                      "Automatic",
 		"availability_zone":              "AvailabilityZone",
@@ -1007,6 +1118,7 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"encryption_key":                 "EncryptionKey",
 		"encryption_key_configuration":   "EncryptionKeyConfiguration",
 		"encryption_key_type":            "EncryptionKeyType",
+		"encryption_type":                "EncryptionType",
 		"fabric_configuration":           "FabricConfiguration",
 		"flow_arn":                       "FlowArn",
 		"flow_source_arn":                "FlowSourceArn",
@@ -1028,6 +1140,7 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"preferred_day_time":             "PreferredDayTime",
 		"protocol":                       "Protocol",
 		"protocol_configuration":         "ProtocolConfiguration",
+		"public":                         "Public",
 		"recovery_latency_mode":          "RecoveryLatencyMode",
 		"region_name":                    "RegionName",
 		"rist":                           "Rist",
@@ -1035,6 +1148,7 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"routed_state":                   "RoutedState",
 		"router_output_id":               "Id",
 		"routing_scope":                  "RoutingScope",
+		"rtmp_push":                      "RtmpPush",
 		"rtp":                            "Rtp",
 		"secret_arn":                     "SecretArn",
 		"secrets_manager":                "SecretsManager",
@@ -1043,9 +1157,11 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"standard":                       "Standard",
 		"state":                          "State",
 		"stream_id":                      "StreamId",
+		"stream_name":                    "StreamName",
 		"tags":                           "Tags",
 		"tier":                           "Tier",
 		"time":                           "Time",
+		"tls_encryption":                 "TlsEncryption",
 		"updated_at":                     "UpdatedAt",
 		"value":                          "Value",
 	})

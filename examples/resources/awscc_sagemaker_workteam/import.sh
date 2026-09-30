@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_workteam.example "workteam_arn"

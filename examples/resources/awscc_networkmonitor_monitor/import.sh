@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmonitor_monitor.example "monitor_arn"

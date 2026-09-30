@@ -1,0 +1,143 @@
+{
+  "typeName": "AWS::NetworkSecurityManager::Scope",
+  "description": "Resource Type definition for AWS::NetworkSecurityManager::Scope. Creates and manages a Network Security Manager scope.",
+  "properties": {
+    "ScopeId": {
+      "description": "The unique identifier of the scope.",
+      "type": "string"
+    },
+    "ScopeArn": {
+      "description": "The Amazon Resource Name (ARN) of the scope.",
+      "type": "string"
+    },
+    "ScopeName": {
+      "description": "The name of the scope.",
+      "type": "string"
+    },
+    "ScopeDescription": {
+      "description": "A description of the scope.",
+      "type": "string"
+    },
+    "ScopeConfiguration": {
+      "description": "The scope configuration as a JSON string.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the scope.",
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE"
+      ]
+    },
+    "Version": {
+      "description": "The version number of the scope.",
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$",
+      "minLength": 1,
+      "maxLength": 10
+    },
+    "Tags": {
+      "description": "The tags associated with the scope.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ScopeName"
+  ],
+  "createOnlyProperties": [
+    "/properties/ScopeName"
+  ],
+  "readOnlyProperties": [
+    "/properties/ScopeId",
+    "/properties/ScopeArn",
+    "/properties/Status",
+    "/properties/Version"
+  ],
+  "primaryIdentifier": [
+    "/properties/ScopeArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ScopeId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-security-manager:TagResource",
+      "network-security-manager:UntagResource",
+      "network-security-manager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "network-security-manager:CreateScope",
+        "network-security-manager:GetScope",
+        "network-security-manager:TagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "network-security-manager:GetScope",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "network-security-manager:UpdateScope",
+        "network-security-manager:GetScope",
+        "network-security-manager:TagResource",
+        "network-security-manager:UntagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "network-security-manager:DeleteScope",
+        "network-security-manager:GetScope",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "network-security-manager:ListScopes"
+      ]
+    }
+  }
+}

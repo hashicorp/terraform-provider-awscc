@@ -58,6 +58,7 @@ Read-Only:
 
 Read-Only:
 
+- `log_group_name_prefixes` (List of String) The list of CloudWatch log group name prefixes to monitor for agent traces. Mutually exclusive with LogGroupNames; specify exactly one of the two selectors.
 - `log_group_names` (List of String) The list of CloudWatch log group names to monitor for agent traces.
 - `service_names` (List of String) The list of service names to filter traces within the specified log groups.
 
@@ -91,7 +92,9 @@ Read-Only:
 
 Read-Only:
 
-- `log_group_name` (String) The CloudWatch log group name for evaluation results.
+- `log_group_name` (String) The CloudWatch log group name for evaluation results. Omit to use the service-managed default log group.
+- `metrics_namespace` (String) The CloudWatch metrics namespace for evaluation result metrics. Omit to use the service-managed default namespace.
+- `result_destination` (String) Where evaluation results are written. DEDICATED_LOG_GROUP, the default when omitted, writes to a dedicated result log group. SOURCE_LOG_GROUP writes results back to the trace source log group; LogGroupName must not be specified with SOURCE_LOG_GROUP.
 
 
 

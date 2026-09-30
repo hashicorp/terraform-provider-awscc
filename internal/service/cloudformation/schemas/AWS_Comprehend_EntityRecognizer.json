@@ -1,0 +1,408 @@
+{
+  "typeName": "AWS::Comprehend::EntityRecognizer",
+  "description": "An Amazon Comprehend custom entity recognizer: a trained model that identifies custom entity types in text, created via an asynchronous training job.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-comprehend.git",
+  "definitions": {
+    "EntityRecognizerInputDataConfig": {
+      "type": "object",
+      "description": "Specifies the format and location of the input data for an entity recognizer.",
+      "properties": {
+        "DataFormat": {
+          "type": "string",
+          "description": "The format of your training data.",
+          "enum": [
+            "COMPREHEND_CSV",
+            "AUGMENTED_MANIFEST"
+          ]
+        },
+        "EntityTypes": {
+          "type": "array",
+          "description": "The entity types in the labeled training data.",
+          "items": {
+            "$ref": "#/definitions/EntityTypesListItem"
+          },
+          "insertionOrder": false
+        },
+        "Documents": {
+          "description": "The S3 location of the folder that contains the training documents.",
+          "$ref": "#/definitions/EntityRecognizerDocuments"
+        },
+        "Annotations": {
+          "description": "The S3 location of the CSV file that annotates your training documents.",
+          "$ref": "#/definitions/EntityRecognizerAnnotations"
+        },
+        "EntityList": {
+          "description": "The S3 location of the CSV file that has the entity list.",
+          "$ref": "#/definitions/EntityRecognizerEntityList"
+        },
+        "AugmentedManifests": {
+          "type": "array",
+          "description": "A list of augmented manifest files that provide training data for a custom model.",
+          "items": {
+            "$ref": "#/definitions/AugmentedManifestsListItem"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "EntityTypes"
+      ],
+      "additionalProperties": false
+    },
+    "EntityTypesListItem": {
+      "type": "object",
+      "description": "An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "An entity type within a labeled training dataset.",
+          "maxLength": 64,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "EntityRecognizerDocuments": {
+      "type": "object",
+      "description": "Describes the training documents submitted with an entity recognizer.",
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "description": "Specifies the Amazon S3 location where the training documents are located.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        },
+        "TestS3Uri": {
+          "type": "string",
+          "description": "Specifies the Amazon S3 location where the test documents are located.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        },
+        "InputFormat": {
+          "type": "string",
+          "description": "Specifies how the text in an input file should be processed.",
+          "enum": [
+            "ONE_DOC_PER_FILE",
+            "ONE_DOC_PER_LINE"
+          ]
+        }
+      },
+      "required": [
+        "S3Uri"
+      ],
+      "additionalProperties": false
+    },
+    "EntityRecognizerAnnotations": {
+      "type": "object",
+      "description": "Describes the annotations associated with an entity recognizer.",
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "description": "Specifies the Amazon S3 location where the annotations are located.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        },
+        "TestS3Uri": {
+          "type": "string",
+          "description": "Specifies the Amazon S3 location where the test annotations are located.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        }
+      },
+      "required": [
+        "S3Uri"
+      ],
+      "additionalProperties": false
+    },
+    "EntityRecognizerEntityList": {
+      "type": "object",
+      "description": "Describes the entity list submitted with an entity recognizer.",
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "description": "Specifies the Amazon S3 location where the entity list is located.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        }
+      },
+      "required": [
+        "S3Uri"
+      ],
+      "additionalProperties": false
+    },
+    "AugmentedManifestsListItem": {
+      "type": "object",
+      "description": "An augmented manifest file that provides training data for your custom model.",
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "description": "The Amazon S3 location of the augmented manifest file.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        },
+        "Split": {
+          "type": "string",
+          "description": "The purpose of the data you've provided in the augmented manifest.",
+          "enum": [
+            "TRAIN",
+            "TEST"
+          ]
+        },
+        "AttributeNames": {
+          "type": "array",
+          "description": "The JSON attribute that contains the annotations for your training documents.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+          },
+          "insertionOrder": true
+        },
+        "AnnotationDataS3Uri": {
+          "type": "string",
+          "description": "The S3 prefix to the annotation files that are referred in the augmented manifest file.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        },
+        "SourceDocumentsS3Uri": {
+          "type": "string",
+          "description": "The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.",
+          "maxLength": 1024,
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+        },
+        "DocumentType": {
+          "type": "string",
+          "description": "The type of augmented manifest.",
+          "enum": [
+            "PLAIN_TEXT_DOCUMENT",
+            "SEMI_STRUCTURED_DOCUMENT"
+          ]
+        }
+      },
+      "required": [
+        "S3Uri",
+        "AttributeNames"
+      ],
+      "additionalProperties": false
+    },
+    "VpcConfig": {
+      "type": "object",
+      "description": "Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job.",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "description": "The ID number for a security group on an instance of your private VPC.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[-0-9a-zA-Z]+$"
+          },
+          "minItems": 1,
+          "maxItems": 5,
+          "insertionOrder": false
+        },
+        "Subnets": {
+          "type": "array",
+          "description": "The ID for each subnet being used in your private VPC.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[-0-9a-zA-Z]+$"
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "SecurityGroupIds",
+        "Subnets"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair that adds metadata to a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the key-value pair that forms a tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the key-value pair that forms a tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) that identifies the entity recognizer.",
+      "maxLength": 256,
+      "pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?$"
+    },
+    "RecognizerName": {
+      "type": "string",
+      "description": "The name given to the entity recognizer.",
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+    },
+    "VersionName": {
+      "type": "string",
+      "description": "The version name given to the entity recognizer.",
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+    },
+    "DataAccessRoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
+    },
+    "LanguageCode": {
+      "type": "string",
+      "description": "The language of the input documents. All documents must be in the same language.",
+      "enum": [
+        "en",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt",
+        "ar",
+        "hi",
+        "ja",
+        "ko",
+        "zh",
+        "zh-TW"
+      ]
+    },
+    "InputDataConfig": {
+      "description": "Specifies the format and location of the input data. The S3 bucket containing the input data must be located in the same Region as the entity recognizer being created.",
+      "$ref": "#/definitions/EntityRecognizerInputDataConfig"
+    },
+    "VolumeKmsKeyId": {
+      "type": "string",
+      "description": "ID for the AWS KMS key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s).",
+      "maxLength": 2048,
+      "pattern": "^\\p{ASCII}+$"
+    },
+    "ModelKmsKeyId": {
+      "type": "string",
+      "description": "ID for the AWS KMS key that Amazon Comprehend uses to encrypt trained custom models.",
+      "maxLength": 2048,
+      "pattern": "^\\p{ASCII}+$"
+    },
+    "VpcConfig": {
+      "description": "Configuration parameters for an optional private VPC containing the resources you are using for your custom entity recognizer.",
+      "$ref": "#/definitions/VpcConfig"
+    },
+    "ModelPolicy": {
+      "type": "string",
+      "description": "The JSON resource-based policy to attach to your custom entity recognizer model.",
+      "minLength": 1,
+      "maxLength": 20000,
+      "pattern": ""
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to associate with the entity recognizer.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "uniqueItems": true,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RecognizerName",
+    "DataAccessRoleArn",
+    "InputDataConfig",
+    "LanguageCode"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ModelPolicy"
+  ],
+  "createOnlyProperties": [
+    "/properties/RecognizerName",
+    "/properties/VersionName",
+    "/properties/DataAccessRoleArn",
+    "/properties/InputDataConfig",
+    "/properties/LanguageCode",
+    "/properties/VolumeKmsKeyId",
+    "/properties/ModelKmsKeyId",
+    "/properties/VpcConfig",
+    "/properties/ModelPolicy"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "comprehend:TagResource",
+      "comprehend:UntagResource",
+      "comprehend:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "comprehend:CreateEntityRecognizer",
+        "comprehend:DescribeEntityRecognizer",
+        "comprehend:TagResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "comprehend:DescribeEntityRecognizer",
+        "comprehend:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "comprehend:DescribeEntityRecognizer",
+        "comprehend:ListTagsForResource",
+        "comprehend:TagResource",
+        "comprehend:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "comprehend:DeleteEntityRecognizer",
+        "comprehend:DescribeEntityRecognizer"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "comprehend:ListEntityRecognizers"
+      ]
+    }
+  }
+}

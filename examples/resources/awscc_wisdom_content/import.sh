@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_content.example "content_arn"

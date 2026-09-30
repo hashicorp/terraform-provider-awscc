@@ -52,7 +52,8 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
-		//	                  "SERVER_ROOT_CA_CERTIFICATE"
+		//	                  "SERVER_ROOT_CA_CERTIFICATE",
+		//	                  "OAUTHBEARER_AUTH"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -571,7 +572,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
 		//	  "properties": {
 		//	    "MaximumPollers": {
-		//	      "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
+		//	      "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS event source mappings, the accepted range is between 2 and 10,000, with a default of 200. For Amazon MSK and self-managed Apache Kafka event source mappings, the accepted range is between 1 and 2,000, with a default of 200.",
 		//	      "maximum": 10000,
 		//	      "minimum": 1,
 		//	      "type": "integer"
@@ -595,7 +596,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MaximumPollers
 				"maximum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
+					Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS event source mappings, the accepted range is between 2 and 10,000, with a default of 200. For Amazon MSK and self-managed Apache Kafka event source mappings, the accepted range is between 1 and 2,000, with a default of 200.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MinimumPollers
@@ -724,6 +725,14 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
 		//	      "type": "string"
 		//	    },
+		//	    "ConsumptionMode": {
+		//	      "description": "The mode that determines how Lambda reads from a Kafka topic. Use Stream for ordered processing or Queue for higher throughput when ordering is not required.",
+		//	      "enum": [
+		//	        "Stream",
+		//	        "Queue"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SchemaRegistryConfig": {
 		//	      "additionalProperties": false,
 		//	      "description": "Specific configuration settings for a Kafka schema registry.",
@@ -739,7 +748,8 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
-		//	                  "SERVER_ROOT_CA_CERTIFICATE"
+		//	                  "SERVER_ROOT_CA_CERTIFICATE",
+		//	                  "OAUTHBEARER_AUTH"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -805,6 +815,11 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 				// Property: ConsumerGroupId
 				"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConsumptionMode
+				"consumption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode that determines how Lambda reads from a Kafka topic. Use Stream for ordered processing or Queue for higher throughput when ordering is not required.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SchemaRegistryConfig
@@ -880,7 +895,14 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "SASL_SCRAM_256_AUTH",
 		//	          "VIRTUAL_HOST",
 		//	          "CLIENT_CERTIFICATE_TLS_AUTH",
-		//	          "SERVER_ROOT_CA_CERTIFICATE"
+		//	          "SERVER_ROOT_CA_CERTIFICATE",
+		//	          "OAUTHBEARER_AUTH",
+		//	          "OAUTHBEARER_SCOPE",
+		//	          "OAUTHBEARER_AUDIENCE",
+		//	          "OAUTHBEARER_LOGICAL_CLUSTER",
+		//	          "OAUTHBEARER_IDENTITY_POOL",
+		//	          "IAM_AUTH",
+		//	          "IAM_OAUTHBEARER_AUTH"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -894,7 +916,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 22,
+		//	  "maxItems": 29,
 		//	  "minItems": 1,
 		//	  "type": "array",
 		//	  "uniqueItems": true
@@ -1049,6 +1071,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"bisect_batch_on_function_error":         "BisectBatchOnFunctionError",
 		"collection_name":                        "CollectionName",
 		"consumer_group_id":                      "ConsumerGroupId",
+		"consumption_mode":                       "ConsumptionMode",
 		"database_name":                          "DatabaseName",
 		"destination":                            "Destination",
 		"destination_config":                     "DestinationConfig",

@@ -1,0 +1,1 @@
+$ terraform import awscc_mediatailor_program.example "arn"

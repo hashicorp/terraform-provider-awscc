@@ -1021,6 +1021,30 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AccessEntry": {
+		//	      "additionalProperties": false,
+		//	      "description": "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
+		//	      "properties": {
+		//	        "DesiredState": {
+		//	          "description": "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED",
+		//	            "INHERIT_FROM_CLUSTER"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
+		//	          "enum": [
+		//	            "ACTIVE",
+		//	            "INACTIVE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "EksClusterArn": {
 		//	      "default": false,
 		//	      "type": "string"
@@ -1038,6 +1062,41 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"eks_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessEntry
+				"access_entry": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DesiredState
+						"desired_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+									"INHERIT_FROM_CLUSTER",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: EksClusterArn
 				"eks_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -1045,6 +1104,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Default:  stringdefault.StaticString("false"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KubernetesNamespace
@@ -1054,6 +1114,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Default:  stringdefault.StaticString("false"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1061,7 +1122,6 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ReplaceComputeEnvironment
@@ -1228,6 +1288,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_entry":                       "AccessEntry",
 		"allocation_strategy":                "AllocationStrategy",
 		"allowed_instance_types":             "AllowedInstanceTypes",
 		"batch_image_status":                 "BatchImageStatus",
@@ -1240,6 +1301,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"compute_resources":                  "ComputeResources",
 		"container_insights":                 "ContainerInsights",
 		"context":                            "Context",
+		"desired_state":                      "DesiredState",
 		"desiredv_cpus":                      "DesiredvCpus",
 		"ec_2_configuration":                 "Ec2Configuration",
 		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
@@ -1284,6 +1346,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"service_role":                       "ServiceRole",
 		"spot_iam_fleet_role":                "SpotIamFleetRole",
 		"state":                              "State",
+		"status":                             "Status",
 		"storage_configuration":              "StorageConfiguration",
 		"storage_size_gi_b":                  "StorageSizeGiB",
 		"subnets":                            "Subnets",

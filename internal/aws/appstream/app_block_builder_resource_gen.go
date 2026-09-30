@@ -146,6 +146,19 @@ func appBlockBuilderResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DisableIMDSV1
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"disable_imdsv1": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -355,6 +368,7 @@ func appBlockBuilderResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                            "Arn",
 		"created_time":                   "CreatedTime",
 		"description":                    "Description",
+		"disable_imdsv1":                 "DisableIMDSV1",
 		"display_name":                   "DisplayName",
 		"enable_default_internet_access": "EnableDefaultInternetAccess",
 		"endpoint_type":                  "EndpointType",

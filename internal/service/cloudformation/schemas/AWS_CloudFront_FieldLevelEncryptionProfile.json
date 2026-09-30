@@ -1,0 +1,139 @@
+{
+  "typeName": "AWS::CloudFront::FieldLevelEncryptionProfile",
+  "description": "Resource Type definition for AWS::CloudFront::FieldLevelEncryptionProfile. A field-level encryption profile maps CloudFront public keys and provider identities to the request-body field patterns that CloudFront encrypts with them.",
+  "definitions": {
+    "EncryptionEntity": {
+      "type": "object",
+      "description": "A public key, its provider identity, and the field patterns CloudFront encrypts with that key.",
+      "properties": {
+        "PublicKeyId": {
+          "type": "string",
+          "description": "The identifier of the CloudFront public key used to encrypt the fields that match the patterns."
+        },
+        "ProviderId": {
+          "type": "string",
+          "description": "The provider associated with the public key. The same value must be supplied with the private key for an application to decrypt the data."
+        },
+        "FieldPatterns": {
+          "type": "array",
+          "description": "The request-body field names to encrypt. A pattern is either a full field name or leading characters followed by a wildcard (*). Patterns are case-sensitive and must not overlap.",
+          "insertionOrder": false,
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "PublicKeyId",
+        "ProviderId",
+        "FieldPatterns"
+      ],
+      "additionalProperties": false
+    },
+    "FieldLevelEncryptionProfileConfig": {
+      "type": "object",
+      "description": "The configuration of a field-level encryption profile.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the field-level encryption profile. Names are unique within an AWS account."
+        },
+        "CallerReference": {
+          "type": "string",
+          "description": "A unique value that identifies the creation request. Caller references are unique within an AWS account and cannot be changed after creation."
+        },
+        "Comment": {
+          "type": "string",
+          "description": "An optional comment describing the field-level encryption profile."
+        },
+        "EncryptionEntities": {
+          "type": "array",
+          "description": "The encryption entities of the field-level encryption profile. At least one entity is required.",
+          "insertionOrder": false,
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/EncryptionEntity"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "CallerReference",
+        "EncryptionEntities"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the field-level encryption profile."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The identifier that CloudFront assigns to the field-level encryption profile."
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the field-level encryption profile was last modified."
+    },
+    "FieldLevelEncryptionProfileConfig": {
+      "$ref": "#/definitions/FieldLevelEncryptionProfileConfig"
+    }
+  },
+  "required": [
+    "FieldLevelEncryptionProfileConfig"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/FieldLevelEncryptionProfileConfig/CallerReference"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudfront:CreateFieldLevelEncryptionProfile"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudfront:GetFieldLevelEncryptionProfile"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudfront:GetFieldLevelEncryptionProfile",
+        "cloudfront:UpdateFieldLevelEncryptionProfile"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudfront:GetFieldLevelEncryptionProfile",
+        "cloudfront:DeleteFieldLevelEncryptionProfile"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudfront:ListFieldLevelEncryptionProfiles"
+      ]
+    }
+  }
+}

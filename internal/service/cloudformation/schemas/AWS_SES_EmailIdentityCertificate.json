@@ -1,0 +1,88 @@
+{
+  "typeName": "AWS::SES::EmailIdentityCertificate",
+  "description": "Associates an AWS Certificate Manager certificate with a sender under an SES email identity, so that SES signs the sender's mail with S/MIME. Removing this resource removes only the association. The ACM certificate itself stays intact. SES stores the sender lower-cased, and this provider matches senders case-insensitively and preserves the casing from the template.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
+  "properties": {
+    "EmailIdentity": {
+      "description": "The email identity that owns the sender the certificate is associated with.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320
+    },
+    "FromAddress": {
+      "description": "The sender the certificate signs for. For an email address identity this is the identity itself.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320
+    },
+    "CertificateArn": {
+      "description": "The ARN of the AWS Certificate Manager certificate to associate with the sender.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[a-z0-9-]*:acm:[a-z0-9-]+:\\d{12}:certificate/[^\\s]+$"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "EmailIdentity",
+    "FromAddress",
+    "CertificateArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/EmailIdentity",
+    "/properties/FromAddress",
+    "/properties/CertificateArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/EmailIdentity",
+    "/properties/FromAddress"
+  ],
+  "propertyTransform": {
+    "/properties/EmailIdentity": "$lowercase(EmailIdentity) $OR EmailIdentity",
+    "/properties/FromAddress": "$lowercase(FromAddress) $OR FromAddress"
+  },
+  "replacementStrategy": "delete_then_create",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ses:AssociateEmailIdentityCertificate",
+        "ses:ListEmailIdentityCertificates"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ses:DisassociateEmailIdentityCertificate",
+        "ses:ListEmailIdentityCertificates"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ses:ListEmailIdentityCertificates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ses:ListEmailIdentityCertificates"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "EmailIdentity": {
+            "$ref": "resource-schema.json#/properties/EmailIdentity"
+          }
+        },
+        "required": [
+          "EmailIdentity"
+        ]
+      },
+      "permissions": [
+        "ses:ListEmailIdentityCertificates"
+      ]
+    }
+  }
+}

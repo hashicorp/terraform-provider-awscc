@@ -411,11 +411,9 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
@@ -576,11 +574,7 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "ProjectDesignation": {
-		//	          "enum": [
-		//	            "OWNER",
-		//	            "CONTRIBUTOR",
-		//	            "PROJECT_CATALOG_STEWARD"
-		//	          ],
+		//	          "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	          "type": "string"
 		//	        },
 		//	        "ProjectGrantFilter": {
@@ -717,11 +711,7 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"OWNER",
-									"CONTRIBUTOR",
-									"PROJECT_CATALOG_STEWARD",
-								),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -822,11 +812,9 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

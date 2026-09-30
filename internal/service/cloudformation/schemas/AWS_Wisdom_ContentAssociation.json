@@ -1,0 +1,183 @@
+{
+  "typeName": "AWS::Wisdom::ContentAssociation",
+  "description": "Definition of AWS::Wisdom::ContentAssociation Resource Type",
+  "definitions": {
+    "ContentAssociationContents": {
+      "type": "object",
+      "properties": {
+        "AmazonConnectGuideAssociation": {
+          "$ref": "#/definitions/AmazonConnectGuideAssociationData"
+        }
+      },
+      "required": [
+        "AmazonConnectGuideAssociation"
+      ],
+      "additionalProperties": false
+    },
+    "AmazonConnectGuideAssociationData": {
+      "type": "object",
+      "properties": {
+        "FlowId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ContentAssociationArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the content association.",
+      "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
+    },
+    "ContentAssociationId": {
+      "type": "string",
+      "description": "The identifier of the content association.",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "ContentArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the content.",
+      "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
+    },
+    "ContentId": {
+      "type": "string",
+      "description": "The identifier of the content.",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "KnowledgeBaseArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the knowledge base.",
+      "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
+    },
+    "KnowledgeBaseId": {
+      "type": "string",
+      "description": "The identifier of the knowledge base.",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "AssociationType": {
+      "type": "string",
+      "description": "The type of association.",
+      "enum": [
+        "AMAZON_CONNECT_GUIDE"
+      ]
+    },
+    "Association": {
+      "$ref": "#/definitions/ContentAssociationContents",
+      "description": "The identifier of the associated resource."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "KnowledgeBaseId",
+    "ContentId",
+    "AssociationType",
+    "Association"
+  ],
+  "readOnlyProperties": [
+    "/properties/ContentAssociationArn",
+    "/properties/ContentAssociationId",
+    "/properties/ContentArn",
+    "/properties/KnowledgeBaseArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/KnowledgeBaseId",
+    "/properties/ContentId",
+    "/properties/AssociationType",
+    "/properties/Association",
+    "/properties/Tags"
+  ],
+  "primaryIdentifier": [
+    "/properties/ContentAssociationArn"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "additionalIdentifiers": [
+    [
+      "/properties/KnowledgeBaseId",
+      "/properties/ContentId",
+      "/properties/ContentAssociationId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wisdom:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wisdom:CreateContentAssociation",
+        "wisdom:GetContentAssociation",
+        "wisdom:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wisdom:GetContentAssociation"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wisdom:DeleteContentAssociation",
+        "wisdom:GetContentAssociation"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "KnowledgeBaseId": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "ContentId": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          }
+        },
+        "required": [
+          "KnowledgeBaseId",
+          "ContentId"
+        ]
+      },
+      "permissions": [
+        "wisdom:ListContentAssociations"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
