@@ -621,6 +621,12 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "GlueLineageSyncEnabled": {
 		//	          "type": "boolean"
+		//	        },
+		//	        "RoleArn": {
+		//	          "description": "The ARN of the IAM role to associate with the connection as the project user role.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(\\/[a-zA-Z0-9+=,.@_-]+)*\\/[a-zA-Z0-9+=,.@_-]+$",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1151,6 +1157,11 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"glue_lineage_sync_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role to associate with the connection as the project user role.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "IAM Properties Input",
 					Computed:    true,
@@ -1508,6 +1519,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"redshift_properties":                      "RedshiftProperties",
 		"refresh_token":                            "RefreshToken",
 		"register_s3_access_grant_location":        "RegisterS3AccessGrantLocation",
+		"role_arn":                                 "RoleArn",
 		"runtime_role":                             "RuntimeRole",
 		"s3_access_grant_location_id":              "S3AccessGrantLocationId",
 		"s3_properties":                            "S3Properties",

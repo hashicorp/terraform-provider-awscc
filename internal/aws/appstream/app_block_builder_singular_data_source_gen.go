@@ -104,6 +104,15 @@ func appBlockBuilderDataSource(ctx context.Context) (datasource.DataSource, erro
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DisableIMDSV1
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"disable_imdsv1": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -259,6 +268,7 @@ func appBlockBuilderDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn":                            "Arn",
 		"created_time":                   "CreatedTime",
 		"description":                    "Description",
+		"disable_imdsv1":                 "DisableIMDSV1",
 		"display_name":                   "DisplayName",
 		"enable_default_internet_access": "EnableDefaultInternetAccess",
 		"endpoint_type":                  "EndpointType",

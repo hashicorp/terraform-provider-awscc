@@ -242,6 +242,9 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "APPLICATION_LOGS",
 		//	                  "USAGE_LOGS",
 		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "S3_SERVER_ACCESS_LOGS",
+		//	                  "ACCESS_LOGS",
+		//	                  "CONNECTION_LOGS",
 		//	                  "ALB_ACCESS_LOGS",
 		//	                  "ALB_CONNECTION_LOGS",
 		//	                  "ALB_HEALTH_CHECK_LOGS"
@@ -251,6 +254,23 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	              "minItems": 1,
 		//	              "type": "array",
 		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MskMonitoringParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration parameters for Amazon MSK cluster monitoring.",
+		//	          "properties": {
+		//	            "EnhancedMonitoring": {
+		//	              "description": "The level of enhanced monitoring for the MSK cluster.",
+		//	              "enum": [
+		//	                "DEFAULT",
+		//	                "PER_BROKER",
+		//	                "PER_TOPIC_PER_BROKER",
+		//	                "PER_TOPIC_PER_PARTITION"
+		//	              ],
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -443,7 +463,16 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "AWS::BedrockAgentCore::Runtime",
 		//	        "AWS::BedrockAgentCore::Browser",
 		//	        "AWS::BedrockAgentCore::CodeInterpreter",
-		//	        "AWS::SecurityHub::Hub"
+		//	        "AWS::SecurityHub::Hub",
+		//	        "AWS::SecurityHub::HubV2",
+		//	        "AWS::S3::Bucket",
+		//	        "AWS::MSK::Cluster",
+		//	        "AWS::CloudFront::Distribution",
+		//	        "AWS::CloudWatch::OTelEnrichment",
+		//	        "AWS::Bedrock::KnowledgeBase",
+		//	        "AWS::BedrockAgentCore::Memory",
+		//	        "AWS::BedrockAgentCore::Gateway",
+		//	        "AWS::BedrockAgentCore::WorkloadIdentity"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -614,6 +643,18 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Parameters for log delivery configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MskMonitoringParameters
+						"msk_monitoring_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnhancedMonitoring
+								"enhanced_monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The level of enhanced monitoring for the MSK cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration parameters for Amazon MSK cluster monitoring.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionInDays
@@ -899,6 +940,7 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		"destination_type":                     "DestinationType",
 		"elb_load_balancer_logging_parameters": "ELBLoadBalancerLoggingParameters",
 		"ends_with":                            "EndsWith",
+		"enhanced_monitoring":                  "EnhancedMonitoring",
 		"equals":                               "Equals",
 		"field":                                "Field",
 		"field_delimiter":                      "FieldDelimiter",
@@ -915,6 +957,7 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		"logging_filter":                       "LoggingFilter",
 		"max_aggregation_interval":             "MaxAggregationInterval",
 		"method":                               "Method",
+		"msk_monitoring_parameters":            "MskMonitoringParameters",
 		"name":                                 "Name",
 		"not_ends_with":                        "NotEndsWith",
 		"not_equals":                           "NotEquals",
