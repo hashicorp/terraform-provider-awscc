@@ -422,13 +422,15 @@
         "APPFLOW",
         "IMPALA",
         "GLUE",
+        "GLUE_DATA_CATALOG",
         "GOOGLE_DRIVE",
         "CONFLUENCE",
         "SHAREPOINT",
         "ONE_DRIVE",
         "WEB_CRAWLER",
         "BOX",
-        "GOOGLESHEETS"
+        "GOOGLESHEETS",
+        "ATLAN"
       ]
     },
     "OAuthParameters": {
@@ -706,6 +708,11 @@
           "description": "<p>The workgroup that Amazon Athena uses.<\/p>",
           "type": "string",
           "maxLength": 128
+        },
+        "ConsumerAccountRoleArn": {
+          "minLength": 20,
+          "type": "string",
+          "maxLength": 2048
         },
         "IdentityCenterConfiguration": {
           "$ref": "#/definitions/IdentityCenterConfiguration"

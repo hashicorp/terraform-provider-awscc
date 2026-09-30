@@ -1,0 +1,146 @@
+{
+  "typeName": "AWS::NetworkMonitor::Monitor",
+  "description": "An Amazon CloudWatch Network Monitor resource that monitors network traffic between a source VPC subnet and a destination IP address.",
+  "properties": {
+    "MonitorArn": {
+      "type": "string",
+      "description": "The ARN of the monitor.",
+      "minLength": 20,
+      "maxLength": 512,
+      "pattern": "^arn:.*$"
+    },
+    "MonitorName": {
+      "type": "string",
+      "description": "The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 200 characters.",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "AggregationPeriod": {
+      "type": "integer",
+      "description": "The time, in seconds, that metrics are aggregated and sent to Amazon CloudWatch. Valid values are either 30 or 60.",
+      "minimum": 30
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the monitor.",
+      "enum": [
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ERROR",
+        "DELETING"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The time and date when the monitor was created.",
+      "format": "date-time"
+    },
+    "ModifiedAt": {
+      "type": "string",
+      "description": "The time and date when the monitor was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the monitor.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "MonitorName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/MonitorArn",
+    "/properties/State",
+    "/properties/CreatedAt",
+    "/properties/ModifiedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/MonitorName"
+  ],
+  "primaryIdentifier": [
+    "/properties/MonitorArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/MonitorName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "networkmonitor:TagResource",
+      "networkmonitor:UntagResource",
+      "networkmonitor:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "networkmonitor:CreateMonitor",
+        "networkmonitor:GetMonitor",
+        "networkmonitor:TagResource",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "networkmonitor:GetMonitor",
+        "networkmonitor:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "networkmonitor:UpdateMonitor",
+        "networkmonitor:GetMonitor",
+        "networkmonitor:TagResource",
+        "networkmonitor:UntagResource",
+        "networkmonitor:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "networkmonitor:DeleteMonitor",
+        "networkmonitor:GetMonitor"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "networkmonitor:ListMonitors"
+      ]
+    }
+  }
+}

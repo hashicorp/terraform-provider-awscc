@@ -1,0 +1,104 @@
+{
+  "typeName": "AWS::AppSync::ApiCache",
+  "description": "Resource Type definition for AWS::AppSync::ApiCache",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appsync/tree/master/aws-appsync-apicache.git",
+  "additionalProperties": false,
+  "properties": {
+    "ApiCachingBehavior": {
+      "description": "Caching behavior, such as FULL_REQUEST_CACHING, PER_RESOLVER_CACHING, or OPERATION_LEVEL_CACHING",
+      "type": "string"
+    },
+    "ApiId": {
+      "description": "Unique AWS AppSync GraphQL API identifier.",
+      "type": "string"
+    },
+    "AtRestEncryptionEnabled": {
+      "description": "At-rest encryption flag for cache. You cannot update this setting after creation.",
+      "type": "boolean"
+    },
+    "HealthMetricsConfig": {
+      "description": "Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include NetworkBandwidthOutAllowanceExceeded and EngineCPUUtilization",
+      "type": "string"
+    },
+    "TransitEncryptionEnabled": {
+      "description": "Transit encryption flag when connecting to cache. You cannot update this setting after creation.",
+      "type": "boolean"
+    },
+    "Ttl": {
+      "description": "TTL in seconds for cache entries. Valid values are 1-3600.",
+      "type": "integer"
+    },
+    "Type": {
+      "description": "The cache instance type, such as SMALL, LARGE and LARGE_4X",
+      "type": "string"
+    },
+    "Id": {
+      "description": "The CloudFormation primary identifier for an ApiCache. Mirrors ApiId once the resource exists; populated by the handler. Customers should reference the ApiCache by ApiId.",
+      "type": "string"
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "Type",
+    "ApiId",
+    "ApiCachingBehavior",
+    "Ttl"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ApiId"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "createOnlyProperties": [
+    "/properties/ApiId",
+    "/properties/AtRestEncryptionEnabled",
+    "/properties/TransitEncryptionEnabled"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appsync:CreateApiCache",
+        "appsync:GetApiCache"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appsync:GetApiCache"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appsync:UpdateApiCache",
+        "appsync:GetApiCache"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appsync:DeleteApiCache"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ApiId": {
+            "$ref": "resource-schema.json#/properties/ApiId"
+          }
+        },
+        "required": [
+          "ApiId"
+        ]
+      },
+      "permissions": [
+        "appsync:GetApiCache"
+      ]
+    }
+  }
+}

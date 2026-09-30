@@ -1,0 +1,418 @@
+{
+  "typeName": "AWS::MediaTailor::Program",
+  "description": "Resource schema for AWS::MediaTailor::Program",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the program."
+    },
+    "ChannelName": {
+      "type": "string",
+      "description": "The name of the channel for this Program."
+    },
+    "ProgramName": {
+      "type": "string",
+      "description": "The name of the Program."
+    },
+    "SourceLocationName": {
+      "type": "string",
+      "description": "The name of the source location."
+    },
+    "LiveSourceName": {
+      "type": "string",
+      "description": "The name of the LiveSource for this Program."
+    },
+    "VodSourceName": {
+      "type": "string",
+      "description": "The name that's used to refer to a VOD source."
+    },
+    "AdBreaks": {
+      "type": "array",
+      "description": "The ad break configuration settings.",
+      "items": {
+        "$ref": "#/definitions/AdBreak"
+      },
+      "insertionOrder": false
+    },
+    "AudienceMedia": {
+      "type": "array",
+      "description": "The list of AudienceMedia defined in program.",
+      "items": {
+        "$ref": "#/definitions/AudienceMedia"
+      },
+      "insertionOrder": false
+    },
+    "ScheduleConfiguration": {
+      "$ref": "#/definitions/ScheduleConfiguration",
+      "description": "The schedule configuration settings."
+    },
+    "ClipRange": {
+      "$ref": "#/definitions/ClipRange",
+      "description": "The clip range configuration settings."
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The timestamp of when the program was created.",
+      "format": "date-time"
+    },
+    "ScheduledStartTime": {
+      "type": "string",
+      "description": "The date and time that the program is scheduled to start.",
+      "format": "date-time"
+    },
+    "DurationMillis": {
+      "type": "integer",
+      "description": "The duration of the live program in milliseconds."
+    }
+  },
+  "definitions": {
+    "AdBreak": {
+      "type": "object",
+      "description": "Ad break configuration parameters.",
+      "properties": {
+        "AdBreakMetadata": {
+          "type": "array",
+          "description": "Defines a list of key/value pairs that MediaTailor generates within the EXT-X-ASSET tag for SCTE35_ENHANCED output.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "insertionOrder": false
+        },
+        "MessageType": {
+          "type": "string",
+          "description": "The SCTE-35 ad insertion type.",
+          "enum": [
+            "SPLICE_INSERT",
+            "TIME_SIGNAL"
+          ]
+        },
+        "OffsetMillis": {
+          "type": "integer",
+          "description": "How long (in milliseconds) after the beginning of the program that an ad starts."
+        },
+        "Slate": {
+          "$ref": "#/definitions/SlateSource"
+        },
+        "SpliceInsertMessage": {
+          "$ref": "#/definitions/SpliceInsertMessage"
+        },
+        "TimeSignalMessage": {
+          "$ref": "#/definitions/TimeSignalMessage"
+        }
+      },
+      "required": [
+        "OffsetMillis"
+      ],
+      "additionalProperties": false
+    },
+    "KeyValuePair": {
+      "type": "object",
+      "description": "For SCTE35_ENHANCED output, defines a key and corresponding value.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "SlateSource": {
+      "type": "object",
+      "description": "Slate VOD source configuration.",
+      "properties": {
+        "SourceLocationName": {
+          "type": "string",
+          "description": "The name of the source location where the slate VOD source is stored."
+        },
+        "VodSourceName": {
+          "type": "string",
+          "description": "The slate VOD source name."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SpliceInsertMessage": {
+      "type": "object",
+      "description": "Splice insert message configuration.",
+      "properties": {
+        "AvailNum": {
+          "type": "integer",
+          "description": "This is written to splice_insert.avail_num."
+        },
+        "AvailsExpected": {
+          "type": "integer",
+          "description": "This is written to splice_insert.avails_expected."
+        },
+        "SpliceEventId": {
+          "type": "integer",
+          "description": "This is written to splice_insert.splice_event_id."
+        },
+        "UniqueProgramId": {
+          "type": "integer",
+          "description": "This is written to splice_insert.unique_program_id."
+        }
+      },
+      "additionalProperties": false
+    },
+    "TimeSignalMessage": {
+      "type": "object",
+      "description": "The SCTE-35 time_signal message configuration.",
+      "properties": {
+        "SegmentationDescriptors": {
+          "type": "array",
+          "description": "The configurations for the SCTE-35 segmentation_descriptor message(s).",
+          "items": {
+            "$ref": "#/definitions/SegmentationDescriptor"
+          },
+          "insertionOrder": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "SegmentationDescriptor": {
+      "type": "object",
+      "description": "The segmentation_descriptor message configuration.",
+      "properties": {
+        "SegmentationEventId": {
+          "type": "integer",
+          "description": "The Event Identifier to assign."
+        },
+        "SegmentationUpidType": {
+          "type": "integer",
+          "description": "The Upid Type to assign."
+        },
+        "SegmentationUpid": {
+          "type": "string",
+          "description": "The Upid to assign."
+        },
+        "SegmentationTypeId": {
+          "type": "integer",
+          "description": "The Type Identifier to assign."
+        },
+        "SegmentNum": {
+          "type": "integer",
+          "description": "The segment number to assign."
+        },
+        "SegmentsExpected": {
+          "type": "integer",
+          "description": "The number of segments expected."
+        },
+        "SubSegmentNum": {
+          "type": "integer",
+          "description": "The sub-segment number to assign."
+        },
+        "SubSegmentsExpected": {
+          "type": "integer",
+          "description": "The number of sub-segments expected."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ScheduleConfiguration": {
+      "type": "object",
+      "description": "Schedule configuration parameters.",
+      "properties": {
+        "Transition": {
+          "$ref": "#/definitions/Transition"
+        },
+        "ClipRange": {
+          "$ref": "#/definitions/ClipRange"
+        }
+      },
+      "required": [
+        "Transition"
+      ],
+      "additionalProperties": false
+    },
+    "Transition": {
+      "type": "object",
+      "description": "Program transition configuration.",
+      "properties": {
+        "DurationMillis": {
+          "type": "integer",
+          "description": "The duration of the live program in seconds."
+        },
+        "RelativePosition": {
+          "type": "string",
+          "description": "The position where this program will be inserted relative to the RelativePosition.",
+          "enum": [
+            "BEFORE_PROGRAM",
+            "AFTER_PROGRAM"
+          ]
+        },
+        "RelativeProgram": {
+          "type": "string",
+          "description": "The name of the program that this program will be inserted next to."
+        },
+        "ScheduledStartTimeMillis": {
+          "type": "integer",
+          "description": "The date and time that the program is scheduled to start, in epoch milliseconds."
+        },
+        "Type": {
+          "type": "string",
+          "description": "Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE."
+        }
+      },
+      "required": [
+        "RelativePosition",
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "ClipRange": {
+      "type": "object",
+      "description": "Clip range configuration for the VOD source associated with the program.",
+      "properties": {
+        "EndOffsetMillis": {
+          "type": "integer",
+          "description": "The end offset of the clip range, in milliseconds."
+        },
+        "StartOffsetMillis": {
+          "type": "integer",
+          "description": "The start offset of the clip range, in milliseconds."
+        }
+      },
+      "additionalProperties": false
+    },
+    "AudienceMedia": {
+      "type": "object",
+      "description": "An AudienceMedia object contains an Audience and a list of AlternateMedia.",
+      "properties": {
+        "Audience": {
+          "type": "string",
+          "description": "The Audience defined in AudienceMedia."
+        },
+        "AlternateMedia": {
+          "type": "array",
+          "description": "The list of AlternateMedia defined in AudienceMedia.",
+          "items": {
+            "$ref": "#/definitions/AlternateMedia"
+          },
+          "insertionOrder": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlternateMedia": {
+      "type": "object",
+      "description": "A playlist of media to be played instead of the default media on a particular program.",
+      "properties": {
+        "SourceLocationName": {
+          "type": "string",
+          "description": "The name of the source location for alternateMedia."
+        },
+        "LiveSourceName": {
+          "type": "string",
+          "description": "The name of the live source for alternateMedia."
+        },
+        "VodSourceName": {
+          "type": "string",
+          "description": "The name of the VOD source for alternateMedia."
+        },
+        "ClipRange": {
+          "$ref": "#/definitions/ClipRange"
+        },
+        "ScheduledStartTimeMillis": {
+          "type": "integer",
+          "description": "The date and time that the alternateMedia is scheduled to start, in epoch milliseconds."
+        },
+        "AdBreaks": {
+          "type": "array",
+          "description": "Ad break configuration parameters defined in AlternateMedia.",
+          "items": {
+            "$ref": "#/definitions/AdBreak"
+          },
+          "insertionOrder": false
+        },
+        "DurationMillis": {
+          "type": "integer",
+          "description": "The duration of the alternateMedia in milliseconds."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "ChannelName",
+    "ProgramName",
+    "SourceLocationName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreationTime",
+    "/properties/ScheduledStartTime",
+    "/properties/ClipRange",
+    "/properties/DurationMillis"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ScheduleConfiguration"
+  ],
+  "createOnlyProperties": [
+    "/properties/ChannelName",
+    "/properties/ProgramName",
+    "/properties/SourceLocationName",
+    "/properties/VodSourceName",
+    "/properties/LiveSourceName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ChannelName",
+      "/properties/ProgramName"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediatailor:CreateProgram",
+        "mediatailor:DescribeProgram"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mediatailor:DescribeProgram"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mediatailor:UpdateProgram",
+        "mediatailor:DescribeProgram"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediatailor:DeleteProgram",
+        "mediatailor:DescribeProgram"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ChannelName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ChannelName"
+        ]
+      },
+      "permissions": [
+        "mediatailor:GetChannelSchedule"
+      ]
+    }
+  }
+}

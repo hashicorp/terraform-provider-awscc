@@ -141,7 +141,8 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "fsx:TagResource",
-      "fsx:UntagResource"
+      "fsx:UntagResource",
+      "fsx:DescribeDataRepositoryAssociations"
     ]
   },
   "additionalProperties": false,

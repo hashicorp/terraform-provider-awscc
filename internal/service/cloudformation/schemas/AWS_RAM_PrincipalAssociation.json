@@ -1,0 +1,96 @@
+{
+  "typeName": "AWS::RAM::PrincipalAssociation",
+  "description": "Associates a specified principal with a resource share.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties": {
+    "ResourceShareArn": {
+      "description": "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share.",
+      "type": "string"
+    },
+    "Principal": {
+      "description": "Specifies the principal to associate with the resource share. The possible values are:\n\n- An AWS account ID\n\n- An Amazon Resource Name (ARN) of an organization in AWS Organizations\n\n- An ARN of an organizational unit (OU) in AWS Organizations\n\n- An ARN of an IAM role\n\n- An ARN of an IAM user",
+      "type": "string"
+    },
+    "AssociationType": {
+      "description": "The type of entity included in this association.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The current status of the association.",
+      "type": "string",
+      "enum": [
+        "ASSOCIATING",
+        "ASSOCIATED",
+        "FAILED",
+        "DISASSOCIATING",
+        "DISASSOCIATED",
+        "SUSPENDED",
+        "SUSPENDING",
+        "RESTORING"
+      ]
+    },
+    "CreationTime": {
+      "description": "The date and time when the association was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastUpdatedTime": {
+      "description": "The date and time when the association was last updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "External": {
+      "description": "Indicates whether the principal belongs to the same organization in AWS Organizations as the AWS account that owns the resource share.",
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ResourceShareArn",
+    "Principal"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociationType",
+    "/properties/Status",
+    "/properties/CreationTime",
+    "/properties/LastUpdatedTime",
+    "/properties/External"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceShareArn",
+    "/properties/Principal"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceShareArn",
+    "/properties/Principal"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ram:AssociateResourceShare",
+        "ram:GetResourceShares",
+        "ram:GetResourceShareAssociations"
+      ],
+      "timeoutInMinutes": 735
+    },
+    "read": {
+      "permissions": [
+        "ram:GetResourceShareAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ram:DisassociateResourceShare",
+        "ram:GetResourceShareAssociations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ram:GetResourceShareAssociations"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

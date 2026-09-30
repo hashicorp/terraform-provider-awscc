@@ -1,0 +1,149 @@
+{
+  "typeName": "AWS::CloudWatch::View",
+  "description": "Resource Type definition for AWS::CloudWatch::View. A view is a named, reusable SQL query that can be referenced from CloudWatch telemetry queries. View names must be unique within the account and region.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the view.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name of the view. Must begin with the \"view.\" prefix followed by lowercase alphanumeric characters, hyphens, and underscores. View names must be unique within the account and region. If not specified, a name is generated.",
+      "pattern": "^view\\.[a-z0-9][a-z0-9_-]{0,250}$",
+      "minLength": 6,
+      "maxLength": 256
+    },
+    "Definition": {
+      "type": "string",
+      "description": "The SQL query that defines the view.",
+      "minLength": 1,
+      "maxLength": 10000
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the view.",
+      "maxLength": 1024
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to the view.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false,
+      "uniqueItems": true
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the view."
+    },
+    "Type": {
+      "type": "string",
+      "description": "The ownership category of the view. Views created through CloudFormation are always USER views; MANAGED views are provisioned by AWS.",
+      "enum": [
+        "USER",
+        "MANAGED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the view was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the view was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "Definition"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Type",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource",
+      "cloudwatch:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateView",
+        "cloudwatch:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetView",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:UpdateView",
+        "cloudwatch:GetView",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteView",
+        "cloudwatch:GetView",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListViews"
+      ]
+    }
+  }
+}
