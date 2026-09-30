@@ -200,8 +200,21 @@ Optional:
 
 Optional:
 
+- `access_entry` (Attributes) The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster. (see [below for nested schema](#nestedatt--eks_configuration--access_entry))
 - `eks_cluster_arn` (String)
 - `kubernetes_namespace` (String)
+
+<a id="nestedatt--eks_configuration--access_entry"></a>
+### Nested Schema for `eks_configuration.access_entry`
+
+Optional:
+
+- `desired_state` (String) The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.
+
+Read-Only:
+
+- `status` (String) The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.
+
 
 
 <a id="nestedatt--update_policy"></a>

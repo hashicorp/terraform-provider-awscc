@@ -1,0 +1,1 @@
+$ terraform import awscc_eventsv2_subscriber.example "subscriber_arn"

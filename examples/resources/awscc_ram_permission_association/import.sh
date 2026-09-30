@@ -1,0 +1,1 @@
+$ terraform import awscc_ram_permission_association.example "resource_share_arn|permission_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_email_identity_certificate.example "email_identity|from_address"

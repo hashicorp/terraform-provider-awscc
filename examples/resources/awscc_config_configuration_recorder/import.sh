@@ -1,0 +1,1 @@
+$ terraform import awscc_config_configuration_recorder.example "name"

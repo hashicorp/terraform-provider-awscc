@@ -1,0 +1,1 @@
+$ terraform import awscc_eventsv2_event_source.example "event_source_arn"

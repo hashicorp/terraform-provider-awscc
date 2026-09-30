@@ -144,6 +144,7 @@ Optional:
 - `connector_parameters` (String) Connector-specific parameters.
 - `deletion_protection_configuration` (Attributes) Configuration for deletion protection. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--deletion_protection_configuration))
 - `media_extraction_configuration` (Attributes) Configuration for media extraction settings. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration))
+- `sync_schedule` (Attributes) Recurring schedule on which the connector automatically refreshes ingested content. Exactly one frequency variant is set. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule))
 
 <a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--deletion_protection_configuration"></a>
 ### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.deletion_protection_configuration`
@@ -185,6 +186,41 @@ Optional:
 Optional:
 
 - `video_extraction_status` (String) Indicates whether a feature is enabled or disabled.
+
+
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule`
+
+Optional:
+
+- `daily` (String) A daily refresh. The run time is system-chosen (off-peak) and not customer-configurable.
+- `monthly` (Attributes) A monthly refresh on a specified day of the month. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule--monthly))
+- `weekly` (Attributes) A weekly refresh on a specified day of the week. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule--weekly))
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule--monthly"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.monthly`
+
+Optional:
+
+- `day_of_month` (Attributes) Day of the month on which a monthly refresh runs. Exactly one variant is set: an explicit day number, or the last calendar day of the month. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule--monthly--day_of_month))
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule--monthly--day_of_month"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.monthly.day_of_month`
+
+Optional:
+
+- `day_number` (Number) Specific day of the month, 1 through 28 (capped at 28 to avoid month-length ambiguity).
+- `last_day_of_month` (String) Run on the last calendar day of each month.
+
+
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--sync_schedule--weekly"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.weekly`
+
+Optional:
+
+- `day_of_week` (String) Day of the week.
 
 
 

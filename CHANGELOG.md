@@ -1,5 +1,125 @@
 ## 1.104.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_fleet`
+* **New Data Source:** `awscc_appstream_fleets`
+* **New Data Source:** `awscc_appsync_api_cache`
+* **New Data Source:** `awscc_cloud9_environment_ec2`
+* **New Data Source:** `awscc_cloud9_environment_ec2s`
+* **New Data Source:** `awscc_cloudfront_field_level_encryption_profile`
+* **New Data Source:** `awscc_cloudfront_field_level_encryption_profiles`
+* **New Data Source:** `awscc_cloudwatch_view`
+* **New Data Source:** `awscc_cloudwatch_views`
+* **New Data Source:** `awscc_comprehend_entity_recognizer`
+* **New Data Source:** `awscc_comprehend_entity_recognizer_endpoint`
+* **New Data Source:** `awscc_comprehend_entity_recognizer_endpoints`
+* **New Data Source:** `awscc_comprehend_entity_recognizers`
+* **New Data Source:** `awscc_config_configuration_recorder`
+* **New Data Source:** `awscc_config_configuration_recorders`
+* **New Data Source:** `awscc_connect_use_case`
+* **New Data Source:** `awscc_elasticache_snapshot`
+* **New Data Source:** `awscc_elasticache_snapshots`
+* **New Data Source:** `awscc_eventsv2_event_bus`
+* **New Data Source:** `awscc_eventsv2_event_buses`
+* **New Data Source:** `awscc_eventsv2_event_source`
+* **New Data Source:** `awscc_eventsv2_event_sources`
+* **New Data Source:** `awscc_eventsv2_resource_policies`
+* **New Data Source:** `awscc_eventsv2_resource_policy`
+* **New Data Source:** `awscc_eventsv2_subscriber`
+* **New Data Source:** `awscc_eventsv2_subscribers`
+* **New Data Source:** `awscc_mediaconnect_flow_media_stream`
+* **New Data Source:** `awscc_mediatailor_program`
+* **New Data Source:** `awscc_mgn_launch_configuration_templates`
+* **New Data Source:** `awscc_networkflowmonitor_scope`
+* **New Data Source:** `awscc_networkflowmonitor_scopes`
+* **New Data Source:** `awscc_networkmonitor_monitor`
+* **New Data Source:** `awscc_networkmonitor_monitors`
+* **New Data Source:** `awscc_networksecuritymanager_rule`
+* **New Data Source:** `awscc_networksecuritymanager_rules`
+* **New Data Source:** `awscc_networksecuritymanager_scope`
+* **New Data Source:** `awscc_networksecuritymanager_scopes`
+* **New Data Source:** `awscc_observabilityadmin_dataset_integration`
+* **New Data Source:** `awscc_observabilityadmin_dataset_integrations`
+* **New Data Source:** `awscc_ram_permission_association`
+* **New Data Source:** `awscc_ram_permission_associations`
+* **New Data Source:** `awscc_ram_principal_association`
+* **New Data Source:** `awscc_ram_principal_associations`
+* **New Data Source:** `awscc_ram_resource_association`
+* **New Data Source:** `awscc_ram_resource_associations`
+* **New Data Source:** `awscc_ram_source_association`
+* **New Data Source:** `awscc_ram_source_associations`
+* **New Data Source:** `awscc_redshift_redshift_idc_application`
+* **New Data Source:** `awscc_redshift_redshift_idc_applications`
+* **New Data Source:** `awscc_sagemaker_workteam`
+* **New Data Source:** `awscc_sagemaker_workteams`
+* **New Data Source:** `awscc_scn_data_integration_flow`
+* **New Data Source:** `awscc_ses_email_identity_certificate`
+* **New Data Source:** `awscc_smsvoice_registration_attachment`
+* **New Data Source:** `awscc_smsvoice_registration_attachments`
+* **New Data Source:** `awscc_transcribe_medical_vocabularies`
+* **New Data Source:** `awscc_transcribe_medical_vocabulary`
+* **New Data Source:** `awscc_wisdom_content`
+* **New Data Source:** `awscc_wisdom_content_association`
+* **New List Resource:** `awscc_appstream_fleet`
+* **New List Resource:** `awscc_cloud9_environment_ec2`
+* **New List Resource:** `awscc_cloudfront_field_level_encryption_profile`
+* **New List Resource:** `awscc_cloudwatch_view`
+* **New List Resource:** `awscc_comprehend_entity_recognizer`
+* **New List Resource:** `awscc_comprehend_entity_recognizer_endpoint`
+* **New List Resource:** `awscc_config_configuration_recorder`
+* **New List Resource:** `awscc_elasticache_snapshot`
+* **New List Resource:** `awscc_eventsv2_event_bus`
+* **New List Resource:** `awscc_eventsv2_event_source`
+* **New List Resource:** `awscc_eventsv2_resource_policy`
+* **New List Resource:** `awscc_eventsv2_subscriber`
+* **New List Resource:** `awscc_networkflowmonitor_scope`
+* **New List Resource:** `awscc_networkmonitor_monitor`
+* **New List Resource:** `awscc_networksecuritymanager_rule`
+* **New List Resource:** `awscc_networksecuritymanager_scope`
+* **New List Resource:** `awscc_observabilityadmin_dataset_integration`
+* **New List Resource:** `awscc_ram_permission_association`
+* **New List Resource:** `awscc_ram_principal_association`
+* **New List Resource:** `awscc_ram_resource_association`
+* **New List Resource:** `awscc_ram_source_association`
+* **New List Resource:** `awscc_redshift_redshift_idc_application`
+* **New List Resource:** `awscc_sagemaker_workteam`
+* **New List Resource:** `awscc_smsvoice_registration_attachment`
+* **New List Resource:** `awscc_transcribe_medical_vocabulary`
+* **New Resource:** `awscc_appstream_fleet`
+* **New Resource:** `awscc_appsync_api_cache`
+* **New Resource:** `awscc_cloud9_environment_ec2`
+* **New Resource:** `awscc_cloudfront_field_level_encryption_profile`
+* **New Resource:** `awscc_cloudwatch_view`
+* **New Resource:** `awscc_comprehend_entity_recognizer`
+* **New Resource:** `awscc_comprehend_entity_recognizer_endpoint`
+* **New Resource:** `awscc_config_configuration_recorder`
+* **New Resource:** `awscc_connect_use_case`
+* **New Resource:** `awscc_elasticache_snapshot`
+* **New Resource:** `awscc_eventsv2_event_bus`
+* **New Resource:** `awscc_eventsv2_event_source`
+* **New Resource:** `awscc_eventsv2_resource_policy`
+* **New Resource:** `awscc_eventsv2_subscriber`
+* **New Resource:** `awscc_mediaconnect_flow_media_stream`
+* **New Resource:** `awscc_mediatailor_program`
+* **New Resource:** `awscc_networkflowmonitor_scope`
+* **New Resource:** `awscc_networkmonitor_monitor`
+* **New Resource:** `awscc_networksecuritymanager_rule`
+* **New Resource:** `awscc_networksecuritymanager_scope`
+* **New Resource:** `awscc_observabilityadmin_dataset_integration`
+* **New Resource:** `awscc_ram_permission_association`
+* **New Resource:** `awscc_ram_principal_association`
+* **New Resource:** `awscc_ram_resource_association`
+* **New Resource:** `awscc_ram_source_association`
+* **New Resource:** `awscc_redshift_redshift_idc_application`
+* **New Resource:** `awscc_sagemaker_workteam`
+* **New Resource:** `awscc_scn_data_integration_flow`
+* **New Resource:** `awscc_ses_email_identity_certificate`
+* **New Resource:** `awscc_smsvoice_registration_attachment`
+* **New Resource:** `awscc_transcribe_medical_vocabulary`
+* **New Resource:** `awscc_wisdom_content`
+* **New Resource:** `awscc_wisdom_content_association`
+
 ## 1.103.0 (September 24, 2026)
 
 Release PR: [#3339](https://github.com/hashicorp/terraform-provider-awscc/pull/3339)

@@ -1,0 +1,1 @@
+$ terraform import awscc_mediaconnect_flow_media_stream.example "arn"

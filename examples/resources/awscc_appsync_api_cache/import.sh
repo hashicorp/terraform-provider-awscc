@@ -1,0 +1,1 @@
+$ terraform import awscc_appsync_api_cache.example "id"
