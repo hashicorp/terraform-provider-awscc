@@ -1,0 +1,1 @@
+$ terraform import awscc_wafv2_rule_group.example "name|id|scope"
