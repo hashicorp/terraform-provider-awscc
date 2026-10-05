@@ -1117,6 +1117,23 @@
             "GOVERNANCE"
           ],
           "description": "The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``."
+        },
+        "DefaultEventHold": {
+          "$ref": "#/definitions/DefaultEventHold",
+          "description": ""
+        }
+      }
+    },
+    "DefaultEventHold": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Years": {
+          "type": "integer"
+        },
+        "Days": {
+          "type": "integer"
         }
       }
     },

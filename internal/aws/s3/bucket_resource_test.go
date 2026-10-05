@@ -65,6 +65,27 @@ func TestAccAWSS3Bucket_identity_noTerraformSupport(t *testing.T) {
 	})
 }
 
+func TestAccAWSS3Bucket_defaultEventHold(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::S3::Bucket", "awscc_s3_bucket", "test")
+	resourceName := td.ResourceName
+	rName := td.RandomName()
+
+	td.ResourceTestWithTestCase(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: td.ProviderFactories(),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccAWSS3BucketDefaultEventHoldConfig(&td, rName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(resourceName, "object_lock_configuration.rule.default_retention.mode", "GOVERNANCE"),
+					resource.TestCheckResourceAttr(resourceName, "object_lock_configuration.rule.default_retention.days", "10"),
+					resource.TestCheckResourceAttr(resourceName, "object_lock_configuration.rule.default_retention.default_event_hold.days", "1"),
+				),
+			},
+		},
+	})
+}
+
 func testAccAWSS3BucketConfig(td *acctest.TestData, rName, tag string) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
@@ -82,4 +103,26 @@ resource %[1]q %[2]q {
   ]
 }
 `, td.TerraformResourceType, td.ResourceLabel, rName, tag)
+}
+
+func testAccAWSS3BucketDefaultEventHoldConfig(td *acctest.TestData, rName string) string {
+	return fmt.Sprintf(`
+resource %[1]q %[2]q {
+  bucket_name         = %[3]q
+  object_lock_enabled = true
+
+  object_lock_configuration = {
+    object_lock_enabled = "Enabled"
+    rule = {
+      default_retention = {
+        mode = "GOVERNANCE"
+        days = 10
+        default_event_hold = {
+          days = 1
+        }
+      }
+    }
+  }
+}
+`, td.TerraformResourceType, td.ResourceLabel, rName)
 }

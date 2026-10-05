@@ -2043,6 +2043,19 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
 		//	              "type": "integer"
 		//	            },
+		//	            "DefaultEventHold": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Days": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Years": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "Mode": {
 		//	              "description": "The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
 		//	              "enum": [
@@ -2080,6 +2093,21 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: Days
 								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DefaultEventHold
+								"default_event_hold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Days
+										"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Years
+										"years": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Mode
@@ -3112,6 +3140,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_export":                            "DataExport",
 		"days":                                   "Days",
 		"days_after_initiation":                  "DaysAfterInitiation",
+		"default_event_hold":                     "DefaultEventHold",
 		"default_retention":                      "DefaultRetention",
 		"delete_marker_replication":              "DeleteMarkerReplication",
 		"destination":                            "Destination",

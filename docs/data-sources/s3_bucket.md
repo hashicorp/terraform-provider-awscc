@@ -557,8 +557,17 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
+- `default_event_hold` (Attributes) (see [below for nested schema](#nestedatt--object_lock_configuration--rule--default_retention--default_event_hold))
 - `mode` (String) The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
 - `years` (Number) The number of years that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
+
+<a id="nestedatt--object_lock_configuration--rule--default_retention--default_event_hold"></a>
+### Nested Schema for `object_lock_configuration.rule.default_retention.default_event_hold`
+
+Read-Only:
+
+- `days` (Number)
+- `years` (Number)
 
 
 
