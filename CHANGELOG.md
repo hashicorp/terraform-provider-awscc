@@ -1,5 +1,9 @@
 ## 1.105.0 (October 7, 2026)
 
+NOTES:
+
+* resource/awscc_s3_bucket: Remove resource suppression due to `SSEAlgorithm` name collision ([#3355](https://github.com/hashicorp/terraform-provider-awscc/pull/3355))
+
 FEATURES:
 
 * **New Data Source:** `awscc_applicationsignals_instrumentation_config`
