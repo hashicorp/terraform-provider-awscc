@@ -511,6 +511,10 @@
         "identifier": ["AccountId"]
     },
     {
+        "resource": "awscc_applicationsignals_instrumentation_config",
+        "identifier": ["InstrumentationType","Service","Environment","SignalType","LocationHash"]
+    },
+    {
         "resource": "awscc_applicationsignals_service_level_objective",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -1363,6 +1367,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_cloudwatch_anomaly_detector",
+        "generateListResource": true,
+        "identifier": ["AnomalyDetectorId"]
+    },
+    {
         "resource": "awscc_cloudwatch_composite_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -1391,6 +1400,10 @@
         "resource": "awscc_cloudwatch_otel_enrichment",
         "generateListResource": true,
         "identifier": ["AccountId"]
+    },
+    {
+        "resource": "awscc_cloudwatch_resource_metrics_configuration",
+        "identifier": ["ResourceArn"]
     },
     {
         "resource": "awscc_cloudwatch_view",
@@ -1633,6 +1646,11 @@
         "resource": "awscc_config_delivery_channel",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_config_organization_config_rule",
+        "generateListResource": true,
+        "identifier": ["OrganizationConfigRuleName"]
     },
     {
         "resource": "awscc_config_organization_conformance_pack",
@@ -1927,6 +1945,11 @@
     },
     {
         "resource": "awscc_drs_launch_configuration_template",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_drs_recovery_plan",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
@@ -2272,6 +2295,11 @@
         "identifier": ["VirtualInterfaceArn"]
     },
     {
+        "resource": "awscc_directoryservice_microsoft_ad",
+        "generateListResource": true,
+        "identifier": ["DirectoryId"]
+    },
+    {
         "resource": "awscc_directoryservice_simple_ad",
         "generateListResource": true,
         "identifier": ["DirectoryId"]
@@ -2345,6 +2373,10 @@
         "resource": "awscc_ec2_carrier_gateway",
         "generateListResource": true,
         "identifier": ["CarrierGatewayId"]
+    },
+    {
+        "resource": "awscc_ec2_client_vpn_route",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_ec2_customer_gateway",
@@ -2606,6 +2638,11 @@
         "resource": "awscc_ec2_route_table",
         "generateListResource": true,
         "identifier": ["RouteTableId"]
+    },
+    {
+        "resource": "awscc_ec2_secondary_network",
+        "generateListResource": true,
+        "identifier": ["SecondaryNetworkArn"]
     },
     {
         "resource": "awscc_ec2_security_group",
@@ -3754,6 +3791,11 @@
         "identifier": ["SerialNumber"]
     },
     {
+        "resource": "awscc_ivs_ad_configuration",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_ivs_channel",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -4009,6 +4051,10 @@
         "resource": "awscc_iot_policy",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_iot_policy_principal_attachment",
+        "identifier": ["PolicyName","Principal"]
     },
     {
         "resource": "awscc_iot_provisioning_template",
@@ -4467,6 +4513,19 @@
         "identifier": ["FunctionArn"]
     },
     {
+        "resource": "awscc_lambda_web_function",
+        "generateListResource": true,
+        "identifier": ["FunctionArn"]
+    },
+    {
+        "resource": "awscc_lambda_web_function_endpoint",
+        "identifier": ["EndpointArn"]
+    },
+    {
+        "resource": "awscc_lambda_web_function_revision",
+        "identifier": ["RevisionArn"]
+    },
+    {
         "resource": "awscc_launchwizard_deployment",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -4510,6 +4569,11 @@
         "resource": "awscc_licensemanager_license_asset_rule_set",
         "generateListResource": true,
         "identifier": ["LicenseAssetRulesetArn"]
+    },
+    {
+        "resource": "awscc_licensemanager_report_generator",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_lightsail_alarm",
@@ -5248,6 +5312,16 @@
         "identifier": ["MonitorArn"]
     },
     {
+        "resource": "awscc_networksecuritymanager_deployment",
+        "generateListResource": true,
+        "identifier": ["DeploymentArn"]
+    },
+    {
+        "resource": "awscc_networksecuritymanager_policy",
+        "generateListResource": true,
+        "identifier": ["PolicyArn"]
+    },
+    {
         "resource": "awscc_networksecuritymanager_rule",
         "generateListResource": true,
         "identifier": ["RuleArn"]
@@ -5256,6 +5330,11 @@
         "resource": "awscc_networksecuritymanager_scope",
         "generateListResource": true,
         "identifier": ["ScopeArn"]
+    },
+    {
+        "resource": "awscc_networksecuritymanager_template",
+        "generateListResource": true,
+        "identifier": ["TemplateArn"]
     },
     {
         "resource": "awscc_nimblestudio_launch_profile",
@@ -5584,6 +5663,11 @@
         "identifier": ["KeyIdentifier"]
     },
     {
+        "resource": "awscc_personalize_campaign",
+        "generateListResource": true,
+        "identifier": ["CampaignArn"]
+    },
+    {
         "resource": "awscc_personalize_dataset",
         "generateListResource": true,
         "identifier": ["DatasetArn"]
@@ -5825,6 +5909,11 @@
         "resource": "awscc_rds_db_cluster",
         "generateListResource": true,
         "identifier": ["DBClusterIdentifier"]
+    },
+    {
+        "resource": "awscc_rds_db_cluster_endpoint",
+        "generateListResource": true,
+        "identifier": ["DBClusterEndpointArn"]
     },
     {
         "resource": "awscc_rds_db_cluster_parameter_group",
@@ -6483,6 +6572,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_scn_instance",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_scn_namespace",
         "identifier": ["Arn"]
     },
@@ -6599,6 +6693,11 @@
         "identifier": ["ConfigurationSetName"]
     },
     {
+        "resource": "awscc_smsvoice_notify_configuration",
+        "generateListResource": true,
+        "identifier": ["NotifyConfigurationArn"]
+    },
+    {
         "resource": "awscc_smsvoice_opt_out_list",
         "generateListResource": true,
         "identifier": ["OptOutListName"]
@@ -6617,6 +6716,11 @@
         "resource": "awscc_smsvoice_protect_configuration",
         "generateListResource": true,
         "identifier": ["ProtectConfigurationId"]
+    },
+    {
+        "resource": "awscc_smsvoice_rcs_agent",
+        "generateListResource": true,
+        "identifier": ["RcsAgentArn"]
     },
     {
         "resource": "awscc_smsvoice_registration",
@@ -7483,6 +7587,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_translate_terminology",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_uxc_account_customization",
         "identifier": ["AccountId"]
     },
@@ -7685,6 +7794,11 @@
         "resource": "awscc_workspaces_connection_alias",
         "generateListResource": true,
         "identifier": ["AliasId"]
+    },
+    {
+        "resource": "awscc_workspaces_directory",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_workspaces_workspace_ip_group",

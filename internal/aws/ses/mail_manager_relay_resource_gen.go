@@ -162,13 +162,11 @@ func mailManagerRelayResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Key": {
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9/_\\+=\\.:@\\-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "^[a-zA-Z0-9/_\\+=\\.:@\\-]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -191,7 +189,6 @@ func mailManagerRelayResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/_\\+=\\.:@\\-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -204,7 +201,6 @@ func mailManagerRelayResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/_\\+=\\.:@\\-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
