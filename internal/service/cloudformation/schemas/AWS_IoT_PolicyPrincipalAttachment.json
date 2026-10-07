@@ -1,0 +1,65 @@
+{
+  "typeName": "AWS::IoT::PolicyPrincipalAttachment",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "description": "Resource Type definition for AWS::IoT::PolicyPrincipalAttachment",
+  "additionalProperties": false,
+  "properties": {
+    "PolicyName": {
+      "type": "string",
+      "description": "The name of the AWS IoT policy"
+    },
+    "Principal": {
+      "type": "string",
+      "description": "The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID"
+    }
+  },
+  "required": [
+    "PolicyName",
+    "Principal"
+  ],
+  "createOnlyProperties": [
+    "/properties/PolicyName",
+    "/properties/Principal"
+  ],
+  "primaryIdentifier": [
+    "/properties/PolicyName",
+    "/properties/Principal"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "iot:ListAttachedPolicies"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "iot:AttachPrincipalPolicy",
+        "iot:ListAttachedPolicies"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "Principal": {
+            "$ref": "resource-schema.json#/properties/Principal"
+          }
+        },
+        "required": [
+          "Principal"
+        ]
+      },
+      "permissions": [
+        "iot:ListAttachedPolicies"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iot:DetachPrincipalPolicy",
+        "iot:ListAttachedPolicies"
+      ]
+    }
+  }
+}

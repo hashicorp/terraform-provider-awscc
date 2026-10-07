@@ -1,0 +1,190 @@
+{
+  "typeName": "AWS::Personalize::Campaign",
+  "description": "A deployment of a solution version that provides real-time recommendations.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "CampaignConfig": {
+      "type": "object",
+      "description": "The configuration details of a campaign.",
+      "properties": {
+        "ItemExplorationConfig": {
+          "type": "object",
+          "description": "Specifies the exploration configuration hyperparameters.",
+          "additionalProperties": false,
+          "patternProperties": {
+            "": {
+              "type": "string",
+              "maxLength": 1000
+            }
+          }
+        },
+        "EnableMetadataWithRecommendations": {
+          "type": "boolean",
+          "description": "Whether metadata with recommendations is enabled for the campaign."
+        },
+        "SyncWithLatestSolutionVersion": {
+          "type": "boolean",
+          "description": "Whether the campaign automatically updates to use the latest solution version."
+        },
+        "RankingInfluence": {
+          "type": "object",
+          "description": "A map of ranking influence values for POPULARITY and FRESHNESS.",
+          "additionalProperties": false,
+          "patternProperties": {
+            "": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name of the campaign.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+    },
+    "SolutionVersionArn": {
+      "type": "string",
+      "description": "The ARN of the solution version to deploy.",
+      "maxLength": 256,
+      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
+    },
+    "MinProvisionedTPS": {
+      "type": "integer",
+      "description": "Specifies the requested minimum provisioned transactions per second.",
+      "minimum": 1
+    },
+    "CampaignConfig": {
+      "$ref": "#/definitions/CampaignConfig"
+    },
+    "CampaignArn": {
+      "type": "string",
+      "description": "The ARN of the campaign.",
+      "maxLength": 256,
+      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the campaign.",
+      "maxLength": 256
+    },
+    "CreationDateTime": {
+      "type": "string",
+      "description": "The time at which the campaign was created.",
+      "format": "date-time"
+    },
+    "LastUpdatedDateTime": {
+      "type": "string",
+      "description": "The time at which the campaign was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to associate with the campaign.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "SolutionVersionArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/CampaignArn",
+    "/properties/Status",
+    "/properties/CreationDateTime",
+    "/properties/LastUpdatedDateTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/CampaignArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "personalize:TagResource",
+      "personalize:UntagResource",
+      "personalize:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "personalize:CreateCampaign",
+        "personalize:DescribeCampaign",
+        "personalize:TagResource",
+        "personalize:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "personalize:DescribeCampaign",
+        "personalize:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "personalize:UpdateCampaign",
+        "personalize:DescribeCampaign",
+        "personalize:TagResource",
+        "personalize:UntagResource",
+        "personalize:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "personalize:DeleteCampaign",
+        "personalize:DescribeCampaign"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "personalize:ListCampaigns"
+      ]
+    }
+  }
+}

@@ -151,6 +151,10 @@
         "RoleArn": {
           "description": "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
           "type": "string"
+        },
+        "AdvancedConfiguration": {
+          "description": "",
+          "$ref": "#/definitions/VpcLatticeAdvancedConfiguration"
         }
       },
       "required": [
@@ -521,6 +525,22 @@
           "$comment": "A time-varying value that has at most a negligible chance of repeating; for example, a random value that is generated anew for each use, a time-stamp, a sequence number, or some combination of these.",
           "type": "string",
           "maxLength": 255
+        }
+      }
+    },
+    "VpcLatticeAdvancedConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TestListenerRule": {
+          "type": "string"
+        },
+        "AlternateTargetGroupArn": {
+          "type": "string"
+        },
+        "ProductionListenerRule": {
+          "type": "string"
         }
       }
     },

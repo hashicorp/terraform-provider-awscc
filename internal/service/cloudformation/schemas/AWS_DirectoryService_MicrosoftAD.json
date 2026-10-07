@@ -1,0 +1,167 @@
+{
+  "typeName": "AWS::DirectoryService::MicrosoftAD",
+  "description": "Resource Type definition for AWS::DirectoryService::MicrosoftAD",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-directoryservice",
+  "additionalProperties": false,
+  "definitions": {
+    "VpcSettings": {
+      "description": "Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SubnetIds": {
+          "description": "The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service specifies a directory server and a DNS server in each of these subnets.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "VpcId": {
+          "description": "The identifier of the VPC in which to create the directory.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "VpcId",
+        "SubnetIds"
+      ]
+    }
+  },
+  "properties": {
+    "DirectoryId": {
+      "description": "Unique identifier for the Microsoft Active Directory",
+      "type": "string"
+    },
+    "CreateAlias": {
+      "description": "Specifies an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as http://<alias>.awsapps.com. By default, AWS CloudFormation does not create an alias.",
+      "type": "boolean"
+    },
+    "Alias": {
+      "description": "The alias for a directory",
+      "type": "string"
+    },
+    "DnsIpAddresses": {
+      "description": "The IP addresses of the DNS servers for the directory, such as [ \"172.31.3.154\", \"172.31.63.203\" ].",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Edition": {
+      "description": "AWS Managed Microsoft AD is available in two editions: Standard and Enterprise.",
+      "type": "string",
+      "enum": [
+        "Enterprise",
+        "Standard"
+      ],
+      "default": "Enterprise"
+    },
+    "EnableSso": {
+      "description": "Whether to enable single sign-on for a Microsoft Active Directory in AWS. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately. If you don't specify a value, AWS CloudFormation disables single sign-on by default.",
+      "type": "boolean",
+      "default": false
+    },
+    "Name": {
+      "description": "The fully qualified domain name for the AWS Managed Microsoft AD directory, such as corp.example.com. This name will resolve inside your VPC only. It does not need to be publicly resolvable.",
+      "type": "string"
+    },
+    "Password": {
+      "description": "The password for the default administrative user named Admin. If you need to change the password for the administrator account, see the ResetUserPassword API call in the AWS Directory Service API Reference.",
+      "type": "string"
+    },
+    "ShortName": {
+      "description": "The NetBIOS name for your domain, such as CORP. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, CORP for the directory DNS corp.example.com. ",
+      "type": "string"
+    },
+    "VpcSettings": {
+      "description": "Specifies the VPC settings of the Microsoft AD directory server in AWS.",
+      "$ref": "#/definitions/VpcSettings"
+    }
+  },
+  "required": [
+    "VpcSettings",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Alias",
+    "/properties/DnsIpAddresses",
+    "/properties/DirectoryId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Password"
+  ],
+  "createOnlyProperties": [
+    "/properties/VpcSettings",
+    "/properties/Edition",
+    "/properties/Name",
+    "/properties/Password",
+    "/properties/ShortName",
+    "/properties/CreateAlias"
+  ],
+  "primaryIdentifier": [
+    "/properties/DirectoryId"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ds:CreateAlias",
+        "ds:CreateMicrosoftAD",
+        "ds:EnableSso",
+        "ds:DisableSso",
+        "ds:DescribeDirectories",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:CreateTags",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:RevokeSecurityGroupIngress"
+      ],
+      "timeoutInMinutes": 210
+    },
+    "read": {
+      "permissions": [
+        "ds:DescribeDirectories"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ds:EnableSso",
+        "ds:DisableSso",
+        "ds:CheckStabilizationForSso",
+        "ds:DescribeDirectories"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ds:DeleteDirectory",
+        "ds:CheckStabilizationForDelete",
+        "ds:DescribeDirectories",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DeleteSecurityGroup",
+        "ec2:DeleteNetworkInterface",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ds:DescribeDirectories"
+      ]
+    }
+  }
+}

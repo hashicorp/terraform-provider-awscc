@@ -233,6 +233,10 @@
         }
       }
     },
+    "SecurityGroupId": {
+      "description": "An EC2 security group ID.",
+      "type": "string"
+    },
     "NodeLifecycleActions": {
       "description": "Custom scripts that run at defined points in a compute node's lifecycle.",
       "additionalProperties": false,
@@ -309,7 +313,6 @@
   },
   "required": [
     "ClusterId",
-    "CustomLaunchTemplate",
     "IamInstanceProfileArn",
     "InstanceConfigs",
     "ScalingConfiguration",

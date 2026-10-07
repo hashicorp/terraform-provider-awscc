@@ -1,0 +1,175 @@
+{
+  "typeName": "AWS::RDS::DBClusterEndpoint",
+  "description": "Resource Type definition for AWS::RDS::DBClusterEndpoint. Creates a new custom endpoint and associates it with an Amazon Aurora DB cluster. This resource applies only to Aurora DB clusters.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DBClusterEndpointArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the DB cluster endpoint.",
+      "pattern": "^arn:aws(-[a-z0-9]+)*:rds:[a-z0-9-]+:[0-9]{12}:cluster-endpoint:[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "DBClusterEndpointIdentifier": {
+      "type": "string",
+      "description": "The identifier to use for the new endpoint. This parameter is stored as a lowercase string.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "DBClusterIdentifier": {
+      "type": "string",
+      "description": "The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "The endpoint classification returned by Amazon RDS."
+    },
+    "CustomEndpointType": {
+      "type": "string",
+      "description": "The type of the custom endpoint.",
+      "enum": [
+        "READER",
+        "WRITER",
+        "ANY"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the endpoint."
+    },
+    "StaticMembers": {
+      "type": "array",
+      "description": "List of DB instance identifiers that are part of the custom endpoint group. Once either member list is set, it can be changed or replaced by the other list, but both lists cannot be removed in place; removing them requires replacing the endpoint.",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true
+    },
+    "ExcludedMembers": {
+      "type": "array",
+      "description": "List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Once either member list is set, it can be changed or replaced by the other list, but both lists cannot be removed in place; removing them requires replacing the endpoint.",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true
+    },
+    "Endpoint": {
+      "type": "string",
+      "description": "The DNS address of the endpoint."
+    },
+    "DBClusterEndpointResourceIdentifier": {
+      "type": "string",
+      "description": "A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags to be assigned to the DB cluster endpoint.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "DBClusterEndpointIdentifier",
+    "DBClusterIdentifier",
+    "CustomEndpointType"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/DBClusterEndpointArn",
+    "/properties/Endpoint",
+    "/properties/DBClusterEndpointResourceIdentifier",
+    "/properties/EndpointType",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/DBClusterEndpointIdentifier",
+    "/properties/DBClusterIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/DBClusterEndpointArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DBClusterEndpointIdentifier"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "rds:AddTagsToResource",
+      "rds:RemoveTagsFromResource",
+      "rds:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds:CreateDBClusterEndpoint",
+        "rds:DescribeDBClusterEndpoints",
+        "rds:AddTagsToResource",
+        "rds:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds:DescribeDBClusterEndpoints",
+        "rds:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds:ModifyDBClusterEndpoint",
+        "rds:DescribeDBClusterEndpoints",
+        "rds:AddTagsToResource",
+        "rds:RemoveTagsFromResource",
+        "rds:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds:DeleteDBClusterEndpoint",
+        "rds:DescribeDBClusterEndpoints"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds:DescribeDBClusterEndpoints"
+      ]
+    }
+  }
+}

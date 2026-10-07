@@ -1,0 +1,145 @@
+{
+  "typeName": "AWS::DRS::RecoveryPlan",
+  "description": "A Recovery Plan orchestrates multi-server disaster recovery in AWS Elastic Disaster Recovery.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the Recovery Plan.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[a-z0-9]+)*:drs:[a-z0-9-]+:[0-9]{12}:[a-zA-Z0-9_/.-]+$"
+    },
+    "RecoveryPlanID": {
+      "type": "string",
+      "description": "The ID of the Recovery Plan.",
+      "minLength": 22,
+      "maxLength": 64,
+      "pattern": "^plan-[0-9a-zA-Z]{17,59}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the Recovery Plan.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _-]*$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the Recovery Plan.",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the Recovery Plan. ACTIVE means executable. INVALID means the plan has no SERVER type steps and cannot be executed.",
+      "enum": [
+        "ACTIVE",
+        "INVALID"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the Recovery Plan was created.",
+      "minLength": 19,
+      "maxLength": 32
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the Recovery Plan was last updated.",
+      "minLength": 19,
+      "maxLength": 32
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the Recovery Plan.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/RecoveryPlanID",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RecoveryPlanID"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "drs:TagResource",
+      "drs:UntagResource",
+      "drs:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "drs:CreateRecoveryPlan",
+        "drs:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "drs:GetRecoveryPlan",
+        "drs:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "drs:UpdateRecoveryPlan",
+        "drs:TagResource",
+        "drs:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "drs:DeleteRecoveryPlan"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "drs:ListRecoveryPlans"
+      ]
+    }
+  }
+}
