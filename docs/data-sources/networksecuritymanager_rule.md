@@ -30,6 +30,7 @@ Data Source schema for AWS::NetworkSecurityManager::Rule
 - `rule_type` (String) The type of rule.
 - `status` (String) The status of the rule.
 - `tags` (Attributes Set) The tags associated with the rule. (see [below for nested schema](#nestedatt--tags))
+- `updated_at` (String) An ISO 8601 timestamp indicating when the rule was last modified.
 - `version` (String) The version number of the rule.
 
 <a id="nestedatt--tags"></a>

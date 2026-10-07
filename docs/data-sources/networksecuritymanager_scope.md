@@ -28,6 +28,7 @@ Data Source schema for AWS::NetworkSecurityManager::Scope
 - `scope_name` (String) The name of the scope.
 - `status` (String) The status of the scope.
 - `tags` (Attributes Set) The tags associated with the scope. (see [below for nested schema](#nestedatt--tags))
+- `updated_at` (String) An ISO 8601 timestamp indicating when the scope was last modified.
 - `version` (String) The version number of the scope.
 
 <a id="nestedatt--tags"></a>

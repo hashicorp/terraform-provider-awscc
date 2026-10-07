@@ -155,11 +155,13 @@
       "properties": {
         "Value": {
           "minLength": 0,
+          "description": "",
           "type": "string",
           "maxLength": 256
         },
         "Key": {
           "minLength": 1,
+          "description": "",
           "type": "string",
           "maxLength": 128
         }

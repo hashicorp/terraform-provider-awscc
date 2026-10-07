@@ -8,6 +8,7 @@ package networksecuritymanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -113,7 +114,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the rule.",
 		//	  "enum": [
 		//	    "DRAFT",
-		//	    "ACTIVE"
+		//	    "ACTIVE",
+		//	    "DISABLED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -167,6 +169,19 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The tags associated with the rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UpdatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An ISO 8601 timestamp indicating when the rule was last modified.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "An ISO 8601 timestamp indicating when the rule was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -208,6 +223,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rule_type":        "RuleType",
 		"status":           "Status",
 		"tags":             "Tags",
+		"updated_at":       "UpdatedAt",
 		"value":            "Value",
 		"version":          "Version",
 	})

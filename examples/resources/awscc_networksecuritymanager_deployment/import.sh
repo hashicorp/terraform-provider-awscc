@@ -1,0 +1,1 @@
+$ terraform import awscc_networksecuritymanager_deployment.example "deployment_arn"

@@ -24,6 +24,21 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::S3::Bucket resource.
 func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AbacStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ABAC status of the general purpose bucket. When ABAC is enabled for the general purpose bucket, you can use tags to manage access to the general purpose buckets as well as for cost tracking purposes. When ABAC is disabled for the general purpose buckets, you can only use tags for cost tracking purposes. For more information, see [Using tags with S3 general purpose buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html).",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"abac_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ABAC status of the general purpose bucket. When ABAC is enabled for the general purpose bucket, you can use tags to manage access to the general purpose buckets as well as for cost tracking purposes. When ABAC is disabled for the general purpose buckets, you can only use tags for cost tracking purposes. For more information, see [Using tags with S3 general purpose buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccelerateConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +131,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Format": {
-		//	                    "description": "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+		//	                    "description": "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 		//	                    "enum": [
 		//	                      "CSV",
 		//	                      "ORC",
@@ -218,7 +233,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: Format
 											"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+												Description: "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: Prefix
@@ -290,8 +305,28 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies the default server-side encryption configuration.\n   +   *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester?s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner.\n  +   *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.",
+		//	        "description": "Specifies the default server-side encryption configuration.\n   +  *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester’s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner.\n  +  *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.",
 		//	        "properties": {
+		//	          "BlockedEncryptionTypes": {
+		//	            "additionalProperties": false,
+		//	            "description": "A bucket-level setting for Amazon S3 general purpose buckets used to prevent the upload of new objects encrypted with the specified server-side encryption type. For example, blocking an encryption type will block ``PutObject``, ``CopyObject``, ``PostObject``, multipart upload, and replication requests to the bucket for objects with the specified encryption type. However, you can continue to read and list any pre-existing objects already encrypted with the specified encryption type. For more information, see [Blocking or unblocking SSE-C for a general purpose bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html).\n  Currently, this parameter only supports blocking or unblocking server-side encryption with customer-provided keys (SSE-C). For more information about SSE-C, see [Using server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).",
+		//	            "properties": {
+		//	              "EncryptionType": {
+		//	                "description": "The object encryption type that you want to block or unblock for an Amazon S3 general purpose bucket.\n  Currently, this parameter only supports blocking or unblocking server side encryption with customer-provided keys (SSE-C). For more information about SSE-C, see [Using server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "NONE",
+		//	                    "SSE-C"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "BucketKeyEnabled": {
 		//	            "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.\n For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.",
 		//	            "type": "boolean"
@@ -301,7 +336,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
 		//	            "properties": {
 		//	              "KMSMasterKeyID": {
-		//	                "description": "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. \n   +   *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n  +   *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.\n  \n  You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key Alias: ``alias/alias-name`` \n  \n If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n   +   *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester?s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n  +   *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.\n  \n   Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
+		//	                "description": "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. \n   +  *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n  +  *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.\n  \n  You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab``\n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``\n  +  Key Alias: ``alias/alias-name``\n  \n If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n   +  *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester’s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n  +  *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.\n  \n   Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
 		//	                "type": "string"
 		//	              },
 		//	              "SSEAlgorithm": {
@@ -337,6 +372,19 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"server_side_encryption_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BlockedEncryptionTypes
+							"blocked_encryption_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EncryptionType
+									"encryption_type": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The object encryption type that you want to block or unblock for an Amazon S3 general purpose bucket.\n  Currently, this parameter only supports blocking or unblocking server side encryption with customer-provided keys (SSE-C). For more information about SSE-C, see [Using server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A bucket-level setting for Amazon S3 general purpose buckets used to prevent the upload of new objects encrypted with the specified server-side encryption type. For example, blocking an encryption type will block ``PutObject``, ``CopyObject``, ``PostObject``, multipart upload, and replication requests to the bucket for objects with the specified encryption type. However, you can continue to read and list any pre-existing objects already encrypted with the specified encryption type. For more information, see [Blocking or unblocking SSE-C for a general purpose bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html).\n  Currently, this parameter only supports blocking or unblocking server-side encryption with customer-provided keys (SSE-C). For more information about SSE-C, see [Using server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: BucketKeyEnabled
 							"bucket_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.\n For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.",
@@ -347,7 +395,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: KMSMasterKeyID
 									"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. \n   +   *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n  +   *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.\n  \n  You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key Alias: ``alias/alias-name`` \n  \n If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n   +   *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester?s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n  +   *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.\n  \n   Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
+										Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. \n   +  *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n  +  *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.\n  \n  You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab``\n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``\n  +  Key Alias: ``alias/alias-name``\n  \n If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n   +  *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester’s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n  +  *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.\n  \n   Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SSEAlgorithm
@@ -379,6 +427,32 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BucketNamePrefix
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"bucket_name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BucketNamespace
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "global",
+		//	    "account-regional"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"bucket_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CorsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +477,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "AllowedMethods": {
-		//	            "description": "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
+		//	            "description": "An HTTP method that you allow the origin to run.\n *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
 		//	            "insertionOrder": true,
 		//	            "items": {
 		//	              "enum": [
@@ -477,7 +551,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: AllowedMethods
 							"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
+								Description: "An HTTP method that you allow the origin to run.\n *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: AllowedOrigins
@@ -695,11 +769,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
+		//	  "description": "Specifies the S3 Inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
+		//	    "description": "Specifies the S3 Inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
 		//	    "properties": {
 		//	      "Destination": {
 		//	        "additionalProperties": false,
@@ -714,7 +788,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Format": {
-		//	            "description": "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+		//	            "description": "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 		//	            "enum": [
 		//	              "CSV",
 		//	              "ORC",
@@ -764,11 +838,14 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "ObjectLockRetainUntilDate",
 		//	            "ObjectLockMode",
 		//	            "ObjectLockLegalHoldStatus",
+		//	            "ObjectLockEventHoldStatus",
+		//	            "ObjectLockEventHoldDuration",
 		//	            "IntelligentTieringAccessTier",
 		//	            "BucketKeyStatus",
 		//	            "ChecksumAlgorithm",
 		//	            "ObjectAccessControlList",
-		//	            "ObjectOwner"
+		//	            "ObjectOwner",
+		//	            "LifecycleExpirationDate"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -818,7 +895,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Format
 							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+								Description: "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Prefix
@@ -863,7 +940,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
+			Description: "Specifies the S3 Inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecycleConfiguration
@@ -897,7 +974,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "ExpirationDate": {
 		//	            "description": "Indicates when objects are deleted from Amazon S3 and Amazon S3 Glacier. The date value must be in ISO 8601 format. The time is always midnight UTC. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time.",
-		//	            "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	            "pattern": "^(\\d{4})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	            "type": "string"
 		//	          },
 		//	          "ExpirationInDays": {
@@ -1073,11 +1150,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "TransitionDate": {
 		//	                "description": "Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-		//	                "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	                "pattern": "^(\\d{4})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	                "type": "string"
 		//	              },
 		//	              "TransitionInDays": {
-		//	                "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
+		//	                "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value can be ``0`` or any positive integer. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 		//	                "type": "integer"
 		//	              }
 		//	            },
@@ -1108,11 +1185,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "TransitionDate": {
 		//	                  "description": "Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-		//	                  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	                  "pattern": "^(\\d{4})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	                  "type": "string"
 		//	                },
 		//	                "TransitionInDays": {
-		//	                  "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
+		//	                  "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value can be ``0`` or any positive integer. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -1134,7 +1211,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "TransitionDefaultMinimumObjectSize": {
-		//	      "description": "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
+		//	      "description": "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +  ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +  ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
 		//	      "enum": [
 		//	        "varies_by_storage_class",
 		//	        "all_storage_classes_128K"
@@ -1307,7 +1384,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: TransitionInDays
 									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
+										Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value can be ``0`` or any positive integer. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -1330,7 +1407,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: TransitionInDays
 										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
+											Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value can be ``0`` or any positive integer. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1345,7 +1422,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: TransitionDefaultMinimumObjectSize
 				"transition_default_minimum_object_size": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
+					Description: "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +  ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +  ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1437,12 +1514,375 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Settings that define where logs are stored.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MetadataConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The S3 Metadata configuration for a general purpose bucket.",
+		//	  "properties": {
+		//	    "AnnotationTableConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The annotation table configuration for a metadata configuration.",
+		//	      "properties": {
+		//	        "ConfigurationState": {
+		//	          "description": "Specifies whether the annotation table configuration is enabled or disabled.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The encryption configuration for the annotation table. To encrypt your annotation table with server-side encryption using AWS Key Management Service (AWS KMS) keys (SSE-KMS), set ``SseAlgorithm`` to ``aws:kms``. You must also set ``KmsKeyArn`` to the ARN of a customer managed KMS key in the same Region where your general purpose bucket is located.",
+		//	          "properties": {
+		//	            "KmsKeyArn": {
+		//	              "description": "If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.",
+		//	              "type": "string"
+		//	            },
+		//	            "SseAlgorithm": {
+		//	              "description": "The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.",
+		//	              "enum": [
+		//	                "aws:kms",
+		//	                "AES256"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SseAlgorithm"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Role": {
+		//	          "description": "The ARN of the IAM role that grants Amazon S3 Metadata permission to read annotations from your bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableArn": {
+		//	          "description": "The Amazon Resource Name (ARN) for the annotation table.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "description": "The name of the annotation table.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ConfigurationState"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Destination": {
+		//	      "additionalProperties": false,
+		//	      "description": "The destination information for the S3 Metadata configuration.",
+		//	      "properties": {
+		//	        "TableBucketArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the table bucket where the metadata configuration is stored.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableBucketType": {
+		//	          "description": "The type of the table bucket where the metadata configuration is stored. The ``aws`` value indicates an AWS managed table bucket, and the ``customer`` value indicates a customer-managed table bucket. V2 metadata configurations are stored in AWS managed table buckets, and V1 metadata configurations are stored in customer-managed table buckets.",
+		//	          "enum": [
+		//	            "aws",
+		//	            "customer"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TableNamespace": {
+		//	          "description": "The namespace in the table bucket where the metadata tables for a metadata configuration are stored.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TableBucketType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "InventoryTableConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The inventory table configuration for a metadata configuration.",
+		//	      "properties": {
+		//	        "ConfigurationState": {
+		//	          "description": "The configuration state of the inventory table, indicating whether the inventory table is enabled or disabled.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The encryption configuration for the inventory table.",
+		//	          "properties": {
+		//	            "KmsKeyArn": {
+		//	              "description": "If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.",
+		//	              "type": "string"
+		//	            },
+		//	            "SseAlgorithm": {
+		//	              "description": "The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.",
+		//	              "enum": [
+		//	                "aws:kms",
+		//	                "AES256"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SseAlgorithm"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "TableArn": {
+		//	          "description": "The Amazon Resource Name (ARN) for the inventory table.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "description": "The name of the inventory table.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ConfigurationState"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "JournalTableConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The journal table configuration for a metadata configuration.",
+		//	      "properties": {
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The encryption configuration for the journal table.",
+		//	          "properties": {
+		//	            "KmsKeyArn": {
+		//	              "description": "If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.",
+		//	              "type": "string"
+		//	            },
+		//	            "SseAlgorithm": {
+		//	              "description": "The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.",
+		//	              "enum": [
+		//	                "aws:kms",
+		//	                "AES256"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SseAlgorithm"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RecordExpiration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The journal table record expiration settings for the journal table.",
+		//	          "properties": {
+		//	            "Days": {
+		//	              "description": "If you enable journal table record expiration, you can set the number of days to retain your journal table records. Journal table records must be retained for a minimum of 7 days. To set this value, specify any whole number from ``7`` to ``2147483647``. For example, to retain your journal table records for one year, set this value to ``365``.",
+		//	              "type": "integer"
+		//	            },
+		//	            "Expiration": {
+		//	              "description": "Specifies whether journal table record expiration is enabled or disabled.",
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Expiration"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "TableArn": {
+		//	          "description": "The Amazon Resource Name (ARN) for the journal table.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "description": "The name of the journal table.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RecordExpiration"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "JournalTableConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"metadata_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AnnotationTableConfiguration
+				"annotation_table_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConfigurationState
+						"configuration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether the annotation table configuration is enabled or disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SseAlgorithm
+								"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption configuration for the annotation table. To encrypt your annotation table with server-side encryption using AWS Key Management Service (AWS KMS) keys (SSE-KMS), set ``SseAlgorithm`` to ``aws:kms``. You must also set ``KmsKeyArn`` to the ARN of a customer managed KMS key in the same Region where your general purpose bucket is located.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Role
+						"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role that grants Amazon S3 Metadata permission to read annotations from your bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableArn
+						"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the annotation table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the annotation table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The annotation table configuration for a metadata configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Destination
+				"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TableBucketArn
+						"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the table bucket where the metadata configuration is stored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableBucketType
+						"table_bucket_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of the table bucket where the metadata configuration is stored. The ``aws`` value indicates an AWS managed table bucket, and the ``customer`` value indicates a customer-managed table bucket. V2 metadata configurations are stored in AWS managed table buckets, and V1 metadata configurations are stored in customer-managed table buckets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableNamespace
+						"table_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The namespace in the table bucket where the metadata tables for a metadata configuration are stored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The destination information for the S3 Metadata configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InventoryTableConfiguration
+				"inventory_table_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConfigurationState
+						"configuration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The configuration state of the inventory table, indicating whether the inventory table is enabled or disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SseAlgorithm
+								"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption configuration for the inventory table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableArn
+						"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the inventory table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the inventory table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The inventory table configuration for a metadata configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JournalTableConfiguration
+				"journal_table_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SseAlgorithm
+								"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption configuration for the journal table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RecordExpiration
+						"record_expiration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Days
+								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "If you enable journal table record expiration, you can set the number of days to retain your journal table records. Journal table records must be retained for a minimum of 7 days. To set this value, specify any whole number from ``7`` to ``2147483647``. For example, to retain your journal table records for one year, set this value to ``365``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Expiration
+								"expiration": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether journal table record expiration is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The journal table record expiration settings for the journal table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableArn
+						"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the journal table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the journal table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The journal table configuration for a metadata configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The S3 Metadata configuration for a general purpose bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetadataTableConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html).",
+		//	  "description": "The metadata table configuration of an S3 general purpose bucket.",
 		//	  "properties": {
 		//	    "S3TablesDestination": {
 		//	      "additionalProperties": false,
@@ -1507,7 +1947,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html).",
+			Description: "The metadata table configuration of an S3 general purpose bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MetricsConfigurations
@@ -2025,7 +2465,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
+		//	  "description": "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).\n  \n   You must URL encode any signed header values that contain spaces. For example, if your header value is ``my file.txt``, containing two spaces after ``my``, you must URL encode this value to ``my%20%20file.txt``.",
 		//	  "properties": {
 		//	    "ObjectLockEnabled": {
 		//	      "description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
@@ -2042,6 +2482,19 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Days": {
 		//	              "description": "The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
 		//	              "type": "integer"
+		//	            },
+		//	            "DefaultEventHold": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Days": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Years": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            },
 		//	            "Mode": {
 		//	              "description": "The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
@@ -2082,6 +2535,21 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: DefaultEventHold
+								"default_event_hold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Days
+										"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Years
+										"years": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Mode
 								"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
@@ -2101,7 +2569,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
+			Description: "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).\n  \n   You must URL encode any signed header values that contain spaces. For example, if your header value is ``my file.txt``, containing two spaces after ``my``, you must URL encode this value to ``my%20%20file.txt``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ObjectLockEnabled
@@ -2256,10 +2724,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "DeleteMarkerReplication": {
 		//	            "additionalProperties": false,
-		//	            "description": "Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication`` ``Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). \n  If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
+		//	            "description": "Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication````Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). \n  If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
 		//	            "properties": {
 		//	              "Status": {
-		//	                "description": "Indicates whether to replicate delete markers. Disabled by default.",
+		//	                "description": "Indicates whether to replicate delete markers.",
 		//	                "enum": [
 		//	                  "Disabled",
 		//	                  "Enabled"
@@ -2375,7 +2843,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "StorageClass": {
-		//	                "description": "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. \n For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.",
+		//	                "description": "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. \n For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.\n ``FSX_OPENZFS`` is not an accepted value when replicating objects.",
 		//	                "enum": [
 		//	                  "DEEP_ARCHIVE",
 		//	                  "GLACIER",
@@ -2483,7 +2951,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "description": "A filter that you can specify for selection for modifications on replicas.",
 		//	                "properties": {
 		//	                  "Status": {
-		//	                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
+		//	                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.\n *Allowed values*: ``Enabled`` | ``Disabled``",
 		//	                    "enum": [
 		//	                      "Enabled",
 		//	                      "Disabled"
@@ -2558,11 +3026,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Status
 									"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates whether to replicate delete markers. Disabled by default.",
+										Description: "Indicates whether to replicate delete markers.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication`` ``Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). \n  If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
+								Description: "Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication````Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). \n  If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Destination
@@ -2652,7 +3120,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: StorageClass
 									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. \n For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.",
+										Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. \n For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.\n ``FSX_OPENZFS`` is not an accepted value when replicating objects.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -2742,7 +3210,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Status
 											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
+												Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n *Allowed values*: ``Enabled`` | ``Disabled``",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -2944,7 +3412,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "KeyPrefixEquals": {
-		//	                "description": "The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``/docs``, which identifies all objects in the docs/ folder.\n Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
+		//	                "description": "The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``docs/``, which identifies all objects in the docs/ folder.\n Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -3036,7 +3504,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: KeyPrefixEquals
 									"key_prefix_equals": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``/docs``, which identifies all objects in the docs/ folder.\n Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
+										Description: "The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``docs/``, which identifies all objects in the docs/ folder.\n Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -3084,150 +3552,263 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::Bucket").WithTerraformTypeName("awscc_s3_bucket")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithAttributeNameMap(map[string]string{
-		"abort_incomplete_multipart_upload":      "AbortIncompleteMultipartUpload",
-		"accelerate_configuration":               "AccelerateConfiguration",
-		"acceleration_status":                    "AccelerationStatus",
-		"access_control":                         "AccessControl",
-		"access_control_translation":             "AccessControlTranslation",
-		"access_point_arn":                       "AccessPointArn",
-		"access_tier":                            "AccessTier",
-		"account":                                "Account",
-		"allowed_headers":                        "AllowedHeaders",
-		"allowed_methods":                        "AllowedMethods",
-		"allowed_origins":                        "AllowedOrigins",
-		"analytics_configurations":               "AnalyticsConfigurations",
-		"and":                                    "And",
-		"arn":                                    "Arn",
-		"block_public_acls":                      "BlockPublicAcls",
-		"block_public_policy":                    "BlockPublicPolicy",
-		"bucket":                                 "Bucket",
-		"bucket_account_id":                      "BucketAccountId",
-		"bucket_arn":                             "BucketArn",
-		"bucket_encryption":                      "BucketEncryption",
-		"bucket_key_enabled":                     "BucketKeyEnabled",
-		"bucket_name":                            "BucketName",
-		"cors_configuration":                     "CorsConfiguration",
-		"cors_rules":                             "CorsRules",
-		"data_export":                            "DataExport",
-		"days":                                   "Days",
-		"days_after_initiation":                  "DaysAfterInitiation",
-		"default_retention":                      "DefaultRetention",
-		"delete_marker_replication":              "DeleteMarkerReplication",
-		"destination":                            "Destination",
-		"destination_bucket_name":                "DestinationBucketName",
-		"domain_name":                            "DomainName",
-		"dual_stack_domain_name":                 "DualStackDomainName",
-		"enabled":                                "Enabled",
-		"encryption_configuration":               "EncryptionConfiguration",
-		"error_document":                         "ErrorDocument",
-		"event":                                  "Event",
-		"event_bridge_configuration":             "EventBridgeConfiguration",
-		"event_bridge_enabled":                   "EventBridgeEnabled",
-		"event_threshold":                        "EventThreshold",
-		"expiration_date":                        "ExpirationDate",
-		"expiration_in_days":                     "ExpirationInDays",
-		"expired_object_delete_marker":           "ExpiredObjectDeleteMarker",
-		"exposed_headers":                        "ExposedHeaders",
-		"filter":                                 "Filter",
-		"format":                                 "Format",
-		"function":                               "Function",
-		"host_name":                              "HostName",
-		"http_error_code_returned_equals":        "HttpErrorCodeReturnedEquals",
-		"http_redirect_code":                     "HttpRedirectCode",
-		"id":                                     "Id",
-		"ignore_public_acls":                     "IgnorePublicAcls",
-		"included_object_versions":               "IncludedObjectVersions",
-		"index_document":                         "IndexDocument",
-		"intelligent_tiering_configurations":     "IntelligentTieringConfigurations",
-		"inventory_configurations":               "InventoryConfigurations",
-		"key":                                    "Key",
-		"key_prefix_equals":                      "KeyPrefixEquals",
-		"kms_master_key_id":                      "KMSMasterKeyID",
-		"lambda_configurations":                  "LambdaConfigurations",
-		"lifecycle_configuration":                "LifecycleConfiguration",
-		"log_file_prefix":                        "LogFilePrefix",
-		"logging_configuration":                  "LoggingConfiguration",
-		"max_age":                                "MaxAge",
-		"metadata_table_configuration":           "MetadataTableConfiguration",
-		"metrics":                                "Metrics",
-		"metrics_configurations":                 "MetricsConfigurations",
-		"minutes":                                "Minutes",
-		"mode":                                   "Mode",
-		"name":                                   "Name",
-		"newer_noncurrent_versions":              "NewerNoncurrentVersions",
-		"noncurrent_days":                        "NoncurrentDays",
-		"noncurrent_version_expiration":          "NoncurrentVersionExpiration",
-		"noncurrent_version_expiration_in_days":  "NoncurrentVersionExpirationInDays",
-		"noncurrent_version_transition":          "NoncurrentVersionTransition",
-		"noncurrent_version_transitions":         "NoncurrentVersionTransitions",
-		"notification_configuration":             "NotificationConfiguration",
-		"object_lock_configuration":              "ObjectLockConfiguration",
-		"object_lock_enabled":                    "ObjectLockEnabled",
-		"object_ownership":                       "ObjectOwnership",
-		"object_size_greater_than":               "ObjectSizeGreaterThan",
-		"object_size_less_than":                  "ObjectSizeLessThan",
-		"optional_fields":                        "OptionalFields",
-		"output_schema_version":                  "OutputSchemaVersion",
-		"owner":                                  "Owner",
-		"ownership_controls":                     "OwnershipControls",
-		"partition_date_source":                  "PartitionDateSource",
-		"partitioned_prefix":                     "PartitionedPrefix",
-		"prefix":                                 "Prefix",
-		"priority":                               "Priority",
-		"protocol":                               "Protocol",
-		"public_access_block_configuration":      "PublicAccessBlockConfiguration",
-		"queue":                                  "Queue",
-		"queue_configurations":                   "QueueConfigurations",
-		"redirect_all_requests_to":               "RedirectAllRequestsTo",
-		"redirect_rule":                          "RedirectRule",
-		"regional_domain_name":                   "RegionalDomainName",
-		"replace_key_prefix_with":                "ReplaceKeyPrefixWith",
-		"replace_key_with":                       "ReplaceKeyWith",
-		"replica_kms_key_id":                     "ReplicaKmsKeyID",
-		"replica_modifications":                  "ReplicaModifications",
-		"replication_configuration":              "ReplicationConfiguration",
-		"replication_time":                       "ReplicationTime",
-		"restrict_public_buckets":                "RestrictPublicBuckets",
-		"role":                                   "Role",
-		"routing_rule_condition":                 "RoutingRuleCondition",
-		"routing_rules":                          "RoutingRules",
-		"rule":                                   "Rule",
-		"rules":                                  "Rules",
-		"s3_key":                                 "S3Key",
-		"s3_tables_destination":                  "S3TablesDestination",
-		"schedule_frequency":                     "ScheduleFrequency",
-		"server_side_encryption_by_default":      "ServerSideEncryptionByDefault",
-		"server_side_encryption_configuration":   "ServerSideEncryptionConfiguration",
-		"simple_prefix":                          "SimplePrefix",
-		"source_selection_criteria":              "SourceSelectionCriteria",
-		"sse_algorithm":                          "SSEAlgorithm",
-		"sse_kms_encrypted_objects":              "SseKmsEncryptedObjects",
-		"status":                                 "Status",
-		"storage_class":                          "StorageClass",
-		"storage_class_analysis":                 "StorageClassAnalysis",
-		"table_arn":                              "TableArn",
-		"table_bucket_arn":                       "TableBucketArn",
-		"table_name":                             "TableName",
-		"table_namespace":                        "TableNamespace",
-		"tag_filter":                             "TagFilter",
-		"tag_filters":                            "TagFilters",
-		"tags":                                   "Tags",
-		"target_object_key_format":               "TargetObjectKeyFormat",
-		"tierings":                               "Tierings",
-		"time":                                   "Time",
-		"topic":                                  "Topic",
-		"topic_configurations":                   "TopicConfigurations",
-		"transition":                             "Transition",
-		"transition_date":                        "TransitionDate",
-		"transition_default_minimum_object_size": "TransitionDefaultMinimumObjectSize",
-		"transition_in_days":                     "TransitionInDays",
-		"transitions":                            "Transitions",
-		"value":                                  "Value",
-		"versioning_configuration":               "VersioningConfiguration",
-		"website_configuration":                  "WebsiteConfiguration",
-		"website_url":                            "WebsiteURL",
-		"years":                                  "Years",
+	opts = opts.WithPathAwareAttributeNameMap(map[string]string{
+		"AccelerateConfiguration/acceleration_status":                                                        "AccelerationStatus",
+		"AnalyticsConfigurations/StorageClassAnalysis/DataExport/Destination/bucket_account_id":              "BucketAccountId",
+		"AnalyticsConfigurations/StorageClassAnalysis/DataExport/Destination/bucket_arn":                     "BucketArn",
+		"AnalyticsConfigurations/StorageClassAnalysis/DataExport/Destination/format":                         "Format",
+		"AnalyticsConfigurations/StorageClassAnalysis/DataExport/Destination/prefix":                         "Prefix",
+		"AnalyticsConfigurations/StorageClassAnalysis/DataExport/destination":                                "Destination",
+		"AnalyticsConfigurations/StorageClassAnalysis/DataExport/output_schema_version":                      "OutputSchemaVersion",
+		"AnalyticsConfigurations/StorageClassAnalysis/data_export":                                           "DataExport",
+		"AnalyticsConfigurations/TagFilters/key":                                                             "Key",
+		"AnalyticsConfigurations/TagFilters/value":                                                           "Value",
+		"AnalyticsConfigurations/id":                                                                         "Id",
+		"AnalyticsConfigurations/prefix":                                                                     "Prefix",
+		"AnalyticsConfigurations/storage_class_analysis":                                                     "StorageClassAnalysis",
+		"AnalyticsConfigurations/tag_filters":                                                                "TagFilters",
+		"BucketEncryption/ServerSideEncryptionConfiguration/BlockedEncryptionTypes/encryption_type":          "EncryptionType",
+		"BucketEncryption/ServerSideEncryptionConfiguration/ServerSideEncryptionByDefault/kms_master_key_id": "KMSMasterKeyID",
+		"BucketEncryption/ServerSideEncryptionConfiguration/ServerSideEncryptionByDefault/sse_algorithm":     "SSEAlgorithm",
+		"BucketEncryption/ServerSideEncryptionConfiguration/blocked_encryption_types":                        "BlockedEncryptionTypes",
+		"BucketEncryption/ServerSideEncryptionConfiguration/bucket_key_enabled":                              "BucketKeyEnabled",
+		"BucketEncryption/ServerSideEncryptionConfiguration/server_side_encryption_by_default":               "ServerSideEncryptionByDefault",
+		"BucketEncryption/server_side_encryption_configuration":                                              "ServerSideEncryptionConfiguration",
+		"CorsConfiguration/CorsRules/allowed_headers":                                                        "AllowedHeaders",
+		"CorsConfiguration/CorsRules/allowed_methods":                                                        "AllowedMethods",
+		"CorsConfiguration/CorsRules/allowed_origins":                                                        "AllowedOrigins",
+		"CorsConfiguration/CorsRules/exposed_headers":                                                        "ExposedHeaders",
+		"CorsConfiguration/CorsRules/id":                                                                     "Id",
+		"CorsConfiguration/CorsRules/max_age":                                                                "MaxAge",
+		"CorsConfiguration/cors_rules":                                                                       "CorsRules",
+		"IntelligentTieringConfigurations/TagFilters/key":                                                    "Key",
+		"IntelligentTieringConfigurations/TagFilters/value":                                                  "Value",
+		"IntelligentTieringConfigurations/Tierings/access_tier":                                              "AccessTier",
+		"IntelligentTieringConfigurations/Tierings/days":                                                     "Days",
+		"IntelligentTieringConfigurations/id":                                                                "Id",
+		"IntelligentTieringConfigurations/prefix":                                                            "Prefix",
+		"IntelligentTieringConfigurations/status":                                                            "Status",
+		"IntelligentTieringConfigurations/tag_filters":                                                       "TagFilters",
+		"IntelligentTieringConfigurations/tierings":                                                          "Tierings",
+		"InventoryConfigurations/Destination/bucket_account_id":                                              "BucketAccountId",
+		"InventoryConfigurations/Destination/bucket_arn":                                                     "BucketArn",
+		"InventoryConfigurations/Destination/format":                                                         "Format",
+		"InventoryConfigurations/Destination/prefix":                                                         "Prefix",
+		"InventoryConfigurations/destination":                                                                "Destination",
+		"InventoryConfigurations/enabled":                                                                    "Enabled",
+		"InventoryConfigurations/id":                                                                         "Id",
+		"InventoryConfigurations/included_object_versions":                                                   "IncludedObjectVersions",
+		"InventoryConfigurations/optional_fields":                                                            "OptionalFields",
+		"InventoryConfigurations/prefix":                                                                     "Prefix",
+		"InventoryConfigurations/schedule_frequency":                                                         "ScheduleFrequency",
+		"LifecycleConfiguration/Rules/AbortIncompleteMultipartUpload/days_after_initiation":                  "DaysAfterInitiation",
+		"LifecycleConfiguration/Rules/NoncurrentVersionExpiration/newer_noncurrent_versions":                 "NewerNoncurrentVersions",
+		"LifecycleConfiguration/Rules/NoncurrentVersionExpiration/noncurrent_days":                           "NoncurrentDays",
+		"LifecycleConfiguration/Rules/NoncurrentVersionTransition/newer_noncurrent_versions":                 "NewerNoncurrentVersions",
+		"LifecycleConfiguration/Rules/NoncurrentVersionTransition/storage_class":                             "StorageClass",
+		"LifecycleConfiguration/Rules/NoncurrentVersionTransition/transition_in_days":                        "TransitionInDays",
+		"LifecycleConfiguration/Rules/NoncurrentVersionTransitions/newer_noncurrent_versions":                "NewerNoncurrentVersions",
+		"LifecycleConfiguration/Rules/NoncurrentVersionTransitions/storage_class":                            "StorageClass",
+		"LifecycleConfiguration/Rules/NoncurrentVersionTransitions/transition_in_days":                       "TransitionInDays",
+		"LifecycleConfiguration/Rules/TagFilters/key":                                                        "Key",
+		"LifecycleConfiguration/Rules/TagFilters/value":                                                      "Value",
+		"LifecycleConfiguration/Rules/Transition/storage_class":                                              "StorageClass",
+		"LifecycleConfiguration/Rules/Transition/transition_date":                                            "TransitionDate",
+		"LifecycleConfiguration/Rules/Transition/transition_in_days":                                         "TransitionInDays",
+		"LifecycleConfiguration/Rules/Transitions/storage_class":                                             "StorageClass",
+		"LifecycleConfiguration/Rules/Transitions/transition_date":                                           "TransitionDate",
+		"LifecycleConfiguration/Rules/Transitions/transition_in_days":                                        "TransitionInDays",
+		"LifecycleConfiguration/Rules/abort_incomplete_multipart_upload":                                     "AbortIncompleteMultipartUpload",
+		"LifecycleConfiguration/Rules/expiration_date":                                                       "ExpirationDate",
+		"LifecycleConfiguration/Rules/expiration_in_days":                                                    "ExpirationInDays",
+		"LifecycleConfiguration/Rules/expired_object_delete_marker":                                          "ExpiredObjectDeleteMarker",
+		"LifecycleConfiguration/Rules/id":                                                                    "Id",
+		"LifecycleConfiguration/Rules/noncurrent_version_expiration":                                         "NoncurrentVersionExpiration",
+		"LifecycleConfiguration/Rules/noncurrent_version_expiration_in_days":                                 "NoncurrentVersionExpirationInDays",
+		"LifecycleConfiguration/Rules/noncurrent_version_transition":                                         "NoncurrentVersionTransition",
+		"LifecycleConfiguration/Rules/noncurrent_version_transitions":                                        "NoncurrentVersionTransitions",
+		"LifecycleConfiguration/Rules/object_size_greater_than":                                              "ObjectSizeGreaterThan",
+		"LifecycleConfiguration/Rules/object_size_less_than":                                                 "ObjectSizeLessThan",
+		"LifecycleConfiguration/Rules/prefix":                                                                "Prefix",
+		"LifecycleConfiguration/Rules/status":                                                                "Status",
+		"LifecycleConfiguration/Rules/tag_filters":                                                           "TagFilters",
+		"LifecycleConfiguration/Rules/transition":                                                            "Transition",
+		"LifecycleConfiguration/Rules/transitions":                                                           "Transitions",
+		"LifecycleConfiguration/rules":                                                                       "Rules",
+		"LifecycleConfiguration/transition_default_minimum_object_size":                                      "TransitionDefaultMinimumObjectSize",
+		"LoggingConfiguration/TargetObjectKeyFormat/PartitionedPrefix/partition_date_source":                 "PartitionDateSource",
+		"LoggingConfiguration/TargetObjectKeyFormat/partitioned_prefix":                                      "PartitionedPrefix",
+		"LoggingConfiguration/TargetObjectKeyFormat/simple_prefix":                                           "SimplePrefix",
+		"LoggingConfiguration/destination_bucket_name":                                                       "DestinationBucketName",
+		"LoggingConfiguration/log_file_prefix":                                                               "LogFilePrefix",
+		"LoggingConfiguration/target_object_key_format":                                                      "TargetObjectKeyFormat",
+		"MetadataConfiguration/AnnotationTableConfiguration/EncryptionConfiguration/kms_key_arn":             "KmsKeyArn",
+		"MetadataConfiguration/AnnotationTableConfiguration/EncryptionConfiguration/sse_algorithm":           "SseAlgorithm",
+		"MetadataConfiguration/AnnotationTableConfiguration/configuration_state":                             "ConfigurationState",
+		"MetadataConfiguration/AnnotationTableConfiguration/encryption_configuration":                        "EncryptionConfiguration",
+		"MetadataConfiguration/AnnotationTableConfiguration/role":                                            "Role",
+		"MetadataConfiguration/AnnotationTableConfiguration/table_arn":                                       "TableArn",
+		"MetadataConfiguration/AnnotationTableConfiguration/table_name":                                      "TableName",
+		"MetadataConfiguration/Destination/table_bucket_arn":                                                 "TableBucketArn",
+		"MetadataConfiguration/Destination/table_bucket_type":                                                "TableBucketType",
+		"MetadataConfiguration/Destination/table_namespace":                                                  "TableNamespace",
+		"MetadataConfiguration/InventoryTableConfiguration/EncryptionConfiguration/kms_key_arn":              "KmsKeyArn",
+		"MetadataConfiguration/InventoryTableConfiguration/EncryptionConfiguration/sse_algorithm":            "SseAlgorithm",
+		"MetadataConfiguration/InventoryTableConfiguration/configuration_state":                              "ConfigurationState",
+		"MetadataConfiguration/InventoryTableConfiguration/encryption_configuration":                         "EncryptionConfiguration",
+		"MetadataConfiguration/InventoryTableConfiguration/table_arn":                                        "TableArn",
+		"MetadataConfiguration/InventoryTableConfiguration/table_name":                                       "TableName",
+		"MetadataConfiguration/JournalTableConfiguration/EncryptionConfiguration/kms_key_arn":                "KmsKeyArn",
+		"MetadataConfiguration/JournalTableConfiguration/EncryptionConfiguration/sse_algorithm":              "SseAlgorithm",
+		"MetadataConfiguration/JournalTableConfiguration/RecordExpiration/days":                              "Days",
+		"MetadataConfiguration/JournalTableConfiguration/RecordExpiration/expiration":                        "Expiration",
+		"MetadataConfiguration/JournalTableConfiguration/encryption_configuration":                           "EncryptionConfiguration",
+		"MetadataConfiguration/JournalTableConfiguration/record_expiration":                                  "RecordExpiration",
+		"MetadataConfiguration/JournalTableConfiguration/table_arn":                                          "TableArn",
+		"MetadataConfiguration/JournalTableConfiguration/table_name":                                         "TableName",
+		"MetadataConfiguration/annotation_table_configuration":                                               "AnnotationTableConfiguration",
+		"MetadataConfiguration/destination":                                                                  "Destination",
+		"MetadataConfiguration/inventory_table_configuration":                                                "InventoryTableConfiguration",
+		"MetadataConfiguration/journal_table_configuration":                                                  "JournalTableConfiguration",
+		"MetadataTableConfiguration/S3TablesDestination/table_arn":                                           "TableArn",
+		"MetadataTableConfiguration/S3TablesDestination/table_bucket_arn":                                    "TableBucketArn",
+		"MetadataTableConfiguration/S3TablesDestination/table_name":                                          "TableName",
+		"MetadataTableConfiguration/S3TablesDestination/table_namespace":                                     "TableNamespace",
+		"MetadataTableConfiguration/s3_tables_destination":                                                   "S3TablesDestination",
+		"MetricsConfigurations/TagFilters/key":                                                               "Key",
+		"MetricsConfigurations/TagFilters/value":                                                             "Value",
+		"MetricsConfigurations/access_point_arn":                                                             "AccessPointArn",
+		"MetricsConfigurations/id":                                                                           "Id",
+		"MetricsConfigurations/prefix":                                                                       "Prefix",
+		"MetricsConfigurations/tag_filters":                                                                  "TagFilters",
+		"NotificationConfiguration/EventBridgeConfiguration/event_bridge_enabled":                            "EventBridgeEnabled",
+		"NotificationConfiguration/LambdaConfigurations/Filter/S3Key/Rules/name":                             "Name",
+		"NotificationConfiguration/LambdaConfigurations/Filter/S3Key/Rules/value":                            "Value",
+		"NotificationConfiguration/LambdaConfigurations/Filter/S3Key/rules":                                  "Rules",
+		"NotificationConfiguration/LambdaConfigurations/Filter/s3_key":                                       "S3Key",
+		"NotificationConfiguration/LambdaConfigurations/event":                                               "Event",
+		"NotificationConfiguration/LambdaConfigurations/filter":                                              "Filter",
+		"NotificationConfiguration/LambdaConfigurations/function":                                            "Function",
+		"NotificationConfiguration/QueueConfigurations/Filter/S3Key/Rules/name":                              "Name",
+		"NotificationConfiguration/QueueConfigurations/Filter/S3Key/Rules/value":                             "Value",
+		"NotificationConfiguration/QueueConfigurations/Filter/S3Key/rules":                                   "Rules",
+		"NotificationConfiguration/QueueConfigurations/Filter/s3_key":                                        "S3Key",
+		"NotificationConfiguration/QueueConfigurations/event":                                                "Event",
+		"NotificationConfiguration/QueueConfigurations/filter":                                               "Filter",
+		"NotificationConfiguration/QueueConfigurations/queue":                                                "Queue",
+		"NotificationConfiguration/TopicConfigurations/Filter/S3Key/Rules/name":                              "Name",
+		"NotificationConfiguration/TopicConfigurations/Filter/S3Key/Rules/value":                             "Value",
+		"NotificationConfiguration/TopicConfigurations/Filter/S3Key/rules":                                   "Rules",
+		"NotificationConfiguration/TopicConfigurations/Filter/s3_key":                                        "S3Key",
+		"NotificationConfiguration/TopicConfigurations/event":                                                "Event",
+		"NotificationConfiguration/TopicConfigurations/filter":                                               "Filter",
+		"NotificationConfiguration/TopicConfigurations/topic":                                                "Topic",
+		"NotificationConfiguration/event_bridge_configuration":                                               "EventBridgeConfiguration",
+		"NotificationConfiguration/lambda_configurations":                                                    "LambdaConfigurations",
+		"NotificationConfiguration/queue_configurations":                                                     "QueueConfigurations",
+		"NotificationConfiguration/topic_configurations":                                                     "TopicConfigurations",
+		"ObjectLockConfiguration/Rule/DefaultRetention/DefaultEventHold/days":                                "Days",
+		"ObjectLockConfiguration/Rule/DefaultRetention/DefaultEventHold/years":                               "Years",
+		"ObjectLockConfiguration/Rule/DefaultRetention/days":                                                 "Days",
+		"ObjectLockConfiguration/Rule/DefaultRetention/default_event_hold":                                   "DefaultEventHold",
+		"ObjectLockConfiguration/Rule/DefaultRetention/mode":                                                 "Mode",
+		"ObjectLockConfiguration/Rule/DefaultRetention/years":                                                "Years",
+		"ObjectLockConfiguration/Rule/default_retention":                                                     "DefaultRetention",
+		"ObjectLockConfiguration/object_lock_enabled":                                                        "ObjectLockEnabled",
+		"ObjectLockConfiguration/rule":                                                                       "Rule",
+		"OwnershipControls/Rules/object_ownership":                                                           "ObjectOwnership",
+		"OwnershipControls/rules":                                                                            "Rules",
+		"PublicAccessBlockConfiguration/block_public_acls":                                                   "BlockPublicAcls",
+		"PublicAccessBlockConfiguration/block_public_policy":                                                 "BlockPublicPolicy",
+		"PublicAccessBlockConfiguration/ignore_public_acls":                                                  "IgnorePublicAcls",
+		"PublicAccessBlockConfiguration/restrict_public_buckets":                                             "RestrictPublicBuckets",
+		"ReplicationConfiguration/Rules/DeleteMarkerReplication/status":                                      "Status",
+		"ReplicationConfiguration/Rules/Destination/AccessControlTranslation/owner":                          "Owner",
+		"ReplicationConfiguration/Rules/Destination/EncryptionConfiguration/replica_kms_key_id":              "ReplicaKmsKeyID",
+		"ReplicationConfiguration/Rules/Destination/Metrics/EventThreshold/minutes":                          "Minutes",
+		"ReplicationConfiguration/Rules/Destination/Metrics/event_threshold":                                 "EventThreshold",
+		"ReplicationConfiguration/Rules/Destination/Metrics/status":                                          "Status",
+		"ReplicationConfiguration/Rules/Destination/ReplicationTime/Time/minutes":                            "Minutes",
+		"ReplicationConfiguration/Rules/Destination/ReplicationTime/status":                                  "Status",
+		"ReplicationConfiguration/Rules/Destination/ReplicationTime/time":                                    "Time",
+		"ReplicationConfiguration/Rules/Destination/access_control_translation":                              "AccessControlTranslation",
+		"ReplicationConfiguration/Rules/Destination/account":                                                 "Account",
+		"ReplicationConfiguration/Rules/Destination/bucket":                                                  "Bucket",
+		"ReplicationConfiguration/Rules/Destination/encryption_configuration":                                "EncryptionConfiguration",
+		"ReplicationConfiguration/Rules/Destination/metrics":                                                 "Metrics",
+		"ReplicationConfiguration/Rules/Destination/replication_time":                                        "ReplicationTime",
+		"ReplicationConfiguration/Rules/Destination/storage_class":                                           "StorageClass",
+		"ReplicationConfiguration/Rules/Filter/And/TagFilters/key":                                           "Key",
+		"ReplicationConfiguration/Rules/Filter/And/TagFilters/value":                                         "Value",
+		"ReplicationConfiguration/Rules/Filter/And/prefix":                                                   "Prefix",
+		"ReplicationConfiguration/Rules/Filter/And/tag_filters":                                              "TagFilters",
+		"ReplicationConfiguration/Rules/Filter/TagFilter/key":                                                "Key",
+		"ReplicationConfiguration/Rules/Filter/TagFilter/value":                                              "Value",
+		"ReplicationConfiguration/Rules/Filter/and":                                                          "And",
+		"ReplicationConfiguration/Rules/Filter/prefix":                                                       "Prefix",
+		"ReplicationConfiguration/Rules/Filter/tag_filter":                                                   "TagFilter",
+		"ReplicationConfiguration/Rules/SourceSelectionCriteria/ReplicaModifications/status":                 "Status",
+		"ReplicationConfiguration/Rules/SourceSelectionCriteria/SseKmsEncryptedObjects/status":               "Status",
+		"ReplicationConfiguration/Rules/SourceSelectionCriteria/replica_modifications":                       "ReplicaModifications",
+		"ReplicationConfiguration/Rules/SourceSelectionCriteria/sse_kms_encrypted_objects":                   "SseKmsEncryptedObjects",
+		"ReplicationConfiguration/Rules/delete_marker_replication":                                           "DeleteMarkerReplication",
+		"ReplicationConfiguration/Rules/destination":                                                         "Destination",
+		"ReplicationConfiguration/Rules/filter":                                                              "Filter",
+		"ReplicationConfiguration/Rules/id":                                                                  "Id",
+		"ReplicationConfiguration/Rules/prefix":                                                              "Prefix",
+		"ReplicationConfiguration/Rules/priority":                                                            "Priority",
+		"ReplicationConfiguration/Rules/source_selection_criteria":                                           "SourceSelectionCriteria",
+		"ReplicationConfiguration/Rules/status":                                                              "Status",
+		"ReplicationConfiguration/role":                                                                      "Role",
+		"ReplicationConfiguration/rules":                                                                     "Rules",
+		"Tags/key":                                                                                           "Key",
+		"Tags/value":                                                                                         "Value",
+		"VersioningConfiguration/status":                                                                     "Status",
+		"WebsiteConfiguration/RedirectAllRequestsTo/host_name":                                               "HostName",
+		"WebsiteConfiguration/RedirectAllRequestsTo/protocol":                                                "Protocol",
+		"WebsiteConfiguration/RoutingRules/RedirectRule/host_name":                                           "HostName",
+		"WebsiteConfiguration/RoutingRules/RedirectRule/http_redirect_code":                                  "HttpRedirectCode",
+		"WebsiteConfiguration/RoutingRules/RedirectRule/protocol":                                            "Protocol",
+		"WebsiteConfiguration/RoutingRules/RedirectRule/replace_key_prefix_with":                             "ReplaceKeyPrefixWith",
+		"WebsiteConfiguration/RoutingRules/RedirectRule/replace_key_with":                                    "ReplaceKeyWith",
+		"WebsiteConfiguration/RoutingRules/RoutingRuleCondition/http_error_code_returned_equals":             "HttpErrorCodeReturnedEquals",
+		"WebsiteConfiguration/RoutingRules/RoutingRuleCondition/key_prefix_equals":                           "KeyPrefixEquals",
+		"WebsiteConfiguration/RoutingRules/redirect_rule":                                                    "RedirectRule",
+		"WebsiteConfiguration/RoutingRules/routing_rule_condition":                                           "RoutingRuleCondition",
+		"WebsiteConfiguration/error_document":                                                                "ErrorDocument",
+		"WebsiteConfiguration/index_document":                                                                "IndexDocument",
+		"WebsiteConfiguration/redirect_all_requests_to":                                                      "RedirectAllRequestsTo",
+		"WebsiteConfiguration/routing_rules":                                                                 "RoutingRules",
+		"abac_status":                                                                                        "AbacStatus",
+		"accelerate_configuration":                                                                           "AccelerateConfiguration",
+		"access_control":                                                                                     "AccessControl",
+		"analytics_configurations":                                                                           "AnalyticsConfigurations",
+		"arn":                                                                                                "Arn",
+		"bucket_encryption":                                                                                  "BucketEncryption",
+		"bucket_name":                                                                                        "BucketName",
+		"bucket_name_prefix":                                                                                 "BucketNamePrefix",
+		"bucket_namespace":                                                                                   "BucketNamespace",
+		"cors_configuration":                                                                                 "CorsConfiguration",
+		"domain_name":                                                                                        "DomainName",
+		"dual_stack_domain_name":                                                                             "DualStackDomainName",
+		"intelligent_tiering_configurations":                                                                 "IntelligentTieringConfigurations",
+		"inventory_configurations":                                                                           "InventoryConfigurations",
+		"lifecycle_configuration":                                                                            "LifecycleConfiguration",
+		"logging_configuration":                                                                              "LoggingConfiguration",
+		"metadata_configuration":                                                                             "MetadataConfiguration",
+		"metadata_table_configuration":                                                                       "MetadataTableConfiguration",
+		"metrics_configurations":                                                                             "MetricsConfigurations",
+		"notification_configuration":                                                                         "NotificationConfiguration",
+		"object_lock_configuration":                                                                          "ObjectLockConfiguration",
+		"object_lock_enabled":                                                                                "ObjectLockEnabled",
+		"ownership_controls":                                                                                 "OwnershipControls",
+		"public_access_block_configuration":                                                                  "PublicAccessBlockConfiguration",
+		"regional_domain_name":                                                                               "RegionalDomainName",
+		"replication_configuration":                                                                          "ReplicationConfiguration",
+		"tags":                                                                                               "Tags",
+		"versioning_configuration":                                                                           "VersioningConfiguration",
+		"website_configuration":                                                                              "WebsiteConfiguration",
+		"website_url":                                                                                        "WebsiteURL",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

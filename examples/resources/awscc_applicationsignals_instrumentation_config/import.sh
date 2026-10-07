@@ -1,0 +1,1 @@
+$ terraform import awscc_applicationsignals_instrumentation_config.example "instrumentation_type|service|environment|signal_type|location_hash"

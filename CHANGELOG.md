@@ -1,4 +1,95 @@
-## 1.105.0 (Unreleased)
+## 1.105.0 (October 7, 2026)
+
+NOTES:
+
+* resource/awscc_s3_bucket: Remove resource suppression due to `SSEAlgorithm` name collision ([#3355](https://github.com/hashicorp/terraform-provider-awscc/pull/3355))
+
+FEATURES:
+
+* **New Data Source:** `awscc_applicationsignals_instrumentation_config`
+* **New Data Source:** `awscc_cloudwatch_anomaly_detector`
+* **New Data Source:** `awscc_cloudwatch_anomaly_detectors`
+* **New Data Source:** `awscc_cloudwatch_resource_metrics_configuration`
+* **New Data Source:** `awscc_config_organization_config_rule`
+* **New Data Source:** `awscc_config_organization_config_rules`
+* **New Data Source:** `awscc_directoryservice_microsoft_ad`
+* **New Data Source:** `awscc_directoryservice_microsoft_ads`
+* **New Data Source:** `awscc_drs_recovery_plan`
+* **New Data Source:** `awscc_drs_recovery_plans`
+* **New Data Source:** `awscc_ec2_client_vpn_route`
+* **New Data Source:** `awscc_ec2_secondary_network`
+* **New Data Source:** `awscc_ec2_secondary_networks`
+* **New Data Source:** `awscc_iot_policy_principal_attachment`
+* **New Data Source:** `awscc_ivs_ad_configuration`
+* **New Data Source:** `awscc_ivs_ad_configurations`
+* **New Data Source:** `awscc_lambda_web_function`
+* **New Data Source:** `awscc_lambda_web_function_endpoint`
+* **New Data Source:** `awscc_lambda_web_function_revision`
+* **New Data Source:** `awscc_lambda_web_functions`
+* **New Data Source:** `awscc_licensemanager_report_generator`
+* **New Data Source:** `awscc_licensemanager_report_generators`
+* **New Data Source:** `awscc_networksecuritymanager_deployment`
+* **New Data Source:** `awscc_networksecuritymanager_deployments`
+* **New Data Source:** `awscc_networksecuritymanager_policies`
+* **New Data Source:** `awscc_networksecuritymanager_policy`
+* **New Data Source:** `awscc_networksecuritymanager_template`
+* **New Data Source:** `awscc_networksecuritymanager_templates`
+* **New Data Source:** `awscc_personalize_campaign`
+* **New Data Source:** `awscc_personalize_campaigns`
+* **New Data Source:** `awscc_rds_db_cluster_endpoint`
+* **New Data Source:** `awscc_rds_db_cluster_endpoints`
+* **New Data Source:** `awscc_scn_instance`
+* **New Data Source:** `awscc_scn_instances`
+* **New Data Source:** `awscc_smsvoice_notify_configuration`
+* **New Data Source:** `awscc_smsvoice_notify_configurations`
+* **New Data Source:** `awscc_smsvoice_rcs_agent`
+* **New Data Source:** `awscc_smsvoice_rcs_agents`
+* **New Data Source:** `awscc_translate_terminologies`
+* **New Data Source:** `awscc_translate_terminology`
+* **New Data Source:** `awscc_workspaces_directories`
+* **New Data Source:** `awscc_workspaces_directory`
+* **New List Resource:** `awscc_cloudwatch_anomaly_detector`
+* **New List Resource:** `awscc_config_organization_config_rule`
+* **New List Resource:** `awscc_directoryservice_microsoft_ad`
+* **New List Resource:** `awscc_drs_recovery_plan`
+* **New List Resource:** `awscc_ec2_secondary_network`
+* **New List Resource:** `awscc_ivs_ad_configuration`
+* **New List Resource:** `awscc_lambda_web_function`
+* **New List Resource:** `awscc_licensemanager_report_generator`
+* **New List Resource:** `awscc_networksecuritymanager_deployment`
+* **New List Resource:** `awscc_networksecuritymanager_policy`
+* **New List Resource:** `awscc_networksecuritymanager_template`
+* **New List Resource:** `awscc_personalize_campaign`
+* **New List Resource:** `awscc_rds_db_cluster_endpoint`
+* **New List Resource:** `awscc_scn_instance`
+* **New List Resource:** `awscc_smsvoice_notify_configuration`
+* **New List Resource:** `awscc_smsvoice_rcs_agent`
+* **New List Resource:** `awscc_translate_terminology`
+* **New List Resource:** `awscc_workspaces_directory`
+* **New Resource:** `awscc_applicationsignals_instrumentation_config`
+* **New Resource:** `awscc_cloudwatch_anomaly_detector`
+* **New Resource:** `awscc_cloudwatch_resource_metrics_configuration`
+* **New Resource:** `awscc_config_organization_config_rule`
+* **New Resource:** `awscc_directoryservice_microsoft_ad`
+* **New Resource:** `awscc_drs_recovery_plan`
+* **New Resource:** `awscc_ec2_client_vpn_route`
+* **New Resource:** `awscc_ec2_secondary_network`
+* **New Resource:** `awscc_iot_policy_principal_attachment`
+* **New Resource:** `awscc_ivs_ad_configuration`
+* **New Resource:** `awscc_lambda_web_function`
+* **New Resource:** `awscc_lambda_web_function_endpoint`
+* **New Resource:** `awscc_lambda_web_function_revision`
+* **New Resource:** `awscc_licensemanager_report_generator`
+* **New Resource:** `awscc_networksecuritymanager_deployment`
+* **New Resource:** `awscc_networksecuritymanager_policy`
+* **New Resource:** `awscc_networksecuritymanager_template`
+* **New Resource:** `awscc_personalize_campaign`
+* **New Resource:** `awscc_rds_db_cluster_endpoint`
+* **New Resource:** `awscc_scn_instance`
+* **New Resource:** `awscc_smsvoice_notify_configuration`
+* **New Resource:** `awscc_smsvoice_rcs_agent`
+* **New Resource:** `awscc_translate_terminology`
+* **New Resource:** `awscc_workspaces_directory`
 
 ## 1.104.0 (September 30, 2026)
 

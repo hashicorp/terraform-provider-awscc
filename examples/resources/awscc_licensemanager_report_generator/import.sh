@@ -1,0 +1,1 @@
+$ terraform import awscc_licensemanager_report_generator.example "arn"

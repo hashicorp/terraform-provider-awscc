@@ -23,9 +23,13 @@ Data Source schema for AWS::AgentRegistry::Registry
 
 - `approval_configuration` (Attributes) Configuration for the registry's record approval workflow. (see [below for nested schema](#nestedatt--approval_configuration))
 - `authorizer_type` (String) The type of authorizer that controls how consumers access the registry's search and MCP invoke operations.
+- `auto_detection_enabled` (Boolean) Specifies whether auto-detection is requested for the registry. Must be specified together with AutoDetectionScope. Setting this to true is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met. To turn auto-detection off, explicitly set this to false - removing AutoDetectionEnabled and AutoDetectionScope from the template is a no-op and leaves the existing auto-detection settings unchanged. A registry cannot be deleted while auto-detection is enabled: set this to false and update the stack before deleting the registry.
+- `auto_detection_scope` (String) The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.
+- `auto_detection_status` (String) The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.
 - `created_at` (String) The timestamp when the registry was created.
 - `description` (String) The description of the registry.
 - `discovery_configuration` (Attributes) Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint. (see [below for nested schema](#nestedatt--discovery_configuration))
+- `encryption_configuration` (Attributes) The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind. (see [below for nested schema](#nestedatt--encryption_configuration))
 - `name` (String) The name of the registry.
 - `registry_arn` (String) The Amazon Resource Name (ARN) of the registry.
 - `registry_id` (String) The unique identifier of the registry.
@@ -95,6 +99,14 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--encryption_configuration"></a>
+### Nested Schema for `encryption_configuration`
+
+Read-Only:
+
+- `kms_key_arn` (String) The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same AWS account and Region as the registry. Multi-Region keys are not supported.
 
 
 <a id="nestedatt--tags"></a>

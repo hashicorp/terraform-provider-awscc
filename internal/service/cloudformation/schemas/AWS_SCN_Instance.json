@@ -1,0 +1,197 @@
+{
+  "typeName": "AWS::SCN::Instance",
+  "description": "Resource Type definition for AWS::SCN::Instance",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the instance.",
+      "minLength": 20,
+      "maxLength": 1011,
+      "pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$"
+    },
+    "InstanceId": {
+      "type": "string",
+      "description": "The instance identifier.",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "InstanceName": {
+      "type": "string",
+      "description": "The instance name.",
+      "minLength": 0,
+      "maxLength": 63,
+      "pattern": ""
+    },
+    "InstanceDescription": {
+      "type": "string",
+      "description": "The instance description.",
+      "minLength": 0,
+      "maxLength": 501,
+      "pattern": "^([a-zA-Z0-9., _?'%-]){0,500}$"
+    },
+    "WebAppDnsDomain": {
+      "type": "string",
+      "description": "The WebApp DNS domain name of the instance.",
+      "pattern": ""
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the instance.",
+      "enum": [
+        "Initializing",
+        "Active",
+        "CreateFailed",
+        "DeleteFailed",
+        "Deleting",
+        "Deleted"
+      ]
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "description": "The AWS account ID that owns the instance.",
+      "pattern": "^[0-9]{12}$"
+    },
+    "CreatedTime": {
+      "type": "string",
+      "description": "The instance creation timestamp.",
+      "format": "date-time"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The instance last modified timestamp.",
+      "format": "date-time"
+    },
+    "VersionNumber": {
+      "type": "number",
+      "description": "The version number of the instance."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags for the instance.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/InstanceId",
+    "/properties/State",
+    "/properties/AwsAccountId",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime",
+    "/properties/VersionNumber"
+  ],
+  "createOnlyProperties": [
+    "/properties/WebAppDnsDomain"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/InstanceId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "scn:TagResource",
+      "scn:UntagResource",
+      "scn:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "scn:CreateInstance",
+        "scn:GetInstance",
+        "scn:CreateSSOApplication",
+        "scn:TagResource",
+        "scn:ListTagsForResource",
+        "s3:*",
+        "chime:*",
+        "events:*",
+        "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:RetireGrant",
+        "organizations:CreateOrganization",
+        "organizations:DescribeOrganization",
+        "organizations:EnableAWSServiceAccess"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "scn:GetInstance",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "scn:UpdateInstance",
+        "scn:GetInstance",
+        "scn:TagResource",
+        "scn:UntagResource",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "scn:DeleteInstance",
+        "scn:GetInstance",
+        "scn:ListTagsForResource",
+        "scn:DeleteSSOApplication",
+        "s3:*",
+        "chime:*",
+        "events:*",
+        "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:RetireGrant",
+        "organizations:CreateOrganization",
+        "organizations:DescribeOrganization",
+        "organizations:EnableAWSServiceAccess"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "scn:ListInstances"
+      ]
+    }
+  }
+}

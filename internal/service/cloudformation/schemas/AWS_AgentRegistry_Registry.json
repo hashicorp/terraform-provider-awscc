@@ -1,103 +1,160 @@
 {
+  "tagging": {
+    "permissions": [
+      "agent-registry:TagResource",
+      "agent-registry:UntagResource",
+      "agent-registry:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "agent-registry:GetRegistry",
+        "agent-registry:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "agent-registry:CreateRegistry",
+        "agent-registry:GetRegistry",
+        "agent-registry:TagResource",
+        "agent-registry:ListTagsForResource",
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "iam:CreateServiceLinkedRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "agent-registry:UpdateRegistry",
+        "agent-registry:GetRegistry",
+        "agent-registry:TagResource",
+        "agent-registry:UntagResource",
+        "agent-registry:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "agent-registry:ListRegistries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "agent-registry:DeleteRegistry",
+        "agent-registry:GetRegistry",
+        "bedrock-agentcore:DeleteWorkloadIdentity"
+      ]
+    }
+  },
   "typeName": "AWS::AgentRegistry::Registry",
+  "readOnlyProperties": [
+    "/properties/RegistryId",
+    "/properties/RegistryArn",
+    "/properties/AutoDetectionStatus",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
   "description": "Definition of AWS::AgentRegistry::Registry Resource Type",
+  "additionalIdentifiers": [
+    [
+      "/properties/RegistryId"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/AuthorizerType",
+    "/properties/EncryptionConfiguration"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/RegistryArn"
+  ],
   "definitions": {
-    "DiscoveryConfiguration": {
+    "RegistryStatus": {
+      "description": "The status of the registry.",
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "READY",
+        "UPDATING",
+        "CREATE_FAILED",
+        "UPDATE_FAILED",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
+    "ApprovalConfiguration": {
+      "description": "Configuration for the registry's record approval workflow.",
+      "additionalProperties": false,
       "type": "object",
+      "properties": {
+        "AutoApprovalRules": {
+          "maxItems": 10,
+          "description": "The rules that determine which registry records are automatically approved on submission. When omitted or empty, submitted records require manual review.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoApprovalRule"
+          }
+        }
+      }
+    },
+    "EncryptionConfiguration": {
+      "description": "The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "KmsKeyArn": {
+          "minLength": 1,
+          "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+          "description": "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same AWS account and Region as the registry. Multi-Region keys are not supported.",
+          "type": "string",
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "KmsKeyArn"
+      ]
+    },
+    "DiscoveryConfiguration": {
       "description": "Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint.",
+      "additionalProperties": false,
+      "type": "object",
       "properties": {
         "AuthorizerConfiguration": {
           "$ref": "#/definitions/AuthorizerConfiguration"
         }
-      },
-      "additionalProperties": false
+      }
     },
-    "RegistryAuthorizerType": {
+    "AutoApprovalRule": {
+      "description": "A rule that determines which registry records are automatically approved on submission.",
       "type": "string",
-      "description": "The type of authorizer that controls how consumers access the registry's search and MCP invoke operations.",
       "enum": [
-        "CUSTOM_JWT",
-        "AWS_IAM"
+        "APPROVE_ALL"
       ]
     },
-    "AuthorizerConfiguration": {
-      "type": "object",
-      "description": "The authorizer configuration for the registry. This is a union - specify exactly one member.",
-      "properties": {
-        "CustomJWTAuthorizer": {
-          "$ref": "#/definitions/CustomJWTAuthorizerConfiguration"
-        }
-      },
-      "required": [
-        "CustomJWTAuthorizer"
-      ],
-      "additionalProperties": false
-    },
-    "CustomJWTAuthorizerConfiguration": {
-      "type": "object",
-      "description": "Configuration for a custom JWT authorizer that validates inbound bearer tokens against an OpenID Connect identity provider.",
-      "properties": {
-        "DiscoveryUrl": {
-          "type": "string",
-          "description": "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
-          "minLength": 1,
-          "maxLength": 2048,
-          "pattern": "^.+/\\.well-known/openid-configuration$"
-        },
-        "AllowedAudience": {
-          "type": "array",
-          "description": "The audience values accepted during JWT validation.",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "minItems": 1
-        },
-        "AllowedClients": {
-          "type": "array",
-          "description": "The client identifiers accepted during JWT validation.",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "minItems": 1
-        },
-        "AllowedScopes": {
-          "type": "array",
-          "description": "The scopes accepted during JWT validation.",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255,
-            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
-          },
-          "minItems": 1
-        },
-        "CustomClaims": {
-          "type": "array",
-          "description": "Additional custom claim validations applied to the inbound JWT.",
-          "items": {
-            "$ref": "#/definitions/CustomClaimValidationType"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "DiscoveryUrl"
-      ],
-      "additionalProperties": false
-    },
     "CustomClaimValidationType": {
-      "type": "object",
       "description": "A validation rule applied to a single claim of an inbound JWT.",
+      "additionalProperties": false,
+      "type": "object",
       "properties": {
+        "AuthorizingClaimMatchValue": {
+          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
+        },
         "InboundTokenClaimName": {
-          "type": "string",
           "minLength": 1,
-          "maxLength": 255,
-          "pattern": "^[A-Za-z0-9_.-:]+$"
+          "pattern": "^[A-Za-z0-9_.-:]+$",
+          "type": "string",
+          "maxLength": 255
         },
         "InboundTokenClaimValueType": {
           "type": "string",
@@ -105,21 +162,116 @@
             "STRING",
             "STRING_ARRAY"
           ]
-        },
-        "AuthorizingClaimMatchValue": {
-          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
         }
       },
       "required": [
         "InboundTokenClaimName",
         "InboundTokenClaimValueType",
         "AuthorizingClaimMatchValue"
+      ]
+    },
+    "ClaimMatchValueType": {
+      "oneOf": [
+        {
+          "required": [
+            "MatchValueString"
+          ]
+        },
+        {
+          "required": [
+            "MatchValueStringList"
+          ]
+        }
       ],
-      "additionalProperties": false
+      "description": "The expected value used to match a claim. Exactly one member is set.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MatchValueString": {
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:/-]+$",
+          "type": "string",
+          "maxLength": 255
+        },
+        "MatchValueStringList": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.:/-]+$",
+            "type": "string",
+            "maxLength": 255
+          }
+        }
+      }
+    },
+    "AutoDetectionScope": {
+      "description": "The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.",
+      "type": "string",
+      "enum": [
+        "ORGANIZATION"
+      ]
+    },
+    "CustomJWTAuthorizerConfiguration": {
+      "description": "Configuration for a custom JWT authorizer that validates inbound bearer tokens against an OpenID Connect identity provider.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "DiscoveryUrl": {
+          "minLength": 1,
+          "pattern": "^.+/\\.well-known/openid-configuration$",
+          "description": "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
+          "type": "string",
+          "maxLength": 2048
+        },
+        "AllowedAudience": {
+          "minItems": 1,
+          "description": "The audience values accepted during JWT validation.",
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "CustomClaims": {
+          "minItems": 1,
+          "description": "Additional custom claim validations applied to the inbound JWT.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomClaimValidationType"
+          }
+        },
+        "AllowedClients": {
+          "minItems": 1,
+          "description": "The client identifiers accepted during JWT validation.",
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "AllowedScopes": {
+          "minItems": 1,
+          "description": "The scopes accepted during JWT validation.",
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$",
+            "type": "string",
+            "maxLength": 255
+          }
+        }
+      },
+      "required": [
+        "DiscoveryUrl"
+      ]
     },
     "AuthorizingClaimMatchValueType": {
-      "type": "object",
       "description": "The value and match operator used to authorize a claim during JWT validation.",
+      "additionalProperties": false,
+      "type": "object",
       "properties": {
         "ClaimMatchValue": {
           "$ref": "#/definitions/ClaimMatchValueType"
@@ -136,237 +288,137 @@
       "required": [
         "ClaimMatchValue",
         "ClaimMatchOperator"
-      ],
-      "additionalProperties": false
-    },
-    "ClaimMatchValueType": {
-      "type": "object",
-      "description": "The expected value used to match a claim. Exactly one member is set.",
-      "properties": {
-        "MatchValueString": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "^[A-Za-z0-9_.:/-]+$"
-        },
-        "MatchValueStringList": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255,
-            "pattern": "^[A-Za-z0-9_.:/-]+$"
-          },
-          "minItems": 1
-        }
-      },
-      "additionalProperties": false,
-      "oneOf": [
-        {
-          "required": [
-            "MatchValueString"
-          ]
-        },
-        {
-          "required": [
-            "MatchValueStringList"
-          ]
-        }
       ]
     },
-    "ApprovalConfiguration": {
-      "type": "object",
-      "description": "Configuration for the registry's record approval workflow.",
-      "properties": {
-        "AutoApprovalRules": {
-          "type": "array",
-          "description": "The rules that determine which registry records are automatically approved on submission. When omitted or empty, submitted records require manual review.",
-          "items": {
-            "$ref": "#/definitions/AutoApprovalRule"
-          },
-          "maxItems": 10,
-          "insertionOrder": false
-        }
-      },
-      "additionalProperties": false
-    },
-    "AutoApprovalRule": {
+    "AutoDetectionStatus": {
+      "description": "The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.",
       "type": "string",
-      "description": "A rule that determines which registry records are automatically approved on submission.",
       "enum": [
-        "APPROVE_ALL"
-      ]
-    },
-    "RegistryStatus": {
-      "type": "string",
-      "description": "The status of the registry.",
-      "enum": [
-        "CREATING",
-        "READY",
-        "UPDATING",
-        "CREATE_FAILED",
-        "UPDATE_FAILED",
-        "DELETING",
-        "DELETE_FAILED"
+        "ACTIVE",
+        "INACTIVE"
       ]
     },
     "Tag": {
-      "type": "object",
       "description": "A tag to assign to the registry.",
+      "additionalProperties": false,
+      "type": "object",
       "properties": {
-        "Key": {
-          "type": "string",
-          "description": "The key of the tag.",
-          "minLength": 1,
-          "maxLength": 128,
-          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
-        },
         "Value": {
-          "type": "string",
-          "description": "The value of the tag.",
           "minLength": 0,
-          "maxLength": 256,
-          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "The value of the tag.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "The key of the tag.",
+          "type": "string",
+          "maxLength": 128
         }
       },
       "required": [
         "Key",
         "Value"
-      ],
-      "additionalProperties": false
+      ]
+    },
+    "RegistryAuthorizerType": {
+      "description": "The type of authorizer that controls how consumers access the registry's search and MCP invoke operations.",
+      "type": "string",
+      "enum": [
+        "CUSTOM_JWT",
+        "AWS_IAM"
+      ]
+    },
+    "AuthorizerConfiguration": {
+      "description": "The authorizer configuration for the registry. This is a union - specify exactly one member.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CustomJWTAuthorizer": {
+          "$ref": "#/definitions/CustomJWTAuthorizerConfiguration"
+        }
+      },
+      "required": [
+        "CustomJWTAuthorizer"
+      ]
     }
   },
   "properties": {
-    "RegistryId": {
-      "type": "string",
-      "description": "The unique identifier of the registry.",
-      "minLength": 12,
-      "maxLength": 16,
-      "pattern": "^[a-zA-Z0-9]{12,16}$"
-    },
-    "RegistryArn": {
-      "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the registry.",
-      "minLength": 46,
-      "maxLength": 2048,
-      "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}$"
-    },
-    "Name": {
-      "type": "string",
-      "description": "The name of the registry.",
-      "minLength": 1,
-      "maxLength": 64,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$"
+    "Status": {
+      "$ref": "#/definitions/RegistryStatus"
     },
     "Description": {
-      "type": "string",
-      "description": "The description of the registry.",
       "minLength": 1,
+      "description": "The description of the registry.",
+      "type": "string",
       "maxLength": 4096
-    },
-    "AuthorizerType": {
-      "$ref": "#/definitions/RegistryAuthorizerType"
-    },
-    "DiscoveryConfiguration": {
-      "$ref": "#/definitions/DiscoveryConfiguration"
     },
     "ApprovalConfiguration": {
       "$ref": "#/definitions/ApprovalConfiguration"
     },
-    "Status": {
-      "$ref": "#/definitions/RegistryStatus"
+    "AuthorizerType": {
+      "$ref": "#/definitions/RegistryAuthorizerType"
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
     },
     "CreatedAt": {
-      "type": "string",
+      "format": "date-time",
       "description": "The timestamp when the registry was created.",
-      "format": "date-time"
+      "type": "string"
+    },
+    "DiscoveryConfiguration": {
+      "$ref": "#/definitions/DiscoveryConfiguration"
+    },
+    "AutoDetectionEnabled": {
+      "description": "Specifies whether auto-detection is requested for the registry. Must be specified together with AutoDetectionScope. Setting this to true is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met. To turn auto-detection off, explicitly set this to false - removing AutoDetectionEnabled and AutoDetectionScope from the template is a no-op and leaves the existing auto-detection settings unchanged. A registry cannot be deleted while auto-detection is enabled: set this to false and update the stack before deleting the registry.",
+      "type": "boolean"
     },
     "UpdatedAt": {
-      "type": "string",
+      "format": "date-time",
       "description": "The timestamp when the registry was last updated.",
-      "format": "date-time"
+      "type": "string"
+    },
+    "Name": {
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$",
+      "description": "The name of the registry.",
+      "type": "string",
+      "maxLength": 64
+    },
+    "AutoDetectionScope": {
+      "$ref": "#/definitions/AutoDetectionScope"
+    },
+    "AutoDetectionStatus": {
+      "$ref": "#/definitions/AutoDetectionStatus"
+    },
+    "RegistryId": {
+      "minLength": 12,
+      "pattern": "^[a-zA-Z0-9]{12,16}$",
+      "description": "The unique identifier of the registry.",
+      "type": "string",
+      "maxLength": 16
+    },
+    "RegistryArn": {
+      "minLength": 46,
+      "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}$",
+      "description": "The Amazon Resource Name (ARN) of the registry.",
+      "type": "string",
+      "maxLength": 2048
     },
     "Tags": {
-      "type": "array",
+      "maxItems": 50,
       "description": "Tags to assign to the registry.",
+      "insertionOrder": false,
+      "type": "array",
       "items": {
         "$ref": "#/definitions/Tag"
-      },
-      "maxItems": 50,
-      "insertionOrder": false
+      }
     }
   },
   "required": [
     "Name"
-  ],
-  "readOnlyProperties": [
-    "/properties/RegistryId",
-    "/properties/RegistryArn",
-    "/properties/Status",
-    "/properties/CreatedAt",
-    "/properties/UpdatedAt"
-  ],
-  "createOnlyProperties": [
-    "/properties/AuthorizerType"
-  ],
-  "primaryIdentifier": [
-    "/properties/RegistryArn"
-  ],
-  "additionalIdentifiers": [
-    [
-      "/properties/RegistryId"
-    ]
-  ],
-  "additionalProperties": false,
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags",
-    "permissions": [
-      "agent-registry:TagResource",
-      "agent-registry:UntagResource",
-      "agent-registry:ListTagsForResource"
-    ]
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "agent-registry:CreateRegistry",
-        "agent-registry:GetRegistry",
-        "agent-registry:TagResource",
-        "agent-registry:ListTagsForResource",
-        "bedrock-agentcore:CreateWorkloadIdentity",
-        "iam:CreateServiceLinkedRole"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "agent-registry:GetRegistry",
-        "agent-registry:ListTagsForResource"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "agent-registry:UpdateRegistry",
-        "agent-registry:GetRegistry",
-        "agent-registry:TagResource",
-        "agent-registry:UntagResource",
-        "agent-registry:ListTagsForResource"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "agent-registry:DeleteRegistry",
-        "agent-registry:GetRegistry",
-        "bedrock-agentcore:DeleteWorkloadIdentity"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "agent-registry:ListRegistries"
-      ]
-    }
-  }
+  ]
 }

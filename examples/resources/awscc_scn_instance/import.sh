@@ -1,0 +1,1 @@
+$ terraform import awscc_scn_instance.example "arn"

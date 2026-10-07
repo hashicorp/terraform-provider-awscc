@@ -1859,6 +1859,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "The VPC Lattice configuration for your service that holds the information for the target group(s) Amazon ECS tasks will be registered to.",
 		//	    "properties": {
+		//	      "AdvancedConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AlternateTargetGroupArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "ProductionListenerRule": {
+		//	            "type": "string"
+		//	          },
+		//	          "TestListenerRule": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "PortName": {
 		//	        "description": "The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.",
 		//	        "type": "string"
@@ -1884,6 +1900,25 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_lattice_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AdvancedConfiguration
+					"advanced_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AlternateTargetGroupArn
+							"alternate_target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProductionListenerRule
+							"production_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TestListenerRule
+							"test_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: PortName
 					"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.",

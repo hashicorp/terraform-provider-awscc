@@ -1,0 +1,1 @@
+$ terraform import awscc_workspaces_directory.example "arn"

@@ -33,6 +33,7 @@ Resource Type definition for AWS::NetworkSecurityManager::Rule. Creates and mana
 - `rule_arn` (String) The Amazon Resource Name (ARN) of the rule.
 - `rule_id` (String) The unique identifier of the rule.
 - `status` (String) The status of the rule.
+- `updated_at` (String) An ISO 8601 timestamp indicating when the rule was last modified.
 - `version` (String) The version number of the rule.
 
 <a id="nestedatt--tags"></a>

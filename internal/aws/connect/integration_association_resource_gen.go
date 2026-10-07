@@ -101,7 +101,8 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		//	    "FILE_SCANNER",
 		//	    "MESSAGE_PROCESSOR",
 		//	    "Q_MESSAGE_TEMPLATES",
-		//	    "SES_IDENTITY"
+		//	    "SES_IDENTITY",
+		//	    "EVENT"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -121,10 +122,83 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 					"MESSAGE_PROCESSOR",
 					"Q_MESSAGE_TEMPLATES",
 					"SES_IDENTITY",
+					"EVENT",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceApplicationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the external application. This is only supported for the EVENT integration type",
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_ -]+$",
+		//	  "type": "string"
+		//	}
+		"source_application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the external application. This is only supported for the EVENT integration type",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ -]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceApplicationUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL for the external application. This is only supported for the EVENT integration type",
+		//	  "maxLength": 2000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"source_application_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL for the external application. This is only supported for the EVENT integration type",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the data source. This is only supported for the EVENT integration type",
+		//	  "enum": [
+		//	    "SALESFORCE",
+		//	    "ZENDESK",
+		//	    "CASES"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the data source. This is only supported for the EVENT integration type",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SALESFORCE",
+					"ZENDESK",
+					"CASES",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -245,6 +319,9 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		"integration_association_id": "IntegrationAssociationId",
 		"integration_type":           "IntegrationType",
 		"key":                        "Key",
+		"source_application_name":    "SourceApplicationName",
+		"source_application_url":     "SourceApplicationUrl",
+		"source_type":                "SourceType",
 		"tags":                       "Tags",
 		"value":                      "Value",
 	})

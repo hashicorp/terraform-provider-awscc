@@ -668,6 +668,16 @@ Read-Only:
 
 Read-Only:
 
+- `advanced_configuration` (Attributes) (see [below for nested schema](#nestedatt--vpc_lattice_configurations--advanced_configuration))
 - `port_name` (String) The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.
 - `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice configuration that the Amazon ECS tasks will be registered to.
+
+<a id="nestedatt--vpc_lattice_configurations--advanced_configuration"></a>
+### Nested Schema for `vpc_lattice_configurations.advanced_configuration`
+
+Read-Only:
+
+- `alternate_target_group_arn` (String)
+- `production_listener_rule` (String)
+- `test_listener_rule` (String)

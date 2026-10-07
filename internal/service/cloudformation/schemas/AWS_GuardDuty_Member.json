@@ -60,7 +60,8 @@
       "permissions": [
         "guardduty:GetMembers",
         "guardduty:DisassociateMembers",
-        "guardduty:DeleteMembers"
+        "guardduty:DeleteMembers",
+        "guardduty:ListMembers"
       ]
     },
     "update": {

@@ -117,9 +117,11 @@ func vPNConcentratorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the transit gateway associated with the VPN concentrator.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Type

@@ -42,7 +42,8 @@
       "type": "string",
       "enum": [
         "DRAFT",
-        "ACTIVE"
+        "ACTIVE",
+        "DISABLED"
       ]
     },
     "Version": {
@@ -51,6 +52,11 @@
       "pattern": "^[1-9][0-9]*$",
       "minLength": 1,
       "maxLength": 10
+    },
+    "UpdatedAt": {
+      "description": "An ISO 8601 timestamp indicating when the rule was last modified.",
+      "type": "string",
+      "format": "date-time"
     },
     "Tags": {
       "description": "The tags associated with the rule.",
@@ -98,7 +104,8 @@
     "/properties/RuleId",
     "/properties/RuleArn",
     "/properties/Status",
-    "/properties/Version"
+    "/properties/Version",
+    "/properties/UpdatedAt"
   ],
   "primaryIdentifier": [
     "/properties/RuleArn"

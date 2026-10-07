@@ -8,6 +8,7 @@ package networksecuritymanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -159,7 +160,8 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the rule.",
 		//	  "enum": [
 		//	    "DRAFT",
-		//	    "ACTIVE"
+		//	    "ACTIVE",
+		//	    "DISABLED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -236,6 +238,22 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UpdatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An ISO 8601 timestamp indicating when the rule was last modified.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "An ISO 8601 timestamp indicating when the rule was last modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -292,6 +310,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		"rule_type":        "RuleType",
 		"status":           "Status",
 		"tags":             "Tags",
+		"updated_at":       "UpdatedAt",
 		"value":            "Value",
 		"version":          "Version",
 	})
