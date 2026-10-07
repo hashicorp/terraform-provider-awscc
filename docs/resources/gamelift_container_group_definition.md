@@ -87,7 +87,6 @@ resource "awscc_gamelift_container_group_definition" "example" {
 - `name` (String) A descriptive label for the container group definition.
 - `operating_system` (String) The operating system of the container group
 - `total_memory_limit_mebibytes` (Number) The total memory limit of container groups following this definition in MiB
-- `total_vcpu_limit` (Number) The total amount of virtual CPUs on the container group definition
 
 ### Optional
 
@@ -96,6 +95,7 @@ resource "awscc_gamelift_container_group_definition" "example" {
 - `source_version_number` (Number) A specific ContainerGroupDefinition version to be updated
 - `support_container_definitions` (Attributes Set) A collection of support container definitions that define the containers in this group. (see [below for nested schema](#nestedatt--support_container_definitions))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `total_vcpu_limit` (Number) The total amount of virtual CPUs on the container group definition
 - `version_description` (String) The description of this version
 
 ### Read-Only

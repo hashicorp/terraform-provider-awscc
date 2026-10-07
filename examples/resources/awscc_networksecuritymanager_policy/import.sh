@@ -1,0 +1,1 @@
+$ terraform import awscc_networksecuritymanager_policy.example "policy_arn"

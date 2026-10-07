@@ -1,0 +1,1 @@
+$ terraform import awscc_networksecuritymanager_template.example "template_arn"

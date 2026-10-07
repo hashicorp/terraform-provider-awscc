@@ -31,6 +31,7 @@ Resource Type definition for AWS::NetworkSecurityManager::Scope. Creates and man
 - `scope_arn` (String) The Amazon Resource Name (ARN) of the scope.
 - `scope_id` (String) The unique identifier of the scope.
 - `status` (String) The status of the scope.
+- `updated_at` (String) An ISO 8601 timestamp indicating when the scope was last modified.
 - `version` (String) The version number of the scope.
 
 <a id="nestedatt--tags"></a>

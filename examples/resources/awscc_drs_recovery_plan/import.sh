@@ -1,0 +1,1 @@
+$ terraform import awscc_drs_recovery_plan.example "arn"

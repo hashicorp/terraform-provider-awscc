@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_secondary_network.example "secondary_network_arn"

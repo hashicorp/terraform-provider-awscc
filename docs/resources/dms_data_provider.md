@@ -56,6 +56,7 @@ resource "awscc_dms_data_provider" "example" {
 - `exact_settings` (Boolean) The property describes the exact settings which can be modified
 - `settings` (Attributes) The property identifies the exact type of settings for the data provider. (see [below for nested schema](#nestedatt--settings))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `virtual` (Boolean) Indicates whether the data provider is virtual.
 
 ### Read-Only
 
@@ -99,7 +100,9 @@ Optional:
 
 - `certificate_arn` (String)
 - `database_name` (String)
+- `encryption_algorithm` (Number)
 - `port` (Number)
+- `security_mechanism` (Number)
 - `server_name` (String)
 - `ssl_mode` (String)
 
@@ -135,6 +138,8 @@ Optional:
 - `certificate_arn` (String)
 - `database_name` (String)
 - `port` (Number)
+- `s3_access_role_arn` (String) The ARN for the role the application uses to access its Amazon S3 bucket.
+- `s3_path` (String) The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.
 - `server_name` (String)
 - `ssl_mode` (String)
 

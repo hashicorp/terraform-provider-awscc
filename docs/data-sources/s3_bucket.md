@@ -21,6 +21,7 @@ Data Source schema for AWS::S3::Bucket
 
 ### Read-Only
 
+- `abac_status` (String) The ABAC status of the general purpose bucket. When ABAC is enabled for the general purpose bucket, you can use tags to manage access to the general purpose buckets as well as for cost tracking purposes. When ABAC is disabled for the general purpose buckets, you can only use tags for cost tracking purposes. For more information, see [Using tags with S3 general purpose buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html).
 - `accelerate_configuration` (Attributes) Configures the transfer acceleration state for an Amazon S3 bucket. For more information, see [Amazon S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--accelerate_configuration))
 - `access_control` (String) This is a legacy property, and it is not recommended for most use cases. A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you keep ACLs disabled. For more information, see [Controlling object ownership](https://docs.aws.amazon.com//AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.
   A canned access control list (ACL) that grants predefined permissions to the bucket. For more information about canned ACLs, see [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) in the *Amazon S3 User Guide*.
@@ -31,21 +32,26 @@ Data Source schema for AWS::S3::Bucket
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3), AWS KMS-managed keys (SSE-KMS), or dual-layer server-side encryption with KMS-managed keys (DSSE-KMS). For information about the Amazon S3 default encryption feature, see [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--bucket_encryption))
 - `bucket_name` (String) A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. 
   If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.
+- `bucket_name_prefix` (String)
+- `bucket_namespace` (String)
 - `cors_configuration` (Attributes) Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--cors_configuration))
 - `domain_name` (String)
 - `dual_stack_domain_name` (String)
 - `intelligent_tiering_configurations` (Attributes List) Defines how Amazon S3 handles Intelligent-Tiering storage. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations))
-- `inventory_configurations` (Attributes List) Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*. (see [below for nested schema](#nestedatt--inventory_configurations))
+- `inventory_configurations` (Attributes List) Specifies the S3 Inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*. (see [below for nested schema](#nestedatt--inventory_configurations))
 - `lifecycle_configuration` (Attributes) Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `logging_configuration` (Attributes) Settings that define where logs are stored. (see [below for nested schema](#nestedatt--logging_configuration))
-- `metadata_table_configuration` (Attributes) The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html). (see [below for nested schema](#nestedatt--metadata_table_configuration))
+- `metadata_configuration` (Attributes) The S3 Metadata configuration for a general purpose bucket. (see [below for nested schema](#nestedatt--metadata_configuration))
+- `metadata_table_configuration` (Attributes) The metadata table configuration of an S3 general purpose bucket. (see [below for nested schema](#nestedatt--metadata_table_configuration))
 - `metrics_configurations` (Attributes List) Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html). (see [below for nested schema](#nestedatt--metrics_configurations))
 - `notification_configuration` (Attributes) Configuration that defines how Amazon S3 handles bucket notifications. (see [below for nested schema](#nestedatt--notification_configuration))
 - `object_lock_configuration` (Attributes) This operation is not supported for directory buckets.
   Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). 
    +  The ``DefaultRetention`` settings require both a mode and a period.
   +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.
-  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html). (see [below for nested schema](#nestedatt--object_lock_configuration))
+  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).
+  
+   You must URL encode any signed header values that contain spaces. For example, if your header value is ``my file.txt``, containing two spaces after ``my``, you must URL encode this value to ``my%20%20file.txt``. (see [below for nested schema](#nestedatt--object_lock_configuration))
 - `object_lock_enabled` (Boolean) Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.
 - `ownership_controls` (Attributes) Configuration that defines how Amazon S3 handles Object Ownership rules. (see [below for nested schema](#nestedatt--ownership_controls))
 - `public_access_block_configuration` (Attributes) Configuration that defines how Amazon S3 handles public access. (see [below for nested schema](#nestedatt--public_access_block_configuration))
@@ -101,7 +107,7 @@ Read-Only:
    Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.
 - `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
 - `format` (String) Specifies the file format used when exporting data to Amazon S3.
-  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
+ *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
 - `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
@@ -129,9 +135,20 @@ Read-Only:
 
 Read-Only:
 
+- `blocked_encryption_types` (Attributes) A bucket-level setting for Amazon S3 general purpose buckets used to prevent the upload of new objects encrypted with the specified server-side encryption type. For example, blocking an encryption type will block ``PutObject``, ``CopyObject``, ``PostObject``, multipart upload, and replication requests to the bucket for objects with the specified encryption type. However, you can continue to read and list any pre-existing objects already encrypted with the specified encryption type. For more information, see [Blocking or unblocking SSE-C for a general purpose bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html).
+  Currently, this parameter only supports blocking or unblocking server-side encryption with customer-provided keys (SSE-C). For more information about SSE-C, see [Using server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html). (see [below for nested schema](#nestedatt--bucket_encryption--server_side_encryption_configuration--blocked_encryption_types))
 - `bucket_key_enabled` (Boolean) Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.
  For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.
 - `server_side_encryption_by_default` (Attributes) Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied. (see [below for nested schema](#nestedatt--bucket_encryption--server_side_encryption_configuration--server_side_encryption_by_default))
+
+<a id="nestedatt--bucket_encryption--server_side_encryption_configuration--blocked_encryption_types"></a>
+### Nested Schema for `bucket_encryption.server_side_encryption_configuration.blocked_encryption_types`
+
+Read-Only:
+
+- `encryption_type` (List of String) The object encryption type that you want to block or unblock for an Amazon S3 general purpose bucket.
+  Currently, this parameter only supports blocking or unblocking server side encryption with customer-provided keys (SSE-C). For more information about SSE-C, see [Using server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).
+
 
 <a id="nestedatt--bucket_encryption--server_side_encryption_configuration--server_side_encryption_by_default"></a>
 ### Nested Schema for `bucket_encryption.server_side_encryption_configuration.server_side_encryption_by_default`
@@ -139,17 +156,17 @@ Read-Only:
 Read-Only:
 
 - `kms_master_key_id` (String) AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. 
-   +   *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.
-  +   *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.
+   +  *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.
+  +  *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.
   
   You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.
-  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` 
-  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` 
-  +  Key Alias: ``alias/alias-name`` 
+  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab``
+  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``
+  +  Key Alias: ``alias/alias-name``
   
  If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).
-   +   *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester?s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. 
-  +   *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.
+   +  *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester’s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. 
+  +  *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.
   
    Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.
 - `sse_algorithm` (String) Server-side encryption algorithm to use for the default encryption.
@@ -172,7 +189,7 @@ Read-Only:
 
 - `allowed_headers` (List of String) Headers that are specified in the ``Access-Control-Request-Headers`` header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.
 - `allowed_methods` (List of String) An HTTP method that you allow the origin to run.
-  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``
+ *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``
 - `allowed_origins` (List of String) One or more origins you want customers to be able to access the bucket from.
 - `exposed_headers` (List of String) One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript ``XMLHttpRequest`` object).
 - `id` (String) A unique identifier for this rule. The value must be no more than 255 characters.
@@ -233,7 +250,7 @@ Read-Only:
    Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.
 - `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
 - `format` (String) Specifies the file format used when exporting data to Amazon S3.
-  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
+ *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
 - `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
@@ -246,8 +263,8 @@ Read-Only:
 - `rules` (Attributes List) A lifecycle rule for individual objects in an Amazon S3 bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
 - `transition_default_minimum_object_size` (String) Indicates which default minimum object size behavior is applied to the lifecycle configuration.
   This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.
-   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.
-  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. 
+   +  ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.
+  +  ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. 
   
  To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.
 
@@ -327,7 +344,7 @@ Read-Only:
 
 - `storage_class` (String) The storage class to which you want the object to transition.
 - `transition_date` (String) Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
-- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.
+- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. The value can be ``0`` or any positive integer. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.
 
 
 <a id="nestedatt--lifecycle_configuration--rules--transitions"></a>
@@ -337,7 +354,7 @@ Read-Only:
 
 - `storage_class` (String) The storage class to which you want the object to transition.
 - `transition_date` (String) Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
-- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.
+- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. The value can be ``0`` or any positive integer. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.
 
 
 
@@ -369,6 +386,97 @@ Read-Only:
 - `partition_date_source` (String) Specifies the partition date source for the partitioned prefix. ``PartitionDateSource`` can be ``EventTime`` or ``DeliveryTime``.
  For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. 
   For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.
+
+
+
+
+<a id="nestedatt--metadata_configuration"></a>
+### Nested Schema for `metadata_configuration`
+
+Read-Only:
+
+- `annotation_table_configuration` (Attributes) The annotation table configuration for a metadata configuration. (see [below for nested schema](#nestedatt--metadata_configuration--annotation_table_configuration))
+- `destination` (Attributes) The destination information for the S3 Metadata configuration. (see [below for nested schema](#nestedatt--metadata_configuration--destination))
+- `inventory_table_configuration` (Attributes) The inventory table configuration for a metadata configuration. (see [below for nested schema](#nestedatt--metadata_configuration--inventory_table_configuration))
+- `journal_table_configuration` (Attributes) The journal table configuration for a metadata configuration. (see [below for nested schema](#nestedatt--metadata_configuration--journal_table_configuration))
+
+<a id="nestedatt--metadata_configuration--annotation_table_configuration"></a>
+### Nested Schema for `metadata_configuration.annotation_table_configuration`
+
+Read-Only:
+
+- `configuration_state` (String) Specifies whether the annotation table configuration is enabled or disabled.
+- `encryption_configuration` (Attributes) The encryption configuration for the annotation table. To encrypt your annotation table with server-side encryption using AWS Key Management Service (AWS KMS) keys (SSE-KMS), set ``SseAlgorithm`` to ``aws:kms``. You must also set ``KmsKeyArn`` to the ARN of a customer managed KMS key in the same Region where your general purpose bucket is located. (see [below for nested schema](#nestedatt--metadata_configuration--annotation_table_configuration--encryption_configuration))
+- `role` (String) The ARN of the IAM role that grants Amazon S3 Metadata permission to read annotations from your bucket.
+- `table_arn` (String) The Amazon Resource Name (ARN) for the annotation table.
+- `table_name` (String) The name of the annotation table.
+
+<a id="nestedatt--metadata_configuration--annotation_table_configuration--encryption_configuration"></a>
+### Nested Schema for `metadata_configuration.annotation_table_configuration.encryption_configuration`
+
+Read-Only:
+
+- `kms_key_arn` (String) If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.
+- `sse_algorithm` (String) The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.
+
+
+
+<a id="nestedatt--metadata_configuration--destination"></a>
+### Nested Schema for `metadata_configuration.destination`
+
+Read-Only:
+
+- `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the table bucket where the metadata configuration is stored.
+- `table_bucket_type` (String) The type of the table bucket where the metadata configuration is stored. The ``aws`` value indicates an AWS managed table bucket, and the ``customer`` value indicates a customer-managed table bucket. V2 metadata configurations are stored in AWS managed table buckets, and V1 metadata configurations are stored in customer-managed table buckets.
+- `table_namespace` (String) The namespace in the table bucket where the metadata tables for a metadata configuration are stored.
+
+
+<a id="nestedatt--metadata_configuration--inventory_table_configuration"></a>
+### Nested Schema for `metadata_configuration.inventory_table_configuration`
+
+Read-Only:
+
+- `configuration_state` (String) The configuration state of the inventory table, indicating whether the inventory table is enabled or disabled.
+- `encryption_configuration` (Attributes) The encryption configuration for the inventory table. (see [below for nested schema](#nestedatt--metadata_configuration--inventory_table_configuration--encryption_configuration))
+- `table_arn` (String) The Amazon Resource Name (ARN) for the inventory table.
+- `table_name` (String) The name of the inventory table.
+
+<a id="nestedatt--metadata_configuration--inventory_table_configuration--encryption_configuration"></a>
+### Nested Schema for `metadata_configuration.inventory_table_configuration.encryption_configuration`
+
+Read-Only:
+
+- `kms_key_arn` (String) If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.
+- `sse_algorithm` (String) The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.
+
+
+
+<a id="nestedatt--metadata_configuration--journal_table_configuration"></a>
+### Nested Schema for `metadata_configuration.journal_table_configuration`
+
+Read-Only:
+
+- `encryption_configuration` (Attributes) The encryption configuration for the journal table. (see [below for nested schema](#nestedatt--metadata_configuration--journal_table_configuration--encryption_configuration))
+- `record_expiration` (Attributes) The journal table record expiration settings for the journal table. (see [below for nested schema](#nestedatt--metadata_configuration--journal_table_configuration--record_expiration))
+- `table_arn` (String) The Amazon Resource Name (ARN) for the journal table.
+- `table_name` (String) The name of the journal table.
+
+<a id="nestedatt--metadata_configuration--journal_table_configuration--encryption_configuration"></a>
+### Nested Schema for `metadata_configuration.journal_table_configuration.encryption_configuration`
+
+Read-Only:
+
+- `kms_key_arn` (String) If server-side encryption with KMSlong (KMS) keys (SSE-KMS) is specified, you must also specify the KMS key Amazon Resource Name (ARN). You must specify a customer-managed KMS key that's located in the same Region as the general purpose bucket that corresponds to the metadata table configuration.
+- `sse_algorithm` (String) The encryption type specified for a metadata table. To specify server-side encryption with KMSlong (KMS) keys (SSE-KMS), use the ``aws:kms`` value. To specify server-side encryption with Amazon S3 managed keys (SSE-S3), use the ``AES256`` value.
+
+
+<a id="nestedatt--metadata_configuration--journal_table_configuration--record_expiration"></a>
+### Nested Schema for `metadata_configuration.journal_table_configuration.record_expiration`
+
+Read-Only:
+
+- `days` (Number) If you enable journal table record expiration, you can set the number of days to retain your journal table records. Journal table records must be retained for a minimum of 7 days. To set this value, specify any whole number from ``7`` to ``2147483647``. For example, to retain your journal table records for one year, set this value to ``365``.
+- `expiration` (String) Specifies whether journal table record expiration is enabled or disabled.
 
 
 
@@ -557,8 +665,18 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
+- `default_event_hold` (Attributes) (see [below for nested schema](#nestedatt--object_lock_configuration--rule--default_retention--default_event_hold))
 - `mode` (String) The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
 - `years` (Number) The number of years that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
+
+<a id="nestedatt--object_lock_configuration--rule--default_retention--default_event_hold"></a>
+### Nested Schema for `object_lock_configuration.rule.default_retention.default_event_hold`
+
+Read-Only:
+
+- `days` (Number)
+- `years` (Number)
+
 
 
 
@@ -611,7 +729,7 @@ Read-Only:
 
 Read-Only:
 
-- `delete_marker_replication` (Attributes) Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication`` ``Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). 
+- `delete_marker_replication` (Attributes) Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication````Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). 
  For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). 
   If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations). (see [below for nested schema](#nestedatt--replication_configuration--rules--delete_marker_replication))
 - `destination` (Attributes) A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC). (see [below for nested schema](#nestedatt--replication_configuration--rules--destination))
@@ -630,7 +748,7 @@ Read-Only:
 
 Read-Only:
 
-- `status` (String) Indicates whether to replicate delete markers. Disabled by default.
+- `status` (String) Indicates whether to replicate delete markers.
 
 
 <a id="nestedatt--replication_configuration--rules--destination"></a>
@@ -647,6 +765,7 @@ Read-Only:
 - `replication_time` (Attributes) A container specifying S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. Must be specified together with a ``Metrics`` block. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--replication_time))
 - `storage_class` (String) The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. 
  For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.
+ ``FSX_OPENZFS`` is not an accepted value when replicating objects.
 
 <a id="nestedatt--replication_configuration--rules--destination--access_control_translation"></a>
 ### Nested Schema for `replication_configuration.rules.destination.access_control_translation`
@@ -756,7 +875,7 @@ Read-Only:
 Read-Only:
 
 - `status` (String) Specifies whether Amazon S3 replicates modifications on replicas.
-  *Allowed values*: ``Enabled`` | ``Disabled``
+ *Allowed values*: ``Enabled`` | ``Disabled``
 
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects"></a>
@@ -836,5 +955,5 @@ Read-Only:
 
 - `http_error_code_returned_equals` (String) The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied.
  Required when parent element ``Condition`` is specified and sibling ``KeyPrefixEquals`` is not specified. If both are specified, then both must be true for the redirect to be applied.
-- `key_prefix_equals` (String) The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``/docs``, which identifies all objects in the docs/ folder.
+- `key_prefix_equals` (String) The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``docs/``, which identifies all objects in the docs/ folder.
  Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.

@@ -1,0 +1,1 @@
+$ terraform import awscc_directoryservice_microsoft_ad.example "directory_id"
