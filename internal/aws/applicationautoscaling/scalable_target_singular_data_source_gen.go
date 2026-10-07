@@ -258,11 +258,13 @@ func scalableTargetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -282,11 +284,13 @@ func scalableTargetDataSource(ctx context.Context) (datasource.DataSource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

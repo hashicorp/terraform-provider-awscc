@@ -91,6 +91,21 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the Kinesis stream.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RecordDistributionStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The record distribution strategy for the stream. This property can ONLY be set when StreamMode is ON_DEMAND",
+		//	  "enum": [
+		//	    "AUTO",
+		//	    "USER_PARTITION_KEY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"record_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The record distribution strategy for the stream. This property can ONLY be set when StreamMode is ON_DEMAND",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionPeriodHours
 		// CloudFormation resource type schema:
 		//
@@ -310,24 +325,25 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Kinesis::Stream").WithTerraformTypeName("awscc_kinesis_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                         "Arn",
-		"current_mi_bps":              "CurrentMiBps",
-		"desired_shard_level_metrics": "DesiredShardLevelMetrics",
-		"encryption_type":             "EncryptionType",
-		"key":                         "Key",
-		"key_id":                      "KeyId",
-		"max_record_size_in_ki_b":     "MaxRecordSizeInKiB",
-		"name":                        "Name",
-		"retention_period_hours":      "RetentionPeriodHours",
-		"shard_count":                 "ShardCount",
-		"stream_encryption":           "StreamEncryption",
-		"stream_mode":                 "StreamMode",
-		"stream_mode_details":         "StreamModeDetails",
-		"tags":                        "Tags",
-		"target_mi_bps":               "TargetMiBps",
-		"value":                       "Value",
-		"warm_throughput_mi_bps":      "WarmThroughputMiBps",
-		"warm_throughput_object":      "WarmThroughputObject",
+		"arn":                          "Arn",
+		"current_mi_bps":               "CurrentMiBps",
+		"desired_shard_level_metrics":  "DesiredShardLevelMetrics",
+		"encryption_type":              "EncryptionType",
+		"key":                          "Key",
+		"key_id":                       "KeyId",
+		"max_record_size_in_ki_b":      "MaxRecordSizeInKiB",
+		"name":                         "Name",
+		"record_distribution_strategy": "RecordDistributionStrategy",
+		"retention_period_hours":       "RetentionPeriodHours",
+		"shard_count":                  "ShardCount",
+		"stream_encryption":            "StreamEncryption",
+		"stream_mode":                  "StreamMode",
+		"stream_mode_details":          "StreamModeDetails",
+		"tags":                         "Tags",
+		"target_mi_bps":                "TargetMiBps",
+		"value":                        "Value",
+		"warm_throughput_mi_bps":       "WarmThroughputMiBps",
+		"warm_throughput_object":       "WarmThroughputObject",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

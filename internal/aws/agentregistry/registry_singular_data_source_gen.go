@@ -74,6 +74,46 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The type of authorizer that controls how consumers access the registry's search and MCP invoke operations.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutoDetectionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether auto-detection is requested for the registry. Must be specified together with AutoDetectionScope. Setting this to true is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met. To turn auto-detection off, explicitly set this to false - removing AutoDetectionEnabled and AutoDetectionScope from the template is a no-op and leaves the existing auto-detection settings unchanged. A registry cannot be deleted while auto-detection is enabled: set this to false and update the stack before deleting the registry.",
+		//	  "type": "boolean"
+		//	}
+		"auto_detection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether auto-detection is requested for the registry. Must be specified together with AutoDetectionScope. Setting this to true is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met. To turn auto-detection off, explicitly set this to false - removing AutoDetectionEnabled and AutoDetectionScope from the template is a no-op and leaves the existing auto-detection settings unchanged. A registry cannot be deleted while auto-detection is enabled: set this to false and update the stack before deleting the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoDetectionScope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.",
+		//	  "enum": [
+		//	    "ORGANIZATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"auto_detection_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoDetectionStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"auto_detection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -339,6 +379,37 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same AWS account and Region as the registry. Multi-Region keys are not supported.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsKeyArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same AWS account and Region as the registry. Multi-Region keys are not supported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -491,6 +562,9 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authorizer_type":                "AuthorizerType",
 		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
 		"auto_approval_rules":            "AutoApprovalRules",
+		"auto_detection_enabled":         "AutoDetectionEnabled",
+		"auto_detection_scope":           "AutoDetectionScope",
+		"auto_detection_status":          "AutoDetectionStatus",
 		"claim_match_operator":           "ClaimMatchOperator",
 		"claim_match_value":              "ClaimMatchValue",
 		"created_at":                     "CreatedAt",
@@ -499,9 +573,11 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                    "Description",
 		"discovery_configuration":        "DiscoveryConfiguration",
 		"discovery_url":                  "DiscoveryUrl",
+		"encryption_configuration":       "EncryptionConfiguration",
 		"inbound_token_claim_name":       "InboundTokenClaimName",
 		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
 		"key":                            "Key",
+		"kms_key_arn":                    "KmsKeyArn",
 		"match_value_string":             "MatchValueString",
 		"match_value_string_list":        "MatchValueStringList",
 		"name":                           "Name",
