@@ -37,3 +37,5 @@ internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
 internal/service/cloudformation/schemas/AWS_SageMaker_ExperimentTrialComponent.json
 internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json
 internal/service/cloudformation/schemas/AWS_Synthetics_Canary.json
+internal/service/cloudformation/schemas/AWS_WAFv2_RuleGroup.json
+internal/service/cloudformation/schemas/AWS_WAFv2_WebACL.json
