@@ -510,6 +510,10 @@
       "minLength": 12,
       "maxLength": 12,
       "pattern": "^[0-9]{12}$"
+    },
+    "CustomMetadata": {
+      "type": "object",
+      "description": "The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false)."
     }
   },
   "required": [

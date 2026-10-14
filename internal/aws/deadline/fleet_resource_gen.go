@@ -608,6 +608,27 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "SoftwareAddOns": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "enum": [
+		//	                      "docker"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
 		//	            "VCpuCount": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -1472,6 +1493,36 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: SoftwareAddOns
+								"software_add_ons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"docker",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(0, 10),
+										listvalidator.UniqueValues(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: VCpuCount
 								"v_cpu_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2021,6 +2072,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"selections":                      "Selections",
 		"service_managed_ec_2":            "ServiceManagedEc2",
 		"size_gi_b":                       "SizeGiB",
+		"software_add_ons":                "SoftwareAddOns",
 		"standby_worker_count":            "StandbyWorkerCount",
 		"status":                          "Status",
 		"status_message":                  "StatusMessage",

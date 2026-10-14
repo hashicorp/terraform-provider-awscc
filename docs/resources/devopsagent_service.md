@@ -23,6 +23,7 @@ The AWS::DevOpsAgent::Service resource registers external services (like Dynatra
 
 - `exchange_url_private_connection_name` (String) The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.
 - `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
+- `name` (String) The display name for the service registration.
 - `private_connection_name` (String) The name of the private connection to use for VPC connectivity.
 - `service_details` (Attributes) Service-specific configuration details for create operation (see [below for nested schema](#nestedatt--service_details))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -43,6 +44,7 @@ Optional:
 
 - `azure_identity` (Attributes) Azure Identity service configuration for federated identity (see [below for nested schema](#nestedatt--service_details--azure_identity))
 - `dynatrace` (Attributes) Dynatrace service configuration (see [below for nested schema](#nestedatt--service_details--dynatrace))
+- `git_hub` (Attributes) GitHub personal access token (PAT) service configuration. Exactly one of AppVerification or DirectAccess selects how the token is used (see [below for nested schema](#nestedatt--service_details--git_hub))
 - `git_lab` (Attributes) GitLab service configuration (see [below for nested schema](#nestedatt--service_details--git_lab))
 - `mcp_server` (Attributes) MCP server configuration (see [below for nested schema](#nestedatt--service_details--mcp_server))
 - `mcp_server_grafana` (Attributes) Grafana MCP server configuration (see [below for nested schema](#nestedatt--service_details--mcp_server_grafana))
@@ -88,6 +90,36 @@ Optional:
 - `client_secret` (String) OAuth client secret
 - `exchange_parameters` (String) OAuth token exchange parameters
 
+
+
+
+<a id="nestedatt--service_details--git_hub"></a>
+### Nested Schema for `service_details.git_hub`
+
+Optional:
+
+- `app_verification` (Attributes) The token verifies an existing DevOps Agent GitHub App installation on github.com and is then discarded. Not supported for GitHub Enterprise Server (see [below for nested schema](#nestedatt--service_details--git_hub--app_verification))
+- `direct_access` (Attributes) The token is stored and used as the long-lived credential for GitHub API access (see [below for nested schema](#nestedatt--service_details--git_hub--direct_access))
+
+<a id="nestedatt--service_details--git_hub--app_verification"></a>
+### Nested Schema for `service_details.git_hub.app_verification`
+
+Optional:
+
+- `app_variant` (String) Permission variant of the DevOps Agent GitHub App that must already be installed on the organization or account
+- `organization_name` (String) GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account
+- `target_url` (String) GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)
+- `token_value` (String) GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats
+
+
+<a id="nestedatt--service_details--git_hub--direct_access"></a>
+### Nested Schema for `service_details.git_hub.direct_access`
+
+Optional:
+
+- `organization_name` (String) GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account
+- `target_url` (String) GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)
+- `token_value` (String) GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats
 
 
 
@@ -339,6 +371,7 @@ Read-Only:
 
 - `azure_identity` (Attributes) Azure Identity service details returned after registration (see [below for nested schema](#nestedatt--additional_service_details--azure_identity))
 - `dynatrace` (Attributes) Dynatrace service details returned after registration (see [below for nested schema](#nestedatt--additional_service_details--dynatrace))
+- `git_hub` (Attributes) GitHub service details returned after registration (see [below for nested schema](#nestedatt--additional_service_details--git_hub))
 - `git_lab` (Attributes) GitLab service details returned after registration (see [below for nested schema](#nestedatt--additional_service_details--git_lab))
 - `mcp_server` (Attributes) MCP server details returned after registration (see [below for nested schema](#nestedatt--additional_service_details--mcp_server))
 - `mcp_server_grafana` (Attributes) Grafana MCP server details returned after registration (see [below for nested schema](#nestedatt--additional_service_details--mcp_server_grafana))
@@ -365,6 +398,19 @@ Read-Only:
 Read-Only:
 
 - `account_urn` (String) Dynatrace resource account URN
+
+
+<a id="nestedatt--additional_service_details--git_hub"></a>
+### Nested Schema for `additional_service_details.git_hub`
+
+Read-Only:
+
+- `app_variant` (String) The GitHub App variant the service was registered with
+- `auth_mode` (String) How the service authenticates against the GitHub API: app after AppVerification, pat after DirectAccess
+- `hosting_type` (String) The GitHub hosting type the service was registered with
+- `owner` (String) The GitHub repository owner name derived from the token
+- `owner_type` (String) Type of repository owner
+- `target_url` (String) GitHub instance URL (absent for github.com)
 
 
 <a id="nestedatt--additional_service_details--git_lab"></a>

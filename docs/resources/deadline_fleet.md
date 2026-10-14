@@ -266,6 +266,7 @@ Optional:
 - `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b))
 - `os_family` (String)
 - `root_ebs_volume` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--root_ebs_volume))
+- `software_add_ons` (Attributes List) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--software_add_ons))
 - `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count))
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities"></a>
@@ -331,6 +332,14 @@ Optional:
 - `iops` (Number)
 - `size_gi_b` (Number)
 - `throughput_mi_b` (Number)
+
+
+<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--software_add_ons"></a>
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.software_add_ons`
+
+Optional:
+
+- `name` (String)
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count"></a>

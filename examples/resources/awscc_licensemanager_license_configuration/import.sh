@@ -1,0 +1,1 @@
+$ terraform import awscc_licensemanager_license_configuration.example "license_configuration_arn"

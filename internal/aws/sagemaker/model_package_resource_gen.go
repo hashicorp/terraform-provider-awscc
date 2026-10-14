@@ -1207,8 +1207,9 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The metadata properties associated with the model package versions.",
 		//	  "patternProperties": {
 		//	    "": {
-		//	      "maxLength": 128,
+		//	      "maxLength": 256,
 		//	      "minLength": 1,
+		//	      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}",
 		//	      "type": "string"
 		//	    },
 		//	    "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}": {

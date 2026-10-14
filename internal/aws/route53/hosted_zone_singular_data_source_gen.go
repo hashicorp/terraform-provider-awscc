@@ -23,6 +23,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Route53::HostedZone resource.
 func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DelegationSetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"delegation_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneConfig
 		// CloudFormation resource type schema:
 		//
@@ -254,6 +265,7 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
 		"comment":                       "Comment",
+		"delegation_set_id":             "DelegationSetId",
 		"enable_accelerated_recovery":   "EnableAcceleratedRecovery",
 		"hosted_zone_config":            "HostedZoneConfig",
 		"hosted_zone_features":          "HostedZoneFeatures",

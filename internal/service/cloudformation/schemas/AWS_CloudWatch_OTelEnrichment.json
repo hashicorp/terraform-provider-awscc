@@ -10,6 +10,35 @@
         "RUNNING",
         "STOPPED"
       ]
+    },
+    "OTelEnrichmentMetricSelector": {
+      "description": "Selects metrics within one namespace. The same shape serves both the include and the exclude direction. Namespaces are compared byte-for-byte and case-sensitively; no wildcards, prefixes or normalization.",
+      "type": "object",
+      "properties": {
+        "Namespace": {
+          "description": "The CloudWatch namespace this selector applies to.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[^:].*$"
+        },
+        "MetricNames": {
+          "description": "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "maxItems": 100,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "required": [
+        "Namespace"
+      ],
+      "additionalProperties": false
     }
   },
   "tagging": {
@@ -22,6 +51,26 @@
     },
     "Status": {
       "$ref": "#/definitions/Status"
+    },
+    "IncludeFilters": {
+      "description": "Scopes enrichment to a subset of the account's telemetry. Absent or empty means all namespaces are in scope. Present means only these are. The service enforces a combined cap of 100 selectors across IncludeFilters and ExcludeFilters, and rejects more than one selector for the same namespace within a direction.",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/definitions/OTelEnrichmentMetricSelector"
+      }
+    },
+    "ExcludeFilters": {
+      "description": "Removes metrics from the include set. Absent or empty means nothing is removed. Evaluated after IncludeFilters, so ExcludeFilters always wins.",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/definitions/OTelEnrichmentMetricSelector"
+      }
     }
   },
   "additionalProperties": false,
@@ -47,7 +96,7 @@
     },
     "update": {
       "permissions": [
-        "cloudwatch:StartOTelEnrichment",
+        "cloudwatch:UpdateOTelEnrichment",
         "cloudwatch:GetOTelEnrichment"
       ]
     },

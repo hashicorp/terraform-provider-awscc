@@ -86,6 +86,7 @@ resource "awscc_ec2_vpc" "main" {
 
 ### Optional
 
+- `delegation_set_id` (String)
 - `hosted_zone_config` (Attributes) A complex type that contains an optional comment.
  If you don't want to specify a comment, omit the ``HostedZoneConfig`` and ``Comment`` elements. (see [below for nested schema](#nestedatt--hosted_zone_config))
 - `hosted_zone_features` (Attributes) The features configuration for the hosted zone, including accelerated recovery settings and status information. (see [below for nested schema](#nestedatt--hosted_zone_features))

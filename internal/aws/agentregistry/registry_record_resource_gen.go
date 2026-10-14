@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -63,6 +64,22 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the AWS account that created the registry record.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false).",
+		//	  "type": "object"
+		//	}
+		"custom_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false).",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1609,6 +1626,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		"credential_provider_configurations": "CredentialProviderConfigurations",
 		"credential_provider_type":           "CredentialProviderType",
 		"custom":                             "Custom",
+		"custom_metadata":                    "CustomMetadata",
 		"custom_parameters":                  "CustomParameters",
 		"data":                               "Data",
 		"data_schema_version":                "DataSchemaVersion",

@@ -1,0 +1,1 @@
+$ terraform import awscc_customerprofiles_recommender_filter.example "recommender_filter_arn"

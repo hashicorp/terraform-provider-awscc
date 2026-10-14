@@ -1,0 +1,323 @@
+{
+  "typeName": "AWS::LicenseManagerUserSubscriptions::LicenseServerEndpoint",
+  "description": "Resource Type definition for AWS::LicenseManagerUserSubscriptions::LicenseServerEndpoint. A license server endpoint that provides access to Remote Desktop Services Subscriber Access License servers for a registered identity provider.",
+  "properties": {
+    "IdentityProviderArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) that identifies the registered identity provider the license server endpoint is created for. For Active Directory, that can be a self-managed Active Directory or an AWS Managed Microsoft AD.",
+      "pattern": "^arn:[a-z0-9-\\.]{1,63}:license-manager-user-subscriptions:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-zA-Z0-9-\\.]{1,510}/[a-zA-Z0-9-\\.]{1,510}$"
+    },
+    "LicenseServerSettings": {
+      "$ref": "#/definitions/LicenseServerSettings"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags that apply for the license server endpoint. A maximum of 50 tags.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false
+    },
+    "LicenseServerEndpointArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the license server endpoint.",
+      "pattern": "^arn:[a-z0-9-\\.]{1,63}:license-manager-user-subscriptions:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:license-server-endpoint/[a-zA-Z0-9-\\.]{1,510}$"
+    },
+    "LicenseServerEndpointId": {
+      "type": "string",
+      "description": "The ID of the license server endpoint."
+    },
+    "LicenseServerEndpointProvisioningStatus": {
+      "type": "string",
+      "description": "The current state of the provisioning process for the license server endpoint.",
+      "enum": [
+        "PROVISIONING",
+        "PROVISIONING_FAILED",
+        "PROVISIONED",
+        "DELETING",
+        "DELETION_FAILED",
+        "DELETED"
+      ]
+    },
+    "ServerType": {
+      "type": "string",
+      "description": "The type of license server.",
+      "enum": [
+        "RDS_SAL"
+      ]
+    },
+    "ServerEndpoint": {
+      "$ref": "#/definitions/ServerEndpoint"
+    },
+    "LicenseServers": {
+      "type": "array",
+      "description": "The license servers that are accessed through this endpoint.",
+      "items": {
+        "$ref": "#/definitions/LicenseServer"
+      },
+      "insertionOrder": false
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The timestamp when License Manager created the license server endpoint.",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "LicenseServerSettings": {
+      "type": "object",
+      "description": "The settings of the RDS license server to create the endpoint for.",
+      "properties": {
+        "ServerType": {
+          "type": "string",
+          "description": "The type of license server.",
+          "enum": [
+            "RDS_SAL"
+          ]
+        },
+        "ServerSettings": {
+          "$ref": "#/definitions/ServerSettings"
+        }
+      },
+      "required": [
+        "ServerType",
+        "ServerSettings"
+      ],
+      "additionalProperties": false
+    },
+    "ServerSettings": {
+      "type": "object",
+      "description": "The settings of a license server, by server type.",
+      "properties": {
+        "RdsSalSettings": {
+          "$ref": "#/definitions/RdsSalSettings"
+        }
+      },
+      "required": [
+        "RdsSalSettings"
+      ],
+      "additionalProperties": false
+    },
+    "RdsSalSettings": {
+      "type": "object",
+      "description": "The settings of a Remote Desktop Services Subscriber Access License server.",
+      "properties": {
+        "RdsSalCredentialsProvider": {
+          "$ref": "#/definitions/CredentialsProvider"
+        }
+      },
+      "required": [
+        "RdsSalCredentialsProvider"
+      ],
+      "additionalProperties": false
+    },
+    "CredentialsProvider": {
+      "type": "object",
+      "description": "The source of the credentials that License Manager uses to reach the license server.",
+      "properties": {
+        "SecretsManagerCredentialsProvider": {
+          "$ref": "#/definitions/SecretsManagerCredentialsProvider"
+        }
+      },
+      "required": [
+        "SecretsManagerCredentialsProvider"
+      ],
+      "additionalProperties": false
+    },
+    "SecretsManagerCredentialsProvider": {
+      "type": "object",
+      "description": "Credentials held in AWS Secrets Manager.",
+      "properties": {
+        "SecretId": {
+          "type": "string",
+          "description": "The identifier of the Secrets Manager secret that holds the license server administrator credentials. The name of the secret must begin with the prefix license-manager-user-.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "SecretId"
+      ],
+      "additionalProperties": false
+    },
+    "ServerEndpoint": {
+      "type": "object",
+      "description": "The network address of a license server endpoint.",
+      "properties": {
+        "Endpoint": {
+          "type": "string",
+          "description": "The network address of the endpoint."
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseServer": {
+      "type": "object",
+      "description": "A Remote Desktop Services license server that is accessed through the endpoint.",
+      "properties": {
+        "ProvisioningStatus": {
+          "type": "string",
+          "description": "The current state of the provisioning process for the license server.",
+          "enum": [
+            "PROVISIONING",
+            "PROVISIONING_FAILED",
+            "PROVISIONED",
+            "DELETING",
+            "DELETION_FAILED",
+            "DELETED"
+          ]
+        },
+        "HealthStatus": {
+          "type": "string",
+          "description": "The health status of the license server.",
+          "enum": [
+            "HEALTHY",
+            "UNHEALTHY",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "Ipv4Address": {
+          "type": "string",
+          "description": "The domain IPv4 address of the license server."
+        },
+        "Ipv6Address": {
+          "type": "string",
+          "description": "The domain IPv6 address of the license server."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "IdentityProviderArn"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/LicenseServerEndpointArn",
+    "/properties/LicenseServerEndpointId",
+    "/properties/LicenseServerEndpointProvisioningStatus",
+    "/properties/ServerType",
+    "/properties/ServerEndpoint",
+    "/properties/LicenseServers",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/IdentityProviderArn",
+    "/properties/LicenseServerSettings"
+  ],
+  "writeOnlyProperties": [
+    "/properties/LicenseServerSettings"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "primaryIdentifier": [
+    "/properties/IdentityProviderArn",
+    "/properties/LicenseServerEndpointArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/IdentityProviderArn",
+      "/properties/LicenseServerEndpointId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "license-manager-user-subscriptions:TagResource",
+      "license-manager-user-subscriptions:UntagResource",
+      "license-manager-user-subscriptions:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "license-manager-user-subscriptions:CreateLicenseServerEndpoint",
+        "license-manager-user-subscriptions:ListLicenseServerEndpoints",
+        "license-manager-user-subscriptions:TagResource",
+        "ds:AuthorizeApplication",
+        "ds:DescribeDirectories",
+        "ds:DescribeDomainControllers",
+        "ds:GetAuthorizedApplicationDetails",
+        "ds:UnauthorizeApplication",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateTags",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "kms:Decrypt",
+        "route53:AssociateVPCWithHostedZone",
+        "route53:ChangeResourceRecordSets",
+        "route53:CreateHostedZone",
+        "route53:GetHostedZone",
+        "route53:ListHostedZonesByName",
+        "route53:ListHostedZonesByVPC",
+        "route53:ListResourceRecordSets",
+        "secretsmanager:GetSecretValue"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "license-manager-user-subscriptions:ListLicenseServerEndpoints",
+        "license-manager-user-subscriptions:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "license-manager-user-subscriptions:ListLicenseServerEndpoints",
+        "license-manager-user-subscriptions:ListTagsForResource",
+        "license-manager-user-subscriptions:TagResource",
+        "license-manager-user-subscriptions:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "license-manager-user-subscriptions:DeleteLicenseServerEndpoint",
+        "license-manager-user-subscriptions:ListLicenseServerEndpoints",
+        "license-manager-user-subscriptions:ListTagsForResource",
+        "ds:GetAuthorizedApplicationDetails",
+        "ds:UnauthorizeApplication",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "route53:ChangeResourceRecordSets",
+        "route53:DeleteHostedZone",
+        "route53:GetHostedZone",
+        "route53:ListResourceRecordSets"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "license-manager-user-subscriptions:ListLicenseServerEndpoints"
+      ]
+    }
+  }
+}

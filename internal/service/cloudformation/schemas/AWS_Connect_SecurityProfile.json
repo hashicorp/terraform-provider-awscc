@@ -223,7 +223,7 @@
     },
     "AllowedAccessControlHierarchyGroupId": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]+$",
+      "pattern": "^[a-zA-Z0-9-]*$",
       "minLength": 0,
       "maxLength": 127,
       "description": "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect."

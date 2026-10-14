@@ -1,0 +1,1 @@
+$ terraform import awscc_appfabric_ingestion_destination.example "arn"

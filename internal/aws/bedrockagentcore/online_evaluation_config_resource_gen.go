@@ -306,7 +306,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		//	    "properties": {
 		//	      "EvaluatorId": {
 		//	        "description": "The unique identifier of the evaluator.",
-		//	        "pattern": "^(Builtin\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
+		//	        "pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -315,7 +315,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
+		//	  "maxItems": 25,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -328,7 +328,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("^(Builtin\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -341,7 +341,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 10),
+				listvalidator.SizeBetween(0, 25),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
@@ -838,7 +838,8 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		//	    "CREATE_FAILED",
 		//	    "UPDATING",
 		//	    "UPDATE_FAILED",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "ERROR"
 		//	  ],
 		//	  "type": "string"
 		//	}

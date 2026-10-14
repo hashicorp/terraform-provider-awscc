@@ -27,6 +27,7 @@ Data Source schema for AWS::AgentRegistry::Registry
 - `auto_detection_scope` (String) The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.
 - `auto_detection_status` (String) The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.
 - `created_at` (String) The timestamp when the registry was created.
+- `custom_metadata_schema_configuration` (Attributes) Configuration that defines a typed metadata schema for a registry. A default schema and per-record-type schema overrides are both optional. Schema evolution is additive only: you can add fields and enum values, but you cannot remove fields, change types, or remove enum values. (see [below for nested schema](#nestedatt--custom_metadata_schema_configuration))
 - `description` (String) The description of the registry.
 - `discovery_configuration` (Attributes) Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint. (see [below for nested schema](#nestedatt--discovery_configuration))
 - `encryption_configuration` (Attributes) The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind. (see [below for nested schema](#nestedatt--encryption_configuration))
@@ -43,6 +44,24 @@ Data Source schema for AWS::AgentRegistry::Registry
 Read-Only:
 
 - `auto_approval_rules` (List of String) The rules that determine which registry records are automatically approved on submission. When omitted or empty, submitted records require manual review.
+
+
+<a id="nestedatt--custom_metadata_schema_configuration"></a>
+### Nested Schema for `custom_metadata_schema_configuration`
+
+Read-Only:
+
+- `default_schema` (String) The default JSON Schema that applies to record types without a specific override. Supported property types are string, string with an enum constraint, string with a uri format, and boolean.
+- `record_type_schema_overrides` (Attributes List) A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation. (see [below for nested schema](#nestedatt--custom_metadata_schema_configuration--record_type_schema_overrides))
+
+<a id="nestedatt--custom_metadata_schema_configuration--record_type_schema_overrides"></a>
+### Nested Schema for `custom_metadata_schema_configuration.record_type_schema_overrides`
+
+Read-Only:
+
+- `record_type` (String) The record type that this schema override applies to.
+- `schema` (String) The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.
+
 
 
 <a id="nestedatt--discovery_configuration"></a>

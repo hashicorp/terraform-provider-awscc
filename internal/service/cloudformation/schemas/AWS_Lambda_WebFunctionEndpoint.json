@@ -258,12 +258,6 @@
   "primaryIdentifier": [
     "/properties/EndpointArn"
   ],
-  "additionalIdentifiers": [
-    [
-      "/properties/FunctionName",
-      "/properties/EndpointName"
-    ]
-  ],
   "readOnlyProperties": [
     "/properties/FunctionArn",
     "/properties/EndpointArn",

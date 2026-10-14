@@ -53,6 +53,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//
 		//	{
 		//	  "items": {
+		//	    "pattern": "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]+:[0-9]{12}:[a-zA-Z0-9\\-_]+$",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 5,

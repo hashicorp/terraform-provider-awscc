@@ -1,4 +1,18 @@
 {
+  "typeConfiguration": {
+    "additionalProperties": false,
+    "properties": {
+      "DeploymentStage": {
+        "description": "Internal use: the RTB Fabric service stage this account's operations are routed to. Leave unset for production.",
+        "type": "string",
+        "enum": [
+          "Beta",
+          "Gamma",
+          "Prod"
+        ]
+      }
+    }
+  },
   "tagging": {
     "permissions": [
       "rtbfabric:TagResource",
@@ -11,6 +25,40 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
+  "typeName": "AWS::RTBFabric::ResponderGateway",
+  "readOnlyProperties": [
+    "/properties/GatewayId",
+    "/properties/Arn",
+    "/properties/ResponderGatewayStatus",
+    "/properties/CreatedTimestamp",
+    "/properties/UpdatedTimestamp",
+    "/properties/ExternalInboundEndpoint",
+    "/properties/CertificateAssociationStatus"
+  ],
+  "description": "Resource Type definition for AWS::RTBFabric::ResponderGateway Resource Type",
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "required": [
+    "VpcId",
+    "SubnetIds",
+    "SecurityGroupIds",
+    "Port",
+    "Protocol"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/Description",
+    "/properties/VpcId",
+    "/properties/SubnetIds",
+    "/properties/SecurityGroupIds",
+    "/properties/Port",
+    "/properties/Protocol",
+    "/properties/DomainName",
+    "/properties/TrustStoreConfiguration",
+    "/properties/ManagedEndpointConfiguration",
+    "/properties/GatewayType",
+    "/properties/AcmCertificateArn"
+  ],
   "handlers": {
     "read": {
       "permissions": [
@@ -66,26 +114,12 @@
       ]
     }
   },
-  "typeName": "AWS::RTBFabric::ResponderGateway",
-  "readOnlyProperties": [
-    "/properties/GatewayId",
-    "/properties/Arn",
-    "/properties/ResponderGatewayStatus",
-    "/properties/CreatedTimestamp",
-    "/properties/UpdatedTimestamp",
-    "/properties/ExternalInboundEndpoint",
-    "/properties/CertificateAssociationStatus"
-  ],
-  "description": "Resource Type definition for AWS::RTBFabric::ResponderGateway Resource Type",
   "additionalIdentifiers": [
     [
       "/properties/GatewayId"
     ]
   ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
   "definitions": {
     "TrustStoreConfiguration": {
       "additionalProperties": false,
@@ -507,25 +541,5 @@
     "AcmCertificateArn": {
       "$ref": "#/definitions/AcmCertificateArn"
     }
-  },
-  "required": [
-    "VpcId",
-    "SubnetIds",
-    "SecurityGroupIds",
-    "Port",
-    "Protocol"
-  ],
-  "conditionalCreateOnlyProperties": [
-    "/properties/Description",
-    "/properties/VpcId",
-    "/properties/SubnetIds",
-    "/properties/SecurityGroupIds",
-    "/properties/Port",
-    "/properties/Protocol",
-    "/properties/DomainName",
-    "/properties/TrustStoreConfiguration",
-    "/properties/ManagedEndpointConfiguration",
-    "/properties/GatewayType",
-    "/properties/AcmCertificateArn"
-  ]
+  }
 }

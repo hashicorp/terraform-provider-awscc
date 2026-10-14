@@ -665,7 +665,8 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
-- `default_event_hold` (Attributes) (see [below for nested schema](#nestedatt--object_lock_configuration--rule--default_retention--default_event_hold))
+- `default_event_hold` (Attributes) The default Object Lock event hold duration that you want to apply to new objects placed in the specified bucket. When the event hold is released, Amazon S3 retains the object version for this duration.
+  If you specify both a default retention period (``Days`` or ``Years``) and a ``DefaultEventHold``, the event hold duration can't exceed the default retention period. (see [below for nested schema](#nestedatt--object_lock_configuration--rule--default_retention--default_event_hold))
 - `mode` (String) The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
 - `years` (Number) The number of years that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.
 
@@ -674,8 +675,8 @@ Read-Only:
 
 Read-Only:
 
-- `days` (Number)
-- `years` (Number)
+- `days` (Number) The number of days that you want to specify for the default event hold duration. Valid values are ``1`` to ``36500`` days. You must specify either ``Days`` or ``Years``, but not both.
+- `years` (Number) The number of years that you want to specify for the default event hold duration. Valid values are ``1`` to ``100`` years. You must specify either ``Days`` or ``Years``, but not both.
 
 
 

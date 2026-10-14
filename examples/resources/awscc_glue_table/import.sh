@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_table.example "catalog_id|database_name|name"

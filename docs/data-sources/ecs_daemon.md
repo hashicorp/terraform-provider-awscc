@@ -24,6 +24,7 @@ Data Source schema for AWS::ECS::Daemon
 - `capacity_provider_arns` (List of String) The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.
 - `cluster_arn` (String) The Amazon Resource Name (ARN) of the cluster that the daemon is running in.
 - `created_at` (String)
+- `critical` (Boolean)
 - `daemon_arn` (String)
 - `daemon_name` (String)
 - `daemon_status` (String)

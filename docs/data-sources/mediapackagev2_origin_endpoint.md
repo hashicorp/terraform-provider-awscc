@@ -346,11 +346,21 @@ Read-Only:
 Read-Only:
 
 - `certificate_arn` (String) <p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>
+- `content_key_period_configuration` (Attributes) <p>The configuration that controls the content key period timing information that MediaPackage signals to your DRM key provider.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider--content_key_period_configuration))
 - `drm_systems` (List of String) <p>The DRM solution provider you're using to protect your content during distribution.</p>
 - `encryption_contract_configuration` (Attributes) <p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration))
 - `resource_id` (String) <p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>
 - `role_arn` (String) <p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>
+- `speke_version` (String)
 - `url` (String) <p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>
+
+<a id="nestedatt--segment--encryption--speke_key_provider--content_key_period_configuration"></a>
+### Nested Schema for `segment.encryption.speke_key_provider.content_key_period_configuration`
+
+Read-Only:
+
+- `content_key_period_timing` (String)
+
 
 <a id="nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration"></a>
 ### Nested Schema for `segment.encryption.speke_key_provider.encryption_contract_configuration`

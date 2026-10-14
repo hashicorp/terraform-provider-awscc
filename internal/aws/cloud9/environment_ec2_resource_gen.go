@@ -390,7 +390,7 @@ func environmentEC2Resource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AutomaticStopTimeMinutes",
 		"/properties/Repositories",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(15).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

@@ -1,0 +1,115 @@
+{
+  "typeName": "AWS::FSx::Snapshot",
+  "description": "Resource Type definition for AWS::FSx::Snapshot",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties": {
+    "ResourceARN": {
+      "description": "Returns the snapshot's Amazon Resource Name (ARN).",
+      "type": "string"
+    },
+    "VolumeId": {
+      "description": "The ID of the volume that the snapshot is of.",
+      "type": "string"
+    },
+    "Id": {
+      "description": "The ID of the snapshot.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "A list of Tag values, with a maximum of 50 elements.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Name": {
+      "description": "The name of the snapshot.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "VolumeId",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/ResourceARN",
+    "/properties/Id"
+  ],
+  "createOnlyProperties": [
+    "/properties/VolumeId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "permissions": [
+      "fsx:TagResource",
+      "fsx:UntagResource",
+      "fsx:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fsx:CreateSnapshot",
+        "fsx:TagResource",
+        "fsx:DescribeSnapshots"
+      ],
+      "timeoutInMinutes": 490
+    },
+    "read": {
+      "permissions": [
+        "fsx:DescribeSnapshots",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fsx:UpdateSnapshot",
+        "fsx:TagResource",
+        "fsx:UntagResource",
+        "fsx:DescribeSnapshots"
+      ],
+      "timeoutInMinutes": 490
+    },
+    "delete": {
+      "permissions": [
+        "fsx:DeleteSnapshot",
+        "fsx:DescribeSnapshots"
+      ],
+      "timeoutInMinutes": 70
+    },
+    "list": {
+      "permissions": [
+        "fsx:DescribeSnapshots"
+      ]
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  }
+}

@@ -142,9 +142,30 @@ Optional:
 
 Optional:
 
+- `authentication_type` (String)
 - `host` (String) <p>The host name of the Databricks data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--databricks_parameters--o_auth_parameters))
 - `port` (Number) <p>The port for the Databricks data source.</p>
 - `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
+
+<a id="nestedatt--alternate_data_source_parameters--databricks_parameters--o_auth_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.databricks_parameters.o_auth_parameters`
+
+Optional:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--databricks_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--databricks_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `alternate_data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Optional:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -384,6 +405,7 @@ Optional:
             <code>DataSourceCredentials</code> structure.</p>
 - `credential_pair` (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
 - `key_pair_credentials` (Attributes) (see [below for nested schema](#nestedatt--credentials--key_pair_credentials))
+- `o_auth_client_credentials` (Attributes) (see [below for nested schema](#nestedatt--credentials--o_auth_client_credentials))
 - `secret_arn` (String) <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
 
 <a id="nestedatt--credentials--credential_pair"></a>
@@ -491,9 +513,30 @@ Optional:
 
 Optional:
 
+- `authentication_type` (String)
 - `host` (String) <p>The host name of the Databricks data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters--o_auth_parameters))
 - `port` (Number) <p>The port for the Databricks data source.</p>
 - `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters--o_auth_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.databricks_parameters.o_auth_parameters`
+
+Optional:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Optional:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -733,6 +776,16 @@ Optional:
 - `private_key_passphrase` (String)
 
 
+<a id="nestedatt--credentials--o_auth_client_credentials"></a>
+### Nested Schema for `credentials.o_auth_client_credentials`
+
+Optional:
+
+- `client_id` (String)
+- `client_secret` (String)
+- `username` (String)
+
+
 
 <a id="nestedatt--data_source_parameters"></a>
 ### Nested Schema for `data_source_parameters`
@@ -822,9 +875,30 @@ Optional:
 
 Optional:
 
+- `authentication_type` (String)
 - `host` (String) <p>The host name of the Databricks data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--databricks_parameters--o_auth_parameters))
 - `port` (Number) <p>The port for the Databricks data source.</p>
 - `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
+
+<a id="nestedatt--data_source_parameters--databricks_parameters--o_auth_parameters"></a>
+### Nested Schema for `data_source_parameters.databricks_parameters.o_auth_parameters`
+
+Optional:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--data_source_parameters--databricks_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--data_source_parameters--databricks_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Optional:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--data_source_parameters--maria_db_parameters"></a>

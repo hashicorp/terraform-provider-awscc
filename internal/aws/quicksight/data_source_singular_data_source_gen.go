@@ -166,11 +166,58 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eThe parameters that are required to connect to a Databricks data source.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "AuthenticationType": {
+		//	            "enum": [
+		//	              "PASSWORD",
+		//	              "TOKEN",
+		//	              "X509",
+		//	              "KEYPAIR"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "Host": {
 		//	            "description": "\u003cp\u003eThe host name of the Databricks data source.\u003c/p\u003e",
 		//	            "maxLength": 256,
 		//	            "minLength": 1,
 		//	            "type": "string"
+		//	          },
+		//	          "OAuthParameters": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IdentityProviderResourceUri": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "IdentityProviderVpcConnectionProperties": {
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "VpcConnectionArn": {
+		//	                    "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "VpcConnectionArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "OAuthScope": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "TokenProviderUrl": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TokenProviderUrl"
+		//	            ],
+		//	            "type": "object"
 		//	          },
 		//	          "Port": {
 		//	            "default": 0,
@@ -911,10 +958,44 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: DatabricksParameters
 					"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationType
+							"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Host
 							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The host name of the Databricks data source.</p>",
 								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OAuthParameters
+							"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IdentityProviderResourceUri
+									"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IdentityProviderVpcConnectionProperties
+									"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: VpcConnectionArn
+											"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>VPC connection properties.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OAuthScope
+									"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TokenProviderUrl
+									"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -1570,11 +1651,58 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "\u003cp\u003eThe parameters that are required to connect to a Databricks data source.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "AuthenticationType": {
+		//	                    "enum": [
+		//	                      "PASSWORD",
+		//	                      "TOKEN",
+		//	                      "X509",
+		//	                      "KEYPAIR"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "Host": {
 		//	                    "description": "\u003cp\u003eThe host name of the Databricks data source.\u003c/p\u003e",
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
+		//	                  },
+		//	                  "OAuthParameters": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "IdentityProviderResourceUri": {
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "IdentityProviderVpcConnectionProperties": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	                        "properties": {
+		//	                          "VpcConnectionArn": {
+		//	                            "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "VpcConnectionArn"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "OAuthScope": {
+		//	                        "maxLength": 128,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "TokenProviderUrl": {
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "TokenProviderUrl"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "Port": {
 		//	                    "default": 0,
@@ -2253,6 +2381,27 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "OAuthClientCredentials": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ClientId": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecret": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Username": {
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SecretArn": {
 		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.\u003c/p\u003e",
 		//	      "maxLength": 2048,
@@ -2381,10 +2530,44 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: DatabricksParameters
 									"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AuthenticationType
+											"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The host name of the Databricks data source.</p>",
 												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OAuthParameters
+											"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: IdentityProviderResourceUri
+													"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: IdentityProviderVpcConnectionProperties
+													"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: VpcConnectionArn
+															"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "<p>VPC connection properties.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: OAuthScope
+													"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: TokenProviderUrl
+													"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2881,6 +3064,24 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: OAuthClientCredentials
+				"o_auth_client_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Username
+						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SecretArn
 				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
@@ -3039,11 +3240,58 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe parameters that are required to connect to a Databricks data source.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "AuthenticationType": {
+		//	          "enum": [
+		//	            "PASSWORD",
+		//	            "TOKEN",
+		//	            "X509",
+		//	            "KEYPAIR"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Host": {
 		//	          "description": "\u003cp\u003eThe host name of the Databricks data source.\u003c/p\u003e",
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "OAuthParameters": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdentityProviderResourceUri": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "IdentityProviderVpcConnectionProperties": {
+		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	              "properties": {
+		//	                "VpcConnectionArn": {
+		//	                  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VpcConnectionArn"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "OAuthScope": {
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "TokenProviderUrl": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenProviderUrl"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "Port": {
 		//	          "default": 0,
@@ -3779,10 +4027,44 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: DatabricksParameters
 				"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Host
 						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The host name of the Databricks data source.</p>",
 							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OAuthParameters
+						"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityProviderResourceUri
+								"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityProviderVpcConnectionProperties
+								"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VpcConnectionArn
+										"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>VPC connection properties.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthScope
+								"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenProviderUrl
+								"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -4605,6 +4887,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aws_account_id":                   "AwsAccountId",
 		"bucket":                           "Bucket",
 		"catalog":                          "Catalog",
+		"client_id":                        "ClientId",
+		"client_secret":                    "ClientSecret",
 		"cluster_id":                       "ClusterId",
 		"consumer_account_role_arn":        "ConsumerAccountRoleArn",
 		"copy_source_arn":                  "CopySourceArn",
@@ -4638,6 +4922,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"message":                   "Message",
 		"my_sql_parameters":         "MySqlParameters",
 		"name":                      "Name",
+		"o_auth_client_credentials": "OAuthClientCredentials",
 		"o_auth_parameters":         "OAuthParameters",
 		"o_auth_scope":              "OAuthScope",
 		"oracle_parameters":         "OracleParameters",

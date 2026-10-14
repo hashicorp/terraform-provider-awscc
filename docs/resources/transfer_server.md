@@ -92,6 +92,7 @@ resource "awscc_transfer_server" "sftp" {
 ### Optional
 
 - `certificate` (String)
+- `create_with_host_key` (Boolean) When this property is `true`, AWS Transfer Family will generate an initial host key for your server, making it immediately available to SFTP clients. When set to `false`, clients will not be able to establish an SFTP session until you import one or more host keys (see AWS::Transfer::HostKey). This property cannot be changed after resource creation. Default: `true`.
 - `domain` (String)
 - `endpoint_details` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details))
 - `endpoint_type` (String)

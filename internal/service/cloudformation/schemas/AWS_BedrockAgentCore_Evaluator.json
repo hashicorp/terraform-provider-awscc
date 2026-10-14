@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::BedrockAgentCore::Evaluator",
-  "description": "Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge configurations.",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge, code-based, or derived evaluator configurations. Derived evaluators run an existing built-in or third-party evaluator's logic on a model that you supply.",
   "definitions": {
     "EvaluatorStatus": {
       "type": "string",
@@ -11,6 +11,27 @@
         "UPDATING",
         "UPDATE_FAILED",
         "DELETING"
+      ]
+    },
+    "EvaluatorType": {
+      "type": "string",
+      "description": "The kind of evaluator resource. Builtin and ThirdParty are AWS-managed global evaluators that you reference but don't create; Custom, CustomCode, and CustomDerived are evaluators that you create.",
+      "enum": [
+        "Builtin",
+        "ThirdParty",
+        "Custom",
+        "CustomCode",
+        "CustomDerived"
+      ]
+    },
+    "Provider": {
+      "type": "string",
+      "description": "Where the evaluator's logic comes from: AWS for AWS-authored evaluators, DeepEval or AutoEval for the corresponding third-party libraries, or Custom for an evaluator that you authored.",
+      "enum": [
+        "AWS",
+        "DeepEval",
+        "AutoEval",
+        "Custom"
       ]
     },
     "EvaluatorLevel": {
@@ -30,6 +51,9 @@
         },
         "CodeBased": {
           "$ref": "#/definitions/CodeBasedEvaluatorConfig"
+        },
+        "Derived": {
+          "$ref": "#/definitions/DerivedEvaluatorConfig"
         }
       },
       "oneOf": [
@@ -42,7 +66,31 @@
           "required": [
             "CodeBased"
           ]
+        },
+        {
+          "required": [
+            "Derived"
+          ]
         }
+      ],
+      "additionalProperties": false
+    },
+    "DerivedEvaluatorConfig": {
+      "type": "object",
+      "description": "The configuration for an evaluator derived from an existing base evaluator (a built-in or third-party evaluator), run on your own model. The base evaluator supplies the prompt and scoring logic.",
+      "properties": {
+        "BaseEvaluatorId": {
+          "type": "string",
+          "description": "The identifier of the base evaluator whose logic to run (a Builtin.* or ThirdParty.* evaluator).",
+          "pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9._-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"
+        },
+        "ModelConfig": {
+          "$ref": "#/definitions/EvaluatorModelConfig"
+        }
+      },
+      "required": [
+        "BaseEvaluatorId",
+        "ModelConfig"
       ],
       "additionalProperties": false
     },
@@ -296,6 +344,16 @@
           "description": "The top-p sampling parameter that controls the diversity of the model's responses.",
           "minimum": 0,
           "maximum": 1
+        },
+        "StopSequences": {
+          "type": "array",
+          "description": "The sequences that make the model stop generating further tokens.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 2500,
+          "insertionOrder": false
         }
       },
       "additionalProperties": false
@@ -345,11 +403,19 @@
     },
     "EvaluatorConfig": {
       "$ref": "#/definitions/EvaluatorConfig",
-      "description": "The configuration for the evaluator."
+      "description": "The configuration for the evaluator, including LLM-as-a-Judge, code-based, or derived settings."
     },
     "Level": {
       "$ref": "#/definitions/EvaluatorLevel",
-      "description": "The evaluation level that determines the scope of evaluation."
+      "description": "The evaluation level that determines the scope of evaluation. Required for all evaluator configuration types. For Derived evaluators it must match the level of the base evaluator identified by BaseEvaluatorId."
+    },
+    "EvaluatorType": {
+      "$ref": "#/definitions/EvaluatorType",
+      "description": "The kind of evaluator resource. Builtin and ThirdParty are AWS-managed global evaluators that you reference but don't create; Custom, CustomCode, and CustomDerived are evaluators that you create."
+    },
+    "Provider": {
+      "$ref": "#/definitions/Provider",
+      "description": "Where the evaluator's logic comes from: AWS, a third-party library (DeepEval or AutoEval), or you. Derived evaluators inherit the provider of their base evaluator."
     },
     "Status": {
       "$ref": "#/definitions/EvaluatorStatus",
@@ -391,12 +457,15 @@
   "readOnlyProperties": [
     "/properties/EvaluatorId",
     "/properties/EvaluatorArn",
+    "/properties/EvaluatorType",
+    "/properties/Provider",
     "/properties/Status",
     "/properties/CreatedAt",
     "/properties/UpdatedAt"
   ],
   "createOnlyProperties": [
-    "/properties/EvaluatorName"
+    "/properties/EvaluatorName",
+    "/properties/EvaluatorConfig/Derived/BaseEvaluatorId"
   ],
   "primaryIdentifier": [
     "/properties/EvaluatorArn"

@@ -69,6 +69,7 @@
   "description": "Information about a daemon resource.",
   "writeOnlyProperties": [
     "/properties/CapacityProviderArns",
+    "/properties/Critical",
     "/properties/DaemonName",
     "/properties/DaemonTaskDefinitionArn",
     "/properties/DeploymentConfiguration",
@@ -189,6 +190,10 @@
       "format": "date-time",
       "description": "",
       "type": "string"
+    },
+    "Critical": {
+      "description": "",
+      "type": "boolean"
     },
     "UpdatedAt": {
       "format": "date-time",

@@ -1,0 +1,1 @@
+$ terraform import awscc_fsx_storage_virtual_machine.example "storage_virtual_machine_id"

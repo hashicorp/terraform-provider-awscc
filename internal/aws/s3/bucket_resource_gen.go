@@ -1221,7 +1221,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "ChecksumAlgorithm",
 		//	            "ObjectAccessControlList",
 		//	            "ObjectOwner",
-		//	            "LifecycleExpirationDate"
+		//	            "LifecycleExpirationDate",
+		//	            "IntelligentTieringReferenceDate"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -1385,6 +1386,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									"ObjectAccessControlList",
 									"ObjectOwner",
 									"LifecycleExpirationDate",
+									"IntelligentTieringReferenceDate",
 								),
 							),
 						}, /*END VALIDATORS*/
@@ -3659,12 +3661,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "DefaultEventHold": {
 		//	              "additionalProperties": false,
-		//	              "description": "",
+		//	              "description": "The default Object Lock event hold duration that you want to apply to new objects placed in the specified bucket. When the event hold is released, Amazon S3 retains the object version for this duration.\n  If you specify both a default retention period (``Days`` or ``Years``) and a ``DefaultEventHold``, the event hold duration can't exceed the default retention period.",
 		//	              "properties": {
 		//	                "Days": {
+		//	                  "description": "The number of days that you want to specify for the default event hold duration. Valid values are ``1`` to ``36500`` days. You must specify either ``Days`` or ``Years``, but not both.",
 		//	                  "type": "integer"
 		//	                },
 		//	                "Years": {
+		//	                  "description": "The number of years that you want to specify for the default event hold duration. Valid values are ``1`` to ``100`` years. You must specify either ``Days`` or ``Years``, but not both.",
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -3722,22 +3726,24 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Days
 										"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The number of days that you want to specify for the default event hold duration. Valid values are ``1`` to ``36500`` days. You must specify either ``Days`` or ``Years``, but not both.",
+											Optional:    true,
+											Computed:    true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Years
 										"years": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The number of years that you want to specify for the default event hold duration. Valid values are ``1`` to ``100`` years. You must specify either ``Days`` or ``Years``, but not both.",
+											Optional:    true,
+											Computed:    true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "",
+									Description: "The default Object Lock event hold duration that you want to apply to new objects placed in the specified bucket. When the event hold is released, Amazon S3 retains the object version for this duration.\n  If you specify both a default retention period (``Days`` or ``Years``) and a ``DefaultEventHold``, the event hold duration can't exceed the default retention period.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

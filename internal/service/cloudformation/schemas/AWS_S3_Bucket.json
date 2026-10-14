@@ -239,7 +239,7 @@
           ]
         },
         "DefaultEventHold": {
-          "description": "",
+          "description": "The default Object Lock event hold duration that you want to apply to new objects placed in the specified bucket. When the event hold is released, Amazon S3 retains the object version for this duration.\n  If you specify both a default retention period (``Days`` or ``Years``) and a ``DefaultEventHold``, the event hold duration can't exceed the default retention period.",
           "$ref": "#/definitions/DefaultEventHold"
         }
       }
@@ -1157,14 +1157,16 @@
       ]
     },
     "DefaultEventHold": {
-      "description": "",
+      "description": "The default Object Lock event hold duration that you want to apply to new objects placed in the specified bucket, unless an object's upload request specifies its own Object Lock settings. New object versions are placed under an event hold and remain protected while the hold is active. When the event hold is released, Amazon S3 retains the object version for this duration, measured from the time the hold is released.\n  The ``DefaultEventHold`` duration can be specified in either ``Days`` or ``Years``, but you must select one. You can't specify ``Days`` and ``Years`` at the same time.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Years": {
+          "description": "The number of years that you want to specify for the default event hold duration. Valid values are ``1`` to ``100`` years. You must specify either ``Days`` or ``Years``, but not both.",
           "type": "integer"
         },
         "Days": {
+          "description": "The number of days that you want to specify for the default event hold duration. Valid values are ``1`` to ``36500`` days. You must specify either ``Days`` or ``Years``, but not both.",
           "type": "integer"
         }
       }
@@ -1702,7 +1704,8 @@
               "ChecksumAlgorithm",
               "ObjectAccessControlList",
               "ObjectOwner",
-              "LifecycleExpirationDate"
+              "LifecycleExpirationDate",
+              "IntelligentTieringReferenceDate"
             ]
           }
         },

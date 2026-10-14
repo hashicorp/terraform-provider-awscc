@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_consent_portal.example "consent_portal_arn"

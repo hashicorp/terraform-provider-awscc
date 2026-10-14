@@ -318,6 +318,14 @@
         "identifier": ["ApplicationId","ConfigurationProfileId","VersionNumber"]
     },
     {
+        "resource": "awscc_appfabric_app_authorization",
+        "identifier": ["AppAuthorizationArn"]
+    },
+    {
+        "resource": "awscc_appfabric_ingestion_destination",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_appflow_connector",
         "generateListResource": true,
         "identifier": ["ConnectorLabel"]
@@ -838,6 +846,11 @@
         "resource": "awscc_bedrockagentcore_configuration_bundle",
         "generateListResource": true,
         "identifier": ["BundleArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_consent_portal",
+        "generateListResource": true,
+        "identifier": ["ConsentPortalArn"]
     },
     {
         "resource": "awscc_bedrockagentcore_evaluator",
@@ -1387,6 +1400,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_cloudwatch_integration",
+        "generateListResource": true,
+        "identifier": ["IntegrationArn"]
+    },
+    {
         "resource": "awscc_cloudwatch_log_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -1875,6 +1893,10 @@
         "identifier": ["DomainName","RecommenderName"]
     },
     {
+        "resource": "awscc_customerprofiles_recommender_filter",
+        "identifier": ["RecommenderFilterArn"]
+    },
+    {
         "resource": "awscc_customerprofiles_segment_definition",
         "identifier": ["DomainName","SegmentDefinitionName"]
     },
@@ -1886,7 +1908,7 @@
     {
         "resource": "awscc_dax_subnet_group",
         "generateListResource": true,
-        "identifier": ["Id"]
+        "identifier": ["SubnetGroupName"]
     },
     {
         "resource": "awscc_dlm_lifecycle_policy",
@@ -2373,6 +2395,10 @@
         "resource": "awscc_ec2_carrier_gateway",
         "generateListResource": true,
         "identifier": ["CarrierGatewayId"]
+    },
+    {
+        "resource": "awscc_ec2_client_vpn_authorization_rule",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_ec2_client_vpn_route",
@@ -3370,6 +3396,16 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_fsx_snapshot",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_fsx_storage_virtual_machine",
+        "generateListResource": true,
+        "identifier": ["StorageVirtualMachineId"]
+    },
+    {
         "resource": "awscc_fsx_volume",
         "generateListResource": true,
         "identifier": ["VolumeId"]
@@ -3602,6 +3638,10 @@
         "resource": "awscc_glue_session",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_glue_table",
+        "identifier": ["CatalogId","DatabaseName","Name"]
     },
     {
         "resource": "awscc_glue_table_optimizer",
@@ -4571,9 +4611,24 @@
         "identifier": ["LicenseAssetRulesetArn"]
     },
     {
+        "resource": "awscc_licensemanager_license_configuration",
+        "generateListResource": true,
+        "identifier": ["LicenseConfigurationArn"]
+    },
+    {
         "resource": "awscc_licensemanager_report_generator",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_licensemanagerlinuxsubscriptions_subscription_provider",
+        "generateListResource": true,
+        "identifier": ["SubscriptionProviderArn"]
+    },
+    {
+        "resource": "awscc_licensemanagerusersubscriptions_license_server_endpoint",
+        "generateListResource": true,
+        "identifier": ["IdentityProviderArn","LicenseServerEndpointArn"]
     },
     {
         "resource": "awscc_lightsail_alarm",
@@ -5713,6 +5768,11 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_polly_lexicon",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_pricingplanmanager_subscription",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -5781,6 +5841,15 @@
         "identifier": ["AnalysisId","AwsAccountId"]
     },
     {
+        "resource": "awscc_quicksight_assignment",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_quicksight_brand",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_quicksight_custom_permissions",
         "generateListResource": true,
         "identifier": ["AwsAccountId","CustomPermissionsName"]
@@ -5817,6 +5886,10 @@
         "resource": "awscc_quicksight_folder",
         "generateListResource": true,
         "identifier": ["AwsAccountId","FolderId"]
+    },
+    {
+        "resource": "awscc_quicksight_group",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_quicksight_knowledge_base",
@@ -5959,6 +6032,11 @@
         "resource": "awscc_rds_db_subnet_group",
         "generateListResource": true,
         "identifier": ["DBSubnetGroupName"]
+    },
+    {
+        "resource": "awscc_rds_deployment",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_rds_event_subscription",
@@ -7171,6 +7249,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_securityagent_integration",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_securityagent_pentest",
         "identifier": ["PentestId","AgentSpaceId"]
     },
@@ -7445,6 +7528,16 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_storagegateway_nfs_file_share",
+        "generateListResource": true,
+        "identifier": ["FileShareARN"]
+    },
+    {
+        "resource": "awscc_storagegateway_smb_file_share",
+        "generateListResource": true,
+        "identifier": ["FileShareARN"]
+    },
+    {
         "resource": "awscc_storagegateway_tape",
         "generateListResource": true,
         "identifier": ["TapeARN"]
@@ -7502,6 +7595,11 @@
         "resource": "awscc_timestream_database",
         "generateListResource": true,
         "identifier": ["DatabaseName"]
+    },
+    {
+        "resource": "awscc_timestream_influx_db_backup",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_timestream_influx_db_cluster",

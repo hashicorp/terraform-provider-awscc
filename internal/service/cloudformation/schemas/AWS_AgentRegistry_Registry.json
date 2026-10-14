@@ -15,7 +15,8 @@
     "read": {
       "permissions": [
         "agent-registry:GetRegistry",
-        "agent-registry:ListTagsForResource"
+        "agent-registry:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "create": {
@@ -30,7 +31,9 @@
         "kms:CreateGrant",
         "kms:GenerateDataKeyWithoutPlaintext",
         "kms:ReEncryptFrom",
-        "kms:ReEncryptTo"
+        "kms:ReEncryptTo",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "update": {
@@ -39,7 +42,9 @@
         "agent-registry:GetRegistry",
         "agent-registry:TagResource",
         "agent-registry:UntagResource",
-        "agent-registry:ListTagsForResource"
+        "agent-registry:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "list": {
@@ -124,6 +129,28 @@
       "required": [
         "KmsKeyArn"
       ]
+    },
+    "CustomMetadataSchemaConfiguration": {
+      "description": "Configuration that defines a typed metadata schema for a registry. A default schema and per-record-type schema overrides are both optional. Schema evolution is additive only: you can add fields and enum values, but you cannot remove fields, change types, or remove enum values.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "RecordTypeSchemaOverrides": {
+          "maxItems": 5,
+          "description": "A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecordTypeSchemaOverride"
+          }
+        },
+        "DefaultSchema": {
+          "minLength": 1,
+          "description": "The default JSON Schema that applies to record types without a specific override. Supported property types are string, string with an enum constraint, string with a uri format, and boolean.",
+          "type": "string",
+          "maxLength": 10240
+        }
+      }
     },
     "DiscoveryConfiguration": {
       "description": "Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint.",
@@ -298,6 +325,34 @@
         "INACTIVE"
       ]
     },
+    "RecordTypeSchemaOverride": {
+      "description": "A schema override for a specific record type within a custom metadata schema configuration.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "RecordType": {
+          "description": "The record type that this schema override applies to.",
+          "type": "string",
+          "enum": [
+            "MCP",
+            "AGENT",
+            "SKILL",
+            "GATEWAY",
+            "CUSTOM"
+          ]
+        },
+        "Schema": {
+          "minLength": 1,
+          "description": "The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.",
+          "type": "string",
+          "maxLength": 10240
+        }
+      },
+      "required": [
+        "RecordType",
+        "Schema"
+      ]
+    },
     "Tag": {
       "description": "A tag to assign to the registry.",
       "additionalProperties": false,
@@ -368,6 +423,9 @@
       "format": "date-time",
       "description": "The timestamp when the registry was created.",
       "type": "string"
+    },
+    "CustomMetadataSchemaConfiguration": {
+      "$ref": "#/definitions/CustomMetadataSchemaConfiguration"
     },
     "DiscoveryConfiguration": {
       "$ref": "#/definitions/DiscoveryConfiguration"

@@ -121,6 +121,7 @@ Optional:
 - `port_configuration` (Attributes) Defines the ports on the container. (see [below for nested schema](#nestedatt--game_server_container_definition--port_configuration))
 - `resolved_image_digest` (String) The digest of the container image.
 - `server_sdk_version` (String) The version of the server SDK used in this container group
+- `vcpu` (Number) The number of virtual CPUs to give to the game server container. This is required when the container group definition doesn't set TotalVcpuLimit.
 
 <a id="nestedatt--game_server_container_definition--depends_on"></a>
 ### Nested Schema for `game_server_container_definition.depends_on`

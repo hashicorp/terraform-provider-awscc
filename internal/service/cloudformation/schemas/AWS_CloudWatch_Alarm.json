@@ -23,7 +23,8 @@
       "permissions": [
         "cloudwatch:PutMetricAlarm",
         "cloudwatch:DescribeAlarms",
-        "cloudwatch:TagResource"
+        "cloudwatch:TagResource",
+        "cloudwatch:ListTagsForResource"
       ]
     },
     "update": {
@@ -31,7 +32,8 @@
         "cloudwatch:PutMetricAlarm",
         "cloudwatch:DescribeAlarms",
         "cloudwatch:TagResource",
-        "cloudwatch:UntagResource"
+        "cloudwatch:UntagResource",
+        "cloudwatch:ListTagsForResource"
       ]
     },
     "list": {

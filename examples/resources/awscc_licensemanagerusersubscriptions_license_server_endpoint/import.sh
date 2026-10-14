@@ -1,0 +1,1 @@
+$ terraform import awscc_licensemanagerusersubscriptions_license_server_endpoint.example "identity_provider_arn|license_server_endpoint_arn"

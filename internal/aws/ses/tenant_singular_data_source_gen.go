@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -32,6 +33,52 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN) of the tenant.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReputationEntity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The reputation configuration for the tenant. Sending status remains managed by SES.",
+		//	  "properties": {
+		//	    "Policy": {
+		//	      "additionalProperties": false,
+		//	      "description": "The reputation policy for the tenant.",
+		//	      "properties": {
+		//	        "ReputationEntityPolicy": {
+		//	          "description": "The ARN of an SES-managed reputation policy.",
+		//	          "pattern": "^arn:[a-z0-9-]+:ses:[a-z0-9-]+:aws:reputation-policy/(none|standard|strict)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ReputationEntityPolicy"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Policy"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"reputation_entity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Policy
+				"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ReputationEntityPolicy
+						"reputation_entity_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of an SES-managed reputation policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The reputation policy for the tenant.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The reputation configuration for the tenant. Sending status remains managed by SES.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceAssociations
@@ -69,6 +116,58 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The list of resources to associate with the tenant.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SuppressionAttributes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The suppression attributes for the tenant.",
+		//	  "properties": {
+		//	    "SuppressedReasons": {
+		//	      "description": "The reasons that cause messages to be added to the suppression list.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "BOUNCE",
+		//	          "COMPLAINT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "SuppressionScope": {
+		//	      "description": "The scope of the suppression list for the tenant.",
+		//	      "enum": [
+		//	        "ACCOUNT",
+		//	        "TENANT"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SuppressionScope",
+		//	    "SuppressedReasons"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"suppression_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SuppressedReasons
+				"suppressed_reasons": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The reasons that cause messages to be added to the suppression list.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SuppressionScope
+				"suppression_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The scope of the suppression list for the tenant.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The suppression attributes for the tenant.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -153,13 +252,19 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SES::Tenant").WithTerraformTypeName("awscc_ses_tenant")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"key":                   "Key",
-		"resource_arn":          "ResourceArn",
-		"resource_associations": "ResourceAssociations",
-		"tags":                  "Tags",
-		"tenant_name":           "TenantName",
-		"value":                 "Value",
+		"arn":                      "Arn",
+		"key":                      "Key",
+		"policy":                   "Policy",
+		"reputation_entity":        "ReputationEntity",
+		"reputation_entity_policy": "ReputationEntityPolicy",
+		"resource_arn":             "ResourceArn",
+		"resource_associations":    "ResourceAssociations",
+		"suppressed_reasons":       "SuppressedReasons",
+		"suppression_attributes":   "SuppressionAttributes",
+		"suppression_scope":        "SuppressionScope",
+		"tags":                     "Tags",
+		"tenant_name":              "TenantName",
+		"value":                    "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

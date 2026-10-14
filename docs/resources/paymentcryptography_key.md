@@ -177,6 +177,8 @@ Optional:
 
 Read-Only:
 
+- `kms_key_arn` (String) The ARN of the AWS KMS key that protects the replica in this region.
+- `kms_key_id` (String) The AWS KMS key requested for this region, when replication failed before its ARN was known.
 - `status` (String) Defines the replication state of a key
 - `status_message` (String)
 

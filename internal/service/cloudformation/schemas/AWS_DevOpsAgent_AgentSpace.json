@@ -35,6 +35,9 @@
         },
         "Idc": {
           "$ref": "#/definitions/IdcAuthConfiguration"
+        },
+        "Idp": {
+          "$ref": "#/definitions/IdpAuthConfiguration"
         }
       }
     },
@@ -83,6 +86,61 @@
       "required": [
         "OperatorAppRoleArn",
         "IdcInstanceArn"
+      ]
+    },
+    "IdpAuthConfiguration": {
+      "description": "External identity provider configuration for the Operator App.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OperatorAppRoleArn": {
+          "description": "The IAM role that Operator App users assume to access DevOps Agent APIs.",
+          "type": "string"
+        },
+        "IssuerUrl": {
+          "description": "The OIDC issuer URL for the external identity provider.",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "ClientId": {
+          "description": "The OIDC client identifier for the external identity provider application.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "ClientSecret": {
+          "description": "The OIDC client secret for the external identity provider application. Use a Secrets Manager dynamic reference to avoid storing the secret in the template.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "Provider": {
+          "description": "The external identity provider type.",
+          "type": "string",
+          "enum": [
+            "okta",
+            "entra"
+          ]
+        },
+        "UserIdClaim": {
+          "description": "The identity claim used to identify users. This value is selected by the service for the configured provider.",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "OperatorAppRoleArn",
+        "IssuerUrl",
+        "ClientId",
+        "ClientSecret",
+        "Provider"
       ]
     },
     "Preferences": {
@@ -184,7 +242,13 @@
     "/properties/OperatorApp/Iam/UpdatedAt",
     "/properties/OperatorApp/Idc/IdcApplicationArn",
     "/properties/OperatorApp/Idc/CreatedAt",
-    "/properties/OperatorApp/Idc/UpdatedAt"
+    "/properties/OperatorApp/Idc/UpdatedAt",
+    "/properties/OperatorApp/Idp/UserIdClaim",
+    "/properties/OperatorApp/Idp/CreatedAt",
+    "/properties/OperatorApp/Idp/UpdatedAt"
+  ],
+  "writeOnlyProperties": [
+    "/properties/OperatorApp/Idp/ClientSecret"
   ],
   "createOnlyProperties": [
     "/properties/KmsKeyArn"
@@ -240,6 +304,7 @@
         "aidevops:UpdateAgentSpace",
         "aidevops:GetAgentSpace",
         "aidevops:EnableOperatorApp",
+        "aidevops:UpdateOperatorAppIdpConfig",
         "aidevops:DisableOperatorApp",
         "aidevops:GetOperatorApp",
         "aidevops:GetOperatorAppTeams",
@@ -274,6 +339,7 @@
         "aidevops:DeleteAgentSpace",
         "aidevops:GetAgentSpace",
         "aidevops:DisableOperatorApp",
+        "kms:Decrypt",
         "sso:DeleteApplication",
         "sso:DeleteApplicationAccessScope",
         "sso:DeleteApplicationAuthenticationMethod",

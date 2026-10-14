@@ -1,0 +1,310 @@
+{
+  "typeName": "AWS::AppFabric::IngestionDestination",
+  "description": "Creates an ingestion destination, which specifies how an application's ingested data is processed by Amazon Web Services AppFabric and where it's delivered.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the ingestion destination.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "AppBundleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the app bundle.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "IngestionArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the ingestion.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "ProcessingConfiguration": {
+      "$ref": "#/definitions/ProcessingConfiguration"
+    },
+    "DestinationConfiguration": {
+      "$ref": "#/definitions/DestinationConfiguration"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The state of the ingestion destination.",
+      "enum": [
+        "Active",
+        "Failed"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp of when the ingestion destination was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp of when the ingestion destination was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A map of the key-value pairs of the tag or tags to assign to the resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "Tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ProcessingConfiguration": {
+      "type": "object",
+      "description": "Contains information about how ingested data is processed.",
+      "properties": {
+        "AuditLog": {
+          "$ref": "#/definitions/AuditLogProcessingConfiguration"
+        }
+      },
+      "required": [
+        "AuditLog"
+      ],
+      "additionalProperties": false
+    },
+    "AuditLogProcessingConfiguration": {
+      "type": "object",
+      "description": "Contains information about an audit log processing configuration.",
+      "properties": {
+        "Schema": {
+          "type": "string",
+          "description": "The event schema in which the audit logs need to be formatted.",
+          "enum": [
+            "ocsf",
+            "raw"
+          ]
+        },
+        "Format": {
+          "type": "string",
+          "description": "The format in which the audit logs need to be formatted.",
+          "enum": [
+            "json",
+            "parquet"
+          ]
+        }
+      },
+      "required": [
+        "Schema",
+        "Format"
+      ],
+      "additionalProperties": false
+    },
+    "DestinationConfiguration": {
+      "type": "object",
+      "description": "Contains information about the destination of ingested data.",
+      "properties": {
+        "AuditLog": {
+          "$ref": "#/definitions/AuditLogDestinationConfiguration"
+        }
+      },
+      "required": [
+        "AuditLog"
+      ],
+      "additionalProperties": false
+    },
+    "AuditLogDestinationConfiguration": {
+      "type": "object",
+      "description": "Contains information about an audit log destination configuration.",
+      "properties": {
+        "Destination": {
+          "$ref": "#/definitions/Destination"
+        }
+      },
+      "required": [
+        "Destination"
+      ],
+      "additionalProperties": false
+    },
+    "Destination": {
+      "type": "object",
+      "description": "Contains information about an audit log destination.",
+      "properties": {
+        "S3Bucket": {
+          "$ref": "#/definitions/S3Bucket"
+        },
+        "FirehoseStream": {
+          "$ref": "#/definitions/FirehoseStream"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "S3Bucket"
+          ]
+        },
+        {
+          "required": [
+            "FirehoseStream"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "S3Bucket": {
+      "type": "object",
+      "description": "Contains information about an Amazon S3 bucket.",
+      "properties": {
+        "BucketName": {
+          "type": "string",
+          "description": "The name of the Amazon S3 bucket.",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "Prefix": {
+          "type": "string",
+          "description": "The object key to use.",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "required": [
+        "BucketName"
+      ],
+      "additionalProperties": false
+    },
+    "FirehoseStream": {
+      "type": "object",
+      "description": "Contains information about an Amazon Kinesis Data Firehose delivery stream.",
+      "properties": {
+        "StreamName": {
+          "type": "string",
+          "description": "The name of the Amazon Kinesis Data Firehose delivery stream.",
+          "minLength": 3,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "StreamName"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "AppBundleArn",
+    "IngestionArn",
+    "ProcessingConfiguration",
+    "DestinationConfiguration"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/AppBundleArn",
+    "/properties/IngestionArn",
+    "/properties/ProcessingConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appfabric:TagResource",
+      "appfabric:UntagResource",
+      "appfabric:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appfabric:CreateIngestionDestination",
+        "appfabric:GetIngestionDestination",
+        "appfabric:TagResource",
+        "appfabric:ListTagsForResource",
+        "s3:GetBucketLocation",
+        "firehose:DescribeDeliveryStream",
+        "firehose:TagDeliveryStream"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appfabric:GetIngestionDestination",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appfabric:UpdateIngestionDestination",
+        "appfabric:GetIngestionDestination",
+        "appfabric:TagResource",
+        "appfabric:UntagResource",
+        "appfabric:ListTagsForResource",
+        "s3:GetBucketLocation",
+        "firehose:DescribeDeliveryStream",
+        "firehose:TagDeliveryStream"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appfabric:GetIngestionDestination",
+        "appfabric:DeleteIngestionDestination",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppBundleArn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1011,
+            "pattern": "^arn:.+$"
+          },
+          "IngestionArn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1011,
+            "pattern": "^arn:.+$"
+          }
+        },
+        "required": [
+          "AppBundleArn",
+          "IngestionArn"
+        ]
+      },
+      "permissions": [
+        "appfabric:ListIngestionDestinations"
+      ]
+    }
+  }
+}

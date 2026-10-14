@@ -1,4 +1,77 @@
-## 1.106.0 (Unreleased)
+## 1.106.0 (October 14, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appfabric_app_authorization`
+* **New Data Source:** `awscc_appfabric_ingestion_destination`
+* **New Data Source:** `awscc_bedrockagentcore_consent_portal`
+* **New Data Source:** `awscc_bedrockagentcore_consent_portals`
+* **New Data Source:** `awscc_cloudwatch_integration`
+* **New Data Source:** `awscc_cloudwatch_integrations`
+* **New Data Source:** `awscc_customerprofiles_recommender_filter`
+* **New Data Source:** `awscc_ec2_client_vpn_authorization_rule`
+* **New Data Source:** `awscc_fsx_snapshot`
+* **New Data Source:** `awscc_fsx_snapshots`
+* **New Data Source:** `awscc_fsx_storage_virtual_machine`
+* **New Data Source:** `awscc_fsx_storage_virtual_machines`
+* **New Data Source:** `awscc_glue_table`
+* **New Data Source:** `awscc_licensemanager_license_configuration`
+* **New Data Source:** `awscc_licensemanager_license_configurations`
+* **New Data Source:** `awscc_licensemanagerlinuxsubscriptions_subscription_provider`
+* **New Data Source:** `awscc_licensemanagerlinuxsubscriptions_subscription_providers`
+* **New Data Source:** `awscc_licensemanagerusersubscriptions_license_server_endpoint`
+* **New Data Source:** `awscc_licensemanagerusersubscriptions_license_server_endpoints`
+* **New Data Source:** `awscc_polly_lexicon`
+* **New Data Source:** `awscc_polly_lexicons`
+* **New Data Source:** `awscc_quicksight_assignment`
+* **New Data Source:** `awscc_quicksight_brand`
+* **New Data Source:** `awscc_quicksight_brands`
+* **New Data Source:** `awscc_quicksight_group`
+* **New Data Source:** `awscc_rds_deployment`
+* **New Data Source:** `awscc_rds_deployments`
+* **New Data Source:** `awscc_securityagent_integration`
+* **New Data Source:** `awscc_securityagent_integrations`
+* **New Data Source:** `awscc_storagegateway_nfs_file_share`
+* **New Data Source:** `awscc_storagegateway_nfs_file_shares`
+* **New Data Source:** `awscc_storagegateway_smb_file_share`
+* **New Data Source:** `awscc_storagegateway_smb_file_shares`
+* **New Data Source:** `awscc_timestream_influx_db_backup`
+* **New Data Source:** `awscc_timestream_influx_db_backups`
+* **New List Resource:** `awscc_bedrockagentcore_consent_portal`
+* **New List Resource:** `awscc_cloudwatch_integration`
+* **New List Resource:** `awscc_fsx_snapshot`
+* **New List Resource:** `awscc_fsx_storage_virtual_machine`
+* **New List Resource:** `awscc_licensemanager_license_configuration`
+* **New List Resource:** `awscc_licensemanagerlinuxsubscriptions_subscription_provider`
+* **New List Resource:** `awscc_licensemanagerusersubscriptions_license_server_endpoint`
+* **New List Resource:** `awscc_polly_lexicon`
+* **New List Resource:** `awscc_quicksight_brand`
+* **New List Resource:** `awscc_rds_deployment`
+* **New List Resource:** `awscc_securityagent_integration`
+* **New List Resource:** `awscc_storagegateway_nfs_file_share`
+* **New List Resource:** `awscc_storagegateway_smb_file_share`
+* **New List Resource:** `awscc_timestream_influx_db_backup`
+* **New Resource:** `awscc_appfabric_app_authorization`
+* **New Resource:** `awscc_appfabric_ingestion_destination`
+* **New Resource:** `awscc_bedrockagentcore_consent_portal`
+* **New Resource:** `awscc_cloudwatch_integration`
+* **New Resource:** `awscc_customerprofiles_recommender_filter`
+* **New Resource:** `awscc_ec2_client_vpn_authorization_rule`
+* **New Resource:** `awscc_fsx_snapshot`
+* **New Resource:** `awscc_fsx_storage_virtual_machine`
+* **New Resource:** `awscc_glue_table`
+* **New Resource:** `awscc_licensemanager_license_configuration`
+* **New Resource:** `awscc_licensemanagerlinuxsubscriptions_subscription_provider`
+* **New Resource:** `awscc_licensemanagerusersubscriptions_license_server_endpoint`
+* **New Resource:** `awscc_polly_lexicon`
+* **New Resource:** `awscc_quicksight_assignment`
+* **New Resource:** `awscc_quicksight_brand`
+* **New Resource:** `awscc_quicksight_group`
+* **New Resource:** `awscc_rds_deployment`
+* **New Resource:** `awscc_securityagent_integration`
+* **New Resource:** `awscc_storagegateway_nfs_file_share`
+* **New Resource:** `awscc_storagegateway_smb_file_share`
+* **New Resource:** `awscc_timestream_influx_db_backup`
 
 ## 1.105.0 (October 7, 2026)
 

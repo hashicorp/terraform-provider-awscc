@@ -1,0 +1,98 @@
+{
+  "typeName": "AWS::Polly::Lexicon",
+  "description": "Resource Type definition for AWS::Polly::Lexicon. A pronunciation lexicon that stores custom pronunciations for speech synthesis.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the lexicon.",
+      "pattern": "^arn:aws[a-zA-Z-]*:polly:[a-z0-9-]+:[0-9]{12}:lexicon/[0-9A-Za-z]{1,20}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the lexicon. Must be an alphanumeric string up to 20 characters long.",
+      "pattern": "^[0-9A-Za-z]{1,20}$"
+    },
+    "Content": {
+      "type": "string",
+      "description": "The content of the PLS lexicon in string format."
+    },
+    "Alphabet": {
+      "type": "string",
+      "description": "The phonetic alphabet used in the lexicon. Valid values are ipa and x-sampa."
+    },
+    "LanguageCode": {
+      "type": "string",
+      "description": "The language code that the lexicon applies to."
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date the lexicon was last modified (ISO 8601 timestamp)."
+    },
+    "LexemesCount": {
+      "type": "integer",
+      "description": "The number of lexemes in the lexicon."
+    },
+    "Size": {
+      "type": "integer",
+      "description": "The total size of the lexicon, in characters."
+    }
+  },
+  "required": [
+    "Name",
+    "Content"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Alphabet",
+    "/properties/LanguageCode",
+    "/properties/LastModified",
+    "/properties/LexemesCount",
+    "/properties/Size"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "polly:PutLexicon",
+        "polly:GetLexicon"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "polly:GetLexicon"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "polly:PutLexicon",
+        "polly:GetLexicon"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "polly:DeleteLexicon",
+        "polly:GetLexicon"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "polly:ListLexicons"
+      ]
+    }
+  }
+}

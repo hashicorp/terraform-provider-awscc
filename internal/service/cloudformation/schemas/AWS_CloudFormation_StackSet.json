@@ -171,7 +171,7 @@
           }
         },
         "AccountsUrl": {
-          "description": "Returns the value of the AccountsUrl property.",
+          "description": "Returns the value of the AccountsUrl property. AccountsUrl is currently not supported when using Account Level Targeting (ALT).",
           "type": "string",
           "minLength": 1,
           "maxLength": 5120,

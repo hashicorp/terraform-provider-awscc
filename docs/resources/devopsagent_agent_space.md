@@ -49,6 +49,7 @@ Optional:
 
 - `iam` (Attributes) (see [below for nested schema](#nestedatt--operator_app--iam))
 - `idc` (Attributes) (see [below for nested schema](#nestedatt--operator_app--idc))
+- `idp` (Attributes) External identity provider configuration for the Operator App. (see [below for nested schema](#nestedatt--operator_app--idp))
 
 <a id="nestedatt--operator_app--iam"></a>
 ### Nested Schema for `operator_app.iam`
@@ -76,6 +77,24 @@ Read-Only:
 - `created_at` (String)
 - `idc_application_arn` (String)
 - `updated_at` (String)
+
+
+<a id="nestedatt--operator_app--idp"></a>
+### Nested Schema for `operator_app.idp`
+
+Optional:
+
+- `client_id` (String) The OIDC client identifier for the external identity provider application.
+- `client_secret` (String) The OIDC client secret for the external identity provider application. Use a Secrets Manager dynamic reference to avoid storing the secret in the template.
+- `issuer_url` (String) The OIDC issuer URL for the external identity provider.
+- `operator_app_role_arn` (String) The IAM role that Operator App users assume to access DevOps Agent APIs.
+- `provider` (String) The external identity provider type.
+
+Read-Only:
+
+- `created_at` (String)
+- `updated_at` (String)
+- `user_id_claim` (String) The identity claim used to identify users. This value is selected by the service for the configured provider.
 
 
 
