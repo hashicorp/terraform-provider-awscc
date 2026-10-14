@@ -18,6 +18,7 @@
         "mcpserversplunk",
         "mcpservernewrelic",
         "gitlab",
+        "github",
         "servicenow",
         "pagerduty",
         "azureidentity",
@@ -26,7 +27,7 @@
       ]
     },
     "ServiceDetails": {
-      "description": "Service-specific configuration details - MCPServerSigV4 supports in-place updates; GitLab (TokenValue), MCPServer (ApiKey or BearerToken credential rotation), MCPServerNewRelic (ApiKey rotation), and MCPServerGrafana (BearerToken rotation) support in-place credential rotation; all other service types and fields require replacement when modified",
+      "description": "Service-specific configuration details - MCPServerSigV4 supports in-place updates; GitLab (TokenValue), MCPServer (ApiKey or BearerToken credential rotation), MCPServerNewRelic (ApiKey rotation), and MCPServerGrafana (BearerToken rotation) support in-place credential rotation; all other service types and fields, including GitHub, require replacement when modified",
       "type": "object",
       "oneOf": [
         {
@@ -81,6 +82,17 @@
           },
           "required": [
             "GitLab"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "GitHub": {
+              "$ref": "#/definitions/GitHubDetails"
+            }
+          },
+          "required": [
+            "GitHub"
           ],
           "additionalProperties": false
         },
@@ -460,6 +472,106 @@
       ],
       "additionalProperties": false
     },
+    "GitHubDetails": {
+      "description": "GitHub personal access token (PAT) service configuration. Exactly one of AppVerification or DirectAccess selects how the token is used",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "AppVerification": {
+              "$ref": "#/definitions/GitHubAppVerificationDetails"
+            }
+          },
+          "required": [
+            "AppVerification"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "DirectAccess": {
+              "$ref": "#/definitions/GitHubPatDetails"
+            }
+          },
+          "required": [
+            "DirectAccess"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "GitHubAppVerificationDetails": {
+      "description": "The token verifies an existing DevOps Agent GitHub App installation on github.com and is then discarded. Not supported for GitHub Enterprise Server",
+      "type": "object",
+      "properties": {
+        "TokenValue": {
+          "description": "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9_]+$"
+        },
+        "TargetUrl": {
+          "description": "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$"
+        },
+        "OrganizationName": {
+          "description": "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 39,
+          "pattern": "^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$"
+        },
+        "AppVariant": {
+          "description": "Permission variant of the DevOps Agent GitHub App that must already be installed on the organization or account",
+          "type": "string",
+          "enum": [
+            "READ_ONLY",
+            "READ_WRITE",
+            "CUSTOM_APP"
+          ]
+        }
+      },
+      "required": [
+        "TokenValue",
+        "AppVariant"
+      ],
+      "additionalProperties": false
+    },
+    "GitHubPatDetails": {
+      "description": "The token is stored and used as the long-lived credential for GitHub API access",
+      "type": "object",
+      "properties": {
+        "TokenValue": {
+          "description": "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9_]+$"
+        },
+        "TargetUrl": {
+          "description": "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$"
+        },
+        "OrganizationName": {
+          "description": "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 39,
+          "pattern": "^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$"
+        }
+      },
+      "required": [
+        "TokenValue"
+      ],
+      "additionalProperties": false
+    },
     "OAuthClientDetails": {
       "description": "OAuth client credentials",
       "type": "object",
@@ -762,6 +874,17 @@
         },
         {
           "properties": {
+            "GitHub": {
+              "$ref": "#/definitions/RegisteredGitHubServiceDetails"
+            }
+          },
+          "required": [
+            "GitHub"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
             "MCPServerSplunk": {
               "$ref": "#/definitions/RegisteredMCPServerDetails"
             }
@@ -971,6 +1094,59 @@
       ],
       "additionalProperties": false
     },
+    "RegisteredGitHubServiceDetails": {
+      "description": "GitHub service details returned after registration",
+      "type": "object",
+      "properties": {
+        "Owner": {
+          "description": "The GitHub repository owner name derived from the token",
+          "type": "string"
+        },
+        "OwnerType": {
+          "description": "Type of repository owner",
+          "type": "string",
+          "enum": [
+            "organization",
+            "user"
+          ]
+        },
+        "TargetUrl": {
+          "description": "GitHub instance URL (absent for github.com)",
+          "type": "string"
+        },
+        "AppVariant": {
+          "description": "The GitHub App variant the service was registered with",
+          "type": "string",
+          "enum": [
+            "READ_ONLY",
+            "READ_WRITE",
+            "CUSTOM_APP"
+          ]
+        },
+        "HostingType": {
+          "description": "The GitHub hosting type the service was registered with",
+          "type": "string",
+          "enum": [
+            "SAAS",
+            "SELF_MANAGED",
+            "DEDICATED"
+          ]
+        },
+        "AuthMode": {
+          "description": "How the service authenticates against the GitHub API: app after AppVerification, pat after DirectAccess",
+          "type": "string",
+          "enum": [
+            "app",
+            "pat"
+          ]
+        }
+      },
+      "required": [
+        "Owner",
+        "OwnerType"
+      ],
+      "additionalProperties": false
+    },
     "RegisteredDynatraceDetails": {
       "description": "Dynatrace service details returned after registration",
       "type": "object",
@@ -1136,6 +1312,13 @@
       "description": "The type of service being registered",
       "$ref": "#/definitions/ServiceType"
     },
+    "Name": {
+      "description": "The display name for the service registration.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[\\p{L}\\p{N} _-]+$"
+    },
     "ServiceDetails": {
       "description": "Service-specific configuration details for create operation",
       "$ref": "#/definitions/ServiceDetails"
@@ -1227,6 +1410,7 @@
   "createOnlyProperties": [
     "/properties/ServiceType",
     "/properties/ServiceDetails/Dynatrace",
+    "/properties/ServiceDetails/GitHub",
     "/properties/ServiceDetails/MCPServerSplunk",
     "/properties/ServiceDetails/ServiceNow",
     "/properties/ServiceDetails/PagerDuty",

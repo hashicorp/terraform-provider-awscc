@@ -158,7 +158,8 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
         "ssm:StartSession"
-      ]
+      ],
+      "timeoutInMinutes": 15
     },
     "read": {
       "permissions": [

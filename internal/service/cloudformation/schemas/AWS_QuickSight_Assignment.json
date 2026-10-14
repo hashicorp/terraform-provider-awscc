@@ -1,0 +1,125 @@
+{
+  "typeName": "AWS::QuickSight::Assignment",
+  "description": "Resource Type definition for AWS::QuickSight::Assignment, which manages an Amazon QuickSight IAM policy assignment that attaches an IAM policy to specified QuickSight users or groups within a namespace.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM policy assignment. This is a synthesized identifier composed of the namespace and assignment name.",
+      "pattern": "^arn:[a-z0-9-]+:quicksight:[a-z0-9-]+:[0-9]{12}:assignment/.+$"
+    },
+    "AssignmentId": {
+      "type": "string",
+      "description": "The ID for the IAM policy assignment."
+    },
+    "AssignmentName": {
+      "type": "string",
+      "description": "The name of the assignment, also called a rule. The name must be unique within the AWS account.",
+      "minLength": 1,
+      "pattern": ""
+    },
+    "AssignmentStatus": {
+      "type": "string",
+      "description": "The status of the assignment.",
+      "enum": [
+        "ENABLED",
+        "DRAFT",
+        "DISABLED"
+      ]
+    },
+    "Namespace": {
+      "type": "string",
+      "description": "The namespace that contains the assignment.",
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9._-]*$"
+    },
+    "Identities": {
+      "type": "object",
+      "description": "The QuickSight users, groups, or both that you want to assign the policy to. This maps identity type to a list of identity names.",
+      "patternProperties": {
+        "": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PolicyArn": {
+      "type": "string",
+      "description": "The ARN for the IAM policy to apply to the QuickSight users and groups specified in this assignment."
+    }
+  },
+  "required": [
+    "AssignmentName",
+    "AssignmentStatus",
+    "Namespace"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AssignmentId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Identities"
+  ],
+  "createOnlyProperties": [
+    "/properties/AssignmentName",
+    "/properties/Namespace"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Namespace",
+      "/properties/AssignmentName"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "quicksight:CreateIAMPolicyAssignment",
+        "quicksight:DescribeIAMPolicyAssignment"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeIAMPolicyAssignment"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "quicksight:UpdateIAMPolicyAssignment",
+        "quicksight:DescribeIAMPolicyAssignment"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "quicksight:DeleteIAMPolicyAssignment",
+        "quicksight:DescribeIAMPolicyAssignment"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "Namespace": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]*$"
+          }
+        },
+        "required": [
+          "Namespace"
+        ]
+      },
+      "permissions": [
+        "quicksight:ListIAMPolicyAssignments"
+      ]
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "typeName": "AWS::LicenseManager::LicenseConfiguration",
+  "description": "Resource schema for AWS::LicenseManager::LicenseConfiguration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ProductInformationFilter": {
+      "description": "Describes a product information filter.",
+      "type": "object",
+      "properties": {
+        "ProductInformationFilterName": {
+          "description": "Filter name.",
+          "type": "string"
+        },
+        "ProductInformationFilterValue": {
+          "description": "Filter value.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ProductInformationFilterComparator": {
+          "description": "Logical operator.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ProductInformationFilterName",
+        "ProductInformationFilterComparator"
+      ],
+      "additionalProperties": false
+    },
+    "ProductInformation": {
+      "description": "Describes product information for a license configuration.",
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "description": "Resource type. The possible values are SSM_MANAGED | RDS.",
+          "type": "string"
+        },
+        "ProductInformationFilterList": {
+          "description": "A product information filter list.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ProductInformationFilter"
+          }
+        }
+      },
+      "required": [
+        "ResourceType",
+        "ProductInformationFilterList"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "LicenseConfigurationId": {
+      "description": "Unique ID of the license configuration.",
+      "type": "string"
+    },
+    "LicenseConfigurationArn": {
+      "description": "Amazon Resource Name (ARN) of the license configuration.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "Name": {
+      "description": "Name of the license configuration.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the license configuration.",
+      "type": "string"
+    },
+    "LicenseCountingType": {
+      "description": "Dimension used to track the license inventory.",
+      "type": "string",
+      "enum": [
+        "vCPU",
+        "Instance",
+        "Core",
+        "Socket"
+      ]
+    },
+    "LicenseCount": {
+      "description": "Number of licenses managed by the license configuration.",
+      "type": "integer"
+    },
+    "LicenseCountHardLimit": {
+      "description": "Indicates whether hard or soft license enforcement is used. Exceeding a hard limit blocks the launch of new instances.",
+      "type": "boolean"
+    },
+    "LicenseRules": {
+      "description": "License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost).",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "LicenseExpiry": {
+      "description": "License configuration expiry as an epoch timestamp (seconds since 1970-01-01T00:00:00Z).",
+      "type": "integer"
+    },
+    "DisassociateWhenNotFound": {
+      "description": "When true, disassociates a resource when software is uninstalled.",
+      "type": "boolean"
+    },
+    "ProductInformationList": {
+      "description": "Product information.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ProductInformation"
+      }
+    },
+    "Status": {
+      "description": "License configuration status.",
+      "type": "string"
+    },
+    "OwnerAccountId": {
+      "description": "Account ID of the owner of the license configuration.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tags to add to the license configuration.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "LicenseCountingType"
+  ],
+  "readOnlyProperties": [
+    "/properties/LicenseConfigurationId",
+    "/properties/LicenseConfigurationArn",
+    "/properties/Status",
+    "/properties/OwnerAccountId"
+  ],
+  "createOnlyProperties": [
+    "/properties/LicenseCountingType",
+    "/properties/LicenseRules"
+  ],
+  "primaryIdentifier": [
+    "/properties/LicenseConfigurationArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/LicenseConfigurationId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "license-manager:TagResource",
+      "license-manager:UntagResource",
+      "license-manager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "license-manager:CreateLicenseConfiguration",
+        "license-manager:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "license-manager:GetLicenseConfiguration",
+        "license-manager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "license-manager:UpdateLicenseConfiguration",
+        "license-manager:GetLicenseConfiguration",
+        "license-manager:TagResource",
+        "license-manager:UntagResource",
+        "license-manager:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "license-manager:DeleteLicenseConfiguration",
+        "license-manager:GetLicenseConfiguration",
+        "license-manager:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "license-manager:ListLicenseConfigurations"
+      ]
+    }
+  }
+}

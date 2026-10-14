@@ -19,8 +19,6 @@
     "/properties/PeerRegion",
     "/properties/PeerOwnerId",
     "/properties/PeerVpcId",
-    "/properties/PeerRoleArn",
-    "/properties/AssumeRoleRegion",
     "/properties/VpcId"
   ],
   "primaryIdentifier": [
@@ -34,7 +32,8 @@
   "handlers": {
     "read": {
       "permissions": [
-        "ec2:DescribeVpcPeeringConnections"
+        "ec2:DescribeVpcPeeringConnections",
+        "sts:AssumeRole"
       ]
     },
     "create": {
@@ -43,14 +42,17 @@
         "ec2:DescribeVpcPeeringConnections",
         "ec2:AcceptVpcPeeringConnection",
         "ec2:CreateTags",
-        "sts:AssumeRole"
+        "sts:AssumeRole",
+        "ec2:ModifyVpcPeeringConnectionOptions"
       ]
     },
     "update": {
       "permissions": [
         "ec2:CreateTags",
         "ec2:DeleteTags",
-        "ec2:DescribeVpcPeeringConnections"
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:ModifyVpcPeeringConnectionOptions",
+        "sts:AssumeRole"
       ]
     },
     "list": {
@@ -93,7 +95,7 @@
   },
   "properties": {
     "PeerRoleArn": {
-      "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
+      "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account. You can update this property. To manage PeerVpcPeeringConnectionOptions on a peering connection with another AWS account, the role must allow ec2:DescribeVpcPeeringConnections and ec2:ModifyVpcPeeringConnectionOptions.",
       "type": "string"
     },
     "VpcId": {
@@ -105,7 +107,7 @@
       "type": "string"
     },
     "AssumeRoleRegion": {
-      "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+      "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided. You can update this property.",
       "type": "string"
     },
     "Id": {

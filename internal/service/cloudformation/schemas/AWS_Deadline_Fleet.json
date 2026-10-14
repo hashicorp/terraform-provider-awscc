@@ -342,6 +342,24 @@
         }
       ]
     },
+    "FleetSoftwareAddOn": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/FleetSoftwareAddOnName"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "FleetSoftwareAddOnName": {
+      "type": "string",
+      "enum": [
+        "docker"
+      ]
+    },
     "FleetStatus": {
       "type": "string",
       "enum": [
@@ -548,6 +566,15 @@
           },
           "maxItems": 15,
           "minItems": 1
+        },
+        "SoftwareAddOns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FleetSoftwareAddOn"
+          },
+          "maxItems": 10,
+          "minItems": 0,
+          "uniqueItems": true
         }
       },
       "required": [

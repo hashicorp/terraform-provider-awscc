@@ -1,124 +1,114 @@
 {
-  "typeName": "AWS::ImageBuilder::InfrastructureConfiguration",
-  "description": "Resource Type definition for AWS::ImageBuilder::InfrastructureConfiguration",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder.git",
-  "properties": {
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
-      "type": "string",
-      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:infrastructure-configuration/.+$"
+  "tagging": {
+    "permissions": [
+      "imagebuilder:TagResource",
+      "imagebuilder:UntagResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "imagebuilder:GetInfrastructureConfiguration"
+      ]
     },
-    "Name": {
-      "description": "The name of the infrastructure configuration.",
-      "type": "string"
+    "create": {
+      "permissions": [
+        "iam:PassRole",
+        "iam:GetRole",
+        "iam:GetInstanceProfile",
+        "iam:CreateServiceLinkedRole",
+        "sns:Publish",
+        "imagebuilder:TagResource",
+        "imagebuilder:GetInfrastructureConfiguration",
+        "imagebuilder:CreateInfrastructureConfiguration",
+        "autoscaling:DescribeAutoScalingGroups"
+      ]
     },
-    "Description": {
-      "description": "The description of the infrastructure configuration.",
-      "type": "string"
+    "update": {
+      "permissions": [
+        "iam:PassRole",
+        "sns:Publish",
+        "imagebuilder:GetInfrastructureConfiguration",
+        "imagebuilder:UpdateInfrastructureConfiguration",
+        "imagebuilder:TagResource",
+        "imagebuilder:UntagResource",
+        "autoscaling:DescribeAutoScalingGroups"
+      ]
     },
-    "InstanceTypes": {
-      "description": "The instance types of the infrastructure configuration.",
-      "type": "array",
-      "insertionOrder": true,
-      "items": {
-        "type": "string"
-      }
+    "list": {
+      "permissions": [
+        "imagebuilder:ListInfrastructureConfigurations"
+      ]
     },
-    "SecurityGroupIds": {
-      "description": "The security group IDs of the infrastructure configuration.",
-      "type": "array",
-      "insertionOrder": false,
-      "items": {
-        "type": "string"
-      }
-    },
-    "Logging": {
-      "description": "The logging configuration of the infrastructure configuration.",
-      "$ref": "#/definitions/Logging"
-    },
-    "SubnetId": {
-      "description": "The subnet ID of the infrastructure configuration.",
-      "type": "string"
-    },
-    "KeyPair": {
-      "description": "The EC2 key pair of the infrastructure configuration..",
-      "type": "string"
-    },
-    "TerminateInstanceOnFailure": {
-      "description": "The terminate instance on failure configuration of the infrastructure configuration.",
-      "type": "boolean"
-    },
-    "InstanceProfileName": {
-      "description": "The instance profile of the infrastructure configuration.",
-      "type": "string"
-    },
-    "InstanceMetadataOptions": {
-      "description": "The instance metadata option settings for the infrastructure configuration.",
-      "$ref": "#/definitions/InstanceMetadataOptions"
-    },
-    "SnsTopicArn": {
-      "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
-      "type": "string"
-    },
-    "ResourceTags": {
-      "description": "The tags attached to the resource created by Image Builder.",
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      }
-    },
-    "Tags": {
-      "description": "The tags associated with the component.",
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      }
-    },
-    "Placement": {
-      "description": "The placement option settings for the infrastructure configuration.",
-      "$ref": "#/definitions/Placement"
+    "delete": {
+      "permissions": [
+        "imagebuilder:UntagResource",
+        "imagebuilder:GetInfrastructureConfiguration",
+        "imagebuilder:DeleteInfrastructureConfiguration"
+      ]
     }
   },
+  "typeName": "AWS::ImageBuilder::InfrastructureConfiguration",
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "description": "Resource Type definition for AWS::ImageBuilder::InfrastructureConfiguration",
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
   "definitions": {
-    "TagMap": {
-      "description": "TagMap",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "TagKey": {
-          "description": "TagKey",
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "TagValue": {
-          "description": "TagValue",
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 256
-        }
-      }
-    },
     "Logging": {
       "description": "The logging configuration of the infrastructure configuration.",
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "S3Logs": {
           "$ref": "#/definitions/S3Logs"
         }
       }
     },
+    "Placement": {
+      "description": "The placement options",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Tenancy": {
+          "description": "Tenancy",
+          "type": "string",
+          "enum": [
+            "default",
+            "dedicated",
+            "host"
+          ]
+        },
+        "AvailabilityZone": {
+          "description": "AvailabilityZone",
+          "type": "string"
+        },
+        "HostId": {
+          "description": "HostId",
+          "type": "string"
+        },
+        "HostResourceGroupArn": {
+          "description": "HostResourceGroupArn",
+          "type": "string"
+        }
+      }
+    },
     "InstanceMetadataOptions": {
       "description": "The instance metadata option settings for the infrastructure configuration.",
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "HttpPutResponseHopLimit": {
           "description": "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
@@ -136,44 +126,35 @@
     },
     "S3Logs": {
       "description": "The S3 path in which to store the logs.",
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
-        "S3BucketName": {
-          "description": "S3BucketName",
-          "type": "string"
-        },
         "S3KeyPrefix": {
           "description": "S3KeyPrefix",
+          "type": "string"
+        },
+        "S3BucketName": {
+          "description": "S3BucketName",
           "type": "string"
         }
       }
     },
-    "Placement": {
-      "description": "The placement options",
-      "type": "object",
+    "TagMap": {
+      "description": "TagMap",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
-        "AvailabilityZone": {
-          "description": "AvailabilityZone",
-          "type": "string"
-        },
-        "Tenancy": {
-          "description": "Tenancy",
+        "TagKey": {
+          "minLength": 1,
+          "description": "TagKey",
           "type": "string",
-          "enum": [
-            "default",
-            "dedicated",
-            "host"
-          ]
+          "maxLength": 128
         },
-        "HostId": {
-          "description": "HostId",
-          "type": "string"
-        },
-        "HostResourceGroupArn": {
-          "description": "HostResourceGroupArn",
-          "type": "string"
+        "TagValue": {
+          "minLength": 1,
+          "description": "TagValue",
+          "type": "string",
+          "maxLength": 256
         }
       }
     }
@@ -182,66 +163,87 @@
     "Name",
     "InstanceProfileName"
   ],
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
-  "readOnlyProperties": [
-    "/properties/Arn"
-  ],
-  "createOnlyProperties": [
-    "/properties/Name"
-  ],
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags",
-    "permissions": [
-      "imagebuilder:TagResource",
-      "imagebuilder:UntagResource"
-    ]
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "iam:PassRole",
-        "iam:GetRole",
-        "iam:GetInstanceProfile",
-        "iam:CreateServiceLinkedRole",
-        "sns:Publish",
-        "imagebuilder:TagResource",
-        "imagebuilder:GetInfrastructureConfiguration",
-        "imagebuilder:CreateInfrastructureConfiguration"
-      ]
+  "properties": {
+    "Logging": {
+      "description": "The logging configuration of the infrastructure configuration.",
+      "$ref": "#/definitions/Logging"
     },
-    "update": {
-      "permissions": [
-        "iam:PassRole",
-        "sns:Publish",
-        "imagebuilder:GetInfrastructureConfiguration",
-        "imagebuilder:UpdateInfrastructureConfiguration",
-        "imagebuilder:TagResource",
-        "imagebuilder:UntagResource"
-      ]
+    "KeyPair": {
+      "description": "The EC2 key pair of the infrastructure configuration..",
+      "type": "string"
     },
-    "read": {
-      "permissions": [
-        "imagebuilder:GetInfrastructureConfiguration"
-      ]
+    "Description": {
+      "description": "The description of the infrastructure configuration.",
+      "type": "string"
     },
-    "delete": {
-      "permissions": [
-        "imagebuilder:UntagResource",
-        "imagebuilder:GetInfrastructureConfiguration",
-        "imagebuilder:DeleteInfrastructureConfiguration"
-      ]
+    "InstanceProfileName": {
+      "description": "The instance profile of the infrastructure configuration.",
+      "type": "string"
     },
-    "list": {
-      "permissions": [
-        "imagebuilder:ListInfrastructureConfigurations"
-      ]
+    "ResourceTags": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "The tags attached to the resource created by Image Builder.",
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "TerminateInstanceOnFailure": {
+      "description": "The terminate instance on failure configuration of the infrastructure configuration.",
+      "type": "boolean"
+    },
+    "SubnetId": {
+      "description": "The subnet ID of the infrastructure configuration.",
+      "type": "string"
+    },
+    "SecurityGroupIds": {
+      "description": "The security group IDs of the infrastructure configuration.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Name": {
+      "description": "The name of the infrastructure configuration.",
+      "type": "string"
+    },
+    "Placement": {
+      "description": "The placement option settings for the infrastructure configuration.",
+      "$ref": "#/definitions/Placement"
+    },
+    "InstanceMetadataOptions": {
+      "description": "The instance metadata option settings for the infrastructure configuration.",
+      "$ref": "#/definitions/InstanceMetadataOptions"
+    },
+    "InstanceTypes": {
+      "description": "The instance types of the infrastructure configuration.",
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "SnsTopicArn": {
+      "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
+      "type": "string"
+    },
+    "Arn": {
+      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:infrastructure-configuration/.+$",
+      "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+      "type": "string"
+    },
+    "Tags": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "The tags associated with the component.",
+      "additionalProperties": false,
+      "type": "object"
     }
-  },
-  "additionalProperties": false
+  }
 }

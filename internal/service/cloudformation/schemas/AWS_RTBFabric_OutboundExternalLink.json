@@ -304,5 +304,19 @@
       "rtbfabric:ListTagsForResource"
     ]
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "typeConfiguration": {
+    "properties": {
+      "DeploymentStage": {
+        "type": "string",
+        "enum": [
+          "Beta",
+          "Gamma",
+          "Prod"
+        ],
+        "description": "Internal use: the RTB Fabric service stage this account's operations are routed to. Leave unset for production."
+      }
+    },
+    "additionalProperties": false
+  }
 }

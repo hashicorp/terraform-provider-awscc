@@ -40,6 +40,66 @@
         "ResourceArn"
       ],
       "additionalProperties": false
+    },
+    "TenantSuppressionAttributes": {
+      "description": "The suppression attributes for the tenant.",
+      "type": "object",
+      "properties": {
+        "SuppressionScope": {
+          "description": "The scope of the suppression list for the tenant.",
+          "type": "string",
+          "enum": [
+            "ACCOUNT",
+            "TENANT"
+          ]
+        },
+        "SuppressedReasons": {
+          "description": "The reasons that cause messages to be added to the suppression list.",
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "BOUNCE",
+              "COMPLAINT"
+            ]
+          }
+        }
+      },
+      "required": [
+        "SuppressionScope",
+        "SuppressedReasons"
+      ],
+      "additionalProperties": false
+    },
+    "ReputationPolicy": {
+      "description": "The reputation policy for the tenant.",
+      "type": "object",
+      "properties": {
+        "ReputationEntityPolicy": {
+          "description": "The ARN of an SES-managed reputation policy.",
+          "type": "string",
+          "pattern": "^arn:[a-z0-9-]+:ses:[a-z0-9-]+:aws:reputation-policy/(none|standard|strict)$"
+        }
+      },
+      "required": [
+        "ReputationEntityPolicy"
+      ],
+      "additionalProperties": false
+    },
+    "ReputationEntity": {
+      "description": "The reputation configuration for the tenant.",
+      "type": "object",
+      "properties": {
+        "Policy": {
+          "$ref": "#/definitions/ReputationPolicy"
+        }
+      },
+      "required": [
+        "Policy"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -73,6 +133,14 @@
       },
       "minItems": 0,
       "maxItems": 50
+    },
+    "SuppressionAttributes": {
+      "description": "The suppression attributes for the tenant.",
+      "$ref": "#/definitions/TenantSuppressionAttributes"
+    },
+    "ReputationEntity": {
+      "description": "The reputation configuration for the tenant. Sending status remains managed by SES.",
+      "$ref": "#/definitions/ReputationEntity"
     }
   },
   "required": [
@@ -105,6 +173,8 @@
       "permissions": [
         "ses:CreateTenant",
         "ses:GetTenant",
+        "ses:GetReputationEntity",
+        "ses:UpdateReputationEntityPolicy",
         "ses:CreateTenantResourceAssociation",
         "ses:ListTenantResources",
         "ses:UntagResource",
@@ -114,12 +184,16 @@
     "read": {
       "permissions": [
         "ses:GetTenant",
+        "ses:GetReputationEntity",
         "ses:ListTenantResources"
       ]
     },
     "update": {
       "permissions": [
         "ses:GetTenant",
+        "ses:GetReputationEntity",
+        "ses:PutTenantSuppressionAttributes",
+        "ses:UpdateReputationEntityPolicy",
         "ses:CreateTenantResourceAssociation",
         "ses:DeleteTenantResourceAssociation",
         "ses:ListTenantResources",

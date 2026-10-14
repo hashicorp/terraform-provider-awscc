@@ -1,0 +1,313 @@
+{
+  "typeName": "AWS::SecurityAgent::Integration",
+  "description": "Resource Type definition for AWS::SecurityAgent::Integration. Creates a connection between Security Agent and a third-party provider for code review and remediation.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "GitHubInput": {
+      "description": "The input required to create a GitHub integration.",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "The OAuth authorization code received from GitHub.",
+          "type": "string"
+        },
+        "State": {
+          "description": "The CSRF state token for validating the OAuth flow.",
+          "type": "string"
+        },
+        "OrganizationName": {
+          "description": "The name of the GitHub organization to integrate with.",
+          "type": "string"
+        },
+        "TargetUrl": {
+          "description": "The HTTPS URL of a self-hosted GitHub Enterprise Server instance. Omit this value for GitHub.com.",
+          "type": "string"
+        },
+        "InstallationId": {
+          "description": "The installation identifier provided by GitHub Enterprise Server on the install callback. Required for GitHub Enterprise Server integrations and ignored for GitHub.com.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Code",
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "GitLabInput": {
+      "description": "The input required to create a GitLab integration.",
+      "type": "object",
+      "properties": {
+        "AccessToken": {
+          "description": "The GitLab access token used to authenticate. This can be a personal access token or a group access token.",
+          "type": "string"
+        },
+        "TokenType": {
+          "description": "The type of GitLab access token.",
+          "type": "string",
+          "enum": [
+            "PERSONAL",
+            "GROUP"
+          ]
+        },
+        "TargetUrl": {
+          "description": "The HTTPS URL of a self-managed GitLab instance. Omit this value for GitLab SaaS (gitlab.com).",
+          "type": "string"
+        },
+        "GroupId": {
+          "description": "The identifier of the GitLab group. Required when TokenType is GROUP and ignored for personal tokens.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "AccessToken",
+        "TokenType"
+      ],
+      "additionalProperties": false
+    },
+    "BitbucketInput": {
+      "description": "The input required to create a Bitbucket integration.",
+      "type": "object",
+      "properties": {
+        "InstallationId": {
+          "description": "The Atlassian installation identifier, available from the Atlassian administration console.",
+          "type": "string"
+        },
+        "Workspace": {
+          "description": "The Bitbucket workspace slug that identifies the workspace to integrate.",
+          "type": "string"
+        },
+        "Code": {
+          "description": "The OAuth 2.0 authorization code returned from the consent redirect.",
+          "type": "string"
+        },
+        "State": {
+          "description": "The CSRF state token echoed back from the OAuth redirect.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "InstallationId",
+        "Workspace",
+        "Code",
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "ConfluenceInput": {
+      "description": "The input required to create a Confluence integration.",
+      "type": "object",
+      "properties": {
+        "InstallationId": {
+          "description": "The Atlassian installation identifier, available from the Atlassian administration console.",
+          "type": "string"
+        },
+        "Code": {
+          "description": "The OAuth 2.0 authorization code returned from the consent redirect.",
+          "type": "string"
+        },
+        "State": {
+          "description": "The CSRF state token echoed back from the OAuth redirect.",
+          "type": "string"
+        },
+        "SiteUrl": {
+          "description": "The Confluence Cloud site URL, for example https://mysite.atlassian.net.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "InstallationId",
+        "Code",
+        "State",
+        "SiteUrl"
+      ],
+      "additionalProperties": false
+    },
+    "ProviderInput": {
+      "description": "The provider-specific input required to create the integration. Exactly one of the provider input objects must be specified.",
+      "type": "object",
+      "properties": {
+        "Github": {
+          "$ref": "#/definitions/GitHubInput"
+        },
+        "Gitlab": {
+          "$ref": "#/definitions/GitLabInput"
+        },
+        "Bitbucket": {
+          "$ref": "#/definitions/BitbucketInput"
+        },
+        "Confluence": {
+          "$ref": "#/definitions/ConfluenceInput"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the integration.",
+      "type": "string"
+    },
+    "IntegrationId": {
+      "description": "The unique identifier of the integration.",
+      "type": "string"
+    },
+    "Provider": {
+      "description": "The integration provider.",
+      "type": "string",
+      "enum": [
+        "GITHUB",
+        "GITLAB",
+        "BITBUCKET",
+        "CONFLUENCE"
+      ]
+    },
+    "ProviderType": {
+      "description": "The type of the integration provider.",
+      "type": "string",
+      "enum": [
+        "SOURCE_CODE",
+        "DOCUMENTATION"
+      ]
+    },
+    "ProviderInput": {
+      "$ref": "#/definitions/ProviderInput"
+    },
+    "DisplayName": {
+      "description": "The display name for the integration.",
+      "type": "string"
+    },
+    "KmsKeyId": {
+      "description": "The identifier of the AWS KMS key to use for encrypting data associated with the integration. Can be a key ID, key ARN, alias name, or alias ARN.",
+      "type": "string"
+    },
+    "InstallationId": {
+      "description": "The installation identifier from the integration provider.",
+      "type": "string"
+    },
+    "TargetUrl": {
+      "description": "The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise Server or self-managed GitLab instance. This value is absent for SaaS integrations.",
+      "type": "string"
+    },
+    "PrivateConnectionName": {
+      "description": "The name of an active private connection used to reach a self-hosted provider instance over private networking.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags to associate with the integration.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Provider",
+    "DisplayName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/IntegrationId",
+    "/properties/InstallationId",
+    "/properties/ProviderType",
+    "/properties/TargetUrl"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ProviderInput",
+    "/properties/KmsKeyId"
+  ],
+  "createOnlyProperties": [
+    "/properties/Provider",
+    "/properties/DisplayName",
+    "/properties/KmsKeyId",
+    "/properties/PrivateConnectionName",
+    "/properties/ProviderInput"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/IntegrationId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityagent:TagResource",
+      "securityagent:UntagResource",
+      "securityagent:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityagent:CreateIntegration",
+        "securityagent:TagResource",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:CreateGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityagent:GetIntegration",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityagent:GetIntegration",
+        "securityagent:TagResource",
+        "securityagent:UntagResource",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityagent:DeleteIntegration",
+        "securityagent:GetIntegration",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityagent:ListIntegrations"
+      ]
+    }
+  }
+}
