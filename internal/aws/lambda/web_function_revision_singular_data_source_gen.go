@@ -241,6 +241,13 @@ func webFunctionRevisionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "additionalProperties": false,
 		//	  "description": "The service configuration for the revision.",
 		//	  "properties": {
+		//	    "EgressNetworkConnectorArn": {
+		//	      "description": "The versioned ARN of the network connector used for outbound network access from the revision.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:network-connector:[a-zA-Z0-9_-]+:[0-9]+$",
+		//	      "type": "string"
+		//	    },
 		//	    "EnvironmentVariables": {
 		//	      "additionalProperties": false,
 		//	      "description": "Environment variables for the function.",
@@ -322,6 +329,11 @@ func webFunctionRevisionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	}
 		"service_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressNetworkConnectorArn
+				"egress_network_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The versioned ARN of the network connector used for outbound network access from the revision.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: EnvironmentVariables
 				"environment_variables": // Pattern: ""
 				schema.MapAttribute{     /*START ATTRIBUTE*/
@@ -427,6 +439,7 @@ func webFunctionRevisionDataSource(ctx context.Context) (datasource.DataSource, 
 		"code_config":                     "CodeConfig",
 		"created_at":                      "CreatedAt",
 		"description":                     "Description",
+		"egress_network_connector_arn":    "EgressNetworkConnectorArn",
 		"environment_variables":           "EnvironmentVariables",
 		"execution_role_arn":              "ExecutionRoleArn",
 		"function_arn":                    "FunctionArn",

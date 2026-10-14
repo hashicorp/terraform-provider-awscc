@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -31,6 +32,122 @@ func oTelEnrichmentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS account ID. This is the primary identifier for this singleton resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ExcludeFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Removes metrics from the include set. Absent or empty means nothing is removed. Evaluated after IncludeFilters, so ExcludeFilters always wins.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Selects metrics within one namespace. The same shape serves both the include and the exclude direction. Namespaces are compared byte-for-byte and case-sensitively; no wildcards, prefixes or normalization.",
+		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Namespace": {
+		//	        "description": "The CloudWatch namespace this selector applies to.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "pattern": "^[^:].*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"exclude_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The CloudWatch namespace this selector applies to.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Removes metrics from the include set. Absent or empty means nothing is removed. Evaluated after IncludeFilters, so ExcludeFilters always wins.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IncludeFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Scopes enrichment to a subset of the account's telemetry. Absent or empty means all namespaces are in scope. Present means only these are. The service enforces a combined cap of 100 selectors across IncludeFilters and ExcludeFilters, and rejects more than one selector for the same namespace within a direction.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Selects metrics within one namespace. The same shape serves both the include and the exclude direction. Namespaces are compared byte-for-byte and case-sensitively; no wildcards, prefixes or normalization.",
+		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Namespace": {
+		//	        "description": "The CloudWatch namespace this selector applies to.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "pattern": "^[^:].*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"include_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The CloudWatch namespace this selector applies to.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Scopes enrichment to a subset of the account's telemetry. Absent or empty means all namespaces are in scope. Present means only these are. The service enforces a combined cap of 100 selectors across IncludeFilters and ExcludeFilters, and rejects more than one selector for the same namespace within a direction.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -65,8 +182,12 @@ func oTelEnrichmentDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::OTelEnrichment").WithTerraformTypeName("awscc_cloudwatch_otel_enrichment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id": "AccountId",
-		"status":     "Status",
+		"account_id":      "AccountId",
+		"exclude_filters": "ExcludeFilters",
+		"include_filters": "IncludeFilters",
+		"metric_names":    "MetricNames",
+		"namespace":       "Namespace",
+		"status":          "Status",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

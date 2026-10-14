@@ -222,7 +222,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "properties": {
 		//	      "EvaluatorId": {
 		//	        "description": "The unique identifier of the evaluator.",
-		//	        "pattern": "^(Builtin\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
+		//	        "pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -231,7 +231,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
+		//	  "maxItems": 25,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -594,7 +594,8 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "CREATE_FAILED",
 		//	    "UPDATING",
 		//	    "UPDATE_FAILED",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "ERROR"
 		//	  ],
 		//	  "type": "string"
 		//	}

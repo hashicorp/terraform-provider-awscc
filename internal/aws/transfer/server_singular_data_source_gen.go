@@ -63,6 +63,17 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreateWithHostKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "When this property is `true`, AWS Transfer Family will generate an initial host key for your server, making it immediately available to SFTP clients. When set to `false`, clients will not be able to establish an SFTP session until you import one or more host keys (see AWS::Transfer::HostKey). This property cannot be changed after resource creation. Default: `true`.",
+		//	  "type": "boolean"
+		//	}
+		"create_with_host_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When this property is `true`, AWS Transfer Family will generate an initial host key for your server, making it immediately available to SFTP clients. When set to `false`, clients will not be able to establish an SFTP session until you import one or more host keys (see AWS::Transfer::HostKey). This property cannot be changed after resource creation. Default: `true`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -653,6 +664,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"as_2_service_managed_egress_ip_addresses": "As2ServiceManagedEgressIpAddresses",
 		"as_2_transports":                          "As2Transports",
 		"certificate":                              "Certificate",
+		"create_with_host_key":                     "CreateWithHostKey",
 		"directory_id":                             "DirectoryId",
 		"directory_listing_optimization":           "DirectoryListingOptimization",
 		"domain":                                   "Domain",

@@ -530,8 +530,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "Type",
-		//	            "Value"
+		//	            "Type"
 		//	          ],
 		//	          "type": "object"
 		//	        },

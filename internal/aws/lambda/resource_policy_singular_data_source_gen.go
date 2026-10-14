@@ -42,15 +42,18 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "anyOf": [
 		//	    {
 		//	      "$ref": "#/definitions/FunctionResourceArn"
+		//	    },
+		//	    {
+		//	      "$ref": "#/definitions/WebFunctionResourceArn"
 		//	    }
 		//	  ],
-		//	  "description": "The Amazon Resource Name (ARN) of the LAM resource you want to add the policy to. For a function, you can use a qualified or an unqualified ARN. The value must be a complete ARN, and the operation does not accept wildcard characters.",
+		//	  "description": "",
 		//	  "maxLength": 1024,
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the LAM resource you want to add the policy to. For a function, you can use a qualified or an unqualified ARN. The value must be a complete ARN, and the operation does not accept wildcard characters.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
