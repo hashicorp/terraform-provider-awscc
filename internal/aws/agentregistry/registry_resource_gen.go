@@ -186,6 +186,127 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CustomMetadataSchemaConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that defines a typed metadata schema for a registry. A default schema and per-record-type schema overrides are both optional. Schema evolution is additive only: you can add fields and enum values, but you cannot remove fields, change types, or remove enum values.",
+		//	  "properties": {
+		//	    "DefaultSchema": {
+		//	      "description": "The default JSON Schema that applies to record types without a specific override. Supported property types are string, string with an enum constraint, string with a uri format, and boolean.",
+		//	      "maxLength": 10240,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "RecordTypeSchemaOverrides": {
+		//	      "description": "A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A schema override for a specific record type within a custom metadata schema configuration.",
+		//	        "properties": {
+		//	          "RecordType": {
+		//	            "description": "The record type that this schema override applies to.",
+		//	            "enum": [
+		//	              "MCP",
+		//	              "AGENT",
+		//	              "SKILL",
+		//	              "GATEWAY",
+		//	              "CUSTOM"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Schema": {
+		//	            "description": "The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.",
+		//	            "maxLength": 10240,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RecordType",
+		//	          "Schema"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_metadata_schema_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultSchema
+				"default_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The default JSON Schema that applies to record types without a specific override. Supported property types are string, string with an enum constraint, string with a uri format, and boolean.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 10240),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RecordTypeSchemaOverrides
+				"record_type_schema_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RecordType
+							"record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The record type that this schema override applies to.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"MCP",
+										"AGENT",
+										"SKILL",
+										"GATEWAY",
+										"CUSTOM",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Schema
+							"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 10240),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(5),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines a typed metadata schema for a registry. A default schema and per-record-type schema overrides are both optional. Schema evolution is additive only: you can add fields and enum values, but you cannot remove fields, change types, or remove enum values.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -815,39 +936,44 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":               "AllowedAudience",
-		"allowed_clients":                "AllowedClients",
-		"allowed_scopes":                 "AllowedScopes",
-		"approval_configuration":         "ApprovalConfiguration",
-		"authorizer_configuration":       "AuthorizerConfiguration",
-		"authorizer_type":                "AuthorizerType",
-		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
-		"auto_approval_rules":            "AutoApprovalRules",
-		"auto_detection_enabled":         "AutoDetectionEnabled",
-		"auto_detection_scope":           "AutoDetectionScope",
-		"auto_detection_status":          "AutoDetectionStatus",
-		"claim_match_operator":           "ClaimMatchOperator",
-		"claim_match_value":              "ClaimMatchValue",
-		"created_at":                     "CreatedAt",
-		"custom_claims":                  "CustomClaims",
-		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
-		"description":                    "Description",
-		"discovery_configuration":        "DiscoveryConfiguration",
-		"discovery_url":                  "DiscoveryUrl",
-		"encryption_configuration":       "EncryptionConfiguration",
-		"inbound_token_claim_name":       "InboundTokenClaimName",
-		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
-		"key":                            "Key",
-		"kms_key_arn":                    "KmsKeyArn",
-		"match_value_string":             "MatchValueString",
-		"match_value_string_list":        "MatchValueStringList",
-		"name":                           "Name",
-		"registry_arn":                   "RegistryArn",
-		"registry_id":                    "RegistryId",
-		"status":                         "Status",
-		"tags":                           "Tags",
-		"updated_at":                     "UpdatedAt",
-		"value":                          "Value",
+		"allowed_audience":                     "AllowedAudience",
+		"allowed_clients":                      "AllowedClients",
+		"allowed_scopes":                       "AllowedScopes",
+		"approval_configuration":               "ApprovalConfiguration",
+		"authorizer_configuration":             "AuthorizerConfiguration",
+		"authorizer_type":                      "AuthorizerType",
+		"authorizing_claim_match_value":        "AuthorizingClaimMatchValue",
+		"auto_approval_rules":                  "AutoApprovalRules",
+		"auto_detection_enabled":               "AutoDetectionEnabled",
+		"auto_detection_scope":                 "AutoDetectionScope",
+		"auto_detection_status":                "AutoDetectionStatus",
+		"claim_match_operator":                 "ClaimMatchOperator",
+		"claim_match_value":                    "ClaimMatchValue",
+		"created_at":                           "CreatedAt",
+		"custom_claims":                        "CustomClaims",
+		"custom_jwt_authorizer":                "CustomJWTAuthorizer",
+		"custom_metadata_schema_configuration": "CustomMetadataSchemaConfiguration",
+		"default_schema":                       "DefaultSchema",
+		"description":                          "Description",
+		"discovery_configuration":              "DiscoveryConfiguration",
+		"discovery_url":                        "DiscoveryUrl",
+		"encryption_configuration":             "EncryptionConfiguration",
+		"inbound_token_claim_name":             "InboundTokenClaimName",
+		"inbound_token_claim_value_type":       "InboundTokenClaimValueType",
+		"key":                                  "Key",
+		"kms_key_arn":                          "KmsKeyArn",
+		"match_value_string":                   "MatchValueString",
+		"match_value_string_list":              "MatchValueStringList",
+		"name":                                 "Name",
+		"record_type":                          "RecordType",
+		"record_type_schema_overrides":         "RecordTypeSchemaOverrides",
+		"registry_arn":                         "RegistryArn",
+		"registry_id":                          "RegistryId",
+		"schema":                               "Schema",
+		"status":                               "Status",
+		"tags":                                 "Tags",
+		"updated_at":                           "UpdatedAt",
+		"value":                                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

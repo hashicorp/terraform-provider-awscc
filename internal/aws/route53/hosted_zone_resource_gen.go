@@ -34,6 +34,22 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Route53::HostedZone resource.
 func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DelegationSetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"delegation_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneConfig
 		// CloudFormation resource type schema:
 		//
@@ -359,6 +375,7 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
 		"comment":                       "Comment",
+		"delegation_set_id":             "DelegationSetId",
 		"enable_accelerated_recovery":   "EnableAcceleratedRecovery",
 		"hosted_zone_config":            "HostedZoneConfig",
 		"hosted_zone_features":          "HostedZoneFeatures",

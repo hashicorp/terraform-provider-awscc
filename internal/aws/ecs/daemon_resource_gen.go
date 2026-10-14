@@ -95,6 +95,22 @@ func daemonResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Critical
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Critical is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DaemonArn
 		// CloudFormation resource type schema:
 		//
@@ -445,6 +461,7 @@ func daemonResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_provider_arns":     "CapacityProviderArns",
 		"cluster_arn":                "ClusterArn",
 		"created_at":                 "CreatedAt",
+		"critical":                   "Critical",
 		"daemon_arn":                 "DaemonArn",
 		"daemon_name":                "DaemonName",
 		"daemon_status":              "DaemonStatus",
@@ -464,6 +481,7 @@ func daemonResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CapacityProviderArns",
+		"/properties/Critical",
 		"/properties/DaemonName",
 		"/properties/DaemonTaskDefinitionArn",
 		"/properties/DeploymentConfiguration",

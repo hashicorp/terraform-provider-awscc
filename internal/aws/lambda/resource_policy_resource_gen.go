@@ -47,15 +47,18 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "anyOf": [
 		//	    {
 		//	      "$ref": "#/definitions/FunctionResourceArn"
+		//	    },
+		//	    {
+		//	      "$ref": "#/definitions/WebFunctionResourceArn"
 		//	    }
 		//	  ],
-		//	  "description": "The Amazon Resource Name (ARN) of the LAM resource you want to add the policy to. For a function, you can use a qualified or an unqualified ARN. The value must be a complete ARN, and the operation does not accept wildcard characters.",
+		//	  "description": "",
 		//	  "maxLength": 1024,
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the LAM resource you want to add the policy to. For a function, you can use a qualified or an unqualified ARN. The value must be a complete ARN, and the operation does not accept wildcard characters.",
+			Description: "",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(12, 1024),
@@ -88,7 +91,6 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "resource_arn",
-			Description:       "The Amazon Resource Name (ARN) of the LAM resource you want to add the policy to",
 			RequiredForImport: true,
 		})
 

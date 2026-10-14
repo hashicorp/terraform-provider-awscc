@@ -115,6 +115,59 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "GitHub": {
+		//	      "additionalProperties": false,
+		//	      "description": "GitHub service details returned after registration",
+		//	      "properties": {
+		//	        "AppVariant": {
+		//	          "description": "The GitHub App variant the service was registered with",
+		//	          "enum": [
+		//	            "READ_ONLY",
+		//	            "READ_WRITE",
+		//	            "CUSTOM_APP"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "AuthMode": {
+		//	          "description": "How the service authenticates against the GitHub API: app after AppVerification, pat after DirectAccess",
+		//	          "enum": [
+		//	            "app",
+		//	            "pat"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "HostingType": {
+		//	          "description": "The GitHub hosting type the service was registered with",
+		//	          "enum": [
+		//	            "SAAS",
+		//	            "SELF_MANAGED",
+		//	            "DEDICATED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Owner": {
+		//	          "description": "The GitHub repository owner name derived from the token",
+		//	          "type": "string"
+		//	        },
+		//	        "OwnerType": {
+		//	          "description": "Type of repository owner",
+		//	          "enum": [
+		//	            "organization",
+		//	            "user"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TargetUrl": {
+		//	          "description": "GitHub instance URL (absent for github.com)",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Owner",
+		//	        "OwnerType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "GitLab": {
 		//	      "additionalProperties": false,
 		//	      "description": "GitLab service details returned after registration",
@@ -401,6 +454,43 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Dynatrace service details returned after registration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: GitHub
+				"git_hub": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppVariant
+						"app_variant": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GitHub App variant the service was registered with",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthMode
+						"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "How the service authenticates against the GitHub API: app after AppVerification, pat after DirectAccess",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostingType
+						"hosting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GitHub hosting type the service was registered with",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Owner
+						"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GitHub repository owner name derived from the token",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OwnerType
+						"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Type of repository owner",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetUrl
+						"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "GitHub instance URL (absent for github.com)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "GitHub service details returned after registration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: GitLab
 				"git_lab": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -676,6 +766,28 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The display name for the service registration.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\p{L}\\p{N} _-]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name for the service registration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{N} _-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -787,6 +899,84 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "AccountUrn"
 		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "GitHub": {
+		//	      "description": "GitHub personal access token (PAT) service configuration. Exactly one of AppVerification or DirectAccess selects how the token is used",
+		//	      "properties": {
+		//	        "AppVerification": {
+		//	          "additionalProperties": false,
+		//	          "description": "The token verifies an existing DevOps Agent GitHub App installation on github.com and is then discarded. Not supported for GitHub Enterprise Server",
+		//	          "properties": {
+		//	            "AppVariant": {
+		//	              "description": "Permission variant of the DevOps Agent GitHub App that must already be installed on the organization or account",
+		//	              "enum": [
+		//	                "READ_ONLY",
+		//	                "READ_WRITE",
+		//	                "CUSTOM_APP"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "OrganizationName": {
+		//	              "description": "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+		//	              "maxLength": 39,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "TargetUrl": {
+		//	              "description": "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$",
+		//	              "type": "string"
+		//	            },
+		//	            "TokenValue": {
+		//	              "description": "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "^[A-Za-z0-9_]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenValue",
+		//	            "AppVariant"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "DirectAccess": {
+		//	          "additionalProperties": false,
+		//	          "description": "The token is stored and used as the long-lived credential for GitHub API access",
+		//	          "properties": {
+		//	            "OrganizationName": {
+		//	              "description": "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+		//	              "maxLength": 39,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "TargetUrl": {
+		//	              "description": "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$",
+		//	              "type": "string"
+		//	            },
+		//	            "TokenValue": {
+		//	              "description": "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "^[A-Za-z0-9_]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenValue"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "GitLab": {
@@ -1466,6 +1656,137 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Dynatrace service configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GitHub
+				"git_hub": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppVerification
+						"app_verification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AppVariant
+								"app_variant": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Permission variant of the DevOps Agent GitHub App that must already be installed on the organization or account",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"READ_ONLY",
+											"READ_WRITE",
+											"CUSTOM_APP",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OrganizationName
+								"organization_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 39),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TargetUrl
+								"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TokenValue
+								"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_]+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The token verifies an existing DevOps Agent GitHub App installation on github.com and is then discarded. Not supported for GitHub Enterprise Server",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DirectAccess
+						"direct_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OrganizationName
+								"organization_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 39),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TargetUrl
+								"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TokenValue
+								"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_]+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The token is stored and used as the long-lived credential for GitHub API access",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "GitHub personal access token (PAT) service configuration. Exactly one of AppVerification or DirectAccess selects how the token is used",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2471,6 +2792,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "mcpserversplunk",
 		//	    "mcpservernewrelic",
 		//	    "gitlab",
+		//	    "github",
 		//	    "servicenow",
 		//	    "pagerduty",
 		//	    "azureidentity",
@@ -2489,6 +2811,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					"mcpserversplunk",
 					"mcpservernewrelic",
 					"gitlab",
+					"github",
 					"servicenow",
 					"pagerduty",
 					"azureidentity",
@@ -2632,8 +2955,11 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"api_key_header":                       "ApiKeyHeader",
 		"api_key_name":                         "ApiKeyName",
 		"api_key_value":                        "ApiKeyValue",
+		"app_variant":                          "AppVariant",
+		"app_verification":                     "AppVerification",
 		"application_ids":                      "ApplicationIds",
 		"arn":                                  "Arn",
+		"auth_mode":                            "AuthMode",
 		"authorization_config":                 "AuthorizationConfig",
 		"authorization_header":                 "AuthorizationHeader",
 		"authorization_method":                 "AuthorizationMethod",
@@ -2644,14 +2970,17 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"client_secret":                        "ClientSecret",
 		"custom_headers":                       "CustomHeaders",
 		"description":                          "Description",
+		"direct_access":                        "DirectAccess",
 		"dynatrace":                            "Dynatrace",
 		"endpoint":                             "Endpoint",
 		"entity_guids":                         "EntityGuids",
 		"exchange_parameters":                  "ExchangeParameters",
 		"exchange_url":                         "ExchangeUrl",
 		"exchange_url_private_connection_name": "ExchangeUrlPrivateConnectionName",
+		"git_hub":                              "GitHub",
 		"git_lab":                              "GitLab",
 		"group_id":                             "GroupId",
+		"hosting_type":                         "HostingType",
 		"instance_url":                         "InstanceUrl",
 		"key":                                  "Key",
 		"kms_key_arn":                          "KmsKeyArn",
@@ -2663,6 +2992,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"mcp_server_splunk":                    "MCPServerSplunk",
 		"name":                                 "Name",
 		"o_auth_client_credentials":            "OAuthClientCredentials",
+		"organization_name":                    "OrganizationName",
+		"owner":                                "Owner",
+		"owner_type":                           "OwnerType",
 		"pager_duty":                           "PagerDuty",
 		"private_connection_name":              "PrivateConnectionName",
 		"region":                               "Region",

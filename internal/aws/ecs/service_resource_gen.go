@@ -256,17 +256,20 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "EarlySuccessCriteria": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The early success criteria configuration for a rolling deployment. With early success criteria, you can configure an Amazon ECS deployment to complete faster. Amazon ECS declares a deployment successful once a target percentage of tasks are healthy, instead of waiting for the service to fully stabilize.",
 		//	      "properties": {
 		//	        "Enable": {
+		//	          "description": "Specifies whether to use the early success criteria for the service deployment. When set to ``false``, the deployment uses the default behavior, where Amazon ECS considers the deployment successful when the target service revision fully stabilizes and the previous tasks are removed. The default value is ``false``.\n When set to ``true``, Amazon ECS monitors the deployment to meet early success criteria. You must also specify ``healthyPercent`` and ``sourceServiceRevisionCleanup``.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "HealthyPercent": {
+		//	          "description": "The percentage of healthy tasks that the target service revision must reach before Amazon ECS considers the deployment successful. This percentage is relative to the service's ``desiredCount`` and must be an integer between ``0`` and ``100``. This value must be greater than or equal to the ``minimumHealthyPercent`` value.\n After this percentage of tasks is healthy and the bake time elapses, Amazon ECS completes the deployment. Amazon ECS continues to scale the target service revision to 100 percent in the background.",
 		//	          "maximum": 100,
 		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        },
 		//	        "SourceServiceRevisionCleanup": {
+		//	          "description": "The time when Amazon ECS removes the source revisions' tasks relative to deployment completion. The valid values are:\n  +  ``BLOCKING``—Amazon ECS removes the previous tasks before it marks the deployment as successful.\n  +  ``DEFERRED``—Amazon ECS marks the deployment successful, and then removes the previous tasks in the background.",
 		//	          "enum": [
 		//	            "BLOCKING",
 		//	            "DEFERRED"
@@ -575,16 +578,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enable
 						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "Specifies whether to use the early success criteria for the service deployment. When set to ``false``, the deployment uses the default behavior, where Amazon ECS considers the deployment successful when the target service revision fully stabilizes and the previous tasks are removed. The default value is ``false``.\n When set to ``true``, Amazon ECS monitors the deployment to meet early success criteria. You must also specify ``healthyPercent`` and ``sourceServiceRevisionCleanup``.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: HealthyPercent
 						"healthy_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The percentage of healthy tasks that the target service revision must reach before Amazon ECS considers the deployment successful. This percentage is relative to the service's ``desiredCount`` and must be an integer between ``0`` and ``100``. This value must be greater than or equal to the ``minimumHealthyPercent`` value.\n After this percentage of tasks is healthy and the bake time elapses, Amazon ECS completes the deployment. Amazon ECS continues to scale the target service revision to 100 percent in the background.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 100),
 							}, /*END VALIDATORS*/
@@ -594,8 +599,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SourceServiceRevisionCleanup
 						"source_service_revision_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The time when Amazon ECS removes the source revisions' tasks relative to deployment completion. The valid values are:\n  +  ``BLOCKING``—Amazon ECS removes the previous tasks before it marks the deployment as successful.\n  +  ``DEFERRED``—Amazon ECS marks the deployment successful, and then removes the previous tasks in the background.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"BLOCKING",
@@ -607,7 +613,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The early success criteria configuration for a rolling deployment. With early success criteria, you can configure an Amazon ECS deployment to complete faster. Amazon ECS declares a deployment successful once a target percentage of tasks are healthy, instead of waiting for the service to fully stabilize.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

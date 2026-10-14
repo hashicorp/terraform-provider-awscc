@@ -80,6 +80,7 @@ func cloudFormationProvisionedProductResource(ctx context.Context) (resource.Res
 		//
 		//	{
 		//	  "items": {
+		//	    "pattern": "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]+:[0-9]{12}:[a-zA-Z0-9\\-_]+$",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 5,
@@ -93,6 +94,9 @@ func cloudFormationProvisionedProductResource(ctx context.Context) (resource.Res
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(5),
 				listvalidator.UniqueValues(),
+				listvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]+:[0-9]{12}:[a-zA-Z0-9\\-_]+$"), ""),
+				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -557,7 +561,7 @@ func cloudFormationProvisionedProductResource(ctx context.Context) (resource.Res
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Schema for AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+		Description: "Resource Type definition for AWS::ServiceCatalog::CloudFormationProvisionedProduct",
 		Version:     1,
 		Attributes:  attributes,
 	}

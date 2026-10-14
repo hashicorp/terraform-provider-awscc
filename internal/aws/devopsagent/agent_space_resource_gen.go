@@ -211,6 +211,61 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "IdcInstanceArn"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "Idp": {
+		//	      "additionalProperties": false,
+		//	      "description": "External identity provider configuration for the Operator App.",
+		//	      "properties": {
+		//	        "ClientId": {
+		//	          "description": "The OIDC client identifier for the external identity provider application.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecret": {
+		//	          "description": "The OIDC client secret for the external identity provider application. Use a Secrets Manager dynamic reference to avoid storing the secret in the template.",
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "CreatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "IssuerUrl": {
+		//	          "description": "The OIDC issuer URL for the external identity provider.",
+		//	          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
+		//	          "type": "string"
+		//	        },
+		//	        "OperatorAppRoleArn": {
+		//	          "description": "The IAM role that Operator App users assume to access DevOps Agent APIs.",
+		//	          "type": "string"
+		//	        },
+		//	        "Provider": {
+		//	          "description": "The external identity provider type.",
+		//	          "enum": [
+		//	            "okta",
+		//	            "entra"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "UpdatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "UserIdClaim": {
+		//	          "description": "The identity claim used to identify users. This value is selected by the service for the configured provider.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OperatorAppRoleArn",
+		//	        "IssuerUrl",
+		//	        "ClientId",
+		//	        "ClientSecret",
+		//	        "Provider"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -305,6 +360,109 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Idp
+				"idp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The OIDC client identifier for the external identity provider application.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The OIDC client secret for the external identity provider application. Use a Secrets Manager dynamic reference to avoid storing the secret in the template.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1024),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// ClientSecret is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: CreatedAt
+						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IssuerUrl
+						"issuer_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The OIDC issuer URL for the external identity provider.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OperatorAppRoleArn
+						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IAM role that Operator App users assume to access DevOps Agent APIs.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Provider
+						"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The external identity provider type.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"okta",
+									"entra",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UpdatedAt
+						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UserIdClaim
+						"user_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identity claim used to identify users. This value is selected by the service for the configured provider.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "External identity provider configuration for the Operator App.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -466,6 +624,8 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"agent_space_id":           "AgentSpaceId",
 		"arn":                      "Arn",
+		"client_id":                "ClientId",
+		"client_secret":            "ClientSecret",
 		"created_at":               "CreatedAt",
 		"description":              "Description",
 		"elevated_actions_enabled": "ElevatedActionsEnabled",
@@ -473,6 +633,8 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		"idc":                      "Idc",
 		"idc_application_arn":      "IdcApplicationArn",
 		"idc_instance_arn":         "IdcInstanceArn",
+		"idp":                      "Idp",
+		"issuer_url":               "IssuerUrl",
 		"key":                      "Key",
 		"kms_key_arn":              "KmsKeyArn",
 		"locale":                   "Locale",
@@ -480,11 +642,16 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		"operator_app":             "OperatorApp",
 		"operator_app_role_arn":    "OperatorAppRoleArn",
 		"preferences":              "Preferences",
+		"provider":                 "Provider",
 		"tags":                     "Tags",
 		"updated_at":               "UpdatedAt",
+		"user_id_claim":            "UserIdClaim",
 		"value":                    "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/OperatorApp/Idp/ClientSecret",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

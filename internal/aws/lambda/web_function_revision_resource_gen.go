@@ -304,6 +304,13 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 		//	  "additionalProperties": false,
 		//	  "description": "The service configuration for the revision.",
 		//	  "properties": {
+		//	    "EgressNetworkConnectorArn": {
+		//	      "description": "The versioned ARN of the network connector used for outbound network access from the revision.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:network-connector:[a-zA-Z0-9_-]+:[0-9]+$",
+		//	      "type": "string"
+		//	    },
 		//	    "EnvironmentVariables": {
 		//	      "additionalProperties": false,
 		//	      "description": "Environment variables for the function.",
@@ -385,6 +392,19 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 		//	}
 		"service_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressNetworkConnectorArn
+				"egress_network_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The versioned ARN of the network connector used for outbound network access from the revision.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:network-connector:[a-zA-Z0-9_-]+:[0-9]+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: EnvironmentVariables
 				"environment_variables": // Pattern: ""
 				schema.MapAttribute{     /*START ATTRIBUTE*/
@@ -574,6 +594,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 		"code_config":                     "CodeConfig",
 		"created_at":                      "CreatedAt",
 		"description":                     "Description",
+		"egress_network_connector_arn":    "EgressNetworkConnectorArn",
 		"environment_variables":           "EnvironmentVariables",
 		"execution_role_arn":              "ExecutionRoleArn",
 		"function_arn":                    "FunctionArn",
