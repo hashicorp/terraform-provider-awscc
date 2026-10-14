@@ -83,6 +83,7 @@ Required:
 
 Optional:
 
+- `egress_network_connector_arn` (String) The versioned ARN of the network connector used for outbound network access from the revision.
 - `environment_variables` (Map of String) Environment variables for the function.
 - `max_concurrency_per_environment` (Number) The maximum concurrency per environment.
 - `telemetry_config` (Attributes) The telemetry configuration. (see [below for nested schema](#nestedatt--service_config--telemetry_config))

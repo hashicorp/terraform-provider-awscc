@@ -22,9 +22,27 @@ Data Source schema for AWS::SES::Tenant
 ### Read-Only
 
 - `arn` (String) Amazon Resource Name (ARN) of the tenant.
+- `reputation_entity` (Attributes) The reputation configuration for the tenant. Sending status remains managed by SES. (see [below for nested schema](#nestedatt--reputation_entity))
 - `resource_associations` (Attributes List) The list of resources to associate with the tenant. (see [below for nested schema](#nestedatt--resource_associations))
+- `suppression_attributes` (Attributes) The suppression attributes for the tenant. (see [below for nested schema](#nestedatt--suppression_attributes))
 - `tags` (Attributes List) The tags (keys and values) associated with the tenant. (see [below for nested schema](#nestedatt--tags))
 - `tenant_name` (String) The name of the tenant.
+
+<a id="nestedatt--reputation_entity"></a>
+### Nested Schema for `reputation_entity`
+
+Read-Only:
+
+- `policy` (Attributes) The reputation policy for the tenant. (see [below for nested schema](#nestedatt--reputation_entity--policy))
+
+<a id="nestedatt--reputation_entity--policy"></a>
+### Nested Schema for `reputation_entity.policy`
+
+Read-Only:
+
+- `reputation_entity_policy` (String) The ARN of an SES-managed reputation policy.
+
+
 
 <a id="nestedatt--resource_associations"></a>
 ### Nested Schema for `resource_associations`
@@ -32,6 +50,15 @@ Data Source schema for AWS::SES::Tenant
 Read-Only:
 
 - `resource_arn` (String) The ARN of the resource to associate with the tenant
+
+
+<a id="nestedatt--suppression_attributes"></a>
+### Nested Schema for `suppression_attributes`
+
+Read-Only:
+
+- `suppressed_reasons` (Set of String) The reasons that cause messages to be added to the suppression list.
+- `suppression_scope` (String) The scope of the suppression list for the tenant.
 
 
 <a id="nestedatt--tags"></a>
