@@ -29,6 +29,7 @@ Resource Type definition for AWS::BedrockAgentCore::OnlineEvaluationConfig - Cre
 - `evaluators` (Attributes List) The list of evaluators to apply during online evaluation. (see [below for nested schema](#nestedatt--evaluators))
 - `execution_status` (String) The execution status indicating whether the online evaluation is currently running.
 - `insights` (Attributes List) The list of insights to enable for failure analysis. (see [below for nested schema](#nestedatt--insights))
+- `output_config` (Attributes) The configuration that specifies where evaluation results should be written. (see [below for nested schema](#nestedatt--output_config))
 - `tags` (Attributes List) A list of tags to assign to the online evaluation configuration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -37,7 +38,6 @@ Resource Type definition for AWS::BedrockAgentCore::OnlineEvaluationConfig - Cre
 - `id` (String) Uniquely identifies the resource.
 - `online_evaluation_config_arn` (String) The Amazon Resource Name (ARN) of the online evaluation configuration.
 - `online_evaluation_config_id` (String) The unique identifier of the online evaluation configuration.
-- `output_config` (Attributes) The configuration that specifies where evaluation results should be written. (see [below for nested schema](#nestedatt--output_config))
 - `status` (String) The status of the online evaluation configuration.
 - `updated_at` (String) The timestamp when the online evaluation configuration was last updated.
 
@@ -53,8 +53,12 @@ Required:
 
 Required:
 
-- `log_group_names` (List of String) The list of CloudWatch log group names to monitor for agent traces.
 - `service_names` (List of String) The list of service names to filter traces within the specified log groups.
+
+Optional:
+
+- `log_group_name_prefixes` (List of String) The list of CloudWatch log group name prefixes to monitor for agent traces. Mutually exclusive with LogGroupNames; specify exactly one of the two selectors.
+- `log_group_names` (List of String) The list of CloudWatch log group names to monitor for agent traces.
 
 
 
@@ -131,6 +135,24 @@ Optional:
 - `insight_id` (String) The unique identifier of the insight.
 
 
+<a id="nestedatt--output_config"></a>
+### Nested Schema for `output_config`
+
+Optional:
+
+- `cloudwatch_config` (Attributes) The CloudWatch configuration for writing evaluation results. (see [below for nested schema](#nestedatt--output_config--cloudwatch_config))
+
+<a id="nestedatt--output_config--cloudwatch_config"></a>
+### Nested Schema for `output_config.cloudwatch_config`
+
+Optional:
+
+- `log_group_name` (String) The CloudWatch log group name for evaluation results. Omit to use the service-managed default log group.
+- `metrics_namespace` (String) The CloudWatch metrics namespace for evaluation result metrics. Omit to use the service-managed default namespace.
+- `result_destination` (String) Where evaluation results are written. DEDICATED_LOG_GROUP, the default when omitted, writes to a dedicated result log group. SOURCE_LOG_GROUP writes results back to the trace source log group; LogGroupName must not be specified with SOURCE_LOG_GROUP.
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -138,21 +160,6 @@ Optional:
 
 - `key` (String)
 - `value` (String)
-
-
-<a id="nestedatt--output_config"></a>
-### Nested Schema for `output_config`
-
-Read-Only:
-
-- `cloudwatch_config` (Attributes) The CloudWatch configuration for writing evaluation results. (see [below for nested schema](#nestedatt--output_config--cloudwatch_config))
-
-<a id="nestedatt--output_config--cloudwatch_config"></a>
-### Nested Schema for `output_config.cloudwatch_config`
-
-Read-Only:
-
-- `log_group_name` (String) The CloudWatch log group name for evaluation results.
 
 ## Import
 

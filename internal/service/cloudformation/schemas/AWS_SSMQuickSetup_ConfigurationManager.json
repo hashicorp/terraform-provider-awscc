@@ -6,7 +6,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "permissions": [
       "ssm-quicksetup:TagResource",
       "ssm-quicksetup:UntagResource"
@@ -224,9 +224,6 @@
     "read": {
       "permissions": [
         "ssm-quicksetup:GetConfigurationManager",
-        "iam:GetRole",
-        "iam:PassRole",
-        "iam:ListRoles",
         "ssm:DescribeDocument",
         "ssm:GetDocument"
       ]

@@ -1,0 +1,1 @@
+$ terraform import awscc_config_organization_config_rule.example "organization_config_rule_name"

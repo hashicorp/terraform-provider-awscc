@@ -3,12 +3,12 @@
 page_title: "awscc_servicecatalog_cloudformation_provisioned_product Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Schema for AWS::ServiceCatalog::CloudFormationProvisionedProduct
+  Resource Type definition for AWS::ServiceCatalog::CloudFormationProvisionedProduct
 ---
 
 # awscc_servicecatalog_cloudformation_provisioned_product (Resource)
 
-Resource Schema for AWS::ServiceCatalog::CloudFormationProvisionedProduct
+Resource Type definition for AWS::ServiceCatalog::CloudFormationProvisionedProduct
 
 
 

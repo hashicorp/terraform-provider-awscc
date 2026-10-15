@@ -120,6 +120,7 @@ resource "awscc_bedrockagentcore_runtime" "example" {
 - `filesystem_configurations` (Attributes List) Filesystem configurations for the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations))
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
+- `platform_version` (String) The version of the runtime platform
 - `protocol_configuration` (String) Protocol configuration for the agent runtime
 - `request_header_configuration` (Attributes) Configuration for HTTP request headers (see [below for nested schema](#nestedatt--request_header_configuration))
 - `tags` (Map of String) A map of tag keys and values

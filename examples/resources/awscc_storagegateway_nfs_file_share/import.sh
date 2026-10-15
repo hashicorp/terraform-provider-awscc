@@ -1,0 +1,1 @@
+$ terraform import awscc_storagegateway_nfs_file_share.example "file_share_arn"

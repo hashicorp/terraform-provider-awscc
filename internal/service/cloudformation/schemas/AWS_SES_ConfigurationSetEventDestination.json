@@ -180,13 +180,15 @@
       "permissions": [
         "ses:CreateConfigurationSetEventDestination",
         "ses:GetConfigurationSetEventDestinations",
-        "ses:DescribeConfigurationSet"
+        "ses:DescribeConfigurationSet",
+        "iam:PassRole"
       ]
     },
     "update": {
       "permissions": [
         "ses:UpdateConfigurationSetEventDestination",
-        "ses:GetConfigurationSetEventDestinations"
+        "ses:GetConfigurationSetEventDestinations",
+        "iam:PassRole"
       ]
     },
     "delete": {

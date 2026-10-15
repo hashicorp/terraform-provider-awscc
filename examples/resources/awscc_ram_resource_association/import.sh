@@ -1,0 +1,1 @@
+$ terraform import awscc_ram_resource_association.example "resource_share_arn|resource_arn"

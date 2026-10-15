@@ -1,0 +1,1 @@
+$ terraform import awscc_networksecuritymanager_rule.example "rule_arn"

@@ -450,6 +450,12 @@
       "properties": {
         "GlueLineageSyncEnabled": {
           "type": "boolean"
+        },
+        "RoleArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "description": "The ARN of the IAM role to associate with the connection as the project user role.",
+          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(\\/[a-zA-Z0-9+=,.@_-]+)*\\/[a-zA-Z0-9+=,.@_-]+$"
         }
       },
       "additionalProperties": false

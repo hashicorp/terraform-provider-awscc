@@ -36,6 +36,30 @@
         }
       },
       "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with the DB proxy target group.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -72,6 +96,15 @@
       "items": {
         "type": "string"
       }
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -91,10 +124,16 @@
     "/properties/TargetGroupName"
   ],
   "tagging": {
-    "taggable": false,
+    "taggable": true,
     "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "rds:AddTagsToResource",
+      "rds:RemoveTagsFromResource",
+      "rds:ListTagsForResource"
+    ]
   },
   "primaryIdentifier": [
     "/properties/TargetGroupArn"
@@ -112,13 +151,15 @@
         "rds:DescribeDBProxyTargetGroups",
         "rds:DescribeDBProxyTargets",
         "rds:ModifyDBProxyTargetGroup",
-        "rds:RegisterDBProxyTargets"
+        "rds:RegisterDBProxyTargets",
+        "rds:AddTagsToResource"
       ]
     },
     "read": {
       "permissions": [
         "rds:DescribeDBProxyTargetGroups",
-        "rds:DescribeDBProxyTargets"
+        "rds:DescribeDBProxyTargets",
+        "rds:ListTagsForResource"
       ]
     },
     "update": {
@@ -127,7 +168,10 @@
         "rds:DescribeDBProxyTargets",
         "rds:ModifyDBProxyTargetGroup",
         "rds:RegisterDBProxyTargets",
-        "rds:DeregisterDBProxyTargets"
+        "rds:DeregisterDBProxyTargets",
+        "rds:AddTagsToResource",
+        "rds:RemoveTagsFromResource",
+        "rds:ListTagsForResource"
       ]
     },
     "delete": {

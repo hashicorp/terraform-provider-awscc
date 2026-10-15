@@ -259,6 +259,9 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	              "items": {
 		//	                "enum": [
 		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "S3_SERVER_ACCESS_LOGS",
+		//	                  "ACCESS_LOGS",
+		//	                  "CONNECTION_LOGS",
 		//	                  "ALB_ACCESS_LOGS",
 		//	                  "ALB_CONNECTION_LOGS",
 		//	                  "ALB_HEALTH_CHECK_LOGS"
@@ -268,6 +271,23 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	              "minItems": 1,
 		//	              "type": "array",
 		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MskMonitoringParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration parameters for Amazon MSK cluster monitoring.",
+		//	          "properties": {
+		//	            "EnhancedMonitoring": {
+		//	              "description": "The level of enhanced monitoring for the MSK cluster.",
+		//	              "enum": [
+		//	                "DEFAULT",
+		//	                "PER_BROKER",
+		//	                "PER_TOPIC_PER_BROKER",
+		//	                "PER_TOPIC_PER_PARTITION"
+		//	              ],
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -457,7 +477,12 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	        "AWS::EKS::Cluster",
 		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
 		//	        "AWS::EC2::Instance",
-		//	        "AWS::SecurityHub::Hub"
+		//	        "AWS::SecurityHub::Hub",
+		//	        "AWS::SecurityHub::HubV2",
+		//	        "AWS::S3::Bucket",
+		//	        "AWS::MSK::Cluster",
+		//	        "AWS::CloudFront::Distribution",
+		//	        "AWS::CloudWatch::OTelEnrichment"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -736,6 +761,9 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 										setvalidator.ValueStringsAre(
 											stringvalidator.OneOf(
 												"SECURITY_FINDING_LOGS",
+												"S3_SERVER_ACCESS_LOGS",
+												"ACCESS_LOGS",
+												"CONNECTION_LOGS",
 												"ALB_ACCESS_LOGS",
 												"ALB_CONNECTION_LOGS",
 												"ALB_HEALTH_CHECK_LOGS",
@@ -748,6 +776,34 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Parameters for log delivery configuration",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MskMonitoringParameters
+						"msk_monitoring_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnhancedMonitoring
+								"enhanced_monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The level of enhanced monitoring for the MSK cluster.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DEFAULT",
+											"PER_BROKER",
+											"PER_TOPIC_PER_BROKER",
+											"PER_TOPIC_PER_PARTITION",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration parameters for Amazon MSK cluster monitoring.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1046,6 +1102,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Regions is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ResourceType
 				"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1060,6 +1117,11 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							"AWS::ElasticLoadBalancingV2::LoadBalancer",
 							"AWS::EC2::Instance",
 							"AWS::SecurityHub::Hub",
+							"AWS::SecurityHub::HubV2",
+							"AWS::S3::Bucket",
+							"AWS::MSK::Cluster",
+							"AWS::CloudFront::Distribution",
+							"AWS::CloudWatch::OTelEnrichment",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -1270,6 +1332,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		"destination_type":                     "DestinationType",
 		"elb_load_balancer_logging_parameters": "ELBLoadBalancerLoggingParameters",
 		"ends_with":                            "EndsWith",
+		"enhanced_monitoring":                  "EnhancedMonitoring",
 		"equals":                               "Equals",
 		"field":                                "Field",
 		"field_delimiter":                      "FieldDelimiter",
@@ -1286,6 +1349,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		"logging_filter":                       "LoggingFilter",
 		"max_aggregation_interval":             "MaxAggregationInterval",
 		"method":                               "Method",
+		"msk_monitoring_parameters":            "MskMonitoringParameters",
 		"name":                                 "Name",
 		"not_ends_with":                        "NotEndsWith",
 		"not_equals":                           "NotEquals",
@@ -1317,6 +1381,9 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		"waf_logging_parameters":               "WAFLoggingParameters",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Rule/Regions",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

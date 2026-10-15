@@ -1,0 +1,1 @@
+$ terraform import awscc_transcribe_medical_vocabulary.example "arn"

@@ -31,7 +31,8 @@
         "CREATE_FAILED",
         "UPDATING",
         "UPDATE_FAILED",
-        "DELETING"
+        "DELETING",
+        "ERROR"
       ]
     },
     "ExecutionStatus": {
@@ -68,6 +69,19 @@
             "pattern": "^[.\\-_/#A-Za-z0-9]+$"
           },
           "minItems": 1,
+          "maxItems": 10,
+          "insertionOrder": false
+        },
+        "LogGroupNamePrefixes": {
+          "type": "array",
+          "description": "The list of CloudWatch log group name prefixes to monitor for agent traces. Mutually exclusive with LogGroupNames; specify exactly one of the two selectors.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^[.\\-_/#A-Za-z0-9]+$"
+          },
+          "minItems": 1,
           "maxItems": 5,
           "insertionOrder": false
         },
@@ -86,8 +100,19 @@
         }
       },
       "required": [
-        "LogGroupNames",
         "ServiceNames"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "LogGroupNames"
+          ]
+        },
+        {
+          "required": [
+            "LogGroupNamePrefixes"
+          ]
+        }
       ],
       "additionalProperties": false
     },
@@ -98,7 +123,7 @@
         "EvaluatorId": {
           "type": "string",
           "description": "The unique identifier of the evaluator.",
-          "pattern": "^(Builtin\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"
+          "pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"
         }
       },
       "required": [
@@ -237,7 +262,25 @@
       "properties": {
         "LogGroupName": {
           "type": "string",
-          "description": "The CloudWatch log group name for evaluation results."
+          "description": "The CloudWatch log group name for evaluation results. Omit to use the service-managed default log group.",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[.\\-_/#A-Za-z0-9]+$"
+        },
+        "MetricsNamespace": {
+          "type": "string",
+          "description": "The CloudWatch metrics namespace for evaluation result metrics. Omit to use the service-managed default namespace.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9._#/:-]+$"
+        },
+        "ResultDestination": {
+          "type": "string",
+          "description": "Where evaluation results are written. DEDICATED_LOG_GROUP, the default when omitted, writes to a dedicated result log group. SOURCE_LOG_GROUP writes results back to the trace source log group; LogGroupName must not be specified with SOURCE_LOG_GROUP.",
+          "enum": [
+            "DEDICATED_LOG_GROUP",
+            "SOURCE_LOG_GROUP"
+          ]
         }
       },
       "additionalProperties": false
@@ -329,7 +372,7 @@
         "$ref": "#/definitions/EvaluatorReference"
       },
       "minItems": 0,
-      "maxItems": 10,
+      "maxItems": 25,
       "insertionOrder": false
     },
     "Rule": {
@@ -391,7 +434,6 @@
     "/properties/OnlineEvaluationConfigId",
     "/properties/OnlineEvaluationConfigArn",
     "/properties/Status",
-    "/properties/OutputConfig",
     "/properties/CreatedAt",
     "/properties/UpdatedAt"
   ],

@@ -32,7 +32,6 @@
     }
   },
   "required": [
-    "TransitGatewayId",
     "Type"
   ],
   "createOnlyProperties": [

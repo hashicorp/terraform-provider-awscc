@@ -1,0 +1,1 @@
+$ terraform import awscc_chime_channel.example "arn|chime_bearer"

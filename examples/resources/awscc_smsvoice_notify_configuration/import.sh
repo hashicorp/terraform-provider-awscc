@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_notify_configuration.example "notify_configuration_arn"

@@ -95,6 +95,7 @@
         "dynamodb:BatchWriteItem",
         "dynamodb:DeleteTable",
         "dynamodb:DeleteTableReplica",
+        "dynamodb:DisassociateTableReplica",
         "dynamodb:UpdateItem",
         "dynamodb:TagResource",
         "dynamodb:UntagResource",

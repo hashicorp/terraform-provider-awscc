@@ -1,0 +1,161 @@
+{
+  "typeName": "AWS::LicenseManager::LicenseAssetGroup",
+  "description": "Resource Type definition for AWS::LicenseManager::LicenseAssetGroup",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "LicenseAssetGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "UsageDimension": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseAssetGroupProperty": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "License asset group name.",
+      "type": "string",
+      "maxLength": 128
+    },
+    "LicenseAssetGroupArn": {
+      "description": "Amazon Resource Name (ARN) of the license asset group.",
+      "type": "string",
+      "maxLength": 2048,
+      "pattern": ""
+    },
+    "Description": {
+      "description": "License asset group description.",
+      "type": "string",
+      "maxLength": 1024
+    },
+    "AssociatedLicenseAssetRulesetARNs": {
+      "description": "ARNs of associated license asset rulesets.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 2048,
+        "pattern": ""
+      },
+      "insertionOrder": false
+    },
+    "LicenseAssetGroupConfigurations": {
+      "description": "License asset group configurations.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LicenseAssetGroupConfiguration"
+      },
+      "insertionOrder": false
+    },
+    "Properties": {
+      "description": "License asset group properties.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LicenseAssetGroupProperty"
+      },
+      "insertionOrder": false
+    },
+    "Tags": {
+      "description": "Tags to add to the license asset group.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "AssociatedLicenseAssetRulesetARNs",
+    "LicenseAssetGroupConfigurations"
+  ],
+  "readOnlyProperties": [
+    "/properties/LicenseAssetGroupArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/LicenseAssetGroupConfigurations"
+  ],
+  "primaryIdentifier": [
+    "/properties/LicenseAssetGroupArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "license-manager:TagResource",
+      "license-manager:UntagResource",
+      "license-manager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "license-manager:CreateLicenseAssetGroup",
+        "license-manager:GetLicenseAssetGroup",
+        "license-manager:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "license-manager:GetLicenseAssetGroup",
+        "license-manager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "license-manager:UpdateLicenseAssetGroup",
+        "license-manager:GetLicenseAssetGroup",
+        "license-manager:TagResource",
+        "license-manager:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "license-manager:DeleteLicenseAssetGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "license-manager:ListLicenseAssetGroups"
+      ]
+    }
+  }
+}

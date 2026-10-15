@@ -83,7 +83,8 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "AUTOMATIC",
 		//	                "NFS3",
 		//	                "NFS4_0",
-		//	                "NFS4_1"
+		//	                "NFS4_1",
+		//	                "NFS4_2"
 		//	              ],
 		//	              "type": "string"
 		//	            }

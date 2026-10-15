@@ -76,12 +76,56 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "FILE_SCANNER",
 		//	    "MESSAGE_PROCESSOR",
 		//	    "Q_MESSAGE_TEMPLATES",
-		//	    "SES_IDENTITY"
+		//	    "SES_IDENTITY",
+		//	    "EVENT"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"integration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the integration type to be associated with the instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceApplicationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the external application. This is only supported for the EVENT integration type",
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_ -]+$",
+		//	  "type": "string"
+		//	}
+		"source_application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the external application. This is only supported for the EVENT integration type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceApplicationUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL for the external application. This is only supported for the EVENT integration type",
+		//	  "maxLength": 2000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"source_application_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL for the external application. This is only supported for the EVENT integration type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the data source. This is only supported for the EVENT integration type",
+		//	  "enum": [
+		//	    "SALESFORCE",
+		//	    "ZENDESK",
+		//	    "CASES"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the data source. This is only supported for the EVENT integration type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -157,6 +201,9 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		"integration_association_id": "IntegrationAssociationId",
 		"integration_type":           "IntegrationType",
 		"key":                        "Key",
+		"source_application_name":    "SourceApplicationName",
+		"source_application_url":     "SourceApplicationUrl",
+		"source_type":                "SourceType",
 		"tags":                       "Tags",
 		"value":                      "Value",
 	})

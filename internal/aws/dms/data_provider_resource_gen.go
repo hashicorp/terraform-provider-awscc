@@ -294,7 +294,13 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DatabaseName": {
 		//	          "type": "string"
 		//	        },
+		//	        "EncryptionAlgorithm": {
+		//	          "type": "integer"
+		//	        },
 		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SecurityMechanism": {
 		//	          "type": "integer"
 		//	        },
 		//	        "ServerName": {
@@ -390,6 +396,14 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Port": {
 		//	          "type": "integer"
+		//	        },
+		//	        "S3AccessRoleArn": {
+		//	          "description": "The ARN for the role the application uses to access its Amazon S3 bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "S3Path": {
+		//	          "description": "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+		//	          "type": "string"
 		//	        },
 		//	        "ServerName": {
 		//	          "type": "string"
@@ -724,6 +738,14 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: EncryptionAlgorithm
+						"encryption_algorithm": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -731,6 +753,14 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecurityMechanism
+						"security_mechanism": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -925,6 +955,24 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3AccessRoleArn
+						"s3_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN for the role the application uses to access its Amazon S3 bucket.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3Path
+						"s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
@@ -1495,6 +1543,23 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Virtual
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Indicates whether the data provider is virtual.",
+		//	  "type": "boolean"
+		//	}
+		"virtual": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the data provider is virtual.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1537,6 +1602,7 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		"description":                   "Description",
 		"doc_db_settings":               "DocDbSettings",
 		"encrypt_password":              "EncryptPassword",
+		"encryption_algorithm":          "EncryptionAlgorithm",
 		"engine":                        "Engine",
 		"exact_settings":                "ExactSettings",
 		"ibm_db_2_luw_settings":         "IbmDb2LuwSettings",
@@ -1550,16 +1616,20 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		"port":                          "Port",
 		"postgre_sql_settings":          "PostgreSqlSettings",
 		"redshift_settings":             "RedshiftSettings",
+		"s3_access_role_arn":            "S3AccessRoleArn",
+		"s3_path":                       "S3Path",
 		"secrets_manager_oracle_asm_access_role_arn":             "SecretsManagerOracleAsmAccessRoleArn",
 		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
 		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",
 		"secrets_manager_security_db_encryption_secret_id":       "SecretsManagerSecurityDbEncryptionSecretId",
-		"server_name":         "ServerName",
-		"settings":            "Settings",
-		"ssl_mode":            "SslMode",
-		"sybase_ase_settings": "SybaseAseSettings",
-		"tags":                "Tags",
-		"value":               "Value",
+		"security_mechanism":                                     "SecurityMechanism",
+		"server_name":                                            "ServerName",
+		"settings":                                               "Settings",
+		"ssl_mode":                                               "SslMode",
+		"sybase_ase_settings":                                    "SybaseAseSettings",
+		"tags":                                                   "Tags",
+		"value":                                                  "Value",
+		"virtual":                                                "Virtual",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

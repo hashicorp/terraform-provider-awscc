@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_redshift_idc_application.example "redshift_idc_application_arn"

@@ -159,7 +159,14 @@
             "SASL_SCRAM_256_AUTH",
             "VIRTUAL_HOST",
             "CLIENT_CERTIFICATE_TLS_AUTH",
-            "SERVER_ROOT_CA_CERTIFICATE"
+            "SERVER_ROOT_CA_CERTIFICATE",
+            "OAUTHBEARER_AUTH",
+            "OAUTHBEARER_SCOPE",
+            "OAUTHBEARER_AUDIENCE",
+            "OAUTHBEARER_LOGICAL_CLUSTER",
+            "OAUTHBEARER_IDENTITY_POOL",
+            "IAM_AUTH",
+            "IAM_OAUTHBEARER_AUTH"
           ]
         },
         "URI": {
@@ -206,7 +213,7 @@
           "minimum": 1
         },
         "MaximumPollers": {
-          "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
+          "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS event source mappings, the accepted range is between 2 and 10,000, with a default of 200. For Amazon MSK and self-managed Apache Kafka event source mappings, the accepted range is between 1 and 2,000, with a default of 200.",
           "maximum": 10000,
           "type": "integer",
           "minimum": 1
@@ -225,6 +232,10 @@
         "SchemaRegistryConfig": {
           "description": "Specific configuration settings for a Kafka schema registry.",
           "$ref": "#/definitions/SchemaRegistryConfig"
+        },
+        "ConsumptionMode": {
+          "description": "",
+          "$ref": "#/definitions/ConsumptionMode"
         }
       }
     },
@@ -409,7 +420,8 @@
           "enum": [
             "BASIC_AUTH",
             "CLIENT_CERTIFICATE_TLS_AUTH",
-            "SERVER_ROOT_CA_CERTIFICATE"
+            "SERVER_ROOT_CA_CERTIFICATE",
+            "OAUTHBEARER_AUTH"
           ]
         },
         "URI": {
@@ -420,6 +432,14 @@
           "maxLength": 10000
         }
       }
+    },
+    "ConsumptionMode": {
+      "description": "The mode that determines how Lambda reads from a Kafka topic. Use Stream for ordered processing or Queue for higher throughput when ordering is not required.",
+      "type": "string",
+      "enum": [
+        "Stream",
+        "Queue"
+      ]
     },
     "OnFailure": {
       "description": "A destination for events that failed processing. For more information, see [Adding a destination](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations).",
@@ -493,7 +513,7 @@
     },
     "SourceAccessConfigurations": {
       "minItems": 1,
-      "maxItems": 22,
+      "maxItems": 29,
       "uniqueItems": true,
       "description": "An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.",
       "type": "array",

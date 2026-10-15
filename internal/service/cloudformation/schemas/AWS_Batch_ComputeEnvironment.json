@@ -425,12 +425,39 @@
         "KubernetesNamespace": {
           "type": "string",
           "default": false
+        },
+        "AccessEntry": {
+          "$ref": "#/definitions/EksAccessEntry"
         }
       },
       "required": [
         "EksClusterArn",
         "KubernetesNamespace"
       ]
+    },
+    "EksAccessEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
+      "properties": {
+        "DesiredState": {
+          "type": "string",
+          "description": "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
+          "enum": [
+            "ENABLED",
+            "DISABLED",
+            "INHERIT_FROM_CLUSTER"
+          ]
+        },
+        "Status": {
+          "type": "string",
+          "description": "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE"
+          ]
+        }
+      }
     },
     "EcsSettings": {
       "type": "object",
@@ -467,7 +494,8 @@
     "/properties/ComputeEnvironmentName",
     "/properties/Tags",
     "/properties/Type",
-    "/properties/EksConfiguration",
+    "/properties/EksConfiguration/EksClusterArn",
+    "/properties/EksConfiguration/KubernetesNamespace",
     "/properties/ComputeResources/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType",
     "/properties/ComputeResources/ManagedInstancesProvider/InstanceLaunchTemplate/FipsEnabled"
   ],
@@ -497,7 +525,8 @@
   ],
   "readOnlyProperties": [
     "/properties/ComputeEnvironmentArn",
-    "/properties/ComputeResources/Ec2Configuration/*/BatchImageStatus"
+    "/properties/ComputeResources/Ec2Configuration/*/BatchImageStatus",
+    "/properties/EksConfiguration/AccessEntry/Status"
   ],
   "additionalIdentifiers": [
     [
@@ -512,7 +541,12 @@
         "Batch:DescribeComputeEnvironments",
         "iam:CreateServiceLinkedRole",
         "Iam:PassRole",
+        "Eks:AssociateAccessPolicy",
+        "Eks:CreateAccessEntry",
+        "Eks:DeleteAccessEntry",
+        "Eks:DescribeAccessEntry",
         "Eks:DescribeCluster",
+        "Eks:ListAssociatedAccessPolicies",
         "ec2:DescribeLaunchTemplateVersions",
         "Batch:SetCapacityTags"
       ]
@@ -529,7 +563,12 @@
         "Batch:TagResource",
         "Batch:UnTagResource",
         "Iam:PassRole",
+        "Eks:AssociateAccessPolicy",
+        "Eks:CreateAccessEntry",
+        "Eks:DeleteAccessEntry",
+        "Eks:DescribeAccessEntry",
         "Eks:DescribeCluster",
+        "Eks:ListAssociatedAccessPolicies",
         "ec2:DescribeLaunchTemplateVersions",
         "Batch:SetCapacityTags"
       ]
@@ -540,7 +579,12 @@
         "Batch:DescribeComputeEnvironments",
         "Batch:UpdateComputeEnvironment",
         "Iam:PassRole",
+        "Eks:AssociateAccessPolicy",
+        "Eks:CreateAccessEntry",
+        "Eks:DeleteAccessEntry",
+        "Eks:DescribeAccessEntry",
         "Eks:DescribeCluster",
+        "Eks:ListAssociatedAccessPolicies",
         "ec2:DescribeLaunchTemplateVersions"
       ]
     },

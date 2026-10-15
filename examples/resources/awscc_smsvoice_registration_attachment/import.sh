@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_registration_attachment.example "registration_attachment_arn"

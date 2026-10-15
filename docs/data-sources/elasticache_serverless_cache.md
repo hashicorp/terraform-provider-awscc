@@ -23,6 +23,7 @@ Data Source schema for AWS::ElastiCache::ServerlessCache
 
 - `arn` (String) The ARN of the Serverless Cache.
 - `cache_usage_limits` (Attributes) The cache capacity limit of the Serverless Cache. (see [below for nested schema](#nestedatt--cache_usage_limits))
+- `connection_type` (String) The connection type for the serverless cache. Valid values are vpc or public.
 - `create_time` (String) The creation time of the Serverless Cache.
 - `daily_snapshot_time` (String) The daily time range (in UTC) during which the service takes automatic snapshot of the Serverless Cache.
 - `description` (String) The description of the Serverless Cache.

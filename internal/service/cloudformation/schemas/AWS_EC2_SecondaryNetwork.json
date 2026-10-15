@@ -1,0 +1,166 @@
+{
+  "typeName": "AWS::EC2::SecondaryNetwork",
+  "description": "Resource Type definition for AWS::EC2::SecondaryNetwork. Creates a secondary network for RDMA (Remote Direct Memory Access) connectivity.",
+  "properties": {
+    "SecondaryNetworkArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the secondary network."
+    },
+    "SecondaryNetworkId": {
+      "type": "string",
+      "description": "The ID of the secondary network."
+    },
+    "OwnerId": {
+      "type": "string",
+      "description": "The ID of the Amazon Web Services account that owns the secondary network."
+    },
+    "NetworkType": {
+      "type": "string",
+      "description": "The type of secondary network.",
+      "enum": [
+        "rdma"
+      ]
+    },
+    "Ipv4CidrBlock": {
+      "type": "string",
+      "description": "The IPv4 CIDR block for the secondary network. The CIDR block size must be between /12 and /28."
+    },
+    "Ipv4CidrBlockAssociations": {
+      "type": "array",
+      "description": "Information about the IPv4 CIDR blocks associated with the secondary network.",
+      "items": {
+        "$ref": "#/definitions/Ipv4CidrBlockAssociation"
+      },
+      "insertionOrder": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the secondary network.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true
+    }
+  },
+  "definitions": {
+    "Ipv4CidrBlockAssociation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AssociationId": {
+          "type": "string",
+          "description": "The association ID for the IPv4 CIDR block."
+        },
+        "CidrBlock": {
+          "type": "string",
+          "description": "The IPv4 CIDR block."
+        },
+        "State": {
+          "type": "string",
+          "description": "The state of the CIDR block association.",
+          "enum": [
+            "associating",
+            "associated",
+            "association-failed",
+            "disassociating",
+            "disassociated",
+            "disassociation-failed"
+          ]
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "Ipv4CidrBlock",
+    "NetworkType"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/SecondaryNetworkArn",
+    "/properties/SecondaryNetworkId",
+    "/properties/OwnerId",
+    "/properties/Ipv4CidrBlockAssociations"
+  ],
+  "createOnlyProperties": [
+    "/properties/Ipv4CidrBlock",
+    "/properties/NetworkType"
+  ],
+  "primaryIdentifier": [
+    "/properties/SecondaryNetworkArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SecondaryNetworkId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateSecondaryNetwork",
+        "ec2:DescribeSecondaryNetworks",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeSecondaryNetworks",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeSecondaryNetworks",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteSecondaryNetwork",
+        "ec2:DescribeSecondaryNetworks",
+        "ec2:DescribeTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeSecondaryNetworks"
+      ]
+    }
+  }
+}

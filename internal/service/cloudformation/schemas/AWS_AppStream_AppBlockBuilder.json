@@ -118,6 +118,9 @@
       "items": {
         "$ref": "#/definitions/Arn"
       }
+    },
+    "DisableIMDSV1": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false,

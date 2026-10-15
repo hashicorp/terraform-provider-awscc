@@ -1,0 +1,1 @@
+$ terraform import awscc_rds_db_cluster_endpoint.example "db_cluster_endpoint_arn"

@@ -26,11 +26,11 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+		//	  "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided. You can update this property.",
 		//	  "type": "string"
 		//	}
 		"assume_role_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+			Description: "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided. You can update this property.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -68,11 +68,11 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
+		//	  "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account. You can update this property. To manage PeerVpcPeeringConnectionOptions on a peering connection with another AWS account, the role must allow ec2:DescribeVpcPeeringConnections and ec2:ModifyVpcPeeringConnectionOptions.",
 		//	  "type": "string"
 		//	}
 		"peer_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
+			Description: "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account. You can update this property. To manage PeerVpcPeeringConnectionOptions on a peering connection with another AWS account, the role must allow ec2:DescribeVpcPeeringConnections and ec2:ModifyVpcPeeringConnectionOptions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeerVpcId

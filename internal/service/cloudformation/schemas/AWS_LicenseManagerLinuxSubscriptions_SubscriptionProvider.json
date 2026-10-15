@@ -1,0 +1,142 @@
+{
+  "typeName": "AWS::LicenseManagerLinuxSubscriptions::SubscriptionProvider",
+  "description": "Resource Type definition for AWS::LicenseManagerLinuxSubscriptions::SubscriptionProvider. Registers a third-party Linux subscription provider so that License Manager can retrieve subscription details for the discovered Linux instances in an account.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "SubscriptionProviderArn": {
+      "description": "The Amazon Resource Name (ARN) of the Linux subscription provider resource that you registered.",
+      "type": "string",
+      "pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,510}/[a-z0-9-\\.]{1,510}$"
+    },
+    "SubscriptionProviderSource": {
+      "description": "The Linux subscription provider that the registration is for.",
+      "type": "string",
+      "enum": [
+        "RedHat"
+      ]
+    },
+    "SecretArn": {
+      "description": "The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the access token for the third-party Linux subscription provider.",
+      "type": "string",
+      "pattern": ""
+    },
+    "SubscriptionProviderStatus": {
+      "description": "The status of the third-party subscription provider access token from the last subscription data request.",
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INVALID",
+        "PENDING"
+      ]
+    },
+    "SubscriptionProviderStatusMessage": {
+      "description": "A message that describes the status of the third-party subscription provider access token.",
+      "type": "string"
+    },
+    "LastSuccessfulDataRetrievalTime": {
+      "description": "The timestamp from the last time that License Manager retrieved subscription details from the registered third-party Linux subscription provider.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The metadata tags assigned to the registered subscription provider.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "SecretArn",
+    "SubscriptionProviderSource"
+  ],
+  "readOnlyProperties": [
+    "/properties/SubscriptionProviderArn",
+    "/properties/SubscriptionProviderStatus",
+    "/properties/SubscriptionProviderStatusMessage",
+    "/properties/LastSuccessfulDataRetrievalTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/SubscriptionProviderSource",
+    "/properties/SecretArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/SubscriptionProviderArn"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "license-manager-linux-subscriptions:TagResource",
+      "license-manager-linux-subscriptions:UntagResource",
+      "license-manager-linux-subscriptions:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "license-manager-linux-subscriptions:RegisterSubscriptionProvider",
+        "license-manager-linux-subscriptions:GetRegisteredSubscriptionProvider",
+        "license-manager-linux-subscriptions:TagResource",
+        "license-manager-linux-subscriptions:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "license-manager-linux-subscriptions:GetRegisteredSubscriptionProvider",
+        "license-manager-linux-subscriptions:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "license-manager-linux-subscriptions:GetRegisteredSubscriptionProvider",
+        "license-manager-linux-subscriptions:TagResource",
+        "license-manager-linux-subscriptions:UntagResource",
+        "license-manager-linux-subscriptions:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "license-manager-linux-subscriptions:DeregisterSubscriptionProvider",
+        "license-manager-linux-subscriptions:GetRegisteredSubscriptionProvider",
+        "license-manager-linux-subscriptions:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "license-manager-linux-subscriptions:ListRegisteredSubscriptionProviders"
+      ]
+    }
+  }
+}

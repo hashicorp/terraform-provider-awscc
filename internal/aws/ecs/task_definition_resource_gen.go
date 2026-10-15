@@ -545,8 +545,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "Type",
-		//	            "Value"
+		//	            "Type"
 		//	          ],
 		//	          "type": "object"
 		//	        },
@@ -1518,9 +1517,6 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 									Description: "The value for the specified resource type.\n When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify ``ALL`` to allocate all available GPUs on the instance to the container.\n When the type is ``NeuronDevice``, the value must be ``ALL``. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify ``NeuronDevice`` resources. This resource type is only supported on Managed Instances.\n When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/

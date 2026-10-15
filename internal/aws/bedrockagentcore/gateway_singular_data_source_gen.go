@@ -115,7 +115,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "InboundTokenClaimName": {
 		//	                "maxLength": 255,
 		//	                "minLength": 1,
-		//	                "pattern": "^[A-Za-z0-9_.-:]+$",
+		//	                "pattern": "^[A-Za-z0-9_.:-]+$",
 		//	                "type": "string"
 		//	              },
 		//	              "InboundTokenClaimValueType": {
@@ -172,6 +172,18 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "type": "array"
+		//	                },
+		//	                "Tags": {
+		//	                  "additionalProperties": false,
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "maxLength": 256,
+		//	                      "minLength": 0,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
 		//	                },
 		//	                "VpcIdentifier": {
 		//	                  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
@@ -301,6 +313,12 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: SubnetIds
 										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags":              // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
 											Computed:    true,
 										}, /*END ATTRIBUTE*/

@@ -22,6 +22,7 @@ Data Source schema for AWS::MediaPackageV2::Channel
 ### Read-Only
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) associated with the resource.</p>
+- `attached_multiview_channels` (List of String) <p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>
 - `channel_group_name` (String)
 - `channel_name` (String)
 - `created_at` (String) <p>The date and time the channel was created.</p>
@@ -31,6 +32,7 @@ Data Source schema for AWS::MediaPackageV2::Channel
 - `input_switch_configuration` (Attributes) <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p> (see [below for nested schema](#nestedatt--input_switch_configuration))
 - `input_type` (String)
 - `modified_at` (String) <p>The date and time the channel was modified.</p>
+- `multiview_configuration` (Attributes) <p>The multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p> (see [below for nested schema](#nestedatt--multiview_configuration))
 - `output_header_configuration` (Attributes) <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p> (see [below for nested schema](#nestedatt--output_header_configuration))
 - `output_locking_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -51,6 +53,15 @@ Read-Only:
 
 - `mqcs_input_switching` (Boolean) <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
 - `preferred_input` (Number) <p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>
+
+
+<a id="nestedatt--multiview_configuration"></a>
+### Nested Schema for `multiview_configuration`
+
+Read-Only:
+
+- `available_layouts` (List of String) <p>The tile layouts that players can request from this multiview channel's origin endpoints. Only the layouts that you list here are available. Each layout must appear at most once.</p>
+- `available_sources` (List of String) <p>The channels that players can use as tiles in this multiview channel's output. Each source channel must be in the same channel group as the multiview channel, and must have an <code>InputType</code> of <code>CMAF</code>. Only the channels that you list here are available as tiles.</p>
 
 
 <a id="nestedatt--output_header_configuration"></a>

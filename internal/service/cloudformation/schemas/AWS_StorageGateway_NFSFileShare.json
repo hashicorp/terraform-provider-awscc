@@ -1,0 +1,328 @@
+{
+  "typeName": "AWS::StorageGateway::NFSFileShare",
+  "replacementStrategy": "delete_then_create",
+  "description": "Resource Type definition for AWS::StorageGateway::NFSFileShare. An NFS file share exposes an Amazon S3 bucket through a Storage Gateway file gateway, so clients read and write objects as files over NFS. The share's variant is fixed by its resource type rather than by a property: the service constructs the two variants with different APIs, and a property carrying the choice would belong to neither API's input.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-storagegateway",
+  "definitions": {
+    "NFSFileShareDefaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Default values for the file and directory permissions of an NFS share. Removing this property from a template leaves the live values unchanged rather than clearing them, because the service has no reset for it: a create that omits the object leaves it absent, but the update path merges member by member keyed on the same internal sentinel that reports absence, so no request can restore that state. Set the members you want rather than relying on removal.",
+      "properties": {
+        "FileMode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4,
+          "pattern": "^[0-7]{4}$",
+          "description": "The Unix file mode in the form nnnn."
+        },
+        "DirectoryMode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4,
+          "pattern": "^[0-7]{4}$",
+          "description": "The Unix directory mode in the form nnnn."
+        },
+        "GroupId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967294,
+          "description": "The default group ID for files in the file share."
+        },
+        "OwnerId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967294,
+          "description": "The default owner ID for files in the file share."
+        }
+      }
+    },
+    "CacheAttributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Refresh cache information for the file share. Removing this property from a template leaves the share's current value: the service documents no value that resets it.",
+      "properties": {
+        "CacheStaleTimeoutInSeconds": {
+          "type": "integer",
+          "description": "How long the directory contents cached by the gateway are considered valid."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A key-value pair assigned to the file share.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "GatewayARN": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 500,
+      "description": "The ARN of the S3 File Gateway that hosts the share.",
+      "pattern": "^arn:[a-z0-9-]+:storagegateway:[a-z0-9-]+:[0-9]{12}:gateway/.+$"
+    },
+    "Role": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):iam::([0-9]+):role/(\\S+)$",
+      "description": "The ARN of the IAM role the gateway assumes when it accesses the S3 location."
+    },
+    "LocationARN": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 1400,
+      "description": "The ARN of the S3 bucket, or bucket prefix, the share exposes.",
+      "pattern": "^(arn:[a-z0-9-]+:s3:[a-z0-9-]*:[0-9]*:.+|[0-9a-zA-Z][0-9a-zA-Z.\\-]{1,61}-s3alias)$"
+    },
+    "BucketRegion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 25,
+      "description": "The Region of the S3 bucket, required when the bucket is reached through a VPC endpoint."
+    },
+    "VPCEndpointDNSName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
+      "description": "The DNS name of the S3 VPC endpoint the gateway uses to reach the bucket."
+    },
+    "EncryptionType": {
+      "type": "string",
+      "enum": [
+        "SseS3",
+        "SseKms",
+        "DsseKms"
+      ],
+      "description": "The server-side encryption the gateway applies to objects it writes."
+    },
+    "KMSEncrypted": {
+      "type": "boolean",
+      "description": "Deprecated by the service in favour of EncryptionType; true selects KMS encryption. Retained because it remains readable and settable."
+    },
+    "KMSKey": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 2048,
+      "pattern": "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$",
+      "description": "The KMS key used for encryption, when EncryptionType selects KMS. Removing this property from a template leaves the share's current value: the service documents no value that resets it."
+    },
+    "DefaultStorageClass": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 50,
+      "description": "The S3 storage class for new objects. The service accepts S3_STANDARD, S3_INTELLIGENT_TIERING, S3_STANDARD_IA and S3_ONEZONE_IA; it is a length-bounded string in the API model rather than an enumeration."
+    },
+    "ObjectACL": {
+      "type": "string",
+      "enum": [
+        "private",
+        "public-read",
+        "public-read-write",
+        "authenticated-read",
+        "bucket-owner-read",
+        "bucket-owner-full-control",
+        "aws-exec-read"
+      ],
+      "description": "The canned S3 ACL applied to objects the gateway writes."
+    },
+    "ReadOnly": {
+      "type": "boolean",
+      "description": "Whether clients may write to the share."
+    },
+    "GuessMIMETypeEnabled": {
+      "type": "boolean",
+      "description": "Whether the gateway infers the MIME type of uploaded objects from their extension."
+    },
+    "RequesterPays": {
+      "type": "boolean",
+      "description": "Whether the bucket is a Requester Pays bucket."
+    },
+    "FileShareName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "The name of the file share, which defaults to the bucket name when omitted. Removing this property from a template leaves the share's current value: the service documents no value that resets it."
+    },
+    "CacheAttributes": {
+      "$ref": "#/definitions/CacheAttributes"
+    },
+    "NotificationPolicy": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100,
+      "pattern": "^\\{[\\w\\s:\\{\\}\\[\\]\\\"]*}$",
+      "description": "The upload-notification settling period, as a JSON document."
+    },
+    "AuditDestinationARN": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1024,
+      "description": "The ARN of the CloudWatch log group that receives the share's audit logs. Removing this property from a template detaches audit logging: the update sends the empty string, which the service treats as the reset.",
+      "pattern": "^$|^arn:[a-z0-9-]+:logs:[a-z0-9-]+:[0-9]{12}:log-group:.+$"
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "Tags assigned to the file share."
+    },
+    "NFSFileShareDefaults": {
+      "$ref": "#/definitions/NFSFileShareDefaults"
+    },
+    "ClientList": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "pattern": ""
+      },
+      "description": "The IPv4 or IPv6 addresses and CIDR blocks permitted to mount the NFS share. Removing this property from a template leaves the share's current value: the service documents no value that resets it."
+    },
+    "Squash": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 15,
+      "description": "How the NFS share maps client user IDs. The service accepts RootSquash, NoSquash and AllSquash; it is a length-bounded string in the API model rather than an enumeration."
+    },
+    "FileShareARN": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 500,
+      "description": "The ARN of the file share.",
+      "pattern": "^arn:[a-z0-9-]+:storagegateway:[a-z0-9-]+:[0-9]{12}:share/.+$"
+    },
+    "FileShareId": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 30,
+      "description": "The ID of the file share."
+    },
+    "FileShareStatus": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 50,
+      "description": "The status of the file share. The service reports CREATING, UPDATING, AVAILABLE, DELETING and FORCE_DELETING; it is a length-bounded string in the API model rather than an enumeration."
+    },
+    "Path": {
+      "type": "string",
+      "description": "The export path the share is mounted or mapped at."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "GatewayARN",
+    "Role",
+    "LocationARN"
+  ],
+  "createOnlyProperties": [
+    "/properties/GatewayARN",
+    "/properties/Role",
+    "/properties/LocationARN",
+    "/properties/BucketRegion",
+    "/properties/VPCEndpointDNSName"
+  ],
+  "readOnlyProperties": [
+    "/properties/FileShareARN",
+    "/properties/FileShareId",
+    "/properties/FileShareStatus",
+    "/properties/Path"
+  ],
+  "primaryIdentifier": [
+    "/properties/FileShareARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/FileShareId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "storagegateway:AddTagsToResource",
+      "storagegateway:RemoveTagsFromResource",
+      "storagegateway:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:PassRole",
+        "logs:CreateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:UpdateLogDelivery",
+        "storagegateway:AddTagsToResource",
+        "storagegateway:CreateNFSFileShare",
+        "storagegateway:DescribeNFSFileShares"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "storagegateway:DescribeNFSFileShares",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "logs:CreateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:UpdateLogDelivery",
+        "storagegateway:AddTagsToResource",
+        "storagegateway:DescribeNFSFileShares",
+        "storagegateway:ListTagsForResource",
+        "storagegateway:RemoveTagsFromResource",
+        "storagegateway:UpdateNFSFileShare"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "logs:CreateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:UpdateLogDelivery",
+        "storagegateway:DeleteFileShare",
+        "storagegateway:DescribeNFSFileShares",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "storagegateway:ListFileShares"
+      ]
+    }
+  }
+}

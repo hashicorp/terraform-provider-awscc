@@ -19,6 +19,7 @@ Information about a daemon resource.
 
 - `capacity_provider_arns` (List of String) The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.
 - `cluster_arn` (String) The Amazon Resource Name (ARN) of the cluster that the daemon is running in.
+- `critical` (Boolean)
 - `daemon_name` (String)
 - `daemon_task_definition_arn` (String) The Amazon Resource Name (ARN) of the daemon task definition used by this revision.
 - `deployment_configuration` (Attributes) The deployment configuration used for this daemon deployment. (see [below for nested schema](#nestedatt--deployment_configuration))

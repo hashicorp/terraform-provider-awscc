@@ -1,0 +1,1 @@
+$ terraform import awscc_ram_source_association.example "resource_share_arn|source_id"

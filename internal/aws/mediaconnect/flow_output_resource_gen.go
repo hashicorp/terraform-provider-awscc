@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -494,6 +495,26 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NdiAudioReferenceLevel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The audio reference level of the NDI receiver, in dBFS.",
+		//	  "maximum": 0,
+		//	  "minimum": -40,
+		//	  "type": "integer"
+		//	}
+		"ndi_audio_reference_level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The audio reference level of the NDI receiver, in dBFS.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(-40, 0),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NdiOutputTimecodeSource
@@ -997,6 +1018,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		"media_stream_output_configurations":    "MediaStreamOutputConfigurations",
 		"min_latency":                           "MinLatency",
 		"name":                                  "Name",
+		"ndi_audio_reference_level":             "NdiAudioReferenceLevel",
 		"ndi_output_timecode_source":            "NdiOutputTimecodeSource",
 		"ndi_program_name":                      "NdiProgramName",
 		"ndi_speed_hq_quality":                  "NdiSpeedHqQuality",

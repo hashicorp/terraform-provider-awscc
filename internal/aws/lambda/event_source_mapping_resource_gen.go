@@ -68,7 +68,8 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
-		//	                  "SERVER_ROOT_CA_CERTIFICATE"
+		//	                  "SERVER_ROOT_CA_CERTIFICATE",
+		//	                  "OAUTHBEARER_AUTH"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -161,6 +162,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 												"BASIC_AUTH",
 												"CLIENT_CERTIFICATE_TLS_AUTH",
 												"SERVER_ROOT_CA_CERTIFICATE",
+												"OAUTHBEARER_AUTH",
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -846,7 +848,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
 		//	  "properties": {
 		//	    "MaximumPollers": {
-		//	      "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
+		//	      "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS event source mappings, the accepted range is between 2 and 10,000, with a default of 200. For Amazon MSK and self-managed Apache Kafka event source mappings, the accepted range is between 1 and 2,000, with a default of 200.",
 		//	      "maximum": 10000,
 		//	      "minimum": 1,
 		//	      "type": "integer"
@@ -870,7 +872,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MaximumPollers
 				"maximum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
+					Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS event source mappings, the accepted range is between 2 and 10,000, with a default of 200. For Amazon MSK and self-managed Apache Kafka event source mappings, the accepted range is between 1 and 2,000, with a default of 200.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -1068,6 +1070,14 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	      "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
 		//	      "type": "string"
 		//	    },
+		//	    "ConsumptionMode": {
+		//	      "description": "The mode that determines how Lambda reads from a Kafka topic. Use Stream for ordered processing or Queue for higher throughput when ordering is not required.",
+		//	      "enum": [
+		//	        "Stream",
+		//	        "Queue"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SchemaRegistryConfig": {
 		//	      "additionalProperties": false,
 		//	      "description": "Specific configuration settings for a Kafka schema registry.",
@@ -1083,7 +1093,8 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
-		//	                  "SERVER_ROOT_CA_CERTIFICATE"
+		//	                  "SERVER_ROOT_CA_CERTIFICATE",
+		//	                  "OAUTHBEARER_AUTH"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -1159,6 +1170,21 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: ConsumptionMode
+				"consumption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode that determines how Lambda reads from a Kafka topic. Use Stream for ordered processing or Queue for higher throughput when ordering is not required.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Stream",
+							"Queue",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SchemaRegistryConfig
 				"schema_registry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1176,6 +1202,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 												"BASIC_AUTH",
 												"CLIENT_CERTIFICATE_TLS_AUTH",
 												"SERVER_ROOT_CA_CERTIFICATE",
+												"OAUTHBEARER_AUTH",
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1303,7 +1330,14 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	          "SASL_SCRAM_256_AUTH",
 		//	          "VIRTUAL_HOST",
 		//	          "CLIENT_CERTIFICATE_TLS_AUTH",
-		//	          "SERVER_ROOT_CA_CERTIFICATE"
+		//	          "SERVER_ROOT_CA_CERTIFICATE",
+		//	          "OAUTHBEARER_AUTH",
+		//	          "OAUTHBEARER_SCOPE",
+		//	          "OAUTHBEARER_AUDIENCE",
+		//	          "OAUTHBEARER_LOGICAL_CLUSTER",
+		//	          "OAUTHBEARER_IDENTITY_POOL",
+		//	          "IAM_AUTH",
+		//	          "IAM_OAUTHBEARER_AUTH"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -1317,7 +1351,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 22,
+		//	  "maxItems": 29,
 		//	  "minItems": 1,
 		//	  "type": "array",
 		//	  "uniqueItems": true
@@ -1340,6 +1374,13 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								"VIRTUAL_HOST",
 								"CLIENT_CERTIFICATE_TLS_AUTH",
 								"SERVER_ROOT_CA_CERTIFICATE",
+								"OAUTHBEARER_AUTH",
+								"OAUTHBEARER_SCOPE",
+								"OAUTHBEARER_AUDIENCE",
+								"OAUTHBEARER_LOGICAL_CLUSTER",
+								"OAUTHBEARER_IDENTITY_POOL",
+								"IAM_AUTH",
+								"IAM_OAUTHBEARER_AUTH",
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1365,7 +1406,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 22),
+				listvalidator.SizeBetween(1, 29),
 				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1567,6 +1608,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		"bisect_batch_on_function_error":         "BisectBatchOnFunctionError",
 		"collection_name":                        "CollectionName",
 		"consumer_group_id":                      "ConsumerGroupId",
+		"consumption_mode":                       "ConsumptionMode",
 		"database_name":                          "DatabaseName",
 		"destination":                            "Destination",
 		"destination_config":                     "DestinationConfig",

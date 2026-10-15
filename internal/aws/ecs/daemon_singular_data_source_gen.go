@@ -64,6 +64,17 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Critical
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DaemonArn
 		// CloudFormation resource type schema:
 		//
@@ -312,6 +323,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"capacity_provider_arns":     "CapacityProviderArns",
 		"cluster_arn":                "ClusterArn",
 		"created_at":                 "CreatedAt",
+		"critical":                   "Critical",
 		"daemon_arn":                 "DaemonArn",
 		"daemon_name":                "DaemonName",
 		"daemon_status":              "DaemonStatus",

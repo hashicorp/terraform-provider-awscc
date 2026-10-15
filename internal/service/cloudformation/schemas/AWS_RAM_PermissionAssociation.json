@@ -1,0 +1,147 @@
+{
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "AWS::RAM::PermissionAssociation",
+  "readOnlyProperties": [
+    "/properties/IsDefault",
+    "/properties/AssociationStatus",
+    "/properties/LastUpdatedTime",
+    "/properties/FeatureSet",
+    "/properties/ResourceType",
+    "/properties/PermissionVersion"
+  ],
+  "description": "Associates a specified AWS RAM permission with a resource share. You can only associate one permission with each resource type in a resource share.",
+  "createOnlyProperties": [
+    "/properties/ResourceShareArn",
+    "/properties/PermissionArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceShareArn",
+    "/properties/PermissionArn"
+  ],
+  "required": [
+    "PermissionArn",
+    "ResourceShareArn"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "handlers": {
+    "read": {
+      "permissions": [
+        "ram:ListPermissionAssociations"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "ram:AssociateResourceSharePermission",
+        "ram:GetPermission",
+        "ram:GetResourceShares",
+        "ram:ListPermissionAssociations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ram:AssociateResourceSharePermission",
+        "ram:GetPermission",
+        "ram:GetResourceShares",
+        "ram:ListPermissionAssociations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ram:ListPermissionAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ram:DisassociateResourceSharePermission",
+        "ram:ListPermissionAssociations"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/Replace"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "PermissionTemplateParameter": {
+      "description": "Specifies a template parameter name and its associated values for a managed permission.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Values": {
+          "description": "The values for the template parameter.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Name": {
+          "description": "The name of the template parameter.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Values"
+      ]
+    }
+  },
+  "properties": {
+    "IsDefault": {
+      "description": "Indicates whether the associated resource share is using the default version of the permission.",
+      "type": "boolean"
+    },
+    "Replace": {
+      "default": false,
+      "description": "Specifies whether to replace the existing permission on the resource share. Use `true` to replace the current permission. Use `false` to add the permission when no permission is currently associated. The default value is `false`. Updating an existing association also requires `true`, because AWS RAM applies the change by re-associating the permission.",
+      "type": "boolean"
+    },
+    "ResourceShareArn": {
+      "description": "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share.",
+      "type": "string"
+    },
+    "PermissionArn": {
+      "description": "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the AWS RAM permission to associate with the resource share.",
+      "type": "string"
+    },
+    "LastUpdatedTime": {
+      "format": "date-time",
+      "description": "The date and time when the association between the permission and the resource share was last updated.",
+      "type": "string"
+    },
+    "ResourceType": {
+      "description": "The resource type to which the permission applies.",
+      "type": "string"
+    },
+    "FeatureSet": {
+      "description": "The feature set of the resource share.",
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "CREATED_FROM_POLICY",
+        "PROMOTING_TO_STANDARD"
+      ]
+    },
+    "AssociationStatus": {
+      "description": "The current status of the association between the permission and the resource share.",
+      "type": "string",
+      "enum": [
+        "ASSOCIATING",
+        "ASSOCIATED",
+        "FAILED",
+        "DISASSOCIATING",
+        "SUSPENDED",
+        "SUSPENDING",
+        "RESTORING",
+        "DISASSOCIATED"
+      ]
+    },
+    "PermissionVersion": {
+      "description": "The version of the permission currently associated with the resource share.",
+      "type": "string"
+    }
+  },
+  "replacementStrategy": "create_then_delete"
+}

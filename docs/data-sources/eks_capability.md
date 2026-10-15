@@ -57,6 +57,7 @@ Read-Only:
 Read-Only:
 
 - `aws_idc` (Attributes) Configuration for integrating Argo CD with IAM Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD. (see [below for nested schema](#nestedatt--configuration--argo_cd--aws_idc))
+- `endpoint_prefix` (String) An optional prefix for the Argo CD server endpoint. When specified, EKS uses this prefix to generate the server endpoint; otherwise, the endpoint is generated automatically. This value cannot be changed after the capability is created.
 - `namespace` (String) The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.
 - `network_access` (Attributes) Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs. (see [below for nested schema](#nestedatt--configuration--argo_cd--network_access))
 - `rbac_role_mappings` (Attributes List) A list of role mappings that define which IAM Identity Center users or groups have which Argo CD roles. Each mapping associates an Argo CD role (ADMIN, EDITOR, or VIEWER) with one or more IAM Identity Center identities. (see [below for nested schema](#nestedatt--configuration--argo_cd--rbac_role_mappings))

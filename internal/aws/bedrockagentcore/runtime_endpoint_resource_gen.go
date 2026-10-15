@@ -226,7 +226,8 @@ func runtimeEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	    "UPDATING",
 		//	    "UPDATE_FAILED",
 		//	    "READY",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "DELETE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}

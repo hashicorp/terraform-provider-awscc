@@ -74,7 +74,6 @@
     "/properties/InstancePlatform",
     "/properties/InstanceType",
     "/properties/AvailabilityZone",
-    "/properties/TagSpecifications",
     "/properties/OutPostArn",
     "/properties/EphemeralStorage",
     "/properties/EbsOptimized",

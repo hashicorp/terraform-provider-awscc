@@ -1,0 +1,123 @@
+{
+  "typeName": "AWS::SageMaker::NotebookInstanceLifecycleConfig",
+  "description": "Resource Type definition for AWS::SageMaker::NotebookInstanceLifecycleConfig",
+  "additionalProperties": false,
+  "properties": {
+    "OnStart": {
+      "type": "array",
+      "description": "A shell script that runs every time you start a notebook instance, including when you create the notebook instance. The shell script must be a base64-encoded string.",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/NotebookInstanceLifecycleHook"
+      }
+    },
+    "NotebookInstanceLifecycleConfigArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the lifecycle configuration."
+    },
+    "NotebookInstanceLifecycleConfigName": {
+      "type": "string",
+      "description": "The name of the lifecycle configuration.",
+      "minLength": 1,
+      "maxLength": 63
+    },
+    "OnCreate": {
+      "type": "array",
+      "description": "A shell script that runs only once, when you create a notebook instance. The shell script must be a base64-encoded string.",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/NotebookInstanceLifecycleHook"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "NotebookInstanceLifecycleHook": {
+      "type": "object",
+      "description": "Specifies the notebook instance lifecycle configuration script. Each lifecycle configuration script has a limit of 16384 characters.",
+      "additionalProperties": false,
+      "properties": {
+        "Content": {
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag."
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags",
+      "sagemaker:ListTags"
+    ]
+  },
+  "createOnlyProperties": [
+    "/properties/NotebookInstanceLifecycleConfigName"
+  ],
+  "primaryIdentifier": [
+    "/properties/NotebookInstanceLifecycleConfigArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/NotebookInstanceLifecycleConfigArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:CreateNotebookInstanceLifecycleConfig",
+        "sagemaker:AddTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeNotebookInstanceLifecycleConfig",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateNotebookInstanceLifecycleConfig",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:DeleteNotebookInstanceLifecycleConfig"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListNotebookInstanceLifecycleConfigs"
+      ]
+    }
+  }
+}

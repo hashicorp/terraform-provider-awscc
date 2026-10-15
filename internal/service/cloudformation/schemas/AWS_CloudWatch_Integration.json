@@ -1,0 +1,207 @@
+{
+  "typeName": "AWS::CloudWatch::Integration",
+  "description": "Resource Type definition for AWS::CloudWatch::Integration. Manages a CloudWatch (Amazon CloudWatch Observability / Omni) account-scoped integration. V1 supports AWS_CONFIG_SLREC, AWS_INTEGRATION, and EXTERNAL_AGENT.",
+  "definitions": {
+    "IntegrationCredential": {
+      "type": "object",
+      "description": "Write-only API-key credential material for the integration. Stored encrypted and never returned on read.",
+      "properties": {
+        "ApiKeyCredential": {
+          "type": "object",
+          "description": "API-key credential material that can be rotated in place on update.",
+          "properties": {
+            "ApiKeyValue": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "ApiKeyValue"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "ApiKeyCredential"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "IntegrationArn": {
+      "type": "string",
+      "description": "The ARN of the integration. arn:aws:cloudwatch:{region}:{account}:integration/{integrationId}.",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "IntegrationId": {
+      "type": "string",
+      "description": "The service-generated unique identifier (UUID) of the integration.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "IntegrationType": {
+      "type": "string",
+      "description": "The type of integration. Immutable after creation.",
+      "enum": [
+        "AWS_CONFIG_SLREC",
+        "AWS_INTEGRATION",
+        "EXTERNAL_AGENT"
+      ]
+    },
+    "Name": {
+      "type": "string",
+      "description": "The customer-supplied name of the integration. Unique per account.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "IAM role ARN the integration assumes. Required for AWS_INTEGRATION (a valid, service-assumable IAM role ARN). Not used by AWS_CONFIG_SLREC or EXTERNAL_AGENT.",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "IntegrationAttributes": {
+      "type": "object",
+      "description": "Type-specific configuration attributes (max 50 entries). EXTERNAL_AGENT requires 'catalogId'. On update, supplied attributes merge into the existing map; omitting a key does not remove it.",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 50
+    },
+    "Credential": {
+      "$ref": "#/definitions/IntegrationCredential"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Lifecycle status of the integration.",
+      "enum": [
+        "PENDING",
+        "PENDING_OAUTH",
+        "ACTIVE",
+        "ERROR",
+        "FAILED",
+        "DELETED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the integration was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the integration was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags associated with the integration.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ]
+      },
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "IntegrationType",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/IntegrationArn",
+    "/properties/IntegrationId",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/IntegrationType",
+    "/properties/Name"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Credential"
+  ],
+  "primaryIdentifier": [
+    "/properties/IntegrationArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/IntegrationId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource",
+      "cloudwatch:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateIntegration",
+        "cloudwatch:GetIntegration",
+        "cloudwatch:TagResource",
+        "cloudwatch:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetIntegration",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:UpdateIntegration",
+        "cloudwatch:GetIntegration",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteIntegration",
+        "cloudwatch:GetIntegration",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListIntegrations"
+      ]
+    }
+  }
+}

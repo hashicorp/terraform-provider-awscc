@@ -1,0 +1,1 @@
+$ terraform import awscc_personalize_filter.example "filter_arn"

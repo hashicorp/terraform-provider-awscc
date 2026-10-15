@@ -16,6 +16,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -381,6 +383,23 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SharingEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Whether the policy is enabled to be shared with other members of the Organization. Only applicable if the policy owner is a management account or delegated admin.",
+		//	  "type": "boolean"
+		//	}
+		"sharing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the policy is enabled to be shared with other members of the Organization. Only applicable if the policy owner is a management account or delegated admin.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -513,6 +532,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_arn":                      "PolicyArn",
 		"rpo_in_minutes":                  "RpoInMinutes",
 		"rto_in_minutes":                  "RtoInMinutes",
+		"sharing_enabled":                 "SharingEnabled",
 		"tags":                            "Tags",
 		"target":                          "Target",
 		"time_between_backups_in_minutes": "TimeBetweenBackupsInMinutes",

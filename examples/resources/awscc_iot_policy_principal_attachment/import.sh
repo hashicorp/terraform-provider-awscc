@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_policy_principal_attachment.example "policy_name|principal"

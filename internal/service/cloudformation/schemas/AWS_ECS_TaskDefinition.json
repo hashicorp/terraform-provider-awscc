@@ -1025,8 +1025,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "Type",
-        "Value"
+        "Type"
       ],
       "properties": {
         "Type": {

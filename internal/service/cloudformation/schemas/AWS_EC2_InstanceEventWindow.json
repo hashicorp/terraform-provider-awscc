@@ -1,0 +1,173 @@
+{
+  "typeName": "AWS::EC2::InstanceEventWindow",
+  "description": "Resource type definition for AWS::EC2::InstanceEventWindow. An event window defines a recurring set of time ranges, or a cron expression, during which AWS-initiated maintenance events may be scheduled for the associated Amazon EC2 instances or Dedicated Hosts.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key of the tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value of the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "TimeRange": {
+      "description": "A time range during which an AWS-initiated maintenance event may occur.",
+      "type": "object",
+      "properties": {
+        "StartWeekDay": {
+          "description": "The day on which the time range begins.",
+          "type": "string",
+          "enum": [
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday"
+          ]
+        },
+        "StartHour": {
+          "description": "The hour when the time range begins.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "EndWeekDay": {
+          "description": "The day on which the time range ends.",
+          "type": "string",
+          "enum": [
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday"
+          ]
+        },
+        "EndHour": {
+          "description": "The hour when the time range ends.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the event window.",
+      "type": "string"
+    },
+    "InstanceEventWindowId": {
+      "description": "The ID of the event window.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the event window.",
+      "type": "string"
+    },
+    "TimeRanges": {
+      "description": "The time ranges of the event window. Exactly one of TimeRanges or CronExpression must be specified.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TimeRange"
+      }
+    },
+    "CronExpression": {
+      "description": "The cron expression defined for the event window. Exactly one of TimeRanges or CronExpression must be specified.",
+      "type": "string"
+    },
+    "State": {
+      "description": "The current state of the event window. Observed values include creating, active, modifying, deleting and deleted.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags applied to the event window.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/InstanceEventWindowId",
+    "/properties/State"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/InstanceEventWindowId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeInstanceEventWindows"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateInstanceEventWindow",
+        "ec2:CreateTags",
+        "ec2:DescribeInstanceEventWindows"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeInstanceEventWindows"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyInstanceEventWindow",
+        "ec2:DescribeInstanceEventWindows",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteInstanceEventWindow",
+        "ec2:DescribeInstanceEventWindows"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeInstanceEventWindows"
+      ]
+    }
+  }
+}

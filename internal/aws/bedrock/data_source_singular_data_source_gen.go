@@ -280,6 +280,98 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "SyncSchedule": {
+		//	          "additionalProperties": false,
+		//	          "description": "Recurring schedule on which the connector automatically refreshes ingested content. Exactly one frequency variant is set.",
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "Daily"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "Weekly"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "Monthly"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "Daily": {
+		//	              "additionalProperties": false,
+		//	              "description": "A daily refresh. The run time is system-chosen (off-peak) and not customer-configurable.",
+		//	              "type": "object"
+		//	            },
+		//	            "Monthly": {
+		//	              "additionalProperties": false,
+		//	              "description": "A monthly refresh on a specified day of the month.",
+		//	              "properties": {
+		//	                "DayOfMonth": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Day of the month on which a monthly refresh runs. Exactly one variant is set: an explicit day number, or the last calendar day of the month.",
+		//	                  "oneOf": [
+		//	                    {
+		//	                      "required": [
+		//	                        "DayNumber"
+		//	                      ]
+		//	                    },
+		//	                    {
+		//	                      "required": [
+		//	                        "LastDayOfMonth"
+		//	                      ]
+		//	                    }
+		//	                  ],
+		//	                  "properties": {
+		//	                    "DayNumber": {
+		//	                      "description": "Specific day of the month, 1 through 28 (capped at 28 to avoid month-length ambiguity).",
+		//	                      "maximum": 28,
+		//	                      "minimum": 1,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "LastDayOfMonth": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Run on the last calendar day of each month.",
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DayOfMonth"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Weekly": {
+		//	              "additionalProperties": false,
+		//	              "description": "A weekly refresh on a specified day of the week.",
+		//	              "properties": {
+		//	                "DayOfWeek": {
+		//	                  "description": "Day of the week.",
+		//	                  "enum": [
+		//	                    "SUNDAY",
+		//	                    "MONDAY",
+		//	                    "TUESDAY",
+		//	                    "WEDNESDAY",
+		//	                    "THURSDAY",
+		//	                    "FRIDAY",
+		//	                    "SATURDAY"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DayOfWeek"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -885,6 +977,56 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Configuration for media extraction settings.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SyncSchedule
+						"sync_schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Daily
+								"daily": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "A daily refresh. The run time is system-chosen (off-peak) and not customer-configurable.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Monthly
+								"monthly": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DayOfMonth
+										"day_of_month": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: DayNumber
+												"day_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "Specific day of the month, 1 through 28 (capped at 28 to avoid month-length ambiguity).",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: LastDayOfMonth
+												"last_day_of_month": schema.StringAttribute{ /*START ATTRIBUTE*/
+													CustomType:  jsontypes.NormalizedType{},
+													Description: "Run on the last calendar day of each month.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Day of the month on which a monthly refresh runs. Exactly one variant is set: an explicit day number, or the last calendar day of the month.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "A monthly refresh on a specified day of the month.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Weekly
+								"weekly": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DayOfWeek
+										"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Day of the week.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "A weekly refresh on a specified day of the week.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Recurring schedule on which the connector automatically refreshes ingested content. Exactly one frequency variant is set.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1916,10 +2058,14 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":                                     "CreatedAt",
 		"credentials_secret_arn":                         "CredentialsSecretArn",
 		"custom_transformation_configuration":            "CustomTransformationConfiguration",
+		"daily":                                          "Daily",
 		"data_deletion_policy":                           "DataDeletionPolicy",
 		"data_source_configuration":                      "DataSourceConfiguration",
 		"data_source_id":                                 "DataSourceId",
 		"data_source_status":                             "DataSourceStatus",
+		"day_number":                                     "DayNumber",
+		"day_of_month":                                   "DayOfMonth",
+		"day_of_week":                                    "DayOfWeek",
 		"deletion_protection_configuration":              "DeletionProtectionConfiguration",
 		"deletion_protection_status":                     "DeletionProtectionStatus",
 		"deletion_protection_threshold":                  "DeletionProtectionThreshold",
@@ -1942,6 +2088,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_arn":                                    "KmsKeyArn",
 		"knowledge_base_id":                              "KnowledgeBaseId",
 		"lambda_arn":                                     "LambdaArn",
+		"last_day_of_month":                              "LastDayOfMonth",
 		"level_configurations":                           "LevelConfigurations",
 		"managed_knowledge_base_connector_configuration": "ManagedKnowledgeBaseConnectorConfiguration",
 		"max_pages":                                      "MaxPages",
@@ -1949,6 +2096,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"media_extraction_configuration":                 "MediaExtractionConfiguration",
 		"method":                                         "Method",
 		"model_arn":                                      "ModelArn",
+		"monthly":                                        "Monthly",
 		"name":                                           "Name",
 		"object_type":                                    "ObjectType",
 		"overlap_percentage":                             "OverlapPercentage",
@@ -1971,6 +2119,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"site_urls":                                      "SiteUrls",
 		"source_configuration":                           "SourceConfiguration",
 		"step_to_apply":                                  "StepToApply",
+		"sync_schedule":                                  "SyncSchedule",
 		"tenant_id":                                      "TenantId",
 		"transformation_function":                        "TransformationFunction",
 		"transformation_lambda_configuration":            "TransformationLambdaConfiguration",
@@ -1986,6 +2135,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"video_extraction_configuration":                 "VideoExtractionConfiguration",
 		"video_extraction_status":                        "VideoExtractionStatus",
 		"web_configuration":                              "WebConfiguration",
+		"weekly":                                         "Weekly",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

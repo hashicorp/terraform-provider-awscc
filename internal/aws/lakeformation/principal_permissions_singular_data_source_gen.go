@@ -149,6 +149,7 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	      "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 		//	      "properties": {
 		//	        "Id": {
+		//	          "description": "An identifier for the catalog resource.",
 		//	          "maxLength": 255,
 		//	          "minLength": 12,
 		//	          "type": "string"
@@ -432,7 +433,8 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Id
 						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "An identifier for the catalog resource.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",

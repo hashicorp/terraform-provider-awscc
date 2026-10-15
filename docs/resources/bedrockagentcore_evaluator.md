@@ -3,12 +3,12 @@
 page_title: "awscc_bedrockagentcore_evaluator Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge configurations.
+  Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge, code-based, or derived evaluator configurations. Derived evaluators run an existing built-in or third-party evaluator's logic on a model that you supply.
 ---
 
 # awscc_bedrockagentcore_evaluator (Resource)
 
-Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge configurations.
+Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge, code-based, or derived evaluator configurations. Derived evaluators run an existing built-in or third-party evaluator's logic on a model that you supply.
 
 
 
@@ -17,9 +17,9 @@ Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom
 
 ### Required
 
-- `evaluator_config` (Attributes) The configuration for the evaluator. (see [below for nested schema](#nestedatt--evaluator_config))
+- `evaluator_config` (Attributes) The configuration for the evaluator, including LLM-as-a-Judge, code-based, or derived settings. (see [below for nested schema](#nestedatt--evaluator_config))
 - `evaluator_name` (String) The name of the evaluator. Must be unique within your account.
-- `level` (String) The evaluation level that determines the scope of evaluation.
+- `level` (String) The evaluation level that determines the scope of evaluation. Required for all evaluator configuration types. For Derived evaluators it must match the level of the base evaluator identified by BaseEvaluatorId.
 
 ### Optional
 
@@ -32,7 +32,9 @@ Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom
 - `created_at` (String) The timestamp when the evaluator was created.
 - `evaluator_arn` (String) The Amazon Resource Name (ARN) of the evaluator.
 - `evaluator_id` (String) The unique identifier of the evaluator.
+- `evaluator_type` (String) The kind of evaluator resource. Builtin and ThirdParty are AWS-managed global evaluators that you reference but don't create; Custom, CustomCode, and CustomDerived are evaluators that you create.
 - `id` (String) Uniquely identifies the resource.
+- `provider_name` (String) Where the evaluator's logic comes from: AWS, a third-party library (DeepEval or AutoEval), or you. Derived evaluators inherit the provider of their base evaluator.
 - `status` (String) The current status of the evaluator.
 - `updated_at` (String) The timestamp when the evaluator was last updated.
 
@@ -42,6 +44,7 @@ Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom
 Optional:
 
 - `code_based` (Attributes) The configuration for code-based evaluation using a Lambda function. (see [below for nested schema](#nestedatt--evaluator_config--code_based))
+- `derived` (Attributes) The configuration for an evaluator derived from an existing base evaluator (a built-in or third-party evaluator), run on your own model. The base evaluator supplies the prompt and scoring logic. (see [below for nested schema](#nestedatt--evaluator_config--derived))
 - `llm_as_a_judge` (Attributes) The configuration for LLM-as-a-Judge evaluation. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge))
 
 <a id="nestedatt--evaluator_config--code_based"></a>
@@ -58,6 +61,65 @@ Optional:
 
 - `lambda_arn` (String) The ARN of the Lambda function used for evaluation.
 - `lambda_timeout_in_seconds` (Number) The timeout in seconds for the Lambda function invocation.
+
+
+
+<a id="nestedatt--evaluator_config--derived"></a>
+### Nested Schema for `evaluator_config.derived`
+
+Optional:
+
+- `base_evaluator_id` (String) The identifier of the base evaluator whose logic to run (a Builtin.* or ThirdParty.* evaluator).
+- `model_config` (Attributes) The model configuration that specifies which foundation model to use for evaluation. (see [below for nested schema](#nestedatt--evaluator_config--derived--model_config))
+
+<a id="nestedatt--evaluator_config--derived--model_config"></a>
+### Nested Schema for `evaluator_config.derived.model_config`
+
+Optional:
+
+- `bedrock_evaluator_model_config` (Attributes) The configuration for using Amazon Bedrock models in evaluator assessments. (see [below for nested schema](#nestedatt--evaluator_config--derived--model_config--bedrock_evaluator_model_config))
+- `responses_evaluator_model_config` (Attributes) The configuration for using OpenResponses-compatible models in evaluator assessments. (see [below for nested schema](#nestedatt--evaluator_config--derived--model_config--responses_evaluator_model_config))
+
+<a id="nestedatt--evaluator_config--derived--model_config--bedrock_evaluator_model_config"></a>
+### Nested Schema for `evaluator_config.derived.model_config.bedrock_evaluator_model_config`
+
+Optional:
+
+- `additional_model_request_fields` (String) Additional model-specific request fields.
+- `inference_config` (Attributes) The inference configuration parameters that control model behavior during evaluation. (see [below for nested schema](#nestedatt--evaluator_config--derived--model_config--bedrock_evaluator_model_config--inference_config))
+- `model_id` (String) The identifier of the Amazon Bedrock model to use for evaluation.
+
+<a id="nestedatt--evaluator_config--derived--model_config--bedrock_evaluator_model_config--inference_config"></a>
+### Nested Schema for `evaluator_config.derived.model_config.bedrock_evaluator_model_config.inference_config`
+
+Optional:
+
+- `max_tokens` (Number) The maximum number of tokens to generate in the model response.
+- `stop_sequences` (List of String) The sequences that make the model stop generating further tokens.
+- `temperature` (Number) The temperature value that controls randomness in the model's responses.
+- `top_p` (Number) The top-p sampling parameter that controls the diversity of the model's responses.
+
+
+
+<a id="nestedatt--evaluator_config--derived--model_config--responses_evaluator_model_config"></a>
+### Nested Schema for `evaluator_config.derived.model_config.responses_evaluator_model_config`
+
+Optional:
+
+- `max_output_tokens` (Number) The maximum number of output tokens to generate, including visible output and reasoning tokens.
+- `model_id` (String) The identifier of the model to use for evaluation.
+- `reasoning` (Attributes) The reasoning configuration for reasoning models. (see [below for nested schema](#nestedatt--evaluator_config--derived--model_config--responses_evaluator_model_config--reasoning))
+- `temperature` (Number) The sampling temperature between 0 and 2.
+- `top_p` (Number) The nucleus sampling probability mass between 0 and 1.
+
+<a id="nestedatt--evaluator_config--derived--model_config--responses_evaluator_model_config--reasoning"></a>
+### Nested Schema for `evaluator_config.derived.model_config.responses_evaluator_model_config.reasoning`
+
+Optional:
+
+- `effort` (String) The level of reasoning effort the model applies.
+
+
 
 
 
@@ -93,6 +155,7 @@ Optional:
 Optional:
 
 - `max_tokens` (Number) The maximum number of tokens to generate in the model response.
+- `stop_sequences` (List of String) The sequences that make the model stop generating further tokens.
 - `temperature` (Number) The temperature value that controls randomness in the model's responses.
 - `top_p` (Number) The top-p sampling parameter that controls the diversity of the model's responses.
 

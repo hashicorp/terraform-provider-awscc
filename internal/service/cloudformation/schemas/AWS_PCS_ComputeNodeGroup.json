@@ -25,6 +25,7 @@
         "ec2:DescribeVpcs",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
+        "ec2:DescribeKeyPairs",
         "ec2:DescribeLaunchTemplates",
         "ec2:DescribeLaunchTemplateVersions",
         "ec2:DescribeInstanceTypes",
@@ -47,6 +48,7 @@
         "ec2:DescribeVpcs",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
+        "ec2:DescribeKeyPairs",
         "ec2:DescribeLaunchTemplates",
         "ec2:DescribeLaunchTemplateVersions",
         "ec2:DescribeInstanceTypes",
@@ -233,6 +235,10 @@
         }
       }
     },
+    "SecurityGroupId": {
+      "description": "An EC2 security group ID.",
+      "type": "string"
+    },
     "NodeLifecycleActions": {
       "description": "Custom scripts that run at defined points in a compute node's lifecycle.",
       "additionalProperties": false,
@@ -309,7 +315,6 @@
   },
   "required": [
     "ClusterId",
-    "CustomLaunchTemplate",
     "IamInstanceProfileArn",
     "InstanceConfigs",
     "ScalingConfiguration",
@@ -388,7 +393,7 @@
     },
     "SubnetIds": {
       "description": "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
-      "insertionOrder": false,
+      "insertionOrder": true,
       "type": "array",
       "items": {
         "$ref": "#/definitions/SubnetId"

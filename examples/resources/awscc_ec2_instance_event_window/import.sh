@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_instance_event_window.example "arn"

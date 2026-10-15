@@ -59,7 +59,7 @@ Optional:
 
 Optional:
 
-- `id` (String)
+- `id` (String) An identifier for the catalog resource.
 
 
 <a id="nestedatt--resource--data_cells_filter"></a>

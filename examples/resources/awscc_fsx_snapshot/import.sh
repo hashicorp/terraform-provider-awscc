@@ -1,0 +1,1 @@
+$ terraform import awscc_fsx_snapshot.example "id"

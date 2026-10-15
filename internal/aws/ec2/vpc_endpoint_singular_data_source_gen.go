@@ -360,7 +360,8 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Gateway",
 		//	    "GatewayLoadBalancer",
 		//	    "ServiceNetwork",
-		//	    "Resource"
+		//	    "Resource",
+		//	    "Tunnel"
 		//	  ],
 		//	  "type": "string"
 		//	}

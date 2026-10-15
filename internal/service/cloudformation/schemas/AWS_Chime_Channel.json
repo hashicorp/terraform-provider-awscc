@@ -1,0 +1,338 @@
+{
+  "typeName": "AWS::Chime::Channel",
+  "description": "Creates a channel in an Amazon Chime SDK Messaging AppInstance. Members of a channel exchange messages within it. Every channel operation is performed on behalf of an AppInstanceUser or AppInstanceBot, whose ARN is supplied as ChimeBearer and forms part of the channel's CloudFormation identifier.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the channel.",
+      "minLength": 5,
+      "maxLength": 1600,
+      "pattern": ""
+    },
+    "ChannelFlowArn": {
+      "type": "string",
+      "description": "The ARN of the channel flow.",
+      "minLength": 5,
+      "maxLength": 1600,
+      "pattern": ""
+    },
+    "ChimeBearer": {
+      "type": "string",
+      "description": "The ARN of the AppInstanceUser or AppInstanceBot that performs every operation on this channel. Whichever of the two creates a channel automatically becomes one of its moderators, so the same ARN can subsequently read, update and delete the channel.",
+      "minLength": 5,
+      "maxLength": 1600,
+      "pattern": ""
+    },
+    "AppInstanceArn": {
+      "type": "string",
+      "description": "The ARN of the AppInstance that contains the channel.",
+      "minLength": 5,
+      "maxLength": 1600,
+      "pattern": ""
+    },
+    "ChannelId": {
+      "type": "string",
+      "description": "The ID of the channel. When omitted, the service generates a UUID.",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the channel.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": ""
+    },
+    "Mode": {
+      "type": "string",
+      "description": "The channel mode. In an UNRESTRICTED channel, members can add themselves and other members; in a RESTRICTED channel, only administrators and moderators can add members. An elastic channel must be RESTRICTED.",
+      "enum": [
+        "UNRESTRICTED",
+        "RESTRICTED"
+      ]
+    },
+    "Privacy": {
+      "type": "string",
+      "description": "The channel's privacy level. A PUBLIC channel is discoverable by anyone in the AppInstance; a PRIVATE channel is not. Privacy cannot be changed after creation.",
+      "enum": [
+        "PUBLIC",
+        "PRIVATE"
+      ]
+    },
+    "Metadata": {
+      "type": "string",
+      "description": "The metadata of the channel.",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "MemberArns": {
+      "type": "array",
+      "description": "The ARNs of the AppInstanceUsers to add to the channel as members when it is created. Cannot be combined with ElasticChannelConfiguration.",
+      "items": {
+        "type": "string",
+        "minLength": 5,
+        "maxLength": 1600,
+        "pattern": ""
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "insertionOrder": false
+    },
+    "ModeratorArns": {
+      "type": "array",
+      "description": "The ARNs of the AppInstanceUsers to add to the channel as moderators when it is created.",
+      "items": {
+        "type": "string",
+        "minLength": 5,
+        "maxLength": 1600,
+        "pattern": ""
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "insertionOrder": false
+    },
+    "ElasticChannelConfiguration": {
+      "$ref": "#/definitions/ElasticChannelConfiguration"
+    },
+    "ExpirationSettings": {
+      "$ref": "#/definitions/ExpirationSettings"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the channel.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    },
+    "CreatedBy": {
+      "$ref": "#/definitions/Identity"
+    },
+    "CreatedTimestamp": {
+      "type": "string",
+      "description": "The time at which the channel was created.",
+      "format": "date-time"
+    },
+    "LastMessageTimestamp": {
+      "type": "string",
+      "description": "The time at which a member sent the last message in the channel.",
+      "format": "date-time"
+    },
+    "LastUpdatedTimestamp": {
+      "type": "string",
+      "description": "The time at which the channel was last updated.",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "ElasticChannelConfiguration": {
+      "type": "object",
+      "description": "The attributes required to configure and create an elastic channel. An elastic channel must use RESTRICTED mode, cannot be created with MemberArns, and is available only in some regions.",
+      "properties": {
+        "MaximumSubChannels": {
+          "type": "integer",
+          "description": "The maximum number of SubChannels allowed in the elastic channel.",
+          "minimum": 2
+        },
+        "TargetMembershipsPerSubChannel": {
+          "type": "integer",
+          "description": "The maximum number of members allowed in a SubChannel.",
+          "minimum": 2
+        },
+        "MinimumMembershipPercentage": {
+          "type": "integer",
+          "description": "The minimum allowed percentage of TargetMembershipsPerSubChannel users, used to balance members across SubChannels.",
+          "minimum": 1,
+          "maximum": 40
+        }
+      },
+      "required": [
+        "MaximumSubChannels",
+        "TargetMembershipsPerSubChannel",
+        "MinimumMembershipPercentage"
+      ],
+      "additionalProperties": false
+    },
+    "ExpirationSettings": {
+      "type": "object",
+      "description": "Settings that control the interval after which the channel is automatically deleted.",
+      "properties": {
+        "ExpirationDays": {
+          "type": "integer",
+          "description": "The period in days after which the system automatically deletes the channel.",
+          "minimum": 1,
+          "maximum": 5475
+        },
+        "ExpirationCriterion": {
+          "type": "string",
+          "description": "The condition the expiration period is measured from.",
+          "enum": [
+            "CREATED_TIMESTAMP",
+            "LAST_MESSAGE_TIMESTAMP"
+          ]
+        }
+      },
+      "required": [
+        "ExpirationDays",
+        "ExpirationCriterion"
+      ],
+      "additionalProperties": false
+    },
+    "Identity": {
+      "type": "object",
+      "description": "The AppInstanceUser or AppInstanceBot that created the channel.",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "description": "The ARN in an identity.",
+          "minLength": 5,
+          "maxLength": 1600,
+          "pattern": ""
+        },
+        "Name": {
+          "type": "string",
+          "description": "The name in an identity.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key in a tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value in a tag.",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "AppInstanceArn",
+    "ChimeBearer",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedBy",
+    "/properties/CreatedTimestamp",
+    "/properties/LastUpdatedTimestamp",
+    "/properties/LastMessageTimestamp",
+    "/properties/ChannelFlowArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AppInstanceArn",
+    "/properties/ChannelId",
+    "/properties/ChimeBearer",
+    "/properties/ElasticChannelConfiguration",
+    "/properties/MemberArns",
+    "/properties/ModeratorArns",
+    "/properties/Privacy"
+  ],
+  "writeOnlyProperties": [
+    "/properties/MemberArns",
+    "/properties/ModeratorArns"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn",
+    "/properties/ChimeBearer"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "chime:TagResource",
+      "chime:UntagResource",
+      "chime:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "chime:CreateChannel",
+        "chime:CreateChannelMembership",
+        "chime:CreateChannelModerator",
+        "chime:PutChannelExpirationSettings",
+        "chime:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "chime:DescribeChannel",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "chime:UpdateChannel",
+        "chime:PutChannelExpirationSettings",
+        "chime:TagResource",
+        "chime:UntagResource",
+        "chime:ListTagsForResource",
+        "chime:DescribeChannel"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "chime:DeleteChannel",
+        "chime:DescribeChannel",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "chime:ListChannels"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AppInstanceArn": {
+            "type": "string",
+            "description": "The ARN of the AppInstance whose channels are listed.",
+            "minLength": 5,
+            "maxLength": 1600,
+            "pattern": ""
+          },
+          "ChimeBearer": {
+            "type": "string",
+            "description": "The AppInstanceUser or AppInstanceBot ARN to enumerate as. ListChannels returns the channels this bearer is authorised to see: an AppInstanceAdmin enumerates every channel in the AppInstance, while a plain bearer enumerates public channels and its own memberships but not a private channel it created itself. Use an AppInstanceAdmin bearer for complete enumeration. Every returned identifier pairs a channel with this bearer and resolves through READ, because READ asks the service the same authorisation question this listing did.",
+            "minLength": 5,
+            "maxLength": 1600,
+            "pattern": ""
+          },
+          "Privacy": {
+            "type": "string",
+            "description": "Optional filter restricting the listing to public or private channels; omitted, the listing covers whatever the bearer may see. Filtering on PRIVATE requires an AppInstanceAdmin bearer, and the service refuses it for a plain bearer.",
+            "enum": [
+              "PUBLIC",
+              "PRIVATE"
+            ]
+          }
+        },
+        "required": [
+          "AppInstanceArn",
+          "ChimeBearer"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

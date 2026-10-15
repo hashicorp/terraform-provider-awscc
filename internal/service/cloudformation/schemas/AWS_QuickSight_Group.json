@@ -1,0 +1,100 @@
+{
+  "typeName": "AWS::QuickSight::Group",
+  "description": "Definition of the AWS::QuickSight::Group Resource Type.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the group."
+    },
+    "GroupName": {
+      "type": "string",
+      "description": "A name for the group.",
+      "minLength": 1,
+      "pattern": ""
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description for the group.",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "Namespace": {
+      "type": "string",
+      "description": "The namespace that you want the group to be a part of.",
+      "minLength": 0,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9._-]*$"
+    },
+    "PrincipalId": {
+      "type": "string",
+      "description": "The principal ID of the group."
+    }
+  },
+  "required": [
+    "GroupName",
+    "Namespace"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/PrincipalId"
+  ],
+  "createOnlyProperties": [
+    "/properties/GroupName",
+    "/properties/Namespace"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/GroupName",
+      "/properties/Namespace"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "quicksight:CreateGroup",
+        "quicksight:DescribeGroup"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeGroup"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "quicksight:UpdateGroup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "quicksight:DeleteGroup",
+        "quicksight:DescribeGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "quicksight:ListGroups"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Namespace": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]*$"
+          }
+        },
+        "required": [
+          "Namespace"
+        ]
+      }
+    }
+  }
+}

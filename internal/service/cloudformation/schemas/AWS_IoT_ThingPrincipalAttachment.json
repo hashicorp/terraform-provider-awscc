@@ -1,0 +1,70 @@
+{
+  "typeName": "AWS::IoT::ThingPrincipalAttachment",
+  "$schema": "https://schema.cloudformation.us-east-1.amazonaws.com/provider.definition.schema.v1.json",
+  "description": "Resource Type definition for AWS::IoT::ThingPrincipalAttachment",
+  "additionalProperties": false,
+  "properties": {
+    "ThingName": {
+      "type": "string",
+      "description": "The name of the AWS IoT thing."
+    },
+    "ThingPrincipalType": {
+      "type": "string",
+      "description": "The type of the relation you want to specify when you attach a principal to a thing."
+    },
+    "Principal": {
+      "type": "string",
+      "description": "The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID."
+    }
+  },
+  "required": [
+    "ThingName",
+    "Principal"
+  ],
+  "createOnlyProperties": [
+    "/properties/Principal",
+    "/properties/ThingName",
+    "/properties/ThingPrincipalType"
+  ],
+  "primaryIdentifier": [
+    "/properties/ThingName",
+    "/properties/Principal"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "iot:ListThingPrincipalsV2"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "iot:AttachThingPrincipal",
+        "iot:ListThingPrincipalsV2"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ThingName": {
+            "$ref": "#/properties/ThingName"
+          }
+        },
+        "required": [
+          "ThingName"
+        ]
+      },
+      "permissions": [
+        "iot:ListThingPrincipalsV2"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iot:DetachThingPrincipal",
+        "iot:ListThingPrincipalsV2"
+      ]
+    }
+  }
+}

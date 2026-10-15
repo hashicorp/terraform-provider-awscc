@@ -48,7 +48,7 @@ Read-Only:
 - `typography` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography))
 - `ui_color_palette` (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
-            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
+            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon Quick</a> in the <i>Amazon Quick User
                 Guide.</i>
          </p> (see [below for nested schema](#nestedatt--configuration--ui_color_palette))
 
@@ -68,22 +68,37 @@ Read-Only:
 
 Read-Only:
 
+- `background` (Attributes) (see [below for nested schema](#nestedatt--configuration--sheet--background))
 - `tile` (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile))
 - `tile_layout` (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout))
+
+<a id="nestedatt--configuration--sheet--background"></a>
+### Nested Schema for `configuration.sheet.background`
+
+Read-Only:
+
+- `color` (String) String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)
+- `gradient` (String)
+
 
 <a id="nestedatt--configuration--sheet--tile"></a>
 ### Nested Schema for `configuration.sheet.tile`
 
 Read-Only:
 
+- `background_color` (String) String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)
 - `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile--border))
+- `border_radius` (String)
+- `padding` (String)
 
 <a id="nestedatt--configuration--sheet--tile--border"></a>
 ### Nested Schema for `configuration.sheet.tile.border`
 
 Read-Only:
 
+- `color` (String) String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)
 - `show` (Boolean) <p>The option to enable display of borders for visuals.</p>
+- `width` (String) String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)
 
 
 
@@ -119,7 +134,101 @@ Read-Only:
 
 Read-Only:
 
+- `axis_label_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--axis_label_font_configuration))
+- `axis_title_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--axis_title_font_configuration))
+- `data_label_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--data_label_font_configuration))
 - `font_families` (Attributes List) (see [below for nested schema](#nestedatt--configuration--typography--font_families))
+- `legend_title_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--legend_title_font_configuration))
+- `legend_value_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--legend_value_font_configuration))
+- `visual_subtitle_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_subtitle_font_configuration))
+- `visual_title_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_title_font_configuration))
+
+<a id="nestedatt--configuration--typography--axis_label_font_configuration"></a>
+### Nested Schema for `configuration.typography.axis_label_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--axis_label_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--axis_label_font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--axis_label_font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.axis_label_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--axis_label_font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.axis_label_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--configuration--typography--axis_title_font_configuration"></a>
+### Nested Schema for `configuration.typography.axis_title_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--axis_title_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--axis_title_font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--axis_title_font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.axis_title_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--axis_title_font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.axis_title_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--configuration--typography--data_label_font_configuration"></a>
+### Nested Schema for `configuration.typography.data_label_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--data_label_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--data_label_font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--data_label_font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.data_label_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--data_label_font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.data_label_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
 
 <a id="nestedatt--configuration--typography--font_families"></a>
 ### Nested Schema for `configuration.typography.font_families`
@@ -127,6 +236,142 @@ Read-Only:
 Read-Only:
 
 - `font_family` (String)
+
+
+<a id="nestedatt--configuration--typography--legend_title_font_configuration"></a>
+### Nested Schema for `configuration.typography.legend_title_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--legend_title_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--legend_title_font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--legend_title_font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.legend_title_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--legend_title_font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.legend_title_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--configuration--typography--legend_value_font_configuration"></a>
+### Nested Schema for `configuration.typography.legend_value_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--legend_value_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--legend_value_font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--legend_value_font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.legend_value_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--legend_value_font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.legend_value_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--configuration--typography--visual_subtitle_font_configuration"></a>
+### Nested Schema for `configuration.typography.visual_subtitle_font_configuration`
+
+Read-Only:
+
+- `font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_subtitle_font_configuration--font_configuration))
+- `text_alignment` (String)
+- `text_transform` (String)
+
+<a id="nestedatt--configuration--typography--visual_subtitle_font_configuration--font_configuration"></a>
+### Nested Schema for `configuration.typography.visual_subtitle_font_configuration.font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.visual_subtitle_font_configuration.font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.visual_subtitle_font_configuration.font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+
+<a id="nestedatt--configuration--typography--visual_title_font_configuration"></a>
+### Nested Schema for `configuration.typography.visual_title_font_configuration`
+
+Read-Only:
+
+- `font_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_title_font_configuration--font_configuration))
+- `text_alignment` (String)
+- `text_transform` (String)
+
+<a id="nestedatt--configuration--typography--visual_title_font_configuration--font_configuration"></a>
+### Nested Schema for `configuration.typography.visual_title_font_configuration.font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_title_font_configuration--font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography--visual_title_font_configuration--font_configuration--font_weight))
+
+<a id="nestedatt--configuration--typography--visual_title_font_configuration--font_configuration--font_size"></a>
+### Nested Schema for `configuration.typography.visual_title_font_configuration.font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--configuration--typography--visual_title_font_configuration--font_configuration--font_weight"></a>
+### Nested Schema for `configuration.typography.visual_title_font_configuration.font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
 
 
 
@@ -174,10 +419,10 @@ Read-Only:
             following:</p>
          <ul>
             <li>
-               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
+               <p>The ARN of an Amazon Quick user or group associated with a data source or dataset. (This is common.)</p>
             </li>
             <li>
-               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
+               <p>The ARN of an Amazon Quick user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
             </li>
             <li>
                <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight
@@ -202,8 +447,8 @@ Read-Only:
 Read-Only:
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- `base_theme_id` (String) <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
-            themes initially inherit from a default Amazon QuickSight theme.</p>
+- `base_theme_id` (String) <p>The Amazon Quick-defined ID of the theme that a custom theme inherits from. All
+            themes initially inherit from a default Quick theme.</p>
 - `configuration` (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
             a theme.</p> (see [below for nested schema](#nestedatt--version--configuration))
 - `created_time` (String) <p>The date and time that this theme version was created.</p>
@@ -224,7 +469,7 @@ Read-Only:
 - `typography` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography))
 - `ui_color_palette` (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
-            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
+            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon Quick</a> in the <i>Amazon Quick User
                 Guide.</i>
          </p> (see [below for nested schema](#nestedatt--version--configuration--ui_color_palette))
 
@@ -244,22 +489,37 @@ Read-Only:
 
 Read-Only:
 
+- `background` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--sheet--background))
 - `tile` (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile))
 - `tile_layout` (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout))
+
+<a id="nestedatt--version--configuration--sheet--background"></a>
+### Nested Schema for `version.configuration.sheet.background`
+
+Read-Only:
+
+- `color` (String) String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)
+- `gradient` (String)
+
 
 <a id="nestedatt--version--configuration--sheet--tile"></a>
 ### Nested Schema for `version.configuration.sheet.tile`
 
 Read-Only:
 
+- `background_color` (String) String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)
 - `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile--border))
+- `border_radius` (String)
+- `padding` (String)
 
 <a id="nestedatt--version--configuration--sheet--tile--border"></a>
 ### Nested Schema for `version.configuration.sheet.tile.border`
 
 Read-Only:
 
+- `color` (String) String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)
 - `show` (Boolean) <p>The option to enable display of borders for visuals.</p>
+- `width` (String) String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)
 
 
 
@@ -295,7 +555,101 @@ Read-Only:
 
 Read-Only:
 
+- `axis_label_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--axis_label_font_configuration))
+- `axis_title_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--axis_title_font_configuration))
+- `data_label_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--data_label_font_configuration))
 - `font_families` (Attributes List) (see [below for nested schema](#nestedatt--version--configuration--typography--font_families))
+- `legend_title_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--legend_title_font_configuration))
+- `legend_value_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--legend_value_font_configuration))
+- `visual_subtitle_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_subtitle_font_configuration))
+- `visual_title_font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_title_font_configuration))
+
+<a id="nestedatt--version--configuration--typography--axis_label_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.axis_label_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--axis_label_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--axis_label_font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--axis_label_font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.axis_label_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--axis_label_font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.axis_label_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--version--configuration--typography--axis_title_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.axis_title_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--axis_title_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--axis_title_font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--axis_title_font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.axis_title_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--axis_title_font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.axis_title_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--version--configuration--typography--data_label_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.data_label_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--data_label_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--data_label_font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--data_label_font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.data_label_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--data_label_font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.data_label_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
 
 <a id="nestedatt--version--configuration--typography--font_families"></a>
 ### Nested Schema for `version.configuration.typography.font_families`
@@ -303,6 +657,142 @@ Read-Only:
 Read-Only:
 
 - `font_family` (String)
+
+
+<a id="nestedatt--version--configuration--typography--legend_title_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.legend_title_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--legend_title_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--legend_title_font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--legend_title_font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.legend_title_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--legend_title_font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.legend_title_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--version--configuration--typography--legend_value_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.legend_value_font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--legend_value_font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--legend_value_font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--legend_value_font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.legend_value_font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--legend_value_font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.legend_value_font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+<a id="nestedatt--version--configuration--typography--visual_subtitle_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.visual_subtitle_font_configuration`
+
+Read-Only:
+
+- `font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_subtitle_font_configuration--font_configuration))
+- `text_alignment` (String)
+- `text_transform` (String)
+
+<a id="nestedatt--version--configuration--typography--visual_subtitle_font_configuration--font_configuration"></a>
+### Nested Schema for `version.configuration.typography.visual_subtitle_font_configuration.font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--visual_subtitle_font_configuration--font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
+
+
+<a id="nestedatt--version--configuration--typography--visual_title_font_configuration"></a>
+### Nested Schema for `version.configuration.typography.visual_title_font_configuration`
+
+Read-Only:
+
+- `font_configuration` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_title_font_configuration--font_configuration))
+- `text_alignment` (String)
+- `text_transform` (String)
+
+<a id="nestedatt--version--configuration--typography--visual_title_font_configuration--font_configuration"></a>
+### Nested Schema for `version.configuration.typography.visual_title_font_configuration.font_configuration`
+
+Read-Only:
+
+- `font_color` (String)
+- `font_decoration` (String)
+- `font_family` (String) <p>The font family that you want to use.</p>
+- `font_size` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_title_font_configuration--font_configuration--font_size))
+- `font_style` (String)
+- `font_weight` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography--visual_title_font_configuration--font_configuration--font_weight))
+
+<a id="nestedatt--version--configuration--typography--visual_title_font_configuration--font_configuration--font_size"></a>
+### Nested Schema for `version.configuration.typography.visual_title_font_configuration.font_configuration.font_size`
+
+Read-Only:
+
+- `absolute` (String) <p>The font size that you want to use in px.</p>
+
+
+<a id="nestedatt--version--configuration--typography--visual_title_font_configuration--font_configuration--font_weight"></a>
+### Nested Schema for `version.configuration.typography.visual_title_font_configuration.font_configuration.font_weight`
+
+Read-Only:
+
+- `name` (String)
+
+
 
 
 

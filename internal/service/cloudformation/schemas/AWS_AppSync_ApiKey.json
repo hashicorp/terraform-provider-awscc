@@ -1,0 +1,92 @@
+{
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "appsync:ListApiKeys"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "appsync:CreateApiKey"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appsync:UpdateApiKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "appsync:ListApiKeys"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ApiId": {
+            "description": "Unique AWS AppSync GraphQL API ID for this API key.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ApiId"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "appsync:DeleteApiKey"
+      ]
+    }
+  },
+  "typeName": "AWS::AppSync::ApiKey",
+  "readOnlyProperties": [
+    "/properties/ApiKey",
+    "/properties/ApiKeyId",
+    "/properties/Arn"
+  ],
+  "description": "Resource Type definition for AWS::AppSync::ApiKey",
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/ApiId"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/ApiId",
+    "/properties/ApiKeyId"
+  ],
+  "properties": {
+    "ApiKey": {
+      "description": "The API key.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Unique description of your API key.",
+      "type": "string"
+    },
+    "ApiKeyId": {
+      "description": "The API key ID.",
+      "type": "string"
+    },
+    "Expires": {
+      "description": "The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.",
+      "type": "number"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the API key.",
+      "type": "string"
+    },
+    "ApiId": {
+      "description": "Unique AWS AppSync GraphQL API ID for this API key.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ApiId"
+  ]
+}

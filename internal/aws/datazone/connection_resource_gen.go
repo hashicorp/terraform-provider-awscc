@@ -746,6 +746,12 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "GlueLineageSyncEnabled": {
 		//	          "type": "boolean"
+		//	        },
+		//	        "RoleArn": {
+		//	          "description": "The ARN of the IAM role to associate with the connection as the project user role.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(\\/[a-zA-Z0-9+=,.@_-]+)*\\/[a-zA-Z0-9+=,.@_-]+$",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1586,6 +1592,19 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role to associate with the connection as the project user role.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:role(\\/[a-zA-Z0-9+=,.@_-]+)*\\/[a-zA-Z0-9+=,.@_-]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "IAM Properties Input",
 					Optional:    true,
@@ -2274,6 +2293,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"redshift_properties":                      "RedshiftProperties",
 		"refresh_token":                            "RefreshToken",
 		"register_s3_access_grant_location":        "RegisterS3AccessGrantLocation",
+		"role_arn":                                 "RoleArn",
 		"runtime_role":                             "RuntimeRole",
 		"s3_access_grant_location_id":              "S3AccessGrantLocationId",
 		"s3_properties":                            "S3Properties",

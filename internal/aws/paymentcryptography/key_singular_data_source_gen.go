@@ -341,6 +341,20 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "KmsKeyArn": {
+		//	          "description": "The ARN of the AWS KMS key that protects the replica in this region.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]{1,20}:[0-9]{12}:key/[a-zA-Z0-9-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "KmsKeyId": {
+		//	          "description": "The AWS KMS key requested for this region, when replication failed before its ARN was known.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9:/_-]+$",
+		//	          "type": "string"
+		//	        },
 		//	        "Status": {
 		//	          "description": "Defines the replication state of a key",
 		//	          "enum": [
@@ -367,6 +381,16 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: KmsKeyArn
+					"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the AWS KMS key that protects the replica in this region.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: KmsKeyId
+					"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS KMS key requested for this region, when replication failed before its ARN was known.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Defines the replication state of a key",
@@ -458,6 +482,8 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_origin":                "KeyOrigin",
 		"key_state":                 "KeyState",
 		"key_usage":                 "KeyUsage",
+		"kms_key_arn":               "KmsKeyArn",
+		"kms_key_id":                "KmsKeyId",
 		"no_restrictions":           "NoRestrictions",
 		"policy":                    "Policy",
 		"replication_regions":       "ReplicationRegions",

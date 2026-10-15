@@ -1,0 +1,1 @@
+$ terraform import awscc_iotsitewise_application.example "arn"

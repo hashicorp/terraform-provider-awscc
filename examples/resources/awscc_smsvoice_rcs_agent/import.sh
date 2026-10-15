@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_rcs_agent.example "rcs_agent_arn"

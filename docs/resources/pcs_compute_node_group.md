@@ -42,7 +42,6 @@ resource "awscc_pcs_compute_node_group" "login" {
 ### Required
 
 - `cluster_id` (String) The ID of the cluster of the compute node group.
-- `custom_launch_template` (Attributes) An Amazon EC2 launch template AWS PCS uses to launch compute nodes. (see [below for nested schema](#nestedatt--custom_launch_template))
 - `iam_instance_profile_arn` (String) The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have pcs:RegisterComputeNodeGroupInstance permissions attached to provision instances correctly.
 - `instance_configs` (Attributes List) A list of EC2 instance configurations that AWS PCS can provision in the compute node group. (see [below for nested schema](#nestedatt--instance_configs))
 - `scaling_configuration` (Attributes) Specifies the boundaries of the compute node group auto scaling. (see [below for nested schema](#nestedatt--scaling_configuration))
@@ -51,6 +50,7 @@ resource "awscc_pcs_compute_node_group" "login" {
 ### Optional
 
 - `ami_id` (String) The ID of the Amazon Machine Image (AMI) that AWS PCS uses to launch instances. If not provided, AWS PCS uses the AMI ID specified in the custom launch template.
+- `custom_launch_template` (Attributes) An Amazon EC2 launch template AWS PCS uses to launch compute nodes. (see [below for nested schema](#nestedatt--custom_launch_template))
 - `name` (String) The name that identifies the compute node group.
 - `node_lifecycle_actions` (Attributes) Custom scripts that run at defined points in a compute node's lifecycle. (see [below for nested schema](#nestedatt--node_lifecycle_actions))
 - `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
@@ -65,18 +65,6 @@ resource "awscc_pcs_compute_node_group" "login" {
 - `error_info` (Attributes List) The list of errors that occurred during compute node group provisioning. (see [below for nested schema](#nestedatt--error_info))
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) The provisioning status of the compute node group. The provisioning status doesn't indicate the overall health of the compute node group.
-
-<a id="nestedatt--custom_launch_template"></a>
-### Nested Schema for `custom_launch_template`
-
-Required:
-
-- `version` (String) The version of the EC2 launch template to use to provision instances.
-
-Optional:
-
-- `template_id` (String) The ID of the EC2 launch template to use to provision instances.
-
 
 <a id="nestedatt--instance_configs"></a>
 ### Nested Schema for `instance_configs`
@@ -93,6 +81,15 @@ Required:
 
 - `max_instance_count` (Number) The upper bound of the number of instances allowed in the compute fleet.
 - `min_instance_count` (Number) The lower bound of the number of instances allowed in the compute fleet.
+
+
+<a id="nestedatt--custom_launch_template"></a>
+### Nested Schema for `custom_launch_template`
+
+Optional:
+
+- `template_id` (String) The ID of the EC2 launch template to use to provision instances.
+- `version` (String) The version of the EC2 launch template to use to provision instances.
 
 
 <a id="nestedatt--node_lifecycle_actions"></a>

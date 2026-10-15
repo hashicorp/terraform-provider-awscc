@@ -179,6 +179,14 @@
     "WarmThroughputObject": {
       "description": "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
       "$ref": "#/definitions/WarmThroughputObject"
+    },
+    "RecordDistributionStrategy": {
+      "description": "The record distribution strategy for the stream. This property can ONLY be set when StreamMode is ON_DEMAND",
+      "type": "string",
+      "enum": [
+        "AUTO",
+        "USER_PARTITION_KEY"
+      ]
     }
   },
   "additionalProperties": false,
@@ -251,7 +259,8 @@
         "kinesis:ListTagsForStream",
         "kinesis:ListTagsForResource",
         "kinesis:UpdateMaxRecordSize",
-        "kinesis:UpdateStreamWarmThroughput"
+        "kinesis:UpdateStreamWarmThroughput",
+        "kinesis:UpdateStreamRecordDistributionStrategy"
       ],
       "timeoutInMinutes": 240
     },

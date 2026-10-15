@@ -30,7 +30,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
 		//	  "maxLength": 127,
 		//	  "minLength": 0,
-		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
 		"allowed_access_control_hierarchy_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/

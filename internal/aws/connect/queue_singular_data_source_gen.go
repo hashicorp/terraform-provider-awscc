@@ -200,7 +200,7 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The outbound email address ID.",
+		//	  "description": "The outbound email configuration for a specified queue.",
 		//	  "properties": {
 		//	    "OutboundEmailAddressId": {
 		//	      "description": "The email address connect resource ID.",
@@ -218,7 +218,7 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The outbound email address ID.",
+			Description: "The outbound email configuration for a specified queue.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: QueueArn

@@ -87,6 +87,7 @@ Read-Only:
 Read-Only:
 
 - `max_concurrent_connections` (Number) Specifies the number of active connections that your connector can establish with the remote server at the same time.
+- `ordered_user_secret_version_stages` (List of String) Specifies the order in which the connector attempts to use secret versions during authentication. This enables fallback to alternative credentials if the primary version fails.
 - `trusted_host_keys` (List of String) List of public host keys, for the external server to which you are connecting.
 - `user_secret_id` (String) ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.
 

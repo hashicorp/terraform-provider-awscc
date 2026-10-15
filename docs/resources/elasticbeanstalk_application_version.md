@@ -85,21 +85,67 @@ resource "awscc_elasticbeanstalk_application_version" "example" {
 ### Required
 
 - `application_name` (String) The name of the Elastic Beanstalk application that is associated with this application version.
-- `source_bundle` (Attributes) The Amazon S3 bucket and key that identify the location of the source bundle for this version. (see [below for nested schema](#nestedatt--source_bundle))
 
 ### Optional
 
+- `build_configuration` (Attributes) Settings for an AWS CodeBuild build that packages and builds an application version from source code. (see [below for nested schema](#nestedatt--build_configuration))
 - `description` (String) A description of this application version.
+- `image_configuration` (Attributes) Configuration for image-based application versions. (see [below for nested schema](#nestedatt--image_configuration))
+- `process` (Boolean) Pre-process and validate the environment manifest (`env.yaml`) and configuration files in the source bundle. Leave unset for the service default.
+- `source_bundle` (Attributes) The Amazon S3 bucket and key that identify the location of the source bundle for this version. (see [below for nested schema](#nestedatt--source_bundle))
 
 ### Read-Only
 
 - `application_version_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
+<a id="nestedatt--build_configuration"></a>
+### Nested Schema for `build_configuration`
+
+Optional:
+
+- `artifact_name` (String) The name of the build artifact.
+- `code_build_service_role` (String) The ARN of the IAM role that AWS CodeBuild assumes to build the application version.
+- `compute_type` (String) The compute type for the CodeBuild build environment.
+- `image` (String) The CodeBuild image used for the build environment.
+- `timeout_in_minutes` (Number) The timeout for the CodeBuild build, in minutes.
+
+
+<a id="nestedatt--image_configuration"></a>
+### Nested Schema for `image_configuration`
+
+Optional:
+
+- `build` (Attributes) Configuration for building a container image from source code. (see [below for nested schema](#nestedatt--image_configuration--build))
+- `source` (Attributes) The container image source for this version, as an ECR image URI. (see [below for nested schema](#nestedatt--image_configuration--source))
+
+<a id="nestedatt--image_configuration--build"></a>
+### Nested Schema for `image_configuration.build`
+
+Optional:
+
+- `architecture` (String) The target architecture for the built container image.
+- `buildpack` (String) The buildpack to use for building the image.
+- `code_build_service_role` (String) The ARN of the IAM role that AWS CodeBuild assumes to build the application version.
+- `compute_type` (String) The compute type for the CodeBuild build environment.
+- `dockerfile_location` (String) The path to the Dockerfile, relative to the source root.
+- `timeout_in_minutes` (Number) The timeout for the CodeBuild build, in minutes.
+- `type` (String) The type of image build: docker or buildpack.
+
+
+<a id="nestedatt--image_configuration--source"></a>
+### Nested Schema for `image_configuration.source`
+
+Optional:
+
+- `uri` (String) The URI of the container image, e.g. an ECR image URI.
+
+
+
 <a id="nestedatt--source_bundle"></a>
 ### Nested Schema for `source_bundle`
 
-Required:
+Optional:
 
 - `s3_bucket` (String) The Amazon S3 bucket where the data is located.
 - `s3_key` (String) The Amazon S3 key where the data is located.

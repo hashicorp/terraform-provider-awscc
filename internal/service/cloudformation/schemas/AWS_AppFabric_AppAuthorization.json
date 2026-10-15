@@ -1,0 +1,285 @@
+{
+  "typeName": "AWS::AppFabric::AppAuthorization",
+  "description": "Creates an app authorization within an app bundle, which allows AppFabric to connect to an application.",
+  "sourceUrl": "https://docs.aws.amazon.com/appfabric/latest/api/",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Tenant": {
+      "description": "Contains information about an application tenant.",
+      "type": "object",
+      "properties": {
+        "TenantIdentifier": {
+          "type": "string",
+          "description": "The ID of the application tenant.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "TenantDisplayName": {
+          "type": "string",
+          "description": "The display name of the tenant.",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "TenantIdentifier",
+        "TenantDisplayName"
+      ],
+      "additionalProperties": false
+    },
+    "Credential": {
+      "description": "Contains credential information for the application.",
+      "type": "object",
+      "properties": {
+        "Oauth2Credential": {
+          "$ref": "#/definitions/Oauth2Credential"
+        },
+        "ApiKeyCredential": {
+          "$ref": "#/definitions/ApiKeyCredential"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Oauth2Credential": {
+      "description": "Contains OAuth2 client credential information.",
+      "type": "object",
+      "properties": {
+        "ClientId": {
+          "type": "string",
+          "description": "The client ID of the client application.",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "ClientSecret": {
+          "type": "string",
+          "description": "The client secret of the client application.",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "ClientId",
+        "ClientSecret"
+      ],
+      "additionalProperties": false
+    },
+    "ApiKeyCredential": {
+      "description": "Contains API key credential information.",
+      "type": "object",
+      "properties": {
+        "ApiKey": {
+          "type": "string",
+          "description": "An API key for an application.",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "ApiKey"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AppBundleIdentifier": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "App": {
+      "type": "string",
+      "description": "The name of the application.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "AuthType": {
+      "type": "string",
+      "description": "The authorization type.",
+      "enum": [
+        "oauth2",
+        "apiKey"
+      ]
+    },
+    "Credential": {
+      "$ref": "#/definitions/Credential",
+      "description": "Contains credentials for the application."
+    },
+    "Tenant": {
+      "$ref": "#/definitions/Tenant",
+      "description": "Contains information about an application tenant."
+    },
+    "AppAuthorizationArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the app authorization.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "AppAuthorizationIdentifier": {
+      "type": "string",
+      "description": "The unique identifier of the app authorization.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "AppBundleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the app bundle for the app authorization.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The state of the app authorization.",
+      "enum": [
+        "PendingConnect",
+        "Connected",
+        "ConnectionValidationFailed",
+        "TokenAutoRotationFailed"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp of when the app authorization was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp of when the app authorization was last updated.",
+      "format": "date-time"
+    },
+    "Persona": {
+      "type": "string",
+      "description": "The user persona of the app authorization.",
+      "enum": [
+        "admin",
+        "endUser"
+      ]
+    },
+    "Tags": {
+      "description": "Tags to apply to the app authorization.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AppBundleIdentifier",
+    "App",
+    "AuthType",
+    "Tenant"
+  ],
+  "readOnlyProperties": [
+    "/properties/AppAuthorizationArn",
+    "/properties/AppAuthorizationIdentifier",
+    "/properties/AppBundleArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Persona"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Credential"
+  ],
+  "createOnlyProperties": [
+    "/properties/AppBundleIdentifier",
+    "/properties/App",
+    "/properties/AuthType"
+  ],
+  "primaryIdentifier": [
+    "/properties/AppAuthorizationArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AppBundleIdentifier",
+      "/properties/AppAuthorizationIdentifier"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appfabric:TagResource",
+      "appfabric:UntagResource",
+      "appfabric:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appfabric:CreateAppAuthorization",
+        "appfabric:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appfabric:GetAppAuthorization",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appfabric:UpdateAppAuthorization",
+        "appfabric:GetAppAuthorization",
+        "appfabric:ListTagsForResource",
+        "appfabric:TagResource",
+        "appfabric:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appfabric:DeleteAppAuthorization"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppBundleIdentifier": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1011,
+            "pattern": "^arn:.+$|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          }
+        },
+        "required": [
+          "AppBundleIdentifier"
+        ]
+      },
+      "permissions": [
+        "appfabric:ListAppAuthorizations"
+      ]
+    }
+  }
+}

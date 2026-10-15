@@ -533,7 +533,7 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "AccountsUrl": {
-		//	            "description": "Returns the value of the AccountsUrl property.",
+		//	            "description": "Returns the value of the AccountsUrl property. AccountsUrl is currently not supported when using Account Level Targeting (ALT).",
 		//	            "maxLength": 5120,
 		//	            "minLength": 1,
 		//	            "pattern": "(s3://|http(s?)://).+",
@@ -639,7 +639,7 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: AccountsUrl
 							"accounts_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Returns the value of the AccountsUrl property.",
+								Description: "Returns the value of the AccountsUrl property. AccountsUrl is currently not supported when using Account Level Targeting (ALT).",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/

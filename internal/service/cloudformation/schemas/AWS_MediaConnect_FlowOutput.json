@@ -355,6 +355,12 @@
       ],
       "description": "The timecode source for the NDI output."
     },
+    "NdiAudioReferenceLevel": {
+      "type": "integer",
+      "minimum": -40,
+      "maximum": 0,
+      "description": "The audio reference level of the NDI receiver, in dBFS."
+    },
     "RouterIntegrationState": {
       "type": "string",
       "enum": [

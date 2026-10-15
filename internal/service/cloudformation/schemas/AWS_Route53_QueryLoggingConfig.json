@@ -1,0 +1,73 @@
+{
+  "typeName": "AWS::Route53::QueryLoggingConfig",
+  "description": "Resource Type definition for AWS::Route53::QueryLoggingConfig. Creates a configuration for DNS query logging, which publishes query logs for a public hosted zone to an Amazon CloudWatch Logs log group.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the query logging configuration.",
+      "pattern": "^arn:aws[a-zA-Z0-9-]*:route53:::queryloggingconfig/[^/\\s]{1,36}$"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The ID that Amazon Route 53 assigns to the configuration for DNS query logging.",
+      "minLength": 1,
+      "maxLength": 36
+    },
+    "HostedZoneId": {
+      "type": "string",
+      "description": "The ID of the public hosted zone that Amazon Route 53 logs queries for.",
+      "maxLength": 32
+    },
+    "CloudWatchLogsLogGroupArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group in us-east-1 that Amazon Route 53 publishes query logs to."
+    }
+  },
+  "required": [
+    "HostedZoneId",
+    "CloudWatchLogsLogGroupArn"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id"
+  ],
+  "createOnlyProperties": [
+    "/properties/HostedZoneId",
+    "/properties/CloudWatchLogsLogGroupArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53:CreateQueryLoggingConfig"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53:GetQueryLoggingConfig"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53:DeleteQueryLoggingConfig"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53:ListQueryLoggingConfigs"
+      ]
+    }
+  }
+}

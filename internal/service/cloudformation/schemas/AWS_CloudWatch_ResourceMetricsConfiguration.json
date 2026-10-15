@@ -1,0 +1,116 @@
+{
+  "typeName": "AWS::CloudWatch::ResourceMetricsConfiguration",
+  "description": "Resource Type definition for AWS::CloudWatch::ResourceMetricsConfiguration. Manages the detailed monitoring metric selections for an AWS resource, identified by the ARN of the resource being monitored.",
+  "definitions": {
+    "ResourceMetricSelection": {
+      "type": "object",
+      "description": "Defines which metrics are enabled for detailed monitoring on the resource.",
+      "properties": {
+        "IncludeMetrics": {
+          "type": "array",
+          "description": "The list of metric names to include in detailed monitoring for the resource.",
+          "insertionOrder": false,
+          "minItems": 1,
+          "maxItems": 500,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "required": [
+        "IncludeMetrics"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ResourceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the resource for which the detailed monitoring metrics configuration is managed.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:.+$"
+    },
+    "MetricSelections": {
+      "type": "array",
+      "description": "The metric selections that define which metrics are enabled for detailed monitoring on the resource.",
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "$ref": "#/definitions/ResourceMetricSelection"
+      }
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the resource metrics configuration was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the resource metrics configuration was last updated."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ResourceArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateResourceMetricsConfiguration",
+        "cloudwatch:GetResourceMetricsConfiguration"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetResourceMetricsConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:UpdateResourceMetricsConfiguration",
+        "cloudwatch:GetResourceMetricsConfiguration"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteResourceMetricsConfiguration",
+        "cloudwatch:GetResourceMetricsConfiguration"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ResourceArn": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "permissions": [
+        "cloudwatch:GetResourceMetricsConfiguration"
+      ]
+    }
+  }
+}

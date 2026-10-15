@@ -1,0 +1,235 @@
+{
+  "typeName": "AWS::SMSVOICE::RcsAgent",
+  "description": "An AWS RCS Agent in AWS End User Messaging SMS. The RCS agent is the top-level resource representing your brand for RCS messaging, and serves as an origination identity for sending RCS messages. A newly created agent is in CREATED status; it advances through TESTING, PARTIAL and ACTIVE only as testing and country launch registrations are submitted and approved by carriers.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^.+$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "maxLength": 256,
+          "pattern": "^.*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "TestingAgentInformation": {
+      "description": "Information about the testing agent (RCS for Business ID) associated with the RCS agent. A testing agent is created by submitting a testing registration, and allows sending to registered test devices without carrier approval.",
+      "type": "object",
+      "properties": {
+        "TestingAgentStatus": {
+          "type": "string",
+          "description": "The status of the testing agent. Named distinctly from the resource-level Status property, which has its own larger set of values.",
+          "enum": [
+            "CREATED",
+            "PENDING",
+            "ACTIVE"
+          ]
+        },
+        "TestingAgentId": {
+          "type": "string",
+          "description": "The identifier of the testing agent assigned by the RCS infrastructure provider."
+        },
+        "RegistrationId": {
+          "type": "string",
+          "description": "The unique identifier of the testing registration that created the testing agent."
+        }
+      },
+      "required": [
+        "TestingAgentStatus",
+        "RegistrationId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "RcsAgentArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the RCS agent."
+    },
+    "RcsAgentId": {
+      "type": "string",
+      "description": "The unique identifier for the RCS agent, in the format rcs- followed by a hexadecimal string."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the RCS agent. CREATED means the agent exists but no registration has been submitted. PENDING means a registration is awaiting processing. TESTING means the testing registration is approved and the agent can message registered test devices. PARTIAL means at least one country launch is active. ACTIVE means all submitted country launches are active. DELETED means the agent has been deleted.",
+      "enum": [
+        "CREATED",
+        "PENDING",
+        "TESTING",
+        "PARTIAL",
+        "ACTIVE",
+        "DELETED"
+      ]
+    },
+    "CreatedTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the RCS agent was created."
+    },
+    "DeletionProtectionEnabled": {
+      "type": "boolean",
+      "description": "When set to true the RCS agent can't be deleted. By default this is false."
+    },
+    "OptOutListName": {
+      "type": "string",
+      "description": "The name of the opt-out list associated with the RCS agent.",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "SelfManagedOptOutsEnabled": {
+      "type": "boolean",
+      "description": "When set to true you're responsible for responding to HELP and STOP requests, and for tracking and honoring opt-out requests. By default this is false."
+    },
+    "TwoWayEnabled": {
+      "type": "boolean",
+      "description": "When set to true two-way messaging is enabled for the RCS agent."
+    },
+    "TwoWayChannelArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the two way channel where inbound messages are delivered.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^\\S+$"
+    },
+    "TwoWayChannelRole": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of an IAM role for the service to assume in order to post inbound messages to the two way channel.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:\\S+$"
+    },
+    "TwoWayMediaS3BucketName": {
+      "type": "string",
+      "description": "The name of the Amazon S3 bucket where inbound RCS media objects are written.",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-z0-9][a-z0-9.-]*[a-z0-9]$"
+    },
+    "TwoWayMediaS3KeyPrefix": {
+      "type": "string",
+      "description": "The key prefix used for inbound RCS media objects in the Amazon S3 bucket.",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^[\\S]+$"
+    },
+    "TwoWayMediaS3Role": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM role used to write inbound RCS media files to the Amazon S3 bucket. The role must have s3:PutObject permission on the bucket and a trust policy allowing sms-voice.amazonaws.com to assume it.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:\\S+$"
+    },
+    "TwoWayRcsEventsEnabled": {
+      "type": "array",
+      "description": "The list of RCS event types enabled for two-way messaging. An empty list disables all event types. The special value ALL enables all current and future event types and must be the only element if used. Requires TwoWayEnabled to be true.",
+      "insertionOrder": false,
+      "minItems": 0,
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      }
+    },
+    "PoolId": {
+      "type": "string",
+      "description": "The unique identifier of the pool associated with the RCS agent. This is populated only while the agent is associated with a pool, which is done through the pool APIs rather than through this resource."
+    },
+    "TestingAgent": {
+      "$ref": "#/definitions/TestingAgentInformation"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to the RCS agent.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/RcsAgentArn",
+    "/properties/RcsAgentId",
+    "/properties/Status",
+    "/properties/CreatedTimestamp",
+    "/properties/PoolId",
+    "/properties/TestingAgent"
+  ],
+  "primaryIdentifier": [
+    "/properties/RcsAgentArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RcsAgentId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sms-voice:TagResource",
+      "sms-voice:UntagResource",
+      "sms-voice:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sms-voice:CreateRcsAgent",
+        "sms-voice:UpdateRcsAgent",
+        "sms-voice:TagResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sms-voice:DescribeRcsAgents",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sms-voice:DescribeRcsAgents",
+        "sms-voice:UpdateRcsAgent",
+        "sms-voice:TagResource",
+        "sms-voice:UntagResource",
+        "sms-voice:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sms-voice:DeleteRcsAgent",
+        "sms-voice:DescribeRcsAgents",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sms-voice:DescribeRcsAgents"
+      ]
+    }
+  }
+}

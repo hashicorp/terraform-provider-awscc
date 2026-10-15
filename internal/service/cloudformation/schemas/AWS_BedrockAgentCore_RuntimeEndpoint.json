@@ -44,7 +44,8 @@
         "UPDATING",
         "UPDATE_FAILED",
         "READY",
-        "DELETING"
+        "DELETING",
+        "DELETE_FAILED"
       ]
     },
     "DateTimestamp": {

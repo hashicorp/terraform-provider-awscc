@@ -35,6 +35,9 @@
         },
         "Idc": {
           "$ref": "#/definitions/IdcAuthConfiguration"
+        },
+        "Idp": {
+          "$ref": "#/definitions/IdpAuthConfiguration"
         }
       }
     },
@@ -84,6 +87,72 @@
         "OperatorAppRoleArn",
         "IdcInstanceArn"
       ]
+    },
+    "IdpAuthConfiguration": {
+      "description": "External identity provider configuration for the Operator App.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OperatorAppRoleArn": {
+          "description": "The IAM role that Operator App users assume to access DevOps Agent APIs.",
+          "type": "string"
+        },
+        "IssuerUrl": {
+          "description": "The OIDC issuer URL for the external identity provider.",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "ClientId": {
+          "description": "The OIDC client identifier for the external identity provider application.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "ClientSecret": {
+          "description": "The OIDC client secret for the external identity provider application. Use a Secrets Manager dynamic reference to avoid storing the secret in the template.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "Provider": {
+          "description": "The external identity provider type.",
+          "type": "string",
+          "enum": [
+            "okta",
+            "entra"
+          ]
+        },
+        "UserIdClaim": {
+          "description": "The identity claim used to identify users. This value is selected by the service for the configured provider.",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "OperatorAppRoleArn",
+        "IssuerUrl",
+        "ClientId",
+        "ClientSecret",
+        "Provider"
+      ]
+    },
+    "Preferences": {
+      "description": "Preferences that configure behavior of this AgentSpace. This container fully owns the AgentSpace preferences: the properties supplied here replace the stored preferences in their entirety, and omitting the Preferences container reverts all preferences to their service defaults.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ElevatedActionsEnabled": {
+          "description": "Indicates whether elevated directed actions are permitted in this AgentSpace. Defaults to false when not set.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "properties": {
@@ -117,6 +186,9 @@
       "minLength": 2,
       "maxLength": 35,
       "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$"
+    },
+    "Preferences": {
+      "$ref": "#/definitions/Preferences"
     },
     "OperatorApp": {
       "$ref": "#/definitions/OperatorApp"
@@ -170,7 +242,13 @@
     "/properties/OperatorApp/Iam/UpdatedAt",
     "/properties/OperatorApp/Idc/IdcApplicationArn",
     "/properties/OperatorApp/Idc/CreatedAt",
-    "/properties/OperatorApp/Idc/UpdatedAt"
+    "/properties/OperatorApp/Idc/UpdatedAt",
+    "/properties/OperatorApp/Idp/UserIdClaim",
+    "/properties/OperatorApp/Idp/CreatedAt",
+    "/properties/OperatorApp/Idp/UpdatedAt"
+  ],
+  "writeOnlyProperties": [
+    "/properties/OperatorApp/Idp/ClientSecret"
   ],
   "createOnlyProperties": [
     "/properties/KmsKeyArn"
@@ -226,6 +304,7 @@
         "aidevops:UpdateAgentSpace",
         "aidevops:GetAgentSpace",
         "aidevops:EnableOperatorApp",
+        "aidevops:UpdateOperatorAppIdpConfig",
         "aidevops:DisableOperatorApp",
         "aidevops:GetOperatorApp",
         "aidevops:GetOperatorAppTeams",
@@ -260,6 +339,7 @@
         "aidevops:DeleteAgentSpace",
         "aidevops:GetAgentSpace",
         "aidevops:DisableOperatorApp",
+        "kms:Decrypt",
         "sso:DeleteApplication",
         "sso:DeleteApplicationAccessScope",
         "sso:DeleteApplicationAuthenticationMethod",

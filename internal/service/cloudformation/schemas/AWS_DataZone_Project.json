@@ -18,10 +18,7 @@
     },
     "UserDesignation": {
       "type": "string",
-      "enum": [
-        "PROJECT_OWNER",
-        "PROJECT_CONTRIBUTOR"
-      ]
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
     },
     "ProjectMembershipAssignment": {
       "type": "object",

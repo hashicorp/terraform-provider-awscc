@@ -23,6 +23,7 @@ Data Source schema for AWS::AgentRegistry::RegistryRecord
 
 - `created_at` (String) The timestamp when the registry record was created.
 - `created_by` (String) The identifier of the AWS account that created the registry record.
+- `custom_metadata` (String) The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false).
 - `description` (String) The description of the registry record.
 - `descriptors` (Attributes) The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type. (see [below for nested schema](#nestedatt--descriptors))
 - `display_name` (String) The human-readable display name of the registry record.

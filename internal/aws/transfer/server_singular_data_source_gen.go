@@ -63,6 +63,17 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreateWithHostKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "When this property is `true`, AWS Transfer Family will generate an initial host key for your server, making it immediately available to SFTP clients. When set to `false`, clients will not be able to establish an SFTP session until you import one or more host keys (see AWS::Transfer::HostKey). This property cannot be changed after resource creation. Default: `true`.",
+		//	  "type": "boolean"
+		//	}
+		"create_with_host_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When this property is `true`, AWS Transfer Family will generate an initial host key for your server, making it immediately available to SFTP clients. When set to `false`, clients will not be able to establish an SFTP session until you import one or more host keys (see AWS::Transfer::HostKey). This property cannot be changed after resource creation. Default: `true`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -313,6 +324,19 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
+		//	    "ProxyConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SftpMode": {
+		//	          "enum": [
+		//	            "PROXY_PROTOCOL_V2_ENFORCED",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SetStatOption": {
 		//	      "enum": [
 		//	        "DEFAULT",
@@ -340,6 +364,16 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PassiveIp
 				"passive_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProxyConfig
+				"proxy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SftpMode
+						"sftp_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SetStatOption
@@ -630,6 +664,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"as_2_service_managed_egress_ip_addresses": "As2ServiceManagedEgressIpAddresses",
 		"as_2_transports":                          "As2Transports",
 		"certificate":                              "Certificate",
+		"create_with_host_key":                     "CreateWithHostKey",
 		"directory_id":                             "DirectoryId",
 		"directory_listing_optimization":           "DirectoryListingOptimization",
 		"domain":                                   "Domain",
@@ -650,12 +685,14 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pre_authentication_login_banner":          "PreAuthenticationLoginBanner",
 		"protocol_details":                         "ProtocolDetails",
 		"protocols":                                "Protocols",
+		"proxy_config":                             "ProxyConfig",
 		"s3_storage_options":                       "S3StorageOptions",
 		"security_group_ids":                       "SecurityGroupIds",
 		"security_policy_name":                     "SecurityPolicyName",
 		"server_id":                                "ServerId",
 		"set_stat_option":                          "SetStatOption",
 		"sftp_authentication_methods":              "SftpAuthenticationMethods",
+		"sftp_mode":                                "SftpMode",
 		"state":                                    "State",
 		"structured_log_destinations":              "StructuredLogDestinations",
 		"subnet_ids":                               "SubnetIds",

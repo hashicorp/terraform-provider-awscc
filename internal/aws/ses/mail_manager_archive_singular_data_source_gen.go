@@ -125,13 +125,11 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "Key": {
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9/_\\+=\\.:@\\-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "^[a-zA-Z0-9/_\\+=\\.:@\\-]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },

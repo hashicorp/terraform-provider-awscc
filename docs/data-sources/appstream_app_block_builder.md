@@ -26,6 +26,7 @@ Data Source schema for AWS::AppStream::AppBlockBuilder
 - `arn` (String)
 - `created_time` (String)
 - `description` (String)
+- `disable_imdsv1` (Boolean)
 - `display_name` (String)
 - `enable_default_internet_access` (Boolean)
 - `iam_role_arn` (String)

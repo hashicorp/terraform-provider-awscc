@@ -1,0 +1,225 @@
+{
+  "typeName": "AWS::StorageGateway::Volume",
+  "description": "Creates a cached iSCSI volume on a Storage Gateway. A cached volume stores data in Amazon S3 and retains a copy of frequently accessed data subsets locally.",
+  "properties": {
+    "VolumeARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the storage volume.",
+      "minLength": 50,
+      "maxLength": 500
+    },
+    "VolumeId": {
+      "type": "string",
+      "description": "The unique identifier of the volume, extracted from the ARN.",
+      "minLength": 12,
+      "maxLength": 30
+    },
+    "GatewayARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the gateway on which to create the volume.",
+      "minLength": 50,
+      "maxLength": 500
+    },
+    "TargetName": {
+      "type": "string",
+      "description": "The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN.",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[-\\.;a-z0-9]+$"
+    },
+    "NetworkInterfaceId": {
+      "type": "string",
+      "description": "The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted."
+    },
+    "VolumeSizeInBytes": {
+      "type": "number",
+      "description": "The size of the volume in bytes."
+    },
+    "SnapshotId": {
+      "type": "string",
+      "description": "The snapshot ID of the snapshot to restore as the new cached volume (e.g., snap-1122aabb).",
+      "pattern": "^snap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})$"
+    },
+    "SourceVolumeARN": {
+      "type": "string",
+      "description": "The ARN of an existing volume from which to create the new volume.",
+      "minLength": 50,
+      "maxLength": 500
+    },
+    "KMSEncrypted": {
+      "type": "boolean",
+      "description": "Set to true to use Amazon S3 server-side encryption with your own KMS key, or false to use a key managed by Amazon S3."
+    },
+    "KMSKey": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption.",
+      "minLength": 7,
+      "maxLength": 2048,
+      "pattern": "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$"
+    },
+    "TargetARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI target name.",
+      "minLength": 50,
+      "maxLength": 800
+    },
+    "VolumeStatus": {
+      "type": "string",
+      "description": "The status of the storage volume.",
+      "minLength": 3,
+      "maxLength": 50
+    },
+    "VolumeAttachmentStatus": {
+      "type": "string",
+      "description": "Indicates whether the storage volume is attached to or detached from the gateway.",
+      "minLength": 3,
+      "maxLength": 50
+    },
+    "VolumeType": {
+      "type": "string",
+      "description": "The type of the volume (CACHED iSCSI).",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "VolumeUsedInBytes": {
+      "type": "number",
+      "description": "The size of the data stored on the volume in bytes."
+    },
+    "CreatedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date the volume was created."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of up to 50 tags to assign to the volume.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "GatewayARN",
+    "TargetName",
+    "NetworkInterfaceId",
+    "VolumeSizeInBytes"
+  ],
+  "createOnlyProperties": [
+    "/properties/GatewayARN",
+    "/properties/TargetName",
+    "/properties/NetworkInterfaceId",
+    "/properties/VolumeSizeInBytes",
+    "/properties/SnapshotId",
+    "/properties/SourceVolumeARN",
+    "/properties/KMSEncrypted",
+    "/properties/KMSKey"
+  ],
+  "writeOnlyProperties": [
+    "/properties/SnapshotId",
+    "/properties/SourceVolumeARN",
+    "/properties/KMSEncrypted"
+  ],
+  "readOnlyProperties": [
+    "/properties/VolumeARN",
+    "/properties/VolumeId",
+    "/properties/TargetARN",
+    "/properties/VolumeStatus",
+    "/properties/VolumeAttachmentStatus",
+    "/properties/VolumeType",
+    "/properties/VolumeUsedInBytes",
+    "/properties/CreatedDate"
+  ],
+  "primaryIdentifier": [
+    "/properties/VolumeARN"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "storagegateway:AddTagsToResource",
+      "storagegateway:RemoveTagsFromResource",
+      "storagegateway:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "storagegateway:CreateCachediSCSIVolume",
+        "storagegateway:DescribeCachediSCSIVolumes",
+        "storagegateway:AddTagsToResource",
+        "kms:DescribeKey",
+        "kms:CreateGrant",
+        "kms:GenerateDataKeyWithoutPlaintext"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "storagegateway:DescribeCachediSCSIVolumes",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "storagegateway:DescribeCachediSCSIVolumes",
+        "storagegateway:AddTagsToResource",
+        "storagegateway:RemoveTagsFromResource",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "storagegateway:DeleteVolume",
+        "storagegateway:DescribeCachediSCSIVolumes",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "storagegateway:ListVolumes"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "GatewayARN": {
+            "type": "string",
+            "description": "The Amazon Resource Name (ARN) of the gateway on which to list volumes.",
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "GatewayARN"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -58,6 +58,50 @@ bigdiffer-lint: prereq-go ## Verify all_schemas.hcl is normalized and anomaly-fr
 bigdiffer-recheck: prereq-go ## Re-probe reason-less suppressed/frozen rows and propose a reclassification (writes nothing)
 	$(GO_VER) run ./internal/tools/bigdiffer -recheck
 
+bigdiffer-commit: ## Commit a bigdiffer run's output as reviewable, path-grouped commits (feature branch only; never pushes)
+	@branch=$$(git symbolic-ref --short HEAD 2>/dev/null) || { echo "==> refusing: HEAD is not on a branch (detached HEAD?) — switch to a feature branch first"; exit 1; }; \
+	case "$$branch" in \
+		main|master|release/*) echo "==> refusing to commit on '$$branch' — switch to a feature branch first"; exit 1;; \
+	esac; \
+	if ! git diff --cached --quiet; then \
+		echo "==> refusing: you already have staged changes — unstage them first (git reset)"; exit 1; \
+	fi; \
+	commit_group() { \
+		msg="$$1"; shift; \
+		for p in "$$@"; do \
+			err=$$(git add -- "$$p" 2>&1) || { \
+				case "$$err" in \
+					*"did not match any files"*) ;; \
+					*) echo "==> aborting: git add failed for '$$p':"; echo "$$err" | sed 's/^/      /'; exit 1;; \
+				esac; \
+			}; \
+		done; \
+		if git diff --cached --quiet; then \
+			echo "    (no changes) $$msg"; \
+		else \
+			git commit -q -m "$$msg" || { echo "==> aborting: git commit failed for '$$msg' — staged changes are left as-is"; exit 1; }; \
+			echo "==> committed: $$msg"; \
+		fi; \
+	}; \
+	commit_group "Refresh CloudFormation schemas" \
+		internal/service/cloudformation/schemas internal/provider/all_schemas.hcl; \
+	commit_group "Regenerate resources and registrations" \
+		'internal/aws/*_resource_gen.go' 'internal/aws/*_resource_gen_test.go' \
+		internal/provider/registrations_gen.go internal/provider/import_examples_gen.json; \
+	commit_group "Regenerate singular data sources" \
+		'internal/aws/*_singular_data_source_gen.go' 'internal/aws/*_singular_data_source_gen_test.go'; \
+	commit_group "Regenerate plural data sources" \
+		'internal/aws/*_plural_data_source_gen.go' 'internal/aws/*_plural_data_source_gen_test.go'; \
+	commit_group "Regenerate documentation and update changelog" \
+		examples docs CHANGELOG.md version/VERSION; \
+	leftover=$$(git status --porcelain -- \
+		internal/service/cloudformation/schemas internal/provider internal/aws \
+		examples docs CHANGELOG.md version/VERSION); \
+	if [ -n "$$leftover" ]; then \
+		echo "==> NOTE: changes remain in bigdiffer's output paths — commit by hand if they belong to this run:"; \
+		printf '%s\n' "$$leftover" | sed 's/^/      /'; \
+	fi
+
 bigdiffer-test: prereq-go ## Run the bigdiffer tool's unit + full-corpus parity suite
 	$(GO_VER) test ./internal/tools/bigdiffer/... -timeout 20m
 
@@ -205,7 +249,13 @@ schemas: prereq-go ## Generate schemas
 	fi
 
 test: prereq-go ## Run unit tests
-	$(GO_VER) test $(TEST) $(TESTARGS) -timeout=5m
+	# -short: internal/tools/bigdiffer has a handful of tests that build a
+	# real binary and drive a genuinely-slow real recursive-schema crash
+	# (tens of seconds each) — they gate themselves on testing.Short() and
+	# are already covered by .github/workflows/bigdiffer.yml's own 20m-
+	# timeout job; this target's 5m timeout is shared with every other
+	# package in the module and was never meant to also carry them.
+	$(GO_VER) test $(TEST) $(TESTARGS) -short -timeout=5m
 
 # make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccAWSLogsLogGroup_basic'
 testacc: prereq-go ## Run acceptance tests
@@ -357,6 +407,7 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: all
 .PHONY: bigdiffer
 .PHONY: bigdiffer-check
+.PHONY: bigdiffer-commit
 .PHONY: bigdiffer-docs
 .PHONY: bigdiffer-lint
 .PHONY: bigdiffer-reconcile

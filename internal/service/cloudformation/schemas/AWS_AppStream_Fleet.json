@@ -1,0 +1,299 @@
+{
+  "typeName": "AWS::AppStream::Fleet",
+  "description": "Resource Type definition for AWS::AppStream::Fleet",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appstream.git",
+  "additionalProperties": false,
+  "properties": {
+    "Description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "ComputeCapacity": {
+      "$ref": "#/definitions/ComputeCapacity"
+    },
+    "Platform": {
+      "type": "string"
+    },
+    "VpcConfig": {
+      "$ref": "#/definitions/VpcConfig"
+    },
+    "FleetType": {
+      "type": "string",
+      "pattern": "^ALWAYS_ON$|^ON_DEMAND$|^ELASTIC$"
+    },
+    "EnableDefaultInternetAccess": {
+      "type": "boolean"
+    },
+    "DomainJoinInfo": {
+      "$ref": "#/definitions/DomainJoinInfo"
+    },
+    "SessionScriptS3Location": {
+      "$ref": "#/definitions/S3Location"
+    },
+    "Name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "ImageName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "MaxUserDurationInSeconds": {
+      "type": "integer",
+      "minimum": 600,
+      "maximum": 432000
+    },
+    "IdleDisconnectTimeoutInSeconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 36000
+    },
+    "UsbDeviceFilterStrings": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "DisconnectTimeoutInSeconds": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 432000
+    },
+    "DisplayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "StreamView": {
+      "type": "string"
+    },
+    "IamRoleArn": {
+      "type": "string",
+      "pattern": "^arn:aws(?:\\-cn|\\-iso\\-b|\\-iso|\\-us\\-gov)?:iam::[0-9]{12}:role/.+$"
+    },
+    "MaxSessionsPerInstance": {
+      "type": "integer"
+    },
+    "Arn": {
+      "type": "string",
+      "pattern": "^arn:[a-z-]+:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:.+$"
+    },
+    "InstanceType": {
+      "type": "string"
+    },
+    "MaxConcurrentSessions": {
+      "type": "integer"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "ImageArn": {
+      "type": "string",
+      "maxLength": 1024,
+      "pattern": "^arn:[a-z-]+:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:.+$"
+    },
+    "RootVolumeConfig": {
+      "$ref": "#/definitions/VolumeConfig"
+    },
+    "DisableIMDSV1": {
+      "type": "boolean"
+    },
+    "AttributesToDelete": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "enum": [
+          "VPC_CONFIGURATION",
+          "VPC_CONFIGURATION_SECURITY_GROUP_IDS",
+          "DOMAIN_JOIN_INFO",
+          "IAM_ROLE_ARN",
+          "USB_DEVICE_FILTER_STRINGS",
+          "SESSION_SCRIPT_S3_LOCATION",
+          "MAX_SESSIONS_PER_INSTANCE"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ComputeCapacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DesiredInstances": {
+          "type": "integer"
+        },
+        "DesiredSessions": {
+          "type": "integer"
+        }
+      }
+    },
+    "VpcConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SubnetIds": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DomainJoinInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OrganizationalUnitDistinguishedName": {
+          "type": "string"
+        },
+        "DirectoryName": {
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "pattern": "^[\\S\\s]*$",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    },
+    "S3Location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3Bucket": {
+          "type": "string"
+        },
+        "S3Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "S3Bucket",
+        "S3Key"
+      ]
+    },
+    "VolumeConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "VolumeSizeInGb": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "required": [
+    "InstanceType",
+    "Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/FleetType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AttributesToDelete"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appstream:TagResource",
+      "appstream:ListTagsForResource",
+      "appstream:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appstream:CreateFleet",
+        "appstream:StartFleet",
+        "appstream:DescribeFleets",
+        "appstream:TagResource",
+        "appstream:ListTagsForResource",
+        "iam:PassRole",
+        "s3:ListBucket",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appstream:DescribeFleets",
+        "appstream:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appstream:UpdateFleet",
+        "appstream:DescribeFleets",
+        "appstream:StopFleet",
+        "appstream:StartFleet",
+        "appstream:TagResource",
+        "appstream:UntagResource",
+        "appstream:ListTagsForResource",
+        "iam:PassRole",
+        "s3:ListBucket",
+        "s3:GetObject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appstream:StopFleet",
+        "appstream:DescribeFleets",
+        "appstream:DeleteFleet"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "appstream:DescribeFleets"
+      ]
+    }
+  }
+}

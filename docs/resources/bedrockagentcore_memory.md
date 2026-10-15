@@ -27,6 +27,7 @@ Resource Type definition for AWS::BedrockAgentCore::Memory
 - `indexed_keys` (Attributes List) List of indexed keys for the memory (see [below for nested schema](#nestedatt--indexed_keys))
 - `memory_execution_role_arn` (String) ARN format
 - `memory_strategies` (Attributes List) List of memory strategies attached to this memory (see [below for nested schema](#nestedatt--memory_strategies))
+- `namespace_keys` (Attributes List) List of namespace variable key definitions for a memory resource (see [below for nested schema](#nestedatt--namespace_keys))
 - `stream_delivery_resources` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources))
 - `tags` (Map of String) A map of tag keys and values
 
@@ -842,6 +843,24 @@ Optional:
 
 
 
+
+
+
+<a id="nestedatt--namespace_keys"></a>
+### Nested Schema for `namespace_keys`
+
+Optional:
+
+- `key` (String) A namespace variable key name. Must start with a lowercase letter and contain only lowercase alphanumeric characters. Cannot be a built-in variable (memoryStrategyId, sessionId, actorId).
+- `validation` (Attributes) Validation rules for namespace variable values. Multiple rules can be specified and all must pass. (see [below for nested schema](#nestedatt--namespace_keys--validation))
+
+<a id="nestedatt--namespace_keys--validation"></a>
+### Nested Schema for `namespace_keys.validation`
+
+Optional:
+
+- `allowed_values` (List of String) List of allowed values for this namespace variable
+- `regex_pattern` (String) A regex pattern that a namespace variable value must match
 
 
 

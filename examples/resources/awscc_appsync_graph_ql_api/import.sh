@@ -1,1 +1,1 @@
-$ terraform import awscc_appsync_graph_ql_api.example "api_id"
+$ terraform import awscc_appsync_graph_ql_api.example "arn"

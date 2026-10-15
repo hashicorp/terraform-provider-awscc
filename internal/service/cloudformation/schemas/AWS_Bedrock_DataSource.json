@@ -370,9 +370,119 @@
         "ConnectorParameters": {
           "type": "object",
           "description": "Connector-specific parameters."
+        },
+        "SyncSchedule": {
+          "$ref": "#/definitions/SyncSchedule"
         }
       },
       "additionalProperties": false
+    },
+    "SyncSchedule": {
+      "type": "object",
+      "description": "Recurring schedule on which the connector automatically refreshes ingested content. Exactly one frequency variant is set.",
+      "properties": {
+        "Daily": {
+          "$ref": "#/definitions/DailySchedule"
+        },
+        "Weekly": {
+          "$ref": "#/definitions/WeeklySchedule"
+        },
+        "Monthly": {
+          "$ref": "#/definitions/MonthlySchedule"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "Daily"
+          ]
+        },
+        {
+          "required": [
+            "Weekly"
+          ]
+        },
+        {
+          "required": [
+            "Monthly"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "DailySchedule": {
+      "type": "object",
+      "description": "A daily refresh. The run time is system-chosen (off-peak) and not customer-configurable.",
+      "additionalProperties": false
+    },
+    "WeeklySchedule": {
+      "type": "object",
+      "description": "A weekly refresh on a specified day of the week.",
+      "properties": {
+        "DayOfWeek": {
+          "$ref": "#/definitions/DayOfWeek"
+        }
+      },
+      "required": [
+        "DayOfWeek"
+      ],
+      "additionalProperties": false
+    },
+    "MonthlySchedule": {
+      "type": "object",
+      "description": "A monthly refresh on a specified day of the month.",
+      "properties": {
+        "DayOfMonth": {
+          "$ref": "#/definitions/DayOfMonth"
+        }
+      },
+      "required": [
+        "DayOfMonth"
+      ],
+      "additionalProperties": false
+    },
+    "DayOfMonth": {
+      "type": "object",
+      "description": "Day of the month on which a monthly refresh runs. Exactly one variant is set: an explicit day number, or the last calendar day of the month.",
+      "properties": {
+        "DayNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 28,
+          "description": "Specific day of the month, 1 through 28 (capped at 28 to avoid month-length ambiguity)."
+        },
+        "LastDayOfMonth": {
+          "type": "object",
+          "description": "Run on the last calendar day of each month.",
+          "additionalProperties": false
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "DayNumber"
+          ]
+        },
+        {
+          "required": [
+            "LastDayOfMonth"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "Day of the week.",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ]
     },
     "DeletionProtectionConfiguration": {
       "type": "object",

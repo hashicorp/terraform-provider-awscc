@@ -1,0 +1,1 @@
+$ terraform import awscc_eventsv2_event_bus.example "event_bus_arn"
