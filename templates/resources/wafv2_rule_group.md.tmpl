@@ -20,8 +20,11 @@ The AWS WAF API itself imposes no nesting limit.
 
 Consequences of the depth limit:
 
-* Configuration nested deeper than the schema cannot be expressed; deeper attributes
-  are not part of the schema.
+* Configuration nested deeper than the schema is rejected at validation with a
+  "Maximum Nesting Depth Exceeded" error naming the offending attribute: at the
+  deepest level, the logical statements and `scope_down_statement` are present in the
+  schema only so that setting them is an error. A `scope_down_statement` counts
+  towards the depth like any other nested statement.
 * **Importing a rule group whose rules nest deeper than the schema omits the deeper
   statement levels from Terraform state**, and a warning diagnostic lists exactly
   which properties were not imported. The rule group itself is not modified by the

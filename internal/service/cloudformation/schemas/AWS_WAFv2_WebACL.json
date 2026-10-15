@@ -2599,6 +2599,12 @@
             "$ref": "#/definitions/ExcludedRule"
           }
         },
+        "ScopeDownStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
+        },
         "ManagedRuleGroupConfigs": {
           "description": "Collection of ManagedRuleGroupConfig.",
           "type": "array",
@@ -2779,6 +2785,12 @@
           },
           "maxItems": 5
         },
+        "ScopeDownStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
+        },
         "ForwardedIPConfig": {
           "$ref": "#/definitions/ForwardedIPConfiguration"
         }
@@ -2932,6 +2944,24 @@
         },
         "RateBasedStatement": {
           "$ref": "#/definitions/RateBasedStatementLevel4"
+        },
+        "AndStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
+        },
+        "OrStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
+        },
+        "NotStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
         },
         "LabelMatchStatement": {
           "$ref": "#/definitions/LabelMatchStatement"

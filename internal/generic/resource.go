@@ -465,6 +465,20 @@ var (
 	idAttributePath = path.Root("id")
 )
 
+// unrepresentablePropertySet returns the declared-unrepresentable CloudFormation
+// property names as a set, or nil if there are none.
+func (r *genericResource) unrepresentablePropertySet() map[string]bool {
+	if len(r.unrepresentableProperties) == 0 {
+		return nil
+	}
+
+	set := make(map[string]bool, len(r.unrepresentableProperties))
+	for _, name := range r.unrepresentableProperties {
+		set[name] = true
+	}
+	return set
+}
+
 // findUnrepresentablePropertyPaths walks the raw Cloud Control resource model in
 // parallel with the Terraform schema — mirroring toTerraform.valueFromRaw's mapping —
 // and returns the JSON Pointer paths of declared-unrepresentable properties that the
@@ -481,10 +495,7 @@ func (r *genericResource) findUnrepresentablePropertyPaths(ctx context.Context, 
 		return nil
 	}
 
-	declared := make(map[string]bool, len(r.unrepresentableProperties))
-	for _, name := range r.unrepresentableProperties {
-		declared[name] = true
-	}
+	declared := r.unrepresentablePropertySet()
 
 	schema := r.tfSchema
 	var found []string
@@ -502,7 +513,7 @@ func (r *genericResource) findUnrepresentablePropertyPaths(ctx context.Context, 
 					continue
 				}
 				childPath := tfPath.WithAttributeName(attributeName)
-				if _, err := schema.TypeAtTerraformPath(ctx, childPath); err != nil {
+				if typ, err := schema.TypeAtTerraformPath(ctx, childPath); err != nil || isPlaceholderType(ctx, typ) {
 					if declared[key] {
 						found = append(found, cfPointer+"/"+key)
 					}
@@ -564,10 +575,7 @@ func (r *genericResource) unrepresentablePropertiesWarning(skipped []skippedProp
 		return nil
 	}
 
-	declared := make(map[string]bool, len(r.unrepresentableProperties))
-	for _, name := range r.unrepresentableProperties {
-		declared[name] = true
-	}
+	declared := r.unrepresentablePropertySet()
 
 	var locations []string
 	seen := make(map[string]bool)
@@ -764,7 +772,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	var skipped []skippedProperty
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap, skipped: &skipped}
+	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap, skipped: &skipped, unrepresentable: r.unrepresentablePropertySet()}
 	schema := currentState.Schema
 	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
 	// so plan shows no diff regardless of user config order.

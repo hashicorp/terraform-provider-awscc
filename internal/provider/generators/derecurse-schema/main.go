@@ -22,7 +22,9 @@
 //  3. A clone whose *required* properties would exceed the maximum depth is
 //     unconstructible (e.g. a level-3 AndStatement, since its required
 //     Statements items would be level-4); *optional* properties that reference
-//     an out-of-depth or unconstructible definition are dropped. So a level-3
+//     an out-of-depth or unconstructible definition are replaced with an empty
+//     placeholder object marked with a "$comment", which the code generator
+//     emits as an attribute that is an error to set. So a level-3
 //     Statement keeps RateBasedStatement/ManagedRuleGroupStatement (minus their
 //     optional ScopeDownStatement) but drops AndStatement/OrStatement/
 //     NotStatement - exactly how terraform-provider-aws models it.
@@ -62,6 +64,11 @@ import (
 const (
 	defaultDepth = 3 // terraform-provider-aws's hand-written WAFv2 trade-off
 	indentStep   = 2 // matches Python's json.dump(..., indent=2)
+
+	// placeholderComment marks a property pruned at the depth boundary. The code
+	// generators (internal/provider/generators/shared/codegen and
+	// internal/tools/bigdiffer/codegen) match on this exact "$comment" value.
+	placeholderComment = "x-derecursed-placeholder"
 )
 
 var (
@@ -601,8 +608,23 @@ func (u *unroller) computeConstructible() map[memberLevel]bool {
 	return constructible
 }
 
-// buildClone clones member at level: drops out-of-depth optional properties
-// and redirects surviving in-cycle refs to the right clone names.
+// placeholder is the stand-in for an optional property pruned at the depth
+// boundary. Dropping the property outright would let Terraform accept it in
+// configuration and silently discard it (unknown keys of an object-typed
+// attribute are dropped during type conversion, before the provider sees
+// them), so the property is kept as an empty, marked object instead. The code
+// generator emits it as an attribute that is an error to set.
+func (u *unroller) placeholder() *object {
+	p := newObject()
+	p.set("$comment", placeholderComment)
+	p.set("description", fmt.Sprintf("Not supported: nesting here would exceed the maximum depth (%d) of this depth-limited schema. Setting this attribute is an error.", u.depth))
+	p.set("type", "object")
+	p.set("additionalProperties", false)
+	return p
+}
+
+// buildClone clones member at level: replaces out-of-depth optional properties
+// with placeholders and redirects surviving in-cycle refs to the right clone names.
 func (u *unroller) buildClone(member string, level int, constructible map[memberLevel]bool) any {
 	original, _ := u.definitions.get(member)
 	body := deepCopy(original)
@@ -612,7 +634,7 @@ func (u *unroller) buildClone(member string, level int, constructible map[member
 				for _, name := range properties.sortedKeys() {
 					value, _ := properties.get(name)
 					if !u.refsOK(value, level, constructible) {
-						properties.delete(name)
+						properties.set(name, u.placeholder())
 						u.pruned[name] = true
 					}
 				}

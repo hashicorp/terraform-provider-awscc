@@ -154,9 +154,12 @@ func TestUnroll(t *testing.T) {
 	// Only refs into the counting member (Statement) increment the level, so
 	// level-1 AndStatement/RateStatement point at StatementLevel2. A level-2
 	// AndStatement would need level-3 required Statements, so it is
-	// unconstructible and dropped from StatementLevel2 (and never emitted);
-	// level-2 RateStatement survives minus its optional ScopeDownStatement.
-	// Both pruned property names are recorded for the code generator.
+	// unconstructible (never emitted) and StatementLevel2's AndStatement is
+	// replaced with a placeholder; level-2 RateStatement survives with a
+	// placeholder for its optional ScopeDownStatement. Placeholders keep the
+	// pruned names in the schema so the generated attribute rejects them
+	// instead of Terraform silently discarding them. Both pruned property names
+	// are recorded for the code generator.
 	want := `{
   "definitions": {
     "Statement": {
@@ -197,11 +200,24 @@ func TestUnroll(t *testing.T) {
     },
     "RateStatementLevel2": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "ScopeDownStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (2) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
+        }
+      }
     },
     "StatementLevel2": {
       "type": "object",
       "properties": {
+        "AndStatement": {
+          "$comment": "x-derecursed-placeholder",
+          "description": "Not supported: nesting here would exceed the maximum depth (2) of this depth-limited schema. Setting this attribute is an error.",
+          "type": "object",
+          "additionalProperties": false
+        },
         "RateStatement": {
           "$ref": "#/definitions/RateStatementLevel2"
         },
