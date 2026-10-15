@@ -20,8 +20,11 @@ The AWS WAF API itself imposes no nesting limit.
 
 Consequences of the depth limit:
 
-* Configuration nested deeper than the schema cannot be expressed; deeper attributes
-  are not part of the schema.
+* Configuration nested deeper than the schema is rejected at validation with a
+  "Maximum Nesting Depth Exceeded" error naming the offending attribute: at the
+  deepest level, the logical statements and `scope_down_statement` are present in the
+  schema only so that setting them is an error. A `scope_down_statement` counts
+  towards the depth like any other nested statement.
 * **Importing a rule group whose rules nest deeper than the schema omits the deeper
   statement levels from Terraform state**, and a warning diagnostic lists exactly
   which properties were not imported. The rule group itself is not modified by the
@@ -417,17 +420,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.asn_match_statement`
@@ -661,6 +671,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -671,6 +689,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -810,6 +829,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -1889,17 +1912,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.asn_match_statement`
@@ -2133,6 +2163,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -2143,6 +2181,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -2282,6 +2321,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -3129,17 +3172,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.asn_match_statement`
@@ -3373,6 +3423,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -3383,6 +3441,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -3522,6 +3581,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -4514,17 +4577,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -4758,6 +4828,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -4768,6 +4846,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -4907,6 +4986,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -6845,17 +6928,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.asn_match_statement`
@@ -7089,6 +7179,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.rate_based_statement`
 
@@ -7099,6 +7197,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -7238,6 +7337,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -8317,17 +8420,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.asn_match_statement`
@@ -8561,6 +8671,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.rate_based_statement`
 
@@ -8571,6 +8689,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -8710,6 +8829,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -9557,17 +9680,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.asn_match_statement`
@@ -9801,6 +9931,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.rate_based_statement`
 
@@ -9811,6 +9949,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -9950,6 +10089,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -10942,17 +11085,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -11186,6 +11336,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -11196,6 +11354,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -11335,6 +11494,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -13041,17 +13204,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.asn_match_statement`
@@ -13285,6 +13455,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -13295,6 +13473,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -13434,6 +13613,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -14513,17 +14696,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.asn_match_statement`
@@ -14757,6 +14947,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -14767,6 +14965,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -14906,6 +15105,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -15753,17 +15956,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.asn_match_statement`
@@ -15997,6 +16207,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -16007,6 +16225,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -16146,6 +16365,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -17138,17 +17361,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -17382,6 +17612,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -17392,6 +17630,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -17531,6 +17770,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -19382,17 +19625,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.asn_match_statement`
@@ -19626,6 +19876,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement`
 
@@ -19636,6 +19894,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -19775,6 +20034,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -20854,17 +21117,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.asn_match_statement`
@@ -21098,6 +21368,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement`
 
@@ -21108,6 +21386,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -21247,6 +21526,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -22094,17 +22377,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.asn_match_statement`
@@ -22338,6 +22628,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement`
 
@@ -22348,6 +22646,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -22487,6 +22786,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -23479,17 +23782,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -23723,6 +24033,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -23733,6 +24051,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -23872,6 +24191,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -26669,17 +26992,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.asn_match_statement`
@@ -26913,6 +27243,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -26923,6 +27261,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -27062,6 +27401,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -28141,17 +28484,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.asn_match_statement`
@@ -28385,6 +28735,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -28395,6 +28753,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -28534,6 +28893,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -29381,17 +29744,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.asn_match_statement`
@@ -29625,6 +29995,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -29635,6 +30013,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -29774,6 +30153,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -30766,17 +31149,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -31010,6 +31400,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -31020,6 +31418,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -31159,6 +31558,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -33097,17 +33500,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.asn_match_statement`
@@ -33341,6 +33751,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.rate_based_statement`
 
@@ -33351,6 +33769,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -33490,6 +33909,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -34569,17 +34992,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.asn_match_statement`
@@ -34813,6 +35243,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.rate_based_statement`
 
@@ -34823,6 +35261,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -34962,6 +35401,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -35809,17 +36252,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.asn_match_statement`
@@ -36053,6 +36503,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.rate_based_statement`
 
@@ -36063,6 +36521,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -36202,6 +36661,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -37194,17 +37657,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -37438,6 +37908,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -37448,6 +37926,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -37587,6 +38066,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -39293,17 +39776,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.asn_match_statement`
@@ -39537,6 +40027,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -39547,6 +40045,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -39686,6 +40185,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -40765,17 +41268,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.asn_match_statement`
@@ -41009,6 +41519,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -41019,6 +41537,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -41158,6 +41677,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -42005,17 +42528,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.asn_match_statement`
@@ -42249,6 +42779,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -42259,6 +42797,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -42398,6 +42937,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -43390,17 +43933,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -43634,6 +44184,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -43644,6 +44202,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -43783,6 +44342,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -45634,17 +46197,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.asn_match_statement`
@@ -45878,6 +46448,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement`
 
@@ -45888,6 +46466,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -46027,6 +46606,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -47106,17 +47689,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.asn_match_statement`
@@ -47350,6 +47940,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement`
 
@@ -47360,6 +47958,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -47499,6 +48098,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -48346,17 +48949,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.asn_match_statement`
@@ -48590,6 +49200,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement`
 
@@ -48600,6 +49218,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -48739,6 +49358,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -49731,17 +50354,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -49975,6 +50605,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -49985,6 +50623,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -50124,6 +50763,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -52689,17 +53332,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.asn_match_statement`
@@ -52933,6 +53583,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -52943,6 +53601,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -53082,6 +53741,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -54161,17 +54824,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.asn_match_statement`
@@ -54405,6 +55075,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -54415,6 +55093,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -54554,6 +55233,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -55401,17 +56084,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.asn_match_statement`
@@ -55645,6 +56335,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -55655,6 +56353,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -55794,6 +56493,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -56786,17 +57489,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -57030,6 +57740,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -57040,6 +57758,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -57179,6 +57898,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -59117,17 +59840,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.asn_match_statement`
@@ -59361,6 +60091,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.rate_based_statement`
 
@@ -59371,6 +60109,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -59510,6 +60249,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -60589,17 +61332,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.asn_match_statement`
@@ -60833,6 +61583,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.rate_based_statement`
 
@@ -60843,6 +61601,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -60982,6 +61741,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -61829,17 +62592,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.asn_match_statement`
@@ -62073,6 +62843,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.rate_based_statement`
 
@@ -62083,6 +62861,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -62222,6 +63001,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -63214,17 +63997,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -63458,6 +64248,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -63468,6 +64266,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -63607,6 +64406,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -65313,17 +66116,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.asn_match_statement`
@@ -65557,6 +66367,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -65567,6 +66385,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -65706,6 +66525,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -66785,17 +67608,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.asn_match_statement`
@@ -67029,6 +67859,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -67039,6 +67877,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -67178,6 +68017,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -68025,17 +68868,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.asn_match_statement`
@@ -68269,6 +69119,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -68279,6 +69137,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -68418,6 +69277,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -69410,17 +70273,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -69654,6 +70524,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -69664,6 +70542,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -69803,6 +70682,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -71654,17 +72537,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.asn_match_statement`
@@ -71898,6 +72788,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement`
 
@@ -71908,6 +72806,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -72047,6 +72946,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -73126,17 +74029,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.asn_match_statement`
@@ -73370,6 +74280,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement`
 
@@ -73380,6 +74298,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -73519,6 +74438,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -74366,17 +75289,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.asn_match_statement`
@@ -74610,6 +75540,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement`
 
@@ -74620,6 +75558,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -74759,6 +75698,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -75751,17 +76694,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -75995,6 +76945,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -76005,6 +76963,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -76144,6 +77103,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -78854,17 +79817,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.asn_match_statement`
@@ -79098,6 +80068,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -79108,6 +80086,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -79247,6 +80226,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -80326,17 +81309,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.asn_match_statement`
@@ -80570,6 +81560,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -80580,6 +81578,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -80719,6 +81718,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -81566,17 +82569,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.asn_match_statement`
@@ -81810,6 +82820,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -81820,6 +82838,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -81959,6 +82978,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -82951,17 +83974,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -83195,6 +84225,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -83205,6 +84243,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -83344,6 +84383,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -85282,17 +86325,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.asn_match_statement`
@@ -85526,6 +86576,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.rate_based_statement`
 
@@ -85536,6 +86594,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -85675,6 +86734,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -86754,17 +87817,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.asn_match_statement`
@@ -86998,6 +88068,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.rate_based_statement`
 
@@ -87008,6 +88086,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -87147,6 +88226,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -87994,17 +89077,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.asn_match_statement`
@@ -88238,6 +89328,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.rate_based_statement`
 
@@ -88248,6 +89346,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -88387,6 +89486,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -89379,17 +90482,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -89623,6 +90733,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -89633,6 +90751,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -89772,6 +90891,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -91478,17 +92601,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.asn_match_statement`
@@ -91722,6 +92852,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.rate_based_statement`
 
@@ -91732,6 +92870,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.rate_based_statement.custom_keys`
@@ -91871,6 +93010,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -92950,17 +94093,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.asn_match_statement`
@@ -93194,6 +94344,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.rate_based_statement`
 
@@ -93204,6 +94362,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.rate_based_statement.custom_keys`
@@ -93343,6 +94502,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -94190,17 +95353,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.asn_match_statement`
@@ -94434,6 +95604,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.rate_based_statement`
 
@@ -94444,6 +95622,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.rate_based_statement.custom_keys`
@@ -94583,6 +95762,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -95575,17 +96758,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -95819,6 +97009,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -95829,6 +97027,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -95968,6 +97167,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -97819,17 +99022,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.asn_match_statement`
@@ -98063,6 +99273,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement`
 
@@ -98073,6 +99291,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.custom_keys`
@@ -98212,6 +99431,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -99291,17 +100514,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.asn_match_statement`
@@ -99535,6 +100765,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement`
 
@@ -99545,6 +100783,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.custom_keys`
@@ -99684,6 +100923,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement--statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement.statement.rate_based_statement.scope_down_statement`
 
 
 
@@ -100531,17 +101774,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.asn_match_statement`
@@ -100775,6 +102025,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement`
 
@@ -100785,6 +102043,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.custom_keys`
@@ -100924,6 +102183,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement--statements--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement.statements.rate_based_statement.scope_down_statement`
 
 
 
@@ -101916,17 +103179,24 @@ Optional:
 
 Optional:
 
+- `and_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement))
 - `asn_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement))
 - `byte_match_statement` (Attributes) Byte Match statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--byte_match_statement))
 - `geo_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--geo_match_statement))
 - `ip_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--ip_set_reference_statement))
 - `label_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--label_match_statement))
+- `not_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement))
+- `or_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement))
 - `rate_based_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement))
 - `regex_match_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_match_statement))
 - `regex_pattern_set_reference_statement` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--regex_pattern_set_reference_statement))
 - `size_constraint_statement` (Attributes) Size Constraint statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--size_constraint_statement))
 - `sqli_match_statement` (Attributes) Sqli Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--sqli_match_statement))
 - `xss_match_statement` (Attributes) Xss Match Statement. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--xss_match_statement))
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--and_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.and_statement`
+
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--asn_match_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.asn_match_statement`
@@ -102160,6 +103430,14 @@ Optional:
 - `scope` (String)
 
 
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--not_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.not_statement`
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--or_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.or_statement`
+
+
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement`
 
@@ -102170,6 +103448,7 @@ Optional:
 - `evaluation_window_sec` (Number)
 - `forwarded_ip_config` (Attributes) (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--forwarded_ip_config))
 - `limit` (Number)
+- `scope_down_statement` (Attributes) Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error. (see [below for nested schema](#nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement))
 
 <a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--custom_keys"></a>
 ### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.custom_keys`
@@ -102309,6 +103588,10 @@ Optional:
 
 - `fallback_behavior` (String)
 - `header_name` (String)
+
+
+<a id="nestedatt--rules--statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement--rate_based_statement--scope_down_statement"></a>
+### Nested Schema for `rules.statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement.rate_based_statement.scope_down_statement`
 
 
 

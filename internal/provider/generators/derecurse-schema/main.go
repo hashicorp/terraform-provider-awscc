@@ -106,14 +106,6 @@ func (o *object) set(key string, value any) {
 	o.values[key] = value
 }
 
-func (o *object) delete(key string) {
-	if !o.has(key) {
-		return
-	}
-	delete(o.values, key)
-	o.keys = slices.DeleteFunc(o.keys, func(k string) bool { return k == key })
-}
-
 func (o *object) sortedKeys() []string {
 	keys := slices.Clone(o.keys)
 	sort.Strings(keys)

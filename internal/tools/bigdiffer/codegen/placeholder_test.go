@@ -93,7 +93,7 @@ func TestEmitterDerecursedPlaceholder(t *testing.T) {
 				}
 			}
 
-			if !testCase.isDataSource && !(features.HasValidator && features.UsesInternalValidatorsPackage) {
+			if !testCase.isDataSource && (!features.HasValidator || !features.UsesInternalValidatorsPackage) {
 				t.Errorf("placeholder features = %+v, want HasValidator and UsesInternalValidatorsPackage", features)
 			}
 		})
