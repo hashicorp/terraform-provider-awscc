@@ -9,10 +9,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -239,6 +241,26 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaximumMessageSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maximum": 1048576,
+		//	  "minimum": 1024,
+		//	  "type": "integer"
+		//	}
+		"maximum_message_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(1024, 1048576),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SignatureVersion
@@ -470,6 +492,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"fifo_topic":                   "FifoTopic",
 		"key":                          "Key",
 		"kms_master_key_id":            "KmsMasterKeyId",
+		"maximum_message_size":         "MaximumMessageSize",
 		"protocol":                     "Protocol",
 		"signature_version":            "SignatureVersion",
 		"subscription":                 "Subscription",

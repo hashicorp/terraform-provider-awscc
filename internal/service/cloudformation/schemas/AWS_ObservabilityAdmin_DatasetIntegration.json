@@ -1,0 +1,128 @@
+{
+  "typeName": "AWS::ObservabilityAdmin::DatasetIntegration",
+  "description": "The AWS::ObservabilityAdmin::DatasetIntegration resource represents a CloudWatch dataset integration for an account in a region. The integration enables telemetry forwarding into the caller's CloudWatch dataset via a customer-provided IAM role.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the dataset integration.",
+      "type": "string",
+      "pattern": "^arn:aws[a-zA-Z-]*:observabilityadmin:[a-z0-9-]+:[0-9]{12}:dataset-integration/.+$",
+      "minLength": 1,
+      "maxLength": 1011
+    },
+    "RoleArn": {
+      "description": "The ARN of the IAM role that the service assumes to forward telemetry to the customer's CloudWatch dataset. The role must live in the caller's account.",
+      "type": "string",
+      "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.+$",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "CreatedAt": {
+      "description": "The ISO 8601 timestamp of when the dataset integration was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "description": "The ISO 8601 timestamp of when the dataset integration was last updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "RoleArn"
+  ],
+  "additionalProperties": false,
+  "replacementStrategy": "delete_then_create",
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "observabilityadmin:TagResource",
+      "observabilityadmin:UntagResource",
+      "observabilityadmin:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "observabilityadmin:CreateDatasetIntegration",
+        "observabilityadmin:GetDatasetIntegration",
+        "observabilityadmin:TagResource",
+        "observabilityadmin:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "observabilityadmin:GetDatasetIntegration",
+        "observabilityadmin:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "observabilityadmin:UpdateDatasetIntegration",
+        "observabilityadmin:GetDatasetIntegration",
+        "observabilityadmin:TagResource",
+        "observabilityadmin:UntagResource",
+        "observabilityadmin:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "observabilityadmin:DeleteDatasetIntegration",
+        "observabilityadmin:GetDatasetIntegration",
+        "observabilityadmin:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "observabilityadmin:ListDatasetIntegrations"
+      ]
+    }
+  }
+}

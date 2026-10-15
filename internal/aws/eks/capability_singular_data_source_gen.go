@@ -112,6 +112,13 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "EndpointPrefix": {
+		//	          "description": "An optional prefix for the Argo CD server endpoint. When specified, EKS uses this prefix to generate the server endpoint; otherwise, the endpoint is generated automatically. This value cannot be changed after the capability is created.",
+		//	          "maxLength": 50,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+		//	          "type": "string"
+		//	        },
 		//	        "Namespace": {
 		//	          "description": "The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.",
 		//	          "type": "string"
@@ -240,6 +247,11 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Configuration for integrating Argo CD with IAM Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointPrefix
+						"endpoint_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An optional prefix for the Argo CD server endpoint. When specified, EKS uses this prefix to generate the server endpoint; otherwise, the endpoint is generated automatically. This value cannot be changed after the capability is created.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
@@ -470,6 +482,7 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"delete_propagation_policy":   "DeletePropagationPolicy",
 		"disabled_services":           "DisabledServices",
 		"enable_cross_namespace":      "EnableCrossNamespace",
+		"endpoint_prefix":             "EndpointPrefix",
 		"id":                          "Id",
 		"idc_instance_arn":            "IdcInstanceArn",
 		"idc_managed_application_arn": "IdcManagedApplicationArn",

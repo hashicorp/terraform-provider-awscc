@@ -310,6 +310,12 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	      "maxLength": 128,
 		//	      "pattern": "^\\d+\\.\\d+\\.\\d+$",
 		//	      "type": "string"
+		//	    },
+		//	    "Vcpu": {
+		//	      "description": "The number of virtual CPUs to give to the game server container. This is required when the container group definition doesn't set TotalVcpuLimit.",
+		//	      "maximum": 10,
+		//	      "minimum": 0.125,
+		//	      "type": "number"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -445,6 +451,11 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 				// Property: ServerSdkVersion
 				"server_sdk_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The version of the server SDK used in this container group",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Vcpu
+				"vcpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of virtual CPUs to give to the game server container. This is required when the container group definition doesn't set TotalVcpuLimit.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

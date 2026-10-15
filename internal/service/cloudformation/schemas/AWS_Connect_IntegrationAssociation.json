@@ -47,7 +47,8 @@
         "FILE_SCANNER",
         "MESSAGE_PROCESSOR",
         "Q_MESSAGE_TEMPLATES",
-        "SES_IDENTITY"
+        "SES_IDENTITY",
+        "EVENT"
       ]
     },
     "InstanceId": {
@@ -60,6 +61,28 @@
     "IntegrationAssociationId": {
       "description": "Identifier of the association with Connect Instance",
       "type": "string"
+    },
+    "SourceType": {
+      "description": "The type of the data source. This is only supported for the EVENT integration type",
+      "type": "string",
+      "enum": [
+        "SALESFORCE",
+        "ZENDESK",
+        "CASES"
+      ]
+    },
+    "SourceApplicationName": {
+      "description": "The name of the external application. This is only supported for the EVENT integration type",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_ -]+$",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "SourceApplicationUrl": {
+      "description": "The URL for the external application. This is only supported for the EVENT integration type",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
     }
   },
   "properties": {
@@ -74,6 +97,15 @@
     },
     "IntegrationType": {
       "$ref": "#/definitions/IntegrationType"
+    },
+    "SourceType": {
+      "$ref": "#/definitions/SourceType"
+    },
+    "SourceApplicationName": {
+      "$ref": "#/definitions/SourceApplicationName"
+    },
+    "SourceApplicationUrl": {
+      "$ref": "#/definitions/SourceApplicationUrl"
     },
     "Tags": {
       "description": "The tags used to organize, track, or control access for this resource.",
@@ -110,7 +142,10 @@
   "createOnlyProperties": [
     "/properties/InstanceId",
     "/properties/IntegrationArn",
-    "/properties/IntegrationType"
+    "/properties/IntegrationType",
+    "/properties/SourceType",
+    "/properties/SourceApplicationName",
+    "/properties/SourceApplicationUrl"
   ],
   "primaryIdentifier": [
     "/properties/InstanceId",

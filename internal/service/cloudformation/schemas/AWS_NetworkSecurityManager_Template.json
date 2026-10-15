@@ -1,0 +1,179 @@
+{
+  "typeName": "AWS::NetworkSecurityManager::Template",
+  "description": "Resource Type definition for AWS::NetworkSecurityManager::Template. Creates and manages a Network Security Manager template.",
+  "definitions": {
+    "AssociatedRule": {
+      "type": "object",
+      "description": "An association between a template and a rule.",
+      "properties": {
+        "RuleArn": {
+          "type": "string",
+          "description": "ARN of the associated rule."
+        }
+      },
+      "required": [
+        "RuleArn"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "TemplateId": {
+      "description": "The unique identifier of the template.",
+      "type": "string"
+    },
+    "TemplateArn": {
+      "description": "The ARN of the template.",
+      "type": "string"
+    },
+    "TemplateName": {
+      "description": "The name of the template.",
+      "type": "string"
+    },
+    "TemplateDescription": {
+      "description": "A description of the template.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the template.",
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE",
+        "DISABLED"
+      ]
+    },
+    "Version": {
+      "description": "The version number.",
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$",
+      "minLength": 1,
+      "maxLength": 10
+    },
+    "UpdatedAt": {
+      "description": "An ISO 8601 timestamp indicating when the template was last modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "AssociatedRuleList": {
+      "description": "List of rules associated with this template.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AssociatedRule"
+      }
+    },
+    "FirewallType": {
+      "description": "The type of firewall.",
+      "type": "string",
+      "enum": [
+        "WAF",
+        "NETWORK_FIREWALL",
+        "NETWORK_FIREWALL_V2",
+        "IGW_FIREWALL"
+      ]
+    },
+    "Tags": {
+      "description": "The tags associated with the template.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "TemplateName"
+  ],
+  "createOnlyProperties": [
+    "/properties/TemplateName",
+    "/properties/FirewallType"
+  ],
+  "readOnlyProperties": [
+    "/properties/TemplateId",
+    "/properties/TemplateArn",
+    "/properties/Status",
+    "/properties/Version",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/TemplateArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/TemplateId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-security-manager:TagResource",
+      "network-security-manager:UntagResource",
+      "network-security-manager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "network-security-manager:CreateTemplate",
+        "network-security-manager:GetTemplate",
+        "network-security-manager:TagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "network-security-manager:GetTemplate",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "network-security-manager:UpdateTemplate",
+        "network-security-manager:GetTemplate",
+        "network-security-manager:TagResource",
+        "network-security-manager:UntagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "network-security-manager:DeleteTemplate",
+        "network-security-manager:GetTemplate",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "network-security-manager:ListTemplates"
+      ]
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "typeName": "AWS::RAM::SourceAssociation",
+  "description": "Associates a specified source account with a resource share.",
+  "properties": {
+    "ResourceShareArn": {
+      "description": "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share.",
+      "type": "string"
+    },
+    "SourceId": {
+      "description": "Specifies the ID of the source account to associate with the resource share.",
+      "type": "string"
+    },
+    "SourceType": {
+      "description": "The type of the source.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The current status of the association.",
+      "type": "string",
+      "enum": [
+        "ASSOCIATING",
+        "ASSOCIATED",
+        "FAILED",
+        "DISASSOCIATING",
+        "DISASSOCIATED",
+        "SUSPENDED",
+        "SUSPENDING",
+        "RESTORING"
+      ]
+    },
+    "CreationTime": {
+      "description": "The date and time when the association was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastUpdatedTime": {
+      "description": "The date and time when the association was last updated.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ResourceShareArn",
+    "SourceId"
+  ],
+  "readOnlyProperties": [
+    "/properties/SourceType",
+    "/properties/Status",
+    "/properties/CreationTime",
+    "/properties/LastUpdatedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceShareArn",
+    "/properties/SourceId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceShareArn",
+    "/properties/SourceId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ram:AssociateResourceShare",
+        "ram:GetResourceShares",
+        "ram:ListSourceAssociations"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ram:ListSourceAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ram:DisassociateResourceShare",
+        "ram:ListSourceAssociations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ram:ListSourceAssociations"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

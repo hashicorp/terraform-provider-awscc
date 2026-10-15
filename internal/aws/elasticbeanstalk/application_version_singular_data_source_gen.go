@@ -33,6 +33,76 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The name of the Elastic Beanstalk application that is associated with this application version. ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BuildConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Settings for an AWS CodeBuild build that packages and builds an application version from source code.",
+		//	  "properties": {
+		//	    "ArtifactName": {
+		//	      "description": "The name of the build artifact.",
+		//	      "type": "string"
+		//	    },
+		//	    "CodeBuildServiceRole": {
+		//	      "description": "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+		//	      "type": "string"
+		//	    },
+		//	    "ComputeType": {
+		//	      "description": "The compute type for the CodeBuild build environment.",
+		//	      "enum": [
+		//	        "BUILD_GENERAL1_SMALL",
+		//	        "BUILD_GENERAL1_MEDIUM",
+		//	        "BUILD_GENERAL1_LARGE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Image": {
+		//	      "description": "The CodeBuild image used for the build environment.",
+		//	      "type": "string"
+		//	    },
+		//	    "TimeoutInMinutes": {
+		//	      "description": "The timeout for the CodeBuild build, in minutes.",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CodeBuildServiceRole",
+		//	    "Image"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"build_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ArtifactName
+				"artifact_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the build artifact.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeBuildServiceRole
+				"code_build_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComputeType
+				"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The compute type for the CodeBuild build environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Image
+				"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CodeBuild image used for the build environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutInMinutes
+				"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The timeout for the CodeBuild build, in minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings for an AWS CodeBuild build that packages and builds an application version from source code.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -52,6 +122,162 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	}
 		"application_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ImageConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for image-based application versions.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Source"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Build"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "Build": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for building a container image from source code.",
+		//	      "properties": {
+		//	        "Architecture": {
+		//	          "description": "The target architecture for the built container image.",
+		//	          "enum": [
+		//	            "amd64",
+		//	            "arm64"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Buildpack": {
+		//	          "description": "The buildpack to use for building the image.",
+		//	          "type": "string"
+		//	        },
+		//	        "CodeBuildServiceRole": {
+		//	          "description": "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+		//	          "type": "string"
+		//	        },
+		//	        "ComputeType": {
+		//	          "description": "The compute type for the CodeBuild build environment.",
+		//	          "enum": [
+		//	            "BUILD_GENERAL1_SMALL",
+		//	            "BUILD_GENERAL1_MEDIUM",
+		//	            "BUILD_GENERAL1_LARGE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "DockerfileLocation": {
+		//	          "description": "The path to the Dockerfile, relative to the source root.",
+		//	          "type": "string"
+		//	        },
+		//	        "TimeoutInMinutes": {
+		//	          "description": "The timeout for the CodeBuild build, in minutes.",
+		//	          "type": "integer"
+		//	        },
+		//	        "Type": {
+		//	          "description": "The type of image build: docker or buildpack.",
+		//	          "enum": [
+		//	            "docker",
+		//	            "buildpack"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type",
+		//	        "CodeBuildServiceRole"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Source": {
+		//	      "additionalProperties": false,
+		//	      "description": "The container image source for this version, as an ECR image URI.",
+		//	      "properties": {
+		//	        "Uri": {
+		//	          "description": "The URI of the container image, e.g. an ECR image URI.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Build
+				"build": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Architecture
+						"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The target architecture for the built container image.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Buildpack
+						"buildpack": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The buildpack to use for building the image.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CodeBuildServiceRole
+						"code_build_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ComputeType
+						"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The compute type for the CodeBuild build environment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DockerfileLocation
+						"dockerfile_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path to the Dockerfile, relative to the source root.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TimeoutInMinutes
+						"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The timeout for the CodeBuild build, in minutes.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of image build: docker or buildpack.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for building a container image from source code.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Source
+				"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Uri
+						"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The URI of the container image, e.g. an ECR image URI.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The container image source for this version, as an ECR image URI.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for image-based application versions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Process
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Pre-process and validate the environment manifest (`env.yaml`) and configuration files in the source bundle. Leave unset for the service default.",
+		//	  "type": "boolean"
+		//	}
+		"process": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Pre-process and validate the environment manifest (`env.yaml`) and configuration files in the source bundle. Leave unset for the service default.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceBundle
 		// CloudFormation resource type schema:
@@ -108,12 +334,27 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticBeanstalk::ApplicationVersion").WithTerraformTypeName("awscc_elasticbeanstalk_application_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_name":       "ApplicationName",
-		"application_version_id": "Id",
-		"description":            "Description",
-		"s3_bucket":              "S3Bucket",
-		"s3_key":                 "S3Key",
-		"source_bundle":          "SourceBundle",
+		"application_name":        "ApplicationName",
+		"application_version_id":  "Id",
+		"architecture":            "Architecture",
+		"artifact_name":           "ArtifactName",
+		"build":                   "Build",
+		"build_configuration":     "BuildConfiguration",
+		"buildpack":               "Buildpack",
+		"code_build_service_role": "CodeBuildServiceRole",
+		"compute_type":            "ComputeType",
+		"description":             "Description",
+		"dockerfile_location":     "DockerfileLocation",
+		"image":                   "Image",
+		"image_configuration":     "ImageConfiguration",
+		"process":                 "Process",
+		"s3_bucket":               "S3Bucket",
+		"s3_key":                  "S3Key",
+		"source":                  "Source",
+		"source_bundle":           "SourceBundle",
+		"timeout_in_minutes":      "TimeoutInMinutes",
+		"type":                    "Type",
+		"uri":                     "Uri",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

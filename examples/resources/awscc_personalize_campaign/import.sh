@@ -1,0 +1,1 @@
+$ terraform import awscc_personalize_campaign.example "campaign_arn"

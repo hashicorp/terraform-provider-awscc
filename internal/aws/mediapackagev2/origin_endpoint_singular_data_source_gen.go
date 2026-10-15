@@ -1543,6 +1543,21 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$",
 		//	              "type": "string"
 		//	            },
+		//	            "ContentKeyPeriodConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eThe configuration that controls the content key period timing information that MediaPackage signals to your DRM key provider.\u003c/p\u003e",
+		//	              "properties": {
+		//	                "ContentKeyPeriodTiming": {
+		//	                  "enum": [
+		//	                    "INDEX_ONLY",
+		//	                    "START_END_ONLY",
+		//	                    "INDEX_WITH_START_END"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "DrmSystems": {
 		//	              "description": "\u003cp\u003eThe DRM solution provider you're using to protect your content during distribution.\u003c/p\u003e",
 		//	              "items": {
@@ -1606,6 +1621,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "description": "\u003cp\u003eThe ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.\u003c/p\u003e \u003cp\u003eValid format: \u003ccode\u003earn:aws:iam::{accountID}:role/{name}\u003c/code\u003e. The following example shows a role ARN: \u003ccode\u003earn:aws:iam::444455556666:role/SpekeAccess\u003c/code\u003e \u003c/p\u003e",
 		//	              "maxLength": 2048,
 		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SpekeVersion": {
+		//	              "enum": [
+		//	                "V2_0",
+		//	                "V2_1"
+		//	              ],
 		//	              "type": "string"
 		//	            },
 		//	            "Url": {
@@ -1774,6 +1796,17 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 									Description: "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: ContentKeyPeriodConfiguration
+								"content_key_period_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ContentKeyPeriodTiming
+										"content_key_period_timing": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The configuration that controls the content key period timing information that MediaPackage signals to your DRM key provider.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: DrmSystems
 								"drm_systems": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
@@ -1804,6 +1837,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>",
 									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SpekeVersion
+								"speke_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: Url
 								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1980,6 +2017,8 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"compactness":                           "Compactness",
 		"constant_initialization_vector":        "ConstantInitializationVector",
 		"container_type":                        "ContainerType",
+		"content_key_period_configuration":      "ContentKeyPeriodConfiguration",
+		"content_key_period_timing":             "ContentKeyPeriodTiming",
 		"copyright":                             "Copyright",
 		"created_at":                            "CreatedAt",
 		"custom_ad_types":                       "CustomAdTypes",
@@ -2049,6 +2088,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"service_location":                      "ServiceLocation",
 		"source":                                "Source",
 		"speke_key_provider":                    "SpekeKeyProvider",
+		"speke_version":                         "SpekeVersion",
 		"start":                                 "Start",
 		"start_tag":                             "StartTag",
 		"startover_window_seconds":              "StartoverWindowSeconds",

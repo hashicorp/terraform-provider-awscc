@@ -353,6 +353,12 @@
         "LinuxCapabilities": {
           "description": "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
           "$ref": "#/definitions/LinuxCapabilities"
+        },
+        "Vcpu": {
+          "description": "The number of virtual CPUs to give to the game server container. This is required when the container group definition doesn't set TotalVcpuLimit.",
+          "type": "number",
+          "minimum": 0.125,
+          "maximum": 10
         }
       },
       "required": [
@@ -559,8 +565,7 @@
   "required": [
     "Name",
     "OperatingSystem",
-    "TotalMemoryLimitMebibytes",
-    "TotalVcpuLimit"
+    "TotalMemoryLimitMebibytes"
   ],
   "createOnlyProperties": [
     "/properties/Name",
@@ -605,7 +610,12 @@
         "gamelift:UpdateContainerGroupDefinition",
         "gamelift:ListTagsForResource",
         "gamelift:TagResource",
-        "gamelift:UntagResource"
+        "gamelift:UntagResource",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:DescribeImages",
+        "ecr:GetAuthorizationToken"
       ]
     },
     "delete": {

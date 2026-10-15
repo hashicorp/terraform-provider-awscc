@@ -1,0 +1,83 @@
+{
+  "typeName": "AWS::EC2::ClientVpnRoute",
+  "description": "Resource Type definition for AWS::EC2::ClientVpnRoute. Specifies a network route to add to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traffic to specific resources or networks.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2.git",
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The CloudFormation-generated identifier for this Client VPN route, derived from the logical resource id and client request token."
+    },
+    "ClientVpnEndpointId": {
+      "type": "string",
+      "description": "The ID of the Client VPN endpoint to which to add the route."
+    },
+    "DestinationCidrBlock": {
+      "type": "string",
+      "description": "The IPv4 address range, in CIDR notation, of the route destination. For example: To add a route for Internet access, enter 0.0.0.0/0. To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range. To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range. To add a route for the local network, enter the client CIDR range."
+    },
+    "TargetVpcSubnetId": {
+      "type": "string",
+      "description": "The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint. Alternatively, if you're adding a route for the local network, specify local."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A brief description of the route."
+    }
+  },
+  "required": [
+    "ClientVpnEndpointId",
+    "DestinationCidrBlock"
+  ],
+  "createOnlyProperties": [
+    "/properties/ClientVpnEndpointId",
+    "/properties/DestinationCidrBlock",
+    "/properties/TargetVpcSubnetId",
+    "/properties/Description"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateClientVpnRoute",
+        "ec2:DescribeClientVpnRoutes"
+      ],
+      "timeoutInMinutes": 130
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeClientVpnRoutes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteClientVpnRoute",
+        "ec2:DescribeClientVpnRoutes"
+      ],
+      "timeoutInMinutes": 130
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeClientVpnRoutes"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ClientVpnEndpointId": {
+            "$ref": "resource-schema.json#/properties/ClientVpnEndpointId"
+          }
+        },
+        "required": [
+          "ClientVpnEndpointId"
+        ]
+      }
+    }
+  }
+}

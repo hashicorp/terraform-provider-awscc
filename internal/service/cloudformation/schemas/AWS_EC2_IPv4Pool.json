@@ -1,0 +1,123 @@
+{
+  "typeName": "AWS::EC2::IPv4Pool",
+  "description": "Resource Type definition for AWS::EC2::IPv4Pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to AWS to manage with IPAM (BYOIP).",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the public IPv4 pool."
+    },
+    "PoolId": {
+      "type": "string",
+      "description": "The ID of the public IPv4 pool."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the public IPv4 pool."
+    },
+    "NetworkBorderGroup": {
+      "type": "string",
+      "description": "The name of the location from which the address pool is advertised."
+    },
+    "TotalAddressCount": {
+      "type": "integer",
+      "description": "The total number of addresses in the pool."
+    },
+    "TotalAvailableAddressCount": {
+      "type": "integer",
+      "description": "The total number of available addresses in the pool."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Any tags assigned to the public IPv4 pool.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/PoolId",
+    "/properties/Description",
+    "/properties/NetworkBorderGroup",
+    "/properties/TotalAddressCount",
+    "/properties/TotalAvailableAddressCount"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PoolId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribePublicIpv4Pools"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreatePublicIpv4Pool",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribePublicIpv4Pools"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribePublicIpv4Pools",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeletePublicIpv4Pool",
+        "ec2:DescribePublicIpv4Pools"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribePublicIpv4Pools"
+      ]
+    }
+  }
+}

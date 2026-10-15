@@ -129,9 +129,10 @@ func main() {
 		recheck        = flag.Bool("recheck", false, "re-probe suppressed/frozen rows with no recorded reason and propose a reclassification (offline except reading the schema cache; never writes all_schemas.hcl)")
 		recheckAll     = flag.Bool("recheck-all", false, "with -recheck: widen the scope to every active suppression/freeze, not just the reason-less/unknown backlog — revisit an old, already-explained decision on demand")
 
-		// Hidden: the hidden -recheck-probe-artifact mode recheck.go re-execs into,
-		// so a crashy regeneration (e.g. a recursive schema) kills only this
-		// subprocess. Not part of the documented CLI surface.
+		// Hidden: the subprocess mode recheck.go re-execs into so a crash
+		// (e.g. a recursive schema) only kills that subprocess. Used by
+		// -recheck's own backlog probe and by every real -sync/-reconcile/
+		// -check artifact generation.
 		recheckProbeArtifact = flag.Bool("recheck-probe-artifact", false, "internal: probe one artifact's regeneration in isolation")
 		probeTFType          = flag.String("probe-tf-type", "", "internal")
 		probeCFNType         = flag.String("probe-cfn-type", "", "internal")
@@ -142,11 +143,18 @@ func main() {
 		probeServicesPath    = flag.String("probe-services-path", "", "internal")
 		probeRepoRoot        = flag.String("probe-repo-root", "", "internal")
 		probeOutputRoot      = flag.String("probe-output-root", "", "internal")
+		probeSuppressRes     = flag.Bool("probe-suppress-resource", false, "internal")
+		probeSuppressSing    = flag.Bool("probe-suppress-singular", false, "internal")
+		probeSuppressPlural  = flag.Bool("probe-suppress-plural", false, "internal")
+		probePathAwareNames  = flag.Bool("probe-path-aware-names", false, "internal")
+		probeOutCode         = flag.String("probe-out-code", "", "internal")
+		probeOutTest         = flag.String("probe-out-test", "", "internal")
+		probeOutManifest     = flag.String("probe-out-manifest", "", "internal: generate every artifact the row's plan calls for (ignoring -probe-kind) and write a JSON manifest instead of single code/test files")
 	)
 	flag.Parse()
 
 	if *recheckProbeArtifact {
-		err := runRecheckProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot)
+		err := runRecheckProbeArtifact(*probeTFType, *probeCFNType, *probeKind, *probeSchema, *probePrefix, *probeCacheDir, *probeServicesPath, *probeRepoRoot, *probeOutputRoot, *probeSuppressRes, *probeSuppressSing, *probeSuppressPlural, *probePathAwareNames, *probeOutCode, *probeOutTest, *probeOutManifest)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			var gateFailure *buildGateFailure
@@ -159,7 +167,6 @@ func main() {
 	}
 
 	if err := run(*allSchemasPath, *checkoutPath, *lint, *sync, *reconcile, *check, *checkDocsFull, *docs, *noDocs, *recheck, *recheckAll); err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
@@ -168,16 +175,34 @@ func main() {
 // snapshot-diff helper: the weekly workflow is -sync, offline machinery-fix
 // landings are -reconcile, the read-only preview of that same landing is
 // -check, docs are -docs, and -lint is an offline hygiene guard for CI.
-func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) error {
+func run(allSchemasPath, checkoutPath string, lint, sync, reconcile, check, checkDocsFull, docs, noDocs, recheck, recheckAll bool) (err error) {
+	// Keep the run log open through top-level error reporting: emit the final
+	// "bigdiffer: ..." diagnostic through the tee (so a failed command's
+	// .bigdiffer-<command>.log ends with it, not only the console) and close
+	// only after. closeLog is nil for a usage error or a pre-log failure
+	// (e.g. the toolchain check), where the diagnostic falls back to the
+	// console-only structOut default.
+	var closeLog func()
+	defer func() {
+		if err != nil {
+			_, _ = fmt.Fprintf(structOut, "bigdiffer: %v\n", err)
+		}
+		if closeLog != nil {
+			closeLog()
+		}
+	}()
 	switch {
 	case sync, reconcile, check:
 		// Only the three commands that generate or verify gofmt'd Go source
 		// need the toolchain pinned — a version mismatch here would silently
 		// produce or "verify" output formatted by the wrong gofmt rules (see
 		// verifyGoToolchain).
-		if err := verifyGoToolchain(); err != nil {
+		if err = verifyGoToolchain(); err != nil {
 			return err
 		}
+	}
+	if name := commandName(sync, reconcile, check, docs, lint, recheck); name != "" {
+		closeLog = startRunLog(name)
 	}
 	switch {
 	case sync:
@@ -664,39 +689,40 @@ func (r Report) anomalyProblems() []string {
 }
 
 func (r Report) write() {
-	fmt.Fprintf(os.Stderr, "== bigdiffer report ==\n")
-	fmt.Fprintf(os.Stderr, "available (base) resources: %d\n", r.Total)
-	fmt.Fprintf(os.Stderr, "added (new this week):      %d\n", len(r.AddedNew))
+	w := func(format string, a ...any) { _, _ = fmt.Fprintf(structOut, format, a...) }
+	w("== bigdiffer report ==\n")
+	w("available (base) resources: %d\n", r.Total)
+	w("added (new this week):      %d\n", len(r.AddedNew))
 	for _, b := range r.AddedNew {
-		fmt.Fprintf(os.Stderr, "  + %s  (%s)\n", b.cfn, b.label)
+		w("  + %s  (%s)\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(os.Stderr, "added (recovered backlog):  %d\n", len(r.AddedBacklog))
+	w("added (recovered backlog):  %d\n", len(r.AddedBacklog))
 	for _, b := range r.AddedBacklog {
-		fmt.Fprintf(os.Stderr, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
+		w("  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
 	}
-	fmt.Fprintf(os.Stderr, "retained (gone from AWS):    %d\n", len(r.Retained))
+	w("retained (gone from AWS):    %d\n", len(r.Retained))
 	if len(r.UnexplainedRetained) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
+		w("ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
 		for _, b := range r.UnexplainedRetained {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)\n", b.cfn, b.label)
+			w("  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}
 	if len(r.Duplicates) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
+		w("ANOMALY - duplicate live blocks for the same CloudFormation type: %d\n", len(r.Duplicates))
 		for _, d := range r.Duplicates {
-			fmt.Fprintf(os.Stderr, "  ! %s\n", d)
+			w("  ! %s\n", d)
 		}
 	}
 	if len(r.NamingViolate) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
+		w("ANOMALY - naming invariant violations (resource_type_name != transform(cfn)): %d\n", len(r.NamingViolate))
 		for _, v := range r.NamingViolate {
-			fmt.Fprintf(os.Stderr, "  ! %s\n", v)
+			w("  ! %s\n", v)
 		}
 	}
 	if len(r.ReasonlessSuppressed) > 0 {
-		fmt.Fprintf(os.Stderr, "ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
+		w("ANOMALY - suppressed/frozen with no reason recorded: %d (run -recheck)\n", len(r.ReasonlessSuppressed))
 		for _, b := range r.ReasonlessSuppressed {
-			fmt.Fprintf(os.Stderr, "  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
+			w("  ! %s  (%s)  [%s]\n", b.cfn, b.label, b.field)
 		}
 	}
 }

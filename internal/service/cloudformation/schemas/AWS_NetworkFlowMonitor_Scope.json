@@ -1,0 +1,193 @@
+{
+  "typeName": "AWS::NetworkFlowMonitor::Scope",
+  "description": "Resource Type definition for AWS::NetworkFlowMonitor::Scope. Creates a scope to define the resources that Network Flow Monitor monitors for network performance.",
+  "definitions": {
+    "TargetIdentifier": {
+      "type": "object",
+      "description": "A target identifier is a pair of identifying information for a scope target.",
+      "properties": {
+        "TargetId": {
+          "$ref": "#/definitions/TargetId"
+        },
+        "TargetType": {
+          "type": "string",
+          "description": "The type of the target. Currently always ACCOUNT.",
+          "enum": [
+            "ACCOUNT"
+          ]
+        }
+      },
+      "required": [
+        "TargetId",
+        "TargetType"
+      ],
+      "additionalProperties": false
+    },
+    "TargetId": {
+      "type": "object",
+      "description": "A target ID is an internally-generated identifier for a target.",
+      "properties": {
+        "AccountId": {
+          "type": "string",
+          "description": "The account ID for the target.",
+          "minLength": 1,
+          "maxLength": 12,
+          "pattern": "^[0-9]{12}$"
+        }
+      },
+      "required": [
+        "AccountId"
+      ],
+      "additionalProperties": false
+    },
+    "TargetResource": {
+      "type": "object",
+      "description": "A target resource in a scope, identified by a Region and target identifier.",
+      "properties": {
+        "TargetIdentifier": {
+          "$ref": "#/definitions/TargetIdentifier"
+        },
+        "Region": {
+          "type": "string",
+          "description": "The AWS Region for the target resource."
+        }
+      },
+      "required": [
+        "TargetIdentifier",
+        "Region"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ScopeArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the scope.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:.*$"
+    },
+    "ScopeId": {
+      "type": "string",
+      "description": "The identifier for the scope."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the scope.",
+      "enum": [
+        "SUCCEEDED",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
+    "Targets": {
+      "type": "array",
+      "description": "The targets for the scope.",
+      "items": {
+        "$ref": "#/definitions/TargetResource"
+      },
+      "minItems": 1,
+      "maxItems": 100,
+      "insertionOrder": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the scope.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "Targets"
+  ],
+  "readOnlyProperties": [
+    "/properties/ScopeArn",
+    "/properties/ScopeId",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/Targets"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "primaryIdentifier": [
+    "/properties/ScopeArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ScopeId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "networkflowmonitor:TagResource",
+      "networkflowmonitor:UntagResource",
+      "networkflowmonitor:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "networkflowmonitor:CreateScope",
+        "networkflowmonitor:GetScope",
+        "networkflowmonitor:TagResource",
+        "iam:GetRole",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "networkflowmonitor:GetScope",
+        "networkflowmonitor:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "networkflowmonitor:UpdateScope",
+        "networkflowmonitor:GetScope",
+        "networkflowmonitor:TagResource",
+        "networkflowmonitor:UntagResource",
+        "networkflowmonitor:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "networkflowmonitor:DeleteScope",
+        "networkflowmonitor:GetScope"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "networkflowmonitor:ListScopes"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

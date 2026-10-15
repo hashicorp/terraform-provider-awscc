@@ -340,6 +340,14 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "ObjectMetadata": {
+		//	      "description": "A value that determines whether source object metadata should be copied to the destination. PRESERVE copies metadata; NONE copies only file-mtime.",
+		//	      "enum": [
+		//	        "PRESERVE",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ObjectTags": {
 		//	      "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
 		//	      "enum": [
@@ -452,6 +460,11 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Mtime
 				"mtime": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectMetadata
+				"object_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether source object metadata should be copied to the destination. PRESERVE copies metadata; NONE copies only file-mtime.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ObjectTags
@@ -958,6 +971,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"manifest_object_version_id":         "ManifestObjectVersionId",
 		"mtime":                              "Mtime",
 		"name":                               "Name",
+		"object_metadata":                    "ObjectMetadata",
 		"object_tags":                        "ObjectTags",
 		"object_version_ids":                 "ObjectVersionIds",
 		"options":                            "Options",

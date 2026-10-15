@@ -266,6 +266,11 @@
       ],
       "additionalProperties": false
     },
+    "PublicTlsEncryptionConfiguration": {
+      "type": "object",
+      "description": "The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.",
+      "additionalProperties": false
+    },
     "RistRouterOutputConfiguration": {
       "type": "object",
       "description": "The configuration settings for a router output using the RIST (Reliable Internet Stream Transport) protocol, including the destination address and port.",
@@ -337,7 +342,8 @@
         "RTP",
         "RIST",
         "SRT_CALLER",
-        "SRT_LISTENER"
+        "SRT_LISTENER",
+        "RTMP_PUSH"
       ]
     },
     "RouterOutputProtocolConfiguration": {
@@ -394,6 +400,19 @@
             "SrtCaller"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RtmpPush",
+          "properties": {
+            "RtmpPush": {
+              "$ref": "#/definitions/RtmpPushRouterOutputConfiguration"
+            }
+          },
+          "required": [
+            "RtmpPush"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -442,6 +461,40 @@
         "REGIONAL",
         "GLOBAL"
       ]
+    },
+    "RtmpPushRouterOutputConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.",
+      "properties": {
+        "DestinationAddress": {
+          "type": "string",
+          "description": "The IP address or hostname of the destination RTMP server that the router output pushes the stream to. Provide only the server address; specify the application and stream names separately."
+        },
+        "DestinationPort": {
+          "type": "integer",
+          "maximum": 65535,
+          "minimum": 443,
+          "description": "The TCP port on the destination RTMP server. For RTMP, valid values range from 1024 to 65535. For RTMPS (RTMP over TLS), valid values are 443 or 1024 to 65535. RTMP typically uses port 1935, and RTMPS typically uses port 443."
+        },
+        "ApplicationName": {
+          "type": "string",
+          "description": "The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName."
+        },
+        "StreamName": {
+          "type": "string",
+          "description": "The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path."
+        },
+        "TlsEncryption": {
+          "$ref": "#/definitions/TlsEncryption"
+        }
+      },
+      "required": [
+        "ApplicationName",
+        "DestinationAddress",
+        "DestinationPort",
+        "StreamName"
+      ],
+      "additionalProperties": false
     },
     "RtpRouterOutputConfiguration": {
       "type": "object",
@@ -599,6 +652,46 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "TlsEncryption": {
+      "type": "object",
+      "description": "The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.",
+      "properties": {
+        "EncryptionType": {
+          "$ref": "#/definitions/TlsEncryptionType"
+        },
+        "EncryptionConfiguration": {
+          "$ref": "#/definitions/TlsEncryptionConfiguration"
+        }
+      },
+      "required": [
+        "EncryptionConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "TlsEncryptionConfiguration": {
+      "description": "The configuration settings for TLS encryption.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Public",
+          "properties": {
+            "Public": {
+              "$ref": "#/definitions/PublicTlsEncryptionConfiguration"
+            }
+          },
+          "required": [
+            "Public"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TlsEncryptionType": {
+      "type": "string",
+      "enum": [
+        "PUBLIC"
+      ]
     }
   },
   "properties": {

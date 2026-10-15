@@ -144,7 +144,8 @@
         "": {
           "type": "string",
           "minLength": 1,
-          "maxLength": 128
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}"
         },
         "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}": {
           "type": "string",
@@ -1150,7 +1151,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "sagemaker:AddTags",

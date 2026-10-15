@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_verified_destination_number.example "verified_destination_number_arn"

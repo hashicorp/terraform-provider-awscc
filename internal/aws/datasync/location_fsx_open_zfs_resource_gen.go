@@ -112,7 +112,8 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 		//	                "AUTOMATIC",
 		//	                "NFS3",
 		//	                "NFS4_0",
-		//	                "NFS4_1"
+		//	                "NFS4_1",
+		//	                "NFS4_2"
 		//	              ],
 		//	              "type": "string"
 		//	            }
@@ -147,6 +148,7 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 											"NFS3",
 											"NFS4_0",
 											"NFS4_1",
+											"NFS4_2",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

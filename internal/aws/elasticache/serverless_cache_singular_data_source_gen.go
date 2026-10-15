@@ -129,6 +129,21 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The cache capacity limit of the Serverless Cache.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ConnectionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The connection type for the serverless cache. Valid values are vpc or public.",
+		//	  "enum": [
+		//	    "vpc",
+		//	    "public"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection type for the serverless cache. Valid values are vpc or public.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -467,6 +482,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		"address":                  "Address",
 		"arn":                      "ARN",
 		"cache_usage_limits":       "CacheUsageLimits",
+		"connection_type":          "ConnectionType",
 		"create_time":              "CreateTime",
 		"daily_snapshot_time":      "DailySnapshotTime",
 		"data_storage":             "DataStorage",

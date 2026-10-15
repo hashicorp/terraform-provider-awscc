@@ -8,14 +8,19 @@ package elasticbeanstalk
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -40,6 +45,115 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BuildConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Settings for an AWS CodeBuild build that packages and builds an application version from source code.",
+		//	  "properties": {
+		//	    "ArtifactName": {
+		//	      "description": "The name of the build artifact.",
+		//	      "type": "string"
+		//	    },
+		//	    "CodeBuildServiceRole": {
+		//	      "description": "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+		//	      "type": "string"
+		//	    },
+		//	    "ComputeType": {
+		//	      "description": "The compute type for the CodeBuild build environment.",
+		//	      "enum": [
+		//	        "BUILD_GENERAL1_SMALL",
+		//	        "BUILD_GENERAL1_MEDIUM",
+		//	        "BUILD_GENERAL1_LARGE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Image": {
+		//	      "description": "The CodeBuild image used for the build environment.",
+		//	      "type": "string"
+		//	    },
+		//	    "TimeoutInMinutes": {
+		//	      "description": "The timeout for the CodeBuild build, in minutes.",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CodeBuildServiceRole",
+		//	    "Image"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"build_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ArtifactName
+				"artifact_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the build artifact.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CodeBuildServiceRole
+				"code_build_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ComputeType
+				"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The compute type for the CodeBuild build environment.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"BUILD_GENERAL1_SMALL",
+							"BUILD_GENERAL1_MEDIUM",
+							"BUILD_GENERAL1_LARGE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Image
+				"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CodeBuild image used for the build environment.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutInMinutes
+				"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The timeout for the CodeBuild build, in minutes.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings for an AWS CodeBuild build that packages and builds an application version from source code.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// BuildConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
@@ -68,6 +182,237 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ImageConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for image-based application versions.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Source"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Build"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "Build": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for building a container image from source code.",
+		//	      "properties": {
+		//	        "Architecture": {
+		//	          "description": "The target architecture for the built container image.",
+		//	          "enum": [
+		//	            "amd64",
+		//	            "arm64"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Buildpack": {
+		//	          "description": "The buildpack to use for building the image.",
+		//	          "type": "string"
+		//	        },
+		//	        "CodeBuildServiceRole": {
+		//	          "description": "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+		//	          "type": "string"
+		//	        },
+		//	        "ComputeType": {
+		//	          "description": "The compute type for the CodeBuild build environment.",
+		//	          "enum": [
+		//	            "BUILD_GENERAL1_SMALL",
+		//	            "BUILD_GENERAL1_MEDIUM",
+		//	            "BUILD_GENERAL1_LARGE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "DockerfileLocation": {
+		//	          "description": "The path to the Dockerfile, relative to the source root.",
+		//	          "type": "string"
+		//	        },
+		//	        "TimeoutInMinutes": {
+		//	          "description": "The timeout for the CodeBuild build, in minutes.",
+		//	          "type": "integer"
+		//	        },
+		//	        "Type": {
+		//	          "description": "The type of image build: docker or buildpack.",
+		//	          "enum": [
+		//	            "docker",
+		//	            "buildpack"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type",
+		//	        "CodeBuildServiceRole"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Source": {
+		//	      "additionalProperties": false,
+		//	      "description": "The container image source for this version, as an ECR image URI.",
+		//	      "properties": {
+		//	        "Uri": {
+		//	          "description": "The URI of the container image, e.g. an ECR image URI.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Build
+				"build": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Architecture
+						"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The target architecture for the built container image.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"amd64",
+									"arm64",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Buildpack
+						"buildpack": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The buildpack to use for building the image.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CodeBuildServiceRole
+						"code_build_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ComputeType
+						"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The compute type for the CodeBuild build environment.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"BUILD_GENERAL1_SMALL",
+									"BUILD_GENERAL1_MEDIUM",
+									"BUILD_GENERAL1_LARGE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DockerfileLocation
+						"dockerfile_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path to the Dockerfile, relative to the source root.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TimeoutInMinutes
+						"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The timeout for the CodeBuild build, in minutes.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of image build: docker or buildpack.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"docker",
+									"buildpack",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for building a container image from source code.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Source
+				"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Uri
+						"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The URI of the container image, e.g. an ECR image URI.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The container image source for this version, as an ECR image URI.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for image-based application versions.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ImageConfiguration is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Process
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Pre-process and validate the environment manifest (`env.yaml`) and configuration files in the source bundle. Leave unset for the service default.",
+		//	  "type": "boolean"
+		//	}
+		"process": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Pre-process and validate the environment manifest (`env.yaml`) and configuration files in the source bundle. Leave unset for the service default.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Process is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SourceBundle
 		// CloudFormation resource type schema:
 		//
@@ -95,18 +440,34 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 				// Property: S3Bucket
 				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 bucket where the data is located.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3Key
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key where the data is located.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -142,14 +503,34 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_name":       "ApplicationName",
-		"application_version_id": "Id",
-		"description":            "Description",
-		"s3_bucket":              "S3Bucket",
-		"s3_key":                 "S3Key",
-		"source_bundle":          "SourceBundle",
+		"application_name":        "ApplicationName",
+		"application_version_id":  "Id",
+		"architecture":            "Architecture",
+		"artifact_name":           "ArtifactName",
+		"build":                   "Build",
+		"build_configuration":     "BuildConfiguration",
+		"buildpack":               "Buildpack",
+		"code_build_service_role": "CodeBuildServiceRole",
+		"compute_type":            "ComputeType",
+		"description":             "Description",
+		"dockerfile_location":     "DockerfileLocation",
+		"image":                   "Image",
+		"image_configuration":     "ImageConfiguration",
+		"process":                 "Process",
+		"s3_bucket":               "S3Bucket",
+		"s3_key":                  "S3Key",
+		"source":                  "Source",
+		"source_bundle":           "SourceBundle",
+		"timeout_in_minutes":      "TimeoutInMinutes",
+		"type":                    "Type",
+		"uri":                     "Uri",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/BuildConfiguration",
+		"/properties/ImageConfiguration",
+		"/properties/Process",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

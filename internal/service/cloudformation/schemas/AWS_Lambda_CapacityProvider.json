@@ -139,7 +139,7 @@
             "type": "string",
             "maxLength": 30,
             "minLength": 1,
-            "pattern": "^[a-zA-Z0-9\\.\\-]+$"
+            "pattern": "^[a-zA-Z0-9\\.\\*\\-]+$"
           },
           "maxItems": 400,
           "minItems": 0
@@ -152,7 +152,7 @@
             "type": "string",
             "maxLength": 30,
             "minLength": 1,
-            "pattern": "^[a-zA-Z0-9\\.\\-]+$"
+            "pattern": "^[a-zA-Z0-9\\.\\*\\-]+$"
           },
           "maxItems": 400,
           "minItems": 0

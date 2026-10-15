@@ -345,6 +345,12 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 		//	      "maxLength": 128,
 		//	      "pattern": "^\\d+\\.\\d+\\.\\d+$",
 		//	      "type": "string"
+		//	    },
+		//	    "Vcpu": {
+		//	      "description": "The number of virtual CPUs to give to the game server container. This is required when the container group definition doesn't set TotalVcpuLimit.",
+		//	      "maximum": 10,
+		//	      "minimum": 0.125,
+		//	      "type": "number"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -694,6 +700,18 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Vcpu
+				"vcpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of virtual CPUs to give to the game server container. This is required when the container group definition doesn't set TotalVcpuLimit.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(0.125000, 10.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1675,10 +1693,14 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 		//	}
 		"total_vcpu_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The total amount of virtual CPUs on the container group definition",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.Float64{ /*START VALIDATORS*/
 				float64validator.Between(0.125000, 10.000000),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VersionDescription
 		// CloudFormation resource type schema:

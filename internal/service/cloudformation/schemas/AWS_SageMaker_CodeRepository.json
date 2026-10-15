@@ -1,0 +1,128 @@
+{
+  "typeName": "AWS::SageMaker::CodeRepository",
+  "description": "Resource Type definition for AWS::SageMaker::CodeRepository",
+  "additionalProperties": false,
+  "properties": {
+    "GitConfig": {
+      "$ref": "#/definitions/GitConfig",
+      "description": "Configuration details for the Git repository, including the URL where it is located and the ARN of the AWS Secrets Manager secret that contains the credentials used to access the repository."
+    },
+    "CodeRepositoryName": {
+      "type": "string",
+      "description": "The name of the Git repository.",
+      "minLength": 1,
+      "maxLength": 63
+    },
+    "CodeRepositoryArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the code repository.",
+      "pattern": "^arn:.*"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs.",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "GitConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to access the git repository."
+        },
+        "RepositoryUrl": {
+          "type": "string",
+          "description": "The URL where the Git repository is located."
+        },
+        "Branch": {
+          "type": "string",
+          "description": "The default branch for the Git repository."
+        }
+      },
+      "required": [
+        "RepositoryUrl"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:ListTags",
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags"
+    ]
+  },
+  "required": [
+    "GitConfig"
+  ],
+  "createOnlyProperties": [
+    "/properties/CodeRepositoryName",
+    "/properties/GitConfig/RepositoryUrl",
+    "/properties/GitConfig/Branch"
+  ],
+  "primaryIdentifier": [
+    "/properties/CodeRepositoryArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/CodeRepositoryArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:CreateCodeRepository",
+        "sagemaker:AddTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeCodeRepository",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateCodeRepository",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:DeleteCodeRepository"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListCodeRepositories"
+      ]
+    }
+  }
+}

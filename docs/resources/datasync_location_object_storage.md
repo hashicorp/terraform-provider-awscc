@@ -22,6 +22,7 @@ Resource Type definition for AWS::DataSync::LocationObjectStorage.
 - `bucket_name` (String) The name of the bucket on the self-managed object storage server.
 - `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
 - `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
+- `federated_identity` (Attributes) Specifies the identity federation configuration that DataSync uses to access your object storage location using an OpenID Connect (OIDC) token. (see [below for nested schema](#nestedatt--federated_identity))
 - `secret_key` (String) Optional. The secret key is used if credentials are required to access the self-managed object storage server.
 - `server_certificate` (String) X.509 PEM content containing a certificate authority or chain to trust.
 - `server_hostname` (String) The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.
@@ -56,6 +57,34 @@ Optional:
 
 - `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
 - `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
+
+<a id="nestedatt--federated_identity"></a>
+### Nested Schema for `federated_identity`
+
+Optional:
+
+- `aws_iam_role` (String) Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.
+- `external_identity` (Attributes) Specifies the external (non-AWS) identity provider that DataSync federates with to access your object storage location. (see [below for nested schema](#nestedatt--federated_identity--external_identity))
+
+<a id="nestedatt--federated_identity--external_identity"></a>
+### Nested Schema for `federated_identity.external_identity`
+
+Optional:
+
+- `google_oidc` (Attributes) Specifies the Google Cloud workload identity federation configuration that DataSync uses to obtain an access token for your Google Cloud Storage bucket. (see [below for nested schema](#nestedatt--federated_identity--external_identity--google_oidc))
+
+<a id="nestedatt--federated_identity--external_identity--google_oidc"></a>
+### Nested Schema for `federated_identity.external_identity.google_oidc`
+
+Optional:
+
+- `identity_pool_name` (String) The name of the Google Cloud workload identity pool that DataSync federates with.
+- `identity_provider_name` (String) The name of the OIDC identity provider configured in the Google Cloud workload identity pool.
+- `project_name` (String) The human-readable Google Cloud project name.
+- `project_number` (String) The numeric Google Cloud project ID, as a string.
+
+
 
 
 <a id="nestedatt--tags"></a>

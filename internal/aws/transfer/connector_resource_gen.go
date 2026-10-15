@@ -644,6 +644,17 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
+		//	    "OrderedUserSecretVersionStages": {
+		//	      "description": "Specifies the order in which the connector attempts to use secret versions during authentication. This enables fallback to alternative credentials if the primary version fails.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "TrustedHostKeys": {
 		//	      "description": "List of public host keys, for the external server to which you are connecting.",
 		//	      "insertionOrder": false,
@@ -679,6 +690,20 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OrderedUserSecretVersionStages
+				"ordered_user_secret_version_stages": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Specifies the order in which the connector attempts to use secret versions during authentication. This enables fallback to alternative credentials if the primary version fails.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 2),
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TrustedHostKeys
@@ -876,6 +901,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"mdn_response":                        "MdnResponse",
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",
+		"ordered_user_secret_version_stages":  "OrderedUserSecretVersionStages",
 		"partner_profile_id":                  "PartnerProfileId",
 		"port_number":                         "PortNumber",
 		"preserve_content_type":               "PreserveContentType",

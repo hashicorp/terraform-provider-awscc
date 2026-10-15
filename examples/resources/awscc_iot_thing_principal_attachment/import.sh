@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_thing_principal_attachment.example "thing_name|principal"

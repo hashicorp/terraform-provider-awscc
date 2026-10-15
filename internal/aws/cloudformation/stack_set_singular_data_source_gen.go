@@ -359,7 +359,7 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "AccountsUrl": {
-		//	            "description": "Returns the value of the AccountsUrl property.",
+		//	            "description": "Returns the value of the AccountsUrl property. AccountsUrl is currently not supported when using Account Level Targeting (ALT).",
 		//	            "maxLength": 5120,
 		//	            "minLength": 1,
 		//	            "pattern": "(s3://|http(s?)://).+",
@@ -443,7 +443,7 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: AccountsUrl
 							"accounts_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Returns the value of the AccountsUrl property.",
+								Description: "Returns the value of the AccountsUrl property. AccountsUrl is currently not supported when using Account Level Targeting (ALT).",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: OrganizationalUnitIds

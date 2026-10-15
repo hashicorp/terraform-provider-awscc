@@ -1,0 +1,295 @@
+{
+  "typeName": "AWS::ElastiCache::Snapshot",
+  "description": "Represents a copy of an entire cluster or replication group as of the time when the snapshot was taken.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "NodeSnapshot": {
+      "type": "object",
+      "properties": {
+        "CacheClusterId": {
+          "type": "string",
+          "description": "A unique identifier for the source cluster."
+        },
+        "CacheNodeCreateTime": {
+          "type": "string",
+          "description": "The date and time when the cache node was created in the source cluster.",
+          "format": "date-time"
+        },
+        "CacheNodeId": {
+          "type": "string",
+          "description": "The cache node identifier for the node in the source cluster."
+        },
+        "CacheSize": {
+          "type": "string",
+          "description": "The size of the cache on the source cache node."
+        },
+        "NodeGroupId": {
+          "type": "string",
+          "description": "A unique identifier for the source node group (shard)."
+        },
+        "SnapshotCreateTime": {
+          "type": "string",
+          "description": "The date and time when the source node's metadata and cache data set was obtained for the snapshot.",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "SnapshotName": {
+      "type": "string",
+      "description": "The name of a snapshot. Must be unique within the customer account."
+    },
+    "CacheClusterId": {
+      "type": "string",
+      "description": "The identifier of an existing cluster to create a snapshot from. The snapshot is created from this cluster."
+    },
+    "ReplicationGroupId": {
+      "type": "string",
+      "description": "The identifier of an existing replication group to create a snapshot from. The snapshot is created from this replication group."
+    },
+    "SnapshotStatus": {
+      "type": "string",
+      "description": "The status of the snapshot. Valid values: creating | available | restoring | copying | deleting | failed | deleted.",
+      "enum": [
+        "creating",
+        "available",
+        "restoring",
+        "copying",
+        "deleting",
+        "failed",
+        "deleted"
+      ]
+    },
+    "SnapshotSource": {
+      "type": "string",
+      "description": "Indicates whether the snapshot is from an automatic backup (automated) or was created manually (manual)."
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The ID of the KMS key used to encrypt the snapshot."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN (Amazon Resource Name) of the snapshot.",
+      "pattern": "^arn:[a-z-]+:elasticache:[a-z0-9-]+:[0-9]{12}:snapshot:.+"
+    },
+    "CacheNodeType": {
+      "type": "string",
+      "description": "The name of the compute and memory capacity node type for the source cluster."
+    },
+    "Engine": {
+      "type": "string",
+      "description": "The name of the cache engine used by the source cluster."
+    },
+    "EngineVersion": {
+      "type": "string",
+      "description": "The version of the cache engine version used by the source cluster."
+    },
+    "NumCacheNodes": {
+      "type": "integer",
+      "description": "The number of cache nodes in the source cluster."
+    },
+    "NumNodeGroups": {
+      "type": "integer",
+      "description": "The number of node groups (shards) in this snapshot."
+    },
+    "PreferredMaintenanceWindow": {
+      "type": "string",
+      "description": "Specifies the weekly time range during which maintenance on the cluster is performed."
+    },
+    "CacheParameterGroupName": {
+      "type": "string",
+      "description": "The cache parameter group that is associated with the source cluster."
+    },
+    "CacheSubnetGroupName": {
+      "type": "string",
+      "description": "The name of the cache subnet group associated with the source cluster."
+    },
+    "SnapshotRetentionLimit": {
+      "type": "integer",
+      "description": "For an automatic snapshot, the number of days for which ElastiCache retains the snapshot before deleting it."
+    },
+    "SnapshotWindow": {
+      "type": "string",
+      "description": "The daily time range during which ElastiCache takes daily snapshots of the source cluster."
+    },
+    "TopicArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the topic used by the source cluster for publishing notifications."
+    },
+    "Port": {
+      "type": "integer",
+      "description": "The port number used by each cache nodes in the source cluster."
+    },
+    "PreferredAvailabilityZone": {
+      "type": "string",
+      "description": "The name of the Availability Zone in which the source cluster is located."
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group for the source cluster."
+    },
+    "AutoMinorVersionUpgrade": {
+      "type": "boolean",
+      "description": "If true, opt-in to the next auto minor version upgrade campaign."
+    },
+    "AutomaticFailover": {
+      "type": "string",
+      "description": "Indicates the status of automatic failover for the source replication group.",
+      "enum": [
+        "enabled",
+        "disabled",
+        "enabling",
+        "disabling"
+      ]
+    },
+    "ReplicationGroupDescription": {
+      "type": "string",
+      "description": "A description of the source replication group."
+    },
+    "DataTiering": {
+      "type": "string",
+      "description": "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ]
+    },
+    "CacheClusterCreateTime": {
+      "type": "string",
+      "description": "The date and time when the source cluster was created.",
+      "format": "date-time"
+    },
+    "NodeSnapshots": {
+      "type": "array",
+      "description": "A list of the cache nodes in the source cluster.",
+      "items": {
+        "$ref": "#/definitions/NodeSnapshot"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to be added to this resource.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "SnapshotName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/SnapshotStatus",
+    "/properties/SnapshotSource",
+    "/properties/CacheNodeType",
+    "/properties/Engine",
+    "/properties/EngineVersion",
+    "/properties/NumCacheNodes",
+    "/properties/NumNodeGroups",
+    "/properties/PreferredMaintenanceWindow",
+    "/properties/CacheParameterGroupName",
+    "/properties/CacheSubnetGroupName",
+    "/properties/SnapshotRetentionLimit",
+    "/properties/SnapshotWindow",
+    "/properties/TopicArn",
+    "/properties/Port",
+    "/properties/PreferredAvailabilityZone",
+    "/properties/VpcId",
+    "/properties/AutoMinorVersionUpgrade",
+    "/properties/AutomaticFailover",
+    "/properties/ReplicationGroupDescription",
+    "/properties/DataTiering",
+    "/properties/CacheClusterCreateTime",
+    "/properties/NodeSnapshots"
+  ],
+  "createOnlyProperties": [
+    "/properties/SnapshotName",
+    "/properties/CacheClusterId",
+    "/properties/ReplicationGroupId",
+    "/properties/KmsKeyId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SnapshotName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "elasticache:AddTagsToResource",
+      "elasticache:RemoveTagsFromResource",
+      "elasticache:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "elasticache:CreateSnapshot",
+        "elasticache:DescribeSnapshots",
+        "elasticache:AddTagsToResource",
+        "elasticache:ListTagsForResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "elasticache:DescribeSnapshots",
+        "elasticache:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "elasticache:DescribeSnapshots",
+        "elasticache:AddTagsToResource",
+        "elasticache:RemoveTagsFromResource",
+        "elasticache:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "elasticache:DeleteSnapshot",
+        "elasticache:DescribeSnapshots"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "elasticache:DescribeSnapshots"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

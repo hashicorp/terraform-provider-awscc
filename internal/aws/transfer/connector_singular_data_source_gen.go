@@ -420,6 +420,17 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
+		//	    "OrderedUserSecretVersionStages": {
+		//	      "description": "Specifies the order in which the connector attempts to use secret versions during authentication. This enables fallback to alternative credentials if the primary version fails.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "TrustedHostKeys": {
 		//	      "description": "List of public host keys, for the external server to which you are connecting.",
 		//	      "insertionOrder": false,
@@ -447,6 +458,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: MaxConcurrentConnections
 				"max_concurrent_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OrderedUserSecretVersionStages
+				"ordered_user_secret_version_stages": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Specifies the order in which the connector attempts to use secret versions during authentication. This enables fallback to alternative credentials if the primary version fails.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TrustedHostKeys
@@ -577,6 +594,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mdn_response":                        "MdnResponse",
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",
+		"ordered_user_secret_version_stages":  "OrderedUserSecretVersionStages",
 		"partner_profile_id":                  "PartnerProfileId",
 		"port_number":                         "PortNumber",
 		"preserve_content_type":               "PreserveContentType",

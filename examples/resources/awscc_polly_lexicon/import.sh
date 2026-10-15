@@ -1,0 +1,1 @@
+$ terraform import awscc_polly_lexicon.example "arn"

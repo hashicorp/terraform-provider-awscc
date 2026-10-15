@@ -27,6 +27,7 @@ Resource Type definition for AWS::AppStream::AppBlockBuilder.
 - `access_endpoints` (Attributes Set) (see [below for nested schema](#nestedatt--access_endpoints))
 - `app_block_arns` (Set of String)
 - `description` (String)
+- `disable_imdsv1` (Boolean)
 - `display_name` (String)
 - `enable_default_internet_access` (Boolean)
 - `iam_role_arn` (String)

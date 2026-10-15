@@ -46,6 +46,9 @@ resource "awscc_connect_integration_association" "this" {
 
 ### Optional
 
+- `source_application_name` (String) The name of the external application. This is only supported for the EVENT integration type
+- `source_application_url` (String) The URL for the external application. This is only supported for the EVENT integration type
+- `source_type` (String) The type of the data source. This is only supported for the EVENT integration type
 - `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

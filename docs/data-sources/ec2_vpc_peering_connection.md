@@ -21,10 +21,10 @@ Data Source schema for AWS::EC2::VPCPeeringConnection
 
 ### Read-Only
 
-- `assume_role_region` (String) The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.
+- `assume_role_region` (String) The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided. You can update this property.
 - `peer_owner_id` (String) The AWS account ID of the owner of the accepter VPC.
 - `peer_region` (String) The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.
-- `peer_role_arn` (String) The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.
+- `peer_role_arn` (String) The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account. You can update this property. To manage PeerVpcPeeringConnectionOptions on a peering connection with another AWS account, the role must allow ec2:DescribeVpcPeeringConnections and ec2:ModifyVpcPeeringConnectionOptions.
 - `peer_vpc_id` (String) The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC.

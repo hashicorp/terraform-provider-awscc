@@ -1,0 +1,155 @@
+{
+  "typeName": "AWS::Connect::UseCase",
+  "description": "Resource Type definition for a use case associated with an Amazon Connect integration association.",
+  "properties": {
+    "UseCaseArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the use case."
+    },
+    "UseCaseId": {
+      "type": "string",
+      "description": "The identifier of the use case.",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "InstanceId": {
+      "type": "string",
+      "description": "The identifier of the Amazon Connect instance.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "IntegrationAssociationId": {
+      "type": "string",
+      "description": "The identifier for the integration association.",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "UseCaseType": {
+      "type": "string",
+      "description": "The type of use case to associate to the integration association.",
+      "enum": [
+        "RULES_EVALUATION",
+        "CONNECT_CAMPAIGNS"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "InstanceId",
+    "IntegrationAssociationId",
+    "UseCaseType"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/UseCaseArn",
+    "/properties/UseCaseId"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/IntegrationAssociationId",
+    "/properties/UseCaseType"
+  ],
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/IntegrationAssociationId",
+    "/properties/UseCaseId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource",
+      "connect:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateUseCase",
+        "connect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:ListUseCases",
+        "connect:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:TagResource",
+        "connect:UntagResource",
+        "connect:ListTagsForResource",
+        "connect:ListUseCases"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteUseCase",
+        "connect:ListUseCases",
+        "connect:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceId": {
+            "type": "string",
+            "description": "The identifier of the Amazon Connect instance.",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "IntegrationAssociationId": {
+            "type": "string",
+            "description": "The identifier for the integration association.",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "InstanceId",
+          "IntegrationAssociationId"
+        ]
+      },
+      "permissions": [
+        "connect:ListUseCases"
+      ]
+    }
+  }
+}

@@ -955,8 +955,8 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "api_id",
-			Description:       "Unique AWS AppSync GraphQL API identifier",
+			Name:              "arn",
+			Description:       "The Amazon Resource Name (ARN) of the API key",
 			RequiredForImport: true,
 		})
 

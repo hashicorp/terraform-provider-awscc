@@ -240,6 +240,9 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	              "items": {
 		//	                "enum": [
 		//	                  "SECURITY_FINDING_LOGS",
+		//	                  "S3_SERVER_ACCESS_LOGS",
+		//	                  "ACCESS_LOGS",
+		//	                  "CONNECTION_LOGS",
 		//	                  "ALB_ACCESS_LOGS",
 		//	                  "ALB_CONNECTION_LOGS",
 		//	                  "ALB_HEALTH_CHECK_LOGS"
@@ -249,6 +252,23 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	              "minItems": 1,
 		//	              "type": "array",
 		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MskMonitoringParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration parameters for Amazon MSK cluster monitoring.",
+		//	          "properties": {
+		//	            "EnhancedMonitoring": {
+		//	              "description": "The level of enhanced monitoring for the MSK cluster.",
+		//	              "enum": [
+		//	                "DEFAULT",
+		//	                "PER_BROKER",
+		//	                "PER_TOPIC_PER_BROKER",
+		//	                "PER_TOPIC_PER_PARTITION"
+		//	              ],
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -438,7 +458,12 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	        "AWS::EKS::Cluster",
 		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
 		//	        "AWS::EC2::Instance",
-		//	        "AWS::SecurityHub::Hub"
+		//	        "AWS::SecurityHub::Hub",
+		//	        "AWS::SecurityHub::HubV2",
+		//	        "AWS::S3::Bucket",
+		//	        "AWS::MSK::Cluster",
+		//	        "AWS::CloudFront::Distribution",
+		//	        "AWS::CloudWatch::OTelEnrichment"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -612,6 +637,18 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Parameters for log delivery configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MskMonitoringParameters
+						"msk_monitoring_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnhancedMonitoring
+								"enhanced_monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The level of enhanced monitoring for the MSK cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration parameters for Amazon MSK cluster monitoring.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionInDays
@@ -902,6 +939,7 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"destination_type":                     "DestinationType",
 		"elb_load_balancer_logging_parameters": "ELBLoadBalancerLoggingParameters",
 		"ends_with":                            "EndsWith",
+		"enhanced_monitoring":                  "EnhancedMonitoring",
 		"equals":                               "Equals",
 		"field":                                "Field",
 		"field_delimiter":                      "FieldDelimiter",
@@ -918,6 +956,7 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"logging_filter":                       "LoggingFilter",
 		"max_aggregation_interval":             "MaxAggregationInterval",
 		"method":                               "Method",
+		"msk_monitoring_parameters":            "MskMonitoringParameters",
 		"name":                                 "Name",
 		"not_ends_with":                        "NotEndsWith",
 		"not_equals":                           "NotEquals",

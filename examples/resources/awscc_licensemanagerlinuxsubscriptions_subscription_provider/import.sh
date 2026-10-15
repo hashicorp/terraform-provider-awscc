@@ -1,0 +1,1 @@
+$ terraform import awscc_licensemanagerlinuxsubscriptions_subscription_provider.example "subscription_provider_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_subnet_cidr_reservation.example "subnet_id|subnet_cidr_reservation_id"

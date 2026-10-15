@@ -1,0 +1,1 @@
+$ terraform import awscc_comprehend_entity_recognizer.example "arn"

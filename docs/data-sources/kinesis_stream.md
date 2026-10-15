@@ -25,6 +25,7 @@ Data Source schema for AWS::Kinesis::Stream
 - `desired_shard_level_metrics` (Set of String) The final list of shard-level metrics
 - `max_record_size_in_ki_b` (Number) Maximum size of a data record in KiB allowed to be put into Kinesis stream.
 - `name` (String) The name of the Kinesis stream.
+- `record_distribution_strategy` (String) The record distribution strategy for the stream. This property can ONLY be set when StreamMode is ON_DEMAND
 - `retention_period_hours` (Number) The number of hours for the data records that are stored in shards to remain accessible.
 - `shard_count` (Number) The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.
 - `stream_encryption` (Attributes) When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. (see [below for nested schema](#nestedatt--stream_encryption))

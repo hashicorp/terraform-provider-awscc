@@ -204,6 +204,20 @@
         },
         "StatusMessage": {
           "type": "string"
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]{1,20}:[0-9]{12}:key/[a-zA-Z0-9-]+$",
+          "description": "The ARN of the AWS KMS key that protects the replica in this region."
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9:/_-]+$",
+          "description": "The AWS KMS key requested for this region, when replication failed before its ARN was known."
         }
       },
       "required": [

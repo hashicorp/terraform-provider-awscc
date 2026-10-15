@@ -1,0 +1,74 @@
+{
+  "typeName": "AWS::Route53::DelegationSet",
+  "description": "Resource Type definition for AWS::Route53::DelegationSet. Creates a reusable delegation set (a group of four name servers) that can be associated with multiple hosted zones.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the delegation set.",
+      "pattern": "^arn:aws[a-zA-Z0-9-]*:route53:::delegationset/[^/\\s]{1,32}$"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The ID that Amazon Route 53 assigns to a reusable delegation set.",
+      "maxLength": 32
+    },
+    "CallerReference": {
+      "type": "string",
+      "description": "A unique string that identifies the request and allows retrying failed CreateReusableDelegationSet requests without risk of executing the operation twice.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "NameServers": {
+      "type": "array",
+      "description": "A list of the authoritative name servers for the delegation set.",
+      "items": {
+        "type": "string",
+        "maxLength": 1024
+      },
+      "insertionOrder": false
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/CallerReference",
+    "/properties/NameServers"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53:CreateReusableDelegationSet",
+        "route53:GetReusableDelegationSet"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53:GetReusableDelegationSet"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53:DeleteReusableDelegationSet",
+        "route53:GetReusableDelegationSet"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53:ListReusableDelegationSets"
+      ]
+    }
+  }
+}

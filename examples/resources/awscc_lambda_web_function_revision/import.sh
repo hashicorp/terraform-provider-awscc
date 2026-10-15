@@ -1,0 +1,1 @@
+$ terraform import awscc_lambda_web_function_revision.example "revision_arn"

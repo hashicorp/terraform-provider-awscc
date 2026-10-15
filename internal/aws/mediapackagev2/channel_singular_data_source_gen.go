@@ -35,6 +35,24 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AttachedMultiviewChannels
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.\u003c/p\u003e",
+		//	  "items": {
+		//	    "maxLength": 256,
+		//	    "minLength": 1,
+		//	    "pattern": "^[a-zA-Z0-9_-]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"attached_multiview_channels": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "<p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +198,8 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "enum": [
 		//	    "HLS",
-		//	    "CMAF"
+		//	    "CMAF",
+		//	    "MULTIVIEW"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -198,6 +217,68 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The date and time the channel was modified.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MultiviewConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eMULTIVIEW\u003c/code\u003e, and can't be set for any other input type.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "AvailableLayouts": {
+		//	      "description": "\u003cp\u003eThe tile layouts that players can request from this multiview channel's origin endpoints. Only the layouts that you list here are available. Each layout must appear at most once.\u003c/p\u003e",
+		//	      "items": {
+		//	        "description": "\u003cp\u003eA tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.\u003c/p\u003e \u003cp\u003eThe allowed values are:\u003c/p\u003e \u003cul\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_SINGLE\u003c/code\u003e ? One tile at full resolution. Use this to serve a single source as a standard stream.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_2EH\u003c/code\u003e ? Two tiles of equal size, arranged horizontally.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_2PL\u003c/code\u003e ? Two tiles, with one larger primary tile.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3EB\u003c/code\u003e ? Three tiles of equal size, with two on top and one below.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3EL\u003c/code\u003e ? Three tiles of equal size, arranged in two columns.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3PL\u003c/code\u003e ? Three tiles, with one larger primary tile on the left and two stacked on the right.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_4E\u003c/code\u003e ? Four tiles of equal size, arranged in a two-by-two grid.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_4PL\u003c/code\u003e ? Four tiles, with one larger primary tile on the left and three stacked on the right.\u003c/p\u003e \u003c/li\u003e \u003c/ul\u003e",
+		//	        "enum": [
+		//	          "LAYOUT_2EH",
+		//	          "LAYOUT_2PL",
+		//	          "LAYOUT_3EL",
+		//	          "LAYOUT_3PL",
+		//	          "LAYOUT_4E",
+		//	          "LAYOUT_4PL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 6,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "AvailableSources": {
+		//	      "description": "\u003cp\u003eThe channels that players can use as tiles in this multiview channel's output. Each source channel must be in the same channel group as the multiview channel, and must have an \u003ccode\u003eInputType\u003c/code\u003e of \u003ccode\u003eCMAF\u003c/code\u003e. Only the channels that you list here are available as tiles.\u003c/p\u003e",
+		//	      "items": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9_-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AvailableLayouts",
+		//	    "AvailableSources"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"multiview_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailableLayouts
+				"available_layouts": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "<p>The tile layouts that players can request from this multiview channel's origin endpoints. Only the layouts that you list here are available. Each layout must appear at most once.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AvailableSources
+				"available_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "<p>The channels that players can use as tiles in this multiview channel's output. Each source channel must be in the same channel group as the multiview channel, and must have an <code>InputType</code> of <code>CMAF</code>. Only the channels that you list here are available as tiles.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OutputHeaderConfiguration
@@ -290,6 +371,9 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
+		"attached_multiview_channels": "AttachedMultiviewChannels",
+		"available_layouts":           "AvailableLayouts",
+		"available_sources":           "AvailableSources",
 		"channel_group_name":          "ChannelGroupName",
 		"channel_name":                "ChannelName",
 		"created_at":                  "CreatedAt",
@@ -302,6 +386,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                         "Key",
 		"modified_at":                 "ModifiedAt",
 		"mqcs_input_switching":        "MQCSInputSwitching",
+		"multiview_configuration":     "MultiviewConfiguration",
 		"output_header_configuration": "OutputHeaderConfiguration",
 		"output_locking_mode":         "OutputLockingMode",
 		"preferred_input":             "PreferredInput",

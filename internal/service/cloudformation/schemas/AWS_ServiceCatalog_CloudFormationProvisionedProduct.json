@@ -1,7 +1,19 @@
 {
   "typeName": "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
-  "description": "Resource Schema for AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+  "description": "Resource Type definition for AWS::ServiceCatalog::CloudFormationProvisionedProduct",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "servicecatalog:TagResource",
+      "servicecatalog:UntagResource",
+      "servicecatalog:ListTagsForResource"
+    ]
+  },
   "documentationUrl": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html",
   "definitions": {
     "ProvisioningPreferences": {
@@ -110,7 +122,8 @@
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "pattern": "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]+:[0-9]{12}:[a-zA-Z0-9\\-_]+$"
       },
       "maxItems": 5
     },
@@ -207,6 +220,9 @@
     "create": {
       "permissions": [
         "servicecatalog:provisionProduct",
+        "servicecatalog:TagResource",
+        "servicecatalog:describeProvisionedProduct",
+        "servicecatalog:describeRecord",
         "cloudformation:CreateStack"
       ],
       "timeoutInMinutes": 720
@@ -214,12 +230,21 @@
     "read": {
       "permissions": [
         "servicecatalog:describeProvisionedProduct",
-        "cloudformation:ListStacks"
+        "servicecatalog:describeRecord",
+        "servicecatalog:DescribeProduct",
+        "servicecatalog:ListTagsForResource",
+        "cloudformation:ListStacks",
+        "cloudformation:DescribeStacks"
       ]
     },
     "update": {
       "permissions": [
         "servicecatalog:updateProvisionedProduct",
+        "servicecatalog:TagResource",
+        "servicecatalog:UntagResource",
+        "servicecatalog:describeProvisionedProduct",
+        "servicecatalog:describeRecord",
+        "servicecatalog:DescribeProduct",
         "cloudformation:UpdateStack"
       ],
       "timeoutInMinutes": 720
@@ -229,6 +254,11 @@
         "servicecatalog:terminateProvisionedProduct",
         "servicecatalog:describeRecord",
         "cloudformation:DeleteStack"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "servicecatalog:ScanProvisionedProducts"
       ]
     }
   }

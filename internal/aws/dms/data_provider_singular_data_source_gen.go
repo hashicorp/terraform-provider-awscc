@@ -231,7 +231,13 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "DatabaseName": {
 		//	          "type": "string"
 		//	        },
+		//	        "EncryptionAlgorithm": {
+		//	          "type": "integer"
+		//	        },
 		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SecurityMechanism": {
 		//	          "type": "integer"
 		//	        },
 		//	        "ServerName": {
@@ -327,6 +333,14 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        },
 		//	        "Port": {
 		//	          "type": "integer"
+		//	        },
+		//	        "S3AccessRoleArn": {
+		//	          "description": "The ARN for the role the application uses to access its Amazon S3 bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "S3Path": {
+		//	          "description": "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+		//	          "type": "string"
 		//	        },
 		//	        "ServerName": {
 		//	          "type": "string"
@@ -610,8 +624,16 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: EncryptionAlgorithm
+						"encryption_algorithm": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecurityMechanism
+						"security_mechanism": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
@@ -690,6 +712,16 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3AccessRoleArn
+						"s3_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN for the role the application uses to access its Amazon S3 bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Path
+						"s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
 						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -943,6 +975,18 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Virtual
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Indicates whether the data provider is virtual.",
+		//	  "type": "boolean"
+		//	}
+		"virtual": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the data provider is virtual.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -973,6 +1017,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"description":                   "Description",
 		"doc_db_settings":               "DocDbSettings",
 		"encrypt_password":              "EncryptPassword",
+		"encryption_algorithm":          "EncryptionAlgorithm",
 		"engine":                        "Engine",
 		"exact_settings":                "ExactSettings",
 		"ibm_db_2_luw_settings":         "IbmDb2LuwSettings",
@@ -986,16 +1031,20 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"port":                          "Port",
 		"postgre_sql_settings":          "PostgreSqlSettings",
 		"redshift_settings":             "RedshiftSettings",
+		"s3_access_role_arn":            "S3AccessRoleArn",
+		"s3_path":                       "S3Path",
 		"secrets_manager_oracle_asm_access_role_arn":             "SecretsManagerOracleAsmAccessRoleArn",
 		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
 		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",
 		"secrets_manager_security_db_encryption_secret_id":       "SecretsManagerSecurityDbEncryptionSecretId",
-		"server_name":         "ServerName",
-		"settings":            "Settings",
-		"ssl_mode":            "SslMode",
-		"sybase_ase_settings": "SybaseAseSettings",
-		"tags":                "Tags",
-		"value":               "Value",
+		"security_mechanism":                                     "SecurityMechanism",
+		"server_name":                                            "ServerName",
+		"settings":                                               "Settings",
+		"ssl_mode":                                               "SslMode",
+		"sybase_ase_settings":                                    "SybaseAseSettings",
+		"tags":                                                   "Tags",
+		"value":                                                  "Value",
+		"virtual":                                                "Virtual",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

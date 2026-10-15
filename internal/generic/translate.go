@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
@@ -223,6 +224,18 @@ type toTerraform struct {
 	// If non-nil, properties skipped because they are absent from the
 	// Terraform schema are appended here instead of only being logged.
 	skipped *[]skippedProperty
+	// CloudFormation property names the Terraform schema cannot represent at the
+	// depth boundary of a de-recursed schema. Where such a property maps to a
+	// placeholder attribute (an object with no attributes) it is skipped, as if
+	// absent from the schema, rather than read as an empty object.
+	unrepresentable map[string]bool
+}
+
+// isPlaceholderType reports whether typ is the type of a de-recursed schema's
+// placeholder attribute: an object with no attributes.
+func isPlaceholderType(ctx context.Context, typ attr.Type) bool {
+	o, ok := typ.TerraformType(ctx).(tftypes.Object)
+	return ok && len(o.AttributeTypes) == 0
 }
 
 func (t toTerraform) recordSkipped(propertyName string, parentPath *tftypes.AttributePath) {
@@ -589,6 +602,18 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 					}
 				}
 				path = path.WithAttributeName(attributeName)
+
+				if t.unrepresentable[key] {
+					if attributeType, err := schema.TypeAtTerraformPath(ctx, path); err == nil && isPlaceholderType(ctx, attributeType) {
+						tflog.Info(ctx, "unrepresentable property at placeholder attribute", map[string]any{
+							"key":  key,
+							"path": path,
+						})
+						path = path.WithoutLastStep()
+						t.recordSkipped(key, path)
+						continue
+					}
+				}
 			} else {
 				path = path.WithElementKeyString(key)
 			}

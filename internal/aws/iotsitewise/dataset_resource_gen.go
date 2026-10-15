@@ -7,6 +7,7 @@ package iotsitewise
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -45,6 +46,80 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DatasetConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the dataset.",
+		//	  "properties": {
+		//	    "Session": {
+		//	      "additionalProperties": false,
+		//	      "description": "The session configuration for a SESSION dataset.",
+		//	      "properties": {
+		//	        "SessionEndTime": {
+		//	          "description": "The end time of the session as an ISO 8601 UTC instant, for example 2024-12-31T23:59:59Z.",
+		//	          "type": "string"
+		//	        },
+		//	        "SessionStartTime": {
+		//	          "description": "The start time of the session as an ISO 8601 UTC instant, for example 2024-01-01T00:00:00Z.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SessionStartTime",
+		//	        "SessionEndTime"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dataset_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Session
+				"session": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SessionEndTime
+						"session_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The end time of the session as an ISO 8601 UTC instant, for example 2024-12-31T23:59:59Z.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SessionStartTime
+						"session_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The start time of the session as an ISO 8601 UTC instant, for example 2024-01-01T00:00:00Z.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The session configuration for a SESSION dataset.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the dataset.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DatasetDescription
 		// CloudFormation resource type schema:
 		//
@@ -64,14 +139,14 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the dataset.",
-		//	  "maxLength": 36,
+		//	  "description": "The ID of the dataset. For workspace-scoped datasets this is the workspace name and dataset ID joined by a slash, for example my-workspace/123e4567-e89b-42d3-a456-426614174000.",
+		//	  "maxLength": 101,
 		//	  "minLength": 36,
-		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	  "pattern": "^([a-zA-Z0-9_-]{1,64}/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"dataset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the dataset.",
+			Description: "The ID of the dataset. For workspace-scoped datasets this is the workspace name and dataset ID joined by a slash, for example my-workspace/123e4567-e89b-42d3-a456-426614174000.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -124,14 +199,16 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SourceFormat": {
 		//	      "description": "The format of the dataset source associated with the dataset.",
 		//	      "enum": [
-		//	        "KNOWLEDGE_BASE"
+		//	        "KNOWLEDGE_BASE",
+		//	        "TIMESERIES"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SourceType": {
 		//	      "description": "The type of data source for the dataset.",
 		//	      "enum": [
-		//	        "KENDRA"
+		//	        "KENDRA",
+		//	        "SITEWISE"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -193,26 +270,70 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SourceFormat
 				"source_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The format of the dataset source associated with the dataset.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"KNOWLEDGE_BASE",
+							"TIMESERIES",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SourceType
 				"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The type of data source for the dataset.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"KENDRA",
+							"SITEWISE",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The data source for the dataset.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatasetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the dataset.",
+		//	  "enum": [
+		//	    "SESSION",
+		//	    "CURATED",
+		//	    "EXTERNAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"dataset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the dataset.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SESSION",
+					"CURATED",
+					"EXTERNAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -273,6 +394,29 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WorkspaceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the workspace associated with the dataset.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_-]+$",
+		//	  "type": "string"
+		//	}
+		"workspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workspace associated with the dataset.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -303,19 +447,25 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"dataset_arn":         "DatasetArn",
+		"dataset_config":      "DatasetConfig",
 		"dataset_description": "DatasetDescription",
 		"dataset_id":          "DatasetId",
 		"dataset_name":        "DatasetName",
 		"dataset_source":      "DatasetSource",
+		"dataset_type":        "DatasetType",
 		"kendra":              "Kendra",
 		"key":                 "Key",
 		"knowledge_base_arn":  "KnowledgeBaseArn",
 		"role_arn":            "RoleArn",
+		"session":             "Session",
+		"session_end_time":    "SessionEndTime",
+		"session_start_time":  "SessionStartTime",
 		"source_detail":       "SourceDetail",
 		"source_format":       "SourceFormat",
 		"source_type":         "SourceType",
 		"tags":                "Tags",
 		"value":               "Value",
+		"workspace_name":      "WorkspaceName",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

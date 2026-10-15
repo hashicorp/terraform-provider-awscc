@@ -99,6 +99,59 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "GitHub": {
+		//	      "additionalProperties": false,
+		//	      "description": "GitHub service details returned after registration",
+		//	      "properties": {
+		//	        "AppVariant": {
+		//	          "description": "The GitHub App variant the service was registered with",
+		//	          "enum": [
+		//	            "READ_ONLY",
+		//	            "READ_WRITE",
+		//	            "CUSTOM_APP"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "AuthMode": {
+		//	          "description": "How the service authenticates against the GitHub API: app after AppVerification, pat after DirectAccess",
+		//	          "enum": [
+		//	            "app",
+		//	            "pat"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "HostingType": {
+		//	          "description": "The GitHub hosting type the service was registered with",
+		//	          "enum": [
+		//	            "SAAS",
+		//	            "SELF_MANAGED",
+		//	            "DEDICATED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Owner": {
+		//	          "description": "The GitHub repository owner name derived from the token",
+		//	          "type": "string"
+		//	        },
+		//	        "OwnerType": {
+		//	          "description": "Type of repository owner",
+		//	          "enum": [
+		//	            "organization",
+		//	            "user"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TargetUrl": {
+		//	          "description": "GitHub instance URL (absent for github.com)",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Owner",
+		//	        "OwnerType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "GitLab": {
 		//	      "additionalProperties": false,
 		//	      "description": "GitLab service details returned after registration",
@@ -385,6 +438,43 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Dynatrace service details returned after registration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: GitHub
+				"git_hub": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppVariant
+						"app_variant": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GitHub App variant the service was registered with",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthMode
+						"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "How the service authenticates against the GitHub API: app after AppVerification, pat after DirectAccess",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostingType
+						"hosting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GitHub hosting type the service was registered with",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Owner
+						"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GitHub repository owner name derived from the token",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OwnerType
+						"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Type of repository owner",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetUrl
+						"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "GitHub instance URL (absent for github.com)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "GitHub service details returned after registration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: GitLab
 				"git_lab": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -636,6 +726,20 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the KMS key to use for encryption.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The display name for the service registration.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\p{L}\\p{N} _-]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name for the service registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -740,6 +844,84 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "GitHub": {
+		//	      "description": "GitHub personal access token (PAT) service configuration. Exactly one of AppVerification or DirectAccess selects how the token is used",
+		//	      "properties": {
+		//	        "AppVerification": {
+		//	          "additionalProperties": false,
+		//	          "description": "The token verifies an existing DevOps Agent GitHub App installation on github.com and is then discarded. Not supported for GitHub Enterprise Server",
+		//	          "properties": {
+		//	            "AppVariant": {
+		//	              "description": "Permission variant of the DevOps Agent GitHub App that must already be installed on the organization or account",
+		//	              "enum": [
+		//	                "READ_ONLY",
+		//	                "READ_WRITE",
+		//	                "CUSTOM_APP"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "OrganizationName": {
+		//	              "description": "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+		//	              "maxLength": 39,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "TargetUrl": {
+		//	              "description": "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$",
+		//	              "type": "string"
+		//	            },
+		//	            "TokenValue": {
+		//	              "description": "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "^[A-Za-z0-9_]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenValue",
+		//	            "AppVariant"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "DirectAccess": {
+		//	          "additionalProperties": false,
+		//	          "description": "The token is stored and used as the long-lived credential for GitHub API access",
+		//	          "properties": {
+		//	            "OrganizationName": {
+		//	              "description": "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+		//	              "maxLength": 39,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9](?:-?[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "TargetUrl": {
+		//	              "description": "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$",
+		//	              "type": "string"
+		//	            },
+		//	            "TokenValue": {
+		//	              "description": "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "^[A-Za-z0-9_]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenValue"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "GitLab": {
 		//	      "additionalProperties": false,
 		//	      "description": "GitLab service configuration",
@@ -763,7 +945,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "TokenValue": {
 		//	          "description": "GitLab access token value",
-		//	          "pattern": "^glpat-[a-zA-Z0-9._-]+$",
+		//	          "pattern": "^[a-zA-Z0-9._-]+$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1064,8 +1246,8 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "RoleArn": {
-		//	              "description": "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
-		//	              "pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
+		//	              "description": "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing. Set to an empty string to remove a previously configured role and make the server role-less (cross-account).",
+		//	              "pattern": "^$|^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
 		//	              "type": "string"
 		//	            },
 		//	            "Service": {
@@ -1345,6 +1527,62 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Dynatrace service configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: GitHub
+				"git_hub": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppVerification
+						"app_verification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AppVariant
+								"app_variant": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Permission variant of the DevOps Agent GitHub App that must already be installed on the organization or account",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OrganizationName
+								"organization_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TargetUrl
+								"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenValue
+								"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The token verifies an existing DevOps Agent GitHub App installation on github.com and is then discarded. Not supported for GitHub Enterprise Server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DirectAccess
+						"direct_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OrganizationName
+								"organization_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub organization to scope the service to. The token must be an active member of the organization and only that organization's repositories are accessible. Omit to register the token's own user account",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TargetUrl
+								"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub instance URL. Omit for github.com. Provide the instance host for GitHub Enterprise Server or GitHub Enterprise Cloud with data residency (e.g. https://github.example.com)",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenValue
+								"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "GitHub personal access token (PAT) value. Accepts classic PATs (ghp_...), fine-grained PATs (github_pat_...), and GitHub Enterprise Server token formats",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The token is stored and used as the long-lived credential for GitHub API access",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "GitHub personal access token (PAT) service configuration. Exactly one of AppVerification or DirectAccess selects how the token is used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: GitLab
 				"git_lab": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1614,7 +1852,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
+									Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing. Set to an empty string to remove a previously configured role and make the server role-less (cross-account).",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Service
@@ -1819,6 +2057,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "mcpserversplunk",
 		//	    "mcpservernewrelic",
 		//	    "gitlab",
+		//	    "github",
 		//	    "servicenow",
 		//	    "pagerduty",
 		//	    "azureidentity",
@@ -1921,8 +2160,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_key_header":                       "ApiKeyHeader",
 		"api_key_name":                         "ApiKeyName",
 		"api_key_value":                        "ApiKeyValue",
+		"app_variant":                          "AppVariant",
+		"app_verification":                     "AppVerification",
 		"application_ids":                      "ApplicationIds",
 		"arn":                                  "Arn",
+		"auth_mode":                            "AuthMode",
 		"authorization_config":                 "AuthorizationConfig",
 		"authorization_header":                 "AuthorizationHeader",
 		"authorization_method":                 "AuthorizationMethod",
@@ -1933,14 +2175,17 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"client_secret":                        "ClientSecret",
 		"custom_headers":                       "CustomHeaders",
 		"description":                          "Description",
+		"direct_access":                        "DirectAccess",
 		"dynatrace":                            "Dynatrace",
 		"endpoint":                             "Endpoint",
 		"entity_guids":                         "EntityGuids",
 		"exchange_parameters":                  "ExchangeParameters",
 		"exchange_url":                         "ExchangeUrl",
 		"exchange_url_private_connection_name": "ExchangeUrlPrivateConnectionName",
+		"git_hub":                              "GitHub",
 		"git_lab":                              "GitLab",
 		"group_id":                             "GroupId",
+		"hosting_type":                         "HostingType",
 		"instance_url":                         "InstanceUrl",
 		"key":                                  "Key",
 		"kms_key_arn":                          "KmsKeyArn",
@@ -1952,6 +2197,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mcp_server_splunk":                    "MCPServerSplunk",
 		"name":                                 "Name",
 		"o_auth_client_credentials":            "OAuthClientCredentials",
+		"organization_name":                    "OrganizationName",
+		"owner":                                "Owner",
+		"owner_type":                           "OwnerType",
 		"pager_duty":                           "PagerDuty",
 		"private_connection_name":              "PrivateConnectionName",
 		"region":                               "Region",

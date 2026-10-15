@@ -29,6 +29,8 @@ Resource Type definition for AWS::Lambda::NetworkConnector
 
 - `arn` (String) The Amazon Resource Name (ARN) of the network connector.
 - `id` (String) Uniquely identifies the resource.
+- `latest_version` (Number) The version number of the network connector's latest version. Updates to the connector's configuration create a new immutable version; this attribute exposes the most recent one.
+- `latest_version_arn` (String) The qualified Amazon Resource Name (ARN) of the network connector's latest version. Includes the immutable version suffix and can be used to pin to a specific version.
 - `state` (String) The current state of the network connector.
 
 <a id="nestedatt--configuration"></a>
@@ -43,13 +45,10 @@ Required:
 
 Required:
 
-- `associated_compute_resource_types` (List of String) The types of Lambda compute resources that can use this connector. Currently, only MicroVm is supported.
-- `subnet_ids` (List of String) The IDs of the VPC subnets where Lambda provisions elastic network interfaces (ENIs). Specify 1 to 16 subnets. All subnets must be in the same VPC.
-
-Optional:
-
+- `associated_compute_resource_types` (List of String) The types of Lambda compute resources that can use this connector. Supported values are MicroVm and WebFunction.
 - `network_protocol` (String) The network protocol for the connector. Specify IPv4 for IPv4-only networking, or DualStack for both IPv4 and IPv6.
-- `security_group_ids` (List of String) The IDs of the VPC security groups to attach to the ENIs. Specify 0 to 5 security groups. All security groups must be in the same VPC as the subnets.
+- `security_group_ids` (List of String) The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.
+- `subnet_ids` (List of String) The IDs of the VPC subnets where Lambda provisions elastic network interfaces (ENIs). Specify 1 to 16 subnets. All subnets must be in the same VPC.
 
 
 

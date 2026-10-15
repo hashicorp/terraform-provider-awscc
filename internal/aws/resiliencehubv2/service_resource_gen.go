@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -490,6 +491,72 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "pattern": "",
 		//	                "type": "string"
 		//	              },
+		//	              "LabelSelector": {
+		//	                "additionalProperties": false,
+		//	                "description": "Kubernetes label selector that scopes discovery to matching objects in the specified namespaces. An object must satisfy both MatchLabels and MatchExpressions. Specify at least one of them; a selector carrying neither is treated as though no selector were supplied, and all supported objects in the specified namespaces are discovered.",
+		//	                "properties": {
+		//	                  "MatchExpressions": {
+		//	                    "description": "Label selector requirements an object must satisfy to be discovered. Up to 20 requirements, all of which must match.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "A single label selector requirement. Specify Values when Operator is IN or NOT_IN, and omit Values when Operator is EXISTS or DOES_NOT_EXIST.",
+		//	                      "properties": {
+		//	                        "Key": {
+		//	                          "description": "Label key the requirement applies to.",
+		//	                          "maxLength": 317,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^([a-z0-9]([-a-z0-9.]{0,251}[a-z0-9])?/)?[a-zA-Z0-9]([-a-zA-Z0-9_.]{0,61}[a-zA-Z0-9])?$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Operator": {
+		//	                          "description": "Operator applied to the label key.",
+		//	                          "enum": [
+		//	                            "IN",
+		//	                            "NOT_IN",
+		//	                            "EXISTS",
+		//	                            "DOES_NOT_EXIST"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Values": {
+		//	                          "description": "Label values the requirement compares against. Up to 20 values. Required for IN and NOT_IN; omit for EXISTS and DOES_NOT_EXIST.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "maxLength": 63,
+		//	                            "minLength": 0,
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 20,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Key",
+		//	                        "Operator"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 20,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "MatchLabels": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Label key/value pairs an object must carry to be discovered. Up to 20 pairs.",
+		//	                    "patternProperties": {
+		//	                      "": {
+		//	                        "maxLength": 63,
+		//	                        "minLength": 0,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "Namespaces": {
 		//	                "description": "EKS namespaces.",
 		//	                "insertionOrder": false,
@@ -593,6 +660,94 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: LabelSelector
+									"label_selector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MatchExpressions
+											"match_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Label key the requirement applies to.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 317),
+																stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]([-a-z0-9.]{0,251}[a-z0-9])?/)?[a-zA-Z0-9]([-a-zA-Z0-9_.]{0,61}[a-zA-Z0-9])?$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Operator
+														"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Operator applied to the label key.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"IN",
+																	"NOT_IN",
+																	"EXISTS",
+																	"DOES_NOT_EXIST",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Values
+														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "Label values the requirement compares against. Up to 20 values. Required for IN and NOT_IN; omit for EXISTS and DOES_NOT_EXIST.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 20),
+																listvalidator.ValueStringsAre(
+																	stringvalidator.LengthBetween(0, 63),
+																),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Label selector requirements an object must satisfy to be discovered. Up to 20 requirements, all of which must match.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeBetween(1, 20),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MatchLabels
+											"match_labels":      // Pattern: ""
+											schema.MapAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "Label key/value pairs an object must carry to be discovered. Up to 20 pairs.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+													mapplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Kubernetes label selector that scopes discovery to matching objects in the specified namespaces. An object must satisfy both MatchLabels and MatchExpressions. Specify at least one of them; a selector carrying neither is treated as though no selector were supplied, and all supported objects in the specified namespaces are discovered.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Namespaces
@@ -1163,6 +1318,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"invoker_role_name":        "InvokerRoleName",
 		"key":                      "Key",
 		"kms_key_id":               "KmsKeyId",
+		"label_selector":           "LabelSelector",
+		"match_expressions":        "MatchExpressions",
+		"match_labels":             "MatchLabels",
 		"multi_az_dr_approach":     "MultiAzDrApproach",
 		"multi_az_rpo":             "MultiAzRpo",
 		"multi_az_rto":             "MultiAzRto",
@@ -1171,6 +1329,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"multi_region_rto":         "MultiRegionRto",
 		"name":                     "Name",
 		"namespaces":               "Namespaces",
+		"operator":                 "Operator",
 		"permission_model":         "PermissionModel",
 		"policy_arn":               "PolicyArn",
 		"policy_name":              "PolicyName",

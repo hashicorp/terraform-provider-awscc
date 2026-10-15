@@ -29,6 +29,7 @@ Data Source schema for AWS::DevOpsAgent::AgentSpace
 - `locale` (String) The locale for the AgentSpace, which determines the language used in agent responses.
 - `name` (String) The name of the AgentSpace.
 - `operator_app` (Attributes) (see [below for nested schema](#nestedatt--operator_app))
+- `preferences` (Attributes) Preferences that configure behavior of this AgentSpace. This container fully owns the AgentSpace preferences: the properties supplied here replace the stored preferences in their entirety, and omitting the Preferences container reverts all preferences to their service defaults. (see [below for nested schema](#nestedatt--preferences))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) The timestamp when the resource was last updated.
 
@@ -39,6 +40,7 @@ Read-Only:
 
 - `iam` (Attributes) (see [below for nested schema](#nestedatt--operator_app--iam))
 - `idc` (Attributes) (see [below for nested schema](#nestedatt--operator_app--idc))
+- `idp` (Attributes) External identity provider configuration for the Operator App. (see [below for nested schema](#nestedatt--operator_app--idp))
 
 <a id="nestedatt--operator_app--iam"></a>
 ### Nested Schema for `operator_app.iam`
@@ -61,6 +63,29 @@ Read-Only:
 - `operator_app_role_arn` (String)
 - `updated_at` (String)
 
+
+<a id="nestedatt--operator_app--idp"></a>
+### Nested Schema for `operator_app.idp`
+
+Read-Only:
+
+- `client_id` (String) The OIDC client identifier for the external identity provider application.
+- `client_secret` (String) The OIDC client secret for the external identity provider application. Use a Secrets Manager dynamic reference to avoid storing the secret in the template.
+- `created_at` (String)
+- `issuer_url` (String) The OIDC issuer URL for the external identity provider.
+- `operator_app_role_arn` (String) The IAM role that Operator App users assume to access DevOps Agent APIs.
+- `provider` (String) The external identity provider type.
+- `updated_at` (String)
+- `user_id_claim` (String) The identity claim used to identify users. This value is selected by the service for the configured provider.
+
+
+
+<a id="nestedatt--preferences"></a>
+### Nested Schema for `preferences`
+
+Read-Only:
+
+- `elevated_actions_enabled` (Boolean) Indicates whether elevated directed actions are permitted in this AgentSpace. Defaults to false when not set.
 
 
 <a id="nestedatt--tags"></a>

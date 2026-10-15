@@ -677,6 +677,30 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AccessEntry": {
+		//	      "additionalProperties": false,
+		//	      "description": "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
+		//	      "properties": {
+		//	        "DesiredState": {
+		//	          "description": "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED",
+		//	            "INHERIT_FROM_CLUSTER"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
+		//	          "enum": [
+		//	            "ACTIVE",
+		//	            "INACTIVE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "EksClusterArn": {
 		//	      "default": false,
 		//	      "type": "string"
@@ -694,6 +718,23 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	}
 		"eks_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessEntry
+				"access_entry": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DesiredState
+						"desired_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: EksClusterArn
 				"eks_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -817,6 +858,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::ComputeEnvironment").WithTerraformTypeName("awscc_batch_compute_environment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_entry":                       "AccessEntry",
 		"allocation_strategy":                "AllocationStrategy",
 		"allowed_instance_types":             "AllowedInstanceTypes",
 		"batch_image_status":                 "BatchImageStatus",
@@ -829,6 +871,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"compute_resources":                  "ComputeResources",
 		"container_insights":                 "ContainerInsights",
 		"context":                            "Context",
+		"desired_state":                      "DesiredState",
 		"desiredv_cpus":                      "DesiredvCpus",
 		"ec_2_configuration":                 "Ec2Configuration",
 		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
@@ -873,6 +916,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"service_role":                       "ServiceRole",
 		"spot_iam_fleet_role":                "SpotIamFleetRole",
 		"state":                              "State",
+		"status":                             "Status",
 		"storage_configuration":              "StorageConfiguration",
 		"storage_size_gi_b":                  "StorageSizeGiB",
 		"subnets":                            "Subnets",

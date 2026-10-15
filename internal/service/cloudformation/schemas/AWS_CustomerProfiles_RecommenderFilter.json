@@ -1,0 +1,176 @@
+{
+  "typeName": "AWS::CustomerProfiles::RecommenderFilter",
+  "description": "A recommender filter that specifies which items to include or exclude from recommendations under an Amazon Connect Customer Profiles domain.",
+  "properties": {
+    "RecommenderFilterArn": {
+      "description": "The Amazon Resource Name (ARN) of the recommender filter.",
+      "type": "string",
+      "pattern": "^arn:([a-z\\d-]+):profile:.*:.*:.+$"
+    },
+    "DomainName": {
+      "description": "The unique name of the domain.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "RecommenderFilterName": {
+      "description": "The name of the recommender filter.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "RecommenderFilterExpression": {
+      "description": "The filter expression that defines which items to include or exclude from recommendations.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2500
+    },
+    "RecommenderSchemaName": {
+      "description": "The name of the recommender schema to use for this recommender filter. If not specified, the default schema is used.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "Description": {
+      "description": "The description of the recommender filter.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "Status": {
+      "description": "The status of the recommender filter.",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "The timestamp of when the recommender filter was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": ""
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "DomainName",
+    "RecommenderFilterName",
+    "RecommenderFilterExpression"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/RecommenderFilterArn",
+    "/properties/Status",
+    "/properties/CreatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainName",
+    "/properties/RecommenderFilterName",
+    "/properties/RecommenderFilterExpression",
+    "/properties/RecommenderSchemaName",
+    "/properties/Description"
+  ],
+  "primaryIdentifier": [
+    "/properties/RecommenderFilterArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainName",
+      "/properties/RecommenderFilterName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "profile:TagResource",
+      "profile:UntagResource",
+      "profile:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "profile:CreateRecommenderFilter",
+        "profile:GetRecommenderFilter",
+        "profile:TagResource",
+        "profile:ListTagsForResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ],
+      "timeoutInMinutes": 390
+    },
+    "read": {
+      "permissions": [
+        "profile:GetRecommenderFilter",
+        "profile:ListTagsForResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "profile:GetRecommenderFilter",
+        "profile:TagResource",
+        "profile:UntagResource",
+        "profile:ListTagsForResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "profile:DeleteRecommenderFilter",
+        "profile:GetRecommenderFilter"
+      ],
+      "timeoutInMinutes": 390
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "permissions": [
+        "profile:ListRecommenderFilters",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    }
+  }
+}

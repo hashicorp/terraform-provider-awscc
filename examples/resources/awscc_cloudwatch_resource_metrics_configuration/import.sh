@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_resource_metrics_configuration.example "resource_arn"

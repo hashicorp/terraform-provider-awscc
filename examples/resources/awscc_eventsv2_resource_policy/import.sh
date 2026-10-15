@@ -1,0 +1,1 @@
+$ terraform import awscc_eventsv2_resource_policy.example "event_bus_arn"

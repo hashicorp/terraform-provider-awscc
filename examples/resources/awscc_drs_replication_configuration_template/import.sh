@@ -1,0 +1,1 @@
+$ terraform import awscc_drs_replication_configuration_template.example "arn"

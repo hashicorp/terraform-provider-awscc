@@ -1,0 +1,1 @@
+$ terraform import awscc_translate_terminology.example "arn"

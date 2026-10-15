@@ -237,7 +237,7 @@ func renderDocsFromSchema(providerDir, docsDir string, schemaJSON []byte) error 
 	if err := os.MkdirAll(docsDir, dirPerm); err != nil {
 		return fmt.Errorf("creating %s: %w", docsDir, err)
 	}
-	if err := runTool(providerDir, "tfplugindocs", "generate",
+	if err := runTool(providerDir, "tfplugindocs", toolBar{label: "tfplugindocs"}, "generate",
 		"--provider-dir", providerDir,
 		"--provider-name", "terraform-provider-awscc",
 		"--providers-schema", schemaPath,

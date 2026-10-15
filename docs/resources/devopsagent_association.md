@@ -75,6 +75,7 @@ Optional:
 
 - `account_id` (String) AWS Account Id corresponding to provided resources
 - `account_type` (String) Account Type 'monitor' for DevOpsAgent monitoring
+- `agent_elevated_role_arn` (String) The IAM role that AWS DevOps Agent assumes to perform elevated directed actions in this AWS account. Elevated actions also require ElevatedActionsEnabled to be set in the Preferences of the AgentSpace. When not provided, only non-elevated directed actions are available. Removing this property from the template clears the role on update. Setting this role is subject to the same iam:PassRole requirement as AssumableRoleArn.
 - `assumable_role_arn` (String) Role ARN to be assumed by DevOpsAgent to operate on behalf of customer
 - `resources` (Attributes List) List of AWS resources (see [below for nested schema](#nestedatt--configuration--aws--resources))
 - `tags` (Attributes List) List of AWS tags as key-value pairs (see [below for nested schema](#nestedatt--configuration--aws--tags))
@@ -166,6 +167,7 @@ Optional:
 
 - `description` (String) The description of the MCP server
 - `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
+- `enabled_elevated_tools` (List of String) The mutative MCP tools enabled for this integration, by tool name. Only tools the service classifies as MUTATIVE may be listed; other names are rejected. Tool names can be found in the console or from the association's current configuration. The list fully replaces the stored value on update: removing a name disables that tool, and removing the property disables all elevated tools.
 - `endpoint` (String) MCP server endpoint URL
 - `name` (String) The name of the MCP server
 
@@ -176,6 +178,7 @@ Optional:
 Optional:
 
 - `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
+- `enabled_elevated_tools` (List of String) The mutative MCP tools enabled for this integration, by tool name. Only tools the service classifies as MUTATIVE may be listed; other names are rejected. Tool names can be found in the console or from the association's current configuration. The list fully replaces the stored value on update: removing a name disables that tool, and removing the property disables all elevated tools. Independent of Tools, which selects the toolsets available to the agent.
 - `endpoint` (String) MCP server endpoint URL
 - `tools` (List of String) List of tool categories to enable for the Grafana MCP server
 
@@ -232,9 +235,19 @@ Optional:
 
 Optional:
 
+- `bidirectional` (Attributes) Optional bidirectional communication configuration. Supply this configuration and set Enabled to true so you can interact with the agent directly from Slack (see [below for nested schema](#nestedatt--configuration--slack--bidirectional))
 - `transmission_target` (Attributes) Transmission targets for agent notifications (see [below for nested schema](#nestedatt--configuration--slack--transmission_target))
 - `workspace_id` (String) Associated Slack workspace ID
 - `workspace_name` (String) Associated Slack workspace name
+
+<a id="nestedatt--configuration--slack--bidirectional"></a>
+### Nested Schema for `configuration.slack.bidirectional`
+
+Optional:
+
+- `enabled` (Boolean) Whether bidirectional communication is enabled for this association. When set to true, you can mention the agent in a configured Slack channel and it responds in that channel. When omitted or set to false, the agent ignores mentions and only sends notifications
+- `role_arn` (String) IAM role ARN that AWS DevOps Agent assumes to exchange messages with your Slack workspace on behalf of this association
+
 
 <a id="nestedatt--configuration--slack--transmission_target"></a>
 ### Nested Schema for `configuration.slack.transmission_target`
@@ -261,6 +274,7 @@ Optional:
 
 - `account_id` (String) AWS Account Id corresponding to provided resources
 - `account_type` (String) Account Type 'source' for DevOpsAgent monitoring
+- `agent_elevated_role_arn` (String) The IAM role that AWS DevOps Agent assumes to perform elevated directed actions in this AWS account. Elevated actions also require ElevatedActionsEnabled to be set in the Preferences of the AgentSpace. When not provided, only non-elevated directed actions are available. Removing this property from the template clears the role on update. Setting this role is subject to the same iam:PassRole requirement as AssumableRoleArn.
 - `assumable_role_arn` (String) Role ARN to be assumed by DevOpsAgent to operate on behalf of customer
 - `resources` (Attributes List) List of AWS resources (see [below for nested schema](#nestedatt--configuration--source_aws--resources))
 - `tags` (Attributes List) List of AWS tags as key-value pairs (see [below for nested schema](#nestedatt--configuration--source_aws--tags))

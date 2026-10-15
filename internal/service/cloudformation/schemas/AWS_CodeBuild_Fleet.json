@@ -235,6 +235,9 @@
       }
     }
   },
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],

@@ -43,7 +43,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
 		//	  "maxLength": 127,
 		//	  "minLength": 0,
-		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
 		"allowed_access_control_hierarchy_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -52,7 +52,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 127),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

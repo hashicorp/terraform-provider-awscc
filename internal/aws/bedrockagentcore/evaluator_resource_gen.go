@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -95,7 +96,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The configuration for the evaluator.",
+		//	  "description": "The configuration for the evaluator, including LLM-as-a-Judge, code-based, or derived settings.",
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
@@ -105,6 +106,11 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//	    {
 		//	      "required": [
 		//	        "CodeBased"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Derived"
 		//	      ]
 		//	    }
 		//	  ],
@@ -137,6 +143,137 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "LambdaConfig"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Derived": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for an evaluator derived from an existing base evaluator (a built-in or third-party evaluator), run on your own model. The base evaluator supplies the prompt and scoring logic.",
+		//	      "properties": {
+		//	        "BaseEvaluatorId": {
+		//	          "description": "The identifier of the base evaluator whose logic to run (a Builtin.* or ThirdParty.* evaluator).",
+		//	          "pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9._-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
+		//	          "type": "string"
+		//	        },
+		//	        "ModelConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "The model configuration that specifies which foundation model to use for evaluation.",
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "BedrockEvaluatorModelConfig"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "ResponsesEvaluatorModelConfig"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "BedrockEvaluatorModelConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration for using Amazon Bedrock models in evaluator assessments.",
+		//	              "properties": {
+		//	                "AdditionalModelRequestFields": {
+		//	                  "description": "Additional model-specific request fields.",
+		//	                  "type": "object"
+		//	                },
+		//	                "InferenceConfig": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The inference configuration parameters that control model behavior during evaluation.",
+		//	                  "properties": {
+		//	                    "MaxTokens": {
+		//	                      "description": "The maximum number of tokens to generate in the model response.",
+		//	                      "minimum": 1,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "StopSequences": {
+		//	                      "description": "The sequences that make the model stop generating further tokens.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "maxItems": 2500,
+		//	                      "type": "array"
+		//	                    },
+		//	                    "Temperature": {
+		//	                      "description": "The temperature value that controls randomness in the model's responses.",
+		//	                      "maximum": 1,
+		//	                      "minimum": 0,
+		//	                      "type": "number"
+		//	                    },
+		//	                    "TopP": {
+		//	                      "description": "The top-p sampling parameter that controls the diversity of the model's responses.",
+		//	                      "maximum": 1,
+		//	                      "minimum": 0,
+		//	                      "type": "number"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "ModelId": {
+		//	                  "description": "The identifier of the Amazon Bedrock model to use for evaluation.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ModelId"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ResponsesEvaluatorModelConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration for using OpenResponses-compatible models in evaluator assessments.",
+		//	              "properties": {
+		//	                "MaxOutputTokens": {
+		//	                  "description": "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "ModelId": {
+		//	                  "description": "The identifier of the model to use for evaluation.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Reasoning": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The reasoning configuration for reasoning models.",
+		//	                  "properties": {
+		//	                    "Effort": {
+		//	                      "description": "The level of reasoning effort the model applies.",
+		//	                      "maxLength": 64,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Temperature": {
+		//	                  "description": "The sampling temperature between 0 and 2.",
+		//	                  "maximum": 2,
+		//	                  "minimum": 0,
+		//	                  "type": "number"
+		//	                },
+		//	                "TopP": {
+		//	                  "description": "The nucleus sampling probability mass between 0 and 1.",
+		//	                  "maximum": 1,
+		//	                  "minimum": 0,
+		//	                  "type": "number"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ModelId"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BaseEvaluatorId",
+		//	        "ModelConfig"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -180,6 +317,16 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "description": "The maximum number of tokens to generate in the model response.",
 		//	                      "minimum": 1,
 		//	                      "type": "integer"
+		//	                    },
+		//	                    "StopSequences": {
+		//	                      "description": "The sequences that make the model stop generating further tokens.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "maxItems": 2500,
+		//	                      "type": "array"
 		//	                    },
 		//	                    "Temperature": {
 		//	                      "description": "The temperature value that controls randomness in the model's responses.",
@@ -391,6 +538,224 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: Derived
+				"derived": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BaseEvaluatorId
+						"base_evaluator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the base evaluator whose logic to run (a Builtin.* or ThirdParty.* evaluator).",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9._-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ModelConfig
+						"model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BedrockEvaluatorModelConfig
+								"bedrock_evaluator_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AdditionalModelRequestFields
+										"additional_model_request_fields": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "Additional model-specific request fields.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: InferenceConfig
+										"inference_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: MaxTokens
+												"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The maximum number of tokens to generate in the model response.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.AtLeast(1),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: StopSequences
+												"stop_sequences": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Description: "The sequences that make the model stop generating further tokens.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeAtMost(2500),
+														listvalidator.ValueStringsAre(
+															stringvalidator.LengthAtLeast(1),
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Temperature
+												"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Description: "The temperature value that controls randomness in the model's responses.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Float64{ /*START VALIDATORS*/
+														float64validator.Between(0.000000, 1.000000),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+														float64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: TopP
+												"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Description: "The top-p sampling parameter that controls the diversity of the model's responses.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Float64{ /*START VALIDATORS*/
+														float64validator.Between(0.000000, 1.000000),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+														float64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The inference configuration parameters that control model behavior during evaluation.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ModelId
+										"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The identifier of the Amazon Bedrock model to use for evaluation.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration for using Amazon Bedrock models in evaluator assessments.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResponsesEvaluatorModelConfig
+								"responses_evaluator_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxOutputTokens
+										"max_output_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.AtLeast(1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ModelId
+										"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The identifier of the model to use for evaluation.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Reasoning
+										"reasoning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Effort
+												"effort": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The level of reasoning effort the model applies.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 64),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The reasoning configuration for reasoning models.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Temperature
+										"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Description: "The sampling temperature between 0 and 2.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Float64{ /*START VALIDATORS*/
+												float64validator.Between(0.000000, 2.000000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TopP
+										"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Description: "The nucleus sampling probability mass between 0 and 1.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Float64{ /*START VALIDATORS*/
+												float64validator.Between(0.000000, 1.000000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration for using OpenResponses-compatible models in evaluator assessments.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The model configuration that specifies which foundation model to use for evaluation.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for an evaluator derived from an existing base evaluator (a built-in or third-party evaluator), run on your own model. The base evaluator supplies the prompt and scoring logic.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: LlmAsAJudge
 				"llm_as_a_judge": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -435,6 +800,23 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: StopSequences
+												"stop_sequences": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Description: "The sequences that make the model stop generating further tokens.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeAtMost(2500),
+														listvalidator.ValueStringsAre(
+															stringvalidator.LengthAtLeast(1),
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Temperature
@@ -694,7 +1076,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The configuration for the evaluator.",
+			Description: "The configuration for the evaluator, including LLM-as-a-Judge, code-based, or derived settings.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EvaluatorId
@@ -730,6 +1112,27 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EvaluatorType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The kind of evaluator resource. Builtin and ThirdParty are AWS-managed global evaluators that you reference but don't create; Custom, CustomCode, and CustomDerived are evaluators that you create.",
+		//	  "enum": [
+		//	    "Builtin",
+		//	    "ThirdParty",
+		//	    "Custom",
+		//	    "CustomCode",
+		//	    "CustomDerived"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"evaluator_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The kind of evaluator resource. Builtin and ThirdParty are AWS-managed global evaluators that you reference but don't create; Custom, CustomCode, and CustomDerived are evaluators that you create.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -756,7 +1159,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The evaluation level that determines the scope of evaluation.",
+		//	  "description": "The evaluation level that determines the scope of evaluation. Required for all evaluator configuration types. For Derived evaluators it must match the level of the base evaluator identified by BaseEvaluatorId.",
 		//	  "enum": [
 		//	    "TOOL_CALL",
 		//	    "TRACE",
@@ -765,7 +1168,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The evaluation level that determines the scope of evaluation.",
+			Description: "The evaluation level that determines the scope of evaluation. Required for all evaluator configuration types. For Derived evaluators it must match the level of the base evaluator identified by BaseEvaluatorId.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -774,6 +1177,26 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 					"SESSION",
 				),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Provider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Where the evaluator's logic comes from: AWS, a third-party library (DeepEval or AutoEval), or you. Derived evaluators inherit the provider of their base evaluator.",
+		//	  "enum": [
+		//	    "AWS",
+		//	    "DeepEval",
+		//	    "AutoEval",
+		//	    "Custom"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Where the evaluator's logic comes from: AWS, a third-party library (DeepEval or AutoEval), or you. Derived evaluators inherit the provider of their base evaluator.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -894,7 +1317,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge configurations.",
+		Description: "Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge, code-based, or derived evaluator configurations. Derived evaluators run an existing built-in or third-party evaluator's logic on a model that you supply.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -912,17 +1335,20 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_model_request_fields":  "AdditionalModelRequestFields",
+		"base_evaluator_id":                "BaseEvaluatorId",
 		"bedrock_evaluator_model_config":   "BedrockEvaluatorModelConfig",
 		"categorical":                      "Categorical",
 		"code_based":                       "CodeBased",
 		"created_at":                       "CreatedAt",
 		"definition":                       "Definition",
+		"derived":                          "Derived",
 		"description":                      "Description",
 		"effort":                           "Effort",
 		"evaluator_arn":                    "EvaluatorArn",
 		"evaluator_config":                 "EvaluatorConfig",
 		"evaluator_id":                     "EvaluatorId",
 		"evaluator_name":                   "EvaluatorName",
+		"evaluator_type":                   "EvaluatorType",
 		"inference_config":                 "InferenceConfig",
 		"instructions":                     "Instructions",
 		"key":                              "Key",
@@ -938,10 +1364,12 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		"model_config":                     "ModelConfig",
 		"model_id":                         "ModelId",
 		"numerical":                        "Numerical",
+		"provider_name":                    "Provider",
 		"rating_scale":                     "RatingScale",
 		"reasoning":                        "Reasoning",
 		"responses_evaluator_model_config": "ResponsesEvaluatorModelConfig",
 		"status":                           "Status",
+		"stop_sequences":                   "StopSequences",
 		"tags":                             "Tags",
 		"temperature":                      "Temperature",
 		"top_p":                            "TopP",

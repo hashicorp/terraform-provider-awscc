@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -113,6 +114,62 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AutoDetectionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether auto-detection is requested for the registry. Must be specified together with AutoDetectionScope. Setting this to true is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met. To turn auto-detection off, explicitly set this to false - removing AutoDetectionEnabled and AutoDetectionScope from the template is a no-op and leaves the existing auto-detection settings unchanged. A registry cannot be deleted while auto-detection is enabled: set this to false and update the stack before deleting the registry.",
+		//	  "type": "boolean"
+		//	}
+		"auto_detection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether auto-detection is requested for the registry. Must be specified together with AutoDetectionScope. Setting this to true is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met. To turn auto-detection off, explicitly set this to false - removing AutoDetectionEnabled and AutoDetectionScope from the template is a no-op and leaves the existing auto-detection settings unchanged. A registry cannot be deleted while auto-detection is enabled: set this to false and update the stack before deleting the registry.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoDetectionScope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.",
+		//	  "enum": [
+		//	    "ORGANIZATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"auto_detection_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source from which resources are detected. ORGANIZATION sources resources from all member accounts of an AWS Organization.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ORGANIZATION",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoDetectionStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"auto_detection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current auto-detection status. ACTIVE indicates that the registry is actively being populated with detected resources. INACTIVE indicates that the preconditions required at the configured scope are not currently met.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -127,6 +184,127 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomMetadataSchemaConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that defines a typed metadata schema for a registry. A default schema and per-record-type schema overrides are both optional. Schema evolution is additive only: you can add fields and enum values, but you cannot remove fields, change types, or remove enum values.",
+		//	  "properties": {
+		//	    "DefaultSchema": {
+		//	      "description": "The default JSON Schema that applies to record types without a specific override. Supported property types are string, string with an enum constraint, string with a uri format, and boolean.",
+		//	      "maxLength": 10240,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "RecordTypeSchemaOverrides": {
+		//	      "description": "A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A schema override for a specific record type within a custom metadata schema configuration.",
+		//	        "properties": {
+		//	          "RecordType": {
+		//	            "description": "The record type that this schema override applies to.",
+		//	            "enum": [
+		//	              "MCP",
+		//	              "AGENT",
+		//	              "SKILL",
+		//	              "GATEWAY",
+		//	              "CUSTOM"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Schema": {
+		//	            "description": "The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.",
+		//	            "maxLength": 10240,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RecordType",
+		//	          "Schema"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_metadata_schema_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultSchema
+				"default_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The default JSON Schema that applies to record types without a specific override. Supported property types are string, string with an enum constraint, string with a uri format, and boolean.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 10240),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RecordTypeSchemaOverrides
+				"record_type_schema_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RecordType
+							"record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The record type that this schema override applies to.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"MCP",
+										"AGENT",
+										"SKILL",
+										"GATEWAY",
+										"CUSTOM",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Schema
+							"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 10240),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(5),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines a typed metadata schema for a registry. A default schema and per-record-type schema overrides are both optional. Schema evolution is additive only: you can add fields and enum values, but you cannot remove fields, change types, or remove enum values.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -515,6 +693,51 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same AWS account and Region as the registry. Multi-Region keys are not supported.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsKeyArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same AWS account and Region as the registry. Multi-Region keys are not supported.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The server-side encryption configuration for a registry. Specifies a customer managed key used to encrypt the registry's content. When omitted, the registry's content is encrypted with an AWS owned key. You cannot change the encryption configuration after registry creation. Specifying a different KMS key, adding this property to an existing registry, or removing it replaces the registry: CloudFormation creates a new registry with a new Amazon Resource Name (ARN) and then deletes the original, including all registry records it contains. Registry records that are not managed by the stack are not re-created in the new registry, and if any remain in the original registry its deletion fails and it is left behind.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -713,34 +936,44 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":               "AllowedAudience",
-		"allowed_clients":                "AllowedClients",
-		"allowed_scopes":                 "AllowedScopes",
-		"approval_configuration":         "ApprovalConfiguration",
-		"authorizer_configuration":       "AuthorizerConfiguration",
-		"authorizer_type":                "AuthorizerType",
-		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
-		"auto_approval_rules":            "AutoApprovalRules",
-		"claim_match_operator":           "ClaimMatchOperator",
-		"claim_match_value":              "ClaimMatchValue",
-		"created_at":                     "CreatedAt",
-		"custom_claims":                  "CustomClaims",
-		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
-		"description":                    "Description",
-		"discovery_configuration":        "DiscoveryConfiguration",
-		"discovery_url":                  "DiscoveryUrl",
-		"inbound_token_claim_name":       "InboundTokenClaimName",
-		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
-		"key":                            "Key",
-		"match_value_string":             "MatchValueString",
-		"match_value_string_list":        "MatchValueStringList",
-		"name":                           "Name",
-		"registry_arn":                   "RegistryArn",
-		"registry_id":                    "RegistryId",
-		"status":                         "Status",
-		"tags":                           "Tags",
-		"updated_at":                     "UpdatedAt",
-		"value":                          "Value",
+		"allowed_audience":                     "AllowedAudience",
+		"allowed_clients":                      "AllowedClients",
+		"allowed_scopes":                       "AllowedScopes",
+		"approval_configuration":               "ApprovalConfiguration",
+		"authorizer_configuration":             "AuthorizerConfiguration",
+		"authorizer_type":                      "AuthorizerType",
+		"authorizing_claim_match_value":        "AuthorizingClaimMatchValue",
+		"auto_approval_rules":                  "AutoApprovalRules",
+		"auto_detection_enabled":               "AutoDetectionEnabled",
+		"auto_detection_scope":                 "AutoDetectionScope",
+		"auto_detection_status":                "AutoDetectionStatus",
+		"claim_match_operator":                 "ClaimMatchOperator",
+		"claim_match_value":                    "ClaimMatchValue",
+		"created_at":                           "CreatedAt",
+		"custom_claims":                        "CustomClaims",
+		"custom_jwt_authorizer":                "CustomJWTAuthorizer",
+		"custom_metadata_schema_configuration": "CustomMetadataSchemaConfiguration",
+		"default_schema":                       "DefaultSchema",
+		"description":                          "Description",
+		"discovery_configuration":              "DiscoveryConfiguration",
+		"discovery_url":                        "DiscoveryUrl",
+		"encryption_configuration":             "EncryptionConfiguration",
+		"inbound_token_claim_name":             "InboundTokenClaimName",
+		"inbound_token_claim_value_type":       "InboundTokenClaimValueType",
+		"key":                                  "Key",
+		"kms_key_arn":                          "KmsKeyArn",
+		"match_value_string":                   "MatchValueString",
+		"match_value_string_list":              "MatchValueStringList",
+		"name":                                 "Name",
+		"record_type":                          "RecordType",
+		"record_type_schema_overrides":         "RecordTypeSchemaOverrides",
+		"registry_arn":                         "RegistryArn",
+		"registry_id":                          "RegistryId",
+		"schema":                               "Schema",
+		"status":                               "Status",
+		"tags":                                 "Tags",
+		"updated_at":                           "UpdatedAt",
+		"value":                                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

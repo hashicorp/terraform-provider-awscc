@@ -1,0 +1,1 @@
+$ terraform import awscc_storagegateway_smb_file_share.example "file_share_arn"

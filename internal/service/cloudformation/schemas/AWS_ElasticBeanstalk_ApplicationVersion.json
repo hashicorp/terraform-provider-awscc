@@ -14,9 +14,21 @@
       "description": "A description of this application version.",
       "type": "string"
     },
+    "Process": {
+      "description": "Pre-process and validate the environment manifest (`env.yaml`) and configuration files in the source bundle. Leave unset for the service default.",
+      "type": "boolean"
+    },
     "SourceBundle": {
       "description": "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
       "$ref": "#/definitions/SourceBundle"
+    },
+    "BuildConfiguration": {
+      "description": "Settings for an AWS CodeBuild build that packages and builds an application version from source code.",
+      "$ref": "#/definitions/BuildConfiguration"
+    },
+    "ImageConfiguration": {
+      "description": "Configuration for image-based application versions.",
+      "$ref": "#/definitions/ImageConfiguration"
     }
   },
   "definitions": {
@@ -37,11 +49,132 @@
         "S3Bucket",
         "S3Key"
       ]
+    },
+    "ImageSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Uri": {
+          "description": "The URI of the container image, e.g. an ECR image URI.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CodeBuildServiceRole": {
+          "description": "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+          "type": "string"
+        },
+        "Image": {
+          "description": "The CodeBuild image used for the build environment.",
+          "type": "string"
+        },
+        "ComputeType": {
+          "description": "The compute type for the CodeBuild build environment.",
+          "type": "string",
+          "enum": [
+            "BUILD_GENERAL1_SMALL",
+            "BUILD_GENERAL1_MEDIUM",
+            "BUILD_GENERAL1_LARGE"
+          ]
+        },
+        "TimeoutInMinutes": {
+          "description": "The timeout for the CodeBuild build, in minutes.",
+          "type": "integer"
+        },
+        "ArtifactName": {
+          "description": "The name of the build artifact.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "CodeBuildServiceRole",
+        "Image"
+      ]
+    },
+    "ImageConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Source": {
+          "description": "The container image source for this version, as an ECR image URI.",
+          "$ref": "#/definitions/ImageSource"
+        },
+        "Build": {
+          "description": "Configuration for building a container image from source code.",
+          "$ref": "#/definitions/ImageBuildConfiguration"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "Source"
+          ]
+        },
+        {
+          "required": [
+            "Build"
+          ]
+        }
+      ]
+    },
+    "ImageBuildConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "The type of image build: docker or buildpack.",
+          "type": "string",
+          "enum": [
+            "docker",
+            "buildpack"
+          ]
+        },
+        "DockerfileLocation": {
+          "description": "The path to the Dockerfile, relative to the source root.",
+          "type": "string"
+        },
+        "Buildpack": {
+          "description": "The buildpack to use for building the image.",
+          "type": "string"
+        },
+        "Architecture": {
+          "description": "The target architecture for the built container image.",
+          "type": "string",
+          "enum": [
+            "amd64",
+            "arm64"
+          ]
+        },
+        "CodeBuildServiceRole": {
+          "description": "The ARN of the IAM role that AWS CodeBuild assumes to build the application version.",
+          "type": "string"
+        },
+        "ComputeType": {
+          "description": "The compute type for the CodeBuild build environment.",
+          "type": "string",
+          "enum": [
+            "BUILD_GENERAL1_SMALL",
+            "BUILD_GENERAL1_MEDIUM",
+            "BUILD_GENERAL1_LARGE"
+          ]
+        },
+        "TimeoutInMinutes": {
+          "description": "The timeout for the CodeBuild build, in minutes.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Type",
+        "CodeBuildServiceRole"
+      ]
     }
   },
   "required": [
-    "ApplicationName",
-    "SourceBundle"
+    "ApplicationName"
   ],
   "additionalProperties": false,
   "tagging": {
@@ -52,7 +185,10 @@
   },
   "createOnlyProperties": [
     "/properties/SourceBundle",
-    "/properties/ApplicationName"
+    "/properties/ApplicationName",
+    "/properties/ImageConfiguration",
+    "/properties/BuildConfiguration",
+    "/properties/Process"
   ],
   "primaryIdentifier": [
     "/properties/ApplicationName",
@@ -60,6 +196,11 @@
   ],
   "readOnlyProperties": [
     "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/BuildConfiguration",
+    "/properties/ImageConfiguration",
+    "/properties/Process"
   ],
   "handlers": {
     "create": {

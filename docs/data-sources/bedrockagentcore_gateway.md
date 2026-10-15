@@ -110,6 +110,7 @@ Read-Only:
 - `routing_domain` (String)
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
+- `tags` (Map of String)
 - `vpc_identifier` (String)
 
 

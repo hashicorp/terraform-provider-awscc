@@ -1,0 +1,311 @@
+{
+  "typeName": "AWS::BCM::ScheduledReport",
+  "description": "Creates and manages a scheduled report for an AWS Billing and Cost Management Dashboards dashboard. A scheduled report renders a snapshot of the dashboard on a cron schedule, using an IAM role that the service assumes to read the underlying cost and usage data.",
+  "definitions": {
+    "ScheduleConfig": {
+      "type": "object",
+      "properties": {
+        "ScheduleExpression": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^[\\S\\s]*$",
+          "description": "The schedule expression that specifies when to trigger the scheduled report run. This value must be a cron expression consisting of six fields separated by white spaces: cron(minutes hours day_of_month month day_of_week year)."
+        },
+        "ScheduleExpressionTimeZone": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^[\\S\\s]*$",
+          "description": "The time zone for the schedule expression, for example, UTC."
+        },
+        "SchedulePeriod": {
+          "$ref": "#/definitions/SchedulePeriod",
+          "description": "The time period during which the schedule is active."
+        },
+        "State": {
+          "$ref": "#/definitions/ScheduleState",
+          "description": "The state of the schedule. ENABLED means the scheduled report runs according to its schedule expression. DISABLED means the scheduled report is paused and will not run until re-enabled."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Defines when and how often a scheduled report runs."
+    },
+    "SchedulePeriod": {
+      "type": "object",
+      "properties": {
+        "StartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the schedule becomes active."
+        },
+        "EndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the schedule stops being active."
+        }
+      },
+      "additionalProperties": false,
+      "description": "The window during which the schedule is active. When omitted the service defaults it. EndTime must be within three years of the time of the request."
+    },
+    "ScheduleState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "description": "Whether the schedule is active."
+    },
+    "DateTimeRange": {
+      "type": "object",
+      "properties": {
+        "StartTime": {
+          "$ref": "#/definitions/DateTimeValue",
+          "description": "The start of the range."
+        },
+        "EndTime": {
+          "$ref": "#/definitions/DateTimeValue",
+          "description": "The end of the range."
+        }
+      },
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "additionalProperties": false,
+      "description": "An absolute or relative date range."
+    },
+    "DateTimeValue": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/DateTimeType",
+          "description": "Whether Value is an absolute date or a duration relative to now."
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^[\\S\\s]*$",
+          "description": "The date, or an ISO 8601 duration when Type is RELATIVE."
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ],
+      "additionalProperties": false,
+      "description": "A date expressed either as an absolute instant or as an offset from now."
+    },
+    "DateTimeType": {
+      "type": "string",
+      "enum": [
+        "ABSOLUTE",
+        "RELATIVE"
+      ],
+      "description": "Whether a date value is absolute or relative."
+    },
+    "HealthStatus": {
+      "type": "object",
+      "properties": {
+        "StatusCode": {
+          "$ref": "#/definitions/HealthStatusCode",
+          "description": "Whether the scheduled report is healthy."
+        },
+        "LastRefreshedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the health status was last refreshed."
+        }
+      },
+      "required": [
+        "StatusCode"
+      ],
+      "additionalProperties": false,
+      "description": "The health of the scheduled report as of its last refresh."
+    },
+    "HealthStatusCode": {
+      "type": "string",
+      "enum": [
+        "HEALTHY",
+        "UNHEALTHY"
+      ],
+      "description": "The health status of a scheduled report."
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "The tag key.",
+          "pattern": "^[\\S\\s]*$"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "description": "The tag value.",
+          "pattern": "^[\\S\\s]*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false,
+      "description": "A key-value pair applied to the scheduled report."
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[-a-z0-9]*:bcm-dashboards::[0-9]{12}:scheduled-report/(\\*|[-a-z0-9]+)$",
+      "description": "The Amazon Resource Name (ARN) of the scheduled report."
+    },
+    "Name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": "",
+      "description": "The name of the scheduled report."
+    },
+    "Description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "",
+      "description": "A description of the scheduled report's purpose or contents."
+    },
+    "DashboardArn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[-a-z0-9]*:bcm-dashboards::[0-9]{12}:dashboard/(\\*|[-a-z0-9]+)$",
+      "description": "The ARN of the dashboard associated with the scheduled report. Managed dashboards cannot be used."
+    },
+    "ScheduledReportExecutionRoleArn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
+      "description": "The ARN of the IAM role that the scheduled report uses to execute. AWS Billing and Cost Management Dashboards assumes this IAM role while executing the scheduled report."
+    },
+    "ScheduleConfig": {
+      "$ref": "#/definitions/ScheduleConfig",
+      "description": "The schedule configuration that defines when and how often the report is generated."
+    },
+    "WidgetIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1,
+      "insertionOrder": true,
+      "description": "The list of widget identifiers included in the scheduled report. If not specified, all widgets in the dashboard are included."
+    },
+    "WidgetDateRangeOverride": {
+      "$ref": "#/definitions/DateTimeRange",
+      "description": "The date range override applied to widgets in the scheduled report."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the scheduled report was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the scheduled report was last modified."
+    },
+    "HealthStatus": {
+      "$ref": "#/definitions/HealthStatus",
+      "description": "The health status of the scheduled report at its last refresh time."
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false,
+      "description": "The tags applied to the scheduled report."
+    }
+  },
+  "required": [
+    "Name",
+    "DashboardArn",
+    "ScheduledReportExecutionRoleArn",
+    "ScheduleConfig"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/HealthStatus"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bcm-dashboards:CreateScheduledReport",
+        "bcm-dashboards:GetDashboard",
+        "bcm-dashboards:TagResource",
+        "iam:PassRole",
+        "ce:GetCostAndUsage",
+        "ce:GetSavingsPlansCoverage",
+        "ce:GetSavingsPlansUtilization",
+        "ce:GetReservationCoverage",
+        "ce:GetReservationUtilization"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bcm-dashboards:GetScheduledReport",
+        "bcm-dashboards:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bcm-dashboards:UpdateScheduledReport",
+        "bcm-dashboards:GetDashboard",
+        "bcm-dashboards:TagResource",
+        "bcm-dashboards:UntagResource",
+        "iam:PassRole",
+        "ce:GetCostAndUsage",
+        "ce:GetSavingsPlansCoverage",
+        "ce:GetSavingsPlansUtilization",
+        "ce:GetReservationCoverage",
+        "ce:GetReservationUtilization"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bcm-dashboards:DeleteScheduledReport"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bcm-dashboards:ListScheduledReports"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bcm-dashboards:TagResource",
+      "bcm-dashboards:UntagResource",
+      "bcm-dashboards:ListTagsForResource"
+    ]
+  },
+  "additionalProperties": false
+}

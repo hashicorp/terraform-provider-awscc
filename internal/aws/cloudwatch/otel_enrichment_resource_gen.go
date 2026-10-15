@@ -7,14 +7,21 @@ package cloudwatch
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -38,6 +45,174 @@ func oTelEnrichmentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ExcludeFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Removes metrics from the include set. Absent or empty means nothing is removed. Evaluated after IncludeFilters, so ExcludeFilters always wins.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Selects metrics within one namespace. The same shape serves both the include and the exclude direction. Namespaces are compared byte-for-byte and case-sensitively; no wildcards, prefixes or normalization.",
+		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Namespace": {
+		//	        "description": "The CloudWatch namespace this selector applies to.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "pattern": "^[^:].*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"exclude_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtMost(100),
+							setvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 255),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The CloudWatch namespace this selector applies to.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[^:].*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Removes metrics from the include set. Absent or empty means nothing is removed. Evaluated after IncludeFilters, so ExcludeFilters always wins.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IncludeFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Scopes enrichment to a subset of the account's telemetry. Absent or empty means all namespaces are in scope. Present means only these are. The service enforces a combined cap of 100 selectors across IncludeFilters and ExcludeFilters, and rejects more than one selector for the same namespace within a direction.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Selects metrics within one namespace. The same shape serves both the include and the exclude direction. Namespaces are compared byte-for-byte and case-sensitively; no wildcards, prefixes or normalization.",
+		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Namespace": {
+		//	        "description": "The CloudWatch namespace this selector applies to.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "pattern": "^[^:].*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"include_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Absent or empty means every metric in this namespace, in whichever direction this selector appears. Present means only these metric names.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtMost(100),
+							setvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 255),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The CloudWatch namespace this selector applies to.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[^:].*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Scopes enrichment to a subset of the account's telemetry. Absent or empty means all namespaces are in scope. Present means only these are. The service enforces a combined cap of 100 selectors across IncludeFilters and ExcludeFilters, and rejects more than one selector for the same namespace within a direction.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -87,13 +262,17 @@ func oTelEnrichmentResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id": "AccountId",
-		"status":     "Status",
+		"account_id":      "AccountId",
+		"exclude_filters": "ExcludeFilters",
+		"include_filters": "IncludeFilters",
+		"metric_names":    "MetricNames",
+		"namespace":       "Namespace",
+		"status":          "Status",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

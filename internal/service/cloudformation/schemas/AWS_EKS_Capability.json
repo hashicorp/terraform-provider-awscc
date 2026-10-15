@@ -66,6 +66,13 @@
           "type": "string",
           "description": "The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used."
         },
+        "EndpointPrefix": {
+          "type": "string",
+          "description": "An optional prefix for the Argo CD server endpoint. When specified, EKS uses this prefix to generate the server endpoint; otherwise, the endpoint is generated automatically. This value cannot be changed after the capability is created.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+        },
         "AwsIdc": {
           "$ref": "#/definitions/AwsIdc"
         },
@@ -274,6 +281,7 @@
     "/properties/CapabilityName",
     "/properties/Type",
     "/properties/Configuration/ArgoCd/Namespace",
+    "/properties/Configuration/ArgoCd/EndpointPrefix",
     "/properties/Configuration/ArgoCd/AwsIdc"
   ],
   "readOnlyProperties": [

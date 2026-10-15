@@ -1,0 +1,1 @@
+$ terraform import awscc_ivs_ad_configuration.example "arn"

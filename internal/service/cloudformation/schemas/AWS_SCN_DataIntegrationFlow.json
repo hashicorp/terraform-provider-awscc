@@ -1,0 +1,436 @@
+{
+  "typeName": "AWS::SCN::DataIntegrationFlow",
+  "description": "Represents an AWS Supply Chain data integration flow.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the DataIntegrationFlow.",
+      "minLength": 20,
+      "maxLength": 1011,
+      "pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$"
+    },
+    "InstanceId": {
+      "type": "string",
+      "description": "The Amazon Web Services Supply Chain instance identifier.",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the DataIntegrationFlow.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9-]+$"
+    },
+    "Sources": {
+      "type": "array",
+      "description": "The source configurations for the DataIntegrationFlow.",
+      "items": {
+        "$ref": "#/definitions/DataIntegrationFlowSource"
+      },
+      "minItems": 1,
+      "maxItems": 40,
+      "insertionOrder": true
+    },
+    "Transformation": {
+      "$ref": "#/definitions/DataIntegrationFlowTransformation"
+    },
+    "Target": {
+      "$ref": "#/definitions/DataIntegrationFlowTarget"
+    },
+    "CreatedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The creation time of the DataIntegrationFlow."
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The last modified time of the DataIntegrationFlow."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the DataIntegrationFlow.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200
+    }
+  },
+  "definitions": {
+    "DataIntegrationFlowSource": {
+      "type": "object",
+      "description": "The DataIntegrationFlow source parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "SourceType": {
+          "type": "string",
+          "description": "The source type.",
+          "enum": [
+            "S3",
+            "DATASET"
+          ]
+        },
+        "SourceName": {
+          "type": "string",
+          "description": "The source name that can be used as table alias in SQL transformation query.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9_]+$"
+        },
+        "S3Source": {
+          "$ref": "#/definitions/S3SourceConfiguration"
+        },
+        "DatasetSource": {
+          "$ref": "#/definitions/DatasetSourceConfiguration"
+        }
+      },
+      "required": [
+        "SourceType",
+        "SourceName"
+      ]
+    },
+    "S3SourceConfiguration": {
+      "type": "object",
+      "description": "The S3 source configuration parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "BucketName": {
+          "type": "string",
+          "description": "The S3 bucket name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9][a-z0-9.-]*[a-z0-9]$"
+        },
+        "Prefix": {
+          "type": "string",
+          "description": "The S3 prefix.",
+          "minLength": 0,
+          "maxLength": 700,
+          "pattern": "^[/A-Za-z0-9._-]+$"
+        },
+        "Options": {
+          "$ref": "#/definitions/S3Options"
+        }
+      },
+      "required": [
+        "BucketName",
+        "Prefix"
+      ]
+    },
+    "DatasetSourceConfiguration": {
+      "type": "object",
+      "description": "The dataset source configuration parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "DatasetIdentifier": {
+          "type": "string",
+          "description": "The ARN of the dataset.",
+          "minLength": 1,
+          "maxLength": 1011,
+          "pattern": "^[-_/A-Za-z0-9:]+$"
+        },
+        "Options": {
+          "$ref": "#/definitions/DatasetOptions"
+        }
+      },
+      "required": [
+        "DatasetIdentifier"
+      ]
+    },
+    "DataIntegrationFlowTransformation": {
+      "type": "object",
+      "description": "The DataIntegrationFlow transformation parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "TransformationType": {
+          "type": "string",
+          "description": "The transformation type.",
+          "enum": [
+            "SQL",
+            "NONE"
+          ]
+        },
+        "SqlTransformation": {
+          "$ref": "#/definitions/SqlTransformationConfiguration"
+        }
+      },
+      "required": [
+        "TransformationType"
+      ]
+    },
+    "SqlTransformationConfiguration": {
+      "type": "object",
+      "description": "The SQL transformation configuration parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "Query": {
+          "type": "string",
+          "description": "The transformation SQL query body based on SparkSQL.",
+          "minLength": 1,
+          "maxLength": 65535
+        }
+      },
+      "required": [
+        "Query"
+      ]
+    },
+    "DataIntegrationFlowTarget": {
+      "type": "object",
+      "description": "The DataIntegrationFlow target parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "TargetType": {
+          "type": "string",
+          "description": "The target type.",
+          "enum": [
+            "DATASET"
+          ]
+        },
+        "DatasetTarget": {
+          "$ref": "#/definitions/DatasetTargetConfiguration"
+        }
+      },
+      "required": [
+        "TargetType"
+      ]
+    },
+    "DatasetTargetConfiguration": {
+      "type": "object",
+      "description": "The dataset target configuration parameters.",
+      "additionalProperties": false,
+      "properties": {
+        "DatasetIdentifier": {
+          "type": "string",
+          "description": "The dataset ARN.",
+          "minLength": 1,
+          "maxLength": 1011,
+          "pattern": "^[-_/A-Za-z0-9:]+$"
+        },
+        "Options": {
+          "$ref": "#/definitions/DatasetOptions"
+        }
+      },
+      "required": [
+        "DatasetIdentifier"
+      ]
+    },
+    "S3Options": {
+      "type": "object",
+      "description": "The Amazon S3 options.",
+      "additionalProperties": false,
+      "properties": {
+        "FileType": {
+          "type": "string",
+          "description": "The file type.",
+          "enum": [
+            "CSV",
+            "PARQUET",
+            "JSON"
+          ]
+        }
+      }
+    },
+    "DatasetOptions": {
+      "type": "object",
+      "description": "The dataset options.",
+      "additionalProperties": false,
+      "properties": {
+        "LoadType": {
+          "type": "string",
+          "description": "The load type.",
+          "enum": [
+            "INCREMENTAL",
+            "REPLACE"
+          ]
+        },
+        "DedupeRecords": {
+          "type": "boolean",
+          "description": "The option to perform deduplication on data records sharing same primary key values."
+        },
+        "DedupeStrategy": {
+          "$ref": "#/definitions/DedupeStrategy"
+        }
+      }
+    },
+    "DedupeStrategy": {
+      "type": "object",
+      "description": "The deduplication strategy.",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The deduplication strategy type.",
+          "enum": [
+            "FIELD_PRIORITY"
+          ]
+        },
+        "FieldPriority": {
+          "$ref": "#/definitions/FieldPriorityDedupeStrategyConfiguration"
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "FieldPriorityDedupeStrategyConfiguration": {
+      "type": "object",
+      "description": "The field priority deduplication strategy configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "Fields": {
+          "type": "array",
+          "description": "The list of field names and their sort order for deduplication.",
+          "items": {
+            "$ref": "#/definitions/FieldPriorityDedupeField"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "Fields"
+      ]
+    },
+    "FieldPriorityDedupeField": {
+      "type": "object",
+      "description": "A deduplication field.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the deduplication field.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "SortOrder": {
+          "type": "string",
+          "description": "The sort order.",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
+        }
+      },
+      "required": [
+        "Name",
+        "SortOrder"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "InstanceId",
+    "Name",
+    "Sources",
+    "Transformation",
+    "Target"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/InstanceId",
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "scn:TagResource",
+      "scn:UntagResource",
+      "scn:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "scn:CreateDataIntegrationFlow",
+        "scn:GetDataIntegrationFlow",
+        "scn:TagResource",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "scn:GetDataIntegrationFlow",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "scn:UpdateDataIntegrationFlow",
+        "scn:GetDataIntegrationFlow",
+        "scn:TagResource",
+        "scn:UntagResource",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "scn:DeleteDataIntegrationFlow",
+        "scn:GetDataIntegrationFlow",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceId": {
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          }
+        },
+        "required": [
+          "InstanceId"
+        ]
+      },
+      "permissions": [
+        "scn:ListDataIntegrationFlows"
+      ]
+    }
+  }
+}

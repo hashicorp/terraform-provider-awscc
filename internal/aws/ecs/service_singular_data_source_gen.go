@@ -205,6 +205,31 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "EarlySuccessCriteria": {
+		//	      "additionalProperties": false,
+		//	      "description": "The early success criteria configuration for a rolling deployment. With early success criteria, you can configure an Amazon ECS deployment to complete faster. Amazon ECS declares a deployment successful once a target percentage of tasks are healthy, instead of waiting for the service to fully stabilize.",
+		//	      "properties": {
+		//	        "Enable": {
+		//	          "description": "Specifies whether to use the early success criteria for the service deployment. When set to ``false``, the deployment uses the default behavior, where Amazon ECS considers the deployment successful when the target service revision fully stabilizes and the previous tasks are removed. The default value is ``false``.\n When set to ``true``, Amazon ECS monitors the deployment to meet early success criteria. You must also specify ``healthyPercent`` and ``sourceServiceRevisionCleanup``.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "HealthyPercent": {
+		//	          "description": "The percentage of healthy tasks that the target service revision must reach before Amazon ECS considers the deployment successful. This percentage is relative to the service's ``desiredCount`` and must be an integer between ``0`` and ``100``. This value must be greater than or equal to the ``minimumHealthyPercent`` value.\n After this percentage of tasks is healthy and the bake time elapses, Amazon ECS completes the deployment. Amazon ECS continues to scale the target service revision to 100 percent in the background.",
+		//	          "maximum": 100,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "SourceServiceRevisionCleanup": {
+		//	          "description": "The time when Amazon ECS removes the source revisions' tasks relative to deployment completion. The valid values are:\n  +  ``BLOCKING``—Amazon ECS removes the previous tasks before it marks the deployment as successful.\n  +  ``DEFERRED``—Amazon ECS marks the deployment successful, and then removes the previous tasks in the background.",
+		//	          "enum": [
+		//	            "BLOCKING",
+		//	            "DEFERRED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "LifecycleHooks": {
 		//	      "description": "An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle.",
 		//	      "items": {
@@ -402,6 +427,28 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.\n  The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EarlySuccessCriteria
+				"early_success_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enable
+						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether to use the early success criteria for the service deployment. When set to ``false``, the deployment uses the default behavior, where Amazon ECS considers the deployment successful when the target service revision fully stabilizes and the previous tasks are removed. The default value is ``false``.\n When set to ``true``, Amazon ECS monitors the deployment to meet early success criteria. You must also specify ``healthyPercent`` and ``sourceServiceRevisionCleanup``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HealthyPercent
+						"healthy_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The percentage of healthy tasks that the target service revision must reach before Amazon ECS considers the deployment successful. This percentage is relative to the service's ``desiredCount`` and must be an integer between ``0`` and ``100``. This value must be greater than or equal to the ``minimumHealthyPercent`` value.\n After this percentage of tasks is healthy and the bake time elapses, Amazon ECS completes the deployment. Amazon ECS continues to scale the target service revision to 100 percent in the background.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceServiceRevisionCleanup
+						"source_service_revision_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The time when Amazon ECS removes the source revisions' tasks relative to deployment completion. The valid values are:\n  +  ``BLOCKING``—Amazon ECS removes the previous tasks before it marks the deployment as successful.\n  +  ``DEFERRED``—Amazon ECS marks the deployment successful, and then removes the previous tasks in the background.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The early success criteria configuration for a rolling deployment. With early success criteria, you can configure an Amazon ECS deployment to complete faster. Amazon ECS declares a deployment successful once a target percentage of tasks are healthy, instead of waiting for the service to fully stabilize.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LifecycleHooks
@@ -1818,6 +1865,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "The VPC Lattice configuration for your service that holds the information for the target group(s) Amazon ECS tasks will be registered to.",
 		//	    "properties": {
+		//	      "AdvancedConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AlternateTargetGroupArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "ProductionListenerRule": {
+		//	            "type": "string"
+		//	          },
+		//	          "TestListenerRule": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "PortName": {
 		//	        "description": "The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.",
 		//	        "type": "string"
@@ -1843,6 +1906,25 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_lattice_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AdvancedConfiguration
+					"advanced_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AlternateTargetGroupArn
+							"alternate_target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProductionListenerRule
+							"production_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TestListenerRule
+							"test_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: PortName
 					"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.",
@@ -1907,6 +1989,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"desired_count":                     "DesiredCount",
 		"discovery_name":                    "DiscoveryName",
 		"dns_name":                          "DnsName",
+		"early_success_criteria":            "EarlySuccessCriteria",
 		"enable":                            "Enable",
 		"enable_ecs_managed_tags":           "EnableECSManagedTags",
 		"enable_execute_command":            "EnableExecuteCommand",
@@ -1922,6 +2005,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"format":                            "Format",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"healthy_percent":                   "HealthyPercent",
 		"hook_details":                      "HookDetails",
 		"hook_target_arn":                   "HookTargetArn",
 		"idle_timeout_seconds":              "IdleTimeoutSeconds",
@@ -1975,6 +2059,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"services":                          "Services",
 		"size_in_gi_b":                      "SizeInGiB",
 		"snapshot_id":                       "SnapshotId",
+		"source_service_revision_cleanup":   "SourceServiceRevisionCleanup",
 		"step_bake_time_in_minutes":         "StepBakeTimeInMinutes",
 		"step_percent":                      "StepPercent",
 		"strategy":                          "Strategy",

@@ -30,7 +30,7 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the network connector.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
-		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9]|[1-9][0-9]+)?)$",
+		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -49,11 +49,12 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "description": "The VPC egress configuration for the network connector. Specifies the subnets, security groups, and network protocol for routing outbound traffic through your VPC.",
 		//	      "properties": {
 		//	        "AssociatedComputeResourceTypes": {
-		//	          "description": "The types of Lambda compute resources that can use this connector. Currently, only MicroVm is supported.",
+		//	          "description": "The types of Lambda compute resources that can use this connector. Supported values are MicroVm and WebFunction.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "enum": [
-		//	              "MicroVm"
+		//	              "MicroVm",
+		//	              "WebFunction"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -70,7 +71,7 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroupIds": {
-		//	          "description": "The IDs of the VPC security groups to attach to the ENIs. Specify 0 to 5 security groups. All security groups must be in the same VPC as the subnets.",
+		//	          "description": "The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 1024,
@@ -78,7 +79,7 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            "pattern": "^sg-[0-9a-zA-Z]*$",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 5,
+		//	          "maxItems": 16,
 		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
@@ -98,6 +99,8 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      },
 		//	      "required": [
 		//	        "SubnetIds",
+		//	        "SecurityGroupIds",
+		//	        "NetworkProtocol",
 		//	        "AssociatedComputeResourceTypes"
 		//	      ],
 		//	      "type": "object"
@@ -116,7 +119,7 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 						// Property: AssociatedComputeResourceTypes
 						"associated_compute_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The types of Lambda compute resources that can use this connector. Currently, only MicroVm is supported.",
+							Description: "The types of Lambda compute resources that can use this connector. Supported values are MicroVm and WebFunction.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: NetworkProtocol
@@ -127,7 +130,7 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The IDs of the VPC security groups to attach to the ENIs. Specify 0 to 5 security groups. All security groups must be in the same VPC as the subnets.",
+							Description: "The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SubnetIds
@@ -144,6 +147,32 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The network configuration for the connector. Specify a VpcEgressConfiguration to enable outbound traffic routing through your VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the network connector's latest version. Updates to the connector's configuration create a new immutable version; this attribute exposes the most recent one.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"latest_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the network connector's latest version. Updates to the connector's configuration create a new immutable version; this attribute exposes the most recent one.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LatestVersionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The qualified Amazon Resource Name (ARN) of the network connector's latest version. Includes the immutable version suffix and can be used to pin to a specific version.",
+		//	  "maxLength": 140,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)$",
+		//	  "type": "string"
+		//	}
+		"latest_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The qualified Amazon Resource Name (ARN) of the network connector's latest version. Includes the immutable version suffix and can be used to pin to a specific version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +180,7 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A unique name for the network connector within your account and Region. Must be 1 to 64 alphanumeric characters, hyphens, or underscores.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
-		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9]|[1-9][0-9]+)?)|[a-zA-Z0-9_-]{1,64}$",
+		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)|[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -261,6 +290,8 @@ func networkConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		"associated_compute_resource_types": "AssociatedComputeResourceTypes",
 		"configuration":                     "Configuration",
 		"key":                               "Key",
+		"latest_version":                    "LatestVersion",
+		"latest_version_arn":                "LatestVersionArn",
 		"name":                              "Name",
 		"network_protocol":                  "NetworkProtocol",
 		"operator_role":                     "OperatorRole",

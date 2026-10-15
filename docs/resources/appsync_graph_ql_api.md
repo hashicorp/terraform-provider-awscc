@@ -162,7 +162,7 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_appsync_graph_ql_api.example
   identity = {
-    api_id = "api_id"
+    arn = "arn"
   }
 }
 ```
@@ -172,7 +172,7 @@ import {
 
 #### Required
 
-- `api_id` (String) Unique AWS AppSync GraphQL API identifier
+- `arn` (String) The Amazon Resource Name (ARN) of the API key
 
 #### Optional
 
@@ -184,12 +184,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_appsync_graph_ql_api.example
-  id = "api_id"
+  id = "arn"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_appsync_graph_ql_api.example "api_id"
+$ terraform import awscc_appsync_graph_ql_api.example "arn"
 ```

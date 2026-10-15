@@ -108,6 +108,30 @@ func schemaAttribute056bb542675b329d26477ca3() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute06d2f525fee05c55e8aa8499() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute0847f878880a4f1ba6c4857b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttribute14c37387bb1f8b4007a20145(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec9052ff8906deb4707582c08(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttributed1b95b46728f28fefa18239e(),
+			// Property: Limit
+			"limit": schemaAttributeca968ebe93755b2234767591(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute0847f878880a4f1ba6c4857b() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -165,11 +189,11 @@ func schemaAttribute0ad663cc0ceda30af09c070e() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute0c785da8a313e40c25dfa5a8() schema.Attribute {
+func schemaAttribute11acc759911eb4211b79e3c9() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 			// Property: Statement
-			"statement": schemaAttributecfc8e3a3245de96f97822f79(),
+			"statement": schemaAttributede7c466655e80d601cfec292(),
 		}, /*END SCHEMA*/
 		Optional: true,
 		Computed: true,
@@ -198,47 +222,6 @@ func schemaAttribute12fa8d3883b1757a55c80c99() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute131e5bda7f73c410cafc367e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttribute83f4b8c1c2e9643255a15e23(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-			// Property: NotStatement
-			"not_statement": schemaAttribute2b00915ecc64dd7012001482(),
-			// Property: OrStatement
-			"or_statement": schemaAttribute83f4b8c1c2e9643255a15e23(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributed36bdb684f627a40132995b9(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttribute141fa2425df4ccd1392f3878() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -252,41 +235,6 @@ func schemaAttribute141fa2425df4ccd1392f3878() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1424e22f2ba6fddf151cb146() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributeb49a1e917de3105f79b1b8f1(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -363,6 +311,37 @@ func schemaAttribute15a5d378503abbe893a99121() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute16daf1984bc99788791a1079() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttribute65605107c42aa477a4ebbbfe(),
+				// Property: CaptchaConfig
+				"captcha_config": schemaAttributee7a13c0e529167bea7ab1f42(),
+				// Property: ChallengeConfig
+				"challenge_config": schemaAttributee7a13c0e529167bea7ab1f42(),
+				// Property: Name
+				"name": schemaAttribute15a5d378503abbe893a99121(),
+				// Property: Priority
+				"priority": schemaAttributec0289bbfedd62f670614c796(),
+				// Property: RuleLabels
+				"rule_labels": schemaAttributefdf9f414921cbdacf9566b5f(),
+				// Property: Statement
+				"statement": schemaAttributee3c1b240a7458b6ca8303546(),
+				// Property: VisibilityConfig
+				"visibility_config": schemaAttribute17ab337dabdfe5dd209d4178(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Collection of Rules.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute17a69cabf0890e4cfe4653bb() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -395,20 +374,6 @@ func schemaAttribute17ab337dabdfe5dd209d4178() schema.Attribute {
 		Validators: []validator.Object{ /*START VALIDATORS*/
 			fwvalidators.NotNullObject(),
 		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19dc37f28c4bbe43318b953e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statements
-			"statements": schemaAttribute2ae4fce3f26b8c713bdacbc6(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -473,20 +438,6 @@ func schemaAttribute1f1824698b558d1e3afa3936() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute21358bef6a220c5a2391354a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statements
-			"statements": schemaAttribute553773085fd42f34729d1dd0(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttribute2266373c64f9df06d224044b() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Description: "The name of the query argument to use.",
@@ -517,7 +468,22 @@ func schemaAttribute22c5e8f6c2792a2f1366cae1() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute23fea41a9ce6f8d545f7e702() schema.Attribute {
+func schemaAttribute24f27bc63bdddebb76d9c658() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomRequestHandling
+			"custom_request_handling": schemaAttributee6a87cec8fed75f00d8371ba(),
+		}, /*END SCHEMA*/
+		Description: "Count traffic towards application.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25b473a0c78dc830677f7569() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 			// Property: AggregateKeyType
@@ -531,25 +497,10 @@ func schemaAttribute23fea41a9ce6f8d545f7e702() schema.Attribute {
 			// Property: Limit
 			"limit": schemaAttributeca968ebe93755b2234767591(),
 			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttribute131e5bda7f73c410cafc367e(),
+			"scope_down_statement": schemaAttributef6d106f20f935ce182ba6f64(),
 		}, /*END SCHEMA*/
 		Optional: true,
 		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24f27bc63bdddebb76d9c658() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomRequestHandling
-			"custom_request_handling": schemaAttributee6a87cec8fed75f00d8371ba(),
-		}, /*END SCHEMA*/
-		Description: "Count traffic towards application.",
-		Optional:    true,
-		Computed:    true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -610,12 +561,12 @@ func schemaAttribute299a0a81c1b40d06fc4cdfd9() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute2ae4fce3f26b8c713bdacbc6() schema.Attribute {
+func schemaAttribute2cf2aa33acda1c8b64df0d3e() schema.Attribute {
 	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AndStatement
-				"and_statement": schemaAttribute83f4b8c1c2e9643255a15e23(),
+				"and_statement": schemaAttribute89deb8afd12773d7d710445d(),
 				// Property: AsnMatchStatement
 				"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
 				// Property: ByteMatchStatement
@@ -627,11 +578,11 @@ func schemaAttribute2ae4fce3f26b8c713bdacbc6() schema.Attribute {
 				// Property: LabelMatchStatement
 				"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
 				// Property: NotStatement
-				"not_statement": schemaAttribute2b00915ecc64dd7012001482(),
+				"not_statement": schemaAttribute50152676dfe40121ea63b745(),
 				// Property: OrStatement
-				"or_statement": schemaAttribute83f4b8c1c2e9643255a15e23(),
+				"or_statement": schemaAttribute89deb8afd12773d7d710445d(),
 				// Property: RateBasedStatement
-				"rate_based_statement": schemaAttributed36bdb684f627a40132995b9(),
+				"rate_based_statement": schemaAttributef88bacc5e34d30e01aa4777c(),
 				// Property: RegexMatchStatement
 				"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
 				// Property: RegexPatternSetReferenceStatement
@@ -651,20 +602,6 @@ func schemaAttribute2ae4fce3f26b8c713bdacbc6() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b00915ecc64dd7012001482() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statement
-			"statement": schemaAttributeb32ee99fc325e3ce300b9df0(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -789,6 +726,20 @@ func schemaAttribute3b0be4fb47dc30d5a775d45a() schema.Attribute {
 		Validators: []validator.Object{ /*START VALIDATORS*/
 			fwvalidators.NotNullObject(),
 		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bd2072cfb274d33ac56b981() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statements
+			"statements": schemaAttribute2cf2aa33acda1c8b64df0d3e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -923,6 +874,20 @@ func schemaAttribute4e9f96b175ffa056a5f1057c() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute50152676dfe40121ea63b745() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statement
+			"statement": schemaAttribute9f7065c64a8f74b891ffb106(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute532d0ba6f59b51914c515a72() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -967,51 +932,6 @@ func schemaAttribute5470374d41639d3e3b58a5d1() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute553773085fd42f34729d1dd0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AndStatement
-				"and_statement": schemaAttribute19dc37f28c4bbe43318b953e(),
-				// Property: AsnMatchStatement
-				"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-				// Property: ByteMatchStatement
-				"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-				// Property: GeoMatchStatement
-				"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-				// Property: IPSetReferenceStatement
-				"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-				// Property: LabelMatchStatement
-				"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-				// Property: NotStatement
-				"not_statement": schemaAttribute0c785da8a313e40c25dfa5a8(),
-				// Property: OrStatement
-				"or_statement": schemaAttribute19dc37f28c4bbe43318b953e(),
-				// Property: RateBasedStatement
-				"rate_based_statement": schemaAttribute23fea41a9ce6f8d545f7e702(),
-				// Property: RegexMatchStatement
-				"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-				// Property: RegexPatternSetReferenceStatement
-				"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-				// Property: SizeConstraintStatement
-				"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-				// Property: SqliMatchStatement
-				"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-				// Property: XssMatchStatement
-				"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1091,37 +1011,6 @@ func schemaAttribute5b0f66f8b3461533a7caf224() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute611bce9700834436f8248b59() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute65605107c42aa477a4ebbbfe(),
-				// Property: CaptchaConfig
-				"captcha_config": schemaAttributee7a13c0e529167bea7ab1f42(),
-				// Property: ChallengeConfig
-				"challenge_config": schemaAttributee7a13c0e529167bea7ab1f42(),
-				// Property: Name
-				"name": schemaAttribute15a5d378503abbe893a99121(),
-				// Property: Priority
-				"priority": schemaAttributec0289bbfedd62f670614c796(),
-				// Property: RuleLabels
-				"rule_labels": schemaAttributefdf9f414921cbdacf9566b5f(),
-				// Property: Statement
-				"statement": schemaAttributeab0eba8cda8c47ba2e2591a7(),
-				// Property: VisibilityConfig
-				"visibility_config": schemaAttribute17ab337dabdfe5dd209d4178(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Collection of Rules.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1365,6 +1254,20 @@ func schemaAttribute712cb809f3f49949350b9ab2() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute72e21ac872029cb0e0c8d38d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statement
+			"statement": schemaAttributeff53ed61165e5e4efceb69b1(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute79c4c8b242284f07ed5bd47b() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1374,6 +1277,30 @@ func schemaAttribute79c4c8b242284f07ed5bd47b() schema.Attribute {
 		Description: "The path component of the URI Fragment. This is the part of a web request that identifies a fragment uri, for example, /abcd#introduction",
 		Optional:    true,
 		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7adeffd1be759d8dccd2efe2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute0847f878880a4f1ba6c4857b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttribute14c37387bb1f8b4007a20145(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec9052ff8906deb4707582c08(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttributed1b95b46728f28fefa18239e(),
+			// Property: Limit
+			"limit": schemaAttributeca968ebe93755b2234767591(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributecc9f3cbd8297f4ce9653e598(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -1406,6 +1333,20 @@ func schemaAttribute7bb958b6d6629b5e83053183() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f12f52f1983ced246630fa1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statements
+			"statements": schemaAttributeb82859de96ea81ebe3b98d4f(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1463,20 +1404,6 @@ func schemaAttribute823f1a1ce5a74ae1cb93cfb1() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute83f4b8c1c2e9643255a15e23() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statements
-			"statements": schemaAttributea36c86cc7ca5433b805af1f6(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttribute86dfe36ead1c6b6910149a26() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Description: "Handling of requests containing oversize fields",
@@ -1521,6 +1448,20 @@ func schemaAttribute89d30f7f56bea78c34130cbc() schema.Attribute {
 		Description: "One query argument in a web request, identified by name, for example UserName or SalesRegion. The name can be up to 30 characters long and isn't case sensitive.",
 		Optional:    true,
 		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89deb8afd12773d7d710445d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statements
+			"statements": schemaAttribute9396d9ca5153497cb9277147(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -1590,6 +1531,51 @@ func schemaAttribute9388f9d3b06f75b86c841bf1() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute9396d9ca5153497cb9277147() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AndStatement
+				"and_statement": schemaAttribute7f12f52f1983ced246630fa1(),
+				// Property: AsnMatchStatement
+				"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+				// Property: ByteMatchStatement
+				"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+				// Property: GeoMatchStatement
+				"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+				// Property: IPSetReferenceStatement
+				"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+				// Property: LabelMatchStatement
+				"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+				// Property: NotStatement
+				"not_statement": schemaAttribute72e21ac872029cb0e0c8d38d(),
+				// Property: OrStatement
+				"or_statement": schemaAttribute7f12f52f1983ced246630fa1(),
+				// Property: RateBasedStatement
+				"rate_based_statement": schemaAttribute7adeffd1be759d8dccd2efe2(),
+				// Property: RegexMatchStatement
+				"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+				// Property: RegexPatternSetReferenceStatement
+				"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+				// Property: SizeConstraintStatement
+				"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+				// Property: SqliMatchStatement
+				"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+				// Property: XssMatchStatement
+				"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute953f918ebcb5b3fc5359fd1f() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Description: "Id of the RuleGroup",
@@ -1627,11 +1613,11 @@ func schemaAttribute9edd84656eda2ed8bb015d9d() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute9fa547cc76ff3e4ff579f9f6() schema.Attribute {
+func schemaAttribute9f7065c64a8f74b891ffb106() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 			// Property: AndStatement
-			"and_statement": schemaAttribute19dc37f28c4bbe43318b953e(),
+			"and_statement": schemaAttribute7f12f52f1983ced246630fa1(),
 			// Property: AsnMatchStatement
 			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
 			// Property: ByteMatchStatement
@@ -1643,11 +1629,11 @@ func schemaAttribute9fa547cc76ff3e4ff579f9f6() schema.Attribute {
 			// Property: LabelMatchStatement
 			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
 			// Property: NotStatement
-			"not_statement": schemaAttribute0c785da8a313e40c25dfa5a8(),
+			"not_statement": schemaAttribute72e21ac872029cb0e0c8d38d(),
 			// Property: OrStatement
-			"or_statement": schemaAttribute19dc37f28c4bbe43318b953e(),
+			"or_statement": schemaAttribute7f12f52f1983ced246630fa1(),
 			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttribute23fea41a9ce6f8d545f7e702(),
+			"rate_based_statement": schemaAttribute7adeffd1be759d8dccd2efe2(),
 			// Property: RegexMatchStatement
 			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
 			// Property: RegexPatternSetReferenceStatement
@@ -1667,86 +1653,6 @@ func schemaAttribute9fa547cc76ff3e4ff579f9f6() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea33679519a7bea6ea6d87223() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttribute19dc37f28c4bbe43318b953e(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-			// Property: NotStatement
-			"not_statement": schemaAttribute0c785da8a313e40c25dfa5a8(),
-			// Property: OrStatement
-			"or_statement": schemaAttribute19dc37f28c4bbe43318b953e(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttribute23fea41a9ce6f8d545f7e702(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea36c86cc7ca5433b805af1f6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AsnMatchStatement
-				"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-				// Property: ByteMatchStatement
-				"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-				// Property: GeoMatchStatement
-				"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-				// Property: IPSetReferenceStatement
-				"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-				// Property: LabelMatchStatement
-				"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-				// Property: RateBasedStatement
-				"rate_based_statement": schemaAttributeb49a1e917de3105f79b1b8f1(),
-				// Property: RegexMatchStatement
-				"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-				// Property: RegexPatternSetReferenceStatement
-				"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-				// Property: SizeConstraintStatement
-				"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-				// Property: SqliMatchStatement
-				"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-				// Property: XssMatchStatement
-				"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1846,50 +1752,6 @@ func schemaAttributeaafe3ee017d24ab65afbb656() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributeab0eba8cda8c47ba2e2591a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttribute21358bef6a220c5a2391354a(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-			// Property: NotStatement
-			"not_statement": schemaAttributefdd6eb435853d0d9f2e19b37(),
-			// Property: OrStatement
-			"or_statement": schemaAttribute21358bef6a220c5a2391354a(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributef216a2b73c0c12432272fdb3(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributeab60a1142fb62fcd2f841d9f() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1961,66 +1823,6 @@ func schemaAttributeb1c6ac33b2e763c4b7f663c0() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributeb32ee99fc325e3ce300b9df0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributeb49a1e917de3105f79b1b8f1(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb49a1e917de3105f79b1b8f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute0847f878880a4f1ba6c4857b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttribute14c37387bb1f8b4007a20145(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec9052ff8906deb4707582c08(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttributed1b95b46728f28fefa18239e(),
-			// Property: Limit
-			"limit": schemaAttributeca968ebe93755b2234767591(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributeb6053184a6f10b187b98e394() schema.Attribute {
 	return (schema.ListAttribute{ /*START ATTRIBUTE*/
 		ElementType: types.StringType,
@@ -2066,6 +1868,51 @@ func schemaAttributeb7437c82823e8d616fcfc6a5() schema.Attribute {
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
 			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb82859de96ea81ebe3b98d4f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AndStatement
+				"and_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+				// Property: AsnMatchStatement
+				"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+				// Property: ByteMatchStatement
+				"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+				// Property: GeoMatchStatement
+				"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+				// Property: IPSetReferenceStatement
+				"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+				// Property: LabelMatchStatement
+				"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+				// Property: NotStatement
+				"not_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+				// Property: OrStatement
+				"or_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+				// Property: RateBasedStatement
+				"rate_based_statement": schemaAttribute06d2f525fee05c55e8aa8499(),
+				// Property: RegexMatchStatement
+				"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+				// Property: RegexPatternSetReferenceStatement
+				"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+				// Property: SizeConstraintStatement
+				"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+				// Property: SqliMatchStatement
+				"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+				// Property: XssMatchStatement
+				"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2216,6 +2063,47 @@ func schemaAttributeca968ebe93755b2234767591() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributecc9f3cbd8297f4ce9653e598() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+			// Property: NotStatement
+			"not_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+			// Property: OrStatement
+			"or_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute06d2f525fee05c55e8aa8499(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributece189f8fd3da55cc33977e19() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2246,50 +2134,6 @@ func schemaAttributecf2c13bfb795dc5f20835d97() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfc8e3a3245de96f97822f79() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttribute83f4b8c1c2e9643255a15e23(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
-			// Property: NotStatement
-			"not_statement": schemaAttribute2b00915ecc64dd7012001482(),
-			// Property: OrStatement
-			"or_statement": schemaAttribute83f4b8c1c2e9643255a15e23(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributed36bdb684f627a40132995b9(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2352,30 +2196,6 @@ func schemaAttributed2eb76b26dd9be5885c8d198() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed36bdb684f627a40132995b9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute0847f878880a4f1ba6c4857b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttribute14c37387bb1f8b4007a20145(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec9052ff8906deb4707582c08(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttributed1b95b46728f28fefa18239e(),
-			// Property: Limit
-			"limit": schemaAttributeca968ebe93755b2234767591(),
-			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttribute1424e22f2ba6fddf151cb146(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2486,6 +2306,47 @@ func schemaAttributedaf6c0c5c83779394a0c881d() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributedbb8e937bbcd9193ace12f1f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttribute7f12f52f1983ced246630fa1(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute72e21ac872029cb0e0c8d38d(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute7f12f52f1983ced246630fa1(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute7adeffd1be759d8dccd2efe2(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributedc1323876e9b95c3bf753aaf() schema.Attribute {
 	return (schema.ListAttribute{ /*START ATTRIBUTE*/
 		ElementType: types.StringType,
@@ -2538,6 +2399,50 @@ func schemaAttributede092664f6dcd02f682761ef() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributede7c466655e80d601cfec292() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttribute89deb8afd12773d7d710445d(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute50152676dfe40121ea63b745(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute89deb8afd12773d7d710445d(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttributef88bacc5e34d30e01aa4777c(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributee269aab8699a2c6e2cbcc3ef() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -2562,6 +2467,50 @@ func schemaAttributee3b510628a5e1471bbe47c71() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3c1b240a7458b6ca8303546() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttribute3bd2072cfb274d33ac56b981(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute11acc759911eb4211b79e3c9(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute3bd2072cfb274d33ac56b981(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute25b473a0c78dc830677f7569(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2692,6 +2641,17 @@ func schemaAttributee839ca5661c3f98382357b7e() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributeeb60b0ee68da322d716a0256() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes:  map[string]schema.Attribute{},
+		Description: "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		Optional:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NestingDepthExceededObject(),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributeeb71c46b4ec5f6047ef5a83c() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2789,24 +2749,41 @@ func schemaAttributeef8201dd2d40442fd0d9e1e7() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributef216a2b73c0c12432272fdb3() schema.Attribute {
+func schemaAttributef6d106f20f935ce182ba6f64() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute0847f878880a4f1ba6c4857b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttribute14c37387bb1f8b4007a20145(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec9052ff8906deb4707582c08(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttributed1b95b46728f28fefa18239e(),
-			// Property: Limit
-			"limit": schemaAttributeca968ebe93755b2234767591(),
-			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttributea33679519a7bea6ea6d87223(),
+			// Property: AndStatement
+			"and_statement": schemaAttribute89deb8afd12773d7d710445d(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute50152676dfe40121ea63b745(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute89deb8afd12773d7d710445d(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttributef88bacc5e34d30e01aa4777c(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
 		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -2827,6 +2804,30 @@ func schemaAttributef810f52ce83651e277d98642() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef88bacc5e34d30e01aa4777c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute0847f878880a4f1ba6c4857b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttribute14c37387bb1f8b4007a20145(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec9052ff8906deb4707582c08(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttributed1b95b46728f28fefa18239e(),
+			// Property: Limit
+			"limit": schemaAttributeca968ebe93755b2234767591(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributedbb8e937bbcd9193ace12f1f(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2872,20 +2873,6 @@ func schemaAttributefad82f407080f742cd73cbc7() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributefdd6eb435853d0d9f2e19b37() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statement
-			"statement": schemaAttribute9fa547cc76ff3e4ff579f9f6(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributefdf9f414921cbdacf9566b5f() schema.Attribute {
 	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -2920,6 +2907,50 @@ func schemaAttributefea29c3f084c2e77103cd1b4() schema.Attribute {
 		Description: "Size Constraint statement.",
 		Optional:    true,
 		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff53ed61165e5e4efceb69b1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttribute17a69cabf0890e4cfe4653bb(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeaafe3ee017d24ab65afbb656(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributeab60a1142fb62fcd2f841d9f(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttributeeb71c46b4ec5f6047ef5a83c(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributed70725af9ff79d0ab30a0e1d(),
+			// Property: NotStatement
+			"not_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+			// Property: OrStatement
+			"or_statement": schemaAttributeeb60b0ee68da322d716a0256(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute06d2f525fee05c55e8aa8499(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttribute42dcbc8eeebf260b28b54528(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttribute59f5adc1c1fd87cf2c4cf642(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributefea29c3f084c2e77103cd1b4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributeee8a541a4b1cdcec1b094788(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttribute12fa8d3883b1757a55c80c99(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -3520,6 +3551,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -4087,6 +4124,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -4564,6 +4613,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -7249,6 +7304,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -7816,6 +7877,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -8293,6 +8366,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -10410,6 +10489,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -10977,6 +11062,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -11454,6 +11551,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -14047,6 +14150,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -14614,6 +14723,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -15091,6 +15212,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -19886,6 +20013,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -20453,6 +20586,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -20930,6 +21075,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -23615,6 +23766,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -24182,6 +24339,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -24659,6 +24828,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -26776,6 +26951,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -27343,6 +27524,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -27820,6 +28013,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -30413,6 +30612,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -30980,6 +31185,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -31457,6 +31674,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -35684,6 +35907,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -36251,6 +36480,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -36728,6 +36969,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -39413,6 +39660,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -39980,6 +40233,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -40457,6 +40722,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -42574,6 +42845,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -43141,6 +43418,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -43618,6 +43907,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -46211,6 +46506,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -46778,6 +47079,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -47255,6 +47568,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -51958,6 +52277,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -52525,6 +52850,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -53002,6 +53339,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -55687,6 +56030,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -56254,6 +56603,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -56731,6 +57092,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -58848,6 +59215,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -59415,6 +59788,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -59892,6 +60277,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -62485,6 +62876,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -63052,6 +63449,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -63529,6 +63938,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -70434,6 +70849,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -71001,6 +71422,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -71478,6 +71911,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -74163,6 +74602,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -74730,6 +75175,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -75207,6 +75664,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -77324,6 +77787,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -77891,6 +78360,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -78368,6 +78849,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -80961,6 +81448,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -81528,6 +82021,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -82005,6 +82510,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -86800,6 +87311,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -87367,6 +87884,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -87844,6 +88373,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -90529,6 +91064,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -91096,6 +91637,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -91573,6 +92126,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -93690,6 +94249,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -94257,6 +94822,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -94734,6 +95311,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -97327,6 +97910,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -97894,6 +98483,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -98371,6 +98972,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -102598,6 +103205,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -103165,6 +103778,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -103642,6 +104267,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -106327,6 +106958,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -106894,6 +107531,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -107371,6 +108020,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -109488,6 +110143,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -110055,6 +110716,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -110532,6 +111205,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -113125,6 +113804,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -113692,6 +114377,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -114169,6 +114866,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -118872,6 +119575,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -119439,6 +120148,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -119916,6 +120637,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -122601,6 +123328,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -123168,6 +123901,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -123645,6 +124390,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -125762,6 +126513,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -126329,6 +127086,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -126806,6 +127575,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -129399,6 +130174,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -129966,6 +130747,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -130443,6 +131236,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -136780,6 +137579,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -137347,6 +138152,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -137824,6 +138641,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -140509,6 +141332,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -141076,6 +141905,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -141553,6 +142394,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -143670,6 +144517,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -144237,6 +145090,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -144714,6 +145579,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -147307,6 +148178,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -147874,6 +148751,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -148351,6 +149240,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -153146,6 +154041,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -153713,6 +154614,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -154190,6 +155103,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -156875,6 +157794,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -157442,6 +158367,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -157919,6 +158856,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -160036,6 +160979,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -160603,6 +161552,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -161080,6 +162041,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -163673,6 +164640,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -164240,6 +165213,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -164717,6 +165702,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -168944,6 +169935,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -169511,6 +170508,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -169988,6 +170997,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -172673,6 +173688,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -173240,6 +174261,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -173717,6 +174750,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -175834,6 +176873,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -176401,6 +177446,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          ],
 		//	                                          "type": "object"
 		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "RateBasedStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -176878,6 +177935,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -179471,6 +180534,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -180038,6 +181107,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -180515,6 +181596,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -185218,6 +186305,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -185785,6 +186878,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -186262,6 +187367,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -188947,6 +190058,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -189514,6 +190631,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -189991,6 +191120,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -192108,6 +193243,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -192675,6 +193816,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -193152,6 +194305,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -195745,6 +196904,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -196312,6 +197477,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -196789,6 +197966,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -203602,6 +204785,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -204169,6 +205358,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -204646,6 +205847,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -207331,6 +208538,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -207898,6 +209111,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -208375,6 +209600,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -210492,6 +211723,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -211059,6 +212296,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -211536,6 +212785,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -214129,6 +215384,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -214696,6 +215957,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -215173,6 +216446,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -219968,6 +221247,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -220535,6 +221820,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -221012,6 +222309,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -223697,6 +225000,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -224264,6 +225573,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -224741,6 +226062,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -226858,6 +228185,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -227425,6 +228758,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -227902,6 +229247,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -230495,6 +231846,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -231062,6 +232419,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -231539,6 +232908,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -235766,6 +237141,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -236333,6 +237714,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -236810,6 +238203,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -239495,6 +240894,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -240062,6 +241467,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -240539,6 +241956,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -242656,6 +244079,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -243223,6 +244652,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        ],
 		//	                                        "type": "object"
 		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "RateBasedStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -243700,6 +245141,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -246293,6 +247740,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -246860,6 +248313,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -247337,6 +248802,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -252040,6 +253511,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -252607,6 +254084,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -253084,6 +254573,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -255769,6 +257264,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -256336,6 +257837,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -256813,6 +258326,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -258930,6 +260449,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -259497,6 +261022,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      ],
 		//	                                      "type": "object"
 		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "RateBasedStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -259974,6 +261511,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -262567,6 +264110,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -263134,6 +264683,18 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    ],
 		//	                                    "type": "object"
 		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "RateBasedStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -263611,6 +265172,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -272054,7 +273621,7 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"rules": schemaAttribute611bce9700834436f8248b59(),
+		"rules": schemaAttribute16daf1984bc99788791a1079(),
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//

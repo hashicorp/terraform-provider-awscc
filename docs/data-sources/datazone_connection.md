@@ -212,6 +212,7 @@ Read-Only:
 Read-Only:
 
 - `glue_lineage_sync_enabled` (Boolean)
+- `role_arn` (String) The ARN of the IAM role to associate with the connection as the project user role.
 
 
 <a id="nestedatt--props--lakehouse_properties"></a>

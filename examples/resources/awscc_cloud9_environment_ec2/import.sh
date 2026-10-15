@@ -1,0 +1,1 @@
+$ terraform import awscc_cloud9_environment_ec2.example "environment_id"

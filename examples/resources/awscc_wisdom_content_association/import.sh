@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_content_association.example "content_association_arn"

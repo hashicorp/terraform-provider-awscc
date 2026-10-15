@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticache_snapshot.example "arn"

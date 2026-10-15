@@ -51,10 +51,10 @@ func runLint(allSchemasPath, checkoutPath string) error {
 		return fmt.Errorf("all_schemas.hcl check failed: %s", strings.Join(problems, "; "))
 	}
 	if n := len(report.UnexplainedRetained); n > 0 {
-		fmt.Fprintf(os.Stderr, "bigdiffer: all_schemas.hcl is normalized; %d advisory anomaly line(s) reported above (not a check failure).\n", n)
+		_, _ = fmt.Fprintf(structOut, "bigdiffer: all_schemas.hcl is normalized; %d advisory anomaly line(s) reported above (not a check failure).\n", n)
 		return nil
 	}
-	fmt.Fprintln(os.Stderr, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
+	_, _ = fmt.Fprintln(structOut, "bigdiffer: all_schemas.hcl is normalized and anomaly-free.")
 	return nil
 }
 

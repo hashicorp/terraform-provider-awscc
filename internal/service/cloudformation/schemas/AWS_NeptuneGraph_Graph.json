@@ -43,10 +43,7 @@
     "read": {
       "permissions": [
         "neptune-graph:GetGraph",
-        "neptune-graph:ListTagsForResource",
-        "kms:DescribeKey",
-        "kms:CreateGrant",
-        "kms:Decrypt"
+        "neptune-graph:ListTagsForResource"
       ],
       "timeoutInMinutes": 2160
     },
@@ -84,10 +81,7 @@
       "permissions": [
         "neptune-graph:GetGraph",
         "neptune-graph:ListGraphs",
-        "neptune-graph:ListTagsForResource",
-        "kms:DescribeKey",
-        "kms:CreateGrant",
-        "kms:Decrypt"
+        "neptune-graph:ListTagsForResource"
       ],
       "timeoutInMinutes": 2160
     },

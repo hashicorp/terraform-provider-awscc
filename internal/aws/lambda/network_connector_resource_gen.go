@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -41,7 +41,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the network connector.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
-		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9]|[1-9][0-9]+)?)$",
+		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -63,11 +63,12 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The VPC egress configuration for the network connector. Specifies the subnets, security groups, and network protocol for routing outbound traffic through your VPC.",
 		//	      "properties": {
 		//	        "AssociatedComputeResourceTypes": {
-		//	          "description": "The types of Lambda compute resources that can use this connector. Currently, only MicroVm is supported.",
+		//	          "description": "The types of Lambda compute resources that can use this connector. Supported values are MicroVm and WebFunction.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "enum": [
-		//	              "MicroVm"
+		//	              "MicroVm",
+		//	              "WebFunction"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -84,7 +85,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroupIds": {
-		//	          "description": "The IDs of the VPC security groups to attach to the ENIs. Specify 0 to 5 security groups. All security groups must be in the same VPC as the subnets.",
+		//	          "description": "The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 1024,
@@ -92,7 +93,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "^sg-[0-9a-zA-Z]*$",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 5,
+		//	          "maxItems": 16,
 		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
@@ -112,6 +113,8 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "SubnetIds",
+		//	        "SecurityGroupIds",
+		//	        "NetworkProtocol",
 		//	        "AssociatedComputeResourceTypes"
 		//	      ],
 		//	      "type": "object"
@@ -130,13 +133,14 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AssociatedComputeResourceTypes
 						"associated_compute_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The types of Lambda compute resources that can use this connector. Currently, only MicroVm is supported.",
+							Description: "The types of Lambda compute resources that can use this connector. Supported values are MicroVm and WebFunction.",
 							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 1),
 								listvalidator.ValueStringsAre(
 									stringvalidator.OneOf(
 										"MicroVm",
+										"WebFunction",
 									),
 								),
 							}, /*END VALIDATORS*/
@@ -147,26 +151,21 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: NetworkProtocol
 						"network_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The network protocol for the connector. Specify IPv4 for IPv4-only networking, or DualStack for both IPv4 and IPv6.",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"IPv4",
 									"DualStack",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The IDs of the VPC security groups to attach to the ENIs. Specify 0 to 5 security groups. All security groups must be in the same VPC as the subnets.",
-							Optional:    true,
-							Computed:    true,
+							Description: "The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.",
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 5),
+								listvalidator.SizeBetween(0, 16),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(0, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
@@ -174,7 +173,6 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SubnetIds
@@ -201,6 +199,38 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The network configuration for the connector. Specify a VpcEgressConfiguration to enable outbound traffic routing through your VPC.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the network connector's latest version. Updates to the connector's configuration create a new immutable version; this attribute exposes the most recent one.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"latest_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the network connector's latest version. Updates to the connector's configuration create a new immutable version; this attribute exposes the most recent one.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LatestVersionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The qualified Amazon Resource Name (ARN) of the network connector's latest version. Includes the immutable version suffix and can be used to pin to a specific version.",
+		//	  "maxLength": 140,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)$",
+		//	  "type": "string"
+		//	}
+		"latest_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The qualified Amazon Resource Name (ARN) of the network connector's latest version. Includes the immutable version suffix and can be used to pin to a specific version.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +238,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique name for the network connector within your account and Region. Must be 1 to 64 alphanumeric characters, hyphens, or underscores.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
-		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9]|[1-9][0-9]+)?)|[a-zA-Z0-9_-]{1,64}$",
+		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)|[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -217,7 +247,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 140),
-				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9]|[1-9][0-9]+)?)|[a-zA-Z0-9_-]{1,64}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)|[a-zA-Z0-9_-]{1,64}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -369,6 +399,8 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"associated_compute_resource_types": "AssociatedComputeResourceTypes",
 		"configuration":                     "Configuration",
 		"key":                               "Key",
+		"latest_version":                    "LatestVersion",
+		"latest_version_arn":                "LatestVersionArn",
 		"name":                              "Name",
 		"network_protocol":                  "NetworkProtocol",
 		"operator_role":                     "OperatorRole",

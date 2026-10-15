@@ -353,6 +353,9 @@ Optional:
  The following attribute is supported by Network Load Balancers, and Gateway Load Balancers.
   +  ``tcp.idle_timeout.seconds`` - The tcp idle timeout value, in seconds. The valid range is 60-6000 seconds. The default is 350 seconds.
   
+ The following attribute is only supported by Gateway Load Balancers:
+  +  ``send_tcp_reset.on_idle_timeout.enabled`` – Specifies whether the Gateway Load Balancer sends a TCP Reset to the sender of traffic when a TCP flow's idle timeout expires. This attribute also applies to non-SYN TCP packets received for flows that are not in the flow table. The value is ``true`` or ``false``. The default is ``false``.
+  
  The following attributes are only supported by Application Load Balancers.
   +  ``routing.http.request.x_amzn_mtls_clientcert_serial_number.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Serial-Number* HTTP request header.
   +  ``routing.http.request.x_amzn_mtls_clientcert_issuer.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Issuer* HTTP request header.

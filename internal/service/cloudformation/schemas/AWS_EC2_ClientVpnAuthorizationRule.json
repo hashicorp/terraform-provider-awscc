@@ -1,0 +1,87 @@
+{
+  "typeName": "AWS::EC2::ClientVpnAuthorizationRule",
+  "description": "Resource Type definition for AWS::EC2::ClientVpnAuthorizationRule",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The ID of the Client VPN Authorization Rule."
+    },
+    "ClientVpnEndpointId": {
+      "type": "string",
+      "description": "The ID of the Client VPN endpoint."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A brief description of the authorization rule."
+    },
+    "AccessGroupId": {
+      "type": "string",
+      "description": "The ID of the group to grant access to, for example, the Active Directory group or identity provider (IdP) group. Required if `AuthorizeAllGroups` is `false` or not specified."
+    },
+    "TargetNetworkCidr": {
+      "type": "string",
+      "description": "The IPv4 address range, in CIDR notation, of the network for which access is being authorized."
+    },
+    "AuthorizeAllGroups": {
+      "type": "boolean",
+      "description": "Indicates whether to grant access to all clients. Specify `true` to grant all clients who successfully establish a VPN connection access to the network. Must be set to `true` if `AccessGroupId` is not specified."
+    }
+  },
+  "required": [
+    "ClientVpnEndpointId",
+    "TargetNetworkCidr"
+  ],
+  "createOnlyProperties": [
+    "/properties/ClientVpnEndpointId",
+    "/properties/AuthorizeAllGroups",
+    "/properties/Description",
+    "/properties/AccessGroupId",
+    "/properties/TargetNetworkCidr"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:AuthorizeClientVpnIngress",
+        "ec2:DescribeClientVpnAuthorizationRules"
+      ],
+      "timeoutInMinutes": 130
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeClientVpnAuthorizationRules"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:RevokeClientVpnIngress",
+        "ec2:DescribeClientVpnAuthorizationRules"
+      ],
+      "timeoutInMinutes": 130
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeClientVpnAuthorizationRules"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ClientVpnEndpointId": {
+            "$ref": "resource-schema.json#/properties/ClientVpnEndpointId"
+          }
+        },
+        "required": [
+          "ClientVpnEndpointId"
+        ]
+      }
+    }
+  }
+}

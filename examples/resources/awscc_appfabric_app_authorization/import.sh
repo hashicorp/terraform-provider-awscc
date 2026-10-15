@@ -1,0 +1,1 @@
+$ terraform import awscc_appfabric_app_authorization.example "app_authorization_arn"

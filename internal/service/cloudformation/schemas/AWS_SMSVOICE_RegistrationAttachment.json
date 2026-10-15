@@ -1,0 +1,152 @@
+{
+  "typeName": "AWS::SMSVOICE::RegistrationAttachment",
+  "description": "Resource Type definition for AWS::SMSVOICE::RegistrationAttachment",
+  "properties": {
+    "RegistrationAttachmentArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the registration attachment.",
+      "pattern": "arn:[a-z0-9-\\.]{1,63}:sms-voice:[a-z0-9-\\.]{0,63}:[0-9]{12}:registration-attachment/[a-z0-9]+"
+    },
+    "RegistrationAttachmentId": {
+      "type": "string",
+      "description": "The unique identifier for the registration attachment."
+    },
+    "AttachmentBody": {
+      "type": "string",
+      "description": "The registration file to upload. The maximum file size is 1500KB and valid file extensions are PDF, JPEG and PNG.",
+      "minLength": 1
+    },
+    "AttachmentUrl": {
+      "type": "string",
+      "description": "A URL to the required registration file. For example, the URL to an MMS/shortcode form.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^\\S+$"
+    },
+    "UploadedAttachmentUrl": {
+      "type": "string",
+      "description": "The URL to the document that was uploaded as the registration attachment, as returned by the service."
+    },
+    "AttachmentStatus": {
+      "type": "string",
+      "description": "The status of the registration attachment.",
+      "enum": [
+        "UPLOAD_IN_PROGRESS",
+        "UPLOAD_COMPLETE",
+        "UPLOAD_FAILED",
+        "DELETED"
+      ]
+    },
+    "CreatedTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the registration attachment was created, in UNIX epoch time format."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of tags (key and value pairs) to associate with the registration attachment.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key identifier, or name, of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The string value associated with the key of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/RegistrationAttachmentArn",
+    "/properties/RegistrationAttachmentId",
+    "/properties/AttachmentStatus",
+    "/properties/CreatedTimestamp",
+    "/properties/UploadedAttachmentUrl"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AttachmentBody",
+    "/properties/AttachmentUrl"
+  ],
+  "createOnlyProperties": [
+    "/properties/AttachmentBody",
+    "/properties/AttachmentUrl"
+  ],
+  "primaryIdentifier": [
+    "/properties/RegistrationAttachmentArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RegistrationAttachmentId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sms-voice:TagResource",
+      "sms-voice:UntagResource",
+      "sms-voice:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sms-voice:CreateRegistrationAttachment",
+        "sms-voice:DescribeRegistrationAttachments",
+        "sms-voice:TagResource",
+        "sms-voice:ListTagsForResource",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sms-voice:DescribeRegistrationAttachments",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sms-voice:DescribeRegistrationAttachments",
+        "sms-voice:TagResource",
+        "sms-voice:UntagResource",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sms-voice:DeleteRegistrationAttachment",
+        "sms-voice:DescribeRegistrationAttachments",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sms-voice:DescribeRegistrationAttachments"
+      ]
+    }
+  }
+}

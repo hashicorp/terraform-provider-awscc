@@ -1,0 +1,180 @@
+{
+  "typeName": "AWS::Transcribe::MedicalVocabulary",
+  "description": "Resource type definition for AWS::Transcribe::MedicalVocabulary",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the medical vocabulary.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "arn:aws(-[^:]+)?:transcribe:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z-]*/[0-9a-zA-Z._-]+"
+    },
+    "VocabularyName": {
+      "type": "string",
+      "description": "The name of the medical vocabulary.",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[0-9a-zA-Z._-]+$"
+    },
+    "LanguageCode": {
+      "type": "string",
+      "description": "The language code of the vocabulary entries.",
+      "enum": [
+        "af-ZA",
+        "ar-AE",
+        "ar-SA",
+        "da-DK",
+        "de-CH",
+        "de-DE",
+        "en-AB",
+        "en-AU",
+        "en-GB",
+        "en-IE",
+        "en-IN",
+        "en-US",
+        "en-WL",
+        "es-ES",
+        "es-US",
+        "fa-IR",
+        "fr-CA",
+        "fr-FR",
+        "he-IL",
+        "hi-IN",
+        "id-ID",
+        "it-IT",
+        "ja-JP",
+        "ko-KR",
+        "ms-MY",
+        "nl-NL",
+        "pt-BR",
+        "pt-PT",
+        "ru-RU",
+        "ta-IN",
+        "te-IN",
+        "tr-TR",
+        "zh-CN",
+        "zh-TW",
+        "th-TH",
+        "en-ZA",
+        "en-NZ",
+        "vi-VN",
+        "sv-SE"
+      ]
+    },
+    "VocabularyFileUri": {
+      "type": "string",
+      "description": "The Amazon S3 location of the text file that contains the medical vocabulary.",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "(s3://|http(s*)://).+"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags associated with the medical vocabulary.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 1,
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "VocabularyName",
+    "LanguageCode"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/VocabularyName",
+    "/properties/LanguageCode"
+  ],
+  "writeOnlyProperties": [
+    "/properties/VocabularyFileUri"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/VocabularyName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "transcribe:TagResource",
+      "transcribe:UntagResource",
+      "transcribe:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transcribe:CreateMedicalVocabulary",
+        "transcribe:GetMedicalVocabulary",
+        "transcribe:ListTagsForResource",
+        "transcribe:TagResource",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transcribe:GetMedicalVocabulary",
+        "transcribe:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transcribe:UpdateMedicalVocabulary",
+        "transcribe:GetMedicalVocabulary",
+        "transcribe:TagResource",
+        "transcribe:UntagResource",
+        "transcribe:ListTagsForResource",
+        "s3:GetObject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transcribe:DeleteMedicalVocabulary",
+        "transcribe:GetMedicalVocabulary",
+        "transcribe:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transcribe:ListMedicalVocabularies"
+      ]
+    }
+  }
+}

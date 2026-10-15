@@ -332,6 +332,19 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the output. This value must be unique within the current flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NdiAudioReferenceLevel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The audio reference level of the NDI receiver, in dBFS.",
+		//	  "maximum": 0,
+		//	  "minimum": -40,
+		//	  "type": "integer"
+		//	}
+		"ndi_audio_reference_level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The audio reference level of the NDI receiver, in dBFS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NdiOutputTimecodeSource
 		// CloudFormation resource type schema:
 		//
@@ -675,6 +688,7 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"media_stream_output_configurations":    "MediaStreamOutputConfigurations",
 		"min_latency":                           "MinLatency",
 		"name":                                  "Name",
+		"ndi_audio_reference_level":             "NdiAudioReferenceLevel",
 		"ndi_output_timecode_source":            "NdiOutputTimecodeSource",
 		"ndi_program_name":                      "NdiProgramName",
 		"ndi_speed_hq_quality":                  "NdiSpeedHqQuality",

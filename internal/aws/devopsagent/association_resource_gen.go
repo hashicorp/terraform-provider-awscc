@@ -93,6 +93,10 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "AgentElevatedRoleArn": {
+		//	          "description": "The IAM role that AWS DevOps Agent assumes to perform elevated directed actions in this AWS account. Elevated actions also require ElevatedActionsEnabled to be set in the Preferences of the AgentSpace. When not provided, only non-elevated directed actions are available. Removing this property from the template clears the role on update. Setting this role is subject to the same iam:PassRole requirement as AssumableRoleArn.",
+		//	          "type": "string"
+		//	        },
 		//	        "AssumableRoleArn": {
 		//	          "description": "Role ARN to be assumed by DevOpsAgent to operate on behalf of customer",
 		//	          "type": "string"
@@ -322,6 +326,17 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
 		//	          "type": "boolean"
 		//	        },
+		//	        "EnabledElevatedTools": {
+		//	          "description": "The mutative MCP tools enabled for this integration, by tool name. Only tools the service classifies as MUTATIVE may be listed; other names are rejected. Tool names can be found in the console or from the association's current configuration. The list fully replaces the stored value on update: removing a name disables that tool, and removing the property disables all elevated tools.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9_-]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
 		//	        "Endpoint": {
 		//	          "description": "MCP server endpoint URL",
 		//	          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
@@ -342,6 +357,17 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	        "EnableWebhookUpdates": {
 		//	          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
 		//	          "type": "boolean"
+		//	        },
+		//	        "EnabledElevatedTools": {
+		//	          "description": "The mutative MCP tools enabled for this integration, by tool name. Only tools the service classifies as MUTATIVE may be listed; other names are rejected. Tool names can be found in the console or from the association's current configuration. The list fully replaces the stored value on update: removing a name disables that tool, and removing the property disables all elevated tools. Independent of Tools, which selects the toolsets available to the agent.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9_-]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
 		//	        },
 		//	        "Endpoint": {
 		//	          "description": "MCP server endpoint URL",
@@ -492,6 +518,27 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Slack workspace integration configuration",
 		//	      "properties": {
+		//	        "Bidirectional": {
+		//	          "additionalProperties": false,
+		//	          "description": "Optional bidirectional communication configuration. Supply this configuration and set Enabled to true so you can interact with the agent directly from Slack",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Whether bidirectional communication is enabled for this association. When set to true, you can mention the agent in a configured Slack channel and it responds in that channel. When omitted or set to false, the agent ignores mentions and only sends notifications",
+		//	              "type": "boolean"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "IAM role ARN that AWS DevOps Agent assumes to exchange messages with your Slack workspace on behalf of this association",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "TransmissionTarget": {
 		//	          "additionalProperties": false,
 		//	          "description": "Transmission targets for agent notifications",
@@ -554,6 +601,10 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	          "enum": [
 		//	            "source"
 		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "AgentElevatedRoleArn": {
+		//	          "description": "The IAM role that AWS DevOps Agent assumes to perform elevated directed actions in this AWS account. Elevated actions also require ElevatedActionsEnabled to be set in the Preferences of the AgentSpace. When not provided, only non-elevated directed actions are available. Removing this property from the template clears the role on update. Setting this role is subject to the same iam:PassRole requirement as AssumableRoleArn.",
 		//	          "type": "string"
 		//	        },
 		//	        "AssumableRoleArn": {
@@ -659,6 +710,15 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 								),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AgentElevatedRoleArn
+						"agent_elevated_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IAM role that AWS DevOps Agent assumes to perform elevated directed actions in this AWS account. Elevated actions also require ElevatedActionsEnabled to be set in the Preferences of the AgentSpace. When not provided, only non-elevated directed actions are available. Removing this property from the template clears the role on update. Setting this role is subject to the same iam:PassRole requirement as AssumableRoleArn.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -1070,6 +1130,23 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 							// EnableWebhookUpdates is a write-only property.
 						}, /*END ATTRIBUTE*/
+						// Property: EnabledElevatedTools
+						"enabled_elevated_tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The mutative MCP tools enabled for this integration, by tool name. Only tools the service classifies as MUTATIVE may be listed; other names are rejected. Tool names can be found in the console or from the association's current configuration. The list fully replaces the stored value on update: removing a name disables that tool, and removing the property disables all elevated tools.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Endpoint
 						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "MCP server endpoint URL",
@@ -1114,6 +1191,23 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 							// EnableWebhookUpdates is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: EnabledElevatedTools
+						"enabled_elevated_tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The mutative MCP tools enabled for this integration, by tool name. Only tools the service classifies as MUTATIVE may be listed; other names are rejected. Tool names can be found in the console or from the association's current configuration. The list fully replaces the stored value on update: removing a name disables that tool, and removing the property disables all elevated tools. Independent of Tools, which selects the toolsets available to the agent.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Endpoint
 						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1369,6 +1463,40 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Slack
 				"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bidirectional
+						"bidirectional": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether bidirectional communication is enabled for this association. When set to true, you can mention the agent in a configured Slack channel and it responds in that channel. When omitted or set to false, the agent ignores mentions and only sends notifications",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "IAM role ARN that AWS DevOps Agent assumes to exchange messages with your Slack workspace on behalf of this association",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Optional bidirectional communication configuration. Supply this configuration and set Enabled to true so you can interact with the agent directly from Slack",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: TransmissionTarget
 						"transmission_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1480,6 +1608,15 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 								),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AgentElevatedRoleArn
+						"agent_elevated_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IAM role that AWS DevOps Agent assumes to perform elevated directed actions in this AWS account. Elevated actions also require ElevatedActionsEnabled to be set in the Preferences of the AgentSpace. When not provided, only non-elevated directed actions are available. Removing this property from the template clears the role on update. Setting this role is subject to the same iam:PassRole requirement as AssumableRoleArn.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -1711,11 +1848,13 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":               "AccountId",
 		"account_type":             "AccountType",
+		"agent_elevated_role_arn":  "AgentElevatedRoleArn",
 		"agent_space_id":           "AgentSpaceId",
 		"association_id":           "AssociationId",
 		"assumable_role_arn":       "AssumableRoleArn",
 		"aws":                      "Aws",
 		"azure":                    "Azure",
+		"bidirectional":            "Bidirectional",
 		"channel_id":               "ChannelId",
 		"channel_name":             "ChannelName",
 		"configuration":            "Configuration",
@@ -1724,6 +1863,8 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"description":              "Description",
 		"dynatrace":                "Dynatrace",
 		"enable_webhook_updates":   "EnableWebhookUpdates",
+		"enabled":                  "Enabled",
+		"enabled_elevated_tools":   "EnabledElevatedTools",
 		"endpoint":                 "Endpoint",
 		"env_id":                   "EnvId",
 		"event_channel":            "EventChannel",
@@ -1752,6 +1893,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"resource_metadata":        "ResourceMetadata",
 		"resource_type":            "ResourceType",
 		"resources":                "Resources",
+		"role_arn":                 "RoleArn",
 		"service_id":               "ServiceId",
 		"service_now":              "ServiceNow",
 		"services":                 "Services",

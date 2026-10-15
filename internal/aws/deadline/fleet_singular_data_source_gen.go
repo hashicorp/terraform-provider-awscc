@@ -585,6 +585,27 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "SoftwareAddOns": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "enum": [
+		//	                      "docker"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
 		//	            "VCpuCount": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -993,6 +1014,18 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: SoftwareAddOns
+								"software_add_ons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: VCpuCount
 								"v_cpu_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1329,6 +1362,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"selections":                      "Selections",
 		"service_managed_ec_2":            "ServiceManagedEc2",
 		"size_gi_b":                       "SizeGiB",
+		"software_add_ons":                "SoftwareAddOns",
 		"standby_worker_count":            "StandbyWorkerCount",
 		"status":                          "Status",
 		"status_message":                  "StatusMessage",

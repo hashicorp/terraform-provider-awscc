@@ -1,0 +1,6 @@
+import {
+  to = awscc_ec2_i_pv_4_pool.example
+  identity = {
+    arn = "arn"
+  }
+}

@@ -53,12 +53,12 @@ resource "awscc_ec2_transit_gateway" "example" {
 
 ### Required
 
-- `transit_gateway_id` (String) The ID of the transit gateway associated with the VPN concentrator.
 - `type` (String) The type of VPN concentrator.
 
 ### Optional
 
 - `tags` (Attributes List) Any tags assigned to the VPN concentrator. (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_id` (String) The ID of the transit gateway associated with the VPN concentrator.
 
 ### Read-Only
 

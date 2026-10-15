@@ -1,0 +1,246 @@
+{
+  "typeName": "AWS::NetworkSecurityManager::Policy",
+  "description": "Resource Type definition for AWS::NetworkSecurityManager::Policy. Creates and manages a Network Security Manager policy.",
+  "definitions": {
+    "AssociatedTemplateAndRule": {
+      "type": "object",
+      "description": "Associates either a template or a rule with a policy.",
+      "properties": {
+        "TemplateArn": {
+          "type": "string",
+          "description": "ARN of the associated template."
+        },
+        "RuleArn": {
+          "type": "string",
+          "description": "ARN of the associated rule."
+        }
+      },
+      "additionalProperties": false
+    },
+    "WafConfig": {
+      "type": "object",
+      "description": "WAF-specific policy settings. Populated only for WAF firewall type policies.",
+      "properties": {
+        "ExistingCustomerWebACLResolution": {
+          "type": "string",
+          "description": "Controls how Network Security Manager handles remediation when a resource already has a customer-created WebACL.",
+          "enum": [
+            "RETROFIT",
+            "OVERRIDE_ASSOCIATION",
+            "NO_REMEDIATION"
+          ]
+        },
+        "ConflictResolution": {
+          "type": "string",
+          "description": "Conflict-resolution strategy applied to AWS WAF policies.",
+          "enum": [
+            "MERGE_WHERE_APPLICABLE"
+          ]
+        }
+      },
+      "required": [
+        "ExistingCustomerWebACLResolution",
+        "ConflictResolution"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyConfiguration": {
+      "type": "object",
+      "description": "Configuration settings for policy behavior.",
+      "properties": {
+        "RemediationEnabled": {
+          "type": "boolean",
+          "description": "Controls automatic remediation of non-compliant resources."
+        },
+        "ResourcesCleanUp": {
+          "type": "boolean",
+          "description": "Controls automatic cleanup of unused resources."
+        },
+        "WafConfig": {
+          "$ref": "#/definitions/WafConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "PolicyId": {
+      "description": "The unique identifier of the policy.",
+      "type": "string",
+      "pattern": "^[a-z0-9]{1,64}$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "PolicyArn": {
+      "description": "The ARN of the policy.",
+      "type": "string",
+      "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:(.+)$",
+      "minLength": 20,
+      "maxLength": 1010
+    },
+    "PolicyName": {
+      "description": "The name of the policy.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "PolicyDescription": {
+      "description": "A description of the policy.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
+      "maxLength": 256
+    },
+    "Status": {
+      "description": "The status of the policy.",
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE",
+        "DISABLED"
+      ]
+    },
+    "Version": {
+      "description": "The version number.",
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$",
+      "minLength": 1,
+      "maxLength": 10
+    },
+    "Priority": {
+      "description": "The priority of the policy.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "AssociatedTemplateAndRuleList": {
+      "description": "List of templates and rules associated with this policy.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AssociatedTemplateAndRule"
+      }
+    },
+    "FirewallType": {
+      "description": "The type of firewall.",
+      "type": "string",
+      "enum": [
+        "WAF",
+        "SHIELD_ADVANCED"
+      ]
+    },
+    "PolicyConfiguration": {
+      "description": "Configuration settings for policy behavior.",
+      "$ref": "#/definitions/PolicyConfiguration"
+    },
+    "UpdatedAt": {
+      "description": "An ISO 8601 timestamp indicating when the policy was last modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "description": "The tags associated with the policy.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PolicyName",
+    "Priority",
+    "FirewallType",
+    "PolicyConfiguration"
+  ],
+  "createOnlyProperties": [
+    "/properties/PolicyName",
+    "/properties/FirewallType"
+  ],
+  "readOnlyProperties": [
+    "/properties/PolicyId",
+    "/properties/PolicyArn",
+    "/properties/Status",
+    "/properties/Version",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/PolicyArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PolicyId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-security-manager:TagResource",
+      "network-security-manager:UntagResource",
+      "network-security-manager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "network-security-manager:CreatePolicy",
+        "network-security-manager:GetPolicy",
+        "network-security-manager:TagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "network-security-manager:GetPolicy",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "network-security-manager:UpdatePolicy",
+        "network-security-manager:GetPolicy",
+        "network-security-manager:TagResource",
+        "network-security-manager:UntagResource",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "network-security-manager:DeletePolicy",
+        "network-security-manager:GetPolicy",
+        "network-security-manager:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "network-security-manager:ListPolicies"
+      ]
+    }
+  }
+}

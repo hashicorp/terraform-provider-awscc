@@ -138,6 +138,13 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "EndpointPrefix": {
+		//	          "description": "An optional prefix for the Argo CD server endpoint. When specified, EKS uses this prefix to generate the server endpoint; otherwise, the endpoint is generated automatically. This value cannot be changed after the capability is created.",
+		//	          "maxLength": 50,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+		//	          "type": "string"
+		//	        },
 		//	        "Namespace": {
 		//	          "description": "The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.",
 		//	          "type": "string"
@@ -301,6 +308,20 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 								objectplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointPrefix
+						"endpoint_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An optional prefix for the Argo CD server endpoint. When specified, EKS uses this prefix to generate the server endpoint; otherwise, the endpoint is generated automatically. This value cannot be changed after the capability is created.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 50),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
@@ -661,6 +682,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		"delete_propagation_policy":   "DeletePropagationPolicy",
 		"disabled_services":           "DisabledServices",
 		"enable_cross_namespace":      "EnableCrossNamespace",
+		"endpoint_prefix":             "EndpointPrefix",
 		"id":                          "Id",
 		"idc_instance_arn":            "IdcInstanceArn",
 		"idc_managed_application_arn": "IdcManagedApplicationArn",

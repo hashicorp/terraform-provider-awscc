@@ -169,6 +169,55 @@ func schemaAttribute0e609b3e43cd706da015474a() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute0ee6f26289fdb88b8224c347() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AndStatement
+				"and_statement": schemaAttribute37a5f5459c5b89ac1a5de8af(),
+				// Property: AsnMatchStatement
+				"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+				// Property: ByteMatchStatement
+				"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+				// Property: GeoMatchStatement
+				"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+				// Property: IPSetReferenceStatement
+				"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+				// Property: LabelMatchStatement
+				"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+				// Property: ManagedRuleGroupStatement
+				"managed_rule_group_statement": schemaAttribute16a3579cc31e89f3f9277623(),
+				// Property: NotStatement
+				"not_statement": schemaAttribute43c1d824d964f1e5333b272d(),
+				// Property: OrStatement
+				"or_statement": schemaAttribute37a5f5459c5b89ac1a5de8af(),
+				// Property: RateBasedStatement
+				"rate_based_statement": schemaAttribute87bc68f24c469f294b8f4408(),
+				// Property: RegexMatchStatement
+				"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+				// Property: RegexPatternSetReferenceStatement
+				"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+				// Property: RuleGroupReferenceStatement
+				"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+				// Property: SizeConstraintStatement
+				"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+				// Property: SqliMatchStatement
+				"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+				// Property: XssMatchStatement
+				"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute0fdea87832bd88820b3a1540() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Description: "The name of the header to use.",
@@ -277,7 +326,25 @@ func schemaAttribute14e2302c7f1e52c71ce9f78f() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute15a55f6acbf8c6495a411f7c() schema.Attribute {
+func schemaAttribute1656bff74c53493ece7b50b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FallbackBehavior
+			"fallback_behavior": schemaAttribute9198e1de2839462b2d889592(),
+			// Property: HeaderName
+			"header_name": schemaAttribute5b6e40ae58e4f128a76be566(),
+			// Property: Position
+			"position": schemaAttribute66cc97a1e25197839270ed22(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16a3579cc31e89f3f9277623() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 			// Property: ExcludedRules
@@ -289,29 +356,11 @@ func schemaAttribute15a55f6acbf8c6495a411f7c() schema.Attribute {
 			// Property: RuleActionOverrides
 			"rule_action_overrides": schemaAttribute5f7e10eac22158b4311cb359(),
 			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttributeab960c200a80bfb3603f6d48(),
+			"scope_down_statement": schemaAttribute5afd0dfb75c3d6453df94391(),
 			// Property: VendorName
 			"vendor_name": schemaAttribute5b6e40ae58e4f128a76be566(),
 			// Property: Version
 			"version": schemaAttributec6d4c2020731b64d4fdbcc2a(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1656bff74c53493ece7b50b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FallbackBehavior
-			"fallback_behavior": schemaAttribute9198e1de2839462b2d889592(),
-			// Property: HeaderName
-			"header_name": schemaAttribute5b6e40ae58e4f128a76be566(),
-			// Property: Position
-			"position": schemaAttribute66cc97a1e25197839270ed22(),
 		}, /*END SCHEMA*/
 		Optional: true,
 		Computed: true,
@@ -351,54 +400,6 @@ func schemaAttribute1904d52df1ab5458ea3d554c() schema.Attribute {
 		Description: "Configures the options for on-source DDoS protection provided by supported resource type.",
 		Optional:    true,
 		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19ca12d51d190a86523cf964() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttributef77bbf52acf6f7202deed7f2(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttribute15a55f6acbf8c6495a411f7c(),
-			// Property: NotStatement
-			"not_statement": schemaAttributedc81c76352dbc36ae36bb65d(),
-			// Property: OrStatement
-			"or_statement": schemaAttributef77bbf52acf6f7202deed7f2(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributed3c809d69001b7a0c8df00bd(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -447,6 +448,20 @@ func schemaAttribute1ca519d49deae991a643c4d7() schema.Attribute {
 		Description: "The string containing the list of a web request's header names, ordered as they appear in the web request, separated by colons.",
 		Optional:    true,
 		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cfc8cbc1a87330f56a76820() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statements
+			"statements": schemaAttribute0ee6f26289fdb88b8224c347(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -553,6 +568,20 @@ func schemaAttribute243d10f57440134844ef420c() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute246a262f073bceaa80e6d70e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statement
+			"statement": schemaAttributeda224fc51db660ceb3ce8a65(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute24941a7743dba1150f6cddda() schema.Attribute {
 	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -574,6 +603,54 @@ func schemaAttribute24941a7743dba1150f6cddda() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute25053e7d4eee72da341952df() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttributee13056bec5f0c82bd32abb31(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttributeda8836768e66fcae1ca80bc2(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute7af2bcf94aeaa4d71cfa0eab(),
+			// Property: OrStatement
+			"or_statement": schemaAttributee13056bec5f0c82bd32abb31(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute99417201a2c0a4ddaf8552c3(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute250871503648d91019359038() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -584,6 +661,54 @@ func schemaAttribute250871503648d91019359038() schema.Attribute {
 		}, /*END SCHEMA*/
 		Optional: true,
 		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26ca55c560ea925d8356f293() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttribute1cfc8cbc1a87330f56a76820(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttribute43b5379954f0f99aa7007b73(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute246a262f073bceaa80e6d70e(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute1cfc8cbc1a87330f56a76820(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttributee51506826e9fb8485acd8515(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -821,51 +946,6 @@ func schemaAttribute31e9c36f1041a96be1c490bf() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute331a7adfc71f55441e0aeb7e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttributef77bbf52acf6f7202deed7f2(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttribute15a55f6acbf8c6495a411f7c(),
-			// Property: NotStatement
-			"not_statement": schemaAttributedc81c76352dbc36ae36bb65d(),
-			// Property: OrStatement
-			"or_statement": schemaAttributef77bbf52acf6f7202deed7f2(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributed3c809d69001b7a0c8df00bd(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttribute3439e0fbddfbf088afcad7d8() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		CustomType:  jsontypes.NormalizedType{},
@@ -926,6 +1006,53 @@ func schemaAttribute377c2870f4bf372375813ce8() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37a5f5459c5b89ac1a5de8af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statements
+			"statements": schemaAttribute65cdb36647c1fa198efdac7d(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute381f0099761cfbb6d81100ab() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttributeacc2deb8474cbdf3fc6cd320(),
+				// Property: CaptchaConfig
+				"captcha_config": schemaAttribute2b5ff622dd5885bc1ba681cf(),
+				// Property: ChallengeConfig
+				"challenge_config": schemaAttribute2b5ff622dd5885bc1ba681cf(),
+				// Property: Name
+				"name": schemaAttribute53ba8a2b6f7f937aede9d7c8(),
+				// Property: OverrideAction
+				"override_action": schemaAttribute9bc9c296cf4d40a53f3d6cef(),
+				// Property: Priority
+				"priority": schemaAttribute70d3e66669722ee2d4e428d8(),
+				// Property: RuleLabels
+				"rule_labels": schemaAttribute00f448a1af67f7d686037ac2(),
+				// Property: Statement
+				"statement": schemaAttribute25053e7d4eee72da341952df(),
+				// Property: VisibilityConfig
+				"visibility_config": schemaAttribute243d10f57440134844ef420c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Collection of Rules.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1053,6 +1180,30 @@ func schemaAttribute3cd35438814278f9e9c30ce6() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute3d87099d9aa24f019c757e49() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
+			// Property: Limit
+			"limit": schemaAttribute1e529e8d2b35260870735629(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute3fd1046bb525e6221fc4cc77() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		CustomType:  jsontypes.NormalizedType{},
@@ -1083,6 +1234,46 @@ func schemaAttribute4137774029ca5a3513522645() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute43b5379954f0f99aa7007b73() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExcludedRules
+			"excluded_rules": schemaAttributebf6648f83e5e5d1a3a02d450(),
+			// Property: ManagedRuleGroupConfigs
+			"managed_rule_group_configs": schemaAttribute71f9d99fbd29b05076942b85(),
+			// Property: Name
+			"name": schemaAttribute53ba8a2b6f7f937aede9d7c8(),
+			// Property: RuleActionOverrides
+			"rule_action_overrides": schemaAttribute5f7e10eac22158b4311cb359(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributea56078829e8909dcdd253c49(),
+			// Property: VendorName
+			"vendor_name": schemaAttribute5b6e40ae58e4f128a76be566(),
+			// Property: Version
+			"version": schemaAttributec6d4c2020731b64d4fdbcc2a(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43c1d824d964f1e5333b272d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statement
+			"statement": schemaAttributea4137881f08e39358d6a0715(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute45d4fbbbc0bae0a532215938() schema.Attribute {
 	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1093,49 +1284,6 @@ func schemaAttribute45d4fbbbc0bae0a532215938() schema.Attribute {
 		}, /*END NESTED OBJECT*/
 		Optional: true,
 		Computed: true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45d99fb276eaa1960352addb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AsnMatchStatement
-				"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-				// Property: ByteMatchStatement
-				"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-				// Property: GeoMatchStatement
-				"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-				// Property: IPSetReferenceStatement
-				"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-				// Property: LabelMatchStatement
-				"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-				// Property: ManagedRuleGroupStatement
-				"managed_rule_group_statement": schemaAttributefac06671e2ddf1820aee6379(),
-				// Property: RateBasedStatement
-				"rate_based_statement": schemaAttribute943b034faf7834cd44d99367(),
-				// Property: RegexMatchStatement
-				"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-				// Property: RegexPatternSetReferenceStatement
-				"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-				// Property: RuleGroupReferenceStatement
-				"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-				// Property: SizeConstraintStatement
-				"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-				// Property: SqliMatchStatement
-				"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-				// Property: XssMatchStatement
-				"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -1421,6 +1569,51 @@ func schemaAttribute5a38823bb99b11fd701e1f98() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute5afd0dfb75c3d6453df94391() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttributed49509213d155a1789506249(),
+			// Property: NotStatement
+			"not_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: OrStatement
+			"or_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute3d87099d9aa24f019c757e49(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute5b6e40ae58e4f128a76be566() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -1518,39 +1711,6 @@ func schemaAttribute610ec90cf71a7b0c2e357360() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute61aa939fd5a7e3d7e9899954() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttributeacc2deb8474cbdf3fc6cd320(),
-				// Property: CaptchaConfig
-				"captcha_config": schemaAttribute2b5ff622dd5885bc1ba681cf(),
-				// Property: ChallengeConfig
-				"challenge_config": schemaAttribute2b5ff622dd5885bc1ba681cf(),
-				// Property: Name
-				"name": schemaAttribute53ba8a2b6f7f937aede9d7c8(),
-				// Property: OverrideAction
-				"override_action": schemaAttribute9bc9c296cf4d40a53f3d6cef(),
-				// Property: Priority
-				"priority": schemaAttribute70d3e66669722ee2d4e428d8(),
-				// Property: RuleLabels
-				"rule_labels": schemaAttribute00f448a1af67f7d686037ac2(),
-				// Property: Statement
-				"statement": schemaAttribute871e7e2fb9694634cbf29b1f(),
-				// Property: VisibilityConfig
-				"visibility_config": schemaAttribute243d10f57440134844ef420c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Collection of Rules.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttribute621474a90a030c44245d8ae3() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -1562,51 +1722,6 @@ func schemaAttribute621474a90a030c44245d8ae3() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63917945d3888102e1b9bf99() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttributef1c68d3406ef796511419a30(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttributeda35a70f57d199c1730d4071(),
-			// Property: NotStatement
-			"not_statement": schemaAttributecaa2ce77eb0454e58c44bdde(),
-			// Property: OrStatement
-			"or_statement": schemaAttributef1c68d3406ef796511419a30(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttribute9e6b0d821234620e05fb95a9(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1634,6 +1749,55 @@ func schemaAttribute65b696e3739e76c6889ff662() schema.Attribute {
 		Computed:    true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65cdb36647c1fa198efdac7d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AndStatement
+				"and_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+				// Property: AsnMatchStatement
+				"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+				// Property: ByteMatchStatement
+				"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+				// Property: GeoMatchStatement
+				"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+				// Property: IPSetReferenceStatement
+				"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+				// Property: LabelMatchStatement
+				"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+				// Property: ManagedRuleGroupStatement
+				"managed_rule_group_statement": schemaAttributed49509213d155a1789506249(),
+				// Property: NotStatement
+				"not_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+				// Property: OrStatement
+				"or_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+				// Property: RateBasedStatement
+				"rate_based_statement": schemaAttribute3d87099d9aa24f019c757e49(),
+				// Property: RegexMatchStatement
+				"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+				// Property: RegexPatternSetReferenceStatement
+				"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+				// Property: RuleGroupReferenceStatement
+				"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+				// Property: SizeConstraintStatement
+				"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+				// Property: SqliMatchStatement
+				"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+				// Property: XssMatchStatement
+				"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -1843,77 +2007,16 @@ func schemaAttribute762c2979accf88c275cb1413() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute7a2662fea9458b88008bd569() schema.Attribute {
+func schemaAttribute7af2bcf94aeaa4d71cfa0eab() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExcludedRules
-			"excluded_rules": schemaAttributebf6648f83e5e5d1a3a02d450(),
-			// Property: ManagedRuleGroupConfigs
-			"managed_rule_group_configs": schemaAttribute71f9d99fbd29b05076942b85(),
-			// Property: Name
-			"name": schemaAttribute53ba8a2b6f7f937aede9d7c8(),
-			// Property: RuleActionOverrides
-			"rule_action_overrides": schemaAttribute5f7e10eac22158b4311cb359(),
-			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttribute63917945d3888102e1b9bf99(),
-			// Property: VendorName
-			"vendor_name": schemaAttribute5b6e40ae58e4f128a76be566(),
-			// Property: Version
-			"version": schemaAttributec6d4c2020731b64d4fdbcc2a(),
+			// Property: Statement
+			"statement": schemaAttribute26ca55c560ea925d8356f293(),
 		}, /*END SCHEMA*/
 		Optional: true,
 		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aa9a49d1d2ba81c496a5ccb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AndStatement
-				"and_statement": schemaAttributef77bbf52acf6f7202deed7f2(),
-				// Property: AsnMatchStatement
-				"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-				// Property: ByteMatchStatement
-				"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-				// Property: GeoMatchStatement
-				"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-				// Property: IPSetReferenceStatement
-				"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-				// Property: LabelMatchStatement
-				"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-				// Property: ManagedRuleGroupStatement
-				"managed_rule_group_statement": schemaAttribute15a55f6acbf8c6495a411f7c(),
-				// Property: NotStatement
-				"not_statement": schemaAttributedc81c76352dbc36ae36bb65d(),
-				// Property: OrStatement
-				"or_statement": schemaAttributef77bbf52acf6f7202deed7f2(),
-				// Property: RateBasedStatement
-				"rate_based_statement": schemaAttributed3c809d69001b7a0c8df00bd(),
-				// Property: RegexMatchStatement
-				"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-				// Property: RegexPatternSetReferenceStatement
-				"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-				// Property: RuleGroupReferenceStatement
-				"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-				// Property: SizeConstraintStatement
-				"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-				// Property: SqliMatchStatement
-				"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-				// Property: XssMatchStatement
-				"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2013,48 +2116,24 @@ func schemaAttribute84260c7ec0facb3542f3556d() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute871e7e2fb9694634cbf29b1f() schema.Attribute {
+func schemaAttribute87bc68f24c469f294b8f4408() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttributeb09a7e82a98486f47650b5af(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttribute7a2662fea9458b88008bd569(),
-			// Property: NotStatement
-			"not_statement": schemaAttribute8f61ab05dade6631d3f49c14(),
-			// Property: OrStatement
-			"or_statement": schemaAttributeb09a7e82a98486f47650b5af(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttributebc566c4a49cd3e975d14de68(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
+			// Property: Limit
+			"limit": schemaAttribute1e529e8d2b35260870735629(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttribute5afd0dfb75c3d6453df94391(),
 		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
+		Optional: true,
+		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -2120,14 +2199,45 @@ func schemaAttribute891299b1a7524244dc44ddad() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute8f61ab05dade6631d3f49c14() schema.Attribute {
+func schemaAttribute8f01669d8d960046a5a904d5() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statement
-			"statement": schemaAttributef73ffe809827863a63cb6770(),
+			// Property: AndStatement
+			"and_statement": schemaAttribute1cfc8cbc1a87330f56a76820(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttribute43b5379954f0f99aa7007b73(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute246a262f073bceaa80e6d70e(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute1cfc8cbc1a87330f56a76820(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttributee51506826e9fb8485acd8515(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
 		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -2203,28 +2313,6 @@ func schemaAttribute9283364865ae309f1ea5c68d() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttribute943b034faf7834cd44d99367() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
-			// Property: Limit
-			"limit": schemaAttribute1e529e8d2b35260870735629(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttribute960b1070826e00486da655d8() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Description: "ARN of the WAF entity.",
@@ -2272,6 +2360,30 @@ func schemaAttribute97f0c61cc6b150500874a0dd() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttribute99417201a2c0a4ddaf8552c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
+			// Property: Limit
+			"limit": schemaAttribute1e529e8d2b35260870735629(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttribute8f01669d8d960046a5a904d5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttribute9bc9c296cf4d40a53f3d6cef() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2301,30 +2413,6 @@ func schemaAttribute9e13e41b5a5439b26daa283b() schema.Attribute {
 		}, /*END SCHEMA*/
 		Description: "Visibility Metric of the WebACL.",
 		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e6b0d821234620e05fb95a9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
-			// Property: Limit
-			"limit": schemaAttribute1e529e8d2b35260870735629(),
-			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttribute331a7adfc71f55441e0aeb7e(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
 
@@ -2411,6 +2499,54 @@ func schemaAttributea3aaaa2d1c7a14f2df348efe() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributea4137881f08e39358d6a0715() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttributed49509213d155a1789506249(),
+			// Property: NotStatement
+			"not_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: OrStatement
+			"or_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute3d87099d9aa24f019c757e49(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributea51d84753b73258a3c724244() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2423,6 +2559,100 @@ func schemaAttributea51d84753b73258a3c724244() schema.Attribute {
 		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea56078829e8909dcdd253c49() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttribute37a5f5459c5b89ac1a5de8af(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttribute16a3579cc31e89f3f9277623(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute43c1d824d964f1e5333b272d(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute37a5f5459c5b89ac1a5de8af(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute87bc68f24c469f294b8f4408(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea583512a515d21d9673f83dc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AndStatement
+				"and_statement": schemaAttribute1cfc8cbc1a87330f56a76820(),
+				// Property: AsnMatchStatement
+				"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+				// Property: ByteMatchStatement
+				"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+				// Property: GeoMatchStatement
+				"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+				// Property: IPSetReferenceStatement
+				"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+				// Property: LabelMatchStatement
+				"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+				// Property: ManagedRuleGroupStatement
+				"managed_rule_group_statement": schemaAttribute43b5379954f0f99aa7007b73(),
+				// Property: NotStatement
+				"not_statement": schemaAttribute246a262f073bceaa80e6d70e(),
+				// Property: OrStatement
+				"or_statement": schemaAttribute1cfc8cbc1a87330f56a76820(),
+				// Property: RateBasedStatement
+				"rate_based_statement": schemaAttributee51506826e9fb8485acd8515(),
+				// Property: RegexMatchStatement
+				"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+				// Property: RegexPatternSetReferenceStatement
+				"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+				// Property: RuleGroupReferenceStatement
+				"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+				// Property: SizeConstraintStatement
+				"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+				// Property: SqliMatchStatement
+				"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+				// Property: XssMatchStatement
+				"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2508,45 +2738,6 @@ func schemaAttributeab21919de37b1b7cbb825396() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributeab960c200a80bfb3603f6d48() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttributefac06671e2ddf1820aee6379(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttribute943b034faf7834cd44d99367(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributeacc2deb8474cbdf3fc6cd320() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2590,6 +2781,17 @@ func schemaAttributeae44167a9795ea71ea5f2484() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributeaef3b1f2b830d92e0e06ffd8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes:  map[string]schema.Attribute{},
+		Description: "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		Optional:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NestingDepthExceededObject(),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributeaf11793e91731ca86c0a35ad() schema.Attribute {
 	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
 		Computed: true,
@@ -2610,20 +2812,6 @@ func schemaAttributeafae549ac83e2e0c7f0698de() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb09a7e82a98486f47650b5af() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statements
-			"statements": schemaAttributefb1e3d2b20c1d0e314561e66(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2703,30 +2891,6 @@ func schemaAttributebc2fc788f98c126979753c3f() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc566c4a49cd3e975d14de68() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
-			// Property: Limit
-			"limit": schemaAttribute1e529e8d2b35260870735629(),
-			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttribute63917945d3888102e1b9bf99(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -2915,20 +3079,6 @@ func schemaAttributec6d4c2020731b64d4fdbcc2a() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributecaa2ce77eb0454e58c44bdde() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statement
-			"statement": schemaAttribute19ca12d51d190a86523cf964(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributecb062b1a5d73bc062be6ba3c() schema.Attribute {
 	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -3023,30 +3173,6 @@ func schemaAttributecfbfdf07e5c2713759643991() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributed3c809d69001b7a0c8df00bd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregateKeyType
-			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
-			// Property: CustomKeys
-			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
-			// Property: EvaluationWindowSec
-			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
-			// Property: ForwardedIPConfig
-			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
-			// Property: Limit
-			"limit": schemaAttribute1e529e8d2b35260870735629(),
-			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttributeab960c200a80bfb3603f6d48(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributed3cec86e5ff93c389e73ec5d() schema.Attribute {
 	return (schema.StringAttribute{ /*START ATTRIBUTE*/
 		Optional: true,
@@ -3057,6 +3183,32 @@ func schemaAttributed3cec86e5ff93c389e73ec5d() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed49509213d155a1789506249() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExcludedRules
+			"excluded_rules": schemaAttributebf6648f83e5e5d1a3a02d450(),
+			// Property: ManagedRuleGroupConfigs
+			"managed_rule_group_configs": schemaAttribute71f9d99fbd29b05076942b85(),
+			// Property: Name
+			"name": schemaAttribute53ba8a2b6f7f937aede9d7c8(),
+			// Property: RuleActionOverrides
+			"rule_action_overrides": schemaAttribute5f7e10eac22158b4311cb359(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributeaef3b1f2b830d92e0e06ffd8(),
+			// Property: VendorName
+			"vendor_name": schemaAttribute5b6e40ae58e4f128a76be566(),
+			// Property: Version
+			"version": schemaAttributec6d4c2020731b64d4fdbcc2a(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -3140,7 +3292,55 @@ func schemaAttributed9e86b97955bfe6f6a3c0657() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributeda35a70f57d199c1730d4071() schema.Attribute {
+func schemaAttributeda224fc51db660ceb3ce8a65() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndStatement
+			"and_statement": schemaAttribute37a5f5459c5b89ac1a5de8af(),
+			// Property: AsnMatchStatement
+			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
+			// Property: ByteMatchStatement
+			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
+			// Property: GeoMatchStatement
+			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
+			// Property: IPSetReferenceStatement
+			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
+			// Property: LabelMatchStatement
+			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
+			// Property: ManagedRuleGroupStatement
+			"managed_rule_group_statement": schemaAttribute16a3579cc31e89f3f9277623(),
+			// Property: NotStatement
+			"not_statement": schemaAttribute43c1d824d964f1e5333b272d(),
+			// Property: OrStatement
+			"or_statement": schemaAttribute37a5f5459c5b89ac1a5de8af(),
+			// Property: RateBasedStatement
+			"rate_based_statement": schemaAttribute87bc68f24c469f294b8f4408(),
+			// Property: RegexMatchStatement
+			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
+			// Property: RegexPatternSetReferenceStatement
+			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
+			// Property: RuleGroupReferenceStatement
+			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
+			// Property: SizeConstraintStatement
+			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
+			// Property: SqliMatchStatement
+			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
+			// Property: XssMatchStatement
+			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
+		}, /*END SCHEMA*/
+		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda8836768e66fcae1ca80bc2() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 			// Property: ExcludedRules
@@ -3152,7 +3352,7 @@ func schemaAttributeda35a70f57d199c1730d4071() schema.Attribute {
 			// Property: RuleActionOverrides
 			"rule_action_overrides": schemaAttribute5f7e10eac22158b4311cb359(),
 			// Property: ScopeDownStatement
-			"scope_down_statement": schemaAttribute331a7adfc71f55441e0aeb7e(),
+			"scope_down_statement": schemaAttribute8f01669d8d960046a5a904d5(),
 			// Property: VendorName
 			"vendor_name": schemaAttribute5b6e40ae58e4f128a76be566(),
 			// Property: Version
@@ -3235,20 +3435,6 @@ func schemaAttributedba685d622d8b3be3f0541dc() schema.Attribute {
 		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc81c76352dbc36ae36bb65d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statement
-			"statement": schemaAttributef2f438df8ffe2b401c122f35(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -3343,6 +3529,20 @@ func schemaAttributee0e69cd823a06a127054f8a1() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
+func schemaAttributee13056bec5f0c82bd32abb31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statements
+			"statements": schemaAttributea583512a515d21d9673f83dc(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func schemaAttributee3c50d4141aa55e589ee8dad() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3426,6 +3626,30 @@ func schemaAttributee4a01e56697e112cfcf79c1b() schema.Attribute {
 		Description: "Configures how to use the Account creation fraud prevention managed rule group in the web ACL",
 		Optional:    true,
 		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee51506826e9fb8485acd8515() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregateKeyType
+			"aggregate_key_type": schemaAttribute02260633e00ce843d937cd5b(),
+			// Property: CustomKeys
+			"custom_keys": schemaAttributedba685d622d8b3be3f0541dc(),
+			// Property: EvaluationWindowSec
+			"evaluation_window_sec": schemaAttributec18080fc5ba0de372d9ad093(),
+			// Property: ForwardedIPConfig
+			"forwarded_ip_config": schemaAttribute250871503648d91019359038(),
+			// Property: Limit
+			"limit": schemaAttribute1e529e8d2b35260870735629(),
+			// Property: ScopeDownStatement
+			"scope_down_statement": schemaAttributea56078829e8909dcdd253c49(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -3637,20 +3861,6 @@ func schemaAttributef0abff16c775dd0718fe0e87() schema.Attribute {
 	} /*END ATTRIBUTE*/)
 }
 
-func schemaAttributef1c68d3406ef796511419a30() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statements
-			"statements": schemaAttribute7aa9a49d1d2ba81c496a5ccb(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func schemaAttributef2ccc3159e1a7f0212ea02c9() schema.Attribute {
 	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3659,48 +3869,6 @@ func schemaAttributef2ccc3159e1a7f0212ea02c9() schema.Attribute {
 		}, /*END SCHEMA*/
 		Optional: true,
 		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2f438df8ffe2b401c122f35() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttributefac06671e2ddf1820aee6379(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttribute943b034faf7834cd44d99367(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
@@ -3795,141 +3963,6 @@ func schemaAttributef653ca46e57935baa83cc97d() schema.Attribute {
 		Computed:    true,
 		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef73ffe809827863a63cb6770() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndStatement
-			"and_statement": schemaAttributef1c68d3406ef796511419a30(),
-			// Property: AsnMatchStatement
-			"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-			// Property: ByteMatchStatement
-			"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-			// Property: GeoMatchStatement
-			"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-			// Property: IPSetReferenceStatement
-			"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-			// Property: LabelMatchStatement
-			"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-			// Property: ManagedRuleGroupStatement
-			"managed_rule_group_statement": schemaAttributeda35a70f57d199c1730d4071(),
-			// Property: NotStatement
-			"not_statement": schemaAttributecaa2ce77eb0454e58c44bdde(),
-			// Property: OrStatement
-			"or_statement": schemaAttributef1c68d3406ef796511419a30(),
-			// Property: RateBasedStatement
-			"rate_based_statement": schemaAttribute9e6b0d821234620e05fb95a9(),
-			// Property: RegexMatchStatement
-			"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-			// Property: RegexPatternSetReferenceStatement
-			"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-			// Property: RuleGroupReferenceStatement
-			"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-			// Property: SizeConstraintStatement
-			"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-			// Property: SqliMatchStatement
-			"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-			// Property: XssMatchStatement
-			"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-		}, /*END SCHEMA*/
-		Description: "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef77bbf52acf6f7202deed7f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statements
-			"statements": schemaAttribute45d99fb276eaa1960352addb(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefac06671e2ddf1820aee6379() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExcludedRules
-			"excluded_rules": schemaAttributebf6648f83e5e5d1a3a02d450(),
-			// Property: ManagedRuleGroupConfigs
-			"managed_rule_group_configs": schemaAttribute71f9d99fbd29b05076942b85(),
-			// Property: Name
-			"name": schemaAttribute53ba8a2b6f7f937aede9d7c8(),
-			// Property: RuleActionOverrides
-			"rule_action_overrides": schemaAttribute5f7e10eac22158b4311cb359(),
-			// Property: VendorName
-			"vendor_name": schemaAttribute5b6e40ae58e4f128a76be566(),
-			// Property: Version
-			"version": schemaAttributec6d4c2020731b64d4fdbcc2a(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb1e3d2b20c1d0e314561e66() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AndStatement
-				"and_statement": schemaAttributef1c68d3406ef796511419a30(),
-				// Property: AsnMatchStatement
-				"asn_match_statement": schemaAttributeddae397929b70bf7dc082041(),
-				// Property: ByteMatchStatement
-				"byte_match_statement": schemaAttributeec364ac41e97278a114470c0(),
-				// Property: GeoMatchStatement
-				"geo_match_statement": schemaAttributecb4f25fa24d0b5ae313a28ef(),
-				// Property: IPSetReferenceStatement
-				"ip_set_reference_statement": schemaAttribute1e3a743215b578e4890e0c5a(),
-				// Property: LabelMatchStatement
-				"label_match_statement": schemaAttributea51d84753b73258a3c724244(),
-				// Property: ManagedRuleGroupStatement
-				"managed_rule_group_statement": schemaAttributeda35a70f57d199c1730d4071(),
-				// Property: NotStatement
-				"not_statement": schemaAttributecaa2ce77eb0454e58c44bdde(),
-				// Property: OrStatement
-				"or_statement": schemaAttributef1c68d3406ef796511419a30(),
-				// Property: RateBasedStatement
-				"rate_based_statement": schemaAttribute9e6b0d821234620e05fb95a9(),
-				// Property: RegexMatchStatement
-				"regex_match_statement": schemaAttributee48f1e52abc2cd914771fd59(),
-				// Property: RegexPatternSetReferenceStatement
-				"regex_pattern_set_reference_statement": schemaAttributeff460ed0b0e80dafac058ef1(),
-				// Property: RuleGroupReferenceStatement
-				"rule_group_reference_statement": schemaAttributeb6435d38b1698747398c0bb8(),
-				// Property: SizeConstraintStatement
-				"size_constraint_statement": schemaAttributebf1da53efcd1b1121db9e8e4(),
-				// Property: SqliMatchStatement
-				"sqli_match_statement": schemaAttributef606e291d1b7479f534b4dc2(),
-				// Property: XssMatchStatement
-				"xss_match_statement": schemaAttributed89e64862c0e794d99942049(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
 		}, /*END PLAN MODIFIERS*/
 	} /*END ATTRIBUTE*/)
 }
@@ -4922,6 +4955,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -6420,6 +6459,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -6434,6 +6479,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -6913,6 +6970,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -10837,6 +10900,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -12335,6 +12404,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -12349,6 +12424,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -12828,6 +12915,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -15265,6 +15358,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -16763,6 +16862,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -16777,6 +16882,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -17256,6 +17373,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -19684,6 +19807,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -21182,6 +21311,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -21196,6 +21331,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -21675,6 +21822,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -24579,6 +24732,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -26077,6 +26236,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -26091,6 +26256,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -26570,6 +26747,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -32915,6 +33098,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -34413,6 +34602,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -34427,6 +34622,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -34906,6 +35113,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -38830,6 +39043,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -40328,6 +40547,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -40342,6 +40567,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -40821,6 +41058,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -43258,6 +43501,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -44756,6 +45005,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -44770,6 +45025,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -45249,6 +45516,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -47677,6 +47950,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -49175,6 +49454,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -49189,6 +49474,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -49668,6 +49965,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -52572,6 +52875,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -54070,6 +54379,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -54084,6 +54399,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -54563,6 +54890,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -59421,6 +59754,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -60919,6 +61258,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -60933,6 +61278,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -61412,6 +61769,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -65336,6 +65699,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -66834,6 +67203,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -66848,6 +67223,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -67327,6 +67714,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -69764,6 +70157,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -71262,6 +71661,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -71276,6 +71681,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -71755,6 +72172,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -74183,6 +74606,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -75681,6 +76110,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -75695,6 +76130,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -76174,6 +76621,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -79078,6 +79531,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -80576,6 +81035,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -80590,6 +81055,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -81069,6 +81546,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -85918,6 +86401,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -87416,6 +87905,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -87430,6 +87925,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -87909,6 +88416,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -91833,6 +92346,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -93331,6 +93850,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -93345,6 +93870,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -93824,6 +94361,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -96261,6 +96804,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -97759,6 +98308,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -97773,6 +98328,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -98252,6 +98819,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -100680,6 +101253,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -102178,6 +102757,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -102192,6 +102777,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -102671,6 +103268,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -105575,6 +106178,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -107073,6 +107682,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -107087,6 +107702,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -107566,6 +108193,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -112891,6 +113524,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -114389,6 +115028,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -114403,6 +115048,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -114882,6 +115539,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -118806,6 +119469,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -120304,6 +120973,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -120318,6 +120993,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -120797,6 +121484,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -123234,6 +123927,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -124732,6 +125431,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -124746,6 +125451,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -125225,6 +125942,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -127653,6 +128376,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -129151,6 +129880,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -129165,6 +129900,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -129644,6 +130391,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -132548,6 +133301,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -134046,6 +134805,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -134060,6 +134825,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -134539,6 +135316,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -143305,6 +144088,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -144803,6 +145592,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -144817,6 +145612,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -145296,6 +146103,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -149220,6 +150033,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -150718,6 +151537,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -150732,6 +151557,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -151211,6 +152048,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -153648,6 +154491,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -155146,6 +155995,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -155160,6 +156015,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -155639,6 +156506,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -158067,6 +158940,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -159565,6 +160444,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -159579,6 +160464,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -160058,6 +160955,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -162962,6 +163865,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -164460,6 +165369,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -164474,6 +165389,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -164953,6 +165880,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -171298,6 +172231,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -172796,6 +173735,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -172810,6 +173755,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -173289,6 +174246,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -177213,6 +178176,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -178711,6 +179680,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -178725,6 +179700,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -179204,6 +180191,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -181641,6 +182634,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -183139,6 +184138,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -183153,6 +184158,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -183632,6 +184649,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -186060,6 +187083,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -187558,6 +188587,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -187572,6 +188607,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -188051,6 +189098,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -190955,6 +192008,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -192453,6 +193512,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -192467,6 +193532,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -192946,6 +194023,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -197804,6 +198887,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -199302,6 +200391,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -199316,6 +200411,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -199795,6 +200902,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -203719,6 +204832,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -205217,6 +206336,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -205231,6 +206356,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -205710,6 +206847,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -208147,6 +209290,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -209645,6 +210794,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -209659,6 +210814,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -210138,6 +211305,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -212566,6 +213739,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -214064,6 +215243,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -214078,6 +215263,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -214557,6 +215754,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -217461,6 +218664,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -218959,6 +220168,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -218973,6 +220188,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -219452,6 +220679,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -224301,6 +225534,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -225799,6 +227038,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -225813,6 +227058,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -226292,6 +227549,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -230216,6 +231479,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -231714,6 +232983,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -231728,6 +233003,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -232207,6 +233494,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -234644,6 +235937,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -236142,6 +237441,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -236156,6 +237461,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -236635,6 +237952,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -239063,6 +240386,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -240561,6 +241890,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -240575,6 +241910,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -241054,6 +242401,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -243958,6 +245311,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -245456,6 +246815,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -245470,6 +246835,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -245949,6 +247326,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -251274,6 +252657,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -252772,6 +254161,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -252786,6 +254181,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -253265,6 +254672,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -257189,6 +258602,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -258687,6 +260106,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -258701,6 +260126,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -259180,6 +260617,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -261617,6 +263060,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -263115,6 +264564,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -263129,6 +264584,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -263608,6 +265075,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -266036,6 +267509,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -267534,6 +269013,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -267548,6 +269033,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -268027,6 +269524,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -270931,6 +272434,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -272429,6 +273938,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -272443,6 +273958,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -272922,6 +274449,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -280201,6 +281734,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -281699,6 +283238,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -281713,6 +283258,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -282192,6 +283749,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -286116,6 +287679,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -287614,6 +289183,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -287628,6 +289203,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -288107,6 +289694,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -290544,6 +292137,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -292042,6 +293641,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -292056,6 +293661,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -292535,6 +294152,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -294963,6 +296586,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -296461,6 +298090,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -296475,6 +298110,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -296954,6 +298601,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -299858,6 +301511,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -301356,6 +303015,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -301370,6 +303035,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -301849,6 +303526,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -308194,6 +309877,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -309692,6 +311381,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -309706,6 +311401,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -310185,6 +311892,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -314109,6 +315822,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -315607,6 +317326,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -315621,6 +317346,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -316100,6 +317837,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -318537,6 +320280,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -320035,6 +321784,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -320049,6 +321804,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -320528,6 +322295,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -322956,6 +324729,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -324454,6 +326233,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -324468,6 +326253,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -324947,6 +326744,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -327851,6 +329654,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -329349,6 +331158,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -329363,6 +331178,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -329842,6 +331669,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -334700,6 +336533,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -336198,6 +338037,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -336212,6 +338057,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -336691,6 +338548,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -340615,6 +342478,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -342113,6 +343982,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -342127,6 +344002,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -342606,6 +344493,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -345043,6 +346936,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -346541,6 +348440,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -346555,6 +348460,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -347034,6 +348951,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -349462,6 +351385,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -350960,6 +352889,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -350974,6 +352909,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -351453,6 +353400,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -354357,6 +356310,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -355855,6 +357814,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -355869,6 +357834,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -356348,6 +358325,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -361197,6 +363180,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -362695,6 +364684,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -362709,6 +364704,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -363188,6 +365195,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -367112,6 +369125,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -368610,6 +370629,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -368624,6 +370649,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -369103,6 +371140,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -371540,6 +373583,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -373038,6 +375087,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -373052,6 +375107,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -373531,6 +375598,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -375959,6 +378032,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -377457,6 +379536,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -377471,6 +379556,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -377950,6 +380047,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -380854,6 +382957,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -382352,6 +384461,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -382366,6 +384481,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -382845,6 +384972,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -388170,6 +390303,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -389668,6 +391807,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -389682,6 +391827,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -390161,6 +392318,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -394085,6 +396248,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -395583,6 +397752,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -395597,6 +397772,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -396076,6 +398263,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -398513,6 +400706,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -400011,6 +402210,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -400025,6 +402230,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -400504,6 +402721,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -402932,6 +405155,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -404430,6 +406659,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -404444,6 +406679,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -404923,6 +407170,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -407827,6 +410080,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -409325,6 +411584,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -409339,6 +411604,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -409818,6 +412095,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -417088,6 +419371,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -418586,6 +420875,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -418600,6 +420895,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -419079,6 +421386,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -423003,6 +425316,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -424501,6 +426820,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -424515,6 +426840,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -424994,6 +427331,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -427431,6 +429774,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -428929,6 +431278,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -428943,6 +431298,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -429422,6 +431789,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -431850,6 +434223,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -433348,6 +435727,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -433362,6 +435747,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -433841,6 +436238,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -436745,6 +439148,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -438243,6 +440652,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -438257,6 +440672,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -438736,6 +441163,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -445081,6 +447514,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -446579,6 +449018,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -446593,6 +449038,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -447072,6 +449529,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -450996,6 +453459,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -452494,6 +454963,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -452508,6 +454983,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -452987,6 +455474,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -455424,6 +457917,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -456922,6 +459421,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -456936,6 +459441,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -457415,6 +459932,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -459843,6 +462366,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -461341,6 +463870,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -461355,6 +463890,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -461834,6 +464381,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -464738,6 +467291,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -466236,6 +468795,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -466250,6 +468815,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -466729,6 +469306,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -471587,6 +474170,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -473085,6 +475674,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -473099,6 +475694,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -473578,6 +476185,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -477502,6 +480115,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -479000,6 +481619,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -479014,6 +481639,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -479493,6 +482130,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -481930,6 +484573,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -483428,6 +486077,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -483442,6 +486097,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -483921,6 +486588,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -486349,6 +489022,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -487847,6 +490526,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -487861,6 +490546,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -488340,6 +491037,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -491244,6 +493947,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -492742,6 +495451,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -492756,6 +495471,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -493235,6 +495962,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -498084,6 +500817,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -499582,6 +502321,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -499596,6 +502341,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -500075,6 +502832,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -503999,6 +506762,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -505497,6 +508266,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -505511,6 +508286,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -505990,6 +508777,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -508427,6 +511220,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -509925,6 +512724,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -509939,6 +512744,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -510418,6 +513235,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -512846,6 +515669,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "additionalProperties": false,
 		//	                                      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                      "properties": {
+		//	                                        "AndStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "AsnMatchStatement": {
 		//	                                          "additionalProperties": false,
 		//	                                          "properties": {
@@ -514344,6 +517173,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maxItems": 100,
 		//	                                              "type": "array"
 		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
+		//	                                            },
 		//	                                            "VendorName": {
 		//	                                              "type": "string"
 		//	                                            },
@@ -514358,6 +517193,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "VendorName",
 		//	                                            "Name"
 		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "NotStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "OrStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                          "type": "object"
 		//	                                        },
 		//	                                        "RateBasedStatement": {
@@ -514837,6 +517684,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                              "maximum": 2000000000,
 		//	                                              "minimum": 10,
 		//	                                              "type": "integer"
+		//	                                            },
+		//	                                            "ScopeDownStatement": {
+		//	                                              "additionalProperties": false,
+		//	                                              "$comment": "x-derecursed-placeholder",
+		//	                                              "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                              "type": "object"
 		//	                                            }
 		//	                                          },
 		//	                                          "required": [
@@ -517741,6 +520594,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -519239,6 +522098,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -519253,6 +522118,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -519732,6 +522609,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -525057,6 +527940,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -526555,6 +529444,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -526569,6 +529464,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -527048,6 +529955,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -530972,6 +533885,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -532470,6 +535389,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -532484,6 +535409,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -532963,6 +535900,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -535400,6 +538343,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -536898,6 +539847,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -536912,6 +539867,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -537391,6 +540358,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -539819,6 +542792,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -541317,6 +544296,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -541331,6 +544316,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -541810,6 +544807,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -544714,6 +547717,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -546212,6 +549221,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -546226,6 +549241,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -546705,6 +549732,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -554451,6 +557484,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -555949,6 +558988,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -555963,6 +559008,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -556442,6 +559499,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -560366,6 +563429,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -561864,6 +564933,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -561878,6 +564953,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -562357,6 +565444,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -564794,6 +567887,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -566292,6 +569391,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -566306,6 +569411,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -566785,6 +569902,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -569213,6 +572336,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -570711,6 +573840,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -570725,6 +573860,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -571204,6 +574351,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -574108,6 +577261,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -575606,6 +578765,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -575620,6 +578785,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -576099,6 +579276,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -582444,6 +585627,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -583942,6 +587131,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -583956,6 +587151,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -584435,6 +587642,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -588359,6 +591572,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -589857,6 +593076,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -589871,6 +593096,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -590350,6 +593587,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -592787,6 +596030,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -594285,6 +597534,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -594299,6 +597554,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -594778,6 +598045,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -597206,6 +600479,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -598704,6 +601983,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -598718,6 +602003,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -599197,6 +602494,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -602101,6 +605404,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -603599,6 +606908,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -603613,6 +606928,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -604092,6 +607419,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -608950,6 +612283,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -610448,6 +613787,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -610462,6 +613807,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -610941,6 +614298,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -614865,6 +618228,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -616363,6 +619732,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -616377,6 +619752,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -616856,6 +620243,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -619293,6 +622686,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -620791,6 +624190,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -620805,6 +624210,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -621284,6 +624701,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -623712,6 +627135,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -625210,6 +628639,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -625224,6 +628659,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -625703,6 +629150,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -628607,6 +632060,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -630105,6 +633564,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -630119,6 +633584,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -630598,6 +634075,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -635447,6 +638930,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -636945,6 +640434,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -636959,6 +640454,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -637438,6 +640945,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -641362,6 +644875,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -642860,6 +646379,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -642874,6 +646399,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -643353,6 +646890,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -645790,6 +649333,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -647288,6 +650837,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -647302,6 +650857,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -647781,6 +651348,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -650209,6 +653782,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "additionalProperties": false,
 		//	                                    "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                    "properties": {
+		//	                                      "AndStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "AsnMatchStatement": {
 		//	                                        "additionalProperties": false,
 		//	                                        "properties": {
@@ -651707,6 +655286,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maxItems": 100,
 		//	                                            "type": "array"
 		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
+		//	                                          },
 		//	                                          "VendorName": {
 		//	                                            "type": "string"
 		//	                                          },
@@ -651721,6 +655306,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "VendorName",
 		//	                                          "Name"
 		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "NotStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "OrStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                        "type": "object"
 		//	                                      },
 		//	                                      "RateBasedStatement": {
@@ -652200,6 +655797,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                            "maximum": 2000000000,
 		//	                                            "minimum": 10,
 		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "ScopeDownStatement": {
+		//	                                            "additionalProperties": false,
+		//	                                            "$comment": "x-derecursed-placeholder",
+		//	                                            "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                            "type": "object"
 		//	                                          }
 		//	                                        },
 		//	                                        "required": [
@@ -655104,6 +658707,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -656602,6 +660211,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -656616,6 +660231,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -657095,6 +660722,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -662420,6 +666053,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -663918,6 +667557,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -663932,6 +667577,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -664411,6 +668068,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -668335,6 +671998,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -669833,6 +673502,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -669847,6 +673522,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -670326,6 +674013,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -672763,6 +676456,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -674261,6 +677960,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -674275,6 +677980,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -674754,6 +678471,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -677182,6 +680905,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  "additionalProperties": false,
 		//	                                  "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                  "properties": {
+		//	                                    "AndStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
 		//	                                    "AsnMatchStatement": {
 		//	                                      "additionalProperties": false,
 		//	                                      "properties": {
@@ -678680,6 +682409,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maxItems": 100,
 		//	                                          "type": "array"
 		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
+		//	                                        },
 		//	                                        "VendorName": {
 		//	                                          "type": "string"
 		//	                                        },
@@ -678694,6 +682429,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "VendorName",
 		//	                                        "Name"
 		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "NotStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "OrStatement": {
+		//	                                      "additionalProperties": false,
+		//	                                      "$comment": "x-derecursed-placeholder",
+		//	                                      "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                      "type": "object"
 		//	                                    },
 		//	                                    "RateBasedStatement": {
@@ -679173,6 +682920,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                          "maximum": 2000000000,
 		//	                                          "minimum": 10,
 		//	                                          "type": "integer"
+		//	                                        },
+		//	                                        "ScopeDownStatement": {
+		//	                                          "additionalProperties": false,
+		//	                                          "$comment": "x-derecursed-placeholder",
+		//	                                          "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                          "type": "object"
 		//	                                        }
 		//	                                      },
 		//	                                      "required": [
@@ -682077,6 +685830,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "additionalProperties": false,
 		//	                                "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
 		//	                                "properties": {
+		//	                                  "AndStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
 		//	                                  "AsnMatchStatement": {
 		//	                                    "additionalProperties": false,
 		//	                                    "properties": {
@@ -683575,6 +687334,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maxItems": 100,
 		//	                                        "type": "array"
 		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
+		//	                                      },
 		//	                                      "VendorName": {
 		//	                                        "type": "string"
 		//	                                      },
@@ -683589,6 +687354,18 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                      "VendorName",
 		//	                                      "Name"
 		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "NotStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "OrStatement": {
+		//	                                    "additionalProperties": false,
+		//	                                    "$comment": "x-derecursed-placeholder",
+		//	                                    "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
 		//	                                    "type": "object"
 		//	                                  },
 		//	                                  "RateBasedStatement": {
@@ -684068,6 +687845,12 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	                                        "maximum": 2000000000,
 		//	                                        "minimum": 10,
 		//	                                        "type": "integer"
+		//	                                      },
+		//	                                      "ScopeDownStatement": {
+		//	                                        "additionalProperties": false,
+		//	                                        "$comment": "x-derecursed-placeholder",
+		//	                                        "description": "Not supported: nesting here would exceed the maximum depth (4) of this depth-limited schema. Setting this attribute is an error.",
+		//	                                        "type": "object"
 		//	                                      }
 		//	                                    },
 		//	                                    "required": [
@@ -693755,7 +697538,7 @@ func webACLResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"rules": schemaAttribute61aa939fd5a7e3d7e9899954(),
+		"rules": schemaAttribute381f0099761cfbb6d81100ab(),
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//

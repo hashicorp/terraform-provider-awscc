@@ -23,6 +23,7 @@ Definition of AWS::AgentRegistry::RegistryRecord Resource Type
 
 ### Optional
 
+- `custom_metadata` (String) The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false).
 - `description` (String) The description of the registry record.
 - `display_name` (String) The human-readable display name of the registry record.
 - `record_version` (String) The version of the registry record.

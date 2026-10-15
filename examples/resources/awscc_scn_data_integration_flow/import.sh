@@ -1,0 +1,1 @@
+$ terraform import awscc_scn_data_integration_flow.example "arn"

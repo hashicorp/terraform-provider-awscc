@@ -145,6 +145,31 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RecordDistributionStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The record distribution strategy for the stream. This property can ONLY be set when StreamMode is ON_DEMAND",
+		//	  "enum": [
+		//	    "AUTO",
+		//	    "USER_PARTITION_KEY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"record_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The record distribution strategy for the stream. This property can ONLY be set when StreamMode is ON_DEMAND",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"AUTO",
+					"USER_PARTITION_KEY",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionPeriodHours
 		// CloudFormation resource type schema:
 		//
@@ -462,24 +487,25 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                         "Arn",
-		"current_mi_bps":              "CurrentMiBps",
-		"desired_shard_level_metrics": "DesiredShardLevelMetrics",
-		"encryption_type":             "EncryptionType",
-		"key":                         "Key",
-		"key_id":                      "KeyId",
-		"max_record_size_in_ki_b":     "MaxRecordSizeInKiB",
-		"name":                        "Name",
-		"retention_period_hours":      "RetentionPeriodHours",
-		"shard_count":                 "ShardCount",
-		"stream_encryption":           "StreamEncryption",
-		"stream_mode":                 "StreamMode",
-		"stream_mode_details":         "StreamModeDetails",
-		"tags":                        "Tags",
-		"target_mi_bps":               "TargetMiBps",
-		"value":                       "Value",
-		"warm_throughput_mi_bps":      "WarmThroughputMiBps",
-		"warm_throughput_object":      "WarmThroughputObject",
+		"arn":                          "Arn",
+		"current_mi_bps":               "CurrentMiBps",
+		"desired_shard_level_metrics":  "DesiredShardLevelMetrics",
+		"encryption_type":              "EncryptionType",
+		"key":                          "Key",
+		"key_id":                       "KeyId",
+		"max_record_size_in_ki_b":      "MaxRecordSizeInKiB",
+		"name":                         "Name",
+		"record_distribution_strategy": "RecordDistributionStrategy",
+		"retention_period_hours":       "RetentionPeriodHours",
+		"shard_count":                  "ShardCount",
+		"stream_encryption":            "StreamEncryption",
+		"stream_mode":                  "StreamMode",
+		"stream_mode_details":          "StreamModeDetails",
+		"tags":                         "Tags",
+		"target_mi_bps":                "TargetMiBps",
+		"value":                        "Value",
+		"warm_throughput_mi_bps":       "WarmThroughputMiBps",
+		"warm_throughput_object":       "WarmThroughputObject",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -85,6 +85,73 @@
       "required": [
         "SecretArn"
       ]
+    },
+    "ObjectStorageFederatedIdentityConfig": {
+      "additionalProperties": false,
+      "description": "Specifies the identity federation configuration that DataSync uses to access your object storage location using an OpenID Connect (OIDC) token.",
+      "type": "object",
+      "properties": {
+        "AwsIamRole": {
+          "description": "Specifies the ARN of the AWS Identity and Access Management (IAM) role that DataSync assumes to mint the OIDC token used to authenticate with the identity provider.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+          "maxLength": 2048
+        },
+        "ExternalIdentity": {
+          "$ref": "#/definitions/ObjectStorageExternalIdentityConfig"
+        }
+      }
+    },
+    "ObjectStorageExternalIdentityConfig": {
+      "additionalProperties": false,
+      "description": "Specifies the external (non-AWS) identity provider that DataSync federates with to access your object storage location.",
+      "type": "object",
+      "properties": {
+        "GoogleOidc": {
+          "$ref": "#/definitions/GoogleOidcConfig"
+        }
+      }
+    },
+    "GoogleOidcConfig": {
+      "additionalProperties": false,
+      "description": "Specifies the Google Cloud workload identity federation configuration that DataSync uses to obtain an access token for your Google Cloud Storage bucket.",
+      "type": "object",
+      "properties": {
+        "ProjectName": {
+          "description": "The human-readable Google Cloud project name.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$",
+          "minLength": 6,
+          "maxLength": 30
+        },
+        "ProjectNumber": {
+          "description": "The numeric Google Cloud project ID, as a string.",
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "IdentityPoolName": {
+          "description": "The name of the Google Cloud workload identity pool that DataSync federates with.",
+          "type": "string",
+          "pattern": "",
+          "minLength": 4,
+          "maxLength": 32
+        },
+        "IdentityProviderName": {
+          "description": "The name of the OIDC identity provider configured in the Google Cloud workload identity pool.",
+          "type": "string",
+          "pattern": "",
+          "minLength": 4,
+          "maxLength": 32
+        }
+      },
+      "required": [
+        "ProjectName",
+        "ProjectNumber",
+        "IdentityPoolName",
+        "IdentityProviderName"
+      ]
     }
   },
   "properties": {
@@ -182,6 +249,9 @@
     },
     "ManagedSecretConfig": {
       "$ref": "#/definitions/ManagedSecretConfig"
+    },
+    "FederatedIdentity": {
+      "$ref": "#/definitions/ObjectStorageFederatedIdentityConfig"
     }
   },
   "tagging": {

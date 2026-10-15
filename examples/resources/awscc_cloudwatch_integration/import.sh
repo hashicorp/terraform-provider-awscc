@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_integration.example "integration_arn"

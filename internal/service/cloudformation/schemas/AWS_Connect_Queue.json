@@ -145,7 +145,7 @@
       ]
     },
     "OutboundEmailConfig": {
-      "description": "The outbound email address ID.",
+      "description": "The outbound email configuration for a specified queue.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -268,7 +268,7 @@
       "type": "string"
     },
     "OutboundEmailConfig": {
-      "description": "The outbound email address ID.",
+      "description": "The outbound email configuration for a specified queue.",
       "$ref": "#/definitions/OutboundEmailConfig"
     },
     "LastModifiedTime": {

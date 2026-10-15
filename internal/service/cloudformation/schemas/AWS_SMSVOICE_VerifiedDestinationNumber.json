@@ -1,0 +1,135 @@
+{
+  "typeName": "AWS::SMSVOICE::VerifiedDestinationNumber",
+  "description": "A destination phone number that has been registered for verification with AWS End User Messaging SMS. A newly created number is in PENDING status; it becomes VERIFIED only after the recipient supplies the one-time code out of band.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^.+$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "maxLength": 256,
+          "pattern": "^.*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "VerifiedDestinationNumberArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the verified destination phone number."
+    },
+    "VerifiedDestinationNumberId": {
+      "type": "string",
+      "description": "The unique identifier for the verified destination phone number."
+    },
+    "DestinationPhoneNumber": {
+      "type": "string",
+      "description": "The verified destination phone number, in E.164 format.",
+      "minLength": 1,
+      "maxLength": 20,
+      "pattern": "^\\+?[1-9][0-9]{1,18}$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the verified destination phone number. PENDING means the phone number has not been verified yet; VERIFIED means it is verified and can receive messages.",
+      "enum": [
+        "PENDING",
+        "VERIFIED",
+        "UNSUPPORTED"
+      ]
+    },
+    "CreatedTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the verified destination phone number was created."
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DestinationPhoneNumber"
+  ],
+  "readOnlyProperties": [
+    "/properties/VerifiedDestinationNumberArn",
+    "/properties/VerifiedDestinationNumberId",
+    "/properties/Status",
+    "/properties/CreatedTimestamp"
+  ],
+  "createOnlyProperties": [
+    "/properties/DestinationPhoneNumber"
+  ],
+  "primaryIdentifier": [
+    "/properties/VerifiedDestinationNumberArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/VerifiedDestinationNumberId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sms-voice:TagResource",
+      "sms-voice:UntagResource",
+      "sms-voice:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sms-voice:CreateVerifiedDestinationNumber",
+        "sms-voice:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sms-voice:DescribeVerifiedDestinationNumbers",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sms-voice:DescribeVerifiedDestinationNumbers",
+        "sms-voice:ListTagsForResource",
+        "sms-voice:TagResource",
+        "sms-voice:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sms-voice:DeleteVerifiedDestinationNumber"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sms-voice:DescribeVerifiedDestinationNumbers"
+      ]
+    }
+  }
+}
