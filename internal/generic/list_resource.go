@@ -78,7 +78,7 @@ func (r *genericResource) List(ctx context.Context, request list.ListRequest, st
 				return
 			}
 
-			translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
+			translator := r.toTerraformTranslator()
 			schema := request.ResourceSchema
 			val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), nil)
 			if err != nil {
