@@ -69,3 +69,58 @@ func TestNotNullObject(t *testing.T) {
 		})
 	}
 }
+
+func TestNestingDepthExceededObject(t *testing.T) {
+	t.Parallel()
+
+	type testCase struct {
+		val                 types.Object
+		expectedDiagnostics diag.Diagnostics
+	}
+
+	attributeTypes := map[string]attr.Type{}
+
+	errorDiagnostics := diag.Diagnostics{
+		diag.NewAttributeErrorDiagnostic(
+			path.Root("test"),
+			"Maximum Nesting Depth Exceeded",
+			`test: value must not be configured: nesting here exceeds the maximum depth of this depth-limited schema. `+
+				`This resource type's schema models a recursive CloudFormation type to a fixed depth, and this configuration nests more deeply than that. `+
+				`Restructure the configuration to fit within the supported depth.`,
+		),
+	}
+
+	tests := map[string]testCase{
+		"null": {
+			val: types.ObjectNull(attributeTypes),
+		},
+		"unknown": {
+			val:                 types.ObjectUnknown(attributeTypes),
+			expectedDiagnostics: errorDiagnostics,
+		},
+		"empty": {
+			val:                 types.ObjectValueMust(attributeTypes, map[string]attr.Value{}),
+			expectedDiagnostics: errorDiagnostics,
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			ctx := context.Background()
+
+			request := validator.ObjectRequest{
+				Path:           path.Root("test"),
+				PathExpression: path.MatchRoot("test"),
+				ConfigValue:    test.val,
+			}
+			response := validator.ObjectResponse{}
+			fwvalidators.NestingDepthExceededObject().ValidateObject(ctx, request, &response)
+
+			if diff := cmp.Diff(response.Diagnostics, test.expectedDiagnostics); diff != "" {
+				t.Errorf("unexpected diagnostics difference: %s", diff)
+			}
+		})
+	}
+}

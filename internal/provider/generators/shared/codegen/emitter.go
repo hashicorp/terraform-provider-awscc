@@ -206,6 +206,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	var planModifiers []string
 	var fwPlanModifierPackage, fwPlanModifierType, fwValidatorType string
 
+	if isDerecursedPlaceholder(property) {
+		return e.emitDerecursedPlaceholder(property), nil
+	}
+
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
@@ -1127,6 +1131,11 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 			}
 		}
 
+		// A data source only reads, so it has no use for a placeholder attribute.
+		if e.IsDataSource && isDerecursedPlaceholder(properties[name]) {
+			continue
+		}
+
 		e.printf("// Property: %s\n", name)
 
 		// Only dump top-level property schemas as nested properties have been expanded here.
@@ -1175,6 +1184,42 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 	e.printf("}/*END SCHEMA*/")
 
 	return features, nil
+}
+
+// derecursedPlaceholderComment marks a property pruned at the depth boundary of a
+// depth-limited (de-recursed) schema. internal/provider/generators/derecurse-schema
+// writes it as the property's "$comment".
+const derecursedPlaceholderComment = "x-derecursed-placeholder"
+
+func isDerecursedPlaceholder(property *cfschema.Property) bool {
+	return property != nil && property.Comment != nil && *property.Comment == derecursedPlaceholderComment
+}
+
+// emitDerecursedPlaceholder emits a property pruned at the depth boundary of a
+// de-recursed schema as an Optional attribute with no nested attributes that is
+// an error to set. Omitting it instead would let Terraform accept configuration
+// nested beyond the schema's depth and silently discard it: unknown keys of an
+// object-typed attribute are dropped during type conversion, before the provider
+// sees them. Generic resource code treats the attribute as unrepresentable when
+// reading.
+func (e Emitter) emitDerecursedPlaceholder(property *cfschema.Property) Features {
+	var features Features
+
+	features.HasValidator = true
+	features.UsesInternalValidatorsPackage = true
+
+	e.printf("schema.SingleNestedAttribute{/*START ATTRIBUTE*/\n")
+	e.printf("Attributes:map[string]schema.Attribute{},\n")
+	if description := property.Description; description != nil {
+		e.printf("Description:%q,\n", *description)
+	}
+	e.printf("Optional:true,\n")
+	e.printf("Validators:[]validator.Object{/*START VALIDATORS*/\n")
+	e.printf("fwvalidators.NestingDepthExceededObject(),\n")
+	e.printf("}/*END VALIDATORS*/,\n")
+	e.printf("}/*END ATTRIBUTE*/")
+
+	return features
 }
 
 // printf emits a formatted string to the underlying writer.
