@@ -1,0 +1,430 @@
+{
+  "typeName": "AWS::AutoScalingPlans::ScalingPlan",
+  "description": "Resource Type definition for AWS::AutoScalingPlans::ScalingPlan",
+  "additionalProperties": false,
+  "properties": {
+    "ScalingPlanArn": {
+      "type": "string",
+      "pattern": "^arn:.*",
+      "description": "The Amazon Resource Name (ARN) of the scaling plan."
+    },
+    "ScalingPlanName": {
+      "type": "string",
+      "description": "The name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes."
+    },
+    "ScalingPlanVersion": {
+      "type": "string",
+      "description": "The version number of the scaling plan. This value is always 1."
+    },
+    "ApplicationSource": {
+      "$ref": "#/definitions/ApplicationSource",
+      "description": "A CloudFormation stack or a set of tags. You can create one scaling plan per application source. The ApplicationSource property must be present to ensure interoperability with the AWS Auto Scaling console."
+    },
+    "ScalingInstructions": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/ScalingInstruction"
+      },
+      "description": "The scaling instructions."
+    }
+  },
+  "definitions": {
+    "ScalingInstruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DisableDynamicScaling": {
+          "type": "boolean",
+          "description": "Controls whether dynamic scaling is disabled. When dynamic scaling is enabled, AWS Auto Scaling creates target tracking scaling policies based on the specified target tracking configurations. The default is enabled (false)."
+        },
+        "ServiceNamespace": {
+          "type": "string",
+          "description": "The namespace of the AWS service."
+        },
+        "PredictiveScalingMaxCapacityBehavior": {
+          "type": "string",
+          "description": "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity specified for the resource. The default value is SetForecastCapacityToMaxCapacity."
+        },
+        "ScalableDimension": {
+          "type": "string",
+          "description": "The scalable dimension associated with the resource."
+        },
+        "ScalingPolicyUpdateBehavior": {
+          "type": "string",
+          "description": "Controls whether a resource's externally created scaling policies are deleted and new target tracking scaling policies created. The default value is KeepExternalPolicies. Valid only when configuring dynamic scaling."
+        },
+        "MinCapacity": {
+          "type": "integer",
+          "description": "The minimum capacity of the resource."
+        },
+        "TargetTrackingConfigurations": {
+          "type": "array",
+          "uniqueItems": false,
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/TargetTrackingConfiguration"
+          },
+          "description": "The target tracking configurations (up to 10). Each of these structures must specify a unique scaling metric and a target value for the metric."
+        },
+        "PredictiveScalingMaxCapacityBuffer": {
+          "type": "integer",
+          "description": "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer. The range is 1-100. Required if PredictiveScalingMaxCapacityBehavior is set to SetMaxCapacityAboveForecastCapacity, and cannot be used otherwise."
+        },
+        "CustomizedLoadMetricSpecification": {
+          "$ref": "#/definitions/CustomizedLoadMetricSpecification",
+          "description": "The customized load metric to use for predictive scaling. This property or a PredefinedLoadMetricSpecification is required when configuring predictive scaling, and cannot be used otherwise."
+        },
+        "PredefinedLoadMetricSpecification": {
+          "$ref": "#/definitions/PredefinedLoadMetricSpecification",
+          "description": "The predefined load metric to use for predictive scaling. This property or a CustomizedLoadMetricSpecification is required when configuring predictive scaling, and cannot be used otherwise."
+        },
+        "ResourceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1600,
+          "description": "The ID of the resource. This string consists of the resource type and unique identifier."
+        },
+        "ScheduledActionBufferTime": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The amount of time, in seconds, to buffer the run time of scheduled scaling actions when scaling out. The value must be less than the forecast interval duration of 3600 seconds (60 minutes). The default is 300 seconds. Valid only when configuring predictive scaling."
+        },
+        "MaxCapacity": {
+          "type": "integer",
+          "description": "The maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for PredictiveScalingMaxCapacityBehavior."
+        },
+        "PredictiveScalingMode": {
+          "type": "string",
+          "description": "The predictive scaling mode. The default value is ForecastAndScale. Otherwise, AWS Auto Scaling forecasts capacity but does not apply any scheduled scaling actions based on the capacity forecast."
+        }
+      },
+      "required": [
+        "ResourceId",
+        "ServiceNamespace",
+        "ScalableDimension",
+        "MinCapacity",
+        "TargetTrackingConfigurations",
+        "MaxCapacity"
+      ]
+    },
+    "ApplicationSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CloudFormationStackARN": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of a CloudFormation stack. The stack must contain at least one scalable resource."
+        },
+        "TagFilters": {
+          "type": "array",
+          "uniqueItems": false,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/TagFilter"
+          },
+          "description": "A set of tag filters (keys and values). Each tag filter specified must contain a key with values as optional. Each scaling plan can include up to 50 keys, and each key can include up to 20 values."
+        }
+      }
+    },
+    "TargetTrackingConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ScaleOutCooldown": {
+          "type": "integer",
+          "description": "The amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start. This value is not used if the scalable resource is an Auto Scaling group."
+        },
+        "TargetValue": {
+          "type": "number",
+          "description": "The target value for the metric."
+        },
+        "PredefinedScalingMetricSpecification": {
+          "$ref": "#/definitions/PredefinedScalingMetricSpecification",
+          "description": "A predefined metric. You can specify either a predefined metric or a customized metric."
+        },
+        "DisableScaleIn": {
+          "type": "boolean",
+          "description": "Indicates whether scale in by the target tracking scaling policy is disabled. If the value is true, scale in is disabled and the target tracking scaling policy doesn't remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking scaling policy can remove capacity from the scalable resource. The default value is false."
+        },
+        "ScaleInCooldown": {
+          "type": "integer",
+          "description": "The amount of time, in seconds, after a scale-in activity completes before another scale in activity can start. This value is not used if the scalable resource is an Auto Scaling group."
+        },
+        "EstimatedInstanceWarmup": {
+          "type": "integer",
+          "description": "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. This value is used only if the resource is an Auto Scaling group."
+        },
+        "CustomizedScalingMetricSpecification": {
+          "$ref": "#/definitions/CustomizedScalingMetricSpecification",
+          "description": "A customized metric. You can specify either a predefined metric or a customized metric."
+        }
+      },
+      "required": [
+        "TargetValue"
+      ]
+    },
+    "CustomizedLoadMetricSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricName": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "Statistic": {
+          "type": "string",
+          "description": "The statistic of the metric."
+        },
+        "Dimensions": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "The dimensions of the metric."
+        },
+        "Unit": {
+          "type": "string",
+          "description": "The unit of the metric."
+        },
+        "Namespace": {
+          "type": "string",
+          "description": "The namespace of the metric."
+        }
+      },
+      "required": [
+        "MetricName",
+        "Statistic",
+        "Namespace"
+      ]
+    },
+    "PredefinedLoadMetricSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PredefinedLoadMetricType": {
+          "type": "string",
+          "description": "The metric type."
+        },
+        "ResourceLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1023,
+          "description": "Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBTargetGroupRequestCount and there is a target group for an Application Load Balancer attached to the Auto Scaling group."
+        }
+      },
+      "required": [
+        "PredefinedLoadMetricType"
+      ]
+    },
+    "TagFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Values": {
+          "type": "array",
+          "uniqueItems": false,
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "description": "The tag values (0 to 20)."
+        },
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "The tag key."
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    },
+    "PredefinedScalingMetricSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourceLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1023,
+          "description": "Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBRequestCountPerTarget and there is a target group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or ECS service."
+        },
+        "PredefinedScalingMetricType": {
+          "type": "string",
+          "description": "The metric type. The ALBRequestCountPerTarget metric type applies only to Auto Scaling groups, Spot Fleet requests, and ECS services."
+        }
+      },
+      "required": [
+        "PredefinedScalingMetricType"
+      ]
+    },
+    "CustomizedScalingMetricSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricName": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "Statistic": {
+          "type": "string",
+          "description": "The statistic of the metric."
+        },
+        "Dimensions": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "The dimensions of the metric."
+        },
+        "Unit": {
+          "type": "string",
+          "description": "The unit of the metric."
+        },
+        "Namespace": {
+          "type": "string",
+          "description": "The namespace of the metric."
+        }
+      },
+      "required": [
+        "MetricName",
+        "Statistic",
+        "Namespace"
+      ]
+    },
+    "MetricDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string",
+          "description": "The value of the dimension."
+        },
+        "Name": {
+          "type": "string",
+          "description": "The name of the dimension."
+        }
+      },
+      "required": [
+        "Value",
+        "Name"
+      ]
+    }
+  },
+  "required": [
+    "ScalingInstructions",
+    "ApplicationSource"
+  ],
+  "readOnlyProperties": [
+    "/properties/ScalingPlanVersion",
+    "/properties/ScalingPlanName",
+    "/properties/ScalingPlanArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ScalingPlanVersion",
+    "/properties/ScalingPlanName"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ScalingPlanArn"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "autoscaling-plans:CreateScalingPlan",
+        "autoscaling-plans:DescribeScalingPlans",
+        "autoscaling-plans:DescribeScalingPlanResources",
+        "cloudwatch:PutMetricAlarm",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeleteScalingPolicy",
+        "iam:CreateServiceLinkedRole",
+        "dynamodb:DescribeTable",
+        "dynamodb:UpdateTable",
+        "ecs:DescribeServices",
+        "ecs:UpdateService",
+        "ec2:DescribeSpotFleetRequests",
+        "ec2:ModifySpotFleetRequest",
+        "autoscaling:UpdateAutoScalingGroup",
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:PutScalingPolicy",
+        "autoscaling:DescribePolicies",
+        "autoscaling:DeletePolicy",
+        "rds:AddTagsToResource",
+        "rds:CreateDBInstance",
+        "rds:DeleteDBInstance",
+        "rds:DescribeDBClusters",
+        "rds:DescribeDBInstances",
+        "cloudwatch:GetMetricData",
+        "autoscaling:DescribeScheduledActions",
+        "autoscaling:BatchDeleteScheduledAction",
+        "autoscaling:BatchPutScheduledUpdateGroupAction"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "autoscaling-plans:DescribeScalingPlans"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "autoscaling-plans:UpdateScalingPlan",
+        "autoscaling-plans:DescribeScalingPlans",
+        "autoscaling-plans:DescribeScalingPlanResources",
+        "cloudwatch:PutMetricAlarm",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeleteScalingPolicy",
+        "dynamodb:DescribeTable",
+        "dynamodb:UpdateTable",
+        "autoscaling:UpdateAutoScalingGroup",
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:PutScalingPolicy",
+        "autoscaling:DescribePolicies",
+        "autoscaling:DeletePolicy",
+        "cloudwatch:GetMetricData",
+        "autoscaling:DescribeScheduledActions",
+        "autoscaling:BatchDeleteScheduledAction",
+        "autoscaling:BatchPutScheduledUpdateGroupAction"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "autoscaling-plans:DeleteScalingPlan",
+        "autoscaling-plans:DescribeScalingPlans",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:DeleteAlarms",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeleteScalingPolicy",
+        "autoscaling:DescribePolicies",
+        "autoscaling:DeletePolicy",
+        "autoscaling:DescribeScheduledActions"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "autoscaling-plans:DescribeScalingPlans"
+      ]
+    }
+  }
+}

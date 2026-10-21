@@ -1,15 +1,59 @@
 {
   "typeName": "AWS::BedrockAgentCore::PaymentManager",
   "description": "Resource Type definition for AWS::BedrockAgentCore::PaymentManager",
-  "resourceLink": {
-    "templateUri": "/bedrock-agentcore/payments/managers/${PaymentManagerId}?region=${awsRegion}",
-    "mappings": {
-      "PaymentManagerId": "/PaymentManagerId"
-    }
-  },
-  "definitions": {
-    "PaymentManagerStatus": {
+  "properties": {
+    "Name": {
       "type": "string",
+      "description": "The name of the payment manager",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,47}$",
+      "minLength": 1,
+      "maxLength": 48
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the payment manager",
+      "pattern": "^[^\\p{C}]*$",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "AuthorizerType": {
+      "type": "string",
+      "description": "The type of authorizer for the payment manager",
+      "enum": [
+        "CUSTOM_JWT",
+        "AWS_IAM"
+      ]
+    },
+    "AuthorizerConfiguration": {
+      "$ref": "#/definitions/AuthorizerConfiguration",
+      "description": "The authorizer configuration for the payment manager"
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role for the payment manager",
+      "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "PaymentManagerId": {
+      "type": "string",
+      "description": "The unique identifier for the payment manager",
+      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
+      "minLength": 12,
+      "maxLength": 211
+    },
+    "WorkloadIdentityDetails": {
+      "$ref": "#/definitions/WorkloadIdentityDetails",
+      "description": "The workload identity details for the payment manager"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the payment manager was created"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the payment manager",
       "enum": [
         "CREATING",
         "UPDATING",
@@ -20,31 +64,123 @@
         "DELETE_FAILED"
       ]
     },
-    "PaymentsAuthorizerType": {
+    "LastUpdatedAt": {
       "type": "string",
-      "enum": [
-        "CUSTOM_JWT",
-        "AWS_IAM"
+      "format": "date-time",
+      "description": "The timestamp when the payment manager was last updated"
+    },
+    "PaymentManagerArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the resource.",
+      "pattern": "^arn:aws(?:-[a-z]+)*:bedrock-agentcore:(?:[a-z]{2,4}(?:-[a-z0-9]+)+)?:[0-9]{12}:payment-manager/(?:([0-9a-z][-]?){1,100}-[0-9a-z]{10})$"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "ClaimMatchValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "MatchValueString",
+          "properties": {
+            "MatchValueString": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:/-]+$",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          },
+          "required": [
+            "MatchValueString"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "MatchValueStringList",
+          "properties": {
+            "MatchValueStringList": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_.:/-]+$",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "minItems": 1,
+              "insertionOrder": false
+            }
+          },
+          "required": [
+            "MatchValueStringList"
+          ],
+          "additionalProperties": false
+        }
       ]
     },
-    "AuthorizerConfiguration": {
+    "AuthorizingClaimMatchValue": {
       "type": "object",
       "properties": {
-        "CustomJWTAuthorizer": {
-          "$ref": "#/definitions/CustomJWTAuthorizerConfiguration"
+        "ClaimMatchValue": {
+          "$ref": "#/definitions/ClaimMatchValue"
+        },
+        "ClaimMatchOperator": {
+          "type": "string",
+          "enum": [
+            "EQUALS",
+            "CONTAINS",
+            "CONTAINS_ANY"
+          ]
         }
       },
       "required": [
-        "CustomJWTAuthorizer"
+        "ClaimMatchValue",
+        "ClaimMatchOperator"
       ],
       "additionalProperties": false
     },
-    "CustomJWTAuthorizerConfiguration": {
+    "CustomClaimValidationType": {
+      "type": "object",
+      "properties": {
+        "InboundTokenClaimName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-:]+$",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "InboundTokenClaimValueType": {
+          "type": "string",
+          "enum": [
+            "STRING",
+            "STRING_ARRAY"
+          ]
+        },
+        "AuthorizingClaimMatchValue": {
+          "$ref": "#/definitions/AuthorizingClaimMatchValue"
+        }
+      },
+      "required": [
+        "InboundTokenClaimName",
+        "InboundTokenClaimValueType",
+        "AuthorizingClaimMatchValue"
+      ],
+      "additionalProperties": false
+    },
+    "CustomJWTAuthorizer": {
       "type": "object",
       "properties": {
         "DiscoveryUrl": {
           "type": "string",
-          "pattern": "^.+/\\.well-known/openid-configuration$"
+          "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
         },
         "AllowedAudience": {
           "type": "array",
@@ -66,9 +202,9 @@
           "type": "array",
           "items": {
             "type": "string",
+            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$",
             "minLength": 1,
-            "maxLength": 255,
-            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
+            "maxLength": 255
           },
           "minItems": 1,
           "insertionOrder": false
@@ -87,75 +223,23 @@
       ],
       "additionalProperties": false
     },
-    "CustomClaimValidationType": {
-      "type": "object",
-      "properties": {
-        "InboundTokenClaimName": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "^[A-Za-z0-9_.:/-]+$"
-        },
-        "InboundTokenClaimValueType": {
-          "type": "string",
-          "enum": [
-            "STRING",
-            "STRING_ARRAY"
-          ]
-        },
-        "AuthorizingClaimMatchValue": {
-          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
-        }
-      },
-      "required": [
-        "InboundTokenClaimName",
-        "InboundTokenClaimValueType",
-        "AuthorizingClaimMatchValue"
-      ],
-      "additionalProperties": false
-    },
-    "AuthorizingClaimMatchValueType": {
-      "type": "object",
-      "properties": {
-        "ClaimMatchValue": {
-          "$ref": "#/definitions/ClaimMatchValueType"
-        },
-        "ClaimMatchOperator": {
-          "type": "string",
-          "enum": [
-            "EQUALS",
-            "CONTAINS",
-            "CONTAINS_ANY"
-          ]
-        }
-      },
-      "required": [
-        "ClaimMatchValue",
-        "ClaimMatchOperator"
-      ],
-      "additionalProperties": false
-    },
-    "ClaimMatchValueType": {
-      "type": "object",
-      "properties": {
-        "MatchValueString": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "^[A-Za-z0-9_.-]+$"
-        },
-        "MatchValueStringList": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255,
-            "pattern": "^[A-Za-z0-9_.-]+$"
+    "AuthorizerConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "CustomJWTAuthorizer",
+          "properties": {
+            "CustomJWTAuthorizer": {
+              "$ref": "#/definitions/CustomJWTAuthorizer"
+            }
           },
-          "insertionOrder": false
+          "required": [
+            "CustomJWTAuthorizer"
+          ],
+          "additionalProperties": false
         }
-      },
-      "additionalProperties": false
+      ],
+      "description": "The authorizer configuration for the payment manager"
     },
     "WorkloadIdentityDetails": {
       "type": "object",
@@ -166,21 +250,22 @@
           "maxLength": 1024
         }
       },
-      "required": [
-        "WorkloadIdentityArn"
-      ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "The workload identity details for the payment manager"
     },
     "Tag": {
       "type": "object",
+      "description": "A key-value pair to associate with a resource.",
       "properties": {
         "Key": {
           "type": "string",
+          "description": "The key name of the tag.",
           "minLength": 1,
           "maxLength": 128
         },
         "Value": {
           "type": "string",
+          "description": "The value for the tag.",
           "minLength": 0,
           "maxLength": 256
         }
@@ -192,87 +277,6 @@
       "additionalProperties": false
     }
   },
-  "properties": {
-    "PaymentManagerArn": {
-      "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the payment manager",
-      "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:payment-manager/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
-    },
-    "PaymentManagerId": {
-      "type": "string",
-      "description": "The unique identifier for the payment manager",
-      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
-    },
-    "Name": {
-      "type": "string",
-      "description": "The name of the payment manager",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,47}$"
-    },
-    "Description": {
-      "type": "string",
-      "description": "A description of the payment manager",
-      "minLength": 1,
-      "maxLength": 4096,
-      "pattern": "^[a-zA-Z0-9\\s]+$"
-    },
-    "AuthorizerType": {
-      "$ref": "#/definitions/PaymentsAuthorizerType"
-    },
-    "AuthorizerConfiguration": {
-      "$ref": "#/definitions/AuthorizerConfiguration"
-    },
-    "RoleArn": {
-      "type": "string",
-      "description": "The ARN of the IAM role for the payment manager",
-      "minLength": 1,
-      "maxLength": 2048,
-      "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"
-    },
-    "WorkloadIdentityDetails": {
-      "$ref": "#/definitions/WorkloadIdentityDetails"
-    },
-    "CreatedAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "The timestamp when the payment manager was created"
-    },
-    "LastUpdatedAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "The timestamp when the payment manager was last updated"
-    },
-    "Status": {
-      "$ref": "#/definitions/PaymentManagerStatus"
-    },
-    "Tags": {
-      "type": "array",
-      "description": "Tags to assign to the payment manager",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      },
-      "maxItems": 50,
-      "insertionOrder": false
-    }
-  },
-  "additionalProperties": false,
-  "required": [
-    "Name",
-    "AuthorizerType",
-    "RoleArn"
-  ],
-  "readOnlyProperties": [
-    "/properties/PaymentManagerArn",
-    "/properties/PaymentManagerId",
-    "/properties/CreatedAt",
-    "/properties/LastUpdatedAt",
-    "/properties/Status",
-    "/properties/WorkloadIdentityDetails"
-  ],
-  "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/AuthorizerType",
-    "/properties/AuthorizerConfiguration"
-  ],
   "primaryIdentifier": [
     "/properties/PaymentManagerArn"
   ],
@@ -281,25 +285,43 @@
       "/properties/PaymentManagerId"
     ]
   ],
+  "required": [
+    "Name",
+    "AuthorizerType",
+    "RoleArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/PaymentManagerId",
+    "/properties/WorkloadIdentityDetails",
+    "/properties/CreatedAt",
+    "/properties/Status",
+    "/properties/LastUpdatedAt",
+    "/properties/PaymentManagerArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/AuthorizerType",
+    "/properties/AuthorizerConfiguration"
+  ],
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
     "permissions": [
+      "bedrock-agentcore:ListTagsForResource",
       "bedrock-agentcore:TagResource",
-      "bedrock-agentcore:UntagResource",
-      "bedrock-agentcore:ListTagsForResource"
+      "bedrock-agentcore:UntagResource"
     ]
   },
   "handlers": {
     "create": {
       "permissions": [
         "bedrock-agentcore:CreatePaymentManager",
+        "bedrock-agentcore:CreateWorkloadIdentity",
         "bedrock-agentcore:GetPaymentManager",
         "bedrock-agentcore:TagResource",
-        "bedrock-agentcore:CreateWorkloadIdentity",
         "iam:PassRole"
       ]
     },
@@ -311,19 +333,19 @@
     },
     "update": {
       "permissions": [
-        "bedrock-agentcore:UpdatePaymentManager",
         "bedrock-agentcore:GetPaymentManager",
+        "bedrock-agentcore:ListTagsForResource",
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:UntagResource",
-        "bedrock-agentcore:ListTagsForResource",
+        "bedrock-agentcore:UpdatePaymentManager",
         "iam:PassRole"
       ]
     },
     "delete": {
       "permissions": [
         "bedrock-agentcore:DeletePaymentManager",
-        "bedrock-agentcore:GetPaymentManager",
-        "bedrock-agentcore:DeleteWorkloadIdentity"
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetPaymentManager"
       ]
     },
     "list": {
@@ -331,5 +353,6 @@
         "bedrock-agentcore:ListPaymentManagers"
       ]
     }
-  }
+  },
+  "additionalProperties": false
 }

@@ -174,7 +174,8 @@
         "route53globalresolver:UntagResource",
         "route53globalresolver:ListTagsForResource",
         "route53globalresolver:TagResource"
-      ]
+      ],
+      "timeoutInMinutes": 30
     },
     "read": {
       "permissions": [
@@ -189,13 +190,15 @@
         "route53globalresolver:TagResource",
         "route53globalresolver:UntagResource",
         "route53globalresolver:ListTagsForResource"
-      ]
+      ],
+      "timeoutInMinutes": 120
     },
     "delete": {
       "permissions": [
         "route53globalresolver:DeleteGlobalResolver",
         "route53globalresolver:GetGlobalResolver"
-      ]
+      ],
+      "timeoutInMinutes": 30
     },
     "list": {
       "permissions": [

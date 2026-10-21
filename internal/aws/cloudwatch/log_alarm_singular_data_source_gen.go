@@ -23,6 +23,86 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::CloudWatch::LogAlarm resource.
 func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ActionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that applies to the notifications this alarm sends when it performs its actions.",
+		//	  "properties": {
+		//	    "AlarmTagsPropagation": {
+		//	      "additionalProperties": false,
+		//	      "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExcludedTagKeys": {
+		//	          "description": "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "IncludedTagKeys": {
+		//	          "description": "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"action_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmTagsPropagation
+				"alarm_tags_propagation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludedTagKeys
+						"excluded_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IncludedTagKeys
+						"included_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that applies to the notifications this alarm sends when it performs its actions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ActionLogLineCount
 		// CloudFormation resource type schema:
 		//
@@ -463,6 +543,7 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::LogAlarm").WithTerraformTypeName("awscc_cloudwatch_log_alarm")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_configuration":      "ActionConfiguration",
 		"action_log_line_count":     "ActionLogLineCount",
 		"action_log_line_role_arn":  "ActionLogLineRoleArn",
 		"actions_enabled":           "ActionsEnabled",
@@ -470,9 +551,13 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_actions":             "AlarmActions",
 		"alarm_description":         "AlarmDescription",
 		"alarm_name":                "AlarmName",
+		"alarm_tags_propagation":    "AlarmTagsPropagation",
 		"arn":                       "Arn",
 		"comparison_operator":       "ComparisonOperator",
+		"enabled":                   "Enabled",
 		"end_time_offset":           "EndTimeOffset",
+		"excluded_tag_keys":         "ExcludedTagKeys",
+		"included_tag_keys":         "IncludedTagKeys",
 		"insufficient_data_actions": "InsufficientDataActions",
 		"key":                       "Key",
 		"log_group_identifiers":     "LogGroupIdentifiers",

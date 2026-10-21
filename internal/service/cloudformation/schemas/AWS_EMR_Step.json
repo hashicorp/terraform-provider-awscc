@@ -102,14 +102,31 @@
   "handlers": {
     "create": {
       "permissions": [
-        "emr:AddJobFlowSteps"
+        "elasticmapreduce:AddJobFlowSteps"
       ]
     },
     "delete": {
       "permissions": []
     },
     "read": {
-      "permissions": []
+      "permissions": [
+        "elasticmapreduce:DescribeStep"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "JobFlowId": {
+            "$ref": "resource-schema.json#/properties/JobFlowId"
+          }
+        },
+        "required": [
+          "JobFlowId"
+        ]
+      },
+      "permissions": [
+        "elasticmapreduce:ListSteps"
+      ]
     }
   }
 }

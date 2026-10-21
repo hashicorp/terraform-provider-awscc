@@ -1,0 +1,1 @@
+$ terraform import awscc_autoscalingplans_scaling_plan.example "scaling_plan_version|scaling_plan_name"

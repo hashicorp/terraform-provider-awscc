@@ -80,6 +80,7 @@
     }
   },
   "writeOnlyProperties": [
+    "/properties/GatewayConnectors",
     "/properties/ServiceConnectConfiguration",
     "/properties/VolumeConfigurations",
     "/properties/ForceNewDeployment",
@@ -532,17 +533,20 @@
       }
     },
     "VpcLatticeAdvancedConfiguration": {
-      "description": "",
+      "description": "The advanced settings for VPC Lattice used in blue/green deployments. Specify the alternate target group and listener rules required for traffic shifting during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html) in the *Amazon Elastic Container Service Developer Guide*.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "TestListenerRule": {
+          "description": "The Amazon Resource Name (ARN) that identifies the test listener rule or listener for routing test traffic.",
           "type": "string"
         },
         "AlternateTargetGroupArn": {
+          "description": "The Amazon Resource Name (ARN) of the alternate target group associated with the VPC Lattice Configuration for Amazon ECS blue/green deployments.",
           "type": "string"
         },
         "ProductionListenerRule": {
+          "description": "The Amazon Resource Name (ARN) that identifies the production listener rule or listener for routing production traffic.",
           "type": "string"
         }
       }
@@ -658,6 +662,15 @@
             "$ref": "#/definitions/ServiceConnectService"
           }
         },
+        "ContainerConfigurations": {
+          "minItems": 0,
+          "maxItems": 10,
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceConnectContainerConfiguration"
+          }
+        },
         "AccessLogConfiguration": {
           "description": "The configuration for Service Connect access logging. Access logs capture detailed information about requests made to your service, including request patterns, response codes, and timing data. They can be useful for debugging connectivity issues, monitoring service performance, and auditing service-to-service communication for security and compliance purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
           "$ref": "#/definitions/ServiceConnectAccessLogConfiguration"
@@ -771,6 +784,54 @@
           ]
         }
       }
+    },
+    "GatewayConnectorHealthCheckMatcher": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "GrpcCode": {
+          "type": "string"
+        },
+        "HttpCode": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceConnectContainerConfiguration": {
+      "description": "",
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LogLevel": {
+          "type": "string",
+          "enum": [
+            "debug",
+            "info"
+          ]
+        }
+      },
+      "minProperties": 1
+    },
+    "GatewayConnector": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Filters": {
+          "$ref": "#/definitions/GatewayConnectorFilters"
+        },
+        "HealthCheck": {
+          "$ref": "#/definitions/GatewayConnectorHealthCheck"
+        },
+        "PortName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "PortName"
+      ]
     },
     "Secret": {
       "description": "An object representing the secret to expose to your container. Secrets can be exposed to a container in the following ways:\n  +  To inject sensitive data into your containers as environment variables, use the ``secrets`` container definition parameter.\n  +  To reference sensitive information in the log configuration of a container, use the ``secretOptions`` container definition parameter.\n  \n For more information, see [Specifying sensitive data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*.",
@@ -963,6 +1024,41 @@
         }
       }
     },
+    "GatewayConnectorHealthCheck": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "HealthCheckIntervalSeconds": {
+          "type": "integer"
+        },
+        "Matcher": {
+          "$ref": "#/definitions/GatewayConnectorHealthCheckMatcher"
+        },
+        "HealthyThresholdCount": {
+          "type": "integer"
+        },
+        "HealthCheckPath": {
+          "type": "string"
+        },
+        "HealthCheckProtocol": {
+          "type": "string",
+          "enum": [
+            "HTTP",
+            "HTTPS"
+          ]
+        },
+        "HealthCheckPort": {
+          "type": "integer"
+        },
+        "UnhealthyThresholdCount": {
+          "type": "integer"
+        },
+        "HealthCheckTimeoutSeconds": {
+          "type": "integer"
+        }
+      }
+    },
     "DeploymentConfiguration": {
       "description": "Optional deployment parameters that control how many tasks run during a deployment and the ordering of stopping and starting tasks.",
       "additionalProperties": false,
@@ -1057,6 +1153,24 @@
       "required": [
         "PortName"
       ]
+    },
+    "GatewayConnectorFilters": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AccessTypes": {
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "PUBLIC",
+              "PRIVATE"
+            ]
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -1218,6 +1332,13 @@
     "DeploymentConfiguration": {
       "description": "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
       "$ref": "#/definitions/DeploymentConfiguration"
+    },
+    "GatewayConnectors": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GatewayConnector"
+      }
     }
   }
 }

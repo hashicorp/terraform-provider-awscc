@@ -182,6 +182,121 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"firewall_policy_change_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: NatGatewayMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The NAT gateways that the firewall proxies egress traffic through when NoSourcePreservation is true.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A mapping to a NAT gateway that a proxy-mode firewall proxies egress traffic through.",
+		//	    "properties": {
+		//	      "NatGatewayId": {
+		//	        "description": "The unique identifier of a NAT gateway.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "NatGatewayId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"nat_gateway_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: NatGatewayId
+					"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of a NAT gateway.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The NAT gateways that the firewall proxies egress traffic through when NoSourcePreservation is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NoSourcePreservation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the firewall operates in proxy mode, where the source IP address of traffic is not preserved. When true, specify NatGatewayMappings and VpcEndpoint instead of the top-level VpcId and SubnetMappings. You can't change this setting after you create the firewall.",
+		//	  "type": "boolean"
+		//	}
+		"no_source_preservation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the firewall operates in proxy mode, where the source IP address of traffic is not preserved. When true, specify NatGatewayMappings and VpcEndpoint instead of the top-level VpcId and SubnetMappings. You can't change this setting after you create the firewall.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NumberOfAssociations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of VPC endpoint associations attached to the firewall.",
+		//	  "type": "integer"
+		//	}
+		"number_of_associations": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of VPC endpoint associations attached to the firewall.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProxySettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The proxy listener configuration for a proxy-mode (no source preservation) firewall.",
+		//	  "properties": {
+		//	    "ListenerProperties": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A port and protocol that a proxy-mode firewall's proxy listener accepts traffic on.",
+		//	        "properties": {
+		//	          "Port": {
+		//	            "description": "The port the proxy listener accepts traffic on.",
+		//	            "type": "integer"
+		//	          },
+		//	          "Type": {
+		//	            "description": "The protocol the proxy listener uses.",
+		//	            "enum": [
+		//	              "HTTP",
+		//	              "HTTPS"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"proxy_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ListenerProperties
+				"listener_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Port
+							"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The port the proxy listener accepts traffic on.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The protocol the proxy listener uses.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The proxy listener configuration for a proxy-mode (no source preservation) firewall.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetChangeProtection
 		// CloudFormation resource type schema:
 		//
@@ -299,6 +414,74 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The VPC and subnets for a proxy-mode firewall's endpoint. Provide this instead of the top-level VpcId and SubnetMappings when NoSourcePreservation is true.",
+		//	  "properties": {
+		//	    "SubnetMappings": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "IPAddressType": {
+		//	            "description": "A IPAddressType",
+		//	            "type": "string"
+		//	          },
+		//	          "SubnetId": {
+		//	            "description": "A SubnetId.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SubnetId"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "VpcId": {
+		//	      "description": "The unique identifier of the VPC for the firewall endpoint.",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "pattern": "^vpc-[0-9a-f]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vpc_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SubnetMappings
+				"subnet_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IPAddressType
+							"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A IPAddressType",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SubnetId
+							"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A SubnetId.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The unique identifier of the VPC for the firewall endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC and subnets for a proxy-mode firewall's endpoint. Provide this instead of the top-level VpcId and SubnetMappings when NoSourcePreservation is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -342,13 +525,22 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"firewall_policy_change_protection":   "FirewallPolicyChangeProtection",
 		"ip_address_type":                     "IPAddressType",
 		"key":                                 "Key",
+		"listener_properties":                 "ListenerProperties",
+		"nat_gateway_id":                      "NatGatewayId",
+		"nat_gateway_mappings":                "NatGatewayMappings",
+		"no_source_preservation":              "NoSourcePreservation",
+		"number_of_associations":              "NumberOfAssociations",
+		"port":                                "Port",
+		"proxy_settings":                      "ProxySettings",
 		"subnet_change_protection":            "SubnetChangeProtection",
 		"subnet_id":                           "SubnetId",
 		"subnet_mappings":                     "SubnetMappings",
 		"tags":                                "Tags",
 		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
 		"transit_gateway_id":                  "TransitGatewayId",
+		"type":                                "Type",
 		"value":                               "Value",
+		"vpc_endpoint":                        "VpcEndpoint",
 		"vpc_id":                              "VpcId",
 	})
 

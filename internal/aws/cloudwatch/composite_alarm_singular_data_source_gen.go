@@ -23,6 +23,86 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::CloudWatch::CompositeAlarm resource.
 func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ActionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that applies to the notifications this alarm sends when it performs its actions.",
+		//	  "properties": {
+		//	    "AlarmTagsPropagation": {
+		//	      "additionalProperties": false,
+		//	      "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExcludedTagKeys": {
+		//	          "description": "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "IncludedTagKeys": {
+		//	          "description": "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"action_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmTagsPropagation
+				"alarm_tags_propagation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludedTagKeys
+						"excluded_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IncludedTagKeys
+						"included_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that applies to the notifications this alarm sends when it performs its actions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ActionsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -247,6 +327,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::CompositeAlarm").WithTerraformTypeName("awscc_cloudwatch_composite_alarm")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_configuration":                "ActionConfiguration",
 		"actions_enabled":                     "ActionsEnabled",
 		"actions_suppressor":                  "ActionsSuppressor",
 		"actions_suppressor_extension_period": "ActionsSuppressorExtensionPeriod",
@@ -255,7 +336,11 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		"alarm_description":                   "AlarmDescription",
 		"alarm_name":                          "AlarmName",
 		"alarm_rule":                          "AlarmRule",
+		"alarm_tags_propagation":              "AlarmTagsPropagation",
 		"arn":                                 "Arn",
+		"enabled":                             "Enabled",
+		"excluded_tag_keys":                   "ExcludedTagKeys",
+		"included_tag_keys":                   "IncludedTagKeys",
 		"insufficient_data_actions":           "InsufficientDataActions",
 		"key":                                 "Key",
 		"ok_actions":                          "OKActions",

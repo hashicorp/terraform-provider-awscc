@@ -70,13 +70,13 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
+		//	  "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"data_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
+			Description: "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -1633,8 +1633,8 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/DataProviderIdentifier",
 		"/properties/ExactSettings",
+		"/properties/DataProviderIdentifier",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

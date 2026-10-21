@@ -309,6 +309,9 @@
               "default": "sampledMaxInLast24Hours"
             }
           ]
+        },
+        "WaitELBTargetGroupHealthy": {
+          "$ref": "#/definitions/WaitELBTargetGroupHealthy"
         }
       },
       "required": [
@@ -369,6 +372,9 @@
               "default": "sampledMaxInLast24Hours"
             }
           ]
+        },
+        "WaitELBTargetGroupHealthy": {
+          "$ref": "#/definitions/WaitELBTargetGroupHealthy"
         }
       },
       "required": [
@@ -758,6 +764,19 @@
             "RdsSwitchoverReadReplicaConfig"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SsmSendCommandConfig",
+          "properties": {
+            "SsmSendCommandConfig": {
+              "$ref": "#/definitions/SsmSendCommandConfiguration"
+            }
+          },
+          "required": [
+            "SsmSendCommandConfig"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -781,7 +800,8 @@
         "RdsCreateCrossRegionReplica",
         "RdsPromoteReadReplica",
         "RdsSwitchoverReadReplica",
-        "Route53HealthCheck"
+        "Route53HealthCheck",
+        "SSMSendCommand"
       ]
     },
     "GlobalAuroraConfiguration": {
@@ -971,6 +991,11 @@
         },
         "Arn": {
           "type": "string"
+        },
+        "Payload": {
+          "type": "string",
+          "maxLength": 786432,
+          "minLength": 1
         }
       },
       "additionalProperties": false
@@ -1221,6 +1246,17 @@
       },
       "additionalProperties": false
     },
+    "RegionSsmDocumentMap": {
+      "type": "object",
+      "maxProperties": 2,
+      "minProperties": 1,
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/SsmDocumentConfig"
+        }
+      },
+      "additionalProperties": false
+    },
     "RegionSwitchPlanConfiguration": {
       "type": "object",
       "properties": {
@@ -1387,6 +1423,128 @@
       },
       "additionalProperties": false
     },
+    "SsmDocumentConfig": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "DocumentArn": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 20,
+          "pattern": "^arn:[a-z0-9\\-]+:ssm:[a-z0-9\\-]+:([0-9]{12})?:document/[a-zA-Z0-9_.\\-]+$"
+        },
+        "Targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SsmTarget"
+          },
+          "maxItems": 5,
+          "minItems": 1
+        },
+        "Parameters": {
+          "$ref": "#/definitions/SsmDocumentParameters"
+        },
+        "DocumentVersion": {
+          "type": "string",
+          "maxLength": 8,
+          "minLength": 1,
+          "pattern": "^([$]LATEST|[$]DEFAULT|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "DocumentArn",
+        "Targets"
+      ],
+      "additionalProperties": false
+    },
+    "SsmDocumentParameters": {
+      "type": "object",
+      "maxProperties": 30,
+      "patternProperties": {
+        "": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 65535,
+            "minLength": 1,
+            "pattern": ""
+          },
+          "maxItems": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "SsmSendCommandConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "RegionDocuments": {
+          "$ref": "#/definitions/RegionSsmDocumentMap"
+        },
+        "RetryIntervalMinutes": {
+          "type": "number"
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/SsmSendCommandUngraceful"
+        }
+      },
+      "required": [
+        "RegionDocuments",
+        "RetryIntervalMinutes"
+      ],
+      "additionalProperties": false
+    },
+    "SsmSendCommandUngraceful": {
+      "type": "object",
+      "properties": {
+        "Behavior": {
+          "$ref": "#/definitions/SsmSendCommandUngracefulBehavior"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SsmSendCommandUngracefulBehavior": {
+      "type": "string",
+      "enum": [
+        "skip"
+      ]
+    },
+    "SsmTarget": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 163,
+          "minLength": 1,
+          "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "maxItems": 50,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Key",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
     "Step": {
       "type": "object",
       "properties": {
@@ -1471,6 +1629,13 @@
         "Condition"
       ],
       "additionalProperties": false
+    },
+    "WaitELBTargetGroupHealthy": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ]
     },
     "Workflow": {
       "type": "object",
@@ -1598,6 +1763,9 @@
     },
     "ReportConfiguration": {
       "$ref": "#/definitions/ReportConfiguration"
+    },
+    "ServiceQuotaChecksEnabled": {
+      "type": "boolean"
     },
     "Tags": {
       "$ref": "#/definitions/Tags"

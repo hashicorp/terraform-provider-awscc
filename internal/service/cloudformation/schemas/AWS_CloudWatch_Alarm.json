@@ -108,6 +108,46 @@
         }
       }
     },
+    "AlarmTagsPropagation": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "IncludedTagKeys": {
+          "minItems": 1,
+          "maxItems": 50,
+          "uniqueItems": true,
+          "description": "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 128
+          }
+        },
+        "ExcludedTagKeys": {
+          "minItems": 1,
+          "maxItems": 50,
+          "uniqueItems": true,
+          "description": "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 128
+          }
+        },
+        "Enabled": {
+          "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
     "MetricStat": {
       "description": "This structure defines the metric to be returned, along with the statistics, period, and units.\n ``MetricStat`` is a property of the [MetricDataQuery](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html) property type.",
       "additionalProperties": false,
@@ -238,6 +278,17 @@
         "PromQLCriteria": {
           "description": "The PromQL criteria for the alarm evaluation.",
           "$ref": "#/definitions/AlarmPromQLCriteria"
+        }
+      }
+    },
+    "ActionConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AlarmTagsPropagation": {
+          "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+          "$ref": "#/definitions/AlarmTagsPropagation"
         }
       }
     },
@@ -415,6 +466,10 @@
     "Arn": {
       "description": "",
       "type": "string"
+    },
+    "ActionConfiguration": {
+      "description": "",
+      "$ref": "#/definitions/ActionConfiguration"
     }
   }
 }

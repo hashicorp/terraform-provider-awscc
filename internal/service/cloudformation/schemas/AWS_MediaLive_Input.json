@@ -1,0 +1,824 @@
+{
+  "typeName": "AWS::MediaLive::Input",
+  "description": "Resource Type definition for AWS::MediaLive::Input Resource Type",
+  "definitions": {
+    "Algorithm": {
+      "type": "string",
+      "description": "Placeholder documentation for Algorithm",
+      "enum": [
+        "AES128",
+        "AES192",
+        "AES256"
+      ]
+    },
+    "InputClass": {
+      "type": "string",
+      "description": "A standard input has two sources and a single pipeline input only has one.",
+      "enum": [
+        "STANDARD",
+        "SINGLE_PIPELINE"
+      ]
+    },
+    "InputDestination": {
+      "type": "object",
+      "description": "The settings for a PUSH type input.",
+      "properties": {
+        "Ip": {
+          "type": "string",
+          "description": "The system-generated static IP address of endpoint.\nIt remains fixed for the lifetime of the input."
+        },
+        "Port": {
+          "type": "string",
+          "description": "The port number for the input."
+        },
+        "Url": {
+          "type": "string",
+          "description": "This represents the endpoint that the customer stream will be\npushed to."
+        },
+        "Vpc": {
+          "description": "The properties for a VPC type input destination.",
+          "$ref": "#/definitions/InputDestinationVpc"
+        },
+        "Network": {
+          "type": "string",
+          "description": "The ID of the attached network."
+        },
+        "NetworkRoutes": {
+          "type": "array",
+          "description": "If the push input has an input location of ON-PREM it's a requirement to specify what the route of the input\nis going to be on the customer local network.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/InputDestinationRoute"
+          }
+        },
+        "StreamName": {
+          "type": "string",
+          "description": "The stream name for the input destination."
+        },
+        "StaticIpAddress": {
+          "type": "string",
+          "description": "The static IP address for the input destination."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputDestinationRoute": {
+      "type": "object",
+      "description": "A network route configuration.",
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "description": "The CIDR of the route."
+        },
+        "Gateway": {
+          "type": "string",
+          "description": "An optional gateway for the route."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputDestinationVpc": {
+      "type": "object",
+      "description": "The properties for a VPC type input destination.",
+      "properties": {
+        "AvailabilityZone": {
+          "type": "string",
+          "description": "The availability zone of the Input destination."
+        },
+        "NetworkInterfaceId": {
+          "type": "string",
+          "description": "The network interface ID of the Input destination in the VPC."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputDeviceSettings": {
+      "type": "object",
+      "description": "Settings for an input device.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The unique ID for the device."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputNetworkLocation": {
+      "type": "string",
+      "description": "With the introduction of MediaLive Anywhere, a MediaLive input can now exist in two different places: AWS or\ninside an on-premises datacenter. By default all inputs will continue to be AWS inputs.",
+      "enum": [
+        "AWS",
+        "ON_PREMISES"
+      ]
+    },
+    "InputRequestDestinationRoute": {
+      "type": "object",
+      "description": "A network route configuration.",
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "description": "The CIDR of the route."
+        },
+        "Gateway": {
+          "type": "string",
+          "description": "An optional gateway for the route."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputSdpLocation": {
+      "type": "object",
+      "description": "The location of the SDP file for one of the SMPTE 2110 streams in a receiver group.",
+      "properties": {
+        "MediaIndex": {
+          "type": "integer",
+          "description": "The index of the media stream in the SDP file for one SMPTE 2110 stream."
+        },
+        "SdpUrl": {
+          "type": "string",
+          "description": "The URL of the SDP file for one SMPTE 2110 stream."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputSource": {
+      "type": "object",
+      "description": "The settings for a PULL type input.",
+      "properties": {
+        "PasswordParam": {
+          "type": "string",
+          "description": "The key used to extract the password from EC2 Parameter store."
+        },
+        "Url": {
+          "type": "string",
+          "description": "This represents the customer's source URL where stream is\npulled from."
+        },
+        "Username": {
+          "type": "string",
+          "description": "The username for the input source."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InputSourceType": {
+      "type": "string",
+      "description": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. Currently, two input types\nsupport a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.",
+      "enum": [
+        "STATIC",
+        "DYNAMIC"
+      ]
+    },
+    "InputState": {
+      "type": "string",
+      "description": "Placeholder documentation for InputState",
+      "enum": [
+        "CREATING",
+        "DETACHED",
+        "ATTACHED",
+        "DELETING",
+        "DELETED"
+      ]
+    },
+    "InputType": {
+      "type": "string",
+      "description": "The different types of inputs that AWS Elemental MediaLive supports.",
+      "enum": [
+        "UDP_PUSH",
+        "RTP_PUSH",
+        "RTMP_PUSH",
+        "RTMP_PULL",
+        "URL_PULL",
+        "MP4_FILE",
+        "MEDIACONNECT",
+        "INPUT_DEVICE",
+        "AWS_CDI",
+        "TS_FILE",
+        "SRT_CALLER",
+        "MULTICAST",
+        "SMPTE_2110_RECEIVER_GROUP",
+        "SDI",
+        "MEDIACONNECT_ROUTER",
+        "SRT_LISTENER"
+      ]
+    },
+    "InputVpcRequest": {
+      "type": "object",
+      "description": "Settings for a private VPC Input.\nWhen this property is specified, the input destination addresses will be created in a VPC rather than with public Internet addresses.\nThis property requires setting the roleArn property on Input creation.\nNot compatible with the inputSecurityGroups property.",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "description": "A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.\nRequires subnetIds. If none are specified then the VPC default security group will be used.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SubnetIds": {
+          "type": "array",
+          "description": "A list of 2 VPC subnet IDs from the same VPC.\nSubnet IDs must be mapped to two unique availability zones (AZ).",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "MediaConnectFlow": {
+      "type": "object",
+      "description": "The settings for a MediaConnect Flow.",
+      "properties": {
+        "FlowArn": {
+          "type": "string",
+          "description": "The unique ARN of the MediaConnect Flow being used as a source."
+        }
+      },
+      "additionalProperties": false
+    },
+    "MulticastSettings": {
+      "type": "object",
+      "description": "Settings for a Multicast input. Contains a list of multicast Urls and optional source ip addresses.",
+      "properties": {
+        "Sources": {
+          "type": "array",
+          "description": "Placeholder documentation for __listOfMulticastSource",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/MulticastSource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "MulticastSource": {
+      "type": "object",
+      "description": "Pair of multicast url and source ip address (optional) that make up a multicast source.",
+      "properties": {
+        "SourceIp": {
+          "type": "string",
+          "description": "This represents the ip address of the device sending the multicast stream."
+        },
+        "Url": {
+          "type": "string",
+          "description": "This represents the customer's source URL where multicast stream is pulled from."
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "MulticastSourceCreateRequest": {
+      "type": "object",
+      "description": "Pair of multicast url and source ip address (optional) that make up a multicast source.",
+      "properties": {
+        "SourceIp": {
+          "type": "string",
+          "description": "This represents the ip address of the device sending the multicast stream."
+        },
+        "Url": {
+          "type": "string",
+          "description": "This represents the customer's source URL where multicast stream is pulled from."
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "MulticastSourceUpdateRequest": {
+      "type": "object",
+      "description": "Pair of multicast url and source ip address (optional) that make up a multicast source.",
+      "properties": {
+        "SourceIp": {
+          "type": "string",
+          "description": "This represents the ip address of the device sending the multicast stream."
+        },
+        "Url": {
+          "type": "string",
+          "description": "This represents the customer's source URL where multicast stream is pulled from."
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "RouterDestinationSettings": {
+      "type": "object",
+      "description": "A MediaConnect Router destination associated with a MediaLive Input. RouterOutputArn is server-assigned.",
+      "properties": {
+        "AvailabilityZoneName": {
+          "type": "string",
+          "description": "The Availability Zone (AZ) name this destination is created in."
+        },
+        "RouterOutputArn": {
+          "type": "string",
+          "description": "The ARN of the MediaConnect Router output currently connected to this input."
+        }
+      },
+      "required": [
+        "AvailabilityZoneName"
+      ],
+      "additionalProperties": false
+    },
+    "RouterSettings": {
+      "type": "object",
+      "description": "Information about the MediaConnect Router association for this input.",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "description": "The ARN of the Secrets Manager secret used to encrypt this input. Required when EncryptionType is SECRETS_MANAGER."
+        },
+        "EncryptionType": {
+          "type": "string",
+          "description": "Encryption configuration for the MediaConnect Router association. AUTOMATIC uses a service-managed secret; SECRETS_MANAGER requires SecretArn.",
+          "enum": [
+            "AUTOMATIC",
+            "SECRETS_MANAGER"
+          ]
+        },
+        "Destinations": {
+          "type": "array",
+          "description": "MediaConnect Router destinations associated with this input.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/RouterDestinationSettings"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Smpte2110ReceiverGroup": {
+      "type": "object",
+      "description": "A receiver group is a collection of video, audio, and ancillary streams that you want to group together and attach to one input.",
+      "properties": {
+        "SdpSettings": {
+          "description": "The single Smpte2110ReceiverGroupSdpSettings that identify the video, audio, and ancillary streams for this receiver group.",
+          "$ref": "#/definitions/Smpte2110ReceiverGroupSdpSettings"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Smpte2110ReceiverGroupSdpSettings": {
+      "type": "object",
+      "description": "Information about the SDP files that describe the SMPTE 2110 streams that go into one SMPTE 2110 receiver group.",
+      "properties": {
+        "AncillarySdps": {
+          "type": "array",
+          "description": "A list of InputSdpLocations. Each item in the list specifies the SDP file and index for one ancillary SMPTE 2110 stream.\nEach stream encapsulates one captions stream (out of any number you can include) or the single SCTE 35 stream that you can include.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/InputSdpLocation"
+          }
+        },
+        "AudioSdps": {
+          "type": "array",
+          "description": "A list of InputSdpLocations. Each item in the list specifies the SDP file and index for one audio SMPTE 2110 stream.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/InputSdpLocation"
+          }
+        },
+        "VideoSdp": {
+          "description": "The InputSdpLocation that specifies the SDP file and index for the single video SMPTE 2110 stream for this 2110 input.",
+          "$ref": "#/definitions/InputSdpLocation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Smpte2110ReceiverGroupSettings": {
+      "type": "object",
+      "description": "Configures the sources for the SMPTE 2110 Receiver Group input.",
+      "properties": {
+        "Smpte2110ReceiverGroups": {
+          "type": "array",
+          "description": "Placeholder documentation for __listOfSmpte2110ReceiverGroup",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Smpte2110ReceiverGroup"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtCallerDecryption": {
+      "type": "object",
+      "description": "The decryption settings for the SRT caller source. Present only if the source has decryption enabled.",
+      "properties": {
+        "Algorithm": {
+          "description": "The algorithm used to encrypt content.",
+          "$ref": "#/definitions/Algorithm"
+        },
+        "PassphraseSecretArn": {
+          "type": "string",
+          "description": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. The secret holds the passphrase that MediaLive uses to decrypt the source content."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtCallerDecryptionRequest": {
+      "type": "object",
+      "description": "Complete these parameters only if the content is encrypted.",
+      "properties": {
+        "Algorithm": {
+          "description": "The algorithm used to encrypt content.",
+          "$ref": "#/definitions/Algorithm"
+        },
+        "PassphraseSecretArn": {
+          "type": "string",
+          "description": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. This secret holds the passphrase that MediaLive will use to decrypt the source content."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtCallerSource": {
+      "type": "object",
+      "description": "The configuration for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender.",
+      "properties": {
+        "Decryption": {
+          "description": "The decryption settings for the SRT caller source. Present only if the source has decryption enabled.",
+          "$ref": "#/definitions/SrtCallerDecryption"
+        },
+        "MinimumLatency": {
+          "type": "integer",
+          "description": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT."
+        },
+        "SrtListenerAddress": {
+          "type": "string",
+          "description": "The IP address at the upstream system (the listener) that MediaLive (the caller) connects to."
+        },
+        "SrtListenerPort": {
+          "type": "string",
+          "description": "The port at the upstream system (the listener) that MediaLive (the caller) connects to."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "The stream ID, if the upstream system uses this identifier."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtCallerSourceRequest": {
+      "type": "object",
+      "description": "Configures the connection for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always the caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender.",
+      "properties": {
+        "Decryption": {
+          "description": "Complete these parameters only if the content is encrypted.",
+          "$ref": "#/definitions/SrtCallerDecryptionRequest"
+        },
+        "MinimumLatency": {
+          "type": "integer",
+          "description": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT. Obtain this value from the operator at the upstream system."
+        },
+        "SrtListenerAddress": {
+          "type": "string",
+          "description": "The IP address at the upstream system (the listener) that MediaLive (the caller) will connect to."
+        },
+        "SrtListenerPort": {
+          "type": "string",
+          "description": "The port at the upstream system (the listener) that MediaLive (the caller) will connect to."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "This value is required if the upstream system uses this identifier because without it, the SRT handshake between MediaLive (the caller) and the upstream system (the listener) might fail."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtListenerDecryption": {
+      "type": "object",
+      "description": "The decryption settings for the SRT listener source. Present only if the source has decryption enabled.",
+      "properties": {
+        "Algorithm": {
+          "description": "The algorithm used to encrypt content.",
+          "$ref": "#/definitions/Algorithm"
+        },
+        "PassphraseSecretArn": {
+          "type": "string",
+          "description": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. The secret holds the passphrase that MediaLive uses to decrypt the source content."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtListenerDecryptionRequest": {
+      "type": "object",
+      "description": "Complete these parameters only if the content is encrypted.",
+      "properties": {
+        "Algorithm": {
+          "description": "The algorithm used to encrypt content.",
+          "$ref": "#/definitions/Algorithm"
+        },
+        "PassphraseSecretArn": {
+          "type": "string",
+          "description": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. This secret holds the passphrase that MediaLive will use to decrypt the source content."
+        }
+      },
+      "required": [
+        "Algorithm",
+        "PassphraseSecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "SrtListenerSettings": {
+      "type": "object",
+      "description": "The configuration for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is the listener and the upstream system is the caller.",
+      "properties": {
+        "Decryption": {
+          "description": "The decryption settings for the SRT listener source. Present only if the source has decryption enabled.",
+          "$ref": "#/definitions/SrtListenerDecryption"
+        },
+        "MinimumLatency": {
+          "type": "integer",
+          "description": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "The stream ID, if the upstream system uses this identifier."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SrtListenerSettingsRequest": {
+      "type": "object",
+      "description": "Configures the connection for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is the listener and the upstream system is the caller.",
+      "properties": {
+        "Decryption": {
+          "description": "Complete these parameters only if the content is encrypted.",
+          "$ref": "#/definitions/SrtListenerDecryptionRequest"
+        },
+        "MinimumLatency": {
+          "type": "integer",
+          "description": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT. Obtain this value from the operator at the upstream system."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "This value is required if the upstream system uses this identifier because without it, the SRT handshake between MediaLive (the listener) and the upstream system (the caller) might fail."
+        }
+      },
+      "required": [
+        "Decryption",
+        "MinimumLatency"
+      ],
+      "additionalProperties": false
+    },
+    "SrtSettings": {
+      "type": "object",
+      "description": "The configured sources for this SRT input.",
+      "properties": {
+        "SrtCallerSources": {
+          "type": "array",
+          "description": "Placeholder documentation for __listOfSrtCallerSource",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/SrtCallerSource"
+          }
+        },
+        "SrtListenerSettings": {
+          "description": "Settings for an SRT listener input. Configured only when the input uses the SRT_LISTENER input type.",
+          "$ref": "#/definitions/SrtListenerSettings"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Unique ARN of the input (generated, immutable)."
+    },
+    "AttachedChannels": {
+      "type": "array",
+      "description": "A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Destinations": {
+      "type": "array",
+      "description": "A list of the destinations of the input (PUSH-type).",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InputDestination"
+      }
+    },
+    "DestinationUrls": {
+      "type": "array",
+      "description": "A list of destination URLs of the input (PUSH-type).",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Id": {
+      "type": "string",
+      "description": "The generated ID of the input (unique for user account, immutable)."
+    },
+    "InputClass": {
+      "description": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.",
+      "$ref": "#/definitions/InputClass"
+    },
+    "InputDevices": {
+      "type": "array",
+      "description": "Settings for the input devices.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InputDeviceSettings"
+      }
+    },
+    "InputNetworkLocation": {
+      "description": "The location of this input. AWS, for an input existing in the AWS Cloud, On-Prem for\nan input in a customer network.",
+      "$ref": "#/definitions/InputNetworkLocation"
+    },
+    "InputPartnerIds": {
+      "type": "array",
+      "description": "A list of IDs for all Inputs which are partners of this one.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "InputSecurityGroups": {
+      "type": "array",
+      "description": "A list of security groups referenced by IDs to attach to the input.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "InputSourceType": {
+      "description": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.",
+      "$ref": "#/definitions/InputSourceType"
+    },
+    "MediaConnectFlows": {
+      "type": "array",
+      "description": "A list of MediaConnect Flows for this input.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/MediaConnectFlow"
+      }
+    },
+    "MulticastSettings": {
+      "description": "Multicast Input settings.",
+      "$ref": "#/definitions/MulticastSettings"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The user-assigned name (This is a mutable value)."
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the role this input assumes during and after creation."
+    },
+    "RouterSettings": {
+      "description": "Information about the MediaConnect Router association for this input.",
+      "$ref": "#/definitions/RouterSettings"
+    },
+    "SdiSources": {
+      "type": "array",
+      "description": "SDI Sources for this Input.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "SecurityGroups": {
+      "type": "array",
+      "description": "A list of IDs for all the Input Security Groups attached to the input.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Smpte2110ReceiverGroupSettings": {
+      "description": "Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.",
+      "$ref": "#/definitions/Smpte2110ReceiverGroupSettings"
+    },
+    "Sources": {
+      "type": "array",
+      "description": "A list of the sources of the input (PULL-type).",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InputSource"
+      }
+    },
+    "SourceUrls": {
+      "type": "array",
+      "description": "A list of source URLs of the input (PULL-type).",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "SrtSettings": {
+      "description": "The settings associated with an SRT input.",
+      "$ref": "#/definitions/SrtSettings"
+    },
+    "State": {
+      "description": "Placeholder documentation for InputState",
+      "$ref": "#/definitions/InputState"
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A collection of key-value pairs.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "Placeholder documentation for __string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Type": {
+      "description": "The different types of inputs that AWS Elemental MediaLive supports.",
+      "$ref": "#/definitions/InputType"
+    },
+    "Vpc": {
+      "description": "Settings for a private VPC Input.\nWhen this property is specified, the input destination addresses will be created in a VPC rather than with public Internet addresses.\nThis property requires setting the roleArn property on Input creation.\nNot compatible with the inputSecurityGroups property.",
+      "$ref": "#/definitions/InputVpcRequest"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AttachedChannels",
+    "/properties/Id",
+    "/properties/InputClass",
+    "/properties/InputPartnerIds",
+    "/properties/InputSourceType",
+    "/properties/SecurityGroups",
+    "/properties/SourceUrls",
+    "/properties/State",
+    "/properties/Destinations/*/Ip",
+    "/properties/Destinations/*/Port",
+    "/properties/Destinations/*/Url",
+    "/properties/Destinations/*/Vpc",
+    "/properties/Destinations/*/Vpc/AvailabilityZone",
+    "/properties/Destinations/*/Vpc/NetworkInterfaceId",
+    "/properties/DestinationUrls",
+    "/properties/RouterSettings/Destinations/*/RouterOutputArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/InputSecurityGroups",
+    "/properties/Vpc",
+    "/properties/Destinations/*/StaticIpAddress"
+  ],
+  "createOnlyProperties": [
+    "/properties/InputNetworkLocation",
+    "/properties/Type",
+    "/properties/Vpc",
+    "/properties/RouterSettings"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "medialive:CreateTags",
+      "medialive:DeleteTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "medialive:CreateInput",
+        "medialive:DescribeInput",
+        "medialive:ListTagsForResource",
+        "medialive:CreateTags",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "medialive:DescribeInput",
+        "medialive:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "medialive:UpdateInput",
+        "medialive:DescribeInput",
+        "medialive:CreateTags",
+        "medialive:DeleteTags",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "medialive:DeleteInput",
+        "medialive:DescribeInput"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "medialive:ListInputs"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

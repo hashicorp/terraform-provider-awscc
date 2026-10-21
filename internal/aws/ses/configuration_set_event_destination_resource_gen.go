@@ -146,7 +146,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 		//	      "uniqueItems": false
 		//	    },
 		//	    "Name": {
-		//	      "description": "The name of the event destination set.",
+		//	      "description": "The name of the event destination set. SES cannot rename an event destination, so changing the name replaces it.",
 		//	      "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 		//	      "type": "string"
 		//	    },
@@ -318,7 +318,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the event destination set.",
+					Description: "The name of the event destination set. SES cannot rename an event destination, so changing the name replaces it.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/

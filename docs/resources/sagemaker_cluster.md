@@ -356,6 +356,7 @@ Optional:
 - `current_count` (Number) The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.
 - `execution_role` (String) The execution role for the instance group to assume.
 - `image_id` (String) AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId
+- `image_release_version` (String) The version of the HyperPod-managed AMI for the instance group, in semantic version format MAJOR.MINOR.PATCH (for example, 1.2.3). Supported only for EKS-orchestrated clusters. If omitted at creation, the latest available version is used (or the version of an existing same-architecture instance group when adding a group). Changing this value on an existing instance group triggers a software update via UpdateClusterSoftware. Automatic patching (AutoPatchConfig) and out-of-band software updates can advance the running version past this value; CloudFormation does not revert such changes and may report the property as drifted. Only an explicit change to this value in the template triggers an update.
 - `instance_count` (Number) The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.
 - `instance_group_name` (String) The name of the instance group of a SageMaker HyperPod cluster.
 - `instance_requirements` (Attributes) The instance requirements for the instance group. Specifies a list of instance types that can be used. (see [below for nested schema](#nestedatt--instance_groups--instance_requirements))

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudwatch_anomaly_detector.example "anomaly_detector_id"
+$ terraform import awscc_cloudwatch_anomaly_detector.example "id"

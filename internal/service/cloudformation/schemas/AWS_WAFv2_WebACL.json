@@ -2570,7 +2570,8 @@
         "wafv2:GetWebACL",
         "wafv2:ListTagsForResource",
         "wafv2:TagResource",
-        "wafv2:UntagResource"
+        "wafv2:UntagResource",
+        "payments:GetConnectedAccount"
       ]
     },
     "delete": {
@@ -2591,7 +2592,8 @@
         "wafv2:GetWebACL",
         "wafv2:ListTagsForResource",
         "wafv2:TagResource",
-        "wafv2:UntagResource"
+        "wafv2:UntagResource",
+        "payments:GetConnectedAccount"
       ]
     },
     "list": {

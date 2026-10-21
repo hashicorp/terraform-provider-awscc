@@ -32,11 +32,16 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 - `firewall_name` (String)
 - `firewall_policy_arn` (String) A resource ARN.
 - `firewall_policy_change_protection` (Boolean)
+- `nat_gateway_mappings` (Attributes Set) The NAT gateways that the firewall proxies egress traffic through when NoSourcePreservation is true. (see [below for nested schema](#nestedatt--nat_gateway_mappings))
+- `no_source_preservation` (Boolean) Indicates whether the firewall operates in proxy mode, where the source IP address of traffic is not preserved. When true, specify NatGatewayMappings and VpcEndpoint instead of the top-level VpcId and SubnetMappings. You can't change this setting after you create the firewall.
+- `number_of_associations` (Number) The number of VPC endpoint associations attached to the firewall.
+- `proxy_settings` (Attributes) The proxy listener configuration for a proxy-mode (no source preservation) firewall. (see [below for nested schema](#nestedatt--proxy_settings))
 - `subnet_change_protection` (Boolean)
 - `subnet_mappings` (Attributes Set) (see [below for nested schema](#nestedatt--subnet_mappings))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_attachment_id` (String)
 - `transit_gateway_id` (String)
+- `vpc_endpoint` (Attributes) The VPC and subnets for a proxy-mode firewall's endpoint. Provide this instead of the top-level VpcId and SubnetMappings when NoSourcePreservation is true. (see [below for nested schema](#nestedatt--vpc_endpoint))
 - `vpc_id` (String)
 
 <a id="nestedatt--availability_zone_mappings"></a>
@@ -45,6 +50,31 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 Read-Only:
 
 - `availability_zone` (String) A AvailabilityZone
+
+
+<a id="nestedatt--nat_gateway_mappings"></a>
+### Nested Schema for `nat_gateway_mappings`
+
+Read-Only:
+
+- `nat_gateway_id` (String) The unique identifier of a NAT gateway.
+
+
+<a id="nestedatt--proxy_settings"></a>
+### Nested Schema for `proxy_settings`
+
+Read-Only:
+
+- `listener_properties` (Attributes List) (see [below for nested schema](#nestedatt--proxy_settings--listener_properties))
+
+<a id="nestedatt--proxy_settings--listener_properties"></a>
+### Nested Schema for `proxy_settings.listener_properties`
+
+Read-Only:
+
+- `port` (Number) The port the proxy listener accepts traffic on.
+- `type` (String) The protocol the proxy listener uses.
+
 
 
 <a id="nestedatt--subnet_mappings"></a>
@@ -63,3 +93,20 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--vpc_endpoint"></a>
+### Nested Schema for `vpc_endpoint`
+
+Read-Only:
+
+- `subnet_mappings` (Attributes Set) (see [below for nested schema](#nestedatt--vpc_endpoint--subnet_mappings))
+- `vpc_id` (String) The unique identifier of the VPC for the firewall endpoint.
+
+<a id="nestedatt--vpc_endpoint--subnet_mappings"></a>
+### Nested Schema for `vpc_endpoint.subnet_mappings`
+
+Read-Only:
+
+- `ip_address_type` (String) A IPAddressType
+- `subnet_id` (String) A SubnetId.

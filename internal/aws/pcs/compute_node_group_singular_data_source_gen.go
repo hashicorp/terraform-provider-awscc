@@ -73,9 +73,6 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Version"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"custom_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

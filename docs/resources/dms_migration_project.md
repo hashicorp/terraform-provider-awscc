@@ -18,11 +18,8 @@ Resource schema for AWS::DMS::MigrationProject
 ### Optional
 
 - `description` (String) The optional description of the migration project.
-- `instance_profile_arn` (String) The property describes an instance profile arn for the migration project. For read
 - `instance_profile_identifier` (String) The property describes an instance profile identifier for the migration project. For create
-- `instance_profile_name` (String) The property describes an instance profile name for the migration project. For read
-- `migration_project_creation_time` (String) The property describes a creating time of the migration project.
-- `migration_project_identifier` (String) The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn
+- `migration_project_identifier` (String) [DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).
 - `migration_project_name` (String) The property describes a name to identify the migration project.
 - `schema_conversion_application_attributes` (Attributes) The property describes schema conversion application attributes for the migration project. (see [below for nested schema](#nestedatt--schema_conversion_application_attributes))
 - `source_data_provider_descriptors` (Attributes Set) The property describes source data provider descriptors for the migration project. (see [below for nested schema](#nestedatt--source_data_provider_descriptors))
@@ -33,7 +30,10 @@ Resource schema for AWS::DMS::MigrationProject
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `instance_profile_arn` (String) The property describes an instance profile arn for the migration project. For read
+- `instance_profile_name` (String) The property describes an instance profile name for the migration project. For read
 - `migration_project_arn` (String) The property describes an ARN of the migration project.
+- `migration_project_creation_time` (String) The property describes a creating time of the migration project.
 
 <a id="nestedatt--schema_conversion_application_attributes"></a>
 ### Nested Schema for `schema_conversion_application_attributes`

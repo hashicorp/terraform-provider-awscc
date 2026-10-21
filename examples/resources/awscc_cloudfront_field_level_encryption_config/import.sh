@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudfront_field_level_encryption_config.example "arn"

@@ -93,7 +93,7 @@ resource "awscc_dms_instance_profile" "example" {
 
 - `availability_zone` (String) The property describes an availability zone of the instance profile.
 - `description` (String) The optional description of the instance profile.
-- `instance_profile_identifier` (String) The property describes an identifier for the instance profile. It is used for describing/deleting/modifying. Can be name/arn
+- `instance_profile_identifier` (String) [DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).
 - `instance_profile_name` (String) The property describes a name for the instance profile.
 - `kms_key_arn` (String) The property describes kms key arn for the instance profile.
 - `network_type` (String) The property describes a network type for the instance profile.

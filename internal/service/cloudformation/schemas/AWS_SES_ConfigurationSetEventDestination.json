@@ -8,7 +8,7 @@
       "additionalProperties": false,
       "properties": {
         "Name": {
-          "description": "The name of the event destination set.",
+          "description": "The name of the event destination set. SES cannot rename an event destination, so changing the name replaces it.",
           "type": "string",
           "pattern": "^[a-zA-Z0-9_-]{0,64}$"
         },
@@ -167,6 +167,9 @@
   ],
   "createOnlyProperties": [
     "/properties/ConfigurationSetName"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/EventDestination/Name"
   ],
   "readOnlyProperties": [
     "/properties/Id"

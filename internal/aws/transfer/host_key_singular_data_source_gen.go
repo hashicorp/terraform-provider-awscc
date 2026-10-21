@@ -101,6 +101,33 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A unique identifier for the host key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of a customer managed key used to encrypt the Secrets Manager secret that holds the host key. Applies only when StorageType is SECRETS_MANAGER. If omitted, the AWS managed key is used.",
+		//	  "maxLength": 1600,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:\\S+$",
+		//	  "type": "string"
+		//	}
+		"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of a customer managed key used to encrypt the Secrets Manager secret that holds the host key. Applies only when StorageType is SECRETS_MANAGER. If omitted, the AWS managed key is used.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SecretId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the Secrets Manager secret that holds the host key. Returned only when StorageType is SECRETS_MANAGER.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Secrets Manager secret that holds the host key. Returned only when StorageType is SECRETS_MANAGER.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerId
 		// CloudFormation resource type schema:
 		//
@@ -113,6 +140,21 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the server that contains the host key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StorageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of storage used for the host key. SERVICE_MANAGED keys are stored within the Transfer Family service. SECRETS_MANAGER keys are stored in an AWS Secrets Manager secret in your account.",
+		//	  "enum": [
+		//	    "SERVICE_MANAGED",
+		//	    "SECRETS_MANAGER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of storage used for the host key. SERVICE_MANAGED keys are stored within the Transfer Family service. SECRETS_MANAGER keys are stored in an AWS Secrets Manager secret in your account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -199,7 +241,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"host_key_fingerprint": "HostKeyFingerprint",
 		"host_key_id":          "HostKeyId",
 		"key":                  "Key",
+		"kms_key":              "KmsKey",
+		"secret_id":            "SecretId",
 		"server_id":            "ServerId",
+		"storage_type":         "StorageType",
 		"tags":                 "Tags",
 		"type":                 "Type",
 		"value":                "Value",

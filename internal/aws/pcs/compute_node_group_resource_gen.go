@@ -99,9 +99,6 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Version"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"custom_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -120,9 +117,6 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The version of the EC2 launch template to use to provision instances.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

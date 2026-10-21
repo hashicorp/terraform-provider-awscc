@@ -311,6 +311,41 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "Multiview": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eThe multiview combination for a pinned manifest. MediaPackage serves the manifest with this layout and these sources, so players request it without an \u003ccode\u003eaws.multiview\u003c/code\u003e query parameter.\u003c/p\u003e \u003cp\u003eIf a request for a pinned manifest also includes an \u003ccode\u003eaws.multiview\u003c/code\u003e query parameter, MediaPackage rejects the request, even when that parameter requests the same combination.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "Layout": {
+		//	                "description": "\u003cp\u003eA tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.\u003c/p\u003e \u003cp\u003eThe allowed values are:\u003c/p\u003e \u003cul\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_2EH\u003c/code\u003e ? Two tiles of equal size, arranged horizontally.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_2PL\u003c/code\u003e ? Two tiles, with one larger primary tile.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3EL\u003c/code\u003e ? Three tiles of equal size, arranged in two columns.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3PL\u003c/code\u003e ? Three tiles, with one larger primary tile on the left and two stacked on the right.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_4E\u003c/code\u003e ? Four tiles of equal size, arranged in a two-by-two grid.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_4PL\u003c/code\u003e ? Four tiles, with one larger primary tile on the left and three stacked on the right.\u003c/p\u003e \u003c/li\u003e \u003c/ul\u003e",
+		//	                "enum": [
+		//	                  "LAYOUT_2EH",
+		//	                  "LAYOUT_2PL",
+		//	                  "LAYOUT_3EL",
+		//	                  "LAYOUT_3PL",
+		//	                  "LAYOUT_4E",
+		//	                  "LAYOUT_4PL"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Sources": {
+		//	                "description": "\u003cp\u003eThe source channels to composite, in tile order. Each channel must be one of the \u003ccode\u003eAvailableSources\u003c/code\u003e of the channel that this origin endpoint is on, and the number of channels must equal the number of tiles in \u003ccode\u003eLayout\u003c/code\u003e.\u003c/p\u003e",
+		//	                "items": {
+		//	                  "maxLength": 256,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[a-zA-Z0-9_-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 50,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Layout",
+		//	              "Sources"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Start": {
 		//	            "description": "\u003cp\u003eOptionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -778,6 +813,55 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Multiview
+							"multiview": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Layout
+									"layout": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>LAYOUT_2EH</code> ? Two tiles of equal size, arranged horizontally.</p> </li> <li> <p> <code>LAYOUT_2PL</code> ? Two tiles, with one larger primary tile.</p> </li> <li> <p> <code>LAYOUT_3EL</code> ? Three tiles of equal size, arranged in two columns.</p> </li> <li> <p> <code>LAYOUT_3PL</code> ? Three tiles, with one larger primary tile on the left and two stacked on the right.</p> </li> <li> <p> <code>LAYOUT_4E</code> ? Four tiles of equal size, arranged in a two-by-two grid.</p> </li> <li> <p> <code>LAYOUT_4PL</code> ? Four tiles, with one larger primary tile on the left and three stacked on the right.</p> </li> </ul>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LAYOUT_2EH",
+												"LAYOUT_2PL",
+												"LAYOUT_3EL",
+												"LAYOUT_3PL",
+												"LAYOUT_4E",
+												"LAYOUT_4PL",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Sources
+									"sources": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "<p>The source channels to composite, in tile order. Each channel must be one of the <code>AvailableSources</code> of the channel that this origin endpoint is on, and the number of channels must equal the number of tiles in <code>Layout</code>.</p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 50),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(1, 256),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+											),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The multiview combination for a pinned manifest. MediaPackage serves the manifest with this layout and these sources, so players request it without an <code>aws.multiview</code> query parameter.</p> <p>If a request for a pinned manifest also includes an <code>aws.multiview</code> query parameter, MediaPackage rejects the request, even when that parameter requests the same combination.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Start
@@ -1254,6 +1338,41 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "Multiview": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eThe multiview combination for a pinned manifest. MediaPackage serves the manifest with this layout and these sources, so players request it without an \u003ccode\u003eaws.multiview\u003c/code\u003e query parameter.\u003c/p\u003e \u003cp\u003eIf a request for a pinned manifest also includes an \u003ccode\u003eaws.multiview\u003c/code\u003e query parameter, MediaPackage rejects the request, even when that parameter requests the same combination.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "Layout": {
+		//	                "description": "\u003cp\u003eA tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.\u003c/p\u003e \u003cp\u003eThe allowed values are:\u003c/p\u003e \u003cul\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_2EH\u003c/code\u003e ? Two tiles of equal size, arranged horizontally.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_2PL\u003c/code\u003e ? Two tiles, with one larger primary tile.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3EL\u003c/code\u003e ? Three tiles of equal size, arranged in two columns.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_3PL\u003c/code\u003e ? Three tiles, with one larger primary tile on the left and two stacked on the right.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_4E\u003c/code\u003e ? Four tiles of equal size, arranged in a two-by-two grid.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eLAYOUT_4PL\u003c/code\u003e ? Four tiles, with one larger primary tile on the left and three stacked on the right.\u003c/p\u003e \u003c/li\u003e \u003c/ul\u003e",
+		//	                "enum": [
+		//	                  "LAYOUT_2EH",
+		//	                  "LAYOUT_2PL",
+		//	                  "LAYOUT_3EL",
+		//	                  "LAYOUT_3PL",
+		//	                  "LAYOUT_4E",
+		//	                  "LAYOUT_4PL"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Sources": {
+		//	                "description": "\u003cp\u003eThe source channels to composite, in tile order. Each channel must be one of the \u003ccode\u003eAvailableSources\u003c/code\u003e of the channel that this origin endpoint is on, and the number of channels must equal the number of tiles in \u003ccode\u003eLayout\u003c/code\u003e.\u003c/p\u003e",
+		//	                "items": {
+		//	                  "maxLength": 256,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[a-zA-Z0-9_-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 50,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Layout",
+		//	              "Sources"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Start": {
 		//	            "description": "\u003cp\u003eOptionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -1406,6 +1525,55 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Multiview
+							"multiview": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Layout
+									"layout": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>LAYOUT_2EH</code> ? Two tiles of equal size, arranged horizontally.</p> </li> <li> <p> <code>LAYOUT_2PL</code> ? Two tiles, with one larger primary tile.</p> </li> <li> <p> <code>LAYOUT_3EL</code> ? Three tiles of equal size, arranged in two columns.</p> </li> <li> <p> <code>LAYOUT_3PL</code> ? Three tiles, with one larger primary tile on the left and two stacked on the right.</p> </li> <li> <p> <code>LAYOUT_4E</code> ? Four tiles of equal size, arranged in a two-by-two grid.</p> </li> <li> <p> <code>LAYOUT_4PL</code> ? Four tiles, with one larger primary tile on the left and three stacked on the right.</p> </li> </ul>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LAYOUT_2EH",
+												"LAYOUT_2PL",
+												"LAYOUT_3EL",
+												"LAYOUT_3PL",
+												"LAYOUT_4E",
+												"LAYOUT_4PL",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Sources
+									"sources": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "<p>The source channels to composite, in tile order. Each channel must be one of the <code>AvailableSources</code> of the channel that this origin endpoint is on, and the number of channels must equal the number of tiles in <code>Layout</code>.</p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 50),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(1, 256),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+											),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The multiview combination for a pinned manifest. MediaPackage serves the manifest with this layout and these sources, so players request it without an <code>aws.multiview</code> query parameter.</p> <p>If a request for a pinned manifest also includes an <code>aws.multiview</code> query parameter, MediaPackage rejects the request, even when that parameter requests the same combination.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Start
@@ -3127,6 +3295,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                   "Key",
 		"key_rotation_interval_seconds":         "KeyRotationIntervalSeconds",
 		"language_code":                         "LanguageCode",
+		"layout":                                "Layout",
 		"low_latency_hls_manifest_urls":         "LowLatencyHlsManifestUrls",
 		"low_latency_hls_manifests":             "LowLatencyHlsManifests",
 		"manifest_filter":                       "ManifestFilter",
@@ -3140,6 +3309,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"more_information_url":                  "MoreInformationUrl",
 		"mss_manifest_urls":                     "MssManifestUrls",
 		"mss_manifests":                         "MssManifests",
+		"multiview":                             "Multiview",
 		"origin_endpoint_name":                  "OriginEndpointName",
 		"output_timestamp_mode":                 "OutputTimestampMode",
 		"period_triggers":                       "PeriodTriggers",
@@ -3165,6 +3335,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"segment_template_format":               "SegmentTemplateFormat",
 		"service_location":                      "ServiceLocation",
 		"source":                                "Source",
+		"sources":                               "Sources",
 		"speke_key_provider":                    "SpekeKeyProvider",
 		"speke_version":                         "SpekeVersion",
 		"start":                                 "Start",

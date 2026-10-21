@@ -45,11 +45,13 @@
       "maxLength": 256
     },
     "DatastoreStatus": {
-      "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+      "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'UPDATING', 'UPDATE_FAILED', 'DELETING', or 'DELETED'.",
       "type": "string",
       "enum": [
         "CREATING",
         "ACTIVE",
+        "UPDATING",
+        "UPDATE_FAILED",
         "DELETING",
         "DELETED"
       ]
@@ -159,6 +161,61 @@
       },
       "additionalProperties": false
     },
+    "AnalyticsConfiguration": {
+      "description": "The analytics configuration for the Data Store. Omitted when the Data Store can't carry analytics.",
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "The analytics status for the Data Store.",
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
+    },
+    "NlpConfiguration": {
+      "description": "The natural language processing (NLP) configuration for the Data Store.",
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "The NLP status for the Data Store.",
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
+    },
+    "ProfileConfiguration": {
+      "description": "The profile configuration for the Data Store.",
+      "type": "object",
+      "properties": {
+        "DefaultProfiles": {
+          "description": "The FHIR profiles the Data Store validates resources against by default, for example us-core-3.1.1.",
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "DefaultProfiles"
+      ],
+      "additionalProperties": false
+    },
     "Tag": {
       "description": "A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.",
       "type": "object",
@@ -214,6 +271,15 @@
     "IdentityProviderConfiguration": {
       "$ref": "#/definitions/IdentityProviderConfiguration"
     },
+    "AnalyticsConfiguration": {
+      "$ref": "#/definitions/AnalyticsConfiguration"
+    },
+    "NlpConfiguration": {
+      "$ref": "#/definitions/NlpConfiguration"
+    },
+    "ProfileConfiguration": {
+      "$ref": "#/definitions/ProfileConfiguration"
+    },
     "Tags": {
       "type": "array",
       "insertionOrder": false,
@@ -237,11 +303,9 @@
     "/properties/DatastoreId"
   ],
   "createOnlyProperties": [
-    "/properties/DatastoreName",
     "/properties/DatastoreTypeVersion",
     "/properties/PreloadDataConfig",
-    "/properties/SseConfiguration",
-    "/properties/IdentityProviderConfiguration"
+    "/properties/SseConfiguration"
   ],
   "tagging": {
     "taggable": true,
@@ -275,7 +339,8 @@
         "healthlake:TagResource",
         "healthlake:UntagResource",
         "healthlake:ListTagsForResource"
-      ]
+      ],
+      "timeoutInMinutes": 360
     },
     "read": {
       "permissions": [
@@ -285,6 +350,7 @@
     },
     "update": {
       "permissions": [
+        "healthlake:UpdateFHIRDatastore",
         "healthlake:TagResource",
         "healthlake:UntagResource",
         "healthlake:ListTagsForResource",
@@ -292,7 +358,8 @@
         "iam:PassRole",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole"
-      ]
+      ],
+      "timeoutInMinutes": 360
     },
     "delete": {
       "permissions": [
@@ -305,7 +372,8 @@
         "ram:AcceptResourceShareInvitation",
         "glue:CreateDatabase",
         "glue:DeleteDatabase"
-      ]
+      ],
+      "timeoutInMinutes": 360
     },
     "list": {
       "permissions": [

@@ -55,6 +55,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The attributes for the instance.",
 		//	  "properties": {
+		//	    "AutoMuteAgentOnHold": {
+		//	      "description": "Boolean flag which enables AUTO_MUTE_AGENT_ON_HOLD on an instance.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "AutoResolveBestVoices": {
 		//	      "description": "Boolean flag which enables AUTO_RESOLVE_BEST_VOICES on an instance.",
 		//	      "type": "boolean"
@@ -116,6 +120,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoMuteAgentOnHold
+				"auto_mute_agent_on_hold": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables AUTO_MUTE_AGENT_ON_HOLD on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: AutoResolveBestVoices
 				"auto_resolve_best_voices": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Boolean flag which enables AUTO_RESOLVE_BEST_VOICES on an instance.",
@@ -465,6 +478,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
 		"attributes":                  "Attributes",
+		"auto_mute_agent_on_hold":     "AutoMuteAgentOnHold",
 		"auto_resolve_best_voices":    "AutoResolveBestVoices",
 		"contact_lens":                "ContactLens",
 		"contactflow_logs":            "ContactflowLogs",

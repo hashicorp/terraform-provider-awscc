@@ -385,6 +385,11 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "required": [
 		//	                "Categorical"
 		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "MultiDimensional"
+		//	              ]
 		//	            }
 		//	          ],
 		//	          "properties": {
@@ -411,6 +416,113 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "MultiDimensional": {
+		//	              "description": "The dimensions an LLM-as-a-Judge evaluator scores in a single judge call. Each dimension has its own instruction and rating scale.",
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "One dimension of an LLM-as-a-Judge evaluator.",
+		//	                "properties": {
+		//	                  "DimensionInstruction": {
+		//	                    "description": "The instruction to the evaluator model describing what to judge for this dimension.",
+		//	                    "maxLength": 4000,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DimensionName": {
+		//	                    "description": "The name of the dimension. Must be unique within the evaluator.",
+		//	                    "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DimensionRatingScale": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "The rating scale for one dimension of an LLM-as-a-Judge evaluator.",
+		//	                    "oneOf": [
+		//	                      {
+		//	                        "required": [
+		//	                          "Numerical"
+		//	                        ]
+		//	                      },
+		//	                      {
+		//	                        "required": [
+		//	                          "Categorical"
+		//	                        ]
+		//	                      }
+		//	                    ],
+		//	                    "properties": {
+		//	                      "Categorical": {
+		//	                        "description": "The categorical rating scale for this dimension.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "A categorical rating scale option.",
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "The description that explains what this categorical rating represents.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Label": {
+		//	                              "description": "The label of this categorical rating option.",
+		//	                              "maxLength": 100,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Label",
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "Numerical": {
+		//	                        "description": "The numerical rating scale for this dimension.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "A numerical rating scale option.",
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "The description that explains what this numerical rating represents.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Label": {
+		//	                              "description": "The label that describes this numerical rating option.",
+		//	                              "maxLength": 100,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Value": {
+		//	                              "description": "The numerical value for this rating scale option.",
+		//	                              "minimum": 0,
+		//	                              "type": "number"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Value",
+		//	                            "Label",
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DimensionName",
+		//	                  "DimensionInstruction",
+		//	                  "DimensionRatingScale"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 50,
+		//	              "minItems": 1,
 		//	              "type": "array"
 		//	            },
 		//	            "Numerical": {
@@ -709,6 +821,75 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END NESTED OBJECT*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: MultiDimensional
+								"multi_dimensional": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DimensionInstruction
+											"dimension_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The instruction to the evaluator model describing what to judge for this dimension.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DimensionName
+											"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the dimension. Must be unique within the evaluator.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DimensionRatingScale
+											"dimension_rating_scale": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Categorical
+													"categorical": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The description that explains what this categorical rating represents.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Label
+																"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The label of this categorical rating option.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "The categorical rating scale for this dimension.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Numerical
+													"numerical": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The description that explains what this numerical rating represents.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Label
+																"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The label that describes this numerical rating option.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																	Description: "The numerical value for this rating scale option.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "The numerical rating scale for this dimension.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The rating scale for one dimension of an LLM-as-a-Judge evaluator.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The dimensions an LLM-as-a-Judge evaluator scores in a single judge call. Each dimension has its own instruction and rating scale.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Numerical
 								"numerical": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -936,6 +1117,9 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"definition":                       "Definition",
 		"derived":                          "Derived",
 		"description":                      "Description",
+		"dimension_instruction":            "DimensionInstruction",
+		"dimension_name":                   "DimensionName",
+		"dimension_rating_scale":           "DimensionRatingScale",
 		"effort":                           "Effort",
 		"evaluator_arn":                    "EvaluatorArn",
 		"evaluator_config":                 "EvaluatorConfig",
@@ -956,6 +1140,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_tokens":                       "MaxTokens",
 		"model_config":                     "ModelConfig",
 		"model_id":                         "ModelId",
+		"multi_dimensional":                "MultiDimensional",
 		"numerical":                        "Numerical",
 		"provider_name":                    "Provider",
 		"rating_scale":                     "RatingScale",

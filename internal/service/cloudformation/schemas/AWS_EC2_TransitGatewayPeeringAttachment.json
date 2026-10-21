@@ -52,6 +52,7 @@
     "update": {
       "permissions": [
         "ec2:DescribeTransitGatewayPeeringAttachments",
+        "ec2:ModifyTransitGatewayPeeringAttachment",
         "ec2:CreateTags",
         "ec2:DeleteTags",
         "ec2:DescribeTags"

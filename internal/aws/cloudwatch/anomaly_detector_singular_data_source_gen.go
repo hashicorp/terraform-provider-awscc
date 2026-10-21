@@ -22,15 +22,6 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::CloudWatch::AnomalyDetector resource.
 func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AnomalyDetectorId
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"anomaly_detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -42,11 +33,9 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "EndTime": {
-		//	            "pattern": "^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$",
 		//	            "type": "string"
 		//	          },
 		//	          "StartTime": {
-		//	            "pattern": "^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -98,13 +87,9 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Name": {
-		//	        "maxLength": 255,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "maxLength": 1024,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -114,7 +99,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 30,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
@@ -131,6 +115,15 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"anomaly_detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: MetricCharacteristics
@@ -165,18 +158,12 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "AccountId": {
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Expression": {
-		//	            "maxLength": 1024,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Id": {
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Label": {
@@ -193,13 +180,9 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                      "additionalProperties": false,
 		//	                      "properties": {
 		//	                        "Name": {
-		//	                          "maxLength": 255,
-		//	                          "minLength": 1,
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "maxLength": 1024,
-		//	                          "minLength": 1,
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -209,19 +192,13 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                      ],
 		//	                      "type": "object"
 		//	                    },
-		//	                    "maxItems": 30,
 		//	                    "type": "array",
 		//	                    "uniqueItems": false
 		//	                  },
 		//	                  "MetricName": {
-		//	                    "maxLength": 255,
-		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Namespace": {
-		//	                    "maxLength": 255,
-		//	                    "minLength": 1,
-		//	                    "pattern": "[^:].*",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -232,15 +209,12 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                "type": "object"
 		//	              },
 		//	              "Period": {
-		//	                "minimum": 1,
 		//	                "type": "integer"
 		//	              },
 		//	              "Stat": {
-		//	                "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$",
 		//	                "type": "string"
 		//	              },
 		//	              "Unit": {
-		//	                "pattern": "^(Seconds|Microseconds|Milliseconds|Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes|Bits|Kilobits|Megabits|Gigabits|Terabits|Percent|Count|Bytes/Second|Kilobytes/Second|Megabytes/Second|Gigabytes/Second|Terabytes/Second|Bits/Second|Kilobits/Second|Megabits/Second|Gigabits/Second|Terabits/Second|Count/Second|None)$",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -252,7 +226,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	            "type": "object"
 		//	          },
 		//	          "Period": {
-		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          },
 		//	          "ReturnData": {
@@ -359,8 +332,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 255,
-		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -370,9 +341,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 255,
-		//	  "minLength": 1,
-		//	  "pattern": "[^:].*",
 		//	  "type": "string"
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -385,8 +353,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "AccountId": {
-		//	      "maxLength": 255,
-		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Dimensions": {
@@ -394,13 +360,9 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "Name": {
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "maxLength": 1024,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -410,23 +372,16 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 30,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
 		//	    "MetricName": {
-		//	      "maxLength": 255,
-		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Namespace": {
-		//	      "maxLength": 255,
-		//	      "minLength": 1,
-		//	      "pattern": "[^:].*",
 		//	      "type": "string"
 		//	    },
 		//	    "Stat": {
-		//	      "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -473,7 +428,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$",
 		//	  "type": "string"
 		//	}
 		"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -497,7 +451,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                     "AccountId",
-		"anomaly_detector_id":            "AnomalyDetectorId",
+		"anomaly_detector_id":            "Id",
 		"configuration":                  "Configuration",
 		"dimensions":                     "Dimensions",
 		"end_time":                       "EndTime",

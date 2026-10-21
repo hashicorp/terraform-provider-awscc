@@ -314,6 +314,13 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "pattern": "^ami-[0-9a-fA-F]{8,17}|default$",
 		//	        "type": "string"
 		//	      },
+		//	      "ImageReleaseVersion": {
+		//	        "description": "The version of the HyperPod-managed AMI for the instance group, in semantic version format MAJOR.MINOR.PATCH (for example, 1.2.3). Supported only for EKS-orchestrated clusters. If omitted at creation, the latest available version is used (or the version of an existing same-architecture instance group when adding a group). Changing this value on an existing instance group triggers a software update via UpdateClusterSoftware. Automatic patching (AutoPatchConfig) and out-of-band software updates can advance the running version past this value; CloudFormation does not revert such changes and may report the property as drifted. Only an explicit change to this value in the template triggers an update.",
+		//	        "maxLength": 64,
+		//	        "minLength": 5,
+		//	        "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+		//	        "type": "string"
+		//	      },
 		//	      "InstanceCount": {
 		//	        "description": "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
 		//	        "minimum": 0,
@@ -877,6 +884,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: ImageId
 					"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageReleaseVersion
+					"image_release_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The version of the HyperPod-managed AMI for the instance group, in semantic version format MAJOR.MINOR.PATCH (for example, 1.2.3). Supported only for EKS-orchestrated clusters. If omitted at creation, the latest available version is used (or the version of an existing same-architecture instance group when adding a group). Changing this value on an existing instance group triggers a software update via UpdateClusterSoftware. Automatic patching (AutoPatchConfig) and out-of-band software updates can advance the running version past this value; CloudFormation does not revert such changes and may report the property as drifted. Only an explicit change to this value in the template triggers an update.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceCount
@@ -2060,6 +2072,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"InstanceGroups/current_count":                                                                             "CurrentCount",
 		"InstanceGroups/execution_role":                                                                            "ExecutionRole",
 		"InstanceGroups/image_id":                                                                                  "ImageId",
+		"InstanceGroups/image_release_version":                                                                     "ImageReleaseVersion",
 		"InstanceGroups/instance_count":                                                                            "InstanceCount",
 		"InstanceGroups/instance_group_name":                                                                       "InstanceGroupName",
 		"InstanceGroups/instance_requirements":                                                                     "InstanceRequirements",

@@ -21,6 +21,7 @@ Data Source schema for AWS::CloudWatch::Alarm
 
 ### Read-Only
 
+- `action_configuration` (Attributes) (see [below for nested schema](#nestedatt--action_configuration))
 - `actions_enabled` (Boolean) Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
 - `alarm_actions` (List of String) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the *API Reference*.
 - `alarm_description` (String) The description of the alarm.
@@ -63,6 +64,24 @@ Data Source schema for AWS::CloudWatch::Alarm
   You can specify the following values: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None.
 - `warm_up_configuration` (Attributes) The warm-up configuration for the alarm. A warm-up period delays alarm evaluation after you create or update the alarm. During the warm-up period, the alarm stays in ``INSUFFICIENT_DATA`` and does not perform alarm actions.
  For more information, see [Alarm warm-up periods](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html) in the *Amazon CloudWatch User Guide*. (see [below for nested schema](#nestedatt--warm_up_configuration))
+
+<a id="nestedatt--action_configuration"></a>
+### Nested Schema for `action_configuration`
+
+Read-Only:
+
+- `alarm_tags_propagation` (Attributes) Whether the alarm's tags are included in its action notifications and state-change events. (see [below for nested schema](#nestedatt--action_configuration--alarm_tags_propagation))
+
+<a id="nestedatt--action_configuration--alarm_tags_propagation"></a>
+### Nested Schema for `action_configuration.alarm_tags_propagation`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether the alarm's tags are included in its action notifications and state-change events.
+- `excluded_tag_keys` (Set of String) The tag keys to leave out. Cannot be specified together with IncludedTagKeys.
+- `included_tag_keys` (Set of String) The only tag keys to include. Cannot be specified together with ExcludedTagKeys.
+
+
 
 <a id="nestedatt--dimensions"></a>
 ### Nested Schema for `dimensions`

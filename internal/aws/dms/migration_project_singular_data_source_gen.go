@@ -104,13 +104,13 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+		//	  "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"migration_project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+			Description: "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MigrationProjectName

@@ -52,13 +52,13 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
+		//	  "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"data_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
+			Description: "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataProviderName

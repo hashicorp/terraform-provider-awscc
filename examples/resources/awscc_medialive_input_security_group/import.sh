@@ -1,0 +1,1 @@
+$ terraform import awscc_medialive_input_security_group.example "id"

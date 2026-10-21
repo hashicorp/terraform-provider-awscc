@@ -38,6 +38,121 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::LogAlarm resource.
 func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ActionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that applies to the notifications this alarm sends when it performs its actions.",
+		//	  "properties": {
+		//	    "AlarmTagsPropagation": {
+		//	      "additionalProperties": false,
+		//	      "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExcludedTagKeys": {
+		//	          "description": "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "IncludedTagKeys": {
+		//	          "description": "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"action_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmTagsPropagation
+				"alarm_tags_propagation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludedTagKeys
+						"excluded_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeBetween(1, 50),
+								setvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IncludedTagKeys
+						"included_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeBetween(1, 50),
+								setvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that applies to the notifications this alarm sends when it performs its actions.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ActionLogLineCount
 		// CloudFormation resource type schema:
 		//
@@ -616,6 +731,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_configuration":      "ActionConfiguration",
 		"action_log_line_count":     "ActionLogLineCount",
 		"action_log_line_role_arn":  "ActionLogLineRoleArn",
 		"actions_enabled":           "ActionsEnabled",
@@ -623,9 +739,13 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		"alarm_actions":             "AlarmActions",
 		"alarm_description":         "AlarmDescription",
 		"alarm_name":                "AlarmName",
+		"alarm_tags_propagation":    "AlarmTagsPropagation",
 		"arn":                       "Arn",
 		"comparison_operator":       "ComparisonOperator",
+		"enabled":                   "Enabled",
 		"end_time_offset":           "EndTimeOffset",
+		"excluded_tag_keys":         "ExcludedTagKeys",
+		"included_tag_keys":         "IncludedTagKeys",
 		"insufficient_data_actions": "InsufficientDataActions",
 		"key":                       "Key",
 		"log_group_identifiers":     "LogGroupIdentifiers",

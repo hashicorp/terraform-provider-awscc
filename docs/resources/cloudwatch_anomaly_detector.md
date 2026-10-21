@@ -147,7 +147,7 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_cloudwatch_anomaly_detector.example
   identity = {
-    anomaly_detector_id = "anomaly_detector_id"
+    id = "id"
   }
 }
 ```
@@ -169,12 +169,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_cloudwatch_anomaly_detector.example
-  id = "anomaly_detector_id"
+  id = "id"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_cloudwatch_anomaly_detector.example "anomaly_detector_id"
+$ terraform import awscc_cloudwatch_anomaly_detector.example "id"
 ```

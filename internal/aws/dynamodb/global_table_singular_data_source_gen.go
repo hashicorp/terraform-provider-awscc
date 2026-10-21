@@ -666,6 +666,9 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "DeletionProtectionEnabled": {
 		//	        "type": "boolean"
 		//	      },
+		//	      "DisassociationProtectionEnabled": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "GlobalSecondaryIndexes": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -1016,6 +1019,10 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
+					// Property: DisassociationProtectionEnabled
+					"disassociation_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: GlobalSecondaryIndexes
 					"global_secondary_indexes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1356,6 +1363,19 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: TableType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "GlobalTableReplica",
+		//	    "Regional"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"table_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: TimeToLiveSpecification
@@ -1735,6 +1755,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"deletion_protection_enabled":            "DeletionProtectionEnabled",
 		"dimensions":                             "Dimensions",
 		"disable_scale_in":                       "DisableScaleIn",
+		"disassociation_protection_enabled":      "DisassociationProtectionEnabled",
 		"distance_function":                      "DistanceFunction",
 		"enabled":                                "Enabled",
 		"global_secondary_indexes":               "GlobalSecondaryIndexes",
@@ -1784,6 +1805,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"table_class":                            "TableClass",
 		"table_id":                               "TableId",
 		"table_name":                             "TableName",
+		"table_type":                             "TableType",
 		"tags":                                   "Tags",
 		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
 		"target_value":                          "TargetValue",

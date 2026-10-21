@@ -1,0 +1,1 @@
+$ terraform import awscc_mediaconvert_certificate_association.example "arn"

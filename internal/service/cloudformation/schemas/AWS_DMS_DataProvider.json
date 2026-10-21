@@ -94,7 +94,7 @@
       "maxLength": 255
     },
     "DataProviderIdentifier": {
-      "description": "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
+      "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
       "type": "string",
       "minLength": 1,
       "maxLength": 255
@@ -567,8 +567,11 @@
     "/properties/DataProviderCreationTime"
   ],
   "writeOnlyProperties": [
-    "/properties/DataProviderIdentifier",
-    "/properties/ExactSettings"
+    "/properties/ExactSettings",
+    "/properties/DataProviderIdentifier"
+  ],
+  "deprecatedProperties": [
+    "/properties/DataProviderIdentifier"
   ],
   "handlers": {
     "create": {

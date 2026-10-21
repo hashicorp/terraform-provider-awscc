@@ -124,7 +124,7 @@ Optional:
 
 Optional:
 
-- `evaluator_id` (String) The unique identifier of the evaluator.
+- `evaluator_id` (String) The ID of the evaluator: a built-in evaluator ID (Builtin.*), a managed third-party evaluator ID (ThirdParty.<provider>.<name>), or a custom evaluator ID. For a custom evaluator in the same template, use Fn::GetAtt with EvaluatorId. Ref returns the evaluator ARN, which this property does not accept.
 
 
 <a id="nestedatt--insights"></a>

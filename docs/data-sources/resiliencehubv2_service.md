@@ -26,6 +26,7 @@ Data Source schema for AWS::ResilienceHubV2::Service
 - `created_at` (String) The timestamp when the service was created.
 - `dependency_discovery` (String) Dependency discovery state.
 - `description` (String) The description of the service.
+- `dev_ops_agent_configuration` (Attributes) Links the service to an AWS DevOps Agent Agent Space. Provide AgentSpaceArn to connect the service; omit this property to leave an existing link unchanged. The DevOps Agent integration is governed by the service's resilience policy and operates in analysis-only mode. (see [below for nested schema](#nestedatt--dev_ops_agent_configuration))
 - `effective_policy_values` (Attributes) Effective policy values computed from the associated policy. (see [below for nested schema](#nestedatt--effective_policy_values))
 - `input_sources` (Attributes List) Input sources for this service. (see [below for nested schema](#nestedatt--input_sources))
 - `kms_key_id` (String) The KMS key ID for encrypting service data.
@@ -53,6 +54,14 @@ Read-Only:
 
 - `system_arn` (String) The system ARN.
 - `user_journey_ids` (List of String) User journey IDs associated with this system.
+
+
+<a id="nestedatt--dev_ops_agent_configuration"></a>
+### Nested Schema for `dev_ops_agent_configuration`
+
+Read-Only:
+
+- `agent_space_arn` (String) The ARN of the DevOps Agent Agent Space to link to this service.
 
 
 <a id="nestedatt--effective_policy_values"></a>

@@ -420,6 +420,24 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
+		//	    "EcrImageInUseCount": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LowerInclusive": {
+		//	            "type": "number"
+		//	          },
+		//	          "UpperInclusive": {
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "EcrImagePushedAt": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -1878,6 +1896,38 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageInUseCount
+				"ecr_image_in_use_count": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LowerInclusive
+							"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: UpperInclusive
+							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -3525,6 +3575,7 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 		"ec_2_instance_vpc_id":               "Ec2InstanceVpcId",
 		"ecr_image_architecture":             "EcrImageArchitecture",
 		"ecr_image_hash":                     "EcrImageHash",
+		"ecr_image_in_use_count":             "EcrImageInUseCount",
 		"ecr_image_pushed_at":                "EcrImagePushedAt",
 		"ecr_image_registry":                 "EcrImageRegistry",
 		"ecr_image_repository_name":          "EcrImageRepositoryName",

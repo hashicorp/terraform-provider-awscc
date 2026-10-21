@@ -1,0 +1,96 @@
+{
+  "typeName": "AWS::Route53Resolver::FirewallConfig",
+  "description": "Resource Type definition for AWS::Route53Resolver::FirewallConfig. Configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the firewall configuration."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The ID of the firewall configuration.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "ResourceId": {
+      "type": "string",
+      "description": "The ID of the VPC that this firewall configuration applies to.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "OwnerId": {
+      "type": "string",
+      "description": "The Amazon Web Services account ID of the owner of the VPC that this firewall configuration applies to.",
+      "minLength": 12,
+      "maxLength": 32
+    },
+    "FirewallFailOpen": {
+      "type": "string",
+      "description": "Determines how DNS Firewall operates during failures. By default, fail open is disabled, which means the failure mode is closed. If you enable this option, the failure mode is open. This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association.",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "USE_LOCAL_RESOURCE_SETTING"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ResourceId",
+    "FirewallFailOpen"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/OwnerId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ResourceId"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53resolver:UpdateFirewallConfig",
+        "route53resolver:GetFirewallConfig",
+        "ec2:DescribeVpcs"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53resolver:GetFirewallConfig",
+        "ec2:DescribeVpcs"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53resolver:UpdateFirewallConfig",
+        "route53resolver:GetFirewallConfig",
+        "ec2:DescribeVpcs"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53resolver:UpdateFirewallConfig",
+        "route53resolver:GetFirewallConfig",
+        "ec2:DescribeVpcs"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53resolver:ListFirewallConfigs",
+        "ec2:DescribeVpcs"
+      ]
+    }
+  }
+}

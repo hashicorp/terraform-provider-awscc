@@ -11,12 +11,14 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -39,7 +41,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
+		//	  "description": "The authorizer configuration for the payment manager",
 		//	  "properties": {
 		//	    "CustomJWTAuthorizer": {
 		//	      "additionalProperties": false,
@@ -88,12 +90,11 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "ClaimMatchValue": {
-		//	                    "additionalProperties": false,
 		//	                    "properties": {
 		//	                      "MatchValueString": {
 		//	                        "maxLength": 255,
 		//	                        "minLength": 1,
-		//	                        "pattern": "^[A-Za-z0-9_.-]+$",
+		//	                        "pattern": "^[A-Za-z0-9_.:/-]+$",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "MatchValueStringList": {
@@ -101,9 +102,10 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "items": {
 		//	                          "maxLength": 255,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^[A-Za-z0-9_.-]+$",
+		//	                          "pattern": "^[A-Za-z0-9_.:/-]+$",
 		//	                          "type": "string"
 		//	                        },
+		//	                        "minItems": 1,
 		//	                        "type": "array"
 		//	                      }
 		//	                    },
@@ -119,7 +121,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	              "InboundTokenClaimName": {
 		//	                "maxLength": 255,
 		//	                "minLength": 1,
-		//	                "pattern": "^[A-Za-z0-9_.:/-]+$",
+		//	                "pattern": "^[A-Za-z0-9_.-:]+$",
 		//	                "type": "string"
 		//	              },
 		//	              "InboundTokenClaimValueType": {
@@ -141,7 +143,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "array"
 		//	        },
 		//	        "DiscoveryUrl": {
-		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
+		//	          "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -151,9 +153,6 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "CustomJWTAuthorizer"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"authorizer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -236,7 +235,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 255),
-															stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.-]+$"), ""),
+															stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.:/-]+$"), ""),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -248,9 +247,10 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeAtLeast(1),
 															listvalidator.ValueStringsAre(
 																stringvalidator.LengthBetween(1, 255),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.-]+$"), ""),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.:/-]+$"), ""),
 															),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -284,7 +284,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 255),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.:/-]+$"), ""),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.-:]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -323,7 +323,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^.+/\\.well-known/openid-configuration$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -333,16 +333,14 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "The authorizer configuration for the payment manager",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
@@ -352,6 +350,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The type of authorizer for the payment manager",
 		//	  "enum": [
 		//	    "CUSTOM_JWT",
 		//	    "AWS_IAM"
@@ -359,7 +358,8 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"authorizer_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The type of authorizer for the payment manager",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"CUSTOM_JWT",
@@ -393,7 +393,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description of the payment manager",
 		//	  "maxLength": 4096,
 		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9\\s]+$",
+		//	  "pattern": "^[^\\p{C}]*$",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -402,7 +402,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 4096),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s]+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\p{C}]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -429,6 +429,8 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the payment manager",
+		//	  "maxLength": 48,
+		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,47}$",
 		//	  "type": "string"
 		//	}
@@ -436,6 +438,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the payment manager",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 48),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9]{0,47}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -446,12 +449,12 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the payment manager",
-		//	  "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:payment-manager/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
+		//	  "description": "The Amazon Resource Name (ARN) of the resource.",
+		//	  "pattern": "^arn:aws(?:-[a-z]+)*:bedrock-agentcore:(?:[a-z]{2,4}(?:-[a-z0-9]+)+)?:[0-9]{12}:payment-manager/(?:([0-9a-z][-]?){1,100}-[0-9a-z]{10})$",
 		//	  "type": "string"
 		//	}
 		"payment_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the payment manager",
+			Description: "The Amazon Resource Name (ARN) of the resource.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -462,6 +465,8 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The unique identifier for the payment manager",
+		//	  "maxLength": 211,
+		//	  "minLength": 12,
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
@@ -494,6 +499,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The current status of the payment manager",
 		//	  "enum": [
 		//	    "CREATING",
 		//	    "UPDATING",
@@ -506,7 +512,8 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The current status of the payment manager",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -515,17 +522,20 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Tags to assign to the payment manager",
+		//	  "description": "An array of key-value pairs to apply to this resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key name of the tag.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the tag.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -538,15 +548,17 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 50,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The key name of the tag.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
@@ -557,8 +569,9 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The value for the tag.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
@@ -569,15 +582,14 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the payment manager",
+			Description: "An array of key-value pairs to apply to this resource.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: WorkloadIdentityDetails
@@ -585,6 +597,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The workload identity details for the payment manager",
 		//	  "properties": {
 		//	    "WorkloadIdentityArn": {
 		//	      "maxLength": 1024,
@@ -592,9 +605,6 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "WorkloadIdentityArn"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"workload_identity_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -604,7 +614,8 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The workload identity details for the payment manager",
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -633,7 +644,7 @@ func paymentManagerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "payment_manager_arn",
-			Description:       "The Amazon Resource Name (ARN) of the payment manager",
+			Description:       "The Amazon Resource Name (ARN) of the resource",
 			RequiredForImport: true,
 		})
 

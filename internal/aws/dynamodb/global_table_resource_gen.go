@@ -1004,6 +1004,9 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "DeletionProtectionEnabled": {
 		//	        "type": "boolean"
 		//	      },
+		//	      "DisassociationProtectionEnabled": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "GlobalSecondaryIndexes": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -1373,6 +1376,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DeletionProtectionEnabled
 					"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DisassociationProtectionEnabled
+					"disassociation_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -2079,6 +2090,29 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TableType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "GlobalTableReplica",
+		//	    "Regional"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"table_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"GlobalTableReplica",
+					"Regional",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TimeToLiveSpecification
 		// CloudFormation resource type schema:
 		//
@@ -2666,6 +2700,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"deletion_protection_enabled":            "DeletionProtectionEnabled",
 		"dimensions":                             "Dimensions",
 		"disable_scale_in":                       "DisableScaleIn",
+		"disassociation_protection_enabled":      "DisassociationProtectionEnabled",
 		"distance_function":                      "DistanceFunction",
 		"enabled":                                "Enabled",
 		"global_secondary_indexes":               "GlobalSecondaryIndexes",
@@ -2715,6 +2750,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"table_class":                            "TableClass",
 		"table_id":                               "TableId",
 		"table_name":                             "TableName",
+		"table_type":                             "TableType",
 		"tags":                                   "Tags",
 		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
 		"target_value":                          "TargetValue",

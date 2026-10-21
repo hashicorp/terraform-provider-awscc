@@ -14,6 +14,10 @@
       "description": "The configuration for avail suppression, also known as ad suppression. For more information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).",
       "$ref": "#/definitions/AvailSuppression"
     },
+    "BeaconingConfiguration": {
+      "description": "The beaconing configuration for this playback configuration, which controls whether AWS Elemental MediaTailor includes beacons of its own in the ad tracking response. If you omit this setting, MediaTailor uses INSIGHTS.",
+      "$ref": "#/definitions/BeaconingConfiguration"
+    },
     "Bumper": {
       "description": "The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. To learn more about bumpers, see Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).",
       "$ref": "#/definitions/Bumper"
@@ -117,6 +121,50 @@
     }
   },
   "definitions": {
+    "BeaconingConfiguration": {
+      "description": "The beaconing configuration for a playback configuration. Beaconing controls whether AWS Elemental MediaTailor includes its own beacons in the ad tracking response, in addition to the ad server beacons. If you omit this setting, MediaTailor uses INSIGHTS.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClientSide": {
+          "description": "The beaconing settings for client-side reporting sessions. If you omit this object, MediaTailor uses INSIGHTS reporting mode.",
+          "$ref": "#/definitions/ClientSideBeaconingConfiguration"
+        }
+      }
+    },
+    "ClientSideBeaconingConfiguration": {
+      "description": "The beaconing settings that apply to client-side reporting sessions: whether AWS Elemental MediaTailor includes its beacons in the ad tracking response, and which player operation events it reports on. If you omit this object, MediaTailor uses INSIGHTS reporting mode.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReportingMode": {
+          "description": "Specifies whether MediaTailor includes its beacons in the ad tracking response. INSIGHTS includes MediaTailor beacons; DISABLED does not. Values are case-sensitive. This setting is required when ClientSide is present. If BeaconingConfiguration or ClientSide is omitted, MediaTailor uses INSIGHTS. To keep beaconing off, retain DISABLED in subsequent updates.",
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "INSIGHTS"
+          ]
+        },
+        "AdditionalEventTypes": {
+          "description": "The player operation events to report on, in addition to the ad progress events that MediaTailor always reports on. Valid values are MUTE, UNMUTE, PAUSE, and SKIP. The default is an empty list. This parameter is valid only when ReportingMode is INSIGHTS. MediaTailor rejects the request if you specify a value while ReportingMode is DISABLED, or if you specify duplicate values.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "MUTE",
+              "UNMUTE",
+              "PAUSE",
+              "SKIP"
+            ]
+          }
+        }
+      },
+      "required": [
+        "ReportingMode"
+      ]
+    },
     "AdConditioningConfiguration": {
       "type": "object",
       "description": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns.</p>",
@@ -399,10 +447,7 @@
         "VastResponse": {
           "$ref": "#/definitions/VastResponse"
         }
-      },
-      "required": [
-        "HttpRequest"
-      ]
+      }
     },
     "VastResponse": {
       "description": "The configuration for how MediaTailor processes the VAST response returned by the Ad Decision Server.",

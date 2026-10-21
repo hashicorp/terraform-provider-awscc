@@ -21,6 +21,7 @@ Data Source schema for AWS::CloudWatch::LogAlarm
 
 ### Read-Only
 
+- `action_configuration` (Attributes) Configuration that applies to the notifications this alarm sends when it performs its actions. (see [below for nested schema](#nestedatt--action_configuration))
 - `action_log_line_count` (Number) The number of log lines to include in alarm notifications. Valid values are 0 to 50.
 - `action_log_line_role_arn` (String) The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.
 - `actions_enabled` (Boolean) Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
@@ -38,6 +39,24 @@ Data Source schema for AWS::CloudWatch::LogAlarm
 - `threshold` (Number) The value to compare against the results of the scheduled query evaluation.
 - `treat_missing_data` (String) Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.
 - `warm_up_configuration` (Attributes) The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide. (see [below for nested schema](#nestedatt--warm_up_configuration))
+
+<a id="nestedatt--action_configuration"></a>
+### Nested Schema for `action_configuration`
+
+Read-Only:
+
+- `alarm_tags_propagation` (Attributes) Whether the alarm's tags are included in its action notifications and state-change events. (see [below for nested schema](#nestedatt--action_configuration--alarm_tags_propagation))
+
+<a id="nestedatt--action_configuration--alarm_tags_propagation"></a>
+### Nested Schema for `action_configuration.alarm_tags_propagation`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether the alarm's tags are included in its action notifications and state-change events.
+- `excluded_tag_keys` (Set of String) The tag keys to leave out. Cannot be specified together with IncludedTagKeys.
+- `included_tag_keys` (Set of String) The only tag keys to include. Cannot be specified together with ExcludedTagKeys.
+
+
 
 <a id="nestedatt--scheduled_query_configuration"></a>
 ### Nested Schema for `scheduled_query_configuration`

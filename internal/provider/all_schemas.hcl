@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1727 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1738 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -722,6 +722,10 @@ resource_schema "aws_autoscaling_warm_pool" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_autoscalingplans_scaling_plan" {
+  cloudformation_type_name = "AWS::AutoScalingPlans::ScalingPlan"
+}
+
 resource_schema "aws_b2bi_capability" {
   cloudformation_type_name = "AWS::B2BI::Capability"
 }
@@ -828,6 +832,10 @@ resource_schema "aws_batch_scheduling_policy" {
 
 resource_schema "aws_batch_service_environment" {
   cloudformation_type_name = "AWS::Batch::ServiceEnvironment"
+}
+
+resource_schema "aws_bcmpricingcalculator_bill_estimate" {
+  cloudformation_type_name = "AWS::BcmPricingCalculator::BillEstimate"
 }
 
 resource_schema "aws_bcmpricingcalculator_bill_scenario" {
@@ -947,6 +955,10 @@ resource_schema "aws_bedrock_resource_policy" {
   cloudformation_type_name               = "AWS::Bedrock::ResourcePolicy"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_bedrock_retrieval_instruction" {
+  cloudformation_type_name = "AWS::Bedrock::RetrievalInstruction"
 }
 
 resource_schema "aws_bedrock_session" {
@@ -1463,6 +1475,10 @@ resource_schema "aws_cloudfront_distribution" {
 
 resource_schema "aws_cloudfront_distribution_tenant" {
   cloudformation_type_name = "AWS::CloudFront::DistributionTenant"
+}
+
+resource_schema "aws_cloudfront_field_level_encryption_config" {
+  cloudformation_type_name = "AWS::CloudFront::FieldLevelEncryptionConfig"
 }
 
 resource_schema "aws_cloudfront_field_level_encryption_profile" {
@@ -2841,6 +2857,10 @@ resource_schema "aws_ec2_ipam_external_resource_verification_token" {
   cloudformation_type_name = "AWS::EC2::IpamExternalResourceVerificationToken"
 }
 
+resource_schema "aws_ec2_ipam_internet_registry_association" {
+  cloudformation_type_name = "AWS::EC2::IpamInternetRegistryAssociation"
+}
+
 resource_schema "aws_ec2_key_pair" {
   cloudformation_type_name = "AWS::EC2::KeyPair"
 }
@@ -3271,6 +3291,14 @@ resource_schema "aws_ecs_express_gateway_service" {
   cloudformation_type_name               = "AWS::ECS::ExpressGatewayService"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_ecs_gateway" {
+  cloudformation_type_name = "AWS::ECS::Gateway"
+}
+
+resource_schema "aws_ecs_gateway_cluster_associations" {
+  cloudformation_type_name = "AWS::ECS::GatewayClusterAssociations"
 }
 
 resource_schema "aws_ecs_primary_task_set" {
@@ -5318,6 +5346,10 @@ resource_schema "aws_mediaconnect_router_output" {
   cloudformation_type_name = "AWS::MediaConnect::RouterOutput"
 }
 
+resource_schema "aws_mediaconvert_certificate_association" {
+  cloudformation_type_name = "AWS::MediaConvert::CertificateAssociation"
+}
+
 resource_schema "aws_mediaconvert_job_template" {
   cloudformation_type_name = "AWS::MediaConvert::JobTemplate"
 }
@@ -5354,6 +5386,14 @@ resource_schema "aws_medialive_event_bridge_rule_template" {
 
 resource_schema "aws_medialive_event_bridge_rule_template_group" {
   cloudformation_type_name = "AWS::MediaLive::EventBridgeRuleTemplateGroup"
+}
+
+resource_schema "aws_medialive_input" {
+  cloudformation_type_name = "AWS::MediaLive::Input"
+}
+
+resource_schema "aws_medialive_input_security_group" {
+  cloudformation_type_name = "AWS::MediaLive::InputSecurityGroup"
 }
 
 resource_schema "aws_medialive_multiplex" {
@@ -6847,6 +6887,10 @@ resource_schema "aws_route53recoveryreadiness_resource_set" {
   cloudformation_type_name = "AWS::Route53RecoveryReadiness::ResourceSet"
 }
 
+resource_schema "aws_route53resolver_firewall_config" {
+  cloudformation_type_name = "AWS::Route53Resolver::FirewallConfig"
+}
+
 resource_schema "aws_route53resolver_firewall_domain_list" {
   cloudformation_type_name = "AWS::Route53Resolver::FirewallDomainList"
 }
@@ -7392,6 +7436,10 @@ resource_schema "aws_sagemaker_code_repository" {
   cloudformation_type_name = "AWS::SageMaker::CodeRepository"
 }
 
+resource_schema "aws_sagemaker_compute_quota" {
+  cloudformation_type_name = "AWS::SageMaker::ComputeQuota"
+}
+
 resource_schema "aws_sagemaker_context" {
   cloudformation_type_name = "AWS::SageMaker::Context"
 }
@@ -7617,6 +7665,10 @@ resource_schema "aws_securityagent_security_requirement_pack" {
 
 resource_schema "aws_securityagent_target_domain" {
   cloudformation_type_name = "AWS::SecurityAgent::TargetDomain"
+}
+
+resource_schema "aws_securityhub_action_target" {
+  cloudformation_type_name = "AWS::SecurityHub::ActionTarget"
 }
 
 resource_schema "aws_securityhub_aggregator_v2" {

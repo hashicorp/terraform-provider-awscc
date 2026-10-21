@@ -966,6 +966,242 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// ForceNewDeployment is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: GatewayConnectors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Filters": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AccessTypes": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "PUBLIC",
+		//	                "PRIVATE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "HealthCheck": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "HealthCheckIntervalSeconds": {
+		//	            "type": "integer"
+		//	          },
+		//	          "HealthCheckPath": {
+		//	            "type": "string"
+		//	          },
+		//	          "HealthCheckPort": {
+		//	            "type": "integer"
+		//	          },
+		//	          "HealthCheckProtocol": {
+		//	            "enum": [
+		//	              "HTTP",
+		//	              "HTTPS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "HealthCheckTimeoutSeconds": {
+		//	            "type": "integer"
+		//	          },
+		//	          "HealthyThresholdCount": {
+		//	            "type": "integer"
+		//	          },
+		//	          "Matcher": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "GrpcCode": {
+		//	                "type": "string"
+		//	              },
+		//	              "HttpCode": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "UnhealthyThresholdCount": {
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "PortName": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "PortName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"gateway_connectors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Filters
+					"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessTypes
+							"access_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"PUBLIC",
+											"PRIVATE",
+										),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: HealthCheck
+					"health_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: HealthCheckIntervalSeconds
+							"health_check_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: HealthCheckPath
+							"health_check_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: HealthCheckPort
+							"health_check_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: HealthCheckProtocol
+							"health_check_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"HTTP",
+										"HTTPS",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: HealthCheckTimeoutSeconds
+							"health_check_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: HealthyThresholdCount
+							"healthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Matcher
+							"matcher": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: GrpcCode
+									"grpc_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: HttpCode
+									"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: UnhealthyThresholdCount
+							"unhealthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PortName
+					"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// GatewayConnectors is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckGracePeriodSeconds
 		// CloudFormation resource type schema:
 		//
@@ -1657,6 +1893,26 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ContainerConfigurations": {
+		//	      "description": "",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "LogLevel": {
+		//	            "enum": [
+		//	              "debug",
+		//	              "info"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    },
 		//	    "Enabled": {
 		//	      "description": "Specifies whether to use Service Connect with this service.",
 		//	      "type": "boolean"
@@ -1888,6 +2144,36 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ContainerConfigurations
+				"container_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LogLevel
+							"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"debug",
+										"info",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(0, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
@@ -2695,15 +2981,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "AdvancedConfiguration": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "The advanced settings for VPC Lattice used in blue/green deployments. Specify the alternate target group and listener rules required for traffic shifting during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	        "properties": {
 		//	          "AlternateTargetGroupArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the alternate target group associated with the VPC Lattice Configuration for Amazon ECS blue/green deployments.",
 		//	            "type": "string"
 		//	          },
 		//	          "ProductionListenerRule": {
+		//	            "description": "The Amazon Resource Name (ARN) that identifies the production listener rule or listener for routing production traffic.",
 		//	            "type": "string"
 		//	          },
 		//	          "TestListenerRule": {
+		//	            "description": "The Amazon Resource Name (ARN) that identifies the test listener rule or listener for routing test traffic.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -2739,30 +3028,33 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AlternateTargetGroupArn
 							"alternate_target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the alternate target group associated with the VPC Lattice Configuration for Amazon ECS blue/green deployments.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ProductionListenerRule
 							"production_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) that identifies the production listener rule or listener for routing production traffic.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: TestListenerRule
 							"test_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) that identifies the test listener rule or listener for routing test traffic.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "The advanced settings for VPC Lattice used in blue/green deployments. Specify the alternate target group and listener rules required for traffic shifting during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html) in the *Amazon Elastic Container Service Developer Guide*.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2848,6 +3140,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_log_configuration":          "AccessLogConfiguration",
+		"access_types":                      "AccessTypes",
 		"action":                            "Action",
 		"advanced_configuration":            "AdvancedConfiguration",
 		"alarm_names":                       "AlarmNames",
@@ -2866,6 +3159,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_provider_strategy":        "CapacityProviderStrategy",
 		"client_aliases":                    "ClientAliases",
 		"cluster":                           "Cluster",
+		"container_configurations":          "ContainerConfigurations",
 		"container_name":                    "ContainerName",
 		"container_port":                    "ContainerPort",
 		"deployment_circuit_breaker":        "DeploymentCircuitBreaker",
@@ -2885,14 +3179,25 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"expression":                        "Expression",
 		"field":                             "Field",
 		"filesystem_type":                   "FilesystemType",
+		"filters":                           "Filters",
 		"force_new_deployment":              "ForceNewDeployment",
 		"force_new_deployment_nonce":        "ForceNewDeploymentNonce",
 		"format":                            "Format",
+		"gateway_connectors":                "GatewayConnectors",
+		"grpc_code":                         "GrpcCode",
 		"header":                            "Header",
+		"health_check":                      "HealthCheck",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"health_check_interval_seconds":     "HealthCheckIntervalSeconds",
+		"health_check_path":                 "HealthCheckPath",
+		"health_check_port":                 "HealthCheckPort",
+		"health_check_protocol":             "HealthCheckProtocol",
+		"health_check_timeout_seconds":      "HealthCheckTimeoutSeconds",
 		"healthy_percent":                   "HealthyPercent",
+		"healthy_threshold_count":           "HealthyThresholdCount",
 		"hook_details":                      "HookDetails",
 		"hook_target_arn":                   "HookTargetArn",
+		"http_code":                         "HttpCode",
 		"idle_timeout_seconds":              "IdleTimeoutSeconds",
 		"include_query_parameters":          "IncludeQueryParameters",
 		"ingress_port_override":             "IngressPortOverride",
@@ -2909,7 +3214,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"load_balancers":                    "LoadBalancers",
 		"log_configuration":                 "LogConfiguration",
 		"log_driver":                        "LogDriver",
+		"log_level":                         "LogLevel",
 		"managed_ebs_volume":                "ManagedEBSVolume",
+		"matcher":                           "Matcher",
 		"maximum_percent":                   "MaximumPercent",
 		"metric_configurations":             "MetricConfigurations",
 		"metric_names":                      "MetricNames",
@@ -2963,6 +3270,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"timeout_in_minutes":                "TimeoutInMinutes",
 		"tls":                               "Tls",
 		"type":                              "Type",
+		"unhealthy_threshold_count":         "UnhealthyThresholdCount",
 		"value":                             "Value",
 		"value_from":                        "ValueFrom",
 		"volume_configurations":             "VolumeConfigurations",
@@ -2973,6 +3281,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/GatewayConnectors",
 		"/properties/ServiceConnectConfiguration",
 		"/properties/VolumeConfigurations",
 		"/properties/ForceNewDeployment",

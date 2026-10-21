@@ -6,20 +6,14 @@
     "MetricCharacteristics": {
       "$ref": "#/definitions/MetricCharacteristics"
     },
-    "AnomalyDetectorId": {
+    "MetricName": {
       "type": "string"
     },
-    "MetricName": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255
-    },
     "Stat": {
-      "type": "string",
-      "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$"
+      "type": "string"
     },
     "Configuration": {
-      "$ref": "#/definitions/MetricConfiguration"
+      "$ref": "#/definitions/Configuration"
     },
     "MetricMathAnomalyDetector": {
       "$ref": "#/definitions/MetricMathAnomalyDetector"
@@ -27,16 +21,15 @@
     "Dimensions": {
       "type": "array",
       "uniqueItems": false,
-      "maxItems": 30,
       "items": {
         "$ref": "#/definitions/Dimension"
       }
     },
+    "Id": {
+      "type": "string"
+    },
     "Namespace": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255,
-      "pattern": "[^:].*"
+      "type": "string"
     },
     "SingleMetricAnomalyDetector": {
       "$ref": "#/definitions/SingleMetricAnomalyDetector"
@@ -65,7 +58,7 @@
         }
       }
     },
-    "MetricConfiguration": {
+    "Configuration": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -86,19 +79,16 @@
       "additionalProperties": false,
       "properties": {
         "Period": {
-          "type": "integer",
-          "minimum": 1
+          "type": "integer"
         },
         "Metric": {
           "$ref": "#/definitions/Metric"
         },
         "Stat": {
-          "type": "string",
-          "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$"
+          "type": "string"
         },
         "Unit": {
-          "type": "string",
-          "pattern": "^(Seconds|Microseconds|Milliseconds|Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes|Bits|Kilobits|Megabits|Gigabits|Terabits|Percent|Count|Bytes/Second|Kilobytes/Second|Megabytes/Second|Gigabytes/Second|Terabytes/Second|Bits/Second|Kilobits/Second|Megabits/Second|Gigabits/Second|Terabits/Second|Count/Second|None)$"
+          "type": "string"
         }
       },
       "required": [
@@ -112,23 +102,17 @@
       "additionalProperties": false,
       "properties": {
         "MetricName": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255
+          "type": "string"
         },
         "Dimensions": {
           "type": "array",
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Dimension"
-          },
-          "maxItems": 30
+          }
         },
         "Namespace": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "[^:].*"
+          "type": "string"
         }
       },
       "required": [
@@ -141,14 +125,10 @@
       "additionalProperties": false,
       "properties": {
         "Value": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 1024
+          "type": "string"
         },
         "Name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255
+          "type": "string"
         }
       },
       "required": [
@@ -161,17 +141,13 @@
       "additionalProperties": false,
       "properties": {
         "AccountId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255
+          "type": "string"
         },
         "ReturnData": {
           "type": "boolean"
         },
         "Expression": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 1024
+          "type": "string"
         },
         "MetricStat": {
           "$ref": "#/definitions/MetricStat"
@@ -180,13 +156,10 @@
           "type": "string"
         },
         "Period": {
-          "type": "integer",
-          "minimum": 1
+          "type": "integer"
         },
         "Id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255
+          "type": "string"
         }
       },
       "required": [
@@ -198,12 +171,10 @@
       "additionalProperties": false,
       "properties": {
         "EndTime": {
-          "type": "string",
-          "pattern": "^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$"
+          "type": "string"
         },
         "StartTime": {
-          "type": "string",
-          "pattern": "^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$"
+          "type": "string"
         }
       },
       "required": [
@@ -216,32 +187,23 @@
       "additionalProperties": false,
       "properties": {
         "MetricName": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255
+          "type": "string"
         },
         "Dimensions": {
           "type": "array",
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Dimension"
-          },
-          "maxItems": 30
+          }
         },
         "AccountId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255
+          "type": "string"
         },
         "Stat": {
-          "type": "string",
-          "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$"
+          "type": "string"
         },
         "Namespace": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "pattern": "[^:].*"
+          "type": "string"
         }
       }
     }
@@ -256,45 +218,9 @@
     "/properties/Stat"
   ],
   "primaryIdentifier": [
-    "/properties/AnomalyDetectorId"
+    "/properties/Id"
   ],
   "readOnlyProperties": [
-    "/properties/AnomalyDetectorId"
-  ],
-  "writeOnlyProperties": [
-    "/properties/MetricMathAnomalyDetector/MetricDataQueries/*/Label"
-  ],
-  "tagging": {
-    "taggable": false
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "cloudwatch:PutAnomalyDetector",
-        "cloudwatch:DescribeAnomalyDetectors"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "cloudwatch:DescribeAnomalyDetectors"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "cloudwatch:PutAnomalyDetector",
-        "cloudwatch:DescribeAnomalyDetectors"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "cloudwatch:DeleteAnomalyDetector",
-        "cloudwatch:DescribeAnomalyDetectors"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "cloudwatch:DescribeAnomalyDetectors"
-      ]
-    }
-  }
+    "/properties/Id"
+  ]
 }

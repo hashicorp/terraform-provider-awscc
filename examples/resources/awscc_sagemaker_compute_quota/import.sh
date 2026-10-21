@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_compute_quota.example "compute_quota_arn"

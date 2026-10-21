@@ -44,6 +44,7 @@ Read-Only:
 - `ec_2_instance_vpc_id` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ec_2_instance_vpc_id))
 - `ecr_image_architecture` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_architecture))
 - `ecr_image_hash` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_hash))
+- `ecr_image_in_use_count` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_in_use_count))
 - `ecr_image_pushed_at` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_pushed_at))
 - `ecr_image_registry` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_registry))
 - `ecr_image_repository_name` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_repository_name))
@@ -173,6 +174,15 @@ Read-Only:
 
 - `comparison` (String)
 - `value` (String)
+
+
+<a id="nestedatt--filter_criteria--ecr_image_in_use_count"></a>
+### Nested Schema for `filter_criteria.ecr_image_in_use_count`
+
+Read-Only:
+
+- `lower_inclusive` (Number)
+- `upper_inclusive` (Number)
 
 
 <a id="nestedatt--filter_criteria--ecr_image_pushed_at"></a>

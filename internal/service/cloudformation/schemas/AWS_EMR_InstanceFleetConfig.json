@@ -1,0 +1,374 @@
+{
+  "typeName": "AWS::EMR::InstanceFleetConfig",
+  "description": "Resource Type definition for AWS::EMR::InstanceFleetConfig",
+  "additionalProperties": false,
+  "properties": {
+    "InstanceFleetType": {
+      "type": "string",
+      "description": "The node type that the instance fleet hosts."
+    },
+    "TargetOnDemandCapacity": {
+      "type": "integer",
+      "description": "The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision."
+    },
+    "ClusterId": {
+      "type": "string",
+      "description": "The unique identifier of the EMR cluster."
+    },
+    "TargetSpotCapacity": {
+      "type": "integer",
+      "description": "The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision."
+    },
+    "LaunchSpecifications": {
+      "$ref": "#/definitions/InstanceFleetProvisioningSpecifications",
+      "description": "The launch specification for the instance fleet."
+    },
+    "ResizeSpecifications": {
+      "$ref": "#/definitions/InstanceFleetResizingSpecifications",
+      "description": "The resize specification for the instance fleet."
+    },
+    "InstanceFleetId": {
+      "type": "string",
+      "description": "The unique identifier for instance fleet for specific cluster"
+    },
+    "InstanceTypeConfigs": {
+      "type": "array",
+      "insertionOrder": false,
+      "description": "InstanceTypeConfigs determine the EC2 instances that Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities.",
+      "items": {
+        "$ref": "#/definitions/InstanceTypeConfig"
+      }
+    },
+    "Name": {
+      "type": "string",
+      "description": "The friendly name of the instance fleet."
+    }
+  },
+  "definitions": {
+    "VolumeSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "VolumeSpecification is a subproperty of the EbsBlockDeviceConfig property type. VolumeSecification determines the volume type, IOPS, and size (GiB) for EBS volumes attached to EC2 instances.",
+      "properties": {
+        "SizeInGB": {
+          "type": "integer",
+          "description": "The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume type is EBS-optimized, the minimum value is 10."
+        },
+        "VolumeType": {
+          "type": "string",
+          "description": "The volume type. Volume types supported are gp3, gp2, io1, st1, sc1, and standard."
+        },
+        "Throughput": {
+          "type": "integer",
+          "description": "The throughput, in mebibyte per second (MiB/s). This optional parameter can be a number from 125 - 1000 and is valid only for gp3 volumes."
+        },
+        "Iops": {
+          "type": "integer",
+          "description": "The number of I/O operations per second (IOPS) that the volume supports."
+        }
+      },
+      "required": [
+        "SizeInGB",
+        "VolumeType"
+      ]
+    },
+    "EbsConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "EbsConfiguration determines the EBS volumes to attach to EMR cluster instances.",
+      "properties": {
+        "EbsBlockDeviceConfigs": {
+          "description": "An array of Amazon EBS volume specifications attached to a cluster instance.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EbsBlockDeviceConfig"
+          }
+        },
+        "EbsOptimized": {
+          "type": "boolean",
+          "description": "Indicates whether an Amazon EBS volume is EBS-optimized."
+        }
+      }
+    },
+    "ApplicationConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuration specifies optional configurations for customizing open-source big data applications and environment parameters.",
+      "properties": {
+        "ConfigurationProperties": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Within a configuration classification, a set of properties that represent the settings that you want to change in the configuration file.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          }
+        },
+        "Configurations": {
+          "description": "A list of additional configurations to apply within a configuration object.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ApplicationConfiguration"
+          }
+        },
+        "Classification": {
+          "type": "string",
+          "description": "The classification within a configuration."
+        }
+      }
+    },
+    "OnDemandCapacityReservationOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "UsageStrategy": {
+          "type": "string",
+          "description": "Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity."
+        },
+        "CapacityReservationResourceGroupArn": {
+          "type": "string",
+          "description": "The ARN of the Capacity Reservation resource group in which to run the instance."
+        },
+        "CapacityReservationPreference": {
+          "type": "string",
+          "description": "Indicates the instance's Capacity Reservation preferences."
+        }
+      }
+    },
+    "InstanceFleetResizingSpecifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OnDemandResizeSpecification": {
+          "$ref": "#/definitions/OnDemandResizingSpecification",
+          "description": "The resize specification for On-Demand Instances in the instance fleet, which contains the allocation strategy, capacity reservation options, and the resize timeout period."
+        },
+        "SpotResizeSpecification": {
+          "$ref": "#/definitions/SpotResizingSpecification",
+          "description": "The resize specification for Spot Instances in the instance fleet, which contains the allocation strategy and the resize timeout period."
+        }
+      }
+    },
+    "InstanceFleetProvisioningSpecifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "InstanceTypeConfig determines the EC2 instances that Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities.",
+      "properties": {
+        "SpotSpecification": {
+          "description": "The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.",
+          "$ref": "#/definitions/SpotProvisioningSpecification"
+        },
+        "OnDemandSpecification": {
+          "description": "The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy.",
+          "$ref": "#/definitions/OnDemandProvisioningSpecification"
+        }
+      }
+    },
+    "OnDemandResizingSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CapacityReservationOptions": {
+          "$ref": "#/definitions/OnDemandCapacityReservationOptions",
+          "description": "Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity."
+        },
+        "AllocationStrategy": {
+          "type": "string",
+          "description": "Specifies the allocation strategy to use to launch On-Demand instances during a resize. The default is lowest-price."
+        },
+        "TimeoutDurationMinutes": {
+          "type": "integer",
+          "description": "On-Demand resize timeout in minutes."
+        }
+      }
+    },
+    "OnDemandProvisioningSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy.",
+      "properties": {
+        "CapacityReservationOptions": {
+          "$ref": "#/definitions/OnDemandCapacityReservationOptions"
+        },
+        "AllocationStrategy": {
+          "description": "Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "AllocationStrategy"
+      ]
+    },
+    "EbsBlockDeviceConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "EbsBlockDeviceConfig defines the number and type of EBS volumes to associate with all EC2 instances in an EMR cluster.",
+      "properties": {
+        "VolumeSpecification": {
+          "description": "EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an Amazon EC2 instance in the cluster.",
+          "$ref": "#/definitions/VolumeSpecification"
+        },
+        "VolumesPerInstance": {
+          "type": "integer",
+          "description": "Use of this property can confuse CloudFormation drift detection. The EbsBlockDeviceConfigs read from the system may return a list with one entry per volume, replacing any entry specified in the template with a VolumesPerInstance greater than one by that many entries containing only the VolumeSpecification. Thus to avoid false drift detection, it is recommended to supply repeated entries in EbsBlockDeviceConfigs for any VolumeSpecification which is intended to be repeated and not to use this property.\n"
+        }
+      },
+      "required": [
+        "VolumeSpecification"
+      ]
+    },
+    "InstanceTypeConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The configuration determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities.",
+      "properties": {
+        "BidPrice": {
+          "description": "The bid price for each Amazon EC2 Spot Instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.",
+          "type": "string"
+        },
+        "WeightedCapacity": {
+          "description": "The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in InstanceFleetConfig. This value is 1 for a master instance fleet, and must be 1 or greater for core and task instance fleets. Defaults to 1 if not specified.",
+          "type": "integer"
+        },
+        "EbsConfiguration": {
+          "description": "The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance as defined by InstanceType.",
+          "$ref": "#/definitions/EbsConfiguration"
+        },
+        "BidPriceAsPercentageOfOnDemandPrice": {
+          "description": "The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot Instance as defined by InstanceType. Expressed as a number (for example, 20 specifies 20%). If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.",
+          "type": "number"
+        },
+        "CustomAmiId": {
+          "description": "The custom AMI ID to use for the instance type.",
+          "type": "string"
+        },
+        "Configurations": {
+          "description": "An optional configuration specification to be used when provisioning cluster instances, which can include configurations for applications and software bundled with Amazon EMR.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ApplicationConfiguration"
+          }
+        },
+        "InstanceType": {
+          "description": "An Amazon EC2 instance type, such as m3.xlarge.",
+          "type": "string"
+        },
+        "Priority": {
+          "description": "The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type.",
+          "type": "number"
+        }
+      },
+      "required": [
+        "InstanceType"
+      ]
+    },
+    "SpotResizingSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AllocationStrategy": {
+          "type": "string",
+          "description": "Specifies the allocation strategy to use to launch Spot instances during a resize."
+        },
+        "TimeoutDurationMinutes": {
+          "type": "integer",
+          "description": "Spot resize timeout in minutes."
+        }
+      }
+    },
+    "SpotProvisioningSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "SpotProvisioningSpecification determines the launch specification for Spot instances in the instance fleet, which includes the defined duration and provisioning timeout behavior.",
+      "properties": {
+        "AllocationStrategy": {
+          "description": "Specifies one of the following strategies to launch Spot Instance fleets: price-capacity-optimized, capacity-optimized, lowest-price, or diversified",
+          "type": "string"
+        },
+        "TimeoutDurationMinutes": {
+          "description": "The Spot provisioning timeout period in minutes. If Spot Instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.",
+          "type": "integer"
+        },
+        "TimeoutAction": {
+          "description": "The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired; that is, when all Spot Instances could not be provisioned within the Spot provisioning timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot Instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.",
+          "type": "string"
+        },
+        "BlockDurationMinutes": {
+          "description": "The defined duration for Spot Instances (also known as Spot blocks) in minutes. When specified, the Spot Instance does not terminate before the defined duration expires, and defined duration pricing for Spot Instances applies. Valid values are 60, 120, 180, 240, 300, or 360.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "TimeoutDurationMinutes",
+        "TimeoutAction"
+      ]
+    }
+  },
+  "required": [
+    "InstanceFleetType",
+    "ClusterId"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/LaunchSpecifications",
+    "/properties/ClusterId",
+    "/properties/InstanceFleetType"
+  ],
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/InstanceFleetId"
+  ],
+  "readOnlyProperties": [
+    "/properties/InstanceFleetId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/InstanceTypeConfigs/*/EbsConfiguration/EbsBlockDeviceConfigs/*/VolumesPerInstance"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "elasticmapreduce:AddInstanceFleet",
+        "elasticmapreduce:ListInstanceFleets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "elasticmapreduce:ListInstanceFleets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "elasticmapreduce:ModifyInstanceFleet",
+        "elasticmapreduce:ListInstanceFleets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "elasticmapreduce:ModifyInstanceFleet",
+        "elasticmapreduce:ListInstanceFleets"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ClusterId": {
+            "$ref": "resource-schema.json#/properties/ClusterId"
+          }
+        },
+        "required": [
+          "ClusterId"
+        ]
+      },
+      "permissions": [
+        "elasticmapreduce:ListInstanceFleets"
+      ]
+    }
+  }
+}

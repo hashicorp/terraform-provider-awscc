@@ -197,20 +197,6 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "anyOf": [
-		//	    {
-		//	      "properties": {
-		//	        "TargetArn": {
-		//	          "pattern": ""
-		//	        }
-		//	      }
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "UniversalTargetParameters"
-		//	      ]
-		//	    }
-		//	  ],
 		//	  "description": "Configuration for how the subscriber invokes its target, including the target ARN, the IAM role used to invoke it, and, optionally, the target-specific parameters object that matches the target type.",
 		//	  "properties": {
 		//	    "EventBusV2Parameters": {

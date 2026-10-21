@@ -278,23 +278,26 @@
               "pattern": "^arn:[^:]*:events:[^:]*:[^:]*:event-busv2/"
             }
           }
-        }
-      },
-      "anyOf": [
-        {
-          "$comment": "A universal service integration target (arn:{partition}:events:::aws-sdk:{service}:{apiAction}) requires UniversalTargetParameters; any other target is unconstrained by this rule. Mirrors EventBridgeNexusFrontEndService USITargetValidator (\"UniversalTargetParameters is required when TargetArn is a USI target\").",
-          "properties": {
-            "TargetArn": {
-              "pattern": ""
-            }
-          }
         },
-        {
-          "required": [
-            "UniversalTargetParameters"
+        "TargetArn": {
+          "$comment": "TargetArn is required, so this dependency always applies. The anyOf sits here instead of on InvokeConfiguration itself because the CDK spec importer drops InvokeConfiguration from the generated CfnSubscriber when the object carries its own anyOf.",
+          "anyOf": [
+            {
+              "$comment": "A universal service integration target (arn:{partition}:events:::aws-sdk:{service}:{apiAction}) requires UniversalTargetParameters; any other target is unconstrained by this rule. Mirrors EventBridgeNexusFrontEndService USITargetValidator (\"UniversalTargetParameters is required when TargetArn is a USI target\").",
+              "properties": {
+                "TargetArn": {
+                  "pattern": ""
+                }
+              }
+            },
+            {
+              "required": [
+                "UniversalTargetParameters"
+              ]
+            }
           ]
         }
-      ]
+      }
     },
     "EventBusV2MetadataMap": {
       "description": "Metadata forwarded with each event, as key-value string pairs, with at most 100 entries. A key or value may also be a JSONata expression.",
