@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -22,6 +23,38 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource.
 func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnalyticsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The analytics configuration for the Data Store. Omitted when the Data Store can't carry analytics.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "The analytics status for the Data Store.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "PAUSED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"analytics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The analytics status for the Data Store.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The analytics configuration for the Data Store. Omitted when the Data Store can't carry analytics.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -114,17 +147,19 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+		//	  "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'UPDATING', 'UPDATE_FAILED', 'DELETING', or 'DELETED'.",
 		//	  "enum": [
 		//	    "CREATING",
 		//	    "ACTIVE",
+		//	    "UPDATING",
+		//	    "UPDATE_FAILED",
 		//	    "DELETING",
 		//	    "DELETED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"datastore_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'UPDATING', 'UPDATE_FAILED', 'DELETING', or 'DELETED'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DatastoreTypeVersion
@@ -208,6 +243,38 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The identity provider configuration for the datastore",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NlpConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The natural language processing (NLP) configuration for the Data Store.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "The NLP status for the Data Store.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"nlp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The NLP status for the Data Store.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The natural language processing (NLP) configuration for the Data Store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreloadDataConfig
 		// CloudFormation resource type schema:
 		//
@@ -237,6 +304,40 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProfileConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The profile configuration for the Data Store.",
+		//	  "properties": {
+		//	    "DefaultProfiles": {
+		//	      "description": "The FHIR profiles the Data Store validates resources against by default, for example us-core-3.1.1.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DefaultProfiles"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"profile_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultProfiles
+				"default_profiles": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The FHIR profiles the Data Store validates resources against by default, for example us-core-3.1.1.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The profile configuration for the Data Store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SseConfiguration
@@ -369,6 +470,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::HealthLake::FHIRDatastore").WithTerraformTypeName("awscc_healthlake_fhir_datastore")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"analytics_configuration":            "AnalyticsConfiguration",
 		"authorization_strategy":             "AuthorizationStrategy",
 		"cmk_type":                           "CmkType",
 		"created_at":                         "CreatedAt",
@@ -378,6 +480,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		"datastore_name":                     "DatastoreName",
 		"datastore_status":                   "DatastoreStatus",
 		"datastore_type_version":             "DatastoreTypeVersion",
+		"default_profiles":                   "DefaultProfiles",
 		"fine_grained_authorization_enabled": "FineGrainedAuthorizationEnabled",
 		"identity_provider_configuration":    "IdentityProviderConfiguration",
 		"idp_lambda_arn":                     "IdpLambdaArn",
@@ -386,10 +489,13 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		"kms_key_id":                         "KmsKeyId",
 		"metadata":                           "Metadata",
 		"nanos":                              "Nanos",
+		"nlp_configuration":                  "NlpConfiguration",
 		"preload_data_config":                "PreloadDataConfig",
 		"preload_data_type":                  "PreloadDataType",
+		"profile_configuration":              "ProfileConfiguration",
 		"seconds":                            "Seconds",
 		"sse_configuration":                  "SseConfiguration",
+		"status":                             "Status",
 		"tags":                               "Tags",
 		"value":                              "Value",
 	})

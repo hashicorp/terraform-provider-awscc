@@ -155,6 +155,35 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The description of the service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DevOpsAgentConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Links the service to an AWS DevOps Agent Agent Space. Provide AgentSpaceArn to connect the service; omit this property to leave an existing link unchanged. The DevOps Agent integration is governed by the service's resilience policy and operates in analysis-only mode.",
+		//	  "properties": {
+		//	    "AgentSpaceArn": {
+		//	      "description": "The ARN of the DevOps Agent Agent Space to link to this service.",
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AgentSpaceArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"dev_ops_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AgentSpaceArn
+				"agent_space_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the DevOps Agent Agent Space to link to this service.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Links the service to an AWS DevOps Agent Agent Space. Provide AgentSpaceArn to connect the service; omit this property to leave an existing link unchanged. The DevOps Agent integration is governed by the service's resilience policy and operates in analysis-only mode.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EffectivePolicyValues
 		// CloudFormation resource type schema:
 		//
@@ -959,56 +988,58 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHubV2::Service").WithTerraformTypeName("awscc_resiliencehubv2_service")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assertions":               "Assertions",
-		"associated_systems":       "AssociatedSystems",
-		"availability_slo":         "AvailabilitySlo",
-		"bucket_owner":             "BucketOwner",
-		"bucket_path":              "BucketPath",
-		"cfn_stack_arn":            "CfnStackArn",
-		"cluster_arn":              "ClusterArn",
-		"created_at":               "CreatedAt",
-		"cross_account_role_arn":   "CrossAccountRoleArn",
-		"cross_account_role_arns":  "CrossAccountRoleArns",
-		"dependency_discovery":     "DependencyDiscovery",
-		"description":              "Description",
-		"design_file_s3_url":       "DesignFileS3Url",
-		"effective_policy_values":  "EffectivePolicyValues",
-		"eks":                      "Eks",
-		"external_id":              "ExternalId",
-		"input_sources":            "InputSources",
-		"invoker_role_name":        "InvokerRoleName",
-		"key":                      "Key",
-		"kms_key_id":               "KmsKeyId",
-		"label_selector":           "LabelSelector",
-		"match_expressions":        "MatchExpressions",
-		"match_labels":             "MatchLabels",
-		"multi_az_dr_approach":     "MultiAzDrApproach",
-		"multi_az_rpo":             "MultiAzRpo",
-		"multi_az_rto":             "MultiAzRto",
-		"multi_region_dr_approach": "MultiRegionDrApproach",
-		"multi_region_rpo":         "MultiRegionRpo",
-		"multi_region_rto":         "MultiRegionRto",
-		"name":                     "Name",
-		"namespaces":               "Namespaces",
-		"operator":                 "Operator",
-		"permission_model":         "PermissionModel",
-		"policy_arn":               "PolicyArn",
-		"policy_name":              "PolicyName",
-		"regions":                  "Regions",
-		"report_configuration":     "ReportConfiguration",
-		"report_output":            "ReportOutput",
-		"resource_configuration":   "ResourceConfiguration",
-		"resource_tags":            "ResourceTags",
-		"s3":                       "S3",
-		"service_arn":              "ServiceArn",
-		"system_arn":               "SystemArn",
-		"tags":                     "Tags",
-		"text":                     "Text",
-		"tf_state_file_url":        "TfStateFileUrl",
-		"updated_at":               "UpdatedAt",
-		"user_journey_ids":         "UserJourneyIds",
-		"value":                    "Value",
-		"values":                   "Values",
+		"agent_space_arn":             "AgentSpaceArn",
+		"assertions":                  "Assertions",
+		"associated_systems":          "AssociatedSystems",
+		"availability_slo":            "AvailabilitySlo",
+		"bucket_owner":                "BucketOwner",
+		"bucket_path":                 "BucketPath",
+		"cfn_stack_arn":               "CfnStackArn",
+		"cluster_arn":                 "ClusterArn",
+		"created_at":                  "CreatedAt",
+		"cross_account_role_arn":      "CrossAccountRoleArn",
+		"cross_account_role_arns":     "CrossAccountRoleArns",
+		"dependency_discovery":        "DependencyDiscovery",
+		"description":                 "Description",
+		"design_file_s3_url":          "DesignFileS3Url",
+		"dev_ops_agent_configuration": "DevOpsAgentConfiguration",
+		"effective_policy_values":     "EffectivePolicyValues",
+		"eks":                         "Eks",
+		"external_id":                 "ExternalId",
+		"input_sources":               "InputSources",
+		"invoker_role_name":           "InvokerRoleName",
+		"key":                         "Key",
+		"kms_key_id":                  "KmsKeyId",
+		"label_selector":              "LabelSelector",
+		"match_expressions":           "MatchExpressions",
+		"match_labels":                "MatchLabels",
+		"multi_az_dr_approach":        "MultiAzDrApproach",
+		"multi_az_rpo":                "MultiAzRpo",
+		"multi_az_rto":                "MultiAzRto",
+		"multi_region_dr_approach":    "MultiRegionDrApproach",
+		"multi_region_rpo":            "MultiRegionRpo",
+		"multi_region_rto":            "MultiRegionRto",
+		"name":                        "Name",
+		"namespaces":                  "Namespaces",
+		"operator":                    "Operator",
+		"permission_model":            "PermissionModel",
+		"policy_arn":                  "PolicyArn",
+		"policy_name":                 "PolicyName",
+		"regions":                     "Regions",
+		"report_configuration":        "ReportConfiguration",
+		"report_output":               "ReportOutput",
+		"resource_configuration":      "ResourceConfiguration",
+		"resource_tags":               "ResourceTags",
+		"s3":                          "S3",
+		"service_arn":                 "ServiceArn",
+		"system_arn":                  "SystemArn",
+		"tags":                        "Tags",
+		"text":                        "Text",
+		"tf_state_file_url":           "TfStateFileUrl",
+		"updated_at":                  "UpdatedAt",
+		"user_journey_ids":            "UserJourneyIds",
+		"value":                       "Value",
+		"values":                      "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

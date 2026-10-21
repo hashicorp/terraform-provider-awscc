@@ -390,6 +390,24 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
+		//	    "EcrImageInUseCount": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LowerInclusive": {
+		//	            "type": "number"
+		//	          },
+		//	          "UpperInclusive": {
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "EcrImagePushedAt": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -1554,6 +1572,22 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: EcrImageInUseCount
+				"ecr_image_in_use_count": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LowerInclusive
+							"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpperInclusive
+							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: EcrImagePushedAt
 				"ecr_image_pushed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -2226,6 +2260,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ec_2_instance_vpc_id":               "Ec2InstanceVpcId",
 		"ecr_image_architecture":             "EcrImageArchitecture",
 		"ecr_image_hash":                     "EcrImageHash",
+		"ecr_image_in_use_count":             "EcrImageInUseCount",
 		"ecr_image_pushed_at":                "EcrImagePushedAt",
 		"ecr_image_registry":                 "EcrImageRegistry",
 		"ecr_image_repository_name":          "EcrImageRepositoryName",

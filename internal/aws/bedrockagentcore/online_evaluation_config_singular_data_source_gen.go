@@ -221,7 +221,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "description": "The reference to an evaluator used in online evaluation configurations.",
 		//	    "properties": {
 		//	      "EvaluatorId": {
-		//	        "description": "The unique identifier of the evaluator.",
+		//	        "description": "The ID of the evaluator: a built-in evaluator ID (Builtin.*), a managed third-party evaluator ID (ThirdParty.\u003cprovider\u003e.\u003cname\u003e), or a custom evaluator ID. For a custom evaluator in the same template, use Fn::GetAtt with EvaluatorId. Ref returns the evaluator ARN, which this property does not accept.",
 		//	        "pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
 		//	        "type": "string"
 		//	      }
@@ -240,7 +240,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EvaluatorId
 					"evaluator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unique identifier of the evaluator.",
+						Description: "The ID of the evaluator: a built-in evaluator ID (Builtin.*), a managed third-party evaluator ID (ThirdParty.<provider>.<name>), or a custom evaluator ID. For a custom evaluator in the same template, use Fn::GetAtt with EvaluatorId. Ref returns the evaluator ARN, which this property does not accept.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
