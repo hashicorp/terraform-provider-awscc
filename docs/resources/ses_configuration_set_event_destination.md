@@ -38,7 +38,7 @@ Optional:
 - `enabled` (Boolean) Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.
 - `event_bridge_destination` (Attributes) An object that contains Event bus ARN associated with the event bridge destination. (see [below for nested schema](#nestedatt--event_destination--event_bridge_destination))
 - `kinesis_firehose_destination` (Attributes) An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination. (see [below for nested schema](#nestedatt--event_destination--kinesis_firehose_destination))
-- `name` (String) The name of the event destination set.
+- `name` (String) The name of the event destination set. SES cannot rename an event destination, so changing the name replaces it.
 - `sns_destination` (Attributes) An object that contains SNS topic ARN associated event destination. (see [below for nested schema](#nestedatt--event_destination--sns_destination))
 
 <a id="nestedatt--event_destination--cloudwatch_destination"></a>

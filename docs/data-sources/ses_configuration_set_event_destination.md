@@ -35,7 +35,7 @@ Read-Only:
 - `event_bridge_destination` (Attributes) An object that contains Event bus ARN associated with the event bridge destination. (see [below for nested schema](#nestedatt--event_destination--event_bridge_destination))
 - `kinesis_firehose_destination` (Attributes) An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination. (see [below for nested schema](#nestedatt--event_destination--kinesis_firehose_destination))
 - `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.
-- `name` (String) The name of the event destination set.
+- `name` (String) The name of the event destination set. SES cannot rename an event destination, so changing the name replaces it.
 - `sns_destination` (Attributes) An object that contains SNS topic ARN associated event destination. (see [below for nested schema](#nestedatt--event_destination--sns_destination))
 
 <a id="nestedatt--event_destination--cloudwatch_destination"></a>

@@ -21,17 +21,28 @@ Data Source schema for AWS::HealthLake::FHIRDatastore
 
 ### Read-Only
 
+- `analytics_configuration` (Attributes) The analytics configuration for the Data Store. Omitted when the Data Store can't carry analytics. (see [below for nested schema](#nestedatt--analytics_configuration))
 - `created_at` (Attributes) The time that a Data Store was created. (see [below for nested schema](#nestedatt--created_at))
 - `datastore_arn` (String) The Amazon Resource Name used in the creation of the Data Store.
 - `datastore_endpoint` (String) The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
 - `datastore_id` (String) The AWS-generated ID number for the Data Store.
 - `datastore_name` (String) The user-generated name for the Data Store.
-- `datastore_status` (String) The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.
+- `datastore_status` (String) The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'UPDATING', 'UPDATE_FAILED', 'DELETING', or 'DELETED'.
 - `datastore_type_version` (String) The FHIR version. Only R4 version data is supported.
 - `identity_provider_configuration` (Attributes) The identity provider configuration for the datastore (see [below for nested schema](#nestedatt--identity_provider_configuration))
+- `nlp_configuration` (Attributes) The natural language processing (NLP) configuration for the Data Store. (see [below for nested schema](#nestedatt--nlp_configuration))
 - `preload_data_config` (Attributes) The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported. (see [below for nested schema](#nestedatt--preload_data_config))
+- `profile_configuration` (Attributes) The profile configuration for the Data Store. (see [below for nested schema](#nestedatt--profile_configuration))
 - `sse_configuration` (Attributes) The server-side encryption key configuration for a customer provided encryption key. (see [below for nested schema](#nestedatt--sse_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--analytics_configuration"></a>
+### Nested Schema for `analytics_configuration`
+
+Read-Only:
+
+- `status` (String) The analytics status for the Data Store.
+
 
 <a id="nestedatt--created_at"></a>
 ### Nested Schema for `created_at`
@@ -53,12 +64,28 @@ Read-Only:
 - `metadata` (String) The JSON metadata elements for identity provider configuration.
 
 
+<a id="nestedatt--nlp_configuration"></a>
+### Nested Schema for `nlp_configuration`
+
+Read-Only:
+
+- `status` (String) The NLP status for the Data Store.
+
+
 <a id="nestedatt--preload_data_config"></a>
 ### Nested Schema for `preload_data_config`
 
 Read-Only:
 
 - `preload_data_type` (String) The type of preloaded data. Only Synthea preloaded data is supported.
+
+
+<a id="nestedatt--profile_configuration"></a>
+### Nested Schema for `profile_configuration`
+
+Read-Only:
+
+- `default_profiles` (Set of String) The FHIR profiles the Data Store validates resources against by default, for example us-core-3.1.1.
 
 
 <a id="nestedatt--sse_configuration"></a>

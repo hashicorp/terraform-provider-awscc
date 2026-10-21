@@ -1,4 +1,63 @@
-## 1.107.0 (Unreleased)
+## 1.107.0 (October 21, 2026)
+
+NOTES:
+
+* provider: The provider is now built with Go 1.26.10, which no longer trusts certificates issued through a set of compromised eMudhra intermediate CAs (CVE-2026-111943) ([#3373](https://github.com/hashicorp/terraform-provider-awscc/issues/3373))
+
+FEATURES:
+
+* **New Data Source:** `awscc_autoscalingplans_scaling_plan`
+* **New Data Source:** `awscc_autoscalingplans_scaling_plans`
+* **New Data Source:** `awscc_bcmpricingcalculator_bill_estimate`
+* **New Data Source:** `awscc_bcmpricingcalculator_bill_estimates`
+* **New Data Source:** `awscc_bedrock_retrieval_instruction`
+* **New Data Source:** `awscc_bedrock_retrieval_instructions`
+* **New Data Source:** `awscc_cloudfront_field_level_encryption_config`
+* **New Data Source:** `awscc_cloudfront_field_level_encryption_configs`
+* **New Data Source:** `awscc_ec2_ipam_internet_registry_association`
+* **New Data Source:** `awscc_ec2_ipam_internet_registry_associations`
+* **New Data Source:** `awscc_ecs_gateway`
+* **New Data Source:** `awscc_ecs_gateway_cluster_associations`
+* **New Data Source:** `awscc_ecs_gateway_cluster_associations_plural`
+* **New Data Source:** `awscc_ecs_gateways`
+* **New Data Source:** `awscc_mediaconvert_certificate_association`
+* **New Data Source:** `awscc_mediaconvert_certificate_associations`
+* **New Data Source:** `awscc_medialive_input`
+* **New Data Source:** `awscc_medialive_input_security_group`
+* **New Data Source:** `awscc_medialive_input_security_groups`
+* **New Data Source:** `awscc_medialive_inputs`
+* **New Data Source:** `awscc_route53resolver_firewall_config`
+* **New Data Source:** `awscc_route53resolver_firewall_configs`
+* **New Data Source:** `awscc_sagemaker_compute_quota`
+* **New Data Source:** `awscc_sagemaker_compute_quota_plural`
+* **New Data Source:** `awscc_securityhub_action_target`
+* **New Data Source:** `awscc_securityhub_action_targets`
+* **New List Resource:** `awscc_autoscalingplans_scaling_plan`
+* **New List Resource:** `awscc_bcmpricingcalculator_bill_estimate`
+* **New List Resource:** `awscc_bedrock_retrieval_instruction`
+* **New List Resource:** `awscc_cloudfront_field_level_encryption_config`
+* **New List Resource:** `awscc_ec2_ipam_internet_registry_association`
+* **New List Resource:** `awscc_ecs_gateway`
+* **New List Resource:** `awscc_ecs_gateway_cluster_associations`
+* **New List Resource:** `awscc_mediaconvert_certificate_association`
+* **New List Resource:** `awscc_medialive_input`
+* **New List Resource:** `awscc_medialive_input_security_group`
+* **New List Resource:** `awscc_route53resolver_firewall_config`
+* **New List Resource:** `awscc_sagemaker_compute_quota`
+* **New List Resource:** `awscc_securityhub_action_target`
+* **New Resource:** `awscc_autoscalingplans_scaling_plan`
+* **New Resource:** `awscc_bcmpricingcalculator_bill_estimate`
+* **New Resource:** `awscc_bedrock_retrieval_instruction`
+* **New Resource:** `awscc_cloudfront_field_level_encryption_config`
+* **New Resource:** `awscc_ec2_ipam_internet_registry_association`
+* **New Resource:** `awscc_ecs_gateway`
+* **New Resource:** `awscc_ecs_gateway_cluster_associations`
+* **New Resource:** `awscc_mediaconvert_certificate_association`
+* **New Resource:** `awscc_medialive_input`
+* **New Resource:** `awscc_medialive_input_security_group`
+* **New Resource:** `awscc_route53resolver_firewall_config`
+* **New Resource:** `awscc_sagemaker_compute_quota`
+* **New Resource:** `awscc_securityhub_action_target`
 
 ## 1.106.0 (October 14, 2026)
 

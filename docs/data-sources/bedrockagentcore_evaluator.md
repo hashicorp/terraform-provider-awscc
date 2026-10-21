@@ -185,6 +185,7 @@ Read-Only:
 Read-Only:
 
 - `categorical` (Attributes List) (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--rating_scale--categorical))
+- `multi_dimensional` (Attributes List) The dimensions an LLM-as-a-Judge evaluator scores in a single judge call. Each dimension has its own instruction and rating scale. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional))
 - `numerical` (Attributes List) (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--rating_scale--numerical))
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge--rating_scale--categorical"></a>
@@ -194,6 +195,44 @@ Read-Only:
 
 - `definition` (String) The description that explains what this categorical rating represents.
 - `label` (String) The label of this categorical rating option.
+
+
+<a id="nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional"></a>
+### Nested Schema for `evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional`
+
+Read-Only:
+
+- `dimension_instruction` (String) The instruction to the evaluator model describing what to judge for this dimension.
+- `dimension_name` (String) The name of the dimension. Must be unique within the evaluator.
+- `dimension_rating_scale` (Attributes) The rating scale for one dimension of an LLM-as-a-Judge evaluator. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional--dimension_rating_scale))
+
+<a id="nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional--dimension_rating_scale"></a>
+### Nested Schema for `evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional.dimension_rating_scale`
+
+Read-Only:
+
+- `categorical` (Attributes List) The categorical rating scale for this dimension. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional--dimension_rating_scale--categorical))
+- `numerical` (Attributes List) The numerical rating scale for this dimension. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional--dimension_rating_scale--numerical))
+
+<a id="nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional--dimension_rating_scale--categorical"></a>
+### Nested Schema for `evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional.dimension_rating_scale.categorical`
+
+Read-Only:
+
+- `definition` (String) The description that explains what this categorical rating represents.
+- `label` (String) The label of this categorical rating option.
+
+
+<a id="nestedatt--evaluator_config--llm_as_a_judge--rating_scale--multi_dimensional--dimension_rating_scale--numerical"></a>
+### Nested Schema for `evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional.dimension_rating_scale.numerical`
+
+Read-Only:
+
+- `definition` (String) The description that explains what this numerical rating represents.
+- `label` (String) The label that describes this numerical rating option.
+- `value` (Number) The numerical value for this rating scale option.
+
+
 
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge--rating_scale--numerical"></a>

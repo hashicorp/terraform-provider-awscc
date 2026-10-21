@@ -25,6 +25,7 @@ Resource Type definition for AWS::CloudWatch::LogAlarm. A LogAlarm evaluates sch
 
 ### Optional
 
+- `action_configuration` (Attributes) Configuration that applies to the notifications this alarm sends when it performs its actions. (see [below for nested schema](#nestedatt--action_configuration))
 - `action_log_line_count` (Number) The number of log lines to include in alarm notifications. Valid values are 0 to 50.
 - `action_log_line_role_arn` (String) The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.
 - `actions_enabled` (Boolean) Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
@@ -77,6 +78,24 @@ Optional:
 
 - `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
 - `value` (String) The value for the specified tag key.
+
+
+
+<a id="nestedatt--action_configuration"></a>
+### Nested Schema for `action_configuration`
+
+Optional:
+
+- `alarm_tags_propagation` (Attributes) Whether the alarm's tags are included in its action notifications and state-change events. (see [below for nested schema](#nestedatt--action_configuration--alarm_tags_propagation))
+
+<a id="nestedatt--action_configuration--alarm_tags_propagation"></a>
+### Nested Schema for `action_configuration.alarm_tags_propagation`
+
+Optional:
+
+- `enabled` (Boolean) Whether the alarm's tags are included in its action notifications and state-change events.
+- `excluded_tag_keys` (Set of String) The tag keys to leave out. Cannot be specified together with IncludedTagKeys.
+- `included_tag_keys` (Set of String) The only tag keys to include. Cannot be specified together with ExcludedTagKeys.
 
 
 

@@ -21,18 +21,18 @@ Data Source schema for AWS::BedrockAgentCore::PaymentManager
 
 ### Read-Only
 
-- `authorizer_configuration` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration))
-- `authorizer_type` (String)
+- `authorizer_configuration` (Attributes) The authorizer configuration for the payment manager (see [below for nested schema](#nestedatt--authorizer_configuration))
+- `authorizer_type` (String) The type of authorizer for the payment manager
 - `created_at` (String) The timestamp when the payment manager was created
 - `description` (String) A description of the payment manager
 - `last_updated_at` (String) The timestamp when the payment manager was last updated
 - `name` (String) The name of the payment manager
-- `payment_manager_arn` (String) The Amazon Resource Name (ARN) of the payment manager
+- `payment_manager_arn` (String) The Amazon Resource Name (ARN) of the resource.
 - `payment_manager_id` (String) The unique identifier for the payment manager
 - `role_arn` (String) The ARN of the IAM role for the payment manager
-- `status` (String)
-- `tags` (Attributes List) Tags to assign to the payment manager (see [below for nested schema](#nestedatt--tags))
-- `workload_identity_details` (Attributes) (see [below for nested schema](#nestedatt--workload_identity_details))
+- `status` (String) The current status of the payment manager
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `workload_identity_details` (Attributes) The workload identity details for the payment manager (see [below for nested schema](#nestedatt--workload_identity_details))
 
 <a id="nestedatt--authorizer_configuration"></a>
 ### Nested Schema for `authorizer_configuration`
@@ -87,8 +87,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 
 <a id="nestedatt--workload_identity_details"></a>

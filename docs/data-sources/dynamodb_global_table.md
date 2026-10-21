@@ -38,6 +38,7 @@ Data Source schema for AWS::DynamoDB::GlobalTable
 - `stream_specification` (Attributes) (see [below for nested schema](#nestedatt--stream_specification))
 - `table_id` (String)
 - `table_name` (String)
+- `table_type` (String)
 - `time_to_live_specification` (Attributes) (see [below for nested schema](#nestedatt--time_to_live_specification))
 - `vector_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--vector_indexes))
 - `warm_throughput` (Attributes) (see [below for nested schema](#nestedatt--warm_throughput))
@@ -217,6 +218,7 @@ Read-Only:
 
 - `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--contributor_insights_specification))
 - `deletion_protection_enabled` (Boolean)
+- `disassociation_protection_enabled` (Boolean)
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes))
 - `global_table_settings_replication_mode` (String)
 - `kinesis_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--kinesis_stream_specification))

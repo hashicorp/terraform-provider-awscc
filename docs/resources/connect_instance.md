@@ -83,6 +83,7 @@ Required:
 
 Optional:
 
+- `auto_mute_agent_on_hold` (Boolean) Boolean flag which enables AUTO_MUTE_AGENT_ON_HOLD on an instance.
 - `auto_resolve_best_voices` (Boolean) Boolean flag which enables AUTO_RESOLVE_BEST_VOICES on an instance.
 - `contact_lens` (Boolean) Boolean flag which enables CONTACT_LENS on an instance.
 - `contactflow_logs` (Boolean) Boolean flag which enables CONTACTFLOW_LOGS on an instance.

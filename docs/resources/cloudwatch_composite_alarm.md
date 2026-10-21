@@ -163,6 +163,7 @@ resource "aws_cloudwatch_metric_alarm" "status_gte_1" {
 
 ### Optional
 
+- `action_configuration` (Attributes) Configuration that applies to the notifications this alarm sends when it performs its actions. (see [below for nested schema](#nestedatt--action_configuration))
 - `actions_enabled` (Boolean) Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
 - `actions_suppressor` (String) Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
 - `actions_suppressor_extension_period` (Number) Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.
@@ -178,6 +179,24 @@ resource "aws_cloudwatch_metric_alarm" "status_gte_1" {
 
 - `arn` (String) Amazon Resource Name (ARN) of the alarm
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--action_configuration"></a>
+### Nested Schema for `action_configuration`
+
+Optional:
+
+- `alarm_tags_propagation` (Attributes) Whether the alarm's tags are included in its action notifications and state-change events. (see [below for nested schema](#nestedatt--action_configuration--alarm_tags_propagation))
+
+<a id="nestedatt--action_configuration--alarm_tags_propagation"></a>
+### Nested Schema for `action_configuration.alarm_tags_propagation`
+
+Optional:
+
+- `enabled` (Boolean) Whether the alarm's tags are included in its action notifications and state-change events.
+- `excluded_tag_keys` (Set of String) The tag keys to leave out. Cannot be specified together with IncludedTagKeys.
+- `included_tag_keys` (Set of String) The only tag keys to include. Cannot be specified together with ExcludedTagKeys.
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

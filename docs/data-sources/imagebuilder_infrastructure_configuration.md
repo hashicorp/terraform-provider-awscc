@@ -29,12 +29,14 @@ Data Source schema for AWS::ImageBuilder::InfrastructureConfiguration
 - `key_pair` (String) The EC2 key pair of the infrastructure configuration..
 - `logging` (Attributes) The logging configuration of the infrastructure configuration. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The name of the infrastructure configuration.
+- `parent_instance` (Attributes) The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from, instead of launching a new instance. This applies only to the build phase. (see [below for nested schema](#nestedatt--parent_instance))
 - `placement` (Attributes) The placement option settings for the infrastructure configuration. (see [below for nested schema](#nestedatt--placement))
 - `resource_tags` (Map of String) The tags attached to the resource created by Image Builder.
 - `security_group_ids` (List of String) The security group IDs of the infrastructure configuration.
 - `sns_topic_arn` (String) The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.
 - `subnet_id` (String) The subnet ID of the infrastructure configuration.
 - `tags` (Map of String) The tags associated with the component.
+- `terminate_instance_on_completion` (Boolean) Specifies whether Image Builder terminates build and test instances that are still running when image creation ends without a failure. A TerminateInstance step in a workflow runs even when this is false.
 - `terminate_instance_on_failure` (Boolean) The terminate instance on failure configuration of the infrastructure configuration.
 
 <a id="nestedatt--instance_metadata_options"></a>
@@ -60,6 +62,23 @@ Read-Only:
 
 - `s3_bucket_name` (String) S3BucketName
 - `s3_key_prefix` (String) S3KeyPrefix
+
+
+
+<a id="nestedatt--parent_instance"></a>
+### Nested Schema for `parent_instance`
+
+Read-Only:
+
+- `auto_scaling_group` (Attributes) The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from. (see [below for nested schema](#nestedatt--parent_instance--auto_scaling_group))
+
+<a id="nestedatt--parent_instance--auto_scaling_group"></a>
+### Nested Schema for `parent_instance.auto_scaling_group`
+
+Read-Only:
+
+- `capacity_wait_timeout_seconds` (Number) The number of seconds that Image Builder waits for an instance to become available in the group before the build fails. If you set this value to 0 or omit it, the build fails as soon as the group has no instance available.
+- `name` (String) The name of the Auto Scaling group, in the same account and AWS Region as the infrastructure configuration.
 
 
 

@@ -27,7 +27,10 @@ Data Source schema for AWS::Transfer::HostKey
 - `host_key_body` (String) The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
 - `host_key_fingerprint` (String) The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.
 - `host_key_id` (String) A unique identifier for the host key.
+- `kms_key` (String) The Amazon Resource Name (ARN) of a customer managed key used to encrypt the Secrets Manager secret that holds the host key. Applies only when StorageType is SECRETS_MANAGER. If omitted, the AWS managed key is used.
+- `secret_id` (String) The Amazon Resource Name (ARN) of the Secrets Manager secret that holds the host key. Returned only when StorageType is SECRETS_MANAGER.
 - `server_id` (String) The identifier of the server that contains the host key.
+- `storage_type` (String) The type of storage used for the host key. SERVICE_MANAGED keys are stored within the Transfer Family service. SECRETS_MANAGER keys are stored in an AWS Secrets Manager secret in your account.
 - `tags` (Attributes List) Key-value pairs that can be used to group and search for host keys. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The encryption algorithm that is used for the host key.
 

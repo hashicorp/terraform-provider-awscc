@@ -453,11 +453,29 @@ Read-Only:
 
 Read-Only:
 
+- `sharing_strategy` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--resource_requirements--sharing_strategy))
 - `type` (String) The type of resource to assign to a container.
 - `value` (String) The value for the specified resource type.
  When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify ``ALL`` to allocate all available GPUs on the instance to the container.
  When the type is ``NeuronDevice``, the value must be ``ALL``. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify ``NeuronDevice`` resources. This resource type is only supported on Managed Instances.
  When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.
+
+<a id="nestedatt--container_definitions--resource_requirements--sharing_strategy"></a>
+### Nested Schema for `container_definitions.resource_requirements.sharing_strategy`
+
+Read-Only:
+
+- `nvidia_mps` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--resource_requirements--sharing_strategy--nvidia_mps))
+
+<a id="nestedatt--container_definitions--resource_requirements--sharing_strategy--nvidia_mps"></a>
+### Nested Schema for `container_definitions.resource_requirements.sharing_strategy.nvidia_mps`
+
+Read-Only:
+
+- `max_compute_percent` (Number) The maximum percentage of the GPU's compute capacity that the container can use.
+- `memory` (Number) The amount of GPU memory, in MiB, allocated to the container.
+
+
 
 
 <a id="nestedatt--container_definitions--restart_policy"></a>

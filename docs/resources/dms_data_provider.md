@@ -50,7 +50,7 @@ resource "awscc_dms_data_provider" "example" {
 
 ### Optional
 
-- `data_provider_identifier` (String) The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn
+- `data_provider_identifier` (String) [DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).
 - `data_provider_name` (String) The property describes a name to identify the data provider.
 - `description` (String) The optional description of the data provider.
 - `exact_settings` (Boolean) The property describes the exact settings which can be modified

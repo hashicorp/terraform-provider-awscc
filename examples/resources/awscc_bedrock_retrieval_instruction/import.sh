@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_retrieval_instruction.example "arn"

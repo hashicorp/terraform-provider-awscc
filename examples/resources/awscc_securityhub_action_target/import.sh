@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_action_target.example "action_target_arn"

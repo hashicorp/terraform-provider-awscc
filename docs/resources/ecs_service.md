@@ -131,6 +131,7 @@ resource "awscc_ecs_service" "nginx" {
  When you use Amazon ECS managed tags, you must set the ``propagateTags`` request parameter.
 - `enable_execute_command` (Boolean) Determines whether the execute command functionality is turned on for the service. If ``true``, the execute command functionality is turned on for all containers in tasks as part of the service.
 - `force_new_deployment` (Attributes) Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version. (see [below for nested schema](#nestedatt--force_new_deployment))
+- `gateway_connectors` (Attributes List) (see [below for nested schema](#nestedatt--gateway_connectors))
 - `health_check_grace_period_seconds` (Number) The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.
  If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.
 - `launch_type` (String) The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
@@ -429,6 +430,48 @@ Optional:
 - `force_new_deployment_nonce` (String) When you change the``ForceNewDeploymentNonce`` value in your template, it signals ECS to start a new deployment even though no other service parameters have changed. The value must be a unique, time- varying value like a timestamp, random string, or sequence number. Use this property when you want to ensure your tasks pick up the latest version of a Docker image that uses the same tag but has been updated in the registry.
 
 
+<a id="nestedatt--gateway_connectors"></a>
+### Nested Schema for `gateway_connectors`
+
+Optional:
+
+- `filters` (Attributes) (see [below for nested schema](#nestedatt--gateway_connectors--filters))
+- `health_check` (Attributes) (see [below for nested schema](#nestedatt--gateway_connectors--health_check))
+- `port_name` (String)
+
+<a id="nestedatt--gateway_connectors--filters"></a>
+### Nested Schema for `gateway_connectors.filters`
+
+Optional:
+
+- `access_types` (List of String)
+
+
+<a id="nestedatt--gateway_connectors--health_check"></a>
+### Nested Schema for `gateway_connectors.health_check`
+
+Optional:
+
+- `health_check_interval_seconds` (Number)
+- `health_check_path` (String)
+- `health_check_port` (Number)
+- `health_check_protocol` (String)
+- `health_check_timeout_seconds` (Number)
+- `healthy_threshold_count` (Number)
+- `matcher` (Attributes) (see [below for nested schema](#nestedatt--gateway_connectors--health_check--matcher))
+- `unhealthy_threshold_count` (Number)
+
+<a id="nestedatt--gateway_connectors--health_check--matcher"></a>
+### Nested Schema for `gateway_connectors.health_check.matcher`
+
+Optional:
+
+- `grpc_code` (String)
+- `http_code` (String)
+
+
+
+
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`
 
@@ -524,6 +567,7 @@ Optional:
 
 - `access_log_configuration` (Attributes) The configuration for Service Connect access logging. Access logs capture detailed information about requests made to your service, including request patterns, response codes, and timing data. They can be useful for debugging connectivity issues, monitoring service performance, and auditing service-to-service communication for security and compliance purposes.
   To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``. (see [below for nested schema](#nestedatt--service_connect_configuration--access_log_configuration))
+- `container_configurations` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--container_configurations))
 - `enabled` (Boolean) Specifies whether to use Service Connect with this service.
 - `log_configuration` (Attributes) The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.
  By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.
@@ -547,6 +591,14 @@ Optional:
 - `format` (String) The format for Service Connect access log output. Choose TEXT for human-readable logs or JSON for structured data that integrates well with log analysis tools.
 - `include_query_parameters` (String) Specifies whether to include query parameters in Service Connect access logs.
  When enabled, query parameters from HTTP requests are included in the access logs. Consider security and privacy implications when enabling this feature, as query parameters may contain sensitive information such as request IDs and tokens. By default, this parameter is ``DISABLED``.
+
+
+<a id="nestedatt--service_connect_configuration--container_configurations"></a>
+### Nested Schema for `service_connect_configuration.container_configurations`
+
+Optional:
+
+- `log_level` (String)
 
 
 <a id="nestedatt--service_connect_configuration--log_configuration"></a>
@@ -767,7 +819,7 @@ Optional:
 
 Optional:
 
-- `advanced_configuration` (Attributes) (see [below for nested schema](#nestedatt--vpc_lattice_configurations--advanced_configuration))
+- `advanced_configuration` (Attributes) The advanced settings for VPC Lattice used in blue/green deployments. Specify the alternate target group and listener rules required for traffic shifting during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--vpc_lattice_configurations--advanced_configuration))
 - `port_name` (String) The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.
 - `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice configuration that the Amazon ECS tasks will be registered to.
@@ -777,9 +829,9 @@ Optional:
 
 Optional:
 
-- `alternate_target_group_arn` (String)
-- `production_listener_rule` (String)
-- `test_listener_rule` (String)
+- `alternate_target_group_arn` (String) The Amazon Resource Name (ARN) of the alternate target group associated with the VPC Lattice Configuration for Amazon ECS blue/green deployments.
+- `production_listener_rule` (String) The Amazon Resource Name (ARN) that identifies the production listener rule or listener for routing production traffic.
+- `test_listener_rule` (String) The Amazon Resource Name (ARN) that identifies the test listener rule or listener for routing test traffic.
 
 ## Import
 

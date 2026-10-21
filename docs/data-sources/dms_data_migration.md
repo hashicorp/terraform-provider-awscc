@@ -23,7 +23,7 @@ Data Source schema for AWS::DMS::DataMigration
 
 - `data_migration_arn` (String) The property describes an ARN of the data migration.
 - `data_migration_create_time` (String) The property describes the create time of the data migration.
-- `data_migration_identifier` (String) The property describes an ARN of the data migration.
+- `data_migration_identifier` (String) [DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).
 - `data_migration_name` (String) The property describes a name to identify the data migration.
 - `data_migration_settings` (Attributes) The property describes the settings for the data migration. (see [below for nested schema](#nestedatt--data_migration_settings))
 - `data_migration_type` (String) The property describes the type of migration.

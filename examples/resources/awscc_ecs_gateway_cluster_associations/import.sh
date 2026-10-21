@@ -1,0 +1,1 @@
+$ terraform import awscc_ecs_gateway_cluster_associations.example "gateway|cluster"

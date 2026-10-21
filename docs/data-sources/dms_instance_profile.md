@@ -25,7 +25,7 @@ Data Source schema for AWS::DMS::InstanceProfile
 - `description` (String) The optional description of the instance profile.
 - `instance_profile_arn` (String) The property describes an ARN of the instance profile.
 - `instance_profile_creation_time` (String) The property describes a creating time of the instance profile.
-- `instance_profile_identifier` (String) The property describes an identifier for the instance profile. It is used for describing/deleting/modifying. Can be name/arn
+- `instance_profile_identifier` (String) [DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).
 - `instance_profile_name` (String) The property describes a name for the instance profile.
 - `kms_key_arn` (String) The property describes kms key arn for the instance profile.
 - `network_type` (String) The property describes a network type for the instance profile.
