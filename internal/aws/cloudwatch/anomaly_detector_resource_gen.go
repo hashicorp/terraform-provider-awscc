@@ -7,11 +7,7 @@ package cloudwatch
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -36,18 +32,6 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::AnomalyDetector resource.
 func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AnomalyDetectorId
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"anomaly_detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -59,11 +43,9 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "EndTime": {
-		//	            "pattern": "^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$",
 		//	            "type": "string"
 		//	          },
 		//	          "StartTime": {
-		//	            "pattern": "^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -93,7 +75,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -105,7 +86,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]{4})-([0-1][0-9])-([0-3][0-9])T([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -143,13 +123,9 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Name": {
-		//	        "maxLength": 255,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "maxLength": 1024,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -159,7 +135,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 30,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
@@ -171,7 +146,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -183,7 +157,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -194,12 +167,21 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(30),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"anomaly_detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MetricCharacteristics
@@ -243,18 +225,12 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "AccountId": {
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Expression": {
-		//	            "maxLength": 1024,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Id": {
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Label": {
@@ -271,13 +247,9 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "additionalProperties": false,
 		//	                      "properties": {
 		//	                        "Name": {
-		//	                          "maxLength": 255,
-		//	                          "minLength": 1,
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "maxLength": 1024,
-		//	                          "minLength": 1,
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -287,19 +259,13 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	                      ],
 		//	                      "type": "object"
 		//	                    },
-		//	                    "maxItems": 30,
 		//	                    "type": "array",
 		//	                    "uniqueItems": false
 		//	                  },
 		//	                  "MetricName": {
-		//	                    "maxLength": 255,
-		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Namespace": {
-		//	                    "maxLength": 255,
-		//	                    "minLength": 1,
-		//	                    "pattern": "[^:].*",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -310,15 +276,12 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "Period": {
-		//	                "minimum": 1,
 		//	                "type": "integer"
 		//	              },
 		//	              "Stat": {
-		//	                "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$",
 		//	                "type": "string"
 		//	              },
 		//	              "Unit": {
-		//	                "pattern": "^(Seconds|Microseconds|Milliseconds|Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes|Bits|Kilobits|Megabits|Gigabits|Terabits|Percent|Count|Bytes/Second|Kilobytes/Second|Megabytes/Second|Gigabytes/Second|Terabytes/Second|Bits/Second|Kilobits/Second|Megabits/Second|Gigabits/Second|Terabits/Second|Count/Second|None)$",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -330,7 +293,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "Period": {
-		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          },
 		//	          "ReturnData": {
@@ -358,9 +320,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 							"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -369,9 +328,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 							"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -381,7 +337,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -411,7 +366,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 255),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -423,7 +377,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 1024),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -434,9 +387,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END NESTED OBJECT*/
 												Optional: true,
 												Computed: true,
-												Validators: []validator.List{ /*START VALIDATORS*/
-													listvalidator.SizeAtMost(30),
-												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
@@ -446,7 +396,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 255),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -458,8 +407,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 255),
-													stringvalidator.RegexMatches(regexp.MustCompile("[^:].*"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -481,7 +428,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
-											int64validator.AtLeast(1),
 											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -493,7 +439,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.RegexMatches(regexp.MustCompile("^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -504,9 +449,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
 										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.RegexMatches(regexp.MustCompile("^(Seconds|Microseconds|Milliseconds|Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes|Bits|Kilobits|Megabits|Gigabits|Terabits|Percent|Count|Bytes/Second|Kilobytes/Second|Megabytes/Second|Gigabytes/Second|Terabytes/Second|Bits/Second|Kilobits/Second|Megabits/Second|Gigabits/Second|Terabits/Second|Count/Second|None)$"), ""),
-										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
@@ -522,9 +464,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 							"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
-								Validators: []validator.Int64{ /*START VALIDATORS*/
-									int64validator.AtLeast(1),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -557,16 +496,11 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 255,
-		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -576,18 +510,11 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 255,
-		//	  "minLength": 1,
-		//	  "pattern": "[^:].*",
 		//	  "type": "string"
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("[^:].*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -600,8 +527,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "AccountId": {
-		//	      "maxLength": 255,
-		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Dimensions": {
@@ -609,13 +534,9 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "Name": {
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "maxLength": 1024,
-		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -625,23 +546,16 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 30,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
 		//	    "MetricName": {
-		//	      "maxLength": 255,
-		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Namespace": {
-		//	      "maxLength": 255,
-		//	      "minLength": 1,
-		//	      "pattern": "[^:].*",
 		//	      "type": "string"
 		//	    },
 		//	    "Stat": {
-		//	      "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -653,9 +567,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 				"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -669,7 +580,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -681,7 +591,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -692,9 +601,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END NESTED OBJECT*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtMost(30),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -703,9 +609,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 				"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -714,10 +617,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 				"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
-						stringvalidator.RegexMatches(regexp.MustCompile("[^:].*"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -726,9 +625,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 				"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -745,15 +641,11 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$",
 		//	  "type": "string"
 		//	}
 		"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^(Minimum|Maximum|Sum|Average|SampleCount|(p|tm)[0-9]{1,2}|(p|tm)[0-9]{1,2}\\.[0-9]{1,2}|(p|tm)100)$"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -782,13 +674,13 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "anomaly_detector_id",
+			Name:              "id",
 			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                     "AccountId",
-		"anomaly_detector_id":            "AnomalyDetectorId",
+		"anomaly_detector_id":            "Id",
 		"configuration":                  "Configuration",
 		"dimensions":                     "Dimensions",
 		"end_time":                       "EndTime",
@@ -815,9 +707,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"value":                          "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/MetricMathAnomalyDetector/MetricDataQueries/*/Label",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
