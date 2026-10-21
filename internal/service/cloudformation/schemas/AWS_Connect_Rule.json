@@ -101,6 +101,33 @@
       },
       "additionalProperties": false
     },
+    "InAppNotificationRecipientType": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "UserTags": {
+          "description": "The collection of recipients who are identified by user tags",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "UserArns": {
+          "description": "The list of recipients by user arns.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/UserArn"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "Reference": {
       "description": "Information about the reference when the ``referenceType`` is ``URL``. Otherwise, null. (Supports variable injection in the ``Value`` field.)",
       "type": "object",
@@ -247,6 +274,80 @@
       ],
       "additionalProperties": false
     },
+    "LocalizedString": {
+      "description": "Localized notification content.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 3000
+    },
+    "NotificationContent": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "EnUS": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "DeDE": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "EsES": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "FrFR": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "IdID": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "ItIT": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "JaJP": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "KoKR": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "PtBR": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "ZhCN": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "ZhTW": {
+          "$ref": "#/definitions/LocalizedString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SendInAppNotificationAction": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "Content": {
+          "$ref": "#/definitions/NotificationContent"
+        },
+        "Recipient": {
+          "$ref": "#/definitions/InAppNotificationRecipientType"
+        },
+        "Exclusion": {
+          "$ref": "#/definitions/InAppNotificationRecipientType"
+        },
+        "Priority": {
+          "description": "The priority of the notification.",
+          "type": "string",
+          "enum": [
+            "HIGH",
+            "LOW"
+          ]
+        }
+      },
+      "required": [
+        "Content",
+        "Recipient"
+      ],
+      "additionalProperties": false
+    },
     "CreateCaseAction": {
       "description": "",
       "type": "object",
@@ -367,6 +468,17 @@
       "minItems": 1,
       "maxItems": 1
     },
+    "SendInAppNotificationActions": {
+      "description": "This action will send an in-app notification when a rule is triggered.",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/SendInAppNotificationAction"
+      },
+      "minItems": 1,
+      "maxItems": 1
+    },
     "CreateCaseActions": {
       "description": "This action will create a case when a rule is triggered.",
       "type": "array",
@@ -430,6 +542,10 @@
         "SendNotificationActions": {
           "$ref": "#/definitions/SendNotificationActions",
           "description": "Information about the send notification action."
+        },
+        "SendInAppNotificationActions": {
+          "$ref": "#/definitions/SendInAppNotificationActions",
+          "description": ""
         },
         "CreateCaseActions": {
           "$ref": "#/definitions/CreateCaseActions",

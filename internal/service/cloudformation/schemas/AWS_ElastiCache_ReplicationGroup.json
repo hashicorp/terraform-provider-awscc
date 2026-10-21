@@ -414,7 +414,8 @@
     "/properties/NodeGroupConfiguration"
   ],
   "propertyTransform": {
-    "/properties/ReplicationGroupId": "$lowercase(ReplicationGroupId)"
+    "/properties/ReplicationGroupId": "$lowercase(ReplicationGroupId)",
+    "/properties/Durability": "Durability = 'default' ? 'disabled' : Durability"
   },
   "primaryIdentifier": [
     "/properties/ReplicationGroupId"

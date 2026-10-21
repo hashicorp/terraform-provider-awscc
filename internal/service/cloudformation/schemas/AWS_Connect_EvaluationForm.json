@@ -122,6 +122,31 @@
         }
       }
     },
+    "EvaluationFormMetricConfiguration": {
+      "description": "Information about the metric configuration for an evaluation form question. Use this to associate a business outcome metric with a question.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricType": {
+          "description": "The type of metric. Currently, only ``BUSINESS_OUTCOME`` is supported.",
+          "type": "string",
+          "enum": [
+            "BUSINESS_OUTCOME"
+          ]
+        },
+        "MetricName": {
+          "description": "The name of the metric. Valid values are:\n  +  ``SALE_SUCCESS`` ? Sale success.\n  +  ``CSAT`` ? Customer satisfaction.\n  +  ``CHURN_PROPENSITY`` ? Churn propensity.\n  +  ``SELF_SERVICE_SUCCESS`` ? Self-service success.\n  +  ``PARTIAL_SELF_SERVICE_SUCCESS`` ? Partial self-service success.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[^\\p{C}]*$"
+        }
+      },
+      "required": [
+        "MetricType",
+        "MetricName"
+      ]
+    },
     "AutomaticFailConfiguration": {
       "description": "Information about automatic fail configuration for an evaluation form.",
       "type": "object",
@@ -953,6 +978,10 @@
           "description": "The scoring configuration of the question.",
           "$ref": "#/definitions/EvaluationFormQuestionScoringConfiguration"
         },
+        "MetricConfiguration": {
+          "description": "The metric configuration for the question. Use this to associate a business outcome metric with the question.",
+          "$ref": "#/definitions/EvaluationFormMetricConfiguration"
+        },
         "Enablement": {
           "description": "A question conditional enablement.",
           "$ref": "#/definitions/EvaluationFormItemEnablementConfiguration"
@@ -1094,6 +1123,12 @@
     "ReviewConfiguration": {
       "description": "Configuration for evaluation review settings of this evaluation form.",
       "$ref": "#/definitions/EvaluationReviewConfiguration"
+    },
+    "AIVersion": {
+      "description": "The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
     },
     "Tags": {
       "description": "The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.",

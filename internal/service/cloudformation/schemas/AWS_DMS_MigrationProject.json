@@ -70,7 +70,7 @@
       "maxLength": 255
     },
     "MigrationProjectIdentifier": {
-      "description": "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+      "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
       "type": "string",
       "minLength": 1,
       "maxLength": 255
@@ -165,10 +165,18 @@
     ]
   ],
   "readOnlyProperties": [
-    "/properties/MigrationProjectArn"
+    "/properties/MigrationProjectArn",
+    "/properties/MigrationProjectCreationTime",
+    "/properties/InstanceProfileArn",
+    "/properties/InstanceProfileName",
+    "/properties/SourceDataProviderDescriptors/*/DataProviderArn",
+    "/properties/SourceDataProviderDescriptors/*/DataProviderName",
+    "/properties/TargetDataProviderDescriptors/*/DataProviderArn",
+    "/properties/TargetDataProviderDescriptors/*/DataProviderName"
   ],
   "deprecatedProperties": [
-    "/properties/MigrationProjectCreationTime"
+    "/properties/MigrationProjectCreationTime",
+    "/properties/MigrationProjectIdentifier"
   ],
   "writeOnlyProperties": [
     "/properties/MigrationProjectIdentifier",

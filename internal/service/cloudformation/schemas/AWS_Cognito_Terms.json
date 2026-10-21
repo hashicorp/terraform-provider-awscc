@@ -92,7 +92,9 @@
   "handlers": {
     "create": {
       "permissions": [
-        "cognito-idp:CreateTerms"
+        "cognito-idp:CreateTerms",
+        "cognito-idp:DescribeTerms",
+        "cognito-idp:DescribeTermsByClient"
       ],
       "timeoutInMinutes": 2
     },

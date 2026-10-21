@@ -167,6 +167,82 @@
           "items": {
             "$ref": "#/definitions/CategoricalScaleDefinition"
           }
+        },
+        "MultiDimensional": {
+          "type": "array",
+          "description": "The dimensions an LLM-as-a-Judge evaluator scores in a single judge call. Each dimension has its own instruction and rating scale.",
+          "insertionOrder": true,
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/EvaluationDimension"
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "Numerical"
+          ]
+        },
+        {
+          "required": [
+            "Categorical"
+          ]
+        },
+        {
+          "required": [
+            "MultiDimensional"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "EvaluationDimension": {
+      "type": "object",
+      "description": "One dimension of an LLM-as-a-Judge evaluator.",
+      "properties": {
+        "DimensionName": {
+          "type": "string",
+          "description": "The name of the dimension. Must be unique within the evaluator.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+        },
+        "DimensionInstruction": {
+          "type": "string",
+          "description": "The instruction to the evaluator model describing what to judge for this dimension.",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "DimensionRatingScale": {
+          "$ref": "#/definitions/DimensionRatingScale"
+        }
+      },
+      "required": [
+        "DimensionName",
+        "DimensionInstruction",
+        "DimensionRatingScale"
+      ],
+      "additionalProperties": false
+    },
+    "DimensionRatingScale": {
+      "type": "object",
+      "description": "The rating scale for one dimension of an LLM-as-a-Judge evaluator.",
+      "properties": {
+        "Numerical": {
+          "type": "array",
+          "description": "The numerical rating scale for this dimension.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NumericalScaleDefinition"
+          }
+        },
+        "Categorical": {
+          "type": "array",
+          "description": "The categorical rating scale for this dimension.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CategoricalScaleDefinition"
+          }
         }
       },
       "oneOf": [

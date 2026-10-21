@@ -48,7 +48,7 @@
       "maxLength": 255
     },
     "InstanceProfileIdentifier": {
-      "description": "The property describes an identifier for the instance profile. It is used for describing/deleting/modifying. Can be name/arn",
+      "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
       "type": "string",
       "minLength": 1,
       "maxLength": 255
@@ -125,6 +125,12 @@
     "/properties/InstanceProfileArn",
     "/properties/InstanceProfileCreationTime"
   ],
+  "deprecatedProperties": [
+    "/properties/InstanceProfileIdentifier"
+  ],
+  "writeOnlyProperties": [
+    "/properties/InstanceProfileIdentifier"
+  ],
   "primaryIdentifier": [
     "/properties/InstanceProfileArn"
   ],
@@ -132,9 +138,6 @@
     [
       "/properties/InstanceProfileName"
     ]
-  ],
-  "writeOnlyProperties": [
-    "/properties/InstanceProfileIdentifier"
   ],
   "handlers": {
     "create": {

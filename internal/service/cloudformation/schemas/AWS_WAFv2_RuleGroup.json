@@ -1774,7 +1774,8 @@
         "wafv2:GetRuleGroup",
         "wafv2:TagResource",
         "wafv2:UntagResource",
-        "wafv2:ListTagsForResource"
+        "wafv2:ListTagsForResource",
+        "payments:GetConnectedAccount"
       ]
     },
     "delete": {
@@ -1795,7 +1796,8 @@
         "wafv2:UntagResource",
         "wafv2:UpdateRuleGroup",
         "wafv2:GetRuleGroup",
-        "wafv2:ListTagsForResource"
+        "wafv2:ListTagsForResource",
+        "payments:GetConnectedAccount"
       ]
     },
     "list": {

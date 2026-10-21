@@ -761,22 +761,25 @@
           ]
         },
         "Value": {
-          "anyOf": [
-            {
-              "type": "array",
-              "insertionOrder": true,
-              "items": {
-                "type": "array",
-                "insertionOrder": true,
-                "items": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "array",
+            "insertionOrder": true,
+            "items": {
+              "anyOf": [
+                {
                   "type": "number"
                 },
-                "minItems": 2,
-                "maxItems": 2
-              },
-              "minItems": 1
-            }
-          ]
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 1
         },
         "XAxisName": {
           "$ref": "#/definitions/AxisNameString"
@@ -810,16 +813,19 @@
           ]
         },
         "Value": {
-          "anyOf": [
-            {
-              "type": "array",
-              "insertionOrder": true,
-              "items": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "anyOf": [
+              {
                 "type": "number"
               },
-              "minItems": 1
-            }
-          ]
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1
         },
         "XAxisName": {
           "$ref": "#/definitions/AxisNameArray"
@@ -853,23 +859,26 @@
           ]
         },
         "Value": {
-          "anyOf": [
-            {
-              "type": "array",
-              "insertionOrder": true,
-              "items": {
-                "type": "array",
-                "insertionOrder": true,
-                "items": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "array",
+            "insertionOrder": true,
+            "items": {
+              "anyOf": [
+                {
                   "type": "number"
                 },
-                "minItems": 1,
-                "maxItems": 20
-              },
-              "minItems": 1,
-              "maxItems": 20
-            }
-          ]
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 20
+          },
+          "minItems": 1,
+          "maxItems": 20
         },
         "XAxisName": {
           "$ref": "#/definitions/AxisNameArray"

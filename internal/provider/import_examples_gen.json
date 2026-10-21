@@ -1382,7 +1382,7 @@
     {
         "resource": "awscc_cloudwatch_anomaly_detector",
         "generateListResource": true,
-        "identifier": ["AnomalyDetectorId"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_cloudwatch_composite_alarm",
