@@ -591,6 +591,11 @@
         "identifier": ["AutoScalingGroupName"]
     },
     {
+        "resource": "awscc_autoscalingplans_scaling_plan",
+        "generateListResource": true,
+        "identifier": ["ScalingPlanVersion","ScalingPlanName"]
+    },
+    {
         "resource": "awscc_b2bi_capability",
         "generateListResource": true,
         "identifier": ["CapabilityId"]
@@ -711,6 +716,11 @@
         "identifier": ["ServiceEnvironmentArn"]
     },
     {
+        "resource": "awscc_bcmpricingcalculator_bill_estimate",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_bcmpricingcalculator_bill_scenario",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -811,6 +821,11 @@
     {
         "resource": "awscc_bedrock_resource_policy",
         "identifier": ["ResourceArn"]
+    },
+    {
+        "resource": "awscc_bedrock_retrieval_instruction",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_bedrock_session",
@@ -1281,6 +1296,11 @@
         "resource": "awscc_cloudfront_distribution_tenant",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_cloudfront_field_level_encryption_config",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_cloudfront_field_level_encryption_profile",
@@ -2537,6 +2557,11 @@
         "identifier": ["IpamExternalResourceVerificationTokenArn"]
     },
     {
+        "resource": "awscc_ec2_ipam_internet_registry_association",
+        "generateListResource": true,
+        "identifier": ["IpamInternetRegistryAssociationArn"]
+    },
+    {
         "resource": "awscc_ec2_key_pair",
         "generateListResource": true,
         "identifier": ["KeyName"]
@@ -3019,6 +3044,16 @@
     {
         "resource": "awscc_ecs_express_gateway_service",
         "identifier": ["ServiceArn"]
+    },
+    {
+        "resource": "awscc_ecs_gateway",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_ecs_gateway_cluster_associations",
+        "generateListResource": true,
+        "identifier": ["Gateway","Cluster"]
     },
     {
         "resource": "awscc_ecs_primary_task_set",
@@ -5016,6 +5051,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_mediaconvert_certificate_association",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_mediaconvert_job_template",
         "generateListResource": true,
         "identifier": ["Name"]
@@ -5058,6 +5098,16 @@
         "resource": "awscc_medialive_event_bridge_rule_template_group",
         "generateListResource": true,
         "identifier": ["Identifier"]
+    },
+    {
+        "resource": "awscc_medialive_input",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_medialive_input_security_group",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_medialive_multiplex",
@@ -6441,6 +6491,11 @@
         "identifier": ["ResourceSetName"]
     },
     {
+        "resource": "awscc_route53resolver_firewall_config",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_route53resolver_firewall_domain_list",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -7023,6 +7078,11 @@
         "identifier": ["CodeRepositoryArn"]
     },
     {
+        "resource": "awscc_sagemaker_compute_quota",
+        "generateListResource": true,
+        "identifier": ["ComputeQuotaArn"]
+    },
+    {
         "resource": "awscc_sagemaker_context",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -7266,6 +7326,11 @@
         "resource": "awscc_securityagent_target_domain",
         "generateListResource": true,
         "identifier": ["TargetDomainId"]
+    },
+    {
+        "resource": "awscc_securityhub_action_target",
+        "generateListResource": true,
+        "identifier": ["ActionTargetArn"]
     },
     {
         "resource": "awscc_securityhub_aggregator_v2",

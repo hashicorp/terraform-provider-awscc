@@ -70,13 +70,13 @@ func dataMigrationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The property describes an ARN of the data migration.",
+		//	  "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 		//	  "maxLength": 300,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"data_migration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an ARN of the data migration.",
+			Description: "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

@@ -31,6 +31,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/auditmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/autoscaling"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/autoscalingplans"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/awsexternalanthropic"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/b2bi"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"

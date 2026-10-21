@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -21,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -39,6 +41,121 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::Alarm resource.
 func alarmResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ActionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "AlarmTagsPropagation": {
+		//	      "additionalProperties": false,
+		//	      "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether the alarm's tags are included in its action notifications and state-change events.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExcludedTagKeys": {
+		//	          "description": "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "IncludedTagKeys": {
+		//	          "description": "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"action_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmTagsPropagation
+				"alarm_tags_propagation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludedTagKeys
+						"excluded_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The tag keys to leave out. Cannot be specified together with IncludedTagKeys.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeBetween(1, 50),
+								setvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IncludedTagKeys
+						"included_tag_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The only tag keys to include. Cannot be specified together with ExcludedTagKeys.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeBetween(1, 50),
+								setvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Whether the alarm's tags are included in its action notifications and state-change events.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ActionsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -1038,22 +1155,27 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                           "AccountId",
+		"action_configuration":                 "ActionConfiguration",
 		"actions_enabled":                      "ActionsEnabled",
 		"alarm_actions":                        "AlarmActions",
 		"alarm_description":                    "AlarmDescription",
 		"alarm_name":                           "AlarmName",
+		"alarm_tags_propagation":               "AlarmTagsPropagation",
 		"arn":                                  "Arn",
 		"comparison_operator":                  "ComparisonOperator",
 		"datapoints_to_alarm":                  "DatapointsToAlarm",
 		"dimensions":                           "Dimensions",
+		"enabled":                              "Enabled",
 		"evaluate_low_sample_count_percentile": "EvaluateLowSampleCountPercentile",
 		"evaluation_criteria":                  "EvaluationCriteria",
 		"evaluation_interval":                  "EvaluationInterval",
 		"evaluation_periods":                   "EvaluationPeriods",
 		"evaluation_window":                    "EvaluationWindow",
+		"excluded_tag_keys":                    "ExcludedTagKeys",
 		"expression":                           "Expression",
 		"extended_statistic":                   "ExtendedStatistic",
 		"id":                                   "Id",
+		"included_tag_keys":                    "IncludedTagKeys",
 		"insufficient_data_actions":            "InsufficientDataActions",
 		"key":                                  "Key",
 		"label":                                "Label",

@@ -8,6 +8,7 @@ package imagebuilder
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -23,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -244,6 +246,90 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ParentInstance
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from, instead of launching a new instance. This applies only to the build phase.",
+		//	  "properties": {
+		//	    "AutoScalingGroup": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from.",
+		//	      "properties": {
+		//	        "CapacityWaitTimeoutSeconds": {
+		//	          "description": "The number of seconds that Image Builder waits for an instance to become available in the group before the build fails. If you set this value to 0 or omit it, the build fails as soon as the group has no instance available.",
+		//	          "maximum": 3600,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "Name": {
+		//	          "description": "The name of the Auto Scaling group, in the same account and AWS Region as the infrastructure configuration.",
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Name"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AutoScalingGroup"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"parent_instance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoScalingGroup
+				"auto_scaling_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityWaitTimeoutSeconds
+						"capacity_wait_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of seconds that Image Builder waits for an instance to become available in the group before the build fails. If you set this value to 0 or omit it, the build fails as soon as the group has no instance available.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 3600),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the Auto Scaling group, in the same account and AWS Region as the infrastructure configuration.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1024),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from, instead of launching a new instance. This applies only to the build phase.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Placement
 		// CloudFormation resource type schema:
 		//
@@ -425,6 +511,21 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TerminateInstanceOnCompletion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether Image Builder terminates build and test instances that are still running when image creation ends without a failure. A TerminateInstance step in a workflow runs even when this is false.",
+		//	  "type": "boolean"
+		//	}
+		"terminate_instance_on_completion": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether Image Builder terminates build and test instances that are still running when image creation ends without a failure. A TerminateInstance step in a workflow runs even when this is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TerminateInstanceOnFailure
 		// CloudFormation resource type schema:
 		//
@@ -469,30 +570,34 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                           "Arn",
-		"availability_zone":             "AvailabilityZone",
-		"description":                   "Description",
-		"host_id":                       "HostId",
-		"host_resource_group_arn":       "HostResourceGroupArn",
-		"http_put_response_hop_limit":   "HttpPutResponseHopLimit",
-		"http_tokens":                   "HttpTokens",
-		"instance_metadata_options":     "InstanceMetadataOptions",
-		"instance_profile_name":         "InstanceProfileName",
-		"instance_types":                "InstanceTypes",
-		"key_pair":                      "KeyPair",
-		"logging":                       "Logging",
-		"name":                          "Name",
-		"placement":                     "Placement",
-		"resource_tags":                 "ResourceTags",
-		"s3_bucket_name":                "S3BucketName",
-		"s3_key_prefix":                 "S3KeyPrefix",
-		"s3_logs":                       "S3Logs",
-		"security_group_ids":            "SecurityGroupIds",
-		"sns_topic_arn":                 "SnsTopicArn",
-		"subnet_id":                     "SubnetId",
-		"tags":                          "Tags",
-		"tenancy":                       "Tenancy",
-		"terminate_instance_on_failure": "TerminateInstanceOnFailure",
+		"arn":                              "Arn",
+		"auto_scaling_group":               "AutoScalingGroup",
+		"availability_zone":                "AvailabilityZone",
+		"capacity_wait_timeout_seconds":    "CapacityWaitTimeoutSeconds",
+		"description":                      "Description",
+		"host_id":                          "HostId",
+		"host_resource_group_arn":          "HostResourceGroupArn",
+		"http_put_response_hop_limit":      "HttpPutResponseHopLimit",
+		"http_tokens":                      "HttpTokens",
+		"instance_metadata_options":        "InstanceMetadataOptions",
+		"instance_profile_name":            "InstanceProfileName",
+		"instance_types":                   "InstanceTypes",
+		"key_pair":                         "KeyPair",
+		"logging":                          "Logging",
+		"name":                             "Name",
+		"parent_instance":                  "ParentInstance",
+		"placement":                        "Placement",
+		"resource_tags":                    "ResourceTags",
+		"s3_bucket_name":                   "S3BucketName",
+		"s3_key_prefix":                    "S3KeyPrefix",
+		"s3_logs":                          "S3Logs",
+		"security_group_ids":               "SecurityGroupIds",
+		"sns_topic_arn":                    "SnsTopicArn",
+		"subnet_id":                        "SubnetId",
+		"tags":                             "Tags",
+		"tenancy":                          "Tenancy",
+		"terminate_instance_on_completion": "TerminateInstanceOnCompletion",
+		"terminate_instance_on_failure":    "TerminateInstanceOnFailure",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

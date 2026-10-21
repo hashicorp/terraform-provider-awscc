@@ -16,8 +16,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
@@ -34,6 +36,53 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource.
 func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnalyticsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The analytics configuration for the Data Store. Omitted when the Data Store can't carry analytics.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "The analytics status for the Data Store.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "PAUSED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"analytics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The analytics status for the Data Store.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"PAUSED",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The analytics configuration for the Data Store. Omitted when the Data Store can't carry analytics.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -139,24 +188,25 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DatastoreStatus
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+		//	  "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'UPDATING', 'UPDATE_FAILED', 'DELETING', or 'DELETED'.",
 		//	  "enum": [
 		//	    "CREATING",
 		//	    "ACTIVE",
+		//	    "UPDATING",
+		//	    "UPDATE_FAILED",
 		//	    "DELETING",
 		//	    "DELETED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"datastore_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'UPDATING', 'UPDATE_FAILED', 'DELETING', or 'DELETED'.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -285,7 +335,53 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 					"fine_grained_authorization_enabled": false,
 				}),
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NlpConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The natural language processing (NLP) configuration for the Data Store.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "The NLP status for the Data Store.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"nlp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The NLP status for the Data Store.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The natural language processing (NLP) configuration for the Data Store.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PreloadDataConfig
@@ -332,6 +428,51 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProfileConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The profile configuration for the Data Store.",
+		//	  "properties": {
+		//	    "DefaultProfiles": {
+		//	      "description": "The FHIR profiles the Data Store validates resources against by default, for example us-core-3.1.1.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DefaultProfiles"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"profile_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultProfiles
+				"default_profiles": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The FHIR profiles the Data Store validates resources against by default, for example us-core-3.1.1.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The profile configuration for the Data Store.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SseConfiguration
@@ -533,6 +674,7 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"analytics_configuration":            "AnalyticsConfiguration",
 		"authorization_strategy":             "AuthorizationStrategy",
 		"cmk_type":                           "CmkType",
 		"created_at":                         "CreatedAt",
@@ -542,6 +684,7 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 		"datastore_name":                     "DatastoreName",
 		"datastore_status":                   "DatastoreStatus",
 		"datastore_type_version":             "DatastoreTypeVersion",
+		"default_profiles":                   "DefaultProfiles",
 		"fine_grained_authorization_enabled": "FineGrainedAuthorizationEnabled",
 		"identity_provider_configuration":    "IdentityProviderConfiguration",
 		"idp_lambda_arn":                     "IdpLambdaArn",
@@ -550,17 +693,20 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_id":                         "KmsKeyId",
 		"metadata":                           "Metadata",
 		"nanos":                              "Nanos",
+		"nlp_configuration":                  "NlpConfiguration",
 		"preload_data_config":                "PreloadDataConfig",
 		"preload_data_type":                  "PreloadDataType",
+		"profile_configuration":              "ProfileConfiguration",
 		"seconds":                            "Seconds",
 		"sse_configuration":                  "SseConfiguration",
+		"status":                             "Status",
 		"tags":                               "Tags",
 		"value":                              "Value",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(360).WithDeleteTimeoutInMinutes(360)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(360)
 
 	v, err := generic.NewResource(ctx, opts...)
 

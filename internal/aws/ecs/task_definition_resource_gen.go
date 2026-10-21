@@ -8,6 +8,7 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -535,6 +536,37 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "additionalProperties": false,
 		//	          "description": "The type and amount of a resource to assign to a container. The supported resource types are GPUs, Neuron devices, and Elastic Inference accelerators. For more information, see [Working with GPUs on Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or [Working with Amazon Elastic Inference on Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html) in the *Amazon Elastic Container Service Developer Guide*",
 		//	          "properties": {
+		//	            "SharingStrategy": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "NvidiaMps": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "",
+		//	                  "properties": {
+		//	                    "MaxComputePercent": {
+		//	                      "description": "The maximum percentage of the GPU's compute capacity that the container can use.",
+		//	                      "maximum": 100,
+		//	                      "minimum": 1,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "Memory": {
+		//	                      "description": "The amount of GPU memory, in MiB, allocated to the container.",
+		//	                      "minimum": 1,
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Memory"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "NvidiaMps"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "Type": {
 		//	              "description": "The type of resource to assign to a container.",
 		//	              "type": "string"
@@ -1500,6 +1532,56 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SharingStrategy
+								"sharing_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: NvidiaMps
+										"nvidia_mps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: MaxComputePercent
+												"max_compute_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The maximum percentage of the GPU's compute capacity that the container can use.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(1, 100),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Memory
+												"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The amount of GPU memory, in MiB, allocated to the container.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.AtLeast(1),
+														fwvalidators.NotNullInt64(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The type of resource to assign to a container.",
@@ -2924,6 +3006,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"linux_parameters":               "LinuxParameters",
 		"log_configuration":              "LogConfiguration",
 		"log_driver":                     "LogDriver",
+		"max_compute_percent":            "MaxComputePercent",
 		"max_swap":                       "MaxSwap",
 		"memory":                         "Memory",
 		"memory_reservation":             "MemoryReservation",
@@ -2932,6 +3015,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"network_mode":                   "NetworkMode",
+		"nvidia_mps":                     "NvidiaMps",
 		"operating_system_family":        "OperatingSystemFamily",
 		"options":                        "Options",
 		"permissions":                    "Permissions",
@@ -2958,6 +3042,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"secret_options":                 "SecretOptions",
 		"secrets":                        "Secrets",
 		"shared_memory_size":             "SharedMemorySize",
+		"sharing_strategy":               "SharingStrategy",
 		"size":                           "Size",
 		"size_in_gi_b":                   "SizeInGiB",
 		"soft_limit":                     "SoftLimit",

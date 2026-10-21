@@ -62,11 +62,7 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes an instance profile arn for the migration project. For read",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -103,11 +99,7 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes an instance profile name for the migration project. For read",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -139,11 +131,7 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"migration_project_creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes a creating time of the migration project.",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 40),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -152,13 +140,13 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+		//	  "description": "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"migration_project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+			Description: "[DEPRECATED] This property is unused and will be ignored. Identity is managed via the resource ARN (primaryIdentifier) and Name (additionalIdentifier).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
