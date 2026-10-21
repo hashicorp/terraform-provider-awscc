@@ -1,0 +1,51 @@
+{
+  "typeName": "AWS::MediaConvert::CertificateAssociation",
+  "description": "Associates an AWS Certificate Manager (ACM) certificate with AWS Elemental MediaConvert to enable encryption for content delivery.",
+  "properties": {
+    "Arn": {
+      "description": "The ARN of the ACM certificate to associate with MediaConvert.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[a-z]+)*:acm:[a-z0-9-]+:[0-9]{12}:certificate/[a-f0-9-]+$"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediaconvert:AssociateCertificate",
+        "acm:DescribeCertificate",
+        "acm:SearchCertificates"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "acm:DescribeCertificate"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediaconvert:DisassociateCertificate",
+        "acm:DescribeCertificate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "acm:ListCertificates"
+      ]
+    }
+  }
+}

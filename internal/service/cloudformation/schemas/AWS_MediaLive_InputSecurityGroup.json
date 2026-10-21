@@ -1,0 +1,110 @@
+{
+  "typeName": "AWS::MediaLive::InputSecurityGroup",
+  "description": "Resource Type definition for AWS::MediaLive::InputSecurityGroup",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "Unique ARN of Input Security Group"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The Id of the Input Security Group"
+    },
+    "Inputs": {
+      "type": "array",
+      "description": "The list of inputs currently using this Input Security Group.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A collection of key-value pairs.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "Placeholder documentation for __string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WhitelistRules": {
+      "type": "array",
+      "description": "Whitelist rules and their sync status",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InputWhitelistRule"
+      }
+    }
+  },
+  "definitions": {
+    "InputWhitelistRule": {
+      "type": "object",
+      "description": "Whitelist rule",
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "description": "The IPv4 CIDR that's whitelisted."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/Inputs"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "medialive:CreateTags",
+      "medialive:ListTagsForResource",
+      "medialive:DeleteTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "medialive:CreateInputSecurityGroup",
+        "medialive:ListTagsForResource",
+        "medialive:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "medialive:DescribeInputSecurityGroup",
+        "medialive:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "medialive:UpdateInputSecurityGroup",
+        "medialive:DescribeInputSecurityGroup",
+        "medialive:ListTagsForResource",
+        "medialive:CreateTags",
+        "medialive:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "medialive:DeleteInputSecurityGroup",
+        "medialive:DescribeInputSecurityGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "medialive:ListInputSecurityGroups"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

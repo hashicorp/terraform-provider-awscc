@@ -1,0 +1,76 @@
+{
+  "typeName": "AWS::SecurityHub::ActionTarget",
+  "description": "Creates a custom action target in Security Hub.",
+  "properties": {
+    "ActionTargetArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the custom action target."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The ID for the custom action target. Can contain up to 20 alphanumeric characters.",
+      "pattern": "\\S"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the custom action target. Can contain up to 20 characters.",
+      "pattern": "\\S"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description for the custom action target.",
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "Name",
+    "Description",
+    "Id"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ActionTargetArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Id"
+  ],
+  "primaryIdentifier": [
+    "/properties/ActionTargetArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityhub:CreateActionTarget",
+        "securityhub:DescribeActionTargets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityhub:DescribeActionTargets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityhub:UpdateActionTarget"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityhub:DeleteActionTarget"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityhub:DescribeActionTargets"
+      ]
+    }
+  }
+}
