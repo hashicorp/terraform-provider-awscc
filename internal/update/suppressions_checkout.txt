@@ -11,11 +11,15 @@ internal/service/cloudformation/schemas/AWS_BedrockAgentCore_Harness.json
 internal/service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json
 internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
 internal/service/cloudformation/schemas/AWS_DataSync_StorageSystem.json
+internal/service/cloudformation/schemas/AWS_DynamoDB_Backup.json
 internal/service/cloudformation/schemas/AWS_EC2_LaunchTemplate.json
 internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
 internal/service/cloudformation/schemas/AWS_EKS_Cluster.json
 internal/service/cloudformation/schemas/AWS_EMRServerless_Application.json
 internal/service/cloudformation/schemas/AWS_FSx_S3AccessPointAttachment.json
+internal/service/cloudformation/schemas/AWS_IoTEvents_AlarmModel.json
+internal/service/cloudformation/schemas/AWS_IoTEvents_DetectorModel.json
+internal/service/cloudformation/schemas/AWS_IoTEvents_Input.json
 internal/service/cloudformation/schemas/AWS_IoTFleetHub_Application.json
 internal/service/cloudformation/schemas/AWS_IoTFleetWise_DecoderManifest.json
 internal/service/cloudformation/schemas/AWS_Lambda_Function.json
@@ -23,6 +27,7 @@ internal/service/cloudformation/schemas/AWS_Lex_Bot.json
 internal/service/cloudformation/schemas/AWS_Logs_LogGroup.json
 internal/service/cloudformation/schemas/AWS_LookoutMetrics_Alert.json
 internal/service/cloudformation/schemas/AWS_LookoutMetrics_AnomalyDetector.json
+internal/service/cloudformation/schemas/AWS_MediaConnect_Flow.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
