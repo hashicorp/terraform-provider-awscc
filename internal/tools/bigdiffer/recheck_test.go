@@ -228,17 +228,7 @@ func TestProbeArtifactIsolatesRecursiveSchema(t *testing.T) {
 	t.Parallel()
 	cfg, rows := loadCorpus(t)
 
-	var recursive resourceRow
-	found := false
-	for _, r := range rows {
-		if r.CloudFormationTypeName == "AWS::WAFv2::WebACL" {
-			recursive, found = r, true
-			break
-		}
-	}
-	if !found {
-		t.Skip("AWS::WAFv2::WebACL not in overlay")
-	}
+	recursive := recursiveOverlayRow(t, rows)
 
 	path := recursive.CloudFormationSchemaPath
 	if path == "" {
@@ -525,17 +515,7 @@ func TestManifestModeSuppressedSiblingRecoveryRequiresRecheckAll(t *testing.T) {
 	}
 	cfg, rows := loadCorpus(t)
 
-	var recursive resourceRow
-	found := false
-	for _, r := range rows {
-		if r.CloudFormationTypeName == "AWS::WAFv2::WebACL" {
-			recursive, found = r, true
-			break
-		}
-	}
-	if !found {
-		t.Skip("AWS::WAFv2::WebACL not in overlay")
-	}
+	recursive := recursiveOverlayRow(t, rows)
 	path := recursive.CloudFormationSchemaPath
 	if path == "" {
 		path = schemaCachePath(cfg.cacheDir, recursive.CloudFormationTypeName)
@@ -603,10 +583,9 @@ func TestManifestModeSuppressedSiblingRecoveryRequiresRecheckAll(t *testing.T) {
 	}
 
 	// Recovery leg: healArtifact must re-probe and propose "lift" once the
-	// probe succeeds. WAFv2::WebACL's own plural artifact fails
-	// healArtifact's earlier structural pre-check (pluralSupported) for an
-	// unrelated reason, so this uses the resource kind with probeArtifact
-	// stubbed to succeed instead.
+	// probe succeeds. A plural artifact can fail healArtifact's earlier
+	// structural pre-check (pluralSupported) for an unrelated reason, so this
+	// uses the resource kind with probeArtifact stubbed to succeed instead.
 	probeArtifact = func(config, resourceRow, artifactKind, []byte) error { return nil }
 	resourceSuppressed := fresh
 	resourceSuppressed.SuppressResourceGeneration = true
@@ -800,4 +779,21 @@ func TestHealRowSinglePendingNoComment(t *testing.T) {
 	if strings.Contains(proposals[0].reason, "candidate") {
 		t.Errorf("proposal reason = %q, a single pending fact must not be marked as a shared candidate", proposals[0].reason)
 	}
+}
+
+// recursiveOverlayRow returns an overlay row whose resource is suppressed because
+// generation overflowed the stack, i.e. a genuinely recursive schema. Tests pick
+// one from the overlay instead of naming a type: the historical example
+// (AWS::WAFv2::WebACL) now ships a depth-limited local schema that generates
+// cleanly.
+func recursiveOverlayRow(t *testing.T, rows []resourceRow) resourceRow {
+	t.Helper()
+
+	for _, r := range rows {
+		if strings.HasPrefix(r.SuppressionReasonResource, "generation_failed: runtime: goroutine stack exceeds") {
+			return r
+		}
+	}
+	t.Skip("no stack-overflowing (recursive) schema in overlay")
+	return resourceRow{}
 }
