@@ -19,10 +19,27 @@ const (
 )
 
 // Identifier represents a generic identifier with a name and an optional description.
+// AttributePath is set when the identifier is a nested resource attribute; it holds the
+// attribute names from the root to the identifier.
 type Identifier struct {
 	Name              string
 	Description       string
 	RequiredForImport bool
+	AttributePath     []string
+}
+
+// StatePath returns the path of the identifier's value in resource state.
+func (i Identifier) StatePath() path.Path {
+	if len(i.AttributePath) == 0 {
+		return path.Root(i.Name)
+	}
+
+	p := path.Root(i.AttributePath[0])
+	for _, v := range i.AttributePath[1:] {
+		p = p.AtName(v)
+	}
+
+	return p
 }
 
 type Identifiers []Identifier
@@ -64,7 +81,7 @@ func (a Identifiers) SetIdentity(ctx context.Context, provider cloudcontrol.Prov
 	for _, v := range a {
 		if v.RequiredForImport {
 			var out attr.Value
-			diags.Append(state.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			diags.Append(state.GetAttribute(ctx, v.StatePath(), &out)...)
 			if diags.HasError() {
 				return diags
 			}

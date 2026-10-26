@@ -90,6 +90,9 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
     Description: "{{ $value.Description }}",
     {{- end}}
     RequiredForImport: true,
+    {{- if $value.AttributePath }}
+    AttributePath: []string{ {{- range $i, $name := $value.AttributePath}} {{- if $i}}, {{end}}"{{ $name }}"{{- end}} },
+    {{- end}}
     }
     {{- end}})
 {{ end }}

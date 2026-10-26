@@ -109,7 +109,7 @@ func formatIdentifier(identifier []string) string {
 	if len(identifier) != 0 {
 		var out []string
 		for _, i := range identifier {
-			out = append(out, naming.SnakeCase(i))
+			out = append(out, naming.CloudFormationPropertyToTerraformAttribute(i))
 		}
 
 		return fmt.Sprintf("\"%s\"", strings.Join(out, "|"))

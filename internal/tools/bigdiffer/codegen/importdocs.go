@@ -82,7 +82,8 @@ func GenerateImportExampleDocs(ex ImportExample) ([]ImportExampleFile, error) {
 	return files, nil
 }
 
-// formatImportIdentifier snake-cases each identifier segment and joins them with
+// formatImportIdentifier converts each identifier segment to its Terraform attribute
+// name, as the resource identity names it, and joins them with
 // "|", quoted — matching the legacy generator exactly. An empty identifier
 // renders the placeholder used by the legacy tool.
 func formatImportIdentifier(identifier []string) string {
@@ -91,7 +92,7 @@ func formatImportIdentifier(identifier []string) string {
 	}
 	out := make([]string, 0, len(identifier))
 	for _, i := range identifier {
-		out = append(out, naming.SnakeCase(i))
+		out = append(out, naming.CloudFormationPropertyToTerraformAttribute(i))
 	}
 	return fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
 }

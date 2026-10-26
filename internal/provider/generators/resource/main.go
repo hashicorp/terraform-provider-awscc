@@ -88,11 +88,18 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		return err
 	}
 
+	// Name identifiers the way their attributes are named, so they resolve in resource state.
 	primaryIdentifier := make([]identity.Identifier, len(templateData.PrimaryIdentifier))
 	for i, v := range templateData.PrimaryIdentifier {
+		var attributePath []string
+		for _, name := range v.AttributePath {
+			attributePath = append(attributePath, naming.CloudFormationPropertyToTerraformAttribute(name))
+		}
+
 		primaryIdentifier[i] = identity.Identifier{
-			Name:        naming.SnakeCase(v.Name),
-			Description: v.Description,
+			Name:          naming.CloudFormationPropertyToTerraformAttribute(v.Name),
+			Description:   v.Description,
+			AttributePath: attributePath,
 		}
 	}
 	templateData.PrimaryIdentifier = primaryIdentifier
