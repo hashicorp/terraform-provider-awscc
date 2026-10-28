@@ -42,6 +42,13 @@
             "type": "string",
             "pattern": "^subnet-[0-9a-f]+$"
           }
+        },
+        "VpcOwnerAccountId": {
+          "description": "The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.",
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "minLength": 12,
+          "maxLength": 12
         }
       },
       "additionalProperties": false

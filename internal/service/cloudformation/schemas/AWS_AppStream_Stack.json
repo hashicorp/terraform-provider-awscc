@@ -91,6 +91,10 @@
     "AgentAccessConfig": {
       "$ref": "#/definitions/AgentAccessConfig",
       "description": "The configuration for agent access on the stack. If specified, agent access is enabled for the stack."
+    },
+    "StorageConnectorAuthentication": {
+      "type": "string",
+      "description": "Controls whether stored OneDrive and Google Drive authentication is retained between streaming sessions. Valid values: FORCE_REAUTHENTICATION | REUSE_CREDENTIALS."
     }
   },
   "definitions": {

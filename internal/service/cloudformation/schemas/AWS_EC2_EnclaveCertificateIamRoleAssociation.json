@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::EC2::EnclaveCertificateIamRoleAssociation",
   "description": "Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This association is based on Amazon Resource Names and it enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave.",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-acmcerts.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-acmcerts",
   "properties": {
     "CertificateArn": {
       "description": "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
@@ -58,6 +58,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "CertificateArn": {
+            "$ref": "resource-schema.json#/properties/CertificateArn"
+          }
+        },
+        "required": [
+          "CertificateArn"
+        ]
+      },
       "permissions": [
         "ec2:GetAssociatedEnclaveCertificateIamRoles"
       ]

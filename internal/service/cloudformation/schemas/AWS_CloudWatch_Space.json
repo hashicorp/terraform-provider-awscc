@@ -1,0 +1,218 @@
+{
+  "typeName": "AWS::CloudWatch::Space",
+  "description": "Resource type definition for AWS::CloudWatch::Space",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the space.",
+      "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:space/(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "SpaceId": {
+      "type": "string",
+      "description": "The unique identifier of the space.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the space.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The identifier of the domain the space belongs to.",
+      "pattern": "^d-[0-9a-z]{1,25}$"
+    },
+    "DataAccessRoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.",
+      "pattern": "^arn:.+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "AgentCoreEvaluationRoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.",
+      "pattern": "^arn:.+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
+    },
+    "Region": {
+      "type": "string",
+      "description": "The AWS Region the space resides in."
+    },
+    "OwnerAccountId": {
+      "type": "string",
+      "description": "The AWS account that owns the space.",
+      "pattern": "^[0-9]{12}$",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the space was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the space was last updated."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the space.",
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "MOVING"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "EncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the space.",
+      "properties": {
+        "EncryptionStrategy": {
+          "type": "string",
+          "description": "Whether the space is encrypted with an AWS owned key or a customer managed key.",
+          "enum": [
+            "AWS_OWNED",
+            "CUSTOMER_MANAGED"
+          ]
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.",
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov):kms:[a-z0-9-]+:[0-9]{12}:key/(?:mrk-)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "EncryptionStrategy"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SpaceId"
+    ]
+  ],
+  "required": [
+    "Name",
+    "DomainId",
+    "DataAccessRoleArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/SpaceId",
+    "/properties/Region",
+    "/properties/OwnerAccountId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/DataAccessRoleArn",
+    "/properties/AgentCoreEvaluationRoleArn"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateSpace",
+        "cloudwatch:TagResource",
+        "iam:PassRole",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetSpace",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:UpdateSpace",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteSpace",
+        "cloudwatch:GetSpace",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListSpaces"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

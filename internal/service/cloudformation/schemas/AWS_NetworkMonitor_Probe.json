@@ -1,0 +1,210 @@
+{
+  "typeName": "AWS::NetworkMonitor::Probe",
+  "description": "An Amazon CloudWatch Network Monitor probe that measures network traffic between a source subnet and a destination.",
+  "properties": {
+    "MonitorName": {
+      "type": "string",
+      "description": "The name of the monitor the probe belongs to.",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "ProbeId": {
+      "type": "string",
+      "description": "The ID of the probe.",
+      "pattern": "^probe-[a-z0-9A-Z-]{21,64}$"
+    },
+    "ProbeArn": {
+      "type": "string",
+      "description": "The ARN of the probe.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:.*$"
+    },
+    "SourceArn": {
+      "type": "string",
+      "description": "The ARN of the subnet the probe sends traffic from.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:.*$"
+    },
+    "Destination": {
+      "type": "string",
+      "description": "The literal IPv4 or IPv6 address the probe sends traffic to. The service rejects a domain name and a CIDR block.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "DestinationPort": {
+      "type": "integer",
+      "description": "The port the probe sends traffic to. Applies to the TCP protocol only.",
+      "minimum": 0,
+      "maximum": 65536
+    },
+    "Protocol": {
+      "type": "string",
+      "description": "The protocol the probe uses.",
+      "enum": [
+        "TCP",
+        "ICMP"
+      ]
+    },
+    "PacketSize": {
+      "type": "integer",
+      "description": "The size, in bytes, of the packets the probe sends.",
+      "minimum": 56,
+      "maximum": 8500
+    },
+    "AddressFamily": {
+      "type": "string",
+      "description": "The IP address family the probe uses, computed by the service from the source and destination.",
+      "enum": [
+        "IPV4",
+        "IPV6"
+      ]
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The ID of the VPC containing the probe's source subnet.",
+      "pattern": "^vpc-[a-zA-Z0-9]{8,32}$"
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the probe.",
+      "enum": [
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ERROR",
+        "DELETING",
+        "DELETED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The time and date when the probe was created.",
+      "format": "date-time"
+    },
+    "ModifiedAt": {
+      "type": "string",
+      "description": "The time and date when the probe was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the probe.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "MonitorName",
+    "SourceArn",
+    "Destination",
+    "Protocol"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ProbeId",
+    "/properties/ProbeArn",
+    "/properties/AddressFamily",
+    "/properties/VpcId",
+    "/properties/State",
+    "/properties/CreatedAt",
+    "/properties/ModifiedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/MonitorName",
+    "/properties/SourceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/MonitorName",
+    "/properties/ProbeId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "networkmonitor:TagResource",
+      "networkmonitor:UntagResource",
+      "networkmonitor:GetProbe"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "networkmonitor:CreateProbe",
+        "networkmonitor:GetProbe",
+        "networkmonitor:TagResource",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "networkmonitor:GetProbe"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "networkmonitor:UpdateProbe",
+        "networkmonitor:GetProbe",
+        "networkmonitor:TagResource",
+        "networkmonitor:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "networkmonitor:DeleteProbe",
+        "networkmonitor:GetProbe"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "networkmonitor:GetMonitor"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "MonitorName": {
+            "type": "string",
+            "description": "The name of the monitor whose probes are listed.",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          }
+        },
+        "required": [
+          "MonitorName"
+        ]
+      }
+    }
+  }
+}

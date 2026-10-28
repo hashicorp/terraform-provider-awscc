@@ -1,0 +1,566 @@
+{
+  "typeName": "AWS::IoT::OTAUpdate",
+  "description": "Creates an IoT OTA update on a target group of things or groups.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "OTAUpdateFile": {
+      "type": "object",
+      "properties": {
+        "FileName": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "FileType": {
+          "type": "integer",
+          "description": "An integer value you can include in the job document to allow your devices to identify the type of file received from the cloud.",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "FileVersion": {
+          "type": "string",
+          "description": "The file version."
+        },
+        "FileLocation": {
+          "$ref": "#/definitions/FileLocation"
+        },
+        "CodeSigning": {
+          "$ref": "#/definitions/CodeSigning"
+        },
+        "Attributes": {
+          "type": "object",
+          "description": "A list of name-attribute pairs.",
+          "patternProperties": {
+            "": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "FileLocation": {
+      "type": "object",
+      "properties": {
+        "Stream": {
+          "$ref": "#/definitions/Stream"
+        },
+        "S3Location": {
+          "$ref": "#/definitions/S3Location"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Stream": {
+      "type": "object",
+      "properties": {
+        "StreamId": {
+          "type": "string",
+          "description": "The stream ID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "FileId": {
+          "type": "integer",
+          "description": "The ID of a file associated with a stream.",
+          "minimum": 0,
+          "maximum": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3Location": {
+      "type": "object",
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "description": "The S3 bucket.",
+          "minLength": 1
+        },
+        "Key": {
+          "type": "string",
+          "description": "The S3 key.",
+          "minLength": 1
+        },
+        "Version": {
+          "type": "string",
+          "description": "The S3 bucket version."
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeSigning": {
+      "type": "object",
+      "properties": {
+        "AwsSignerJobId": {
+          "type": "string",
+          "description": "The ID of the AWSSignerJob which was created to sign the file."
+        },
+        "StartSigningJobParameter": {
+          "$ref": "#/definitions/StartSigningJobParameter"
+        },
+        "CustomCodeSigning": {
+          "$ref": "#/definitions/CustomCodeSigning"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StartSigningJobParameter": {
+      "type": "object",
+      "properties": {
+        "SigningProfileParameter": {
+          "$ref": "#/definitions/SigningProfileParameter"
+        },
+        "SigningProfileName": {
+          "type": "string",
+          "description": "The code-signing profile name."
+        },
+        "Destination": {
+          "$ref": "#/definitions/Destination"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SigningProfileParameter": {
+      "type": "object",
+      "properties": {
+        "CertificateArn": {
+          "type": "string",
+          "description": "Certificate ARN."
+        },
+        "Platform": {
+          "type": "string",
+          "description": "The hardware platform of your device."
+        },
+        "CertificatePathOnDevice": {
+          "type": "string",
+          "description": "The location of the code-signing certificate on your device."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Destination": {
+      "type": "object",
+      "properties": {
+        "S3Destination": {
+          "$ref": "#/definitions/S3Destination"
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3Destination": {
+      "type": "object",
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "description": "The S3 bucket that contains the updated firmware.",
+          "minLength": 1
+        },
+        "Prefix": {
+          "type": "string",
+          "description": "The S3 prefix."
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomCodeSigning": {
+      "type": "object",
+      "properties": {
+        "Signature": {
+          "$ref": "#/definitions/CodeSigningSignature"
+        },
+        "CertificateChain": {
+          "$ref": "#/definitions/CodeSigningCertificateChain"
+        },
+        "HashAlgorithm": {
+          "type": "string",
+          "description": "The hash algorithm used to code sign the file."
+        },
+        "SignatureAlgorithm": {
+          "type": "string",
+          "description": "The signature algorithm used to code sign the file."
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeSigningSignature": {
+      "type": "object",
+      "properties": {
+        "InlineDocument": {
+          "type": "string",
+          "description": "A base64 encoded binary representation of the code signing signature."
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeSigningCertificateChain": {
+      "type": "object",
+      "properties": {
+        "CertificateName": {
+          "type": "string",
+          "description": "The name of the certificate."
+        },
+        "InlineDocument": {
+          "type": "string",
+          "description": "A base64 encoded binary representation of the code signing certificate chain."
+        }
+      },
+      "additionalProperties": false
+    },
+    "AwsJobExecutionsRolloutConfig": {
+      "type": "object",
+      "properties": {
+        "MaximumPerMinute": {
+          "type": "integer",
+          "description": "The maximum number of OTA update job executions started per minute.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "ExponentialRate": {
+          "$ref": "#/definitions/AwsJobExponentialRolloutRate"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AwsJobExponentialRolloutRate": {
+      "type": "object",
+      "properties": {
+        "BaseRatePerMinute": {
+          "type": "integer",
+          "description": "The minimum number of things that will be notified of a pending job, per minute, at the start of the job rollout.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "IncrementFactor": {
+          "type": "number",
+          "description": "The rate of increase for a job rollout."
+        },
+        "RateIncreaseCriteria": {
+          "$ref": "#/definitions/AwsJobRateIncreaseCriteria"
+        }
+      },
+      "required": [
+        "BaseRatePerMinute",
+        "IncrementFactor",
+        "RateIncreaseCriteria"
+      ],
+      "additionalProperties": false
+    },
+    "AwsJobRateIncreaseCriteria": {
+      "type": "object",
+      "properties": {
+        "NumberOfNotifiedThings": {
+          "type": "integer",
+          "description": "When this number of things have been notified, it will initiate an increase in the rollout rate.",
+          "minimum": 1
+        },
+        "NumberOfSucceededThings": {
+          "type": "integer",
+          "description": "When this number of things have succeeded in their job execution, it will initiate an increase in the rollout rate.",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "AwsJobPresignedUrlConfig": {
+      "type": "object",
+      "properties": {
+        "ExpiresInSec": {
+          "type": "integer",
+          "description": "How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 1800 seconds."
+        }
+      },
+      "additionalProperties": false
+    },
+    "AwsJobAbortConfig": {
+      "type": "object",
+      "properties": {
+        "AbortCriteriaList": {
+          "type": "array",
+          "description": "The list of criteria that determine when and how to abort the job.",
+          "items": {
+            "$ref": "#/definitions/AwsJobAbortCriteria"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "AbortCriteriaList"
+      ],
+      "additionalProperties": false
+    },
+    "AwsJobAbortCriteria": {
+      "type": "object",
+      "properties": {
+        "FailureType": {
+          "type": "string",
+          "description": "The type of job execution failures that can initiate a job abort.",
+          "enum": [
+            "FAILED",
+            "REJECTED",
+            "TIMED_OUT",
+            "ALL"
+          ]
+        },
+        "Action": {
+          "type": "string",
+          "description": "The type of job action to take to initiate the job abort.",
+          "enum": [
+            "CANCEL"
+          ]
+        },
+        "ThresholdPercentage": {
+          "type": "number",
+          "description": "The minimum percentage of job execution failures that must occur to initiate the job abort.",
+          "maximum": 100
+        },
+        "MinNumberOfExecutedThings": {
+          "type": "integer",
+          "description": "The minimum number of things which must receive job execution notifications before the job can be aborted.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "FailureType",
+        "Action",
+        "ThresholdPercentage",
+        "MinNumberOfExecutedThings"
+      ],
+      "additionalProperties": false
+    },
+    "AwsJobTimeoutConfig": {
+      "type": "object",
+      "properties": {
+        "InProgressTimeoutInMinutes": {
+          "type": "integer",
+          "description": "Specifies the amount of time, in minutes, this device has to finish execution of this job."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "OtaUpdateId": {
+      "type": "string",
+      "description": "The ID of the OTA update to be created.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "OtaUpdateArn": {
+      "type": "string",
+      "description": "The OTA update ARN."
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the OTA update.",
+      "maxLength": 2028,
+      "pattern": "^[^\\p{C}]+$"
+    },
+    "Targets": {
+      "type": "array",
+      "description": "The devices targeted to receive OTA updates.",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "Protocols": {
+      "type": "array",
+      "description": "The protocol used to transfer the OTA update image.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "MQTT",
+          "HTTP"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "TargetSelection": {
+      "type": "string",
+      "description": "Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all things specified as targets have completed the update (SNAPSHOT).",
+      "enum": [
+        "CONTINUOUS",
+        "SNAPSHOT"
+      ]
+    },
+    "AwsJobExecutionsRolloutConfig": {
+      "$ref": "#/definitions/AwsJobExecutionsRolloutConfig"
+    },
+    "AwsJobPresignedUrlConfig": {
+      "$ref": "#/definitions/AwsJobPresignedUrlConfig"
+    },
+    "AwsJobAbortConfig": {
+      "$ref": "#/definitions/AwsJobAbortConfig"
+    },
+    "AwsJobTimeoutConfig": {
+      "$ref": "#/definitions/AwsJobTimeoutConfig"
+    },
+    "Files": {
+      "type": "array",
+      "description": "The files to be streamed by the OTA update.",
+      "items": {
+        "$ref": "#/definitions/OTAUpdateFile"
+      },
+      "minItems": 1
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "The IAM role that grants AWS IoT Core access to the Amazon S3, IoT jobs and AWS Code Signing resources to create an OTA update job.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "AdditionalParameters": {
+      "type": "object",
+      "description": "A list of additional OTA update parameters, which are name-value pairs.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 4096
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Metadata which can be used to manage updates.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "OtaUpdateStatus": {
+      "type": "string",
+      "description": "The status of the OTA update.",
+      "enum": [
+        "CREATE_PENDING",
+        "CREATE_IN_PROGRESS",
+        "CREATE_COMPLETE",
+        "CREATE_FAILED",
+        "DELETE_IN_PROGRESS",
+        "DELETE_FAILED"
+      ]
+    },
+    "CreationDate": {
+      "type": "string",
+      "description": "The date when the OTA update was created.",
+      "format": "date-time"
+    },
+    "LastModifiedDate": {
+      "type": "string",
+      "description": "The date when the OTA update was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "OtaUpdateId",
+    "Targets",
+    "Files"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/OtaUpdateArn",
+    "/properties/OtaUpdateStatus",
+    "/properties/CreationDate",
+    "/properties/LastModifiedDate"
+  ],
+  "writeOnlyProperties": [
+    "/properties/RoleArn",
+    "/properties/AwsJobAbortConfig",
+    "/properties/AwsJobTimeoutConfig",
+    "/properties/AwsJobExecutionsRolloutConfig/ExponentialRate"
+  ],
+  "primaryIdentifier": [
+    "/properties/OtaUpdateArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/OtaUpdateId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iot:TagResource",
+      "iot:UntagResource",
+      "iot:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iot:CreateOTAUpdate",
+        "iot:GetOTAUpdate",
+        "iot:TagResource",
+        "iam:PassRole",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iot:GetOTAUpdate",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iot:GetOTAUpdate",
+        "iot:TagResource",
+        "iot:UntagResource",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iot:DeleteOTAUpdate",
+        "iot:GetOTAUpdate",
+        "iot:DescribeJob",
+        "iot:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iot:ListOTAUpdates"
+      ]
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/OtaUpdateId",
+    "/properties/Targets",
+    "/properties/Protocols",
+    "/properties/TargetSelection",
+    "/properties/AwsJobExecutionsRolloutConfig",
+    "/properties/AwsJobPresignedUrlConfig",
+    "/properties/AwsJobAbortConfig",
+    "/properties/AwsJobTimeoutConfig",
+    "/properties/Files",
+    "/properties/RoleArn",
+    "/properties/AdditionalParameters",
+    "/properties/Description"
+  ]
+}

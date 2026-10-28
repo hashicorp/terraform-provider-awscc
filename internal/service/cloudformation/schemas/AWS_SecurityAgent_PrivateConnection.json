@@ -1,0 +1,288 @@
+{
+  "typeName": "AWS::SecurityAgent::PrivateConnection",
+  "description": "Resource Type definition for AWS::SecurityAgent::PrivateConnection. A private connection allows Security Agent to reach a target resource privately via a VPC Lattice resource gateway.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ServiceManaged": {
+      "description": "The configuration for a service-managed private connection, where the service manages the resource gateway lifecycle.",
+      "type": "object",
+      "properties": {
+        "HostAddress": {
+          "type": "string",
+          "description": "The IP address or DNS name of the target resource."
+        },
+        "VpcId": {
+          "type": "string",
+          "description": "The VPC to create the service-managed resource gateway in."
+        },
+        "SubnetIds": {
+          "type": "array",
+          "description": "The subnets that the service-managed resource gateway spans.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "description": "The security groups to attach to the service-managed resource gateway.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "IpAddressType": {
+          "type": "string",
+          "description": "The IP address type of the service-managed resource gateway.",
+          "enum": [
+            "IPV4",
+            "IPV6",
+            "DUAL_STACK"
+          ]
+        },
+        "Ipv4AddressesPerEni": {
+          "type": "integer",
+          "description": "The number of IPv4 addresses in each elastic network interface for the service-managed resource gateway."
+        },
+        "PortRanges": {
+          "type": "array",
+          "description": "The TCP port ranges that a consumer can use to access the resource.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "DnsResolution": {
+          "type": "string",
+          "description": "The DNS resolution mode for the resource gateway.",
+          "enum": [
+            "PUBLIC",
+            "IN_VPC"
+          ]
+        }
+      },
+      "required": [
+        "HostAddress",
+        "VpcId",
+        "SubnetIds"
+      ],
+      "additionalProperties": false
+    },
+    "SelfManaged": {
+      "description": "The configuration for a self-managed private connection, where you manage your own resource configuration.",
+      "type": "object",
+      "properties": {
+        "ResourceConfigurationId": {
+          "type": "string",
+          "description": "The identifier or ARN of the resource configuration."
+        }
+      },
+      "required": [
+        "ResourceConfigurationId"
+      ],
+      "additionalProperties": false
+    },
+    "Mode": {
+      "description": "The configuration for the private connection. Specify either a service-managed or a self-managed mode.",
+      "type": "object",
+      "properties": {
+        "ServiceManaged": {
+          "$ref": "#/definitions/ServiceManaged"
+        },
+        "SelfManaged": {
+          "$ref": "#/definitions/SelfManaged"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "ServiceManaged"
+          ]
+        },
+        {
+          "required": [
+            "SelfManaged"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the private connection.",
+      "pattern": "^arn:aws(-[a-z]+)*:securityagent:[a-z0-9-]+:[0-9]{12}:.+$"
+    },
+    "PrivateConnectionName": {
+      "type": "string",
+      "description": "A unique name for the private connection within your account."
+    },
+    "Mode": {
+      "$ref": "#/definitions/Mode"
+    },
+    "Certificate": {
+      "type": "string",
+      "description": "The PEM-encoded certificate chain for the private connection."
+    },
+    "Type": {
+      "type": "string",
+      "description": "The type of the private connection, indicating whether it is service-managed or self-managed.",
+      "enum": [
+        "SERVICE_MANAGED",
+        "SELF_MANAGED"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the private connection.",
+      "enum": [
+        "ACTIVE",
+        "CREATE_IN_PROGRESS",
+        "CREATE_FAILED",
+        "DELETE_IN_PROGRESS",
+        "DELETE_FAILED"
+      ]
+    },
+    "ResourceGatewayId": {
+      "type": "string",
+      "description": "The identifier or ARN of the VPC Lattice resource gateway."
+    },
+    "HostAddress": {
+      "type": "string",
+      "description": "The IP address or DNS name of the target resource."
+    },
+    "VpcId": {
+      "type": "string",
+      "description": "The identifier of the VPC the resource gateway is created in."
+    },
+    "ResourceConfigurationId": {
+      "type": "string",
+      "description": "The identifier or ARN of the VPC Lattice resource configuration."
+    },
+    "CertificateExpiryTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the connection's certificate expires, in UTC format."
+    },
+    "DnsResolution": {
+      "type": "string",
+      "description": "The DNS resolution mode for the resource gateway.",
+      "enum": [
+        "PUBLIC",
+        "IN_VPC"
+      ]
+    },
+    "Tags": {
+      "description": "The tags attached to the private connection.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PrivateConnectionName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Certificate",
+    "/properties/Mode"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Type",
+    "/properties/Status",
+    "/properties/ResourceGatewayId",
+    "/properties/HostAddress",
+    "/properties/VpcId",
+    "/properties/ResourceConfigurationId",
+    "/properties/CertificateExpiryTime",
+    "/properties/DnsResolution"
+  ],
+  "createOnlyProperties": [
+    "/properties/PrivateConnectionName",
+    "/properties/Mode"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PrivateConnectionName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityagent:TagResource",
+      "securityagent:UntagResource",
+      "securityagent:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityagent:CreatePrivateConnection",
+        "securityagent:DescribePrivateConnection",
+        "securityagent:TagResource",
+        "securityagent:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:AssociateViaAWSService"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityagent:DescribePrivateConnection",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityagent:UpdatePrivateConnectionCertificate",
+        "securityagent:DescribePrivateConnection",
+        "securityagent:TagResource",
+        "securityagent:UntagResource",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityagent:DeletePrivateConnection",
+        "securityagent:DescribePrivateConnection",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityagent:ListPrivateConnections"
+      ]
+    }
+  }
+}

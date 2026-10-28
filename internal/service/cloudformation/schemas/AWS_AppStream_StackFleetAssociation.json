@@ -16,7 +16,7 @@
     "FleetName",
     "StackName"
   ],
-  "createOnlyProperties": [
+  "conditionalCreateOnlyProperties": [
     "/properties/FleetName",
     "/properties/StackName"
   ],
