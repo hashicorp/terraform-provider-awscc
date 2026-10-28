@@ -119,6 +119,28 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AcceptedWarnings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Warning codes to accept for this domain configuration update. Accepting a warning lets the update proceed past a validation that would otherwise block it. This property applies only to the current update and is not persisted on the domain. You can find warning codes in the ValidationFailures returned by DescribeDomainChangeProgress or DescribeDryRunProgress.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"accepted_warnings": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Warning codes to accept for this domain configuration update. Accepting a warning lets the update proceed past a validation that would otherwise block it. This property applies only to the current update and is not persisted on the domain. You can find warning codes in the ValidationFailures returned by DescribeDomainChangeProgress or DescribeDryRunProgress.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AcceptedWarnings is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicies
 		// CloudFormation resource type schema:
 		//
@@ -1176,6 +1198,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Enabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "EncryptionMode": {
+		//	      "description": "The type of encryption at rest applied to the domain's data. Valid values are DISK and NATIVE. DISK is the default and uses volume-level encryption. NATIVE uses engine-native, index-level encryption and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE, it can't be changed back to DISK.",
+		//	      "enum": [
+		//	        "DISK",
+		//	        "NATIVE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "KmsKeyId": {
 		//	      "type": "string"
 		//	    }
@@ -1190,6 +1220,21 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionMode
+				"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of encryption at rest applied to the domain's data. Valid values are DISK and NATIVE. DISK is the default and uses volume-level encryption. NATIVE uses engine-native, index-level encryption and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE, it can't be changed back to DISK.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DISK",
+							"NATIVE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyId
@@ -1918,6 +1963,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accepted_warnings":                "AcceptedWarnings",
 		"access_policies":                  "AccessPolicies",
 		"advanced_options":                 "AdvancedOptions",
 		"advanced_security_options":        "AdvancedSecurityOptions",
@@ -1959,6 +2005,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"enabled":                          "Enabled",
 		"enabled_api_access":               "EnabledAPIAccess",
 		"encryption_at_rest_options":       "EncryptionAtRestOptions",
+		"encryption_mode":                  "EncryptionMode",
 		"end_time":                         "EndTime",
 		"enforce_https":                    "EnforceHTTPS",
 		"engine_mode":                      "EngineMode",
@@ -2038,6 +2085,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AdvancedSecurityOptions/SAMLOptions/MasterUserName",
 		"/properties/AdvancedSecurityOptions/SAMLOptions/MasterBackendRole",
 		"/properties/AdvancedSecurityOptions/JWTOptions/PublicKey",
+		"/properties/AcceptedWarnings",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

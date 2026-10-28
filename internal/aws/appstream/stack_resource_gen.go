@@ -536,6 +536,21 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StorageConnectorAuthentication
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Controls whether stored OneDrive and Google Drive authentication is retained between streaming sessions. Valid values: FORCE_REAUTHENTICATION | REUSE_CREDENTIALS.",
+		//	  "type": "string"
+		//	}
+		"storage_connector_authentication": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Controls whether stored OneDrive and Google Drive authentication is retained between streaming sessions. Valid values: FORCE_REAUTHENTICATION | REUSE_CREDENTIALS.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StorageConnectors
 		// CloudFormation resource type schema:
 		//
@@ -814,45 +829,46 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_endpoints":              "AccessEndpoints",
-		"action":                        "Action",
-		"agent_access_config":           "AgentAccessConfig",
-		"agent_action":                  "AgentAction",
-		"allowed_urls":                  "AllowedUrls",
-		"application_settings":          "ApplicationSettings",
-		"attributes_to_delete":          "AttributesToDelete",
-		"connector_type":                "ConnectorType",
-		"content_redirection":           "ContentRedirection",
-		"delete_storage_connectors":     "DeleteStorageConnectors",
-		"denied_urls":                   "DeniedUrls",
-		"description":                   "Description",
-		"display_name":                  "DisplayName",
-		"domains":                       "Domains",
-		"embed_host_domains":            "EmbedHostDomains",
-		"enabled":                       "Enabled",
-		"endpoint_type":                 "EndpointType",
-		"feedback_url":                  "FeedbackURL",
-		"host_to_client":                "HostToClient",
-		"key":                           "Key",
-		"maximum_length":                "MaximumLength",
-		"name":                          "Name",
-		"permission":                    "Permission",
-		"preferred_protocol":            "PreferredProtocol",
-		"redirect_url":                  "RedirectURL",
-		"resource_identifier":           "ResourceIdentifier",
-		"s3_bucket_arn":                 "S3BucketArn",
-		"screen_image_format":           "ScreenImageFormat",
-		"screen_resolution":             "ScreenResolution",
-		"screenshots_upload_enabled":    "ScreenshotsUploadEnabled",
-		"settings":                      "Settings",
-		"settings_group":                "SettingsGroup",
-		"storage_connectors":            "StorageConnectors",
-		"streaming_experience_settings": "StreamingExperienceSettings",
-		"tags":                          "Tags",
-		"user_control_mode":             "UserControlMode",
-		"user_settings":                 "UserSettings",
-		"value":                         "Value",
-		"vpce_id":                       "VpceId",
+		"access_endpoints":                 "AccessEndpoints",
+		"action":                           "Action",
+		"agent_access_config":              "AgentAccessConfig",
+		"agent_action":                     "AgentAction",
+		"allowed_urls":                     "AllowedUrls",
+		"application_settings":             "ApplicationSettings",
+		"attributes_to_delete":             "AttributesToDelete",
+		"connector_type":                   "ConnectorType",
+		"content_redirection":              "ContentRedirection",
+		"delete_storage_connectors":        "DeleteStorageConnectors",
+		"denied_urls":                      "DeniedUrls",
+		"description":                      "Description",
+		"display_name":                     "DisplayName",
+		"domains":                          "Domains",
+		"embed_host_domains":               "EmbedHostDomains",
+		"enabled":                          "Enabled",
+		"endpoint_type":                    "EndpointType",
+		"feedback_url":                     "FeedbackURL",
+		"host_to_client":                   "HostToClient",
+		"key":                              "Key",
+		"maximum_length":                   "MaximumLength",
+		"name":                             "Name",
+		"permission":                       "Permission",
+		"preferred_protocol":               "PreferredProtocol",
+		"redirect_url":                     "RedirectURL",
+		"resource_identifier":              "ResourceIdentifier",
+		"s3_bucket_arn":                    "S3BucketArn",
+		"screen_image_format":              "ScreenImageFormat",
+		"screen_resolution":                "ScreenResolution",
+		"screenshots_upload_enabled":       "ScreenshotsUploadEnabled",
+		"settings":                         "Settings",
+		"settings_group":                   "SettingsGroup",
+		"storage_connector_authentication": "StorageConnectorAuthentication",
+		"storage_connectors":               "StorageConnectors",
+		"streaming_experience_settings":    "StreamingExperienceSettings",
+		"tags":                             "Tags",
+		"user_control_mode":                "UserControlMode",
+		"user_settings":                    "UserSettings",
+		"value":                            "Value",
+		"vpce_id":                          "VpceId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

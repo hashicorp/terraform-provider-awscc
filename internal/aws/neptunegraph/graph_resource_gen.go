@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -36,6 +37,22 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::NeptuneGraph::Graph resource.
 func graphResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time at which the graph was created.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the graph was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -466,6 +483,20 @@ func graphResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the graph.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the graph.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -608,6 +639,7 @@ func graphResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"blank_node_handling":            "BlankNodeHandling",
+		"create_time":                    "CreateTime",
 		"deletion_protection":            "DeletionProtection",
 		"endpoint":                       "Endpoint",
 		"fail_on_error":                  "FailOnError",
@@ -632,6 +664,7 @@ func graphResource(ctx context.Context) (resource.Resource, error) {
 		"s3_export_kms_key_id":           "S3ExportKmsKeyId",
 		"s3_export_path":                 "S3ExportPath",
 		"source":                         "Source",
+		"status":                         "Status",
 		"tags":                           "Tags",
 		"value":                          "Value",
 		"vector_search_configuration":    "VectorSearchConfiguration",

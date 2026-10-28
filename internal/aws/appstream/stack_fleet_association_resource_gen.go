@@ -35,9 +35,6 @@ func stackFleetAssociationResource(ctx context.Context) (resource.Resource, erro
 		"fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StackName
 		// CloudFormation resource type schema:
@@ -49,9 +46,6 @@ func stackFleetAssociationResource(ctx context.Context) (resource.Resource, erro
 		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -91,9 +85,9 @@ func stackFleetAssociationResource(ctx context.Context) (resource.Resource, erro
 		"stack_name": "StackName",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

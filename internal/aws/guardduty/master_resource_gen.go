@@ -44,11 +44,11 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Value used to validate the master account to the member account.",
+		//	  "description": "Value used to validate the administrator account to the member account.",
 		//	  "type": "string"
 		//	}
 		"invitation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Value used to validate the master account to the member account.",
+			Description: "Value used to validate the administrator account to the member account.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -60,11 +60,11 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ID of the account used as the master account.",
+		//	  "description": "ID of the account used as the administrator account.",
 		//	  "type": "string"
 		//	}
 		"master_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the account used as the master account.",
+			Description: "ID of the account used as the administrator account.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -99,7 +99,7 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 		},
 		identity.Identifier{
 			Name:              "master_id",
-			Description:       "ID of the account used as the master account",
+			Description:       "ID of the account used as the administrator account",
 			RequiredForImport: true,
 		})
 

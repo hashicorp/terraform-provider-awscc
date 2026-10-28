@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -16,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -721,6 +723,49 @@ func deploymentGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Ec2DeploymentOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups during deployments to the deployment group. Applies only to in-place deployment groups on the EC2/On-premises compute platform that include at least one Auto Scaling group.",
+		//	  "properties": {
+		//	    "AutoScalingGroupProcessesToSuspend": {
+		//	      "description": "The Amazon EC2 Auto Scaling processes to suspend during an in-place deployment. CodeDeploy suspends these processes before it deploys to instances in an Auto Scaling group, and resumes them when the deployment succeeds, fails, or is stopped. Valid values are Terminate, AZRebalance, InstanceRefresh, and ScheduledActions. Process names are case sensitive. To stop suspending processes, remove the property.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ec_2_deployment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoScalingGroupProcessesToSuspend
+				"auto_scaling_group_processes_to_suspend": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The Amazon EC2 Auto Scaling processes to suspend during an in-place deployment. CodeDeploy suspends these processes before it deploys to instances in an Auto Scaling group, and resumes them when the deployment succeeds, fails, or is stopped. Valid values are Terminate, AZRebalance, InstanceRefresh, and ScheduledActions. Process names are case sensitive. To stop suspending processes, remove the property.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeAtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups during deployments to the deployment group. Applies only to in-place deployment groups on the EC2/On-premises compute platform that include at least one Auto Scaling group.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Ec2TagFilters
@@ -1555,59 +1600,61 @@ func deploymentGroupResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                              "Action",
-		"action_on_timeout":                   "ActionOnTimeout",
-		"alarm_configuration":                 "AlarmConfiguration",
-		"alarms":                              "Alarms",
-		"application_name":                    "ApplicationName",
-		"auto_rollback_configuration":         "AutoRollbackConfiguration",
-		"auto_scaling_groups":                 "AutoScalingGroups",
-		"blue_green_deployment_configuration": "BlueGreenDeploymentConfiguration",
-		"bucket":                              "Bucket",
-		"bundle_type":                         "BundleType",
-		"cluster_name":                        "ClusterName",
-		"commit_id":                           "CommitId",
-		"deployment":                          "Deployment",
-		"deployment_config_name":              "DeploymentConfigName",
-		"deployment_group_name":               "DeploymentGroupName",
-		"deployment_option":                   "DeploymentOption",
-		"deployment_ready_option":             "DeploymentReadyOption",
-		"deployment_style":                    "DeploymentStyle",
-		"deployment_type":                     "DeploymentType",
-		"description":                         "Description",
-		"e_tag":                               "ETag",
-		"ec_2_tag_filters":                    "Ec2TagFilters",
-		"ec_2_tag_group":                      "Ec2TagGroup",
-		"ec_2_tag_set":                        "Ec2TagSet",
-		"ec_2_tag_set_list":                   "Ec2TagSetList",
-		"ecs_services":                        "ECSServices",
-		"elb_info_list":                       "ElbInfoList",
-		"enabled":                             "Enabled",
-		"events":                              "Events",
-		"git_hub_location":                    "GitHubLocation",
-		"green_fleet_provisioning_option":     "GreenFleetProvisioningOption",
-		"ignore_application_stop_failures":    "IgnoreApplicationStopFailures",
-		"ignore_poll_alarm_failure":           "IgnorePollAlarmFailure",
-		"key":                                 "Key",
-		"listener_arns":                       "ListenerArns",
-		"load_balancer_info":                  "LoadBalancerInfo",
-		"name":                                "Name",
-		"on_premises_instance_tag_filters":    "OnPremisesInstanceTagFilters",
-		"on_premises_tag_group":               "OnPremisesTagGroup",
-		"on_premises_tag_set":                 "OnPremisesTagSet",
-		"on_premises_tag_set_list":            "OnPremisesTagSetList",
-		"outdated_instances_strategy":         "OutdatedInstancesStrategy",
-		"prod_traffic_route":                  "ProdTrafficRoute",
-		"repository":                          "Repository",
-		"revision":                            "Revision",
-		"revision_type":                       "RevisionType",
-		"s3_location":                         "S3Location",
-		"service_name":                        "ServiceName",
-		"service_role_arn":                    "ServiceRoleArn",
-		"tags":                                "Tags",
-		"target_group_info_list":              "TargetGroupInfoList",
-		"target_group_pair_info_list":         "TargetGroupPairInfoList",
-		"target_groups":                       "TargetGroups",
+		"action":                      "Action",
+		"action_on_timeout":           "ActionOnTimeout",
+		"alarm_configuration":         "AlarmConfiguration",
+		"alarms":                      "Alarms",
+		"application_name":            "ApplicationName",
+		"auto_rollback_configuration": "AutoRollbackConfiguration",
+		"auto_scaling_group_processes_to_suspend": "AutoScalingGroupProcessesToSuspend",
+		"auto_scaling_groups":                     "AutoScalingGroups",
+		"blue_green_deployment_configuration":     "BlueGreenDeploymentConfiguration",
+		"bucket":                                  "Bucket",
+		"bundle_type":                             "BundleType",
+		"cluster_name":                            "ClusterName",
+		"commit_id":                               "CommitId",
+		"deployment":                              "Deployment",
+		"deployment_config_name":                  "DeploymentConfigName",
+		"deployment_group_name":                   "DeploymentGroupName",
+		"deployment_option":                       "DeploymentOption",
+		"deployment_ready_option":                 "DeploymentReadyOption",
+		"deployment_style":                        "DeploymentStyle",
+		"deployment_type":                         "DeploymentType",
+		"description":                             "Description",
+		"e_tag":                                   "ETag",
+		"ec_2_deployment_options":                 "Ec2DeploymentOptions",
+		"ec_2_tag_filters":                        "Ec2TagFilters",
+		"ec_2_tag_group":                          "Ec2TagGroup",
+		"ec_2_tag_set":                            "Ec2TagSet",
+		"ec_2_tag_set_list":                       "Ec2TagSetList",
+		"ecs_services":                            "ECSServices",
+		"elb_info_list":                           "ElbInfoList",
+		"enabled":                                 "Enabled",
+		"events":                                  "Events",
+		"git_hub_location":                        "GitHubLocation",
+		"green_fleet_provisioning_option":         "GreenFleetProvisioningOption",
+		"ignore_application_stop_failures":        "IgnoreApplicationStopFailures",
+		"ignore_poll_alarm_failure":               "IgnorePollAlarmFailure",
+		"key":                                     "Key",
+		"listener_arns":                           "ListenerArns",
+		"load_balancer_info":                      "LoadBalancerInfo",
+		"name":                                    "Name",
+		"on_premises_instance_tag_filters":        "OnPremisesInstanceTagFilters",
+		"on_premises_tag_group":                   "OnPremisesTagGroup",
+		"on_premises_tag_set":                     "OnPremisesTagSet",
+		"on_premises_tag_set_list":                "OnPremisesTagSetList",
+		"outdated_instances_strategy":             "OutdatedInstancesStrategy",
+		"prod_traffic_route":                      "ProdTrafficRoute",
+		"repository":                              "Repository",
+		"revision":                                "Revision",
+		"revision_type":                           "RevisionType",
+		"s3_location":                             "S3Location",
+		"service_name":                            "ServiceName",
+		"service_role_arn":                        "ServiceRoleArn",
+		"tags":                                    "Tags",
+		"target_group_info_list":                  "TargetGroupInfoList",
+		"target_group_pair_info_list":             "TargetGroupPairInfoList",
+		"target_groups":                           "TargetGroups",
 		"terminate_blue_instances_on_deployment_success": "TerminateBlueInstancesOnDeploymentSuccess",
 		"termination_hook_enabled":                       "TerminationHookEnabled",
 		"termination_wait_time_in_minutes":               "TerminationWaitTimeInMinutes",
