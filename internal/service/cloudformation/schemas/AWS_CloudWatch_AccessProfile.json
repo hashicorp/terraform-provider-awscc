@@ -1,0 +1,176 @@
+{
+  "typeName": "AWS::CloudWatch::AccessProfile",
+  "description": "Resource type definition for AWS::CloudWatch::AccessProfile",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the access profile.",
+      "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:access-profile/[a-zA-Z0-9_-]{1,64}$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "ProfileId": {
+      "type": "string",
+      "description": "The unique identifier of the access profile.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "SpaceId": {
+      "type": "string",
+      "description": "The unique identifier of the space the access profile belongs to.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the access profile.",
+      "pattern": "^[a-zA-Z0-9 _.:/=+@-]+$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the access profile.",
+      "maxLength": 1024
+    },
+    "ProfileType": {
+      "type": "string",
+      "description": "Whether the access profile is managed by the service or by the customer.",
+      "enum": [
+        "SERVICE_MANAGED",
+        "CUSTOMER_MANAGED"
+      ]
+    },
+    "AssumeStatus": {
+      "type": "string",
+      "description": "Whether the calling principal is authorized to assume the access profile.",
+      "enum": [
+        "ALLOWED",
+        "DENIED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the access profile was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the access profile was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SpaceId",
+    "/properties/ProfileId"
+  ],
+  "required": [
+    "SpaceId",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/ProfileId",
+    "/properties/ProfileType",
+    "/properties/AssumeStatus",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/SpaceId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateAccessProfile",
+        "cloudwatch:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetAccessProfile",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:ListTagsForResource",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:UpdateAccessProfile"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteAccessProfile",
+        "cloudwatch:GetAccessProfile",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListAccessProfiles"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "SpaceId": {
+            "type": "string",
+            "description": "The unique identifier of the space to list access profiles for.",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          }
+        },
+        "required": [
+          "SpaceId"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

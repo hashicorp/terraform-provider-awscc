@@ -15,7 +15,9 @@
   "readOnlyProperties": [
     "/properties/GraphArn",
     "/properties/GraphId",
-    "/properties/Endpoint"
+    "/properties/Endpoint",
+    "/properties/Status",
+    "/properties/CreateTime"
   ],
   "description": "The AWS::NeptuneGraph::Graph resource creates an Amazon NeptuneGraph Graph.",
   "createOnlyProperties": [
@@ -257,9 +259,9 @@
     }
   },
   "properties": {
-    "PublicConnectivity": {
-      "description": "Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.\n\nWhen the Graph is publicly reachable, its Domain Name System (DNS) endpoint resolves to the public IP address from the internet.\n\nWhen the Graph isn't publicly reachable, you need to create a PrivateGraphEndpoint in a given VPC to ensure the DNS name resolves to a private IP address that is reachable from the VPC.\n\n_Default_: If not specified, the default value is false.",
-      "type": "boolean"
+    "Status": {
+      "description": "The current status of the graph.",
+      "type": "string"
     },
     "KmsKeyIdentifier": {
       "minLength": 1,
@@ -275,6 +277,31 @@
       "type": "string",
       "maxLength": 63
     },
+    "ReplicaCount": {
+      "description": "Specifies the number of replicas you want when finished. All replicas will be provisioned in different availability zones.\n\nReplica Count should always be less than or equal to 2.\n\n_Default_: If not specified, the default value is 1.",
+      "type": "integer"
+    },
+    "GraphId": {
+      "description": "The auto-generated id assigned by the service.",
+      "type": "string"
+    },
+    "CreateTime": {
+      "format": "date-time",
+      "description": "The time at which the graph was created.",
+      "type": "string"
+    },
+    "DeletionProtection": {
+      "description": "Value that indicates whether the Graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.\n\n_Default_: If not specified, the default value is true.",
+      "type": "boolean"
+    },
+    "VectorSearchConfiguration": {
+      "description": "Vector Search Configuration",
+      "$ref": "#/definitions/VectorSearchConfiguration"
+    },
+    "PublicConnectivity": {
+      "description": "Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.\n\nWhen the Graph is publicly reachable, its Domain Name System (DNS) endpoint resolves to the public IP address from the internet.\n\nWhen the Graph isn't publicly reachable, you need to create a PrivateGraphEndpoint in a given VPC to ensure the DNS name resolves to a private IP address that is reachable from the VPC.\n\n_Default_: If not specified, the default value is false.",
+      "type": "boolean"
+    },
     "ImportTask": {
       "description": "The details of the import task to use to create the graph. When specified, the graph is created using CreateGraphUsingImportTask and data is imported from the supplied source.",
       "$ref": "#/definitions/ImportTask"
@@ -287,25 +314,9 @@
       "description": "Graph resource ARN",
       "type": "string"
     },
-    "ReplicaCount": {
-      "description": "Specifies the number of replicas you want when finished. All replicas will be provisioned in different availability zones.\n\nReplica Count should always be less than or equal to 2.\n\n_Default_: If not specified, the default value is 1.",
-      "type": "integer"
-    },
-    "GraphId": {
-      "description": "The auto-generated id assigned by the service.",
-      "type": "string"
-    },
     "ProvisionedMemory": {
       "description": "Memory for the Graph.",
       "type": "integer"
-    },
-    "DeletionProtection": {
-      "description": "Value that indicates whether the Graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.\n\n_Default_: If not specified, the default value is true.",
-      "type": "boolean"
-    },
-    "VectorSearchConfiguration": {
-      "description": "Vector Search Configuration",
-      "$ref": "#/definitions/VectorSearchConfiguration"
     },
     "Tags": {
       "maxItems": 50,

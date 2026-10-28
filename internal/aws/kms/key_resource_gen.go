@@ -172,7 +172,10 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ML_DSA_44",
 		//	    "ML_DSA_65",
 		//	    "ML_DSA_87",
-		//	    "ECC_NIST_EDWARDS25519"
+		//	    "ECC_NIST_EDWARDS25519",
+		//	    "ML_KEM_512",
+		//	    "ML_KEM_768",
+		//	    "ML_KEM_1024"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -200,6 +203,9 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 					"ML_DSA_65",
 					"ML_DSA_87",
 					"ECC_NIST_EDWARDS25519",
+					"ML_KEM_512",
+					"ML_KEM_768",
+					"ML_KEM_1024",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -216,7 +222,8 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ENCRYPT_DECRYPT",
 		//	    "SIGN_VERIFY",
 		//	    "GENERATE_VERIFY_MAC",
-		//	    "KEY_AGREEMENT"
+		//	    "KEY_AGREEMENT",
+		//	    "ENCAPSULATE_DECAPSULATE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -231,6 +238,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 					"SIGN_VERIFY",
 					"GENERATE_VERIFY_MAC",
 					"KEY_AGREEMENT",
+					"ENCAPSULATE_DECAPSULATE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

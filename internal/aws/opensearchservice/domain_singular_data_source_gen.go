@@ -83,6 +83,22 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: AcceptedWarnings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Warning codes to accept for this domain configuration update. Accepting a warning lets the update proceed past a validation that would otherwise block it. This property applies only to the current update and is not persisted on the domain. You can find warning codes in the ValidationFailures returned by DescribeDomainChangeProgress or DescribeDryRunProgress.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"accepted_warnings": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Warning codes to accept for this domain configuration update. Accepting a warning lets the update proceed past a validation that would otherwise block it. This property applies only to the current update and is not persisted on the domain. You can find warning codes in the ValidationFailures returned by DescribeDomainChangeProgress or DescribeDryRunProgress.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicies
 		// CloudFormation resource type schema:
 		//
@@ -800,6 +816,14 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Enabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "EncryptionMode": {
+		//	      "description": "The type of encryption at rest applied to the domain's data. Valid values are DISK and NATIVE. DISK is the default and uses volume-level encryption. NATIVE uses engine-native, index-level encryption and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE, it can't be changed back to DISK.",
+		//	      "enum": [
+		//	        "DISK",
+		//	        "NATIVE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "KmsKeyId": {
 		//	      "type": "string"
 		//	    }
@@ -811,6 +835,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionMode
+				"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of encryption at rest applied to the domain's data. Valid values are DISK and NATIVE. DISK is the default and uses volume-level encryption. NATIVE uses engine-native, index-level encryption and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE, it can't be changed back to DISK.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyId
 				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1322,6 +1351,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchService::Domain").WithTerraformTypeName("awscc_opensearchservice_domain")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accepted_warnings":                "AcceptedWarnings",
 		"access_policies":                  "AccessPolicies",
 		"advanced_options":                 "AdvancedOptions",
 		"advanced_security_options":        "AdvancedSecurityOptions",
@@ -1363,6 +1393,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enabled":                          "Enabled",
 		"enabled_api_access":               "EnabledAPIAccess",
 		"encryption_at_rest_options":       "EncryptionAtRestOptions",
+		"encryption_mode":                  "EncryptionMode",
 		"end_time":                         "EndTime",
 		"enforce_https":                    "EnforceHTTPS",
 		"engine_mode":                      "EngineMode",

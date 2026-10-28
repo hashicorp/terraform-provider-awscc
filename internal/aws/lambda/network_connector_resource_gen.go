@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -76,6 +77,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
+		//	        "ElasticIpConfiguration": {},
 		//	        "NetworkProtocol": {
 		//	          "description": "The network protocol for the connector. Specify IPv4 for IPv4-only networking, or DualStack for both IPv4 and IPv6.",
 		//	          "enum": [
@@ -146,6 +148,15 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ElasticIpConfiguration
+						"elastic_ip_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Optional:   true,
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: NetworkProtocol
@@ -258,14 +269,14 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations.",
+		//	  "description": "The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations. If ElasticIpConfiguration Type is ServiceManaged, this role must also have permissions for ec2:AllocateAddress and ec2:AssociateAddress.",
 		//	  "maxLength": 10000,
 		//	  "minLength": 0,
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
 		"operator_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations.",
+			Description: "The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations. If ElasticIpConfiguration Type is ServiceManaged, this role must also have permissions for ec2:AllocateAddress and ec2:AssociateAddress.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -398,6 +409,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                               "Arn",
 		"associated_compute_resource_types": "AssociatedComputeResourceTypes",
 		"configuration":                     "Configuration",
+		"elastic_ip_configuration":          "ElasticIpConfiguration",
 		"key":                               "Key",
 		"latest_version":                    "LatestVersion",
 		"latest_version_arn":                "LatestVersionArn",

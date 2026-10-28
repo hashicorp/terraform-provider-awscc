@@ -21,6 +21,7 @@ Data Source schema for AWS::NeptuneGraph::Graph
 
 ### Read-Only
 
+- `create_time` (String) The time at which the graph was created.
 - `deletion_protection` (Boolean) Value that indicates whether the Graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.
 
 _Default_: If not specified, the default value is true.
@@ -47,6 +48,7 @@ _Default_: If not specified, the default value is false.
 Replica Count should always be less than or equal to 2.
 
 _Default_: If not specified, the default value is 1.
+- `status` (String) The current status of the graph.
 - `tags` (Attributes Set) The tags associated with this graph. (see [below for nested schema](#nestedatt--tags))
 - `vector_search_configuration` (Attributes) Vector Search Configuration (see [below for nested schema](#nestedatt--vector_search_configuration))
 

@@ -85,7 +85,8 @@
     },
     "delete": {
       "permissions": [
-        "organizations:DeleteResourcePolicy"
+        "organizations:DeleteResourcePolicy",
+        "organizations:DescribeResourcePolicy"
       ]
     },
     "list": {

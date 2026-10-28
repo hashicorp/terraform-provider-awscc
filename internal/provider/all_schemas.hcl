@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1738 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1751 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -436,6 +436,12 @@ resource_schema "aws_appconfig_hosted_configuration_version" {
 
 resource_schema "aws_appfabric_app_authorization" {
   cloudformation_type_name               = "AWS::AppFabric::AppAuthorization"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_appfabric_ingestion" {
+  cloudformation_type_name               = "AWS::AppFabric::Ingestion"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
@@ -1559,6 +1565,12 @@ resource_schema "aws_cloudtrail_trail" {
   cloudformation_type_name = "AWS::CloudTrail::Trail"
 }
 
+resource_schema "aws_cloudwatch_access_profile" {
+  cloudformation_type_name               = "AWS::CloudWatch::AccessProfile"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_cloudwatch_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::Alarm"
 }
@@ -1578,6 +1590,18 @@ resource_schema "aws_cloudwatch_composite_alarm" {
 
 resource_schema "aws_cloudwatch_dashboard" {
   cloudformation_type_name = "AWS::CloudWatch::Dashboard"
+}
+
+resource_schema "aws_cloudwatch_domain" {
+  cloudformation_type_name = "AWS::CloudWatch::Domain"
+}
+
+resource_schema "aws_cloudwatch_domain_access_grant_for_organization" {
+  cloudformation_type_name = "AWS::CloudWatch::DomainAccessGrantForOrganization"
+}
+
+resource_schema "aws_cloudwatch_domain_for_organization" {
+  cloudformation_type_name = "AWS::CloudWatch::DomainForOrganization"
 }
 
 resource_schema "aws_cloudwatch_insight_rule" {
@@ -1600,10 +1624,20 @@ resource_schema "aws_cloudwatch_otel_enrichment" {
   cloudformation_type_name = "AWS::CloudWatch::OTelEnrichment"
 }
 
+resource_schema "aws_cloudwatch_omni_dashboard" {
+  cloudformation_type_name               = "AWS::CloudWatch::OmniDashboard"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_cloudwatch_resource_metrics_configuration" {
   cloudformation_type_name               = "AWS::CloudWatch::ResourceMetricsConfiguration"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_cloudwatch_space" {
+  cloudformation_type_name = "AWS::CloudWatch::Space"
 }
 
 resource_schema "aws_cloudwatch_view" {
@@ -1626,6 +1660,14 @@ resource_schema "aws_codeartifact_repository" {
 
 resource_schema "aws_codebuild_fleet" {
   cloudformation_type_name = "AWS::CodeBuild::Fleet"
+}
+
+resource_schema "aws_codebuild_project" {
+  cloudformation_type_name                 = "AWS::CodeBuild::Project"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: Triggers/FilterGroups is of unsupported type: list of array of array"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: Triggers/FilterGroups is of unsupported type: list of array of array"
 }
 
 resource_schema "aws_codebuild_report_group" {
@@ -3059,6 +3101,12 @@ resource_schema "aws_ec2_transit_gateway_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayAttachment"
 }
 
+resource_schema "aws_ec2_transit_gateway_attachment_nat_configuration" {
+  cloudformation_type_name               = "AWS::EC2::TransitGatewayAttachmentNatConfiguration"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_ec2_transit_gateway_connect" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayConnect"
 }
@@ -4401,6 +4449,10 @@ resource_schema "aws_iot_mitigation_action" {
   cloudformation_type_name = "AWS::IoT::MitigationAction"
 }
 
+resource_schema "aws_iot_ota_update" {
+  cloudformation_type_name = "AWS::IoT::OTAUpdate"
+}
+
 resource_schema "aws_iot_policy" {
   cloudformation_type_name = "AWS::IoT::Policy"
 }
@@ -5163,6 +5215,8 @@ resource_schema "aws_lookoutmetrics_anomaly_detector" {
 
 resource_schema "aws_lookoutvision_project" {
   cloudformation_type_name = "AWS::LookoutVision::Project"
+  frozen_reason            = "manual: withdrawn from AWS, pending major-version removal"
+  frozen_since             = "2026-10-28"
 }
 
 resource_schema "aws_m2_application" {
@@ -5193,6 +5247,10 @@ resource_schema "aws_mgn_launch_configuration_template" {
 
 resource_schema "aws_mgn_network_migration_definition" {
   cloudformation_type_name = "AWS::MGN::NetworkMigrationDefinition"
+}
+
+resource_schema "aws_mgn_wave" {
+  cloudformation_type_name = "AWS::MGN::Wave"
 }
 
 resource_schema "aws_mpa_approval_team" {
@@ -5725,6 +5783,12 @@ resource_schema "aws_networkmonitor_monitor" {
   cloudformation_type_name = "AWS::NetworkMonitor::Monitor"
 }
 
+resource_schema "aws_networkmonitor_probe" {
+  cloudformation_type_name               = "AWS::NetworkMonitor::Probe"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_networksecuritymanager_deployment" {
   cloudformation_type_name = "AWS::NetworkSecurityManager::Deployment"
 }
@@ -6160,6 +6224,10 @@ resource_schema "aws_personalize_filter" {
 
 resource_schema "aws_personalize_metric_attribution" {
   cloudformation_type_name = "AWS::Personalize::MetricAttribution"
+}
+
+resource_schema "aws_personalize_recommender" {
+  cloudformation_type_name = "AWS::Personalize::Recommender"
 }
 
 resource_schema "aws_personalize_schema" {
@@ -7657,6 +7725,10 @@ resource_schema "aws_securityagent_pentest" {
   cloudformation_type_name               = "AWS::SecurityAgent::Pentest"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_securityagent_private_connection" {
+  cloudformation_type_name = "AWS::SecurityAgent::PrivateConnection"
 }
 
 resource_schema "aws_securityagent_security_requirement_pack" {

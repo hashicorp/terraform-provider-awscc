@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_domain_for_organization.example "arn"

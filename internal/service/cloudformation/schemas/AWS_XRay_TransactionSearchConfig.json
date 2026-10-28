@@ -8,6 +8,9 @@
     },
     "IndexingPercentage": {
       "$ref": "#/definitions/IndexingPercentage"
+    },
+    "CloudWatchLogsConfiguration": {
+      "$ref": "#/definitions/CloudWatchLogsConfiguration"
     }
   },
   "definitions": {
@@ -21,6 +24,19 @@
       "type": "number",
       "minimum": 0,
       "maximum": 100
+    },
+    "CloudWatchLogsConfiguration": {
+      "description": "Configuration for the CloudWatch Logs log group that X-Ray creates when this resource enables Transaction Search. It is used only at that time and is never returned",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SpansLogGroupKmsKeyId": {
+          "description": "The ARN of a symmetric customer managed AWS KMS key in the same account and Region, used to encrypt the aws/spans log group. Key IDs and alias ARNs are not supported, so for an AWS::KMS::Key use Fn::GetAtt Arn, not Ref. X-Ray applies the key only when it creates aws/spans while enabling Transaction Search. If aws/spans already exists, for example from an earlier enablement or an earlier create that failed partway, the create fails and X-Ray does not enable Transaction Search or change the log group. Remove this property to use the existing log group with its current encryption, and use the CloudWatch Logs AssociateKmsKey API to change its key. The caller needs kms:DescribeKey on the key, and the key policy must allow CloudWatch Logs to use it. Adding, changing or removing this property replaces the resource, which fails while Transaction Search is enabled",
+          "type": "string",
+          "pattern": "^arn:aws[a-z-]*:kms:[a-z0-9-]+:\\d{12}:key/[a-zA-Z0-9-]+$",
+          "maxLength": 256
+        }
+      }
     }
   },
   "tagging": {
@@ -31,6 +47,7 @@
       "permissions": [
         "application-signals:StartDiscovery",
         "iam:CreateServiceLinkedRole",
+        "kms:DescribeKey",
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutRetentionPolicy",
@@ -70,6 +87,12 @@
   "additionalProperties": false,
   "readOnlyProperties": [
     "/properties/AccountId"
+  ],
+  "createOnlyProperties": [
+    "/properties/CloudWatchLogsConfiguration"
+  ],
+  "writeOnlyProperties": [
+    "/properties/CloudWatchLogsConfiguration"
   ],
   "primaryIdentifier": [
     "/properties/AccountId"

@@ -1,0 +1,226 @@
+{
+  "typeName": "AWS::CloudWatch::DomainAccessGrantForOrganization",
+  "description": "Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization-scoped CloudWatch Omni domain.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the organization access grant.",
+      "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:organization-access-grant/(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "GrantId": {
+      "type": "string",
+      "description": "The unique identifier of the grant.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the grant.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The unique identifier of the organization domain the grant applies to.",
+      "pattern": "^d-[0-9a-z]{1,25}$"
+    },
+    "Principal": {
+      "$ref": "#/definitions/OrganizationAccessGrantPrincipal"
+    },
+    "Permission": {
+      "type": "string",
+      "description": "The permission level the grant confers. Organization grants are administrative only.",
+      "enum": [
+        "ADMIN"
+      ]
+    },
+    "GrantType": {
+      "type": "string",
+      "description": "Whether the grant is managed by the service or by the customer.",
+      "enum": [
+        "SERVICE_MANAGED",
+        "CUSTOMER_MANAGED"
+      ]
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "The principal that created the grant."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the grant was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the grant was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "OrganizationAccessGrantPrincipal": {
+      "type": "object",
+      "description": "The principal the grant is issued to. Supply PrincipalId, or PrincipalAttributes for an attribute-based grant.",
+      "properties": {
+        "PrincipalType": {
+          "type": "string",
+          "description": "The type of principal the grant is issued to.",
+          "enum": [
+            "IDC_USER",
+            "IDC_GROUP",
+            "IAM_USER",
+            "IAM_ROLE",
+            "IAM_ROOT"
+          ]
+        },
+        "PrincipalId": {
+          "type": "string",
+          "description": "The identifier of the principal, such as an IAM role ARN or an Identity Center user ID.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:/_+=,.@-]*$",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "PrincipalAttributes": {
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "description": "Attribute key-value pairs that select the principals the grant applies to.",
+          "items": {
+            "$ref": "#/definitions/PrincipalAttribute"
+          },
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "PrincipalType"
+      ],
+      "additionalProperties": false
+    },
+    "PrincipalAttribute": {
+      "type": "object",
+      "description": "An attribute key-value pair used to select principals.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The attribute name.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The attribute value.",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/GrantId"
+    ]
+  ],
+  "required": [
+    "DomainId",
+    "Name",
+    "Principal",
+    "Permission"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/GrantId",
+    "/properties/GrantType",
+    "/properties/CreatedBy",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/Name",
+    "/properties/Principal",
+    "/properties/Permission",
+    "/properties/Tags"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateDomainAccessGrantForOrganization",
+        "cloudwatch:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetDomainAccessGrantForOrganization",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteDomainAccessGrantForOrganization",
+        "cloudwatch:GetDomainAccessGrantForOrganization",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListDomainAccessGrantsForOrganization"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

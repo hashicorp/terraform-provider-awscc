@@ -1,5 +1,51 @@
 ## 1.108.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_appfabric_ingestion`
+* **New Data Source:** `awscc_cloudwatch_access_profile`
+* **New Data Source:** `awscc_cloudwatch_domain`
+* **New Data Source:** `awscc_cloudwatch_domain_access_grant_for_organization`
+* **New Data Source:** `awscc_cloudwatch_domain_access_grant_for_organizations`
+* **New Data Source:** `awscc_cloudwatch_domain_for_organization`
+* **New Data Source:** `awscc_cloudwatch_domain_for_organizations`
+* **New Data Source:** `awscc_cloudwatch_domains`
+* **New Data Source:** `awscc_cloudwatch_omni_dashboard`
+* **New Data Source:** `awscc_cloudwatch_space`
+* **New Data Source:** `awscc_cloudwatch_spaces`
+* **New Data Source:** `awscc_codebuild_projects`
+* **New Data Source:** `awscc_ec2_transit_gateway_attachment_nat_configuration`
+* **New Data Source:** `awscc_iot_ota_update`
+* **New Data Source:** `awscc_iot_ota_updates`
+* **New Data Source:** `awscc_mgn_wave`
+* **New Data Source:** `awscc_mgn_waves`
+* **New Data Source:** `awscc_networkmonitor_probe`
+* **New Data Source:** `awscc_personalize_recommender`
+* **New Data Source:** `awscc_personalize_recommenders`
+* **New Data Source:** `awscc_securityagent_private_connection`
+* **New Data Source:** `awscc_securityagent_private_connections`
+* **New List Resource:** `awscc_cloudwatch_domain`
+* **New List Resource:** `awscc_cloudwatch_domain_access_grant_for_organization`
+* **New List Resource:** `awscc_cloudwatch_domain_for_organization`
+* **New List Resource:** `awscc_cloudwatch_space`
+* **New List Resource:** `awscc_iot_ota_update`
+* **New List Resource:** `awscc_mgn_wave`
+* **New List Resource:** `awscc_personalize_recommender`
+* **New List Resource:** `awscc_securityagent_private_connection`
+* **New Resource:** `awscc_appfabric_ingestion`
+* **New Resource:** `awscc_cloudwatch_access_profile`
+* **New Resource:** `awscc_cloudwatch_domain`
+* **New Resource:** `awscc_cloudwatch_domain_access_grant_for_organization`
+* **New Resource:** `awscc_cloudwatch_domain_for_organization`
+* **New Resource:** `awscc_cloudwatch_omni_dashboard`
+* **New Resource:** `awscc_cloudwatch_space`
+* **New Resource:** `awscc_ec2_transit_gateway_attachment_nat_configuration`
+* **New Resource:** `awscc_iot_ota_update`
+* **New Resource:** `awscc_mgn_wave`
+* **New Resource:** `awscc_networkmonitor_probe`
+* **New Resource:** `awscc_personalize_recommender`
+* **New Resource:** `awscc_securityagent_private_connection`
+
 ## 1.107.0 (October 21, 2026)
 
 NOTES:

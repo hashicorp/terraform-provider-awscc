@@ -99,11 +99,11 @@ func daemonResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "If the ``critical`` parameter of this daemon revision is ``true``, and the daemon task fails, stops, or becomes unhealthy, Amazon ECS drains the container instance and stops the other tasks running on it. If the parameter is ``false``, the daemon task failure doesn't affect the other tasks on the instance, and doesn't block instance registration. The default value is ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "If the ``critical`` parameter of this daemon revision is ``true``, and the daemon task fails, stops, or becomes unhealthy, Amazon ECS drains the container instance and stops the other tasks running on it. If the parameter is ``false``, the daemon task failure doesn't affect the other tasks on the instance, and doesn't block instance registration. The default value is ``true``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/

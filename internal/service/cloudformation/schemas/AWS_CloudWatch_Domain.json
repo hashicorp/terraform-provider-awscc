@@ -1,0 +1,217 @@
+{
+  "typeName": "AWS::CloudWatch::Domain",
+  "description": "The account-level boundary for CloudWatch Omni. A domain configures the\nidentity providers users sign in through and exposes the endpoint URLs used\nto reach CloudWatch Omni. Spaces are created within a domain.",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "A name that identifies the domain.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "IdentityProviders": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "IAM",
+          "IDC"
+        ]
+      },
+      "description": "The identity providers configured for the domain.",
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "IdentityProviderConfiguration": {
+      "$ref": "#/definitions/IdentityProviderConfiguration"
+    },
+    "DomainEndpointUrl": {
+      "type": "string",
+      "description": "The HTTPS endpoint URL for accessing the domain."
+    },
+    "CustomEndpointUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional endpoint URLs derived from the domain name."
+    },
+    "IdentityCenterApplicationArn": {
+      "type": "string",
+      "description": "The ARN of the Identity Center application. Absent for IAM-only domains.",
+      "pattern": "^arn:.+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "Region": {
+      "type": "string",
+      "description": "The Region where this domain was created."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the domain was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the domain was last updated."
+    },
+    "Status": {
+      "type": "string",
+      "description": "Current status of the domain.",
+      "enum": [
+        "ACTIVE"
+      ]
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The unique ID of the domain.",
+      "pattern": "^d-[0-9a-z]{1,25}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the resource.",
+      "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:domain/(?:d-[0-9a-z]{1,25})$"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "IdentityCenterConfiguration": {
+      "type": "object",
+      "properties": {
+        "IdentityCenterInstanceArn": {
+          "type": "string",
+          "description": "Identity Center instance ARN",
+          "pattern": "^arn:aws[a-z-]*:sso:::instance/[a-zA-Z0-9-]+$",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": false,
+      "description": "Identity Center configuration. Required when identityProviders includes IDC."
+    },
+    "IdentityProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "IdentityCenterConfiguration": {
+          "$ref": "#/definitions/IdentityCenterConfiguration"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Identity provider configuration for the domain."
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainId"
+    ]
+  ],
+  "required": [
+    "Name",
+    "IdentityProviders"
+  ],
+  "readOnlyProperties": [
+    "/properties/DomainEndpointUrl",
+    "/properties/CustomEndpointUrls",
+    "/properties/IdentityCenterApplicationArn",
+    "/properties/Region",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status",
+    "/properties/DomainId",
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateDomain",
+        "cloudwatch:TagResource",
+        "sso:CreateApplication",
+        "sso:CreateApplicationAssignment",
+        "sso:DescribeInstance",
+        "sso:ListRegions",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetDomain",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:UpdateDomain"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteDomain",
+        "cloudwatch:GetDomain",
+        "cloudwatch:ListTagsForResource",
+        "sso:DeleteApplication",
+        "sso:DeleteApplicationAssignment"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListDomains"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

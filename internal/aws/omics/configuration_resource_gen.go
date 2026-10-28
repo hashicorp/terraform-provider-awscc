@@ -136,6 +136,13 @@ func configurationResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "maxItems": 16,
 		//	          "type": "array"
+		//	        },
+		//	        "VpcOwnerAccountId": {
+		//	          "description": "The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "pattern": "^[0-9]+$",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -176,6 +183,19 @@ func configurationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VpcOwnerAccountId
+						"vpc_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -286,17 +306,18 @@ func configurationResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"creation_time":      "CreationTime",
-		"description":        "Description",
-		"name":               "Name",
-		"run_configurations": "RunConfigurations",
-		"security_group_ids": "SecurityGroupIds",
-		"status":             "Status",
-		"subnet_ids":         "SubnetIds",
-		"tags":               "Tags",
-		"uuid":               "Uuid",
-		"vpc_config":         "VpcConfig",
+		"arn":                  "Arn",
+		"creation_time":        "CreationTime",
+		"description":          "Description",
+		"name":                 "Name",
+		"run_configurations":   "RunConfigurations",
+		"security_group_ids":   "SecurityGroupIds",
+		"status":               "Status",
+		"subnet_ids":           "SubnetIds",
+		"tags":                 "Tags",
+		"uuid":                 "Uuid",
+		"vpc_config":           "VpcConfig",
+		"vpc_owner_account_id": "VpcOwnerAccountId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

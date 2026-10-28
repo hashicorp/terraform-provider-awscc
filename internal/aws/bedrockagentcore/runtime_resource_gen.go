@@ -2105,7 +2105,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"workload_identity_details":         "WorkloadIdentityDetails",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(60)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

@@ -1,0 +1,182 @@
+{
+  "typeName": "AWS::AppFabric::Ingestion",
+  "description": "Creates a data ingestion for an application using AppFabric.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "Tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the ingestion.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "AppBundleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the app bundle for the ingestion.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "App": {
+      "type": "string",
+      "description": "The name of the application.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "TenantId": {
+      "type": "string",
+      "description": "The ID of the application tenant.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "IngestionType": {
+      "type": "string",
+      "description": "The type of the ingestion.",
+      "enum": [
+        "auditLog"
+      ]
+    },
+    "State": {
+      "type": "string",
+      "description": "The status of the ingestion.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp of when the ingestion was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp of when the ingestion was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A map of the key-value pairs of the tag or tags to assign to the resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AppBundleArn",
+    "App",
+    "TenantId",
+    "IngestionType"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/State",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/AppBundleArn",
+    "/properties/App",
+    "/properties/TenantId",
+    "/properties/IngestionType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AppBundleArn",
+      "/properties/App",
+      "/properties/TenantId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appfabric:TagResource",
+      "appfabric:UntagResource",
+      "appfabric:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appfabric:CreateIngestion",
+        "appfabric:GetIngestion",
+        "appfabric:TagResource",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appfabric:GetIngestion",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appfabric:GetIngestion",
+        "appfabric:TagResource",
+        "appfabric:UntagResource",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appfabric:GetIngestion",
+        "appfabric:DeleteIngestion",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppBundleArn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1011,
+            "pattern": "^arn:.+$"
+          }
+        },
+        "required": [
+          "AppBundleArn"
+        ]
+      },
+      "permissions": [
+        "appfabric:ListIngestions"
+      ]
+    }
+  }
+}

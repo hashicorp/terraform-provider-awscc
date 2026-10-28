@@ -8,6 +8,7 @@ package neptunegraph
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -22,6 +23,19 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::NeptuneGraph::Graph resource.
 func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time at which the graph was created.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the graph was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -310,6 +324,17 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the number of replicas you want when finished. All replicas will be provisioned in different availability zones.\n\nReplica Count should always be less than or equal to 2.\n\n_Default_: If not specified, the default value is 1.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the graph.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -406,6 +431,7 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"blank_node_handling":            "BlankNodeHandling",
+		"create_time":                    "CreateTime",
 		"deletion_protection":            "DeletionProtection",
 		"endpoint":                       "Endpoint",
 		"fail_on_error":                  "FailOnError",
@@ -430,6 +456,7 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_export_kms_key_id":           "S3ExportKmsKeyId",
 		"s3_export_path":                 "S3ExportPath",
 		"source":                         "Source",
+		"status":                         "Status",
 		"tags":                           "Tags",
 		"value":                          "Value",
 		"vector_search_configuration":    "VectorSearchConfiguration",

@@ -322,6 +322,10 @@
         "identifier": ["AppAuthorizationArn"]
     },
     {
+        "resource": "awscc_appfabric_ingestion",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_appfabric_ingestion_destination",
         "identifier": ["Arn"]
     },
@@ -1390,6 +1394,10 @@
         "identifier": ["TrailName"]
     },
     {
+        "resource": "awscc_cloudwatch_access_profile",
+        "identifier": ["SpaceId","ProfileId"]
+    },
+    {
         "resource": "awscc_cloudwatch_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -1413,6 +1421,21 @@
         "resource": "awscc_cloudwatch_dashboard",
         "generateListResource": true,
         "identifier": ["DashboardName"]
+    },
+    {
+        "resource": "awscc_cloudwatch_domain",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_cloudwatch_domain_access_grant_for_organization",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_cloudwatch_domain_for_organization",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_cloudwatch_insight_rule",
@@ -1440,8 +1463,17 @@
         "identifier": ["AccountId"]
     },
     {
+        "resource": "awscc_cloudwatch_omni_dashboard",
+        "identifier": ["SpaceId","DashboardId"]
+    },
+    {
         "resource": "awscc_cloudwatch_resource_metrics_configuration",
         "identifier": ["ResourceArn"]
+    },
+    {
+        "resource": "awscc_cloudwatch_space",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_cloudwatch_view",
@@ -2785,6 +2817,10 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_ec2_transit_gateway_attachment_nat_configuration",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_ec2_transit_gateway_connect",
         "generateListResource": true,
         "identifier": ["TransitGatewayAttachmentId"]
@@ -4123,6 +4159,11 @@
         "identifier": ["ActionName"]
     },
     {
+        "resource": "awscc_iot_ota_update",
+        "generateListResource": true,
+        "identifier": ["OtaUpdateArn"]
+    },
+    {
         "resource": "awscc_iot_policy",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -4902,6 +4943,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_mgn_wave",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_mpa_identity_source",
         "generateListResource": true,
         "identifier": ["IdentitySourceArn"]
@@ -5417,6 +5463,10 @@
         "identifier": ["MonitorArn"]
     },
     {
+        "resource": "awscc_networkmonitor_probe",
+        "identifier": ["MonitorName","ProbeId"]
+    },
+    {
         "resource": "awscc_networksecuritymanager_deployment",
         "generateListResource": true,
         "identifier": ["DeploymentArn"]
@@ -5796,6 +5846,11 @@
         "resource": "awscc_personalize_metric_attribution",
         "generateListResource": true,
         "identifier": ["MetricAttributionArn"]
+    },
+    {
+        "resource": "awscc_personalize_recommender",
+        "generateListResource": true,
+        "identifier": ["RecommenderArn"]
     },
     {
         "resource": "awscc_personalize_schema",
@@ -7316,6 +7371,11 @@
     {
         "resource": "awscc_securityagent_pentest",
         "identifier": ["PentestId","AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_private_connection",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_securityagent_security_requirement_pack",

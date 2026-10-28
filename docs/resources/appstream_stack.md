@@ -29,6 +29,7 @@ Resource Type definition for AWS::AppStream::Stack
 - `feedback_url` (String) The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
 - `name` (String) The name of the stack.
 - `redirect_url` (String) The URL that users are redirected to after their streaming session ends.
+- `storage_connector_authentication` (String) Controls whether stored OneDrive and Google Drive authentication is retained between streaming sessions. Valid values: FORCE_REAUTHENTICATION | REUSE_CREDENTIALS.
 - `storage_connectors` (Attributes List) The storage connectors to enable. (see [below for nested schema](#nestedatt--storage_connectors))
 - `streaming_experience_settings` (Attributes) The streaming protocol that you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client. (see [below for nested schema](#nestedatt--streaming_experience_settings))
 - `tags` (Attributes List) An array of key-value pairs. (see [below for nested schema](#nestedatt--tags))

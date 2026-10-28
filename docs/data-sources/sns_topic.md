@@ -40,7 +40,8 @@ Data Source schema for AWS::SNS::Topic
 - `fifo_topic` (Boolean) Set to true to create a FIFO topic.
 - `kms_master_key_id` (String) The ID of an AWS managed customer master key (CMK) for SNS or a custom CMK. For more information, see [Key terms](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms). For more examples, see ``KeyId`` in the *API Reference*.
  This property applies only to [server-side-encryption](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html).
-- `maximum_message_size` (Number)
+- `maximum_message_size` (Number) The maximum payload size, in bytes, for messages published to the topic. Valid values are ``1024`` to ``1048576`` (1 MiB). When this property is not specified, the topic uses the default SNS message size of ``262144`` bytes (256 KiB).
+ A topic with ``MaximumMessageSize`` above ``262144`` supports a maximum of 100 subscriptions, all of which must use the SQS, AWS Lambda, or Amazon Data Firehose protocols. For more information, see [Publishing large messages with](https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html) in the *Developer Guide*.
 - `signature_version` (String) The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS. By default, ``SignatureVersion`` is set to ``1``.
 - `subscription` (Attributes List) The SNS subscriptions (endpoints) for this topic.
   If you specify the ``Subscription`` property in the ``AWS::SNS::Topic`` resource and it creates an associated subscription resource, the associated subscription is not deleted when the ``AWS::SNS::Topic`` resource is deleted. (see [below for nested schema](#nestedatt--subscription))

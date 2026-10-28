@@ -1,0 +1,1 @@
+$ terraform import awscc_mgn_wave.example "arn"

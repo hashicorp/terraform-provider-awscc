@@ -1,0 +1,1 @@
+$ terraform import awscc_securityagent_private_connection.example "arn"

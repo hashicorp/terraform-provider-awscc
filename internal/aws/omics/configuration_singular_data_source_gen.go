@@ -104,6 +104,13 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "maxItems": 16,
 		//	          "type": "array"
+		//	        },
+		//	        "VpcOwnerAccountId": {
+		//	          "description": "The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "pattern": "^[0-9]+$",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -124,6 +131,11 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 						// Property: SubnetIds
 						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcOwnerAccountId
+						"vpc_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -205,17 +217,18 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Omics::Configuration").WithTerraformTypeName("awscc_omics_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"creation_time":      "CreationTime",
-		"description":        "Description",
-		"name":               "Name",
-		"run_configurations": "RunConfigurations",
-		"security_group_ids": "SecurityGroupIds",
-		"status":             "Status",
-		"subnet_ids":         "SubnetIds",
-		"tags":               "Tags",
-		"uuid":               "Uuid",
-		"vpc_config":         "VpcConfig",
+		"arn":                  "Arn",
+		"creation_time":        "CreationTime",
+		"description":          "Description",
+		"name":                 "Name",
+		"run_configurations":   "RunConfigurations",
+		"security_group_ids":   "SecurityGroupIds",
+		"status":               "Status",
+		"subnet_ids":           "SubnetIds",
+		"tags":                 "Tags",
+		"uuid":                 "Uuid",
+		"vpc_config":           "VpcConfig",
+		"vpc_owner_account_id": "VpcOwnerAccountId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

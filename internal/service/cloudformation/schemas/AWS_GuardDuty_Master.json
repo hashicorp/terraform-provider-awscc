@@ -10,11 +10,11 @@
   },
   "properties": {
     "MasterId": {
-      "description": "ID of the account used as the master account.",
+      "description": "ID of the account used as the administrator account.",
       "type": "string"
     },
     "InvitationId": {
-      "description": "Value used to validate the master account to the member account.",
+      "description": "Value used to validate the administrator account to the member account.",
       "type": "string"
     },
     "DetectorId": {
