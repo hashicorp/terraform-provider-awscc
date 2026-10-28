@@ -126,7 +126,10 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ML_DSA_44",
 		//	    "ML_DSA_65",
 		//	    "ML_DSA_87",
-		//	    "ECC_NIST_EDWARDS25519"
+		//	    "ECC_NIST_EDWARDS25519",
+		//	    "ML_KEM_512",
+		//	    "ML_KEM_768",
+		//	    "ML_KEM_1024"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -144,7 +147,8 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ENCRYPT_DECRYPT",
 		//	    "SIGN_VERIFY",
 		//	    "GENERATE_VERIFY_MAC",
-		//	    "KEY_AGREEMENT"
+		//	    "KEY_AGREEMENT",
+		//	    "ENCAPSULATE_DECAPSULATE"
 		//	  ],
 		//	  "type": "string"
 		//	}

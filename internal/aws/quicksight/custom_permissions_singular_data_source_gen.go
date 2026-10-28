@@ -51,1357 +51,3186 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "properties": {
 		//	    "AccessAppsNativeDataStore": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Action": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "AddOrRunAnomalyDetectionForAnalyses": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AdobeAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "AmazonBedrockARSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "AmazonBedrockFSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "AmazonBedrockKRSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "AmazonSThreeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Analysis": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ApproveFlowShareRequests": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Apps": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "AsanaAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AthenaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AuroraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Automate": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "BambooHRAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "BedrockManagedKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "BoxAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "BoxKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "BuildCalculatedFieldWithQ": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CanvaAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ChatAgent": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ComprehendAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ComprehendMedicalAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ConfluenceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ConfluenceKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAdobeAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateAmazonBedrockARSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateAmazonBedrockFSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateAmazonBedrockKRSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateAmazonSThreeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateApps": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateAsanaAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateBambooHRAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateBedrockManagedKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateBoxAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateBoxKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateCanvaAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateComprehendAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateComprehendMedicalAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateConfluenceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateConfluenceKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateDashboardEmailReports": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateDataSources": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateDatasets": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateFactSetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateGenericHTTPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateGithubAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateGoogleCalendarAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateGoogleDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateHubspotAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateHuggingFaceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateIDCKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateIntercomAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateJiraAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateKnowledgeBases": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateLinearAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateMCPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateMSExchangeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateMSTeamsAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateMondayAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateNewRelicAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateNotionAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateOneDriveAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateOneDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateOpenAPIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdatePagerDutyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateQBusinessKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateS3KnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSAPBillOfMaterialAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSAPBusinessPartnerAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSAPMaterialStockAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSAPPhysicalInventoryAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSAPProductMasterDataAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSalesforceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSandPGMIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSandPGlobalEnergyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateServiceNowAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSharePointAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSharePointKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSlackAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateSmartsheetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateTextractAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateThemes": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateThresholdAlerts": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateWebCrawlerKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateZendeskAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAthenaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAuroraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateChatAgents": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateDashboardExecutiveSummaryWithQ": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDatabricksDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDb2DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDenodoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDocumentDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDremioDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDynamoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateExasolDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateFileDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateGitHubDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateGoogleAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateGoogleBigQueryDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateGoogleSheetsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateImpalaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateJiraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateMariaDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateMongoAtlasDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateMongoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateMySqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateOpenSearchDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateOracleDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreatePayPalDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreatePostgreSqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreatePrestoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateRadiantDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateRdsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateRedshiftAutoDiscoveredDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateRedshiftManualDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateS3AnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateS3DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateS3TablesDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateSPICEDataset": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateSalesforceDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateSapHanaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateServiceNowDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateSharedFolders": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateSnowflakeDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "CreateSpaces": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateSparkDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateSqlServerDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateSquareDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateStarburstDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateTeradataDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateTimestreamDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateTrinoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateTwitterDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Dashboard": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DatabricksDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Db2DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DenodoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DocumentDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DremioDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DynamoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "EditVisualWithQ": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ExasolDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ExportToCsv": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ExportToCsvInScheduledReports": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ExportToExcel": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ExportToExcelInScheduledReports": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ExportToPdf": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ExportToPdfInScheduledReports": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Extension": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "FactSetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "FileDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Flow": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "GenericHTTPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GitHubDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "GithubAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GoogleAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GoogleBigQueryDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "GoogleCalendarAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GoogleDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GoogleSheetsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "HubspotAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "HuggingFaceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "IDCKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ImpalaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "InboundEmailTrigger": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "IncludeContentInScheduledReportsEmail": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "IntercomAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "InvokeAppsAIInference": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "JiraAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "JiraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "KnowledgeBase": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "LinearAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "MCPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "MSExchangeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "MSTeamsAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ManageSharedFolders": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MariaDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "MondayAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MongoAtlasDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MongoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MySqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "NewRelicAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "NotionAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "OneDriveAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OneDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "OpenAPIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OpenSearchDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OracleDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "PagerDutyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PayPalDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "PerformFlowUiTask": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PostgreSqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrestoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "PrintReports": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "PublishWithoutApproval": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "QBusinessKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "QuickEventTrigger": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RadiantDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RdsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RedshiftAutoDiscoveredDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RedshiftManualDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "RenameSharedFolders": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Research": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "S3AnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "S3DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "S3KnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "S3TablesDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SAPBillOfMaterialAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SAPBusinessPartnerAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SAPMaterialStockAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SAPPhysicalInventoryAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SAPProductMasterDataAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SalesforceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SalesforceDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SandPGMIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SandPGlobalEnergyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SapHanaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ScheduleTrigger": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ServiceNowAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ServiceNowDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAdobeAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareAmazonBedrockARSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareAmazonBedrockFSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareAmazonBedrockKRSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareAmazonSThreeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareAnalyses": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareApps": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareAsanaAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAthenaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAuroraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareBambooHRAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareBedrockManagedKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareBoxAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareBoxKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareCanvaAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareChatAgents": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareComprehendAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareComprehendMedicalAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareConfluenceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareConfluenceKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareDashboards": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareDataSources": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareDatabricksDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareDatasets": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareDb2DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareDenodoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareDocumentDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareDremioDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareDynamoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareExasolDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareFactSetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareFileDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareGenericHTTPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGitHubDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareGithubAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGoogleAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGoogleBigQueryDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareGoogleCalendarAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGoogleDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGoogleSheetsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareHubspotAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareHuggingFaceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareIDCKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareImpalaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareIntercomAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareJiraAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareJiraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareKnowledgeBases": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareLinearAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareMCPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareMSExchangeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareMSTeamsAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMariaDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareMondayAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMongoAtlasDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMongoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMySqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareNewRelicAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareNotionAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareOneDriveAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareOneDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareOpenAPIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareOpenSearchDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareOracleDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SharePagerDutyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SharePayPalDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SharePointAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SharePointKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SharePostgreSqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SharePrestoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareQBusinessKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareRadiantDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareRdsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareRedshiftAutoDiscoveredDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareRedshiftManualDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareS3AnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareS3DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareS3KnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareS3TablesDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSAPBillOfMaterialAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSAPBusinessPartnerAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSAPMaterialStockAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSAPPhysicalInventoryAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSAPProductMasterDataAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSalesforceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSalesforceDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSandPGMIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSandPGlobalEnergyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSapHanaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareServiceNowAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareServiceNowDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSharePointAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSharePointKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSlackAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSmartsheetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSnowflakeDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSpaces": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSparkDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSqlServerDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSquareDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareStarburstDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareTeradataDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareTextractAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareTimestreamDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareTrinoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareTwitterDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareWebCrawlerKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ShareZendeskAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SlackAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SmartsheetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SnowflakeDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Space": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SparkDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SqlServerDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SquareDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "StarburstDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SubscribeDashboardEmailReports": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TeradataDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "TextractAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TimestreamDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Topic": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Trigger": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TrinoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TwitterDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateAdobeAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateAthenaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateAuroraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateDatabricksDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateDb2DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateDenodoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateDocumentDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateDremioDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateDynamoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateExasolDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateFileDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateGitHubDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateGoogleAnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateGoogleBigQueryDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateGoogleSheetsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateImpalaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateJiraDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateMariaDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateMongoAtlasDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateMongoDbDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateMySqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateOpenSearchDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateOracleDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdatePayPalDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdatePostgreSqlDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdatePrestoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateRadiantDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateRdsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateRedshiftAutoDiscoveredDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateRedshiftManualDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateS3AnalyticsDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateS3DataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateS3TablesDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateSalesforceDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateSapHanaDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateServiceNowDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateSnowflakeDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateSparkDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateSqlServerDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateSquareDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateStarburstDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateTeradataDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateTimestreamDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateTrinoDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateTwitterDataSource": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseAgentWebSearch": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseAmazonBedrockARSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseAmazonBedrockFSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseAmazonBedrockKRSAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseAmazonSThreeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseAsanaAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseBambooHRAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseBedrockManagedKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseBedrockModels": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseBoxAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseBoxKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseBrowserExtension": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseCanvaAgentAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseComprehendAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseComprehendMedicalAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseConfluenceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseConfluenceKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseExcelAddInExtension": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseFactSetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseGenericHTTPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseGithubAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseGoogleCalendarAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseGoogleDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseHubspotAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseHuggingFaceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseIDCKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseIntercomAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseJiraAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseLinearAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseMCPAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseMSExchangeAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseMSTeamsAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseMondayAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseNewRelicAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseNotionAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseOneDriveAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseOneDriveKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseOpenAPIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseOutlookAddInExtension": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UsePagerDutyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UsePowerpointAddInExtension": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseQBusinessKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseS3KnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSAPBillOfMaterialAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSAPBusinessPartnerAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSAPMaterialStockAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSAPPhysicalInventoryAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSAPProductMasterDataAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSalesforceAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSandPGMIAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSandPGlobalEnergyAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseServiceNowAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSharePointAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSharePointKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSlackAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseSmartsheetAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseTextractAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseWebCrawlerKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseWordAddInExtension": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "UseZendeskAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ViewAccountSPICECapacity": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "WebCrawlerKnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ZendeskAction": {
 		//	      "enum": [
-		//	        "DENY"
+		//	        "DENY",
+		//	        "ALLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -1420,6 +3249,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: AddOrRunAnomalyDetectionForAnalyses
 				"add_or_run_anomaly_detection_for_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AdobeAnalyticsDataSource
+				"adobe_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: AmazonBedrockARSAction
@@ -1454,6 +3287,14 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: AthenaDataSource
+				"athena_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuroraDataSource
+				"aurora_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Automate
 				"automate": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1462,8 +3303,16 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: BedrockManagedKnowledgeBase
+				"bedrock_managed_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: BoxAgentAction
 				"box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: BoxKnowledgeBase
+				"box_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: BuildCalculatedFieldWithQ
@@ -1488,6 +3337,14 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: ConfluenceAction
 				"confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConfluenceKnowledgeBase
+				"confluence_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAdobeAnalyticsDataSource
+				"create_adobe_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateAmazonBedrockARSAction
@@ -1518,8 +3375,16 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_and_update_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateBedrockManagedKnowledgeBase
+				"create_and_update_bedrock_managed_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateBoxAgentAction
 				"create_and_update_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateBoxKnowledgeBase
+				"create_and_update_box_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateCanvaAgentAction
@@ -1536,6 +3401,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateConfluenceAction
 				"create_and_update_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateConfluenceKnowledgeBase
+				"create_and_update_confluence_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateDashboardEmailReports
@@ -1566,12 +3435,20 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_and_update_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateGoogleDriveKnowledgeBase
+				"create_and_update_google_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateHubspotAction
 				"create_and_update_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateHuggingFaceAction
 				"create_and_update_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateIDCKnowledgeBase
+				"create_and_update_idc_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateIntercomAction
@@ -1618,12 +3495,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_and_update_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateOneDriveKnowledgeBase
+				"create_and_update_one_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateOpenAPIAction
 				"create_and_update_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdatePagerDutyAction
 				"create_and_update_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateQBusinessKnowledgeBase
+				"create_and_update_q_business_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateS3KnowledgeBase
+				"create_and_update_s3_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateSAPBillOfMaterialAction
@@ -1666,6 +3555,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_and_update_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSharePointKnowledgeBase
+				"create_and_update_share_point_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateSlackAction
 				"create_and_update_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1686,8 +3579,20 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_and_update_threshold_alerts": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateWebCrawlerKnowledgeBase
+				"create_and_update_web_crawler_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateZendeskAction
 				"create_and_update_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAthenaDataSource
+				"create_athena_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAuroraDataSource
+				"create_aurora_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateChatAgents
@@ -1698,24 +3603,220 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_dashboard_executive_summary_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateDatabricksDataSource
+				"create_databricks_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDb2DataSource
+				"create_db_2_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDenodoDataSource
+				"create_denodo_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDocumentDbDataSource
+				"create_document_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDremioDataSource
+				"create_dremio_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDynamoDbDataSource
+				"create_dynamo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateExasolDataSource
+				"create_exasol_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateFileDataSource
+				"create_file_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateGitHubDataSource
+				"create_git_hub_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateGoogleAnalyticsDataSource
+				"create_google_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateGoogleBigQueryDataSource
+				"create_google_big_query_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateGoogleSheetsDataSource
+				"create_google_sheets_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateImpalaDataSource
+				"create_impala_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateJiraDataSource
+				"create_jira_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateMariaDbDataSource
+				"create_maria_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateMongoAtlasDataSource
+				"create_mongo_atlas_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateMongoDbDataSource
+				"create_mongo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateMySqlDataSource
+				"create_my_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateOpenSearchDataSource
+				"create_open_search_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateOracleDataSource
+				"create_oracle_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreatePayPalDataSource
+				"create_pay_pal_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreatePostgreSqlDataSource
+				"create_postgre_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreatePrestoDataSource
+				"create_presto_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateRadiantDataSource
+				"create_radiant_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateRdsDataSource
+				"create_rds_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateRedshiftAutoDiscoveredDataSource
+				"create_redshift_auto_discovered_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateRedshiftManualDataSource
+				"create_redshift_manual_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateS3AnalyticsDataSource
+				"create_s3_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateS3DataSource
+				"create_s3_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateS3TablesDataSource
+				"create_s3_tables_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateSPICEDataset
 				"create_spice_dataset": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateSalesforceDataSource
+				"create_salesforce_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateSapHanaDataSource
+				"create_sap_hana_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateServiceNowDataSource
+				"create_service_now_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateSharedFolders
 				"create_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateSnowflakeDataSource
+				"create_snowflake_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CreateSpaces
 				"create_spaces": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateSparkDataSource
+				"create_spark_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateSqlServerDataSource
+				"create_sql_server_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateSquareDataSource
+				"create_square_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateStarburstDataSource
+				"create_starburst_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateTeradataDataSource
+				"create_teradata_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateTimestreamDataSource
+				"create_timestream_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateTrinoDataSource
+				"create_trino_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateTwitterDataSource
+				"create_twitter_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Dashboard
 				"dashboard": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: DatabricksDataSource
+				"databricks_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Db2DataSource
+				"db_2_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DenodoDataSource
+				"denodo_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentDbDataSource
+				"document_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DremioDataSource
+				"dremio_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DynamoDbDataSource
+				"dynamo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: EditVisualWithQ
 				"edit_visual_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExasolDataSource
+				"exasol_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ExportToCsv
@@ -1750,6 +3851,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: FileDataSource
+				"file_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Flow
 				"flow": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1758,12 +3863,32 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: GitHubDataSource
+				"git_hub_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: GithubAction
 				"github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: GoogleAnalyticsDataSource
+				"google_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: GoogleBigQueryDataSource
+				"google_big_query_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: GoogleCalendarAction
 				"google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: GoogleDriveKnowledgeBase
+				"google_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: GoogleSheetsDataSource
+				"google_sheets_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: HubspotAction
@@ -1772,6 +3897,18 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: HuggingFaceAction
 				"hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IDCKnowledgeBase
+				"idc_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImpalaDataSource
+				"impala_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InboundEmailTrigger
+				"inbound_email_trigger": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeContentInScheduledReportsEmail
@@ -1788,6 +3925,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: JiraAction
 				"jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: JiraDataSource
+				"jira_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: KnowledgeBase
@@ -1814,8 +3955,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"manage_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: MariaDbDataSource
+				"maria_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: MondayAction
 				"monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MongoAtlasDataSource
+				"mongo_atlas_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MongoDbDataSource
+				"mongo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MySqlDataSource
+				"my_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: NewRelicAction
@@ -1830,16 +3987,40 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: OneDriveKnowledgeBase
+				"one_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: OpenAPIAction
 				"open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OpenSearchDataSource
+				"open_search_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OracleDataSource
+				"oracle_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: PagerDutyAction
 				"pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: PayPalDataSource
+				"pay_pal_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: PerformFlowUiTask
 				"perform_flow_ui_task": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostgreSqlDataSource
+				"postgre_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrestoDataSource
+				"presto_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: PrintReports
@@ -1850,12 +4031,52 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"publish_without_approval": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: QBusinessKnowledgeBase
+				"q_business_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: QuickEventTrigger
+				"quick_event_trigger": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RadiantDataSource
+				"radiant_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RdsDataSource
+				"rds_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftAutoDiscoveredDataSource
+				"redshift_auto_discovered_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftManualDataSource
+				"redshift_manual_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: RenameSharedFolders
 				"rename_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Research
 				"research": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3AnalyticsDataSource
+				"s3_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3DataSource
+				"s3_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3KnowledgeBase
+				"s3_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3TablesDataSource
+				"s3_tables_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SAPBillOfMaterialAction
@@ -1882,6 +4103,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SalesforceDataSource
+				"salesforce_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SandPGMIAction
 				"sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1890,8 +4115,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SapHanaDataSource
+				"sap_hana_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduleTrigger
+				"schedule_trigger": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ServiceNowAction
 				"service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNowDataSource
+				"service_now_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAdobeAnalyticsDataSource
+				"share_adobe_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareAmazonBedrockARSAction
@@ -1922,12 +4163,28 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareAthenaDataSource
+				"share_athena_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAuroraDataSource
+				"share_aurora_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareBambooHRAction
 				"share_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareBedrockManagedKnowledgeBase
+				"share_bedrock_managed_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareBoxAgentAction
 				"share_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareBoxKnowledgeBase
+				"share_box_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareCanvaAgentAction
@@ -1950,6 +4207,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareConfluenceKnowledgeBase
+				"share_confluence_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareDashboards
 				"share_dashboards": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1958,24 +4219,76 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_data_sources": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareDatabricksDataSource
+				"share_databricks_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareDatasets
 				"share_datasets": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDb2DataSource
+				"share_db_2_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDenodoDataSource
+				"share_denodo_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDocumentDbDataSource
+				"share_document_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDremioDataSource
+				"share_dremio_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDynamoDbDataSource
+				"share_dynamo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareExasolDataSource
+				"share_exasol_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareFactSetAction
 				"share_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareFileDataSource
+				"share_file_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareGenericHTTPAction
 				"share_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGitHubDataSource
+				"share_git_hub_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareGithubAction
 				"share_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareGoogleAnalyticsDataSource
+				"share_google_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGoogleBigQueryDataSource
+				"share_google_big_query_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareGoogleCalendarAction
 				"share_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGoogleDriveKnowledgeBase
+				"share_google_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGoogleSheetsDataSource
+				"share_google_sheets_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareHubspotAction
@@ -1986,12 +4299,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareIDCKnowledgeBase
+				"share_idc_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareImpalaDataSource
+				"share_impala_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareIntercomAction
 				"share_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareJiraAction
 				"share_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareJiraDataSource
+				"share_jira_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareKnowledgeBases
@@ -2014,8 +4339,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareMariaDbDataSource
+				"share_maria_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareMondayAction
 				"share_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMongoAtlasDataSource
+				"share_mongo_atlas_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMongoDbDataSource
+				"share_mongo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMySqlDataSource
+				"share_my_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareNewRelicAction
@@ -2030,16 +4371,80 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareOneDriveKnowledgeBase
+				"share_one_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareOpenAPIAction
 				"share_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareOpenSearchDataSource
+				"share_open_search_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareOracleDataSource
+				"share_oracle_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SharePagerDutyAction
 				"share_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SharePayPalDataSource
+				"share_pay_pal_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SharePointAction
 				"share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SharePointKnowledgeBase
+				"share_point_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SharePostgreSqlDataSource
+				"share_postgre_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SharePrestoDataSource
+				"share_presto_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareQBusinessKnowledgeBase
+				"share_q_business_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareRadiantDataSource
+				"share_radiant_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareRdsDataSource
+				"share_rds_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareRedshiftAutoDiscoveredDataSource
+				"share_redshift_auto_discovered_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareRedshiftManualDataSource
+				"share_redshift_manual_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareS3AnalyticsDataSource
+				"share_s3_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareS3DataSource
+				"share_s3_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareS3KnowledgeBase
+				"share_s3_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareS3TablesDataSource
+				"share_s3_tables_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareSAPBillOfMaterialAction
@@ -2066,6 +4471,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareSalesforceDataSource
+				"share_salesforce_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareSandPGMIAction
 				"share_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -2074,12 +4483,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareSapHanaDataSource
+				"share_sap_hana_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareServiceNowAction
 				"share_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareServiceNowDataSource
+				"share_service_now_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareSharePointAction
 				"share_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSharePointKnowledgeBase
+				"share_share_point_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareSlackAction
@@ -2090,12 +4511,52 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareSnowflakeDataSource
+				"share_snowflake_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareSpaces
 				"share_spaces": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareSparkDataSource
+				"share_spark_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSqlServerDataSource
+				"share_sql_server_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSquareDataSource
+				"share_square_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareStarburstDataSource
+				"share_starburst_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareTeradataDataSource
+				"share_teradata_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareTextractAction
 				"share_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareTimestreamDataSource
+				"share_timestream_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareTrinoDataSource
+				"share_trino_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareTwitterDataSource
+				"share_twitter_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareWebCrawlerKnowledgeBase
+				"share_web_crawler_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareZendeskAction
@@ -2110,20 +4571,240 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SnowflakeDataSource
+				"snowflake_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Space
 				"space": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SparkDataSource
+				"spark_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SqlServerDataSource
+				"sql_server_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SquareDataSource
+				"square_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StarburstDataSource
+				"starburst_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SubscribeDashboardEmailReports
 				"subscribe_dashboard_email_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: TeradataDataSource
+				"teradata_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: TextractAction
 				"textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: TimestreamDataSource
+				"timestream_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Topic
 				"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Trigger
+				"trigger": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrinoDataSource
+				"trino_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TwitterDataSource
+				"twitter_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateAdobeAnalyticsDataSource
+				"update_adobe_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateAthenaDataSource
+				"update_athena_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateAuroraDataSource
+				"update_aurora_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDatabricksDataSource
+				"update_databricks_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDb2DataSource
+				"update_db_2_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDenodoDataSource
+				"update_denodo_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDocumentDbDataSource
+				"update_document_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDremioDataSource
+				"update_dremio_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDynamoDbDataSource
+				"update_dynamo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateExasolDataSource
+				"update_exasol_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateFileDataSource
+				"update_file_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateGitHubDataSource
+				"update_git_hub_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateGoogleAnalyticsDataSource
+				"update_google_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateGoogleBigQueryDataSource
+				"update_google_big_query_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateGoogleSheetsDataSource
+				"update_google_sheets_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateImpalaDataSource
+				"update_impala_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateJiraDataSource
+				"update_jira_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateMariaDbDataSource
+				"update_maria_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateMongoAtlasDataSource
+				"update_mongo_atlas_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateMongoDbDataSource
+				"update_mongo_db_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateMySqlDataSource
+				"update_my_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateOpenSearchDataSource
+				"update_open_search_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateOracleDataSource
+				"update_oracle_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdatePayPalDataSource
+				"update_pay_pal_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdatePostgreSqlDataSource
+				"update_postgre_sql_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdatePrestoDataSource
+				"update_presto_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateRadiantDataSource
+				"update_radiant_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateRdsDataSource
+				"update_rds_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateRedshiftAutoDiscoveredDataSource
+				"update_redshift_auto_discovered_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateRedshiftManualDataSource
+				"update_redshift_manual_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateS3AnalyticsDataSource
+				"update_s3_analytics_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateS3DataSource
+				"update_s3_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateS3TablesDataSource
+				"update_s3_tables_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateSalesforceDataSource
+				"update_salesforce_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateSapHanaDataSource
+				"update_sap_hana_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateServiceNowDataSource
+				"update_service_now_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateSnowflakeDataSource
+				"update_snowflake_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateSparkDataSource
+				"update_spark_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateSqlServerDataSource
+				"update_sql_server_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateSquareDataSource
+				"update_square_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateStarburstDataSource
+				"update_starburst_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateTeradataDataSource
+				"update_teradata_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateTimestreamDataSource
+				"update_timestream_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateTrinoDataSource
+				"update_trino_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateTwitterDataSource
+				"update_twitter_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UseAgentWebSearch
@@ -2154,12 +4835,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"use_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseBedrockManagedKnowledgeBase
+				"use_bedrock_managed_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UseBedrockModels
 				"use_bedrock_models": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UseBoxAgentAction
 				"use_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseBoxKnowledgeBase
+				"use_box_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseBrowserExtension
+				"use_browser_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UseCanvaAgentAction
@@ -2178,6 +4871,14 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"use_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseConfluenceKnowledgeBase
+				"use_confluence_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseExcelAddInExtension
+				"use_excel_add_in_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UseFactSetAction
 				"use_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -2194,12 +4895,20 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"use_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseGoogleDriveKnowledgeBase
+				"use_google_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UseHubspotAction
 				"use_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UseHuggingFaceAction
 				"use_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseIDCKnowledgeBase
+				"use_idc_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UseIntercomAction
@@ -2242,12 +4951,32 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"use_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseOneDriveKnowledgeBase
+				"use_one_drive_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UseOpenAPIAction
 				"use_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseOutlookAddInExtension
+				"use_outlook_add_in_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UsePagerDutyAction
 				"use_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UsePowerpointAddInExtension
+				"use_powerpoint_add_in_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseQBusinessKnowledgeBase
+				"use_q_business_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseS3KnowledgeBase
+				"use_s3_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UseSAPBillOfMaterialAction
@@ -2290,6 +5019,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"use_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseSharePointKnowledgeBase
+				"use_share_point_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UseSlackAction
 				"use_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -2302,12 +5035,24 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"use_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: UseWebCrawlerKnowledgeBase
+				"use_web_crawler_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseWordAddInExtension
+				"use_word_add_in_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: UseZendeskAction
 				"use_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ViewAccountSPICECapacity
 				"view_account_spice_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WebCrawlerKnowledgeBase
+				"web_crawler_knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ZendeskAction
@@ -2396,27 +5141,34 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_apps_native_data_store": "AccessAppsNativeDataStore",
 		"action":                        "Action",
-		"add_or_run_anomaly_detection_for_analyses": "AddOrRunAnomalyDetectionForAnalyses",
-		"amazon_bedrock_ars_action":                 "AmazonBedrockARSAction",
-		"amazon_bedrock_fs_action":                  "AmazonBedrockFSAction",
-		"amazon_bedrock_krs_action":                 "AmazonBedrockKRSAction",
-		"amazon_s_three_action":                     "AmazonSThreeAction",
-		"analysis":                                  "Analysis",
-		"approve_flow_share_requests":               "ApproveFlowShareRequests",
-		"apps":                                      "Apps",
-		"arn":                                       "Arn",
-		"asana_action":                              "AsanaAction",
-		"automate":                                  "Automate",
-		"aws_account_id":                            "AwsAccountId",
-		"bamboo_hr_action":                          "BambooHRAction",
-		"box_agent_action":                          "BoxAgentAction",
-		"build_calculated_field_with_q":             "BuildCalculatedFieldWithQ",
-		"canva_agent_action":                        "CanvaAgentAction",
-		"capabilities":                              "Capabilities",
-		"chat_agent":                                "ChatAgent",
-		"comprehend_action":                         "ComprehendAction",
-		"comprehend_medical_action":                 "ComprehendMedicalAction",
-		"confluence_action":                         "ConfluenceAction",
+		"add_or_run_anomaly_detection_for_analyses":        "AddOrRunAnomalyDetectionForAnalyses",
+		"adobe_analytics_data_source":                      "AdobeAnalyticsDataSource",
+		"amazon_bedrock_ars_action":                        "AmazonBedrockARSAction",
+		"amazon_bedrock_fs_action":                         "AmazonBedrockFSAction",
+		"amazon_bedrock_krs_action":                        "AmazonBedrockKRSAction",
+		"amazon_s_three_action":                            "AmazonSThreeAction",
+		"analysis":                                         "Analysis",
+		"approve_flow_share_requests":                      "ApproveFlowShareRequests",
+		"apps":                                             "Apps",
+		"arn":                                              "Arn",
+		"asana_action":                                     "AsanaAction",
+		"athena_data_source":                               "AthenaDataSource",
+		"aurora_data_source":                               "AuroraDataSource",
+		"automate":                                         "Automate",
+		"aws_account_id":                                   "AwsAccountId",
+		"bamboo_hr_action":                                 "BambooHRAction",
+		"bedrock_managed_knowledge_base":                   "BedrockManagedKnowledgeBase",
+		"box_agent_action":                                 "BoxAgentAction",
+		"box_knowledge_base":                               "BoxKnowledgeBase",
+		"build_calculated_field_with_q":                    "BuildCalculatedFieldWithQ",
+		"canva_agent_action":                               "CanvaAgentAction",
+		"capabilities":                                     "Capabilities",
+		"chat_agent":                                       "ChatAgent",
+		"comprehend_action":                                "ComprehendAction",
+		"comprehend_medical_action":                        "ComprehendMedicalAction",
+		"confluence_action":                                "ConfluenceAction",
+		"confluence_knowledge_base":                        "ConfluenceKnowledgeBase",
+		"create_adobe_analytics_data_source":               "CreateAdobeAnalyticsDataSource",
 		"create_and_update_amazon_bedrock_ars_action":      "CreateAndUpdateAmazonBedrockARSAction",
 		"create_and_update_amazon_bedrock_fs_action":       "CreateAndUpdateAmazonBedrockFSAction",
 		"create_and_update_amazon_bedrock_krs_action":      "CreateAndUpdateAmazonBedrockKRSAction",
@@ -2424,11 +5176,14 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"create_and_update_apps":                           "CreateAndUpdateApps",
 		"create_and_update_asana_action":                   "CreateAndUpdateAsanaAction",
 		"create_and_update_bamboo_hr_action":               "CreateAndUpdateBambooHRAction",
+		"create_and_update_bedrock_managed_knowledge_base": "CreateAndUpdateBedrockManagedKnowledgeBase",
 		"create_and_update_box_agent_action":               "CreateAndUpdateBoxAgentAction",
+		"create_and_update_box_knowledge_base":             "CreateAndUpdateBoxKnowledgeBase",
 		"create_and_update_canva_agent_action":             "CreateAndUpdateCanvaAgentAction",
 		"create_and_update_comprehend_action":              "CreateAndUpdateComprehendAction",
 		"create_and_update_comprehend_medical_action":      "CreateAndUpdateComprehendMedicalAction",
 		"create_and_update_confluence_action":              "CreateAndUpdateConfluenceAction",
+		"create_and_update_confluence_knowledge_base":      "CreateAndUpdateConfluenceKnowledgeBase",
 		"create_and_update_dashboard_email_reports":        "CreateAndUpdateDashboardEmailReports",
 		"create_and_update_data_sources":                   "CreateAndUpdateDataSources",
 		"create_and_update_datasets":                       "CreateAndUpdateDatasets",
@@ -2436,8 +5191,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"create_and_update_generic_http_action":            "CreateAndUpdateGenericHTTPAction",
 		"create_and_update_github_action":                  "CreateAndUpdateGithubAction",
 		"create_and_update_google_calendar_action":         "CreateAndUpdateGoogleCalendarAction",
+		"create_and_update_google_drive_knowledge_base":    "CreateAndUpdateGoogleDriveKnowledgeBase",
 		"create_and_update_hubspot_action":                 "CreateAndUpdateHubspotAction",
 		"create_and_update_hugging_face_action":            "CreateAndUpdateHuggingFaceAction",
+		"create_and_update_idc_knowledge_base":             "CreateAndUpdateIDCKnowledgeBase",
 		"create_and_update_intercom_action":                "CreateAndUpdateIntercomAction",
 		"create_and_update_jira_action":                    "CreateAndUpdateJiraAction",
 		"create_and_update_knowledge_bases":                "CreateAndUpdateKnowledgeBases",
@@ -2449,8 +5206,11 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"create_and_update_new_relic_action":               "CreateAndUpdateNewRelicAction",
 		"create_and_update_notion_action":                  "CreateAndUpdateNotionAction",
 		"create_and_update_one_drive_action":               "CreateAndUpdateOneDriveAction",
+		"create_and_update_one_drive_knowledge_base":       "CreateAndUpdateOneDriveKnowledgeBase",
 		"create_and_update_open_api_action":                "CreateAndUpdateOpenAPIAction",
 		"create_and_update_pager_duty_action":              "CreateAndUpdatePagerDutyAction",
+		"create_and_update_q_business_knowledge_base":      "CreateAndUpdateQBusinessKnowledgeBase",
+		"create_and_update_s3_knowledge_base":              "CreateAndUpdateS3KnowledgeBase",
 		"create_and_update_salesforce_action":              "CreateAndUpdateSalesforceAction",
 		"create_and_update_sand_p_global_energy_action":    "CreateAndUpdateSandPGlobalEnergyAction",
 		"create_and_update_sand_pgmi_action":               "CreateAndUpdateSandPGMIAction",
@@ -2461,20 +5221,73 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"create_and_update_sap_product_master_data_action": "CreateAndUpdateSAPProductMasterDataAction",
 		"create_and_update_service_now_action":             "CreateAndUpdateServiceNowAction",
 		"create_and_update_share_point_action":             "CreateAndUpdateSharePointAction",
+		"create_and_update_share_point_knowledge_base":     "CreateAndUpdateSharePointKnowledgeBase",
 		"create_and_update_slack_action":                   "CreateAndUpdateSlackAction",
 		"create_and_update_smartsheet_action":              "CreateAndUpdateSmartsheetAction",
 		"create_and_update_textract_action":                "CreateAndUpdateTextractAction",
 		"create_and_update_themes":                         "CreateAndUpdateThemes",
 		"create_and_update_threshold_alerts":               "CreateAndUpdateThresholdAlerts",
+		"create_and_update_web_crawler_knowledge_base":     "CreateAndUpdateWebCrawlerKnowledgeBase",
 		"create_and_update_zendesk_action":                 "CreateAndUpdateZendeskAction",
+		"create_athena_data_source":                        "CreateAthenaDataSource",
+		"create_aurora_data_source":                        "CreateAuroraDataSource",
 		"create_chat_agents":                               "CreateChatAgents",
 		"create_dashboard_executive_summary_with_q":        "CreateDashboardExecutiveSummaryWithQ",
+		"create_databricks_data_source":                    "CreateDatabricksDataSource",
+		"create_db_2_data_source":                          "CreateDb2DataSource",
+		"create_denodo_data_source":                        "CreateDenodoDataSource",
+		"create_document_db_data_source":                   "CreateDocumentDbDataSource",
+		"create_dremio_data_source":                        "CreateDremioDataSource",
+		"create_dynamo_db_data_source":                     "CreateDynamoDbDataSource",
+		"create_exasol_data_source":                        "CreateExasolDataSource",
+		"create_file_data_source":                          "CreateFileDataSource",
+		"create_git_hub_data_source":                       "CreateGitHubDataSource",
+		"create_google_analytics_data_source":              "CreateGoogleAnalyticsDataSource",
+		"create_google_big_query_data_source":              "CreateGoogleBigQueryDataSource",
+		"create_google_sheets_data_source":                 "CreateGoogleSheetsDataSource",
+		"create_impala_data_source":                        "CreateImpalaDataSource",
+		"create_jira_data_source":                          "CreateJiraDataSource",
+		"create_maria_db_data_source":                      "CreateMariaDbDataSource",
+		"create_mongo_atlas_data_source":                   "CreateMongoAtlasDataSource",
+		"create_mongo_db_data_source":                      "CreateMongoDbDataSource",
+		"create_my_sql_data_source":                        "CreateMySqlDataSource",
+		"create_open_search_data_source":                   "CreateOpenSearchDataSource",
+		"create_oracle_data_source":                        "CreateOracleDataSource",
+		"create_pay_pal_data_source":                       "CreatePayPalDataSource",
+		"create_postgre_sql_data_source":                   "CreatePostgreSqlDataSource",
+		"create_presto_data_source":                        "CreatePrestoDataSource",
+		"create_radiant_data_source":                       "CreateRadiantDataSource",
+		"create_rds_data_source":                           "CreateRdsDataSource",
+		"create_redshift_auto_discovered_data_source":      "CreateRedshiftAutoDiscoveredDataSource",
+		"create_redshift_manual_data_source":               "CreateRedshiftManualDataSource",
+		"create_s3_analytics_data_source":                  "CreateS3AnalyticsDataSource",
+		"create_s3_data_source":                            "CreateS3DataSource",
+		"create_s3_tables_data_source":                     "CreateS3TablesDataSource",
+		"create_salesforce_data_source":                    "CreateSalesforceDataSource",
+		"create_sap_hana_data_source":                      "CreateSapHanaDataSource",
+		"create_service_now_data_source":                   "CreateServiceNowDataSource",
 		"create_shared_folders":                            "CreateSharedFolders",
+		"create_snowflake_data_source":                     "CreateSnowflakeDataSource",
 		"create_spaces":                                    "CreateSpaces",
+		"create_spark_data_source":                         "CreateSparkDataSource",
 		"create_spice_dataset":                             "CreateSPICEDataset",
+		"create_sql_server_data_source":                    "CreateSqlServerDataSource",
+		"create_square_data_source":                        "CreateSquareDataSource",
+		"create_starburst_data_source":                     "CreateStarburstDataSource",
+		"create_teradata_data_source":                      "CreateTeradataDataSource",
+		"create_timestream_data_source":                    "CreateTimestreamDataSource",
+		"create_trino_data_source":                         "CreateTrinoDataSource",
+		"create_twitter_data_source":                       "CreateTwitterDataSource",
 		"custom_permissions_name":                          "CustomPermissionsName",
 		"dashboard":                                        "Dashboard",
+		"databricks_data_source":                           "DatabricksDataSource",
+		"db_2_data_source":                                 "Db2DataSource",
+		"denodo_data_source":                               "DenodoDataSource",
+		"document_db_data_source":                          "DocumentDbDataSource",
+		"dremio_data_source":                               "DremioDataSource",
+		"dynamo_db_data_source":                            "DynamoDbDataSource",
 		"edit_visual_with_q":                               "EditVisualWithQ",
+		"exasol_data_source":                               "ExasolDataSource",
 		"export_to_csv":                                    "ExportToCsv",
 		"export_to_csv_in_scheduled_reports":               "ExportToCsvInScheduledReports",
 		"export_to_excel":                                  "ExportToExcel",
@@ -2483,43 +5296,78 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"export_to_pdf_in_scheduled_reports":               "ExportToPdfInScheduledReports",
 		"extension":                                        "Extension",
 		"fact_set_action":                                  "FactSetAction",
+		"file_data_source":                                 "FileDataSource",
 		"flow":                                             "Flow",
 		"generic_http_action":                              "GenericHTTPAction",
+		"git_hub_data_source":                              "GitHubDataSource",
 		"github_action":                                    "GithubAction",
+		"google_analytics_data_source":                     "GoogleAnalyticsDataSource",
+		"google_big_query_data_source":                     "GoogleBigQueryDataSource",
 		"google_calendar_action":                           "GoogleCalendarAction",
+		"google_drive_knowledge_base":                      "GoogleDriveKnowledgeBase",
+		"google_sheets_data_source":                        "GoogleSheetsDataSource",
 		"hubspot_action":                                   "HubspotAction",
 		"hugging_face_action":                              "HuggingFaceAction",
+		"idc_knowledge_base":                               "IDCKnowledgeBase",
+		"impala_data_source":                               "ImpalaDataSource",
+		"inbound_email_trigger":                            "InboundEmailTrigger",
 		"include_content_in_scheduled_reports_email":       "IncludeContentInScheduledReportsEmail",
 		"intercom_action":                                  "IntercomAction",
 		"invoke_apps_ai_inference":                         "InvokeAppsAIInference",
 		"jira_action":                                      "JiraAction",
+		"jira_data_source":                                 "JiraDataSource",
 		"key":                                              "Key",
 		"knowledge_base":                                   "KnowledgeBase",
 		"linear_action":                                    "LinearAction",
 		"manage_shared_folders":                            "ManageSharedFolders",
+		"maria_db_data_source":                             "MariaDbDataSource",
 		"mcp_action":                                       "MCPAction",
 		"monday_action":                                    "MondayAction",
+		"mongo_atlas_data_source":                          "MongoAtlasDataSource",
+		"mongo_db_data_source":                             "MongoDbDataSource",
 		"ms_exchange_action":                               "MSExchangeAction",
 		"ms_teams_action":                                  "MSTeamsAction",
+		"my_sql_data_source":                               "MySqlDataSource",
 		"new_relic_action":                                 "NewRelicAction",
 		"notion_action":                                    "NotionAction",
 		"one_drive_action":                                 "OneDriveAction",
+		"one_drive_knowledge_base":                         "OneDriveKnowledgeBase",
 		"open_api_action":                                  "OpenAPIAction",
+		"open_search_data_source":                          "OpenSearchDataSource",
+		"oracle_data_source":                               "OracleDataSource",
 		"pager_duty_action":                                "PagerDutyAction",
+		"pay_pal_data_source":                              "PayPalDataSource",
 		"perform_flow_ui_task":                             "PerformFlowUiTask",
+		"postgre_sql_data_source":                          "PostgreSqlDataSource",
+		"presto_data_source":                               "PrestoDataSource",
 		"print_reports":                                    "PrintReports",
 		"publish_without_approval":                         "PublishWithoutApproval",
+		"q_business_knowledge_base":                        "QBusinessKnowledgeBase",
+		"quick_event_trigger":                              "QuickEventTrigger",
+		"radiant_data_source":                              "RadiantDataSource",
+		"rds_data_source":                                  "RdsDataSource",
+		"redshift_auto_discovered_data_source":             "RedshiftAutoDiscoveredDataSource",
+		"redshift_manual_data_source":                      "RedshiftManualDataSource",
 		"rename_shared_folders":                            "RenameSharedFolders",
 		"research":                                         "Research",
+		"s3_analytics_data_source":                         "S3AnalyticsDataSource",
+		"s3_data_source":                                   "S3DataSource",
+		"s3_knowledge_base":                                "S3KnowledgeBase",
+		"s3_tables_data_source":                            "S3TablesDataSource",
 		"salesforce_action":                                "SalesforceAction",
+		"salesforce_data_source":                           "SalesforceDataSource",
 		"sand_p_global_energy_action":                      "SandPGlobalEnergyAction",
 		"sand_pgmi_action":                                 "SandPGMIAction",
 		"sap_bill_of_material_action":                      "SAPBillOfMaterialAction",
 		"sap_business_partner_action":                      "SAPBusinessPartnerAction",
+		"sap_hana_data_source":                             "SapHanaDataSource",
 		"sap_material_stock_action":                        "SAPMaterialStockAction",
 		"sap_physical_inventory_action":                    "SAPPhysicalInventoryAction",
 		"sap_product_master_data_action":                   "SAPProductMasterDataAction",
+		"schedule_trigger":                                 "ScheduleTrigger",
 		"service_now_action":                               "ServiceNowAction",
+		"service_now_data_source":                          "ServiceNowDataSource",
+		"share_adobe_analytics_data_source":                "ShareAdobeAnalyticsDataSource",
 		"share_amazon_bedrock_ars_action":                  "ShareAmazonBedrockARSAction",
 		"share_amazon_bedrock_fs_action":                   "ShareAmazonBedrockFSAction",
 		"share_amazon_bedrock_krs_action":                  "ShareAmazonBedrockKRSAction",
@@ -2527,58 +5375,168 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"share_analyses":                                   "ShareAnalyses",
 		"share_apps":                                       "ShareApps",
 		"share_asana_action":                               "ShareAsanaAction",
+		"share_athena_data_source":                         "ShareAthenaDataSource",
+		"share_aurora_data_source":                         "ShareAuroraDataSource",
 		"share_bamboo_hr_action":                           "ShareBambooHRAction",
+		"share_bedrock_managed_knowledge_base":             "ShareBedrockManagedKnowledgeBase",
 		"share_box_agent_action":                           "ShareBoxAgentAction",
+		"share_box_knowledge_base":                         "ShareBoxKnowledgeBase",
 		"share_canva_agent_action":                         "ShareCanvaAgentAction",
 		"share_chat_agents":                                "ShareChatAgents",
 		"share_comprehend_action":                          "ShareComprehendAction",
 		"share_comprehend_medical_action":                  "ShareComprehendMedicalAction",
 		"share_confluence_action":                          "ShareConfluenceAction",
+		"share_confluence_knowledge_base":                  "ShareConfluenceKnowledgeBase",
 		"share_dashboards":                                 "ShareDashboards",
 		"share_data_sources":                               "ShareDataSources",
+		"share_databricks_data_source":                     "ShareDatabricksDataSource",
 		"share_datasets":                                   "ShareDatasets",
+		"share_db_2_data_source":                           "ShareDb2DataSource",
+		"share_denodo_data_source":                         "ShareDenodoDataSource",
+		"share_document_db_data_source":                    "ShareDocumentDbDataSource",
+		"share_dremio_data_source":                         "ShareDremioDataSource",
+		"share_dynamo_db_data_source":                      "ShareDynamoDbDataSource",
+		"share_exasol_data_source":                         "ShareExasolDataSource",
 		"share_fact_set_action":                            "ShareFactSetAction",
+		"share_file_data_source":                           "ShareFileDataSource",
 		"share_generic_http_action":                        "ShareGenericHTTPAction",
+		"share_git_hub_data_source":                        "ShareGitHubDataSource",
 		"share_github_action":                              "ShareGithubAction",
+		"share_google_analytics_data_source":               "ShareGoogleAnalyticsDataSource",
+		"share_google_big_query_data_source":               "ShareGoogleBigQueryDataSource",
 		"share_google_calendar_action":                     "ShareGoogleCalendarAction",
+		"share_google_drive_knowledge_base":                "ShareGoogleDriveKnowledgeBase",
+		"share_google_sheets_data_source":                  "ShareGoogleSheetsDataSource",
 		"share_hubspot_action":                             "ShareHubspotAction",
 		"share_hugging_face_action":                        "ShareHuggingFaceAction",
+		"share_idc_knowledge_base":                         "ShareIDCKnowledgeBase",
+		"share_impala_data_source":                         "ShareImpalaDataSource",
 		"share_intercom_action":                            "ShareIntercomAction",
 		"share_jira_action":                                "ShareJiraAction",
+		"share_jira_data_source":                           "ShareJiraDataSource",
 		"share_knowledge_bases":                            "ShareKnowledgeBases",
 		"share_linear_action":                              "ShareLinearAction",
+		"share_maria_db_data_source":                       "ShareMariaDbDataSource",
 		"share_mcp_action":                                 "ShareMCPAction",
 		"share_monday_action":                              "ShareMondayAction",
+		"share_mongo_atlas_data_source":                    "ShareMongoAtlasDataSource",
+		"share_mongo_db_data_source":                       "ShareMongoDbDataSource",
 		"share_ms_exchange_action":                         "ShareMSExchangeAction",
 		"share_ms_teams_action":                            "ShareMSTeamsAction",
+		"share_my_sql_data_source":                         "ShareMySqlDataSource",
 		"share_new_relic_action":                           "ShareNewRelicAction",
 		"share_notion_action":                              "ShareNotionAction",
 		"share_one_drive_action":                           "ShareOneDriveAction",
+		"share_one_drive_knowledge_base":                   "ShareOneDriveKnowledgeBase",
 		"share_open_api_action":                            "ShareOpenAPIAction",
+		"share_open_search_data_source":                    "ShareOpenSearchDataSource",
+		"share_oracle_data_source":                         "ShareOracleDataSource",
 		"share_pager_duty_action":                          "SharePagerDutyAction",
+		"share_pay_pal_data_source":                        "SharePayPalDataSource",
 		"share_point_action":                               "SharePointAction",
+		"share_point_knowledge_base":                       "SharePointKnowledgeBase",
+		"share_postgre_sql_data_source":                    "SharePostgreSqlDataSource",
+		"share_presto_data_source":                         "SharePrestoDataSource",
+		"share_q_business_knowledge_base":                  "ShareQBusinessKnowledgeBase",
+		"share_radiant_data_source":                        "ShareRadiantDataSource",
+		"share_rds_data_source":                            "ShareRdsDataSource",
+		"share_redshift_auto_discovered_data_source":       "ShareRedshiftAutoDiscoveredDataSource",
+		"share_redshift_manual_data_source":                "ShareRedshiftManualDataSource",
+		"share_s3_analytics_data_source":                   "ShareS3AnalyticsDataSource",
+		"share_s3_data_source":                             "ShareS3DataSource",
+		"share_s3_knowledge_base":                          "ShareS3KnowledgeBase",
+		"share_s3_tables_data_source":                      "ShareS3TablesDataSource",
 		"share_salesforce_action":                          "ShareSalesforceAction",
+		"share_salesforce_data_source":                     "ShareSalesforceDataSource",
 		"share_sand_p_global_energy_action":                "ShareSandPGlobalEnergyAction",
 		"share_sand_pgmi_action":                           "ShareSandPGMIAction",
 		"share_sap_bill_of_material_action":                "ShareSAPBillOfMaterialAction",
 		"share_sap_business_partner_action":                "ShareSAPBusinessPartnerAction",
+		"share_sap_hana_data_source":                       "ShareSapHanaDataSource",
 		"share_sap_material_stock_action":                  "ShareSAPMaterialStockAction",
 		"share_sap_physical_inventory_action":              "ShareSAPPhysicalInventoryAction",
 		"share_sap_product_master_data_action":             "ShareSAPProductMasterDataAction",
 		"share_service_now_action":                         "ShareServiceNowAction",
+		"share_service_now_data_source":                    "ShareServiceNowDataSource",
 		"share_share_point_action":                         "ShareSharePointAction",
+		"share_share_point_knowledge_base":                 "ShareSharePointKnowledgeBase",
 		"share_slack_action":                               "ShareSlackAction",
 		"share_smartsheet_action":                          "ShareSmartsheetAction",
+		"share_snowflake_data_source":                      "ShareSnowflakeDataSource",
 		"share_spaces":                                     "ShareSpaces",
+		"share_spark_data_source":                          "ShareSparkDataSource",
+		"share_sql_server_data_source":                     "ShareSqlServerDataSource",
+		"share_square_data_source":                         "ShareSquareDataSource",
+		"share_starburst_data_source":                      "ShareStarburstDataSource",
+		"share_teradata_data_source":                       "ShareTeradataDataSource",
 		"share_textract_action":                            "ShareTextractAction",
+		"share_timestream_data_source":                     "ShareTimestreamDataSource",
+		"share_trino_data_source":                          "ShareTrinoDataSource",
+		"share_twitter_data_source":                        "ShareTwitterDataSource",
+		"share_web_crawler_knowledge_base":                 "ShareWebCrawlerKnowledgeBase",
 		"share_zendesk_action":                             "ShareZendeskAction",
 		"slack_action":                                     "SlackAction",
 		"smartsheet_action":                                "SmartsheetAction",
+		"snowflake_data_source":                            "SnowflakeDataSource",
 		"space":                                            "Space",
+		"spark_data_source":                                "SparkDataSource",
+		"sql_server_data_source":                           "SqlServerDataSource",
+		"square_data_source":                               "SquareDataSource",
+		"starburst_data_source":                            "StarburstDataSource",
 		"subscribe_dashboard_email_reports":                "SubscribeDashboardEmailReports",
 		"tags":                                             "Tags",
+		"teradata_data_source":                             "TeradataDataSource",
 		"textract_action":                                  "TextractAction",
+		"timestream_data_source":                           "TimestreamDataSource",
 		"topic":                                            "Topic",
+		"trigger":                                          "Trigger",
+		"trino_data_source":                                "TrinoDataSource",
+		"twitter_data_source":                              "TwitterDataSource",
+		"update_adobe_analytics_data_source":               "UpdateAdobeAnalyticsDataSource",
+		"update_athena_data_source":                        "UpdateAthenaDataSource",
+		"update_aurora_data_source":                        "UpdateAuroraDataSource",
+		"update_databricks_data_source":                    "UpdateDatabricksDataSource",
+		"update_db_2_data_source":                          "UpdateDb2DataSource",
+		"update_denodo_data_source":                        "UpdateDenodoDataSource",
+		"update_document_db_data_source":                   "UpdateDocumentDbDataSource",
+		"update_dremio_data_source":                        "UpdateDremioDataSource",
+		"update_dynamo_db_data_source":                     "UpdateDynamoDbDataSource",
+		"update_exasol_data_source":                        "UpdateExasolDataSource",
+		"update_file_data_source":                          "UpdateFileDataSource",
+		"update_git_hub_data_source":                       "UpdateGitHubDataSource",
+		"update_google_analytics_data_source":              "UpdateGoogleAnalyticsDataSource",
+		"update_google_big_query_data_source":              "UpdateGoogleBigQueryDataSource",
+		"update_google_sheets_data_source":                 "UpdateGoogleSheetsDataSource",
+		"update_impala_data_source":                        "UpdateImpalaDataSource",
+		"update_jira_data_source":                          "UpdateJiraDataSource",
+		"update_maria_db_data_source":                      "UpdateMariaDbDataSource",
+		"update_mongo_atlas_data_source":                   "UpdateMongoAtlasDataSource",
+		"update_mongo_db_data_source":                      "UpdateMongoDbDataSource",
+		"update_my_sql_data_source":                        "UpdateMySqlDataSource",
+		"update_open_search_data_source":                   "UpdateOpenSearchDataSource",
+		"update_oracle_data_source":                        "UpdateOracleDataSource",
+		"update_pay_pal_data_source":                       "UpdatePayPalDataSource",
+		"update_postgre_sql_data_source":                   "UpdatePostgreSqlDataSource",
+		"update_presto_data_source":                        "UpdatePrestoDataSource",
+		"update_radiant_data_source":                       "UpdateRadiantDataSource",
+		"update_rds_data_source":                           "UpdateRdsDataSource",
+		"update_redshift_auto_discovered_data_source":      "UpdateRedshiftAutoDiscoveredDataSource",
+		"update_redshift_manual_data_source":               "UpdateRedshiftManualDataSource",
+		"update_s3_analytics_data_source":                  "UpdateS3AnalyticsDataSource",
+		"update_s3_data_source":                            "UpdateS3DataSource",
+		"update_s3_tables_data_source":                     "UpdateS3TablesDataSource",
+		"update_salesforce_data_source":                    "UpdateSalesforceDataSource",
+		"update_sap_hana_data_source":                      "UpdateSapHanaDataSource",
+		"update_service_now_data_source":                   "UpdateServiceNowDataSource",
+		"update_snowflake_data_source":                     "UpdateSnowflakeDataSource",
+		"update_spark_data_source":                         "UpdateSparkDataSource",
+		"update_sql_server_data_source":                    "UpdateSqlServerDataSource",
+		"update_square_data_source":                        "UpdateSquareDataSource",
+		"update_starburst_data_source":                     "UpdateStarburstDataSource",
+		"update_teradata_data_source":                      "UpdateTeradataDataSource",
+		"update_timestream_data_source":                    "UpdateTimestreamDataSource",
+		"update_trino_data_source":                         "UpdateTrinoDataSource",
+		"update_twitter_data_source":                       "UpdateTwitterDataSource",
 		"use_agent_web_search":                             "UseAgentWebSearch",
 		"use_amazon_bedrock_ars_action":                    "UseAmazonBedrockARSAction",
 		"use_amazon_bedrock_fs_action":                     "UseAmazonBedrockFSAction",
@@ -2586,18 +5544,25 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"use_amazon_s_three_action":                        "UseAmazonSThreeAction",
 		"use_asana_action":                                 "UseAsanaAction",
 		"use_bamboo_hr_action":                             "UseBambooHRAction",
+		"use_bedrock_managed_knowledge_base":               "UseBedrockManagedKnowledgeBase",
 		"use_bedrock_models":                               "UseBedrockModels",
 		"use_box_agent_action":                             "UseBoxAgentAction",
+		"use_box_knowledge_base":                           "UseBoxKnowledgeBase",
+		"use_browser_extension":                            "UseBrowserExtension",
 		"use_canva_agent_action":                           "UseCanvaAgentAction",
 		"use_comprehend_action":                            "UseComprehendAction",
 		"use_comprehend_medical_action":                    "UseComprehendMedicalAction",
 		"use_confluence_action":                            "UseConfluenceAction",
+		"use_confluence_knowledge_base":                    "UseConfluenceKnowledgeBase",
+		"use_excel_add_in_extension":                       "UseExcelAddInExtension",
 		"use_fact_set_action":                              "UseFactSetAction",
 		"use_generic_http_action":                          "UseGenericHTTPAction",
 		"use_github_action":                                "UseGithubAction",
 		"use_google_calendar_action":                       "UseGoogleCalendarAction",
+		"use_google_drive_knowledge_base":                  "UseGoogleDriveKnowledgeBase",
 		"use_hubspot_action":                               "UseHubspotAction",
 		"use_hugging_face_action":                          "UseHuggingFaceAction",
+		"use_idc_knowledge_base":                           "UseIDCKnowledgeBase",
 		"use_intercom_action":                              "UseIntercomAction",
 		"use_jira_action":                                  "UseJiraAction",
 		"use_linear_action":                                "UseLinearAction",
@@ -2608,8 +5573,13 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"use_new_relic_action":                             "UseNewRelicAction",
 		"use_notion_action":                                "UseNotionAction",
 		"use_one_drive_action":                             "UseOneDriveAction",
+		"use_one_drive_knowledge_base":                     "UseOneDriveKnowledgeBase",
 		"use_open_api_action":                              "UseOpenAPIAction",
+		"use_outlook_add_in_extension":                     "UseOutlookAddInExtension",
 		"use_pager_duty_action":                            "UsePagerDutyAction",
+		"use_powerpoint_add_in_extension":                  "UsePowerpointAddInExtension",
+		"use_q_business_knowledge_base":                    "UseQBusinessKnowledgeBase",
+		"use_s3_knowledge_base":                            "UseS3KnowledgeBase",
 		"use_salesforce_action":                            "UseSalesforceAction",
 		"use_sand_p_global_energy_action":                  "UseSandPGlobalEnergyAction",
 		"use_sand_pgmi_action":                             "UseSandPGMIAction",
@@ -2620,12 +5590,16 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"use_sap_product_master_data_action":               "UseSAPProductMasterDataAction",
 		"use_service_now_action":                           "UseServiceNowAction",
 		"use_share_point_action":                           "UseSharePointAction",
+		"use_share_point_knowledge_base":                   "UseSharePointKnowledgeBase",
 		"use_slack_action":                                 "UseSlackAction",
 		"use_smartsheet_action":                            "UseSmartsheetAction",
 		"use_textract_action":                              "UseTextractAction",
+		"use_web_crawler_knowledge_base":                   "UseWebCrawlerKnowledgeBase",
+		"use_word_add_in_extension":                        "UseWordAddInExtension",
 		"use_zendesk_action":                               "UseZendeskAction",
 		"value":                                            "Value",
 		"view_account_spice_capacity":                      "ViewAccountSPICECapacity",
+		"web_crawler_knowledge_base":                       "WebCrawlerKnowledgeBase",
 		"zendesk_action":                                   "ZendeskAction",
 	})
 

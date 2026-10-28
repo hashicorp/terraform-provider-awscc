@@ -56,7 +56,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "description": "The region containing the VPC to protect.",
 		//	  "maxLength": 255,
-		//	  "pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$",
+		//	  "pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|mx|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$",
 		//	  "type": "string"
 		//	}
 		"origin_region": schema.StringAttribute{ /*START ATTRIBUTE*/

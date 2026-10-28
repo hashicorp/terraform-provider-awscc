@@ -37,22 +37,22 @@ func masterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Value used to validate the master account to the member account.",
+		//	  "description": "Value used to validate the administrator account to the member account.",
 		//	  "type": "string"
 		//	}
 		"invitation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Value used to validate the master account to the member account.",
+			Description: "Value used to validate the administrator account to the member account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MasterId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ID of the account used as the master account.",
+		//	  "description": "ID of the account used as the administrator account.",
 		//	  "type": "string"
 		//	}
 		"master_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the account used as the master account.",
+			Description: "ID of the account used as the administrator account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
