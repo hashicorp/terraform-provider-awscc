@@ -1,4 +1,4 @@
-## 1.108.0 (Unreleased)
+## 1.108.0 (October 28, 2026)
 
 FEATURES:
 
