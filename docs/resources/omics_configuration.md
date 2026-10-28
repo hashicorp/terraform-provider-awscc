@@ -47,6 +47,7 @@ Optional:
 
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
+- `vpc_owner_account_id` (String) The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.
 
 ## Import
 

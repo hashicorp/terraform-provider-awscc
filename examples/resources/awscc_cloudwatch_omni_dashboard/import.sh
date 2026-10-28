@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_omni_dashboard.example "space_id|dashboard_id"

@@ -30,6 +30,7 @@ Data Source schema for AWS::CodeDeploy::DeploymentGroup
 - `deployment_config_name` (String) A deployment configuration name or a predefined configuration name. With predefined configurations, you can deploy application revisions to one instance at a time (CodeDeployDefault.OneAtATime), half of the instances at a time (CodeDeployDefault.HalfAtATime), or all the instances at once (CodeDeployDefault.AllAtOnce).
 - `deployment_group_name` (String) A name for the deployment group. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment group name.
 - `deployment_style` (Attributes) Attributes that determine the type of deployment to run and whether to route deployment traffic behind a load balancer. If you specify this property with a blue/green deployment type, don't specify the AutoScalingGroups, LoadBalancerInfo, or Deployment properties. (see [below for nested schema](#nestedatt--deployment_style))
+- `ec_2_deployment_options` (Attributes) Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups during deployments to the deployment group. Applies only to in-place deployment groups on the EC2/On-premises compute platform that include at least one Auto Scaling group. (see [below for nested schema](#nestedatt--ec_2_deployment_options))
 - `ec_2_tag_filters` (Attributes List) The Amazon EC2 tags that are already applied to Amazon EC2 instances that you want to include in the deployment group. CodeDeploy includes all Amazon EC2 instances identified by any of the tags you specify in this deployment group. Duplicates are not allowed. You can specify EC2TagFilters or Ec2TagSet, but not both. (see [below for nested schema](#nestedatt--ec_2_tag_filters))
 - `ec_2_tag_set` (Attributes) Information about groups of tags applied to Amazon EC2 instances. Use when the deployment group includes only Amazon EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilter. (see [below for nested schema](#nestedatt--ec_2_tag_set))
 - `ecs_services` (Attributes List) The target Amazon ECS services in the deployment group. This applies only to deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name pair using the format <clustername>:<servicename>. (see [below for nested schema](#nestedatt--ecs_services))
@@ -153,6 +154,14 @@ Read-Only:
 
 - `deployment_option` (String) Indicates whether to route deployment traffic behind a load balancer.
 - `deployment_type` (String) Indicates whether to run an in-place or blue/green deployment.
+
+
+<a id="nestedatt--ec_2_deployment_options"></a>
+### Nested Schema for `ec_2_deployment_options`
+
+Read-Only:
+
+- `auto_scaling_group_processes_to_suspend` (Set of String) The Amazon EC2 Auto Scaling processes to suspend during an in-place deployment. CodeDeploy suspends these processes before it deploys to instances in an Auto Scaling group, and resumes them when the deployment succeeds, fails, or is stopped. Valid values are Terminate, AZRebalance, InstanceRefresh, and ScheduledActions. Process names are case sensitive. To stop suspending processes, remove the property.
 
 
 <a id="nestedatt--ec_2_tag_filters"></a>

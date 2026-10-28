@@ -17,6 +17,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Optional
 
+- `accepted_warnings` (List of String) Warning codes to accept for this domain configuration update. Accepting a warning lets the update proceed past a validation that would otherwise block it. This property applies only to the current update and is not persisted on the domain. You can find warning codes in the ValidationFailures returned by DescribeDomainChangeProgress or DescribeDryRunProgress.
 - `access_policies` (String)
 - `advanced_options` (Map of String)
 - `advanced_security_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options))
@@ -265,6 +266,7 @@ Optional:
 Optional:
 
 - `enabled` (Boolean)
+- `encryption_mode` (String) The type of encryption at rest applied to the domain's data. Valid values are DISK and NATIVE. DISK is the default and uses volume-level encryption. NATIVE uses engine-native, index-level encryption and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE, it can't be changed back to DISK.
 - `kms_key_id` (String)
 
 

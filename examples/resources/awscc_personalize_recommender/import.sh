@@ -1,0 +1,1 @@
+$ terraform import awscc_personalize_recommender.example "recommender_arn"

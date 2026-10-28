@@ -22,5 +22,5 @@ Data Source schema for AWS::GuardDuty::Master
 ### Read-Only
 
 - `detector_id` (String) Unique ID of the detector of the GuardDuty member account.
-- `invitation_id` (String) Value used to validate the master account to the member account.
-- `master_id` (String) ID of the account used as the master account.
+- `invitation_id` (String) Value used to validate the administrator account to the member account.
+- `master_id` (String) ID of the account used as the administrator account.

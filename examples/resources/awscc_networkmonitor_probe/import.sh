@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmonitor_probe.example "monitor_name|probe_id"

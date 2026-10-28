@@ -80,10 +80,12 @@ _Default_: If not specified, the default value is 1.
 
 ### Read-Only
 
+- `create_time` (String) The time at which the graph was created.
 - `endpoint` (String) The connection endpoint for the graph. For example: `g-12a3bcdef4.us-east-1.neptune-graph.amazonaws.com`
 - `graph_arn` (String) Graph resource ARN
 - `graph_id` (String) The auto-generated id assigned by the service.
 - `id` (String) Uniquely identifies the resource.
+- `status` (String) The current status of the graph.
 
 <a id="nestedatt--import_task"></a>
 ### Nested Schema for `import_task`

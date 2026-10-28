@@ -22,7 +22,7 @@ Resource Type definition for AWS::Lambda::NetworkConnector
 ### Optional
 
 - `name` (String) A unique name for the network connector within your account and Region. Must be 1 to 64 alphanumeric characters, hyphens, or underscores.
-- `operator_role` (String) The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations.
+- `operator_role` (String) The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations. If ElasticIpConfiguration Type is ServiceManaged, this role must also have permissions for ec2:AllocateAddress and ec2:AssociateAddress.
 - `tags` (Attributes Set) A list of tags to apply to the network connector. Use tags to categorize network connectors for cost allocation, access control, or operational management. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -49,6 +49,10 @@ Required:
 - `network_protocol` (String) The network protocol for the connector. Specify IPv4 for IPv4-only networking, or DualStack for both IPv4 and IPv6.
 - `security_group_ids` (List of String) The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.
 - `subnet_ids` (List of String) The IDs of the VPC subnets where Lambda provisions elastic network interfaces (ENIs). Specify 1 to 16 subnets. All subnets must be in the same VPC.
+
+Optional:
+
+- `elastic_ip_configuration` (String)
 
 
 

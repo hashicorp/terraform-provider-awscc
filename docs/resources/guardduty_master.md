@@ -39,11 +39,11 @@ resource "awscc_guardduty_master" "example" {
 ### Required
 
 - `detector_id` (String) Unique ID of the detector of the GuardDuty member account.
-- `master_id` (String) ID of the account used as the master account.
+- `master_id` (String) ID of the account used as the administrator account.
 
 ### Optional
 
-- `invitation_id` (String) Value used to validate the master account to the member account.
+- `invitation_id` (String) Value used to validate the administrator account to the member account.
 
 ### Read-Only
 
@@ -71,7 +71,7 @@ import {
 #### Required
 
 - `detector_id` (String) Unique ID of the detector of the GuardDuty member account
-- `master_id` (String) ID of the account used as the master account
+- `master_id` (String) ID of the account used as the administrator account
 
 #### Optional
 
