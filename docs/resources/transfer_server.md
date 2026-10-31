@@ -47,6 +47,7 @@ data "aws_iam_policy_document" "transfer_logging" {
       "logs:PutLogEvents"
     ]
     resources = [
+      aws_cloudwatch_log_group.transfer.arn,
       "${aws_cloudwatch_log_group.transfer.arn}:*"
     ]
   }
