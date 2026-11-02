@@ -16,6 +16,7 @@ import (
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
 	tfmaps "github.com/hashicorp/terraform-provider-awscc/internal/maps"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/schemaoverrides"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tools/bigdiffer/naming"
 )
 
@@ -993,7 +994,12 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	}
 
 	// Handle any default value.
-	if f, defaultValue, planModifier, err := attributeDefaultValue(path, property); err != nil {
+	typeName := ""
+	if e.CfResource.TypeName != nil {
+		typeName = *e.CfResource.TypeName
+	}
+	preserveDefaultOmission := schemaoverrides.PreserveDefaultOmission(typeName, path)
+	if f, defaultValue, planModifier, err := attributeDefaultValue(path, property, preserveDefaultOmission); err != nil {
 		return features, err
 	} else {
 		features = features.LogicalOr(f)
@@ -1265,7 +1271,7 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 }
 
 // attributeDefaultValue returns any default value for the specified Property.
-func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, string, error) {
+func attributeDefaultValue(path []string, property *cfschema.Property, preserveOmission bool) (Features, string, string, error) {
 	var features Features
 
 	switch property.Default.(type) {
@@ -1317,6 +1323,9 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
 			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), "", nil
 		case string:
+			if preserveOmission {
+				return features, "", fmt.Sprintf("generic.StringDefaultValue(%q)", v), nil
+			}
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
 			return features, fmt.Sprintf("stringdefault.StaticString(%q)", v), "", nil
 		default:

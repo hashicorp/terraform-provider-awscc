@@ -55,3 +55,27 @@ func TestGenerateResourceSmoke(t *testing.T) {
 		t.Errorf("generated acceptance test missing package declaration")
 	}
 }
+
+func TestGenerateResourcePreservesOmittedScalarDefault(t *testing.T) {
+	t.Parallel()
+
+	schema := repoPath(t, "internal", "service", "cloudformation", "schemas", "AWS_BedrockAgentCore_Gateway.json")
+	if _, err := os.Stat(schema); err != nil {
+		t.Skipf("committed schema not found (%v)", err)
+	}
+	services := repoPath(t, "internal", "identity", "names", "services.hcl")
+
+	ui := &cli.BasicUi{Writer: os.Stdout, ErrorWriter: os.Stderr}
+	code, _, err := GenerateResource(ui, schema, "awscc_bedrockagentcore_gateway", "bedrockagentcore", services, true, false)
+	if err != nil {
+		t.Fatalf("GenerateResource: %v", err)
+	}
+
+	generated := string(code)
+	if strings.Contains(generated, `stringdefault.StaticString("MCP")`) {
+		t.Error("generated protocol_type must not add MCP to the create plan")
+	}
+	if !strings.Contains(generated, `generic.StringDefaultValue("MCP")`) {
+		t.Error("generated protocol_type does not preserve a matching service default from state")
+	}
+}
