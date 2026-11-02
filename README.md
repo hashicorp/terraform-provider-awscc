@@ -57,3 +57,9 @@ Responses to our most frequently asked questions can be found in our [FAQ](contr
 The Terraform Provider for AWS CloudFormation Cloud Control API is the work of a handful of contributors. We appreciate your help!
 
 To contribute, please read the contribution guidelines: [Contributing to Terraform - AWS Cloud Control Provider](contributing/CONTRIBUTING.md)
+
+## Privacy Notice
+
+Individuals, including external contributors, who participate in this repository and related project activities may have personal information associated with their GitHub profiles, contributions, and repository activity processed for security, compliance, audit, vulnerability management, and related governance purposes. 
+
+For more information about how personal information may be collected, used, shared, retained, and the rights available to individuals, please review the IBM Privacy Statement: [https://www.ibm.com/privacy](https://www.ibm.com/privacy)
