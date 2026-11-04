@@ -48,6 +48,15 @@ FEATURES:
 * **New Resource:** `awscc_mgn_replication_configuration_template`
 * **New Resource:** `awscc_osis_pipeline_endpoint`
 
+BUG FIXES:
+
+* resource/awscc_cloudwatch_anomaly_detector: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* data-source/awscc_cloudwatch_anomaly_detector: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* list-resource/awscc_cloudwatch_anomaly_detector: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* resource/awscc_medialive_input: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* data-source/awscc_medialive_input: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* list-resource/awscc_medialive_input: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+
 ## 1.108.0 (October 28, 2026)
 
 FEATURES:
