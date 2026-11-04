@@ -64,6 +64,7 @@ resource "awscc_iam_role_policy" "example" {
           "iot:DeleteV2LoggingLevel"
         ]
         Resource = [
+          "arn:aws:logs:us-east-1:${data.aws_caller_identity.current.account_id}:log-group:AWSIotLogsV2",
           "arn:aws:logs:us-east-1:${data.aws_caller_identity.current.account_id}:log-group:AWSIotLogsV2:*"
         ]
       }
