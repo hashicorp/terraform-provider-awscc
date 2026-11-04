@@ -156,6 +156,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		pID := strings.Split(id, "/")
 		identifier := identity.Identifier{}
 		if len(pID) != 1 {
+			identifier.AttributePath = pID
 			id = strings.Join(pID, "")
 		}
 
