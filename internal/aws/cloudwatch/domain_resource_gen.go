@@ -41,12 +41,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the resource.",
+		//	  "description": "The Amazon Resource Name (ARN) of the domain.",
 		//	  "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:domain/(?:d-[0-9a-z]{1,25})$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource.",
+			Description: "The Amazon Resource Name (ARN) of the domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -373,7 +373,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The account-level boundary for CloudWatch Omni. A domain configures the\nidentity providers users sign in through and exposes the endpoint URLs used\nto reach CloudWatch Omni. Spaces are created within a domain.",
+		Description: "Resource Type definition for AWS::CloudWatch::Domain. A domain is the identity and access boundary for CloudWatch Omni. It configures the identity providers users sign in through and provides the sign-in URL for your team.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -385,7 +385,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "arn",
-			Description:       "The Amazon Resource Name (ARN) of the resource",
+			Description:       "The Amazon Resource Name (ARN) of the domain",
 			RequiredForImport: true,
 		})
 

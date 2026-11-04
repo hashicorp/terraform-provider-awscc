@@ -7,6 +7,7 @@ package mediaconnect
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -94,6 +95,7 @@ func routerNetworkInterfaceResource(ctx context.Context) (resource.Resource, err
 		//	            "properties": {
 		//	              "Cidr": {
 		//	                "description": "The CIDR block that is allowed to access the public router network interface.",
+		//	                "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -154,6 +156,7 @@ func routerNetworkInterfaceResource(ctx context.Context) (resource.Resource, err
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.RegexMatches(regexp.MustCompile("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -259,6 +262,7 @@ func routerNetworkInterfaceResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The name of the router network interface.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -266,6 +270,7 @@ func routerNetworkInterfaceResource(ctx context.Context) (resource.Resource, err
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceType
@@ -288,11 +293,11 @@ func routerNetworkInterfaceResource(ctx context.Context) (resource.Resource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS Region for the router network interface. Defaults to the current region if not specified.",
+		//	  "description": "The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.",
 		//	  "type": "string"
 		//	}
 		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region for the router network interface. Defaults to the current region if not specified.",
+			Description: "The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

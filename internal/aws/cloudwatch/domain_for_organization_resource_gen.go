@@ -41,14 +41,14 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the resource.",
+		//	  "description": "The Amazon Resource Name (ARN) of the organization domain.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:organization-domain/(?:d-[0-9a-z]{1,25})$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource.",
+			Description: "The Amazon Resource Name (ARN) of the organization domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -58,13 +58,13 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp when the domain was created.",
+		//	  "description": "The timestamp when the organization domain was created.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the domain was created.",
+			Description: "The timestamp when the organization domain was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -92,14 +92,14 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of an IAM role in the management account that CloudWatch Omni assumes for domain-scoped credential vending.",
+		//	  "description": "The ARN of the customer-provided IAM role in the management account used for domain access.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
 		"domain_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an IAM role in the management account that CloudWatch Omni assumes for domain-scoped credential vending.",
+			Description: "The ARN of the customer-provided IAM role in the management account used for domain access.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(20, 2048),
@@ -113,11 +113,11 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The HTTPS endpoint URL for accessing the domain.",
+		//	  "description": "The HTTPS endpoint URL for accessing the organization domain.",
 		//	  "type": "string"
 		//	}
 		"domain_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTPS endpoint URL for accessing the domain.",
+			Description: "The HTTPS endpoint URL for accessing the organization domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -127,12 +127,12 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique ID of the domain.",
+		//	  "description": "The unique ID of the organization domain.",
 		//	  "pattern": "^d-[0-9a-z]{1,25}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique ID of the domain.",
+			Description: "The unique ID of the organization domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -160,7 +160,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Identity provider configuration for the domain.",
+		//	  "description": "Identity provider configuration for the organization domain.",
 		//	  "properties": {
 		//	    "IdentityCenterConfiguration": {
 		//	      "additionalProperties": false,
@@ -206,7 +206,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Identity provider configuration for the domain.",
+			Description: "Identity provider configuration for the organization domain.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -217,7 +217,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identity providers configured for the domain.",
+		//	  "description": "The identity providers configured for the organization domain.",
 		//	  "items": {
 		//	    "enum": [
 		//	      "IAM",
@@ -232,7 +232,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		//	}
 		"identity_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The identity providers configured for the domain.",
+			Description: "The identity providers configured for the organization domain.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 2),
@@ -249,14 +249,14 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name that identifies the domain.",
+		//	  "description": "A name that identifies the organization domain.",
 		//	  "maxLength": 63,
 		//	  "minLength": 3,
 		//	  "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name that identifies the domain.",
+			Description: "A name that identifies the organization domain.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 63),
@@ -267,11 +267,11 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the AWS Organization this domain belongs to.",
+		//	  "description": "The ID of the AWS Organization that owns the domain.",
 		//	  "type": "string"
 		//	}
 		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Organization this domain belongs to.",
+			Description: "The ID of the AWS Organization that owns the domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -281,14 +281,14 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The account ID of the organization's management account, which owns this domain.",
+		//	  "description": "The AWS account ID that owns the organization domain.",
 		//	  "maxLength": 12,
 		//	  "minLength": 12,
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The account ID of the organization's management account, which owns this domain.",
+			Description: "The AWS account ID that owns the organization domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -298,11 +298,11 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Region where this domain was created.",
+		//	  "description": "The Region where this organization domain was created.",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Region where this domain was created.",
+			Description: "The Region where this organization domain was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -312,14 +312,14 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Current status of the domain.",
+		//	  "description": "Current status of the organization domain.",
 		//	  "enum": [
 		//	    "ACTIVE"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current status of the domain.",
+			Description: "Current status of the organization domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -403,13 +403,13 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp when the domain was last updated.",
+		//	  "description": "The timestamp when the organization domain was last updated.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the domain was last updated.",
+			Description: "The timestamp when the organization domain was last updated.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -427,7 +427,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudWatch::DomainForOrganization. The organization-level boundary for CloudWatch Omni: an organization domain configures the identity providers users sign in through for the whole AWS Organization and exposes the endpoint URLs used to reach CloudWatch Omni. It can only be created by the organization's management account.",
+		Description: "Resource Type definition for AWS::CloudWatch::DomainForOrganization. An organization domain provides a single sign-in URL and centralized identity provider configuration for your AWS Organization, removing the need for each account to configure its own domain. Only the management account can create it.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -439,7 +439,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "arn",
-			Description:       "The Amazon Resource Name (ARN) of the resource",
+			Description:       "The Amazon Resource Name (ARN) of the organization domain",
 			RequiredForImport: true,
 		})
 

@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -49,6 +50,27 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AssociatedSourceEndpointArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Names (ARNs) of one or more source endpoints that are associated with this router output.",
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 64,
+		//	    "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:sourceEndpoint:[a-z0-9]{12}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"associated_source_endpoint_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Amazon Resource Names (ARNs) of one or more source endpoints that are associated with this router output.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +95,7 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "MediaConnectFlow": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configuration settings for connecting a router output to a MediaConnect flow source.",
+		//	      "description": "Configuration settings for connecting a router output to a MediaConnect flow source. To connect the router output to the flow source, provide both flowArn and flowSourceArn. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption.",
 		//	      "properties": {
 		//	        "DestinationTransitEncryption": {
 		//	          "additionalProperties": false,
@@ -142,7 +164,7 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "MediaLiveInput": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configuration settings for connecting a router output to a MediaLive input.",
+		//	      "description": "Configuration settings for connecting a router output to a MediaLive input. To connect the router output to the MediaLive input, provide both mediaLiveInputArn and mediaLivePipelineId. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption.",
 		//	      "properties": {
 		//	        "DestinationTransitEncryption": {
 		//	          "additionalProperties": false,
@@ -208,6 +230,76 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "DestinationTransitEncryption"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SourceEndpoint": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration settings for a router output that is represented by a source endpoint.",
+		//	      "properties": {
+		//	        "DestinationTransitEncryption": {
+		//	          "description": "The encryption settings for an endpoint connection. This is a union type, so exactly one of its members is set: secretsManager when you store the encryption key or passphrase in Secrets Manager, or automatic when you let MediaConnect determine the encryption key when the endpoint connects.",
+		//	          "properties": {
+		//	            "Automatic": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.",
+		//	              "type": "object"
+		//	            },
+		//	            "SecretsManager": {
+		//	              "additionalProperties": false,
+		//	              "description": "The endpoint encryption configuration for connections that use a key or passphrase that you store in Secrets Manager.",
+		//	              "properties": {
+		//	                "EncryptionSecret": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+		//	                  "properties": {
+		//	                    "SecretArn": {
+		//	                      "description": "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint.",
+		//	                      "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "SecretArn"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "EncryptionSecretType": {
+		//	                  "enum": [
+		//	                    "AES_128_KEY",
+		//	                    "AES_192_KEY",
+		//	                    "AES_256_KEY",
+		//	                    "SRT_PASSPHRASE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "EncryptionSecret"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "DestinationTransitEncryptionType": {
+		//	          "enum": [
+		//	            "SECRETS_MANAGER",
+		//	            "AUTOMATIC"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "EndpointLifecycleManagement": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "UNMANAGED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DestinationTransitEncryption",
+		//	        "EndpointLifecycleManagement"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -589,7 +681,7 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configuration settings for connecting a router output to a MediaConnect flow source.",
+					Description: "Configuration settings for connecting a router output to a MediaConnect flow source. To connect the router output to the flow source, provide both flowArn and flowSourceArn. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -715,7 +807,125 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configuration settings for connecting a router output to a MediaLive input.",
+					Description: "Configuration settings for connecting a router output to a MediaLive input. To connect the router output to the MediaLive input, provide both mediaLiveInputArn and mediaLivePipelineId. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourceEndpoint
+				"source_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DestinationTransitEncryption
+						"destination_transit_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Automatic
+								"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretsManager
+								"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EncryptionSecret
+										"encryption_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: SecretArn
+												"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"), ""),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: EncryptionSecretType
+										"encryption_secret_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"AES_128_KEY",
+													"AES_192_KEY",
+													"AES_256_KEY",
+													"SRT_PASSPHRASE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The endpoint encryption configuration for connections that use a key or passphrase that you store in Secrets Manager.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption settings for an endpoint connection. This is a union type, so exactly one of its members is set: secretsManager when you store the encryption key or passphrase in Secrets Manager, or automatic when you let MediaConnect determine the encryption key when the endpoint connects.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DestinationTransitEncryptionType
+						"destination_transit_encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"SECRETS_MANAGER",
+									"AUTOMATIC",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointLifecycleManagement
+						"endpoint_lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"UNMANAGED",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for a router output that is represented by a source endpoint.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1416,7 +1626,8 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "STANDARD",
 		//	    "MEDIACONNECT_FLOW",
-		//	    "MEDIALIVE_INPUT"
+		//	    "MEDIALIVE_INPUT",
+		//	    "SOURCE_ENDPOINT"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1568,7 +1779,9 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "OUTPUT_100",
 		//	    "OUTPUT_50",
-		//	    "OUTPUT_20"
+		//	    "OUTPUT_20",
+		//	    "OUTPUT_500",
+		//	    "OUTPUT_250"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1579,6 +1792,8 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 					"OUTPUT_100",
 					"OUTPUT_50",
 					"OUTPUT_20",
+					"OUTPUT_500",
+					"OUTPUT_250",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -1626,67 +1841,73 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_name":               "ApplicationName",
-		"arn":                            "Arn",
-		"automatic":                      "Automatic",
-		"availability_zone":              "AvailabilityZone",
-		"configuration":                  "Configuration",
-		"created_at":                     "CreatedAt",
-		"day":                            "Day",
-		"default":                        "Default",
-		"destination_address":            "DestinationAddress",
-		"destination_port":               "DestinationPort",
-		"destination_transit_encryption": "DestinationTransitEncryption",
-		"encryption_configuration":       "EncryptionConfiguration",
-		"encryption_key":                 "EncryptionKey",
-		"encryption_key_configuration":   "EncryptionKeyConfiguration",
-		"encryption_key_type":            "EncryptionKeyType",
-		"encryption_type":                "EncryptionType",
-		"fabric_configuration":           "FabricConfiguration",
-		"flow_arn":                       "FlowArn",
-		"flow_source_arn":                "FlowSourceArn",
-		"forward_error_correction":       "ForwardErrorCorrection",
-		"ip_address":                     "IpAddress",
-		"key":                            "Key",
-		"maintenance_configuration":      "MaintenanceConfiguration",
-		"maintenance_type":               "MaintenanceType",
-		"maximum_bitrate":                "MaximumBitrate",
-		"media_connect_flow":             "MediaConnectFlow",
-		"media_live_input":               "MediaLiveInput",
-		"media_live_input_arn":           "MediaLiveInputArn",
-		"media_live_pipeline_id":         "MediaLivePipelineId",
-		"minimum_latency_milliseconds":   "MinimumLatencyMilliseconds",
-		"name":                           "Name",
-		"network_interface_arn":          "NetworkInterfaceArn",
-		"output_type":                    "OutputType",
-		"port":                           "Port",
-		"preferred_day_time":             "PreferredDayTime",
-		"protocol":                       "Protocol",
-		"protocol_configuration":         "ProtocolConfiguration",
-		"public":                         "Public",
-		"recovery_latency_mode":          "RecoveryLatencyMode",
-		"region_name":                    "RegionName",
-		"rist":                           "Rist",
-		"role_arn":                       "RoleArn",
-		"routed_state":                   "RoutedState",
-		"router_output_id":               "Id",
-		"routing_scope":                  "RoutingScope",
-		"rtmp_push":                      "RtmpPush",
-		"rtp":                            "Rtp",
-		"secret_arn":                     "SecretArn",
-		"secrets_manager":                "SecretsManager",
-		"srt_caller":                     "SrtCaller",
-		"srt_listener":                   "SrtListener",
-		"standard":                       "Standard",
-		"state":                          "State",
-		"stream_id":                      "StreamId",
-		"stream_name":                    "StreamName",
-		"tags":                           "Tags",
-		"tier":                           "Tier",
-		"time":                           "Time",
-		"tls_encryption":                 "TlsEncryption",
-		"updated_at":                     "UpdatedAt",
-		"value":                          "Value",
+		"application_name":                    "ApplicationName",
+		"arn":                                 "Arn",
+		"associated_source_endpoint_arns":     "AssociatedSourceEndpointArns",
+		"automatic":                           "Automatic",
+		"availability_zone":                   "AvailabilityZone",
+		"configuration":                       "Configuration",
+		"created_at":                          "CreatedAt",
+		"day":                                 "Day",
+		"default":                             "Default",
+		"destination_address":                 "DestinationAddress",
+		"destination_port":                    "DestinationPort",
+		"destination_transit_encryption":      "DestinationTransitEncryption",
+		"destination_transit_encryption_type": "DestinationTransitEncryptionType",
+		"encryption_configuration":            "EncryptionConfiguration",
+		"encryption_key":                      "EncryptionKey",
+		"encryption_key_configuration":        "EncryptionKeyConfiguration",
+		"encryption_key_type":                 "EncryptionKeyType",
+		"encryption_secret":                   "EncryptionSecret",
+		"encryption_secret_type":              "EncryptionSecretType",
+		"encryption_type":                     "EncryptionType",
+		"endpoint_lifecycle_management":       "EndpointLifecycleManagement",
+		"fabric_configuration":                "FabricConfiguration",
+		"flow_arn":                            "FlowArn",
+		"flow_source_arn":                     "FlowSourceArn",
+		"forward_error_correction":            "ForwardErrorCorrection",
+		"ip_address":                          "IpAddress",
+		"key":                                 "Key",
+		"maintenance_configuration":           "MaintenanceConfiguration",
+		"maintenance_type":                    "MaintenanceType",
+		"maximum_bitrate":                     "MaximumBitrate",
+		"media_connect_flow":                  "MediaConnectFlow",
+		"media_live_input":                    "MediaLiveInput",
+		"media_live_input_arn":                "MediaLiveInputArn",
+		"media_live_pipeline_id":              "MediaLivePipelineId",
+		"minimum_latency_milliseconds":        "MinimumLatencyMilliseconds",
+		"name":                                "Name",
+		"network_interface_arn":               "NetworkInterfaceArn",
+		"output_type":                         "OutputType",
+		"port":                                "Port",
+		"preferred_day_time":                  "PreferredDayTime",
+		"protocol":                            "Protocol",
+		"protocol_configuration":              "ProtocolConfiguration",
+		"public":                              "Public",
+		"recovery_latency_mode":               "RecoveryLatencyMode",
+		"region_name":                         "RegionName",
+		"rist":                                "Rist",
+		"role_arn":                            "RoleArn",
+		"routed_state":                        "RoutedState",
+		"router_output_id":                    "Id",
+		"routing_scope":                       "RoutingScope",
+		"rtmp_push":                           "RtmpPush",
+		"rtp":                                 "Rtp",
+		"secret_arn":                          "SecretArn",
+		"secrets_manager":                     "SecretsManager",
+		"source_endpoint":                     "SourceEndpoint",
+		"srt_caller":                          "SrtCaller",
+		"srt_listener":                        "SrtListener",
+		"standard":                            "Standard",
+		"state":                               "State",
+		"stream_id":                           "StreamId",
+		"stream_name":                         "StreamName",
+		"tags":                                "Tags",
+		"tier":                                "Tier",
+		"time":                                "Time",
+		"tls_encryption":                      "TlsEncryption",
+		"updated_at":                          "UpdatedAt",
+		"value":                               "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

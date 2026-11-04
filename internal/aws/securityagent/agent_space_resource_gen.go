@@ -368,6 +368,11 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "required": [
 		//	                    "ConfluenceDocument"
 		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "AzureDevOpsRepository"
+		//	                  ]
 		//	                }
 		//	              ]
 		//	            },
@@ -392,12 +397,55 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "required": [
 		//	                    "ConfluenceCapabilities"
 		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "AzureDevOpsCapabilities"
+		//	                  ]
 		//	                }
 		//	              ]
 		//	            }
 		//	          ],
 		//	          "description": "Selected Resource (eg: Code Repository, Document) from an Integration",
 		//	          "properties": {
+		//	            "AzureDevOpsCapabilities": {
+		//	              "additionalProperties": false,
+		//	              "description": "Azure DevOps repository capabilities",
+		//	              "properties": {
+		//	                "LeaveComments": {
+		//	                  "description": "Enables Code Review in the repository",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "RemediateCode": {
+		//	                  "description": "Enables creation of pull requests with automated fixes",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "AzureDevOpsRepository": {
+		//	              "additionalProperties": false,
+		//	              "description": "Azure DevOps repository details",
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "description": "Azure DevOps repository name",
+		//	                  "type": "string"
+		//	                },
+		//	                "Organization": {
+		//	                  "description": "Read-only Azure DevOps organization that owns the repository, populated from service-side metadata",
+		//	                  "type": "string"
+		//	                },
+		//	                "Project": {
+		//	                  "description": "Azure DevOps project that owns the repository",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "Project"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "BitbucketCapabilities": {
 		//	              "additionalProperties": false,
 		//	              "description": "Bitbucket repository capabilities",
@@ -588,6 +636,79 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 					"provider_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AzureDevOpsCapabilities
+								"azure_dev_ops_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LeaveComments
+										"leave_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables Code Review in the repository",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RemediateCode
+										"remediate_code": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables creation of pull requests with automated fixes",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Azure DevOps repository capabilities",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AzureDevOpsRepository
+								"azure_dev_ops_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Azure DevOps repository name",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Organization
+										"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Read-only Azure DevOps organization that owns the repository, populated from service-side metadata",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Project
+										"project": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Azure DevOps project that owns the repository",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Azure DevOps repository details",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: BitbucketCapabilities
 								"bitbucket_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1081,52 +1202,56 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_space_id":           "AgentSpaceId",
-		"aws_resources":            "AwsResources",
-		"bitbucket_capabilities":   "BitbucketCapabilities",
-		"bitbucket_repository":     "BitbucketRepository",
-		"code_review_settings":     "CodeReviewSettings",
-		"confluence_capabilities":  "ConfluenceCapabilities",
-		"confluence_document":      "ConfluenceDocument",
-		"controls_scanning":        "ControlsScanning",
-		"create_document":          "CreateDocument",
-		"created_at":               "CreatedAt",
-		"description":              "Description",
-		"fetch_document":           "FetchDocument",
-		"general_purpose_scanning": "GeneralPurposeScanning",
-		"git_hub_capabilities":     "GitHubCapabilities",
-		"git_hub_repository":       "GitHubRepository",
-		"git_lab_capabilities":     "GitLabCapabilities",
-		"git_lab_repository":       "GitLabRepository",
-		"iam_roles":                "IamRoles",
-		"integrated_resources":     "IntegratedResources",
-		"integration":              "Integration",
-		"key":                      "Key",
-		"kms_key_id":               "KmsKeyId",
-		"lambda_function_arns":     "LambdaFunctionArns",
-		"leave_comments":           "LeaveComments",
-		"log_groups":               "LogGroups",
-		"name":                     "Name",
-		"namespace":                "Namespace",
-		"owner":                    "Owner",
-		"page_id":                  "PageId",
-		"provider_resources":       "ProviderResources",
-		"remediate_code":           "RemediateCode",
-		"s3_buckets":               "S3Buckets",
-		"secret_arns":              "SecretArns",
-		"security_group_arns":      "SecurityGroupArns",
-		"space_key":                "SpaceKey",
-		"space_title":              "SpaceTitle",
-		"subnet_arns":              "SubnetArns",
-		"tags":                     "Tags",
-		"target_domain_ids":        "TargetDomainIds",
-		"title":                    "Title",
-		"update_document":          "UpdateDocument",
-		"updated_at":               "UpdatedAt",
-		"value":                    "Value",
-		"vpc_arn":                  "VpcArn",
-		"vpcs":                     "Vpcs",
-		"workspace":                "Workspace",
+		"agent_space_id":             "AgentSpaceId",
+		"aws_resources":              "AwsResources",
+		"azure_dev_ops_capabilities": "AzureDevOpsCapabilities",
+		"azure_dev_ops_repository":   "AzureDevOpsRepository",
+		"bitbucket_capabilities":     "BitbucketCapabilities",
+		"bitbucket_repository":       "BitbucketRepository",
+		"code_review_settings":       "CodeReviewSettings",
+		"confluence_capabilities":    "ConfluenceCapabilities",
+		"confluence_document":        "ConfluenceDocument",
+		"controls_scanning":          "ControlsScanning",
+		"create_document":            "CreateDocument",
+		"created_at":                 "CreatedAt",
+		"description":                "Description",
+		"fetch_document":             "FetchDocument",
+		"general_purpose_scanning":   "GeneralPurposeScanning",
+		"git_hub_capabilities":       "GitHubCapabilities",
+		"git_hub_repository":         "GitHubRepository",
+		"git_lab_capabilities":       "GitLabCapabilities",
+		"git_lab_repository":         "GitLabRepository",
+		"iam_roles":                  "IamRoles",
+		"integrated_resources":       "IntegratedResources",
+		"integration":                "Integration",
+		"key":                        "Key",
+		"kms_key_id":                 "KmsKeyId",
+		"lambda_function_arns":       "LambdaFunctionArns",
+		"leave_comments":             "LeaveComments",
+		"log_groups":                 "LogGroups",
+		"name":                       "Name",
+		"namespace":                  "Namespace",
+		"organization":               "Organization",
+		"owner":                      "Owner",
+		"page_id":                    "PageId",
+		"project":                    "Project",
+		"provider_resources":         "ProviderResources",
+		"remediate_code":             "RemediateCode",
+		"s3_buckets":                 "S3Buckets",
+		"secret_arns":                "SecretArns",
+		"security_group_arns":        "SecurityGroupArns",
+		"space_key":                  "SpaceKey",
+		"space_title":                "SpaceTitle",
+		"subnet_arns":                "SubnetArns",
+		"tags":                       "Tags",
+		"target_domain_ids":          "TargetDomainIds",
+		"title":                      "Title",
+		"update_document":            "UpdateDocument",
+		"updated_at":                 "UpdatedAt",
+		"value":                      "Value",
+		"vpc_arn":                    "VpcArn",
+		"vpcs":                       "Vpcs",
+		"workspace":                  "Workspace",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

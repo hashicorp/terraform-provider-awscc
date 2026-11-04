@@ -320,7 +320,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Amazon Resource Name for the created Connector.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -835,7 +835,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "CustomPluginArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
-		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	            "type": "string"
 		//	          },
 		//	          "Revision": {
@@ -872,7 +872,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The Amazon Resource Name (ARN) of the custom plugin to use.",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Revision
@@ -894,23 +894,20 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*",
 		//	  "type": "string"
 		//	}
 		"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):iam:.*"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -995,7 +992,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "WorkerConfigurationArn": {
 		//	      "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
-		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1026,7 +1023,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1039,7 +1036,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -53,13 +53,13 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The dashboard body, a JSON document describing the dashboard's widgets and layout.",
+		//	  "description": "The dashboard definition.",
 		//	  "maxLength": 1048576,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The dashboard body, a JSON document describing the dashboard's widgets and layout.",
+			Description: "The dashboard definition.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1048576),
@@ -69,13 +69,13 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the dashboard was created.",
+		//	  "description": "The timestamp when the dashboard was created.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the dashboard was created.",
+			Description: "The timestamp when the dashboard was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -99,14 +99,14 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier of the dashboard.",
+		//	  "description": "The unique ID of the dashboard.",
 		//	  "maxLength": 36,
 		//	  "minLength": 36,
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"dashboard_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the dashboard.",
+			Description: "The unique ID of the dashboard.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -116,13 +116,13 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description of the dashboard.",
+		//	  "description": "An optional description of the dashboard.",
 		//	  "maxLength": 1024,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the dashboard.",
+			Description: "An optional description of the dashboard.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -136,14 +136,14 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the dashboard.",
+		//	  "description": "A name that identifies the dashboard.",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9_.@~()-]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the dashboard.",
+			Description: "A name that identifies the dashboard.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
@@ -154,12 +154,12 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier of the space the dashboard belongs to.",
+		//	  "description": "The unique ID of the space to create the dashboard in.",
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the space the dashboard belongs to.",
+			Description: "The unique ID of the space to create the dashboard in.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
@@ -246,13 +246,13 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the dashboard was last updated.",
+		//	  "description": "The timestamp when the dashboard was last updated.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the dashboard was last updated.",
+			Description: "The timestamp when the dashboard was last updated.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -270,7 +270,7 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource type definition for AWS::CloudWatch::OmniDashboard",
+		Description: "Resource Type definition for AWS::CloudWatch::OmniDashboard. A dashboard is a saved arrangement of panels that shows your team one agreed view of a system, backed by queries against your space's telemetry.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -282,12 +282,12 @@ func omniDashboardResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "space_id",
-			Description:       "The unique identifier of the space the dashboard belongs to",
+			Description:       "The unique ID of the space to create the dashboard in",
 			RequiredForImport: true,
 		},
 		identity.Identifier{
 			Name:              "dashboard_id",
-			Description:       "The unique identifier of the dashboard",
+			Description:       "The unique ID of the dashboard",
 			RequiredForImport: true,
 		})
 
