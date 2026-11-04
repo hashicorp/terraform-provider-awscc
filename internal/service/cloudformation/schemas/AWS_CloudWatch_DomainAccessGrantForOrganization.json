@@ -1,44 +1,45 @@
 {
   "typeName": "AWS::CloudWatch::DomainAccessGrantForOrganization",
-  "description": "Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization-scoped CloudWatch Omni domain.",
+  "description": "Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization domain.",
   "properties": {
     "Arn": {
       "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the organization access grant.",
+      "description": "The Amazon Resource Name (ARN) of the access grant.",
       "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:organization-access-grant/(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
       "minLength": 1,
       "maxLength": 2048
     },
     "GrantId": {
       "type": "string",
-      "description": "The unique identifier of the grant.",
+      "description": "The unique ID of the access grant.",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "Name": {
       "type": "string",
-      "description": "The name of the grant.",
+      "description": "A name that identifies the access grant.",
       "pattern": "^[a-zA-Z0-9_-]+$",
       "minLength": 1,
       "maxLength": 64
     },
     "DomainId": {
       "type": "string",
-      "description": "The unique identifier of the organization domain the grant applies to.",
+      "description": "The ID of the organization domain the grant belongs to.",
       "pattern": "^d-[0-9a-z]{1,25}$"
     },
     "Principal": {
-      "$ref": "#/definitions/OrganizationAccessGrantPrincipal"
+      "$ref": "#/definitions/OrganizationAccessGrantPrincipal",
+      "description": "The principal receiving the grant."
     },
     "Permission": {
       "type": "string",
-      "description": "The permission level the grant confers. Organization grants are administrative only.",
+      "description": "The permission granted.",
       "enum": [
         "ADMIN"
       ]
     },
     "GrantType": {
       "type": "string",
-      "description": "Whether the grant is managed by the service or by the customer.",
+      "description": "Who manages the grant.",
       "enum": [
         "SERVICE_MANAGED",
         "CUSTOMER_MANAGED"
@@ -51,12 +52,12 @@
     "CreatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The time the grant was created."
+      "description": "The timestamp when the grant was created."
     },
     "UpdatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The time the grant was last updated."
+      "description": "The timestamp when the grant was last updated."
     },
     "Tags": {
       "type": "array",

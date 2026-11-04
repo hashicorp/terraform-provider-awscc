@@ -94,7 +94,7 @@
     "CustomPluginArn": {
       "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
       "type": "string",
-      "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*"
     },
     "ContentType": {
       "description": "The type of the plugin file.",

@@ -27,6 +27,7 @@
       "properties": {
         "Cidr": {
           "type": "string",
+          "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$",
           "description": "The CIDR block that is allowed to access the public router network interface."
         }
       },
@@ -100,10 +101,6 @@
       ],
       "additionalProperties": false
     },
-    "Unit": {
-      "type": "object",
-      "additionalProperties": false
-    },
     "VpcRouterNetworkInterfaceConfiguration": {
       "type": "object",
       "description": "The configuration settings for a router network interface within a VPC, including the security group IDs and subnet ID.",
@@ -158,6 +155,7 @@
       "type": "string",
       "maxLength": 128,
       "minLength": 1,
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$",
       "description": "The name of the router network interface."
     },
     "NetworkInterfaceType": {
@@ -165,7 +163,7 @@
     },
     "RegionName": {
       "type": "string",
-      "description": "The AWS Region for the router network interface. Defaults to the current region if not specified."
+      "description": "The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified."
     },
     "State": {
       "$ref": "#/definitions/RouterNetworkInterfaceState"

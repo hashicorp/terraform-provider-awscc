@@ -131,7 +131,6 @@
     ]
   },
   "required": [
-    "QuotaShareName",
     "JobQueue",
     "CapacityLimits",
     "ResourceSharingConfiguration",

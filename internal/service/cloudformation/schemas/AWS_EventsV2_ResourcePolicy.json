@@ -58,8 +58,7 @@
     },
     "delete": {
       "permissions": [
-        "events:DeleteResourcePolicy",
-        "events:GetResourcePolicy"
+        "events:DeleteResourcePolicy"
       ]
     },
     "list": {

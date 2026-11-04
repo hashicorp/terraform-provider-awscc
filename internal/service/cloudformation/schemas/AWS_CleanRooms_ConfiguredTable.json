@@ -678,6 +678,78 @@
       ],
       "additionalProperties": false
     },
+    "DatabricksTableReference": {
+      "type": "object",
+      "properties": {
+        "SchemaName": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"
+        },
+        "TableName": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"
+        },
+        "WorkspaceUrl": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 10,
+          "pattern": "^https://[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/?$"
+        },
+        "ConnectionType": {
+          "$ref": "#/definitions/DatabricksConnectionType"
+        }
+      },
+      "required": [
+        "ConnectionType",
+        "SchemaName",
+        "TableName",
+        "WorkspaceUrl"
+      ],
+      "additionalProperties": false
+    },
+    "DatabricksConnectionType": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "DeltaSharing",
+          "properties": {
+            "DeltaSharing": {
+              "$ref": "#/definitions/DatabricksDeltaSharingConnection"
+            }
+          },
+          "required": [
+            "DeltaSharing"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DatabricksDeltaSharingConnection": {
+      "type": "object",
+      "properties": {
+        "DeltaShareEndpoint": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 10,
+          "pattern": "^https://(?:[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/api/2\\.0/delta-sharing|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.opensharing\\.[a-z0-9-]+\\.cloud\\.databricks\\.com/api/2\\.0/opensharing)/metastores/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/recipients/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "ShareName": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"
+        }
+      },
+      "required": [
+        "DeltaShareEndpoint",
+        "ShareName"
+      ],
+      "additionalProperties": false
+    },
     "AnalysisRule": {
       "type": "object",
       "properties": {
@@ -732,6 +804,19 @@
           },
           "required": [
             "Athena"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Databricks",
+          "properties": {
+            "Databricks": {
+              "$ref": "#/definitions/DatabricksTableReference"
+            }
+          },
+          "required": [
+            "Databricks"
           ],
           "additionalProperties": false
         }

@@ -18,7 +18,7 @@
     "WorkerConfigurationArn": {
       "description": "The Amazon Resource Name (ARN) of the custom configuration.",
       "type": "string",
-      "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*"
     },
     "PropertiesFileContent": {
       "description": "Base64 encoded contents of connect-distributed.properties file.",

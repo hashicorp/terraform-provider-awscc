@@ -1,0 +1,640 @@
+{
+  "typeName": "AWS::MediaConnect::SourceEndpoint",
+  "description": "Represents a source endpoint in AWS Elemental MediaConnect that can be connected to an input",
+  "definitions": {
+    "EndpointEncryptionSecretConfiguration": {
+      "type": "object",
+      "description": "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+          "description": "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint."
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "EndpointLifecycle": {
+      "type": "string",
+      "enum": [
+        "MANAGED",
+        "UNMANAGED"
+      ]
+    },
+    "ForwardErrorCorrectionState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "PublicSourceEndpointNetworkingConfiguration": {
+      "type": "object",
+      "description": "The networking configuration for a publicly accessible source endpoint, including the CIDR blocks that are allowed to connect.",
+      "properties": {
+        "SourceAllowRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublicSourceEndpointNetworkingConfigurationAllowRule"
+          },
+          "maxItems": 10,
+          "minItems": 0,
+          "description": "The rules that specify which CIDR blocks can connect to the source endpoint. You can specify up to 10 rules."
+        }
+      },
+      "required": [
+        "SourceAllowRules"
+      ],
+      "additionalProperties": false
+    },
+    "PublicSourceEndpointNetworkingConfigurationAllowRule": {
+      "type": "object",
+      "description": "A rule that allows a specific CIDR block to connect to the public source endpoint.",
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$",
+          "description": "The CIDR block that is allowed to connect to the source endpoint, in CIDR notation."
+        }
+      },
+      "required": [
+        "Cidr"
+      ],
+      "additionalProperties": false
+    },
+    "RistStandardSourceEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a source endpoint that uses the RIST protocol.",
+      "properties": {
+        "DestinationIngestPort": {
+          "type": "integer",
+          "maximum": 30000,
+          "minimum": 3000,
+          "description": "The port on the destination that receives the content. The valid range is 3000 to 30000."
+        },
+        "RecoveryLatencyMilliseconds": {
+          "type": "integer",
+          "maximum": 10000,
+          "minimum": 10,
+          "description": "The amount of time, in milliseconds, that the source endpoint allows for recovering lost packets. The valid range is 10 to 10000."
+        }
+      },
+      "required": [
+        "DestinationIngestPort",
+        "RecoveryLatencyMilliseconds"
+      ],
+      "additionalProperties": false
+    },
+    "RouterOutputSourceEndpointAssociatedResourceDetails": {
+      "type": "object",
+      "description": "The details of the router output that is associated with a source endpoint.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the router output."
+        },
+        "MaximumBitrate": {
+          "type": "integer",
+          "description": "The maximum bitrate of the router output, in bits per second."
+        },
+        "State": {
+          "$ref": "#/definitions/RouterOutputState"
+        }
+      },
+      "required": [
+        "MaximumBitrate",
+        "Name",
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "RouterOutputSourceEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a source endpoint that represents a router output.",
+      "properties": {
+        "RouterOutputArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:routerOutput:[a-z0-9]{12}$",
+          "description": "The Amazon Resource Name (ARN) of the router output that the source endpoint represents."
+        }
+      },
+      "required": [
+        "RouterOutputArn"
+      ],
+      "additionalProperties": false
+    },
+    "RouterOutputState": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "STANDBY",
+        "STARTING",
+        "ACTIVE",
+        "STOPPING",
+        "DELETING",
+        "UPDATING",
+        "ERROR",
+        "RECOVERING",
+        "MIGRATING"
+      ]
+    },
+    "RtpStandardSourceEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a source endpoint that uses the RTP protocol.",
+      "properties": {
+        "DestinationIngestPort": {
+          "type": "integer",
+          "maximum": 30000,
+          "minimum": 3000,
+          "description": "The port on the destination that receives the content. The valid range is 3000 to 30000."
+        },
+        "ForwardErrorCorrectionState": {
+          "$ref": "#/definitions/ForwardErrorCorrectionState"
+        }
+      },
+      "required": [
+        "DestinationIngestPort",
+        "ForwardErrorCorrectionState"
+      ],
+      "additionalProperties": false
+    },
+    "SourceEndpointAssociatedResourceDetails": {
+      "description": "The details of the resource that is associated with a source endpoint. This is a union type, so exactly one of its members is set, depending on the type of the source endpoint.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Standard",
+          "properties": {
+            "Standard": {
+              "$ref": "#/definitions/StandardSourceEndpointAssociatedResourceDetails"
+            }
+          },
+          "required": [
+            "Standard"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RouterOutput",
+          "properties": {
+            "RouterOutput": {
+              "$ref": "#/definitions/RouterOutputSourceEndpointAssociatedResourceDetails"
+            }
+          },
+          "required": [
+            "RouterOutput"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SourceEndpointConfiguration": {
+      "description": "The configuration settings for a source endpoint. This is a union type, so exactly one of its members is set, depending on the type of the source endpoint.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Standard",
+          "properties": {
+            "Standard": {
+              "$ref": "#/definitions/StandardSourceEndpointConfiguration"
+            }
+          },
+          "required": [
+            "Standard"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RouterOutput",
+          "properties": {
+            "RouterOutput": {
+              "$ref": "#/definitions/RouterOutputSourceEndpointConfiguration"
+            }
+          },
+          "required": [
+            "RouterOutput"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SourceEndpointConnectionState": {
+      "type": "string",
+      "enum": [
+        "CONNECTED",
+        "DISCONNECTED",
+        "CONNECTING",
+        "DISCONNECTING"
+      ]
+    },
+    "SourceEndpointNetworkingType": {
+      "type": "string",
+      "enum": [
+        "PUBLIC",
+        "VPC"
+      ]
+    },
+    "SourceEndpointProtocol": {
+      "type": "string",
+      "enum": [
+        "RTP",
+        "RIST",
+        "SRT_CALLER",
+        "SRT_LISTENER"
+      ]
+    },
+    "SourceEndpointRegistrationState": {
+      "type": "string",
+      "enum": [
+        "REGISTERED",
+        "REGISTERING",
+        "DEREGISTERING",
+        "REGISTRATION_FAILED"
+      ]
+    },
+    "SourceEndpointType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "ROUTER_OUTPUT"
+      ]
+    },
+    "SrtCallerStandardSourceEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a source endpoint that uses SRT in caller mode.",
+      "properties": {
+        "DestinationIngestPort": {
+          "type": "integer",
+          "maximum": 30000,
+          "minimum": 3000,
+          "description": "The port on which the destination listens for the connection. The valid range is 3000 to 30000."
+        },
+        "MinimumLatencyMilliseconds": {
+          "type": "integer",
+          "maximum": 10000,
+          "minimum": 10,
+          "description": "The minimum latency, in milliseconds, for the SRT connection. The valid range is 10 to 10000."
+        },
+        "EncryptionPassphrase": {
+          "$ref": "#/definitions/EndpointEncryptionSecretConfiguration"
+        }
+      },
+      "required": [
+        "DestinationIngestPort",
+        "MinimumLatencyMilliseconds"
+      ],
+      "additionalProperties": false
+    },
+    "SrtListenerStandardSourceEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a source endpoint that uses SRT in listener mode.",
+      "properties": {
+        "SourceListenerPort": {
+          "type": "integer",
+          "maximum": 65535,
+          "minimum": 1024,
+          "description": "The port that the source endpoint listens on for incoming connections. The valid range is 1024 to 65535."
+        },
+        "SourceAddress": {
+          "type": "string",
+          "description": "The IP address that the source endpoint listens on for incoming connections."
+        },
+        "MinimumLatencyMilliseconds": {
+          "type": "integer",
+          "maximum": 10000,
+          "minimum": 10,
+          "description": "The minimum latency, in milliseconds, for the SRT connection. The valid range is 10 to 10000."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "The stream ID that identifies the content for the SRT connection."
+        },
+        "EncryptionPassphrase": {
+          "$ref": "#/definitions/EndpointEncryptionSecretConfiguration"
+        }
+      },
+      "required": [
+        "MinimumLatencyMilliseconds",
+        "SourceAddress",
+        "SourceListenerPort"
+      ],
+      "additionalProperties": false
+    },
+    "StandardSourceEndpointAssociatedResourceDetails": {
+      "type": "object",
+      "description": "The associated resource details for a standard source endpoint. This type does not require any additional settings.",
+      "additionalProperties": false
+    },
+    "StandardSourceEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a standard source endpoint.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 164,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$",
+          "description": "The name of the source endpoint."
+        },
+        "SourceNetworkingConfiguration": {
+          "$ref": "#/definitions/StandardSourceEndpointNetworkingConfiguration"
+        },
+        "ProtocolConfiguration": {
+          "$ref": "#/definitions/StandardSourceEndpointProtocolConfiguration"
+        },
+        "SourceNetworkingType": {
+          "$ref": "#/definitions/SourceEndpointNetworkingType"
+        },
+        "Protocol": {
+          "$ref": "#/definitions/SourceEndpointProtocol"
+        }
+      },
+      "required": [
+        "Name",
+        "ProtocolConfiguration",
+        "SourceNetworkingConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "StandardSourceEndpointNetworkingConfiguration": {
+      "description": "The networking configuration for a standard source endpoint. This is a union type, so exactly one of its members is set: public for a publicly accessible endpoint, or vpc for an endpoint in a virtual private cloud (VPC).",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Public",
+          "properties": {
+            "Public": {
+              "$ref": "#/definitions/PublicSourceEndpointNetworkingConfiguration"
+            }
+          },
+          "required": [
+            "Public"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Vpc",
+          "properties": {
+            "Vpc": {
+              "$ref": "#/definitions/VpcSourceEndpointNetworkingConfiguration"
+            }
+          },
+          "required": [
+            "Vpc"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "StandardSourceEndpointProtocolConfiguration": {
+      "description": "The protocol configuration for a standard source endpoint. This is a union type, so exactly one of its members is set, depending on the protocol that the source endpoint uses.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Rist",
+          "properties": {
+            "Rist": {
+              "$ref": "#/definitions/RistStandardSourceEndpointConfiguration"
+            }
+          },
+          "required": [
+            "Rist"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SrtListener",
+          "properties": {
+            "SrtListener": {
+              "$ref": "#/definitions/SrtListenerStandardSourceEndpointConfiguration"
+            }
+          },
+          "required": [
+            "SrtListener"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SrtCaller",
+          "properties": {
+            "SrtCaller": {
+              "$ref": "#/definitions/SrtCallerStandardSourceEndpointConfiguration"
+            }
+          },
+          "required": [
+            "SrtCaller"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Rtp",
+          "properties": {
+            "Rtp": {
+              "$ref": "#/definitions/RtpStandardSourceEndpointConfiguration"
+            }
+          },
+          "required": [
+            "Rtp"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "VpcSourceEndpointNetworkingConfiguration": {
+      "type": "object",
+      "description": "The networking configuration for a source endpoint in a virtual private cloud (VPC).",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 1,
+          "description": "The IDs of the security groups to associate with the source endpoint. You can specify from 1 to 5 security groups."
+        },
+        "SubnetId": {
+          "type": "string",
+          "description": "The ID of the subnet to use for the source endpoint."
+        }
+      },
+      "required": [
+        "SecurityGroupIds",
+        "SubnetId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 64,
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:sourceEndpoint:[a-z0-9]{12}$"
+    },
+    "AssociatedResourceDetails": {
+      "$ref": "#/definitions/SourceEndpointAssociatedResourceDetails"
+    },
+    "AvailabilityZone": {
+      "type": "string",
+      "description": "The Availability Zone in which the source endpoint is located."
+    },
+    "AvailabilityZoneId": {
+      "type": "string",
+      "description": "The ID of the Availability Zone in which the source endpoint is located."
+    },
+    "Configuration": {
+      "$ref": "#/definitions/SourceEndpointConfiguration"
+    },
+    "ConnectionState": {
+      "$ref": "#/definitions/SourceEndpointConnectionState"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date and time when the source endpoint was created.",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the source endpoint."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier of the source endpoint."
+    },
+    "LifecycleManagement": {
+      "$ref": "#/definitions/EndpointLifecycle"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the source endpoint."
+    },
+    "RegionName": {
+      "type": "string",
+      "description": "The name of the Amazon Web Services Region in which the source endpoint is located."
+    },
+    "RegistrationState": {
+      "$ref": "#/definitions/SourceEndpointRegistrationState"
+    },
+    "SourceType": {
+      "$ref": "#/definitions/SourceEndpointType"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "The tags associated with the source endpoint. Each tag is a key-value pair.",
+      "insertionOrder": false
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time when the source endpoint was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "Configuration"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AssociatedResourceDetails",
+    "/properties/AvailabilityZone",
+    "/properties/AvailabilityZoneId",
+    "/properties/ConnectionState",
+    "/properties/CreatedAt",
+    "/properties/Id",
+    "/properties/LifecycleManagement",
+    "/properties/Name",
+    "/properties/RegistrationState",
+    "/properties/SourceType",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Configuration/Standard/SourceNetworkingConfiguration/Vpc",
+    "/properties/Configuration/RouterOutput",
+    "/properties/RegionName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediaconnect:GetSourceEndpoint",
+        "mediaconnect:ListSourceEndpoints",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateTags",
+        "iam:CreateServiceLinkedRole",
+        "mediaconnect:AssociateSource",
+        "mediaconnect:RegisterSourceEndpoint",
+        "mediaconnect:TagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediaconnect:GetSourceEndpoint",
+        "mediaconnect:ListSourceEndpoints",
+        "mediaconnect:DeregisterSourceEndpoint",
+        "mediaconnect:DisassociateSource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mediaconnect:ListSourceEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mediaconnect:GetSourceEndpoint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mediaconnect:ListTagsForResource",
+        "mediaconnect:TagResource",
+        "mediaconnect:UntagResource",
+        "mediaconnect:GetSourceEndpoint",
+        "mediaconnect:UpdateSourceEndpoint"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "mediaconnect:ListTagsForResource",
+      "mediaconnect:TagResource",
+      "mediaconnect:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "additionalProperties": false
+}

@@ -167,7 +167,8 @@
     "create": {
       "permissions": [
         "bedrock-agentcore:CreatePaymentConnector",
-        "bedrock-agentcore:GetPaymentConnector"
+        "bedrock-agentcore:GetPaymentConnector",
+        "bedrock-agentcore:GetPaymentCredentialProvider"
       ]
     },
     "read": {
@@ -178,7 +179,8 @@
     "update": {
       "permissions": [
         "bedrock-agentcore:UpdatePaymentConnector",
-        "bedrock-agentcore:GetPaymentConnector"
+        "bedrock-agentcore:GetPaymentConnector",
+        "bedrock-agentcore:GetPaymentCredentialProvider"
       ]
     },
     "delete": {

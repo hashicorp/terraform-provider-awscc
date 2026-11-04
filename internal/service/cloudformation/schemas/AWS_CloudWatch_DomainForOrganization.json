@@ -1,10 +1,10 @@
 {
   "typeName": "AWS::CloudWatch::DomainForOrganization",
-  "description": "Resource Type definition for AWS::CloudWatch::DomainForOrganization. The organization-level boundary for CloudWatch Omni: an organization domain configures the identity providers users sign in through for the whole AWS Organization and exposes the endpoint URLs used to reach CloudWatch Omni. It can only be created by the organization's management account.",
+  "description": "Resource Type definition for AWS::CloudWatch::DomainForOrganization. An organization domain provides a single sign-in URL and centralized identity provider configuration for your AWS Organization, removing the need for each account to configure its own domain. Only the management account can create it.",
   "properties": {
     "Name": {
       "type": "string",
-      "description": "A name that identifies the domain.",
+      "description": "A name that identifies the organization domain.",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
       "minLength": 3,
       "maxLength": 63
@@ -18,24 +18,25 @@
           "IDC"
         ]
       },
-      "description": "The identity providers configured for the domain.",
+      "description": "The identity providers configured for the organization domain.",
       "minItems": 1,
       "maxItems": 2,
       "uniqueItems": true
     },
     "IdentityProviderConfiguration": {
-      "$ref": "#/definitions/IdentityProviderConfiguration"
+      "$ref": "#/definitions/IdentityProviderConfiguration",
+      "description": "Identity provider configuration for the organization domain."
     },
     "DomainAccessRoleArn": {
       "type": "string",
-      "description": "The ARN of an IAM role in the management account that CloudWatch Omni assumes for domain-scoped credential vending.",
+      "description": "The ARN of the customer-provided IAM role in the management account used for domain access.",
       "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.+$",
       "minLength": 20,
       "maxLength": 2048
     },
     "DomainEndpointUrl": {
       "type": "string",
-      "description": "The HTTPS endpoint URL for accessing the domain."
+      "description": "The HTTPS endpoint URL for accessing the organization domain."
     },
     "CustomEndpointUrls": {
       "type": "array",
@@ -46,11 +47,11 @@
     },
     "OrganizationId": {
       "type": "string",
-      "description": "The ID of the AWS Organization this domain belongs to."
+      "description": "The ID of the AWS Organization that owns the domain."
     },
     "OwnerAccountId": {
       "type": "string",
-      "description": "The account ID of the organization's management account, which owns this domain.",
+      "description": "The AWS account ID that owns the organization domain.",
       "pattern": "^[0-9]{12}$",
       "minLength": 12,
       "maxLength": 12
@@ -64,33 +65,33 @@
     },
     "Region": {
       "type": "string",
-      "description": "The Region where this domain was created."
+      "description": "The Region where this organization domain was created."
     },
     "CreatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The timestamp when the domain was created."
+      "description": "The timestamp when the organization domain was created."
     },
     "UpdatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The timestamp when the domain was last updated."
+      "description": "The timestamp when the organization domain was last updated."
     },
     "Status": {
       "type": "string",
-      "description": "Current status of the domain.",
+      "description": "Current status of the organization domain.",
       "enum": [
         "ACTIVE"
       ]
     },
     "DomainId": {
       "type": "string",
-      "description": "The unique ID of the domain.",
+      "description": "The unique ID of the organization domain.",
       "pattern": "^d-[0-9a-z]{1,25}$"
     },
     "Arn": {
       "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the resource.",
+      "description": "The Amazon Resource Name (ARN) of the organization domain.",
       "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:organization-domain/(?:d-[0-9a-z]{1,25})$",
       "minLength": 1,
       "maxLength": 2048

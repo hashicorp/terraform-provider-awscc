@@ -7,6 +7,11 @@
       "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
       "additionalProperties": false
     },
+    "AutomaticEndpointEncryptionConfiguration": {
+      "type": "object",
+      "description": "The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.",
+      "additionalProperties": false
+    },
     "Day": {
       "type": "string",
       "enum": [
@@ -23,6 +28,75 @@
       "type": "object",
       "description": "Configuration settings for default maintenance scheduling.",
       "additionalProperties": false
+    },
+    "EndpointEncryptionConfiguration": {
+      "description": "The encryption settings for an endpoint connection. This is a union type, so exactly one of its members is set: secretsManager when you store the encryption key or passphrase in Secrets Manager, or automatic when you let MediaConnect determine the encryption key when the endpoint connects.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SecretsManager",
+          "properties": {
+            "SecretsManager": {
+              "$ref": "#/definitions/SecretsManagerEndpointEncryptionConfiguration"
+            }
+          },
+          "required": [
+            "SecretsManager"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Automatic",
+          "properties": {
+            "Automatic": {
+              "$ref": "#/definitions/AutomaticEndpointEncryptionConfiguration"
+            }
+          },
+          "required": [
+            "Automatic"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EndpointEncryptionSecretConfiguration": {
+      "type": "object",
+      "description": "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+          "description": "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint."
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "EndpointEncryptionSecretType": {
+      "type": "string",
+      "enum": [
+        "AES_128_KEY",
+        "AES_192_KEY",
+        "AES_256_KEY",
+        "SRT_PASSPHRASE"
+      ]
+    },
+    "EndpointEncryptionType": {
+      "type": "string",
+      "enum": [
+        "SECRETS_MANAGER",
+        "AUTOMATIC"
+      ]
+    },
+    "EndpointLifecycle": {
+      "type": "string",
+      "enum": [
+        "MANAGED",
+        "UNMANAGED"
+      ]
     },
     "FabricConfiguration": {
       "type": "object",
@@ -145,7 +219,7 @@
     },
     "MediaConnectFlowRouterOutputConfiguration": {
       "type": "object",
-      "description": "Configuration settings for connecting a router output to a MediaConnect flow source.",
+      "description": "Configuration settings for connecting a router output to a MediaConnect flow source. To connect the router output to the flow source, provide both flowArn and flowSourceArn. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption.",
       "properties": {
         "FlowArn": {
           "type": "string",
@@ -175,7 +249,7 @@
     },
     "MediaLiveInputRouterOutputConfiguration": {
       "type": "object",
-      "description": "Configuration settings for connecting a router output to a MediaLive input.",
+      "description": "Configuration settings for connecting a router output to a MediaLive input. To connect the router output to the MediaLive input, provide both mediaLiveInputArn and mediaLivePipelineId. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption.",
       "properties": {
         "MediaLiveInputArn": {
           "type": "string",
@@ -333,6 +407,19 @@
             "MediaLiveInput"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SourceEndpoint",
+          "properties": {
+            "SourceEndpoint": {
+              "$ref": "#/definitions/SourceEndpointRouterOutputConfiguration"
+            }
+          },
+          "required": [
+            "SourceEndpoint"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -349,19 +436,6 @@
     "RouterOutputProtocolConfiguration": {
       "description": "The protocol configuration settings for a router output.",
       "oneOf": [
-        {
-          "type": "object",
-          "title": "Rtp",
-          "properties": {
-            "Rtp": {
-              "$ref": "#/definitions/RtpRouterOutputConfiguration"
-            }
-          },
-          "required": [
-            "Rtp"
-          ],
-          "additionalProperties": false
-        },
         {
           "type": "object",
           "title": "Rist",
@@ -390,6 +464,19 @@
         },
         {
           "type": "object",
+          "title": "RtmpPush",
+          "properties": {
+            "RtmpPush": {
+              "$ref": "#/definitions/RtmpPushRouterOutputConfiguration"
+            }
+          },
+          "required": [
+            "RtmpPush"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
           "title": "SrtCaller",
           "properties": {
             "SrtCaller": {
@@ -403,14 +490,14 @@
         },
         {
           "type": "object",
-          "title": "RtmpPush",
+          "title": "Rtp",
           "properties": {
-            "RtmpPush": {
-              "$ref": "#/definitions/RtmpPushRouterOutputConfiguration"
+            "Rtp": {
+              "$ref": "#/definitions/RtpRouterOutputConfiguration"
             }
           },
           "required": [
-            "RtmpPush"
+            "Rtp"
           ],
           "additionalProperties": false
         }
@@ -444,7 +531,9 @@
       "enum": [
         "OUTPUT_100",
         "OUTPUT_50",
-        "OUTPUT_20"
+        "OUTPUT_20",
+        "OUTPUT_500",
+        "OUTPUT_250"
       ]
     },
     "RouterOutputType": {
@@ -452,7 +541,8 @@
       "enum": [
         "STANDARD",
         "MEDIACONNECT_FLOW",
-        "MEDIALIVE_INPUT"
+        "MEDIALIVE_INPUT",
+        "SOURCE_ENDPOINT"
       ]
     },
     "RoutingScope": {
@@ -538,6 +628,42 @@
       "required": [
         "RoleArn",
         "SecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "SecretsManagerEndpointEncryptionConfiguration": {
+      "type": "object",
+      "description": "The endpoint encryption configuration for connections that use a key or passphrase that you store in Secrets Manager.",
+      "properties": {
+        "EncryptionSecretType": {
+          "$ref": "#/definitions/EndpointEncryptionSecretType"
+        },
+        "EncryptionSecret": {
+          "$ref": "#/definitions/EndpointEncryptionSecretConfiguration"
+        }
+      },
+      "required": [
+        "EncryptionSecret"
+      ],
+      "additionalProperties": false
+    },
+    "SourceEndpointRouterOutputConfiguration": {
+      "type": "object",
+      "description": "Configuration settings for a router output that is represented by a source endpoint.",
+      "properties": {
+        "EndpointLifecycleManagement": {
+          "$ref": "#/definitions/EndpointLifecycle"
+        },
+        "DestinationTransitEncryptionType": {
+          "$ref": "#/definitions/EndpointEncryptionType"
+        },
+        "DestinationTransitEncryption": {
+          "$ref": "#/definitions/EndpointEncryptionConfiguration"
+        }
+      },
+      "required": [
+        "DestinationTransitEncryption",
+        "EndpointLifecycleManagement"
       ],
       "additionalProperties": false
     },
@@ -699,6 +825,16 @@
       "type": "string",
       "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:routerOutput:[a-z0-9]{12}$"
     },
+    "AssociatedSourceEndpointArns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 128,
+        "minLength": 64,
+        "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:sourceEndpoint:[a-z0-9]{12}$"
+      },
+      "description": "The Amazon Resource Names (ARNs) of one or more source endpoints that are associated with this router output."
+    },
     "AvailabilityZone": {
       "type": "string",
       "description": "The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided."
@@ -780,6 +916,7 @@
   ],
   "readOnlyProperties": [
     "/properties/Arn",
+    "/properties/AssociatedSourceEndpointArns",
     "/properties/CreatedAt",
     "/properties/Id",
     "/properties/IpAddress",
@@ -806,7 +943,9 @@
         "ec2:CreateTags",
         "iam:PassRole",
         "mediaconnect:AssociateRouterNetworkInterface",
+        "mediaconnect:AssociateSource",
         "mediaconnect:CreateRouterOutput",
+        "mediaconnect:RegisterSourceEndpoint",
         "mediaconnect:TagResource",
         "mediaconnect:UpdateFlowSource",
         "medialive:UpdateInput"
@@ -819,7 +958,9 @@
         "mediaconnect:UpdateFlowSource",
         "medialive:UpdateInput",
         "mediaconnect:ListRouterOutputs",
-        "mediaconnect:DeleteRouterOutput"
+        "mediaconnect:DeleteRouterOutput",
+        "mediaconnect:DeregisterSourceEndpoint",
+        "mediaconnect:DisassociateSource"
       ]
     },
     "list": {

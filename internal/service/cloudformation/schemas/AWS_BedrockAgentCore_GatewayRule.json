@@ -32,6 +32,29 @@
         }
       ]
     },
+    "CircuitBreakerConfiguration": {
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CircuitBreakerMode"
+            },
+            {
+              "default": "ENABLED"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CircuitBreakerMode": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "Condition": {
       "oneOf": [
         {
@@ -57,6 +80,19 @@
           },
           "required": [
             "MatchPaths"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "MatchModels",
+          "properties": {
+            "MatchModels": {
+              "$ref": "#/definitions/MatchModels"
+            }
+          },
+          "required": [
+            "MatchModels"
           ],
           "additionalProperties": false
         }
@@ -110,6 +146,92 @@
       ],
       "additionalProperties": false
     },
+    "Fallback": {
+      "type": "object",
+      "properties": {
+        "TriggerOn": {
+          "$ref": "#/definitions/FallbackTriggers"
+        },
+        "FirstByteTimeoutMilliseconds": {
+          "type": "integer",
+          "maximum": 900000,
+          "minimum": 50
+        },
+        "CircuitBreaker": {
+          "$ref": "#/definitions/CircuitBreakerConfiguration"
+        },
+        "TargetFallback": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FallbackTarget"
+          },
+          "maxItems": 2,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "TargetFallback"
+      ],
+      "additionalProperties": false
+    },
+    "FallbackError": {
+      "type": "string",
+      "enum": [
+        "CONNECTION_ERROR",
+        "FIRST_BYTE_TIMEOUT",
+        "UNROUTABLE"
+      ]
+    },
+    "FallbackTarget": {
+      "type": "object",
+      "properties": {
+        "TargetName": {
+          "type": "string",
+          "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+        },
+        "Model": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"
+        },
+        "TriggerOn": {
+          "$ref": "#/definitions/FallbackTriggers"
+        },
+        "FirstByteTimeoutMilliseconds": {
+          "type": "integer",
+          "maximum": 900000,
+          "minimum": 50
+        }
+      },
+      "required": [
+        "TargetName"
+      ],
+      "additionalProperties": false
+    },
+    "FallbackTriggers": {
+      "type": "object",
+      "properties": {
+        "StatusCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[4-5]([0-9]{2}|XX)$"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FallbackError"
+          },
+          "maxItems": 3,
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "GatewayRuleStatus": {
       "type": "string",
       "enum": [
@@ -135,6 +257,55 @@
         "Arn"
       ],
       "additionalProperties": false
+    },
+    "MatchModelEntry": {
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@:]+(/[a-zA-Z0-9\\-\\._\\*\\?@:]+)*$"
+        },
+        "Operator": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MatchOperator"
+            },
+            {
+              "default": "StringLike"
+            }
+          ]
+        }
+      },
+      "required": [
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "MatchModels": {
+      "type": "object",
+      "properties": {
+        "AnyOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchModelEntry"
+          },
+          "maxItems": 100,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "AnyOf"
+      ],
+      "additionalProperties": false
+    },
+    "MatchOperator": {
+      "type": "string",
+      "enum": [
+        "StringEquals",
+        "StringLike"
+      ]
     },
     "MatchPaths": {
       "type": "object",
@@ -250,6 +421,15 @@
         "TargetName": {
           "type": "string",
           "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+        },
+        "Model": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"
+        },
+        "Fallback": {
+          "$ref": "#/definitions/Fallback"
         }
       },
       "required": [
@@ -286,6 +466,15 @@
         "TargetName": {
           "type": "string",
           "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+        },
+        "Model": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"
+        },
+        "Fallback": {
+          "$ref": "#/definitions/Fallback"
         },
         "Description": {
           "type": "string",
@@ -397,7 +586,7 @@
       "items": {
         "$ref": "#/definitions/Condition"
       },
-      "maxItems": 2,
+      "maxItems": 3,
       "minItems": 0
     },
     "CreatedAt": {
@@ -411,7 +600,7 @@
     },
     "GatewayArn": {
       "type": "string",
-      "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
+      "pattern": "^arn:(aws(-[a-z]+)*):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
     },
     "GatewayIdentifier": {
       "type": "string",

@@ -41,7 +41,8 @@
       "maxLength": 2048
     },
     "EncryptionConfiguration": {
-      "$ref": "#/definitions/EncryptionConfiguration"
+      "$ref": "#/definitions/EncryptionConfiguration",
+      "description": "The encryption configuration for the space."
     },
     "Region": {
       "type": "string",
