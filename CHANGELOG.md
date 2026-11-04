@@ -1,4 +1,6 @@
-## 1.109.0 (Unreleased)
+## 1.110.0 (Unreleased)
+
+## 1.109.0 (November 4, 2026)
 
 FEATURES:
 
