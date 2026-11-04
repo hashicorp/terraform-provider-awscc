@@ -1,0 +1,1 @@
+$ terraform import awscc_dax_cluster.example "cluster_name"

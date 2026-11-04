@@ -1,0 +1,1 @@
+$ terraform import awscc_mediaconnect_source_endpoint.example "arn"

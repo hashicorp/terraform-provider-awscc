@@ -1,0 +1,1 @@
+$ terraform import awscc_directconnect_resiliency_group.example "resiliency_group_arn"
