@@ -76,6 +76,20 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The bucket for the InfluxDB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DbClusterId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The service generated unique identifier of the InfluxDB cluster containing this instance.",
+		//	  "maxLength": 64,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"db_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service generated unique identifier of the InfluxDB cluster containing this instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbInstanceType
 		// CloudFormation resource type schema:
 		//
@@ -173,11 +187,25 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "description": "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.",
-		//	  "pattern": "^arn:[a-z]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
+		//	  "pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
 		"influx_auth_parameters_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The customer managed key used to encrypt data in the InfluxDB instance.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9:/_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer managed key used to encrypt data in the InfluxDB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogDeliveryConfiguration
@@ -534,6 +562,7 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		"availability_zone":                 "AvailabilityZone",
 		"bucket":                            "Bucket",
 		"bucket_name":                       "BucketName",
+		"db_cluster_id":                     "DbClusterId",
 		"db_instance_type":                  "DbInstanceType",
 		"db_parameter_group_identifier":     "DbParameterGroupIdentifier",
 		"db_storage_type":                   "DbStorageType",
@@ -543,6 +572,7 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		"influx_auth_parameters_secret_arn": "InfluxAuthParametersSecretArn",
 		"influx_db_instance_id":             "Id",
 		"key":                               "Key",
+		"kms_key_id":                        "KmsKeyId",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
 		"maintenance_schedule":              "MaintenanceSchedule",
 		"name":                              "Name",

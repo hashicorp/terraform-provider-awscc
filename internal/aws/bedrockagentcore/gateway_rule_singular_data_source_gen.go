@@ -128,6 +128,122 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "StaticRoute": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "Fallback": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "CircuitBreaker": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Mode": {
+		//	                        "default": "ENABLED",
+		//	                        "$ref": "#/definitions/CircuitBreakerMode",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "FirstByteTimeoutMilliseconds": {
+		//	                    "maximum": 900000,
+		//	                    "minimum": 50,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "TargetFallback": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "FirstByteTimeoutMilliseconds": {
+		//	                          "maximum": 900000,
+		//	                          "minimum": 50,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "Model": {
+		//	                          "maxLength": 2048,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "TargetName": {
+		//	                          "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "TriggerOn": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Errors": {
+		//	                              "items": {
+		//	                                "enum": [
+		//	                                  "CONNECTION_ERROR",
+		//	                                  "FIRST_BYTE_TIMEOUT",
+		//	                                  "UNROUTABLE"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 3,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            },
+		//	                            "StatusCodes": {
+		//	                              "items": {
+		//	                                "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 10,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "TargetName"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "TriggerOn": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Errors": {
+		//	                        "items": {
+		//	                          "enum": [
+		//	                            "CONNECTION_ERROR",
+		//	                            "FIRST_BYTE_TIMEOUT",
+		//	                            "UNROUTABLE"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 3,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      },
+		//	                      "StatusCodes": {
+		//	                        "items": {
+		//	                          "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 10,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TargetFallback"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Model": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                "type": "string"
+		//	              },
 		//	              "TargetName": {
 		//	                "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
 		//	                "type": "string"
@@ -150,6 +266,116 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "minLength": 1,
 		//	                      "type": "string"
 		//	                    },
+		//	                    "Fallback": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "CircuitBreaker": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Mode": {
+		//	                              "default": "ENABLED",
+		//	                              "$ref": "#/definitions/CircuitBreakerMode",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "FirstByteTimeoutMilliseconds": {
+		//	                          "maximum": 900000,
+		//	                          "minimum": 50,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "TargetFallback": {
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "FirstByteTimeoutMilliseconds": {
+		//	                                "maximum": 900000,
+		//	                                "minimum": 50,
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "Model": {
+		//	                                "maxLength": 2048,
+		//	                                "minLength": 1,
+		//	                                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TargetName": {
+		//	                                "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TriggerOn": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "Errors": {
+		//	                                    "items": {
+		//	                                      "enum": [
+		//	                                        "CONNECTION_ERROR",
+		//	                                        "FIRST_BYTE_TIMEOUT",
+		//	                                        "UNROUTABLE"
+		//	                                      ],
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "maxItems": 3,
+		//	                                    "minItems": 1,
+		//	                                    "type": "array"
+		//	                                  },
+		//	                                  "StatusCodes": {
+		//	                                    "items": {
+		//	                                      "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "maxItems": 10,
+		//	                                    "minItems": 1,
+		//	                                    "type": "array"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "TargetName"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 2,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        },
+		//	                        "TriggerOn": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Errors": {
+		//	                              "items": {
+		//	                                "enum": [
+		//	                                  "CONNECTION_ERROR",
+		//	                                  "FIRST_BYTE_TIMEOUT",
+		//	                                  "UNROUTABLE"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 3,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            },
+		//	                            "StatusCodes": {
+		//	                              "items": {
+		//	                                "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 10,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "TargetFallback"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Metadata": {
 		//	                      "additionalProperties": false,
 		//	                      "patternProperties": {
@@ -160,6 +386,12 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
+		//	                    },
+		//	                    "Model": {
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                      "type": "string"
 		//	                    },
 		//	                    "Name": {
 		//	                      "maxLength": 64,
@@ -279,6 +511,82 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: StaticRoute
 							"static_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Fallback
+									"fallback": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CircuitBreaker
+											"circuit_breaker": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Mode
+													"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: FirstByteTimeoutMilliseconds
+											"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: TargetFallback
+											"target_fallback": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: FirstByteTimeoutMilliseconds
+														"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Model
+														"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TargetName
+														"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TriggerOn
+														"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Errors
+																"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: StatusCodes
+																"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: TriggerOn
+											"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Errors
+													"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: StatusCodes
+													"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Model
+									"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: TargetName
 									"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
@@ -297,11 +605,87 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 												"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: Fallback
+												"fallback": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CircuitBreaker
+														"circuit_breaker": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Mode
+																"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: FirstByteTimeoutMilliseconds
+														"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TargetFallback
+														"target_fallback": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: FirstByteTimeoutMilliseconds
+																	"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Model
+																	"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TargetName
+																	"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TriggerOn
+																	"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Errors
+																			"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+																				ElementType: types.StringType,
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: StatusCodes
+																			"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																				ElementType: types.StringType,
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TriggerOn
+														"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Errors
+																"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: StatusCodes
+																"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: Metadata
 												"metadata":          // Pattern: ""
 												schema.MapAttribute{ /*START ATTRIBUTE*/
 													ElementType: types.StringType,
 													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Model
+												"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
 												}, /*END ATTRIBUTE*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -335,6 +719,40 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "items": {
 		//	    "properties": {
+		//	      "MatchModels": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AnyOf": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Operator": {
+		//	                  "default": "StringLike",
+		//	                  "$ref": "#/definitions/MatchOperator",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@:]+(/[a-zA-Z0-9\\-\\._\\*\\?@:]+)*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 100,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AnyOf"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "MatchPaths": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -397,13 +815,35 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 2,
+		//	  "maxItems": 3,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MatchModels
+					"match_models": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AnyOf
+							"any_of": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Operator
+										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: MatchPaths
 					"match_paths": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -473,7 +913,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(-[a-z]+)*):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -579,37 +1019,48 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::GatewayRule").WithTerraformTypeName("awscc_bedrockagentcore_gateway_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions":              "Actions",
-		"any_of":               "AnyOf",
-		"arn":                  "Arn",
-		"bundle_arn":           "BundleArn",
-		"bundle_version":       "BundleVersion",
-		"conditions":           "Conditions",
-		"configuration_bundle": "ConfigurationBundle",
-		"created_at":           "CreatedAt",
-		"description":          "Description",
-		"gateway_arn":          "GatewayArn",
-		"gateway_identifier":   "GatewayIdentifier",
-		"iam_principal":        "IamPrincipal",
-		"managed_by":           "ManagedBy",
-		"match_paths":          "MatchPaths",
-		"match_principals":     "MatchPrincipals",
-		"metadata":             "Metadata",
-		"name":                 "Name",
-		"operator":             "Operator",
-		"priority":             "Priority",
-		"route_to_target":      "RouteToTarget",
-		"rule_id":              "RuleId",
-		"static_override":      "StaticOverride",
-		"static_route":         "StaticRoute",
-		"status":               "Status",
-		"system":               "System",
-		"target_name":          "TargetName",
-		"traffic_split":        "TrafficSplit",
-		"updated_at":           "UpdatedAt",
-		"weight":               "Weight",
-		"weighted_override":    "WeightedOverride",
-		"weighted_route":       "WeightedRoute",
+		"actions":                         "Actions",
+		"any_of":                          "AnyOf",
+		"arn":                             "Arn",
+		"bundle_arn":                      "BundleArn",
+		"bundle_version":                  "BundleVersion",
+		"circuit_breaker":                 "CircuitBreaker",
+		"conditions":                      "Conditions",
+		"configuration_bundle":            "ConfigurationBundle",
+		"created_at":                      "CreatedAt",
+		"description":                     "Description",
+		"errors":                          "Errors",
+		"fallback":                        "Fallback",
+		"first_byte_timeout_milliseconds": "FirstByteTimeoutMilliseconds",
+		"gateway_arn":                     "GatewayArn",
+		"gateway_identifier":              "GatewayIdentifier",
+		"iam_principal":                   "IamPrincipal",
+		"managed_by":                      "ManagedBy",
+		"match_models":                    "MatchModels",
+		"match_paths":                     "MatchPaths",
+		"match_principals":                "MatchPrincipals",
+		"metadata":                        "Metadata",
+		"mode":                            "Mode",
+		"model":                           "Model",
+		"name":                            "Name",
+		"operator":                        "Operator",
+		"priority":                        "Priority",
+		"route_to_target":                 "RouteToTarget",
+		"rule_id":                         "RuleId",
+		"static_override":                 "StaticOverride",
+		"static_route":                    "StaticRoute",
+		"status":                          "Status",
+		"status_codes":                    "StatusCodes",
+		"system":                          "System",
+		"target_fallback":                 "TargetFallback",
+		"target_name":                     "TargetName",
+		"traffic_split":                   "TrafficSplit",
+		"trigger_on":                      "TriggerOn",
+		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
+		"weight":                          "Weight",
+		"weighted_override":               "WeightedOverride",
+		"weighted_route":                  "WeightedRoute",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

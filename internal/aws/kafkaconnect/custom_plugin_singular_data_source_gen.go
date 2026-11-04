@@ -42,7 +42,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
 		"custom_plugin_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

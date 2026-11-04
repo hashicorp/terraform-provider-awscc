@@ -401,7 +401,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(-[a-z]+)*):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -492,7 +492,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "Arn": {
 		//	                "maxLength": 170,
 		//	                "minLength": 1,
-		//	                "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	                "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z0-9-]+):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -577,7 +577,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "pattern": "^arn:(aws(-[a-z]+)*):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -602,7 +602,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Arn": {
 		//	      "maxLength": 170,
 		//	      "minLength": 1,
-		//	      "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$",
+		//	      "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$",
 		//	      "type": "string"
 		//	    },
 		//	    "Mode": {
@@ -640,6 +640,9 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Mcp": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "DisableMcpListToolsPagination": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "Instructions": {
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
@@ -689,6 +692,10 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Mcp
 				"mcp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DisableMcpListToolsPagination
+						"disable_mcp_list_tools_pagination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Instructions
 						"instructions": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -908,6 +915,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_claims":                     "CustomClaims",
 		"custom_jwt_authorizer":             "CustomJWTAuthorizer",
 		"description":                       "Description",
+		"disable_mcp_list_tools_pagination": "DisableMcpListToolsPagination",
 		"discovery_url":                     "DiscoveryUrl",
 		"enable_response_streaming":         "EnableResponseStreaming",
 		"endpoint_ip_address_type":          "EndpointIpAddressType",

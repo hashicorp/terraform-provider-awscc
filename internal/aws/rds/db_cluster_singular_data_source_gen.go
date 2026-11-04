@@ -1009,6 +1009,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of EC2 VPC security groups to associate with this DB cluster.\n If you plan to update the resource, don't specify VPC security groups in a shared VPC.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WithExpressConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"with_express_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1105,6 +1116,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"use_latest_restorable_time":            "UseLatestRestorableTime",
 		"value":                                 "Value",
 		"vpc_security_group_ids":                "VpcSecurityGroupIds",
+		"with_express_configuration":            "WithExpressConfiguration",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

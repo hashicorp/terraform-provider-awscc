@@ -119,7 +119,7 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the custom configuration.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
 		"worker_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

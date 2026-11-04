@@ -27,7 +27,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A list of gateway capability summaries that each contain a namespace and status.",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Contains a summary of a gateway capability configuration.",
@@ -49,7 +49,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"gateway_capability_summaries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"gateway_capability_summaries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CapabilityConfiguration
