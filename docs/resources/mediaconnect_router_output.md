@@ -136,6 +136,7 @@ resource "awscc_mediaconnect_router_output" "example" {
 ### Read-Only
 
 - `arn` (String)
+- `associated_source_endpoint_arns` (List of String) The Amazon Resource Names (ARNs) of one or more source endpoints that are associated with this router output.
 - `created_at` (String) The timestamp when the router output was created.
 - `id` (String) Uniquely identifies the resource.
 - `ip_address` (String) The IP address of the router output.
@@ -151,8 +152,9 @@ resource "awscc_mediaconnect_router_output" "example" {
 
 Optional:
 
-- `media_connect_flow` (Attributes) Configuration settings for connecting a router output to a MediaConnect flow source. (see [below for nested schema](#nestedatt--configuration--media_connect_flow))
-- `media_live_input` (Attributes) Configuration settings for connecting a router output to a MediaLive input. (see [below for nested schema](#nestedatt--configuration--media_live_input))
+- `media_connect_flow` (Attributes) Configuration settings for connecting a router output to a MediaConnect flow source. To connect the router output to the flow source, provide both flowArn and flowSourceArn. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption. (see [below for nested schema](#nestedatt--configuration--media_connect_flow))
+- `media_live_input` (Attributes) Configuration settings for connecting a router output to a MediaLive input. To connect the router output to the MediaLive input, provide both mediaLiveInputArn and mediaLivePipelineId. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change destinationTransitEncryption while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption. (see [below for nested schema](#nestedatt--configuration--media_live_input))
+- `source_endpoint` (Attributes) Configuration settings for a router output that is represented by a source endpoint. (see [below for nested schema](#nestedatt--configuration--source_endpoint))
 - `standard` (Attributes) The configuration settings for a standard router output, including the protocol, protocol-specific configuration, network interface, and availability zone. (see [below for nested schema](#nestedatt--configuration--standard))
 
 <a id="nestedatt--configuration--media_connect_flow"></a>
@@ -224,6 +226,42 @@ Optional:
 
 - `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
 - `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
+
+
+
+
+
+<a id="nestedatt--configuration--source_endpoint"></a>
+### Nested Schema for `configuration.source_endpoint`
+
+Optional:
+
+- `destination_transit_encryption` (Attributes) The encryption settings for an endpoint connection. This is a union type, so exactly one of its members is set: secretsManager when you store the encryption key or passphrase in Secrets Manager, or automatic when you let MediaConnect determine the encryption key when the endpoint connects. (see [below for nested schema](#nestedatt--configuration--source_endpoint--destination_transit_encryption))
+- `destination_transit_encryption_type` (String)
+- `endpoint_lifecycle_management` (String)
+
+<a id="nestedatt--configuration--source_endpoint--destination_transit_encryption"></a>
+### Nested Schema for `configuration.source_endpoint.destination_transit_encryption`
+
+Optional:
+
+- `automatic` (String) The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.
+- `secrets_manager` (Attributes) The endpoint encryption configuration for connections that use a key or passphrase that you store in Secrets Manager. (see [below for nested schema](#nestedatt--configuration--source_endpoint--destination_transit_encryption--secrets_manager))
+
+<a id="nestedatt--configuration--source_endpoint--destination_transit_encryption--secrets_manager"></a>
+### Nested Schema for `configuration.source_endpoint.destination_transit_encryption.secrets_manager`
+
+Optional:
+
+- `encryption_secret` (Attributes) The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection. (see [below for nested schema](#nestedatt--configuration--source_endpoint--destination_transit_encryption--secrets_manager--encryption_secret))
+- `encryption_secret_type` (String)
+
+<a id="nestedatt--configuration--source_endpoint--destination_transit_encryption--secrets_manager--encryption_secret"></a>
+### Nested Schema for `configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret`
+
+Optional:
+
+- `secret_arn` (String) The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint.
 
 
 

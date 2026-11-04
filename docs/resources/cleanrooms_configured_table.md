@@ -155,6 +155,7 @@ resource "awscc_cleanrooms_configured_table" "example" {
 Optional:
 
 - `athena` (Attributes) (see [below for nested schema](#nestedatt--table_reference--athena))
+- `databricks` (Attributes) (see [below for nested schema](#nestedatt--table_reference--databricks))
 - `glue` (Attributes) (see [below for nested schema](#nestedatt--table_reference--glue))
 - `snowflake` (Attributes) (see [below for nested schema](#nestedatt--table_reference--snowflake))
 
@@ -169,6 +170,34 @@ Optional:
 - `region` (String)
 - `table_name` (String)
 - `work_group` (String)
+
+
+<a id="nestedatt--table_reference--databricks"></a>
+### Nested Schema for `table_reference.databricks`
+
+Optional:
+
+- `connection_type` (Attributes) (see [below for nested schema](#nestedatt--table_reference--databricks--connection_type))
+- `schema_name` (String)
+- `table_name` (String)
+- `workspace_url` (String)
+
+<a id="nestedatt--table_reference--databricks--connection_type"></a>
+### Nested Schema for `table_reference.databricks.connection_type`
+
+Optional:
+
+- `delta_sharing` (Attributes) (see [below for nested schema](#nestedatt--table_reference--databricks--connection_type--delta_sharing))
+
+<a id="nestedatt--table_reference--databricks--connection_type--delta_sharing"></a>
+### Nested Schema for `table_reference.databricks.connection_type.delta_sharing`
+
+Optional:
+
+- `delta_share_endpoint` (String)
+- `share_name` (String)
+
+
 
 
 <a id="nestedatt--table_reference--glue"></a>

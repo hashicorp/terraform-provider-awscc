@@ -1596,8 +1596,9 @@ resource_schema "aws_cloudwatch_alarm_mute_rule" {
 }
 
 resource_schema "aws_cloudwatch_anomaly_detector" {
-  cloudformation_type_name = "AWS::CloudWatch::AnomalyDetector"
-  non_provisionable        = true
+  cloudformation_type_name   = "AWS::CloudWatch::AnomalyDetector"
+  non_provisionable          = true
+  path_aware_attribute_names = true
 }
 
 resource_schema "aws_cloudwatch_composite_alarm" {
@@ -5495,7 +5496,8 @@ resource_schema "aws_medialive_event_bridge_rule_template_group" {
 }
 
 resource_schema "aws_medialive_input" {
-  cloudformation_type_name = "AWS::MediaLive::Input"
+  cloudformation_type_name   = "AWS::MediaLive::Input"
+  path_aware_attribute_names = true
 }
 
 resource_schema "aws_medialive_input_security_group" {

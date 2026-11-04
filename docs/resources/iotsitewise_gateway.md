@@ -3,12 +3,12 @@
 page_title: "awscc_iotsitewise_gateway Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::IoTSiteWise::Gateway
+  Resource Type definition for AWS::IoTSiteWise::Gateway
 ---
 
 # awscc_iotsitewise_gateway (Resource)
 
-Resource schema for AWS::IoTSiteWise::Gateway
+Resource Type definition for AWS::IoTSiteWise::Gateway
 
 ## Example Usage
 
@@ -50,7 +50,7 @@ resource "awscc_iotsitewise_gateway" "example" {
 
 ### Optional
 
-- `gateway_capability_summaries` (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
+- `gateway_capability_summaries` (Attributes Set) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
 - `gateway_version` (String) The version of the gateway you want to create.
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 

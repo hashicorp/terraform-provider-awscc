@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_domain_access_grant_for_organization Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization-scoped CloudWatch Omni domain.
+  Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization domain.
 ---
 
 # awscc_cloudwatch_domain_access_grant_for_organization (Resource)
 
-Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization-scoped CloudWatch Omni domain.
+Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization domain.
 
 
 
@@ -17,10 +17,10 @@ Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. 
 
 ### Required
 
-- `domain_id` (String) The unique identifier of the organization domain the grant applies to.
-- `name` (String) The name of the grant.
-- `permission` (String) The permission level the grant confers. Organization grants are administrative only.
-- `principal` (Attributes) The principal the grant is issued to. Supply PrincipalId, or PrincipalAttributes for an attribute-based grant. (see [below for nested schema](#nestedatt--principal))
+- `domain_id` (String) The ID of the organization domain the grant belongs to.
+- `name` (String) A name that identifies the access grant.
+- `permission` (String) The permission granted.
+- `principal` (Attributes) The principal receiving the grant. (see [below for nested schema](#nestedatt--principal))
 
 ### Optional
 
@@ -28,13 +28,13 @@ Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. 
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the organization access grant.
-- `created_at` (String) The time the grant was created.
+- `arn` (String) The Amazon Resource Name (ARN) of the access grant.
+- `created_at` (String) The timestamp when the grant was created.
 - `created_by` (String) The principal that created the grant.
-- `grant_id` (String) The unique identifier of the grant.
-- `grant_type` (String) Whether the grant is managed by the service or by the customer.
+- `grant_id` (String) The unique ID of the access grant.
+- `grant_type` (String) Who manages the grant.
 - `id` (String) Uniquely identifies the resource.
-- `updated_at` (String) The time the grant was last updated.
+- `updated_at` (String) The timestamp when the grant was last updated.
 
 <a id="nestedatt--principal"></a>
 ### Nested Schema for `principal`
@@ -86,7 +86,7 @@ import {
 
 #### Required
 
-- `arn` (String) The Amazon Resource Name (ARN) of the organization access grant
+- `arn` (String) The Amazon Resource Name (ARN) of the access grant
 
 #### Optional
 

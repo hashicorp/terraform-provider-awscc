@@ -23,6 +23,7 @@ Data Source schema for AWS::Route53Profiles::ProfileAssociation
 
 - `arn` (String) The Amazon Resource Name (ARN) of the profile association.
 - `name` (String) The name of an association between a  Profile and a VPC.
+- `priority` (Number) The priority of the profile association, used to order the profiles applied to a VPC when multiple profiles are associated with it. Lower values have higher precedence. Omit for the first profile associated with a VPC. This orders whole profiles on a VPC and is distinct from the DNS Firewall rule group priority carried in a ProfileResourceAssociation's ResourceProperties.
 - `profile_association_id` (String) Primary Identifier for  Profile Association
 - `profile_id` (String) The ID of the  profile that you associated with the resource that is specified by ResourceId.
 - `resource_id` (String) The resource that you associated the  profile with.

@@ -337,6 +337,7 @@ Data Source schema for AWS::RDS::DBCluster
 - `vpc_security_group_ids` (List of String) A list of EC2 VPC security groups to associate with this DB cluster.
  If you plan to update the resource, don't specify VPC security groups in a shared VPC.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
+- `with_express_configuration` (Boolean)
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`

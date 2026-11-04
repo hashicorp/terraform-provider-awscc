@@ -77,6 +77,7 @@ Read-Only:
 - `passive_ip` (String)
 - `proxy_config` (Attributes) (see [below for nested schema](#nestedatt--protocol_details--proxy_config))
 - `set_stat_option` (String)
+- `sftp_ports` (Attributes List) (see [below for nested schema](#nestedatt--protocol_details--sftp_ports))
 - `tls_session_resumption_mode` (String)
 
 <a id="nestedatt--protocol_details--proxy_config"></a>
@@ -85,6 +86,15 @@ Read-Only:
 Read-Only:
 
 - `sftp_mode` (String)
+
+
+<a id="nestedatt--protocol_details--sftp_ports"></a>
+### Nested Schema for `protocol_details.sftp_ports`
+
+Read-Only:
+
+- `communication_mode` (String)
+- `sftp_port` (Number)
 
 
 

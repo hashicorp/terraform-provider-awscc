@@ -58,7 +58,7 @@ resource "awscc_mediaconnect_router_network_interface" "example" {
 
 ### Optional
 
-- `region_name` (String) The AWS Region for the router network interface. Defaults to the current region if not specified.
+- `region_name` (String) The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.
 - `tags` (Attributes List) Key-value pairs that can be used to tag and organize this router network interface. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

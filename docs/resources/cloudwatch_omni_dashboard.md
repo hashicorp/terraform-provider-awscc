@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_omni_dashboard Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource type definition for AWS::CloudWatch::OmniDashboard
+  Resource Type definition for AWS::CloudWatch::OmniDashboard. A dashboard is a saved arrangement of panels that shows your team one agreed view of a system, backed by queries against your space's telemetry.
 ---
 
 # awscc_cloudwatch_omni_dashboard (Resource)
 
-Resource type definition for AWS::CloudWatch::OmniDashboard
+Resource Type definition for AWS::CloudWatch::OmniDashboard. A dashboard is a saved arrangement of panels that shows your team one agreed view of a system, backed by queries against your space's telemetry.
 
 
 
@@ -17,23 +17,23 @@ Resource type definition for AWS::CloudWatch::OmniDashboard
 
 ### Required
 
-- `body` (String) The dashboard body, a JSON document describing the dashboard's widgets and layout.
-- `name` (String) The name of the dashboard.
-- `space_id` (String) The unique identifier of the space the dashboard belongs to.
+- `body` (String) The dashboard definition.
+- `name` (String) A name that identifies the dashboard.
+- `space_id` (String) The unique ID of the space to create the dashboard in.
 
 ### Optional
 
-- `description` (String) The description of the dashboard.
+- `description` (String) An optional description of the dashboard.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the dashboard.
-- `created_at` (String) The time the dashboard was created.
+- `created_at` (String) The timestamp when the dashboard was created.
 - `created_by` (String) The principal that created the dashboard.
-- `dashboard_id` (String) The unique identifier of the dashboard.
+- `dashboard_id` (String) The unique ID of the dashboard.
 - `id` (String) Uniquely identifies the resource.
-- `updated_at` (String) The time the dashboard was last updated.
+- `updated_at` (String) The timestamp when the dashboard was last updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -64,8 +64,8 @@ import {
 
 #### Required
 
-- `dashboard_id` (String) The unique identifier of the dashboard
-- `space_id` (String) The unique identifier of the space the dashboard belongs to
+- `dashboard_id` (String) The unique ID of the dashboard
+- `space_id` (String) The unique ID of the space to create the dashboard in
 
 #### Optional
 

@@ -81,6 +81,8 @@ Optional:
 
 Optional:
 
+- `azure_dev_ops_capabilities` (Attributes) Azure DevOps repository capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--azure_dev_ops_capabilities))
+- `azure_dev_ops_repository` (Attributes) Azure DevOps repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--azure_dev_ops_repository))
 - `bitbucket_capabilities` (Attributes) Bitbucket repository capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--bitbucket_capabilities))
 - `bitbucket_repository` (Attributes) Bitbucket repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--bitbucket_repository))
 - `confluence_capabilities` (Attributes) Confluence document capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--confluence_capabilities))
@@ -89,6 +91,25 @@ Optional:
 - `git_hub_repository` (Attributes) GitHub repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_hub_repository))
 - `git_lab_capabilities` (Attributes) GitLab repository capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_lab_capabilities))
 - `git_lab_repository` (Attributes) GitLab repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_lab_repository))
+
+<a id="nestedatt--integrated_resources--provider_resources--azure_dev_ops_capabilities"></a>
+### Nested Schema for `integrated_resources.provider_resources.azure_dev_ops_capabilities`
+
+Optional:
+
+- `leave_comments` (Boolean) Enables Code Review in the repository
+- `remediate_code` (Boolean) Enables creation of pull requests with automated fixes
+
+
+<a id="nestedatt--integrated_resources--provider_resources--azure_dev_ops_repository"></a>
+### Nested Schema for `integrated_resources.provider_resources.azure_dev_ops_repository`
+
+Optional:
+
+- `name` (String) Azure DevOps repository name
+- `organization` (String) Read-only Azure DevOps organization that owns the repository, populated from service-side metadata
+- `project` (String) Azure DevOps project that owns the repository
+
 
 <a id="nestedatt--integrated_resources--provider_resources--bitbucket_capabilities"></a>
 ### Nested Schema for `integrated_resources.provider_resources.bitbucket_capabilities`

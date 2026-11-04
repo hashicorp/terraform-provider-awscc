@@ -21,17 +21,17 @@ Data Source schema for AWS::CloudWatch::DomainAccessGrantForOrganization
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the organization access grant.
-- `created_at` (String) The time the grant was created.
+- `arn` (String) The Amazon Resource Name (ARN) of the access grant.
+- `created_at` (String) The timestamp when the grant was created.
 - `created_by` (String) The principal that created the grant.
-- `domain_id` (String) The unique identifier of the organization domain the grant applies to.
-- `grant_id` (String) The unique identifier of the grant.
-- `grant_type` (String) Whether the grant is managed by the service or by the customer.
-- `name` (String) The name of the grant.
-- `permission` (String) The permission level the grant confers. Organization grants are administrative only.
-- `principal` (Attributes) The principal the grant is issued to. Supply PrincipalId, or PrincipalAttributes for an attribute-based grant. (see [below for nested schema](#nestedatt--principal))
+- `domain_id` (String) The ID of the organization domain the grant belongs to.
+- `grant_id` (String) The unique ID of the access grant.
+- `grant_type` (String) Who manages the grant.
+- `name` (String) A name that identifies the access grant.
+- `permission` (String) The permission granted.
+- `principal` (Attributes) The principal receiving the grant. (see [below for nested schema](#nestedatt--principal))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- `updated_at` (String) The time the grant was last updated.
+- `updated_at` (String) The timestamp when the grant was last updated.
 
 <a id="nestedatt--principal"></a>
 ### Nested Schema for `principal`
