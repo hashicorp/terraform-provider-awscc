@@ -22,15 +22,15 @@ Data Source schema for AWS::CloudWatch::OmniDashboard
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the dashboard.
-- `body` (String) The dashboard body, a JSON document describing the dashboard's widgets and layout.
-- `created_at` (String) The time the dashboard was created.
+- `body` (String) The dashboard definition.
+- `created_at` (String) The timestamp when the dashboard was created.
 - `created_by` (String) The principal that created the dashboard.
-- `dashboard_id` (String) The unique identifier of the dashboard.
-- `description` (String) The description of the dashboard.
-- `name` (String) The name of the dashboard.
-- `space_id` (String) The unique identifier of the space the dashboard belongs to.
+- `dashboard_id` (String) The unique ID of the dashboard.
+- `description` (String) An optional description of the dashboard.
+- `name` (String) A name that identifies the dashboard.
+- `space_id` (String) The unique ID of the space to create the dashboard in.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- `updated_at` (String) The time the dashboard was last updated.
+- `updated_at` (String) The timestamp when the dashboard was last updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

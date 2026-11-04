@@ -1,0 +1,423 @@
+{
+  "typeName": "AWS::CloudWatch::AccessGrant",
+  "description": "Resource Type definition for AWS::CloudWatch::AccessGrant. An access grant authorizes a principal to perform a set of actions on resources in a space.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the access grant.",
+      "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:access-grant/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "GrantId": {
+      "type": "string",
+      "description": "The unique ID of the access grant.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "A name that identifies the access grant.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The ID of the domain the grant belongs to.",
+      "pattern": "^d-[0-9a-z]{1,25}$"
+    },
+    "SpaceId": {
+      "type": "string",
+      "description": "The space this grant applies to. Domain-scoped grants are returned by ListDomainAccessGrantsForOrganization instead.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Principal": {
+      "$ref": "#/definitions/AccessGrantPrincipal",
+      "description": "The principal receiving the grant."
+    },
+    "Permission": {
+      "type": "string",
+      "description": "The permission granted.",
+      "enum": [
+        "SPACE_ADMIN",
+        "READ",
+        "READ_WRITE_DELETE",
+        "CUSTOM"
+      ]
+    },
+    "ScopedActions": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "description": "Groups of actions allowed by the grant, each with the resource scopes and conditions that limit those actions.",
+      "items": {
+        "$ref": "#/definitions/ScopedActions"
+      },
+      "maxItems": 20
+    },
+    "AccountId": {
+      "type": "string",
+      "description": "The AWS account ID that owns the grant.",
+      "pattern": "^[0-9]{12}$",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "GrantType": {
+      "type": "string",
+      "description": "Who manages the grant.",
+      "enum": [
+        "SERVICE_MANAGED",
+        "CUSTOMER_MANAGED"
+      ]
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "The principal that created the grant."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the grant was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the grant was last updated."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "AccessGrantPrincipal": {
+      "type": "object",
+      "description": "The principal receiving the grant. Specify PrincipalId, PrincipalAttributes, or both.",
+      "properties": {
+        "PrincipalType": {
+          "type": "string",
+          "description": "The type of principal receiving the grant.",
+          "enum": [
+            "IDC_USER",
+            "IDC_GROUP",
+            "IAM_USER",
+            "IAM_ROLE",
+            "IAM_ROOT",
+            "ACCESS_PROFILE",
+            "ALERT",
+            "AGENT"
+          ]
+        },
+        "PrincipalId": {
+          "type": "string",
+          "description": "The ID of the principal receiving the grant. An IAM principal ARN, an Identity Center UUID, or a service-defined identifier.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:/_+=,.@-]*$",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "PrincipalAttributes": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": true,
+          "description": "Attribute conditions for attribute-based access. When provided, the grant targets any principal matching all specified conditions. Supported only for IDC_USER principals.",
+          "items": {
+            "$ref": "#/definitions/AccessGrantPrincipalAttribute"
+          },
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "PrincipalType"
+      ],
+      "additionalProperties": false
+    },
+    "AccessGrantPrincipalAttribute": {
+      "type": "object",
+      "description": "A single attribute condition used to match principals for attribute-based access.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The Identity Center user attribute to match on. One of userName, active, userStatus, displayName, email, name.givenName, name.familyName, enterprise.department, enterprise.division, enterprise.organization, enterprise.costCenter, or enterprise.employeeNumber.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The attribute value.",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ScopedActions": {
+      "type": "object",
+      "description": "A group of actions within an access grant, together with the resource scopes and context conditions that apply to exactly those actions.",
+      "properties": {
+        "Actions": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": true,
+          "description": "The actions this group applies to, each in vendor-code:Action form.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "Resources": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": true,
+          "description": "Resource scopes constraining these actions to specific resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceScope"
+          },
+          "maxItems": 10
+        },
+        "ContextConditions": {
+          "type": "object",
+          "description": "Context conditions for fine-grained access control on these actions, as a map of condition keys to lists of allowed values.",
+          "patternProperties": {
+            "": {
+              "type": "array",
+              "uniqueItems": false,
+              "insertionOrder": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "maxProperties": 10,
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Actions"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceScope": {
+      "type": "object",
+      "description": "A single resource scope entry within an access grant. Associates a resource type with optional ARN patterns, tag conditions, and row-level filters.",
+      "properties": {
+        "ResourceType": {
+          "type": "string",
+          "description": "The resource type name, for example DataSet or OmniDashboard."
+        },
+        "ResourceArns": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": true,
+          "description": "Specific resource ARNs or ARN patterns. When set, actions are limited to these resources. When absent, defaults to all resources of the type.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5
+        },
+        "Tags": {
+          "type": "object",
+          "description": "Tag-based conditions for dynamic resource scoping. Access applies only to resources carrying all of the specified tag key-value pairs.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "maxProperties": 3,
+          "additionalProperties": false
+        },
+        "SignalTypes": {
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "description": "Signal types this scope's row filtering applies to. Required when RowScopeGroups is set.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "LOGS",
+              "TRACES"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "RowScopeGroups": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": true,
+          "description": "Row-level filters for this scope, as an OR of AND-groups: a row is visible when it matches every filter in any one group. Requires SignalTypes.",
+          "items": {
+            "$ref": "#/definitions/RowScopeGroup"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "ResourceType"
+      ],
+      "additionalProperties": false
+    },
+    "RowScopeGroup": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "description": "A group of row filters that must all match. A row satisfies the group only when it matches every filter in it.",
+      "items": {
+        "$ref": "#/definitions/RowScope"
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "RowScope": {
+      "type": "object",
+      "description": "A single additive row-level filter on an access grant. A row is visible when its value for the given field matches the filter's values.",
+      "properties": {
+        "Field": {
+          "type": "string",
+          "description": "The field the allowlist applies to, for example serviceName or accountId.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "Operator": {
+          "type": "string",
+          "description": "Match operator applied to this filter's values.",
+          "enum": [
+            "IN"
+          ]
+        },
+        "Values": {
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "description": "The values the field is matched against.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "Field",
+        "Operator",
+        "Values"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/GrantId"
+    ]
+  ],
+  "required": [
+    "DomainId",
+    "SpaceId",
+    "Name",
+    "Principal",
+    "Permission"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/GrantId",
+    "/properties/AccountId",
+    "/properties/GrantType",
+    "/properties/CreatedBy",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/SpaceId",
+    "/properties/Name",
+    "/properties/Principal",
+    "/properties/Permission",
+    "/properties/ScopedActions",
+    "/properties/Tags"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ScopedActions/*/ContextConditions"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:CreateAccessGrant",
+        "cloudwatch:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetAccessGrant",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteAccessGrant",
+        "cloudwatch:GetAccessGrant",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListAccessGrants"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

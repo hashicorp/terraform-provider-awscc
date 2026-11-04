@@ -217,7 +217,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Amazon Resource Name for the created Connector.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -616,7 +616,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "CustomPluginArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
-		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	            "type": "string"
 		//	          },
 		//	          "Revision": {
@@ -672,7 +672,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*",
 		//	  "type": "string"
 		//	}
 		"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -738,7 +738,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "WorkerConfigurationArn": {
 		//	      "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
-		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafkaconnect:.*",
 		//	      "type": "string"
 		//	    }
 		//	  },

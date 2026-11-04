@@ -1338,6 +1338,63 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "Databricks": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ConnectionType": {
+		//	          "properties": {
+		//	            "DeltaSharing": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DeltaShareEndpoint": {
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 10,
+		//	                  "pattern": "^https://(?:[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/api/2\\.0/delta-sharing|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.opensharing\\.[a-z0-9-]+\\.cloud\\.databricks\\.com/api/2\\.0/opensharing)/metastores/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/recipients/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "ShareName": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DeltaShareEndpoint",
+		//	                "ShareName"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SchemaName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "WorkspaceUrl": {
+		//	          "maxLength": 256,
+		//	          "minLength": 10,
+		//	          "pattern": "^https://[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/?$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ConnectionType",
+		//	        "SchemaName",
+		//	        "TableName",
+		//	        "WorkspaceUrl"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Glue": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -1567,6 +1624,104 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Databricks
+				"databricks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConnectionType
+						"connection_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeltaSharing
+								"delta_sharing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DeltaShareEndpoint
+										"delta_share_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(10, 1024),
+												stringvalidator.RegexMatches(regexp.MustCompile("^https://(?:[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/api/2\\.0/delta-sharing|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.opensharing\\.[a-z0-9-]+\\.cloud\\.databricks\\.com/api/2\\.0/opensharing)/metastores/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/recipients/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ShareName
+										"share_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 255),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SchemaName
+						"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WorkspaceUrl
+						"workspace_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(10, 256),
+								stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1902,8 +2057,12 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"columns":                            "Columns",
 		"comparison_controls":                "ComparisonControls",
 		"configured_table_identifier":        "ConfiguredTableIdentifier",
+		"connection_type":                    "ConnectionType",
 		"custom":                             "Custom",
 		"database_name":                      "DatabaseName",
+		"databricks":                         "Databricks",
+		"delta_share_endpoint":               "DeltaShareEndpoint",
+		"delta_sharing":                      "DeltaSharing",
 		"description":                        "Description",
 		"differential_privacy":               "DifferentialPrivacy",
 		"dimension_columns":                  "DimensionColumns",
@@ -1929,6 +2088,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"schema_name":                        "SchemaName",
 		"secret_arn":                         "SecretArn",
 		"selected_analysis_methods":          "SelectedAnalysisMethods",
+		"share_name":                         "ShareName",
 		"snowflake":                          "Snowflake",
 		"table_name":                         "TableName",
 		"table_reference":                    "TableReference",
@@ -1938,6 +2098,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"v1":                                 "V1",
 		"value":                              "Value",
 		"work_group":                         "WorkGroup",
+		"workspace_url":                      "WorkspaceUrl",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

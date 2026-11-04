@@ -38,14 +38,14 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the organization access grant.",
+		//	  "description": "The Amazon Resource Name (ARN) of the access grant.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:organization-access-grant/(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the organization access grant.",
+			Description: "The Amazon Resource Name (ARN) of the access grant.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -55,13 +55,13 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the grant was created.",
+		//	  "description": "The timestamp when the grant was created.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the grant was created.",
+			Description: "The timestamp when the grant was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -85,12 +85,12 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier of the organization domain the grant applies to.",
+		//	  "description": "The ID of the organization domain the grant belongs to.",
 		//	  "pattern": "^d-[0-9a-z]{1,25}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the organization domain the grant applies to.",
+			Description: "The ID of the organization domain the grant belongs to.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^d-[0-9a-z]{1,25}$"), ""),
@@ -103,12 +103,12 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier of the grant.",
+		//	  "description": "The unique ID of the access grant.",
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"grant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the grant.",
+			Description: "The unique ID of the access grant.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -118,7 +118,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Whether the grant is managed by the service or by the customer.",
+		//	  "description": "Who manages the grant.",
 		//	  "enum": [
 		//	    "SERVICE_MANAGED",
 		//	    "CUSTOMER_MANAGED"
@@ -126,7 +126,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		//	  "type": "string"
 		//	}
 		"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the grant is managed by the service or by the customer.",
+			Description: "Who manages the grant.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -136,14 +136,14 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the grant.",
+		//	  "description": "A name that identifies the access grant.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the grant.",
+			Description: "A name that identifies the access grant.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
@@ -157,14 +157,14 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The permission level the grant confers. Organization grants are administrative only.",
+		//	  "description": "The permission granted.",
 		//	  "enum": [
 		//	    "ADMIN"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The permission level the grant confers. Organization grants are administrative only.",
+			Description: "The permission granted.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -180,7 +180,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The principal the grant is issued to. Supply PrincipalId, or PrincipalAttributes for an attribute-based grant.",
+		//	  "description": "The principal receiving the grant.",
 		//	  "properties": {
 		//	    "PrincipalAttributes": {
 		//	      "description": "Attribute key-value pairs that select the principals the grant applies to.",
@@ -308,7 +308,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The principal the grant is issued to. Supply PrincipalId, or PrincipalAttributes for an attribute-based grant.",
+			Description: "The principal receiving the grant.",
 			Required:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
@@ -393,13 +393,13 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the grant was last updated.",
+		//	  "description": "The timestamp when the grant was last updated.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the grant was last updated.",
+			Description: "The timestamp when the grant was last updated.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -417,7 +417,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization-scoped CloudWatch Omni domain.",
+		Description: "Resource Type definition for AWS::CloudWatch::DomainAccessGrantForOrganization. An organization access grant authorizes a principal to administer an organization domain.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -429,7 +429,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "arn",
-			Description:       "The Amazon Resource Name (ARN) of the organization access grant",
+			Description:       "The Amazon Resource Name (ARN) of the access grant",
 			RequiredForImport: true,
 		})
 

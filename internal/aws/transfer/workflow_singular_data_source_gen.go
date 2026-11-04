@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -1020,6 +1021,27 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the details for the steps that are in the specified workflow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StructuredLogDestinations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the log destinations for the workflow.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 1600,
+		//	    "minLength": 20,
+		//	    "pattern": "^arn:\\S+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"structured_log_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specifies the log destinations for the workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1102,31 +1124,32 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Workflow").WithTerraformTypeName("awscc_transfer_workflow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                       "Arn",
-		"bucket":                    "Bucket",
-		"copy_step_details":         "CopyStepDetails",
-		"custom_step_details":       "CustomStepDetails",
-		"decrypt_step_details":      "DecryptStepDetails",
-		"delete_step_details":       "DeleteStepDetails",
-		"description":               "Description",
-		"destination_file_location": "DestinationFileLocation",
-		"efs_file_location":         "EfsFileLocation",
-		"file_system_id":            "FileSystemId",
-		"key":                       "Key",
-		"name":                      "Name",
-		"on_exception_steps":        "OnExceptionSteps",
-		"overwrite_existing":        "OverwriteExisting",
-		"path":                      "Path",
-		"s3_file_location":          "S3FileLocation",
-		"source_file_location":      "SourceFileLocation",
-		"steps":                     "Steps",
-		"tag_step_details":          "TagStepDetails",
-		"tags":                      "Tags",
-		"target":                    "Target",
-		"timeout_seconds":           "TimeoutSeconds",
-		"type":                      "Type",
-		"value":                     "Value",
-		"workflow_id":               "WorkflowId",
+		"arn":                         "Arn",
+		"bucket":                      "Bucket",
+		"copy_step_details":           "CopyStepDetails",
+		"custom_step_details":         "CustomStepDetails",
+		"decrypt_step_details":        "DecryptStepDetails",
+		"delete_step_details":         "DeleteStepDetails",
+		"description":                 "Description",
+		"destination_file_location":   "DestinationFileLocation",
+		"efs_file_location":           "EfsFileLocation",
+		"file_system_id":              "FileSystemId",
+		"key":                         "Key",
+		"name":                        "Name",
+		"on_exception_steps":          "OnExceptionSteps",
+		"overwrite_existing":          "OverwriteExisting",
+		"path":                        "Path",
+		"s3_file_location":            "S3FileLocation",
+		"source_file_location":        "SourceFileLocation",
+		"steps":                       "Steps",
+		"structured_log_destinations": "StructuredLogDestinations",
+		"tag_step_details":            "TagStepDetails",
+		"tags":                        "Tags",
+		"target":                      "Target",
+		"timeout_seconds":             "TimeoutSeconds",
+		"type":                        "Type",
+		"value":                       "Value",
+		"workflow_id":                 "WorkflowId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

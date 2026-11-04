@@ -161,6 +161,7 @@ resource "awscc_timestream_influx_db_instance" "example" {
 - `db_parameter_group_identifier` (String) The name of an existing InfluxDB parameter group.
 - `db_storage_type` (String) The storage type of the InfluxDB instance.
 - `deployment_type` (String) Deployment type of the InfluxDB Instance.
+- `kms_key_id` (String) The customer managed key used to encrypt data in the InfluxDB instance.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB instance. (see [below for nested schema](#nestedatt--log_delivery_configuration))
 - `maintenance_schedule` (Attributes) The maintenance schedule for the InfluxDB instance. (see [below for nested schema](#nestedatt--maintenance_schedule))
 - `name` (String) The unique name that is associated with the InfluxDB instance.
@@ -178,6 +179,7 @@ resource "awscc_timestream_influx_db_instance" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) that is associated with the InfluxDB instance.
 - `availability_zone` (String) The Availability Zone (AZ) where the InfluxDB instance is created.
+- `db_cluster_id` (String) The service generated unique identifier of the InfluxDB cluster containing this instance.
 - `endpoint` (String) The connection endpoint for the InfluxDB instance.
 - `id` (String) Uniquely identifies the resource.
 - `influx_auth_parameters_secret_arn` (String) The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.

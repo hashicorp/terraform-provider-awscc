@@ -1420,6 +1420,23 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WithExpressConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"with_express_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// WithExpressConfiguration is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1528,12 +1545,14 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"use_latest_restorable_time":            "UseLatestRestorableTime",
 		"value":                                 "Value",
 		"vpc_security_group_ids":                "VpcSecurityGroupIds",
+		"with_express_configuration":            "WithExpressConfiguration",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ClusterScalabilityType",
 		"/properties/DBInstanceParameterGroupName",
 		"/properties/DeleteAutomatedBackups",
+		"/properties/WithExpressConfiguration",
 		"/properties/MasterUserAuthenticationType",
 		"/properties/MasterUserPassword",
 		"/properties/RestoreToTime",

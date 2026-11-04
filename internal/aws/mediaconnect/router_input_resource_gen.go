@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -49,6 +50,27 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AssociatedDestinationEndpointArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Names (ARNs) of one or more destination endpoints that are associated with this router input.",
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 64,
+		//	    "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:destinationEndpoint:[a-z0-9]{12}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"associated_destination_endpoint_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Amazon Resource Names (ARNs) of one or more destination endpoints that are associated with this router input.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -71,6 +93,76 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The configuration settings for a router input.",
 		//	  "properties": {
+		//	    "DestinationEndpoint": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration settings for a router input that is represented by a destination endpoint.",
+		//	      "properties": {
+		//	        "EndpointLifecycleManagement": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "UNMANAGED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SourceTransitDecryption": {
+		//	          "description": "The encryption settings for an endpoint connection. This is a union type, so exactly one of its members is set: secretsManager when you store the encryption key or passphrase in Secrets Manager, or automatic when you let MediaConnect determine the encryption key when the endpoint connects.",
+		//	          "properties": {
+		//	            "Automatic": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.",
+		//	              "type": "object"
+		//	            },
+		//	            "SecretsManager": {
+		//	              "additionalProperties": false,
+		//	              "description": "The endpoint encryption configuration for connections that use a key or passphrase that you store in Secrets Manager.",
+		//	              "properties": {
+		//	                "EncryptionSecret": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+		//	                  "properties": {
+		//	                    "SecretArn": {
+		//	                      "description": "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint.",
+		//	                      "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "SecretArn"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "EncryptionSecretType": {
+		//	                  "enum": [
+		//	                    "AES_128_KEY",
+		//	                    "AES_192_KEY",
+		//	                    "AES_256_KEY",
+		//	                    "SRT_PASSPHRASE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "EncryptionSecret"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SourceTransitDecryptionType": {
+		//	          "enum": [
+		//	            "SECRETS_MANAGER",
+		//	            "AUTOMATIC"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EndpointLifecycleManagement",
+		//	        "SourceTransitDecryption"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Failover": {
 		//	      "additionalProperties": false,
 		//	      "description": "Configuration settings for a failover router input that allows switching between two input sources.",
@@ -276,7 +368,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "MediaConnectFlow": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configuration settings for connecting a router input to a flow output.",
+		//	      "description": "Configuration settings for connecting a router input to a flow output. To connect the router input to the flow output, provide both flowArn and flowOutputArn. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change sourceTransitDecryption while the router input is connected to a flow output. To change it, first disconnect the router input, then update the decryption.",
 		//	      "properties": {
 		//	        "FlowArn": {
 		//	          "description": "The ARN of the flow to connect to.",
@@ -345,7 +437,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "MediaLiveChannel": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configuration settings for connecting a router input to a MediaLive channel output.",
+		//	      "description": "Configuration settings for connecting a router input to a MediaLive channel output. To connect the router input to the MediaLive channel output, provide all three of mediaLiveChannelArn, mediaLivePipelineId, and mediaLiveChannelOutputName. To disconnect it, call the update operation and omit all three fields while keeping this configuration object. You can't change sourceTransitDecryption while the router input is connected to a MediaLive channel output. To change it, first disconnect the router input, then update the decryption.",
 		//	      "properties": {
 		//	        "MediaLiveChannelArn": {
 		//	          "description": "The ARN of the MediaLive channel to connect to this router input.",
@@ -694,6 +786,124 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationEndpoint
+				"destination_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EndpointLifecycleManagement
+						"endpoint_lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"UNMANAGED",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceTransitDecryption
+						"source_transit_decryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Automatic
+								"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "The configuration for automatic endpoint encryption. In this mode, MediaConnect determines the encryption key when the endpoint connects. This type does not require any additional settings.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretsManager
+								"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EncryptionSecret
+										"encryption_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: SecretArn
+												"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"), ""),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: EncryptionSecretType
+										"encryption_secret_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"AES_128_KEY",
+													"AES_192_KEY",
+													"AES_256_KEY",
+													"SRT_PASSPHRASE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The endpoint encryption configuration for connections that use a key or passphrase that you store in Secrets Manager.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption settings for an endpoint connection. This is a union type, so exactly one of its members is set: secretsManager when you store the encryption key or passphrase in Secrets Manager, or automatic when you let MediaConnect determine the encryption key when the endpoint connects.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceTransitDecryptionType
+						"source_transit_decryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"SECRETS_MANAGER",
+									"AUTOMATIC",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for a router input that is represented by a destination endpoint.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Failover
 				"failover": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1151,7 +1361,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configuration settings for connecting a router input to a flow output.",
+					Description: "Configuration settings for connecting a router input to a flow output. To connect the router input to the flow output, provide both flowArn and flowOutputArn. To disconnect it, call the update operation and omit both fields while keeping this configuration object. You can't change sourceTransitDecryption while the router input is connected to a flow output. To change it, first disconnect the router input, then update the decryption.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1286,7 +1496,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configuration settings for connecting a router input to a MediaLive channel output.",
+					Description: "Configuration settings for connecting a router input to a MediaLive channel output. To connect the router input to the MediaLive channel output, provide all three of mediaLiveChannelArn, mediaLivePipelineId, and mediaLiveChannelOutputName. To disconnect it, call the update operation and omit all three fields while keeping this configuration object. You can't change sourceTransitDecryption while the router input is connected to a MediaLive channel output. To change it, first disconnect the router input, then update the decryption.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2032,7 +2242,8 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	    "FAILOVER",
 		//	    "MERGE",
 		//	    "MEDIACONNECT_FLOW",
-		//	    "MEDIALIVE_CHANNEL"
+		//	    "MEDIALIVE_CHANNEL",
+		//	    "DESTINATION_ENDPOINT"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2342,7 +2553,9 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "INPUT_100",
 		//	    "INPUT_50",
-		//	    "INPUT_20"
+		//	    "INPUT_20",
+		//	    "INPUT_500",
+		//	    "INPUT_250"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2353,6 +2566,8 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 					"INPUT_100",
 					"INPUT_50",
 					"INPUT_20",
+					"INPUT_500",
+					"INPUT_250",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -2538,6 +2753,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                    "Arn",
+		"associated_destination_endpoint_arns":   "AssociatedDestinationEndpointArns",
 		"automatic":                              "Automatic",
 		"availability_zone":                      "AvailabilityZone",
 		"black_frames":                           "BlackFrames",
@@ -2549,9 +2765,13 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		"day":                                    "Day",
 		"decryption_configuration":               "DecryptionConfiguration",
 		"default":                                "Default",
+		"destination_endpoint":                   "DestinationEndpoint",
 		"encryption_key":                         "EncryptionKey",
 		"encryption_key_configuration":           "EncryptionKeyConfiguration",
 		"encryption_key_type":                    "EncryptionKeyType",
+		"encryption_secret":                      "EncryptionSecret",
+		"encryption_secret_type":                 "EncryptionSecretType",
+		"endpoint_lifecycle_management":          "EndpointLifecycleManagement",
 		"failover":                               "Failover",
 		"flow_arn":                               "FlowArn",
 		"flow_output_arn":                        "FlowOutputArn",
@@ -2594,6 +2814,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		"source_port":                            "SourcePort",
 		"source_priority_mode":                   "SourcePriorityMode",
 		"source_transit_decryption":              "SourceTransitDecryption",
+		"source_transit_decryption_type":         "SourceTransitDecryptionType",
 		"srt_caller":                             "SrtCaller",
 		"srt_listener":                           "SrtListener",
 		"standard":                               "Standard",

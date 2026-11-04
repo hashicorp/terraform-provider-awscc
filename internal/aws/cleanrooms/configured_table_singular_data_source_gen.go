@@ -846,6 +846,63 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "Databricks": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ConnectionType": {
+		//	          "properties": {
+		//	            "DeltaSharing": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DeltaShareEndpoint": {
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 10,
+		//	                  "pattern": "^https://(?:[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/api/2\\.0/delta-sharing|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.opensharing\\.[a-z0-9-]+\\.cloud\\.databricks\\.com/api/2\\.0/opensharing)/metastores/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/recipients/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "ShareName": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DeltaShareEndpoint",
+		//	                "ShareName"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SchemaName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\p{L}\\p{M}\\p{N}\\p{Pc}\\p{Pd}]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "WorkspaceUrl": {
+		//	          "maxLength": 256,
+		//	          "minLength": 10,
+		//	          "pattern": "^https://[a-zA-Z0-9.-]+\\.cloud\\.databricks\\.com/?$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ConnectionType",
+		//	        "SchemaName",
+		//	        "TableName",
+		//	        "WorkspaceUrl"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Glue": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -1005,6 +1062,44 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: Databricks
+				"databricks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConnectionType
+						"connection_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeltaSharing
+								"delta_sharing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DeltaShareEndpoint
+										"delta_share_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ShareName
+										"share_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SchemaName
+						"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkspaceUrl
+						"workspace_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Glue
 				"glue": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1159,8 +1254,12 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"columns":                            "Columns",
 		"comparison_controls":                "ComparisonControls",
 		"configured_table_identifier":        "ConfiguredTableIdentifier",
+		"connection_type":                    "ConnectionType",
 		"custom":                             "Custom",
 		"database_name":                      "DatabaseName",
+		"databricks":                         "Databricks",
+		"delta_share_endpoint":               "DeltaShareEndpoint",
+		"delta_sharing":                      "DeltaSharing",
 		"description":                        "Description",
 		"differential_privacy":               "DifferentialPrivacy",
 		"dimension_columns":                  "DimensionColumns",
@@ -1186,6 +1285,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"schema_name":                        "SchemaName",
 		"secret_arn":                         "SecretArn",
 		"selected_analysis_methods":          "SelectedAnalysisMethods",
+		"share_name":                         "ShareName",
 		"snowflake":                          "Snowflake",
 		"table_name":                         "TableName",
 		"table_reference":                    "TableReference",
@@ -1195,6 +1295,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"v1":                                 "V1",
 		"value":                              "Value",
 		"work_group":                         "WorkGroup",
+		"workspace_url":                      "WorkspaceUrl",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

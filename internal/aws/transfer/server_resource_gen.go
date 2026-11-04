@@ -9,11 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -525,6 +527,33 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "SftpPorts": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CommunicationMode": {
+		//	            "enum": [
+		//	              "CLIENT_TALK_FIRST",
+		//	              "SERVER_TALK_FIRST"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "SftpPort": {
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SftpPort"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "TlsSessionResumptionMode": {
 		//	      "enum": [
 		//	        "DISABLED",
@@ -603,6 +632,48 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SftpPorts
+				"sftp_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CommunicationMode
+							"communication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"CLIENT_TALK_FIRST",
+										"SERVER_TALK_FIRST",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SftpPort
+							"sftp_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(1, 65535),
+									fwvalidators.NotNullInt64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 3),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TlsSessionResumptionMode
@@ -1049,6 +1120,7 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"as_2_service_managed_egress_ip_addresses": "As2ServiceManagedEgressIpAddresses",
 		"as_2_transports":                          "As2Transports",
 		"certificate":                              "Certificate",
+		"communication_mode":                       "CommunicationMode",
 		"create_with_host_key":                     "CreateWithHostKey",
 		"directory_id":                             "DirectoryId",
 		"directory_listing_optimization":           "DirectoryListingOptimization",
@@ -1078,6 +1150,8 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"set_stat_option":                          "SetStatOption",
 		"sftp_authentication_methods":              "SftpAuthenticationMethods",
 		"sftp_mode":                                "SftpMode",
+		"sftp_port":                                "SftpPort",
+		"sftp_ports":                               "SftpPorts",
 		"state":                                    "State",
 		"structured_log_destinations":              "StructuredLogDestinations",
 		"subnet_ids":                               "SubnetIds",

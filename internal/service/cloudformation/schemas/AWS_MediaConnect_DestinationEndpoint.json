@@ -1,0 +1,644 @@
+{
+  "typeName": "AWS::MediaConnect::DestinationEndpoint",
+  "description": "Represents a destination endpoint in AWS Elemental MediaConnect that can be connected to a router output",
+  "definitions": {
+    "DestinationEndpointAssociatedResourceDetails": {
+      "description": "The details of the resource that is associated with a destination endpoint. This is a union type, so exactly one of its members is set, depending on the type of the destination endpoint.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Standard",
+          "properties": {
+            "Standard": {
+              "$ref": "#/definitions/StandardDestinationEndpointAssociatedResourceDetails"
+            }
+          },
+          "required": [
+            "Standard"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RouterInput",
+          "properties": {
+            "RouterInput": {
+              "$ref": "#/definitions/RouterInputDestinationEndpointAssociatedResourceDetails"
+            }
+          },
+          "required": [
+            "RouterInput"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DestinationEndpointConfiguration": {
+      "description": "The configuration settings for a destination endpoint. This is a union type, so exactly one of its members is set, depending on the type of the destination endpoint.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Standard",
+          "properties": {
+            "Standard": {
+              "$ref": "#/definitions/StandardDestinationEndpointConfiguration"
+            }
+          },
+          "required": [
+            "Standard"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RouterInput",
+          "properties": {
+            "RouterInput": {
+              "$ref": "#/definitions/RouterInputDestinationEndpointConfiguration"
+            }
+          },
+          "required": [
+            "RouterInput"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DestinationEndpointConnectionState": {
+      "type": "string",
+      "enum": [
+        "CONNECTED",
+        "DISCONNECTED",
+        "CONNECTING",
+        "DISCONNECTING"
+      ]
+    },
+    "DestinationEndpointNetworkingType": {
+      "type": "string",
+      "enum": [
+        "PUBLIC",
+        "VPC"
+      ]
+    },
+    "DestinationEndpointProtocol": {
+      "type": "string",
+      "enum": [
+        "RTP",
+        "RIST",
+        "SRT_CALLER",
+        "SRT_LISTENER"
+      ]
+    },
+    "DestinationEndpointRegistrationState": {
+      "type": "string",
+      "enum": [
+        "REGISTERED",
+        "REGISTERING",
+        "DEREGISTERING",
+        "REGISTRATION_FAILED"
+      ]
+    },
+    "DestinationEndpointType": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "ROUTER_INPUT"
+      ]
+    },
+    "EndpointEncryptionSecretConfiguration": {
+      "type": "object",
+      "description": "The configuration for the Secrets Manager secret that holds the key or passphrase used to encrypt an endpoint connection.",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+          "description": "The ARN of the Secrets Manager secret that holds the key or passphrase. The secret must be encrypted with a customer managed Amazon Web Services KMS key that is enabled and symmetric; it cannot use the Amazon Web Services managed key aws/secretsmanager. The secret must be in the same Amazon Web Services account and Region as the endpoint."
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "EndpointLifecycle": {
+      "type": "string",
+      "enum": [
+        "MANAGED",
+        "UNMANAGED"
+      ]
+    },
+    "ForwardErrorCorrectionState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "PublicDestinationEndpointNetworkingConfiguration": {
+      "type": "object",
+      "description": "The networking configuration for a publicly accessible destination endpoint, including the CIDR blocks that are allowed to connect.",
+      "properties": {
+        "DestinationAllowRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublicDestinationEndpointNetworkingConfigurationAllowRule"
+          },
+          "maxItems": 10,
+          "minItems": 0,
+          "description": "The rules that specify which CIDR blocks can connect to the destination endpoint. You can specify up to 10 rules."
+        }
+      },
+      "required": [
+        "DestinationAllowRules"
+      ],
+      "additionalProperties": false
+    },
+    "PublicDestinationEndpointNetworkingConfigurationAllowRule": {
+      "type": "object",
+      "description": "A rule that allows a specific CIDR block to connect to the public destination endpoint.",
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$",
+          "description": "The CIDR block that is allowed to connect to the destination endpoint, in CIDR notation."
+        }
+      },
+      "required": [
+        "Cidr"
+      ],
+      "additionalProperties": false
+    },
+    "RistStandardDestinationEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a destination endpoint that uses the RIST protocol.",
+      "properties": {
+        "DestinationAddress": {
+          "type": "string",
+          "description": "The IP address on which the destination endpoint receives content."
+        },
+        "DestinationIngestPort": {
+          "type": "integer",
+          "maximum": 65531,
+          "minimum": 1024,
+          "description": "The port on which the destination endpoint receives content. The valid range is 1024 to 65531."
+        }
+      },
+      "required": [
+        "DestinationAddress",
+        "DestinationIngestPort"
+      ],
+      "additionalProperties": false
+    },
+    "RouterInputDestinationEndpointAssociatedResourceDetails": {
+      "type": "object",
+      "description": "The details of the router input that is associated with a destination endpoint.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the router input."
+        },
+        "MaximumBitrate": {
+          "type": "integer",
+          "description": "The maximum bitrate of the router input, in bits per second."
+        },
+        "State": {
+          "$ref": "#/definitions/RouterInputState"
+        }
+      },
+      "required": [
+        "MaximumBitrate",
+        "Name",
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "RouterInputDestinationEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a destination endpoint that represents a router input.",
+      "properties": {
+        "RouterInputArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:routerInput:[a-z0-9]{12}$",
+          "description": "The Amazon Resource Name (ARN) of the router input that the destination endpoint represents."
+        }
+      },
+      "required": [
+        "RouterInputArn"
+      ],
+      "additionalProperties": false
+    },
+    "RouterInputState": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "STANDBY",
+        "STARTING",
+        "ACTIVE",
+        "STOPPING",
+        "DELETING",
+        "UPDATING",
+        "ERROR",
+        "RECOVERING",
+        "MIGRATING"
+      ]
+    },
+    "RtpStandardDestinationEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a destination endpoint that uses the RTP protocol.",
+      "properties": {
+        "DestinationAddress": {
+          "type": "string",
+          "description": "The IP address on which the destination endpoint receives content."
+        },
+        "DestinationIngestPort": {
+          "type": "integer",
+          "maximum": 65531,
+          "minimum": 1024,
+          "description": "The port on which the destination endpoint receives content. The valid range is 1024 to 65531."
+        },
+        "ForwardErrorCorrectionState": {
+          "$ref": "#/definitions/ForwardErrorCorrectionState"
+        }
+      },
+      "required": [
+        "DestinationAddress",
+        "DestinationIngestPort",
+        "ForwardErrorCorrectionState"
+      ],
+      "additionalProperties": false
+    },
+    "SrtCallerStandardDestinationEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a destination endpoint that uses SRT in caller mode.",
+      "properties": {
+        "SourceListenerPort": {
+          "type": "integer",
+          "maximum": 30000,
+          "minimum": 3000,
+          "description": "The port on which the source listens for the connection. The valid range is 3000 to 30000."
+        },
+        "MinimumLatencyMilliseconds": {
+          "type": "integer",
+          "maximum": 10000,
+          "minimum": 10,
+          "description": "The minimum latency, in milliseconds, for the SRT connection. The valid range is 10 to 10000."
+        },
+        "EncryptionPassphrase": {
+          "$ref": "#/definitions/EndpointEncryptionSecretConfiguration"
+        }
+      },
+      "required": [
+        "MinimumLatencyMilliseconds",
+        "SourceListenerPort"
+      ],
+      "additionalProperties": false
+    },
+    "SrtListenerStandardDestinationEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a destination endpoint that uses SRT in listener mode.",
+      "properties": {
+        "DestinationAddress": {
+          "type": "string",
+          "description": "The IP address on which the destination endpoint listens for incoming connections."
+        },
+        "DestinationIngestPort": {
+          "type": "integer",
+          "maximum": 65531,
+          "minimum": 0,
+          "description": "The port on which the destination endpoint listens for incoming connections. The valid range is 0 to 65531."
+        },
+        "MinimumLatencyMilliseconds": {
+          "type": "integer",
+          "maximum": 10000,
+          "minimum": 10,
+          "description": "The minimum latency, in milliseconds, for the SRT connection. The valid range is 10 to 10000."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "The stream ID that identifies the content for the SRT connection."
+        },
+        "EncryptionPassphrase": {
+          "$ref": "#/definitions/EndpointEncryptionSecretConfiguration"
+        }
+      },
+      "required": [
+        "DestinationAddress",
+        "DestinationIngestPort",
+        "MinimumLatencyMilliseconds"
+      ],
+      "additionalProperties": false
+    },
+    "StandardDestinationEndpointAssociatedResourceDetails": {
+      "type": "object",
+      "description": "The associated resource details for a standard destination endpoint. This type does not require any additional settings.",
+      "additionalProperties": false
+    },
+    "StandardDestinationEndpointConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for a standard destination endpoint.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 164,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$",
+          "description": "The name of the destination endpoint."
+        },
+        "DestinationNetworkingConfiguration": {
+          "$ref": "#/definitions/StandardDestinationEndpointNetworkingConfiguration"
+        },
+        "ProtocolConfiguration": {
+          "$ref": "#/definitions/StandardDestinationEndpointProtocolConfiguration"
+        },
+        "DestinationNetworkingType": {
+          "$ref": "#/definitions/DestinationEndpointNetworkingType"
+        },
+        "Protocol": {
+          "$ref": "#/definitions/DestinationEndpointProtocol"
+        }
+      },
+      "required": [
+        "DestinationNetworkingConfiguration",
+        "Name",
+        "ProtocolConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "StandardDestinationEndpointNetworkingConfiguration": {
+      "description": "The networking configuration for a standard destination endpoint. This is a union type, so exactly one of its members is set: public for a publicly accessible endpoint, or vpc for an endpoint in a virtual private cloud (VPC).",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Public",
+          "properties": {
+            "Public": {
+              "$ref": "#/definitions/PublicDestinationEndpointNetworkingConfiguration"
+            }
+          },
+          "required": [
+            "Public"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Vpc",
+          "properties": {
+            "Vpc": {
+              "$ref": "#/definitions/VpcDestinationEndpointNetworkingConfiguration"
+            }
+          },
+          "required": [
+            "Vpc"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "StandardDestinationEndpointProtocolConfiguration": {
+      "description": "The protocol configuration for a standard destination endpoint. This is a union type, so exactly one of its members is set, depending on the protocol that the destination endpoint uses.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Rist",
+          "properties": {
+            "Rist": {
+              "$ref": "#/definitions/RistStandardDestinationEndpointConfiguration"
+            }
+          },
+          "required": [
+            "Rist"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SrtListener",
+          "properties": {
+            "SrtListener": {
+              "$ref": "#/definitions/SrtListenerStandardDestinationEndpointConfiguration"
+            }
+          },
+          "required": [
+            "SrtListener"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SrtCaller",
+          "properties": {
+            "SrtCaller": {
+              "$ref": "#/definitions/SrtCallerStandardDestinationEndpointConfiguration"
+            }
+          },
+          "required": [
+            "SrtCaller"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Rtp",
+          "properties": {
+            "Rtp": {
+              "$ref": "#/definitions/RtpStandardDestinationEndpointConfiguration"
+            }
+          },
+          "required": [
+            "Rtp"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "VpcDestinationEndpointNetworkingConfiguration": {
+      "type": "object",
+      "description": "The networking configuration for a destination endpoint in a virtual private cloud (VPC).",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 1,
+          "description": "The IDs of the security groups to associate with the destination endpoint. You can specify from 1 to 5 security groups."
+        },
+        "SubnetId": {
+          "type": "string",
+          "description": "The ID of the subnet to use for the destination endpoint."
+        }
+      },
+      "required": [
+        "SecurityGroupIds",
+        "SubnetId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 64,
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:destinationEndpoint:[a-z0-9]{12}$"
+    },
+    "AssociatedResourceDetails": {
+      "$ref": "#/definitions/DestinationEndpointAssociatedResourceDetails"
+    },
+    "AvailabilityZone": {
+      "type": "string",
+      "description": "The Availability Zone in which the destination endpoint is located."
+    },
+    "AvailabilityZoneId": {
+      "type": "string",
+      "description": "The ID of the Availability Zone in which the destination endpoint is located."
+    },
+    "Configuration": {
+      "$ref": "#/definitions/DestinationEndpointConfiguration"
+    },
+    "ConnectionState": {
+      "$ref": "#/definitions/DestinationEndpointConnectionState"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date and time when the destination endpoint was created.",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the destination endpoint."
+    },
+    "DestinationType": {
+      "$ref": "#/definitions/DestinationEndpointType"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier of the destination endpoint."
+    },
+    "LifecycleManagement": {
+      "$ref": "#/definitions/EndpointLifecycle"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the destination endpoint."
+    },
+    "RegionName": {
+      "type": "string",
+      "description": "The name of the Amazon Web Services Region in which the destination endpoint is located."
+    },
+    "RegistrationState": {
+      "$ref": "#/definitions/DestinationEndpointRegistrationState"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "The tags associated with the destination endpoint. Each tag is a key-value pair.",
+      "insertionOrder": false
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time when the destination endpoint was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "Configuration"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AssociatedResourceDetails",
+    "/properties/AvailabilityZone",
+    "/properties/AvailabilityZoneId",
+    "/properties/ConnectionState",
+    "/properties/CreatedAt",
+    "/properties/DestinationType",
+    "/properties/Id",
+    "/properties/LifecycleManagement",
+    "/properties/Name",
+    "/properties/RegistrationState",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Configuration/Standard/DestinationNetworkingConfiguration/Vpc",
+    "/properties/Configuration/RouterInput",
+    "/properties/RegionName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediaconnect:GetDestinationEndpoint",
+        "mediaconnect:ListDestinationEndpoints",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateTags",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "mediaconnect:AssociateDestination",
+        "mediaconnect:RegisterDestinationEndpoint",
+        "mediaconnect:TagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediaconnect:GetDestinationEndpoint",
+        "mediaconnect:ListDestinationEndpoints",
+        "mediaconnect:DeregisterDestinationEndpoint",
+        "mediaconnect:DisassociateDestination"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mediaconnect:ListDestinationEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mediaconnect:GetDestinationEndpoint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mediaconnect:ListTagsForResource",
+        "mediaconnect:TagResource",
+        "mediaconnect:UntagResource",
+        "mediaconnect:GetDestinationEndpoint",
+        "mediaconnect:UpdateDestinationEndpoint"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "mediaconnect:ListTagsForResource",
+      "mediaconnect:TagResource",
+      "mediaconnect:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "additionalProperties": false
+}

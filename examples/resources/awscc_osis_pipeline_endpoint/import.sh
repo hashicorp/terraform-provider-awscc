@@ -1,0 +1,1 @@
+$ terraform import awscc_osis_pipeline_endpoint.example "arn"

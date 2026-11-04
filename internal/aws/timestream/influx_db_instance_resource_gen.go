@@ -116,6 +116,23 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Bucket is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: DbClusterId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The service generated unique identifier of the InfluxDB cluster containing this instance.",
+		//	  "maxLength": 64,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"db_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service generated unique identifier of the InfluxDB cluster containing this instance.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DbInstanceType
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +282,7 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.",
-		//	  "pattern": "^arn:[a-z]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
+		//	  "pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
 		"influx_auth_parameters_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -273,6 +290,29 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The customer managed key used to encrypt data in the InfluxDB instance.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9:/_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer managed key used to encrypt data in the InfluxDB instance.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:/_\\-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LogDeliveryConfiguration
@@ -800,6 +840,7 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"availability_zone":                 "AvailabilityZone",
 		"bucket":                            "Bucket",
 		"bucket_name":                       "BucketName",
+		"db_cluster_id":                     "DbClusterId",
 		"db_instance_type":                  "DbInstanceType",
 		"db_parameter_group_identifier":     "DbParameterGroupIdentifier",
 		"db_storage_type":                   "DbStorageType",
@@ -809,6 +850,7 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"influx_auth_parameters_secret_arn": "InfluxAuthParametersSecretArn",
 		"influx_db_instance_id":             "Id",
 		"key":                               "Key",
+		"kms_key_id":                        "KmsKeyId",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
 		"maintenance_schedule":              "MaintenanceSchedule",
 		"name":                              "Name",

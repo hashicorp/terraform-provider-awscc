@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1751 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1763 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -440,6 +440,10 @@ resource_schema "aws_appfabric_app_authorization" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_appfabric_app_bundle" {
+  cloudformation_type_name = "AWS::AppFabric::AppBundle"
+}
+
 resource_schema "aws_appfabric_ingestion" {
   cloudformation_type_name               = "AWS::AppFabric::Ingestion"
   suppress_plural_data_source_generation = true
@@ -766,6 +770,10 @@ resource_schema "aws_bcm_scheduled_report" {
 
 resource_schema "aws_bcmdataexports_export" {
   cloudformation_type_name = "AWS::BCMDataExports::Export"
+}
+
+resource_schema "aws_backup_backup_access_point" {
+  cloudformation_type_name = "AWS::Backup::BackupAccessPoint"
 }
 
 resource_schema "aws_backup_backup_plan" {
@@ -1565,6 +1573,14 @@ resource_schema "aws_cloudtrail_trail" {
   cloudformation_type_name = "AWS::CloudTrail::Trail"
 }
 
+resource_schema "aws_cloudwatch_access_grant" {
+  cloudformation_type_name                 = "AWS::CloudWatch::AccessGrant"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: ScopedActions/Resources/RowScopeGroups is of unsupported type: list of array of array"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: ScopedActions/Resources/RowScopeGroups is of unsupported type: list of array of array"
+}
+
 resource_schema "aws_cloudwatch_access_profile" {
   cloudformation_type_name               = "AWS::CloudWatch::AccessProfile"
   suppress_plural_data_source_generation = true
@@ -1580,8 +1596,9 @@ resource_schema "aws_cloudwatch_alarm_mute_rule" {
 }
 
 resource_schema "aws_cloudwatch_anomaly_detector" {
-  cloudformation_type_name = "AWS::CloudWatch::AnomalyDetector"
-  non_provisionable        = true
+  cloudformation_type_name   = "AWS::CloudWatch::AnomalyDetector"
+  non_provisionable          = true
+  path_aware_attribute_names = true
 }
 
 resource_schema "aws_cloudwatch_composite_alarm" {
@@ -2277,6 +2294,10 @@ resource_schema "aws_customerprofiles_segment_definition" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_dax_cluster" {
+  cloudformation_type_name = "AWS::DAX::Cluster"
+}
+
 resource_schema "aws_dax_parameter_group" {
   cloudformation_type_name = "AWS::DAX::ParameterGroup"
 }
@@ -2703,6 +2724,10 @@ resource_schema "aws_directconnect_public_virtual_interface" {
   cloudformation_type_name = "AWS::DirectConnect::PublicVirtualInterface"
 }
 
+resource_schema "aws_directconnect_resiliency_group" {
+  cloudformation_type_name = "AWS::DirectConnect::ResiliencyGroup"
+}
+
 resource_schema "aws_directconnect_transit_virtual_interface" {
   cloudformation_type_name = "AWS::DirectConnect::TransitVirtualInterface"
 }
@@ -3041,6 +3066,10 @@ resource_schema "aws_ec2_security_group_ingress" {
 
 resource_schema "aws_ec2_security_group_vpc_association" {
   cloudformation_type_name = "AWS::EC2::SecurityGroupVpcAssociation"
+}
+
+resource_schema "aws_ec2_snapshot" {
+  cloudformation_type_name = "AWS::EC2::Snapshot"
 }
 
 resource_schema "aws_ec2_snapshot_block_public_access" {
@@ -4860,6 +4889,10 @@ resource_schema "aws_lakeformation_principal_permissions" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_lakeformation_resource" {
+  cloudformation_type_name = "AWS::LakeFormation::Resource"
+}
+
 resource_schema "aws_lakeformation_tag" {
   cloudformation_type_name = "AWS::LakeFormation::Tag"
 }
@@ -5233,6 +5266,10 @@ resource_schema "aws_m2_environment" {
   cloudformation_type_name = "AWS::M2::Environment"
 }
 
+resource_schema "aws_mgn_application" {
+  cloudformation_type_name = "AWS::MGN::Application"
+}
+
 resource_schema "aws_mgn_connector" {
   cloudformation_type_name = "AWS::MGN::Connector"
 }
@@ -5247,6 +5284,10 @@ resource_schema "aws_mgn_launch_configuration_template" {
 
 resource_schema "aws_mgn_network_migration_definition" {
   cloudformation_type_name = "AWS::MGN::NetworkMigrationDefinition"
+}
+
+resource_schema "aws_mgn_replication_configuration_template" {
+  cloudformation_type_name = "AWS::MGN::ReplicationConfigurationTemplate"
 }
 
 resource_schema "aws_mgn_wave" {
@@ -5358,6 +5399,10 @@ resource_schema "aws_mediaconnect_bridge_source" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_mediaconnect_destination_endpoint" {
+  cloudformation_type_name = "AWS::MediaConnect::DestinationEndpoint"
+}
+
 resource_schema "aws_mediaconnect_flow" {
   cloudformation_type_name = "AWS::MediaConnect::Flow"
   frozen_since             = "2025-02-26"
@@ -5404,6 +5449,10 @@ resource_schema "aws_mediaconnect_router_output" {
   cloudformation_type_name = "AWS::MediaConnect::RouterOutput"
 }
 
+resource_schema "aws_mediaconnect_source_endpoint" {
+  cloudformation_type_name = "AWS::MediaConnect::SourceEndpoint"
+}
+
 resource_schema "aws_mediaconvert_certificate_association" {
   cloudformation_type_name = "AWS::MediaConvert::CertificateAssociation"
 }
@@ -5447,7 +5496,8 @@ resource_schema "aws_medialive_event_bridge_rule_template_group" {
 }
 
 resource_schema "aws_medialive_input" {
-  cloudformation_type_name = "AWS::MediaLive::Input"
+  cloudformation_type_name   = "AWS::MediaLive::Input"
+  path_aware_attribute_names = true
 }
 
 resource_schema "aws_medialive_input_security_group" {
@@ -5929,6 +5979,10 @@ resource_schema "aws_odb_odb_peering_connection" {
 
 resource_schema "aws_osis_pipeline" {
   cloudformation_type_name = "AWS::OSIS::Pipeline"
+}
+
+resource_schema "aws_osis_pipeline_endpoint" {
+  cloudformation_type_name = "AWS::OSIS::PipelineEndpoint"
 }
 
 resource_schema "aws_oam_link" {

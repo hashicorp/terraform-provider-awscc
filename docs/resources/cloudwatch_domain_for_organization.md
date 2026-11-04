@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_domain_for_organization Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudWatch::DomainForOrganization. The organization-level boundary for CloudWatch Omni: an organization domain configures the identity providers users sign in through for the whole AWS Organization and exposes the endpoint URLs used to reach CloudWatch Omni. It can only be created by the organization's management account.
+  Resource Type definition for AWS::CloudWatch::DomainForOrganization. An organization domain provides a single sign-in URL and centralized identity provider configuration for your AWS Organization, removing the need for each account to configure its own domain. Only the management account can create it.
 ---
 
 # awscc_cloudwatch_domain_for_organization (Resource)
 
-Resource Type definition for AWS::CloudWatch::DomainForOrganization. The organization-level boundary for CloudWatch Omni: an organization domain configures the identity providers users sign in through for the whole AWS Organization and exposes the endpoint URLs used to reach CloudWatch Omni. It can only be created by the organization's management account.
+Resource Type definition for AWS::CloudWatch::DomainForOrganization. An organization domain provides a single sign-in URL and centralized identity provider configuration for your AWS Organization, removing the need for each account to configure its own domain. Only the management account can create it.
 
 
 
@@ -17,29 +17,29 @@ Resource Type definition for AWS::CloudWatch::DomainForOrganization. The organiz
 
 ### Required
 
-- `domain_access_role_arn` (String) The ARN of an IAM role in the management account that CloudWatch Omni assumes for domain-scoped credential vending.
-- `identity_providers` (List of String) The identity providers configured for the domain.
-- `name` (String) A name that identifies the domain.
+- `domain_access_role_arn` (String) The ARN of the customer-provided IAM role in the management account used for domain access.
+- `identity_providers` (List of String) The identity providers configured for the organization domain.
+- `name` (String) A name that identifies the organization domain.
 
 ### Optional
 
-- `identity_provider_configuration` (Attributes) Identity provider configuration for the domain. (see [below for nested schema](#nestedatt--identity_provider_configuration))
+- `identity_provider_configuration` (Attributes) Identity provider configuration for the organization domain. (see [below for nested schema](#nestedatt--identity_provider_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the resource.
-- `created_at` (String) The timestamp when the domain was created.
+- `arn` (String) The Amazon Resource Name (ARN) of the organization domain.
+- `created_at` (String) The timestamp when the organization domain was created.
 - `custom_endpoint_urls` (List of String) Additional endpoint URLs derived from the domain name.
-- `domain_endpoint_url` (String) The HTTPS endpoint URL for accessing the domain.
-- `domain_id` (String) The unique ID of the domain.
+- `domain_endpoint_url` (String) The HTTPS endpoint URL for accessing the organization domain.
+- `domain_id` (String) The unique ID of the organization domain.
 - `id` (String) Uniquely identifies the resource.
 - `identity_center_application_arn` (String) The ARN of the Identity Center application. Absent for IAM-only domains.
-- `organization_id` (String) The ID of the AWS Organization this domain belongs to.
-- `owner_account_id` (String) The account ID of the organization's management account, which owns this domain.
-- `region` (String) The Region where this domain was created.
-- `status` (String) Current status of the domain.
-- `updated_at` (String) The timestamp when the domain was last updated.
+- `organization_id` (String) The ID of the AWS Organization that owns the domain.
+- `owner_account_id` (String) The AWS account ID that owns the organization domain.
+- `region` (String) The Region where this organization domain was created.
+- `status` (String) Current status of the organization domain.
+- `updated_at` (String) The timestamp when the organization domain was last updated.
 
 <a id="nestedatt--identity_provider_configuration"></a>
 ### Nested Schema for `identity_provider_configuration`
@@ -85,7 +85,7 @@ import {
 
 #### Required
 
-- `arn` (String) The Amazon Resource Name (ARN) of the resource
+- `arn` (String) The Amazon Resource Name (ARN) of the organization domain
 
 #### Optional
 

@@ -157,7 +157,7 @@ import {
 
 #### Required
 
-- `anomaly_detector_id` (String)
+- `id` (String)
 
 #### Optional
 

@@ -1,0 +1,150 @@
+{
+  "typeName": "AWS::MGN::Application",
+  "description": "An MGN Application is a logical grouping of source servers being migrated together using AWS Application Migration Service.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ApplicationID": {
+      "type": "string",
+      "description": "The ID of the application.",
+      "minLength": 21,
+      "maxLength": 21,
+      "pattern": "^app-[0-9a-zA-Z]{17}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the application.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the application.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the application.",
+      "minLength": 0,
+      "maxLength": 600,
+      "pattern": "^[^\\x00]*$"
+    },
+    "IsArchived": {
+      "type": "boolean",
+      "description": "Whether the application is archived."
+    },
+    "CreationDateTime": {
+      "type": "string",
+      "description": "The date and time the application was created.",
+      "minLength": 19,
+      "maxLength": 32
+    },
+    "LastModifiedDateTime": {
+      "type": "string",
+      "description": "The date and time the application was last modified.",
+      "minLength": 19,
+      "maxLength": 32
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A set of tags to associate with the application.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ApplicationID",
+    "/properties/Arn",
+    "/properties/IsArchived",
+    "/properties/CreationDateTime",
+    "/properties/LastModifiedDateTime"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ApplicationID"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mgn:TagResource",
+      "mgn:UntagResource",
+      "mgn:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mgn:CreateApplication",
+        "mgn:TagResource",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mgn:ListApplications",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mgn:UpdateApplication",
+        "mgn:TagResource",
+        "mgn:UntagResource",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mgn:DeleteApplication",
+        "mgn:ListApplications",
+        "mgn:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mgn:ListApplications"
+      ]
+    }
+  }
+}

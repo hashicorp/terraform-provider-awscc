@@ -1149,6 +1149,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules for each service.\n  To remove this property from your service resource, specify an empty ``PlacementStrategy`` array.",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "The task placement strategy for a task or service. For more information, see [Task placement strategies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html) in the *Amazon Elastic Container Service Developer Guide*.",

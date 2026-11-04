@@ -74,6 +74,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	            "properties": {
 		//	              "Cidr": {
 		//	                "description": "The CIDR block that is allowed to access the public router network interface.",
+		//	                "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -195,6 +196,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The name of the router network interface.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -218,11 +220,11 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS Region for the router network interface. Defaults to the current region if not specified.",
+		//	  "description": "The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.",
 		//	  "type": "string"
 		//	}
 		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region for the router network interface. Defaults to the current region if not specified.",
+			Description: "The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: State

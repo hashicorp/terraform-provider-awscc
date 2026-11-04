@@ -55,6 +55,17 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The name of an association between a  Profile and a VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Priority
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The priority of the profile association, used to order the profiles applied to a VPC when multiple profiles are associated with it. Lower values have higher precedence. Omit for the first profile associated with a VPC. This orders whole profiles on a VPC and is distinct from the DNS Firewall rule group priority carried in a ProfileResourceAssociation's ResourceProperties.",
+		//	  "type": "integer"
+		//	}
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The priority of the profile association, used to order the profiles applied to a VPC when multiple profiles are associated with it. Lower values have higher precedence. Omit for the first profile associated with a VPC. This orders whole profiles on a VPC and is distinct from the DNS Firewall rule group priority carried in a ProfileResourceAssociation's ResourceProperties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -146,6 +157,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		"arn":                    "Arn",
 		"key":                    "Key",
 		"name":                   "Name",
+		"priority":               "Priority",
 		"profile_association_id": "Id",
 		"profile_id":             "ProfileId",
 		"resource_id":            "ResourceId",

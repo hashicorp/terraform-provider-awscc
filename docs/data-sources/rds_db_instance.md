@@ -321,7 +321,9 @@ Data Source schema for AWS::RDS::DBInstance
   +   ``sqlserver-ee`` 
   +   ``sqlserver-se`` 
   +   ``sqlserver-ex`` 
-  +   ``sqlserver-web``
+  +   ``sqlserver-web`` 
+  +  ``sqlserver-dev-ee`` (for RDS for SQL Server Developer Edition with Enterprise Edition capabilities)
+  +  ``sqlserver-dev-se`` (for RDS for SQL Server Developer Edition with Standard Edition capabilities)
 - `engine_lifecycle_support` (String) The lifecycle type for this DB instance.
   By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB instance will fail if the DB major version is past its end of standard support date.
   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the engine lifecycle support is managed by the DB cluster.

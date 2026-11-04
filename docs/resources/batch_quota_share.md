@@ -20,11 +20,11 @@ Creates an AWS Batch quota share. Each quota share operates as a virtual queue w
 - `capacity_limits` (Attributes List) A list that specifies the quantity and type of compute capacity allocated to the quota share. (see [below for nested schema](#nestedatt--capacity_limits))
 - `job_queue` (String) The AWS Batch job queue associated with the quota share. This can be the job queue name or ARN. A job queue must be in the `VALID` state before you can associate it with a quota share.
 - `preemption_configuration` (Attributes) Specifies the preemption behavior for jobs in a quota share. (see [below for nested schema](#nestedatt--preemption_configuration))
-- `quota_share_name` (String) The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
 - `resource_sharing_configuration` (Attributes) Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity. (see [below for nested schema](#nestedatt--resource_sharing_configuration))
 
 ### Optional
 
+- `quota_share_name` (String) The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
 - `state` (String) The state of the quota share. If the quota share is `ENABLED`, it is able to accept jobs. If the quota share is `DISABLED`, new jobs won't be accepted but jobs already submitted can finish. The default state is `ENABLED`.
 - `tags` (Map of String) The tags that you apply to the quota share to help you categorize and organize your resources. Each tag consists of a key and an optional value.
 

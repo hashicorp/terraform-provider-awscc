@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::CloudWatch::OmniDashboard",
-  "description": "Resource type definition for AWS::CloudWatch::OmniDashboard",
+  "description": "Resource Type definition for AWS::CloudWatch::OmniDashboard. A dashboard is a saved arrangement of panels that shows your team one agreed view of a system, backed by queries against your space's telemetry.",
   "properties": {
     "Arn": {
       "type": "string",
@@ -11,32 +11,32 @@
     },
     "DashboardId": {
       "type": "string",
-      "description": "The unique identifier of the dashboard.",
+      "description": "The unique ID of the dashboard.",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
       "minLength": 36,
       "maxLength": 36
     },
     "SpaceId": {
       "type": "string",
-      "description": "The unique identifier of the space the dashboard belongs to.",
+      "description": "The unique ID of the space to create the dashboard in.",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "Name": {
       "type": "string",
-      "description": "The name of the dashboard.",
+      "description": "A name that identifies the dashboard.",
       "pattern": "^[a-zA-Z0-9_.@~()-]+$",
       "minLength": 1,
       "maxLength": 256
     },
     "Body": {
       "type": "string",
-      "description": "The dashboard body, a JSON document describing the dashboard's widgets and layout.",
+      "description": "The dashboard definition.",
       "minLength": 1,
       "maxLength": 1048576
     },
     "Description": {
       "type": "string",
-      "description": "The description of the dashboard.",
+      "description": "An optional description of the dashboard.",
       "minLength": 1,
       "maxLength": 1024
     },
@@ -47,12 +47,12 @@
     "CreatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The time the dashboard was created."
+      "description": "The timestamp when the dashboard was created."
     },
     "UpdatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The time the dashboard was last updated."
+      "description": "The timestamp when the dashboard was last updated."
     },
     "Tags": {
       "type": "array",

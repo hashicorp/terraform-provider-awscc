@@ -322,6 +322,11 @@
         "identifier": ["AppAuthorizationArn"]
     },
     {
+        "resource": "awscc_appfabric_app_bundle",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_appfabric_ingestion",
         "identifier": ["Arn"]
     },
@@ -628,6 +633,11 @@
         "resource": "awscc_bcmdataexports_export",
         "generateListResource": true,
         "identifier": ["ExportArn"]
+    },
+    {
+        "resource": "awscc_backup_backup_access_point",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_backup_backup_plan",
@@ -1953,6 +1963,11 @@
         "identifier": ["DomainName","SegmentDefinitionName"]
     },
     {
+        "resource": "awscc_dax_cluster",
+        "generateListResource": true,
+        "identifier": ["ClusterName"]
+    },
+    {
         "resource": "awscc_dax_parameter_group",
         "generateListResource": true,
         "identifier": ["ParameterGroupName"]
@@ -2364,6 +2379,11 @@
         "identifier": ["VirtualInterfaceArn"]
     },
     {
+        "resource": "awscc_directconnect_resiliency_group",
+        "generateListResource": true,
+        "identifier": ["ResiliencyGroupArn"]
+    },
+    {
         "resource": "awscc_directconnect_transit_virtual_interface",
         "generateListResource": true,
         "identifier": ["VirtualInterfaceArn"]
@@ -2746,6 +2766,11 @@
         "resource": "awscc_ec2_security_group_vpc_association",
         "generateListResource": true,
         "identifier": ["GroupId","VpcId"]
+    },
+    {
+        "resource": "awscc_ec2_snapshot",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_ec2_snapshot_block_public_access",
@@ -4556,6 +4581,11 @@
         "identifier": ["PrincipalIdentifier","ResourceIdentifier"]
     },
     {
+        "resource": "awscc_lakeformation_resource",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_lakeformation_tag",
         "generateListResource": true,
         "identifier": ["TagKey"]
@@ -4933,12 +4963,22 @@
         "identifier": ["EnvironmentArn"]
     },
     {
+        "resource": "awscc_mgn_application",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_mgn_connector",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
     {
         "resource": "awscc_mgn_network_migration_definition",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_mgn_replication_configuration_template",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
@@ -5049,6 +5089,11 @@
         "identifier": ["BridgeArn","Name"]
     },
     {
+        "resource": "awscc_mediaconnect_destination_endpoint",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_mediaconnect_flow",
         "generateListResource": true,
         "identifier": ["FlowArn"]
@@ -5093,6 +5138,11 @@
     },
     {
         "resource": "awscc_mediaconnect_router_output",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_mediaconnect_source_endpoint",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
@@ -5573,6 +5623,11 @@
         "resource": "awscc_osis_pipeline",
         "generateListResource": true,
         "identifier": ["PipelineArn"]
+    },
+    {
+        "resource": "awscc_osis_pipeline_endpoint",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_oam_link",

@@ -28,7 +28,7 @@ Data Source schema for AWS::MediaConnect::RouterNetworkInterface
 - `created_at` (String) The timestamp when the router network interface was created.
 - `name` (String) The name of the router network interface.
 - `network_interface_type` (String)
-- `region_name` (String) The AWS Region for the router network interface. Defaults to the current region if not specified.
+- `region_name` (String) The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.
 - `router_network_interface_id` (String) The unique identifier of the router network interface.
 - `state` (String)
 - `tags` (Attributes List) Key-value pairs that can be used to tag and organize this router network interface. (see [below for nested schema](#nestedatt--tags))

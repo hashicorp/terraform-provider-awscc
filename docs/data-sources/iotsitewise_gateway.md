@@ -21,7 +21,7 @@ Data Source schema for AWS::IoTSiteWise::Gateway
 
 ### Read-Only
 
-- `gateway_capability_summaries` (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
+- `gateway_capability_summaries` (Attributes Set) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
 - `gateway_id` (String) The ID of the gateway device.
 - `gateway_name` (String) A unique, friendly name for the gateway.
 - `gateway_platform` (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))

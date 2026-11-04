@@ -200,6 +200,7 @@ Optional:
 
 Optional:
 
+- `disable_mcp_list_tools_pagination` (Boolean)
 - `instructions` (String)
 - `search_type` (String)
 - `session_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration--mcp--session_configuration))

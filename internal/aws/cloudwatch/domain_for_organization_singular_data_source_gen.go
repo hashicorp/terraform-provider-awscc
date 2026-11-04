@@ -28,27 +28,27 @@ func domainForOrganizationDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the resource.",
+		//	  "description": "The Amazon Resource Name (ARN) of the organization domain.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:organization-domain/(?:d-[0-9a-z]{1,25})$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource.",
+			Description: "The Amazon Resource Name (ARN) of the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp when the domain was created.",
+		//	  "description": "The timestamp when the organization domain was created.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the domain was created.",
+			Description: "The timestamp when the organization domain was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomEndpointUrls
@@ -70,37 +70,37 @@ func domainForOrganizationDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of an IAM role in the management account that CloudWatch Omni assumes for domain-scoped credential vending.",
+		//	  "description": "The ARN of the customer-provided IAM role in the management account used for domain access.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
 		"domain_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an IAM role in the management account that CloudWatch Omni assumes for domain-scoped credential vending.",
+			Description: "The ARN of the customer-provided IAM role in the management account used for domain access.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainEndpointUrl
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The HTTPS endpoint URL for accessing the domain.",
+		//	  "description": "The HTTPS endpoint URL for accessing the organization domain.",
 		//	  "type": "string"
 		//	}
 		"domain_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTPS endpoint URL for accessing the domain.",
+			Description: "The HTTPS endpoint URL for accessing the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique ID of the domain.",
+		//	  "description": "The unique ID of the organization domain.",
 		//	  "pattern": "^d-[0-9a-z]{1,25}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique ID of the domain.",
+			Description: "The unique ID of the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityCenterApplicationArn
@@ -122,7 +122,7 @@ func domainForOrganizationDataSource(ctx context.Context) (datasource.DataSource
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Identity provider configuration for the domain.",
+		//	  "description": "Identity provider configuration for the organization domain.",
 		//	  "properties": {
 		//	    "IdentityCenterConfiguration": {
 		//	      "additionalProperties": false,
@@ -156,14 +156,14 @@ func domainForOrganizationDataSource(ctx context.Context) (datasource.DataSource
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Identity provider configuration for the domain.",
+			Description: "Identity provider configuration for the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityProviders
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identity providers configured for the domain.",
+		//	  "description": "The identity providers configured for the organization domain.",
 		//	  "items": {
 		//	    "enum": [
 		//	      "IAM",
@@ -178,71 +178,71 @@ func domainForOrganizationDataSource(ctx context.Context) (datasource.DataSource
 		//	}
 		"identity_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The identity providers configured for the domain.",
+			Description: "The identity providers configured for the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name that identifies the domain.",
+		//	  "description": "A name that identifies the organization domain.",
 		//	  "maxLength": 63,
 		//	  "minLength": 3,
 		//	  "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name that identifies the domain.",
+			Description: "A name that identifies the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrganizationId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the AWS Organization this domain belongs to.",
+		//	  "description": "The ID of the AWS Organization that owns the domain.",
 		//	  "type": "string"
 		//	}
 		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Organization this domain belongs to.",
+			Description: "The ID of the AWS Organization that owns the domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The account ID of the organization's management account, which owns this domain.",
+		//	  "description": "The AWS account ID that owns the organization domain.",
 		//	  "maxLength": 12,
 		//	  "minLength": 12,
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The account ID of the organization's management account, which owns this domain.",
+			Description: "The AWS account ID that owns the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Region where this domain was created.",
+		//	  "description": "The Region where this organization domain was created.",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Region where this domain was created.",
+			Description: "The Region where this organization domain was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Current status of the domain.",
+		//	  "description": "Current status of the organization domain.",
 		//	  "enum": [
 		//	    "ACTIVE"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current status of the domain.",
+			Description: "Current status of the organization domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -300,13 +300,13 @@ func domainForOrganizationDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp when the domain was last updated.",
+		//	  "description": "The timestamp when the organization domain was last updated.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the domain was last updated.",
+			Description: "The timestamp when the organization domain was last updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

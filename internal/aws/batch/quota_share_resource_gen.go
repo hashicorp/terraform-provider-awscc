@@ -159,12 +159,14 @@ func quotaShareResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"quota_share_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceSharingConfiguration

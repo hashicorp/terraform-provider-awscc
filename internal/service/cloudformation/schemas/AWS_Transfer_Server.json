@@ -8,6 +8,13 @@
         "HTTP"
       ]
     },
+    "CommunicationMode": {
+      "type": "string",
+      "enum": [
+        "CLIENT_TALK_FIRST",
+        "SERVER_TALK_FIRST"
+      ]
+    },
     "DirectoryListingOptimization": {
       "type": "string",
       "description": "Indicates whether optimization to directory listing on S3 servers is used. Disabled by default for compatibility.",
@@ -168,6 +175,15 @@
         },
         "ProxyConfig": {
           "$ref": "#/definitions/ProxyConfig"
+        },
+        "SftpPorts": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/SftpPortWithOptions"
+          },
+          "maxItems": 3,
+          "minItems": 1
         }
       },
       "additionalProperties": false
@@ -196,6 +212,23 @@
         "PUBLIC_KEY_OR_PASSWORD",
         "PUBLIC_KEY_AND_PASSWORD"
       ]
+    },
+    "SftpPortWithOptions": {
+      "type": "object",
+      "properties": {
+        "SftpPort": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "CommunicationMode": {
+          "$ref": "#/definitions/CommunicationMode"
+        }
+      },
+      "required": [
+        "SftpPort"
+      ],
+      "additionalProperties": false
     },
     "State": {
       "type": "string",
@@ -521,7 +554,8 @@
   "conditionalCreateOnlyProperties": [
     "/properties/EndpointDetails",
     "/properties/EndpointDetails/AddressAllocationIds",
-    "/properties/IpAddressType"
+    "/properties/IpAddressType",
+    "/properties/ProtocolDetails/SftpPorts"
   ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-transfer"
 }

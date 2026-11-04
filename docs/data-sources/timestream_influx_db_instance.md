@@ -25,6 +25,7 @@ Data Source schema for AWS::Timestream::InfluxDBInstance
 - `arn` (String) The Amazon Resource Name (ARN) that is associated with the InfluxDB instance.
 - `availability_zone` (String) The Availability Zone (AZ) where the InfluxDB instance is created.
 - `bucket` (String) The bucket for the InfluxDB instance.
+- `db_cluster_id` (String) The service generated unique identifier of the InfluxDB cluster containing this instance.
 - `db_instance_type` (String) The compute instance of the InfluxDB instance.
 - `db_parameter_group_identifier` (String) The name of an existing InfluxDB parameter group.
 - `db_storage_type` (String) The storage type of the InfluxDB instance.
@@ -32,6 +33,7 @@ Data Source schema for AWS::Timestream::InfluxDBInstance
 - `endpoint` (String) The connection endpoint for the InfluxDB instance.
 - `influx_auth_parameters_secret_arn` (String) The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.
 - `influx_db_instance_id` (String) The service generated unique identifier for InfluxDB instance.
+- `kms_key_id` (String) The customer managed key used to encrypt data in the InfluxDB instance.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB instance. (see [below for nested schema](#nestedatt--log_delivery_configuration))
 - `maintenance_schedule` (Attributes) The maintenance schedule for the InfluxDB instance. (see [below for nested schema](#nestedatt--maintenance_schedule))
 - `name` (String) The unique name that is associated with the InfluxDB instance.

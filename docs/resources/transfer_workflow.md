@@ -141,6 +141,7 @@ resource "awscc_transfer_workflow" "example" {
 
 - `description` (String) A textual description for the workflow.
 - `on_exception_steps` (Attributes List) Specifies the steps (actions) to take if any errors are encountered during execution of the workflow. (see [below for nested schema](#nestedatt--on_exception_steps))
+- `structured_log_destinations` (List of String) Specifies the log destinations for the workflow.
 - `tags` (Attributes Set) Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

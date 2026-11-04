@@ -104,7 +104,57 @@ Optional:
 
 Optional:
 
+- `fallback` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--static_route--fallback))
+- `model` (String)
 - `target_name` (String)
+
+<a id="nestedatt--actions--route_to_target--static_route--fallback"></a>
+### Nested Schema for `actions.route_to_target.static_route.fallback`
+
+Optional:
+
+- `circuit_breaker` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--static_route--fallback--circuit_breaker))
+- `first_byte_timeout_milliseconds` (Number)
+- `target_fallback` (Attributes List) (see [below for nested schema](#nestedatt--actions--route_to_target--static_route--fallback--target_fallback))
+- `trigger_on` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--static_route--fallback--trigger_on))
+
+<a id="nestedatt--actions--route_to_target--static_route--fallback--circuit_breaker"></a>
+### Nested Schema for `actions.route_to_target.static_route.fallback.circuit_breaker`
+
+Optional:
+
+- `mode` (String)
+
+
+<a id="nestedatt--actions--route_to_target--static_route--fallback--target_fallback"></a>
+### Nested Schema for `actions.route_to_target.static_route.fallback.target_fallback`
+
+Optional:
+
+- `first_byte_timeout_milliseconds` (Number)
+- `model` (String)
+- `target_name` (String)
+- `trigger_on` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--static_route--fallback--target_fallback--trigger_on))
+
+<a id="nestedatt--actions--route_to_target--static_route--fallback--target_fallback--trigger_on"></a>
+### Nested Schema for `actions.route_to_target.static_route.fallback.target_fallback.trigger_on`
+
+Optional:
+
+- `errors` (List of String)
+- `status_codes` (List of String)
+
+
+
+<a id="nestedatt--actions--route_to_target--static_route--fallback--trigger_on"></a>
+### Nested Schema for `actions.route_to_target.static_route.fallback.trigger_on`
+
+Optional:
+
+- `errors` (List of String)
+- `status_codes` (List of String)
+
+
 
 
 <a id="nestedatt--actions--route_to_target--weighted_route"></a>
@@ -120,10 +170,60 @@ Optional:
 Optional:
 
 - `description` (String)
+- `fallback` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback))
 - `metadata` (Map of String)
+- `model` (String)
 - `name` (String)
 - `target_name` (String)
 - `weight` (Number)
+
+<a id="nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback"></a>
+### Nested Schema for `actions.route_to_target.weighted_route.traffic_split.fallback`
+
+Optional:
+
+- `circuit_breaker` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--circuit_breaker))
+- `first_byte_timeout_milliseconds` (Number)
+- `target_fallback` (Attributes List) (see [below for nested schema](#nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--target_fallback))
+- `trigger_on` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--trigger_on))
+
+<a id="nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--circuit_breaker"></a>
+### Nested Schema for `actions.route_to_target.weighted_route.traffic_split.fallback.circuit_breaker`
+
+Optional:
+
+- `mode` (String)
+
+
+<a id="nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--target_fallback"></a>
+### Nested Schema for `actions.route_to_target.weighted_route.traffic_split.fallback.target_fallback`
+
+Optional:
+
+- `first_byte_timeout_milliseconds` (Number)
+- `model` (String)
+- `target_name` (String)
+- `trigger_on` (Attributes) (see [below for nested schema](#nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--target_fallback--trigger_on))
+
+<a id="nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--target_fallback--trigger_on"></a>
+### Nested Schema for `actions.route_to_target.weighted_route.traffic_split.fallback.target_fallback.trigger_on`
+
+Optional:
+
+- `errors` (List of String)
+- `status_codes` (List of String)
+
+
+
+<a id="nestedatt--actions--route_to_target--weighted_route--traffic_split--fallback--trigger_on"></a>
+### Nested Schema for `actions.route_to_target.weighted_route.traffic_split.fallback.trigger_on`
+
+Optional:
+
+- `errors` (List of String)
+- `status_codes` (List of String)
+
+
 
 
 
@@ -134,8 +234,26 @@ Optional:
 
 Optional:
 
+- `match_models` (Attributes) (see [below for nested schema](#nestedatt--conditions--match_models))
 - `match_paths` (Attributes) (see [below for nested schema](#nestedatt--conditions--match_paths))
 - `match_principals` (Attributes) (see [below for nested schema](#nestedatt--conditions--match_principals))
+
+<a id="nestedatt--conditions--match_models"></a>
+### Nested Schema for `conditions.match_models`
+
+Optional:
+
+- `any_of` (Attributes List) (see [below for nested schema](#nestedatt--conditions--match_models--any_of))
+
+<a id="nestedatt--conditions--match_models--any_of"></a>
+### Nested Schema for `conditions.match_models.any_of`
+
+Optional:
+
+- `operator` (String)
+- `value` (String)
+
+
 
 <a id="nestedatt--conditions--match_paths"></a>
 ### Nested Schema for `conditions.match_paths`

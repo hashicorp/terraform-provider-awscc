@@ -3,16 +3,12 @@
 page_title: "awscc_cloudwatch_domain Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The account-level boundary for CloudWatch Omni. A domain configures the
-  identity providers users sign in through and exposes the endpoint URLs used
-  to reach CloudWatch Omni. Spaces are created within a domain.
+  Resource Type definition for AWS::CloudWatch::Domain. A domain is the identity and access boundary for CloudWatch Omni. It configures the identity providers users sign in through and provides the sign-in URL for your team.
 ---
 
 # awscc_cloudwatch_domain (Resource)
 
-The account-level boundary for CloudWatch Omni. A domain configures the
-identity providers users sign in through and exposes the endpoint URLs used
-to reach CloudWatch Omni. Spaces are created within a domain.
+Resource Type definition for AWS::CloudWatch::Domain. A domain is the identity and access boundary for CloudWatch Omni. It configures the identity providers users sign in through and provides the sign-in URL for your team.
 
 
 
@@ -31,7 +27,7 @@ to reach CloudWatch Omni. Spaces are created within a domain.
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the domain.
 - `created_at` (String) The timestamp when the domain was created.
 - `custom_endpoint_urls` (List of String) Additional endpoint URLs derived from the domain name.
 - `domain_endpoint_url` (String) The HTTPS endpoint URL for accessing the domain.
@@ -86,7 +82,7 @@ import {
 
 #### Required
 
-- `arn` (String) The Amazon Resource Name (ARN) of the resource
+- `arn` (String) The Amazon Resource Name (ARN) of the domain
 
 #### Optional
 

@@ -344,6 +344,33 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "SftpPorts": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CommunicationMode": {
+		//	            "enum": [
+		//	              "CLIENT_TALK_FIRST",
+		//	              "SERVER_TALK_FIRST"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "SftpPort": {
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SftpPort"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "TlsSessionResumptionMode": {
 		//	      "enum": [
 		//	        "DISABLED",
@@ -378,6 +405,22 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SetStatOption
 				"set_stat_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SftpPorts
+				"sftp_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CommunicationMode
+							"communication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SftpPort
+							"sftp_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: TlsSessionResumptionMode
@@ -664,6 +707,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"as_2_service_managed_egress_ip_addresses": "As2ServiceManagedEgressIpAddresses",
 		"as_2_transports":                          "As2Transports",
 		"certificate":                              "Certificate",
+		"communication_mode":                       "CommunicationMode",
 		"create_with_host_key":                     "CreateWithHostKey",
 		"directory_id":                             "DirectoryId",
 		"directory_listing_optimization":           "DirectoryListingOptimization",
@@ -693,6 +737,8 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"set_stat_option":                          "SetStatOption",
 		"sftp_authentication_methods":              "SftpAuthenticationMethods",
 		"sftp_mode":                                "SftpMode",
+		"sftp_port":                                "SftpPort",
+		"sftp_ports":                               "SftpPorts",
 		"state":                                    "State",
 		"structured_log_destinations":              "StructuredLogDestinations",
 		"subnet_ids":                               "SubnetIds",

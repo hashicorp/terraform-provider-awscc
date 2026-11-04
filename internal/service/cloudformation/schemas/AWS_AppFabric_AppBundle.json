@@ -1,0 +1,120 @@
+{
+  "typeName": "AWS::AppFabric::AppBundle",
+  "description": "Creates an app bundle to collect data from an application using AppFabric.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the app bundle.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:.+$"
+    },
+    "CustomerManagedKeyIdentifier": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key to use to encrypt the application data. If this is not specified, an AWS owned key is used for encryption.",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "arn:.+$|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A map of the key-value pairs of the tag or tags to assign to the resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "Tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "replacementStrategy": "delete_then_create",
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/CustomerManagedKeyIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appfabric:TagResource",
+      "appfabric:UntagResource",
+      "appfabric:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appfabric:CreateAppBundle",
+        "appfabric:GetAppBundle",
+        "appfabric:TagResource",
+        "appfabric:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:RetireGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appfabric:GetAppBundle",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appfabric:GetAppBundle",
+        "appfabric:TagResource",
+        "appfabric:UntagResource",
+        "appfabric:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appfabric:GetAppBundle",
+        "appfabric:ListTagsForResource",
+        "appfabric:DeleteAppBundle"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "appfabric:ListAppBundles"
+      ]
+    }
+  }
+}

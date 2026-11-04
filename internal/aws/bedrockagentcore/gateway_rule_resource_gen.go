@@ -11,15 +11,18 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -141,6 +144,122 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "StaticRoute": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "Fallback": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "CircuitBreaker": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Mode": {
+		//	                        "default": "ENABLED",
+		//	                        "$ref": "#/definitions/CircuitBreakerMode",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "FirstByteTimeoutMilliseconds": {
+		//	                    "maximum": 900000,
+		//	                    "minimum": 50,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "TargetFallback": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "FirstByteTimeoutMilliseconds": {
+		//	                          "maximum": 900000,
+		//	                          "minimum": 50,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "Model": {
+		//	                          "maxLength": 2048,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "TargetName": {
+		//	                          "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "TriggerOn": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Errors": {
+		//	                              "items": {
+		//	                                "enum": [
+		//	                                  "CONNECTION_ERROR",
+		//	                                  "FIRST_BYTE_TIMEOUT",
+		//	                                  "UNROUTABLE"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 3,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            },
+		//	                            "StatusCodes": {
+		//	                              "items": {
+		//	                                "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 10,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "TargetName"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "TriggerOn": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Errors": {
+		//	                        "items": {
+		//	                          "enum": [
+		//	                            "CONNECTION_ERROR",
+		//	                            "FIRST_BYTE_TIMEOUT",
+		//	                            "UNROUTABLE"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 3,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      },
+		//	                      "StatusCodes": {
+		//	                        "items": {
+		//	                          "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 10,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TargetFallback"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Model": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                "type": "string"
+		//	              },
 		//	              "TargetName": {
 		//	                "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
 		//	                "type": "string"
@@ -163,6 +282,116 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "minLength": 1,
 		//	                      "type": "string"
 		//	                    },
+		//	                    "Fallback": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "CircuitBreaker": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Mode": {
+		//	                              "default": "ENABLED",
+		//	                              "$ref": "#/definitions/CircuitBreakerMode",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "FirstByteTimeoutMilliseconds": {
+		//	                          "maximum": 900000,
+		//	                          "minimum": 50,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "TargetFallback": {
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "FirstByteTimeoutMilliseconds": {
+		//	                                "maximum": 900000,
+		//	                                "minimum": 50,
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "Model": {
+		//	                                "maxLength": 2048,
+		//	                                "minLength": 1,
+		//	                                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TargetName": {
+		//	                                "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TriggerOn": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "Errors": {
+		//	                                    "items": {
+		//	                                      "enum": [
+		//	                                        "CONNECTION_ERROR",
+		//	                                        "FIRST_BYTE_TIMEOUT",
+		//	                                        "UNROUTABLE"
+		//	                                      ],
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "maxItems": 3,
+		//	                                    "minItems": 1,
+		//	                                    "type": "array"
+		//	                                  },
+		//	                                  "StatusCodes": {
+		//	                                    "items": {
+		//	                                      "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "maxItems": 10,
+		//	                                    "minItems": 1,
+		//	                                    "type": "array"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "TargetName"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 2,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        },
+		//	                        "TriggerOn": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Errors": {
+		//	                              "items": {
+		//	                                "enum": [
+		//	                                  "CONNECTION_ERROR",
+		//	                                  "FIRST_BYTE_TIMEOUT",
+		//	                                  "UNROUTABLE"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 3,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            },
+		//	                            "StatusCodes": {
+		//	                              "items": {
+		//	                                "pattern": "^[4-5]([0-9]{2}|XX)$",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "maxItems": 10,
+		//	                              "minItems": 1,
+		//	                              "type": "array"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "TargetFallback"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Metadata": {
 		//	                      "additionalProperties": false,
 		//	                      "patternProperties": {
@@ -173,6 +402,12 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
+		//	                    },
+		//	                    "Model": {
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$",
+		//	                      "type": "string"
 		//	                    },
 		//	                    "Name": {
 		//	                      "maxLength": 64,
@@ -379,6 +614,197 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: StaticRoute
 							"static_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Fallback
+									"fallback": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CircuitBreaker
+											"circuit_breaker": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Mode
+													"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Default:  stringdefault.StaticString("ENABLED"),
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: FirstByteTimeoutMilliseconds
+											"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(50, 900000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TargetFallback
+											"target_fallback": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: FirstByteTimeoutMilliseconds
+														"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.Int64{ /*START VALIDATORS*/
+																int64validator.Between(50, 900000),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Model
+														"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 2048),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TargetName
+														"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][-]?){1,100}$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TriggerOn
+														"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Errors
+																"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.List{ /*START VALIDATORS*/
+																		listvalidator.SizeBetween(1, 3),
+																		listvalidator.ValueStringsAre(
+																			stringvalidator.OneOf(
+																				"CONNECTION_ERROR",
+																				"FIRST_BYTE_TIMEOUT",
+																				"UNROUTABLE",
+																			),
+																		),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: StatusCodes
+																"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.List{ /*START VALIDATORS*/
+																		listvalidator.SizeBetween(1, 10),
+																		listvalidator.ValueStringsAre(
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[4-5]([0-9]{2}|XX)$"), ""),
+																		),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeBetween(1, 2),
+													fwvalidators.NotNullList(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TriggerOn
+											"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Errors
+													"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeBetween(1, 3),
+															listvalidator.ValueStringsAre(
+																stringvalidator.OneOf(
+																	"CONNECTION_ERROR",
+																	"FIRST_BYTE_TIMEOUT",
+																	"UNROUTABLE",
+																),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: StatusCodes
+													"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeBetween(1, 10),
+															listvalidator.ValueStringsAre(
+																stringvalidator.RegexMatches(regexp.MustCompile("^[4-5]([0-9]{2}|XX)$"), ""),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Model
+									"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: TargetName
 									"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
@@ -416,6 +842,185 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: Fallback
+												"fallback": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CircuitBreaker
+														"circuit_breaker": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Mode
+																"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Default:  stringdefault.StaticString("ENABLED"),
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: FirstByteTimeoutMilliseconds
+														"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.Int64{ /*START VALIDATORS*/
+																int64validator.Between(50, 900000),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TargetFallback
+														"target_fallback": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: FirstByteTimeoutMilliseconds
+																	"first_byte_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.Int64{ /*START VALIDATORS*/
+																			int64validator.Between(50, 900000),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Model
+																	"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: TargetName
+																	"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][-]?){1,100}$"), ""),
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: TriggerOn
+																	"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Errors
+																			"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+																				ElementType: types.StringType,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.List{ /*START VALIDATORS*/
+																					listvalidator.SizeBetween(1, 3),
+																					listvalidator.ValueStringsAre(
+																						stringvalidator.OneOf(
+																							"CONNECTION_ERROR",
+																							"FIRST_BYTE_TIMEOUT",
+																							"UNROUTABLE",
+																						),
+																					),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																					listplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: StatusCodes
+																			"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																				ElementType: types.StringType,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.List{ /*START VALIDATORS*/
+																					listvalidator.SizeBetween(1, 10),
+																					listvalidator.ValueStringsAre(
+																						stringvalidator.RegexMatches(regexp.MustCompile("^[4-5]([0-9]{2}|XX)$"), ""),
+																					),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																					listplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 2),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TriggerOn
+														"trigger_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Errors
+																"errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.List{ /*START VALIDATORS*/
+																		listvalidator.SizeBetween(1, 3),
+																		listvalidator.ValueStringsAre(
+																			stringvalidator.OneOf(
+																				"CONNECTION_ERROR",
+																				"FIRST_BYTE_TIMEOUT",
+																				"UNROUTABLE",
+																			),
+																		),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: StatusCodes
+																"status_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.List{ /*START VALIDATORS*/
+																		listvalidator.SizeBetween(1, 10),
+																		listvalidator.ValueStringsAre(
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[4-5]([0-9]{2}|XX)$"), ""),
+																		),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Metadata
 												"metadata":          // Pattern: ""
 												schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -424,6 +1029,18 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 													Computed:    true,
 													PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 														mapplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Model
+												"model": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 2048),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Name
@@ -502,6 +1119,40 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "items": {
 		//	    "properties": {
+		//	      "MatchModels": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AnyOf": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Operator": {
+		//	                  "default": "StringLike",
+		//	                  "$ref": "#/definitions/MatchOperator",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@:]+(/[a-zA-Z0-9\\-\\._\\*\\?@:]+)*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 100,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AnyOf"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "MatchPaths": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -564,13 +1215,61 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 2,
+		//	  "maxItems": 3,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MatchModels
+					"match_models": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AnyOf
+							"any_of": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Operator
+										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  stringdefault.StaticString("StringLike"),
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\._\\*\\?@:]+(/[a-zA-Z0-9\\-\\._\\*\\?@:]+)*$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 100),
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: MatchPaths
 					"match_paths": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -666,7 +1365,7 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 2),
+				listvalidator.SizeBetween(0, 3),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -708,7 +1407,7 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(-[a-z]+)*):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -855,37 +1554,48 @@ func gatewayRuleResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions":              "Actions",
-		"any_of":               "AnyOf",
-		"arn":                  "Arn",
-		"bundle_arn":           "BundleArn",
-		"bundle_version":       "BundleVersion",
-		"conditions":           "Conditions",
-		"configuration_bundle": "ConfigurationBundle",
-		"created_at":           "CreatedAt",
-		"description":          "Description",
-		"gateway_arn":          "GatewayArn",
-		"gateway_identifier":   "GatewayIdentifier",
-		"iam_principal":        "IamPrincipal",
-		"managed_by":           "ManagedBy",
-		"match_paths":          "MatchPaths",
-		"match_principals":     "MatchPrincipals",
-		"metadata":             "Metadata",
-		"name":                 "Name",
-		"operator":             "Operator",
-		"priority":             "Priority",
-		"route_to_target":      "RouteToTarget",
-		"rule_id":              "RuleId",
-		"static_override":      "StaticOverride",
-		"static_route":         "StaticRoute",
-		"status":               "Status",
-		"system":               "System",
-		"target_name":          "TargetName",
-		"traffic_split":        "TrafficSplit",
-		"updated_at":           "UpdatedAt",
-		"weight":               "Weight",
-		"weighted_override":    "WeightedOverride",
-		"weighted_route":       "WeightedRoute",
+		"actions":                         "Actions",
+		"any_of":                          "AnyOf",
+		"arn":                             "Arn",
+		"bundle_arn":                      "BundleArn",
+		"bundle_version":                  "BundleVersion",
+		"circuit_breaker":                 "CircuitBreaker",
+		"conditions":                      "Conditions",
+		"configuration_bundle":            "ConfigurationBundle",
+		"created_at":                      "CreatedAt",
+		"description":                     "Description",
+		"errors":                          "Errors",
+		"fallback":                        "Fallback",
+		"first_byte_timeout_milliseconds": "FirstByteTimeoutMilliseconds",
+		"gateway_arn":                     "GatewayArn",
+		"gateway_identifier":              "GatewayIdentifier",
+		"iam_principal":                   "IamPrincipal",
+		"managed_by":                      "ManagedBy",
+		"match_models":                    "MatchModels",
+		"match_paths":                     "MatchPaths",
+		"match_principals":                "MatchPrincipals",
+		"metadata":                        "Metadata",
+		"mode":                            "Mode",
+		"model":                           "Model",
+		"name":                            "Name",
+		"operator":                        "Operator",
+		"priority":                        "Priority",
+		"route_to_target":                 "RouteToTarget",
+		"rule_id":                         "RuleId",
+		"static_override":                 "StaticOverride",
+		"static_route":                    "StaticRoute",
+		"status":                          "Status",
+		"status_codes":                    "StatusCodes",
+		"system":                          "System",
+		"target_fallback":                 "TargetFallback",
+		"target_name":                     "TargetName",
+		"traffic_split":                   "TrafficSplit",
+		"trigger_on":                      "TriggerOn",
+		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
+		"weight":                          "Weight",
+		"weighted_override":               "WeightedOverride",
+		"weighted_route":                  "WeightedRoute",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

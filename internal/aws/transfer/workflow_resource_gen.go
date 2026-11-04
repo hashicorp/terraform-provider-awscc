@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -1567,6 +1568,40 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StructuredLogDestinations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the log destinations for the workflow.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 1600,
+		//	    "minLength": 20,
+		//	    "pattern": "^arn:\\S+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"structured_log_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specifies the log destinations for the workflow.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 1),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(20, 1600),
+					stringvalidator.RegexMatches(regexp.MustCompile("^arn:\\S+$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1687,31 +1722,32 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                       "Arn",
-		"bucket":                    "Bucket",
-		"copy_step_details":         "CopyStepDetails",
-		"custom_step_details":       "CustomStepDetails",
-		"decrypt_step_details":      "DecryptStepDetails",
-		"delete_step_details":       "DeleteStepDetails",
-		"description":               "Description",
-		"destination_file_location": "DestinationFileLocation",
-		"efs_file_location":         "EfsFileLocation",
-		"file_system_id":            "FileSystemId",
-		"key":                       "Key",
-		"name":                      "Name",
-		"on_exception_steps":        "OnExceptionSteps",
-		"overwrite_existing":        "OverwriteExisting",
-		"path":                      "Path",
-		"s3_file_location":          "S3FileLocation",
-		"source_file_location":      "SourceFileLocation",
-		"steps":                     "Steps",
-		"tag_step_details":          "TagStepDetails",
-		"tags":                      "Tags",
-		"target":                    "Target",
-		"timeout_seconds":           "TimeoutSeconds",
-		"type":                      "Type",
-		"value":                     "Value",
-		"workflow_id":               "WorkflowId",
+		"arn":                         "Arn",
+		"bucket":                      "Bucket",
+		"copy_step_details":           "CopyStepDetails",
+		"custom_step_details":         "CustomStepDetails",
+		"decrypt_step_details":        "DecryptStepDetails",
+		"delete_step_details":         "DeleteStepDetails",
+		"description":                 "Description",
+		"destination_file_location":   "DestinationFileLocation",
+		"efs_file_location":           "EfsFileLocation",
+		"file_system_id":              "FileSystemId",
+		"key":                         "Key",
+		"name":                        "Name",
+		"on_exception_steps":          "OnExceptionSteps",
+		"overwrite_existing":          "OverwriteExisting",
+		"path":                        "Path",
+		"s3_file_location":            "S3FileLocation",
+		"source_file_location":        "SourceFileLocation",
+		"steps":                       "Steps",
+		"structured_log_destinations": "StructuredLogDestinations",
+		"tag_step_details":            "TagStepDetails",
+		"tags":                        "Tags",
+		"target":                      "Target",
+		"timeout_seconds":             "TimeoutSeconds",
+		"type":                        "Type",
+		"value":                       "Value",
+		"workflow_id":                 "WorkflowId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

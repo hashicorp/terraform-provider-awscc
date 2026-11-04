@@ -8,13 +8,13 @@ package iotsitewise
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -37,7 +37,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A list of gateway capability summaries that each contain a namespace and status.",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Contains a summary of a gateway capability configuration.",
@@ -59,7 +59,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"gateway_capability_summaries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"gateway_capability_summaries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CapabilityConfiguration
@@ -88,11 +88,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A list of gateway capability summaries that each contain a namespace and status.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
@@ -339,7 +336,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::IoTSiteWise::Gateway",
+		Description: "Resource Type definition for AWS::IoTSiteWise::Gateway",
 		Version:     1,
 		Attributes:  attributes,
 	}

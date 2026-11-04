@@ -1,494 +1,22 @@
 {
-  "typeName": "AWS::Batch::ComputeEnvironment",
-  "description": "Resource Type definition for AWS::Batch::ComputeEnvironment",
-  "additionalProperties": false,
-  "properties": {
-    "ComputeEnvironmentArn": {
-      "type": "string"
-    },
-    "ComputeEnvironmentName": {
-      "type": "string"
-    },
-    "ComputeResources": {
-      "$ref": "#/definitions/ComputeResources"
-    },
-    "ReplaceComputeEnvironment": {
-      "type": "boolean",
-      "default": true
-    },
-    "ServiceRole": {
-      "type": "string"
-    },
-    "State": {
-      "type": "string"
-    },
-    "Tags": {
-      "type": "object",
-      "description": "A key-value pair to associate with a resource.",
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "Type": {
-      "type": "string"
-    },
-    "UpdatePolicy": {
-      "$ref": "#/definitions/UpdatePolicy"
-    },
-    "UnmanagedvCpus": {
-      "type": "integer"
-    },
-    "EksConfiguration": {
-      "$ref": "#/definitions/EksConfiguration"
-    },
-    "EcsSettings": {
-      "$ref": "#/definitions/EcsSettings"
-    },
-    "Context": {
-      "type": "string"
-    }
-  },
-  "definitions": {
-    "ComputeResources": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "AllocationStrategy": {
-          "type": "string"
-        },
-        "BidPercentage": {
-          "type": "integer"
-        },
-        "DesiredvCpus": {
-          "type": "integer"
-        },
-        "Ec2Configuration": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "$ref": "#/definitions/Ec2ConfigurationObject"
-          }
-        },
-        "Ec2KeyPair": {
-          "type": "string"
-        },
-        "ImageId": {
-          "type": "string"
-        },
-        "InstanceRole": {
-          "type": "string"
-        },
-        "InstanceTypes": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        },
-        "LaunchTemplate": {
-          "$ref": "#/definitions/LaunchTemplateSpecification"
-        },
-        "MaxvCpus": {
-          "type": "integer"
-        },
-        "MinvCpus": {
-          "type": "integer"
-        },
-        "PlacementGroup": {
-          "type": "string"
-        },
-        "ScalingPolicy": {
-          "$ref": "#/definitions/ComputeScalingPolicy"
-        },
-        "SecurityGroupIds": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        },
-        "SpotIamFleetRole": {
-          "type": "string"
-        },
-        "Subnets": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        },
-        "Tags": {
-          "type": "object",
-          "description": "A key-value pair to associate with a resource.",
-          "patternProperties": {
-            "": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        "Type": {
-          "type": "string"
-        },
-        "UpdateToLatestImageVersion": {
-          "type": "boolean",
-          "default": false
-        },
-        "ManagedInstancesProvider": {
-          "$ref": "#/definitions/ManagedInstancesProvider"
-        },
-        "CapacityTags": {
-          "type": "object",
-          "description": "Capacity-level tags for compute environments.",
-          "patternProperties": {
-            "": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "Type",
-        "MaxvCpus"
-      ]
-    },
-    "ManagedInstancesProvider": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "PropagateTags": {
-          "type": "string",
-          "enum": [
-            "CAPACITY_PROVIDER",
-            "NONE"
-          ]
-        },
-        "InfrastructureRoleArn": {
-          "type": "string"
-        },
-        "InstanceLaunchTemplate": {
-          "$ref": "#/definitions/InstanceLaunchTemplate"
-        },
-        "InfrastructureOptimization": {
-          "$ref": "#/definitions/InfrastructureOptimization"
-        }
-      },
-      "required": [
-        "InfrastructureRoleArn",
-        "InstanceLaunchTemplate"
-      ]
-    },
-    "InstanceLaunchTemplate": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Ec2InstanceProfileArn": {
-          "type": "string"
-        },
-        "NetworkConfiguration": {
-          "$ref": "#/definitions/ManagedInstancesNetworkConfiguration"
-        },
-        "InstanceRequirements": {
-          "$ref": "#/definitions/InstanceRequirements"
-        },
-        "CapacityOptionType": {
-          "type": "string",
-          "enum": [
-            "ON_DEMAND",
-            "SPOT",
-            "RESERVED"
-          ]
-        },
-        "StorageConfiguration": {
-          "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
-        },
-        "Monitoring": {
-          "type": "string"
-        },
-        "FipsEnabled": {
-          "type": "boolean"
-        },
-        "CapacityReservations": {
-          "$ref": "#/definitions/CapacityReservations"
-        },
-        "InstanceMetadataTagsPropagation": {
-          "type": "boolean"
-        },
-        "LocalStorageConfiguration": {
-          "$ref": "#/definitions/ManagedInstancesLocalStorageConfiguration"
-        }
-      },
-      "required": [
-        "Ec2InstanceProfileArn",
-        "NetworkConfiguration"
-      ]
-    },
-    "ManagedInstancesNetworkConfiguration": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Subnets": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        },
-        "SecurityGroups": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "Subnets",
-        "SecurityGroups"
-      ]
-    },
-    "InstanceRequirements": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "AllowedInstanceTypes": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "InfrastructureOptimization": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ScaleInAfter": {
-          "type": "integer"
-        }
-      }
-    },
-    "ManagedInstancesStorageConfiguration": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "StorageSizeGiB": {
-          "type": "integer"
-        }
-      }
-    },
-    "CapacityReservations": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ReservationGroupArn": {
-          "type": "string"
-        },
-        "ReservationPreference": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagedInstancesLocalStorageConfiguration": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "UseLocalStorage": {
-          "type": "boolean"
-        }
-      }
-    },
-    "ComputeScalingPolicy": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "MinScaleDownDelayMinutes": {
-          "type": "integer"
-        }
-      }
-    },
-    "Ec2ConfigurationObject": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ImageIdOverride": {
-          "type": "string"
-        },
-        "ImageType": {
-          "type": "string"
-        },
-        "ImageKubernetesVersion": {
-          "type": "string"
-        },
-        "BatchImageStatus": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ImageType"
-      ]
-    },
-    "LaunchTemplateSpecification": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "LaunchTemplateId": {
-          "type": "string"
-        },
-        "LaunchTemplateName": {
-          "type": "string"
-        },
-        "Version": {
-          "type": "string"
-        },
-        "UserdataType": {
-          "type": "string",
-          "enum": [
-            "EKS_BOOTSTRAP_SH",
-            "EKS_NODEADM"
-          ]
-        },
-        "Overrides": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "$ref": "#/definitions/LaunchTemplateSpecificationOverride"
-          }
-        }
-      }
-    },
-    "LaunchTemplateSpecificationOverride": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "LaunchTemplateId": {
-          "type": "string"
-        },
-        "LaunchTemplateName": {
-          "type": "string"
-        },
-        "Version": {
-          "type": "string"
-        },
-        "UserdataType": {
-          "type": "string",
-          "enum": [
-            "EKS_BOOTSTRAP_SH",
-            "EKS_NODEADM"
-          ]
-        },
-        "TargetInstanceTypes": {
-          "type": "array",
-          "uniqueItems": false,
-          "insertionOrder": false,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdatePolicy": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "TerminateJobsOnUpdate": {
-          "type": "boolean",
-          "default": false
-        },
-        "JobExecutionTimeoutMinutes": {
-          "type": "integer",
-          "default": 30
-        }
-      }
-    },
-    "EksConfiguration": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "EksClusterArn": {
-          "type": "string",
-          "default": false
-        },
-        "KubernetesNamespace": {
-          "type": "string",
-          "default": false
-        },
-        "AccessEntry": {
-          "$ref": "#/definitions/EksAccessEntry"
-        }
-      },
-      "required": [
-        "EksClusterArn",
-        "KubernetesNamespace"
-      ]
-    },
-    "EksAccessEntry": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
-      "properties": {
-        "DesiredState": {
-          "type": "string",
-          "description": "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
-          "enum": [
-            "ENABLED",
-            "DISABLED",
-            "INHERIT_FROM_CLUSTER"
-          ]
-        },
-        "Status": {
-          "type": "string",
-          "description": "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
-          "enum": [
-            "ACTIVE",
-            "INACTIVE"
-          ]
-        }
-      }
-    },
-    "EcsSettings": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ContainerInsights": {
-          "type": "string",
-          "description": "The CloudWatch Container Insights setting applied to the Amazon ECS cluster that backs this compute environment. After you set this property, you can't revert it to the default (unset) state in which the setting is managed outside of AWS Batch. If you remove this property after previously setting it, AWS Batch treats the omission as DISABLED, because the underlying API has no way to unset the value. Because of this, if a stack rollback would return this property to its previous unset state, AWS Batch sets it to DISABLED instead.",
-          "enum": [
-            "ENABLED",
-            "ENHANCED",
-            "DISABLED"
-          ]
-        }
-      }
-    }
-  },
   "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags",
     "permissions": [
       "Batch:TagResource",
       "Batch:UnTagResource"
-    ]
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false
   },
-  "required": [
-    "Type"
+  "typeName": "AWS::Batch::ComputeEnvironment",
+  "readOnlyProperties": [
+    "/properties/ComputeEnvironmentArn",
+    "/properties/ComputeResources/Ec2Configuration/*/BatchImageStatus",
+    "/properties/EksConfiguration/AccessEntry/Status"
   ],
+  "description": "Resource Type definition for AWS::Batch::ComputeEnvironment",
   "createOnlyProperties": [
     "/properties/ComputeResources/SpotIamFleetRole",
     "/properties/ComputeEnvironmentName",
@@ -498,6 +26,12 @@
     "/properties/EksConfiguration/KubernetesNamespace",
     "/properties/ComputeResources/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType",
     "/properties/ComputeResources/ManagedInstancesProvider/InstanceLaunchTemplate/FipsEnabled"
+  ],
+  "primaryIdentifier": [
+    "/properties/ComputeEnvironmentArn"
+  ],
+  "required": [
+    "Type"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/ComputeResources/AllocationStrategy",
@@ -515,25 +49,12 @@
     "/properties/ComputeResources/Tags",
     "/properties/ComputeResources/Type"
   ],
-  "writeOnlyProperties": [
-    "/properties/ComputeResources/UpdateToLatestImageVersion",
-    "/properties/ReplaceComputeEnvironment",
-    "/properties/UpdatePolicy"
-  ],
-  "primaryIdentifier": [
-    "/properties/ComputeEnvironmentArn"
-  ],
-  "readOnlyProperties": [
-    "/properties/ComputeEnvironmentArn",
-    "/properties/ComputeResources/Ec2Configuration/*/BatchImageStatus",
-    "/properties/EksConfiguration/AccessEntry/Status"
-  ],
-  "additionalIdentifiers": [
-    [
-      "/properties/ComputeEnvironmentName"
-    ]
-  ],
   "handlers": {
+    "read": {
+      "permissions": [
+        "Batch:DescribeComputeEnvironments"
+      ]
+    },
     "create": {
       "permissions": [
         "Batch:CreateComputeEnvironment",
@@ -549,11 +70,6 @@
         "Eks:ListAssociatedAccessPolicies",
         "ec2:DescribeLaunchTemplateVersions",
         "Batch:SetCapacityTags"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "Batch:DescribeComputeEnvironments"
       ]
     },
     "update": {
@@ -573,6 +89,11 @@
         "Batch:SetCapacityTags"
       ]
     },
+    "list": {
+      "permissions": [
+        "Batch:DescribeComputeEnvironments"
+      ]
+    },
     "delete": {
       "permissions": [
         "Batch:DeleteComputeEnvironment",
@@ -587,11 +108,490 @@
         "Eks:ListAssociatedAccessPolicies",
         "ec2:DescribeLaunchTemplateVersions"
       ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/ComputeResources/UpdateToLatestImageVersion",
+    "/properties/ReplaceComputeEnvironment",
+    "/properties/UpdatePolicy"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ComputeEnvironmentName"
+    ]
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "LaunchTemplateSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UserdataType": {
+          "type": "string",
+          "enum": [
+            "EKS_BOOTSTRAP_SH",
+            "EKS_NODEADM"
+          ]
+        },
+        "LaunchTemplateName": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Overrides": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LaunchTemplateSpecificationOverride"
+          }
+        },
+        "LaunchTemplateId": {
+          "type": "string"
+        }
+      }
     },
-    "list": {
-      "permissions": [
-        "Batch:DescribeComputeEnvironments"
+    "UpdatePolicy": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "JobExecutionTimeoutMinutes": {
+          "default": 30,
+          "type": "integer"
+        },
+        "TerminateJobsOnUpdate": {
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "EksAccessEntry": {
+      "description": "The EKS access entry configuration for the compute environment. Controls whether AWS Batch manages the EKS access entry for the compute environment's service role, or inherits it from the cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "The read-only status of the EKS access entry, returned by DescribeComputeEnvironments.",
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE"
+          ]
+        },
+        "DesiredState": {
+          "description": "The desired state of the EKS access entry managed by AWS Batch. When omitted, AWS Batch applies INHERIT_FROM_CLUSTER.",
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED",
+            "INHERIT_FROM_CLUSTER"
+          ]
+        }
+      }
+    },
+    "ManagedInstancesNetworkConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SecurityGroups": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Subnets": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Subnets",
+        "SecurityGroups"
       ]
+    },
+    "InfrastructureOptimization": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ScaleInAfter": {
+          "type": "integer"
+        }
+      }
+    },
+    "CapacityReservations": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ReservationGroupArn": {
+          "type": "string"
+        },
+        "ReservationPreference": {
+          "type": "string"
+        }
+      }
+    },
+    "Ec2ConfigurationObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ImageIdOverride": {
+          "type": "string"
+        },
+        "ImageKubernetesVersion": {
+          "type": "string"
+        },
+        "BatchImageStatus": {
+          "type": "string"
+        },
+        "ImageType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ImageType"
+      ]
+    },
+    "EksConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EksClusterArn": {
+          "default": false,
+          "type": "string"
+        },
+        "AccessEntry": {
+          "$ref": "#/definitions/EksAccessEntry"
+        },
+        "KubernetesNamespace": {
+          "default": false,
+          "type": "string"
+        }
+      },
+      "required": [
+        "EksClusterArn",
+        "KubernetesNamespace"
+      ]
+    },
+    "ManagedInstancesLocalStorageConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UseLocalStorage": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LaunchTemplateSpecificationOverride": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TargetInstanceTypes": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "UserdataType": {
+          "type": "string",
+          "enum": [
+            "EKS_BOOTSTRAP_SH",
+            "EKS_NODEADM"
+          ]
+        },
+        "LaunchTemplateName": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "LaunchTemplateId": {
+          "type": "string"
+        }
+      }
+    },
+    "ComputeResources": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ScalingPolicy": {
+          "$ref": "#/definitions/ComputeScalingPolicy"
+        },
+        "SpotIamFleetRole": {
+          "type": "string"
+        },
+        "MaxvCpus": {
+          "type": "integer"
+        },
+        "CapacityTags": {
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "description": "Capacity-level tags for compute environments.",
+          "additionalProperties": false,
+          "type": "object"
+        },
+        "Ec2Configuration": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ec2ConfigurationObject"
+          }
+        },
+        "BidPercentage": {
+          "type": "integer"
+        },
+        "SecurityGroupIds": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AllocationStrategy": {
+          "type": "string"
+        },
+        "Subnets": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Type": {
+          "type": "string"
+        },
+        "MinvCpus": {
+          "type": "integer"
+        },
+        "UpdateToLatestImageVersion": {
+          "default": false,
+          "type": "boolean"
+        },
+        "LaunchTemplate": {
+          "$ref": "#/definitions/LaunchTemplateSpecification"
+        },
+        "ImageId": {
+          "type": "string"
+        },
+        "InstanceRole": {
+          "type": "string"
+        },
+        "InstanceTypes": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Ec2KeyPair": {
+          "type": "string"
+        },
+        "PlacementGroup": {
+          "type": "string"
+        },
+        "Tags": {
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "description": "A key-value pair to associate with a resource.",
+          "additionalProperties": false,
+          "type": "object"
+        },
+        "DesiredvCpus": {
+          "type": "integer"
+        },
+        "ManagedInstancesProvider": {
+          "$ref": "#/definitions/ManagedInstancesProvider"
+        }
+      },
+      "required": [
+        "Type",
+        "MaxvCpus"
+      ]
+    },
+    "ManagedInstancesStorageConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "StorageSizeGiB": {
+          "type": "integer"
+        }
+      }
+    },
+    "InstanceRequirements": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AllowedInstanceTypes": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ComputeScalingPolicy": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MinScaleDownDelayMinutes": {
+          "type": "integer"
+        }
+      }
+    },
+    "EcsSettings": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ContainerInsights": {
+          "description": "The CloudWatch Container Insights setting applied to the Amazon ECS cluster that backs this compute environment. After you set this property, you can't revert it to the default (unset) state in which the setting is managed outside of AWS Batch. If you remove this property after previously setting it, AWS Batch treats the omission as DISABLED, because the underlying API has no way to unset the value. Because of this, if a stack rollback would return this property to its previous unset state, AWS Batch sets it to DISABLED instead.",
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "ENHANCED",
+            "DISABLED"
+          ]
+        }
+      }
+    },
+    "InstanceLaunchTemplate": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Ec2InstanceProfileArn": {
+          "type": "string"
+        },
+        "CapacityOptionType": {
+          "type": "string",
+          "enum": [
+            "ON_DEMAND",
+            "SPOT",
+            "RESERVED"
+          ]
+        },
+        "FipsEnabled": {
+          "type": "boolean"
+        },
+        "InstanceMetadataTagsPropagation": {
+          "type": "boolean"
+        },
+        "StorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
+        },
+        "NetworkConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesNetworkConfiguration"
+        },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirements"
+        },
+        "CapacityReservations": {
+          "$ref": "#/definitions/CapacityReservations"
+        },
+        "Monitoring": {
+          "type": "string"
+        },
+        "LocalStorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesLocalStorageConfiguration"
+        }
+      },
+      "required": [
+        "Ec2InstanceProfileArn",
+        "NetworkConfiguration"
+      ]
+    },
+    "ManagedInstancesProvider": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "InfrastructureRoleArn": {
+          "type": "string"
+        },
+        "PropagateTags": {
+          "type": "string",
+          "enum": [
+            "CAPACITY_PROVIDER",
+            "NONE"
+          ]
+        },
+        "InfrastructureOptimization": {
+          "$ref": "#/definitions/InfrastructureOptimization"
+        },
+        "InstanceLaunchTemplate": {
+          "$ref": "#/definitions/InstanceLaunchTemplate"
+        }
+      },
+      "required": [
+        "InfrastructureRoleArn",
+        "InstanceLaunchTemplate"
+      ]
+    }
+  },
+  "properties": {
+    "Context": {
+      "type": "string"
+    },
+    "UpdatePolicy": {
+      "$ref": "#/definitions/UpdatePolicy"
+    },
+    "ComputeEnvironmentArn": {
+      "type": "string"
+    },
+    "UnmanagedvCpus": {
+      "type": "integer"
+    },
+    "Type": {
+      "type": "string"
+    },
+    "ReplaceComputeEnvironment": {
+      "default": true,
+      "type": "boolean"
+    },
+    "ServiceRole": {
+      "type": "string"
+    },
+    "EksConfiguration": {
+      "$ref": "#/definitions/EksConfiguration"
+    },
+    "ComputeEnvironmentName": {
+      "type": "string"
+    },
+    "ComputeResources": {
+      "$ref": "#/definitions/ComputeResources"
+    },
+    "State": {
+      "type": "string"
+    },
+    "EcsSettings": {
+      "$ref": "#/definitions/EcsSettings"
+    },
+    "Tags": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "type": "object"
     }
   }
 }

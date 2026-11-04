@@ -28,12 +28,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the resource.",
+		//	  "description": "The Amazon Resource Name (ARN) of the domain.",
 		//	  "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:domain/(?:d-[0-9a-z]{1,25})$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource.",
+			Description: "The Amazon Resource Name (ARN) of the domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt

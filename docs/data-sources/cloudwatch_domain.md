@@ -21,7 +21,7 @@ Data Source schema for AWS::CloudWatch::Domain
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the domain.
 - `created_at` (String) The timestamp when the domain was created.
 - `custom_endpoint_urls` (List of String) Additional endpoint URLs derived from the domain name.
 - `domain_endpoint_url` (String) The HTTPS endpoint URL for accessing the domain.

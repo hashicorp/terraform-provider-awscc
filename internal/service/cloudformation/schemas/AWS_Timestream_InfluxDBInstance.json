@@ -34,7 +34,9 @@
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeSecurityGroups",
         "ec2:CreateNetworkInterface",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
       ],
       "timeoutInMinutes": 2160
     },
@@ -73,6 +75,7 @@
     "/properties/Status",
     "/properties/Arn",
     "/properties/Id",
+    "/properties/DbClusterId",
     "/properties/AvailabilityZone",
     "/properties/Endpoint",
     "/properties/SecondaryAvailabilityZone",
@@ -95,7 +98,8 @@
     "/properties/VpcSubnetIds",
     "/properties/VpcSecurityGroupIds",
     "/properties/PubliclyAccessible",
-    "/properties/NetworkType"
+    "/properties/NetworkType",
+    "/properties/KmsKeyId"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -158,7 +162,7 @@
       "maxLength": 64
     },
     "InfluxAuthParametersSecretArn": {
-      "pattern": "^arn:[a-z]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
+      "pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
       "description": "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.",
       "type": "string"
     },
@@ -278,6 +282,13 @@
         "FAILED"
       ]
     },
+    "KmsKeyId": {
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9:/_\\-]+$",
+      "description": "The customer managed key used to encrypt data in the InfluxDB instance.",
+      "type": "string",
+      "maxLength": 2048
+    },
     "AvailabilityZone": {
       "description": "The Availability Zone (AZ) where the InfluxDB instance is created.",
       "type": "string"
@@ -339,6 +350,13 @@
       "minLength": 2,
       "pattern": "^[^_][^\"]*$",
       "description": "The bucket for the InfluxDB instance.",
+      "type": "string",
+      "maxLength": 64
+    },
+    "DbClusterId": {
+      "minLength": 3,
+      "pattern": "^[a-zA-Z0-9]+$",
+      "description": "The service generated unique identifier of the InfluxDB cluster containing this instance.",
       "type": "string",
       "maxLength": 64
     },

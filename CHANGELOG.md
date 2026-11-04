@@ -1,5 +1,62 @@
 ## 1.109.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_appfabric_app_bundle`
+* **New Data Source:** `awscc_appfabric_app_bundles`
+* **New Data Source:** `awscc_backup_backup_access_point`
+* **New Data Source:** `awscc_backup_backup_access_points`
+* **New Data Source:** `awscc_cloudwatch_access_grants`
+* **New Data Source:** `awscc_dax_cluster`
+* **New Data Source:** `awscc_dax_clusters`
+* **New Data Source:** `awscc_directconnect_resiliency_group`
+* **New Data Source:** `awscc_directconnect_resiliency_groups`
+* **New Data Source:** `awscc_ec2_snapshot`
+* **New Data Source:** `awscc_ec2_snapshots`
+* **New Data Source:** `awscc_lakeformation_resource`
+* **New Data Source:** `awscc_lakeformation_resources`
+* **New Data Source:** `awscc_mediaconnect_destination_endpoint`
+* **New Data Source:** `awscc_mediaconnect_destination_endpoints`
+* **New Data Source:** `awscc_mediaconnect_source_endpoint`
+* **New Data Source:** `awscc_mediaconnect_source_endpoints`
+* **New Data Source:** `awscc_mgn_application`
+* **New Data Source:** `awscc_mgn_applications`
+* **New Data Source:** `awscc_mgn_replication_configuration_template`
+* **New Data Source:** `awscc_mgn_replication_configuration_templates`
+* **New Data Source:** `awscc_osis_pipeline_endpoint`
+* **New Data Source:** `awscc_osis_pipeline_endpoints`
+* **New List Resource:** `awscc_appfabric_app_bundle`
+* **New List Resource:** `awscc_backup_backup_access_point`
+* **New List Resource:** `awscc_dax_cluster`
+* **New List Resource:** `awscc_directconnect_resiliency_group`
+* **New List Resource:** `awscc_ec2_snapshot`
+* **New List Resource:** `awscc_lakeformation_resource`
+* **New List Resource:** `awscc_mediaconnect_destination_endpoint`
+* **New List Resource:** `awscc_mediaconnect_source_endpoint`
+* **New List Resource:** `awscc_mgn_application`
+* **New List Resource:** `awscc_mgn_replication_configuration_template`
+* **New List Resource:** `awscc_osis_pipeline_endpoint`
+* **New Resource:** `awscc_appfabric_app_bundle`
+* **New Resource:** `awscc_backup_backup_access_point`
+* **New Resource:** `awscc_dax_cluster`
+* **New Resource:** `awscc_directconnect_resiliency_group`
+* **New Resource:** `awscc_ec2_snapshot`
+* **New Resource:** `awscc_lakeformation_resource`
+* **New Resource:** `awscc_mediaconnect_destination_endpoint`
+* **New Resource:** `awscc_mediaconnect_source_endpoint`
+* **New Resource:** `awscc_mgn_application`
+* **New Resource:** `awscc_mgn_replication_configuration_template`
+* **New Resource:** `awscc_osis_pipeline_endpoint`
+
+BUG FIXES:
+
+* resource/awscc_cloudwatch_anomaly_detector: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* data-source/awscc_cloudwatch_anomaly_detector: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* list-resource/awscc_cloudwatch_anomaly_detector: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* resource/awscc_medialive_input: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* data-source/awscc_medialive_input: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+* list-resource/awscc_medialive_input: Fix the provider failing to register these types because of a duplicate `Id` attribute name mapping
+
 ## 1.108.0 (October 28, 2026)
 
 FEATURES:

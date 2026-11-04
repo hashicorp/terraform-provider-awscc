@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -72,6 +73,21 @@ func profileAssociationResource(ctx context.Context) (resource.Resource, error) 
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Priority
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The priority of the profile association, used to order the profiles applied to a VPC when multiple profiles are associated with it. Lower values have higher precedence. Omit for the first profile associated with a VPC. This orders whole profiles on a VPC and is distinct from the DNS Firewall rule group priority carried in a ProfileResourceAssociation's ResourceProperties.",
+		//	  "type": "integer"
+		//	}
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The priority of the profile association, used to order the profiles applied to a VPC when multiple profiles are associated with it. Lower values have higher precedence. Omit for the first profile associated with a VPC. This orders whole profiles on a VPC and is distinct from the DNS Firewall rule group priority carried in a ProfileResourceAssociation's ResourceProperties.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProfileId
@@ -204,6 +220,7 @@ func profileAssociationResource(ctx context.Context) (resource.Resource, error) 
 		"arn":                    "Arn",
 		"key":                    "Key",
 		"name":                   "Name",
+		"priority":               "Priority",
 		"profile_association_id": "Id",
 		"profile_id":             "ProfileId",
 		"resource_id":            "ResourceId",
