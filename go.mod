@@ -27,7 +27,7 @@ require (
 	github.com/mattbaird/jsonpatch v0.0.0-20240118010651-0ba75a80ca38
 	github.com/schollz/progressbar/v3 v3.19.1
 	github.com/zclconf/go-cty v1.19.0
-	golang.org/x/sync v0.24.0
+	golang.org/x/sync v0.25.0
 	golang.org/x/term v0.47.0
 	golang.org/x/text v0.43.0
 	golang.org/x/tools v0.52.0
