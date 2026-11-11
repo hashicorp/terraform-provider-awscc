@@ -13,7 +13,7 @@
           "description": "A name to identify the origin access control. You can specify up to 64 characters."
         },
         "OriginAccessControlOriginType": {
-          "pattern": "^(s3|mediastore|lambda|mediapackagev2)$",
+          "pattern": "^(s3|mediastore|lambda|mediapackagev2|execute-api)$",
           "type": "string",
           "description": "The type of origin that this origin access control is for."
         },

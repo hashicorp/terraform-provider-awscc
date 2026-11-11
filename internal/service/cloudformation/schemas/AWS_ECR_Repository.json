@@ -220,6 +220,9 @@
     "/properties/Arn",
     "/properties/RepositoryUri"
   ],
+  "propertyTransform": {
+    "/properties/EncryptionConfiguration/KmsKey": "KmsKey $OR $join([\"arn:aws(-[a-z]{1,4}){0,2}:kms:[a-z]{2,4}(-[a-z]{1,4})?-[a-z]{1,10}-[0-9]:[0-9]{12}:key\\/\", KmsKey]) $OR EncryptionConfiguration.KmsKey $OR $join([\"arn:aws(-[a-z]{1,4}){0,2}:kms:[a-z]{2,4}(-[a-z]{1,4})?-[a-z]{1,10}-[0-9]:[0-9]{12}:key\\/\", EncryptionConfiguration.KmsKey])"
+  },
   "writeOnlyProperties": [
     "/properties/EmptyOnDelete"
   ],

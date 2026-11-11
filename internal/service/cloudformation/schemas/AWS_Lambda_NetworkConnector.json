@@ -130,7 +130,6 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "ElasticIpConfiguration": {},
         "AssociatedComputeResourceTypes": {
           "minItems": 1,
           "maxItems": 1,
@@ -219,7 +218,7 @@
     "RoleArn": {
       "minLength": 0,
       "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-      "description": "The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations. If ElasticIpConfiguration Type is ServiceManaged, this role must also have permissions for ec2:AllocateAddress and ec2:AssociateAddress.",
+      "description": "The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for ec2:CreateNetworkInterface and related describe operations.",
       "type": "string",
       "maxLength": 10000
     },

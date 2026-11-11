@@ -37,7 +37,9 @@
         "AWS::Bedrock::KnowledgeBase",
         "AWS::BedrockAgentCore::Memory",
         "AWS::BedrockAgentCore::Gateway",
-        "AWS::BedrockAgentCore::WorkloadIdentity"
+        "AWS::BedrockAgentCore::WorkloadIdentity",
+        "AWS::BedrockAgentCore::PaymentManager",
+        "AWS::XRay::TransactionSearchConfig"
       ]
     },
     "TelemetryType": {
@@ -46,7 +48,8 @@
       "enum": [
         "Logs",
         "Traces",
-        "Metrics"
+        "Metrics",
+        "Insights"
       ]
     },
     "Scope": {

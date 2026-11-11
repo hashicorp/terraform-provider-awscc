@@ -59,7 +59,7 @@
       "insertionOrder": false,
       "uniqueItems": true,
       "minItems": 1,
-      "maxItems": 2
+      "maxItems": 50
     },
     "Expression": {
       "description": "Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \"{ObjectTypeName.AttributeName}\".",
@@ -94,7 +94,7 @@
     "RangeValue": {
       "description": "The amount of time of the specified unit.",
       "type": "integer",
-      "minimum": 1,
+      "minimum": 0,
       "maximum": 2147483647
     },
     "ValueRange": {
@@ -146,9 +146,6 @@
           "maxLength": 255
         }
       },
-      "required": [
-        "Unit"
-      ],
       "additionalProperties": false
     },
     "ObjectCount": {
@@ -270,6 +267,149 @@
       },
       "minItems": 0,
       "maxItems": 50
+    },
+    "FilterInclude": {
+      "description": "Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.",
+      "type": "string",
+      "enum": [
+        "ALL",
+        "ANY",
+        "NONE"
+      ]
+    },
+    "FilterGroupType": {
+      "description": "The type of logical relationship between the dimensions of the Filter group.",
+      "type": "string",
+      "enum": [
+        "ALL",
+        "ANY",
+        "NONE"
+      ]
+    },
+    "FilterDimensionType": {
+      "description": "The action to filter with.",
+      "type": "string",
+      "enum": [
+        "INCLUSIVE",
+        "EXCLUSIVE",
+        "CONTAINS",
+        "BEGINS_WITH",
+        "ENDS_WITH",
+        "BEFORE",
+        "AFTER",
+        "BETWEEN",
+        "NOT_BETWEEN",
+        "ON",
+        "GREATER_THAN",
+        "LESS_THAN",
+        "GREATER_THAN_OR_EQUAL",
+        "LESS_THAN_OR_EQUAL",
+        "EQUAL"
+      ]
+    },
+    "FilterAttributeDimension": {
+      "description": "Object that defines how to filter the incoming objects for the calculated attribute.",
+      "type": "object",
+      "properties": {
+        "DimensionType": {
+          "$ref": "#/definitions/FilterDimensionType"
+        },
+        "Values": {
+          "description": "The values to apply the DimensionType on.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "DimensionType",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "FilterDimension": {
+      "description": "Contains the map of attribute names to attribute dimensions.",
+      "type": "object",
+      "properties": {
+        "Attributes": {
+          "description": "Is the attribute within the FilterDimension map",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/FilterAttributeDimension"
+            }
+          },
+          "minProperties": 1,
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Attributes"
+      ],
+      "additionalProperties": false
+    },
+    "FilterDimensionList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FilterDimension"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 10
+    },
+    "FilterGroup": {
+      "description": "Object that holds the dimensions to filter on.",
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/FilterGroupType"
+        },
+        "Dimensions": {
+          "description": "Object that holds the attributes to filter on.",
+          "$ref": "#/definitions/FilterDimensionList"
+        }
+      },
+      "required": [
+        "Type",
+        "Dimensions"
+      ],
+      "additionalProperties": false
+    },
+    "GroupList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FilterGroup"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "Filter": {
+      "description": "Defines how to filter the objects coming in for calculated attributes.",
+      "type": "object",
+      "properties": {
+        "Include": {
+          "$ref": "#/definitions/FilterInclude"
+        },
+        "Groups": {
+          "description": "Holds the list of Filter groups within the Filter definition.",
+          "$ref": "#/definitions/GroupList"
+        }
+      },
+      "required": [
+        "Include",
+        "Groups"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -287,6 +427,9 @@
     },
     "AttributeDetails": {
       "$ref": "#/definitions/AttributeDetails"
+    },
+    "Filter": {
+      "$ref": "#/definitions/Filter"
     },
     "Conditions": {
       "$ref": "#/definitions/Conditions"
@@ -345,6 +488,9 @@
   "createOnlyProperties": [
     "/properties/DomainName",
     "/properties/CalculatedAttributeName",
+    "/properties/Statistic",
+    "/properties/AttributeDetails",
+    "/properties/Filter",
     "/properties/UseHistoricalData",
     "/properties/Conditions/Range/TimestampSource",
     "/properties/Conditions/Range/TimestampFormat"

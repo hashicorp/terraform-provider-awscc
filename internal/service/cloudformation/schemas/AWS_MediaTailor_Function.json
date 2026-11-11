@@ -28,6 +28,31 @@
         "POST"
       ]
     },
+    "HttpRequestCacheConfiguration": {
+      "type": "object",
+      "description": "The optional response-caching configuration shared by the HTTP-based function types (HTTP_REQUEST, AWS_SERVICE_REQUEST, and VAST_REQUEST). When you provide this configuration, MediaTailor caches function responses with HTTP status codes 200, 203, 204, 404, 405, 410, 414, or 501. For a cacheable response, MediaTailor uses the Cache-Control max-age directive limited to the range between TtlMinimumSeconds and TtlMaximumSeconds. If no max-age directive is present, MediaTailor uses TtlMinimumSeconds. Cached HTTP responses are scoped per playback configuration, not per function.",
+      "properties": {
+        "TtlMinimumSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive."
+        },
+        "TtlMaximumSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds."
+        },
+        "Key": {
+          "type": "string",
+          "description": "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB."
+        }
+      },
+      "required": [
+        "TtlMinimumSeconds",
+        "TtlMaximumSeconds"
+      ],
+      "additionalProperties": false
+    },
     "HttpRequestConfiguration": {
       "type": "object",
       "description": "Configuration for HTTP request functions.",
@@ -59,6 +84,10 @@
         "Headers": {
           "$ref": "#/definitions/StringMap",
           "description": "A map of HTTP headers to include in the request."
+        },
+        "Cache": {
+          "$ref": "#/definitions/HttpRequestCacheConfiguration",
+          "description": "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching."
         }
       },
       "required": [
@@ -112,6 +141,10 @@
               "type": "string"
             }
           }
+        },
+        "Cache": {
+          "$ref": "#/definitions/HttpRequestCacheConfiguration",
+          "description": "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the AWS service, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching."
         },
         "TargetService": {
           "type": "string",
@@ -303,6 +336,10 @@
               "type": "string"
             }
           }
+        },
+        "Cache": {
+          "$ref": "#/definitions/HttpRequestCacheConfiguration",
+          "description": "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching."
         }
       },
       "required": [

@@ -246,8 +246,8 @@
       "properties": {
         "DiscoveryUrl": {
           "minLength": 1,
-          "pattern": "^.+/\\.well-known/openid-configuration$",
-          "description": "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
+          "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
+          "description": "The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys. The URL contains /.well-known/openid-configuration or /.well-known/oauth-authorization-server, respectively.",
           "type": "string",
           "maxLength": 2048
         },

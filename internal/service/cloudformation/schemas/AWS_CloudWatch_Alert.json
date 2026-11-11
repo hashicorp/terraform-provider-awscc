@@ -1,0 +1,421 @@
+{
+  "typeName": "AWS::CloudWatch::Alert",
+  "description": "Resource Type definition for AWS::CloudWatch::Alert. An alert runs a SQL or PromQL query in a CloudWatch Omni space on a fixed interval, compares the result against warning and critical thresholds, and sends notifications to Amazon SNS topics or integrations when its state changes.",
+  "properties": {
+    "SpaceId": {
+      "type": "string",
+      "description": "The ID of the space to create the alert in. Changing this value replaces the alert.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ProfileId": {
+      "type": "string",
+      "description": "The ID of the access profile the alert uses to run its query and send notifications.",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "Name": {
+      "type": "string",
+      "description": "The display name of the alert. Names don't need to be unique within a space; the alert is identified by AlertId.",
+      "pattern": "^[a-zA-Z0-9_.@~()-]+$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the alert.",
+      "maxLength": 1024
+    },
+    "Rule": {
+      "$ref": "#/definitions/Rule"
+    },
+    "NotificationsEnabled": {
+      "type": "boolean",
+      "description": "Whether the alert sends notifications. When false, the alert is still evaluated and records its state, but sends nothing. Defaults to true."
+    },
+    "NotificationRules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NotificationRule"
+      },
+      "description": "The notification rules that determine when and where notifications are sent.",
+      "minItems": 0,
+      "maxItems": 5
+    },
+    "AccountId": {
+      "type": "string",
+      "description": "The AWS account ID that owns the alert.",
+      "pattern": "^[0-9]{12}$",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the alert was created, in ISO 8601 format (UTC)."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the alert was last updated, in ISO 8601 format (UTC)."
+    },
+    "AlertId": {
+      "type": "string",
+      "description": "The ID of the alert, assigned by CloudWatch when the alert is created. It doesn't change when the alert is updated, and it is the resource ID in the alert's ARN.",
+      "pattern": "^[0-9a-f]{32}$",
+      "minLength": 32,
+      "maxLength": 32
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the alert.",
+      "pattern": "^arn:[^:]+:cloudwatch:[^:]*:[0-9]{12}:alert/[0-9a-f]{32}$"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "Query": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "type": "string",
+          "description": "The query language. Valid values: SQL, PROMQL.",
+          "enum": [
+            "SQL",
+            "PROMQL"
+          ]
+        },
+        "Expression": {
+          "type": "string",
+          "description": "The query expression. For PromQL, the series value is returned in a field named value.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "Language",
+        "Expression"
+      ],
+      "additionalProperties": false,
+      "description": "The query the alert runs, and the language it is written in."
+    },
+    "Condition": {
+      "type": "object",
+      "properties": {
+        "ThresholdMode": {
+          "type": "string",
+          "description": "How the threshold is applied. COUNT_OF_RESULTS compares the number of rows the query returns. FIELD_VALUE compares the value of ThresholdField in each result row; each row is tracked separately.",
+          "enum": [
+            "COUNT_OF_RESULTS",
+            "FIELD_VALUE"
+          ]
+        },
+        "ThresholdField": {
+          "type": "string",
+          "description": "The result field to compare against the threshold. Required when ThresholdMode is FIELD_VALUE.",
+          "maxLength": 256
+        },
+        "Comparator": {
+          "type": "string",
+          "description": "The comparison operator. Valid values: GT, GTE, LT, LTE (greater than, greater than or equal to, less than, less than or equal to).",
+          "enum": [
+            "GT",
+            "LT",
+            "GTE",
+            "LTE"
+          ]
+        },
+        "WarningThreshold": {
+          "type": "number",
+          "description": "The value at which the alert enters the WARNING state."
+        },
+        "CriticalThreshold": {
+          "type": "number",
+          "description": "The value at which the alert enters the CRITICAL state."
+        }
+      },
+      "additionalProperties": false,
+      "description": "The thresholds that set the alert's state. Specify at least one of WarningThreshold and CriticalThreshold."
+    },
+    "Evaluation": {
+      "type": "object",
+      "properties": {
+        "IntervalSeconds": {
+          "type": "integer",
+          "description": "The time between evaluations, in seconds. Valid values: 30, 60, 120, 300, 600, 900, 1800, 3600."
+        },
+        "PendingDurationSeconds": {
+          "type": "integer",
+          "description": "How long a threshold breach must last before the alert changes state, in seconds. Must be a multiple of IntervalSeconds. 0 changes state immediately."
+        },
+        "RecoveryDurationSeconds": {
+          "type": "integer",
+          "description": "How long the result must stay within its thresholds before the alert returns to OK, in seconds. Must be a multiple of IntervalSeconds. 0 returns to OK immediately."
+        }
+      },
+      "required": [
+        "IntervalSeconds"
+      ],
+      "additionalProperties": false,
+      "description": "How often the alert is evaluated, and how long a change must last before the state changes."
+    },
+    "NoData": {
+      "type": "object",
+      "properties": {
+        "TreatAs": {
+          "type": "string",
+          "description": "The state to report when an evaluation returns no data. Valid values: OK, WARNING, CRITICAL, NODATA.",
+          "enum": [
+            "OK",
+            "WARNING",
+            "CRITICAL",
+            "NODATA"
+          ]
+        }
+      },
+      "required": [
+        "TreatAs"
+      ],
+      "additionalProperties": false,
+      "description": "How the alert behaves when an evaluation returns no data. If omitted, the alert reports NODATA."
+    },
+    "TelemetryRule": {
+      "type": "object",
+      "properties": {
+        "Query": {
+          "$ref": "#/definitions/Query"
+        },
+        "Condition": {
+          "$ref": "#/definitions/Condition"
+        },
+        "Evaluation": {
+          "$ref": "#/definitions/Evaluation"
+        },
+        "NoData": {
+          "$ref": "#/definitions/NoData"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A rule that queries telemetry, evaluates the result against a condition, and sets how missing data is handled.",
+      "required": [
+        "Query",
+        "Condition",
+        "Evaluation"
+      ]
+    },
+    "Rule": {
+      "description": "The rule that defines how the alert is evaluated.",
+      "type": "object",
+      "properties": {
+        "TelemetryRule": {
+          "$ref": "#/definitions/TelemetryRule"
+        }
+      },
+      "required": [
+        "TelemetryRule"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "TelemetryRule"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "Trigger": {
+      "type": "object",
+      "properties": {
+        "StateValues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "OK",
+              "WARNING",
+              "CRITICAL",
+              "NODATA"
+            ]
+          },
+          "description": "The alert states that trigger this rule. A notification is sent when the alert enters any listed state. If omitted or empty, every state triggers the rule.",
+          "maxItems": 4
+        }
+      },
+      "additionalProperties": false,
+      "description": "The alert states that trigger the notification rule."
+    },
+    "Metadata": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "additionalProperties": false,
+      "description": "Settings specific to the target, as key-value pairs (up to 20). The keys depend on the integration type. Not used for sns targets.",
+      "maxProperties": 20
+    },
+    "Target": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The target type. Valid values: sns, slack, pagerduty.",
+          "enum": [
+            "sns",
+            "slack",
+            "pagerduty"
+          ]
+        },
+        "Arn": {
+          "type": "string",
+          "description": "The ARN of the target. For sns, the ARN of the Amazon SNS topic. For slack and pagerduty, the ARN of a CloudWatch Omni integration.",
+          "pattern": "^arn:.+$",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata"
+        }
+      },
+      "required": [
+        "Type",
+        "Arn"
+      ],
+      "additionalProperties": false,
+      "description": "Where the notification is sent."
+    },
+    "NotificationRule": {
+      "type": "object",
+      "properties": {
+        "Trigger": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "Target": {
+          "$ref": "#/definitions/Target"
+        }
+      },
+      "required": [
+        "Trigger",
+        "Target"
+      ],
+      "additionalProperties": false,
+      "description": "A notification rule: which alert states trigger it, and where the notification is sent."
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "The key name of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "description": "The value for the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SpaceId",
+    "/properties/AlertId"
+  ],
+  "required": [
+    "SpaceId",
+    "ProfileId",
+    "Name",
+    "Rule"
+  ],
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/AlertId",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/SpaceId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:AssumeAccessProfile",
+        "cloudwatch:CreateAlert",
+        "cloudwatch:InvokeIntegration",
+        "cloudwatch:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetAlert",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:AssumeAccessProfile",
+        "cloudwatch:InvokeIntegration",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:UpdateAlert"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteAlert",
+        "cloudwatch:GetAlert",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListAlerts"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "SpaceId": {
+            "type": "string",
+            "description": "The ID of the space the alert belongs to.",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          }
+        },
+        "required": [
+          "SpaceId"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

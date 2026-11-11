@@ -127,8 +127,50 @@
         "ImageScanningEnabled": {
           "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.",
           "type": "boolean"
+        },
+        "ImageScanningTypes": {
+          "description": "The type of vulnerability scan that Image Builder runs for AMI output when ImageScanningEnabled is true. Specify a single value. If you omit ImageScanningTypes, Image Builder uses TEST_INSTANCE_CVE. With TEST_INSTANCE_CVE, Amazon Inspector scans the test instance during image tests, and you must activate Amazon Inspector for Amazon EC2 scanning in your account. With ON_DEMAND_AMI_CVE, Amazon Inspector starts an on-demand scan of the output AMI during image tests. You must build from an image recipe, but you do not need to activate Amazon Inspector in your account.",
+          "type": "array",
+          "insertionOrder": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "TEST_INSTANCE_CVE",
+              "ON_DEMAND_AMI_CVE"
+            ]
+          }
+        },
+        "ScanResultCondition": {
+          "description": "The condition that the output AMI's scan results must meet for the image to pass. You can set ScanResultCondition only when ImageScanningTypes is ON_DEMAND_AMI_CVE. If you omit it, Image Builder starts the scan but does not wait for it or use its results to pass or fail the image.",
+          "$ref": "#/definitions/ScanResultCondition"
         }
       }
+    },
+    "ScanResultCondition": {
+      "description": "The condition that the output AMI's scan results must meet for the image to pass. When you set it, the test phase waits for the scan to finish, and Image Builder fails the image if a counted finding exceeds MaximumSeverityLabel.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaximumSeverityLabel": {
+          "description": "The maximum severity allowed for findings on the output AMI. A finding above this severity fails the image, unless FixAvailable excludes it.",
+          "type": "string",
+          "enum": [
+            "INFORMATIONAL",
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "FixAvailable": {
+          "description": "Specifies whether only findings that have a fix available count toward MaximumSeverityLabel. When false, Image Builder counts every finding. The default is true.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "MaximumSeverityLabel"
+      ]
     },
     "EcrConfiguration": {
       "description": "Settings for Image Builder to configure the ECR repository and output container images that are scanned.",

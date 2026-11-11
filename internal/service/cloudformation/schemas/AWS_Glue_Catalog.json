@@ -169,11 +169,13 @@
       "description": "The Amazon Resource Name (ARN) of the catalog."
     },
     "CreateTime": {
-      "type": "integer",
+      "type": "string",
+      "format": "date-time",
       "description": "The time at which the catalog was created."
     },
     "UpdateTime": {
-      "type": "integer",
+      "type": "string",
+      "format": "date-time",
       "description": "The time at which the catalog was last updated."
     },
     "Name": {
@@ -298,7 +300,9 @@
         "glue:GetTags",
         "iam:PassRole",
         "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
         "kms:Decrypt",
+        "kms:DescribeKey",
         "kms:Encrypt",
         "kms:GenerateDataKey",
         "redshift-serverless:CreateNamespace",
@@ -335,7 +339,9 @@
         "glue:UntagResource",
         "glue:GetTags",
         "iam:PassRole",
+        "kms:CreateGrant",
         "kms:Decrypt",
+        "kms:DescribeKey",
         "kms:Encrypt",
         "kms:GenerateDataKey",
         "redshift-serverless:UpdateNamespace",

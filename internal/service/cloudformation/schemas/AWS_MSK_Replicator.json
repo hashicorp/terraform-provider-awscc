@@ -753,8 +753,10 @@
         "logs:DeleteLogDelivery",
         "logs:DescribeLogGroups",
         "logs:DescribeResourcePolicies",
+        "logs:GetLogDelivery",
         "logs:ListLogDeliveries",
         "logs:PutResourcePolicy",
+        "logs:UpdateLogDelivery",
         "s3:GetBucketPolicy",
         "s3:PutBucketPolicy",
         "firehose:TagDeliveryStream"

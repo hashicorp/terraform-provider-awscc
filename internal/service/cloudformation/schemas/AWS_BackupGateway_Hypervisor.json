@@ -149,7 +149,10 @@
         "backup-gateway:ListHypervisors",
         "backup-gateway:ImportHypervisorConfiguration",
         "backup-gateway:DeleteHypervisor",
-        "backup-gateway:ListTagsForResource"
+        "backup-gateway:ListTagsForResource",
+        "kms:CreateGrant",
+        "kms:Encrypt",
+        "kms:Decrypt"
       ]
     },
     "delete": {

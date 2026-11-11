@@ -384,7 +384,8 @@
       "permissions": [
         "lambda:DeleteCapacityProvider",
         "lambda:GetCapacityProvider"
-      ]
+      ],
+      "timeoutInMinutes": 150
     },
     "list": {
       "handlerSchema": {

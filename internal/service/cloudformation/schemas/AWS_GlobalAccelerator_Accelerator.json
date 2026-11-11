@@ -102,33 +102,17 @@
     "FlowLogsEnabled": {
       "description": "Indicates whether flow logs are enabled for the accelerator.",
       "default": false,
-      "type": "boolean",
-      "dependencies": {
-        "FlowLogsEnabled": [
-          "FlowLogsS3Bucket",
-          "FlowLogsS3Prefix"
-        ]
-      }
+      "type": "boolean"
     },
     "FlowLogsS3Bucket": {
       "description": "The name of the Amazon S3 bucket for the flow logs.",
       "type": "string",
-      "maxLength": 255,
-      "dependencies": {
-        "FlowLogsS3Bucket": [
-          "FlowLogsEnabled"
-        ]
-      }
+      "maxLength": 255
     },
     "FlowLogsS3Prefix": {
       "description": "The prefix for the location in the Amazon S3 bucket for the flow logs.",
       "type": "string",
-      "maxLength": 255,
-      "dependencies": {
-        "FlowLogsS3Prefix": [
-          "FlowLogsEnabled"
-        ]
-      }
+      "maxLength": 255
     }
   },
   "tagging": {

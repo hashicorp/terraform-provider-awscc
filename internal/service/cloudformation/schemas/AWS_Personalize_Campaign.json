@@ -179,7 +179,8 @@
       "permissions": [
         "personalize:DeleteCampaign",
         "personalize:DescribeCampaign"
-      ]
+      ],
+      "timeoutInMinutes": 360
     },
     "list": {
       "permissions": [
