@@ -60,7 +60,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		//	    },
 		//	    "OriginAccessControlOriginType": {
 		//	      "description": "The type of origin that this origin access control is for.",
-		//	      "pattern": "^(s3|mediastore|lambda|mediapackagev2)$",
+		//	      "pattern": "^(s3|mediastore|lambda|mediapackagev2|execute-api)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SigningBehavior": {
@@ -103,7 +103,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 					Description: "The type of origin that this origin access control is for.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^(s3|mediastore|lambda|mediapackagev2)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(s3|mediastore|lambda|mediapackagev2|execute-api)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SigningBehavior

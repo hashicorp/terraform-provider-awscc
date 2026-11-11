@@ -491,7 +491,9 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AWS::Bedrock::KnowledgeBase",
 		//	        "AWS::BedrockAgentCore::Memory",
 		//	        "AWS::BedrockAgentCore::Gateway",
-		//	        "AWS::BedrockAgentCore::WorkloadIdentity"
+		//	        "AWS::BedrockAgentCore::WorkloadIdentity",
+		//	        "AWS::BedrockAgentCore::PaymentManager",
+		//	        "AWS::XRay::TransactionSearchConfig"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -523,7 +525,8 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "enum": [
 		//	        "Logs",
 		//	        "Traces",
-		//	        "Metrics"
+		//	        "Metrics",
+		//	        "Insights"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -1137,6 +1140,8 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 							"AWS::BedrockAgentCore::Memory",
 							"AWS::BedrockAgentCore::Gateway",
 							"AWS::BedrockAgentCore::WorkloadIdentity",
+							"AWS::BedrockAgentCore::PaymentManager",
+							"AWS::XRay::TransactionSearchConfig",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -1181,6 +1186,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 							"Logs",
 							"Traces",
 							"Metrics",
+							"Insights",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/

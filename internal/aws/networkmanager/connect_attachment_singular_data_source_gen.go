@@ -115,6 +115,97 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "Errors from the last modification of the attachment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NatGatewayRules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The complete set of NAT gateway rules on the attachment. Updating this property replaces the entire rule set, and rules left out of the new value are removed. To remove all rules, specify an empty list or remove this property. NAT gateway support can't be enabled without rules, so it is then disabled unless NatGatewaySupport is specified. Only the core network owner can configure NAT gateway rules. The rules aren't returned when the attachment is read, so drift detection doesn't check them. Not available in AWS GovCloud (US).",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A NAT gateway rule on the attachment.",
+		//	    "properties": {
+		//	      "MatchSourceCidr": {
+		//	        "description": "The IPv4 CIDR that source traffic is matched against for translation.",
+		//	        "maxLength": 18,
+		//	        "minLength": 9,
+		//	        "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$",
+		//	        "type": "string"
+		//	      },
+		//	      "NatCidr": {
+		//	        "description": "The IPv4 CIDR that matched source traffic is translated into. Must have the same prefix length as MatchSourceCidr.",
+		//	        "maxLength": 18,
+		//	        "minLength": 9,
+		//	        "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$",
+		//	        "type": "string"
+		//	      },
+		//	      "RuleNumber": {
+		//	        "description": "The rule number that uniquely identifies the NAT rule on the attachment.",
+		//	        "maximum": 32766,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "RuleNumber",
+		//	      "MatchSourceCidr",
+		//	      "NatCidr"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"nat_gateway_rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MatchSourceCidr
+					"match_source_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IPv4 CIDR that source traffic is matched against for translation.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NatCidr
+					"nat_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IPv4 CIDR that matched source traffic is translated into. Must have the same prefix length as MatchSourceCidr.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleNumber
+					"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The rule number that uniquely identifies the NAT rule on the attachment.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The complete set of NAT gateway rules on the attachment. Updating this property replaces the entire rule set, and rules left out of the new value are removed. To remove all rules, specify an empty list or remove this property. NAT gateway support can't be enabled without rules, so it is then disabled unless NatGatewaySupport is specified. Only the core network owner can configure NAT gateway rules. The rules aren't returned when the attachment is read, so drift detection doesn't check them. Not available in AWS GovCloud (US).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NatGatewaySupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether NAT gateway support is enabled on the attachment. Required when NatGatewayRules lists rules. Set to DISABLE with NatGatewayRules to keep the rules on the attachment without translating traffic, and set it to ENABLE to activate them again. An attachment that is pending acceptance applies this setting once it is accepted. Only the core network owner can configure or read NAT gateway settings. Not available in AWS GovCloud (US).",
+		//	  "enum": [
+		//	    "ENABLE",
+		//	    "DISABLE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"nat_gateway_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether NAT gateway support is enabled on the attachment. Required when NatGatewayRules lists rules. Set to DISABLE with NatGatewayRules to keep the rules on the attachment without translating traffic, and set it to ENABLE to activate them again. An attachment that is pending acceptance applies this setting once it is accepted. Only the core network owner can configure or read NAT gateway settings. Not available in AWS GovCloud (US).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NatSystemRouteSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether system routes are installed for the NAT CIDRs of the attachment's NAT gateway rules. On Connect attachments this is always false and is not configurable. Not available in AWS GovCloud (US).",
+		//	  "type": "boolean"
+		//	}
+		"nat_system_route_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether system routes are installed for the NAT CIDRs of the attachment's NAT gateway rules. On Connect attachments this is always false and is not configurable. Not available in AWS GovCloud (US).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -456,6 +547,11 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		"edge_location":                          "EdgeLocation",
 		"key":                                    "Key",
 		"last_modification_errors":               "LastModificationErrors",
+		"match_source_cidr":                      "MatchSourceCidr",
+		"nat_cidr":                               "NatCidr",
+		"nat_gateway_rules":                      "NatGatewayRules",
+		"nat_gateway_support":                    "NatGatewaySupport",
+		"nat_system_route_support":               "NatSystemRouteSupport",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"options":                                "Options",
 		"owner_account_id":                       "OwnerAccountId",
@@ -464,6 +560,7 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		"protocol":                               "Protocol",
 		"resource_arn":                           "ResourceArn",
 		"routing_policy_label":                   "RoutingPolicyLabel",
+		"rule_number":                            "RuleNumber",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"tags":                                   "Tags",

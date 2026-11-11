@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1763 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1769 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1595,6 +1595,12 @@ resource_schema "aws_cloudwatch_alarm_mute_rule" {
   cloudformation_type_name = "AWS::CloudWatch::AlarmMuteRule"
 }
 
+resource_schema "aws_cloudwatch_alert" {
+  cloudformation_type_name               = "AWS::CloudWatch::Alert"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_cloudwatch_anomaly_detector" {
   cloudformation_type_name   = "AWS::CloudWatch::AnomalyDetector"
   non_provisionable          = true
@@ -2804,8 +2810,18 @@ resource_schema "aws_ec2_client_vpn_authorization_rule" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_ec2_client_vpn_endpoint" {
+  cloudformation_type_name = "AWS::EC2::ClientVpnEndpoint"
+}
+
 resource_schema "aws_ec2_client_vpn_route" {
   cloudformation_type_name               = "AWS::EC2::ClientVpnRoute"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_ec2_client_vpn_target_network_association" {
+  cloudformation_type_name               = "AWS::EC2::ClientVpnTargetNetworkAssociation"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
@@ -3475,6 +3491,16 @@ resource_schema "aws_eks_pod_identity_association" {
   cloudformation_type_name               = "AWS::EKS::PodIdentityAssociation"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_emr_cluster" {
+  cloudformation_type_name                 = "AWS::EMR::Cluster"
+  suppress_plural_data_source_generation   = true
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_plural_data_source    = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_resource              = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
+  suppression_reason_singular_data_source  = "generation_failed: probe timed out after 30s (possible runaway/recursive schema)"
 }
 
 resource_schema "aws_emr_instance_fleet_config" {
@@ -8415,8 +8441,18 @@ resource_schema "aws_wellarchitected_agent_goal" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_wellarchitected_agent_organizational_profile" {
+  cloudformation_type_name = "AWS::WellArchitected::AgentOrganizationalProfile"
+}
+
 resource_schema "aws_wellarchitected_agent_profile" {
   cloudformation_type_name = "AWS::WellArchitected::AgentProfile"
+}
+
+resource_schema "aws_wellarchitected_agent_profile_policy" {
+  cloudformation_type_name               = "AWS::WellArchitected::AgentProfilePolicy"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_wellarchitected_lens" {
@@ -8443,6 +8479,8 @@ resource_schema "aws_wisdom_ai_agent" {
   cloudformation_type_name               = "AWS::Wisdom::AIAgent"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+  frozen_reason                          = "generation_failed: resource: emitting schema code: Configuration/OrchestrationAIAgentConfiguration/InputSchemas is of unsupported type: list of undefined schema; singular_data_source: emitting schema code: Configuration/OrchestrationAIAgentConfiguration/InputSchemas is of unsupported type: list of undefined schema"
+  frozen_since                           = "2026-11-11"
 }
 
 resource_schema "aws_wisdom_ai_agent_version" {

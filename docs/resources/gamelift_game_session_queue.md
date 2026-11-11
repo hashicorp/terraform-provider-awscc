@@ -38,6 +38,7 @@ resource "awscc_gamelift_game_session_queue" "example" {
 - `custom_event_data` (String) Information that is added to all events that are related to this game session queue.
 - `destinations` (Attributes List) A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue. (see [below for nested schema](#nestedatt--destinations))
 - `filter_configuration` (Attributes) A list of locations where a queue is allowed to place new game sessions. (see [below for nested schema](#nestedatt--filter_configuration))
+- `log_configuration` (Attributes) A policy that determines where a game session queue's placement logs are delivered. (see [below for nested schema](#nestedatt--log_configuration))
 - `notification_target` (String) An SNS topic ARN that is set up to receive game session placement notifications.
 - `player_latency_policies` (Attributes List) A set of policies that act as a sliding cap on player latency. (see [below for nested schema](#nestedatt--player_latency_policies))
 - `priority_configuration` (Attributes) Custom settings to use when prioritizing destinations and locations for game session placements. (see [below for nested schema](#nestedatt--priority_configuration))
@@ -63,6 +64,23 @@ Optional:
 Optional:
 
 - `allowed_locations` (List of String) A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.
+
+
+<a id="nestedatt--log_configuration"></a>
+### Nested Schema for `log_configuration`
+
+Optional:
+
+- `delivery_destinations` (Attributes Set) The set of destinations that receive the game session queue's placement logs. A queue can deliver logs to between 1 and 3 destinations. (see [below for nested schema](#nestedatt--log_configuration--delivery_destinations))
+
+<a id="nestedatt--log_configuration--delivery_destinations"></a>
+### Nested Schema for `log_configuration.delivery_destinations`
+
+Optional:
+
+- `destination_arn` (String) The Amazon Resource Name (ARN) of the resource that receives the placement logs. The resource type must match LogDestination (a CloudWatch Logs log group, S3 bucket, or Firehose delivery stream). Required for FIREHOSE; optional for CLOUDWATCH and S3.
+- `log_destination` (String) The type of service that receives the game session queue's placement logs.
+
 
 
 <a id="nestedatt--player_latency_policies"></a>

@@ -109,16 +109,20 @@
       "description": "The status of the transit gateway peering attachment.",
       "$ref": "#/definitions/PeeringAttachmentStatus"
     },
+    "PeerAccountId": {
+      "description": "The ID of the peer account",
+      "type": "string"
+    },
+    "PeerRegion": {
+      "description": "Peer Region",
+      "type": "string"
+    },
     "TransitGatewayId": {
       "description": "The ID of the transit gateway.",
       "type": "string"
     },
     "PeerTransitGatewayId": {
       "description": "The ID of the peer transit gateway.",
-      "type": "string"
-    },
-    "PeerAccountId": {
-      "description": "The ID of the peer account",
       "type": "string"
     },
     "State": {
@@ -128,10 +132,6 @@
     "CreationTime": {
       "format": "date-time",
       "description": "The time the transit gateway peering attachment was created.",
-      "type": "string"
-    },
-    "PeerRegion": {
-      "description": "Peer Region",
       "type": "string"
     },
     "Tags": {

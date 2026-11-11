@@ -205,14 +205,14 @@
         "StatusMessage": {
           "type": "string"
         },
-        "KmsKeyArn": {
+        "KmsEncryptionKeyArn": {
           "type": "string",
           "maxLength": 2048,
           "minLength": 20,
           "pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]{1,20}:[0-9]{12}:key/[a-zA-Z0-9-]+$",
           "description": "The ARN of the AWS KMS key that protects the replica in this region."
         },
-        "KmsKeyId": {
+        "KmsEncryptionKeyId": {
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,

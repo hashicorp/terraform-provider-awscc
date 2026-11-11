@@ -32,7 +32,7 @@ Data Source schema for AWS::Connect::Queue
 - `outbound_caller_config` (Attributes) The outbound caller ID name, number, and outbound whisper flow. (see [below for nested schema](#nestedatt--outbound_caller_config))
 - `outbound_email_config` (Attributes) The outbound email configuration for a specified queue. (see [below for nested schema](#nestedatt--outbound_email_config))
 - `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
-- `quick_connect_arns` (List of String) The quick connects available to agents who are working the queue.
+- `quick_connect_arns` (List of String) The quick connects available to agents who are working the queue. To remove all quick connects from the queue, specify an empty list.
 - `status` (String) The status of the queue.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of queue.

@@ -253,6 +253,7 @@ Optional:
 - `local_storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--local_storage_configuration))
 - `monitoring` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--network_configuration))
+- `nitro_enclaves_enabled` (Boolean)
 - `storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--storage_configuration))
 
 <a id="nestedatt--managed_instances_provider--instance_launch_template--capacity_reservations"></a>

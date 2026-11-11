@@ -301,7 +301,7 @@ func acmeEndpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CertificateManager::AcmeEndpoint",
+		Description: "Resource Type definition for AWS::CertificateManager::AcmeEndpoint, an ACME protocol endpoint for issuing certificates through AWS Certificate Manager",
 		Version:     1,
 		Attributes:  attributes,
 	}

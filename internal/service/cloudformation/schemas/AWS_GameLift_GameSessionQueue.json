@@ -131,6 +131,53 @@
         }
       },
       "additionalProperties": false
+    },
+    "DeliveryDestination": {
+      "type": "object",
+      "description": "The destination to deliver a game session queue's placement logs to. Omit DestinationArn for a CLOUDWATCH or S3 destination to have GameLift create one; FIREHOSE requires DestinationArn.",
+      "properties": {
+        "LogDestination": {
+          "description": "The type of service that receives the game session queue's placement logs.",
+          "type": "string",
+          "enum": [
+            "CLOUDWATCH",
+            "S3",
+            "FIREHOSE"
+          ]
+        },
+        "DestinationArn": {
+          "description": "The Amazon Resource Name (ARN) of the resource that receives the placement logs. The resource type must match LogDestination (a CloudWatch Logs log group, S3 bucket, or Firehose delivery stream). Required for FIREHOSE; optional for CLOUDWATCH and S3.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^arn:[a-zA-Z0-9:/*._#-]+$"
+        }
+      },
+      "required": [
+        "LogDestination"
+      ],
+      "additionalProperties": false
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "description": "A policy that determines where a game session queue's placement logs are delivered.",
+      "properties": {
+        "DeliveryDestinations": {
+          "description": "The set of destinations that receive the game session queue's placement logs. A queue can deliver logs to between 1 and 3 destinations.",
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/DeliveryDestination"
+          }
+        }
+      },
+      "required": [
+        "DeliveryDestinations"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -186,6 +233,11 @@
       "type": "object",
       "$ref": "#/definitions/PriorityConfiguration"
     },
+    "LogConfiguration": {
+      "description": "A policy that determines where a game session queue's placement logs are delivered.",
+      "type": "object",
+      "$ref": "#/definitions/LogConfiguration"
+    },
     "Arn": {
       "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.",
       "type": "string",
@@ -220,10 +272,23 @@
   "handlers": {
     "create": {
       "permissions": [
+        "gamelift:AllowVendedLogDeliveryForResource",
         "gamelift:CreateGameSessionQueue",
         "gamelift:DescribeGameSessionQueues",
         "gamelift:ListTagsForResource",
-        "gamelift:TagResource"
+        "gamelift:TagResource",
+        "logs:PutDeliverySource",
+        "logs:PutDeliveryDestination",
+        "logs:CreateDelivery",
+        "logs:CreateLogGroup",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:PutResourcePolicy",
+        "s3:CreateBucket",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "firehose:TagDeliveryStream",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {
@@ -235,16 +300,35 @@
     "delete": {
       "permissions": [
         "gamelift:DescribeGameSessionQueues",
-        "gamelift:DeleteGameSessionQueue"
+        "gamelift:DeleteGameSessionQueue",
+        "logs:DeleteDelivery",
+        "logs:DeleteDeliveryDestination",
+        "logs:DeleteDeliverySource"
       ]
     },
     "update": {
       "permissions": [
+        "gamelift:AllowVendedLogDeliveryForResource",
         "gamelift:UpdateGameSessionQueue",
         "gamelift:ListTagsForResource",
         "gamelift:TagResource",
         "gamelift:UntagResource",
-        "gamelift:DescribeGameSessionQueues"
+        "gamelift:DescribeGameSessionQueues",
+        "logs:PutDeliverySource",
+        "logs:PutDeliveryDestination",
+        "logs:CreateDelivery",
+        "logs:CreateLogGroup",
+        "logs:DeleteDelivery",
+        "logs:DeleteDeliveryDestination",
+        "logs:DeleteDeliverySource",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:PutResourcePolicy",
+        "s3:CreateBucket",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "firehose:TagDeliveryStream",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "list": {

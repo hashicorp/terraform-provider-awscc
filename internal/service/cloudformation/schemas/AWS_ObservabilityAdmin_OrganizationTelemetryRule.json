@@ -30,7 +30,8 @@
         "AWS::S3::Bucket",
         "AWS::MSK::Cluster",
         "AWS::CloudFront::Distribution",
-        "AWS::CloudWatch::OTelEnrichment"
+        "AWS::CloudWatch::OTelEnrichment",
+        "AWS::XRay::TransactionSearchConfig"
       ]
     },
     "TelemetryType": {
@@ -38,7 +39,9 @@
       "type": "string",
       "enum": [
         "Logs",
-        "Metrics"
+        "Traces",
+        "Metrics",
+        "Insights"
       ]
     },
     "Scope": {

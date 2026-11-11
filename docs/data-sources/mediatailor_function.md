@@ -39,6 +39,7 @@ Data Source schema for AWS::MediaTailor::Function
 Read-Only:
 
 - `body` (String) An expression that evaluates to the request body for the AWS service API call. The body must conform to the input format that the target service operation expects. Applies only when the target operation accepts a request body. The maximum size after evaluation is 64 KB.
+- `cache` (Attributes) The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the AWS service, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching. (see [below for nested schema](#nestedatt--aws_service_request_configuration--cache))
 - `headers` (Map of String) A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound request to the AWS service. Use this to pass any headers required by the target service operation. You can include a maximum of 50 headers.
 - `method_type` (String)
 - `output` (Map of String) A map of output bindings. Each key is a namespaced output path, such as player_params.device_type. Each value is an expression that MediaTailor evaluates at runtime and can reference the response object from the target service. For more information, see JSONata expression reference (https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html) in the MediaTailor User Guide.
@@ -47,6 +48,16 @@ Read-Only:
 - `target_region` (String) The AWS Region for the target service. Specify a static Region code (for example, us-east-1) or a JSONata expression that resolves to a Region code at runtime (for example, {%inference.region%}).
 - `target_service` (String) The AWS service to call. Valid value: elemental-inference (AWS Elemental Inference).
 - `url` (String) An expression that evaluates to the endpoint URL for the target AWS service API operation. Use {%...%} delimiters for dynamic expressions. The URL must correspond to a valid endpoint for the service specified in TargetService. The maximum length after evaluation is 2,048 characters.
+
+<a id="nestedatt--aws_service_request_configuration--cache"></a>
+### Nested Schema for `aws_service_request_configuration.cache`
+
+Read-Only:
+
+- `key` (String) A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.
+- `ttl_maximum_seconds` (Number) The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.
+- `ttl_minimum_seconds` (Number) The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.
+
 
 
 <a id="nestedatt--concurrent_executor_configuration"></a>
@@ -86,12 +97,23 @@ Read-Only:
 Read-Only:
 
 - `body` (String) The body of the HTTP request.
+- `cache` (Attributes) The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching. (see [below for nested schema](#nestedatt--http_request_configuration--cache))
 - `headers` (Map of String) A map of HTTP headers to include in the request.
 - `method_type` (String) The HTTP method type for the request.
 - `output` (Map of String) A map of output key-value pairs. Keys must start with session., temp., avail., scte., or be a valid adsRequest directive.
 - `request_timeout_milliseconds` (Number) The timeout in milliseconds for the HTTP request. Maximum value is 2000.
 - `runtime` (String) The runtime environment for the function expression language.
 - `url` (String) The URL endpoint for the HTTP request.
+
+<a id="nestedatt--http_request_configuration--cache"></a>
+### Nested Schema for `http_request_configuration.cache`
+
+Read-Only:
+
+- `key` (String) A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.
+- `ttl_maximum_seconds` (Number) The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.
+- `ttl_minimum_seconds` (Number) The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.
+
 
 
 <a id="nestedatt--sequential_executor_configuration"></a>
@@ -130,9 +152,19 @@ Read-Only:
 Read-Only:
 
 - `body` (String) An expression that evaluates to the request body, for example to send an OpenRTB bid request. The expression can be up to 100,000 characters, and the body after evaluation can be up to 64 KB.
+- `cache` (Attributes) The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching. (see [below for nested schema](#nestedatt--vast_request_configuration--cache))
 - `headers` (Map of String) A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound request. Headers beginning with X-Amz- are reserved by the service, and method override headers are not allowed.
 - `method_type` (String)
 - `output` (Map of String) A map of output bindings. Each key is a namespaced output path (such as temp.wrappedAds), and each value is an expression that MediaTailor evaluates at runtime. Output expressions in a VAST_REQUEST function can reference the response object, which exposes response.parsedAds, the ads parsed from the VAST response after schema validation and wrapper resolution, and response.statusCode. For more information about expression syntax, see JSONata expression reference (https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html) in the MediaTailor User Guide.
 - `request_timeout_milliseconds` (Number) The maximum time, in milliseconds, that MediaTailor waits for a response from the VAST endpoint. The timeout covers the entire response, including any wrapper redirects that MediaTailor follows. If the call exceeds this timeout, MediaTailor proceeds with an empty ad list and continues output expression evaluation. Valid values are 100 to 2000.
 - `runtime` (String) The expression language used to evaluate expressions in the function configuration. Set this to JSONATA.
 - `url` (String) An expression that evaluates to the VAST endpoint URL. Use {%...%} delimiters for dynamic expressions. A literal value must be an https:// URL. The expression can be up to 25,000 characters, and the URL after evaluation can be up to 2,048 characters.
+
+<a id="nestedatt--vast_request_configuration--cache"></a>
+### Nested Schema for `vast_request_configuration.cache`
+
+Read-Only:
+
+- `key` (String) A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.
+- `ttl_maximum_seconds` (Number) The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.
+- `ttl_minimum_seconds` (Number) The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.

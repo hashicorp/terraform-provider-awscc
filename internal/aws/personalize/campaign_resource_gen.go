@@ -365,7 +365,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"value":                                "Value",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(360)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

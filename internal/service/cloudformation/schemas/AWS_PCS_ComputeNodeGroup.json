@@ -321,6 +321,10 @@
     "SubnetIds"
   ],
   "properties": {
+    "SshKeyName": {
+      "description": "The name of the EC2 key pair configured directly on the compute node group. The key pair must exist in the caller's account and Region and overrides the key pair from the custom launch template. When not provided and a custom launch template is present, AWS PCS uses the key pair from the launch template.",
+      "type": "string"
+    },
     "Status": {
       "description": "The provisioning status of the compute node group. The provisioning status doesn't indicate the overall health of the compute node group.",
       "type": "string",
@@ -389,6 +393,22 @@
             "$ref": "#/definitions/SlurmCustomSetting"
           }
         }
+      }
+    },
+    "LaunchTemplateMode": {
+      "description": "How AWS PCS gets the launch template for the compute node group. CUSTOM uses CustomLaunchTemplate. MANAGED has AWS PCS generate and manage the launch template from the instance settings; omit CustomLaunchTemplate. Defaults to CUSTOM on create.",
+      "type": "string",
+      "enum": [
+        "CUSTOM",
+        "MANAGED"
+      ]
+    },
+    "SecurityGroupIds": {
+      "description": "The IDs of the EC2 security groups configured directly on the compute node group. These replace the security groups from the custom launch template. A request cannot specify this property with a launch template that defines NetworkInterfaces. When not provided and a custom launch template is present, AWS PCS uses the security groups from the launch template.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SecurityGroupId"
       }
     },
     "SubnetIds": {

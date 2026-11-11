@@ -120,7 +120,8 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    "properties": {
 		//	      "Architecture": {
 		//	        "enum": [
-		//	          "ARM_64"
+		//	          "ARM_64",
+		//	          "X86_64"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -407,6 +408,20 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "ARN of the MicroVM image.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The customer managed KMS key used to encrypt the MicroVM image configuration at rest. When omitted, a service owned key is used.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws[a-z-]*:kms:[a-z0-9-]+:[0-9]{12}:(key|alias)/[a-zA-Z0-9:/_-]+|alias/[a-zA-Z0-9:/_-]+|[a-zA-Z0-9-]+)$",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer managed KMS key used to encrypt the MicroVM image configuration at rest. When omitted, a service owned key is used.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatestActiveImageVersion
 		// CloudFormation resource type schema:
 		//
@@ -645,6 +660,7 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"hooks":                        "Hooks",
 		"image_arn":                    "ImageArn",
 		"key":                          "Key",
+		"kms_key_identifier":           "KmsKeyIdentifier",
 		"latest_active_image_version":  "LatestActiveImageVersion",
 		"latest_failed_image_version":  "LatestFailedImageVersion",
 		"log_group":                    "LogGroup",

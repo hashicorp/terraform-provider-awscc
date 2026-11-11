@@ -472,7 +472,9 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "AWS::Bedrock::KnowledgeBase",
 		//	        "AWS::BedrockAgentCore::Memory",
 		//	        "AWS::BedrockAgentCore::Gateway",
-		//	        "AWS::BedrockAgentCore::WorkloadIdentity"
+		//	        "AWS::BedrockAgentCore::WorkloadIdentity",
+		//	        "AWS::BedrockAgentCore::PaymentManager",
+		//	        "AWS::XRay::TransactionSearchConfig"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -504,7 +506,8 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "enum": [
 		//	        "Logs",
 		//	        "Traces",
-		//	        "Metrics"
+		//	        "Metrics",
+		//	        "Insights"
 		//	      ],
 		//	      "type": "string"
 		//	    }

@@ -345,6 +345,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The resource type this template should dynamically generate cloudwatch metric alarms for.",
 		//	  "enum": [
 		//	    "CLOUDFRONT_DISTRIBUTION",
+		//	    "ELEMENTAL_INFERENCE_FEED",
 		//	    "MEDIALIVE_MULTIPLEX",
 		//	    "MEDIALIVE_CHANNEL",
 		//	    "MEDIALIVE_INPUT_DEVICE",
@@ -362,6 +363,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"CLOUDFRONT_DISTRIBUTION",
+					"ELEMENTAL_INFERENCE_FEED",
 					"MEDIALIVE_MULTIPLEX",
 					"MEDIALIVE_CHANNEL",
 					"MEDIALIVE_INPUT_DEVICE",

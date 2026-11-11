@@ -181,6 +181,7 @@
       ]
     },
     "delete": {
+      "timeoutInMinutes": 130,
       "permissions": [
         "bedrock-agentcore:DeleteAgentRuntimeEndpoint",
         "bedrock-agentcore:GetAgentRuntime",

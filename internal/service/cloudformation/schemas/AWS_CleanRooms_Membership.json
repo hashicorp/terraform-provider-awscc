@@ -79,6 +79,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "ResultFormat": {
+          "$ref": "#/definitions/ResultFormat"
+        },
         "Bucket": {
           "type": "string",
           "minLength": 3,

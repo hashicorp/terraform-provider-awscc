@@ -8,6 +8,7 @@ package glue
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -319,9 +320,11 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The time at which the catalog was created.",
-		//	  "type": "integer"
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"create_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time at which the catalog was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -511,9 +514,11 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The time at which the catalog was last updated.",
-		//	  "type": "integer"
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"update_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time at which the catalog was last updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -259,6 +260,44 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ImageScanningEnabled": {
 		//	      "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.",
 		//	      "type": "boolean"
+		//	    },
+		//	    "ImageScanningTypes": {
+		//	      "description": "The type of vulnerability scan that Image Builder runs for AMI output when ImageScanningEnabled is true. Specify a single value. If you omit ImageScanningTypes, Image Builder uses TEST_INSTANCE_CVE. With TEST_INSTANCE_CVE, Amazon Inspector scans the test instance during image tests, and you must activate Amazon Inspector for Amazon EC2 scanning in your account. With ON_DEMAND_AMI_CVE, Amazon Inspector starts an on-demand scan of the output AMI during image tests. You must build from an image recipe, but you do not need to activate Amazon Inspector in your account.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "enum": [
+		//	          "TEST_INSTANCE_CVE",
+		//	          "ON_DEMAND_AMI_CVE"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ScanResultCondition": {
+		//	      "additionalProperties": false,
+		//	      "description": "The condition that the output AMI's scan results must meet for the image to pass. You can set ScanResultCondition only when ImageScanningTypes is ON_DEMAND_AMI_CVE. If you omit it, Image Builder starts the scan but does not wait for it or use its results to pass or fail the image.",
+		//	      "properties": {
+		//	        "FixAvailable": {
+		//	          "description": "Specifies whether only findings that have a fix available count toward MaximumSeverityLabel. When false, Image Builder counts every finding. The default is true.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "MaximumSeverityLabel": {
+		//	          "description": "The maximum severity allowed for findings on the output AMI. A finding above this severity fails the image, unless FixAvailable excludes it.",
+		//	          "enum": [
+		//	            "INFORMATIONAL",
+		//	            "LOW",
+		//	            "MEDIUM",
+		//	            "HIGH"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaximumSeverityLabel"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -302,6 +341,63 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ImageScanningTypes
+				"image_scanning_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The type of vulnerability scan that Image Builder runs for AMI output when ImageScanningEnabled is true. Specify a single value. If you omit ImageScanningTypes, Image Builder uses TEST_INSTANCE_CVE. With TEST_INSTANCE_CVE, Amazon Inspector scans the test instance during image tests, and you must activate Amazon Inspector for Amazon EC2 scanning in your account. With ON_DEMAND_AMI_CVE, Amazon Inspector starts an on-demand scan of the output AMI during image tests. You must build from an image recipe, but you do not need to activate Amazon Inspector in your account.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"TEST_INSTANCE_CVE",
+								"ON_DEMAND_AMI_CVE",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScanResultCondition
+				"scan_result_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FixAvailable
+						"fix_available": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether only findings that have a fix available count toward MaximumSeverityLabel. When false, Image Builder counts every finding. The default is true.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumSeverityLabel
+						"maximum_severity_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The maximum severity allowed for findings on the output AMI. A finding above this severity fails the image, unless FixAvailable excludes it.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"INFORMATIONAL",
+									"LOW",
+									"MEDIUM",
+									"HIGH",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The condition that the output AMI's scan results must meet for the image to pass. You can set ScanResultCondition only when ImageScanningTypes is ON_DEMAND_AMI_CVE. If you omit it, Image Builder starts the scan but does not wait for it or use its results to pass or fail the image.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -689,11 +785,13 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"ecr_configuration":                 "EcrConfiguration",
 		"enhanced_image_metadata_enabled":   "EnhancedImageMetadataEnabled",
 		"execution_role":                    "ExecutionRole",
+		"fix_available":                     "FixAvailable",
 		"image_id":                          "ImageId",
 		"image_pipeline_execution_settings": "ImagePipelineExecutionSettings",
 		"image_recipe_arn":                  "ImageRecipeArn",
 		"image_scanning_configuration":      "ImageScanningConfiguration",
 		"image_scanning_enabled":            "ImageScanningEnabled",
+		"image_scanning_types":              "ImageScanningTypes",
 		"image_tests_configuration":         "ImageTestsConfiguration",
 		"image_tests_enabled":               "ImageTestsEnabled",
 		"image_uri":                         "ImageUri",
@@ -702,6 +800,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"log_group_name":                    "LogGroupName",
 		"logging_configuration":             "LoggingConfiguration",
 		"major":                             "Major",
+		"maximum_severity_label":            "MaximumSeverityLabel",
 		"minor":                             "Minor",
 		"name":                              "Name",
 		"on_failure":                        "OnFailure",
@@ -710,6 +809,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"parameters":                        "Parameters",
 		"patch":                             "Patch",
 		"repository_name":                   "RepositoryName",
+		"scan_result_condition":             "ScanResultCondition",
 		"tags":                              "Tags",
 		"timeout_minutes":                   "TimeoutMinutes",
 		"value":                             "Value",

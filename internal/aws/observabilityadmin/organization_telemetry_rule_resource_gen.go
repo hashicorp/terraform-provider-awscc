@@ -482,7 +482,8 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	        "AWS::S3::Bucket",
 		//	        "AWS::MSK::Cluster",
 		//	        "AWS::CloudFront::Distribution",
-		//	        "AWS::CloudWatch::OTelEnrichment"
+		//	        "AWS::CloudWatch::OTelEnrichment",
+		//	        "AWS::XRay::TransactionSearchConfig"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -517,7 +518,9 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	      "description": "Telemetry Type associated with the Organization Telemetry Rule",
 		//	      "enum": [
 		//	        "Logs",
-		//	        "Metrics"
+		//	        "Traces",
+		//	        "Metrics",
+		//	        "Insights"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -1122,6 +1125,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							"AWS::MSK::Cluster",
 							"AWS::CloudFront::Distribution",
 							"AWS::CloudWatch::OTelEnrichment",
+							"AWS::XRay::TransactionSearchConfig",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -1173,7 +1177,9 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Logs",
+							"Traces",
 							"Metrics",
+							"Insights",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/

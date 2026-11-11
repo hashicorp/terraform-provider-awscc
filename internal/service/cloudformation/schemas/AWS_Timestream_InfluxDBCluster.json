@@ -16,6 +16,7 @@
     "read": {
       "permissions": [
         "timestream-influxdb:GetDbCluster",
+        "timestream-influxdb:ListDbInstancesForCluster",
         "timestream-influxdb:ListTagsForResource"
       ],
       "timeoutInMinutes": 2160
@@ -29,6 +30,7 @@
         "timestream-influxdb:GetDbCluster",
         "timestream-influxdb:GetDbParameterGroup",
         "timestream-influxdb:ListDbClusters",
+        "timestream-influxdb:ListDbInstancesForCluster",
         "timestream-influxdb:CreateDbCluster",
         "timestream-influxdb:TagResource",
         "timestream-influxdb:ListTagsForResource",
@@ -39,7 +41,9 @@
         "ec2:CreateNetworkInterface",
         "ec2:DescribeRouteTables",
         "ec2:DescribeVpcEndpoints",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
       ],
       "timeoutInMinutes": 2160
     },
@@ -50,6 +54,7 @@
         "timestream-influxdb:UpdateDbInstance",
         "timestream-influxdb:GetDbCluster",
         "timestream-influxdb:ListDbClusters",
+        "timestream-influxdb:ListDbInstancesForCluster",
         "timestream-influxdb:UpdateDbCluster",
         "timestream-influxdb:TagResource",
         "timestream-influxdb:UntagResource",
@@ -85,7 +90,10 @@
     "/properties/ReaderEndpoint",
     "/properties/InfluxAuthParametersSecretArn",
     "/properties/EngineType",
-    "/properties/NextMaintenanceTime"
+    "/properties/NextMaintenanceTime",
+    "/properties/EffectiveDbParameterGroupIdentifier",
+    "/properties/MemberCount",
+    "/properties/MemberModeCounts"
   ],
   "description": "The AWS::Timestream::InfluxDBCluster resource creates an InfluxDB cluster.",
   "writeOnlyProperties": [
@@ -106,7 +114,8 @@
     "/properties/DbStorageType",
     "/properties/AllocatedStorage",
     "/properties/DeploymentType",
-    "/properties/NetworkType"
+    "/properties/NetworkType",
+    "/properties/KmsKeyId"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -133,6 +142,35 @@
       },
       "required": [
         "Key"
+      ]
+    },
+    "MemberModeCount": {
+      "description": "The number of DB cluster members reporting one instance mode.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "description": "The instance mode reported by DB cluster members.",
+          "type": "string",
+          "enum": [
+            "PRIMARY",
+            "STANDBY",
+            "REPLICA",
+            "INGEST",
+            "QUERY",
+            "COMPACT",
+            "PROCESS"
+          ]
+        },
+        "Count": {
+          "description": "The number of DB cluster members reporting this instance mode.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "Mode",
+        "Count"
       ]
     },
     "MaintenanceSchedule": {
@@ -169,7 +207,7 @@
       "maxLength": 64
     },
     "InfluxAuthParametersSecretArn": {
-      "pattern": "^arn:[a-z]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
+      "pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
       "description": "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB cluster.",
       "type": "string"
     },
@@ -194,6 +232,13 @@
         "db.influx.24xlarge"
       ]
     },
+    "EffectiveDbParameterGroupIdentifier": {
+      "minLength": 3,
+      "pattern": "^[a-zA-Z0-9]+$",
+      "description": "The parameter group actually applied to the InfluxDB cluster. When the service applies optimized defaults it creates a system-managed parameter group and this field reflects that effective parameter group, while DbParameterGroupIdentifier continues to reflect the customer-provided parameter group. When no service-managed parameter group is applied, this equals DbParameterGroupIdentifier.",
+      "type": "string",
+      "maxLength": 64
+    },
     "VpcSubnetIds": {
       "minItems": 1,
       "maxItems": 3,
@@ -202,6 +247,15 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "MemberModeCounts": {
+      "maxItems": 7,
+      "description": "DB cluster member counts grouped by instance mode.",
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MemberModeCount"
       }
     },
     "DeploymentType": {
@@ -295,6 +349,18 @@
         "FAILED",
         "DELETED"
       ]
+    },
+    "KmsKeyId": {
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9:/_\\-]+$",
+      "description": "The customer managed key used to encrypt data in the InfluxDB cluster.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "MemberCount": {
+      "description": "The number of DB instances that belong to the InfluxDB cluster.",
+      "type": "integer",
+      "minimum": 0
     },
     "FailoverMode": {
       "description": "Failover mode of the InfluxDB cluster.",

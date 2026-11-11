@@ -195,7 +195,8 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "enum": [
 		//	    "SQL",
-		//	    "PYSPARK_1_0"
+		//	    "PYSPARK_1_0",
+		//	    "PYSPARK_2_0"
 		//	  ],
 		//	  "type": "string"
 		//	}

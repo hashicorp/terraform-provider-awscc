@@ -3,12 +3,12 @@
 page_title: "awscc_kinesisanalyticsv2_application Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html.
+  Resource Type definition for AWS::KinesisAnalyticsV2::Application. Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html.
 ---
 
 # awscc_kinesisanalyticsv2_application (Resource)
 
-Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see [Creating an Application](https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).
+Resource Type definition for AWS::KinesisAnalyticsV2::Application. Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see [Creating an Application](https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).
 
 
 
@@ -45,7 +45,6 @@ Optional:
 - `application_system_rollback_configuration` (Attributes) Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_system_rollback_configuration))
 - `environment_properties` (Attributes) Describes execution properties for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--environment_properties))
 - `flink_application_configuration` (Attributes) The creation and update parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--flink_application_configuration))
-- `sql_application_configuration` (Attributes) The creation and update parameters for a SQL-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration))
 - `vpc_configurations` (Attributes List) The array of descriptions of VPC configurations available to the application. (see [below for nested schema](#nestedatt--application_configuration--vpc_configurations))
 - `zeppelin_application_configuration` (Attributes) The configuration parameters for a Kinesis Data Analytics Studio notebook. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration))
 
@@ -63,7 +62,7 @@ Optional:
 Optional:
 
 - `s3_content_location` (Attributes) Information about the Amazon S3 bucket that contains the application code. (see [below for nested schema](#nestedatt--application_configuration--application_code_configuration--code_content--s3_content_location))
-- `text_content` (String) The text-format code for a Flink-based Kinesis Data Analytics application.
+- `text_content` (String) The text-format code for a Kinesis Data Analytics Studio notebook, as a Zeppelin note JSON object.
 - `zip_file_content` (String) The zip-format code for a Flink-based Kinesis Data Analytics application.
 
 <a id="nestedatt--application_configuration--application_code_configuration--code_content--s3_content_location"></a>
@@ -92,6 +91,7 @@ Optional:
 
 Optional:
 
+- `snapshot_mode` (String) The snapshot mode of a Flink-based Kinesis Data Analytics application. Changing from APPLICATION_SNAPSHOTS_LEGACY to ENHANCED_SNAPSHOTS is one-way; an application in ENHANCED_SNAPSHOTS mode cannot return to APPLICATION_SNAPSHOTS_LEGACY.
 - `snapshots_enabled` (Boolean) Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
 
 
@@ -159,122 +159,6 @@ Optional:
 - `configuration_type` (String) Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to `CUSTOM` in order to change your application's `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU` properties.
 - `parallelism` (Number) Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration:AutoScalingEnabled is set to true.
 - `parallelism_per_kpu` (Number) Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.
-
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration"></a>
-### Nested Schema for `application_configuration.sql_application_configuration`
-
-Optional:
-
-- `inputs` (Attributes List) The array of Input objects describing the input streams used by the application. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs))
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs`
-
-Optional:
-
-- `input_parallelism` (Attributes) Describes the number of in-application streams to create. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_parallelism))
-- `input_processing_configuration` (Attributes) The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration))
-- `input_schema` (Attributes) Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema))
-- `kinesis_firehose_input` (Attributes) If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_firehose_input))
-- `kinesis_streams_input` (Attributes) If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input))
-- `name_prefix` (String) The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `"MyInApplicationStream"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `"MyInApplicationStream_001"`, `"MyInApplicationStream_002"`, and so on.
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_parallelism"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_parallelism`
-
-Optional:
-
-- `count` (Number) The number of in-application streams to create.
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration`
-
-Optional:
-
-- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor))
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration.input_lambda_processor`
-
-Optional:
-
-- `resource_arn` (String) The ARN of the Amazon Lambda function that operates on records in the stream.
-
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema`
-
-Optional:
-
-- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns))
-- `record_encoding` (String) Specifies the encoding of the records in the streaming source. For example, UTF-8.
-- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format))
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_columns`
-
-Optional:
-
-- `mapping` (String) A reference to the data element in the streaming input or the reference data source.
-- `name` (String) The name of the column that is created in the in-application input stream or reference table.
-- `sql_type` (String) The type of column created in the in-application input stream or reference table.
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format`
-
-Optional:
-
-- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters))
-- `record_format_type` (String) The type of record format.
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters`
-
-Optional:
-
-- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters))
-- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters))
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.csv_mapping_parameters`
-
-Optional:
-
-- `record_column_delimiter` (String) The column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.
-- `record_row_delimiter` (String) The row delimiter. For example, in a CSV format, '\n' is the typical row delimiter.
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.json_mapping_parameters`
-
-Optional:
-
-- `record_row_path` (String) The path to the top-level parent that contains the records.
-
-
-
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_firehose_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_firehose_input`
-
-Optional:
-
-- `resource_arn` (String) The Amazon Resource Name (ARN) of the delivery stream.
-
-
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
-
-Optional:
-
-- `resource_arn` (String) The ARN of the input Kinesis data stream to read.
-
 
 
 
@@ -392,7 +276,8 @@ Optional:
 Optional:
 
 - `application_restore_type` (String) Specifies how the application should be restored.
-- `snapshot_name` (String) The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.
+- `snapshot_arn` (String) The ARN of an existing snapshot to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType. Specify either SnapshotName or SnapshotArn, not both.
+- `snapshot_name` (String) The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType. Specify either SnapshotName or SnapshotArn, not both.
 
 
 <a id="nestedatt--run_configuration--flink_run_configuration"></a>

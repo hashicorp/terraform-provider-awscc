@@ -822,7 +822,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_config":                          "VpcConfig",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(150)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

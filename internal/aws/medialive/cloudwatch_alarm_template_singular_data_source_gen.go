@@ -248,6 +248,7 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The resource type this template should dynamically generate cloudwatch metric alarms for.",
 		//	  "enum": [
 		//	    "CLOUDFRONT_DISTRIBUTION",
+		//	    "ELEMENTAL_INFERENCE_FEED",
 		//	    "MEDIALIVE_MULTIPLEX",
 		//	    "MEDIALIVE_CHANNEL",
 		//	    "MEDIALIVE_INPUT_DEVICE",

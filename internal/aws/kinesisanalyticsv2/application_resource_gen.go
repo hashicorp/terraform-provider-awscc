@@ -85,7 +85,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "object"
 		//	            },
 		//	            "TextContent": {
-		//	              "description": "The text-format code for a Flink-based Kinesis Data Analytics application.",
+		//	              "description": "The text-format code for a Kinesis Data Analytics Studio notebook, as a Zeppelin note JSON object.",
 		//	              "maxLength": 102400,
 		//	              "minLength": 1,
 		//	              "type": "string"
@@ -141,6 +141,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
 		//	      "properties": {
+		//	        "SnapshotMode": {
+		//	          "description": "The snapshot mode of a Flink-based Kinesis Data Analytics application. Changing from APPLICATION_SNAPSHOTS_LEGACY to ENHANCED_SNAPSHOTS is one-way; an application in ENHANCED_SNAPSHOTS mode cannot return to APPLICATION_SNAPSHOTS_LEGACY.",
+		//	          "enum": [
+		//	            "APPLICATION_SNAPSHOTS_LEGACY",
+		//	            "ENHANCED_SNAPSHOTS"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "SnapshotsEnabled": {
 		//	          "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
 		//	          "type": "boolean"
@@ -314,229 +322,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	            "ConfigurationType"
 		//	          ],
 		//	          "type": "object"
-		//	        }
-		//	      },
-		//	      "type": "object"
-		//	    },
-		//	    "SqlApplicationConfiguration": {
-		//	      "additionalProperties": false,
-		//	      "description": "The creation and update parameters for a SQL-based Kinesis Data Analytics application.",
-		//	      "properties": {
-		//	        "Inputs": {
-		//	          "description": "The array of Input objects describing the input streams used by the application.",
-		//	          "insertionOrder": false,
-		//	          "items": {
-		//	            "additionalProperties": false,
-		//	            "description": "When you configure the application input for a SQL-based Kinesis Data Analytics application, you specify the streaming source, the in-application stream name that is created, and the mapping between the two.",
-		//	            "properties": {
-		//	              "InputParallelism": {
-		//	                "additionalProperties": false,
-		//	                "description": "Describes the number of in-application streams to create.",
-		//	                "properties": {
-		//	                  "Count": {
-		//	                    "description": "The number of in-application streams to create.",
-		//	                    "maximum": 64,
-		//	                    "minimum": 1,
-		//	                    "type": "integer"
-		//	                  }
-		//	                },
-		//	                "type": "object"
-		//	              },
-		//	              "InputProcessingConfiguration": {
-		//	                "additionalProperties": false,
-		//	                "description": "The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.",
-		//	                "properties": {
-		//	                  "InputLambdaProcessor": {
-		//	                    "additionalProperties": false,
-		//	                    "description": "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
-		//	                    "properties": {
-		//	                      "ResourceARN": {
-		//	                        "description": "The ARN of the Amazon Lambda function that operates on records in the stream.",
-		//	                        "maxLength": 2048,
-		//	                        "minLength": 1,
-		//	                        "pattern": "^arn:.*$",
-		//	                        "type": "string"
-		//	                      }
-		//	                    },
-		//	                    "required": [
-		//	                      "ResourceARN"
-		//	                    ],
-		//	                    "type": "object"
-		//	                  }
-		//	                },
-		//	                "type": "object"
-		//	              },
-		//	              "InputSchema": {
-		//	                "additionalProperties": false,
-		//	                "description": "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
-		//	                "properties": {
-		//	                  "RecordColumns": {
-		//	                    "description": "A list of `RecordColumn` objects.",
-		//	                    "insertionOrder": false,
-		//	                    "items": {
-		//	                      "additionalProperties": false,
-		//	                      "description": "For a SQL-based Kinesis Data Analytics application, describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.\nAlso used to describe the format of the reference data source.",
-		//	                      "properties": {
-		//	                        "Mapping": {
-		//	                          "description": "A reference to the data element in the streaming input or the reference data source.",
-		//	                          "maxLength": 65535,
-		//	                          "minLength": 1,
-		//	                          "type": "string"
-		//	                        },
-		//	                        "Name": {
-		//	                          "description": "The name of the column that is created in the in-application input stream or reference table.",
-		//	                          "maxLength": 256,
-		//	                          "minLength": 1,
-		//	                          "pattern": "^[^-\\s\u003c\u003e\u0026]*$",
-		//	                          "type": "string"
-		//	                        },
-		//	                        "SqlType": {
-		//	                          "description": "The type of column created in the in-application input stream or reference table.",
-		//	                          "maxLength": 100,
-		//	                          "minLength": 1,
-		//	                          "type": "string"
-		//	                        }
-		//	                      },
-		//	                      "required": [
-		//	                        "SqlType",
-		//	                        "Name"
-		//	                      ],
-		//	                      "type": "object"
-		//	                    },
-		//	                    "maxItems": 1000,
-		//	                    "type": "array",
-		//	                    "uniqueItems": false
-		//	                  },
-		//	                  "RecordEncoding": {
-		//	                    "description": "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
-		//	                    "enum": [
-		//	                      "UTF-8"
-		//	                    ],
-		//	                    "type": "string"
-		//	                  },
-		//	                  "RecordFormat": {
-		//	                    "additionalProperties": false,
-		//	                    "description": "Specifies the format of the records on the streaming source.",
-		//	                    "properties": {
-		//	                      "MappingParameters": {
-		//	                        "additionalProperties": false,
-		//	                        "description": "When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.",
-		//	                        "properties": {
-		//	                          "CSVMappingParameters": {
-		//	                            "additionalProperties": false,
-		//	                            "description": "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
-		//	                            "properties": {
-		//	                              "RecordColumnDelimiter": {
-		//	                                "description": "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
-		//	                                "maxLength": 1024,
-		//	                                "minLength": 1,
-		//	                                "type": "string"
-		//	                              },
-		//	                              "RecordRowDelimiter": {
-		//	                                "description": "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
-		//	                                "maxLength": 1024,
-		//	                                "minLength": 1,
-		//	                                "type": "string"
-		//	                              }
-		//	                            },
-		//	                            "required": [
-		//	                              "RecordRowDelimiter",
-		//	                              "RecordColumnDelimiter"
-		//	                            ],
-		//	                            "type": "object"
-		//	                          },
-		//	                          "JSONMappingParameters": {
-		//	                            "additionalProperties": false,
-		//	                            "description": "Provides additional mapping information when JSON is the record format on the streaming source.",
-		//	                            "properties": {
-		//	                              "RecordRowPath": {
-		//	                                "description": "The path to the top-level parent that contains the records.",
-		//	                                "maxLength": 65535,
-		//	                                "minLength": 1,
-		//	                                "pattern": "",
-		//	                                "type": "string"
-		//	                              }
-		//	                            },
-		//	                            "required": [
-		//	                              "RecordRowPath"
-		//	                            ],
-		//	                            "type": "object"
-		//	                          }
-		//	                        },
-		//	                        "type": "object"
-		//	                      },
-		//	                      "RecordFormatType": {
-		//	                        "description": "The type of record format.",
-		//	                        "enum": [
-		//	                          "CSV",
-		//	                          "JSON"
-		//	                        ],
-		//	                        "type": "string"
-		//	                      }
-		//	                    },
-		//	                    "required": [
-		//	                      "RecordFormatType"
-		//	                    ],
-		//	                    "type": "object"
-		//	                  }
-		//	                },
-		//	                "required": [
-		//	                  "RecordColumns",
-		//	                  "RecordFormat"
-		//	                ],
-		//	                "type": "object"
-		//	              },
-		//	              "KinesisFirehoseInput": {
-		//	                "additionalProperties": false,
-		//	                "description": "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
-		//	                "properties": {
-		//	                  "ResourceARN": {
-		//	                    "description": "The Amazon Resource Name (ARN) of the delivery stream.",
-		//	                    "maxLength": 2048,
-		//	                    "minLength": 1,
-		//	                    "pattern": "^arn:.*$",
-		//	                    "type": "string"
-		//	                  }
-		//	                },
-		//	                "required": [
-		//	                  "ResourceARN"
-		//	                ],
-		//	                "type": "object"
-		//	              },
-		//	              "KinesisStreamsInput": {
-		//	                "additionalProperties": false,
-		//	                "description": "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
-		//	                "properties": {
-		//	                  "ResourceARN": {
-		//	                    "description": "The ARN of the input Kinesis data stream to read.",
-		//	                    "maxLength": 2048,
-		//	                    "minLength": 1,
-		//	                    "pattern": "^arn:.*$",
-		//	                    "type": "string"
-		//	                  }
-		//	                },
-		//	                "required": [
-		//	                  "ResourceARN"
-		//	                ],
-		//	                "type": "object"
-		//	              },
-		//	              "NamePrefix": {
-		//	                "description": "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
-		//	                "maxLength": 32,
-		//	                "minLength": 1,
-		//	                "pattern": "^[^-\\s\u003c\u003e\u0026]*$",
-		//	                "type": "string"
-		//	              }
-		//	            },
-		//	            "required": [
-		//	              "NamePrefix",
-		//	              "InputSchema"
-		//	            ],
-		//	            "type": "object"
-		//	          },
-		//	          "maxItems": 1,
-		//	          "type": "array",
-		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -811,7 +596,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: TextContent
 								"text_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The text-format code for a Flink-based Kinesis Data Analytics application.",
+									Description: "The text-format code for a Kinesis Data Analytics Studio notebook, as a Zeppelin note JSON object.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -909,6 +694,21 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ApplicationSnapshotConfiguration
 				"application_snapshot_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SnapshotMode
+						"snapshot_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The snapshot mode of a Flink-based Kinesis Data Analytics application. Changing from APPLICATION_SNAPSHOTS_LEGACY to ENHANCED_SNAPSHOTS is one-way; an application in ENHANCED_SNAPSHOTS mode cannot return to APPLICATION_SNAPSHOTS_LEGACY.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"APPLICATION_SNAPSHOTS_LEGACY",
+									"ENHANCED_SNAPSHOTS",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: SnapshotsEnabled
 						"snapshots_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
@@ -1191,344 +991,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The creation and update parameters for a Flink-based Kinesis Data Analytics application.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SqlApplicationConfiguration
-				"sql_application_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Inputs
-						"inputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: InputParallelism
-									"input_parallelism": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Count
-											"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "The number of in-application streams to create.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Int64{ /*START VALIDATORS*/
-													int64validator.Between(1, 64),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Describes the number of in-application streams to create.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: InputProcessingConfiguration
-									"input_processing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: InputLambdaProcessor
-											"input_lambda_processor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: ResourceARN
-													"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The ARN of the Amazon Lambda function that operates on records in the stream.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 2048),
-															stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: InputSchema
-									"input_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: RecordColumns
-											"record_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Mapping
-														"mapping": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "A reference to the data element in the streaming input or the reference data source.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 65535),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Name
-														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The name of the column that is created in the in-application input stream or reference table.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[^-\\s<>&]*$"), ""),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: SqlType
-														"sql_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of column created in the in-application input stream or reference table.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 100),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "A list of `RecordColumn` objects.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.List{ /*START VALIDATORS*/
-													listvalidator.SizeAtMost(1000),
-													fwvalidators.NotNullList(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													generic.Multiset(),
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: RecordEncoding
-											"record_encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.OneOf(
-														"UTF-8",
-													),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: RecordFormat
-											"record_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: MappingParameters
-													"mapping_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: CSVMappingParameters
-															"csv_mapping_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: RecordColumnDelimiter
-																	"record_column_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RecordRowDelimiter
-																	"record_row_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: JSONMappingParameters
-															"json_mapping_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: RecordRowPath
-																	"record_row_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The path to the top-level parent that contains the records.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 65535),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Provides additional mapping information when JSON is the record format on the streaming source.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: RecordFormatType
-													"record_format_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The type of record format.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"CSV",
-																"JSON",
-															),
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Specifies the format of the records on the streaming source.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Object{ /*START VALIDATORS*/
-													fwvalidators.NotNullObject(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Object{ /*START VALIDATORS*/
-											fwvalidators.NotNullObject(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: KinesisFirehoseInput
-									"kinesis_firehose_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ResourceARN
-											"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Amazon Resource Name (ARN) of the delivery stream.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 2048),
-													stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: KinesisStreamsInput
-									"kinesis_streams_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ResourceARN
-											"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The ARN of the input Kinesis data stream to read.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 2048),
-													stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: NamePrefix
-									"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 32),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[^-\\s<>&]*$"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The array of Input objects describing the input streams used by the application.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeAtMost(1),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The creation and update parameters for a SQL-based Kinesis Data Analytics application.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1984,8 +1446,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "SnapshotArn": {
+		//	          "description": "The ARN of an existing snapshot to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType. Specify either SnapshotName or SnapshotArn, not both.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "SnapshotName": {
-		//	          "description": "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
+		//	          "description": "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType. Specify either SnapshotName or SnapshotArn, not both.",
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "pattern": "^[a-zA-Z0-9_.-]+$",
@@ -2033,9 +1501,21 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: SnapshotArn
+						"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of an existing snapshot to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType. Specify either SnapshotName or SnapshotArn, not both.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: SnapshotName
 						"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
+							Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType. Specify either SnapshotName or SnapshotArn, not both.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -2200,7 +1680,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see [Creating an Application](https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).",
+		Description: "Resource Type definition for AWS::KinesisAnalyticsV2::Application. Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see [Creating an Application](https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -2242,8 +1722,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"code_content":                              "CodeContent",
 		"code_content_type":                         "CodeContentType",
 		"configuration_type":                        "ConfigurationType",
-		"count":                                     "Count",
-		"csv_mapping_parameters":                    "CSVMappingParameters",
 		"custom_artifacts_configuration":            "CustomArtifactsConfiguration",
 		"database_arn":                              "DatabaseARN",
 		"deploy_as_application_configuration":       "DeployAsApplicationConfiguration",
@@ -2253,26 +1731,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"flink_run_configuration":                   "FlinkRunConfiguration",
 		"glue_data_catalog_configuration":           "GlueDataCatalogConfiguration",
 		"group_id":                                  "GroupId",
-		"input_lambda_processor":                    "InputLambdaProcessor",
-		"input_parallelism":                         "InputParallelism",
-		"input_processing_configuration":            "InputProcessingConfiguration",
-		"input_schema":                              "InputSchema",
-		"inputs":                                    "Inputs",
-		"json_mapping_parameters":                   "JSONMappingParameters",
 		"key":                                       "Key",
 		"key_id":                                    "KeyId",
 		"key_type":                                  "KeyType",
-		"kinesis_firehose_input":                    "KinesisFirehoseInput",
-		"kinesis_streams_input":                     "KinesisStreamsInput",
 		"log_level":                                 "LogLevel",
-		"mapping":                                   "Mapping",
-		"mapping_parameters":                        "MappingParameters",
 		"maven_reference":                           "MavenReference",
 		"metrics_level":                             "MetricsLevel",
 		"min_pause_between_checkpoints":             "MinPauseBetweenCheckpoints",
 		"monitoring_configuration":                  "MonitoringConfiguration",
-		"name":                                      "Name",
-		"name_prefix":                               "NamePrefix",
 		"object_version":                            "ObjectVersion",
 		"parallelism":                               "Parallelism",
 		"parallelism_configuration":                 "ParallelismConfiguration",
@@ -2280,24 +1746,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"property_group_id":                         "PropertyGroupId",
 		"property_groups":                           "PropertyGroups",
 		"property_map":                              "PropertyMap",
-		"record_column_delimiter":                   "RecordColumnDelimiter",
-		"record_columns":                            "RecordColumns",
-		"record_encoding":                           "RecordEncoding",
-		"record_format":                             "RecordFormat",
-		"record_format_type":                        "RecordFormatType",
-		"record_row_delimiter":                      "RecordRowDelimiter",
-		"record_row_path":                           "RecordRowPath",
-		"resource_arn":                              "ResourceARN",
 		"rollback_enabled":                          "RollbackEnabled",
 		"run_configuration":                         "RunConfiguration",
 		"runtime_environment":                       "RuntimeEnvironment",
 		"s3_content_location":                       "S3ContentLocation",
 		"security_group_ids":                        "SecurityGroupIds",
 		"service_execution_role":                    "ServiceExecutionRole",
+		"snapshot_arn":                              "SnapshotArn",
+		"snapshot_mode":                             "SnapshotMode",
 		"snapshot_name":                             "SnapshotName",
 		"snapshots_enabled":                         "SnapshotsEnabled",
-		"sql_application_configuration":             "SqlApplicationConfiguration",
-		"sql_type":                                  "SqlType",
 		"subnet_ids":                                "SubnetIds",
 		"tags":                                      "Tags",
 		"text_content":                              "TextContent",

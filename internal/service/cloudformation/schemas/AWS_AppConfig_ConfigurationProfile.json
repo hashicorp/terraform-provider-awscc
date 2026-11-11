@@ -19,7 +19,6 @@
   "description": "An example resource schema demonstrating some basic constructs and validation rules.",
   "createOnlyProperties": [
     "/properties/LocationUri",
-    "/properties/Type",
     "/properties/ApplicationId"
   ],
   "primaryIdentifier": [

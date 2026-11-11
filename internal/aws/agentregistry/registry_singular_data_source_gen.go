@@ -351,10 +351,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "array"
 		//	            },
 		//	            "DiscoveryUrl": {
-		//	              "description": "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
+		//	              "description": "The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys. The URL contains /.well-known/openid-configuration or /.well-known/oauth-authorization-server, respectively.",
 		//	              "maxLength": 2048,
 		//	              "minLength": 1,
-		//	              "pattern": "^.+/\\.well-known/openid-configuration$",
+		//	              "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -444,7 +444,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: DiscoveryUrl
 								"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
+									Description: "The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys. The URL contains /.well-known/openid-configuration or /.well-known/oauth-authorization-server, respectively.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/

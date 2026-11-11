@@ -364,11 +364,28 @@
         }
       }
     },
+    "LogDriverVolumeConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "Driver"
+      ],
+      "properties": {
+        "Driver": {
+          "type": "string"
+        }
+      }
+    },
     "Volume": {
       "description": "The data volume configuration for tasks launched using this task definition. Specifying a volume configuration in a task definition is optional. The volume configuration may contain multiple volumes but only one volume configured at launch is supported. Each volume defined in the volume configuration may only specify a ``name`` and one of either ``configuredAtLaunch``, ``dockerVolumeConfiguration``, ``efsVolumeConfiguration``, ``s3filesVolumeConfiguration``, ``fsxWindowsFileServerVolumeConfiguration``, or ``host``. If an empty volume configuration is specified, by default Amazon ECS uses a host volume. For more information, see [Using data volumes in tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).",
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "LogDriverVolumeConfiguration": {
+          "description": "",
+          "$ref": "#/definitions/LogDriverVolumeConfiguration"
+        },
         "Host": {
           "description": "This parameter is specified when you use bind mount host volumes. The contents of the ``host`` parameter determine whether your bind mount host volume persists on the host container instance and where it's stored. If the ``host`` parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data isn't guaranteed to persist after the containers that are associated with it stop running.\n Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives. For example, you can mount ``C:\\my\\path:C:\\my\\path`` and ``D:\\:D:\\``, but not ``D:\\my\\path:C:\\my\\path`` or ``D:\\:C:\\my\\path``.",
           "$ref": "#/definitions/HostVolumeProperties"

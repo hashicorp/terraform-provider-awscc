@@ -187,6 +187,21 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "A list of EC2 instance configurations that AWS PCS can provision in the compute node group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LaunchTemplateMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "How AWS PCS gets the launch template for the compute node group. CUSTOM uses CustomLaunchTemplate. MANAGED has AWS PCS generate and manage the launch template from the instance settings; omit CustomLaunchTemplate. Defaults to CUSTOM on create.",
+		//	  "enum": [
+		//	    "CUSTOM",
+		//	    "MANAGED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"launch_template_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How AWS PCS gets the launch template for the compute node group. CUSTOM uses CustomLaunchTemplate. MANAGED has AWS PCS generate and manage the launch template from the instance settings; omit CustomLaunchTemplate. Defaults to CUSTOM on create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -567,6 +582,23 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Specifies the boundaries of the compute node group auto scaling.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IDs of the EC2 security groups configured directly on the compute node group. These replace the security groups from the custom launch template. A request cannot specify this property with a launch template that defines NetworkInterfaces. When not provided and a custom launch template is present, AWS PCS uses the security groups from the launch template.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "An EC2 security group ID.",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IDs of the EC2 security groups configured directly on the compute node group. These replace the security groups from the custom launch template. A request cannot specify this property with a launch template that defines NetworkInterfaces. When not provided and a custom launch template is present, AWS PCS uses the security groups from the launch template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SlurmConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -688,6 +720,17 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Additional configuration when you specify SPOT as the purchase option.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SshKeyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the EC2 key pair configured directly on the compute node group. The key pair must exist in the caller's account and Region and overrides the key pair from the custom launch template. When not provided and a custom launch template is present, AWS PCS uses the key pair from the launch template.",
+		//	  "type": "string"
+		//	}
+		"ssh_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the EC2 key pair configured directly on the compute node group. The key pair must exist in the caller's account and Region and overrides the key pair from the custom launch template. When not provided and a custom launch template is present, AWS PCS uses the key pair from the launch template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -775,6 +818,7 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"iam_instance_profile_arn":        "IamInstanceProfileArn",
 		"instance_configs":                "InstanceConfigs",
 		"instance_type":                   "InstanceType",
+		"launch_template_mode":            "LaunchTemplateMode",
 		"max_instance_count":              "MaxInstanceCount",
 		"message":                         "Message",
 		"min_instance_count":              "MinInstanceCount",
@@ -792,9 +836,11 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"script_caching_policy":           "ScriptCachingPolicy",
 		"script_location":                 "ScriptLocation",
 		"script_source":                   "ScriptSource",
+		"security_group_ids":              "SecurityGroupIds",
 		"slurm_configuration":             "SlurmConfiguration",
 		"slurm_custom_settings":           "SlurmCustomSettings",
 		"spot_options":                    "SpotOptions",
+		"ssh_key_name":                    "SshKeyName",
 		"stages":                          "Stages",
 		"status":                          "Status",
 		"subnet_ids":                      "SubnetIds",

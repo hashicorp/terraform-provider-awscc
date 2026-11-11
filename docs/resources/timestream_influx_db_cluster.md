@@ -149,6 +149,7 @@ resource "awscc_timestream_influx_db_cluster" "example" {
 - `db_storage_type` (String) The storage type of the InfluxDB cluster.
 - `deployment_type` (String) Deployment type of the InfluxDB cluster.
 - `failover_mode` (String) Failover mode of the InfluxDB cluster.
+- `kms_key_id` (String) The customer managed key used to encrypt data in the InfluxDB cluster.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB cluster. (see [below for nested schema](#nestedatt--log_delivery_configuration))
 - `maintenance_schedule` (Attributes) The maintenance schedule for the InfluxDB cluster. (see [below for nested schema](#nestedatt--maintenance_schedule))
 - `name` (String) The unique name that is associated with the InfluxDB cluster.
@@ -165,11 +166,14 @@ resource "awscc_timestream_influx_db_cluster" "example" {
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) that is associated with the InfluxDB cluster.
+- `effective_db_parameter_group_identifier` (String) The parameter group actually applied to the InfluxDB cluster. When the service applies optimized defaults it creates a system-managed parameter group and this field reflects that effective parameter group, while DbParameterGroupIdentifier continues to reflect the customer-provided parameter group. When no service-managed parameter group is applied, this equals DbParameterGroupIdentifier.
 - `endpoint` (String) The connection endpoint for the InfluxDB cluster.
 - `engine_type` (String) The engine type for the InfluxDB cluster.
 - `id` (String) Uniquely identifies the resource.
 - `influx_auth_parameters_secret_arn` (String) The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB cluster.
 - `influx_db_cluster_id` (String) The service generated unique identifier for InfluxDB cluster.
+- `member_count` (Number) The number of DB instances that belong to the InfluxDB cluster.
+- `member_mode_counts` (Attributes List) DB cluster member counts grouped by instance mode. (see [below for nested schema](#nestedatt--member_mode_counts))
 - `next_maintenance_time` (String) The timestamp of the next scheduled maintenance event.
 - `reader_endpoint` (String) The reader endpoint for the InfluxDB cluster.
 - `status` (String) Status of the InfluxDB cluster.
@@ -207,6 +211,15 @@ Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--member_mode_counts"></a>
+### Nested Schema for `member_mode_counts`
+
+Read-Only:
+
+- `count` (Number) The number of DB cluster members reporting this instance mode.
+- `mode` (String) The instance mode reported by DB cluster members.
 
 ## Import
 

@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::CertificateManager::AcmeEndpoint",
-  "description": "Resource Type definition for AWS::CertificateManager::AcmeEndpoint",
+  "description": "Resource Type definition for AWS::CertificateManager::AcmeEndpoint, an ACME protocol endpoint for issuing certificates through AWS Certificate Manager",
   "definitions": {
     "Tag": {
       "description": "A key-value pair to associate with a resource.",

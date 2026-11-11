@@ -16,11 +16,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -62,7 +64,7 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 2,
+		//	      "maxItems": 50,
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -100,7 +102,7 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 					Description: "A list of attribute items specified in the mathematical expression.",
 					Required:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeBetween(1, 2),
+						setvalidator.SizeBetween(1, 50),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Expression
@@ -114,6 +116,9 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 			}, /*END SCHEMA*/
 			Description: "Mathematical expression and a list of attribute items specified in that expression.",
 			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CalculatedAttributeName
 		// CloudFormation resource type schema:
@@ -175,7 +180,7 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		//	        "Value": {
 		//	          "description": "The amount of time of the specified unit.",
 		//	          "maximum": 2147483647,
-		//	          "minimum": 1,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        },
 		//	        "ValueRange": {
@@ -202,9 +207,6 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		//	          "type": "object"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Unit"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "Threshold": {
@@ -289,7 +291,6 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 								stringvalidator.OneOf(
 									"DAYS",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -301,7 +302,7 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 2147483647),
+								int64validator.Between(0, 2147483647),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -479,6 +480,267 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Filter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Defines how to filter the objects coming in for calculated attributes.",
+		//	  "properties": {
+		//	    "Groups": {
+		//	      "description": "Holds the list of Filter groups within the Filter definition.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Object that holds the dimensions to filter on.",
+		//	        "properties": {
+		//	          "Dimensions": {
+		//	            "description": "Object that holds the attributes to filter on.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Contains the map of attribute names to attribute dimensions.",
+		//	              "properties": {
+		//	                "Attributes": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Is the attribute within the FilterDimension map",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Object that defines how to filter the incoming objects for the calculated attribute.",
+		//	                      "properties": {
+		//	                        "DimensionType": {
+		//	                          "description": "The action to filter with.",
+		//	                          "enum": [
+		//	                            "INCLUSIVE",
+		//	                            "EXCLUSIVE",
+		//	                            "CONTAINS",
+		//	                            "BEGINS_WITH",
+		//	                            "ENDS_WITH",
+		//	                            "BEFORE",
+		//	                            "AFTER",
+		//	                            "BETWEEN",
+		//	                            "NOT_BETWEEN",
+		//	                            "ON",
+		//	                            "GREATER_THAN",
+		//	                            "LESS_THAN",
+		//	                            "GREATER_THAN_OR_EQUAL",
+		//	                            "LESS_THAN_OR_EQUAL",
+		//	                            "EQUAL"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Values": {
+		//	                          "description": "The values to apply the DimensionType on.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "maxLength": 255,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 10,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "DimensionType",
+		//	                        "Values"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Attributes"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 10,
+		//	            "minItems": 1,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Type": {
+		//	            "description": "The type of logical relationship between the dimensions of the Filter group.",
+		//	            "enum": [
+		//	              "ALL",
+		//	              "ANY",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Type",
+		//	          "Dimensions"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Include": {
+		//	      "description": "Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.",
+		//	      "enum": [
+		//	        "ALL",
+		//	        "ANY",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Include",
+		//	    "Groups"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Groups
+				"groups": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Dimensions
+							"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Attributes
+										"attributes":              // Pattern: ""
+										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DimensionType
+													"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The action to filter with.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"INCLUSIVE",
+																"EXCLUSIVE",
+																"CONTAINS",
+																"BEGINS_WITH",
+																"ENDS_WITH",
+																"BEFORE",
+																"AFTER",
+																"BETWEEN",
+																"NOT_BETWEEN",
+																"ON",
+																"GREATER_THAN",
+																"LESS_THAN",
+																"GREATER_THAN_OR_EQUAL",
+																"LESS_THAN_OR_EQUAL",
+																"EQUAL",
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Values
+													"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The values to apply the DimensionType on.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Set{ /*START VALIDATORS*/
+															setvalidator.SizeBetween(1, 10),
+															setvalidator.ValueStringsAre(
+																stringvalidator.LengthBetween(1, 255),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+															setplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "Is the attribute within the FilterDimension map",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Map{ /*START VALIDATORS*/
+												fwvalidators.NotNullMap(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Object that holds the attributes to filter on.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.SizeBetween(1, 10),
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of logical relationship between the dimensions of the Filter group.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ALL",
+										"ANY",
+										"NONE",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Holds the list of Filter groups within the Filter definition.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(1, 2),
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Include
+				"include": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ALL",
+							"ANY",
+							"NONE",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines how to filter the objects coming in for calculated attributes.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -564,6 +826,9 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 					"MAX_OCCURRENCE",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -716,10 +981,15 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		"conditions":                "Conditions",
 		"created_at":                "CreatedAt",
 		"description":               "Description",
+		"dimension_type":            "DimensionType",
+		"dimensions":                "Dimensions",
 		"display_name":              "DisplayName",
 		"domain_name":               "DomainName",
 		"end":                       "End",
 		"expression":                "Expression",
+		"filter":                    "Filter",
+		"groups":                    "Groups",
+		"include":                   "Include",
 		"key":                       "Key",
 		"last_updated_at":           "LastUpdatedAt",
 		"message":                   "Message",
@@ -736,10 +1006,12 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		"threshold":                 "Threshold",
 		"timestamp_format":          "TimestampFormat",
 		"timestamp_source":          "TimestampSource",
+		"type":                      "Type",
 		"unit":                      "Unit",
 		"use_historical_data":       "UseHistoricalData",
 		"value":                     "Value",
 		"value_range":               "ValueRange",
+		"values":                    "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

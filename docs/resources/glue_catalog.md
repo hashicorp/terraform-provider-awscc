@@ -35,10 +35,10 @@ Creates a catalog in the Glue Data Catalog.
 ### Read-Only
 
 - `catalog_id` (String) The ID of the catalog.
-- `create_time` (Number) The time at which the catalog was created.
+- `create_time` (String) The time at which the catalog was created.
 - `id` (String) Uniquely identifies the resource.
 - `resource_arn` (String) The Amazon Resource Name (ARN) of the catalog.
-- `update_time` (Number) The time at which the catalog was last updated.
+- `update_time` (String) The time at which the catalog was last updated.
 
 <a id="nestedatt--catalog_properties"></a>
 ### Nested Schema for `catalog_properties`

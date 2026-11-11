@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -49,7 +50,7 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 2,
+		//	      "maxItems": 50,
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -145,7 +146,7 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	        "Value": {
 		//	          "description": "The amount of time of the specified unit.",
 		//	          "maximum": 2147483647,
-		//	          "minimum": 1,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        },
 		//	        "ValueRange": {
@@ -172,9 +173,6 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	          "type": "object"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Unit"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "Threshold": {
@@ -329,6 +327,182 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique name of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Filter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Defines how to filter the objects coming in for calculated attributes.",
+		//	  "properties": {
+		//	    "Groups": {
+		//	      "description": "Holds the list of Filter groups within the Filter definition.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Object that holds the dimensions to filter on.",
+		//	        "properties": {
+		//	          "Dimensions": {
+		//	            "description": "Object that holds the attributes to filter on.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Contains the map of attribute names to attribute dimensions.",
+		//	              "properties": {
+		//	                "Attributes": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Is the attribute within the FilterDimension map",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Object that defines how to filter the incoming objects for the calculated attribute.",
+		//	                      "properties": {
+		//	                        "DimensionType": {
+		//	                          "description": "The action to filter with.",
+		//	                          "enum": [
+		//	                            "INCLUSIVE",
+		//	                            "EXCLUSIVE",
+		//	                            "CONTAINS",
+		//	                            "BEGINS_WITH",
+		//	                            "ENDS_WITH",
+		//	                            "BEFORE",
+		//	                            "AFTER",
+		//	                            "BETWEEN",
+		//	                            "NOT_BETWEEN",
+		//	                            "ON",
+		//	                            "GREATER_THAN",
+		//	                            "LESS_THAN",
+		//	                            "GREATER_THAN_OR_EQUAL",
+		//	                            "LESS_THAN_OR_EQUAL",
+		//	                            "EQUAL"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Values": {
+		//	                          "description": "The values to apply the DimensionType on.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "maxLength": 255,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 10,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "DimensionType",
+		//	                        "Values"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Attributes"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 10,
+		//	            "minItems": 1,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Type": {
+		//	            "description": "The type of logical relationship between the dimensions of the Filter group.",
+		//	            "enum": [
+		//	              "ALL",
+		//	              "ANY",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Type",
+		//	          "Dimensions"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Include": {
+		//	      "description": "Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.",
+		//	      "enum": [
+		//	        "ALL",
+		//	        "ANY",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Include",
+		//	    "Groups"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Groups
+				"groups": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Dimensions
+							"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Attributes
+										"attributes":              // Pattern: ""
+										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DimensionType
+													"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The action to filter with.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Values
+													"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The values to apply the DimensionType on.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "Is the attribute within the FilterDimension map",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Object that holds the attributes to filter on.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of logical relationship between the dimensions of the Filter group.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Holds the list of Filter groups within the Filter definition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Include
+				"include": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines how to filter the objects coming in for calculated attributes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
@@ -502,10 +676,15 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		"conditions":                "Conditions",
 		"created_at":                "CreatedAt",
 		"description":               "Description",
+		"dimension_type":            "DimensionType",
+		"dimensions":                "Dimensions",
 		"display_name":              "DisplayName",
 		"domain_name":               "DomainName",
 		"end":                       "End",
 		"expression":                "Expression",
+		"filter":                    "Filter",
+		"groups":                    "Groups",
+		"include":                   "Include",
 		"key":                       "Key",
 		"last_updated_at":           "LastUpdatedAt",
 		"message":                   "Message",
@@ -522,10 +701,12 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		"threshold":                 "Threshold",
 		"timestamp_format":          "TimestampFormat",
 		"timestamp_source":          "TimestampSource",
+		"type":                      "Type",
 		"unit":                      "Unit",
 		"use_historical_data":       "UseHistoricalData",
 		"value":                     "Value",
 		"value_range":               "ValueRange",
+		"values":                    "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

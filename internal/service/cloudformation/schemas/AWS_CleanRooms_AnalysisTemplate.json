@@ -408,7 +408,8 @@
       "type": "string",
       "enum": [
         "SQL",
-        "PYSPARK_1_0"
+        "PYSPARK_1_0",
+        "PYSPARK_2_0"
       ]
     },
     "ErrorMessageConfiguration": {

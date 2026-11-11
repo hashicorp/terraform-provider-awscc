@@ -131,6 +131,20 @@ func influxDBClusterDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "Deployment type of the InfluxDB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EffectiveDbParameterGroupIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The parameter group actually applied to the InfluxDB cluster. When the service applies optimized defaults it creates a system-managed parameter group and this field reflects that effective parameter group, while DbParameterGroupIdentifier continues to reflect the customer-provided parameter group. When no service-managed parameter group is applied, this equals DbParameterGroupIdentifier.",
+		//	  "maxLength": 64,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"effective_db_parameter_group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The parameter group actually applied to the InfluxDB cluster. When the service applies optimized defaults it creates a system-managed parameter group and this field reflects that effective parameter group, while DbParameterGroupIdentifier continues to reflect the customer-provided parameter group. When no service-managed parameter group is applied, this equals DbParameterGroupIdentifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -192,11 +206,25 @@ func influxDBClusterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB cluster.",
-		//	  "pattern": "^arn:[a-z]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
+		//	  "pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
 		"influx_auth_parameters_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The customer managed key used to encrypt data in the InfluxDB cluster.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9:/_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer managed key used to encrypt data in the InfluxDB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogDeliveryConfiguration
@@ -299,6 +327,74 @@ func influxDBClusterDataSource(ctx context.Context) (datasource.DataSource, erro
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The maintenance schedule for the InfluxDB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MemberCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of DB instances that belong to the InfluxDB cluster.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"member_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of DB instances that belong to the InfluxDB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MemberModeCounts
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "DB cluster member counts grouped by instance mode.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The number of DB cluster members reporting one instance mode.",
+		//	    "properties": {
+		//	      "Count": {
+		//	        "description": "The number of DB cluster members reporting this instance mode.",
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "Mode": {
+		//	        "description": "The instance mode reported by DB cluster members.",
+		//	        "enum": [
+		//	          "PRIMARY",
+		//	          "STANDBY",
+		//	          "REPLICA",
+		//	          "INGEST",
+		//	          "QUERY",
+		//	          "COMPACT",
+		//	          "PROCESS"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Mode",
+		//	      "Count"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 7,
+		//	  "type": "array"
+		//	}
+		"member_mode_counts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Count
+					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of DB cluster members reporting this instance mode.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Mode
+					"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The instance mode reported by DB cluster members.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "DB cluster member counts grouped by instance mode.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -547,14 +643,16 @@ func influxDBClusterDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::InfluxDBCluster").WithTerraformTypeName("awscc_timestream_influx_db_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocated_storage":                 "AllocatedStorage",
-		"arn":                               "Arn",
-		"bucket":                            "Bucket",
-		"bucket_name":                       "BucketName",
-		"db_instance_type":                  "DbInstanceType",
-		"db_parameter_group_identifier":     "DbParameterGroupIdentifier",
-		"db_storage_type":                   "DbStorageType",
-		"deployment_type":                   "DeploymentType",
+		"allocated_storage":             "AllocatedStorage",
+		"arn":                           "Arn",
+		"bucket":                        "Bucket",
+		"bucket_name":                   "BucketName",
+		"count":                         "Count",
+		"db_instance_type":              "DbInstanceType",
+		"db_parameter_group_identifier": "DbParameterGroupIdentifier",
+		"db_storage_type":               "DbStorageType",
+		"deployment_type":               "DeploymentType",
+		"effective_db_parameter_group_identifier": "EffectiveDbParameterGroupIdentifier",
 		"enabled":                           "Enabled",
 		"endpoint":                          "Endpoint",
 		"engine_type":                       "EngineType",
@@ -562,8 +660,12 @@ func influxDBClusterDataSource(ctx context.Context) (datasource.DataSource, erro
 		"influx_auth_parameters_secret_arn": "InfluxAuthParametersSecretArn",
 		"influx_db_cluster_id":              "Id",
 		"key":                               "Key",
+		"kms_key_id":                        "KmsKeyId",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
 		"maintenance_schedule":              "MaintenanceSchedule",
+		"member_count":                      "MemberCount",
+		"member_mode_counts":                "MemberModeCounts",
+		"mode":                              "Mode",
 		"name":                              "Name",
 		"network_type":                      "NetworkType",
 		"next_maintenance_time":             "NextMaintenanceTime",

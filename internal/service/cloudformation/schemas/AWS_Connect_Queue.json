@@ -211,8 +211,8 @@
       "maxLength": 250
     },
     "QuickConnectArns": {
-      "minItems": 1,
-      "description": "The quick connects available to agents who are working the queue.",
+      "minItems": 0,
+      "description": "The quick connects available to agents who are working the queue. To remove all quick connects from the queue, specify an empty list.",
       "insertionOrder": false,
       "type": "array",
       "items": {

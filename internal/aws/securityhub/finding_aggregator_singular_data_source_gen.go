@@ -53,7 +53,8 @@ func findingAggregatorDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "enum": [
 		//	    "ALL_REGIONS",
 		//	    "ALL_REGIONS_EXCEPT_SPECIFIED",
-		//	    "SPECIFIED_REGIONS"
+		//	    "SPECIFIED_REGIONS",
+		//	    "NO_REGIONS"
 		//	  ],
 		//	  "type": "string"
 		//	}

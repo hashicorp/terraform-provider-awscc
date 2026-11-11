@@ -68,7 +68,9 @@
         "appsync:GetWebACLForResource",
         "bedrock-agentcore:GatewayAssociateWebACL",
         "bedrock-agentcore:GatewayDisassociateWebACL",
-        "bedrock-agentcore:GatewayGetWebACLForResource"
+        "bedrock-agentcore:GatewayGetWebACLForResource",
+        "amplifygen3:AssociateWebACL",
+        "amplifygen3:GetWebACLForResource"
       ]
     },
     "delete": {
@@ -78,6 +80,7 @@
         "wafv2:GetWebACL",
         "wafv2:DisassociateWebACL",
         "wafv2:PutPermissionPolicy",
+        "wafv2:GetPermissionPolicy",
         "elasticloadbalancing:SetWebACL",
         "apigateway:SetWebACL",
         "appsync:SetWebACL",
@@ -101,7 +104,9 @@
         "appsync:GetWebACLForResource",
         "bedrock-agentcore:GatewayAssociateWebACL",
         "bedrock-agentcore:GatewayDisassociateWebACL",
-        "bedrock-agentcore:GatewayGetWebACLForResource"
+        "bedrock-agentcore:GatewayGetWebACLForResource",
+        "amplifygen3:DisassociateWebACL",
+        "amplifygen3:GetWebACLForResource"
       ]
     },
     "read": {
@@ -132,7 +137,8 @@
         "appsync:GetWebACLForResource",
         "bedrock-agentcore:GatewayAssociateWebACL",
         "bedrock-agentcore:GatewayDisassociateWebACL",
-        "bedrock-agentcore:GatewayGetWebACLForResource"
+        "bedrock-agentcore:GatewayGetWebACLForResource",
+        "amplifygen3:GetWebACLForResource"
       ]
     },
     "update": {
@@ -162,7 +168,8 @@
         "appsync:GetWebACLForResource",
         "bedrock-agentcore:GatewayAssociateWebACL",
         "bedrock-agentcore:GatewayDisassociateWebACL",
-        "bedrock-agentcore:GatewayGetWebACLForResource"
+        "bedrock-agentcore:GatewayGetWebACLForResource",
+        "amplifygen3:GetWebACLForResource"
       ]
     }
   }

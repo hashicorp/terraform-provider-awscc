@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_client_vpn_target_network_association.example "client_vpn_endpoint_id|association_id"

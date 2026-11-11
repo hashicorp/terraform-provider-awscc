@@ -64,12 +64,12 @@
     "ConnectionId": {
       "description": "The unique identifier for the connection.",
       "type": "string",
-      "pattern": "^mcc-[a-z0-9]{8}$"
+      "pattern": "^(mcc|lmcc)-[a-z0-9]{8}$"
     },
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the connection.",
       "type": "string",
-      "pattern": "^arn:aws[a-z-]*:interconnect:[^:]+:[0-9]{12}:connection/mcc-[a-z0-9]{8}$"
+      "pattern": "^arn:aws[a-z-]*:interconnect:[^:]+:[0-9]{12}:connection/(mcc|lmcc)-[a-z0-9]{8}$"
     },
     "Description": {
       "description": "A description of the connection.",
@@ -209,7 +209,8 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "interconnect:TagResource",
-      "interconnect:UntagResource"
+      "interconnect:UntagResource",
+      "interconnect:ListTagsForResource"
     ]
   },
   "handlers": {
@@ -238,6 +239,7 @@
     "delete": {
       "permissions": [
         "interconnect:GetConnection",
+        "interconnect:ListTagsForResource",
         "interconnect:DeleteConnection"
       ]
     },

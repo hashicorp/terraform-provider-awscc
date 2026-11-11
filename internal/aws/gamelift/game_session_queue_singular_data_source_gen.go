@@ -119,6 +119,78 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "A list of locations where a queue is allowed to place new game sessions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LogConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A policy that determines where a game session queue's placement logs are delivered.",
+		//	  "properties": {
+		//	    "DeliveryDestinations": {
+		//	      "description": "The set of destinations that receive the game session queue's placement logs. A queue can deliver logs to between 1 and 3 destinations.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The destination to deliver a game session queue's placement logs to. Omit DestinationArn for a CLOUDWATCH or S3 destination to have GameLift create one; FIREHOSE requires DestinationArn.",
+		//	        "properties": {
+		//	          "DestinationArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the resource that receives the placement logs. The resource type must match LogDestination (a CloudWatch Logs log group, S3 bucket, or Firehose delivery stream). Required for FIREHOSE; optional for CLOUDWATCH and S3.",
+		//	            "maxLength": 512,
+		//	            "minLength": 1,
+		//	            "pattern": "^arn:[a-zA-Z0-9:/*._#-]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "LogDestination": {
+		//	            "description": "The type of service that receives the game session queue's placement logs.",
+		//	            "enum": [
+		//	              "CLOUDWATCH",
+		//	              "S3",
+		//	              "FIREHOSE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "LogDestination"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DeliveryDestinations"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeliveryDestinations
+				"delivery_destinations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationArn
+							"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the resource that receives the placement logs. The resource type must match LogDestination (a CloudWatch Logs log group, S3 bucket, or Firehose delivery stream). Required for FIREHOSE; optional for CLOUDWATCH and S3.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LogDestination
+							"log_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of service that receives the game session queue's placement logs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The set of destinations that receive the game session queue's placement logs. A queue can deliver logs to between 1 and 3 destinations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A policy that determines where a game session queue's placement logs are delivered.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -327,14 +399,17 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::GameSessionQueue").WithTerraformTypeName("awscc_gamelift_game_session_queue")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_locations":    "AllowedLocations",
-		"arn":                  "Arn",
-		"custom_event_data":    "CustomEventData",
-		"destination_arn":      "DestinationArn",
-		"destinations":         "Destinations",
-		"filter_configuration": "FilterConfiguration",
-		"key":                  "Key",
-		"location_order":       "LocationOrder",
+		"allowed_locations":     "AllowedLocations",
+		"arn":                   "Arn",
+		"custom_event_data":     "CustomEventData",
+		"delivery_destinations": "DeliveryDestinations",
+		"destination_arn":       "DestinationArn",
+		"destinations":          "Destinations",
+		"filter_configuration":  "FilterConfiguration",
+		"key":                   "Key",
+		"location_order":        "LocationOrder",
+		"log_configuration":     "LogConfiguration",
+		"log_destination":       "LogDestination",
 		"maximum_individual_player_latency_milliseconds": "MaximumIndividualPlayerLatencyMilliseconds",
 		"name":                    "Name",
 		"notification_target":     "NotificationTarget",

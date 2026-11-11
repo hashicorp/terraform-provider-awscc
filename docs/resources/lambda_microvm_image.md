@@ -33,6 +33,7 @@ Resource Type definition for AWS::Lambda::MicrovmImage
 
 ### Optional
 
+- `kms_key_identifier` (String) The customer managed KMS key used to encrypt the MicroVM image configuration at rest. When omitted, a service owned key is used.
 - `tags` (Attributes Set) Key-value pairs to associate with the MicroVM image for organization and management. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

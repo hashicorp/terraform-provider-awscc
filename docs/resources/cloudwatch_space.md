@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_space Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource type definition for AWS::CloudWatch::Space
+  Resource Type definition for AWS::CloudWatch::Space. A space is where you work in CloudWatch Omni. It gives you access to telemetry from the account and Region in which the space is hosted, and controls who can see it.
 ---
 
 # awscc_cloudwatch_space (Resource)
 
-Resource type definition for AWS::CloudWatch::Space
+Resource Type definition for AWS::CloudWatch::Space. A space is where you work in CloudWatch Omni. It gives you access to telemetry from the account and Region in which the space is hosted, and controls who can see it.
 
 
 
@@ -17,34 +17,34 @@ Resource type definition for AWS::CloudWatch::Space
 
 ### Required
 
-- `data_access_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.
-- `domain_id` (String) The identifier of the domain the space belongs to.
-- `name` (String) The name of the space.
+- `data_access_role_arn` (String) The ARN of the IAM role used for data access.
+- `domain_id` (String) The ID of the domain to create the space in.
+- `name` (String) A name that identifies the space.
 
 ### Optional
 
-- `agent_core_evaluation_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.
-- `encryption_configuration` (Attributes) The encryption configuration for the space. (see [below for nested schema](#nestedatt--encryption_configuration))
+- `agent_core_evaluation_role_arn` (String) The ARN of the IAM role used by AgentCore online evaluation. Absent when the space was created without one.
+- `encryption_configuration` (Attributes) How the space's data at rest is encrypted. Always populated. (see [below for nested schema](#nestedatt--encryption_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the space.
-- `created_at` (String) The time the space was created.
+- `created_at` (String) The timestamp when the space was created.
 - `id` (String) Uniquely identifies the resource.
-- `owner_account_id` (String) The AWS account that owns the space.
-- `region` (String) The AWS Region the space resides in.
-- `space_id` (String) The unique identifier of the space.
+- `owner_account_id` (String) AWS account ID that owns this space.
+- `region` (String) The region where this space was created.
+- `space_id` (String) The unique ID of the space.
 - `status` (String) The status of the space.
-- `updated_at` (String) The time the space was last updated.
+- `updated_at` (String) The timestamp when the space was last updated.
 
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
 
 Optional:
 
-- `encryption_strategy` (String) Whether the space is encrypted with an AWS owned key or a customer managed key.
-- `kms_key_arn` (String) The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.
+- `encryption_strategy` (String) Which kind of key to use. Required.
+- `kms_key_arn` (String) Customer managed KMS key ARN. Required when encryptionStrategy is CUSTOMER_MANAGED, and must be omitted when it is AWS_OWNED. Must be a symmetric ENCRYPT_DECRYPT key in the caller's account and region.
 
 
 <a id="nestedatt--tags"></a>

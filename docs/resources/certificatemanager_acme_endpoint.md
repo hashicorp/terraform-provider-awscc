@@ -3,12 +3,12 @@
 page_title: "awscc_certificatemanager_acme_endpoint Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CertificateManager::AcmeEndpoint
+  Resource Type definition for AWS::CertificateManager::AcmeEndpoint, an ACME protocol endpoint for issuing certificates through AWS Certificate Manager
 ---
 
 # awscc_certificatemanager_acme_endpoint (Resource)
 
-Resource Type definition for AWS::CertificateManager::AcmeEndpoint
+Resource Type definition for AWS::CertificateManager::AcmeEndpoint, an ACME protocol endpoint for issuing certificates through AWS Certificate Manager
 
 
 

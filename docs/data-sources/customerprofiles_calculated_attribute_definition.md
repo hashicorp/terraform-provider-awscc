@@ -28,6 +28,7 @@ Data Source schema for AWS::CustomerProfiles::CalculatedAttributeDefinition
 - `description` (String) The description of the calculated attribute.
 - `display_name` (String) The display name of the calculated attribute.
 - `domain_name` (String) The unique name of the domain.
+- `filter` (Attributes) Defines how to filter the objects coming in for calculated attributes. (see [below for nested schema](#nestedatt--filter))
 - `last_updated_at` (String) The timestamp of when the calculated attribute definition was most recently edited.
 - `readiness` (Attributes) The readiness status of the calculated attribute. (see [below for nested schema](#nestedatt--readiness))
 - `statistic` (String) The aggregation operation to perform for the calculated attribute.
@@ -89,6 +90,41 @@ Read-Only:
 
 - `operator` (String) The operator of the threshold.
 - `value` (String) The value of the threshold.
+
+
+
+<a id="nestedatt--filter"></a>
+### Nested Schema for `filter`
+
+Read-Only:
+
+- `groups` (Attributes Set) Holds the list of Filter groups within the Filter definition. (see [below for nested schema](#nestedatt--filter--groups))
+- `include` (String) Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.
+
+<a id="nestedatt--filter--groups"></a>
+### Nested Schema for `filter.groups`
+
+Read-Only:
+
+- `dimensions` (Attributes Set) Object that holds the attributes to filter on. (see [below for nested schema](#nestedatt--filter--groups--dimensions))
+- `type` (String) The type of logical relationship between the dimensions of the Filter group.
+
+<a id="nestedatt--filter--groups--dimensions"></a>
+### Nested Schema for `filter.groups.dimensions`
+
+Read-Only:
+
+- `attributes` (Attributes Map) Is the attribute within the FilterDimension map (see [below for nested schema](#nestedatt--filter--groups--dimensions--attributes))
+
+<a id="nestedatt--filter--groups--dimensions--attributes"></a>
+### Nested Schema for `filter.groups.dimensions.attributes`
+
+Read-Only:
+
+- `dimension_type` (String) The action to filter with.
+- `values` (Set of String) The values to apply the DimensionType on.
+
+
 
 
 

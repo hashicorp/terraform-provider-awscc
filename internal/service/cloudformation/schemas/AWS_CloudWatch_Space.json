@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::CloudWatch::Space",
-  "description": "Resource type definition for AWS::CloudWatch::Space",
+  "description": "Resource Type definition for AWS::CloudWatch::Space. A space is where you work in CloudWatch Omni. It gives you access to telemetry from the account and Region in which the space is hosted, and controls who can see it.",
   "properties": {
     "Arn": {
       "type": "string",
@@ -11,46 +11,46 @@
     },
     "SpaceId": {
       "type": "string",
-      "description": "The unique identifier of the space.",
+      "description": "The unique ID of the space.",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "Name": {
       "type": "string",
-      "description": "The name of the space.",
+      "description": "A name that identifies the space.",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
       "minLength": 3,
       "maxLength": 64
     },
     "DomainId": {
       "type": "string",
-      "description": "The identifier of the domain the space belongs to.",
+      "description": "The ID of the domain to create the space in.",
       "pattern": "^d-[0-9a-z]{1,25}$"
     },
     "DataAccessRoleArn": {
       "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.",
+      "description": "The ARN of the IAM role used for data access.",
       "pattern": "^arn:.+$",
       "minLength": 1,
       "maxLength": 2048
     },
     "AgentCoreEvaluationRoleArn": {
       "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.",
+      "description": "The ARN of the IAM role used by AgentCore online evaluation. Absent when the space was created without one.",
       "pattern": "^arn:.+$",
       "minLength": 1,
       "maxLength": 2048
     },
     "EncryptionConfiguration": {
       "$ref": "#/definitions/EncryptionConfiguration",
-      "description": "The encryption configuration for the space."
+      "description": "How the space's data at rest is encrypted. Always populated."
     },
     "Region": {
       "type": "string",
-      "description": "The AWS Region the space resides in."
+      "description": "The region where this space was created."
     },
     "OwnerAccountId": {
       "type": "string",
-      "description": "The AWS account that owns the space.",
+      "description": "AWS account ID that owns this space.",
       "pattern": "^[0-9]{12}$",
       "minLength": 12,
       "maxLength": 12
@@ -58,12 +58,12 @@
     "CreatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The time the space was created."
+      "description": "The timestamp when the space was created."
     },
     "UpdatedAt": {
       "type": "string",
       "format": "date-time",
-      "description": "The time the space was last updated."
+      "description": "The timestamp when the space was last updated."
     },
     "Status": {
       "type": "string",
@@ -92,7 +92,7 @@
       "properties": {
         "EncryptionStrategy": {
           "type": "string",
-          "description": "Whether the space is encrypted with an AWS owned key or a customer managed key.",
+          "description": "Which kind of key to use. Required.",
           "enum": [
             "AWS_OWNED",
             "CUSTOMER_MANAGED"
@@ -100,7 +100,7 @@
         },
         "KmsKeyArn": {
           "type": "string",
-          "description": "The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.",
+          "description": "Customer managed KMS key ARN. Required when encryptionStrategy is CUSTOMER_MANAGED, and must be omitted when it is AWS_OWNED. Must be a symmetric ENCRYPT_DECRYPT key in the caller's account and region.",
           "pattern": "^arn:(aws|aws-cn|aws-us-gov):kms:[a-z0-9-]+:[0-9]{12}:key/(?:mrk-)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "minLength": 1,
           "maxLength": 2048
