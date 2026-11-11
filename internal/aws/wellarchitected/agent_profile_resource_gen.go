@@ -80,7 +80,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 100,
+		//	  "maxItems": 1000,
 		//	  "minItems": 0,
 		//	  "type": "array",
 		//	  "uniqueItems": true
@@ -124,7 +124,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The aggregation configuration entries (account, regions, access role) associated with this profile.",
 			Required:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(0, 100),
+				setvalidator.SizeBetween(0, 1000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Arn

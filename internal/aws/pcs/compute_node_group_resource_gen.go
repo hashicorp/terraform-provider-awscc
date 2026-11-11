@@ -243,6 +243,31 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LaunchTemplateMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "How AWS PCS gets the launch template for the compute node group. CUSTOM uses CustomLaunchTemplate. MANAGED has AWS PCS generate and manage the launch template from the instance settings; omit CustomLaunchTemplate. Defaults to CUSTOM on create.",
+		//	  "enum": [
+		//	    "CUSTOM",
+		//	    "MANAGED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"launch_template_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How AWS PCS gets the launch template for the compute node group. CUSTOM uses CustomLaunchTemplate. MANAGED has AWS PCS generate and manage the launch template from the instance settings; omit CustomLaunchTemplate. Defaults to CUSTOM on create.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CUSTOM",
+					"MANAGED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -823,6 +848,28 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specifies the boundaries of the compute node group auto scaling.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IDs of the EC2 security groups configured directly on the compute node group. These replace the security groups from the custom launch template. A request cannot specify this property with a launch template that defines NetworkInterfaces. When not provided and a custom launch template is present, AWS PCS uses the security groups from the launch template.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "An EC2 security group ID.",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IDs of the EC2 security groups configured directly on the compute node group. These replace the security groups from the custom launch template. A request cannot specify this property with a launch template that defines NetworkInterfaces. When not provided and a custom launch template is present, AWS PCS uses the security groups from the launch template.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SlurmConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -993,6 +1040,21 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SshKeyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the EC2 key pair configured directly on the compute node group. The key pair must exist in the caller's account and Region and overrides the key pair from the custom launch template. When not provided and a custom launch template is present, AWS PCS uses the key pair from the launch template.",
+		//	  "type": "string"
+		//	}
+		"ssh_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the EC2 key pair configured directly on the compute node group. The key pair must exist in the caller's account and Region and overrides the key pair from the custom launch template. When not provided and a custom launch template is present, AWS PCS uses the key pair from the launch template.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1099,6 +1161,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		"iam_instance_profile_arn":        "IamInstanceProfileArn",
 		"instance_configs":                "InstanceConfigs",
 		"instance_type":                   "InstanceType",
+		"launch_template_mode":            "LaunchTemplateMode",
 		"max_instance_count":              "MaxInstanceCount",
 		"message":                         "Message",
 		"min_instance_count":              "MinInstanceCount",
@@ -1116,9 +1179,11 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		"script_caching_policy":           "ScriptCachingPolicy",
 		"script_location":                 "ScriptLocation",
 		"script_source":                   "ScriptSource",
+		"security_group_ids":              "SecurityGroupIds",
 		"slurm_configuration":             "SlurmConfiguration",
 		"slurm_custom_settings":           "SlurmCustomSettings",
 		"spot_options":                    "SpotOptions",
+		"ssh_key_name":                    "SshKeyName",
 		"stages":                          "Stages",
 		"status":                          "Status",
 		"subnet_ids":                      "SubnetIds",

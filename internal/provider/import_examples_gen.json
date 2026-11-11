@@ -1418,6 +1418,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_cloudwatch_alert",
+        "identifier": ["SpaceId","AlertId"]
+    },
+    {
         "resource": "awscc_cloudwatch_anomaly_detector",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -2473,8 +2477,17 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_ec2_client_vpn_endpoint",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_ec2_client_vpn_route",
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_ec2_client_vpn_target_network_association",
+        "identifier": ["ClientVpnEndpointId","AssociationId"]
     },
     {
         "resource": "awscc_ec2_customer_gateway",
@@ -7981,9 +7994,18 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_wellarchitected_agent_organizational_profile",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_wellarchitected_agent_profile",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_wellarchitected_agent_profile_policy",
+        "identifier": ["ProfileArn"]
     },
     {
         "resource": "awscc_wellarchitected_lens",

@@ -325,7 +325,7 @@ func runtimeEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"target_version":             "TargetVersion",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(130)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

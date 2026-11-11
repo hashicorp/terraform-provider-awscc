@@ -8,12 +8,12 @@ package glue
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -461,13 +461,15 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The time at which the catalog was created.",
-		//	  "type": "integer"
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"create_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time at which the catalog was created.",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -730,13 +732,15 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The time at which the catalog was last updated.",
-		//	  "type": "integer"
+		//	  "format": "date-time",
+		//	  "type": "string"
 		//	}
-		"update_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time at which the catalog was last updated.",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

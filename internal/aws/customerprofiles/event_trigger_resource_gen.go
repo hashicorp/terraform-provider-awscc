@@ -494,6 +494,294 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IntentFilterDefinition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Filters the destination to profiles whose predicted intents meet the specified conditions.",
+		//	  "properties": {
+		//	    "Groups": {
+		//	      "description": "A list of intent filter groups combined by the definition's logical operator.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A group of intent filter conditions combined by the group's logical operator.",
+		//	        "properties": {
+		//	          "Conditions": {
+		//	            "description": "A list of intent filter conditions.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "The criteria that a predicted intent must meet.",
+		//	              "properties": {
+		//	                "ComparisonOperator": {
+		//	                  "description": "The operator used to compare the predicted intent against a list of values.",
+		//	                  "enum": [
+		//	                    "INCLUSIVE",
+		//	                    "EXCLUSIVE",
+		//	                    "CONTAINS",
+		//	                    "GREATER_THAN",
+		//	                    "LESS_THAN",
+		//	                    "GREATER_THAN_OR_EQUAL",
+		//	                    "LESS_THAN_OR_EQUAL",
+		//	                    "EQUAL"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Intent": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Identifies a predicted intent by domain and type.",
+		//	                  "properties": {
+		//	                    "IntentDomain": {
+		//	                      "description": "The domain of the intent.",
+		//	                      "enum": [
+		//	                        "DEFAULT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "The type of the intent.",
+		//	                      "enum": [
+		//	                        "PRICE_SENSITIVITY",
+		//	                        "UPGRADE_UPSELL_PROPENSITY",
+		//	                        "LAST_SEARCH_INTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "IntentDomain",
+		//	                    "Type"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Values": {
+		//	                  "description": "A list of intent values used for comparison.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 10,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Intent",
+		//	                "ComparisonOperator",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 5,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "LogicalOperator": {
+		//	            "description": "The operator used to combine multiple dimensions.",
+		//	            "enum": [
+		//	              "ANY",
+		//	              "ALL",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Conditions",
+		//	          "LogicalOperator"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LogicalOperator": {
+		//	      "description": "The operator used to combine multiple dimensions.",
+		//	      "enum": [
+		//	        "ANY",
+		//	        "ALL",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Groups",
+		//	    "LogicalOperator"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"intent_filter_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Groups
+				"groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Conditions
+							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ComparisonOperator
+										"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The operator used to compare the predicted intent against a list of values.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"INCLUSIVE",
+													"EXCLUSIVE",
+													"CONTAINS",
+													"GREATER_THAN",
+													"LESS_THAN",
+													"GREATER_THAN_OR_EQUAL",
+													"LESS_THAN_OR_EQUAL",
+													"EQUAL",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Intent
+										"intent": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: IntentDomain
+												"intent_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The domain of the intent.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"DEFAULT",
+														),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The type of the intent.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"PRICE_SENSITIVITY",
+															"UPGRADE_UPSELL_PROPENSITY",
+															"LAST_SEARCH_INTENT",
+														),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Identifies a predicted intent by domain and type.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A list of intent values used for comparison.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 10),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthBetween(1, 255),
+												),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "A list of intent filter conditions.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 5),
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: LogicalOperator
+							"logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The operator used to combine multiple dimensions.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ANY",
+										"ALL",
+										"NONE",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of intent filter groups combined by the definition's logical operator.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogicalOperator
+				"logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The operator used to combine multiple dimensions.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ANY",
+							"ALL",
+							"NONE",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Filters the destination to profiles whose predicted intents meet the specified conditions.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -658,6 +946,7 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"comparison_operator":         "ComparisonOperator",
+		"conditions":                  "Conditions",
 		"created_at":                  "CreatedAt",
 		"description":                 "Description",
 		"domain_name":                 "DomainName",
@@ -667,6 +956,10 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 		"event_trigger_limits":        "EventTriggerLimits",
 		"event_trigger_name":          "EventTriggerName",
 		"field_name":                  "FieldName",
+		"groups":                      "Groups",
+		"intent":                      "Intent",
+		"intent_domain":               "IntentDomain",
+		"intent_filter_definition":    "IntentFilterDefinition",
 		"key":                         "Key",
 		"last_updated_at":             "LastUpdatedAt",
 		"logical_operator":            "LogicalOperator",
@@ -677,6 +970,7 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 		"segment_filter":              "SegmentFilter",
 		"source":                      "Source",
 		"tags":                        "Tags",
+		"type":                        "Type",
 		"unit":                        "Unit",
 		"unlimited":                   "Unlimited",
 		"value":                       "Value",

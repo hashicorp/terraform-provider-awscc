@@ -162,7 +162,8 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "Architecture": {
 		//	        "enum": [
-		//	          "ARM_64"
+		//	          "ARM_64",
+		//	          "X86_64"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -184,6 +185,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"ARM_64",
+								"X86_64",
 							),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -595,6 +597,29 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The customer managed KMS key used to encrypt the MicroVM image configuration at rest. When omitted, a service owned key is used.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws[a-z-]*:kms:[a-z0-9-]+:[0-9]{12}:(key|alias)/[a-zA-Z0-9:/_-]+|alias/[a-zA-Z0-9:/_-]+|[a-zA-Z0-9-]+)$",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer managed KMS key used to encrypt the MicroVM image configuration at rest. When omitted, a service owned key is used.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z-]*:kms:[a-z0-9-]+:[0-9]{12}:(key|alias)/[a-zA-Z0-9:/_-]+|alias/[a-zA-Z0-9:/_-]+|[a-zA-Z0-9-]+)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// KmsKeyIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: LatestActiveImageVersion
 		// CloudFormation resource type schema:
 		//
@@ -913,6 +938,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 		"hooks":                        "Hooks",
 		"image_arn":                    "ImageArn",
 		"key":                          "Key",
+		"kms_key_identifier":           "KmsKeyIdentifier",
 		"latest_active_image_version":  "LatestActiveImageVersion",
 		"latest_failed_image_version":  "LatestFailedImageVersion",
 		"log_group":                    "LogGroup",
@@ -956,6 +982,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AdditionalOsCapabilities",
 		"/properties/Hooks",
 		"/properties/EnvironmentVariables",
+		"/properties/KmsKeyIdentifier",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

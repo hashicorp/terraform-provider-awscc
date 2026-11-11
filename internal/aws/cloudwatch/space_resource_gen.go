@@ -38,14 +38,14 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.",
+		//	  "description": "The ARN of the IAM role used by AgentCore online evaluation. Absent when the space was created without one.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
 		"agent_core_evaluation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.",
+			Description: "The ARN of the IAM role used by AgentCore online evaluation. Absent when the space was created without one.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -78,13 +78,13 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the space was created.",
+		//	  "description": "The timestamp when the space was created.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the space was created.",
+			Description: "The timestamp when the space was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -94,14 +94,14 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.",
+		//	  "description": "The ARN of the IAM role used for data access.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
 		"data_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.",
+			Description: "The ARN of the IAM role used for data access.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
@@ -115,12 +115,12 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the domain the space belongs to.",
+		//	  "description": "The ID of the domain to create the space in.",
 		//	  "pattern": "^d-[0-9a-z]{1,25}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the domain the space belongs to.",
+			Description: "The ID of the domain to create the space in.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^d-[0-9a-z]{1,25}$"), ""),
@@ -134,10 +134,10 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The encryption configuration for the space.",
+		//	  "description": "How the space's data at rest is encrypted. Always populated.",
 		//	  "properties": {
 		//	    "EncryptionStrategy": {
-		//	      "description": "Whether the space is encrypted with an AWS owned key or a customer managed key.",
+		//	      "description": "Which kind of key to use. Required.",
 		//	      "enum": [
 		//	        "AWS_OWNED",
 		//	        "CUSTOMER_MANAGED"
@@ -145,7 +145,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.",
+		//	      "description": "Customer managed KMS key ARN. Required when encryptionStrategy is CUSTOMER_MANAGED, and must be omitted when it is AWS_OWNED. Must be a symmetric ENCRYPT_DECRYPT key in the caller's account and region.",
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
 		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov):kms:[a-z0-9-]+:[0-9]{12}:key/(?:mrk-)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -161,7 +161,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EncryptionStrategy
 				"encryption_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the space is encrypted with an AWS owned key or a customer managed key.",
+					Description: "Which kind of key to use. Required.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -177,7 +177,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyArn
 				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.",
+					Description: "Customer managed KMS key ARN. Required when encryptionStrategy is CUSTOMER_MANAGED, and must be omitted when it is AWS_OWNED. Must be a symmetric ENCRYPT_DECRYPT key in the caller's account and region.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -189,7 +189,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The encryption configuration for the space.",
+			Description: "How the space's data at rest is encrypted. Always populated.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -200,14 +200,14 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the space.",
+		//	  "description": "A name that identifies the space.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the space.",
+			Description: "A name that identifies the space.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 64),
@@ -218,14 +218,14 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS account that owns the space.",
+		//	  "description": "AWS account ID that owns this space.",
 		//	  "maxLength": 12,
 		//	  "minLength": 12,
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account that owns the space.",
+			Description: "AWS account ID that owns this space.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -235,11 +235,11 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS Region the space resides in.",
+		//	  "description": "The region where this space was created.",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region the space resides in.",
+			Description: "The region where this space was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -249,12 +249,12 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier of the space.",
+		//	  "description": "The unique ID of the space.",
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the space.",
+			Description: "The unique ID of the space.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -357,13 +357,13 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the space was last updated.",
+		//	  "description": "The timestamp when the space was last updated.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the space was last updated.",
+			Description: "The timestamp when the space was last updated.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -381,7 +381,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource type definition for AWS::CloudWatch::Space",
+		Description: "Resource Type definition for AWS::CloudWatch::Space. A space is where you work in CloudWatch Omni. It gives you access to telemetry from the account and Region in which the space is hosted, and controls who can see it.",
 		Version:     1,
 		Attributes:  attributes,
 	}

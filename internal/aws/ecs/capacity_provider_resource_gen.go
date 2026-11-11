@@ -591,6 +591,9 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "NitroEnclavesEnabled": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "StorageConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -1319,6 +1322,14 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: NitroEnclavesEnabled
+						"nitro_enclaves_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: StorageConfiguration
 						"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1513,6 +1524,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"network_bandwidth_gbps":                                  "NetworkBandwidthGbps",
 		"network_configuration":                                   "NetworkConfiguration",
 		"network_interface_count":                                 "NetworkInterfaceCount",
+		"nitro_enclaves_enabled":                                  "NitroEnclavesEnabled",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"propagate_tags":                              "PropagateTags",
 		"require_hibernate_support":                   "RequireHibernateSupport",

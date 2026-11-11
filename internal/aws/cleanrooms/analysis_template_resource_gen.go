@@ -304,7 +304,8 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "SQL",
-		//	    "PYSPARK_1_0"
+		//	    "PYSPARK_1_0",
+		//	    "PYSPARK_2_0"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -314,6 +315,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"SQL",
 					"PYSPARK_1_0",
+					"PYSPARK_2_0",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

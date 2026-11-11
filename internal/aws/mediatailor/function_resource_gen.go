@@ -63,6 +63,31 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "An expression that evaluates to the request body for the AWS service API call. The body must conform to the input format that the target service operation expects. Applies only when the target operation accepts a request body. The maximum size after evaluation is 64 KB.",
 		//	      "type": "string"
 		//	    },
+		//	    "Cache": {
+		//	      "additionalProperties": false,
+		//	      "description": "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the AWS service, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.",
+		//	      "properties": {
+		//	        "Key": {
+		//	          "description": "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.",
+		//	          "type": "string"
+		//	        },
+		//	        "TtlMaximumSeconds": {
+		//	          "description": "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "TtlMinimumSeconds": {
+		//	          "description": "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TtlMinimumSeconds",
+		//	        "TtlMaximumSeconds"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Headers": {
 		//	      "additionalProperties": false,
 		//	      "description": "A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound request to the AWS service. Use this to pass any headers required by the target service operation. You can include a maximum of 50 headers.",
@@ -140,6 +165,52 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Cache
+				"cache": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TtlMaximumSeconds
+						"ttl_maximum_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TtlMinimumSeconds
+						"ttl_minimum_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the AWS service, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Headers
@@ -570,6 +641,31 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The body of the HTTP request.",
 		//	      "type": "string"
 		//	    },
+		//	    "Cache": {
+		//	      "additionalProperties": false,
+		//	      "description": "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.",
+		//	      "properties": {
+		//	        "Key": {
+		//	          "description": "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.",
+		//	          "type": "string"
+		//	        },
+		//	        "TtlMaximumSeconds": {
+		//	          "description": "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "TtlMinimumSeconds": {
+		//	          "description": "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TtlMinimumSeconds",
+		//	        "TtlMaximumSeconds"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Headers": {
 		//	      "additionalProperties": false,
 		//	      "description": "A map of HTTP headers to include in the request.",
@@ -631,6 +727,52 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Cache
+				"cache": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TtlMaximumSeconds
+						"ttl_maximum_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TtlMinimumSeconds
+						"ttl_minimum_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Headers
@@ -939,6 +1081,31 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "An expression that evaluates to the request body, for example to send an OpenRTB bid request. The expression can be up to 100,000 characters, and the body after evaluation can be up to 64 KB.",
 		//	      "type": "string"
 		//	    },
+		//	    "Cache": {
+		//	      "additionalProperties": false,
+		//	      "description": "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.",
+		//	      "properties": {
+		//	        "Key": {
+		//	          "description": "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.",
+		//	          "type": "string"
+		//	        },
+		//	        "TtlMaximumSeconds": {
+		//	          "description": "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "TtlMinimumSeconds": {
+		//	          "description": "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TtlMinimumSeconds",
+		//	        "TtlMaximumSeconds"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Headers": {
 		//	      "additionalProperties": false,
 		//	      "description": "A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound request. Headers beginning with X-Amz- are reserved by the service, and method override headers are not allowed.",
@@ -1001,6 +1168,52 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Cache
+				"cache": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, request body, and HTTP method; request headers are not included. The evaluated key must be smaller than 1 KB.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TtlMaximumSeconds
+						"ttl_maximum_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to TtlMinimumSeconds.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TtlMinimumSeconds
+						"ttl_minimum_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no Cache-Control max-age directive.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Headers
@@ -1121,6 +1334,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                               "Arn",
 		"aws_service_request_configuration": "AwsServiceRequestConfiguration",
 		"body":                              "Body",
+		"cache":                             "Cache",
 		"concurrent_executor_configuration": "ConcurrentExecutorConfiguration",
 		"custom_output_configuration":       "CustomOutputConfiguration",
 		"description":                       "Description",
@@ -1141,6 +1355,8 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"target_region":                     "TargetRegion",
 		"target_service":                    "TargetService",
 		"timeout_milliseconds":              "TimeoutMilliseconds",
+		"ttl_maximum_seconds":               "TtlMaximumSeconds",
+		"ttl_minimum_seconds":               "TtlMinimumSeconds",
 		"url":                               "Url",
 		"value":                             "Value",
 		"vast_request_configuration":        "VastRequestConfiguration",

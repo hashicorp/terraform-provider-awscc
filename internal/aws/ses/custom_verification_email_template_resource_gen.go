@@ -68,11 +68,11 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The tags (keys and values) associated with the tenant.",
+		//	  "description": "The tags (keys and values) associated with the custom verification email template.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "An object that defines the tags (keys and values) that you want to associate with the tenant.",
+		//	    "description": "An object that defines the tags (keys and values) that you want to associate with the custom verification email template.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key of the key-value tag.",
@@ -128,7 +128,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the tenant.",
+			Description: "The tags (keys and values) associated with the custom verification email template.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

@@ -7,9 +7,14 @@ package networkmanager
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -147,6 +152,145 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NatGatewayRules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The complete set of NAT gateway rules on the attachment. Updating this property replaces the entire rule set, and rules left out of the new value are removed. To remove all rules, specify an empty list or remove this property. NAT gateway support can't be enabled without rules, so it is then disabled unless NatGatewaySupport is specified. Only the core network owner can configure NAT gateway rules. The rules aren't returned when the attachment is read, so drift detection doesn't check them. Not available in AWS GovCloud (US).",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A NAT gateway rule on the attachment.",
+		//	    "properties": {
+		//	      "MatchSourceCidr": {
+		//	        "description": "The IPv4 CIDR that source traffic is matched against for translation.",
+		//	        "maxLength": 18,
+		//	        "minLength": 9,
+		//	        "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$",
+		//	        "type": "string"
+		//	      },
+		//	      "NatCidr": {
+		//	        "description": "The IPv4 CIDR that matched source traffic is translated into. Must have the same prefix length as MatchSourceCidr.",
+		//	        "maxLength": 18,
+		//	        "minLength": 9,
+		//	        "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$",
+		//	        "type": "string"
+		//	      },
+		//	      "RuleNumber": {
+		//	        "description": "The rule number that uniquely identifies the NAT rule on the attachment.",
+		//	        "maximum": 32766,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "RuleNumber",
+		//	      "MatchSourceCidr",
+		//	      "NatCidr"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"nat_gateway_rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MatchSourceCidr
+					"match_source_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IPv4 CIDR that source traffic is matched against for translation.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(9, 18),
+							stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: NatCidr
+					"nat_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IPv4 CIDR that matched source traffic is translated into. Must have the same prefix length as MatchSourceCidr.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(9, 18),
+							stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RuleNumber
+					"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The rule number that uniquely identifies the NAT rule on the attachment.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(1, 32766),
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The complete set of NAT gateway rules on the attachment. Updating this property replaces the entire rule set, and rules left out of the new value are removed. To remove all rules, specify an empty list or remove this property. NAT gateway support can't be enabled without rules, so it is then disabled unless NatGatewaySupport is specified. Only the core network owner can configure NAT gateway rules. The rules aren't returned when the attachment is read, so drift detection doesn't check them. Not available in AWS GovCloud (US).",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// NatGatewayRules is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: NatGatewaySupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether NAT gateway support is enabled on the attachment. Required when NatGatewayRules lists rules. Set to DISABLE with NatGatewayRules to keep the rules on the attachment without translating traffic, and set it to ENABLE to activate them again. An attachment that is pending acceptance applies this setting once it is accepted. Only the core network owner can configure or read NAT gateway settings. Not available in AWS GovCloud (US).",
+		//	  "enum": [
+		//	    "ENABLE",
+		//	    "DISABLE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"nat_gateway_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether NAT gateway support is enabled on the attachment. Required when NatGatewayRules lists rules. Set to DISABLE with NatGatewayRules to keep the rules on the attachment without translating traffic, and set it to ENABLE to activate them again. An attachment that is pending acceptance applies this setting once it is accepted. Only the core network owner can configure or read NAT gateway settings. Not available in AWS GovCloud (US).",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLE",
+					"DISABLE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NatSystemRouteSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether system routes are installed for the NAT CIDRs of the attachment's NAT gateway rules. Configurable on BGP Site-to-Site VPN attachments. Always false and not configurable for static VPN attachments. If omitted, a new NAT gateway configuration uses the service default for the attachment and an existing configuration keeps its current value, so removing this property from a template doesn't reset the setting. Only the core network owner can configure this setting. Not available in AWS GovCloud (US).",
+		//	  "type": "boolean"
+		//	}
+		"nat_system_route_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether system routes are installed for the NAT CIDRs of the attachment's NAT gateway rules. Configurable on BGP Site-to-Site VPN attachments. Always false and not configurable for static VPN attachments. If omitted, a new NAT gateway configuration uses the service default for the attachment and an existing configuration keeps its current value, so removing this property from a template doesn't reset the setting. Only the core network owner can configure this setting. Not available in AWS GovCloud (US).",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
@@ -529,12 +673,18 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 		"edge_location":                          "EdgeLocation",
 		"key":                                    "Key",
 		"last_modification_errors":               "LastModificationErrors",
+		"match_source_cidr":                      "MatchSourceCidr",
+		"nat_cidr":                               "NatCidr",
+		"nat_gateway_rules":                      "NatGatewayRules",
+		"nat_gateway_support":                    "NatGatewaySupport",
+		"nat_system_route_support":               "NatSystemRouteSupport",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"owner_account_id":                       "OwnerAccountId",
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"resource_arn":                           "ResourceArn",
 		"routing_policy_label":                   "RoutingPolicyLabel",
+		"rule_number":                            "RuleNumber",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"tags":                                   "Tags",
@@ -545,6 +695,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/RoutingPolicyLabel",
+		"/properties/NatGatewayRules",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(720)
 

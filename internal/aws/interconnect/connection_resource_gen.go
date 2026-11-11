@@ -54,7 +54,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the connection.",
-		//	  "pattern": "^arn:aws[a-z-]*:interconnect:[^:]+:[0-9]{12}:connection/mcc-[a-z0-9]{8}$",
+		//	  "pattern": "^arn:aws[a-z-]*:interconnect:[^:]+:[0-9]{12}:connection/(mcc|lmcc)-[a-z0-9]{8}$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -153,7 +153,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The unique identifier for the connection.",
-		//	  "pattern": "^mcc-[a-z0-9]{8}$",
+		//	  "pattern": "^(mcc|lmcc)-[a-z0-9]{8}$",
 		//	  "type": "string"
 		//	}
 		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/

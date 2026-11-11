@@ -68,7 +68,8 @@ func findingAggregatorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "ALL_REGIONS",
 		//	    "ALL_REGIONS_EXCEPT_SPECIFIED",
-		//	    "SPECIFIED_REGIONS"
+		//	    "SPECIFIED_REGIONS",
+		//	    "NO_REGIONS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -80,6 +81,7 @@ func findingAggregatorResource(ctx context.Context) (resource.Resource, error) {
 					"ALL_REGIONS",
 					"ALL_REGIONS_EXCEPT_SPECIFIED",
 					"SPECIFIED_REGIONS",
+					"NO_REGIONS",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

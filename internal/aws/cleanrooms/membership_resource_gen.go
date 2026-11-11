@@ -112,6 +112,13 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "KeyPrefix": {
 		//	              "type": "string"
+		//	            },
+		//	            "ResultFormat": {
+		//	              "enum": [
+		//	                "CSV",
+		//	                "PARQUET"
+		//	              ],
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -161,6 +168,20 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResultFormat
+								"result_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"CSV",
+											"PARQUET",
+										),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
