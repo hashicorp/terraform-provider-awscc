@@ -64,6 +64,8 @@ Optional:
 
 - `ecr_configuration` (Attributes) Contains ECR settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration--ecr_configuration))
 - `image_scanning_enabled` (Boolean) This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the test instance when you create a new image.
+- `image_scanning_types` (List of String) The type of vulnerability scan that Image Builder runs for AMI output when ImageScanningEnabled is true. Specify a single value. If you omit ImageScanningTypes, Image Builder uses TEST_INSTANCE_CVE. With TEST_INSTANCE_CVE, Amazon Inspector scans the test instance during image tests, and you must activate Amazon Inspector for Amazon EC2 scanning in your account. With ON_DEMAND_AMI_CVE, Amazon Inspector starts an on-demand scan of the output AMI during image tests. You must build from an image recipe, but you do not need to activate Amazon Inspector in your account.
+- `scan_result_condition` (Attributes) The condition that the output AMI's scan results must meet for the image to pass. You can set ScanResultCondition only when ImageScanningTypes is ON_DEMAND_AMI_CVE. If you omit it, Image Builder starts the scan but does not wait for it or use its results to pass or fail the image. (see [below for nested schema](#nestedatt--image_scanning_configuration--scan_result_condition))
 
 <a id="nestedatt--image_scanning_configuration--ecr_configuration"></a>
 ### Nested Schema for `image_scanning_configuration.ecr_configuration`
@@ -72,6 +74,15 @@ Optional:
 
 - `container_tags` (List of String) Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.
 - `repository_name` (String) The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don’t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.
+
+
+<a id="nestedatt--image_scanning_configuration--scan_result_condition"></a>
+### Nested Schema for `image_scanning_configuration.scan_result_condition`
+
+Optional:
+
+- `fix_available` (Boolean) Specifies whether only findings that have a fix available count toward MaximumSeverityLabel. When false, Image Builder counts every finding. The default is true.
+- `maximum_severity_label` (String) The maximum severity allowed for findings on the output AMI. A finding above this severity fails the image, unless FixAvailable excludes it.
 
 
 

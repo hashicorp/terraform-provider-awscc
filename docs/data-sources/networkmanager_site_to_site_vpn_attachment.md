@@ -29,6 +29,9 @@ Data Source schema for AWS::NetworkManager::SiteToSiteVpnAttachment
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) The Region where the edge is located.
 - `last_modification_errors` (List of String) Errors from the last modification of the attachment.
+- `nat_gateway_rules` (Attributes Set) The complete set of NAT gateway rules on the attachment. Updating this property replaces the entire rule set, and rules left out of the new value are removed. To remove all rules, specify an empty list or remove this property. NAT gateway support can't be enabled without rules, so it is then disabled unless NatGatewaySupport is specified. Only the core network owner can configure NAT gateway rules. The rules aren't returned when the attachment is read, so drift detection doesn't check them. Not available in AWS GovCloud (US). (see [below for nested schema](#nestedatt--nat_gateway_rules))
+- `nat_gateway_support` (String) Whether NAT gateway support is enabled on the attachment. Required when NatGatewayRules lists rules. Set to DISABLE with NatGatewayRules to keep the rules on the attachment without translating traffic, and set it to ENABLE to activate them again. An attachment that is pending acceptance applies this setting once it is accepted. Only the core network owner can configure or read NAT gateway settings. Not available in AWS GovCloud (US).
+- `nat_system_route_support` (Boolean) Whether system routes are installed for the NAT CIDRs of the attachment's NAT gateway rules. Configurable on BGP Site-to-Site VPN attachments. Always false and not configurable for static VPN attachments. If omitted, a new NAT gateway configuration uses the service default for the attachment and an existing configuration keeps its current value, so removing this property from a template doesn't reset the setting. Only the core network owner can configure this setting. Not available in AWS GovCloud (US).
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `owner_account_id` (String) Owner account of the attachment.
 - `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
@@ -40,6 +43,16 @@ Data Source schema for AWS::NetworkManager::SiteToSiteVpnAttachment
 - `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) Last update time of the attachment.
 - `vpn_connection_arn` (String) The ARN of the site-to-site VPN attachment.
+
+<a id="nestedatt--nat_gateway_rules"></a>
+### Nested Schema for `nat_gateway_rules`
+
+Read-Only:
+
+- `match_source_cidr` (String) The IPv4 CIDR that source traffic is matched against for translation.
+- `nat_cidr` (String) The IPv4 CIDR that matched source traffic is translated into. Must have the same prefix length as MatchSourceCidr.
+- `rule_number` (Number) The rule number that uniquely identifies the NAT rule on the attachment.
+
 
 <a id="nestedatt--proposed_network_function_group_change"></a>
 ### Nested Schema for `proposed_network_function_group_change`

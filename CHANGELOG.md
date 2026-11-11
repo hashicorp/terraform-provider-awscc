@@ -1,4 +1,21 @@
-## 1.110.0 (Unreleased)
+## 1.110.0 (November 11, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_alert`
+* **New Data Source:** `awscc_ec2_client_vpn_endpoint`
+* **New Data Source:** `awscc_ec2_client_vpn_endpoints`
+* **New Data Source:** `awscc_ec2_client_vpn_target_network_association`
+* **New Data Source:** `awscc_wellarchitected_agent_organizational_profile`
+* **New Data Source:** `awscc_wellarchitected_agent_organizational_profiles`
+* **New Data Source:** `awscc_wellarchitected_agent_profile_policy`
+* **New List Resource:** `awscc_ec2_client_vpn_endpoint`
+* **New List Resource:** `awscc_wellarchitected_agent_organizational_profile`
+* **New Resource:** `awscc_cloudwatch_alert`
+* **New Resource:** `awscc_ec2_client_vpn_endpoint`
+* **New Resource:** `awscc_ec2_client_vpn_target_network_association`
+* **New Resource:** `awscc_wellarchitected_agent_organizational_profile`
+* **New Resource:** `awscc_wellarchitected_agent_profile_policy`
 
 ## 1.109.0 (November 4, 2026)
 

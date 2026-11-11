@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_alert.example "space_id|alert_id"

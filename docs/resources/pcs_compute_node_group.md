@@ -51,11 +51,14 @@ resource "awscc_pcs_compute_node_group" "login" {
 
 - `ami_id` (String) The ID of the Amazon Machine Image (AMI) that AWS PCS uses to launch instances. If not provided, AWS PCS uses the AMI ID specified in the custom launch template.
 - `custom_launch_template` (Attributes) An Amazon EC2 launch template AWS PCS uses to launch compute nodes. (see [below for nested schema](#nestedatt--custom_launch_template))
+- `launch_template_mode` (String) How AWS PCS gets the launch template for the compute node group. CUSTOM uses CustomLaunchTemplate. MANAGED has AWS PCS generate and manage the launch template from the instance settings; omit CustomLaunchTemplate. Defaults to CUSTOM on create.
 - `name` (String) The name that identifies the compute node group.
 - `node_lifecycle_actions` (Attributes) Custom scripts that run at defined points in a compute node's lifecycle. (see [below for nested schema](#nestedatt--node_lifecycle_actions))
 - `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
+- `security_group_ids` (List of String) The IDs of the EC2 security groups configured directly on the compute node group. These replace the security groups from the custom launch template. A request cannot specify this property with a launch template that defines NetworkInterfaces. When not provided and a custom launch template is present, AWS PCS uses the security groups from the launch template.
 - `slurm_configuration` (Attributes) Additional options related to the Slurm scheduler. (see [below for nested schema](#nestedatt--slurm_configuration))
 - `spot_options` (Attributes) Additional configuration when you specify SPOT as the purchase option. (see [below for nested schema](#nestedatt--spot_options))
+- `ssh_key_name` (String) The name of the EC2 key pair configured directly on the compute node group. The key pair must exist in the caller's account and Region and overrides the key pair from the custom launch template. When not provided and a custom launch template is present, AWS PCS uses the key pair from the launch template.
 - `tags` (Map of String) 1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.
 
 ### Read-Only

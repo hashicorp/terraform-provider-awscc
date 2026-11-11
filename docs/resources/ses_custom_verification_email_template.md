@@ -54,7 +54,7 @@ output "custom_verification_email_template_name" {
 
 ### Optional
 
-- `tags` (Attributes List) The tags (keys and values) associated with the tenant. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags (keys and values) associated with the custom verification email template. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

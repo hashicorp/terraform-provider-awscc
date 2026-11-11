@@ -26,7 +26,7 @@ Data Source schema for AWS::Glue::Catalog
 - `catalog_properties` (Attributes) A structure that specifies data lake access properties and other custom properties. (see [below for nested schema](#nestedatt--catalog_properties))
 - `create_database_default_permissions` (Attributes List) An array of PrincipalPermissions objects for default database permissions. (see [below for nested schema](#nestedatt--create_database_default_permissions))
 - `create_table_default_permissions` (Attributes List) An array of PrincipalPermissions objects for default table permissions. (see [below for nested schema](#nestedatt--create_table_default_permissions))
-- `create_time` (Number) The time at which the catalog was created.
+- `create_time` (String) The time at which the catalog was created.
 - `description` (String) A description of the catalog.
 - `federated_catalog` (Attributes) A FederatedCatalog structure that references an entity outside the Glue Data Catalog. (see [below for nested schema](#nestedatt--federated_catalog))
 - `name` (String) The name of the catalog to create.
@@ -35,7 +35,7 @@ Data Source schema for AWS::Glue::Catalog
 - `resource_arn` (String) The Amazon Resource Name (ARN) of the catalog.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `target_redshift_catalog` (Attributes) A structure that describes a target catalog for resource linking. (see [below for nested schema](#nestedatt--target_redshift_catalog))
-- `update_time` (Number) The time at which the catalog was last updated.
+- `update_time` (String) The time at which the catalog was last updated.
 
 <a id="nestedatt--catalog_properties"></a>
 ### Nested Schema for `catalog_properties`

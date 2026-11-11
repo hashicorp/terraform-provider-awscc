@@ -167,6 +167,7 @@ Optional:
 
 - `bucket` (String)
 - `key_prefix` (String)
+- `result_format` (String)
 
 
 

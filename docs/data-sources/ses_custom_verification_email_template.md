@@ -24,7 +24,7 @@ Data Source schema for AWS::SES::CustomVerificationEmailTemplate
 - `failure_redirection_url` (String) The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
 - `from_email_address` (String) The email address that the custom verification email is sent from.
 - `success_redirection_url` (String) The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
-- `tags` (Attributes List) The tags (keys and values) associated with the tenant. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags (keys and values) associated with the custom verification email template. (see [below for nested schema](#nestedatt--tags))
 - `template_content` (String) The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.
 - `template_name` (String) The name of the custom verification email template.
 - `template_subject` (String) The subject line of the custom verification email.

@@ -33,6 +33,7 @@ Data Source schema for AWS::Lambda::MicrovmImage
 - `environment_variables` (Attributes Set) Environment variables to set in the container during the snapshot build. (see [below for nested schema](#nestedatt--environment_variables))
 - `hooks` (Attributes) (see [below for nested schema](#nestedatt--hooks))
 - `image_arn` (String) ARN of the MicroVM image.
+- `kms_key_identifier` (String) The customer managed KMS key used to encrypt the MicroVM image configuration at rest. When omitted, a service owned key is used.
 - `latest_active_image_version` (String) The latest active version of the MicroVM image.
 - `latest_failed_image_version` (String) The latest failed version of the MicroVM image.
 - `logging` (Attributes) Configuration for MicroVM image logging. (see [below for nested schema](#nestedatt--logging))

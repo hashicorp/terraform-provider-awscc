@@ -27,6 +27,7 @@ A calculated attribute definition for Customer Profiles
 - `conditions` (Attributes) The conditions including range, object count, and threshold for the calculated attribute. (see [below for nested schema](#nestedatt--conditions))
 - `description` (String) The description of the calculated attribute.
 - `display_name` (String) The display name of the calculated attribute.
+- `filter` (Attributes) Defines how to filter the objects coming in for calculated attributes. (see [below for nested schema](#nestedatt--filter))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `use_historical_data` (Boolean) Whether to use historical data for the calculated attribute.
 
@@ -92,6 +93,41 @@ Optional:
 
 - `operator` (String) The operator of the threshold.
 - `value` (String) The value of the threshold.
+
+
+
+<a id="nestedatt--filter"></a>
+### Nested Schema for `filter`
+
+Optional:
+
+- `groups` (Attributes Set) Holds the list of Filter groups within the Filter definition. (see [below for nested schema](#nestedatt--filter--groups))
+- `include` (String) Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.
+
+<a id="nestedatt--filter--groups"></a>
+### Nested Schema for `filter.groups`
+
+Optional:
+
+- `dimensions` (Attributes Set) Object that holds the attributes to filter on. (see [below for nested schema](#nestedatt--filter--groups--dimensions))
+- `type` (String) The type of logical relationship between the dimensions of the Filter group.
+
+<a id="nestedatt--filter--groups--dimensions"></a>
+### Nested Schema for `filter.groups.dimensions`
+
+Optional:
+
+- `attributes` (Attributes Map) Is the attribute within the FilterDimension map (see [below for nested schema](#nestedatt--filter--groups--dimensions--attributes))
+
+<a id="nestedatt--filter--groups--dimensions--attributes"></a>
+### Nested Schema for `filter.groups.dimensions.attributes`
+
+Optional:
+
+- `dimension_type` (String) The action to filter with.
+- `values` (Set of String) The values to apply the DimensionType on.
+
+
 
 
 

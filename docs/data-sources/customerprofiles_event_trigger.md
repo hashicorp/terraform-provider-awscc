@@ -27,6 +27,7 @@ Data Source schema for AWS::CustomerProfiles::EventTrigger
 - `event_trigger_conditions` (Attributes List) A list of conditions that determine when an event should trigger the destination. (see [below for nested schema](#nestedatt--event_trigger_conditions))
 - `event_trigger_limits` (Attributes) Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods. (see [below for nested schema](#nestedatt--event_trigger_limits))
 - `event_trigger_name` (String) The unique name of the event trigger.
+- `intent_filter_definition` (Attributes) Filters the destination to profiles whose predicted intents meet the specified conditions. (see [below for nested schema](#nestedatt--intent_filter_definition))
 - `last_updated_at` (String) The timestamp of when the event trigger was most recently updated.
 - `object_type_name` (String) The unique name of the object type.
 - `segment_filter` (String) The destination is triggered only for profiles that meet the criteria of a segment definition.
@@ -77,6 +78,43 @@ Read-Only:
 - `unit` (String) The unit of time.
 - `unlimited` (Boolean) If set to true, there is no limit on the number of destination invocations per profile. The default is false.
 - `value` (Number) The amount of time of the specified unit.
+
+
+
+<a id="nestedatt--intent_filter_definition"></a>
+### Nested Schema for `intent_filter_definition`
+
+Read-Only:
+
+- `groups` (Attributes List) A list of intent filter groups combined by the definition's logical operator. (see [below for nested schema](#nestedatt--intent_filter_definition--groups))
+- `logical_operator` (String) The operator used to combine multiple dimensions.
+
+<a id="nestedatt--intent_filter_definition--groups"></a>
+### Nested Schema for `intent_filter_definition.groups`
+
+Read-Only:
+
+- `conditions` (Attributes List) A list of intent filter conditions. (see [below for nested schema](#nestedatt--intent_filter_definition--groups--conditions))
+- `logical_operator` (String) The operator used to combine multiple dimensions.
+
+<a id="nestedatt--intent_filter_definition--groups--conditions"></a>
+### Nested Schema for `intent_filter_definition.groups.conditions`
+
+Read-Only:
+
+- `comparison_operator` (String) The operator used to compare the predicted intent against a list of values.
+- `intent` (Attributes) Identifies a predicted intent by domain and type. (see [below for nested schema](#nestedatt--intent_filter_definition--groups--conditions--intent))
+- `values` (List of String) A list of intent values used for comparison.
+
+<a id="nestedatt--intent_filter_definition--groups--conditions--intent"></a>
+### Nested Schema for `intent_filter_definition.groups.conditions.intent`
+
+Read-Only:
+
+- `intent_domain` (String) The domain of the intent.
+- `type` (String) The type of the intent.
+
+
 
 
 

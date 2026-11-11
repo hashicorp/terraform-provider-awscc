@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_cluster Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Resource Type definition for AWS::Redshift::Cluster
 ---
 
 # awscc_redshift_cluster (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Resource Type definition for AWS::Redshift::Cluster
 
 
 
