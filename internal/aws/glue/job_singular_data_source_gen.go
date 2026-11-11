@@ -375,7 +375,17 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "R.1X",
 		//	    "R.2X",
 		//	    "R.4X",
-		//	    "R.8X"
+		//	    "R.8X",
+		//	    "G.1X.GRAVITON",
+		//	    "G.2X.GRAVITON",
+		//	    "G.4X.GRAVITON",
+		//	    "G.8X.GRAVITON",
+		//	    "G.12X.GRAVITON",
+		//	    "G.16X.GRAVITON",
+		//	    "R.1X.GRAVITON",
+		//	    "R.2X.GRAVITON",
+		//	    "R.4X.GRAVITON",
+		//	    "R.8X.GRAVITON"
 		//	  ],
 		//	  "type": "string"
 		//	}

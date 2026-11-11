@@ -27,14 +27,14 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.",
+		//	  "description": "The ARN of the IAM role used by AgentCore online evaluation. Absent when the space was created without one.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
 		"agent_core_evaluation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role used for AgentCore evaluation.",
+			Description: "The ARN of the IAM role used by AgentCore online evaluation. Absent when the space was created without one.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
@@ -55,39 +55,39 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the space was created.",
+		//	  "description": "The timestamp when the space was created.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the space was created.",
+			Description: "The timestamp when the space was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataAccessRoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.",
+		//	  "description": "The ARN of the IAM role used for data access.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
 		"data_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role the space uses to access observability data.",
+			Description: "The ARN of the IAM role used for data access.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the domain the space belongs to.",
+		//	  "description": "The ID of the domain to create the space in.",
 		//	  "pattern": "^d-[0-9a-z]{1,25}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the domain the space belongs to.",
+			Description: "The ID of the domain to create the space in.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
@@ -95,10 +95,10 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The encryption configuration for the space.",
+		//	  "description": "How the space's data at rest is encrypted. Always populated.",
 		//	  "properties": {
 		//	    "EncryptionStrategy": {
-		//	      "description": "Whether the space is encrypted with an AWS owned key or a customer managed key.",
+		//	      "description": "Which kind of key to use. Required.",
 		//	      "enum": [
 		//	        "AWS_OWNED",
 		//	        "CUSTOMER_MANAGED"
@@ -106,7 +106,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.",
+		//	      "description": "Customer managed KMS key ARN. Required when encryptionStrategy is CUSTOMER_MANAGED, and must be omitted when it is AWS_OWNED. Must be a symmetric ENCRYPT_DECRYPT key in the caller's account and region.",
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
 		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov):kms:[a-z0-9-]+:[0-9]{12}:key/(?:mrk-)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -122,67 +122,67 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EncryptionStrategy
 				"encryption_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the space is encrypted with an AWS owned key or a customer managed key.",
+					Description: "Which kind of key to use. Required.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyArn
 				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the customer managed KMS key. Required when encryptionStrategy is CUSTOMER_MANAGED.",
+					Description: "Customer managed KMS key ARN. Required when encryptionStrategy is CUSTOMER_MANAGED, and must be omitted when it is AWS_OWNED. Must be a symmetric ENCRYPT_DECRYPT key in the caller's account and region.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The encryption configuration for the space.",
+			Description: "How the space's data at rest is encrypted. Always populated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the space.",
+		//	  "description": "A name that identifies the space.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the space.",
+			Description: "A name that identifies the space.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS account that owns the space.",
+		//	  "description": "AWS account ID that owns this space.",
 		//	  "maxLength": 12,
 		//	  "minLength": 12,
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account that owns the space.",
+			Description: "AWS account ID that owns this space.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS Region the space resides in.",
+		//	  "description": "The region where this space was created.",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region the space resides in.",
+			Description: "The region where this space was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SpaceId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier of the space.",
+		//	  "description": "The unique ID of the space.",
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the space.",
+			Description: "The unique ID of the space.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -256,13 +256,13 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time the space was last updated.",
+		//	  "description": "The timestamp when the space was last updated.",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the space was last updated.",
+			Description: "The timestamp when the space was last updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

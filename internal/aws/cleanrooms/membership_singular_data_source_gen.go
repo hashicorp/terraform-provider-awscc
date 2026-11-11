@@ -85,6 +85,13 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "KeyPrefix": {
 		//	              "type": "string"
+		//	            },
+		//	            "ResultFormat": {
+		//	              "enum": [
+		//	                "CSV",
+		//	                "PARQUET"
+		//	              ],
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -124,6 +131,10 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: KeyPrefix
 								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResultFormat
+								"result_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/

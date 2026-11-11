@@ -69,7 +69,7 @@ func agentProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 100,
+		//	  "maxItems": 1000,
 		//	  "minItems": 0,
 		//	  "type": "array",
 		//	  "uniqueItems": true

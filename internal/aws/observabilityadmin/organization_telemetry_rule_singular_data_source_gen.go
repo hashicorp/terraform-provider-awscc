@@ -463,7 +463,8 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	        "AWS::S3::Bucket",
 		//	        "AWS::MSK::Cluster",
 		//	        "AWS::CloudFront::Distribution",
-		//	        "AWS::CloudWatch::OTelEnrichment"
+		//	        "AWS::CloudWatch::OTelEnrichment",
+		//	        "AWS::XRay::TransactionSearchConfig"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -498,7 +499,9 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	      "description": "Telemetry Type associated with the Organization Telemetry Rule",
 		//	      "enum": [
 		//	        "Logs",
-		//	        "Metrics"
+		//	        "Traces",
+		//	        "Metrics",
+		//	        "Insights"
 		//	      ],
 		//	      "type": "string"
 		//	    }

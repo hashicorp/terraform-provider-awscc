@@ -237,19 +237,19 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The quick connects available to agents who are working the queue.",
+		//	  "description": "The quick connects available to agents who are working the queue. To remove all quick connects from the queue, specify an empty list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "The Amazon Resource Name (ARN) for the quick connect.",
 		//	    "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
 		//	    "type": "string"
 		//	  },
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"quick_connect_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The quick connects available to agents who are working the queue.",
+			Description: "The quick connects available to agents who are working the queue. To remove all quick connects from the queue, specify an empty list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
