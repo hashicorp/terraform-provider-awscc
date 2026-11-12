@@ -68,6 +68,31 @@ func TestTranslateToCloudControl(t *testing.T) {
 			},
 		},
 		{
+			TestName:      "complex Plan with empty objects",
+			Plan:          makeComplexTestPlanWithEmptyObjects(),
+			TfToCfNameMap: complexTfToCfNameMap,
+			ExpectedState: map[string]any{
+				"Name": "hello, world",
+				// Present-but-empty objects are preserved as {}: for properties like
+				// AWS::WAFv2::WebACL's DefaultAction.Allow the presence of the empty
+				// object is the setting.
+				"BootDisk":    map[string]any{},
+				"ScratchDisk": map[string]any{},
+				"Disks": []any{
+					map[string]any{},
+				},
+			},
+		},
+		{
+			TestName:      "maps Plan with empty map",
+			Plan:          makeMapsTestPlanWithEmptyMap(),
+			TfToCfNameMap: mapsTfToCfNameMap,
+			ExpectedState: map[string]any{
+				"Name":      "testing",
+				"SimpleMap": map[string]any{},
+			},
+		},
+		{
 			TestName:      "maps Plan",
 			Plan:          makeMapsTestPlan(),
 			TfToCfNameMap: mapsTfToCfNameMap,
@@ -1043,5 +1068,63 @@ func BenchmarkReorderKeyValueSlicesToMatchPrior(b *testing.B) {
 
 	for b.Loop() {
 		reorderKeyValueSlicesToMatchPrior(current, prior)
+	}
+}
+
+func makeComplexTestPlanWithEmptyObjects() tfsdk.Plan {
+	return tfsdk.Plan{
+		Raw: tftypes.NewValue(tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"name": tftypes.String,
+				"disks": tftypes.List{
+					ElementType: diskElementType,
+				},
+				"boot_disk": diskElementType,
+				"scratch_disk": tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"interface": tftypes.String,
+					},
+				},
+			},
+		}, map[string]tftypes.Value{
+			"name": tftypes.NewValue(tftypes.String, "hello, world"),
+			"disks": tftypes.NewValue(tftypes.List{
+				ElementType: diskElementType,
+			}, []tftypes.Value{
+				tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+					"id":                   tftypes.NewValue(tftypes.String, nil),
+					"delete_with_instance": tftypes.NewValue(tftypes.Bool, nil),
+				}),
+			}),
+			"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+				"id":                   tftypes.NewValue(tftypes.String, nil),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, nil),
+			}),
+			"scratch_disk": tftypes.NewValue(tftypes.Object{
+				AttributeTypes: map[string]tftypes.Type{
+					"interface": tftypes.String,
+				},
+			}, map[string]tftypes.Value{
+				"interface": tftypes.NewValue(tftypes.String, nil),
+			}),
+		}),
+		Schema: testComplexSchema,
+	}
+}
+
+func makeMapsTestPlanWithEmptyMap() tfsdk.Plan {
+	return tfsdk.Plan{
+		Raw: tftypes.NewValue(tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"name":       tftypes.String,
+				"simple_map": tftypes.Map{ElementType: tftypes.String},
+			},
+		}, map[string]tftypes.Value{
+			"name": tftypes.NewValue(tftypes.String, "testing"),
+			"simple_map": tftypes.NewValue(tftypes.Map{
+				ElementType: tftypes.String,
+			}, map[string]tftypes.Value{}),
+		}),
+		Schema: testMapsSchema,
 	}
 }
