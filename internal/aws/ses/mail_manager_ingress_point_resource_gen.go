@@ -128,7 +128,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(8, 64),
+						stringvalidator.UTF8LengthBetween(8, 64),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9!@#$%^&*()_+\\-=\\[\\]{}|.,?]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -146,7 +146,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 500000),
+										stringvalidator.UTF8LengthBetween(1, 500000),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\P{C}\\s]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -159,7 +159,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 500000),
+										stringvalidator.UTF8LengthBetween(1, 500000),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\P{C}\\s]*$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -229,7 +229,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 63),
+				stringvalidator.UTF8LengthBetween(3, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_\\-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -333,7 +333,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 		"rule_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -415,7 +415,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -427,7 +427,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -481,7 +481,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 		"traffic_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Type

@@ -85,7 +85,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -106,7 +106,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the support permit.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{1,256}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -214,7 +214,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 10),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(3, 255),
+									stringvalidator.UTF8LengthBetween(3, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9-]*:[A-Za-z0-9_.-]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -294,7 +294,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 512),
+									stringvalidator.UTF8LengthBetween(1, 512),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:/_.-]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -357,7 +357,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The ARN of the KMS key used to sign permit grants.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.UTF8LengthBetween(1, 512),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/:_-]{1,512}$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -402,7 +402,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:/-]{1,512}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -454,7 +454,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -468,7 +468,7 @@ func supportPermitResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

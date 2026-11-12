@@ -319,7 +319,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 1),
 																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 127),
+																	stringvalidator.UTF8LengthBetween(1, 127),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 																),
 																fwvalidators.NotNullList(),
@@ -362,7 +362,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 																		Optional: true,
 																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 127),
+																			stringvalidator.UTF8LengthBetween(1, 127),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -413,7 +413,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(0, 200),
+														stringvalidator.UTF8LengthBetween(0, 200),
 														stringvalidator.RegexMatches(regexp.MustCompile("(ANY_QUERY|ANY_JOB|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"), ""),
 													),
 													fwvalidators.NotNullList(),
@@ -431,7 +431,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(12, 12),
+														stringvalidator.UTF8LengthBetween(12, 12),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\d+"), ""),
 													),
 												}, /*END VALIDATORS*/
@@ -448,7 +448,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(12, 12),
+														stringvalidator.UTF8LengthBetween(12, 12),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\d+"), ""),
 													),
 												}, /*END VALIDATORS*/
@@ -467,7 +467,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 														Computed:    true,
 														Validators: []validator.List{ /*START VALIDATORS*/
 															listvalidator.ValueStringsAre(
-																stringvalidator.LengthBetween(1, 127),
+																stringvalidator.UTF8LengthBetween(1, 127),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 															),
 															fwvalidators.NotNullList(),
@@ -484,7 +484,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 														Computed:    true,
 														Validators: []validator.List{ /*START VALIDATORS*/
 															listvalidator.ValueStringsAre(
-																stringvalidator.LengthBetween(1, 127),
+																stringvalidator.UTF8LengthBetween(1, 127),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 															),
 															fwvalidators.NotNullList(),
@@ -547,7 +547,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(1, 127),
+														stringvalidator.UTF8LengthBetween(1, 127),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 													),
 												}, /*END VALIDATORS*/
@@ -662,7 +662,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(255),
+				stringvalidator.UTF8LengthAtMost(255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -695,7 +695,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(4, 2048),
+				stringvalidator.UTF8LengthBetween(4, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -726,7 +726,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -745,7 +745,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -784,7 +784,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -795,7 +795,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(500000),
+								stringvalidator.UTF8LengthAtMost(500000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -870,7 +870,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -882,7 +882,7 @@ func intermediateTableResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -205,7 +205,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 512),
+									stringvalidator.UTF8LengthBetween(1, 512),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[.\\-_/#A-Za-z0-9]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -223,7 +223,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 10),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 512),
+									stringvalidator.UTF8LengthBetween(1, 512),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[.\\-_/#A-Za-z0-9]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -240,7 +240,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 1),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -270,7 +270,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -290,7 +290,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 			Description: "The Amazon Resource Name (ARN) of the IAM role that grants permissions for evaluation.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -409,7 +409,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9._]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -528,7 +528,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.UTF8LengthBetween(1, 512),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[.\\-_/#A-Za-z0-9]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -541,7 +541,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._#/:-]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -697,7 +697,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -754,7 +754,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 1024),
+											stringvalidator.UTF8LengthBetween(1, 1024),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -886,7 +886,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -898,7 +898,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

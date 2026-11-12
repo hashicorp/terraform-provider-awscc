@@ -102,7 +102,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 			Description: "The ARN of the customer-provided IAM role in the management account used for domain access.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -190,7 +190,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:sso:::instance/[a-zA-Z0-9-]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -259,7 +259,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 			Description: "A name that identifies the organization domain.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 63),
+				stringvalidator.UTF8LengthBetween(3, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+(-[a-z0-9]+)*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -367,7 +367,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -380,7 +380,7 @@ func domainForOrganizationResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

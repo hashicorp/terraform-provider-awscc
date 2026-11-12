@@ -150,7 +150,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 5),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(3, 128),
+					stringvalidator.UTF8LengthBetween(3, 128),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$"), ""),
 				),
 			}, /*END VALIDATORS*/

@@ -206,7 +206,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtMost(10),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 80),
+									stringvalidator.UTF8LengthBetween(1, 80),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -325,7 +325,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtMost(20),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 80),
+									stringvalidator.UTF8LengthBetween(1, 80),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -391,7 +391,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -412,7 +412,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 			Description: "The environment that the service is running in.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9:/+=,.@_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -534,7 +534,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 128),
+								stringvalidator.UTF8LengthBetween(1, 128),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -546,7 +546,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 128),
+								stringvalidator.UTF8LengthBetween(1, 128),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -557,7 +557,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 							Description: "The source file path relative to the project or source root.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.UTF8LengthBetween(1, 1024),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Language
@@ -590,7 +590,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 80),
+								stringvalidator.UTF8LengthBetween(1, 80),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -637,7 +637,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 			Description: "The name of the service to instrument. This should match the service.name resource attribute reported by the application.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9:/+=,.@_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -707,7 +707,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -720,7 +720,7 @@ func instrumentationConfigResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

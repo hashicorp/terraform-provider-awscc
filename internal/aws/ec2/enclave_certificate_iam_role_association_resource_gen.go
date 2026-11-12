@@ -43,7 +43,7 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 			Description: "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1283),
+				stringvalidator.UTF8LengthBetween(1, 1283),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:acm:[A-Za-z0-9-]{1,64}:([0-9]{12})?:certificate/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -106,7 +106,7 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1283),
+				stringvalidator.UTF8LengthBetween(1, 1283),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:iam:.*:([0-9]{12})?:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -42,7 +42,7 @@ func emailIdentityCertificateResource(ctx context.Context) (resource.Resource, e
 			Description: "The ARN of the AWS Certificate Manager certificate to associate with the sender.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z0-9-]*:acm:[a-z0-9-]+:\\d{12}:certificate/[^\\s]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -62,7 +62,7 @@ func emailIdentityCertificateResource(ctx context.Context) (resource.Resource, e
 			Description: "The email identity that owns the sender the certificate is associated with.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 320),
+				stringvalidator.UTF8LengthBetween(1, 320),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -81,7 +81,7 @@ func emailIdentityCertificateResource(ctx context.Context) (resource.Resource, e
 			Description: "The sender the certificate signs for. For an email address identity this is the identity itself.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 320),
+				stringvalidator.UTF8LengthBetween(1, 320),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

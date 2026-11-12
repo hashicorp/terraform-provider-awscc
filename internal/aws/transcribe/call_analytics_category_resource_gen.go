@@ -69,7 +69,7 @@ func callAnalyticsCategoryResource(ctx context.Context) (resource.Resource, erro
 			Description: "A unique name, chosen by you, for your Call Analytics category.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1053,7 +1053,7 @@ func callAnalyticsCategoryResource(ctx context.Context) (resource.Resource, erro
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 2000),
+										stringvalidator.UTF8LengthBetween(1, 2000),
 									),
 									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
@@ -1126,7 +1126,7 @@ func callAnalyticsCategoryResource(ctx context.Context) (resource.Resource, erro
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1138,7 +1138,7 @@ func callAnalyticsCategoryResource(ctx context.Context) (resource.Resource, erro
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

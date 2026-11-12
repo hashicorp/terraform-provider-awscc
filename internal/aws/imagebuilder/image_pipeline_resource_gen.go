@@ -585,7 +585,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(3, 100),
+						stringvalidator.UTF8LengthBetween(3, 100),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9\\-_+]+)*$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

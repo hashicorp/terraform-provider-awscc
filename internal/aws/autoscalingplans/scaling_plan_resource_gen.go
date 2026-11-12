@@ -103,7 +103,7 @@ func scalingPlanResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -119,7 +119,7 @@ func scalingPlanResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtMost(20),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 256),
+										stringvalidator.UTF8LengthBetween(1, 256),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -525,7 +525,7 @@ func scalingPlanResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1023),
+									stringvalidator.UTF8LengthBetween(1, 1023),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -571,7 +571,7 @@ func scalingPlanResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The ID of the resource. This string consists of the resource type and unique identifier.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1600),
+							stringvalidator.UTF8LengthBetween(1, 1600),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ScalableDimension
@@ -741,7 +741,7 @@ func scalingPlanResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 1023),
+												stringvalidator.UTF8LengthBetween(1, 1023),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),

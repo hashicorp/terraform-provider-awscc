@@ -402,7 +402,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeBetween(1, 10),
 							listvalidator.ValueStringsAre(
-								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.UTF8LengthBetween(1, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 							),
 						}, /*END VALIDATORS*/
@@ -416,7 +416,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 10000),
+							stringvalidator.UTF8LengthBetween(1, 10000),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

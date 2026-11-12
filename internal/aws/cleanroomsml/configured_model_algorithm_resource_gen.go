@@ -62,7 +62,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(255),
+				stringvalidator.UTF8LengthAtMost(255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -94,7 +94,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
+						stringvalidator.UTF8LengthBetween(1, 255),
 						stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -123,7 +123,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -143,7 +143,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -161,7 +161,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z]*:iam::[0-9]{12}:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -205,7 +205,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -217,7 +217,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -313,7 +313,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 100),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -329,7 +329,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 100),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -342,7 +342,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
+						stringvalidator.UTF8LengthBetween(1, 255),
 						stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -359,7 +359,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -372,7 +372,7 @@ func configuredModelAlgorithmResource(ctx context.Context) (resource.Resource, e
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 500),
+									stringvalidator.UTF8LengthBetween(1, 500),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/

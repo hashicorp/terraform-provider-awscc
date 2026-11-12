@@ -91,7 +91,7 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 			Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 16384),
+				stringvalidator.UTF8LengthBetween(1, 16384),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -112,7 +112,7 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 			Description: "The name of the Amazon SageMaker Studio Lifecycle Configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -158,7 +158,7 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -170,7 +170,7 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

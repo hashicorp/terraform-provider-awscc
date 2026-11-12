@@ -86,7 +86,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -105,7 +105,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtMost(1),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(0, 256),
+										stringvalidator.UTF8LengthBetween(0, 256),
 										stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"), ""),
 									),
 									fwvalidators.NotNullList(),
@@ -201,7 +201,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -220,7 +220,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtMost(1),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthBetween(0, 256),
+												stringvalidator.UTF8LengthBetween(0, 256),
 												stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"), ""),
 											),
 											fwvalidators.NotNullList(),
@@ -274,7 +274,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 			Description: "The ARN of the AWS SSO instance under which the operation will be executed.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 1224),
+				stringvalidator.UTF8LengthBetween(10, 1224),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

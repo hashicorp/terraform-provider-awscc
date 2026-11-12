@@ -59,7 +59,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The resource policy document, which can be up to 5kb in size.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 5120),
+				stringvalidator.UTF8LengthBetween(1, 5120),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
@@ -76,7 +76,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the resource policy. Must be unique within a specific AWS account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -140,7 +140,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the predefined attribute.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -170,7 +170,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 10),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 100),
+					stringvalidator.UTF8LengthBetween(1, 100),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -212,7 +212,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 500),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 100),
+							stringvalidator.UTF8LengthBetween(1, 100),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

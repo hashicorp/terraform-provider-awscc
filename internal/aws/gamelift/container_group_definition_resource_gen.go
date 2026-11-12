@@ -368,7 +368,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 128),
+						stringvalidator.UTF8LengthBetween(1, 128),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -404,7 +404,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -435,7 +435,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -449,7 +449,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -475,7 +475,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
+						stringvalidator.UTF8LengthBetween(1, 255),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_\\.@\\/:]+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -573,7 +573,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
+									stringvalidator.UTF8LengthBetween(1, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(\\/+[^\\/]+\\/*)+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -586,7 +586,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
+									stringvalidator.UTF8LengthBetween(1, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^\\/[\\s\\S]*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -694,7 +694,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(128),
+						stringvalidator.UTF8LengthAtMost(128),
 						stringvalidator.RegexMatches(regexp.MustCompile("^\\d+\\.\\d+\\.\\d+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -736,7 +736,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 			Description: "A descriptive label for the container group definition.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1145,7 +1145,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1181,7 +1181,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1212,7 +1212,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1226,7 +1226,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1267,7 +1267,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 20),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 									),
 									fwvalidators.NotNullList(),
@@ -1338,7 +1338,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_\\.@\\/:]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1448,7 +1448,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.UTF8LengthBetween(1, 1024),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(\\/+[^\\/]+\\/*)+$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1461,7 +1461,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.UTF8LengthBetween(1, 1024),
 										stringvalidator.RegexMatches(regexp.MustCompile("^\\/[\\s\\S]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1632,7 +1632,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1646,7 +1646,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1716,7 +1716,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

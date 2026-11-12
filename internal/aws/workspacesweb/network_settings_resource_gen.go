@@ -90,7 +90,7 @@ func networkSettingsResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 5),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[\\w+\\-]+$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -119,7 +119,7 @@ func networkSettingsResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(2, 3),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 32),
+					stringvalidator.UTF8LengthBetween(1, 32),
 					stringvalidator.RegexMatches(regexp.MustCompile("^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -166,7 +166,7 @@ func networkSettingsResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -179,7 +179,7 @@ func networkSettingsResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -211,7 +211,7 @@ func networkSettingsResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[0-9a-z]*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

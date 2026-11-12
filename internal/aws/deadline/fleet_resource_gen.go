@@ -956,7 +956,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.UTF8LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z][a-zA-Z0-9]{0,63}:)?amount(\\.[a-zA-Z][a-zA-Z0-9]{0,63})+$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -984,7 +984,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.UTF8LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z][a-zA-Z0-9]{0,63}:)?attr(\\.[a-zA-Z][a-zA-Z0-9]{0,63})+$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -1000,7 +1000,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeBetween(1, 10),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(1, 100),
+														stringvalidator.UTF8LengthBetween(1, 100),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_]([a-zA-Z0-9_\\-]{0,99})$"), ""),
 													),
 													fwvalidators.NotNullList(),
@@ -1237,7 +1237,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 														Optional: true,
 														Computed: true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 100),
+															stringvalidator.UTF8LengthBetween(1, 100),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -1270,7 +1270,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.UTF8LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1320,7 +1320,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.UTF8LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z][a-zA-Z0-9]{0,63}:)?amount(\\.[a-zA-Z][a-zA-Z0-9]{0,63})+$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -1348,7 +1348,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.UTF8LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z][a-zA-Z0-9]{0,63}:)?attr(\\.[a-zA-Z][a-zA-Z0-9]{0,63})+$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -1364,7 +1364,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeBetween(1, 10),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(1, 100),
+														stringvalidator.UTF8LengthBetween(1, 100),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_]([a-zA-Z0-9_\\-]{0,99})$"), ""),
 													),
 													fwvalidators.NotNullList(),
@@ -1392,7 +1392,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.UTF8LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1630,7 +1630,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1689,7 +1689,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1727,7 +1727,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Default:  stringdefault.StaticString(""),
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 100),
+				stringvalidator.UTF8LengthBetween(0, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1744,7 +1744,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FarmId
@@ -1806,7 +1806,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 15000),
+						stringvalidator.UTF8LengthBetween(0, 15000),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1953,7 +1953,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
+							stringvalidator.UTF8LengthBetween(1, 127),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1966,7 +1966,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

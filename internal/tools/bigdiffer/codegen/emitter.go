@@ -1610,13 +1610,13 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	var validators []string
 
 	if property.MinLength != nil && property.MaxLength == nil {
-		validators = append(validators, fmt.Sprintf("stringvalidator.LengthAtLeast(%d)", *property.MinLength))
+		validators = append(validators, fmt.Sprintf("stringvalidator.UTF8LengthAtLeast(%d)", *property.MinLength))
 		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	} else if property.MinLength == nil && property.MaxLength != nil {
-		validators = append(validators, fmt.Sprintf("stringvalidator.LengthAtMost(%d)", *property.MaxLength))
+		validators = append(validators, fmt.Sprintf("stringvalidator.UTF8LengthAtMost(%d)", *property.MaxLength))
 		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	} else if property.MinLength != nil && property.MaxLength != nil {
-		validators = append(validators, fmt.Sprintf("stringvalidator.LengthBetween(%d,%d)", *property.MinLength, *property.MaxLength))
+		validators = append(validators, fmt.Sprintf("stringvalidator.UTF8LengthBetween(%d,%d)", *property.MinLength, *property.MaxLength))
 		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	}
 

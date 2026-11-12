@@ -124,7 +124,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 1),
+								stringvalidator.UTF8LengthBetween(0, 1),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(\\-|\\_|\\s)?$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -170,7 +170,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
+								stringvalidator.UTF8LengthBetween(3, 63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -179,7 +179,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 1024),
+								stringvalidator.UTF8LengthBetween(0, 1024),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -242,7 +242,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.UTF8LengthBetween(1, 2048),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -255,7 +255,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
+								stringvalidator.UTF8LengthBetween(3, 63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -264,7 +264,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 1024),
+								stringvalidator.UTF8LengthBetween(0, 1024),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -337,7 +337,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -359,7 +359,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The name of the previously trained ML model being used to create the inference scheduler.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -380,7 +380,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -399,7 +399,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -450,7 +450,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -463,7 +463,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w+-=\\.:/@]*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

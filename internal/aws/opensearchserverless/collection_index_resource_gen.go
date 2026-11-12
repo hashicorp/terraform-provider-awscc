@@ -42,7 +42,7 @@ func collectionIndexResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The identifier of the collection",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 40),
+				stringvalidator.UTF8LengthBetween(3, 40),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]{3,40}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -63,7 +63,7 @@ func collectionIndexResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the collection index",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -84,7 +84,7 @@ func collectionIndexResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2480),
+				stringvalidator.UTF8LengthBetween(1, 2480),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

@@ -70,7 +70,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			Description: "The name of the EKS cluster that the certificate authority belongs to.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

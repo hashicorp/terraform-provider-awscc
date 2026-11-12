@@ -178,7 +178,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 										setvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -195,7 +195,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 										setvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -209,7 +209,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1000),
+										stringvalidator.UTF8LengthBetween(1, 1000),
 										stringvalidator.RegexMatches(regexp.MustCompile("([\\w|\\d|\\.|_]+)"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -226,7 +226,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 										setvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -243,7 +243,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 										setvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -260,7 +260,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 										setvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -277,7 +277,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 										setvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 2048),
+											stringvalidator.UTF8LengthBetween(1, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -304,7 +304,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1000),
+							stringvalidator.UTF8LengthBetween(1, 1000),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -791,7 +791,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(200),
+				stringvalidator.UTF8LengthAtMost(200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -822,7 +822,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -904,7 +904,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 128),
+				stringvalidator.UTF8LengthBetween(3, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9]([a-zA-Z0-9\\._-])*[a-zA-Z0-9]$)"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

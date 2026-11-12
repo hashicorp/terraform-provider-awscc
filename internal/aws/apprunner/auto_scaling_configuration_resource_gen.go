@@ -64,7 +64,7 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(4, 32),
+				stringvalidator.UTF8LengthBetween(4, 32),
 				stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -410,7 +410,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										stringvalidator.RegexMatches(regexp.MustCompile("^/.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -449,7 +449,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(3, 2000),
+										stringvalidator.UTF8LengthBetween(3, 2000),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9,\\-]+$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -511,7 +511,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2097152),
+								stringvalidator.UTF8LengthBetween(1, 2097152),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -523,7 +523,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 255),
+								stringvalidator.UTF8LengthBetween(0, 255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(https|http)://(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -741,7 +741,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(resourceArn|internalId|[a-zA-Z0-9+\\-=._:/@]+)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -755,7 +755,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -807,7 +807,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(0, 1),
 						setvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 2097152),
+							stringvalidator.UTF8LengthBetween(1, 2097152),
 						),
 						fwvalidators.NotNullSet(),
 					}, /*END VALIDATORS*/
@@ -849,7 +849,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 50),
+				stringvalidator.UTF8LengthBetween(5, 50),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

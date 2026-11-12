@@ -83,7 +83,7 @@ func mailManagerAddonInstanceResource(ctx context.Context) (resource.Resource, e
 		"addon_subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(4, 67),
+				stringvalidator.UTF8LengthBetween(4, 67),
 				stringvalidator.RegexMatches(regexp.MustCompile("^as-[a-zA-Z0-9]{1,64}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -126,7 +126,7 @@ func mailManagerAddonInstanceResource(ctx context.Context) (resource.Resource, e
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -138,7 +138,7 @@ func mailManagerAddonInstanceResource(ctx context.Context) (resource.Resource, e
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

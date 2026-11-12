@@ -82,7 +82,7 @@ func routingControlResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the routing control. You can use any non-white space character in the name.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoutingControlArn

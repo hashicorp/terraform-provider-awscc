@@ -85,7 +85,7 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ID of the service setting, such as /ssm/parameter-store/high-throughput-enabled.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1000),
+				stringvalidator.UTF8LengthBetween(1, 1000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -104,7 +104,7 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The value of the service setting.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 4096),
+				stringvalidator.UTF8LengthBetween(1, 4096),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status

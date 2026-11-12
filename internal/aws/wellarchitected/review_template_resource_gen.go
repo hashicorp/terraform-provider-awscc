@@ -49,7 +49,7 @@ func reviewTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The review template description.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 250),
+				stringvalidator.UTF8LengthBetween(3, 250),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-_.,:/()@!&?#+''\\s]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -71,7 +71,7 @@ func reviewTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -92,7 +92,7 @@ func reviewTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 2084),
+				stringvalidator.UTF8LengthBetween(0, 2084),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -152,7 +152,7 @@ func reviewTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -164,7 +164,7 @@ func reviewTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -211,7 +211,7 @@ func reviewTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the review template.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 100),
+				stringvalidator.UTF8LengthBetween(3, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-_.,:/()@!&?#+''\\s]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

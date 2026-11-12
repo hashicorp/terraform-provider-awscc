@@ -187,7 +187,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.UTF8LengthBetween(1, 256),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,256}$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -201,7 +201,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.UTF8LengthBetween(1, 256),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,256}$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -256,7 +256,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(36, 1024),
+								stringvalidator.UTF8LengthBetween(36, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z0-9-]*:events:[a-z0-9-]+:\\d{12}:event-bus/[^:]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -336,7 +336,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(36, 1024),
+								stringvalidator.UTF8LengthBetween(36, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/

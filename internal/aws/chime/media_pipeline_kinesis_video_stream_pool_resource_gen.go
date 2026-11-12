@@ -99,7 +99,7 @@ func mediaPipelineKinesisVideoStreamPoolResource(ctx context.Context) (resource.
 			Description: "The name of the Kinesis Video Stream Pool.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -171,7 +171,7 @@ func mediaPipelineKinesisVideoStreamPoolResource(ctx context.Context) (resource.
 					Description: "The AWS Region of the video stream.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 32),
+						stringvalidator.UTF8LengthBetween(1, 32),
 						stringvalidator.RegexMatches(regexp.MustCompile("^([a-z]+-){2,}\\d+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -220,7 +220,7 @@ func mediaPipelineKinesisVideoStreamPoolResource(ctx context.Context) (resource.
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -232,7 +232,7 @@ func mediaPipelineKinesisVideoStreamPoolResource(ctx context.Context) (resource.
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
