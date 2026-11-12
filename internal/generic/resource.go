@@ -97,11 +97,10 @@ func resourceWithPathAwareAttributeNameMap(v map[string]string) ResourceOptionsF
 		}
 		o.pathCfToTfNameMap = reverse
 
-		// Populate the flat maps for SetUnknownValuesFromResourceModel, which fills in
-		// computed attributes (like cluster_arn, creation_time) after Create/Update.
-		// That function uses the old flat map interface shared by all resources.
-		// The flat map is lossy for colliding properties (FSxLustreConfig vs FsxLustreConfig)
-		// but those are user-provided, never computed unknowns, so this path never resolves them.
+		// Populate the flat maps for the callers that still key by bare property name
+		// (unorderedArrayPaths, propertyPathToAttributePath). The flat map is lossy for
+		// colliding properties, so it must not be used for value translation: the
+		// toTerraform / toCloudControl translators always receive the path-aware maps.
 		flatTfToCf := make(map[string]string)
 		flatCfToTf := make(map[string]string)
 		for tfPathKey, cfName := range v {
@@ -615,7 +614,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap}
+	translator := r.toTerraformTranslator()
 	schema := currentState.Schema
 	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
 	// so plan shows no diff regardless of user config order.
@@ -1001,7 +1000,7 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 		return diags
 	}
 
-	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)
+	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.toTerraformTranslator())
 
 	if err != nil {
 		diags.AddError(
@@ -1016,6 +1015,12 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 }
 
 // bootstrapContext injects the CloudFormation type name into logger contexts
+// toTerraformTranslator returns the Cloud Control -> Terraform translator for the resource,
+// carrying the path-aware attribute name map when the resource uses one.
+func (r *genericResource) toTerraformTranslator() toTerraform {
+	return toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap}
+}
+
 func (r *genericResource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.cfTypeName)
 	return r.provider.RegisterLogger(ctx)
