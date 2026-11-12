@@ -83,7 +83,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 			Description: "The Amazon Web Services Supply Chain instance identifier.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -120,7 +120,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the DataIntegrationFlow.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -311,7 +311,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1011),
+									stringvalidator.UTF8LengthBetween(1, 1011),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[-_/A-Za-z0-9:]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -347,7 +347,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 																	Optional:    true,
 																	Computed:    true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthBetween(1, 100),
+																		stringvalidator.UTF8LengthBetween(1, 100),
 																		stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_]+$"), ""),
 																		fwvalidators.NotNullString(),
 																	}, /*END VALIDATORS*/
@@ -455,7 +455,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(3, 63),
+									stringvalidator.UTF8LengthBetween(3, 63),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9.-]*[a-z0-9]$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -496,7 +496,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(0, 700),
+									stringvalidator.UTF8LengthBetween(0, 700),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[/A-Za-z0-9._-]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -517,7 +517,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 						Description: "The source name that can be used as table alias in SQL transformation query.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -582,7 +582,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -595,7 +595,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -740,7 +740,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 1011),
+								stringvalidator.UTF8LengthBetween(1, 1011),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[-_/A-Za-z0-9:]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -776,7 +776,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 100),
+																	stringvalidator.UTF8LengthBetween(1, 100),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_]+$"), ""),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
@@ -937,7 +937,7 @@ func dataIntegrationFlowResource(ctx context.Context) (resource.Resource, error)
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 65535),
+								stringvalidator.UTF8LengthBetween(1, 65535),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

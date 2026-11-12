@@ -47,7 +47,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9_.:/=+\\-@\\s]*)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -83,7 +83,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9_.:/=+\\-@\\s]+)$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -108,7 +108,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 					stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -134,7 +134,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 1024),
+					stringvalidator.UTF8LengthBetween(1, 1024),
 					stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -180,7 +180,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -193,7 +193,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

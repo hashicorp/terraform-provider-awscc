@@ -460,7 +460,7 @@ func sourceEndpointResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 164),
+								stringvalidator.UTF8LengthBetween(1, 164),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/

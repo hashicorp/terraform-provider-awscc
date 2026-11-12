@@ -65,7 +65,7 @@ func notifyConfigurationResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -101,7 +101,7 @@ func notifyConfigurationResource(ctx context.Context) (resource.Resource, error)
 			Description: "The display name to associate with the notify configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 15),
+				stringvalidator.UTF8LengthBetween(1, 15),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_ -]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -169,7 +169,7 @@ func notifyConfigurationResource(ctx context.Context) (resource.Resource, error)
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(300),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(2, 2),
+					stringvalidator.UTF8LengthBetween(2, 2),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z]{2}$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -227,7 +227,7 @@ func notifyConfigurationResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_:/-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -296,7 +296,7 @@ func notifyConfigurationResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -310,7 +310,7 @@ func notifyConfigurationResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

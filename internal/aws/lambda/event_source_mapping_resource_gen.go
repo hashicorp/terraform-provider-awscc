@@ -138,7 +138,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 200),
+						stringvalidator.UTF8LengthBetween(1, 200),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -175,7 +175,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 10000),
+											stringvalidator.UTF8LengthBetween(1, 10000),
 											stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -216,7 +216,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 10000),
+								stringvalidator.UTF8LengthBetween(1, 10000),
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-/*:_+=.@-]*"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -341,7 +341,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 1024),
+								stringvalidator.UTF8LengthBetween(12, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^$|kafka://([^.]([a-zA-Z0-9\\-_.]{0,248}))|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -402,7 +402,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 57),
+						stringvalidator.UTF8LengthBetween(1, 57),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -414,7 +414,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.UTF8LengthBetween(1, 63),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -473,7 +473,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 1024),
+				stringvalidator.UTF8LengthBetween(12, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -541,7 +541,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(0, 4096),
+									stringvalidator.UTF8LengthBetween(0, 4096),
 									stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -583,7 +583,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The name or ARN of the Lambda function.\n  **Name formats**\n +  *Function name* – ``MyFunction``.\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +  *Version or Alias ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +  *Partial ARN* – ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 140),
+				stringvalidator.UTF8LengthBetween(1, 140),
 				stringvalidator.RegexMatches(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -652,7 +652,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 2048),
+				stringvalidator.UTF8LengthBetween(12, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -900,7 +900,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 128),
+						stringvalidator.UTF8LengthBetween(0, 128),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -939,7 +939,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 				listvalidator.SizeBetween(1, 1),
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 1000),
+					stringvalidator.UTF8LengthBetween(1, 1000),
 					stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -1031,7 +1031,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								listvalidator.SizeBetween(1, 10),
 								listvalidator.UniqueValues(),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 300),
+									stringvalidator.UTF8LengthBetween(1, 300),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -1163,7 +1163,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 200),
+						stringvalidator.UTF8LengthBetween(1, 200),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1215,7 +1215,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 10000),
+											stringvalidator.UTF8LengthBetween(1, 10000),
 											stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1256,7 +1256,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 10000),
+								stringvalidator.UTF8LengthBetween(1, 10000),
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-/*:_+=.@-]*"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1393,7 +1393,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 200),
+							stringvalidator.UTF8LengthBetween(1, 200),
 							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1428,7 +1428,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(6, 12),
+				stringvalidator.UTF8LengthBetween(6, 12),
 				stringvalidator.RegexMatches(regexp.MustCompile("(LATEST|TRIM_HORIZON|AT_TIMESTAMP)+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1492,7 +1492,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1505,7 +1505,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1545,7 +1545,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 				listvalidator.SizeBetween(1, 1),
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 249),
+					stringvalidator.UTF8LengthBetween(1, 249),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)"), ""),
 				),
 			}, /*END VALIDATORS*/

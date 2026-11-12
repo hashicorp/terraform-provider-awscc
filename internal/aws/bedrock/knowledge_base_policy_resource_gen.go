@@ -43,7 +43,7 @@ func knowledgeBasePolicyResource(ctx context.Context) (resource.Resource, error)
 			Description: "The unique identifier of the knowledge base",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 10),
+				stringvalidator.UTF8LengthBetween(1, 10),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

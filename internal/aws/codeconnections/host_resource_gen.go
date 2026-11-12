@@ -79,7 +79,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the host.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -98,7 +98,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The endpoint of the infrastructure where your provider type is installed.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProviderType
@@ -189,7 +189,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -202,7 +202,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -283,7 +283,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 10),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(11, 20),
+							stringvalidator.UTF8LengthBetween(11, 20),
 							stringvalidator.RegexMatches(regexp.MustCompile("^sg-\\w{8}(\\w{9})?$"), ""),
 						),
 						fwvalidators.NotNullList(),
@@ -302,7 +302,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 10),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(15, 24),
+							stringvalidator.UTF8LengthBetween(15, 24),
 							stringvalidator.RegexMatches(regexp.MustCompile("^subnet-\\w{8}(\\w{9})?$"), ""),
 						),
 						fwvalidators.NotNullList(),
@@ -318,7 +318,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 16384),
+						stringvalidator.UTF8LengthBetween(1, 16384),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -330,7 +330,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(12, 21),
+						stringvalidator.UTF8LengthBetween(12, 21),
 						stringvalidator.RegexMatches(regexp.MustCompile("^vpc-\\w{8}(\\w{9})?$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/

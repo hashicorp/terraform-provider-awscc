@@ -40,7 +40,7 @@ func userPoolReplicaResource(ctx context.Context) (resource.Resource, error) {
 		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 32),
+				stringvalidator.UTF8LengthBetween(5, 32),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

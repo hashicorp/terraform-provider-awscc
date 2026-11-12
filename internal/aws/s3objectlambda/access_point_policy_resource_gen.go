@@ -43,7 +43,7 @@ func accessPointPolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 45),
+				stringvalidator.UTF8LengthBetween(3, 45),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

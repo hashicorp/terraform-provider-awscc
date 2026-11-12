@@ -170,7 +170,7 @@ func codeSecurityScanConfigurationResource(ctx context.Context) (resource.Resour
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -252,7 +252,7 @@ func codeSecurityScanConfigurationResource(ctx context.Context) (resource.Resour
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 60),
+				stringvalidator.UTF8LengthBetween(1, 60),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_$:.]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -94,7 +94,7 @@ func transitGatewayAttachmentNatConfigurationResource(ctx context.Context) (reso
 						Description: "The source CIDR that the rule matches on.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 18),
+							stringvalidator.UTF8LengthBetween(1, 18),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: NatCidr
@@ -102,7 +102,7 @@ func transitGatewayAttachmentNatConfigurationResource(ctx context.Context) (reso
 						Description: "The CIDR that the matched source addresses are translated to.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 18),
+							stringvalidator.UTF8LengthBetween(1, 18),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: RuleNumber

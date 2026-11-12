@@ -77,7 +77,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1000),
+				stringvalidator.UTF8LengthBetween(0, 1000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -156,7 +156,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[-._\\w]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -282,7 +282,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 24),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(5, 200),
+							stringvalidator.UTF8LengthBetween(5, 200),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(geo|geo-routes|geo-places|geo-maps):\\w*\\*?$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -299,7 +299,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(59, 59),
+									stringvalidator.UTF8LengthBetween(59, 59),
 									stringvalidator.RegexMatches(regexp.MustCompile("^([A-Fa-f0-9]{2}:){19}[A-Fa-f0-9]{2}$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -312,7 +312,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^([A-Za-z][A-Za-z\\d_]*\\.)+[A-Za-z][A-Za-z\\d_]*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -341,7 +341,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 155),
+									stringvalidator.UTF8LengthBetween(1, 155),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+(\\.[A-Za-z0-9\\-]+)+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -369,7 +369,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 5),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(253),
+							stringvalidator.UTF8LengthAtMost(253),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\w!$&()*+,./:;=?@\\x{60}-]|%([\\dA-Fa-f]{2}|[\\dA-Fa-f]?\\*))+$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -385,7 +385,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 8),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(1600),
+							stringvalidator.UTF8LengthAtMost(1600),
 							stringvalidator.RegexMatches(regexp.MustCompile("(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$)|(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):(geo-routes|geo-places|geo-maps)(:((\\*)|([a-z0-9]+([.-][a-z0-9]+)*)))::((provider[\\/][*-._\\w]+))$)"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -441,7 +441,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z+-=._:/]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -455,7 +455,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9 _=@:.+-/]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

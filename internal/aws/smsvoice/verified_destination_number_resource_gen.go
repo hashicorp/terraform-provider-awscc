@@ -62,7 +62,7 @@ func verifiedDestinationNumberResource(ctx context.Context) (resource.Resource, 
 			Description: "The verified destination phone number, in E.164 format.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 20),
+				stringvalidator.UTF8LengthBetween(1, 20),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\+?[1-9][0-9]{1,18}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -130,7 +130,7 @@ func verifiedDestinationNumberResource(ctx context.Context) (resource.Resource, 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -144,7 +144,7 @@ func verifiedDestinationNumberResource(ctx context.Context) (resource.Resource, 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

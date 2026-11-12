@@ -60,7 +60,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the author publishing the app.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
+				stringvalidator.UTF8LengthBetween(1, 127),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
@@ -90,7 +90,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The description of the application.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: HomePageUrl
@@ -176,7 +176,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the application.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 140),
+				stringvalidator.UTF8LengthBetween(1, 140),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

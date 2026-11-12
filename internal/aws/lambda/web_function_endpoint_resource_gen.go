@@ -90,7 +90,7 @@ func webFunctionEndpointResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.UTF8LengthBetween(0, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -143,7 +143,7 @@ func webFunctionEndpointResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the endpoint.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -205,7 +205,7 @@ func webFunctionEndpointResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the web function this endpoint belongs to. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -430,7 +430,7 @@ func webFunctionEndpointResource(ctx context.Context) (resource.Resource, error)
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 50),
+					stringvalidator.UTF8LengthBetween(1, 50),
 					stringvalidator.RegexMatches(regexp.MustCompile("^([a-z]{2,}-){2,}[0-9]$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -481,7 +481,7 @@ func webFunctionEndpointResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

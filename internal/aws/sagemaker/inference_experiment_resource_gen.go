@@ -137,7 +137,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 10),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -154,7 +154,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 10),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -176,7 +176,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(512),
+						stringvalidator.UTF8LengthAtMost(512),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/])/?(.*)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -190,7 +190,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -220,7 +220,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -332,7 +332,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the endpoint used to run the inference experiment.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(63),
+				stringvalidator.UTF8LengthAtMost(63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -353,7 +353,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
+				stringvalidator.UTF8LengthAtMost(2048),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -486,7 +486,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 						Description: "The name of the Amazon SageMaker Model entity.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(63),
+							stringvalidator.UTF8LengthAtMost(63),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -495,7 +495,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 						Description: "The name of the variant.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(63),
+							stringvalidator.UTF8LengthAtMost(63),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -520,7 +520,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name for the inference experiment.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 120),
+				stringvalidator.UTF8LengthBetween(1, 120),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -540,7 +540,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -667,7 +667,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(63),
+									stringvalidator.UTF8LengthAtMost(63),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -694,7 +694,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(63),
+						stringvalidator.UTF8LengthAtMost(63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -749,7 +749,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -798,7 +798,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -812,7 +812,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

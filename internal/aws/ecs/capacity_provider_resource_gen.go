@@ -900,7 +900,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 30),
+											stringvalidator.UTF8LengthBetween(1, 30),
 											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -989,7 +989,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 30),
+											stringvalidator.UTF8LengthBetween(1, 30),
 											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -1424,7 +1424,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtLeast(1),
+							stringvalidator.UTF8LengthAtLeast(1),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1435,7 +1435,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtLeast(1),
+							stringvalidator.UTF8LengthAtLeast(1),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

@@ -115,7 +115,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(35, 10000),
+								stringvalidator.UTF8LengthBetween(35, 10000),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -139,7 +139,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(35, 10000),
+								stringvalidator.UTF8LengthBetween(35, 10000),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -172,7 +172,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 4096),
+				stringvalidator.UTF8LengthBetween(1, 4096),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -219,7 +219,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The customer-assigned immutable name for the policy. Must be unique within the policy engine.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 48),
+				stringvalidator.UTF8LengthBetween(1, 48),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -257,7 +257,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The identifier of the policy engine which contains this policy.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 59),
+				stringvalidator.UTF8LengthBetween(12, 59),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

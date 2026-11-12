@@ -455,7 +455,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@\\*\\?]+$"), ""),
 									),
 								}, /*END VALIDATORS*/
@@ -602,7 +602,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@\\*\\?]+$"), ""),
 									),
 								}, /*END VALIDATORS*/
@@ -655,7 +655,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@\\*\\?]+$"), ""),
 									),
 								}, /*END VALIDATORS*/
@@ -706,7 +706,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 512),
+									stringvalidator.UTF8LengthBetween(1, 512),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@\\*\\?]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -720,7 +720,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@\\*\\?]+$"), ""),
 									),
 								}, /*END VALIDATORS*/
@@ -773,7 +773,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@\\*\\?]+$"), ""),
 									),
 								}, /*END VALIDATORS*/
@@ -814,7 +814,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\s@\\.]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -851,7 +851,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the automation rule.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 128),
+				stringvalidator.UTF8LengthBetween(0, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -1157,7 +1157,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1170,7 +1170,7 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-\\:\\/\\=\\+\\@]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

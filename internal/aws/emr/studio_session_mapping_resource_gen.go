@@ -96,7 +96,7 @@ func studioSessionMappingResource(ctx context.Context) (resource.Resource, error
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(4, 256),
+				stringvalidator.UTF8LengthBetween(4, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^es-[0-9A-Z]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

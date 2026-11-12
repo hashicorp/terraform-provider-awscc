@@ -262,7 +262,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ID of the security group to use with the endpoint.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^sg-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -302,7 +302,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

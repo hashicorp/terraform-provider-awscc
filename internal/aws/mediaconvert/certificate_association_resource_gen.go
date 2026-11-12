@@ -43,7 +43,7 @@ func certificateAssociationResource(ctx context.Context) (resource.Resource, err
 			Description: "The ARN of the ACM certificate to associate with MediaConvert.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]+)*:acm:[a-z0-9-]+:[0-9]{12}:certificate/[a-f0-9-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

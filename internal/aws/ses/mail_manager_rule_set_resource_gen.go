@@ -77,7 +77,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1187,7 +1187,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 64),
+												stringvalidator.UTF8LengthBetween(1, 64),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[xX]\\-[a-zA-Z0-9\\-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1200,7 +1200,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 128),
+												stringvalidator.UTF8LengthBetween(1, 128),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1236,7 +1236,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1273,7 +1273,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 256),
+												stringvalidator.UTF8LengthBetween(1, 256),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[\\x20-\\x7e]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1286,7 +1286,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 500),
+												stringvalidator.UTF8LengthBetween(1, 500),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[\\r\\n\\x20-\\x7e]+$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1298,7 +1298,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1311,7 +1311,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(0, 254),
+												stringvalidator.UTF8LengthBetween(0, 254),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z@+.-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1324,7 +1324,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(3, 3),
+												stringvalidator.UTF8LengthBetween(3, 3),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[45][0-9][0-9]$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1337,7 +1337,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(5, 9),
+												stringvalidator.UTF8LengthBetween(5, 9),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[45]\\.[0-9]{1,3}\\.[0-9]{1,3}$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1374,7 +1374,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1387,7 +1387,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1424,7 +1424,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(36, 36),
+												stringvalidator.UTF8LengthBetween(36, 36),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1437,7 +1437,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(36, 36),
+												stringvalidator.UTF8LengthBetween(36, 36),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1450,7 +1450,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1496,7 +1496,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1535,7 +1535,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1600,7 +1600,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1613,7 +1613,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc):sns:[a-z]{2}-([a-z]+-)+\\d{1}:\\d{12}:[\\w\\-]{1,256}$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1664,7 +1664,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1691,7 +1691,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 												listvalidator.SizeBetween(1, 100),
 												listvalidator.UniqueValues(),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(0, 254),
+													stringvalidator.UTF8LengthBetween(0, 254),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z@+.-]+$"), ""),
 												),
 											}, /*END VALIDATORS*/
@@ -1728,7 +1728,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1765,7 +1765,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1778,7 +1778,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 62),
+												stringvalidator.UTF8LengthBetween(1, 62),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1791,7 +1791,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 62),
+												stringvalidator.UTF8LengthBetween(1, 62),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9!_.*'()/-]+$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1803,7 +1803,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-:/]+$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1854,7 +1854,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.UTF8LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -2056,7 +2056,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 10),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 43),
+													stringvalidator.UTF8LengthBetween(1, 43),
 													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|.|:|/)*)$"), ""),
 												),
 												fwvalidators.NotNullList(),
@@ -2164,7 +2164,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.UTF8LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -2266,7 +2266,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 10),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 4096),
+													stringvalidator.UTF8LengthBetween(1, 4096),
 												),
 												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
@@ -2307,7 +2307,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.UTF8LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -2405,7 +2405,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 32),
+							stringvalidator.UTF8LengthBetween(1, 32),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2442,7 +2442,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.UTF8LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -2644,7 +2644,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 10),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 43),
+													stringvalidator.UTF8LengthBetween(1, 43),
 													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|.|:|/)*)$"), ""),
 												),
 												fwvalidators.NotNullList(),
@@ -2752,7 +2752,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.UTF8LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -2854,7 +2854,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 10),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 4096),
+													stringvalidator.UTF8LengthBetween(1, 4096),
 												),
 												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
@@ -2895,7 +2895,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.UTF8LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -3031,7 +3031,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3043,7 +3043,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -875,7 +875,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 25),
 																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthAtMost(1000),
+																		stringvalidator.UTF8LengthAtMost(1000),
 																	),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -892,7 +892,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 25),
 																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthAtMost(1000),
+																		stringvalidator.UTF8LengthAtMost(1000),
 																	),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -906,7 +906,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 50),
+																	stringvalidator.UTF8LengthBetween(1, 50),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1018,7 +1018,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^https://[A-Za-z0-9][^\\s]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1307,7 +1307,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -1321,7 +1321,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.UTF8LengthBetween(12, 12),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1337,7 +1337,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 1),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 300),
+									stringvalidator.UTF8LengthBetween(1, 300),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1378,7 +1378,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 25),
 																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthAtMost(1000),
+																		stringvalidator.UTF8LengthAtMost(1000),
 																	),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1395,7 +1395,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 25),
 																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthAtMost(1000),
+																		stringvalidator.UTF8LengthAtMost(1000),
 																	),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1409,7 +1409,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 50),
+																	stringvalidator.UTF8LengthBetween(1, 50),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1505,7 +1505,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^https://[A-Za-z0-9][^\\s]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1557,7 +1557,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 25),
 																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthAtMost(1000),
+																		stringvalidator.UTF8LengthAtMost(1000),
 																	),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1574,7 +1574,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 25),
 																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthAtMost(1000),
+																		stringvalidator.UTF8LengthAtMost(1000),
 																	),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1588,7 +1588,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 50),
+																	stringvalidator.UTF8LengthBetween(1, 50),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1685,7 +1685,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 50),
+										stringvalidator.UTF8LengthBetween(1, 50),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1826,7 +1826,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 25),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthAtMost(1000),
+											stringvalidator.UTF8LengthAtMost(1000),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1843,7 +1843,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 25),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthAtMost(1000),
+											stringvalidator.UTF8LengthAtMost(1000),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1872,7 +1872,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(15, 40),
+										stringvalidator.UTF8LengthBetween(15, 40),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2016,7 +2016,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -2103,7 +2103,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.UTF8LengthBetween(1, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2683,7 +2683,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:(bedrock):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2737,7 +2737,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^s3://.{1,128}$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -2798,7 +2798,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(0, 2048),
+															stringvalidator.UTF8LengthBetween(0, 2048),
 															stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
@@ -2887,7 +2887,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:(bedrock):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2918,7 +2918,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 10000),
+												stringvalidator.UTF8LengthBetween(1, 10000),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

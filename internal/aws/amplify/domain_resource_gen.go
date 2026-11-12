@@ -46,7 +46,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 20),
+				stringvalidator.UTF8LengthBetween(1, 20),
 				stringvalidator.RegexMatches(regexp.MustCompile("d[a-z0-9]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -86,7 +86,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 2048),
+					stringvalidator.UTF8LengthBetween(1, 2048),
 					stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -106,7 +106,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1000),
+				stringvalidator.UTF8LengthAtMost(1000),
 				stringvalidator.RegexMatches(regexp.MustCompile("^$|^arn:.+:iam::\\d{12}:role.+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -236,7 +236,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(255),
+				stringvalidator.UTF8LengthAtMost(255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -316,7 +316,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -324,7 +324,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(255),
+							stringvalidator.UTF8LengthAtMost(255),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/

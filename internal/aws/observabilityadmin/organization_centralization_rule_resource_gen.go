@@ -257,7 +257,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.UTF8LengthBetween(12, 12),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -275,7 +275,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 1011),
+												stringvalidator.UTF8LengthBetween(1, 1011),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -287,7 +287,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthAtLeast(1),
+												stringvalidator.UTF8LengthAtLeast(1),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -309,7 +309,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 512),
+												stringvalidator.UTF8LengthBetween(1, 512),
 												stringvalidator.RegexMatches(regexp.MustCompile("^(?:[\\._\\-/#A-Za-z0-9]+|\\$\\{[A-Za-z]+(?:\\.[A-Za-z]+){1,2}\\})+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -375,7 +375,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 1011),
+												stringvalidator.UTF8LengthBetween(1, 1011),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -398,7 +398,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -447,7 +447,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthAtLeast(1),
+												stringvalidator.UTF8LengthAtLeast(1),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -472,7 +472,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtLeast(1),
+								stringvalidator.UTF8LengthAtLeast(1),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -488,7 +488,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeAtLeast(1),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtLeast(1),
+									stringvalidator.UTF8LengthAtLeast(1),
 								),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -497,7 +497,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2000),
+								stringvalidator.UTF8LengthBetween(1, 2000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -511,7 +511,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2000),
+										stringvalidator.UTF8LengthBetween(1, 2000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -537,7 +537,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2000),
+										stringvalidator.UTF8LengthBetween(1, 2000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -558,7 +558,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2000),
+										stringvalidator.UTF8LengthBetween(1, 2000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -604,7 +604,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -652,7 +652,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -665,7 +665,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

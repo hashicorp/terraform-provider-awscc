@@ -93,7 +93,7 @@ func resourceMetricsConfigurationResource(ctx context.Context) (resource.Resourc
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeBetween(1, 500),
 							listvalidator.ValueStringsAre(
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							),
 							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
@@ -129,7 +129,7 @@ func resourceMetricsConfigurationResource(ctx context.Context) (resource.Resourc
 			Description: "The Amazon Resource Name (ARN) of the resource for which the detailed monitoring metrics configuration is managed.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

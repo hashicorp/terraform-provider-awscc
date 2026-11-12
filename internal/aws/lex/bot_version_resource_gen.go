@@ -44,7 +44,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Unique ID of resource",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 10),
+				stringvalidator.UTF8LengthBetween(10, 10),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -119,7 +119,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The version of a bot.",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 5),
+									stringvalidator.UTF8LengthBetween(1, 5),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
@@ -157,7 +157,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(200),
+				stringvalidator.UTF8LengthAtMost(200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

@@ -99,7 +99,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 4096),
+				stringvalidator.UTF8LengthBetween(1, 4096),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -578,7 +578,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
+								stringvalidator.UTF8LengthBetween(1, 102400),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -590,7 +590,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -618,7 +618,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 64),
+																			stringvalidator.UTF8LengthBetween(1, 64),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -631,7 +631,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(20, 2048),
+																			stringvalidator.UTF8LengthBetween(20, 2048),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"), ""),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -644,7 +644,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -692,7 +692,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:.*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -762,7 +762,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -809,7 +809,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 102400),
+												stringvalidator.UTF8LengthBetween(1, 102400),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -821,7 +821,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 255),
+												stringvalidator.UTF8LengthBetween(1, 255),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -839,7 +839,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 															Optional:    true,
 															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 2048),
+																stringvalidator.UTF8LengthBetween(1, 2048),
 																stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -885,7 +885,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
+								stringvalidator.UTF8LengthBetween(1, 102400),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -897,7 +897,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -926,7 +926,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -967,7 +967,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
+								stringvalidator.UTF8LengthBetween(1, 102400),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -996,7 +996,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1043,7 +1043,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 102400),
+												stringvalidator.UTF8LengthBetween(1, 102400),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1055,7 +1055,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 255),
+												stringvalidator.UTF8LengthBetween(1, 255),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1083,7 +1083,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
+								stringvalidator.UTF8LengthBetween(1, 102400),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1095,7 +1095,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1123,7 +1123,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 64),
+																			stringvalidator.UTF8LengthBetween(1, 64),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1136,7 +1136,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(20, 2048),
+																			stringvalidator.UTF8LengthBetween(20, 2048),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"), ""),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1149,7 +1149,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1197,7 +1197,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:.*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -1267,7 +1267,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.UTF8LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1317,7 +1317,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1337,7 +1337,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the registry record.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -1420,7 +1420,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1459,7 +1459,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/)?[a-zA-Z0-9]{12,16}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1536,7 +1536,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1550,7 +1550,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

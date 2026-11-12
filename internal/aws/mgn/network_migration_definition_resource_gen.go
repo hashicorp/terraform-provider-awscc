@@ -82,7 +82,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 600),
+				stringvalidator.UTF8LengthBetween(0, 600),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x00]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -103,7 +103,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 			Description: "The name of the network migration definition.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s\\x00]( *[^\\s\\x00])*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -246,7 +246,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 								Description: "The AWS account ID of the S3 bucket owner.",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(12, 12),
+									stringvalidator.UTF8LengthBetween(12, 12),
 									stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12,}"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
@@ -308,7 +308,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -321,7 +321,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -412,7 +412,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(9, 18),
+						stringvalidator.UTF8LengthBetween(9, 18),
 						stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -425,7 +425,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(9, 18),
+						stringvalidator.UTF8LengthBetween(9, 18),
 						stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -438,7 +438,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(9, 18),
+						stringvalidator.UTF8LengthBetween(9, 18),
 						stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -501,7 +501,7 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 					Description: "The AWS account ID of the S3 bucket owner.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(12, 12),
+						stringvalidator.UTF8LengthBetween(12, 12),
 						stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12,}"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
