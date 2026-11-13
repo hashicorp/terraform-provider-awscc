@@ -219,7 +219,7 @@ func qEV2IdcApplicationResource(ctx context.Context) (resource.Resource, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "qev2_idc_application_arn",
+			Name:              "qev_2_idc_application_arn",
 			Description:       "The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center",
 			RequiredForImport: true,
 		})
