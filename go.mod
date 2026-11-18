@@ -3,7 +3,7 @@ module github.com/hashicorp/terraform-provider-awscc
 go 1.26.10
 
 require (
-	github.com/YakDriver/regexache v0.25.0
+	github.com/YakDriver/regexache v0.26.0
 	github.com/aws/aws-sdk-go-v2 v1.47.8
 	github.com/aws/aws-sdk-go-v2/config v1.33.16
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.20.8
