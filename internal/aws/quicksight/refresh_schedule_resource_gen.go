@@ -338,6 +338,7 @@ func refreshScheduleResource(ctx context.Context) (resource.Resource, error) {
 		identity.Identifier{
 			Name:              "schedule_schedule_id",
 			RequiredForImport: true,
+			AttributePath:     []string{"schedule", "schedule_id"},
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
