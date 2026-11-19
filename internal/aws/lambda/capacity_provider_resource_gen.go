@@ -72,7 +72,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 140),
+				stringvalidator.UTF8LengthBetween(1, 140),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -280,7 +280,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 400),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 30),
+							stringvalidator.UTF8LengthBetween(1, 30),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\*\\-]+$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -318,7 +318,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 400),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 30),
+							stringvalidator.UTF8LengthBetween(1, 30),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\*\\-]+$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -351,7 +351,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 10000),
+				stringvalidator.UTF8LengthBetween(0, 10000),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -386,7 +386,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 10000),
+						stringvalidator.UTF8LengthBetween(0, 10000),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -457,7 +457,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -470,7 +470,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.UTF8LengthBetween(0, 256),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -571,7 +571,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -584,7 +584,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -643,7 +643,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.UTF8LengthBetween(1, 512),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -732,7 +732,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 5),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(0, 1024),
+							stringvalidator.UTF8LengthBetween(0, 1024),
 							stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -748,7 +748,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 16),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(0, 1024),
+							stringvalidator.UTF8LengthBetween(0, 1024),
 							stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*$"), ""),
 						),
 					}, /*END VALIDATORS*/

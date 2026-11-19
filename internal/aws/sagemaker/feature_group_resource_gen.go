@@ -62,7 +62,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -83,7 +83,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Event Time Feature Name.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -132,7 +132,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.UTF8LengthBetween(1, 64),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -172,7 +172,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Name of the FeatureGroup.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -273,7 +273,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -285,7 +285,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -297,7 +297,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -327,7 +327,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -338,7 +338,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(1024),
+								stringvalidator.UTF8LengthAtMost(1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -449,7 +449,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -537,7 +537,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Record Identifier Feature Name.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -559,7 +559,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

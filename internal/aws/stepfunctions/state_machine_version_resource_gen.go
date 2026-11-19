@@ -53,7 +53,7 @@ func stateMachineVersionResource(ctx context.Context) (resource.Resource, error)
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -71,7 +71,7 @@ func stateMachineVersionResource(ctx context.Context) (resource.Resource, error)
 		"state_machine_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -89,7 +89,7 @@ func stateMachineVersionResource(ctx context.Context) (resource.Resource, error)
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

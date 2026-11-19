@@ -87,7 +87,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 2000),
+				stringvalidator.UTF8LengthBetween(0, 2000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -108,7 +108,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^:*]{1,512}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -128,7 +128,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
@@ -145,7 +145,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of an existing log group that you want to associate with this metric filter.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[.\\-_/#A-Za-z0-9]{1,512}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -286,7 +286,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -299,7 +299,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -323,7 +323,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The name of the CloudWatch metric.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MetricNamespace
@@ -331,7 +331,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 						Description: "A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z\\.\\-_\\/#]{1,256}"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -340,7 +340,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 100),
+							stringvalidator.UTF8LengthBetween(1, 100),
 							stringvalidator.RegexMatches(regexp.MustCompile(".{1,100}"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/

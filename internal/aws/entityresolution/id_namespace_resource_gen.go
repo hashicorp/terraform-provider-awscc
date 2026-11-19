@@ -63,7 +63,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 255),
+				stringvalidator.UTF8LengthBetween(0, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -225,7 +225,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(20, 255),
+									stringvalidator.UTF8LengthBetween(20, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -305,7 +305,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 25),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(0, 255),
+													stringvalidator.UTF8LengthBetween(0, 255),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
 												),
 												fwvalidators.NotNullList(),
@@ -320,7 +320,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(0, 255),
+												stringvalidator.UTF8LengthBetween(0, 255),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -386,7 +386,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 		"id_namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -441,7 +441,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9-]*$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -473,7 +473,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(32, 512),
+				stringvalidator.UTF8LengthBetween(32, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -522,7 +522,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -535,7 +535,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

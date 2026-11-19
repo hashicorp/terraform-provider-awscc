@@ -81,7 +81,7 @@ func probeResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The literal IPv4 or IPv6 address the probe sends traffic to. The service rejects a domain name and a CIDR block.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationPort
@@ -134,7 +134,7 @@ func probeResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the monitor the probe belongs to.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -228,7 +228,7 @@ func probeResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the subnet the probe sends traffic from.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -294,7 +294,7 @@ func probeResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -306,7 +306,7 @@ func probeResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

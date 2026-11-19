@@ -41,7 +41,7 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 		"alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(7, 256),
+				stringvalidator.UTF8LengthBetween(7, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^alias/[a-zA-Z0-9/_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -61,7 +61,7 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(70, 150),
+				stringvalidator.UTF8LengthBetween(70, 150),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:key/[0-9a-zA-Z]{16,64}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

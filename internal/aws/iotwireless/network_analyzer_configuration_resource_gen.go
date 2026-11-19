@@ -63,7 +63,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
+				stringvalidator.UTF8LengthAtMost(2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -82,7 +82,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 			Description: "Name of the network analyzer configuration",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -131,7 +131,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -144,7 +144,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

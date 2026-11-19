@@ -41,7 +41,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The resource policy to create or update.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 20480),
+				stringvalidator.UTF8LengthBetween(1, 20480),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
@@ -58,7 +58,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon Resource Name (ARN) of the resource for which to create or update the resource policy.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 1011),
+				stringvalidator.UTF8LengthBetween(20, 1011),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]+:bedrock-agentcore:[a-z0-9-]*:[0-9]{12}:.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

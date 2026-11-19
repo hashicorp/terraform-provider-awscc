@@ -184,7 +184,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 10),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

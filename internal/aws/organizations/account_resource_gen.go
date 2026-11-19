@@ -65,7 +65,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The friendly name of the member account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
@@ -97,7 +97,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The email address of the owner to assign to the new member account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(6, 64),
+				stringvalidator.UTF8LengthBetween(6, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("[^\\s@]+@[^\\s@]+\\.[^\\s@]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -196,7 +196,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Default:     stringdefault.StaticString("OrganizationAccountAccessRole"),
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]{1,64}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -287,7 +287,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -301,7 +301,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

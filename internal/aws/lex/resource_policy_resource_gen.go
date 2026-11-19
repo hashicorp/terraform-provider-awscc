@@ -68,7 +68,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1011),
+				stringvalidator.UTF8LengthBetween(1, 1011),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

@@ -143,7 +143,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 			Computed:    true,
 			Default:     stringdefault.StaticString("No description"),
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -251,7 +251,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 						Computed:    true,
 						Default:     stringdefault.StaticString("No reason"),
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.UTF8LengthBetween(1, 1024),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -266,7 +266,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
+									stringvalidator.UTF8LengthBetween(1, 1024),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1188,7 +1188,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1220,7 +1220,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1626,7 +1626,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2225,7 +2225,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2423,7 +2423,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2486,7 +2486,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2510,7 +2510,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 20),
+								stringvalidator.UTF8LengthBetween(1, 20),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2578,7 +2578,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2591,7 +2591,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

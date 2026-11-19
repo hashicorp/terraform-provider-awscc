@@ -42,7 +42,7 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name or the Id of the Application.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

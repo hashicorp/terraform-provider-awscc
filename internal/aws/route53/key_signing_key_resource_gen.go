@@ -60,7 +60,7 @@ func keySigningKeyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

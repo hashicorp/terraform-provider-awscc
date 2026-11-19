@@ -96,7 +96,7 @@ func sipMediaApplicationResource(ctx context.Context) (resource.Resource, error)
 						Description: "Valid Amazon Resource Name (ARN) of the Lambda function.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 10000),
+							stringvalidator.UTF8LengthBetween(0, 10000),
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -122,7 +122,7 @@ func sipMediaApplicationResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the SIP media application.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 _.-]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -195,7 +195,7 @@ func sipMediaApplicationResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -208,7 +208,7 @@ func sipMediaApplicationResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

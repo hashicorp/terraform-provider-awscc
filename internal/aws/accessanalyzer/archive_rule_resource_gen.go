@@ -47,7 +47,7 @@ func archiveRuleResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the analyzer for the archive rule.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_.-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -200,7 +200,7 @@ func archiveRuleResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the archive rule.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_.-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

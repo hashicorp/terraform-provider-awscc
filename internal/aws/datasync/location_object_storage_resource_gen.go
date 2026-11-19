@@ -53,7 +53,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -83,7 +83,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 8),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(128),
+					stringvalidator.UTF8LengthAtMost(128),
 					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -107,7 +107,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 63),
+				stringvalidator.UTF8LengthBetween(3, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -146,7 +146,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -203,7 +203,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -217,7 +217,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -305,7 +305,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -324,7 +324,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(4, 32),
+										stringvalidator.UTF8LengthBetween(4, 32),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -337,7 +337,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(4, 32),
+										stringvalidator.UTF8LengthBetween(4, 32),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -350,7 +350,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(6, 30),
+										stringvalidator.UTF8LengthBetween(6, 30),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9-]{4,28}[a-z0-9]$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -364,7 +364,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 20),
+										stringvalidator.UTF8LengthBetween(1, 20),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -476,7 +476,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(8, 200),
+				stringvalidator.UTF8LengthBetween(8, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -497,7 +497,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(32768),
+				stringvalidator.UTF8LengthAtMost(32768),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -517,7 +517,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(255),
+				stringvalidator.UTF8LengthAtMost(255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -584,7 +584,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(4096),
+				stringvalidator.UTF8LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -636,7 +636,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -650,7 +650,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

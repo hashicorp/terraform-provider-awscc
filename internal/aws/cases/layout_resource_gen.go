@@ -182,7 +182,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 																	Optional:    true,
 																	Computed:    true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthBetween(1, 500),
+																		stringvalidator.UTF8LengthBetween(1, 500),
 																		fwvalidators.NotNullString(),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -208,7 +208,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthAtMost(100),
+															stringvalidator.UTF8LengthAtMost(100),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -262,7 +262,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 																	Optional:    true,
 																	Computed:    true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthBetween(1, 500),
+																		stringvalidator.UTF8LengthBetween(1, 500),
 																		fwvalidators.NotNullString(),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -288,7 +288,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthAtMost(100),
+															stringvalidator.UTF8LengthAtMost(100),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -364,7 +364,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -433,7 +433,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A descriptive name for the layout. Must be unique within the Cases domain and should clearly indicate the layout's purpose and field organization.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.*[\\S]$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -478,7 +478,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -491,7 +491,7 @@ func layoutResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

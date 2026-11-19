@@ -405,7 +405,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 20),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 200),
+										stringvalidator.UTF8LengthBetween(1, 200),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 									),
 								}, /*END VALIDATORS*/
@@ -489,7 +489,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -518,7 +518,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 300),
+									stringvalidator.UTF8LengthBetween(1, 300),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z_, ]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -549,7 +549,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(4096),
+											stringvalidator.UTF8LengthAtMost(4096),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -562,7 +562,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(4096),
+											stringvalidator.UTF8LengthAtMost(4096),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -574,7 +574,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(4096),
+											stringvalidator.UTF8LengthAtMost(4096),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -610,7 +610,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -623,7 +623,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -732,7 +732,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -745,7 +745,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z-,]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -774,7 +774,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 300),
+									stringvalidator.UTF8LengthBetween(1, 300),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z_, ]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -834,7 +834,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -847,7 +847,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 3000),
+									stringvalidator.UTF8LengthBetween(1, 3000),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9,-._]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -860,7 +860,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.UTF8LengthBetween(1, 200),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -873,7 +873,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 3000),
+									stringvalidator.UTF8LengthBetween(1, 3000),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9,-._]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -896,7 +896,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
+									stringvalidator.UTF8LengthBetween(1, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -919,7 +919,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
+									stringvalidator.UTF8LengthBetween(1, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1017,7 +1017,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 			Description: "The name of the media insights pipeline configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 64),
+				stringvalidator.UTF8LengthBetween(2, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1167,7 +1167,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(2, 64),
+											stringvalidator.UTF8LengthBetween(2, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -1194,7 +1194,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 10),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthBetween(1, 100),
+												stringvalidator.UTF8LengthBetween(1, 100),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[\\s0-9a-zA-Z'-]+$"), ""),
 											),
 											fwvalidators.NotNullList(),
@@ -1219,7 +1219,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(2, 64),
+											stringvalidator.UTF8LengthBetween(2, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -1243,7 +1243,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(2, 64),
+											stringvalidator.UTF8LengthBetween(2, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -1337,7 +1337,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 			Description: "The ARN of the role used by the service to access Amazon Web Services resources.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -1379,7 +1379,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1391,7 +1391,7 @@ func mediaInsightsPipelineConfigurationResource(ctx context.Context) (resource.R
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

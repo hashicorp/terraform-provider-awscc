@@ -43,7 +43,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The policy document",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 51200),
+				stringvalidator.UTF8LengthBetween(1, 51200),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
@@ -60,7 +60,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A name for resource policy",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([^:*\\/]+\\/?)*[^:*\\/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

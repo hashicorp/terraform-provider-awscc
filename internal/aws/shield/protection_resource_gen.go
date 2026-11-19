@@ -155,7 +155,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(1),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 2048),
+					stringvalidator.UTF8LengthBetween(1, 2048),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -177,7 +177,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Friendly name for the Protection.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[ a-zA-Z0-9_\\.\\-]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -225,7 +225,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN (Amazon Resource Name) of the resource to be protected.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -272,7 +272,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -285,7 +285,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

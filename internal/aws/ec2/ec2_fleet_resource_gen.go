@@ -680,7 +680,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(3, 128),
+									stringvalidator.UTF8LengthBetween(3, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\(\\)\\.\\-/_]+"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1048,7 +1048,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 30),
+													stringvalidator.UTF8LengthBetween(1, 30),
 													stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
 												),
 											}, /*END VALIDATORS*/
@@ -1178,7 +1178,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 30),
+													stringvalidator.UTF8LengthBetween(1, 30),
 													stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
 												),
 											}, /*END VALIDATORS*/

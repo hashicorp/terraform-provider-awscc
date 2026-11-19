@@ -71,7 +71,7 @@ func transactionSearchConfigResource(ctx context.Context) (resource.Resource, er
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(256),
+						stringvalidator.UTF8LengthAtMost(256),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:kms:[a-z0-9-]+:\\d{12}:key/[a-zA-Z0-9-]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

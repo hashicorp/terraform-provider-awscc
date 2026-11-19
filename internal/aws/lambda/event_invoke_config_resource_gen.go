@@ -87,7 +87,7 @@ func eventInvokeConfigResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 350),
+								stringvalidator.UTF8LengthBetween(0, 350),
 								stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]+(-[a-z]+)+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -112,7 +112,7 @@ func eventInvokeConfigResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 350),
+								stringvalidator.UTF8LengthBetween(0, 350),
 								stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]+(-[a-z]+)+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/

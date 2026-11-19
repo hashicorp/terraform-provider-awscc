@@ -63,7 +63,7 @@ func annotationStoreResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 500),
+				stringvalidator.UTF8LengthBetween(0, 500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -123,7 +123,7 @@ func annotationStoreResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 127),
+						stringvalidator.UTF8LengthBetween(1, 127),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:.+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -170,7 +170,7 @@ func annotationStoreResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.UTF8LengthBetween(20, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

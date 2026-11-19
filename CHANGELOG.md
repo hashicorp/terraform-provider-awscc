@@ -1,5 +1,9 @@
 ## 1.111.0 (Unreleased)
 
+BUG FIXES:
+
+* provider: Update string length validation to use character rather than byte length
+
 ## 1.110.0 (November 11, 2026)
 
 FEATURES:

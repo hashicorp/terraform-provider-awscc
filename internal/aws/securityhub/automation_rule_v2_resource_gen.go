@@ -772,7 +772,7 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 															Optional:    true,
 															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 4096),
+																stringvalidator.UTF8LengthBetween(1, 4096),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -785,7 +785,7 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 															Optional:    true,
 															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 4096),
+																stringvalidator.UTF8LengthBetween(1, 4096),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -985,7 +985,7 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 															Optional:    true,
 															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 4096),
+																stringvalidator.UTF8LengthBetween(1, 4096),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1069,7 +1069,7 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 			Description: "A description of the automation rule",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -1117,7 +1117,7 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the automation rule",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

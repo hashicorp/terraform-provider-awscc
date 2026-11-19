@@ -62,7 +62,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1123,7 +1123,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(1, 100),
 									setvalidator.ValueStringsAre(
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1138,7 +1138,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(0, 100),
 									setvalidator.ValueStringsAre(
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 									),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
@@ -1311,7 +1311,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(1, 100),
 									setvalidator.ValueStringsAre(
-										stringvalidator.LengthAtMost(249),
+										stringvalidator.UTF8LengthAtMost(249),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1326,7 +1326,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(1, 100),
 									setvalidator.ValueStringsAre(
-										stringvalidator.LengthAtMost(249),
+										stringvalidator.UTF8LengthAtMost(249),
 									),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
@@ -1371,7 +1371,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the replicator.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z][0-9A-Za-z-]{0,}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1432,7 +1432,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1444,7 +1444,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

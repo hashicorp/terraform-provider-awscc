@@ -118,7 +118,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -138,7 +138,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The display name of the alert. Names don't need to be unique within a space; the alert is identified by AlertId.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.@~()-]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -233,7 +233,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
+									stringvalidator.UTF8LengthBetween(1, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:.+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -356,7 +356,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ID of the access profile the alert uses to run its query and send notifications.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -537,7 +537,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -638,7 +638,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 									Description: "The query expression. For PromQL, the series value is returned in a field named value.",
 									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 10000),
+										stringvalidator.UTF8LengthBetween(1, 10000),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Language
@@ -724,7 +724,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -737,7 +737,7 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

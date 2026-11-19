@@ -80,7 +80,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
+								stringvalidator.UTF8LengthBetween(3, 63),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -92,7 +92,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.UTF8LengthBetween(1, 1024),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -104,7 +104,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.UTF8LengthBetween(1, 1024),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -183,14 +183,14 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ObjectKey
 				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VersionId
@@ -217,7 +217,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -302,7 +302,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -343,7 +343,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+[a-zA-Z0-9\\.\\-_]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -411,7 +411,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:iam::[0-9]{12}:role(/[a-zA-Z0-9+=,.@_-]{1,512})*?/[a-zA-Z0-9+=,.@_-]{1,64}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -477,7 +477,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

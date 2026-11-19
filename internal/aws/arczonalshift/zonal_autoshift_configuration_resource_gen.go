@@ -136,7 +136,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 15),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(10, 10),
+							stringvalidator.UTF8LengthBetween(10, 10),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{4}-[0-9]{2}-[0-9]{2}$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -153,7 +153,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 15),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(19, 19),
+							stringvalidator.UTF8LengthBetween(19, 19),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):[0-9]{2}:[0-9]{2}-(Mon|Tue|Wed|Thu|Fri|Sat|Sun):[0-9]{2}:[0-9]{2}$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -171,7 +171,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(8, 1024),
+									stringvalidator.UTF8LengthBetween(8, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -184,7 +184,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(8, 10),
+									stringvalidator.UTF8LengthBetween(8, 10),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -213,7 +213,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(8, 1024),
+									stringvalidator.UTF8LengthBetween(8, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -226,7 +226,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(8, 10),
+									stringvalidator.UTF8LengthBetween(8, 10),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]*$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -266,7 +266,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(8, 1024),
+				stringvalidator.UTF8LengthBetween(8, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

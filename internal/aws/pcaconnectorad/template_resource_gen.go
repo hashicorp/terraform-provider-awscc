@@ -49,7 +49,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
+				stringvalidator.UTF8LengthBetween(5, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1412,7 +1412,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 														Optional: true,
 														Computed: true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
+															stringvalidator.UTF8LengthBetween(1, 64),
 															stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1643,7 +1643,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.UniqueValues(),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.UTF8LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1837,7 +1837,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeBetween(1, 100),
 								listvalidator.UniqueValues(),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 64),
+									stringvalidator.UTF8LengthBetween(1, 64),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2029,7 +2029,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 														Optional: true,
 														Computed: true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
+															stringvalidator.UTF8LengthBetween(1, 64),
 															stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2293,7 +2293,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.UniqueValues(),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.UTF8LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2554,7 +2554,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeBetween(1, 100),
 								listvalidator.UniqueValues(),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 64),
+									stringvalidator.UTF8LengthBetween(1, 64),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2746,7 +2746,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 														Optional: true,
 														Computed: true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
+															stringvalidator.UTF8LengthBetween(1, 64),
 															stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3008,7 +3008,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.UniqueValues(),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.UTF8LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3280,7 +3280,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeBetween(1, 100),
 								listvalidator.UniqueValues(),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 64),
+									stringvalidator.UTF8LengthBetween(1, 64),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3309,7 +3309,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

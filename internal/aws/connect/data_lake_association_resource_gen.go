@@ -41,7 +41,7 @@ func dataLakeAssociationResource(ctx context.Context) (resource.Resource, error)
 			Description: "The identifier of the analytics data set.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -61,7 +61,7 @@ func dataLakeAssociationResource(ctx context.Context) (resource.Resource, error)
 			Description: "The identifier of the Amazon Connect instance",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[-a-zA-Z0-9]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -112,7 +112,7 @@ func dataLakeAssociationResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.UTF8LengthBetween(12, 12),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

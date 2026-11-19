@@ -507,7 +507,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtMost(20),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthAtMost(256),
+												stringvalidator.UTF8LengthAtMost(256),
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -535,7 +535,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 64),
+											stringvalidator.UTF8LengthBetween(1, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9 _-]*$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -568,7 +568,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(64, 64),
+													stringvalidator.UTF8LengthBetween(64, 64),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-fA-F0-9]{64}$"), ""),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -581,7 +581,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(1024),
+													stringvalidator.UTF8LengthAtMost(1024),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -593,7 +593,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.UTF8LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -637,7 +637,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtMost(20),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthAtMost(256),
+												stringvalidator.UTF8LengthAtMost(256),
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -665,7 +665,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 64),
+											stringvalidator.UTF8LengthBetween(1, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9 _-]*$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -698,7 +698,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(64, 64),
+													stringvalidator.UTF8LengthBetween(64, 64),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-fA-F0-9]{64}$"), ""),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -711,7 +711,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(1024),
+													stringvalidator.UTF8LengthAtMost(1024),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -723,7 +723,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.UTF8LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/

@@ -65,7 +65,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "The name of the configuration",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -168,7 +168,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "The id of the Slack channel",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -186,7 +186,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "The id of the Slack workspace",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -252,7 +252,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -264,7 +264,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

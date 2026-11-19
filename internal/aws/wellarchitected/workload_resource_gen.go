@@ -57,7 +57,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 100),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(12, 12),
+					stringvalidator.UTF8LengthBetween(12, 12),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -79,7 +79,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
+				stringvalidator.UTF8LengthAtMost(2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -107,7 +107,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 50),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(100),
+					stringvalidator.UTF8LengthAtMost(100),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -127,7 +127,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The description for the workload.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 250),
+				stringvalidator.UTF8LengthBetween(3, 250),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DiscoveryConfig
@@ -257,7 +257,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(100),
+				stringvalidator.UTF8LengthAtMost(100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -276,7 +276,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(100),
+				stringvalidator.UTF8LengthAtMost(100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -300,7 +300,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -329,7 +329,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 5),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(3, 25),
+					stringvalidator.UTF8LengthBetween(3, 25),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -349,7 +349,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2084),
+				stringvalidator.UTF8LengthAtMost(2084),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -369,7 +369,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 255),
+				stringvalidator.UTF8LengthBetween(3, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -411,7 +411,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -423,7 +423,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -486,7 +486,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the workload.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 100),
+				stringvalidator.UTF8LengthBetween(3, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

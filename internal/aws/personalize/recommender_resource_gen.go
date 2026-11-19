@@ -67,7 +67,7 @@ func recommenderResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the Domain dataset group that the recommender is created for.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -104,7 +104,7 @@ func recommenderResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the recommender.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -124,7 +124,7 @@ func recommenderResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the recipe (Domain dataset group use case) that the recommender uses.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -320,7 +320,7 @@ func recommenderResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -333,7 +333,7 @@ func recommenderResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

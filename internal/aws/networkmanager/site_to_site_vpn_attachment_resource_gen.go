@@ -205,7 +205,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(9, 18),
+							stringvalidator.UTF8LengthBetween(9, 18),
 							stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -219,7 +219,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(9, 18),
+							stringvalidator.UTF8LengthBetween(9, 18),
 							stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

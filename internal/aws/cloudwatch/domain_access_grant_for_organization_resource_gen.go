@@ -146,7 +146,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 			Description: "A name that identifies the access grant.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -248,7 +248,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -261,7 +261,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 512),
+									stringvalidator.UTF8LengthBetween(1, 512),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -286,7 +286,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.UTF8LengthBetween(1, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9:/_+=,.@-]*$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -356,7 +356,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -369,7 +369,7 @@ func domainAccessGrantForOrganizationResource(ctx context.Context) (resource.Res
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

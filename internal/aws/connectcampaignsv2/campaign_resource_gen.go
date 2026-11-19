@@ -457,7 +457,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-\\.\\+]+@([\\w-]+\\.)+[\\w-]{2,4}$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -471,7 +471,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 256),
+										stringvalidator.UTF8LengthBetween(0, 256),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -483,7 +483,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.UTF8LengthBetween(20, 500),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -558,7 +558,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.UTF8LengthBetween(20, 500),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -572,7 +572,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.UTF8LengthBetween(20, 500),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -644,7 +644,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(500),
+								stringvalidator.UTF8LengthAtMost(500),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -691,7 +691,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(500),
+										stringvalidator.UTF8LengthAtMost(500),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -704,7 +704,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(100),
+										stringvalidator.UTF8LengthAtMost(100),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -905,7 +905,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.UTF8LengthBetween(20, 500),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -919,7 +919,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.UTF8LengthBetween(20, 500),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1758,7 +1758,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(127),
+													stringvalidator.UTF8LengthAtMost(127),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -1979,7 +1979,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(127),
+													stringvalidator.UTF8LengthAtMost(127),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -2143,7 +2143,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(127),
+													stringvalidator.UTF8LengthAtMost(127),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -2307,7 +2307,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(127),
+													stringvalidator.UTF8LengthAtMost(127),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -2375,7 +2375,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 500),
+				stringvalidator.UTF8LengthBetween(20, 500),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2396,7 +2396,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Amazon Connect Instance Id",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.UTF8LengthBetween(0, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-.]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2450,7 +2450,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 50),
+						stringvalidator.UTF8LengthBetween(0, 50),
 						stringvalidator.RegexMatches(regexp.MustCompile("^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -2479,7 +2479,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Campaign name",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
+				stringvalidator.UTF8LengthBetween(1, 127),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Schedule
@@ -2521,7 +2521,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(100),
+						stringvalidator.UTF8LengthAtMost(100),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2534,7 +2534,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 50),
+						stringvalidator.UTF8LengthBetween(0, 50),
 						stringvalidator.RegexMatches(regexp.MustCompile("^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2547,7 +2547,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(100),
+						stringvalidator.UTF8LengthAtMost(100),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2613,7 +2613,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 500),
+						stringvalidator.UTF8LengthBetween(20, 500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2629,7 +2629,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 500),
+								stringvalidator.UTF8LengthBetween(20, 500),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

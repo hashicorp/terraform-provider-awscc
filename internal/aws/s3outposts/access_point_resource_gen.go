@@ -62,7 +62,7 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -83,7 +83,7 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A name for the AccessPoint.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 50),
+				stringvalidator.UTF8LengthBetween(3, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9\\\\-]*[a-z0-9])?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -130,7 +130,7 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 1024),
+						stringvalidator.UTF8LengthBetween(1, 1024),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

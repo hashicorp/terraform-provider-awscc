@@ -114,7 +114,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(1, 100),
 						setvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -150,7 +150,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.UTF8LengthBetween(1, 2048),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -197,7 +197,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -217,7 +217,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 80),
+				stringvalidator.UTF8LengthBetween(1, 80),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -266,7 +266,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
+							stringvalidator.UTF8LengthBetween(1, 2048),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -310,7 +310,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

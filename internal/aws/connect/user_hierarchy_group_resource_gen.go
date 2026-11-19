@@ -59,7 +59,7 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The name of the user hierarchy group.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ParentGroupArn
@@ -124,7 +124,7 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -137,7 +137,7 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -66,7 +66,7 @@ func vocabularyResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -124,7 +124,7 @@ func vocabularyResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(0, 256),
+					stringvalidator.UTF8LengthBetween(0, 256),
 					stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -174,7 +174,7 @@ func vocabularyResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -187,7 +187,7 @@ func vocabularyResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -222,7 +222,7 @@ func vocabularyResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2000),
+				stringvalidator.UTF8LengthBetween(1, 2000),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(s3://|http(s*)://).+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -244,7 +244,7 @@ func vocabularyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A unique name, chosen by you, for your custom vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an AWS account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

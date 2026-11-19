@@ -39,7 +39,7 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 			Description: "The AWS account ID of the target account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -58,7 +58,7 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -90,7 +90,7 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 			Description: "The Amazon Resource Name (ARN) of an IAM role for the target account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1224),
+				stringvalidator.UTF8LengthAtMost(1224),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -65,7 +65,7 @@ func agentOrganizationalProfileResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -133,7 +133,7 @@ func agentOrganizationalProfileResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -153,7 +153,7 @@ func agentOrganizationalProfileResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 128),
+				stringvalidator.UTF8LengthBetween(3, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -207,7 +207,7 @@ func agentOrganizationalProfileResource(ctx context.Context) (resource.Resource,
 			Description: "The name of the organizational profile. Unique within the account and used as the last component of the ARN.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 128),
+				stringvalidator.UTF8LengthBetween(3, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -295,7 +295,7 @@ func agentOrganizationalProfileResource(ctx context.Context) (resource.Resource,
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -308,7 +308,7 @@ func agentOrganizationalProfileResource(ctx context.Context) (resource.Resource,
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

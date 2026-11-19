@@ -162,7 +162,7 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
+							stringvalidator.UTF8LengthBetween(1, 127),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -173,7 +173,7 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

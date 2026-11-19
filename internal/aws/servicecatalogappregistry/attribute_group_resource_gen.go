@@ -68,7 +68,7 @@ func attributeGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -101,7 +101,7 @@ func attributeGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the attribute group. ",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("\\w+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

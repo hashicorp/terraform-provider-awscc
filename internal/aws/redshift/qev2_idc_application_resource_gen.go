@@ -45,7 +45,7 @@ func qEV2IdcApplicationResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The display name for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application. It appears in the console.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
+				stringvalidator.UTF8LengthBetween(1, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w+=,.@-]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -119,7 +119,7 @@ func qEV2IdcApplicationResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The name of the Amazon Redshift Query Editor (QEV2) application in IAM Identity Center.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*(-[a-z0-9]+)*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -167,7 +167,7 @@ func qEV2IdcApplicationResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -180,7 +180,7 @@ func qEV2IdcApplicationResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

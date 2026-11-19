@@ -45,7 +45,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
+				stringvalidator.UTF8LengthBetween(5, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]+)*:acm-pca:[a-z]+(-[a-z]+)+-[1-9]\\d*:\\d{12}:certificate-authority\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -121,7 +121,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(15, 100),
+								stringvalidator.UTF8LengthBetween(15, 100),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{2,15}-[a-zA-Z0-9]{2,15}-[a-zA-Z0-9]{2,15}-[a-zA-Z0-9]{2,15}-[a-zA-Z0-9]{2,15}$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -134,7 +134,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -244,7 +244,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
+				stringvalidator.UTF8LengthBetween(5, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

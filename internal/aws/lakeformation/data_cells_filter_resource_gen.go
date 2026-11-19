@@ -54,7 +54,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 255),
+					stringvalidator.UTF8LengthBetween(1, 255),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -94,7 +94,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -124,7 +124,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the Database that the Table resides in.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -143,7 +143,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The desired name of the Data Cells Filter.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -211,7 +211,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Catalog Id of the Table on which to create a Data Cells Filter.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.UTF8LengthBetween(12, 12),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -230,7 +230,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the Table to create a Data Cells Filter for.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

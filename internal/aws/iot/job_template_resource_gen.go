@@ -211,7 +211,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A description of the Job Template.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2028),
+				stringvalidator.UTF8LengthAtMost(2028),
 				stringvalidator.RegexMatches(regexp.MustCompile("[^\\p{C}]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -237,7 +237,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 1600),
+					stringvalidator.UTF8LengthBetween(1, 1600),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -260,7 +260,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(32768),
+				stringvalidator.UTF8LengthAtMost(32768),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -282,7 +282,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1350),
+				stringvalidator.UTF8LengthBetween(1, 1350),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -557,7 +557,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"job_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -607,7 +607,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -669,7 +669,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.UTF8LengthBetween(20, 2048),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -728,7 +728,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -741,7 +741,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -73,7 +73,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -86,7 +86,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 512),
+							stringvalidator.UTF8LengthBetween(1, 512),
 							stringvalidator.RegexMatches(regexp.MustCompile("((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -121,7 +121,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 700),
+				stringvalidator.UTF8LengthBetween(1, 700),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -156,7 +156,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The sso instance arn that the permission set is owned.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 1224),
+				stringvalidator.UTF8LengthBetween(10, 1224),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -186,7 +186,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(25),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(20, 2048),
+					stringvalidator.UTF8LengthBetween(20, 2048),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -208,7 +208,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name you want to assign to this permission set.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 32),
+				stringvalidator.UTF8LengthBetween(1, 32),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -278,7 +278,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 128),
+								stringvalidator.UTF8LengthBetween(1, 128),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -291,7 +291,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.UTF8LengthBetween(1, 512),
 								stringvalidator.RegexMatches(regexp.MustCompile("((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -311,7 +311,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.UTF8LengthBetween(20, 2048),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -339,7 +339,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 240),
+				stringvalidator.UTF8LengthBetween(1, 240),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9&amp;$@#\\/%?=~\\-_'&quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -361,7 +361,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -406,7 +406,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -419,7 +419,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

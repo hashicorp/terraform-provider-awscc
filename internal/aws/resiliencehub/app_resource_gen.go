@@ -88,7 +88,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A string containing full ResilienceHub app template body.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 409600),
+				stringvalidator.UTF8LengthBetween(0, 409600),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s:,-\\.'\\/{}\\[\\]:\"]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -106,7 +106,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 500),
+				stringvalidator.UTF8LengthBetween(0, 500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -194,7 +194,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -455,7 +455,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 							"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type

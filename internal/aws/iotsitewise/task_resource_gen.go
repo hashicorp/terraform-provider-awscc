@@ -50,7 +50,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 2048),
+				stringvalidator.UTF8LengthBetween(0, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -118,7 +118,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -131,7 +131,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -382,7 +382,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The Amazon ECR image URI for the task container.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.UTF8LengthBetween(1, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^((\\d{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.[a-z.]+)|public\\.ecr\\.aws/[a-z][a-z0-9]+([._-][a-z0-9]+)*)/[a-z0-9]+((\\.||__|__|-+)[a-z0-9]+)*(/[a-z0-9]+((\\.||__|__|-+)[a-z0-9]+)*)*(:[a-zA-Z0-9._-]+|@sha256:[a-f0-9]{64})?$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -449,7 +449,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 64),
+											stringvalidator.UTF8LengthBetween(1, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -463,7 +463,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 1024),
+											stringvalidator.UTF8LengthBetween(1, 1024),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -482,7 +482,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(4, 128),
+															stringvalidator.UTF8LengthBetween(4, 128),
 															stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov)?:s3:[a-z0-9-]*:\\d{12}:accesspoint[/:][a-zA-Z0-9._-]+$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
@@ -496,7 +496,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 1024),
+															stringvalidator.UTF8LengthBetween(1, 1024),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -591,7 +591,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The ARN of the IAM role that grants the containerized workload permissions to access AWS resources.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w+=\\/,.@-]+:iam::[0-9]+:role/[\\w+=,.@/-]+$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -629,7 +629,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the task. Must be unique within the workspace.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -650,7 +650,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the workspace.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

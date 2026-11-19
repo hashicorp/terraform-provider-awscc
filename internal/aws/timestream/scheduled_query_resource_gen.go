@@ -63,7 +63,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(32, 128),
+				stringvalidator.UTF8LengthBetween(32, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -125,7 +125,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 							Description: "Name of the S3 bucket under which error reports will be created.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
+								stringvalidator.UTF8LengthBetween(3, 63),
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -150,7 +150,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 896),
+								stringvalidator.UTF8LengthBetween(1, 896),
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -182,7 +182,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -228,7 +228,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 							Description: "SNS topic ARN that the scheduled query status notifications will be sent to.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -255,7 +255,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 262144),
+				stringvalidator.UTF8LengthBetween(1, 262144),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -399,7 +399,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 					Description: "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 256),
+						stringvalidator.UTF8LengthBetween(1, 256),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -422,7 +422,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -443,7 +443,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -492,7 +492,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -505,7 +505,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -78,7 +78,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the AWS Config connector.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov)?:config:[a-z0-9-]+:\\d{12}:connector/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -185,7 +185,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 256),
+								stringvalidator.UTF8LengthBetween(0, 256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -213,7 +213,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(0, 128),
+													stringvalidator.UTF8LengthBetween(0, 128),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"), ""),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -226,7 +226,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 256),
+													stringvalidator.UTF8LengthBetween(1, 256),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -262,7 +262,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 256),
+								stringvalidator.UTF8LengthBetween(0, 256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -319,7 +319,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -340,7 +340,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The display name of the cloud connector.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -358,7 +358,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The IAM role ARN used by the cloud connector.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -401,7 +401,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -413,7 +413,7 @@ func cloudConnectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

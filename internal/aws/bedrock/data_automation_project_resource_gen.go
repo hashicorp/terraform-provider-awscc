@@ -108,7 +108,7 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(128),
+									stringvalidator.UTF8LengthAtMost(128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov|-iso|-iso-[a-z]):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):blueprint/(bedrock-data-automation-public-[a-zA-Z0-9-_]{1,30}|[a-zA-Z0-9-]{12,36})$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -137,7 +137,7 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]*$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -197,7 +197,7 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1488,7 +1488,7 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 			Description: "Name of the DataAutomationProject",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2661,7 +2661,7 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -2675,7 +2675,7 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

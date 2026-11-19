@@ -60,7 +60,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1000),
+				stringvalidator.UTF8LengthBetween(1, 1000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -124,7 +124,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Index ID",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -145,7 +145,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 10),
+				stringvalidator.UTF8LengthBetween(2, 10),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z-]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -165,7 +165,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 			Description: "FAQ name",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -185,7 +185,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 			Description: "FAQ role ARN",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1284),
+				stringvalidator.UTF8LengthBetween(1, 1284),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -222,7 +222,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(3, 63),
+						stringvalidator.UTF8LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -230,7 +230,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 1024),
+						stringvalidator.UTF8LengthBetween(1, 1024),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -280,7 +280,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -293,7 +293,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

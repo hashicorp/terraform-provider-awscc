@@ -134,7 +134,7 @@ func reportGeneratorResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(0, 2048),
+							stringvalidator.UTF8LengthBetween(0, 2048),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -150,7 +150,7 @@ func reportGeneratorResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(0, 2048),
+							stringvalidator.UTF8LengthBetween(0, 2048),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -265,7 +265,7 @@ func reportGeneratorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Name of the report generator.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ReportType

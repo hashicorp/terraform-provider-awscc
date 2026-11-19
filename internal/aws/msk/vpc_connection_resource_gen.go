@@ -61,7 +61,7 @@ func vpcConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The type of private link authentication",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 10),
+				stringvalidator.UTF8LengthBetween(3, 10),
 				stringvalidator.OneOf(
 					"SASL_IAM",
 					"SASL_SCRAM",

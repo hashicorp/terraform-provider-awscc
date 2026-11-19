@@ -111,7 +111,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -140,7 +140,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 255),
+					stringvalidator.UTF8LengthBetween(1, 255),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -211,7 +211,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -295,7 +295,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
+							stringvalidator.UTF8LengthBetween(1, 127),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -308,7 +308,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 255),
+							stringvalidator.UTF8LengthBetween(0, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

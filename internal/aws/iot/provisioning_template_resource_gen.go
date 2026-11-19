@@ -44,7 +44,7 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(500),
+				stringvalidator.UTF8LengthAtMost(500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -203,7 +203,7 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 36),
+				stringvalidator.UTF8LengthBetween(1, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

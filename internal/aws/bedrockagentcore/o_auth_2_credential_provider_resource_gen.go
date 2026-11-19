@@ -247,7 +247,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 			Description: "The name of the OAuth2 credential provider",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1105,7 +1105,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1117,7 +1117,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1132,7 +1132,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1145,7 +1145,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1208,7 +1208,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1220,7 +1220,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1235,7 +1235,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1248,7 +1248,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1456,7 +1456,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(3, 255),
+												stringvalidator.UTF8LengthBetween(3, 255),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1537,7 +1537,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.UTF8LengthBetween(20, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1571,7 +1571,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 253),
+											stringvalidator.UTF8LengthBetween(1, 253),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1606,7 +1606,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(3, 255),
+															stringvalidator.UTF8LengthBetween(3, 255),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -1687,7 +1687,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(20, 2048),
+															stringvalidator.UTF8LengthBetween(20, 2048),
 															stringvalidator.RegexMatches(regexp.MustCompile("^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
@@ -1764,7 +1764,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 2048),
+														stringvalidator.UTF8LengthBetween(1, 2048),
 														stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
@@ -1828,7 +1828,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1840,7 +1840,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1855,7 +1855,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1868,7 +1868,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1913,7 +1913,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1925,7 +1925,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1940,7 +1940,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1953,7 +1953,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2007,7 +2007,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2019,7 +2019,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2034,7 +2034,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2047,7 +2047,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2110,7 +2110,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2122,7 +2122,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2137,7 +2137,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2150,7 +2150,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2195,7 +2195,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2207,7 +2207,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2222,7 +2222,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2235,7 +2235,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2270,7 +2270,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2292,7 +2292,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2304,7 +2304,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2319,7 +2319,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2332,7 +2332,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2377,7 +2377,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2389,7 +2389,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2404,7 +2404,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2417,7 +2417,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3188,7 +3188,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -3201,7 +3201,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

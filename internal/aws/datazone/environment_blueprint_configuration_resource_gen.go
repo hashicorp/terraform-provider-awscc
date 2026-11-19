@@ -99,7 +99,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(0),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(4, 16),
+					stringvalidator.UTF8LengthBetween(4, 16),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -242,7 +242,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(0, 20),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.UTF8LengthBetween(1, 1024),
 										stringvalidator.RegexMatches(regexp.MustCompile("^s3://.+$"), ""),
 									),
 								}, /*END VALIDATORS*/

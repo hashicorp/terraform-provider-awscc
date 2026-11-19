@@ -59,7 +59,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -127,7 +127,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					"event_bus_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 512),
+							stringvalidator.UTF8LengthBetween(1, 512),
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:events:[a-z]+-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -154,7 +154,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\.\\-_A-Za-z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -218,7 +218,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:iam::\\d{12}:role\\/[\\w+=,.@/-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -289,7 +289,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 								"health_check": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.UTF8LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z]|\\-)*:route53:::healthcheck/[\\-a-z0-9]+$"), ""),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/
@@ -303,7 +303,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 								"route": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(9, 20),
+										stringvalidator.UTF8LengthBetween(9, 20),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\-a-z0-9]+$"), ""),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/

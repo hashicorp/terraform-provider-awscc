@@ -41,7 +41,7 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -60,7 +60,7 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The query string for the prepared statement.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 262144),
+				stringvalidator.UTF8LengthBetween(1, 262144),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StatementName
@@ -76,7 +76,7 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the prepared statement.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -95,7 +95,7 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the workgroup to which the prepared statement belongs.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

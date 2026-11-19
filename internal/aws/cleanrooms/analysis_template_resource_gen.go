@@ -108,7 +108,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 1000),
+							stringvalidator.UTF8LengthBetween(0, 1000),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -119,7 +119,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 100),
+							stringvalidator.UTF8LengthBetween(1, 100),
 							stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-zA-Z_]+"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -250,7 +250,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(255),
+				stringvalidator.UTF8LengthAtMost(255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -347,7 +347,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -365,7 +365,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -404,7 +404,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtLeast(0),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(128),
+							stringvalidator.UTF8LengthAtMost(128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"), ""),
 						),
 						fwvalidators.NotNullList(),
@@ -527,7 +527,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(3, 63),
+													stringvalidator.UTF8LengthBetween(3, 63),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -578,7 +578,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(3, 63),
+												stringvalidator.UTF8LengthBetween(3, 63),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -621,7 +621,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(32, 512),
+								stringvalidator.UTF8LengthBetween(32, 512),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -640,7 +640,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 90000),
+						stringvalidator.UTF8LengthBetween(0, 90000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -839,7 +839,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(128),
+													stringvalidator.UTF8LengthAtMost(128),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -971,7 +971,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -983,7 +983,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

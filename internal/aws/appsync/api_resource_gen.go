@@ -630,7 +630,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the AppSync API.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_\\-\\ ]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -649,7 +649,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 250),
+				stringvalidator.UTF8LengthBetween(1, 250),
 				stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_\\-\\ \\.]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -699,7 +699,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -712,7 +712,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\w+-=\\.:/@]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

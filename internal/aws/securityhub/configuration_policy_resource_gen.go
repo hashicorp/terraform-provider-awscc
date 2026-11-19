@@ -232,7 +232,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 								listvalidator.SizeAtMost(1000),
 								listvalidator.UniqueValues(),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(2048),
+									stringvalidator.UTF8LengthAtMost(2048),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -252,7 +252,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 										listvalidator.SizeAtMost(1000),
 										listvalidator.UniqueValues(),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthAtMost(2048),
+											stringvalidator.UTF8LengthAtMost(2048),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -269,7 +269,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 										listvalidator.SizeAtMost(1000),
 										listvalidator.UniqueValues(),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthAtMost(2048),
+											stringvalidator.UTF8LengthAtMost(2048),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -312,7 +312,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 																	Optional:    true,
 																	Computed:    true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthAtMost(2048),
+																		stringvalidator.UTF8LengthAtMost(2048),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																		stringplanmodifier.UseStateForUnknown(),
@@ -328,7 +328,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 																		listvalidator.SizeAtMost(100),
 																		listvalidator.UniqueValues(),
 																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthAtMost(2048),
+																			stringvalidator.UTF8LengthAtMost(2048),
 																		),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -364,7 +364,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 																	Optional:    true,
 																	Computed:    true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthAtMost(2048),
+																		stringvalidator.UTF8LengthAtMost(2048),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																		stringplanmodifier.UseStateForUnknown(),
@@ -380,7 +380,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 																		listvalidator.SizeAtMost(100),
 																		listvalidator.UniqueValues(),
 																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthAtMost(2048),
+																			stringvalidator.UTF8LengthAtMost(2048),
 																		),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -425,7 +425,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthAtMost(2048),
+													stringvalidator.UTF8LengthAtMost(2048),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -501,7 +501,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 512),
+				stringvalidator.UTF8LengthBetween(0, 512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -535,7 +535,7 @@ func configurationPolicyResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the configuration policy.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceEnabled

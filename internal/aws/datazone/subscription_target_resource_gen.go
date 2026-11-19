@@ -51,7 +51,7 @@ func subscriptionTargetResource(ctx context.Context) (resource.Resource, error) 
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 256),
+					stringvalidator.UTF8LengthBetween(1, 256),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[^\\.]*"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -228,7 +228,7 @@ func subscriptionTargetResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The name of the subscription target.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectId
@@ -304,7 +304,7 @@ func subscriptionTargetResource(ctx context.Context) (resource.Resource, error) 
 						Description: "The form name included in the subscription target configuration.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

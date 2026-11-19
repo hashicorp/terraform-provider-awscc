@@ -116,7 +116,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 									Description: "The S3 bucket name.",
 									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(3, 63),
+										stringvalidator.UTF8LengthBetween(3, 63),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9][a-z0-9\\.\\-]{1,61}[a-z0-9])$"), ""),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/
@@ -125,7 +125,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 									Description: "The S3 object key.",
 									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.UTF8LengthBetween(1, 1024),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/
 								// Property: VersionId
@@ -153,7 +153,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 							Description: "The runtime identifier.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 30),
+								stringvalidator.UTF8LengthBetween(1, 30),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*[0-9]+(\\.[a-z0-9]+)*$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -198,7 +198,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.UTF8LengthBetween(0, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -235,7 +235,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the web function this revision belongs to. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -256,7 +256,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-z-]*){1}:kms:[a-z0-9-]+:[0-9]{12}:key/.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -398,7 +398,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.UTF8LengthBetween(1, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:network-connector:[a-zA-Z0-9_-]+:[0-9]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -421,7 +421,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 					Description: "The ARN of the execution role.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.UTF8LengthBetween(20, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-z-]*){1}:iam::[0-9]{12}:role/.*$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -468,7 +468,7 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 500),
+										stringvalidator.UTF8LengthBetween(1, 500),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\.\\-_/#]+$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

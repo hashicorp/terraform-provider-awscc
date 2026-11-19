@@ -117,7 +117,7 @@ func signingConfigurationResource(ctx context.Context) (resource.Resource, error
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 256),
+										stringvalidator.UTF8LengthBetween(1, 256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(?:[a-z0-9*]+(?:[._-][a-z0-9*]+)*/)*[a-z0-9*]+(?:[._-][a-z0-9*]+)*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -158,7 +158,7 @@ func signingConfigurationResource(ctx context.Context) (resource.Resource, error
 						Description: "AWS Signer signing profile ARN to use for matched repositories.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(200),
+							stringvalidator.UTF8LengthAtMost(200),
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]+)*:signer:[a-z0-9-]+:[0-9]{12}:\\/signing-profiles\\/[a-zA-Z0-9_]{2,}$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/

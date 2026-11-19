@@ -45,7 +45,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
+				stringvalidator.UTF8LengthBetween(5, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -159,7 +159,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(1, 5),
 						listvalidator.UniqueValues(),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(11, 20),
+							stringvalidator.UTF8LengthBetween(11, 20),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(?:sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$"), ""),
 						),
 					}, /*END VALIDATORS*/

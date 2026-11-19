@@ -117,7 +117,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -133,7 +133,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -981,7 +981,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -994,7 +994,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

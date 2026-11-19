@@ -47,7 +47,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the AWS Kinesis resource to which the policy applies.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

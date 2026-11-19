@@ -76,7 +76,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 50),
+				stringvalidator.UTF8LengthBetween(3, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -195,7 +195,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 					"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(3, 63),
+							stringvalidator.UTF8LengthBetween(3, 63),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -204,7 +204,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(12, 12),
+							stringvalidator.UTF8LengthBetween(12, 12),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

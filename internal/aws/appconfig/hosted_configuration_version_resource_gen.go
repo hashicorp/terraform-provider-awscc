@@ -92,7 +92,7 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 			Description: "A standard MIME type describing the format of the configuration content.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -112,7 +112,7 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -151,7 +151,7 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 64),
+				stringvalidator.UTF8LengthBetween(0, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^$|.*[^0-9].*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

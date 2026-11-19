@@ -221,7 +221,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -235,7 +235,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
+						stringvalidator.UTF8LengthAtMost(1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[\\w+]+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -249,7 +249,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
+						stringvalidator.UTF8LengthAtMost(1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[\\w+]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -263,7 +263,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -277,7 +277,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -291,7 +291,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -305,7 +305,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -318,7 +318,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -332,7 +332,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(500),
+						stringvalidator.UTF8LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -448,7 +448,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -462,7 +462,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -512,7 +512,7 @@ func workforceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the private workforce.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([a-zA-Z0-9\\-]){0,62}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

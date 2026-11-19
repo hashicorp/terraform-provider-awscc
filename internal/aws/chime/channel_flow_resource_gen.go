@@ -47,7 +47,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the app instance.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 1600),
+				stringvalidator.UTF8LengthBetween(5, 1600),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -143,7 +143,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the channel flow.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Processors
@@ -248,7 +248,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 										Description: "The ARN of the Lambda message processing function.",
 										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(15, 2048),
+											stringvalidator.UTF8LengthBetween(15, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?$"), ""),
 										}, /*END VALIDATORS*/
 									}, /*END ATTRIBUTE*/
@@ -284,7 +284,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The name of the processor.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -335,7 +335,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -348,7 +348,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

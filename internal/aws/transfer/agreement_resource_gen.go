@@ -46,7 +46,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specifies the access role for the agreement.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:.*role/.*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -98,7 +98,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(|/.*)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -237,7 +237,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -282,7 +282,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A unique identifier for the local profile.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(19, 19),
+				stringvalidator.UTF8LengthBetween(19, 19),
 				stringvalidator.RegexMatches(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -300,7 +300,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A unique identifier for the partner profile.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(19, 19),
+				stringvalidator.UTF8LengthBetween(19, 19),
 				stringvalidator.RegexMatches(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -343,7 +343,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A unique identifier for the server.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(19, 19),
+				stringvalidator.UTF8LengthBetween(19, 19),
 				stringvalidator.RegexMatches(regexp.MustCompile("^s-([0-9a-f]{17})$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -417,7 +417,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -430,7 +430,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

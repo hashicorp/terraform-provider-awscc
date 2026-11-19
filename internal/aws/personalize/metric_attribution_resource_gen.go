@@ -46,7 +46,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the destination dataset group.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\d-]+):personalize:.*:.*:.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -113,7 +113,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The metric's event type.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Expression
@@ -121,7 +121,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The attribute's expression.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MetricName
@@ -129,7 +129,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The metric's name.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -192,7 +192,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The ARN of the IAM role for the metric attribution.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(256),
+						stringvalidator.UTF8LengthAtMost(256),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -205,7 +205,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws.*:kms:.*:[0-9]{12}:key/"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -218,7 +218,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(s3|http|https)://.+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -252,7 +252,7 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the metric attribution.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

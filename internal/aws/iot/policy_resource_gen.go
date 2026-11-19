@@ -65,7 +65,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 404600),
+				stringvalidator.UTF8LengthBetween(1, 404600),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyName

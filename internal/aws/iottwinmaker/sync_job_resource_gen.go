@@ -95,7 +95,7 @@ func syncJobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The IAM Role that execute SyncJob.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -115,7 +115,7 @@ func syncJobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The source of the SyncJob.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -177,7 +177,7 @@ func syncJobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ID of the workspace.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

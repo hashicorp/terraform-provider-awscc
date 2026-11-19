@@ -65,7 +65,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A name for the bucket.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 63),
+				stringvalidator.UTF8LengthBetween(3, 63),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -323,7 +323,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 1024),
+																stringvalidator.UTF8LengthBetween(1, 1024),
 																stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -336,7 +336,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 1024),
+																stringvalidator.UTF8LengthBetween(1, 1024),
 																stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -381,7 +381,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.UTF8LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -394,7 +394,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.UTF8LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -424,7 +424,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(255),
+									stringvalidator.UTF8LengthAtMost(255),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -521,7 +521,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.UTF8LengthBetween(1, 1024),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -533,7 +533,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.UTF8LengthBetween(1, 1024),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

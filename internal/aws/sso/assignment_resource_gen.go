@@ -43,7 +43,7 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The sso instance that the permission set is owned.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 1224),
+				stringvalidator.UTF8LengthBetween(10, 1224),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -64,7 +64,7 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The permission set that the assignment will be assigned",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 1224),
+				stringvalidator.UTF8LengthBetween(10, 1224),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -85,7 +85,7 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The assignee's identifier, user id/group id",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 47),
+				stringvalidator.UTF8LengthBetween(1, 47),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

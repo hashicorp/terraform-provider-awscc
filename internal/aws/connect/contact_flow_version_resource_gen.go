@@ -43,7 +43,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The ARN of the contact flow this version is tied to.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -80,7 +80,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(500),
+				stringvalidator.UTF8LengthAtMost(500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

@@ -216,7 +216,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "An identifier for the new game server group.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-\\.]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -416,7 +416,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*:role\\/[\\w+=,.@-]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -502,7 +502,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 20),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(15, 24),
+					stringvalidator.UTF8LengthBetween(15, 24),
 					stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]+$"), ""),
 				),
 			}, /*END VALIDATORS*/

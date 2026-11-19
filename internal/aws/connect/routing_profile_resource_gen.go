@@ -89,7 +89,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The description of the routing profile.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 250),
+				stringvalidator.UTF8LengthBetween(1, 250),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
@@ -339,7 +339,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the routing profile.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
+				stringvalidator.UTF8LengthBetween(1, 127),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: QueueConfigs
@@ -545,7 +545,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -558,7 +558,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

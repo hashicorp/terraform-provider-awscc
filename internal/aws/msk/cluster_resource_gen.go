@@ -201,7 +201,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(6, 9),
+						stringvalidator.UTF8LengthBetween(6, 9),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -242,7 +242,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(7, 23),
+										stringvalidator.UTF8LengthBetween(7, 23),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -359,7 +359,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(5, 32),
+						stringvalidator.UTF8LengthBetween(5, 32),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
@@ -622,7 +622,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -813,7 +813,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(7, 23),
+				stringvalidator.UTF8LengthBetween(7, 23),
 				stringvalidator.OneOf(
 					"DEFAULT",
 					"PER_BROKER",
@@ -836,7 +836,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"kafka_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingInfo
@@ -1349,7 +1349,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 6),
+				stringvalidator.UTF8LengthBetween(5, 6),
 				stringvalidator.OneOf(
 					"LOCAL",
 					"TIERED",

@@ -76,7 +76,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Policy text content. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1000000),
+				stringvalidator.UTF8LengthBetween(1, 1000000),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -94,7 +94,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -131,7 +131,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Name of the Policy",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -178,7 +178,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -192,7 +192,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

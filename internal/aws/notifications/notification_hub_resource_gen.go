@@ -98,7 +98,7 @@ func notificationHubResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Region that NotificationHub is present in.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 25),
+				stringvalidator.UTF8LengthBetween(2, 25),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

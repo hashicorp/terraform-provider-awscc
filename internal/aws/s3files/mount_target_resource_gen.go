@@ -54,7 +54,7 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}|fs-[0-9a-f]{17,40})$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -100,7 +100,7 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(7, 15),
+				stringvalidator.UTF8LengthBetween(7, 15),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -120,7 +120,7 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 39),
+				stringvalidator.UTF8LengthBetween(3, 39),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -190,7 +190,7 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(100),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(11, 43),
+					stringvalidator.UTF8LengthBetween(11, 43),
 					stringvalidator.RegexMatches(regexp.MustCompile("^(sg-[0-9a-f]{8,40})$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -242,7 +242,7 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(15, 47),
+				stringvalidator.UTF8LengthBetween(15, 47),
 				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-f]{8,40}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

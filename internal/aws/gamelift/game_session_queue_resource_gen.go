@@ -70,7 +70,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\S]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -106,7 +106,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:/-]+"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -156,7 +156,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 100),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.UTF8LengthBetween(1, 64),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]+(-([a-z]+|\\d))*"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -232,7 +232,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 512),
+									stringvalidator.UTF8LengthBetween(1, 512),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z0-9:/*._#-]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -291,7 +291,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A descriptive label that is associated with game session queue. Queue names must be unique within each Region.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -313,7 +313,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 300),
+				stringvalidator.UTF8LengthBetween(1, 300),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:_-]*(\\.fifo)?"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -432,7 +432,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 100),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.UTF8LengthBetween(1, 64),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -511,7 +511,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -524,7 +524,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -75,7 +75,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeBetween(0, 100),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 64),
+					stringvalidator.UTF8LengthBetween(1, 64),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -97,7 +97,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^$|^arn:[a-z0-9-]+:logs:[a-z0-9-]+:[0-9]{12}:log-group:.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -118,7 +118,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 15),
+				stringvalidator.UTF8LengthBetween(5, 15),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -139,7 +139,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 25),
+				stringvalidator.UTF8LengthBetween(1, 25),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -218,7 +218,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 50),
+				stringvalidator.UTF8LengthBetween(5, 50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -298,7 +298,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -334,7 +334,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the S3 File Gateway that hosts the share.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(50, 500),
+				stringvalidator.UTF8LengthBetween(50, 500),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]+:storagegateway:[a-z0-9-]+:[0-9]{12}:gateway/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -380,7 +380,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeBetween(0, 100),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 64),
+					stringvalidator.UTF8LengthBetween(1, 64),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -417,7 +417,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(7, 2048),
+				stringvalidator.UTF8LengthBetween(7, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -438,7 +438,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the S3 bucket, or bucket prefix, the share exposes.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(16, 1400),
+				stringvalidator.UTF8LengthBetween(16, 1400),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:[a-z0-9-]+:s3:[a-z0-9-]*:[0-9]*:.+|[0-9a-zA-Z][0-9a-zA-Z.\\-]{1,61}-s3alias)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -460,7 +460,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 100),
+				stringvalidator.UTF8LengthBetween(2, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\{[\\w\\s:\\{\\}\\[\\]\\\"]*}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -575,7 +575,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the IAM role the gateway assumes when it accesses the S3 location.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):iam::([0-9]+):role/(\\S+)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -636,7 +636,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -649,7 +649,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -680,7 +680,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -712,7 +712,7 @@ func sMBFileShareResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeBetween(0, 100),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 64),
+					stringvalidator.UTF8LengthBetween(1, 64),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

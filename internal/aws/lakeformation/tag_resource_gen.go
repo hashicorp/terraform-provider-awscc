@@ -45,7 +45,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.UTF8LengthBetween(12, 12),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -66,7 +66,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The key-name for the LF-tag.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -96,7 +96,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 1000),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(0, 256),
+					stringvalidator.UTF8LengthBetween(0, 256),
 					stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$"), ""),
 				),
 			}, /*END VALIDATORS*/

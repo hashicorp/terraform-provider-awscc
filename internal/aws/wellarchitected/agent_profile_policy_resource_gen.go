@@ -41,7 +41,7 @@ func agentProfilePolicyResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The IAM resource-based policy document as a JSON string. Allow-only statements, no negation condition operators, maximum 51200 characters.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 51200),
+				stringvalidator.UTF8LengthBetween(1, 51200),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProfileArn
@@ -58,7 +58,7 @@ func agentProfilePolicyResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The Amazon Resource Name (ARN) of the parent Agent Profile the policy is attached to. Pass `!GetAtt` (or `!Ref`) of the parent AWS::WellArchitected::AgentProfile to flow its ARN here. Also serves as the primary identifier of this policy attachment.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z0-9-]+)?:wellarchitected:[a-z0-9-]{6,64}:[0-9]{12}:agent-profile/[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

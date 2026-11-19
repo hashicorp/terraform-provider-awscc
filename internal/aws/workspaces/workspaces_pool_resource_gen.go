@@ -65,7 +65,7 @@ func workspacesPoolResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(100),
+						stringvalidator.UTF8LengthAtMost(100),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_./()!*'-]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -160,7 +160,7 @@ func workspacesPoolResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_./() -]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -179,7 +179,7 @@ func workspacesPoolResource(ctx context.Context) (resource.Resource, error) {
 		"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 65),
+				stringvalidator.UTF8LengthBetween(10, 65),
 				stringvalidator.RegexMatches(regexp.MustCompile("^wsd-[0-9a-z]{8,63}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

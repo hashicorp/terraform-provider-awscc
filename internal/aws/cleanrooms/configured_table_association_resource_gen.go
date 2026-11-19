@@ -188,7 +188,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeBetween(0, 25),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthAtMost(256),
+														stringvalidator.UTF8LengthAtMost(256),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -204,7 +204,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(12, 12),
+														stringvalidator.UTF8LengthBetween(12, 12),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\d+"), ""),
 													),
 												}, /*END VALIDATORS*/
@@ -231,7 +231,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeBetween(0, 25),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthAtMost(256),
+														stringvalidator.UTF8LengthAtMost(256),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -247,7 +247,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(12, 12),
+														stringvalidator.UTF8LengthBetween(12, 12),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\d+"), ""),
 													),
 												}, /*END VALIDATORS*/
@@ -274,7 +274,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeBetween(0, 25),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthAtMost(256),
+														stringvalidator.UTF8LengthAtMost(256),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -290,7 +290,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(12, 12),
+														stringvalidator.UTF8LengthBetween(12, 12),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\d+"), ""),
 													),
 												}, /*END VALIDATORS*/
@@ -381,7 +381,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		"configured_table_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -400,7 +400,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(255),
+				stringvalidator.UTF8LengthAtMost(255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -418,7 +418,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -436,7 +436,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -454,7 +454,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(32, 512),
+				stringvalidator.UTF8LengthBetween(32, 512),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -493,7 +493,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -505,7 +505,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

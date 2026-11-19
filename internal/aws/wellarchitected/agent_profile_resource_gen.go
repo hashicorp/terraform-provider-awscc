@@ -93,7 +93,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The ARN of the IAM role used to access resources in this account.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
+							stringvalidator.UTF8LengthBetween(1, 2048),
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\-]+):iam::[0-9]{12}:role/(service-role/)?[a-zA-Z0-9+=,.@\\-_]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -102,7 +102,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The target AWS account ID.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(12, 12),
+							stringvalidator.UTF8LengthBetween(12, 12),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -114,7 +114,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.SizeBetween(0, 25),
 							setvalidator.ValueStringsAre(
-								stringvalidator.LengthAtMost(64),
+								stringvalidator.UTF8LengthAtMost(64),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-[a-z]+-[0-9]{1}$"), ""),
 							),
 						}, /*END VALIDATORS*/
@@ -157,7 +157,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -225,7 +225,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -245,7 +245,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 128),
+				stringvalidator.UTF8LengthBetween(3, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -265,7 +265,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the IAM role assumed to execute recommendation actions.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\-]+):iam::[0-9]{12}:role/(service-role/)?[a-zA-Z0-9+=,.@\\-_]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -317,7 +317,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the profile. Unique within the account and used as the last component of the ARN.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 128),
+				stringvalidator.UTF8LengthBetween(3, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -403,7 +403,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -416,7 +416,7 @@ func agentProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -97,7 +97,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		"group_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.UTF8LengthBetween(0, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\x20-\\x7E]+$"), ""),
 			}, /*END VALIDATORS*/
 			// GroupDisplayName is a write-only property.
@@ -114,7 +114,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		"group_security_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(7, 256),
+				stringvalidator.UTF8LengthBetween(7, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^S-[0-9]-([0-9]+-){1,14}[0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -133,7 +133,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
+				stringvalidator.UTF8LengthBetween(5, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)\\/template(\\/[\\w-]+)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

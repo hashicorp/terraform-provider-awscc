@@ -91,7 +91,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -175,7 +175,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 					Description: "An Amazon S3 bucket identifier. This is the name of the S3 bucket.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Key
@@ -183,7 +183,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The name of the zip file that contains the script files.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ObjectVersion
@@ -192,7 +192,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -203,7 +203,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access the S3 bucket.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(1),
+						stringvalidator.UTF8LengthAtLeast(1),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -252,7 +252,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -265,7 +265,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -298,7 +298,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

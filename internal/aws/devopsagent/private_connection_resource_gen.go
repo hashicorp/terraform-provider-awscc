@@ -66,7 +66,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 32768),
+				stringvalidator.UTF8LengthBetween(1, 32768),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -208,7 +208,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -248,7 +248,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 255),
+								stringvalidator.UTF8LengthBetween(3, 255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.:\\-]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -312,7 +312,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(11, 20),
+									stringvalidator.UTF8LengthBetween(11, 20),
 									stringvalidator.RegexMatches(regexp.MustCompile("^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -330,7 +330,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 20),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(15, 24),
+									stringvalidator.UTF8LengthBetween(15, 24),
 									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -345,7 +345,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(5, 50),
+								stringvalidator.UTF8LengthBetween(5, 50),
 								stringvalidator.RegexMatches(regexp.MustCompile("^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -382,7 +382,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Unique name for this Private Connection within the account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 30),
+				stringvalidator.UTF8LengthBetween(3, 30),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -451,7 +451,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -464,7 +464,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

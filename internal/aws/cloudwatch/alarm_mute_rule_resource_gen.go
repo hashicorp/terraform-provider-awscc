@@ -63,7 +63,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -135,7 +135,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeAtMost(500),
 						setvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 						),
 						fwvalidators.NotNullSet(),
 					}, /*END VALIDATORS*/
@@ -179,7 +179,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -238,7 +238,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The duration of the schedule when it triggers",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 50),
+								stringvalidator.UTF8LengthBetween(1, 50),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Expression
@@ -246,7 +246,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The expression of the schedule",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.UTF8LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Timezone
@@ -255,7 +255,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 50),
+								stringvalidator.UTF8LengthBetween(1, 50),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -344,7 +344,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -357,7 +357,7 @@ func alarmMuteRuleResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

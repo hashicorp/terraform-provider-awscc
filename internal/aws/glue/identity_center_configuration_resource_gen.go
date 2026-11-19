@@ -77,7 +77,7 @@ func identityCenterConfigurationResource(ctx context.Context) (resource.Resource
 			Description: "The IAM identity center instance arn",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 1224),
+				stringvalidator.UTF8LengthBetween(10, 1224),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -77,7 +77,7 @@ func computeQuotaResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the EKS-orchestrated SageMaker HyperPod cluster the compute allocation definition is bound to. Slurm-orchestrated clusters are rejected by the service.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 256),
+				stringvalidator.UTF8LengthBetween(20, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -796,7 +796,7 @@ func computeQuotaResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -833,7 +833,7 @@ func computeQuotaResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the compute allocation definition.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -906,7 +906,7 @@ func computeQuotaResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -918,7 +918,7 @@ func computeQuotaResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

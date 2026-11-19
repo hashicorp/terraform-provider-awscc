@@ -58,7 +58,7 @@ func trafficPolicyInstanceResource(ctx context.Context) (resource.Resource, erro
 			Description: "The ID of the hosted zone that Amazon Route 53 creates the resource record sets in. The bare ID as Route 53 returns it, without a /hostedzone/ prefix.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(32),
+				stringvalidator.UTF8LengthAtMost(32),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z0-9]{1,32}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -94,7 +94,7 @@ func trafficPolicyInstanceResource(ctx context.Context) (resource.Resource, erro
 			Description: "The domain name, or subdomain name, for which Amazon Route 53 answers DNS queries by using the resource record sets it creates for this traffic policy instance. Must be lower-case and end with a trailing dot, which is the form Route 53 returns: Route 53 normalizes DNS names, so admitting another form would neither round-trip through Read nor guarantee that a change to this property changes the resource's identity.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^A-Z\\s]+\\.$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -145,7 +145,7 @@ func trafficPolicyInstanceResource(ctx context.Context) (resource.Resource, erro
 			Description: "The ID of the traffic policy that Amazon Route 53 uses to create resource record sets in the specified hosted zone. Lower-case, as Route 53 returns it.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 36),
+				stringvalidator.UTF8LengthBetween(1, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f-]{1,36}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

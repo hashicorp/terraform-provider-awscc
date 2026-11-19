@@ -43,7 +43,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.UTF8LengthBetween(12, 12),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -366,7 +366,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 64),
+										stringvalidator.UTF8LengthBetween(1, 64),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -409,7 +409,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 64),
+										stringvalidator.UTF8LengthBetween(1, 64),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -715,7 +715,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -727,7 +727,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -761,7 +761,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

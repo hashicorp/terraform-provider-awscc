@@ -106,7 +106,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(64),
+							stringvalidator.UTF8LengthAtMost(64),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -118,7 +118,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(512),
+							stringvalidator.UTF8LengthAtMost(512),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -143,7 +143,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.ValueStringsAre(
-								stringvalidator.LengthAtMost(64),
+								stringvalidator.UTF8LengthAtMost(64),
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -182,7 +182,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 			Description: "A description for the experiment template.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ExperimentOptions
@@ -333,7 +333,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 512),
+											stringvalidator.UTF8LengthBetween(1, 512),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -366,7 +366,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(3, 63),
+										stringvalidator.UTF8LengthBetween(3, 63),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -378,7 +378,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 256),
+										stringvalidator.UTF8LengthBetween(1, 256),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -498,7 +498,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -532,7 +532,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
+								stringvalidator.UTF8LengthBetween(3, 63),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -544,7 +544,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 700),
+								stringvalidator.UTF8LengthBetween(1, 700),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -576,7 +576,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1224),
+				stringvalidator.UTF8LengthAtMost(1224),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StopConditions
@@ -611,7 +611,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(64),
+							stringvalidator.UTF8LengthAtMost(64),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -619,7 +619,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(20, 2048),
+							stringvalidator.UTF8LengthBetween(20, 2048),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -753,7 +753,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -768,7 +768,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthAtMost(128),
+											stringvalidator.UTF8LengthAtMost(128),
 										),
 										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
@@ -802,7 +802,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.ValueStringsAre(
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -825,7 +825,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(64),
+							stringvalidator.UTF8LengthAtMost(64),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -837,7 +837,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(64),
+							stringvalidator.UTF8LengthAtMost(64),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

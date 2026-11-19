@@ -61,7 +61,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(512),
+				stringvalidator.UTF8LengthAtMost(512),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -106,7 +106,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(512),
+								stringvalidator.UTF8LengthAtMost(512),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:*:.*:.*:[0-9]+:.*"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -140,7 +140,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The provisioning type of the connector. Currently the only supported value is LAMBDA. ",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -158,7 +158,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
+				stringvalidator.UTF8LengthAtMost(2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -139,7 +139,7 @@ func accountCustomizationResource(ctx context.Context) (resource.Resource, error
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(500),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 64),
+					stringvalidator.UTF8LengthBetween(1, 64),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

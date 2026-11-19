@@ -62,7 +62,7 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 			Description: "Name of the scan",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtLeast(1),
+				stringvalidator.UTF8LengthAtLeast(1),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Schedule

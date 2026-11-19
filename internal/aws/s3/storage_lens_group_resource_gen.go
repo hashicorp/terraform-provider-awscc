@@ -322,7 +322,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(1024),
+									stringvalidator.UTF8LengthAtMost(1024),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -337,7 +337,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(1024),
+									stringvalidator.UTF8LengthAtMost(1024),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -353,7 +353,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 128),
+											stringvalidator.UTF8LengthBetween(1, 128),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -365,7 +365,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(0, 256),
+											stringvalidator.UTF8LengthBetween(0, 256),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -467,7 +467,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(1024),
+							stringvalidator.UTF8LengthAtMost(1024),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -482,7 +482,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(1024),
+							stringvalidator.UTF8LengthAtMost(1024),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -498,7 +498,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -510,7 +510,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.UTF8LengthBetween(0, 256),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -607,7 +607,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(1024),
+									stringvalidator.UTF8LengthAtMost(1024),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -622,7 +622,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(1024),
+									stringvalidator.UTF8LengthAtMost(1024),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -638,7 +638,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 128),
+											stringvalidator.UTF8LengthBetween(1, 128),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -650,7 +650,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(0, 256),
+											stringvalidator.UTF8LengthBetween(0, 256),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -762,7 +762,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name that identifies the Amazon S3 Storage Lens Group.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -820,7 +820,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -832,7 +832,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

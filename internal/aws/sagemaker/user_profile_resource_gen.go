@@ -51,7 +51,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ID of the associated Domain.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -91,7 +91,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -136,7 +136,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -148,7 +148,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -196,7 +196,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A name for the UserProfile.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.UTF8LengthBetween(1, 63),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1990,7 +1990,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2007,7 +2007,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
+											stringvalidator.UTF8LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2021,7 +2021,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
+											stringvalidator.UTF8LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2252,7 +2252,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2265,7 +2265,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2278,7 +2278,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2291,7 +2291,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.UTF8LengthBetween(0, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2315,7 +2315,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
+									stringvalidator.UTF8LengthAtMost(256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -2343,7 +2343,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(11, 21),
+											stringvalidator.UTF8LengthBetween(11, 21),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2356,7 +2356,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.UTF8LengthBetween(1, 256),
 											stringvalidator.RegexMatches(regexp.MustCompile("^\\/\\S*$"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2378,7 +2378,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(11, 21),
+											stringvalidator.UTF8LengthBetween(11, 21),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2391,7 +2391,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.UTF8LengthBetween(1, 256),
 											stringvalidator.RegexMatches(regexp.MustCompile("^\\/\\S*$"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2413,7 +2413,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(0, 1024),
+											stringvalidator.UTF8LengthBetween(0, 1024),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -2424,7 +2424,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(0, 1024),
+											stringvalidator.UTF8LengthBetween(0, 1024),
 											stringvalidator.RegexMatches(regexp.MustCompile("(s3)://([^/]+)/?(.*)"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2490,7 +2490,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1023),
+						stringvalidator.UTF8LengthAtMost(1023),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -2502,7 +2502,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.UTF8LengthBetween(20, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2589,7 +2589,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2606,7 +2606,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(256),
+											stringvalidator.UTF8LengthAtMost(256),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2635,7 +2635,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
+											stringvalidator.UTF8LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2649,7 +2649,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
+											stringvalidator.UTF8LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2880,7 +2880,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2893,7 +2893,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2906,7 +2906,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2919,7 +2919,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.UTF8LengthBetween(0, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2946,7 +2946,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(0, 5),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(20, 2048),
+											stringvalidator.UTF8LengthBetween(20, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -2963,7 +2963,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(0, 5),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(20, 2048),
+											stringvalidator.UTF8LengthBetween(20, 2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 										),
 									}, /*END VALIDATORS*/
@@ -2988,7 +2988,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
+									stringvalidator.UTF8LengthAtMost(256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -3206,7 +3206,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3219,7 +3219,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3232,7 +3232,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3245,7 +3245,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.UTF8LengthBetween(0, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3268,7 +3268,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
+									stringvalidator.UTF8LengthAtMost(256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -3297,7 +3297,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
+											stringvalidator.UTF8LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -3311,7 +3311,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
+											stringvalidator.UTF8LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -3542,7 +3542,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3555,7 +3555,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3568,7 +3568,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
+										stringvalidator.UTF8LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3581,7 +3581,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.UTF8LengthBetween(0, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3605,7 +3605,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
+									stringvalidator.UTF8LengthAtMost(256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -3673,7 +3673,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 5),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(32),
+							stringvalidator.UTF8LengthAtMost(32),
 							stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -3705,7 +3705,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3718,7 +3718,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(1024),
+								stringvalidator.UTF8LengthAtMost(1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4080,7 +4080,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtMost(20),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthBetween(1, 128),
+												stringvalidator.UTF8LengthBetween(1, 128),
 												stringvalidator.RegexMatches(regexp.MustCompile("^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"), ""),
 											),
 										}, /*END VALIDATORS*/

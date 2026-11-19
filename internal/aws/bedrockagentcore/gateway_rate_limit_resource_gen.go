@@ -63,7 +63,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 512),
+				stringvalidator.UTF8LengthBetween(0, 512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -92,7 +92,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 10),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 80),
+					stringvalidator.UTF8LengthBetween(1, 80),
 					stringvalidator.RegexMatches(regexp.MustCompile("^(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_])$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -405,7 +405,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 64),
+				stringvalidator.UTF8LengthBetween(2, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

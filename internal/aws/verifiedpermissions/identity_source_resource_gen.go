@@ -188,7 +188,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 1000),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -205,7 +205,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 200),
+										stringvalidator.UTF8LengthBetween(1, 200),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -225,7 +225,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z0-9-]+:cognito-idp:(([a-zA-Z0-9-]+:\\d{12}:userpool/[\\w-]+_[0-9a-zA-Z]+))$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -248,7 +248,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 100),
+								stringvalidator.UTF8LengthBetween(1, 100),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -262,7 +262,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtLeast(1),
+										stringvalidator.UTF8LengthAtLeast(1),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -274,7 +274,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 200),
+										stringvalidator.UTF8LengthBetween(1, 200),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -294,7 +294,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -316,7 +316,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 255),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 255),
+													stringvalidator.UTF8LengthBetween(1, 255),
 												),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -330,7 +330,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											Default:  stringdefault.StaticString("sub"),
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthAtLeast(1),
+												stringvalidator.UTF8LengthAtLeast(1),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -354,7 +354,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(0, 1000),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 255),
+													stringvalidator.UTF8LengthBetween(1, 255),
 													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 												),
 											}, /*END VALIDATORS*/
@@ -369,7 +369,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											Default:  stringdefault.StaticString("sub"),
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthAtLeast(1),
+												stringvalidator.UTF8LengthAtLeast(1),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -496,7 +496,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		"policy_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -516,7 +516,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

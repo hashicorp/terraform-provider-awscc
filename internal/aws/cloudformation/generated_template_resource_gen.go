@@ -76,7 +76,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name assigned to the generated template.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime

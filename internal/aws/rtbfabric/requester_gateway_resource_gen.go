@@ -232,7 +232,7 @@ func requesterGatewayResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(resourceArn|internalId|[a-zA-Z0-9+\\-=._:/@]+)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -246,7 +246,7 @@ func requesterGatewayResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 1600),
+							stringvalidator.UTF8LengthBetween(0, 1600),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -303,7 +303,7 @@ func requesterGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 50),
+				stringvalidator.UTF8LengthBetween(5, 50),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

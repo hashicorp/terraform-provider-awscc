@@ -55,7 +55,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Name of the Cluster",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtLeast(1),
+				stringvalidator.UTF8LengthAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -74,7 +74,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtLeast(1),
+				stringvalidator.UTF8LengthAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -93,7 +93,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The IAM policy arn for pods",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtLeast(1),
+				stringvalidator.UTF8LengthAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -158,7 +158,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 127),
+										stringvalidator.UTF8LengthBetween(1, 127),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -171,7 +171,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.UTF8LengthBetween(1, 255),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -190,7 +190,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtLeast(1),
+							stringvalidator.UTF8LengthAtLeast(1),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -261,7 +261,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
+							stringvalidator.UTF8LengthBetween(1, 127),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -274,7 +274,7 @@ func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

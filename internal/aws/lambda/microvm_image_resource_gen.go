@@ -78,7 +78,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 			Description: "ARN of the base MicroVM image.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 			}, /*END VALIDATORS*/
 			// BaseImageArn is a write-only property.
@@ -97,7 +97,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specific version of the base MicroVM image to use.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 			}, /*END VALIDATORS*/
 			// BaseImageVersion is a write-only property.
@@ -143,7 +143,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.UTF8LengthBetween(1, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -278,7 +278,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -286,7 +286,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 4096),
+							stringvalidator.UTF8LengthBetween(0, 4096),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -612,7 +612,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z-]*:kms:[a-z0-9-]+:[0-9]{12}:(key|alias)/[a-zA-Z0-9:/_-]+|alias/[a-zA-Z0-9:/_-]+|[a-zA-Z0-9-]+)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -690,7 +690,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.UTF8LengthBetween(1, 512),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-/.#]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -702,7 +702,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.UTF8LengthBetween(1, 512),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[^:*]*$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -744,7 +744,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Unique name for the MicroVM image within the account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -851,7 +851,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -864,7 +864,7 @@ func microvmImageResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

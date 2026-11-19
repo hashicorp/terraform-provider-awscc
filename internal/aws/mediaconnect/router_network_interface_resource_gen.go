@@ -269,7 +269,7 @@ func routerNetworkInterfaceResource(ctx context.Context) (resource.Resource, err
 			Description: "The name of the router network interface.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

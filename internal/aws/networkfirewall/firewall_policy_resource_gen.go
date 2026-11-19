@@ -52,7 +52,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -315,7 +315,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthAtLeast(1),
+												stringvalidator.UTF8LengthAtLeast(1),
 												stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 											),
 										}, /*END VALIDATORS*/
@@ -459,7 +459,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -494,7 +494,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 															Optional: true,
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 128),
+																stringvalidator.UTF8LengthBetween(1, 128),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_ ]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
@@ -535,7 +535,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -583,7 +583,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -605,7 +605,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 256),
+						stringvalidator.UTF8LengthBetween(1, 256),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -659,7 +659,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -704,7 +704,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -717,7 +717,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 255),
+							stringvalidator.UTF8LengthBetween(0, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

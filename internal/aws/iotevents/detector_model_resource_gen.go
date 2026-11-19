@@ -2228,7 +2228,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The state that is entered at the creation of each detector (instance).",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 128),
+						stringvalidator.UTF8LengthBetween(1, 128),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: States
@@ -2255,7 +2255,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2324,7 +2324,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2419,7 +2419,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2490,7 +2490,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2546,7 +2546,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -2563,7 +2563,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2759,7 +2759,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2775,7 +2775,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2819,7 +2819,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2835,7 +2835,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2879,7 +2879,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2903,7 +2903,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																			stringplanmodifier.UseStateForUnknown(),
@@ -2927,7 +2927,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2951,7 +2951,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2964,7 +2964,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -2992,7 +2992,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3025,7 +3025,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3052,7 +3052,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3124,7 +3124,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
+														stringvalidator.UTF8LengthAtMost(512),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -3136,7 +3136,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(128),
+														stringvalidator.UTF8LengthAtMost(128),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3181,7 +3181,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3250,7 +3250,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3345,7 +3345,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3416,7 +3416,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3472,7 +3472,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -3489,7 +3489,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3685,7 +3685,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3701,7 +3701,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3745,7 +3745,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3761,7 +3761,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3805,7 +3805,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3829,7 +3829,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																			stringplanmodifier.UseStateForUnknown(),
@@ -3853,7 +3853,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3877,7 +3877,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3890,7 +3890,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -3918,7 +3918,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3951,7 +3951,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3978,7 +3978,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4050,7 +4050,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
+														stringvalidator.UTF8LengthAtMost(512),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -4062,7 +4062,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(128),
+														stringvalidator.UTF8LengthAtMost(128),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4107,7 +4107,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4176,7 +4176,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4271,7 +4271,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4342,7 +4342,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4398,7 +4398,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -4415,7 +4415,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4611,7 +4611,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4627,7 +4627,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4671,7 +4671,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4687,7 +4687,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4731,7 +4731,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4755,7 +4755,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																			stringplanmodifier.UseStateForUnknown(),
@@ -4779,7 +4779,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4803,7 +4803,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4816,7 +4816,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -4844,7 +4844,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4877,7 +4877,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4904,7 +4904,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4976,7 +4976,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
+														stringvalidator.UTF8LengthAtMost(512),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -4988,7 +4988,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(128),
+														stringvalidator.UTF8LengthAtMost(128),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5022,7 +5022,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5091,7 +5091,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5186,7 +5186,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5257,7 +5257,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5313,7 +5313,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -5330,7 +5330,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5526,7 +5526,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5542,7 +5542,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5586,7 +5586,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5602,7 +5602,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5646,7 +5646,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5670,7 +5670,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																			stringplanmodifier.UseStateForUnknown(),
@@ -5694,7 +5694,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5718,7 +5718,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
+																			stringvalidator.UTF8LengthBetween(1, 1024),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5731,7 +5731,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
+																			stringvalidator.UTF8LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
@@ -5759,7 +5759,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5792,7 +5792,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																		Optional:    true,
 																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
+																			stringvalidator.UTF8LengthBetween(1, 2048),
 																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5819,7 +5819,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																				Optional:    true,
 																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
+																					stringvalidator.UTF8LengthAtLeast(1),
 																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5891,7 +5891,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
+														stringvalidator.UTF8LengthAtMost(512),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5904,7 +5904,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 128),
+														stringvalidator.UTF8LengthBetween(1, 128),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5917,7 +5917,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 128),
+														stringvalidator.UTF8LengthBetween(1, 128),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5946,7 +5946,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The name of the state.",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -5977,7 +5977,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -5998,7 +5998,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6046,7 +6046,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6067,7 +6067,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the role that grants permission to ITE to perform its operations.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

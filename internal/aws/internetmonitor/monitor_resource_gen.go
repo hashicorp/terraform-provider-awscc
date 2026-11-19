@@ -294,7 +294,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtLeast(3),
+								stringvalidator.UTF8LengthAtLeast(3),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -349,7 +349,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.UTF8LengthBetween(12, 12),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(\\d{12})$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -417,7 +417,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"monitor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -475,7 +475,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(20, 2048),
+					stringvalidator.UTF8LengthBetween(20, 2048),
 					stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -502,7 +502,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(20, 2048),
+					stringvalidator.UTF8LengthBetween(20, 2048),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -529,7 +529,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(20, 2048),
+					stringvalidator.UTF8LengthBetween(20, 2048),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

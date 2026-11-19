@@ -93,7 +93,7 @@ func pipelineEndpointResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon Resource Name (ARN) of the pipeline to create the endpoint for.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(46, 76),
+				stringvalidator.UTF8LengthBetween(46, 76),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):osis:.+:pipeline/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -181,7 +181,7 @@ func pipelineEndpointResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 12),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(11, 20),
+							stringvalidator.UTF8LengthBetween(11, 20),
 							stringvalidator.RegexMatches(regexp.MustCompile("^sg-\\w{8}(\\w{9})?$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -198,7 +198,7 @@ func pipelineEndpointResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 12),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(15, 24),
+							stringvalidator.UTF8LengthBetween(15, 24),
 							stringvalidator.RegexMatches(regexp.MustCompile("^subnet-\\w{8}(\\w{9})?$"), ""),
 						),
 					}, /*END VALIDATORS*/

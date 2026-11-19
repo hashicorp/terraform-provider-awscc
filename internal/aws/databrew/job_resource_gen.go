@@ -146,7 +146,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -157,7 +157,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -172,7 +172,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -198,7 +198,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(12, 12),
+											stringvalidator.UTF8LengthBetween(12, 12),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -257,7 +257,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(12, 12),
+											stringvalidator.UTF8LengthBetween(12, 12),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -294,7 +294,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -383,7 +383,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -409,7 +409,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(12, 12),
+											stringvalidator.UTF8LengthBetween(12, 12),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -489,7 +489,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -509,7 +509,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -665,7 +665,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Job name",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -713,7 +713,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(12, 12),
+						stringvalidator.UTF8LengthBetween(12, 12),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -889,7 +889,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 1),
+											stringvalidator.UTF8LengthBetween(1, 1),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -930,7 +930,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(12, 12),
+									stringvalidator.UTF8LengthBetween(12, 12),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1209,7 +1209,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 255),
+												stringvalidator.UTF8LengthBetween(1, 255),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1220,7 +1220,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 255),
+												stringvalidator.UTF8LengthBetween(1, 255),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -1248,7 +1248,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtLeast(1),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthBetween(1, 128),
+												stringvalidator.UTF8LengthBetween(1, 128),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 											),
 										}, /*END VALIDATORS*/
@@ -1278,7 +1278,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 													Optional: true,
 													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 128),
+														stringvalidator.UTF8LengthBetween(1, 128),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
@@ -1329,7 +1329,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -1359,7 +1359,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 128),
+											stringvalidator.UTF8LengthBetween(1, 128),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -1399,7 +1399,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeAtLeast(1),
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 128),
+											stringvalidator.UTF8LengthBetween(1, 128),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 										),
 										fwvalidators.NotNullList(),
@@ -1423,7 +1423,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z_][A-Z\\\\d_]*$"), ""),
 								),
 								fwvalidators.NotNullList(),
@@ -1448,7 +1448,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1459,7 +1459,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1498,7 +1498,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1602,7 +1602,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1614,7 +1614,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1708,7 +1708,7 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(20, 2048),
+							stringvalidator.UTF8LengthBetween(20, 2048),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

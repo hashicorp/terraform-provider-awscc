@@ -168,7 +168,7 @@ func replicationConfigurationTemplateResource(ctx context.Context) (resource.Res
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -229,7 +229,7 @@ func replicationConfigurationTemplateResource(ctx context.Context) (resource.Res
 			Description: "The instance type to be used for the replication server.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 255),
+				stringvalidator.UTF8LengthBetween(0, 255),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicationServersSecurityGroupsIDs
@@ -255,7 +255,7 @@ func replicationConfigurationTemplateResource(ctx context.Context) (resource.Res
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 32),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(0, 255),
+					stringvalidator.UTF8LengthBetween(0, 255),
 					stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-fA-F]{8,}$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -277,7 +277,7 @@ func replicationConfigurationTemplateResource(ctx context.Context) (resource.Res
 			Description: "The subnet to be used by the replication staging area.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 255),
+				stringvalidator.UTF8LengthBetween(0, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-fA-F]{8,}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -358,7 +358,7 @@ func replicationConfigurationTemplateResource(ctx context.Context) (resource.Res
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -371,7 +371,7 @@ func replicationConfigurationTemplateResource(ctx context.Context) (resource.Res
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

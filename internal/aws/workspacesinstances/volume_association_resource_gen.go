@@ -41,7 +41,7 @@ func volumeAssociationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The device name for the volume attachment",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(32),
+				stringvalidator.UTF8LengthAtMost(32),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

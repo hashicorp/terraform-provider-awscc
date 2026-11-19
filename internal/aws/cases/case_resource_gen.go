@@ -75,7 +75,7 @@ func caseResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The full customer profile ARN for the case.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(4100),
+				stringvalidator.UTF8LengthAtMost(4100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -94,7 +94,7 @@ func caseResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The unique identifier of the Cases domain.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -142,7 +142,7 @@ func caseResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -155,7 +155,7 @@ func caseResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9 _.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -189,7 +189,7 @@ func caseResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A unique identifier of a template.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -207,7 +207,7 @@ func caseResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The title of the case.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(4100),
+				stringvalidator.UTF8LengthAtMost(4100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

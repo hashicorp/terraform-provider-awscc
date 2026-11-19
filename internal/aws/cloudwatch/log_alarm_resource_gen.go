@@ -114,7 +114,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -130,7 +130,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -254,7 +254,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -449,7 +449,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LogGroupIdentifiers
@@ -515,7 +515,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.UTF8LengthBetween(1, 128),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -528,7 +528,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -593,7 +593,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -606,7 +606,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

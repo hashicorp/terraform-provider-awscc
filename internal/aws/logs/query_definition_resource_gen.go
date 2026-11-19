@@ -56,7 +56,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 512),
+					stringvalidator.UTF8LengthBetween(1, 512),
 					stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -78,7 +78,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A name for the saved query definition",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.UTF8LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters
@@ -125,7 +125,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(1024),
+							stringvalidator.UTF8LengthAtMost(1024),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -137,7 +137,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(512),
+							stringvalidator.UTF8LengthAtMost(512),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -149,7 +149,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(128),
+							stringvalidator.UTF8LengthAtMost(128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_][a-zA-Z0-9_]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -228,7 +228,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The query string to use for this definition",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 10000),
+				stringvalidator.UTF8LengthBetween(1, 10000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -74,7 +74,7 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 32768),
+				stringvalidator.UTF8LengthBetween(1, 32768),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -237,7 +237,7 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("([_A-Za-z][_0-9A-Za-z]{0,511})?"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -316,7 +316,7 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.UTF8LengthBetween(1, 512),
 										stringvalidator.RegexMatches(regexp.MustCompile("([_A-Za-z][_0-9A-Za-z]{0,511})?"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -388,7 +388,7 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Namespace indentifier.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("([A-Za-z0-9](?:[A-Za-z0-9\\-]{0,48}[A-Za-z0-9])?)"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -552,7 +552,7 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -565,7 +565,7 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\w+-=\\.:/@]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

@@ -92,7 +92,7 @@ func proactiveEngagementResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.UTF8LengthBetween(1, 1024),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\s\\.\\-,:/()+@]*$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -104,7 +104,7 @@ func proactiveEngagementResource(ctx context.Context) (resource.Resource, error)
 						Description: "The email address for the contact.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 150),
+							stringvalidator.UTF8LengthBetween(1, 150),
 							stringvalidator.RegexMatches(regexp.MustCompile("^\\S+@\\S+\\.\\S+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -114,7 +114,7 @@ func proactiveEngagementResource(ctx context.Context) (resource.Resource, error)
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 16),
+							stringvalidator.UTF8LengthBetween(1, 16),
 							stringvalidator.RegexMatches(regexp.MustCompile("^\\+[1-9]\\d{1,14}$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

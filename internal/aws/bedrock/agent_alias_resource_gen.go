@@ -234,7 +234,7 @@ func agentAliasResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -275,7 +275,7 @@ func agentAliasResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 5),
+							stringvalidator.UTF8LengthBetween(1, 5),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

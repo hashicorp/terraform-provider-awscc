@@ -47,7 +47,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 			Description: "The Amazon S3 URI for MLFlow Tracking Server artifacts.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^s3:\\/\\/([^\\/]+)\\/?(.*)$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -81,7 +81,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 32),
+				stringvalidator.UTF8LengthBetween(1, 32),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\d+(\\.\\d+)+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -102,7 +102,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 			Description: "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role\\/?[a-zA-Z_0-9+=,.@\\-_\\/]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -147,7 +147,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -160,7 +160,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -210,7 +210,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 			Description: "The name of the MLFlow Tracking Server.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -258,7 +258,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(9),
+				stringvalidator.UTF8LengthAtMost(9),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):([0-5]\\d)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

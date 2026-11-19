@@ -392,7 +392,7 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 			Description: "ProductSKU of the license.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status

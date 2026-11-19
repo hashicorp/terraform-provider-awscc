@@ -45,7 +45,7 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 			Description: "The name of the Multi Region Access Point to apply policy",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 50),
+				stringvalidator.UTF8LengthBetween(3, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

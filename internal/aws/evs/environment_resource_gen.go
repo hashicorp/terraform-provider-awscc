@@ -130,7 +130,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(2, 2),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(3, 21),
+							stringvalidator.UTF8LengthBetween(3, 21),
 						),
 						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
@@ -316,7 +316,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 25),
+							stringvalidator.UTF8LengthBetween(1, 25),
 							stringvalidator.RegexMatches(regexp.MustCompile("^h-[a-f0-9]{8}([a-f0-9]{9})?$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -356,7 +356,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -369,7 +369,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 25),
+							stringvalidator.UTF8LengthBetween(1, 25),
 							stringvalidator.RegexMatches(regexp.MustCompile("^pg-[a-f0-9]{8}([a-f0-9]{9})?$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -939,7 +939,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(3, 25),
+							stringvalidator.UTF8LengthBetween(3, 25),
 							stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
 						),
 					}, /*END VALIDATORS*/
@@ -968,7 +968,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"service_access_subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(15, 24),
+				stringvalidator.UTF8LengthBetween(15, 24),
 				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[a-f0-9]{8}([a-f0-9]{9})?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1042,7 +1042,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1055,7 +1055,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1293,7 +1293,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 21),
+				stringvalidator.UTF8LengthBetween(12, 21),
 				stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[a-f0-9]{8}([a-f0-9]{9})?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

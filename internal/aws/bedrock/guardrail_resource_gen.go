@@ -95,7 +95,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(1, 2),
 						listvalidator.UniqueValues(),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(15, 2048),
+							stringvalidator.UTF8LengthBetween(15, 2048),
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$"), ""),
 						),
 						fwvalidators.NotNullList(),
@@ -125,7 +125,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Messaging for when violations are detected in text",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BlockedOutputsMessaging
@@ -141,7 +141,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Messaging for when violations are detected in text",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ContentPolicyConfig
@@ -637,7 +637,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(15, 2048),
+						stringvalidator.UTF8LengthBetween(15, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -667,7 +667,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -742,7 +742,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -763,7 +763,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Name of the guardrail",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z-_]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -1087,7 +1087,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1000),
+									stringvalidator.UTF8LengthBetween(1, 1000),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1123,7 +1123,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 100),
+									stringvalidator.UTF8LengthBetween(1, 100),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1160,7 +1160,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtLeast(1),
+									stringvalidator.UTF8LengthAtLeast(1),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1274,7 +1274,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1288,7 +1288,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1419,7 +1419,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1000),
+									stringvalidator.UTF8LengthBetween(1, 1000),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1435,7 +1435,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(0),
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(1, 100),
+										stringvalidator.UTF8LengthBetween(1, 100),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1470,7 +1470,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 100),
+									stringvalidator.UTF8LengthBetween(1, 100),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z-_ !?.]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -1813,7 +1813,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtLeast(1),
+									stringvalidator.UTF8LengthAtLeast(1),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

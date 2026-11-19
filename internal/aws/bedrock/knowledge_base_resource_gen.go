@@ -66,7 +66,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -848,7 +848,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1026,7 +1026,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.UTF8LengthBetween(1, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1057,7 +1057,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 2048),
+															stringvalidator.UTF8LengthBetween(1, 2048),
 															stringvalidator.RegexMatches(regexp.MustCompile("^s3://.{1,128}$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
@@ -1189,7 +1189,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 63),
+														stringvalidator.UTF8LengthBetween(1, 63),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1326,7 +1326,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 1000),
+																	stringvalidator.UTF8LengthBetween(1, 1000),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1339,7 +1339,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 1000),
+																	stringvalidator.UTF8LengthBetween(1, 1000),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1373,7 +1373,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 																			Optional:    true,
 																			Computed:    true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
-																				stringvalidator.LengthBetween(1, 200),
+																				stringvalidator.UTF8LengthBetween(1, 200),
 																			}, /*END VALIDATORS*/
 																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																				stringplanmodifier.UseStateForUnknown(),
@@ -1400,7 +1400,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 																			Optional:    true,
 																			Computed:    true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
-																				stringvalidator.LengthBetween(1, 127),
+																				stringvalidator.UTF8LengthBetween(1, 127),
 																			}, /*END VALIDATORS*/
 																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																				stringplanmodifier.UseStateForUnknown(),
@@ -1422,7 +1422,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 200),
+																	stringvalidator.UTF8LengthBetween(1, 200),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																	stringplanmodifier.UseStateForUnknown(),
@@ -1501,7 +1501,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 														Validators: []validator.List{ /*START VALIDATORS*/
 															listvalidator.SizeBetween(1, 1000),
 															listvalidator.ValueStringsAre(
-																stringvalidator.LengthBetween(1, 200),
+																stringvalidator.UTF8LengthBetween(1, 200),
 																stringvalidator.RegexMatches(regexp.MustCompile("^.*\\.*$"), ""),
 															),
 															fwvalidators.NotNullList(),
@@ -1528,7 +1528,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 200),
+															stringvalidator.UTF8LengthBetween(1, 200),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1631,7 +1631,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -1802,7 +1802,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 2048),
+															stringvalidator.UTF8LengthBetween(1, 2048),
 															stringvalidator.RegexMatches(regexp.MustCompile("^s3://.{1,128}$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
@@ -1911,7 +1911,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
+				stringvalidator.UTF8LengthAtMost(2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -2420,7 +2420,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(63),
+								stringvalidator.UTF8LengthAtMost(63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2447,7 +2447,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(63),
+								stringvalidator.UTF8LengthAtMost(63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2461,7 +2461,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+\\.mongodb\\.net$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2475,7 +2475,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(255),
+								stringvalidator.UTF8LengthAtMost(255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(?:arn:aws(?:-us-gov|-cn|-iso|-iso-[a-z])*:.+:.*:\\d+:.+/.+$|[a-zA-Z0-9*]+[a-zA-Z0-9._-]*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2491,7 +2491,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2505,7 +2505,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2519,7 +2519,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2544,7 +2544,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2557,7 +2557,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2585,7 +2585,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2599,7 +2599,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2624,7 +2624,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):neptune-graph:[a-zA-Z0-9-]*:[0-9]{12}:graph\\/g-[a-zA-Z0-9]{10}$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2649,7 +2649,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:es:([a-z]{2,}-){2,}\\d:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2663,7 +2663,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2680,7 +2680,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2694,7 +2694,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2708,7 +2708,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2733,7 +2733,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2757,7 +2757,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov|-iso):aoss:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:collection/[a-z0-9-]{3,32}$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2774,7 +2774,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2788,7 +2788,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2802,7 +2802,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2827,7 +2827,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2852,7 +2852,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2882,7 +2882,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2896,7 +2896,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(2048),
+										stringvalidator.UTF8LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2921,7 +2921,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
+								stringvalidator.UTF8LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2958,7 +2958,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(63),
+								stringvalidator.UTF8LengthAtMost(63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2975,7 +2975,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(63),
+										stringvalidator.UTF8LengthAtMost(63),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-]+$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2988,7 +2988,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(63),
+										stringvalidator.UTF8LengthAtMost(63),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-]+$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -3002,7 +3002,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(63),
+										stringvalidator.UTF8LengthAtMost(63),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-]+$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -3016,7 +3016,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(63),
+										stringvalidator.UTF8LengthAtMost(63),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-]+$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -3030,7 +3030,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(63),
+										stringvalidator.UTF8LengthAtMost(63),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-]+$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -3068,7 +3068,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(63),
+								stringvalidator.UTF8LengthAtMost(63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\.\\-]+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -3102,7 +3102,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
+								stringvalidator.UTF8LengthBetween(3, 63),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),

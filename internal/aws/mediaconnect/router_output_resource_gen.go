@@ -1616,7 +1616,7 @@ func routerOutputResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the router output.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.UTF8LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OutputType

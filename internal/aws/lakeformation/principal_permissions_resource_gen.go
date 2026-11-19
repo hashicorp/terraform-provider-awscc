@@ -47,7 +47,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 255),
+				stringvalidator.UTF8LengthBetween(12, 255),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -187,7 +187,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 255),
+						stringvalidator.UTF8LengthBetween(1, 255),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -514,7 +514,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -537,7 +537,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -550,7 +550,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -563,7 +563,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -576,7 +576,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -600,7 +600,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -636,7 +636,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -649,7 +649,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -673,7 +673,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -686,7 +686,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -702,7 +702,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 50),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.UTF8LengthBetween(0, 256),
 								),
 								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
@@ -728,7 +728,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -745,7 +745,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 128),
+											stringvalidator.UTF8LengthBetween(1, 128),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -760,7 +760,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 50),
 											listvalidator.ValueStringsAre(
-												stringvalidator.LengthBetween(0, 256),
+												stringvalidator.UTF8LengthBetween(0, 256),
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -815,7 +815,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -828,7 +828,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -841,7 +841,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -874,7 +874,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(12, 255),
+								stringvalidator.UTF8LengthBetween(12, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -889,7 +889,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.UTF8LengthBetween(1, 255),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -908,7 +908,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 255),
+											stringvalidator.UTF8LengthBetween(1, 255),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -930,7 +930,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -943,7 +943,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
+								stringvalidator.UTF8LengthBetween(1, 255),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

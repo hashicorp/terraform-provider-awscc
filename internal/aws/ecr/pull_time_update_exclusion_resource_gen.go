@@ -42,7 +42,7 @@ func pullTimeUpdateExclusionResource(ctx context.Context) (resource.Resource, er
 			Description: "The ARN of the IAM principal to remove from the pull time update exclusion list.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(200),
+				stringvalidator.UTF8LengthAtMost(200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]+)*:iam::[0-9]{12}:(role|user)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

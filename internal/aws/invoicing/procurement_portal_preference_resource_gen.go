@@ -87,7 +87,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 			Description: "The unique identifier for the buyer in the procurement portal.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -132,7 +132,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.UTF8LengthBetween(1, 1024),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -145,7 +145,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 1024),
+							stringvalidator.UTF8LengthBetween(0, 1024),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -461,7 +461,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -524,7 +524,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -660,7 +660,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 			Description: "The unique identifier for the supplier in the procurement portal.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
+				stringvalidator.UTF8LengthBetween(0, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -708,7 +708,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -721,7 +721,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -814,7 +814,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 1024),
+						stringvalidator.UTF8LengthBetween(0, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -827,7 +827,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 1024),
+						stringvalidator.UTF8LengthBetween(0, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -840,7 +840,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 1024),
+						stringvalidator.UTF8LengthBetween(0, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -867,7 +867,7 @@ func procurementPortalPreferenceResource(ctx context.Context) (resource.Resource
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 1024),
+						stringvalidator.UTF8LengthBetween(0, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -66,7 +66,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -123,7 +123,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -137,7 +137,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -167,7 +167,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(253),
+				stringvalidator.UTF8LengthAtMost(253),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -188,7 +188,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -276,7 +276,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(104),
+				stringvalidator.UTF8LengthAtMost(104),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.{0,104}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -303,7 +303,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(128),
+					stringvalidator.UTF8LengthAtMost(128),
 					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -326,7 +326,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(4096),
+				stringvalidator.UTF8LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -378,7 +378,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -392,7 +392,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -425,7 +425,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(104),
+				stringvalidator.UTF8LengthAtMost(104),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

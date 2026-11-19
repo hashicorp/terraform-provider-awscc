@@ -42,7 +42,7 @@ func storageProfileResource(ctx context.Context) (resource.Resource, error) {
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FarmId
@@ -106,7 +106,7 @@ func storageProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.UTF8LengthBetween(1, 64),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z ]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -119,7 +119,7 @@ func storageProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 1024),
+							stringvalidator.UTF8LengthBetween(0, 1024),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

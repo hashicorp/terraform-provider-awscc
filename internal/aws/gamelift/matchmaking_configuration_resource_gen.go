@@ -156,7 +156,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.UTF8LengthBetween(0, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -176,7 +176,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.UTF8LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -247,7 +247,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(32),
+							stringvalidator.UTF8LengthAtMost(32),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -260,7 +260,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(96),
+							stringvalidator.UTF8LengthAtMost(96),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -293,7 +293,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 4096),
+				stringvalidator.UTF8LengthBetween(1, 4096),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -320,7 +320,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 256),
+					stringvalidator.UTF8LengthBetween(1, 256),
 					stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:/-]+"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -342,7 +342,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Description: "A unique identifier for the matchmaking configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-\\.]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -364,7 +364,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 300),
+				stringvalidator.UTF8LengthBetween(0, 300),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:_/-]*(.fifo)?"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -419,7 +419,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 			Description: "A unique identifier for the matchmaking rule set to use with this configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.UTF8LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-\\.]*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -465,7 +465,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -478,7 +478,7 @@ func matchmakingConfigurationResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

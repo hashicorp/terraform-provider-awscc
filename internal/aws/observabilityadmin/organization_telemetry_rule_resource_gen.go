@@ -593,7 +593,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 															Optional:    true,
 															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 1000),
+																stringvalidator.UTF8LengthBetween(1, 1000),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																stringplanmodifier.UseStateForUnknown(),
@@ -743,7 +743,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.UTF8LengthBetween(1, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:\\d{12}:key/(mrk-)?[a-f0-9-]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -957,7 +957,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 																			Optional:    true,
 																			Computed:    true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
-																				stringvalidator.LengthBetween(1, 1024),
+																				stringvalidator.UTF8LengthBetween(1, 1024),
 																				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z_\\-:]+$"), ""),
 																			}, /*END VALIDATORS*/
 																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1044,7 +1044,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
+															stringvalidator.UTF8LengthBetween(1, 64),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1218,7 +1218,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 			Description: "The name of the organization telemetry rule",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1266,7 +1266,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1279,7 +1279,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -72,7 +72,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(2048),
+					stringvalidator.UTF8LengthAtMost(2048),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -94,7 +94,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 500),
+				stringvalidator.UTF8LengthBetween(0, 500),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\P{C}\r\n\t]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -176,7 +176,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 533333),
+							stringvalidator.UTF8LengthBetween(1, 533333),
 							stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -228,7 +228,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the workspace.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
+				stringvalidator.UTF8LengthBetween(1, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -284,7 +284,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 4096),
+							stringvalidator.UTF8LengthBetween(0, 4096),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -296,7 +296,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 25),
+							stringvalidator.UTF8LengthBetween(1, 25),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -309,7 +309,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(2048),
+							stringvalidator.UTF8LengthAtMost(2048),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -322,7 +322,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 63),
+							stringvalidator.UTF8LengthBetween(0, 63),
 							stringvalidator.RegexMatches(regexp.MustCompile("^$|^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]{3,}$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -383,7 +383,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -396,7 +396,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -751,7 +751,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -763,7 +763,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -775,7 +775,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -797,7 +797,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -817,7 +817,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -829,7 +829,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -851,7 +851,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -871,7 +871,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -883,7 +883,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -895,7 +895,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -907,7 +907,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -919,7 +919,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -941,7 +941,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -953,7 +953,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -965,7 +965,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1045,7 +1045,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1057,7 +1057,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1069,7 +1069,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1091,7 +1091,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1111,7 +1111,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1123,7 +1123,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1145,7 +1145,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1165,7 +1165,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1177,7 +1177,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1189,7 +1189,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1201,7 +1201,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1213,7 +1213,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1235,7 +1235,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1247,7 +1247,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1259,7 +1259,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 											Optional: true,
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 127),
+												stringvalidator.UTF8LengthBetween(1, 127),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1348,7 +1348,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 127),
+				stringvalidator.UTF8LengthBetween(0, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\P{C}]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

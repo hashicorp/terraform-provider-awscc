@@ -44,7 +44,7 @@ func contactFlowModuleVersionResource(ctx context.Context) (resource.Resource, e
 			Description: "The identifier of the contact flow module (ARN) this version is tied to.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
+				stringvalidator.UTF8LengthBetween(1, 500),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -81,7 +81,7 @@ func contactFlowModuleVersionResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(500),
+				stringvalidator.UTF8LengthAtMost(500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

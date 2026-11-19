@@ -86,7 +86,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The execution role ARN assumed by Hooks to invoke Lambda.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
+				stringvalidator.UTF8LengthAtMost(256),
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -167,7 +167,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Amazon Resource Name (ARN), Partial ARN, name, version, or alias of the Lambda function to invoke with this hook.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 170),
+				stringvalidator.UTF8LengthBetween(1, 170),
 				stringvalidator.RegexMatches(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -207,7 +207,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.UTF8LengthBetween(1, 512),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -221,7 +221,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 256),
+						stringvalidator.UTF8LengthBetween(1, 256),
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -367,7 +367,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(128),
+									stringvalidator.UTF8LengthAtMost(128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -384,7 +384,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(128),
+									stringvalidator.UTF8LengthAtMost(128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -412,7 +412,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
+									stringvalidator.UTF8LengthAtMost(256),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -428,7 +428,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
+									stringvalidator.UTF8LengthAtMost(256),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -598,7 +598,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(1, 50),
 						setvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -647,7 +647,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.UTF8LengthBetween(1, 256),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

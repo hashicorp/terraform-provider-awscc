@@ -111,7 +111,7 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		"template": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 15000),
+				stringvalidator.UTF8LengthBetween(1, 15000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateType

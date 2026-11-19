@@ -167,7 +167,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 16),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(0, 1024),
+									stringvalidator.UTF8LengthBetween(0, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -183,7 +183,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 16),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(0, 1024),
+									stringvalidator.UTF8LengthBetween(0, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*$"), ""),
 								),
 							}, /*END VALIDATORS*/
@@ -246,7 +246,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 140),
+				stringvalidator.UTF8LengthBetween(1, 140),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)|[a-zA-Z0-9_-]{1,64}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -269,7 +269,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 10000),
+				stringvalidator.UTF8LengthBetween(0, 10000),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -338,7 +338,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -351,7 +351,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

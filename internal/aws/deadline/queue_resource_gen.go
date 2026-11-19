@@ -125,7 +125,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Default:  stringdefault.StaticString(""),
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 100),
+				stringvalidator.UTF8LengthBetween(0, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -142,7 +142,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FarmId
@@ -192,7 +192,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.UTF8LengthBetween(1, 63),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -204,7 +204,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(3, 63),
+						stringvalidator.UTF8LengthBetween(3, 63),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -291,7 +291,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 31),
+								stringvalidator.UTF8LengthBetween(0, 31),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(?:[a-z][a-z0-9-]{0,30})?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -304,7 +304,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 31),
+								stringvalidator.UTF8LengthBetween(0, 31),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(?:[a-z][a-z0-9-]{0,30})?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -342,7 +342,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -354,7 +354,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 111),
+								stringvalidator.UTF8LengthBetween(0, 111),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[^\"'/\\[\\]:;|=,+*?<>\\s]*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -412,7 +412,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(0, 20),
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 64),
+					stringvalidator.UTF8LengthBetween(1, 64),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z ]*$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -705,7 +705,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
+							stringvalidator.UTF8LengthBetween(1, 127),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -718,7 +718,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
+							stringvalidator.UTF8LengthBetween(1, 255),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

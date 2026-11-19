@@ -69,7 +69,7 @@ func queryLoggingConfigResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The ID of the public hosted zone that Amazon Route 53 logs queries for.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(32),
+				stringvalidator.UTF8LengthAtMost(32),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

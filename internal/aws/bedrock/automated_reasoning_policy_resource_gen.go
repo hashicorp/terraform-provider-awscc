@@ -81,7 +81,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
+				stringvalidator.UTF8LengthAtMost(1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -138,7 +138,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -159,7 +159,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z-_ ]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -333,7 +333,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(2048),
+									stringvalidator.UTF8LengthAtMost(2048),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -346,7 +346,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(2048),
+									stringvalidator.UTF8LengthAtMost(2048),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -360,7 +360,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(12, 12),
+									stringvalidator.UTF8LengthBetween(12, 12),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][0-9A-Z]{11}$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -391,7 +391,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(1024),
+									stringvalidator.UTF8LengthAtMost(1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]+$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -404,7 +404,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 64),
+									stringvalidator.UTF8LengthBetween(1, 64),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -422,7 +422,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthAtMost(1024),
+												stringvalidator.UTF8LengthAtMost(1024),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]+$"), ""),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -435,7 +435,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 64),
+												stringvalidator.UTF8LengthBetween(1, 64),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -480,7 +480,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(1024),
+									stringvalidator.UTF8LengthAtMost(1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -494,7 +494,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 64),
+									stringvalidator.UTF8LengthBetween(1, 64),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -508,7 +508,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 64),
+									stringvalidator.UTF8LengthBetween(1, 64),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][A-Za-z0-9_]+$"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -604,7 +604,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -618,7 +618,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

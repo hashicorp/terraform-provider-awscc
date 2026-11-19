@@ -50,7 +50,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "User provided identifier for integration, unique to the user account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -160,7 +160,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\w#+=/:,.@-]*\\*?"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -174,7 +174,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(20, 2048),
+									stringvalidator.UTF8LengthBetween(20, 2048),
 									stringvalidator.RegexMatches(regexp.MustCompile("[\\w#+=/:,.@-]*\\*?"), ""),
 								),
 								fwvalidators.NotNullList(),
@@ -188,7 +188,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\w#+=/:,.@-]*\\*?"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -201,7 +201,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\w#+=/:,.@-]*\\*?"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -61,7 +61,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 1024),
+				stringvalidator.UTF8LengthBetween(12, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

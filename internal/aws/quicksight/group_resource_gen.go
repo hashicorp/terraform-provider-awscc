@@ -56,7 +56,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.UTF8LengthBetween(1, 512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -75,7 +75,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A name for the group.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtLeast(1),
+				stringvalidator.UTF8LengthAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -95,7 +95,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The namespace that you want the group to be a part of.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 64),
+				stringvalidator.UTF8LengthBetween(0, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

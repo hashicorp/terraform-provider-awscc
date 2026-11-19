@@ -76,7 +76,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The case-sensitive name of the new group. Names must be unique.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 32),
+				stringvalidator.UTF8LengthBetween(1, 32),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InsightsConfiguration

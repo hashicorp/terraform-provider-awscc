@@ -43,7 +43,7 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 			Description: "An account alias associated with a customer's account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 30),
+				stringvalidator.UTF8LengthBetween(1, 30),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

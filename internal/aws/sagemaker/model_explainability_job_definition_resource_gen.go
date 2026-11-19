@@ -66,7 +66,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(63),
+				stringvalidator.UTF8LengthAtMost(63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -105,7 +105,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(63),
+				stringvalidator.UTF8LengthAtMost(63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -255,7 +255,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Description: "The S3 URI to an analysis configuration file",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
+						stringvalidator.UTF8LengthAtMost(1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -276,7 +276,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Description: "The container image to be run by the monitoring job.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(255),
+						stringvalidator.UTF8LengthAtMost(255),
 						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -325,7 +325,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.UTF8LengthBetween(1, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -341,7 +341,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(1024),
+								stringvalidator.UTF8LengthAtMost(1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -525,7 +525,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(512),
+								stringvalidator.UTF8LengthAtMost(512),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -602,7 +602,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -614,7 +614,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -626,7 +626,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -640,7 +640,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -693,7 +693,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(63),
+								stringvalidator.UTF8LengthAtMost(63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -707,7 +707,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -719,7 +719,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -731,7 +731,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -745,7 +745,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
+								stringvalidator.UTF8LengthAtMost(256),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -870,7 +870,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
+						stringvalidator.UTF8LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -889,7 +889,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 										Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(256),
+											stringvalidator.UTF8LengthAtMost(256),
 											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 										}, /*END VALIDATORS*/
 									}, /*END ATTRIBUTE*/
@@ -913,7 +913,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 										Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(512),
+											stringvalidator.UTF8LengthAtMost(512),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 										}, /*END VALIDATORS*/
 									}, /*END ATTRIBUTE*/
@@ -1016,7 +1016,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(32),
+									stringvalidator.UTF8LengthAtMost(32),
 									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 								),
 								fwvalidators.NotNullList(),
@@ -1034,7 +1034,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 16),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(32),
+									stringvalidator.UTF8LengthAtMost(32),
 									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 								),
 								fwvalidators.NotNullList(),
@@ -1074,7 +1074,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.UTF8LengthBetween(20, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1165,7 +1165,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1179,7 +1179,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
+							stringvalidator.UTF8LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

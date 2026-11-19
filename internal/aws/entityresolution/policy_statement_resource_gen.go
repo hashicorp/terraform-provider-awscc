@@ -49,7 +49,7 @@ func policyStatementResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(3, 64),
+					stringvalidator.UTF8LengthBetween(3, 64),
 					stringvalidator.RegexMatches(regexp.MustCompile("^(entityresolution:[a-zA-Z0-9]+)$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -87,7 +87,7 @@ func policyStatementResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 40960),
+				stringvalidator.UTF8LengthBetween(1, 40960),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -134,7 +134,7 @@ func policyStatementResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(12, 64),
+					stringvalidator.UTF8LengthBetween(12, 64),
 					stringvalidator.RegexMatches(regexp.MustCompile("^(\\\\d{12})|([a-z0-9\\\\.]+)$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -156,7 +156,7 @@ func policyStatementResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Statement Id of the policy statement that is being attached.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.UTF8LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

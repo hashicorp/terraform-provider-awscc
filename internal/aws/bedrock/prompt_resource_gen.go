@@ -87,7 +87,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -127,7 +127,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
+				stringvalidator.UTF8LengthBetween(1, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -682,7 +682,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(2048),
+											stringvalidator.UTF8LengthAtMost(2048),
 											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -787,7 +787,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.UTF8LengthBetween(1, 128),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -801,7 +801,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.UTF8LengthBetween(1, 1024),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -827,7 +827,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
+							stringvalidator.UTF8LengthBetween(1, 2048),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -921,7 +921,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthAtLeast(1),
+																	stringvalidator.UTF8LengthAtLeast(1),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																	stringplanmodifier.UseStateForUnknown(),
@@ -1005,7 +1005,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtLeast(1),
+														stringvalidator.UTF8LengthAtLeast(1),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -1058,7 +1058,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.LengthBetween(1, 64),
+																	stringvalidator.UTF8LengthBetween(1, 64),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
@@ -1120,7 +1120,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 																	Optional: true,
 																	Computed: true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthAtLeast(1),
+																		stringvalidator.UTF8LengthAtLeast(1),
 																	}, /*END VALIDATORS*/
 																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																		stringplanmodifier.UseStateForUnknown(),
@@ -1155,7 +1155,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 																	Optional:    true,
 																	Computed:    true,
 																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.LengthBetween(1, 64),
+																		stringvalidator.UTF8LengthBetween(1, 64),
 																		stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 																		fwvalidators.NotNullString(),
 																	}, /*END VALIDATORS*/
@@ -1263,7 +1263,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 200000),
+											stringvalidator.UTF8LengthBetween(1, 200000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -1278,7 +1278,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(3, 63),
+													stringvalidator.UTF8LengthBetween(3, 63),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -1292,7 +1292,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.UTF8LengthBetween(1, 1024),
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1305,7 +1305,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.UTF8LengthBetween(1, 1024),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),

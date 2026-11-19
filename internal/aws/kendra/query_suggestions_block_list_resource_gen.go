@@ -60,7 +60,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1000),
+				stringvalidator.UTF8LengthBetween(0, 1000),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\P{C}*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -98,7 +98,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 			Description: "The identifier of the index for the block list.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(36, 36),
+				stringvalidator.UTF8LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -119,7 +119,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 			Description: "The name of the block list.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.UTF8LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -137,7 +137,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 			Description: "The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the block list text file.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1284),
+				stringvalidator.UTF8LengthBetween(0, 1284),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SourceS3Path
@@ -174,7 +174,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 					Description: "The name of the S3 bucket that contains the file.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(3, 63),
+						stringvalidator.UTF8LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -183,7 +183,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 					Description: "The name of the file.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 1024),
+						stringvalidator.UTF8LengthBetween(1, 1024),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -231,7 +231,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -244,7 +244,7 @@ func querySuggestionsBlockListResource(ctx context.Context) (resource.Resource, 
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

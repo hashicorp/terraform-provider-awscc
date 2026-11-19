@@ -83,7 +83,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.UTF8LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*:iam::\\d{12}:role/.+$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -116,7 +116,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1000),
+				stringvalidator.UTF8LengthAtMost(1000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -136,7 +136,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the OpenSearch Service domain.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 28),
+				stringvalidator.UTF8LengthBetween(3, 28),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9\\-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,7 +157,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the data source.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 80),
+				stringvalidator.UTF8LengthBetween(3, 80),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9_]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

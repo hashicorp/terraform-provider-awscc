@@ -83,7 +83,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The ARN or name of the secret to attach the resource-based policy.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.UTF8LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

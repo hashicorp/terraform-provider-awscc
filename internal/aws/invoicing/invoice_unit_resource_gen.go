@@ -48,7 +48,7 @@ func invoiceUnitResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 500),
+				stringvalidator.UTF8LengthBetween(0, 500),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -67,7 +67,7 @@ func invoiceUnitResource(ctx context.Context) (resource.Resource, error) {
 		"invoice_receiver": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.UTF8LengthBetween(12, 12),
 				stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -113,7 +113,7 @@ func invoiceUnitResource(ctx context.Context) (resource.Resource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50),
+				stringvalidator.UTF8LengthBetween(1, 50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -153,7 +153,7 @@ func invoiceUnitResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.UTF8LengthBetween(1, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -165,7 +165,7 @@ func invoiceUnitResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 200),
+							stringvalidator.UTF8LengthBetween(0, 200),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -209,7 +209,7 @@ func invoiceUnitResource(ctx context.Context) (resource.Resource, error) {
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(12, 12),
+							stringvalidator.UTF8LengthBetween(12, 12),
 							stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}$"), ""),
 						),
 					}, /*END VALIDATORS*/

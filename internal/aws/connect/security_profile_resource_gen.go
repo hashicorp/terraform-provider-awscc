@@ -51,7 +51,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 127),
+				stringvalidator.UTF8LengthBetween(0, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -101,7 +101,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -114,7 +114,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -171,7 +171,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -183,7 +183,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -257,7 +257,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.SizeAtMost(50),
 							setvalidator.ValueStringsAre(
-								stringvalidator.LengthBetween(1, 128),
+								stringvalidator.UTF8LengthBetween(1, 128),
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -270,7 +270,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -317,7 +317,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 250),
+				stringvalidator.UTF8LengthBetween(0, 250),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -419,7 +419,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
-													stringvalidator.LengthBetween(1, 127),
+													stringvalidator.UTF8LengthBetween(1, 127),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -435,7 +435,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 													listvalidator.SizeBetween(1, 2),
 													listvalidator.UniqueValues(),
 													listvalidator.ValueStringsAre(
-														stringvalidator.LengthBetween(1, 1000),
+														stringvalidator.UTF8LengthBetween(1, 1000),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -502,7 +502,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(10),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -580,7 +580,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(500),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -616,7 +616,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the security profile.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
+				stringvalidator.UTF8LengthBetween(1, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[ a-zA-Z0-9_@-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -647,7 +647,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(10),
 				setvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.UTF8LengthBetween(1, 128),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -697,7 +697,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.UTF8LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -710,7 +710,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.UTF8LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -118,7 +118,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.UTF8LengthBetween(1, 64),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -132,7 +132,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 10485760),
+									stringvalidator.UTF8LengthBetween(1, 10485760),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -145,7 +145,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
-										stringvalidator.LengthBetween(0, 256),
+										stringvalidator.UTF8LengthBetween(0, 256),
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -168,7 +168,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtLeast(1),
+									stringvalidator.UTF8LengthAtLeast(1),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -211,7 +211,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtLeast(1),
+									stringvalidator.UTF8LengthAtLeast(1),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -258,7 +258,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.UTF8LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
