@@ -319,17 +319,7 @@ func TestRefreshCandidateContainsRecursiveSchemaCrash(t *testing.T) {
 	realIsolation(t)
 	cfg, rows := loadCorpus(t)
 
-	var recursive resourceRow
-	found := false
-	for _, r := range rows {
-		if r.CloudFormationTypeName == "AWS::WAFv2::WebACL" {
-			recursive, found = r, true
-			break
-		}
-	}
-	if !found {
-		t.Skip("AWS::WAFv2::WebACL not in overlay")
-	}
+	recursive := recursiveOverlayRow(t, rows)
 
 	path := recursive.CloudFormationSchemaPath
 	if path == "" {
@@ -340,7 +330,7 @@ func TestRefreshCandidateContainsRecursiveSchemaCrash(t *testing.T) {
 		t.Fatalf("reading schema: %v", err)
 	}
 
-	// AWS::WAFv2::WebACL is already suppressed in the real overlay, so a
+	// The recursive row is already suppressed in the real overlay, so a
 	// fully suppressed row generates zero artifacts and this test would
 	// pass vacuously. Simulate the real incident instead: the same
 	// recursive schema, on a fresh, unsuppressed row, matching what
