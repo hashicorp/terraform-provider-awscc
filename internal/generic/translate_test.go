@@ -1045,3 +1045,306 @@ func BenchmarkReorderKeyValueSlicesToMatchPrior(b *testing.B) {
 		reorderKeyValueSlicesToMatchPrior(current, prior)
 	}
 }
+
+// instanceGroupModel returns a SageMaker Cluster InstanceGroups element (Cloud Control
+// naming) with the given name and instance type, plus any extra key/value pairs.
+func instanceGroupModel(name, instanceType string, extra ...any) map[string]any {
+	m := map[string]any{"InstanceGroupName": name, "InstanceType": instanceType}
+	for i := 0; i+1 < len(extra); i += 2 {
+		m[extra[i].(string)] = extra[i+1]
+	}
+	return m
+}
+
+func TestIdentityField(t *testing.T) {
+	group := instanceGroupModel
+
+	testCases := []struct {
+		name     string
+		current  []any
+		prior    []any
+		expected string
+	}{
+		{
+			name:     "empty prior",
+			current:  []any{group("a", "t3")},
+			expected: "",
+		},
+		{
+			name:     "single *Name field",
+			current:  []any{group("b", "m5"), group("a", "t3")},
+			prior:    []any{group("a", "t3"), group("b", "m5")},
+			expected: "InstanceGroupName",
+		},
+		{
+			name:     "*Name preferred over unique *Id",
+			current:  []any{group("b", "m5", "ImageId", "ami-2"), group("a", "t3", "ImageId", "ami-1")},
+			prior:    []any{group("a", "t3", "ImageId", "ami-1"), group("b", "m5", "ImageId", "ami-2")},
+			expected: "InstanceGroupName",
+		},
+		{
+			name:     "exact Name preferred over *Name",
+			current:  []any{map[string]any{"Name": "x", "DisplayName": "1"}, map[string]any{"Name": "y", "DisplayName": "2"}},
+			prior:    []any{map[string]any{"Name": "y", "DisplayName": "2"}, map[string]any{"Name": "x", "DisplayName": "1"}},
+			expected: "Name",
+		},
+		{
+			name:     "Terraform naming",
+			current:  []any{map[string]any{"instance_group_name": "b"}, map[string]any{"instance_group_name": "a"}},
+			prior:    []any{map[string]any{"instance_group_name": "a"}, map[string]any{"instance_group_name": "b"}},
+			expected: "instance_group_name",
+		},
+		{
+			name:     "falls back to unique *Id when *Name is duplicated",
+			current:  []any{map[string]any{"GroupName": "g", "RuleId": "r2"}, map[string]any{"GroupName": "g", "RuleId": "r1"}},
+			prior:    []any{map[string]any{"GroupName": "g", "RuleId": "r1"}, map[string]any{"GroupName": "g", "RuleId": "r2"}},
+			expected: "RuleId",
+		},
+		{
+			name:     "duplicate names, no other candidate",
+			current:  []any{group("a", "t3"), group("a", "m5")},
+			prior:    []any{group("a", "m5"), group("a", "t3")},
+			expected: "",
+		},
+		{
+			name:     "missing on one element",
+			current:  []any{group("a", "t3"), map[string]any{"InstanceType": "m5"}},
+			prior:    []any{group("a", "t3")},
+			expected: "",
+		},
+		{
+			name:     "empty value",
+			current:  []any{group("", "t3"), group("b", "m5")},
+			prior:    []any{group("b", "m5"), group("c", "t3")},
+			expected: "",
+		},
+		{
+			name:     "no shared values",
+			current:  []any{group("a", "t3")},
+			prior:    []any{group("z", "t3")},
+			expected: "",
+		},
+		{
+			name:     "non-scalar candidate ignored",
+			current:  []any{map[string]any{"Name": map[string]any{"x": "y"}}},
+			prior:    []any{map[string]any{"Name": map[string]any{"x": "y"}}},
+			expected: "",
+		},
+		{
+			name:     "no candidate fields",
+			current:  []any{map[string]any{"Port": 443.0}},
+			prior:    []any{map[string]any{"Port": 443.0}},
+			expected: "",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := identityField(tc.current, tc.prior); got != tc.expected {
+				t.Errorf("identityField() = %q, want %q", got, tc.expected)
+			}
+		})
+	}
+}
+
+func TestSliceMatcherReorder_unorderedObjectLists(t *testing.T) {
+	group := instanceGroupModel
+	matcher := sliceMatcher{unorderedPaths: map[string]bool{
+		"/InstanceGroups":                         true,
+		"/InstanceGroups/KubernetesConfig/Taints": true,
+		"/InstanceGroups/AutoRollbackAlarms":      true,
+		"/InstanceGroups/OnStartDeepHealthChecks": true,
+	}}
+
+	testCases := []struct {
+		name     string
+		current  map[string]any
+		prior    map[string]any
+		expected map[string]any
+	}{
+		{
+			name: "reorders by identity field (#3110)",
+			current: map[string]any{
+				"InstanceGroups": []any{group("worker-c", "g5"), group("worker-a", "t3"), group("worker-b", "m5")},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{group("worker-a", "t3"), group("worker-b", "m5"), group("worker-c", "g5")},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{group("worker-a", "t3"), group("worker-b", "m5"), group("worker-c", "g5")},
+			},
+		},
+		{
+			name: "shared ImageId does not prevent matching by name",
+			current: map[string]any{
+				"InstanceGroups": []any{group("b", "m5", "ImageId", "ami-1"), group("a", "t3", "ImageId", "ami-1")},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{group("a", "t3", "ImageId", "ami-1"), group("b", "m5", "ImageId", "ami-1")},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{group("a", "t3", "ImageId", "ami-1"), group("b", "m5", "ImageId", "ami-1")},
+			},
+		},
+		{
+			name: "values come from current, not prior",
+			current: map[string]any{
+				"InstanceGroups": []any{group("b", "m5", "InstanceCount", 2.0), group("a", "t3", "InstanceCount", 1.0)},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{group("a", "t3", "InstanceCount", 9.0), group("b", "m5", "InstanceCount", 9.0)},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{group("a", "t3", "InstanceCount", 1.0), group("b", "m5", "InstanceCount", 2.0)},
+			},
+		},
+		{
+			name: "new element appended",
+			current: map[string]any{
+				"InstanceGroups": []any{group("c", "g5"), group("b", "m5"), group("a", "t3")},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{group("a", "t3"), group("b", "m5")},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{group("a", "t3"), group("b", "m5"), group("c", "g5")},
+			},
+		},
+		{
+			name: "removed element dropped",
+			current: map[string]any{
+				"InstanceGroups": []any{group("c", "g5"), group("b", "m5")},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{group("a", "t3"), group("b", "m5"), group("c", "g5")},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{group("b", "m5"), group("c", "g5")},
+			},
+		},
+		{
+			name: "duplicate identity values left as is",
+			current: map[string]any{
+				"InstanceGroups": []any{group("a", "m5"), group("a", "t3")},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{group("a", "t3"), group("a", "m5")},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{group("a", "m5"), group("a", "t3")},
+			},
+		},
+		{
+			name: "ordered (not unordered) object list left as is",
+			current: map[string]any{
+				"OrderedSteps": []any{map[string]any{"StepName": "b"}, map[string]any{"StepName": "a"}},
+			},
+			prior: map[string]any{
+				"OrderedSteps": []any{map[string]any{"StepName": "a"}, map[string]any{"StepName": "b"}},
+			},
+			expected: map[string]any{
+				"OrderedSteps": []any{map[string]any{"StepName": "b"}, map[string]any{"StepName": "a"}},
+			},
+		},
+		{
+			name: "nested lists are matched against the matched element, not the same index",
+			current: map[string]any{
+				"InstanceGroups": []any{
+					group("b", "m5",
+						"KubernetesConfig", map[string]any{"Taints": []any{
+							map[string]any{"Key": "z", "Effect": "NoSchedule"},
+							map[string]any{"Key": "y", "Effect": "NoSchedule"},
+						}},
+						"AutoRollbackAlarms", []any{
+							map[string]any{"AlarmName": "b-2"},
+							map[string]any{"AlarmName": "b-1"},
+						},
+						"OnStartDeepHealthChecks", []any{"InstanceStress", "InstanceConnectivity"},
+					),
+					group("a", "t3",
+						"KubernetesConfig", map[string]any{"Taints": []any{
+							map[string]any{"Key": "x", "Effect": "NoSchedule"},
+						}},
+					),
+				},
+			},
+			prior: map[string]any{
+				"InstanceGroups": []any{
+					group("a", "t3",
+						"KubernetesConfig", map[string]any{"Taints": []any{
+							map[string]any{"Key": "x", "Effect": "NoSchedule"},
+						}},
+					),
+					group("b", "m5",
+						"KubernetesConfig", map[string]any{"Taints": []any{
+							map[string]any{"Key": "y", "Effect": "NoSchedule"},
+							map[string]any{"Key": "z", "Effect": "NoSchedule"},
+						}},
+						"AutoRollbackAlarms", []any{
+							map[string]any{"AlarmName": "b-1"},
+							map[string]any{"AlarmName": "b-2"},
+						},
+						"OnStartDeepHealthChecks", []any{"InstanceConnectivity", "InstanceStress"},
+					),
+				},
+			},
+			expected: map[string]any{
+				"InstanceGroups": []any{
+					group("a", "t3",
+						"KubernetesConfig", map[string]any{"Taints": []any{
+							map[string]any{"Key": "x", "Effect": "NoSchedule"},
+						}},
+					),
+					group("b", "m5",
+						"KubernetesConfig", map[string]any{"Taints": []any{
+							map[string]any{"Key": "y", "Effect": "NoSchedule"},
+							map[string]any{"Key": "z", "Effect": "NoSchedule"},
+						}},
+						"AutoRollbackAlarms", []any{
+							map[string]any{"AlarmName": "b-1"},
+							map[string]any{"AlarmName": "b-2"},
+						},
+						"OnStartDeepHealthChecks", []any{"InstanceConnectivity", "InstanceStress"},
+					),
+				},
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			matcher.reorder(tc.current, tc.prior, "")
+			if diff := cmp.Diff(tc.expected, tc.current); diff != "" {
+				t.Errorf("unexpected diff (-wanted, +got): %s", diff)
+			}
+		})
+	}
+}
+
+// TestSliceMatcherReorder_identityOnly verifies that, when filling unknown values after
+// Create/Update, only unordered object lists are matched; other lists keep Cloud Control order.
+func TestSliceMatcherReorder_identityOnly(t *testing.T) {
+	group := instanceGroupModel
+	matcher := sliceMatcher{unorderedPaths: map[string]bool{"/InstanceGroups": true}, identityOnly: true}
+
+	current := map[string]any{
+		"InstanceGroups": []any{group("b", "m5"), group("a", "t3")},
+		"Tags":           []any{map[string]any{"Key": "z", "Value": "1"}, map[string]any{"Key": "a", "Value": "2"}},
+		"SubnetIds":      []any{"subnet-2", "subnet-1"},
+	}
+	prior := map[string]any{
+		"InstanceGroups": []any{group("a", "t3"), group("b", "m5")},
+		"Tags":           []any{map[string]any{"Key": "a", "Value": "2"}, map[string]any{"Key": "z", "Value": "1"}},
+		"SubnetIds":      []any{"subnet-1", "subnet-2"},
+	}
+	expected := map[string]any{
+		"InstanceGroups": []any{group("a", "t3"), group("b", "m5")},
+		"Tags":           []any{map[string]any{"Key": "z", "Value": "1"}, map[string]any{"Key": "a", "Value": "2"}},
+		"SubnetIds":      []any{"subnet-2", "subnet-1"},
+	}
+
+	matcher.reorder(current, prior, "")
+	if diff := cmp.Diff(expected, current); diff != "" {
+		t.Errorf("unexpected diff (-wanted, +got): %s", diff)
+	}
+}
