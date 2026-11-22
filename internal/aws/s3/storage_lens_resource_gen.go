@@ -1529,6 +1529,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		identity.Identifier{
 			Name:              "storage_lens_configuration_id",
 			RequiredForImport: true,
+			AttributePath:     []string{"storage_lens_configuration", "id"},
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{

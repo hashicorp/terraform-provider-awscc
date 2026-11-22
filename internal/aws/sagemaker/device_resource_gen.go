@@ -228,6 +228,7 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		identity.Identifier{
 			Name:              "device_device_name",
 			RequiredForImport: true,
+			AttributePath:     []string{"device", "device_name"},
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{

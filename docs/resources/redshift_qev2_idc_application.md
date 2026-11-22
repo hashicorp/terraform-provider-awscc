@@ -50,7 +50,7 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_redshift_qev2_idc_application.example
   identity = {
-    qev2_idc_application_arn = "qev2_idc_application_arn"
+    qev_2_idc_application_arn = "qev_2_idc_application_arn"
   }
 }
 ```
@@ -60,7 +60,7 @@ import {
 
 #### Required
 
-- `qev2_idc_application_arn` (String) The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center
+- `qev_2_idc_application_arn` (String) The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center
 
 #### Optional
 
@@ -72,12 +72,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_redshift_qev2_idc_application.example
-  id = "qev2_idc_application_arn"
+  id = "qev_2_idc_application_arn"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_redshift_qev2_idc_application.example "qev2_idc_application_arn"
+$ terraform import awscc_redshift_qev2_idc_application.example "qev_2_idc_application_arn"
 ```
