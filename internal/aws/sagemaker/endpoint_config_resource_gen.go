@@ -220,6 +220,69 @@ func endpointConfigResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CrossRegionTrafficConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Limits the requests per second that the endpoint accepts from other AWS Regions. The limit is MaxCrossRegionPercentPerEndpoint percent of MaxInvocationsPerSecondPerInstance multiplied by the number of InService instances, shared by all production variants and inference components of the endpoint. Requests from the endpoint's own Region are not counted. Not supported with serverless variants or AsyncInferenceConfig. If you don't specify it, requests from other Regions are not limited.",
+		//	  "properties": {
+		//	    "MaxCrossRegionPercentPerEndpoint": {
+		//	      "description": "The percentage of the endpoint's capacity (MaxInvocationsPerSecondPerInstance multiplied by the number of InService instances) that requests from other Regions can use. Valid values are 1 to 100.",
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "MaxInvocationsPerSecondPerInstance": {
+		//	      "description": "The number of invocations per second that one InService instance can serve, used to size the limit on requests from other Regions. One value applies to every production variant, whatever its instance type. Valid values are 1 to 10000.",
+		//	      "maximum": 10000,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MaxInvocationsPerSecondPerInstance",
+		//	    "MaxCrossRegionPercentPerEndpoint"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cross_region_traffic_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCrossRegionPercentPerEndpoint
+				"max_cross_region_percent_per_endpoint": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The percentage of the endpoint's capacity (MaxInvocationsPerSecondPerInstance multiplied by the number of InService instances) that requests from other Regions can use. Valid values are 1 to 100.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 100),
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxInvocationsPerSecondPerInstance
+				"max_invocations_per_second_per_instance": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of invocations per second that one InService instance can serve, used to size the limit on requests from other Regions. One value applies to every production variant, whatever its instance type. Valid values are 1 to 10000.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 10000),
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Limits the requests per second that the endpoint accepts from other AWS Regions. The limit is MaxCrossRegionPercentPerEndpoint percent of MaxInvocationsPerSecondPerInstance multiplied by the number of InService instances, shared by all production variants and inference components of the endpoint. Requests from the endpoint's own Region are not counted. Not supported with serverless variants or AsyncInferenceConfig. If you don't specify it, requests from other Regions are not limited.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataCaptureConfig
 		// CloudFormation resource type schema:
 		//
@@ -2569,6 +2632,7 @@ func endpointConfigResource(ctx context.Context) (resource.Resource, error) {
 		"content_template":                                  "ContentTemplate",
 		"cooldown_in_minutes":                               "CooldownInMinutes",
 		"core_dump_config":                                  "CoreDumpConfig",
+		"cross_region_traffic_config":                       "CrossRegionTrafficConfig",
 		"csv_content_types":                                 "CsvContentTypes",
 		"data_capture_config":                               "DataCaptureConfig",
 		"destination_s3_uri":                                "DestinationS3Uri",
@@ -2605,7 +2669,9 @@ func endpointConfigResource(ctx context.Context) (resource.Resource, error) {
 		"managed_instance_scaling":                          "ManagedInstanceScaling",
 		"max_concurrency":                                   "MaxConcurrency",
 		"max_concurrent_invocations_per_instance":           "MaxConcurrentInvocationsPerInstance",
+		"max_cross_region_percent_per_endpoint":             "MaxCrossRegionPercentPerEndpoint",
 		"max_instance_count":                                "MaxInstanceCount",
+		"max_invocations_per_second_per_instance":           "MaxInvocationsPerSecondPerInstance",
 		"max_payload_in_mb":                                 "MaxPayloadInMB",
 		"max_record_count":                                  "MaxRecordCount",
 		"maximum_step_size":                                 "MaximumStepSize",

@@ -36,6 +36,20 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AwsBillingIamRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS Marketplace service-linked role in the payment manager's account, set by the service. Only present for AwsBilling connectors.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$",
+		//	  "type": "string"
+		//	}
+		"aws_billing_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AWS Marketplace service-linked role in the payment manager's account, set by the service. Only present for AwsBilling connectors.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorCreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +117,11 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "enum": [
 		//	    "CoinbaseCDP",
-		//	    "StripePrivy"
+		//	    "StripePrivy",
+		//	    "Stripe",
+		//	    "PayPal",
+		//	    "AmazonPay",
+		//	    "AwsBilling"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -119,7 +137,46 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "AmazonPay": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CredentialProviderArn": {
+		//	            "description": "The ARN of the payment credential provider",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CredentialProviderArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "CoinbaseCDP": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CredentialProviderArn": {
+		//	            "description": "The ARN of the payment credential provider",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CredentialProviderArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "PayPal": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CredentialProviderArn": {
+		//	            "description": "The ARN of the payment credential provider",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CredentialProviderArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Stripe": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "CredentialProviderArn": {
@@ -155,8 +212,41 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AmazonPay
+					"amazon_pay": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CredentialProviderArn
+							"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the payment credential provider",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: CoinbaseCDP
 					"coinbase_cdp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CredentialProviderArn
+							"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the payment credential provider",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: PayPal
+					"pay_pal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CredentialProviderArn
+							"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the payment credential provider",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Stripe
+					"stripe": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: CredentialProviderArn
 							"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -264,7 +354,9 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::PaymentConnector").WithTerraformTypeName("awscc_bedrockagentcore_payment_connector")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"amazon_pay":                         "AmazonPay",
 		"authorization_url":                  "AuthorizationUrl",
+		"aws_billing_iam_role_arn":           "AwsBillingIamRoleArn",
 		"coinbase_cdp":                       "CoinbaseCDP",
 		"connector_created_at":               "ConnectorCreatedAt",
 		"connector_last_updated_at":          "ConnectorLastUpdatedAt",
@@ -274,10 +366,12 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		"credential_provider_arn":            "CredentialProviderArn",
 		"credential_provider_configurations": "CredentialProviderConfigurations",
 		"description":                        "Description",
+		"pay_pal":                            "PayPal",
 		"payment_connector_arn":              "PaymentConnectorArn",
 		"payment_connector_id":               "PaymentConnectorId",
 		"payment_manager_id":                 "PaymentManagerId",
 		"provision_mode":                     "ProvisionMode",
+		"stripe":                             "Stripe",
 		"stripe_privy":                       "StripePrivy",
 	})
 

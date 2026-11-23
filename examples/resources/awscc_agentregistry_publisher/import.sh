@@ -1,0 +1,1 @@
+$ terraform import awscc_agentregistry_publisher.example "publisher_arn"

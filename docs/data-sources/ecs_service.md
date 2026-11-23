@@ -340,9 +340,18 @@ Read-Only:
 
 Read-Only:
 
+- `deregistration_delay` (Attributes) (see [below for nested schema](#nestedatt--gateway_connectors--deregistration_delay))
 - `filters` (Attributes) (see [below for nested schema](#nestedatt--gateway_connectors--filters))
 - `health_check` (Attributes) (see [below for nested schema](#nestedatt--gateway_connectors--health_check))
 - `port_name` (String)
+
+<a id="nestedatt--gateway_connectors--deregistration_delay"></a>
+### Nested Schema for `gateway_connectors.deregistration_delay`
+
+Read-Only:
+
+- `timeout_seconds` (Number)
+
 
 <a id="nestedatt--gateway_connectors--filters"></a>
 ### Nested Schema for `gateway_connectors.filters`

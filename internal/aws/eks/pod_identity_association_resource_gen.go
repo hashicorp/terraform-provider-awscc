@@ -7,11 +7,13 @@ package eks
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -255,6 +257,83 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WorkloadIdentityConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The workload identity configuration of the pod identity association. When enabled, the association also provisions a SPIFFE identity for the workload. Setting Enabled to false disables workload identity and keeps the ARNs. Removing the property from the template leaves the association unchanged; set Enabled to false to disable workload identity.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Whether workload identity is enabled for the association. Enabling it requires TemplateArn and ProviderArn, and cannot be combined with TargetRoleArn.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProviderArn": {
+		//	      "description": "The ARN of the customer-owned IAM workload identity provider that produces the trusted context assertion for the workload.",
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws[a-zA-Z-]*:iam::([0-9]{12}|o-[a-z0-9]{10,32}):workload-identity-provider/[^/]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "TemplateArn": {
+		//	      "description": "The ARN of the customer-owned IAM workload identity template that renders the workload's SPIFFE identity.",
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:workload-identity-template/[^/]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"workload_identity_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether workload identity is enabled for the association. Enabling it requires TemplateArn and ProviderArn, and cannot be combined with TargetRoleArn.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProviderArn
+				"provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the customer-owned IAM workload identity provider that produces the trusted context assertion for the workload.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthAtLeast(1),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::([0-9]{12}|o-[a-z0-9]{10,32}):workload-identity-provider/[^/]+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TemplateArn
+				"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the customer-owned IAM workload identity template that renders the workload's SPIFFE identity.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthAtLeast(1),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:workload-identity-template/[^/]+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The workload identity configuration of the pod identity association. When enabled, the association also provisions a SPIFFE identity for the workload. Setting Enabled to false disables workload identity and keeps the ARNs. Removing the property from the template leaves the association unchanged; set Enabled to false to disable workload identity.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -284,19 +363,23 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"association_arn":      "AssociationArn",
-		"association_id":       "AssociationId",
-		"cluster_name":         "ClusterName",
-		"disable_session_tags": "DisableSessionTags",
-		"external_id":          "ExternalId",
-		"key":                  "Key",
-		"namespace":            "Namespace",
-		"policy":               "Policy",
-		"role_arn":             "RoleArn",
-		"service_account":      "ServiceAccount",
-		"tags":                 "Tags",
-		"target_role_arn":      "TargetRoleArn",
-		"value":                "Value",
+		"association_arn":          "AssociationArn",
+		"association_id":           "AssociationId",
+		"cluster_name":             "ClusterName",
+		"disable_session_tags":     "DisableSessionTags",
+		"enabled":                  "Enabled",
+		"external_id":              "ExternalId",
+		"key":                      "Key",
+		"namespace":                "Namespace",
+		"policy":                   "Policy",
+		"provider_arn":             "ProviderArn",
+		"role_arn":                 "RoleArn",
+		"service_account":          "ServiceAccount",
+		"tags":                     "Tags",
+		"target_role_arn":          "TargetRoleArn",
+		"template_arn":             "TemplateArn",
+		"value":                    "Value",
+		"workload_identity_config": "WorkloadIdentityConfig",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

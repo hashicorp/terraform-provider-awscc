@@ -130,7 +130,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InstanceType": {
-		//	      "maxLength": 32,
+		//	      "maxLength": 64,
 		//	      "minLength": 5,
 		//	      "type": "string"
 		//	    },
@@ -170,6 +170,13 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "TopicReassignment": {
+		//	      "enum": [
+		//	        "AUTO",
+		//	        "MANUAL"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -294,6 +301,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicReassignment
+				"topic_reassignment": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1031,6 +1042,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"storage_mode":                   "StorageMode",
 		"tags":                           "Tags",
 		"tls":                            "Tls",
+		"topic_reassignment":             "TopicReassignment",
 		"type":                           "Type",
 		"unauthenticated":                "Unauthenticated",
 		"volume_size":                    "VolumeSize",

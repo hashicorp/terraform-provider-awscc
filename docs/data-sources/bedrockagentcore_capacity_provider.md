@@ -63,6 +63,7 @@ Read-Only:
 Read-Only:
 
 - `capacity_reservation_specification` (Attributes) The Capacity Reservation targeting option. (see [below for nested schema](#nestedatt--compute_configuration--ec_2_configuration--launch_template_source--launch_parameters--capacity_reservation_specification))
+- `cpu_options` (Attributes) The CPU options for the instances. (see [below for nested schema](#nestedatt--compute_configuration--ec_2_configuration--launch_template_source--launch_parameters--cpu_options))
 - `ephemeral_volumes` (Attributes List) The block device mapping for ephemeral (instance store) volumes. (see [below for nested schema](#nestedatt--compute_configuration--ec_2_configuration--launch_template_source--launch_parameters--ephemeral_volumes))
 - `instance_profile_arn` (String) The ARN of the IAM instance profile to associate with launched instances.
 - `instance_requirements` (Attributes) Requirements for EC2 instance types. (see [below for nested schema](#nestedatt--compute_configuration--ec_2_configuration--launch_template_source--launch_parameters--instance_requirements))
@@ -88,6 +89,14 @@ Read-Only:
 - `capacity_reservation_id` (String) The ID of the Capacity Reservation in which to run the instance.
 - `capacity_reservation_resource_group_arn` (String) The ARN of the Capacity Reservation resource group in which to run the instance.
 
+
+
+<a id="nestedatt--compute_configuration--ec_2_configuration--launch_template_source--launch_parameters--cpu_options"></a>
+### Nested Schema for `compute_configuration.ec_2_configuration.launch_template_source.launch_parameters.cpu_options`
+
+Read-Only:
+
+- `nested_virtualization` (String) Indicates whether nested virtualization is enabled on the instances, which exposes hardware virtualization (KVM) to agents. Default: DISABLED.
 
 
 <a id="nestedatt--compute_configuration--ec_2_configuration--launch_template_source--launch_parameters--ephemeral_volumes"></a>

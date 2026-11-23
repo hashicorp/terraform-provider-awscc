@@ -48,12 +48,14 @@ func accessSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IP address range (CIDR) whose traffic this access source admits. Required unless the access source uses a core network endpoint.",
 		//	  "maxLength": 42,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The IP address range (CIDR) whose traffic this access source admits. Required unless the access source uses a core network endpoint.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClientToken
 		// CloudFormation resource type schema:
@@ -65,6 +67,20 @@ func accessSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: CoreNetworkEndpointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the core network endpoint whose Cloud WAN segment traffic this access source admits. Use together with Segment instead of Cidr. The core network endpoint must be OPERATIONAL.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[-.a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"core_network_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the core network endpoint whose Cloud WAN segment traffic this access source admits. Use together with Segment instead of Cidr. The core network endpoint must be OPERATIONAL.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
@@ -124,6 +140,19 @@ func accessSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Segment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Cloud WAN segment of the core network endpoint, or * for all of its segments. Requires CoreNetworkEndpointId.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"segment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Cloud WAN segment of the core network endpoint, or * for all of its segments. Requires CoreNetworkEndpointId.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -208,20 +237,22 @@ func accessSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53GlobalResolver::AccessSource").WithTerraformTypeName("awscc_route53globalresolver_access_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_source_id": "AccessSourceId",
-		"arn":              "Arn",
-		"cidr":             "Cidr",
-		"client_token":     "ClientToken",
-		"created_at":       "CreatedAt",
-		"dns_view_id":      "DnsViewId",
-		"ip_address_type":  "IpAddressType",
-		"key":              "Key",
-		"name":             "Name",
-		"protocol":         "Protocol",
-		"status":           "Status",
-		"tags":             "Tags",
-		"updated_at":       "UpdatedAt",
-		"value":            "Value",
+		"access_source_id":         "AccessSourceId",
+		"arn":                      "Arn",
+		"cidr":                     "Cidr",
+		"client_token":             "ClientToken",
+		"core_network_endpoint_id": "CoreNetworkEndpointId",
+		"created_at":               "CreatedAt",
+		"dns_view_id":              "DnsViewId",
+		"ip_address_type":          "IpAddressType",
+		"key":                      "Key",
+		"name":                     "Name",
+		"protocol":                 "Protocol",
+		"segment":                  "Segment",
+		"status":                   "Status",
+		"tags":                     "Tags",
+		"updated_at":               "UpdatedAt",
+		"value":                    "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -22,6 +22,7 @@ Data Source schema for AWS::AppStream::ImageBuilder
 ### Read-Only
 
 - `access_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--access_endpoints))
+- `agent_access_config` (Attributes) The configuration for agent access on the image builder. If specified, agent access is enabled for the image builder. (see [below for nested schema](#nestedatt--agent_access_config))
 - `appstream_agent_version` (String)
 - `description` (String)
 - `disable_imdsv1` (Boolean)
@@ -47,6 +48,28 @@ Read-Only:
 
 - `endpoint_type` (String)
 - `vpce_id` (String)
+
+
+<a id="nestedatt--agent_access_config"></a>
+### Nested Schema for `agent_access_config`
+
+Read-Only:
+
+- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.
+- `screen_image_format` (String) The image format for agent screen captures.
+- `screen_resolution` (String) The screen resolution for the agent streaming environment.
+- `screenshots_upload_enabled` (Boolean) Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.
+- `settings` (Attributes List) The list of agent access settings that define permissions for each agent action. You must specify at least one setting. Agent actions that aren't listed are disabled, so list only the actions that you enable. (see [below for nested schema](#nestedatt--agent_access_config--settings))
+- `user_control_mode` (String) The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.
+
+<a id="nestedatt--agent_access_config--settings"></a>
+### Nested Schema for `agent_access_config.settings`
+
+Read-Only:
+
+- `agent_action` (String) The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools.
+- `permission` (String) Whether the agent action is enabled or disabled.
+
 
 
 <a id="nestedatt--domain_join_info"></a>

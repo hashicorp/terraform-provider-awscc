@@ -23,6 +23,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource.
 func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccepterAllowMultipathResilience
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the accepter side of the peering attachment has opted in to MultipathResilience.",
+		//	  "type": "boolean"
+		//	}
+		"accepter_allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the accepter side of the peering attachment has opted in to MultipathResilience.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -34,6 +45,54 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time the transit gateway peering attachment was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MultipathResilienceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The connection-level MultipathResilience status, computed from both sides of the peering attachment. (enabled/pending/disabled)",
+		//	  "type": "string"
+		//	}
+		"multipath_resilience_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection-level MultipathResilience status, computed from both sides of the peering attachment. (enabled/pending/disabled)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Options
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Options for transit gateway peering attachment",
+		//	  "properties": {
+		//	    "AllowMultipathResilience": {
+		//	      "description": "Whether to enable MultipathResilience on this side of the peering attachment.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultipathResilienceMode": {
+		//	      "description": "The MultipathResilience mode. Only valid when AllowMultipathResilience is true.",
+		//	      "enum": [
+		//	        "always-on"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowMultipathResilience
+				"allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable MultipathResilience on this side of the peering attachment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultipathResilienceMode
+				"multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The MultipathResilience mode. Only valid when AllowMultipathResilience is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Options for transit gateway peering attachment",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeerAccountId
@@ -67,6 +126,28 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	}
 		"peer_transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the peer transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RequesterAllowMultipathResilience
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the requester side of the peering attachment has opted in to MultipathResilience.",
+		//	  "type": "boolean"
+		//	}
+		"requester_allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the requester side of the peering attachment has opted in to MultipathResilience.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RequesterMultipathResilienceMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The MultipathResilience mode chosen by the requester side of the peering attachment.",
+		//	  "type": "string"
+		//	}
+		"requester_multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The MultipathResilience mode chosen by the requester side of the peering attachment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -192,19 +273,26 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_peering_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"code":                          "Code",
-		"creation_time":                 "CreationTime",
-		"key":                           "Key",
-		"message":                       "Message",
-		"peer_account_id":               "PeerAccountId",
-		"peer_region":                   "PeerRegion",
-		"peer_transit_gateway_id":       "PeerTransitGatewayId",
-		"state":                         "State",
-		"status":                        "Status",
-		"tags":                          "Tags",
-		"transit_gateway_attachment_id": "TransitGatewayAttachmentId",
-		"transit_gateway_id":            "TransitGatewayId",
-		"value":                         "Value",
+		"accepter_allow_multipath_resilience":  "AccepterAllowMultipathResilience",
+		"allow_multipath_resilience":           "AllowMultipathResilience",
+		"code":                                 "Code",
+		"creation_time":                        "CreationTime",
+		"key":                                  "Key",
+		"message":                              "Message",
+		"multipath_resilience_mode":            "MultipathResilienceMode",
+		"multipath_resilience_status":          "MultipathResilienceStatus",
+		"options":                              "Options",
+		"peer_account_id":                      "PeerAccountId",
+		"peer_region":                          "PeerRegion",
+		"peer_transit_gateway_id":              "PeerTransitGatewayId",
+		"requester_allow_multipath_resilience": "RequesterAllowMultipathResilience",
+		"requester_multipath_resilience_mode":  "RequesterMultipathResilienceMode",
+		"state":                                "State",
+		"status":                               "Status",
+		"tags":                                 "Tags",
+		"transit_gateway_attachment_id":        "TransitGatewayAttachmentId",
+		"transit_gateway_id":                   "TransitGatewayId",
+		"value":                                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

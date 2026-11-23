@@ -148,7 +148,9 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	    "IN_PROGRESS",
 		//	    "ACTIVE",
 		//	    "INACTIVE",
-		//	    "DISABLING"
+		//	    "DISABLING",
+		//	    "DELETE_IN_PROGRESS",
+		//	    "DELETE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}

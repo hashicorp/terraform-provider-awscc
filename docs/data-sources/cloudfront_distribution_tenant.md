@@ -27,6 +27,7 @@ Data Source schema for AWS::CloudFront::DistributionTenant
 - `customizations` (Attributes) Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant. (see [below for nested schema](#nestedatt--customizations))
 - `distribution_id` (String) The ID of the multi-tenant distribution.
 - `distribution_tenant_id` (String)
+- `domain_mappings` (Attributes List) (see [below for nested schema](#nestedatt--domain_mappings))
 - `domain_results` (Attributes List) (see [below for nested schema](#nestedatt--domain_results))
 - `domains` (List of String) The domains associated with the distribution tenant.
 - `e_tag` (String)
@@ -34,6 +35,7 @@ Data Source schema for AWS::CloudFront::DistributionTenant
 - `last_modified_time` (String)
 - `managed_certificate_request` (Attributes) An object that represents the request for the Amazon CloudFront managed ACM certificate. (see [below for nested schema](#nestedatt--managed_certificate_request))
 - `name` (String) The name of the distribution tenant.
+- `on_domain_takeover` (String)
 - `parameters` (Attributes List) A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution. (see [below for nested schema](#nestedatt--parameters))
 - `status` (String)
 - `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
@@ -77,13 +79,25 @@ Read-Only:
 
 
 
+<a id="nestedatt--domain_mappings"></a>
+### Nested Schema for `domain_mappings`
+
+Read-Only:
+
+- `domain` (String) The domain to serve only on the Anycast IP list. Must be lowercase and must also be listed in `Domains`.
+- `serve_on` (String) Set to `anycast-ip-list-only` to serve the domain only on the Anycast IP list of the tenant's connection group. To serve a domain normally, on all CloudFront IP addresses, omit it from `DomainMappings`.
+
+
 <a id="nestedatt--domain_results"></a>
 ### Nested Schema for `domain_results`
 
 Read-Only:
 
 - `domain` (String) The specified domain.
+- `serve_on` (String)
 - `status` (String) Whether the domain is active or inactive.
+- `status_reason` (String)
+- `status_reason_code` (String)
 
 
 <a id="nestedatt--managed_certificate_request"></a>

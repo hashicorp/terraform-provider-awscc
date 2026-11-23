@@ -110,7 +110,83 @@ Optional:
 Optional:
 
 - `connection_name` (String) The name of the connection to an external data source.
+- `connection_type` (String) The type of connection used to access the federated catalog. Synchronization is only supported for certain connection types.
 - `identifier` (String) A unique identifier for the federated catalog.
+- `sync_configuration` (Attributes) Configuration for synchronizing a federated catalog with its external data source. Removing this property does not disable synchronization: Glue keeps the stored configuration for anything omitted from an update. To stop synchronizing, set the Status of each mode to DISABLED. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration))
+
+<a id="nestedatt--federated_catalog--sync_configuration"></a>
+### Nested Schema for `federated_catalog.sync_configuration`
+
+Optional:
+
+- `assets_sync_configuration` (Attributes) Configuration for synchronizing assets from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing assets. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration--assets_sync_configuration))
+- `lineage_sync_configuration` (Attributes) Configuration for synchronizing lineage from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing lineage. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration--lineage_sync_configuration))
+- `role_arn` (String) The IAM role, in the catalog owner's account, that the crawlers Glue manages on your behalf assume.
+
+<a id="nestedatt--federated_catalog--sync_configuration--assets_sync_configuration"></a>
+### Nested Schema for `federated_catalog.sync_configuration.assets_sync_configuration`
+
+Optional:
+
+- `refresh_interval_minutes` (Number) How often the crawler synchronizes assets, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.
+- `status` (String) Whether asset synchronization is enabled.
+
+Read-Only:
+
+- `managed_crawler_details` (Attributes) The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration--assets_sync_configuration--managed_crawler_details))
+
+<a id="nestedatt--federated_catalog--sync_configuration--assets_sync_configuration--managed_crawler_details"></a>
+### Nested Schema for `federated_catalog.sync_configuration.assets_sync_configuration.managed_crawler_details`
+
+Read-Only:
+
+- `crawler_arn` (String) The Amazon Resource Name (ARN) of the crawler.
+- `error` (Attributes) Details about an error. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration--assets_sync_configuration--managed_crawler_details--error))
+- `status` (String) The provisioning state of the crawler.
+
+<a id="nestedatt--federated_catalog--sync_configuration--assets_sync_configuration--managed_crawler_details--error"></a>
+### Nested Schema for `federated_catalog.sync_configuration.assets_sync_configuration.managed_crawler_details.error`
+
+Read-Only:
+
+- `error_code` (String) The code associated with this error.
+- `error_message` (String) A message describing the error.
+
+
+
+
+<a id="nestedatt--federated_catalog--sync_configuration--lineage_sync_configuration"></a>
+### Nested Schema for `federated_catalog.sync_configuration.lineage_sync_configuration`
+
+Optional:
+
+- `refresh_interval_minutes` (Number) How often the crawler synchronizes lineage, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.
+- `status` (String) Whether lineage synchronization is enabled.
+
+Read-Only:
+
+- `managed_crawler_details` (Attributes) The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration--lineage_sync_configuration--managed_crawler_details))
+
+<a id="nestedatt--federated_catalog--sync_configuration--lineage_sync_configuration--managed_crawler_details"></a>
+### Nested Schema for `federated_catalog.sync_configuration.lineage_sync_configuration.managed_crawler_details`
+
+Read-Only:
+
+- `crawler_arn` (String) The Amazon Resource Name (ARN) of the crawler.
+- `error` (Attributes) Details about an error. (see [below for nested schema](#nestedatt--federated_catalog--sync_configuration--lineage_sync_configuration--managed_crawler_details--error))
+- `status` (String) The provisioning state of the crawler.
+
+<a id="nestedatt--federated_catalog--sync_configuration--lineage_sync_configuration--managed_crawler_details--error"></a>
+### Nested Schema for `federated_catalog.sync_configuration.lineage_sync_configuration.managed_crawler_details.error`
+
+Read-Only:
+
+- `error_code` (String) The code associated with this error.
+- `error_message` (String) A message describing the error.
+
+
+
+
 
 
 <a id="nestedatt--tags"></a>

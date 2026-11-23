@@ -27,6 +27,7 @@ Data Source schema for AWS::DSQL::Cluster
 - `endpoint` (String) The DSQL cluster endpoint.
 - `identifier` (String) The ID of the created cluster.
 - `kms_encryption_key` (String) The KMS key that encrypts data on the cluster.
+- `metric_groups` (Attributes Set) The Advanced monitoring metric groups to enable on the cluster. Omit to enable none. (see [below for nested schema](#nestedatt--metric_groups))
 - `multi_region_properties` (Attributes) The Multi-region properties associated to this cluster. (see [below for nested schema](#nestedatt--multi_region_properties))
 - `policy_document` (String) The IAM policy applied to the cluster resource.
 - `policy_version` (String) The version number of the cluster's resource based policy
@@ -44,6 +45,14 @@ Read-Only:
 - `encryption_status` (String) The status of encryption for the cluster.
 - `encryption_type` (String) The type of encryption that protects data in the cluster.
 - `kms_key_arn` (String) The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.
+
+
+<a id="nestedatt--metric_groups"></a>
+### Nested Schema for `metric_groups`
+
+Read-Only:
+
+- `metric_group` (String) The name of the metric group. Valid values: STATEMENT_STATISTICS.
 
 
 <a id="nestedatt--multi_region_properties"></a>

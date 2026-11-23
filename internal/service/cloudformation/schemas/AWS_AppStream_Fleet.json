@@ -74,7 +74,7 @@
     },
     "IamRoleArn": {
       "type": "string",
-      "pattern": "^arn:aws(?:\\-cn|\\-iso\\-b|\\-iso|\\-us\\-gov)?:iam::[0-9]{12}:role/.+$"
+      "pattern": ""
     },
     "MaxSessionsPerInstance": {
       "type": "integer"
@@ -101,8 +101,7 @@
     },
     "ImageArn": {
       "type": "string",
-      "maxLength": 1024,
-      "pattern": "^arn:[a-z-]+:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:.+$"
+      "maxLength": 1024
     },
     "RootVolumeConfig": {
       "$ref": "#/definitions/VolumeConfig"
@@ -281,7 +280,8 @@
         "iam:PassRole",
         "s3:ListBucket",
         "s3:GetObject"
-      ]
+      ],
+      "timeoutInMinutes": 190
     },
     "delete": {
       "permissions": [

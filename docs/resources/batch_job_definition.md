@@ -618,6 +618,7 @@ Optional:
 - `image_pull_secrets` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--image_pull_secrets))
 - `init_containers` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers))
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--metadata))
+- `security_context` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--security_context))
 - `service_account_name` (String)
 - `share_process_namespace` (Boolean)
 - `volumes` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--volumes))
@@ -661,11 +662,31 @@ Optional:
 Optional:
 
 - `allow_privilege_escalation` (Boolean)
+- `capabilities` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--containers--security_context--capabilities))
 - `privileged` (Boolean)
 - `read_only_root_filesystem` (Boolean)
 - `run_as_group` (Number)
 - `run_as_non_root` (Boolean)
 - `run_as_user` (Number)
+- `seccomp_profile` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--containers--security_context--seccomp_profile))
+
+<a id="nestedatt--eks_properties--pod_properties--containers--security_context--capabilities"></a>
+### Nested Schema for `eks_properties.pod_properties.containers.security_context.capabilities`
+
+Optional:
+
+- `add` (List of String)
+- `drop` (List of String)
+
+
+<a id="nestedatt--eks_properties--pod_properties--containers--security_context--seccomp_profile"></a>
+### Nested Schema for `eks_properties.pod_properties.containers.security_context.seccomp_profile`
+
+Optional:
+
+- `localhost_profile` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--eks_properties--pod_properties--containers--volume_mounts"></a>
@@ -727,11 +748,31 @@ Optional:
 Optional:
 
 - `allow_privilege_escalation` (Boolean)
+- `capabilities` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers--security_context--capabilities))
 - `privileged` (Boolean)
 - `read_only_root_filesystem` (Boolean)
 - `run_as_group` (Number)
 - `run_as_non_root` (Boolean)
 - `run_as_user` (Number)
+- `seccomp_profile` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers--security_context--seccomp_profile))
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers--security_context--capabilities"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers.security_context.capabilities`
+
+Optional:
+
+- `add` (List of String)
+- `drop` (List of String)
+
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers--security_context--seccomp_profile"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers.security_context.seccomp_profile`
+
+Optional:
+
+- `localhost_profile` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--eks_properties--pod_properties--init_containers--volume_mounts"></a>
@@ -754,6 +795,27 @@ Optional:
 - `annotations` (Map of String)
 - `labels` (Map of String)
 - `namespace` (String)
+
+
+<a id="nestedatt--eks_properties--pod_properties--security_context"></a>
+### Nested Schema for `eks_properties.pod_properties.security_context`
+
+Optional:
+
+- `fs_group` (Number)
+- `run_as_group` (Number)
+- `run_as_non_root` (Boolean)
+- `run_as_user` (Number)
+- `seccomp_profile` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--security_context--seccomp_profile))
+
+<a id="nestedatt--eks_properties--pod_properties--security_context--seccomp_profile"></a>
+### Nested Schema for `eks_properties.pod_properties.security_context.seccomp_profile`
+
+Optional:
+
+- `localhost_profile` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--eks_properties--pod_properties--volumes"></a>
@@ -1289,6 +1351,7 @@ Optional:
 - `image_pull_secrets` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--image_pull_secrets))
 - `init_containers` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--init_containers))
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--metadata))
+- `security_context` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--security_context))
 - `service_account_name` (String)
 - `share_process_namespace` (Boolean)
 - `volumes` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes))
@@ -1332,11 +1395,31 @@ Optional:
 Optional:
 
 - `allow_privilege_escalation` (Boolean)
+- `capabilities` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--containers--security_context--capabilities))
 - `privileged` (Boolean)
 - `read_only_root_filesystem` (Boolean)
 - `run_as_group` (Number)
 - `run_as_non_root` (Boolean)
 - `run_as_user` (Number)
+- `seccomp_profile` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--containers--security_context--seccomp_profile))
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--containers--security_context--capabilities"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.containers.security_context.capabilities`
+
+Optional:
+
+- `add` (List of String)
+- `drop` (List of String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--containers--security_context--seccomp_profile"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.containers.security_context.seccomp_profile`
+
+Optional:
+
+- `localhost_profile` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--containers--volume_mounts"></a>
@@ -1398,11 +1481,31 @@ Optional:
 Optional:
 
 - `allow_privilege_escalation` (Boolean)
+- `capabilities` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--init_containers--security_context--capabilities))
 - `privileged` (Boolean)
 - `read_only_root_filesystem` (Boolean)
 - `run_as_group` (Number)
 - `run_as_non_root` (Boolean)
 - `run_as_user` (Number)
+- `seccomp_profile` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--init_containers--security_context--seccomp_profile))
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--init_containers--security_context--capabilities"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.init_containers.security_context.capabilities`
+
+Optional:
+
+- `add` (List of String)
+- `drop` (List of String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--init_containers--security_context--seccomp_profile"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.init_containers.security_context.seccomp_profile`
+
+Optional:
+
+- `localhost_profile` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--init_containers--volume_mounts"></a>
@@ -1425,6 +1528,27 @@ Optional:
 - `annotations` (Map of String)
 - `labels` (Map of String)
 - `namespace` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--security_context"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.security_context`
+
+Optional:
+
+- `fs_group` (Number)
+- `run_as_group` (Number)
+- `run_as_non_root` (Boolean)
+- `run_as_user` (Number)
+- `seccomp_profile` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--security_context--seccomp_profile))
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--security_context--seccomp_profile"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.security_context.seccomp_profile`
+
+Optional:
+
+- `localhost_profile` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes"></a>

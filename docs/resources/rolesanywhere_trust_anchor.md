@@ -22,6 +22,7 @@ Definition of AWS::RolesAnywhere::TrustAnchor Resource Type.
 
 ### Optional
 
+- `crl_dp_revocation_enabled` (Boolean)
 - `enabled` (Boolean)
 - `notification_settings` (Attributes List) (see [below for nested schema](#nestedatt--notification_settings))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

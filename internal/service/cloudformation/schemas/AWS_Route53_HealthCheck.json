@@ -132,6 +132,24 @@
           "minLength": 1,
           "maxLength": 255
         },
+        "EndpointType": {
+          "description": "Whether the health check targets a public endpoint or a private endpoint inside a VPC. Defaults to PUBLIC. Adding this property to an existing health check's template replaces the health check; leave it unset for existing public health checks.",
+          "type": "string",
+          "enum": [
+            "PUBLIC",
+            "PRIVATE"
+          ]
+        },
+        "HealthCheckSourceId": {
+          "description": "The ID of the health check source that Route 53 uses to reach a private endpoint. Required when EndpointType is PRIVATE.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "relationshipRef": {
+            "typeName": "AWS::Route53::HealthCheckSource",
+            "propertyPath": "/properties/HealthCheckSourceId"
+          }
+        },
         "Type": {
           "type": "string",
           "enum": [
@@ -168,7 +186,8 @@
   "createOnlyProperties": [
     "/properties/HealthCheckConfig/Type",
     "/properties/HealthCheckConfig/MeasureLatency",
-    "/properties/HealthCheckConfig/RequestInterval"
+    "/properties/HealthCheckConfig/RequestInterval",
+    "/properties/HealthCheckConfig/EndpointType"
   ],
   "readOnlyProperties": [
     "/properties/HealthCheckId"

@@ -27,6 +27,7 @@ Data Source schema for AWS::Wisdom::AIPrompt
 - `assistant_arn` (String)
 - `assistant_id` (String)
 - `description` (String)
+- `inference_configuration` (Attributes) (see [below for nested schema](#nestedatt--inference_configuration))
 - `model_id` (String)
 - `modified_time_seconds` (Number)
 - `name` (String)
@@ -34,6 +35,17 @@ Data Source schema for AWS::Wisdom::AIPrompt
 - `template_configuration` (Attributes) (see [below for nested schema](#nestedatt--template_configuration))
 - `template_type` (String)
 - `type` (String)
+
+<a id="nestedatt--inference_configuration"></a>
+### Nested Schema for `inference_configuration`
+
+Read-Only:
+
+- `max_tokens_to_sample` (Number)
+- `temperature` (Number)
+- `top_k` (Number)
+- `top_p` (Number)
+
 
 <a id="nestedatt--template_configuration"></a>
 ### Nested Schema for `template_configuration`

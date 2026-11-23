@@ -23,6 +23,7 @@ Resource Type definition for AWS::NetworkSecurityManager::Scope. Creates and man
 
 - `scope_configuration` (String) The scope configuration as a JSON string.
 - `scope_description` (String) A description of the scope.
+- `specialized_scope_type` (String) Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.
 - `tags` (Attributes Set) The tags associated with the scope. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

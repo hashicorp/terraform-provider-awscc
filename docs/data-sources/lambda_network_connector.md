@@ -43,9 +43,18 @@ Read-Only:
 Read-Only:
 
 - `associated_compute_resource_types` (List of String) The types of Lambda compute resources that can use this connector. Supported values are MicroVm and WebFunction.
+- `elastic_ip_configuration` (Attributes) Specifies whether Lambda assigns an Elastic IP address to each of the network connector's elastic network interfaces (ENIs). If you don't specify an Elastic IP configuration, no Elastic IP address is assigned. When you update this configuration, the change applies to the ENIs of the new connector version. (see [below for nested schema](#nestedatt--configuration--vpc_egress_configuration--elastic_ip_configuration))
 - `network_protocol` (String) The network protocol for the connector. Specify IPv4 for IPv4-only networking, or DualStack for both IPv4 and IPv6.
 - `security_group_ids` (List of String) The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.
 - `subnet_ids` (List of String) The IDs of the VPC subnets where Lambda provisions elastic network interfaces (ENIs). Specify 1 to 16 subnets. All subnets must be in the same VPC.
+
+<a id="nestedatt--configuration--vpc_egress_configuration--elastic_ip_configuration"></a>
+### Nested Schema for `configuration.vpc_egress_configuration.elastic_ip_configuration`
+
+Read-Only:
+
+- `type` (String) The Elastic IP address type for the connector's ENIs. With None, Lambda doesn't assign an Elastic IP address. With ServiceManaged, Lambda allocates a service-managed Elastic IP address in your account for each ENI, associates it with that ENI, and releases it when it deletes the ENI. The connector's operator role must allow the ec2:AllocateAddress and ec2:AssociateAddress actions on Elastic IP addresses and on the connector's ENIs.
+
 
 
 

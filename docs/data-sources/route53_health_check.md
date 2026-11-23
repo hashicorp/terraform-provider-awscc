@@ -33,8 +33,10 @@ Read-Only:
 - `alarm_identifier` (Attributes) A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy. (see [below for nested schema](#nestedatt--health_check_config--alarm_identifier))
 - `child_health_checks` (List of String)
 - `enable_sni` (Boolean)
+- `endpoint_type` (String) Whether the health check targets a public endpoint or a private endpoint inside a VPC. Defaults to PUBLIC. Adding this property to an existing health check's template replaces the health check; leave it unset for existing public health checks.
 - `failure_threshold` (Number)
 - `fully_qualified_domain_name` (String)
+- `health_check_source_id` (String) The ID of the health check source that Route 53 uses to reach a private endpoint. Required when EndpointType is PRIVATE.
 - `health_threshold` (Number)
 - `insufficient_data_health_status` (String)
 - `inverted` (Boolean)

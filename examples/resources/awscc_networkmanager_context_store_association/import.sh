@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmanager_context_store_association.example "context_store_id|resource_arn"

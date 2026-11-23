@@ -1,0 +1,103 @@
+{
+  "typeName": "AWS::Cognito::UserPoolClientSessionConfigurationAttachment",
+  "description": "Resource Type definition for AWS::Cognito::UserPoolClientSessionConfigurationAttachment. Manages the session configuration of a user pool app client. The settings take effect only while the user pool has UserSessionTracking ENABLED, so declaring DependsOn the AWS::Cognito::UserPoolSessionConfigurationAttachment is recommended. The service default (SSOSession MaxValidityMinutes 60) cannot be declared; remove the resource to return the app client to the default.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "SSOSession": {
+      "type": "object",
+      "description": "Managed login single sign-on session settings for the app client.",
+      "properties": {
+        "MaxValidityMinutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 129600,
+          "description": "The maximum time in minutes since the last authentication during which this app client can reuse an existing managed login SSO session without asking the user to sign in again. 0 means the app client always asks the user to sign in."
+        }
+      },
+      "required": [
+        "MaxValidityMinutes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "UserPoolId": {
+      "type": "string",
+      "description": "The ID of the user pool."
+    },
+    "ClientId": {
+      "type": "string",
+      "description": "The ID of the app client."
+    },
+    "SSOSession": {
+      "$ref": "#/definitions/SSOSession"
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "additionalProperties": false,
+  "required": [
+    "UserPoolId",
+    "ClientId",
+    "SSOSession"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserPoolId",
+    "/properties/ClientId"
+  ],
+  "primaryIdentifier": [
+    "/properties/UserPoolId",
+    "/properties/ClientId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cognito-idp:SetUserPoolClientSessionConfiguration",
+        "cognito-idp:GetUserPoolClientSessionConfiguration"
+      ],
+      "timeoutInMinutes": 5
+    },
+    "read": {
+      "permissions": [
+        "cognito-idp:GetUserPoolClientSessionConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cognito-idp:SetUserPoolClientSessionConfiguration",
+        "cognito-idp:GetUserPoolClientSessionConfiguration"
+      ],
+      "timeoutInMinutes": 5
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:SetUserPoolClientSessionConfiguration",
+        "cognito-idp:GetUserPoolClientSessionConfiguration"
+      ],
+      "timeoutInMinutes": 5
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "UserPoolId": {
+            "$ref": "resource-schema.json#/properties/UserPoolId"
+          },
+          "ClientId": {
+            "$ref": "resource-schema.json#/properties/ClientId"
+          }
+        },
+        "required": [
+          "UserPoolId",
+          "ClientId"
+        ]
+      },
+      "permissions": [
+        "cognito-idp:GetUserPoolClientSessionConfiguration"
+      ]
+    }
+  }
+}

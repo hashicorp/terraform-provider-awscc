@@ -55,9 +55,6 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Scope"
-		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -114,9 +111,6 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ExternalUrlConfig"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"application_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -148,12 +142,61 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "STANDARD",
 		//	    "SERVICE",
-		//	    "MCP_SERVER"
+		//	    "MCP_SERVER",
+		//	    "A2A_SERVER"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"application_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of application",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AuthConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The authentication configuration. Required when ApplicationType is A2A_SERVER.",
+		//	  "properties": {
+		//	    "AudienceOverride": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "AuthType": {
+		//	      "enum": [
+		//	        "API_KEY",
+		//	        "CONNECT_JWT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CredentialProviderIdentifier": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AuthType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudienceOverride
+				"audience_override": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthType
+				"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CredentialProviderIdentifier
+				"credential_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The authentication configuration. Required when ApplicationType is A2A_SERVER.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -244,6 +287,28 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"is_service": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates if the application is a service",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The region in which the application was last modified.",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The region in which the application was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time when the application was last modified.",
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time when the application was last modified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -363,28 +428,34 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::Application").WithTerraformTypeName("awscc_appintegrations_application")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_url":                "AccessUrl",
-		"allow":                     "Allow",
-		"application_arn":           "ApplicationArn",
-		"application_config":        "ApplicationConfig",
-		"application_id":            "Id",
-		"application_source_config": "ApplicationSourceConfig",
-		"application_type":          "ApplicationType",
-		"approved_origins":          "ApprovedOrigins",
-		"contact_handling":          "ContactHandling",
-		"description":               "Description",
-		"external_url_config":       "ExternalUrlConfig",
-		"iframe_config":             "IframeConfig",
-		"initialization_timeout":    "InitializationTimeout",
-		"is_service":                "IsService",
-		"key":                       "Key",
-		"name":                      "Name",
-		"namespace":                 "Namespace",
-		"permissions":               "Permissions",
-		"sandbox":                   "Sandbox",
-		"scope":                     "Scope",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"access_url":                     "AccessUrl",
+		"allow":                          "Allow",
+		"application_arn":                "ApplicationArn",
+		"application_config":             "ApplicationConfig",
+		"application_id":                 "Id",
+		"application_source_config":      "ApplicationSourceConfig",
+		"application_type":               "ApplicationType",
+		"approved_origins":               "ApprovedOrigins",
+		"audience_override":              "AudienceOverride",
+		"auth_config":                    "AuthConfig",
+		"auth_type":                      "AuthType",
+		"contact_handling":               "ContactHandling",
+		"credential_provider_identifier": "CredentialProviderIdentifier",
+		"description":                    "Description",
+		"external_url_config":            "ExternalUrlConfig",
+		"iframe_config":                  "IframeConfig",
+		"initialization_timeout":         "InitializationTimeout",
+		"is_service":                     "IsService",
+		"key":                            "Key",
+		"last_modified_region":           "LastModifiedRegion",
+		"last_modified_time":             "LastModifiedTime",
+		"name":                           "Name",
+		"namespace":                      "Namespace",
+		"permissions":                    "Permissions",
+		"sandbox":                        "Sandbox",
+		"scope":                          "Scope",
+		"tags":                           "Tags",
+		"value":                          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

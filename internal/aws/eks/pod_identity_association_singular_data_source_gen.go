@@ -188,6 +188,56 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "The Target Role Arn of the pod identity association.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WorkloadIdentityConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The workload identity configuration of the pod identity association. When enabled, the association also provisions a SPIFFE identity for the workload. Setting Enabled to false disables workload identity and keeps the ARNs. Removing the property from the template leaves the association unchanged; set Enabled to false to disable workload identity.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Whether workload identity is enabled for the association. Enabling it requires TemplateArn and ProviderArn, and cannot be combined with TargetRoleArn.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProviderArn": {
+		//	      "description": "The ARN of the customer-owned IAM workload identity provider that produces the trusted context assertion for the workload.",
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws[a-zA-Z-]*:iam::([0-9]{12}|o-[a-z0-9]{10,32}):workload-identity-provider/[^/]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "TemplateArn": {
+		//	      "description": "The ARN of the customer-owned IAM workload identity template that renders the workload's SPIFFE identity.",
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:workload-identity-template/[^/]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"workload_identity_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether workload identity is enabled for the association. Enabling it requires TemplateArn and ProviderArn, and cannot be combined with TargetRoleArn.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProviderArn
+				"provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the customer-owned IAM workload identity provider that produces the trusted context assertion for the workload.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TemplateArn
+				"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the customer-owned IAM workload identity template that renders the workload's SPIFFE identity.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The workload identity configuration of the pod identity association. When enabled, the association also provisions a SPIFFE identity for the workload. Setting Enabled to false disables workload identity and keeps the ARNs. Removing the property from the template leaves the association unchanged; set Enabled to false to disable workload identity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -205,19 +255,23 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::PodIdentityAssociation").WithTerraformTypeName("awscc_eks_pod_identity_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"association_arn":      "AssociationArn",
-		"association_id":       "AssociationId",
-		"cluster_name":         "ClusterName",
-		"disable_session_tags": "DisableSessionTags",
-		"external_id":          "ExternalId",
-		"key":                  "Key",
-		"namespace":            "Namespace",
-		"policy":               "Policy",
-		"role_arn":             "RoleArn",
-		"service_account":      "ServiceAccount",
-		"tags":                 "Tags",
-		"target_role_arn":      "TargetRoleArn",
-		"value":                "Value",
+		"association_arn":          "AssociationArn",
+		"association_id":           "AssociationId",
+		"cluster_name":             "ClusterName",
+		"disable_session_tags":     "DisableSessionTags",
+		"enabled":                  "Enabled",
+		"external_id":              "ExternalId",
+		"key":                      "Key",
+		"namespace":                "Namespace",
+		"policy":                   "Policy",
+		"provider_arn":             "ProviderArn",
+		"role_arn":                 "RoleArn",
+		"service_account":          "ServiceAccount",
+		"tags":                     "Tags",
+		"target_role_arn":          "TargetRoleArn",
+		"template_arn":             "TemplateArn",
+		"value":                    "Value",
+		"workload_identity_config": "WorkloadIdentityConfig",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

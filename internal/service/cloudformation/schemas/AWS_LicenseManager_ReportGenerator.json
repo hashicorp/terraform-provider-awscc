@@ -189,7 +189,9 @@
         "license-manager:CreateLicenseManagerReportGenerator",
         "license-manager:GetLicenseConfiguration",
         "license-manager:GetServiceSettings",
-        "license-manager:TagResource"
+        "license-manager:TagResource",
+        "license-manager:UpdateServiceSettings",
+        "s3:CreateBucket"
       ]
     },
     "read": {

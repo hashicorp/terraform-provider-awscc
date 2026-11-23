@@ -7,6 +7,7 @@ package config
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -52,6 +53,18 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for the connector that specifies the third-party cloud provider connection details.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Azure"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Gcp"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "Azure": {
 		//	      "additionalProperties": false,
@@ -73,6 +86,37 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "TenantIdentifier",
 		//	        "ClientIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Gcp": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for connecting to Google Cloud.",
+		//	      "properties": {
+		//	        "GcpOrganizationId": {
+		//	          "description": "The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in ServiceAccountEmail. Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.",
+		//	          "maxLength": 20,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ServiceAccountEmail": {
+		//	          "description": "The email address of the Google Cloud service account that AWS Config uses.",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-z][a-z0-9\\-]*@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$",
+		//	          "type": "string"
+		//	        },
+		//	        "WorkloadIdentityPoolProvider": {
+		//	          "description": "The full resource name of the workload identity pool provider that AWS Config uses to federate into Google Cloud.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "^projects/[0-9]+/locations/global/workloadIdentityPools/[^/]+/providers/[^/]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServiceAccountEmail",
+		//	        "WorkloadIdentityPoolProvider"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -112,6 +156,57 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration for connecting to Microsoft Azure.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Gcp
+				"gcp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GcpOrganizationId
+						"gcp_organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in ServiceAccountEmail. Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 20),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceAccountEmail
+						"service_account_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The email address of the Google Cloud service account that AWS Config uses.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 256),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9\\-]*@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WorkloadIdentityPoolProvider
+						"workload_identity_pool_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The full resource name of the workload identity pool provider that AWS Config uses to federate into Google Cloud.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 512),
+								stringvalidator.RegexMatches(regexp.MustCompile("^projects/[0-9]+/locations/global/workloadIdentityPools/[^/]+/providers/[^/]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for connecting to Google Cloud.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -258,16 +353,20 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"azure":                   "Azure",
-		"client_identifier":       "ClientIdentifier",
-		"connector_configuration": "ConnectorConfiguration",
-		"created_time":            "CreatedTime",
-		"key":                     "Key",
-		"name":                    "Name",
-		"tags":                    "Tags",
-		"tenant_identifier":       "TenantIdentifier",
-		"value":                   "Value",
+		"arn":                             "Arn",
+		"azure":                           "Azure",
+		"client_identifier":               "ClientIdentifier",
+		"connector_configuration":         "ConnectorConfiguration",
+		"created_time":                    "CreatedTime",
+		"gcp":                             "Gcp",
+		"gcp_organization_id":             "GcpOrganizationId",
+		"key":                             "Key",
+		"name":                            "Name",
+		"service_account_email":           "ServiceAccountEmail",
+		"tags":                            "Tags",
+		"tenant_identifier":               "TenantIdentifier",
+		"value":                           "Value",
+		"workload_identity_pool_provider": "WorkloadIdentityPoolProvider",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -873,6 +873,39 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
+		//	    "ExcludedAccountIds": {
+		//	      "description": "List of account IDs to exclude from the organization rule. Excluded accounts take precedence over included organizational units and accounts.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "pattern": "^[0-9]{12}$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 50,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ExcludedOrganizationalUnitIds": {
+		//	      "description": "List of organizational unit or organization root IDs to exclude from the organization rule. Exclusions include accounts in descendant organizational units and take precedence over included organizational units and accounts.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "pattern": "^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 150,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "OrganizationalUnitIds": {
+		//	      "description": "List of organizational unit or organization root IDs where the organization rule applies. The rule also applies to accounts in descendant organizational units.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "pattern": "^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 150,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "RuleApplyOrder": {
 		//	      "description": "When the rule should be applied relative to account rules",
 		//	      "enum": [
@@ -896,6 +929,57 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(1, 50),
 						listvalidator.ValueStringsAre(
 							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExcludedAccountIds
+				"excluded_account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of account IDs to exclude from the organization rule. Excluded accounts take precedence over included organizational units and accounts.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 50),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExcludedOrganizationalUnitIds
+				"excluded_organizational_unit_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of organizational unit or organization root IDs to exclude from the organization rule. Exclusions include accounts in descendant organizational units and take precedence over included organizational units and accounts.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 150),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OrganizationalUnitIds
+				"organizational_unit_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of organizational unit or organization root IDs where the organization rule applies. The rule also applies to accounts in descendant organizational units.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 150),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1220,39 +1304,42 @@ func automationRuleResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                   "AccountId",
-		"account_ids":                  "AccountIds",
-		"comparison":                   "Comparison",
-		"created_timestamp":            "CreatedTimestamp",
-		"criteria":                     "Criteria",
-		"description":                  "Description",
-		"ebs_volume_size_in_gib":       "EbsVolumeSizeInGib",
-		"ebs_volume_type":              "EbsVolumeType",
-		"estimated_monthly_savings":    "EstimatedMonthlySavings",
-		"execution_window_in_minutes":  "ExecutionWindowInMinutes",
-		"key":                          "Key",
-		"last_updated_timestamp":       "LastUpdatedTimestamp",
-		"look_back_period_in_days":     "LookBackPeriodInDays",
-		"name":                         "Name",
-		"organization_configuration":   "OrganizationConfiguration",
-		"priority":                     "Priority",
-		"recommended_action_types":     "RecommendedActionTypes",
-		"region":                       "Region",
-		"resource_arn":                 "ResourceArn",
-		"resource_tag":                 "ResourceTag",
-		"restart_needed":               "RestartNeeded",
-		"rule_apply_order":             "RuleApplyOrder",
-		"rule_arn":                     "RuleArn",
-		"rule_id":                      "RuleId",
-		"rule_revision":                "RuleRevision",
-		"rule_type":                    "RuleType",
-		"schedule":                     "Schedule",
-		"schedule_expression":          "ScheduleExpression",
-		"schedule_expression_timezone": "ScheduleExpressionTimezone",
-		"status":                       "Status",
-		"tags":                         "Tags",
-		"value":                        "Value",
-		"values":                       "Values",
+		"account_id":                       "AccountId",
+		"account_ids":                      "AccountIds",
+		"comparison":                       "Comparison",
+		"created_timestamp":                "CreatedTimestamp",
+		"criteria":                         "Criteria",
+		"description":                      "Description",
+		"ebs_volume_size_in_gib":           "EbsVolumeSizeInGib",
+		"ebs_volume_type":                  "EbsVolumeType",
+		"estimated_monthly_savings":        "EstimatedMonthlySavings",
+		"excluded_account_ids":             "ExcludedAccountIds",
+		"excluded_organizational_unit_ids": "ExcludedOrganizationalUnitIds",
+		"execution_window_in_minutes":      "ExecutionWindowInMinutes",
+		"key":                              "Key",
+		"last_updated_timestamp":           "LastUpdatedTimestamp",
+		"look_back_period_in_days":         "LookBackPeriodInDays",
+		"name":                             "Name",
+		"organization_configuration":       "OrganizationConfiguration",
+		"organizational_unit_ids":          "OrganizationalUnitIds",
+		"priority":                         "Priority",
+		"recommended_action_types":         "RecommendedActionTypes",
+		"region":                           "Region",
+		"resource_arn":                     "ResourceArn",
+		"resource_tag":                     "ResourceTag",
+		"restart_needed":                   "RestartNeeded",
+		"rule_apply_order":                 "RuleApplyOrder",
+		"rule_arn":                         "RuleArn",
+		"rule_id":                          "RuleId",
+		"rule_revision":                    "RuleRevision",
+		"rule_type":                        "RuleType",
+		"schedule":                         "Schedule",
+		"schedule_expression":              "ScheduleExpression",
+		"schedule_expression_timezone":     "ScheduleExpressionTimezone",
+		"status":                           "Status",
+		"tags":                             "Tags",
+		"value":                            "Value",
+		"values":                           "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

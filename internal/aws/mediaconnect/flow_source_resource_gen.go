@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -428,7 +429,8 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "rtp",
 		//	    "rist",
 		//	    "srt-listener",
-		//	    "srt-caller"
+		//	    "srt-caller",
+		//	    "rtmp-push"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -444,11 +446,165 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 					"rist",
 					"srt-listener",
 					"srt-caller",
+					"rtmp-push",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RtmpPushDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The read-only details for the RTMP (Real-Time Messaging Protocol) source.",
+		//	  "properties": {
+		//	    "ApplicationName": {
+		//	      "description": "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+		//	      "type": "string"
+		//	    },
+		//	    "StreamName": {
+		//	      "description": "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ApplicationName",
+		//	    "StreamName"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rtmp_push_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationName
+				"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StreamName
+				"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The read-only details for the RTMP (Real-Time Messaging Protocol) source.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RtmpPushSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The settings for the RTMP (Real-Time Messaging Protocol) source.",
+		//	  "properties": {
+		//	    "NamingConfiguration": {
+		//	      "description": "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+		//	      "properties": {
+		//	        "Automatic": {
+		//	          "additionalProperties": false,
+		//	          "description": "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+		//	          "type": "object"
+		//	        },
+		//	        "Manual": {
+		//	          "additionalProperties": false,
+		//	          "description": "The manual RTMP naming configuration, where you specify the application and stream names.",
+		//	          "properties": {
+		//	            "ApplicationName": {
+		//	              "description": "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+		//	              "type": "string"
+		//	            },
+		//	            "StreamName": {
+		//	              "description": "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApplicationName",
+		//	            "StreamName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "NamingConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rtmp_push_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NamingConfiguration
+				"naming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Automatic
+						"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Manual
+						"manual": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApplicationName
+								"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StreamName
+								"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The manual RTMP naming configuration, where you specify the application and stream names.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The settings for the RTMP (Real-Time Messaging Protocol) source.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SenderControlPort
@@ -674,6 +830,8 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                      "Algorithm",
+		"application_name":               "ApplicationName",
+		"automatic":                      "Automatic",
 		"bridge_arn":                     "BridgeArn",
 		"constant_initialization_vector": "ConstantInitializationVector",
 		"decryption":                     "Decryption",
@@ -686,14 +844,18 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		"ingest_port":                    "IngestPort",
 		"key":                            "Key",
 		"key_type":                       "KeyType",
+		"manual":                         "Manual",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
 		"min_latency":                    "MinLatency",
 		"name":                           "Name",
+		"naming_configuration":           "NamingConfiguration",
 		"protocol":                       "Protocol",
 		"region":                         "Region",
 		"resource_id":                    "ResourceId",
 		"role_arn":                       "RoleArn",
+		"rtmp_push_details":              "RtmpPushDetails",
+		"rtmp_push_settings":             "RtmpPushSettings",
 		"secret_arn":                     "SecretArn",
 		"sender_control_port":            "SenderControlPort",
 		"sender_ip_address":              "SenderIpAddress",
@@ -702,6 +864,7 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		"source_listener_address":        "SourceListenerAddress",
 		"source_listener_port":           "SourceListenerPort",
 		"stream_id":                      "StreamId",
+		"stream_name":                    "StreamName",
 		"tags":                           "Tags",
 		"url":                            "Url",
 		"value":                          "Value",

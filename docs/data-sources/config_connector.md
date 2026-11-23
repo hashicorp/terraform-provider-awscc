@@ -33,6 +33,7 @@ Data Source schema for AWS::Config::Connector
 Read-Only:
 
 - `azure` (Attributes) The configuration for connecting to Microsoft Azure. (see [below for nested schema](#nestedatt--connector_configuration--azure))
+- `gcp` (Attributes) The configuration for connecting to Google Cloud. (see [below for nested schema](#nestedatt--connector_configuration--gcp))
 
 <a id="nestedatt--connector_configuration--azure"></a>
 ### Nested Schema for `connector_configuration.azure`
@@ -41,6 +42,16 @@ Read-Only:
 
 - `client_identifier` (String) The Azure client (application) identifier.
 - `tenant_identifier` (String) The Azure tenant identifier.
+
+
+<a id="nestedatt--connector_configuration--gcp"></a>
+### Nested Schema for `connector_configuration.gcp`
+
+Read-Only:
+
+- `gcp_organization_id` (String) The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in ServiceAccountEmail. Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.
+- `service_account_email` (String) The email address of the Google Cloud service account that AWS Config uses.
+- `workload_identity_pool_provider` (String) The full resource name of the workload identity pool provider that AWS Config uses to federate into Google Cloud.
 
 
 

@@ -123,6 +123,77 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The prefix for delivery S3 bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The global tag scope of the managed conformance pack. If specified, only resources with this tag key and value pair are in scope of the conformance pack.",
+		//	  "properties": {
+		//	    "TagKey": {
+		//	      "description": "The tag key of the tag scope. Only resources with this tag key are in scope of the conformance pack.",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "TagValue": {
+		//	      "description": "The tag value of the tag scope. If omitted, resources are in scope based on the presence of the tag key alone, regardless of its value.",
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TagKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TagKey
+				"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tag key of the tag scope. Only resources with this tag key are in scope of the conformance pack.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TagValue
+				"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tag value of the tag scope. If omitted, resources are in scope based on the presence of the tag key alone, regardless of its value.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The global tag scope of the managed conformance pack. If specified, only resources with this tag key and value pair are in scope of the conformance pack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Source
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source of a managed conformance pack. Specifying Source creates a managed conformance pack, whose Config rules are managed by AWS. You can only specify one of Source or the template body or template S3Uri fields.",
+		//	  "properties": {
+		//	    "SourceIdentifier": {
+		//	      "description": "The identifier specifying which managed conformance pack is being deployed.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SourceIdentifier"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceIdentifier
+				"source_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier specifying which managed conformance pack is being deployed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source of a managed conformance pack. Specifying Source creates a managed conformance pack, whose Config rules are managed by AWS. You can only specify one of Source or the template body or template S3Uri fields.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -234,6 +305,21 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the conformance pack. CUSTOM for a conformance pack whose Config rules are managed by the customer; MANAGED for a managed conformance pack whose Config rules are managed by AWS.",
+		//	  "enum": [
+		//	    "CUSTOM",
+		//	    "MANAGED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the conformance pack. CUSTOM for a conformance pack whose Config rules are managed by the customer; MANAGED for a managed conformance pack whose Config rules are managed by AWS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -261,10 +347,16 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		"key":                               "Key",
 		"parameter_name":                    "ParameterName",
 		"parameter_value":                   "ParameterValue",
+		"scope":                             "Scope",
+		"source":                            "Source",
+		"source_identifier":                 "SourceIdentifier",
+		"tag_key":                           "TagKey",
+		"tag_value":                         "TagValue",
 		"tags":                              "Tags",
 		"template_body":                     "TemplateBody",
 		"template_s3_uri":                   "TemplateS3Uri",
 		"template_ssm_document_details":     "TemplateSSMDocumentDetails",
+		"type":                              "Type",
 		"value":                             "Value",
 	})
 

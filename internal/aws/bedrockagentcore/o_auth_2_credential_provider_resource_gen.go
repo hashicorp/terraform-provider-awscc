@@ -59,7 +59,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	  "properties": {
 		//	    "SecretArn": {
 		//	      "description": "The ARN of the secret in AWS Secrets Manager",
-		//	      "pattern": "^arn:(aws|aws-us-gov):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
+		//	      "pattern": "^arn:aws(-cn|-us-gov)?:secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -137,7 +137,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the OAuth2 credential provider",
-		//	  "pattern": "^arn:(aws|aws-us-gov):bedrock-agentcore:[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/oauth2credentialprovider/[a-zA-Z0-9-]+$",
+		//	  "pattern": "^arn:aws(-cn|-us-gov)?:bedrock-agentcore:[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/oauth2credentialprovider/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
 		"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -315,6 +315,67 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	      "additionalProperties": false,
 		//	      "description": "Input configuration for a custom OAuth2 provider",
 		//	      "properties": {
+		//	        "CertificateConfigurations": {
+		//	          "description": "Private certificate authority (CA) configurations for the identity provider, referenced by Amazon S3 object or AWS Secrets Manager secret",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A reference to a private CA certificate. Specify exactly one certificate source.",
+		//	            "oneOf": [
+		//	              {
+		//	                "required": [
+		//	                  "S3"
+		//	                ]
+		//	              },
+		//	              {
+		//	                "required": [
+		//	                  "SecretsManager"
+		//	                ]
+		//	              }
+		//	            ],
+		//	            "properties": {
+		//	              "S3": {
+		//	                "additionalProperties": false,
+		//	                "description": "A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object",
+		//	                "properties": {
+		//	                  "BucketOwnerAccountId": {
+		//	                    "description": "The account ID of the Amazon S3 bucket owner, used for cross-account access to the bucket",
+		//	                    "pattern": "^[0-9]{12}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Uri": {
+		//	                    "description": "The URI of the Amazon S3 object that contains the PEM-encoded certificate",
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Uri"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SecretsManager": {
+		//	                "additionalProperties": false,
+		//	                "description": "A reference to a PEM-encoded private CA certificate stored in an AWS Secrets Manager secret",
+		//	                "properties": {
+		//	                  "SecretArn": {
+		//	                    "description": "The ARN of the AWS Secrets Manager secret that contains the PEM-encoded certificate",
+		//	                    "pattern": "^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SecretArn"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
 		//	        "ClientAuthenticationMethod": {
 		//	          "description": "The client authentication method to use when authenticating with the token endpoint",
 		//	          "enum": [
@@ -405,8 +466,8 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	              "type": "object"
 		//	            },
 		//	            "DiscoveryUrl": {
-		//	              "description": "The discovery URL for the OAuth2 provider",
-		//	              "pattern": "^.+/\\.well-known/openid-configuration$",
+		//	              "description": "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL",
+		//	              "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1185,6 +1246,82 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 				// Property: CustomOauth2ProviderConfig
 				"custom_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateConfigurations
+						"certificate_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3
+									"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BucketOwnerAccountId
+											"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The account ID of the Amazon S3 bucket owner, used for cross-account access to the bucket",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Uri
+											"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The URI of the Amazon S3 object that contains the PEM-encoded certificate",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SecretsManager
+									"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SecretArn
+											"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ARN of the AWS Secrets Manager secret that contains the PEM-encoded certificate",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A reference to a PEM-encoded private CA certificate stored in an AWS Secrets Manager secret",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Private certificate authority (CA) configurations for the identity provider, referenced by Amazon S3 object or AWS Secrets Manager secret",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: ClientAuthenticationMethod
 						"client_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The client authentication method to use when authenticating with the token endpoint",
@@ -1341,11 +1478,11 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 								}, /*END ATTRIBUTE*/
 								// Property: DiscoveryUrl
 								"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The discovery URL for the OAuth2 provider",
+									Description: "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^.+/\\.well-known/openid-configuration$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2470,6 +2607,67 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	  "additionalProperties": false,
 		//	  "description": "The output configuration for the OAuth2 provider",
 		//	  "properties": {
+		//	    "CertificateConfigurations": {
+		//	      "description": "Private certificate authority (CA) configurations for the identity provider, referenced by Amazon S3 object or AWS Secrets Manager secret",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A reference to a private CA certificate. Specify exactly one certificate source.",
+		//	        "oneOf": [
+		//	          {
+		//	            "required": [
+		//	              "S3"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "SecretsManager"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "properties": {
+		//	          "S3": {
+		//	            "additionalProperties": false,
+		//	            "description": "A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object",
+		//	            "properties": {
+		//	              "BucketOwnerAccountId": {
+		//	                "description": "The account ID of the Amazon S3 bucket owner, used for cross-account access to the bucket",
+		//	                "pattern": "^[0-9]{12}$",
+		//	                "type": "string"
+		//	              },
+		//	              "Uri": {
+		//	                "description": "The URI of the Amazon S3 object that contains the PEM-encoded certificate",
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Uri"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "SecretsManager": {
+		//	            "additionalProperties": false,
+		//	            "description": "A reference to a PEM-encoded private CA certificate stored in an AWS Secrets Manager secret",
+		//	            "properties": {
+		//	              "SecretArn": {
+		//	                "description": "The ARN of the AWS Secrets Manager secret that contains the PEM-encoded certificate",
+		//	                "pattern": "^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SecretArn"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "ClientAuthenticationMethod": {
 		//	      "description": "The client authentication method used when authenticating with the token endpoint",
 		//	      "enum": [
@@ -2522,8 +2720,8 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	          "type": "object"
 		//	        },
 		//	        "DiscoveryUrl": {
-		//	          "description": "The discovery URL for the OAuth2 provider",
-		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
+		//	          "description": "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL",
+		//	          "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2840,6 +3038,47 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	}
 		"oauth_2_provider_config_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateConfigurations
+				"certificate_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: S3
+							"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BucketOwnerAccountId
+									"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The account ID of the Amazon S3 bucket owner, used for cross-account access to the bucket",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Uri
+									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The URI of the Amazon S3 object that contains the PEM-encoded certificate",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SecretsManager
+							"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: SecretArn
+									"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ARN of the AWS Secrets Manager secret that contains the PEM-encoded certificate",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A reference to a PEM-encoded private CA certificate stored in an AWS Secrets Manager secret",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Private certificate authority (CA) configurations for the identity provider, referenced by Amazon S3 object or AWS Secrets Manager secret",
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ClientAuthenticationMethod
 				"client_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The client authentication method used when authenticating with the token endpoint",
@@ -2885,7 +3124,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 						}, /*END ATTRIBUTE*/
 						// Property: DiscoveryUrl
 						"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The discovery URL for the OAuth2 provider",
+							Description: "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -3258,7 +3497,9 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		"atlassian_oauth_2_provider_config":  "AtlassianOauth2ProviderConfig",
 		"authorization_endpoint":             "AuthorizationEndpoint",
 		"authorization_server_metadata":      "AuthorizationServerMetadata",
+		"bucket_owner_account_id":            "BucketOwnerAccountId",
 		"callback_url":                       "CallbackUrl",
+		"certificate_configurations":         "CertificateConfigurations",
 		"client_authentication_method":       "ClientAuthenticationMethod",
 		"client_id":                          "ClientId",
 		"client_secret":                      "ClientSecret",
@@ -3298,9 +3539,11 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		"resource_configuration_identifier":  "ResourceConfigurationIdentifier",
 		"response_types":                     "ResponseTypes",
 		"routing_domain":                     "RoutingDomain",
+		"s3":                                 "S3",
 		"salesforce_oauth_2_provider_config": "SalesforceOauth2ProviderConfig",
 		"secret_arn":                         "SecretArn",
 		"secret_id":                          "SecretId",
+		"secrets_manager":                    "SecretsManager",
 		"security_group_ids":                 "SecurityGroupIds",
 		"self_managed_lattice_resource":      "SelfManagedLatticeResource",
 		"signing_algorithm":                  "SigningAlgorithm",
@@ -3311,6 +3554,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		"tenant_id":                          "TenantId",
 		"token_endpoint":                     "TokenEndpoint",
 		"token_exchange_grant_type_config":   "TokenExchangeGrantTypeConfig",
+		"uri":                                "Uri",
 		"value":                              "Value",
 		"vpc_identifier":                     "VpcIdentifier",
 	})

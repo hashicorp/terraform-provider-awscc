@@ -26,10 +26,13 @@ Data Source schema for AWS::Config::ConformancePack
 - `conformance_pack_name` (String) Name of the conformance pack which will be assigned as the unique identifier.
 - `delivery_s3_bucket` (String) AWS Config stores intermediate files while processing conformance pack template.
 - `delivery_s3_key_prefix` (String) The prefix for delivery S3 bucket.
+- `scope` (Attributes) The global tag scope of the managed conformance pack. If specified, only resources with this tag key and value pair are in scope of the conformance pack. (see [below for nested schema](#nestedatt--scope))
+- `source` (Attributes) The source of a managed conformance pack. Specifying Source creates a managed conformance pack, whose Config rules are managed by AWS. You can only specify one of Source or the template body or template S3Uri fields. (see [below for nested schema](#nestedatt--source))
 - `tags` (Attributes List) The tags for the conformance pack. (see [below for nested schema](#nestedatt--tags))
 - `template_body` (String) A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.
 - `template_s3_uri` (String) Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.
 - `template_ssm_document_details` (Attributes) The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document. (see [below for nested schema](#nestedatt--template_ssm_document_details))
+- `type` (String) The type of the conformance pack. CUSTOM for a conformance pack whose Config rules are managed by the customer; MANAGED for a managed conformance pack whose Config rules are managed by AWS.
 
 <a id="nestedatt--conformance_pack_input_parameters"></a>
 ### Nested Schema for `conformance_pack_input_parameters`
@@ -38,6 +41,23 @@ Read-Only:
 
 - `parameter_name` (String) Key part of key-value pair with value being parameter value
 - `parameter_value` (String) Value part of key-value pair with key being parameter Name
+
+
+<a id="nestedatt--scope"></a>
+### Nested Schema for `scope`
+
+Read-Only:
+
+- `tag_key` (String) The tag key of the tag scope. Only resources with this tag key are in scope of the conformance pack.
+- `tag_value` (String) The tag value of the tag scope. If omitted, resources are in scope based on the presence of the tag key alone, regardless of its value.
+
+
+<a id="nestedatt--source"></a>
+### Nested Schema for `source`
+
+Read-Only:
+
+- `source_identifier` (String) The identifier specifying which managed conformance pack is being deployed.
 
 
 <a id="nestedatt--tags"></a>

@@ -47,6 +47,23 @@ func vPCEndpointServicePermissionsDataSource(ctx context.Context) (datasource.Da
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayAttachmentAllowedPrincipals
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"transit_gateway_attachment_allowed_principals": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -66,6 +83,7 @@ func vPCEndpointServicePermissionsDataSource(ctx context.Context) (datasource.Da
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_principals": "AllowedPrincipals",
 		"service_id":         "ServiceId",
+		"transit_gateway_attachment_allowed_principals": "TransitGatewayAttachmentAllowedPrincipals",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

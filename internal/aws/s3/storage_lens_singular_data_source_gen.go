@@ -243,6 +243,46 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "CostAndUsageReportsPublish": {
+		//	      "additionalProperties": false,
+		//	      "description": "Settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+		//	      "properties": {
+		//	        "PrefixLevel": {
+		//	          "additionalProperties": false,
+		//	          "description": "Prefix-level settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+		//	          "properties": {
+		//	            "IsEnabled": {
+		//	              "description": "Specifies whether publishing prefix-level metrics to AWS Cost and Usage Reports is enabled or disabled.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "SelectionCriteria": {
+		//	              "additionalProperties": false,
+		//	              "description": "Selection criteria for the data that Amazon S3 Storage Lens publishes to AWS Cost and Usage Reports.",
+		//	              "properties": {
+		//	                "MaxDepth": {
+		//	                  "description": "The maximum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MaxDepth defaults to 3.",
+		//	                  "maximum": 15,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "MinDepth": {
+		//	                  "description": "The minimum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MinDepth defaults to 1.",
+		//	                  "maximum": 15,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsEnabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "DataExport": {
 		//	      "additionalProperties": false,
 		//	      "description": "Specifies how Amazon S3 Storage Lens metrics should be exported.",
@@ -536,6 +576,17 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "IntAccessTiers": {
+		//	      "additionalProperties": false,
+		//	      "description": "Metric breakdown per Intelligent-Tiering access tiers.",
+		//	      "properties": {
+		//	        "IsEnabled": {
+		//	          "description": "Specifies whether metric breakdown per Intelligent-Tiering access tiers is enabled or disabled.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "IsEnabled": {
 		//	      "description": "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
 		//	      "type": "boolean"
@@ -766,6 +817,42 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CostAndUsageReportsPublish
+				"cost_and_usage_reports_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrefixLevel
+						"prefix_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether publishing prefix-level metrics to AWS Cost and Usage Reports is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionCriteria
+								"selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxDepth
+										"max_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MaxDepth defaults to 3.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MinDepth
+										"min_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minimum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MinDepth defaults to 1.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Selection criteria for the data that Amazon S3 Storage Lens publishes to AWS Cost and Usage Reports.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Prefix-level settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DataExport
@@ -1021,6 +1108,18 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: IntAccessTiers
+				"int_access_tiers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsEnabled
+						"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether metric breakdown per Intelligent-Tiering access tiers is enabled or disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Metric breakdown per Intelligent-Tiering access tiers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: IsEnabled
 				"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
@@ -1116,6 +1215,7 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket_level":                          "BucketLevel",
 		"buckets":                               "Buckets",
 		"cloudwatch_metrics":                    "CloudWatchMetrics",
+		"cost_and_usage_reports_publish":        "CostAndUsageReportsPublish",
 		"data_export":                           "DataExport",
 		"delimiter":                             "Delimiter",
 		"detailed_status_codes_metrics":         "DetailedStatusCodesMetrics",
@@ -1125,10 +1225,12 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"format":                                "Format",
 		"id":                                    "Id",
 		"include":                               "Include",
+		"int_access_tiers":                      "IntAccessTiers",
 		"is_enabled":                            "IsEnabled",
 		"key":                                   "Key",
 		"key_id":                                "KeyId",
 		"max_depth":                             "MaxDepth",
+		"min_depth":                             "MinDepth",
 		"min_storage_bytes_percentage":          "MinStorageBytesPercentage",
 		"output_schema_version":                 "OutputSchemaVersion",
 		"prefix":                                "Prefix",

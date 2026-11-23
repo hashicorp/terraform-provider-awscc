@@ -238,6 +238,42 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": true
+		//	    },
+		//	    "TextSearchConfigurations": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Language": {
+		//	            "enum": [
+		//	              "en",
+		//	              "fr",
+		//	              "es",
+		//	              "pt",
+		//	              "it",
+		//	              "de",
+		//	              "nl",
+		//	              "zh",
+		//	              "ja",
+		//	              "ko"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "MetadataKey": {
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MetadataKey"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -258,6 +294,56 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TextSearchConfigurations
+				"text_search_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Language
+							"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"en",
+										"fr",
+										"es",
+										"pt",
+										"it",
+										"de",
+										"nl",
+										"zh",
+										"ja",
+										"ko",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MetadataKey
+							"metadata_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.UTF8LengthBetween(1, 63),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -266,7 +352,6 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -415,18 +500,21 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		"index_name":                   "IndexName",
 		"key":                          "Key",
 		"kms_key_arn":                  "KmsKeyArn",
+		"language":                     "Language",
 		"metadata_configuration":       "MetadataConfiguration",
+		"metadata_key":                 "MetadataKey",
 		"non_filterable_metadata_keys": "NonFilterableMetadataKeys",
 		"sse_type":                     "SseType",
 		"tags":                         "Tags",
+		"text_search_configurations":   "TextSearchConfigurations",
 		"value":                        "Value",
 		"vector_bucket_arn":            "VectorBucketArn",
 		"vector_bucket_name":           "VectorBucketName",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

@@ -8,6 +8,7 @@ package route53
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -61,6 +62,14 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Any comments that you want to include about the hosted zone.",
 		//	      "maxLength": 256,
 		//	      "type": "string"
+		//	    },
+		//	    "HostedZoneTier": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "ADVANCED"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -74,6 +83,21 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.UTF8LengthAtMost(256),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HostedZoneTier
+				"hosted_zone_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"STANDARD",
+							"ADVANCED",
+						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -94,7 +118,66 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The features configuration for the hosted zone, including accelerated recovery settings and status information.",
 		//	  "properties": {
+		//	    "ChangeGuardrails": {
+		//	      "description": "",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the Change Guardrail.",
+		//	            "enum": [
+		//	              "NS_OCCLUSION_CHECK",
+		//	              "ALIAS_TARGET_CHECK",
+		//	              "ACTIVE_RECORD_CHECK",
+		//	              "ACTIVE_DELEGATION_CHECK"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "The status of the Change Guardrail. ENABLED makes Route 53 block the corresponding destructive change; DISABLED turns the guardrail off.",
+		//	            "enum": [
+		//	              "ENABLED",
+		//	              "DISABLED"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "ChangeHistory": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "RetentionStartsAt": {
+		//	          "description": "The earliest time the hosted zone's change history can be read from, as an ISO 8601 timestamp. Present only when Status is ENABLED.",
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "Whether change history is enabled for the hosted zone.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "EnableAcceleratedRecovery": {
+		//	      "description": "",
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnablePublicDNSFallback": {
 		//	      "description": "",
 		//	      "type": "boolean"
 		//	    }
@@ -103,8 +186,85 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"hosted_zone_features": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChangeGuardrails
+				"change_guardrails": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the Change Guardrail.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NS_OCCLUSION_CHECK",
+										"ALIAS_TARGET_CHECK",
+										"ACTIVE_RECORD_CHECK",
+										"ACTIVE_DELEGATION_CHECK",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The status of the Change Guardrail. ENABLED makes Route 53 block the corresponding destructive change; DISABLED turns the guardrail off.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ENABLED",
+										"DISABLED",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ChangeHistory
+				"change_history": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RetentionStartsAt
+						"retention_starts_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "The earliest time the hosted zone's change history can be read from, as an ISO 8601 timestamp. Present only when Status is ENABLED.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether change history is enabled for the hosted zone.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: EnableAcceleratedRecovery
 				"enable_accelerated_recovery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnablePublicDNSFallback
+				"enable_public_dns_fallback": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "",
 					Optional:    true,
 					Computed:    true,
@@ -373,18 +533,24 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"change_guardrails":             "ChangeGuardrails",
+		"change_history":                "ChangeHistory",
 		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
 		"comment":                       "Comment",
 		"delegation_set_id":             "DelegationSetId",
 		"enable_accelerated_recovery":   "EnableAcceleratedRecovery",
+		"enable_public_dns_fallback":    "EnablePublicDNSFallback",
 		"hosted_zone_config":            "HostedZoneConfig",
 		"hosted_zone_features":          "HostedZoneFeatures",
 		"hosted_zone_id":                "Id",
 		"hosted_zone_tags":              "HostedZoneTags",
+		"hosted_zone_tier":              "HostedZoneTier",
 		"key":                           "Key",
 		"name":                          "Name",
 		"name_servers":                  "NameServers",
 		"query_logging_config":          "QueryLoggingConfig",
+		"retention_starts_at":           "RetentionStartsAt",
+		"status":                        "Status",
 		"value":                         "Value",
 		"vp_cs":                         "VPCs",
 		"vpc_id":                        "VPCId",

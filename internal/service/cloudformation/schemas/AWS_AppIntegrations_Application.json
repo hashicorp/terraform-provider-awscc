@@ -74,10 +74,7 @@
             "PER_CONTACT"
           ]
         }
-      },
-      "required": [
-        "Scope"
-      ]
+      }
     },
     "ApplicationConfig": {
       "type": "object",
@@ -107,6 +104,32 @@
           }
         }
       }
+    },
+    "AuthConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AuthType": {
+          "type": "string",
+          "enum": [
+            "API_KEY",
+            "CONNECT_JWT"
+          ]
+        },
+        "CredentialProviderIdentifier": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "AudienceOverride": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "AuthType"
+      ]
     }
   },
   "properties": {
@@ -152,10 +175,7 @@
         "ExternalUrlConfig": {
           "$ref": "#/definitions/ExternalUrlConfig"
         }
-      },
-      "required": [
-        "ExternalUrlConfig"
-      ]
+      }
     },
     "Permissions": {
       "description": "The configuration of events or requests that the application has access to.",
@@ -187,7 +207,8 @@
       "enum": [
         "STANDARD",
         "SERVICE",
-        "MCP_SERVER"
+        "MCP_SERVER",
+        "A2A_SERVER"
       ]
     },
     "InitializationTimeout": {
@@ -201,6 +222,18 @@
     "IframeConfig": {
       "description": "The iframe configuration",
       "$ref": "#/definitions/IframeConfig"
+    },
+    "AuthConfig": {
+      "description": "The authentication configuration. Required when ApplicationType is A2A_SERVER.",
+      "$ref": "#/definitions/AuthConfig"
+    },
+    "LastModifiedTime": {
+      "description": "The time when the application was last modified.",
+      "type": "string"
+    },
+    "LastModifiedRegion": {
+      "description": "The region in which the application was last modified.",
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -222,7 +255,9 @@
   },
   "readOnlyProperties": [
     "/properties/ApplicationArn",
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/LastModifiedTime",
+    "/properties/LastModifiedRegion"
   ],
   "primaryIdentifier": [
     "/properties/ApplicationArn"

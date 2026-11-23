@@ -1,0 +1,1 @@
+$ terraform import awscc_athena_system_tables.example "table_name"

@@ -307,6 +307,18 @@
         "ResolutionSeconds"
       ]
     },
+    "GatewayConnectorDeregistrationDelay": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TimeoutSeconds": {
+          "maximum": 3600,
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
     "ServiceVolumeConfiguration": {
       "description": "The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.",
       "additionalProperties": false,
@@ -822,6 +834,9 @@
       "properties": {
         "Filters": {
           "$ref": "#/definitions/GatewayConnectorFilters"
+        },
+        "DeregistrationDelay": {
+          "$ref": "#/definitions/GatewayConnectorDeregistrationDelay"
         },
         "HealthCheck": {
           "$ref": "#/definitions/GatewayConnectorHealthCheck"

@@ -51,6 +51,148 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The unique identifier of the association",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Capabilities
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Automated AWS DevOps Agent capabilities enabled for this association, such as code change risk analysis",
+		//	  "properties": {
+		//	    "CodeChangeRiskAnalysis": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for code change risk analysis, in which AWS DevOps Agent automatically analyzes pull requests and merge requests for deployment risk.",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether the capability is enabled for this association",
+		//	          "type": "boolean"
+		//	        },
+		//	        "TriggerFilterGroups": {
+		//	          "description": "Filter groups controlling when the capability triggers automatically. The capability triggers when any group matches. When omitted, all applicable events trigger the capability. Retained while the capability is disabled.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A group of trigger conditions. The group matches when all present conditions pass. At least one condition must be present.",
+		//	            "properties": {
+		//	              "Events": {
+		//	                "description": "Passes when the webhook event is one of the listed events",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "PULL_REQUEST_READY_FOR_REVIEW",
+		//	                    "PULL_REQUEST_DRAFT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 10,
+		//	                "minItems": 1,
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              },
+		//	              "TargetBranches": {
+		//	                "additionalProperties": false,
+		//	                "description": "Passes when the change request target branch matches",
+		//	                "properties": {
+		//	                  "Patterns": {
+		//	                    "description": "Anchored full-match regex patterns, for example 'main' or 'release/.*'",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 256,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[^\\x00-\\x1F\\x7F-\\x9F]+$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 20,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Patterns"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CodeChangeRiskAnalysisAutomatedTesting": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for code change risk analysis automated testing, in which AWS DevOps Agent also runs tests against the change during the analysis.",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether the capability is enabled for this association",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CodeChangeRiskAnalysis
+				"code_change_risk_analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the capability is enabled for this association",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TriggerFilterGroups
+						"trigger_filter_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Events
+									"events": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Passes when the webhook event is one of the listed events",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TargetBranches
+									"target_branches": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Patterns
+											"patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "Anchored full-match regex patterns, for example 'main' or 'release/.*'",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Passes when the change request target branch matches",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Filter groups controlling when the capability triggers automatically. The capability triggers when any group matches. When omitted, all applicable events trigger the capability. Retained while the capability is disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for code change risk analysis, in which AWS DevOps Agent automatically analyzes pull requests and merge requests for deployment risk.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeChangeRiskAnalysisAutomatedTesting
+				"code_change_risk_analysis_automated_testing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the capability is enabled for this association",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for code change risk analysis automated testing, in which AWS DevOps Agent also runs tests against the change during the analysis.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Automated AWS DevOps Agent capabilities enabled for this association, such as code change risk analysis",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -214,6 +356,12 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "ReleaseManagementAssociationId": {
+		//	          "description": "The ID of the release management association that this repository uses for automated testing",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "RepoId": {
 		//	          "description": "Associated Github repo ID",
 		//	          "type": "string"
@@ -249,6 +397,12 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "ProjectPath": {
 		//	          "description": "Full GitLab project path (e.g., namespace/project-name)",
+		//	          "type": "string"
+		//	        },
+		//	        "ReleaseManagementAssociationId": {
+		//	          "description": "The ID of the release management association that this project uses for automated testing",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -476,6 +630,55 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "Services",
 		//	        "CustomerEmail"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ReleaseManagement": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for a release management environment. A release management environment defines how AWS DevOps Agent reaches your application, and other associations reference it to run automatic verification testing against that application.",
+		//	      "properties": {
+		//	        "Name": {
+		//	          "description": "The name for this release management environment",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\p{L}\\p{N}\\p{P}\\p{S}\\p{Z}]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "NetworkAccess": {
+		//	          "description": "Specifies how AWS DevOps Agent reaches your application using this release management environment",
+		//	          "properties": {
+		//	            "PrivateAccess": {
+		//	              "additionalProperties": false,
+		//	              "description": "Private network access to your application inside a VPC, reached through a private connection",
+		//	              "properties": {
+		//	                "PrivateConnectionName": {
+		//	                  "description": "Name of the private connection that supplies the VPC configuration for this release management environment",
+		//	                  "maxLength": 30,
+		//	                  "minLength": 3,
+		//	                  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+		//	                  "type": "string"
+		//	                },
+		//	                "RuntimeRoleArn": {
+		//	                  "description": "Role ARN that AWS DevOps Agent assumes at runtime to connect to your VPC",
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "PrivateConnectionName",
+		//	                "RuntimeRoleArn"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Name",
+		//	        "NetworkAccess"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -792,6 +995,11 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "Type of repository owner",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: ReleaseManagementAssociationId
+						"release_management_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the release management association that this repository uses for automated testing",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: RepoId
 						"repo_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Associated Github repo ID",
@@ -827,6 +1035,11 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: ProjectPath
 						"project_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Full GitLab project path (e.g., namespace/project-name)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ReleaseManagementAssociationId
+						"release_management_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the release management association that this project uses for automated testing",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1006,6 +1219,42 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "PagerDuty integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReleaseManagement
+				"release_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name for this release management environment",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkAccess
+						"network_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PrivateAccess
+								"private_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PrivateConnectionName
+										"private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Name of the private connection that supplies the VPC configuration for this release management environment",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RuntimeRoleArn
+										"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Role ARN that AWS DevOps Agent assumes at runtime to connect to your VPC",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Private network access to your application inside a VPC, reached through a private connection",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies how AWS DevOps Agent reaches your application using this release management environment",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for a release management environment. A release management environment defines how AWS DevOps Agent reaches your application, and other associations reference it to run automatic verification testing against that application.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ServiceNow
@@ -1230,67 +1479,80 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsAgent::Association").WithTerraformTypeName("awscc_devopsagent_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":               "AccountId",
-		"account_type":             "AccountType",
-		"agent_elevated_role_arn":  "AgentElevatedRoleArn",
-		"agent_space_id":           "AgentSpaceId",
-		"association_id":           "AssociationId",
-		"assumable_role_arn":       "AssumableRoleArn",
-		"aws":                      "Aws",
-		"azure":                    "Azure",
-		"bidirectional":            "Bidirectional",
-		"channel_id":               "ChannelId",
-		"channel_name":             "ChannelName",
-		"configuration":            "Configuration",
-		"created_at":               "CreatedAt",
-		"customer_email":           "CustomerEmail",
-		"description":              "Description",
-		"dynatrace":                "Dynatrace",
-		"enable_webhook_updates":   "EnableWebhookUpdates",
-		"enabled":                  "Enabled",
-		"enabled_elevated_tools":   "EnabledElevatedTools",
-		"endpoint":                 "Endpoint",
-		"env_id":                   "EnvId",
-		"event_channel":            "EventChannel",
-		"git_hub":                  "GitHub",
-		"git_lab":                  "GitLab",
-		"incident_response_target": "IncidentResponseTarget",
-		"instance_id":              "InstanceId",
-		"instance_identifier":      "InstanceIdentifier",
-		"key":                      "Key",
-		"linked_association_ids":   "LinkedAssociationIds",
-		"mcp_server":               "MCPServer",
-		"mcp_server_datadog":       "MCPServerDatadog",
-		"mcp_server_grafana":       "MCPServerGrafana",
-		"mcp_server_new_relic":     "MCPServerNewRelic",
-		"mcp_server_sig_v4":        "MCPServerSigV4",
-		"mcp_server_splunk":        "MCPServerSplunk",
-		"name":                     "Name",
-		"owner":                    "Owner",
-		"owner_type":               "OwnerType",
-		"pager_duty":               "PagerDuty",
-		"project_id":               "ProjectId",
-		"project_path":             "ProjectPath",
-		"repo_id":                  "RepoId",
-		"repo_name":                "RepoName",
-		"resource_arn":             "ResourceArn",
-		"resource_metadata":        "ResourceMetadata",
-		"resource_type":            "ResourceType",
-		"resources":                "Resources",
-		"role_arn":                 "RoleArn",
-		"service_id":               "ServiceId",
-		"service_now":              "ServiceNow",
-		"services":                 "Services",
-		"slack":                    "Slack",
-		"source_aws":               "SourceAws",
-		"subscription_id":          "SubscriptionId",
-		"tags":                     "Tags",
-		"tools":                    "Tools",
-		"transmission_target":      "TransmissionTarget",
-		"updated_at":               "UpdatedAt",
-		"value":                    "Value",
-		"workspace_id":             "WorkspaceId",
-		"workspace_name":           "WorkspaceName",
+		"account_id":                "AccountId",
+		"account_type":              "AccountType",
+		"agent_elevated_role_arn":   "AgentElevatedRoleArn",
+		"agent_space_id":            "AgentSpaceId",
+		"association_id":            "AssociationId",
+		"assumable_role_arn":        "AssumableRoleArn",
+		"aws":                       "Aws",
+		"azure":                     "Azure",
+		"bidirectional":             "Bidirectional",
+		"capabilities":              "Capabilities",
+		"channel_id":                "ChannelId",
+		"channel_name":              "ChannelName",
+		"code_change_risk_analysis": "CodeChangeRiskAnalysis",
+		"code_change_risk_analysis_automated_testing": "CodeChangeRiskAnalysisAutomatedTesting",
+		"configuration":                     "Configuration",
+		"created_at":                        "CreatedAt",
+		"customer_email":                    "CustomerEmail",
+		"description":                       "Description",
+		"dynatrace":                         "Dynatrace",
+		"enable_webhook_updates":            "EnableWebhookUpdates",
+		"enabled":                           "Enabled",
+		"enabled_elevated_tools":            "EnabledElevatedTools",
+		"endpoint":                          "Endpoint",
+		"env_id":                            "EnvId",
+		"event_channel":                     "EventChannel",
+		"events":                            "Events",
+		"git_hub":                           "GitHub",
+		"git_lab":                           "GitLab",
+		"incident_response_target":          "IncidentResponseTarget",
+		"instance_id":                       "InstanceId",
+		"instance_identifier":               "InstanceIdentifier",
+		"key":                               "Key",
+		"linked_association_ids":            "LinkedAssociationIds",
+		"mcp_server":                        "MCPServer",
+		"mcp_server_datadog":                "MCPServerDatadog",
+		"mcp_server_grafana":                "MCPServerGrafana",
+		"mcp_server_new_relic":              "MCPServerNewRelic",
+		"mcp_server_sig_v4":                 "MCPServerSigV4",
+		"mcp_server_splunk":                 "MCPServerSplunk",
+		"name":                              "Name",
+		"network_access":                    "NetworkAccess",
+		"owner":                             "Owner",
+		"owner_type":                        "OwnerType",
+		"pager_duty":                        "PagerDuty",
+		"patterns":                          "Patterns",
+		"private_access":                    "PrivateAccess",
+		"private_connection_name":           "PrivateConnectionName",
+		"project_id":                        "ProjectId",
+		"project_path":                      "ProjectPath",
+		"release_management":                "ReleaseManagement",
+		"release_management_association_id": "ReleaseManagementAssociationId",
+		"repo_id":                           "RepoId",
+		"repo_name":                         "RepoName",
+		"resource_arn":                      "ResourceArn",
+		"resource_metadata":                 "ResourceMetadata",
+		"resource_type":                     "ResourceType",
+		"resources":                         "Resources",
+		"role_arn":                          "RoleArn",
+		"runtime_role_arn":                  "RuntimeRoleArn",
+		"service_id":                        "ServiceId",
+		"service_now":                       "ServiceNow",
+		"services":                          "Services",
+		"slack":                             "Slack",
+		"source_aws":                        "SourceAws",
+		"subscription_id":                   "SubscriptionId",
+		"tags":                              "Tags",
+		"target_branches":                   "TargetBranches",
+		"tools":                             "Tools",
+		"transmission_target":               "TransmissionTarget",
+		"trigger_filter_groups":             "TriggerFilterGroups",
+		"updated_at":                        "UpdatedAt",
+		"value":                             "Value",
+		"workspace_id":                      "WorkspaceId",
+		"workspace_name":                    "WorkspaceName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

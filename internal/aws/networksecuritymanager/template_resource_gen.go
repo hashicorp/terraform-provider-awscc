@@ -7,6 +7,7 @@ package networksecuritymanager
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -213,12 +214,16 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A description of the template.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"template_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the template.",
 			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 _.:/=+\\-@]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -242,11 +247,15 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the template.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the template.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

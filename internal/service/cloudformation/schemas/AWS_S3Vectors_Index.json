@@ -64,6 +64,35 @@
       "minLength": 3,
       "maxLength": 63
     },
+    "TextSearchConfiguration": {
+      "type": "object",
+      "properties": {
+        "MetadataKey": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63
+        },
+        "Language": {
+          "type": "string",
+          "enum": [
+            "en",
+            "fr",
+            "es",
+            "pt",
+            "it",
+            "de",
+            "nl",
+            "zh",
+            "ja",
+            "ko"
+          ]
+        }
+      },
+      "required": [
+        "MetadataKey"
+      ],
+      "additionalProperties": false
+    },
     "MetadataConfiguration": {
       "description": "The metadata configuration for the vector index.",
       "type": "object",
@@ -75,6 +104,16 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63
+          },
+          "minItems": 1,
+          "maxItems": 10,
+          "insertionOrder": false,
+          "uniqueItems": true
+        },
+        "TextSearchConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextSearchConfiguration"
           },
           "minItems": 1,
           "maxItems": 10,
@@ -176,7 +215,7 @@
     "/properties/DistanceMetric",
     "/properties/EncryptionConfiguration",
     "/properties/IndexName",
-    "/properties/MetadataConfiguration",
+    "/properties/MetadataConfiguration/NonFilterableMetadataKeys",
     "/properties/VectorBucketArn",
     "/properties/VectorBucketName"
   ],
@@ -209,7 +248,8 @@
         "s3vectors:TagResource",
         "kms:GenerateDataKey",
         "kms:Decrypt"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "read": {
       "permissions": [
@@ -220,10 +260,12 @@
     "update": {
       "permissions": [
         "s3vectors:GetIndex",
+        "s3vectors:UpdateMetadataConfiguration",
         "s3vectors:TagResource",
         "s3vectors:UntagResource",
         "s3vectors:ListTagsForResource"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "delete": {
       "permissions": [

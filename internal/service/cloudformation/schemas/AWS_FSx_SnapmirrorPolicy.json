@@ -1,0 +1,247 @@
+{
+  "typeName": "AWS::FSx::SnapmirrorPolicy",
+  "description": "Creates an Amazon FSx for NetApp ONTAP SnapMirror policy. A SnapMirror policy controls how SnapMirror relationships replicate data: which snapshots are copied, how many are retained on the destination, the transfer schedule, compression and throughput throttling. A SnapMirror policy is scoped either to a file system or to a storage virtual machine (SVM).",
+  "definitions": {
+    "RetentionRule": {
+      "type": "object",
+      "description": "A rule that retains snapshots with a SnapMirror label on the destination.",
+      "additionalProperties": false,
+      "properties": {
+        "Label": {
+          "type": "string",
+          "description": "The SnapMirror label of the snapshots this rule retains.",
+          "minLength": 0,
+          "maxLength": 31
+        },
+        "Count": {
+          "type": "integer",
+          "description": "The number of snapshots with this label to retain on the destination.",
+          "minimum": 1,
+          "maximum": 1019
+        },
+        "CreationSchedule": {
+          "type": "string",
+          "description": "The name of an ONTAP job schedule that creates snapshots with this label on the destination.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9_:.-]{1,256}$"
+        }
+      },
+      "required": [
+        "Label",
+        "Count"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair used to tag the SnapMirror policy.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "SnapmirrorPolicyId": {
+      "type": "string",
+      "description": "The system-generated, unique ID of the SnapMirror policy.",
+      "pattern": "^(snapmirrorpol-[0-9a-f]{17})$"
+    },
+    "ResourceARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the SnapMirror policy.",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": ""
+    },
+    "FileSystemId": {
+      "type": "string",
+      "description": "The ID of the file system the SnapMirror policy is scoped to. Specify either FileSystemId or StorageVirtualMachineId.",
+      "minLength": 11,
+      "maxLength": 21,
+      "pattern": "^(fs-[0-9a-f]{8,})$"
+    },
+    "StorageVirtualMachineId": {
+      "type": "string",
+      "description": "The ID of the storage virtual machine (SVM) the SnapMirror policy is scoped to. Specify either FileSystemId or StorageVirtualMachineId.",
+      "minLength": 21,
+      "maxLength": 21,
+      "pattern": "^(svm-[0-9a-f]{17,})$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the SnapMirror policy. Names must be unique within the policy scope.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "SnapshotCopyMode": {
+      "type": "string",
+      "description": "Which snapshots SnapMirror copies. COPY_ALL_SOURCE_SNAPSHOTS and COPY_LATEST_SOURCE_SNAPSHOT create mirror policies and do not allow RetentionRules. NO_CREATE_SNAPSHOT_ON_SOURCE creates a vault policy and requires RetentionRules. Omit for a mirror-vault policy.",
+      "enum": [
+        "COPY_ALL_SOURCE_SNAPSHOTS",
+        "COPY_LATEST_SOURCE_SNAPSHOT",
+        "NO_CREATE_SNAPSHOT_ON_SOURCE"
+      ]
+    },
+    "RetentionRules": {
+      "type": "array",
+      "description": "Rules that retain labeled snapshots on the destination, up to 10. After they are set, they can be changed but not removed; removing them from the template, or setting an empty list, leaves the current rules.",
+      "maxItems": 10,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RetentionRule"
+      }
+    },
+    "TransferSchedule": {
+      "type": "string",
+      "description": "The name of the ONTAP job schedule for SnapMirror transfers. Omit for no schedule.",
+      "minLength": 0,
+      "maxLength": 256,
+      "pattern": "^[a-zA-Z0-9_:.-]{0,256}$"
+    },
+    "NetworkCompressionEnabled": {
+      "type": "boolean",
+      "description": "Whether SnapMirror compresses data sent over the network. After it is set, it can be changed but not removed; removing it from the template leaves the current setting."
+    },
+    "ThrottleInKbps": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The maximum transfer throughput in kilobytes per second. 0 means unlimited. After it is set, it can be changed but not removed; removing it from the template leaves the current throttle.",
+      "minimum": 0
+    },
+    "Scope": {
+      "type": "string",
+      "description": "Whether the policy is scoped to a file system (FILESYSTEM) or to an SVM (SVM).",
+      "enum": [
+        "FILESYSTEM",
+        "SVM"
+      ]
+    },
+    "UUID": {
+      "type": "string",
+      "description": "The ONTAP UUID of the SnapMirror policy.",
+      "maxLength": 36,
+      "pattern": ""
+    },
+    "Lifecycle": {
+      "type": "string",
+      "description": "The lifecycle status of the SnapMirror policy.",
+      "enum": [
+        "CREATING",
+        "CREATED",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to apply to the SnapMirror policy, with a maximum of 50 tags.",
+      "maxItems": 50,
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "FileSystemId"
+      ]
+    },
+    {
+      "required": [
+        "StorageVirtualMachineId"
+      ]
+    }
+  ],
+  "readOnlyProperties": [
+    "/properties/SnapmirrorPolicyId",
+    "/properties/ResourceARN",
+    "/properties/Scope",
+    "/properties/UUID",
+    "/properties/Lifecycle"
+  ],
+  "createOnlyProperties": [
+    "/properties/FileSystemId",
+    "/properties/StorageVirtualMachineId",
+    "/properties/Name",
+    "/properties/SnapshotCopyMode"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SnapmirrorPolicyId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fsx:ListTagsForResource",
+      "fsx:TagResource",
+      "fsx:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fsx:CreateSnapmirrorPolicy",
+        "fsx:DescribeSnapmirrorPolicies",
+        "fsx:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fsx:DescribeSnapmirrorPolicies",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fsx:DescribeSnapmirrorPolicies",
+        "fsx:UpdateSnapmirrorPolicy",
+        "fsx:TagResource",
+        "fsx:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fsx:DeleteSnapmirrorPolicy",
+        "fsx:DescribeSnapmirrorPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fsx:DescribeSnapmirrorPolicies"
+      ]
+    }
+  }
+}

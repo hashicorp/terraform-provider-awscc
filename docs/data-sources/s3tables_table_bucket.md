@@ -22,6 +22,7 @@ Data Source schema for AWS::S3Tables::TableBucket
 ### Read-Only
 
 - `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
+- `logging_configuration` (Attributes) Describes where logs are stored and the prefix that Amazon S3 assigns to all log object keys for a table bucket. (see [below for nested schema](#nestedatt--logging_configuration))
 - `metrics_configuration` (Attributes) Settings governing the Metric configuration for the table bucket. (see [below for nested schema](#nestedatt--metrics_configuration))
 - `replication_configuration` (Attributes) Specifies replication configuration for the table bucket (see [below for nested schema](#nestedatt--replication_configuration))
 - `storage_class_configuration` (Attributes) Specifies storage class settings for the table bucket (see [below for nested schema](#nestedatt--storage_class_configuration))
@@ -37,6 +38,32 @@ Read-Only:
 
 - `kms_key_arn` (String) ARN of the KMS key to use for encryption
 - `sse_algorithm` (String) Server-side encryption algorithm
+
+
+<a id="nestedatt--logging_configuration"></a>
+### Nested Schema for `logging_configuration`
+
+Read-Only:
+
+- `target_bucket` (String) The name of the general purpose bucket that logs are delivered to. The bucket must be in the same AWS Region and owned by the same AWS account as the table bucket. The bucket can't use SSE-KMS or DSSE-KMS default encryption, can't have S3 Object Lock enabled, and can't have Requester Pays enabled. You can deliver logs from multiple table buckets to the same target bucket. In this case, choose a different TargetPrefix for each table bucket so that you can tell their log objects apart.
+- `target_object_key_format` (Attributes) The key format of the log objects. Only PartitionedPrefix is supported. (see [below for nested schema](#nestedatt--logging_configuration--target_object_key_format))
+- `target_prefix` (String) The prefix for the keys of the log objects that are delivered to the target bucket.
+
+<a id="nestedatt--logging_configuration--target_object_key_format"></a>
+### Nested Schema for `logging_configuration.target_object_key_format`
+
+Read-Only:
+
+- `partitioned_prefix` (Attributes) Amazon S3 keys for log objects are partitioned in the following format: [TargetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString] (see [below for nested schema](#nestedatt--logging_configuration--target_object_key_format--partitioned_prefix))
+
+<a id="nestedatt--logging_configuration--target_object_key_format--partitioned_prefix"></a>
+### Nested Schema for `logging_configuration.target_object_key_format.partitioned_prefix`
+
+Read-Only:
+
+- `partition_date_source` (String) The date to use for the log object key partitions. Valid values are EventTime, the time that the requests in the log were made, and DeliveryTime, the time that the log was delivered.
+
+
 
 
 <a id="nestedatt--metrics_configuration"></a>

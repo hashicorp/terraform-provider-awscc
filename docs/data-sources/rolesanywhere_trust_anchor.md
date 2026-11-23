@@ -21,6 +21,7 @@ Data Source schema for AWS::RolesAnywhere::TrustAnchor
 
 ### Read-Only
 
+- `crl_dp_revocation_enabled` (Boolean)
 - `enabled` (Boolean)
 - `name` (String)
 - `notification_settings` (Attributes List) (see [below for nested schema](#nestedatt--notification_settings))

@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -27,7 +28,7 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The event source configuration. Specify exactly one of AwsServiceEventsConfiguration or PartnerEventsConfiguration.",
+		//	  "description": "The event source configuration. Specify exactly one of AwsServiceEventsConfiguration, PartnerEventsConfiguration or WebhookEventsConfiguration.",
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
@@ -37,6 +38,11 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    {
 		//	      "required": [
 		//	        "PartnerEventsConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WebhookEventsConfiguration"
 		//	      ]
 		//	    }
 		//	  ],
@@ -118,6 +124,251 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "PartnerEventSourceArn"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "WebhookEventsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for receiving events that an external provider sends to a webhook URL.",
+		//	      "properties": {
+		//	        "AuthConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "How the provider authenticates its requests. Set exactly one authentication type. You can't change the type after you create the event source.",
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "StaticTokenAuthConfiguration"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "BasicHttpAuthConfiguration"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "HmacAuthConfiguration"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "BasicHttpAuthConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The provider sends HTTP Basic authentication credentials.",
+		//	              "properties": {
+		//	                "Password": {
+		//	                  "description": "The password. Set on create only: changing this value in a template has no effect. To change the password, call RotateWebhookCredentials. The username and the webhook URL do not change.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 6,
+		//	                  "type": "string"
+		//	                },
+		//	                "Username": {
+		//	                  "description": "The username. Cannot contain a colon or whitespace. Changing the username requires replacing the event source, which also requires a new Name and gives the event source a new webhook URL. RotateWebhookCredentials cannot change the username.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[^:\\s]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "HmacAuthConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The provider signs each request with a hash-based message authentication code (HMAC) of the secret.",
+		//	              "properties": {
+		//	                "Algorithm": {
+		//	                  "description": "The hash algorithm the provider uses to compute the signature.\n\nValid values:\n- SHA256 - SHA-256.\n- SHA1 - SHA-1. Not recommended. Use SHA1 only for interoperability with a provider that cannot sign with SHA-256.",
+		//	                  "enum": [
+		//	                    "SHA256",
+		//	                    "SHA1"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Delimiter": {
+		//	                  "description": "The separator between parts of the signature header value, for example a comma for a header value of t=1727816400,v1=\u003csignature\u003e, or a space when the header carries several signatures. Required when TimestampHttpHeader is the same header as SignatureHttpHeader.",
+		//	                  "maxLength": 64,
+		//	                  "minLength": 1,
+		//	                  "pattern": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Encoding": {
+		//	                  "description": "How the provider encodes the signature in the header.\n\nValid values:\n- HEX - Hexadecimal.\n- BASE64 - Base64.",
+		//	                  "enum": [
+		//	                    "HEX",
+		//	                    "BASE64"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "MessageIdHttpHeader": {
+		//	                  "description": "The name of the header that carries the message ID. Required when SignedMessageComposition is MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[!#$%\u0026'*+\\-.^_`|~0-9A-Za-z]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "SecretEncoding": {
+		//	                  "description": "How the secret is encoded. RAW uses the secret's characters as the signing key. BASE64 decodes the secret first, as required by providers that issue Base64-encoded signing keys, such as those following the Standard Webhooks specification. If you do not specify an encoding, EventBridge uses RAW. Changing the encoding replaces the event source.",
+		//	                  "enum": [
+		//	                    "RAW",
+		//	                    "BASE64"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "SecretValue": {
+		//	                  "description": "The signing key shared with the provider. If you do not specify a key, EventBridge generates one. EventBridge stores the key only in AWS Secrets Manager and never returns it. Set on create only: changing this value in a template has no effect. To change the key, call RotateWebhookCredentials. The webhook URL does not change.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 6,
+		//	                  "type": "string"
+		//	                },
+		//	                "SignatureHttpHeader": {
+		//	                  "description": "The name of the header that carries the signature, for example X-Hub-Signature-256. When TimestampHttpHeader names the same header, Delimiter, SignaturePrefix and TimestampPrefix are all required.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[!#$%\u0026'*+\\-.^_`|~0-9A-Za-z]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "SignaturePrefix": {
+		//	                  "description": "The text that precedes the signature in the header value, for example sha256=. Required when TimestampHttpHeader is the same header as SignatureHttpHeader.",
+		//	                  "maxLength": 64,
+		//	                  "minLength": 1,
+		//	                  "pattern": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "SignedMessageComposition": {
+		//	                  "description": "How the provider assembles the message it signs from the request.\n\nValid values:\n- BODY - The request body alone.\n- TIMESTAMP_DOT_BODY - \u003ctimestamp\u003e.\u003cbody\u003e. Requires TimestampHttpHeader.\n- MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY - \u003cmessageId\u003e.\u003ctimestamp\u003e.\u003cbody\u003e, as in the Standard Webhooks specification. Requires TimestampHttpHeader and MessageIdHttpHeader.",
+		//	                  "enum": [
+		//	                    "BODY",
+		//	                    "TIMESTAMP_DOT_BODY",
+		//	                    "MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TimestampHttpHeader": {
+		//	                  "description": "The name of the header that carries the request timestamp. Required when SignedMessageComposition is TIMESTAMP_DOT_BODY or MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY, or when TimestampToleranceInSeconds is set. When it names the same header as SignatureHttpHeader, Delimiter, SignaturePrefix and TimestampPrefix are all required.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[!#$%\u0026'*+\\-.^_`|~0-9A-Za-z]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TimestampPrefix": {
+		//	                  "description": "The text that precedes the timestamp in the header value, for example t=. Required when TimestampHttpHeader is the same header as SignatureHttpHeader.",
+		//	                  "maxLength": 64,
+		//	                  "minLength": 1,
+		//	                  "pattern": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "TimestampToleranceInSeconds": {
+		//	                  "description": "The maximum difference, in seconds, allowed between the request timestamp and the time EventBridge receives the request. Requests outside this window are rejected. If you do not specify a tolerance, EventBridge uses 300 seconds. Requires TimestampHttpHeader.",
+		//	                  "maximum": 900,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Algorithm",
+		//	                "Encoding",
+		//	                "SignatureHttpHeader",
+		//	                "SignedMessageComposition"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "StaticTokenAuthConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The provider sends the secret as the value of an HTTP header.",
+		//	              "properties": {
+		//	                "SecretValue": {
+		//	                  "description": "The token the provider sends in the header. If you do not specify a token, Amazon EventBridge generates one. EventBridge stores the token only in AWS Secrets Manager and never returns it. Set on create only: changing this value in a template has no effect. To change the token, call RotateWebhookCredentials. The webhook URL does not change.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 6,
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenHttpHeader": {
+		//	                  "description": "The name of the header that carries the secret, for example X-Webhook-Secret. Must be a valid header name as defined in RFC 7230.",
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[!#$%\u0026'*+\\-.^_`|~0-9A-Za-z]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TokenHttpHeader"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "DeduplicationConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Deduplicates the event source's events on the event bus. If you do not specify a configuration, EventBridge does not deduplicate events.",
+		//	          "properties": {
+		//	            "DeduplicationType": {
+		//	              "description": "How EventBridge detects duplicate events.\n\nValid values:\n- CONTENT_BASED - Detects duplicates by a hash of the event content.",
+		//	              "enum": [
+		//	                "CONTENT_BASED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DeduplicationType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "KmsKeyIdentifier": {
+		//	          "description": "The AWS KMS key that encrypts the event source's secret in AWS Secrets Manager. If you do not specify a key, the secret is encrypted with the AWS managed key aws/secretsmanager. A key you specify must be an enabled customer managed key in your account and Region. Changing the key re-encrypts the secret under the new key. The previous key can still decrypt the stored versions until the credential is next rotated.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^[a-zA-Z0-9_\\-/:]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "LogConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The log records Amazon EventBridge delivers for the webhook requests this event source receives. If you do not specify a configuration, EventBridge delivers no logs. Logs are delivered to the destinations you configure with Amazon CloudWatch Logs vended log delivery.",
+		//	          "properties": {
+		//	            "IncludePayload": {
+		//	              "description": "Whether the event payload is included in emitted log records: FULL includes it in every emitted record, and ON_ERROR_ONLY includes it only in error records. The default is ON_ERROR_ONLY.",
+		//	              "enum": [
+		//	                "FULL",
+		//	                "ON_ERROR_ONLY"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Level": {
+		//	              "description": "The minimum log level: OFF (no logging), ERROR, or INFO. Records below this level are not emitted. The default is OFF.",
+		//	              "enum": [
+		//	                "OFF",
+		//	                "ERROR",
+		//	                "INFO"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MetadataHttpHeaders": {
+		//	          "description": "The HTTP request headers to add to each event's metadata, up to 20. Header names are case-insensitive and cannot repeat. Amazon EventBridge adds each header under its lowercase name. If you do not specify headers, EventBridge adds none. You cannot list headers that carry credentials or describe the network path, or the header that carries the static token.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "The name of an HTTP request header. Must be a valid header name as defined in RFC 7230.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[!#$%\u0026'*+\\-.^_`|~0-9A-Za-z]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 20,
+		//	          "type": "array"
+		//	        },
+		//	        "RoleArn": {
+		//	          "description": "The ARN of the IAM role that Amazon EventBridge assumes to put the webhook's events on the event bus. The role must belong to the calling account.",
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:aws(-[a-z0-9]+)*:iam::\\d{12}:role\\/[\\w+=,.@/-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AuthConfiguration",
+		//	        "RoleArn"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -187,8 +438,168 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Configuration for forwarding a partner event source's events.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: WebhookEventsConfiguration
+				"webhook_events_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthConfiguration
+						"auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicHttpAuthConfiguration
+								"basic_http_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The password. Set on create only: changing this value in a template has no effect. To change the password, call RotateWebhookCredentials. The username and the webhook URL do not change.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The username. Cannot contain a colon or whitespace. Changing the username requires replacing the event source, which also requires a new Name and gives the event source a new webhook URL. RotateWebhookCredentials cannot change the username.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The provider sends HTTP Basic authentication credentials.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: HmacAuthConfiguration
+								"hmac_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Algorithm
+										"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The hash algorithm the provider uses to compute the signature.\n\nValid values:\n- SHA256 - SHA-256.\n- SHA1 - SHA-1. Not recommended. Use SHA1 only for interoperability with a provider that cannot sign with SHA-256.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Delimiter
+										"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The separator between parts of the signature header value, for example a comma for a header value of t=1727816400,v1=<signature>, or a space when the header carries several signatures. Required when TimestampHttpHeader is the same header as SignatureHttpHeader.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Encoding
+										"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "How the provider encodes the signature in the header.\n\nValid values:\n- HEX - Hexadecimal.\n- BASE64 - Base64.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MessageIdHttpHeader
+										"message_id_http_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the header that carries the message ID. Required when SignedMessageComposition is MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretEncoding
+										"secret_encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "How the secret is encoded. RAW uses the secret's characters as the signing key. BASE64 decodes the secret first, as required by providers that issue Base64-encoded signing keys, such as those following the Standard Webhooks specification. If you do not specify an encoding, EventBridge uses RAW. Changing the encoding replaces the event source.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretValue
+										"secret_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The signing key shared with the provider. If you do not specify a key, EventBridge generates one. EventBridge stores the key only in AWS Secrets Manager and never returns it. Set on create only: changing this value in a template has no effect. To change the key, call RotateWebhookCredentials. The webhook URL does not change.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SignatureHttpHeader
+										"signature_http_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the header that carries the signature, for example X-Hub-Signature-256. When TimestampHttpHeader names the same header, Delimiter, SignaturePrefix and TimestampPrefix are all required.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SignaturePrefix
+										"signature_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The text that precedes the signature in the header value, for example sha256=. Required when TimestampHttpHeader is the same header as SignatureHttpHeader.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SignedMessageComposition
+										"signed_message_composition": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "How the provider assembles the message it signs from the request.\n\nValid values:\n- BODY - The request body alone.\n- TIMESTAMP_DOT_BODY - <timestamp>.<body>. Requires TimestampHttpHeader.\n- MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY - <messageId>.<timestamp>.<body>, as in the Standard Webhooks specification. Requires TimestampHttpHeader and MessageIdHttpHeader.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TimestampHttpHeader
+										"timestamp_http_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the header that carries the request timestamp. Required when SignedMessageComposition is TIMESTAMP_DOT_BODY or MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY, or when TimestampToleranceInSeconds is set. When it names the same header as SignatureHttpHeader, Delimiter, SignaturePrefix and TimestampPrefix are all required.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TimestampPrefix
+										"timestamp_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The text that precedes the timestamp in the header value, for example t=. Required when TimestampHttpHeader is the same header as SignatureHttpHeader.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TimestampToleranceInSeconds
+										"timestamp_tolerance_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum difference, in seconds, allowed between the request timestamp and the time EventBridge receives the request. Requests outside this window are rejected. If you do not specify a tolerance, EventBridge uses 300 seconds. Requires TimestampHttpHeader.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The provider signs each request with a hash-based message authentication code (HMAC) of the secret.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StaticTokenAuthConfiguration
+								"static_token_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SecretValue
+										"secret_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The token the provider sends in the header. If you do not specify a token, Amazon EventBridge generates one. EventBridge stores the token only in AWS Secrets Manager and never returns it. Set on create only: changing this value in a template has no effect. To change the token, call RotateWebhookCredentials. The webhook URL does not change.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenHttpHeader
+										"token_http_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the header that carries the secret, for example X-Webhook-Secret. Must be a valid header name as defined in RFC 7230.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The provider sends the secret as the value of an HTTP header.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "How the provider authenticates its requests. Set exactly one authentication type. You can't change the type after you create the event source.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeduplicationConfiguration
+						"deduplication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeduplicationType
+								"deduplication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "How EventBridge detects duplicate events.\n\nValid values:\n- CONTENT_BASED - Detects duplicates by a hash of the event content.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Deduplicates the event source's events on the event bus. If you do not specify a configuration, EventBridge does not deduplicate events.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyIdentifier
+						"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS KMS key that encrypts the event source's secret in AWS Secrets Manager. If you do not specify a key, the secret is encrypted with the AWS managed key aws/secretsmanager. A key you specify must be an enabled customer managed key in your account and Region. Changing the key re-encrypts the secret under the new key. The previous key can still decrypt the stored versions until the credential is next rotated.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogConfiguration
+						"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IncludePayload
+								"include_payload": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether the event payload is included in emitted log records: FULL includes it in every emitted record, and ON_ERROR_ONLY includes it only in error records. The default is ON_ERROR_ONLY.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Level
+								"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The minimum log level: OFF (no logging), ERROR, or INFO. Records below this level are not emitted. The default is OFF.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The log records Amazon EventBridge delivers for the webhook requests this event source receives. If you do not specify a configuration, EventBridge delivers no logs. Logs are delivered to the destinations you configure with Amazon CloudWatch Logs vended log delivery.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetadataHttpHeaders
+						"metadata_http_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The HTTP request headers to add to each event's metadata, up to 20. Header names are case-insensitive and cannot repeat. Amazon EventBridge adds each header under its lowercase name. If you do not specify headers, EventBridge adds none. You cannot list headers that carry credentials or describe the network path, or the header that carries the static token.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role that Amazon EventBridge assumes to put the webhook's events on the event bus. The role must belong to the calling account.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for receiving events that an external provider sends to a webhook URL.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The event source configuration. Specify exactly one of AwsServiceEventsConfiguration or PartnerEventsConfiguration.",
+			Description: "The event source configuration. Specify exactly one of AwsServiceEventsConfiguration, PartnerEventsConfiguration or WebhookEventsConfiguration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
@@ -215,6 +626,59 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A description of the event source. Control characters and Unicode line separators are not allowed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Details
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Values EventBridge generated for the event source, such as a webhook's URL and the ARN of its secret. Absent for event source types that have no generated values.",
+		//	  "properties": {
+		//	    "WebhookDetails": {
+		//	      "additionalProperties": false,
+		//	      "description": "Values generated for a webhook event source.",
+		//	      "properties": {
+		//	        "SecretArn": {
+		//	          "description": "The ARN of the AWS Secrets Manager secret, in your account, that holds the webhook credential.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "pattern": "^arn:aws(-[a-z0-9]+)*:secretsmanager:[a-z][a-z0-9]*(-[a-z0-9]+)*:([0-9]{12}):secret:events-webhook(-preprod)?[!/].+$",
+		//	          "type": "string"
+		//	        },
+		//	        "WebhookUrl": {
+		//	          "description": "The HTTPS URL to configure at the event provider. The URL does not change for the life of the event source. Treat the URL as a credential. The URL appears in stack describe output and in drift detection results.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: WebhookDetails
+				"webhook_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the AWS Secrets Manager secret, in your account, that holds the webhook credential.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WebhookUrl
+						"webhook_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The HTTPS URL to configure at the event provider. The URL does not change for the life of the event source. Treat the URL as a credential. The URL appears in stack describe output and in drift detection results.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Values generated for a webhook event source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Values EventBridge generated for the event source, such as a webhook's URL and the ARN of its secret. Absent for event source types that have no generated values.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBusArn
 		// CloudFormation resource type schema:
 		//
@@ -233,14 +697,14 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the event source. Its resource segment has the form event-sourcev2/\u003ctype\u003e/\u003cname\u003e/\u003cid\u003e. The type segment is set by the service (aws.service for AWS service events, aws.partner for partner events) and is not part of the event source name. The id segment is a 25-character identifier generated by the service.",
+		//	  "description": "The Amazon Resource Name (ARN) of the event source. Its resource segment has the form event-sourcev2/\u003ctype\u003e/\u003cname\u003e/\u003cid\u003e. Amazon EventBridge sets the type segment, which is not part of the event source name. The id segment is a 25-character identifier that EventBridge generates.\n\nValid values for the type segment:\n- aws.service - AWS service events.\n- aws.partner - Partner events.\n- webhook - Webhook events.",
 		//	  "maxLength": 1011,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws(-[a-z0-9]+)*:events:[a-z][a-z0-9]*(-[a-z0-9]+)*:([0-9]{12}):event-sourcev2\\/(aws\\.service|aws\\.partner)\\/[A-Za-z0-9][\\.\\-_A-Za-z0-9]{0,255}\\/[a-z0-9]{25}$",
+		//	  "pattern": "^arn:aws(-[a-z0-9]+)*:events:[a-z][a-z0-9]*(-[a-z0-9]+)*:([0-9]{12}):event-sourcev2\\/(aws\\.service|aws\\.partner|webhook)\\/[A-Za-z0-9][\\.\\-_A-Za-z0-9]{0,255}\\/[a-z0-9]{25}$",
 		//	  "type": "string"
 		//	}
 		"event_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the event source. Its resource segment has the form event-sourcev2/<type>/<name>/<id>. The type segment is set by the service (aws.service for AWS service events, aws.partner for partner events) and is not part of the event source name. The id segment is a 25-character identifier generated by the service.",
+			Description: "The Amazon Resource Name (ARN) of the event source. Its resource segment has the form event-sourcev2/<type>/<name>/<id>. Amazon EventBridge sets the type segment, which is not part of the event source name. The id segment is a 25-character identifier that EventBridge generates.\n\nValid values for the type segment:\n- aws.service - AWS service events.\n- aws.partner - Partner events.\n- webhook - Webhook events.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
@@ -369,26 +833,58 @@ func eventSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EventsV2::EventSource").WithTerraformTypeName("awscc_eventsv2_event_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                        "Algorithm",
 		"arn":                              "Arn",
+		"auth_configuration":               "AuthConfiguration",
 		"aws_service":                      "AwsService",
 		"aws_service_events_configuration": "AwsServiceEventsConfiguration",
+		"basic_http_auth_configuration":    "BasicHttpAuthConfiguration",
 		"configuration":                    "Configuration",
 		"creation_time":                    "CreationTime",
+		"deduplication_configuration":      "DeduplicationConfiguration",
+		"deduplication_type":               "DeduplicationType",
+		"delimiter":                        "Delimiter",
 		"description":                      "Description",
+		"details":                          "Details",
+		"encoding":                         "Encoding",
 		"event_bus_arn":                    "EventBusArn",
 		"event_source_arn":                 "EventSourceArn",
+		"hmac_auth_configuration":          "HmacAuthConfiguration",
+		"include_payload":                  "IncludePayload",
 		"key":                              "Key",
+		"kms_key_identifier":               "KmsKeyIdentifier",
 		"last_modified_time":               "LastModifiedTime",
+		"level":                            "Level",
+		"log_configuration":                "LogConfiguration",
+		"message_id_http_header":           "MessageIdHttpHeader",
+		"metadata_http_headers":            "MetadataHttpHeaders",
 		"name":                             "Name",
 		"on_failure_configuration":         "OnFailureConfiguration",
 		"partner_bus_kms_key_identifier":   "PartnerBusKmsKeyIdentifier",
 		"partner_event_source_arn":         "PartnerEventSourceArn",
 		"partner_events_configuration":     "PartnerEventsConfiguration",
+		"password":                         "Password",
 		"pattern":                          "Pattern",
 		"revoked":                          "Revoked",
+		"role_arn":                         "RoleArn",
+		"secret_arn":                       "SecretArn",
+		"secret_encoding":                  "SecretEncoding",
+		"secret_value":                     "SecretValue",
+		"signature_http_header":            "SignatureHttpHeader",
+		"signature_prefix":                 "SignaturePrefix",
+		"signed_message_composition":       "SignedMessageComposition",
 		"state":                            "State",
+		"static_token_auth_configuration":  "StaticTokenAuthConfiguration",
 		"tags":                             "Tags",
+		"timestamp_http_header":            "TimestampHttpHeader",
+		"timestamp_prefix":                 "TimestampPrefix",
+		"timestamp_tolerance_in_seconds":   "TimestampToleranceInSeconds",
+		"token_http_header":                "TokenHttpHeader",
+		"username":                         "Username",
 		"value":                            "Value",
+		"webhook_details":                  "WebhookDetails",
+		"webhook_events_configuration":     "WebhookEventsConfiguration",
+		"webhook_url":                      "WebhookUrl",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

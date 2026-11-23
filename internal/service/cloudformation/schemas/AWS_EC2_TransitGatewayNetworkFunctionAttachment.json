@@ -1,0 +1,153 @@
+{
+  "typeName": "AWS::EC2::TransitGatewayNetworkFunctionAttachment",
+  "description": "The AWS::EC2::TransitGatewayNetworkFunctionAttachment type",
+  "properties": {
+    "TransitGatewayAttachmentId": {
+      "description": "The ID of the network function attachment.",
+      "type": "string"
+    },
+    "TransitGatewayId": {
+      "description": "The ID of the transit gateway.",
+      "type": "string"
+    },
+    "ServiceName": {
+      "description": "The name of the network function service.",
+      "type": "string"
+    },
+    "ResourceId": {
+      "description": "The resource ID of the network function.",
+      "type": "string"
+    },
+    "AvailabilityZones": {
+      "description": "The Availability Zones for the attachment.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "AvailabilityZoneIds": {
+      "description": "The Availability Zone IDs for the attachment.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "State": {
+      "description": "The state of the attachment.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "The creation time of the attachment.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags for the attachment.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "TransitGatewayId"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "AvailabilityZones"
+      ]
+    },
+    {
+      "required": [
+        "AvailabilityZoneIds"
+      ]
+    }
+  ],
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key of the tag.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/TransitGatewayAttachmentId",
+    "/properties/State",
+    "/properties/ResourceId",
+    "/properties/CreationTime"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ServiceName"
+  ],
+  "createOnlyProperties": [
+    "/properties/TransitGatewayId",
+    "/properties/ServiceName"
+  ],
+  "primaryIdentifier": [
+    "/properties/TransitGatewayAttachmentId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateTransitGatewayNetworkFunctionAttachment",
+        "ec2:DescribeTransitGatewayNetworkFunctionAttachments",
+        "ec2:DescribeVpcEndpointServices",
+        "ec2:CreateTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayNetworkFunctionAttachments",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyTransitGatewayNetworkFunctionAttachment",
+        "ec2:DescribeTransitGatewayNetworkFunctionAttachments",
+        "ec2:DeleteTags",
+        "ec2:CreateTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteTransitGatewayNetworkFunctionAttachment",
+        "ec2:DescribeTransitGatewayNetworkFunctionAttachments",
+        "ec2:DeleteTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayNetworkFunctionAttachments",
+        "ec2:DescribeTags"
+      ]
+    }
+  }
+}

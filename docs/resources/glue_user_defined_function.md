@@ -22,8 +22,10 @@ Represents a user-defined function (UDF) definition in the AWS Glue Data Catalog
 
 ### Optional
 
+- `artifact_location` (String) The registered Amazon S3 location that contains the function artifacts. Required when GovernanceMode is LAKE_FORMATION.
 - `class_name` (String) The Java class that contains the function code.
 - `function_type` (String) The type of the function.
+- `governance_mode` (String) How access to the function is governed. The mode cannot be changed after creation.
 - `owner_name` (String) The owner of the function.
 - `owner_type` (String) The owner type.
 - `resource_uris` (Attributes List) The resource URIs for the function. (see [below for nested schema](#nestedatt--resource_uris))
@@ -38,6 +40,7 @@ Represents a user-defined function (UDF) definition in the AWS Glue Data Catalog
 
 Optional:
 
+- `last_modified` (String) The time at which Glue recorded the resource as last modified in Amazon S3 for a Lake Formation governed function.
 - `resource_type` (String) The type of the resource.
 - `uri` (String) The URI for accessing the resource.
 

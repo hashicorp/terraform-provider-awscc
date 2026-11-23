@@ -25,14 +25,26 @@
     },
     "CloudConnectorConfiguration": {
       "type": "object",
-      "description": "The configuration for the cloud connector. Currently supports Azure.",
+      "description": "The configuration for the cloud connector. Exactly one of AzureConfiguration or GcpConfiguration.",
       "properties": {
         "AzureConfiguration": {
           "$ref": "#/definitions/AzureConfiguration"
+        },
+        "GcpConfiguration": {
+          "$ref": "#/definitions/GcpConfiguration"
         }
       },
-      "required": [
-        "AzureConfiguration"
+      "oneOf": [
+        {
+          "required": [
+            "AzureConfiguration"
+          ]
+        },
+        {
+          "required": [
+            "GcpConfiguration"
+          ]
+        }
       ],
       "additionalProperties": false
     },
@@ -91,6 +103,85 @@
       },
       "required": [
         "Subscriptions"
+      ],
+      "additionalProperties": false
+    },
+    "GcpConfiguration": {
+      "type": "object",
+      "description": "Configuration for connecting to Google Cloud.",
+      "properties": {
+        "OrganizationId": {
+          "type": "string",
+          "description": "The GCP organization ID. Required when Targets is omitted, which targets the entire organization. Cannot be changed after creation.",
+          "minLength": 1,
+          "maxLength": 19,
+          "pattern": "^[1-9][0-9]{0,18}$"
+        },
+        "WorkloadIdentityPoolProvider": {
+          "type": "string",
+          "description": "The resource name of the workload identity pool provider that trusts the connector's IAM role.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^projects/[1-9][0-9]{0,18}/locations/global/workloadIdentityPools/[a-z0-9-]{4,32}/providers/[a-z0-9-]{4,32}$"
+        },
+        "ServiceAccountEmail": {
+          "type": "string",
+          "description": "The GCP service account the connector impersonates. Its project is the connector's management project. Cannot be changed after creation.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[a-z][a-z0-9\\-]*[a-z0-9]@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$"
+        },
+        "Targets": {
+          "$ref": "#/definitions/GcpConfigurationTargets"
+        }
+      },
+      "required": [
+        "WorkloadIdentityPoolProvider",
+        "ServiceAccountEmail"
+      ],
+      "additionalProperties": false
+    },
+    "GcpConfigurationTargets": {
+      "type": "object",
+      "description": "The targets for the cloud connector. If omitted, the entire organization is targeted.",
+      "properties": {
+        "Projects": {
+          "type": "array",
+          "description": "List of GCP projects.",
+          "items": {
+            "$ref": "#/definitions/GcpProject"
+          },
+          "minItems": 1,
+          "maxItems": 75,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Projects"
+      ],
+      "additionalProperties": false
+    },
+    "GcpProject": {
+      "type": "object",
+      "description": "A GCP project with its ID and optional display name.",
+      "properties": {
+        "ProjectId": {
+          "type": "string",
+          "description": "The GCP project ID.",
+          "minLength": 6,
+          "maxLength": 30,
+          "pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$"
+        },
+        "ProjectDisplayName": {
+          "type": "string",
+          "description": "The display name of the GCP project.",
+          "minLength": 0,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"
+        }
+      },
+      "required": [
+        "ProjectId"
       ],
       "additionalProperties": false
     },
@@ -205,7 +296,9 @@
   "createOnlyProperties": [
     "/properties/RoleArn",
     "/properties/ConfigConnectorArn",
-    "/properties/Configuration/AzureConfiguration/TenantId"
+    "/properties/Configuration/AzureConfiguration/TenantId",
+    "/properties/Configuration/GcpConfiguration/ServiceAccountEmail",
+    "/properties/Configuration/GcpConfiguration/OrganizationId"
   ],
   "additionalProperties": false,
   "tagging": {

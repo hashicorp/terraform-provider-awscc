@@ -1,21 +1,75 @@
 {
+  "typeName": "AWS::AppSync::ApiKey",
+  "description": "Resource Type definition for AWS::AppSync::ApiKey",
+  "additionalProperties": false,
+  "properties": {
+    "ApiKey": {
+      "type": "string",
+      "description": "The API key."
+    },
+    "Description": {
+      "type": "string",
+      "description": "Unique description of your API key."
+    },
+    "ApiKeyId": {
+      "type": "string",
+      "description": "The API key ID."
+    },
+    "Expires": {
+      "type": "number",
+      "description": "The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the API key."
+    },
+    "ApiId": {
+      "type": "string",
+      "description": "Unique AWS AppSync GraphQL API ID for this API key."
+    }
+  },
+  "required": [
+    "ApiId"
+  ],
+  "createOnlyProperties": [
+    "/properties/ApiId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ApiId",
+    "/properties/ApiKeyId"
+  ],
+  "readOnlyProperties": [
+    "/properties/ApiKey",
+    "/properties/ApiKeyId",
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
   "tagging": {
     "taggable": false
   },
   "handlers": {
-    "read": {
-      "permissions": [
-        "appsync:ListApiKeys"
-      ]
-    },
     "create": {
       "permissions": [
         "appsync:CreateApiKey"
       ]
     },
+    "read": {
+      "permissions": [
+        "appsync:ListApiKeys"
+      ]
+    },
     "update": {
       "permissions": [
         "appsync:UpdateApiKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appsync:DeleteApiKey"
       ]
     },
     "list": {
@@ -25,68 +79,14 @@
       "handlerSchema": {
         "properties": {
           "ApiId": {
-            "description": "Unique AWS AppSync GraphQL API ID for this API key.",
-            "type": "string"
+            "type": "string",
+            "description": "Unique AWS AppSync GraphQL API ID for this API key."
           }
         },
         "required": [
           "ApiId"
         ]
       }
-    },
-    "delete": {
-      "permissions": [
-        "appsync:DeleteApiKey"
-      ]
     }
-  },
-  "typeName": "AWS::AppSync::ApiKey",
-  "readOnlyProperties": [
-    "/properties/ApiKey",
-    "/properties/ApiKeyId",
-    "/properties/Arn"
-  ],
-  "description": "Resource Type definition for AWS::AppSync::ApiKey",
-  "additionalIdentifiers": [
-    [
-      "/properties/Arn"
-    ]
-  ],
-  "createOnlyProperties": [
-    "/properties/ApiId"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/ApiId",
-    "/properties/ApiKeyId"
-  ],
-  "properties": {
-    "ApiKey": {
-      "description": "The API key.",
-      "type": "string"
-    },
-    "Description": {
-      "description": "Unique description of your API key.",
-      "type": "string"
-    },
-    "ApiKeyId": {
-      "description": "The API key ID.",
-      "type": "string"
-    },
-    "Expires": {
-      "description": "The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.",
-      "type": "number"
-    },
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the API key.",
-      "type": "string"
-    },
-    "ApiId": {
-      "description": "Unique AWS AppSync GraphQL API ID for this API key.",
-      "type": "string"
-    }
-  },
-  "required": [
-    "ApiId"
-  ]
+  }
 }

@@ -38,8 +38,34 @@ Resource Type definition for AWS::BedrockAgentCore::PaymentCredentialProvider
 
 Optional:
 
+- `amazon_pay_configuration` (Attributes) Amazon Pay configuration with merchant identifiers and a delegated authorization token (see [below for nested schema](#nestedatt--provider_configuration_input--amazon_pay_configuration))
 - `coinbase_cdp_configuration` (Attributes) Coinbase CDP configuration with API credentials (see [below for nested schema](#nestedatt--provider_configuration_input--coinbase_cdp_configuration))
+- `pay_pal_configuration` (Attributes) PayPal configuration with REST app credentials (see [below for nested schema](#nestedatt--provider_configuration_input--pay_pal_configuration))
+- `stripe_configuration` (Attributes) Stripe configuration with a restricted key, supplied inline (MANAGED) or as a Secrets Manager reference (EXTERNAL) (see [below for nested schema](#nestedatt--provider_configuration_input--stripe_configuration))
 - `stripe_privy_configuration` (Attributes) Stripe Privy configuration with credentials (see [below for nested schema](#nestedatt--provider_configuration_input--stripe_privy_configuration))
+
+<a id="nestedatt--provider_configuration_input--amazon_pay_configuration"></a>
+### Nested Schema for `provider_configuration_input.amazon_pay_configuration`
+
+Optional:
+
+- `amazon_pay_region` (String) The Amazon Pay region the merchant's authorization token belongs to. AgentCore uses it to pick the Amazon Pay API host.
+- `authorization_token` (String) The delegated authorization token, supplied inline. Mutually exclusive with AuthorizationTokenConfig.
+- `authorization_token_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--amazon_pay_configuration--authorization_token_config))
+- `authorization_token_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+- `environment` (String) The Amazon Pay API environment
+- `merchant_id` (String) The Amazon Pay merchant (seller) ID
+- `store_id` (String) The Amazon Pay store (client) ID
+
+<a id="nestedatt--provider_configuration_input--amazon_pay_configuration--authorization_token_config"></a>
+### Nested Schema for `provider_configuration_input.amazon_pay_configuration.authorization_token_config`
+
+Optional:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
+
 
 <a id="nestedatt--provider_configuration_input--coinbase_cdp_configuration"></a>
 ### Nested Schema for `provider_configuration_input.coinbase_cdp_configuration`
@@ -65,6 +91,47 @@ Optional:
 
 <a id="nestedatt--provider_configuration_input--coinbase_cdp_configuration--wallet_secret_config"></a>
 ### Nested Schema for `provider_configuration_input.coinbase_cdp_configuration.wallet_secret_config`
+
+Optional:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
+
+
+<a id="nestedatt--provider_configuration_input--pay_pal_configuration"></a>
+### Nested Schema for `provider_configuration_input.pay_pal_configuration`
+
+Optional:
+
+- `client_id` (String) The PayPal REST app client ID
+- `client_secret` (String) The PayPal REST app client secret, supplied inline. Mutually exclusive with ClientSecretConfig.
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--pay_pal_configuration--client_secret_config))
+- `client_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+- `environment` (String) The PayPal API environment
+
+<a id="nestedatt--provider_configuration_input--pay_pal_configuration--client_secret_config"></a>
+### Nested Schema for `provider_configuration_input.pay_pal_configuration.client_secret_config`
+
+Optional:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
+
+
+<a id="nestedatt--provider_configuration_input--stripe_configuration"></a>
+### Nested Schema for `provider_configuration_input.stripe_configuration`
+
+Optional:
+
+- `publishable_key` (String) The Stripe publishable key (pk_live_* or pk_test_*). Its mode must match the restricted key's.
+- `restricted_key` (String) The Stripe restricted key (rk_live_* or rk_test_*), supplied inline. Mutually exclusive with RestrictedKeyConfig.
+- `restricted_key_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--stripe_configuration--restricted_key_config))
+- `restricted_key_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+
+<a id="nestedatt--provider_configuration_input--stripe_configuration--restricted_key_config"></a>
+### Nested Schema for `provider_configuration_input.stripe_configuration.restricted_key_config`
 
 Optional:
 
@@ -121,8 +188,33 @@ Optional:
 
 Read-Only:
 
+- `amazon_pay_configuration` (Attributes) Amazon Pay configuration output with the authorization token secret ARN (see [below for nested schema](#nestedatt--provider_configuration_output--amazon_pay_configuration))
 - `coinbase_cdp_configuration` (Attributes) Coinbase CDP configuration output with secret ARNs (see [below for nested schema](#nestedatt--provider_configuration_output--coinbase_cdp_configuration))
+- `pay_pal_configuration` (Attributes) PayPal configuration output with the client secret ARN (see [below for nested schema](#nestedatt--provider_configuration_output--pay_pal_configuration))
+- `stripe_configuration` (Attributes) Stripe configuration output with the restricted key secret ARN (see [below for nested schema](#nestedatt--provider_configuration_output--stripe_configuration))
 - `stripe_privy_configuration` (Attributes) Stripe Privy configuration output with secret ARNs (see [below for nested schema](#nestedatt--provider_configuration_output--stripe_privy_configuration))
+
+<a id="nestedatt--provider_configuration_output--amazon_pay_configuration"></a>
+### Nested Schema for `provider_configuration_output.amazon_pay_configuration`
+
+Read-Only:
+
+- `amazon_pay_region` (String) The Amazon Pay region the merchant's authorization token belongs to. AgentCore uses it to pick the Amazon Pay API host.
+- `authorization_token_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--amazon_pay_configuration--authorization_token_arn))
+- `authorization_token_json_key` (String) The JSON key within the secret that contains the authorization token value
+- `authorization_token_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+- `environment` (String) The Amazon Pay API environment
+- `merchant_id` (String) The Amazon Pay merchant (seller) ID
+- `store_id` (String) The Amazon Pay store (client) ID
+
+<a id="nestedatt--provider_configuration_output--amazon_pay_configuration--authorization_token_arn"></a>
+### Nested Schema for `provider_configuration_output.amazon_pay_configuration.authorization_token_arn`
+
+Read-Only:
+
+- `secret_arn` (String) The ARN of the secret in AWS Secrets Manager
+
+
 
 <a id="nestedatt--provider_configuration_output--coinbase_cdp_configuration"></a>
 ### Nested Schema for `provider_configuration_output.coinbase_cdp_configuration`
@@ -147,6 +239,45 @@ Read-Only:
 
 <a id="nestedatt--provider_configuration_output--coinbase_cdp_configuration--wallet_secret_arn"></a>
 ### Nested Schema for `provider_configuration_output.coinbase_cdp_configuration.wallet_secret_arn`
+
+Read-Only:
+
+- `secret_arn` (String) The ARN of the secret in AWS Secrets Manager
+
+
+
+<a id="nestedatt--provider_configuration_output--pay_pal_configuration"></a>
+### Nested Schema for `provider_configuration_output.pay_pal_configuration`
+
+Read-Only:
+
+- `client_id` (String) The PayPal REST app client ID
+- `client_secret_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--pay_pal_configuration--client_secret_arn))
+- `client_secret_json_key` (String) The JSON key within the secret that contains the client secret value
+- `client_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+- `environment` (String) The PayPal API environment
+
+<a id="nestedatt--provider_configuration_output--pay_pal_configuration--client_secret_arn"></a>
+### Nested Schema for `provider_configuration_output.pay_pal_configuration.client_secret_arn`
+
+Read-Only:
+
+- `secret_arn` (String) The ARN of the secret in AWS Secrets Manager
+
+
+
+<a id="nestedatt--provider_configuration_output--stripe_configuration"></a>
+### Nested Schema for `provider_configuration_output.stripe_configuration`
+
+Read-Only:
+
+- `publishable_key` (String) The Stripe publishable key stored on the provider. Only present when one was supplied.
+- `restricted_key_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--stripe_configuration--restricted_key_arn))
+- `restricted_key_json_key` (String) The JSON key within the secret that contains the restricted key value
+- `restricted_key_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+
+<a id="nestedatt--provider_configuration_output--stripe_configuration--restricted_key_arn"></a>
+### Nested Schema for `provider_configuration_output.stripe_configuration.restricted_key_arn`
 
 Read-Only:
 

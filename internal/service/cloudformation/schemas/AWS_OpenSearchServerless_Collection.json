@@ -4,9 +4,14 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aoss:TagResource",
+      "aoss:UntagResource",
+      "aoss:ListTagsForResource"
+    ]
   },
   "definitions": {
     "Tag": {
@@ -131,7 +136,7 @@
       "maxItems": 50,
       "minItems": 0,
       "insertionOrder": false,
-      "description": "List of tags to be added to the resource"
+      "description": "List of tags to associate with the collection. Tag changes are applied in place without replacing the collection. Reading, adding, changing or removing tags requires the aoss:ListTagsForResource, aoss:TagResource and aoss:UntagResource permissions."
     },
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the collection.",
@@ -184,12 +189,10 @@
     "/properties/KmsKeyArn"
   ],
   "writeOnlyProperties": [
-    "/properties/Tags",
     "/properties/EncryptionConfig"
   ],
   "createOnlyProperties": [
     "/properties/Name",
-    "/properties/Tags",
     "/properties/Type",
     "/properties/StandbyReplicas",
     "/properties/CollectionGroupName",
@@ -213,6 +216,7 @@
         "aoss:BatchGetCollection",
         "aoss:AddCollectionToCollectionGroup",
         "aoss:TagResource",
+        "aoss:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
         "kms:CreateGrant",
         "kms:DescribeKey"
@@ -238,7 +242,10 @@
     "update": {
       "permissions": [
         "aoss:UpdateCollection",
-        "aoss:BatchGetCollection"
+        "aoss:BatchGetCollection",
+        "aoss:TagResource",
+        "aoss:UntagResource",
+        "aoss:ListTagsForResource"
       ]
     }
   },

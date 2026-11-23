@@ -1,0 +1,109 @@
+{
+  "typeName": "AWS::APIPortal::ProductSharingPolicy",
+  "description": "Resource Type definition for AWS::APIPortal::ProductSharingPolicy. Singleton sub-property of an AWS::APIPortal::Product capturing the resource-based sharing policy attached via RAM.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "ProductId": {
+      "type": "string",
+      "description": "The identifier of the parent Product. Singleton key for this CFN type.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "PolicyDocument": {
+      "type": "string",
+      "description": "JSON IAM-style resource-based policy document. Size limit raised to 409,600 chars per RAM's recommended public-policy onboarding guidance.",
+      "minLength": 1,
+      "maxLength": 409600
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the product sharing policy.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ProductId",
+    "PolicyDocument"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProductId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProductId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apiportal:TagResource",
+      "apiportal:UntagResource",
+      "apiportal:GetProductSharingPolicy"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:PutProductSharingPolicy",
+        "apiportal:GetProductSharingPolicy",
+        "apiportal:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetProductSharingPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:ListProducts",
+        "apiportal:GetProductSharingPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:PutProductSharingPolicy",
+        "apiportal:GetProductSharingPolicy",
+        "apiportal:TagResource",
+        "apiportal:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DeleteProductSharingPolicy",
+        "apiportal:GetProductSharingPolicy"
+      ]
+    }
+  }
+}

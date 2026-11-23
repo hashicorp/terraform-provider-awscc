@@ -231,6 +231,32 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The identifier of the contact flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ContactHooks
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The contact hooks for the task template.",
+		//	  "properties": {
+		//	    "WrapUpFlowArn": {
+		//	      "description": "The identifier (arn) of the flow module that runs when an agent attempts to disconnect from a task created by referencing this template. If no agent ever connects to the task, the flow module runs when the task is terminated.",
+		//	      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/flow-module/[-a-zA-Z0-9]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"contact_hooks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: WrapUpFlowArn
+				"wrap_up_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier (arn) of the flow module that runs when an agent attempts to disconnect from a task created by referencing this template. If no agent ever connects to the task, the flow module runs when the task is terminated.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The contact hooks for the task template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Defaults
 		// CloudFormation resource type schema:
 		//
@@ -542,6 +568,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"client_token":                 "ClientToken",
 		"constraints":                  "Constraints",
 		"contact_flow_arn":             "ContactFlowArn",
+		"contact_hooks":                "ContactHooks",
 		"default_value":                "DefaultValue",
 		"defaults":                     "Defaults",
 		"description":                  "Description",
@@ -559,6 +586,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags":                         "Tags",
 		"type":                         "Type",
 		"value":                        "Value",
+		"wrap_up_flow_arn":             "WrapUpFlowArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

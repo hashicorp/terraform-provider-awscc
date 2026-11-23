@@ -75,6 +75,21 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "You can opt out of certificate transparency logging by specifying the DISABLED option. Opt in by specifying ENABLED.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CertificateUsage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The extended key usage of an Amazon N2 certificate. Valid only with RootHierarchyType. Defaults to CLIENT_AND_SERVER_AUTH. CLIENT_AUTH_ONLY requires N2_AMAZON_MANAGED.",
+		//	  "enum": [
+		//	    "CLIENT_AND_SERVER_AUTH",
+		//	    "CLIENT_AUTH_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"certificate_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The extended key usage of an Amazon N2 certificate. Valid only with RootHierarchyType. Defaults to CLIENT_AND_SERVER_AUTH. CLIENT_AUTH_ONLY requires N2_AMAZON_MANAGED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -137,6 +152,21 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"key_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RootHierarchyType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon N2 root hierarchy that issues the certificate. Omit for a public TLS certificate. Amazon N2 roots are not trusted by browsers.",
+		//	  "enum": [
+		//	    "N2_AMAZON_MANAGED",
+		//	    "N2_SFG2_AMAZON_MANAGED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"root_hierarchy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon N2 root hierarchy that issues the certificate. Omit for a public TLS certificate. Amazon N2 roots are not trusted by browsers.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubjectAlternativeNames
@@ -231,11 +261,13 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate_authority_arn":                   "CertificateAuthorityArn",
 		"certificate_export":                          "CertificateExport",
 		"certificate_transparency_logging_preference": "CertificateTransparencyLoggingPreference",
+		"certificate_usage":                           "CertificateUsage",
 		"domain_name":                                 "DomainName",
 		"domain_validation_options":                   "DomainValidationOptions",
 		"hosted_zone_id":                              "HostedZoneId",
 		"key":                                         "Key",
 		"key_algorithm":                               "KeyAlgorithm",
+		"root_hierarchy_type":                         "RootHierarchyType",
 		"subject_alternative_names":                   "SubjectAlternativeNames",
 		"tags":                                        "Tags",
 		"validation_domain":                           "ValidationDomain",

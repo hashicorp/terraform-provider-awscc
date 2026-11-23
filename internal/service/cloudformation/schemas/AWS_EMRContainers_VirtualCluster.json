@@ -150,9 +150,11 @@
     "create": {
       "permissions": [
         "emr-containers:CreateVirtualCluster",
+        "emr-containers:DescribeVirtualCluster",
         "emr-containers:TagResource",
         "iam:CreateServiceLinkedRole"
-      ]
+      ],
+      "timeoutInMinutes": 60
     },
     "read": {
       "permissions": [

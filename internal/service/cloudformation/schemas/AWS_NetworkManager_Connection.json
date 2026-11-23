@@ -1,0 +1,193 @@
+{
+  "typeName": "AWS::NetworkManager::Connection",
+  "description": "Resource Type definition for AWS::NetworkManager::Connection. Describes a connection between two devices in a global network.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-networkmanager",
+  "additionalProperties": false,
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the connection.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "The tag key. Printable ASCII with at least one non-space character and no leading or trailing space, at most 128 characters, and cannot be prefixed with aws:.",
+          "pattern": "^[!-~]([ -~]*[!-~])?$"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[!-~]([ -~]*[!-~])?$",
+          "description": "The tag value. Printable ASCII with at least one non-space character and no leading or trailing space, at most 256 characters, and cannot be prefixed with aws:."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ConnectionArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the connection.",
+      "maxLength": 500,
+      "pattern": "^arn:[^:]{1,63}:networkmanager:[^:]{0,63}:[^:]{0,63}:connection\\/global-network-[0-9a-f]{8,17}\\/connection-[0-9a-f]{8,17}$"
+    },
+    "ConnectionId": {
+      "type": "string",
+      "description": "The ID of the connection.",
+      "maxLength": 50,
+      "pattern": "^connection-[a-z0-9-]*$"
+    },
+    "GlobalNetworkId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The ID of the global network that the connection belongs to.",
+      "maxLength": 50,
+      "pattern": "^global-network-[a-z0-9-]*$"
+    },
+    "DeviceId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The ID of the first device in the connection.",
+      "maxLength": 50,
+      "pattern": "^device-[a-z0-9-]*$"
+    },
+    "ConnectedDeviceId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The ID of the second device in the connection.",
+      "maxLength": 50,
+      "pattern": "^device-[a-z0-9-]*$"
+    },
+    "LinkId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The ID of the link for the first device.",
+      "maxLength": 50,
+      "pattern": "^link-[a-z0-9-]*$"
+    },
+    "ConnectedLinkId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The ID of the link for the second device.",
+      "maxLength": 50,
+      "pattern": "^link-[a-z0-9-]*$"
+    },
+    "Description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The description of the connection.",
+      "maxLength": 256
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the connection was created."
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the connection.",
+      "enum": [
+        "PENDING",
+        "AVAILABLE",
+        "DELETING",
+        "UPDATING"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the connection.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "uniqueItems": true,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "GlobalNetworkId",
+    "DeviceId",
+    "ConnectedDeviceId"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConnectionArn",
+    "/properties/ConnectionId",
+    "/properties/CreatedAt",
+    "/properties/State"
+  ],
+  "createOnlyProperties": [
+    "/properties/GlobalNetworkId",
+    "/properties/DeviceId",
+    "/properties/ConnectedDeviceId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ConnectionArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/GlobalNetworkId",
+      "/properties/ConnectionId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "networkmanager:TagResource",
+      "networkmanager:UntagResource",
+      "networkmanager:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "networkmanager:CreateConnection",
+        "networkmanager:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "networkmanager:GetConnections",
+        "networkmanager:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "networkmanager:UpdateConnection",
+        "networkmanager:TagResource",
+        "networkmanager:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "networkmanager:DeleteConnection"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "networkmanager:GetConnections"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "GlobalNetworkId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^global-network-[a-z0-9-]*$"
+          }
+        },
+        "required": [
+          "GlobalNetworkId"
+        ]
+      }
+    }
+  }
+}

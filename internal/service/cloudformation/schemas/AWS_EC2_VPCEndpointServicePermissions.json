@@ -65,6 +65,15 @@
         "type": "string"
       }
     },
+    "TransitGatewayAttachmentAllowedPrincipals": {
+      "uniqueItems": false,
+      "description": "The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "ServiceId": {
       "type": "string"
     }

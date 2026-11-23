@@ -59,6 +59,36 @@
       ],
       "additionalProperties": false
     },
+    "CertificateConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "S3",
+          "properties": {
+            "S3": {
+              "$ref": "#/definitions/S3CertificateConfiguration"
+            }
+          },
+          "required": [
+            "S3"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "SecretsManager",
+          "properties": {
+            "SecretsManager": {
+              "$ref": "#/definitions/SecretsManagerCertificateConfiguration"
+            }
+          },
+          "required": [
+            "SecretsManager"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
     "ClaimMatchOperatorType": {
       "type": "string",
       "enum": [
@@ -173,10 +203,44 @@
         },
         "PrivateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "CertificateConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateConfiguration"
+          },
+          "maxItems": 1,
+          "minItems": 1
         }
       },
       "required": [
         "DiscoveryUrl"
+      ],
+      "additionalProperties": false
+    },
+    "DomainOverride": {
+      "type": "object",
+      "properties": {
+        "DefaultDomain": {
+          "type": "string",
+          "maxLength": 253,
+          "minLength": 1,
+          "pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"
+        },
+        "AlternateDomains": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 253,
+            "minLength": 1,
+            "pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "DefaultDomain"
       ],
       "additionalProperties": false
     },
@@ -216,12 +280,36 @@
         },
         "InputConfiguration": {
           "$ref": "#/definitions/InterceptorInputConfiguration"
+        },
+        "ResponseInterceptionMode": {
+          "$ref": "#/definitions/ResponseInterceptionMode"
+        },
+        "ResponseStreamingConfiguration": {
+          "$ref": "#/definitions/ResponseStreamingConfiguration"
         }
       },
       "required": [
         "InterceptionPoints",
         "Interceptor"
       ],
+      "additionalProperties": false
+    },
+    "ResponseInterceptionMode": {
+      "type": "string",
+      "enum": [
+        "BUFFERED",
+        "STREAM"
+      ]
+    },
+    "ResponseStreamingConfiguration": {
+      "type": "object",
+      "properties": {
+        "MaxEventsPerInvocation": {
+          "type": "integer",
+          "maximum": 8192,
+          "minimum": 1
+        }
+      },
       "additionalProperties": false
     },
     "GatewayPolicyEngineConfiguration": {
@@ -480,11 +568,41 @@
         }
       ]
     },
+    "S3CertificateConfiguration": {
+      "type": "object",
+      "properties": {
+        "Uri": {
+          "type": "string",
+          "pattern": ""
+        },
+        "BucketOwnerAccountId": {
+          "type": "string",
+          "pattern": "^[0-9]{12}$"
+        }
+      },
+      "required": [
+        "Uri"
+      ],
+      "additionalProperties": false
+    },
     "SearchType": {
       "type": "string",
       "enum": [
         "SEMANTIC"
       ]
+    },
+    "SecretsManagerCertificateConfiguration": {
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$"
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false
     },
     "SelfManagedLatticeResource": {
       "oneOf": [
@@ -586,6 +704,9 @@
       "type": "string",
       "maxLength": 200,
       "minLength": 1
+    },
+    "DomainOverride": {
+      "$ref": "#/definitions/DomainOverride"
     },
     "ExceptionLevel": {
       "$ref": "#/definitions/ExceptionLevel"
@@ -706,18 +827,38 @@
         "bedrock-agentcore:ListTagsForResource",
         "bedrock-agentcore:SynchronizeGatewayTargets",
         "bedrock-agentcore:TagResource",
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "kms:CreateGrant",
         "kms:Decrypt",
         "kms:DescribeKey",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "s3:GetObject",
+        "secretsmanager:GetSecretValue",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:CreateResourceConfiguration",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations"
       ]
     },
     "delete": {
       "permissions": [
         "bedrock-agentcore:DeleteGateway",
         "bedrock-agentcore:DeleteWorkloadIdentity",
-        "bedrock-agentcore:GetGateway"
+        "bedrock-agentcore:GetGateway",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation"
       ]
     },
     "list": {
@@ -738,11 +879,28 @@
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:UntagResource",
         "bedrock-agentcore:UpdateGateway",
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "kms:Decrypt",
         "kms:DescribeKey",
         "kms:GenerateDataKey",
-        "kms:ListGrants"
+        "kms:ListGrants",
+        "s3:GetObject",
+        "secretsmanager:GetSecretValue",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:CreateResourceConfiguration",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations"
       ]
     }
   },

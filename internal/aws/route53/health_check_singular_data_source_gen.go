@@ -62,6 +62,14 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "EnableSNI": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "EndpointType": {
+		//	      "description": "Whether the health check targets a public endpoint or a private endpoint inside a VPC. Defaults to PUBLIC. Adding this property to an existing health check's template replaces the health check; leave it unset for existing public health checks.",
+		//	      "enum": [
+		//	        "PUBLIC",
+		//	        "PRIVATE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "FailureThreshold": {
 		//	      "maximum": 10,
 		//	      "minimum": 1,
@@ -69,6 +77,16 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "FullyQualifiedDomainName": {
 		//	      "maxLength": 255,
+		//	      "type": "string"
+		//	    },
+		//	    "HealthCheckSourceId": {
+		//	      "description": "The ID of the health check source that Route 53 uses to reach a private endpoint. Required when EndpointType is PRIVATE.",
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/HealthCheckSourceId",
+		//	        "typeName": "AWS::Route53::HealthCheckSource"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "HealthThreshold": {
@@ -173,6 +191,11 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"enable_sni": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: EndpointType
+				"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether the health check targets a public endpoint or a private endpoint inside a VPC. Defaults to PUBLIC. Adding this property to an existing health check's template replaces the health check; leave it unset for existing public health checks.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: FailureThreshold
 				"failure_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -180,6 +203,11 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: FullyQualifiedDomainName
 				"fully_qualified_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HealthCheckSourceId
+				"health_check_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the health check source that Route 53 uses to reach a private endpoint. Required when EndpointType is PRIVATE.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HealthThreshold
 				"health_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -311,10 +339,12 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_identifier":                "AlarmIdentifier",
 		"child_health_checks":             "ChildHealthChecks",
 		"enable_sni":                      "EnableSNI",
+		"endpoint_type":                   "EndpointType",
 		"failure_threshold":               "FailureThreshold",
 		"fully_qualified_domain_name":     "FullyQualifiedDomainName",
 		"health_check_config":             "HealthCheckConfig",
 		"health_check_id":                 "HealthCheckId",
+		"health_check_source_id":          "HealthCheckSourceId",
 		"health_check_tags":               "HealthCheckTags",
 		"health_threshold":                "HealthThreshold",
 		"insufficient_data_health_status": "InsufficientDataHealthStatus",

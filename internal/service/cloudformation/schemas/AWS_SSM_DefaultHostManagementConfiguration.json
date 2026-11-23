@@ -1,0 +1,127 @@
+{
+  "typeName": "AWS::SSM::DefaultHostManagementConfiguration",
+  "description": "Resource Type definition for AWS::SSM::DefaultHostManagementConfiguration. Enables or disables Default Host Management Configuration (DHMC) for an AWS account and Region by managing the '/ssm/managed-instance/default-ec2-instance-management-role' service setting. This is a singleton resource - there is at most one DHMC configuration per account/Region.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "definitions": {
+    "DHMCPermissionModel": {
+      "type": "string",
+      "description": "The permission model used to enable DHMC. SERVICE_MANAGED lets SSM create and manage the DHMC IAM role on your behalf. SELF_MANAGED registers an IAM role that you provide.",
+      "enum": [
+        "SERVICE_MANAGED",
+        "SELF_MANAGED"
+      ]
+    }
+  },
+  "properties": {
+    "PermissionModel": {
+      "$ref": "#/definitions/DHMCPermissionModel"
+    },
+    "CustomerManagedRoleArn": {
+      "description": "The ARN of the customer-provided IAM role to register for DHMC. Required when PermissionModel is SELF_MANAGED and must not be set when PermissionModel is SERVICE_MANAGED.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/[\\w+=,.@/-]+$"
+    },
+    "RoleArn": {
+      "description": "The ARN of the IAM role currently configured for DHMC. For SERVICE_MANAGED this is the SSM-created role in the IAM reserved path; for SELF_MANAGED this echoes the registered CustomerManagedRoleArn.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/[\\w+=,.@/-]+$"
+    },
+    "SettingId": {
+      "description": "The ID of the DHMC service setting. This is a fixed value that uniquely identifies the DHMC configuration for the account and Region.",
+      "type": "string"
+    },
+    "SettingArn": {
+      "description": "The ARN of the DHMC service setting.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the DHMC service setting. 'Default' indicates DHMC is not configured; 'Customized' indicates a role is configured.",
+      "type": "string"
+    },
+    "LastModifiedDate": {
+      "description": "The date the DHMC service setting was last modified.",
+      "type": "string"
+    },
+    "LastModifiedUser": {
+      "description": "The principal that last modified the DHMC service setting.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PermissionModel"
+  ],
+  "readOnlyProperties": [
+    "/properties/RoleArn",
+    "/properties/SettingId",
+    "/properties/SettingArn",
+    "/properties/Status",
+    "/properties/LastModifiedDate",
+    "/properties/LastModifiedUser"
+  ],
+  "primaryIdentifier": [
+    "/properties/SettingId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SettingArn"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ssm:RegisterDefaultHostManagementConfiguration",
+        "ssm:GetServiceSetting",
+        "ssm:UpdateServiceSetting",
+        "iam:CreateRole",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRole",
+        "iam:GetRole",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ssm:GetServiceSetting"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ssm:RegisterDefaultHostManagementConfiguration",
+        "ssm:GetServiceSetting",
+        "ssm:UpdateServiceSetting",
+        "iam:CreateRole",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRole",
+        "iam:GetRole",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm:DeregisterDefaultHostManagementConfiguration",
+        "ssm:GetServiceSetting",
+        "ssm:ResetServiceSetting",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRole"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ssm:GetServiceSetting"
+      ]
+    }
+  }
+}

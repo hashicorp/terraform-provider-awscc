@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -564,6 +565,48 @@ func scheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "EventBridgePutEventsV2Parameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "EventBridge PutEvent V2 predefined target type",
+		//	      "properties": {
+		//	        "DetailType": {
+		//	          "description": "Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Source": {
+		//	          "description": "The source of the event.",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DetailType",
+		//	        "Source"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "EventBridgePutRawEventsParameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "EventBridge PutRawEvent predefined target type",
+		//	      "properties": {
+		//	        "Metadata": {
+		//	          "additionalProperties": false,
+		//	          "description": "Customer-defined metadata key-value pairs.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Input": {
 		//	      "description": "The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target, the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler delivers a default notification to the target.",
 		//	      "minLength": 1,
@@ -1091,6 +1134,65 @@ func scheduleResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: EventBridgePutEventsV2Parameters
+				"event_bridge_put_events_v2_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetailType
+						"detail_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 128),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Source
+						"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the event.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 256),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "EventBridge PutEvent V2 predefined target type",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EventBridgePutRawEventsParameters
+				"event_bridge_put_raw_events_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Metadata
+						"metadata":          // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Customer-defined metadata key-value pairs.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "EventBridge PutRawEvent predefined target type",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Input
 				"input": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target, the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler delivers a default notification to the target.",
@@ -1281,61 +1383,64 @@ func scheduleResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                            "Arn",
-		"assign_public_ip":               "AssignPublicIp",
-		"awsvpc_configuration":           "AwsvpcConfiguration",
-		"base":                           "Base",
-		"capacity_provider":              "CapacityProvider",
-		"capacity_provider_strategy":     "CapacityProviderStrategy",
-		"dead_letter_config":             "DeadLetterConfig",
-		"description":                    "Description",
-		"detail_type":                    "DetailType",
-		"ecs_parameters":                 "EcsParameters",
-		"enable_ecs_managed_tags":        "EnableECSManagedTags",
-		"enable_execute_command":         "EnableExecuteCommand",
-		"end_date":                       "EndDate",
-		"event_bridge_parameters":        "EventBridgeParameters",
-		"expression":                     "Expression",
-		"field":                          "Field",
-		"flexible_time_window":           "FlexibleTimeWindow",
-		"group":                          "Group",
-		"group_name":                     "GroupName",
-		"input":                          "Input",
-		"kinesis_parameters":             "KinesisParameters",
-		"kms_key_arn":                    "KmsKeyArn",
-		"launch_type":                    "LaunchType",
-		"maximum_event_age_in_seconds":   "MaximumEventAgeInSeconds",
-		"maximum_retry_attempts":         "MaximumRetryAttempts",
-		"maximum_window_in_minutes":      "MaximumWindowInMinutes",
-		"message_group_id":               "MessageGroupId",
-		"mode":                           "Mode",
-		"name":                           "Name",
-		"network_configuration":          "NetworkConfiguration",
-		"partition_key":                  "PartitionKey",
-		"pipeline_parameter_list":        "PipelineParameterList",
-		"placement_constraints":          "PlacementConstraints",
-		"placement_strategy":             "PlacementStrategy",
-		"platform_version":               "PlatformVersion",
-		"propagate_tags":                 "PropagateTags",
-		"reference_id":                   "ReferenceId",
-		"retry_policy":                   "RetryPolicy",
-		"role_arn":                       "RoleArn",
-		"sage_maker_pipeline_parameters": "SageMakerPipelineParameters",
-		"schedule_expression":            "ScheduleExpression",
-		"schedule_expression_timezone":   "ScheduleExpressionTimezone",
-		"security_groups":                "SecurityGroups",
-		"source":                         "Source",
-		"sqs_parameters":                 "SqsParameters",
-		"start_date":                     "StartDate",
-		"state":                          "State",
-		"subnets":                        "Subnets",
-		"tags":                           "Tags",
-		"target":                         "Target",
-		"task_count":                     "TaskCount",
-		"task_definition_arn":            "TaskDefinitionArn",
-		"type":                           "Type",
-		"value":                          "Value",
-		"weight":                         "Weight",
+		"arn":                                    "Arn",
+		"assign_public_ip":                       "AssignPublicIp",
+		"awsvpc_configuration":                   "AwsvpcConfiguration",
+		"base":                                   "Base",
+		"capacity_provider":                      "CapacityProvider",
+		"capacity_provider_strategy":             "CapacityProviderStrategy",
+		"dead_letter_config":                     "DeadLetterConfig",
+		"description":                            "Description",
+		"detail_type":                            "DetailType",
+		"ecs_parameters":                         "EcsParameters",
+		"enable_ecs_managed_tags":                "EnableECSManagedTags",
+		"enable_execute_command":                 "EnableExecuteCommand",
+		"end_date":                               "EndDate",
+		"event_bridge_parameters":                "EventBridgeParameters",
+		"event_bridge_put_events_v2_parameters":  "EventBridgePutEventsV2Parameters",
+		"event_bridge_put_raw_events_parameters": "EventBridgePutRawEventsParameters",
+		"expression":                             "Expression",
+		"field":                                  "Field",
+		"flexible_time_window":                   "FlexibleTimeWindow",
+		"group":                                  "Group",
+		"group_name":                             "GroupName",
+		"input":                                  "Input",
+		"kinesis_parameters":                     "KinesisParameters",
+		"kms_key_arn":                            "KmsKeyArn",
+		"launch_type":                            "LaunchType",
+		"maximum_event_age_in_seconds":           "MaximumEventAgeInSeconds",
+		"maximum_retry_attempts":                 "MaximumRetryAttempts",
+		"maximum_window_in_minutes":              "MaximumWindowInMinutes",
+		"message_group_id":                       "MessageGroupId",
+		"metadata":                               "Metadata",
+		"mode":                                   "Mode",
+		"name":                                   "Name",
+		"network_configuration":                  "NetworkConfiguration",
+		"partition_key":                          "PartitionKey",
+		"pipeline_parameter_list":                "PipelineParameterList",
+		"placement_constraints":                  "PlacementConstraints",
+		"placement_strategy":                     "PlacementStrategy",
+		"platform_version":                       "PlatformVersion",
+		"propagate_tags":                         "PropagateTags",
+		"reference_id":                           "ReferenceId",
+		"retry_policy":                           "RetryPolicy",
+		"role_arn":                               "RoleArn",
+		"sage_maker_pipeline_parameters":         "SageMakerPipelineParameters",
+		"schedule_expression":                    "ScheduleExpression",
+		"schedule_expression_timezone":           "ScheduleExpressionTimezone",
+		"security_groups":                        "SecurityGroups",
+		"source":                                 "Source",
+		"sqs_parameters":                         "SqsParameters",
+		"start_date":                             "StartDate",
+		"state":                                  "State",
+		"subnets":                                "Subnets",
+		"tags":                                   "Tags",
+		"target":                                 "Target",
+		"task_count":                             "TaskCount",
+		"task_definition_arn":                    "TaskDefinitionArn",
+		"type":                                   "Type",
+		"value":                                  "Value",
+		"weight":                                 "Weight",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

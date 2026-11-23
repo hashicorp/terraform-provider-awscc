@@ -200,6 +200,7 @@ resource "awscc_ecs_task_definition" "example" {
 - `task_role_arn` (String) The short name or full Amazon Resource Name (ARN) of the IAMlong role that grants containers in the task permission to call AWS APIs on your behalf. For more information, see [Amazon ECS Task Role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) in the *Amazon Elastic Container Service Developer Guide*.
  IAM roles for tasks on Windows require that the ``-EnableTaskIAMRole`` option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code to use the feature. For more information, see [Windows IAM roles for tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html) in the *Amazon Elastic Container Service Developer Guide*.
   String validation is done on the ECS side. If an invalid string value is given for ``TaskRoleArn``, it may cause the Cloudformation job to hang.
+- `trusted_execution_configuration` (Attributes) (see [below for nested schema](#nestedatt--trusted_execution_configuration))
 - `volumes` (Attributes Set) The list of data volume definitions for the task. For more information, see [Using data volumes in tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html) in the *Amazon Elastic Container Service Developer Guide*.
   The ``host`` and ``sourcePath`` parameters aren't supported for tasks run on FARGATElong. (see [below for nested schema](#nestedatt--volumes))
 
@@ -722,6 +723,15 @@ Optional:
 
 - `key` (String) One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
 - `value` (String) The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).
+
+
+<a id="nestedatt--trusted_execution_configuration"></a>
+### Nested Schema for `trusted_execution_configuration`
+
+Optional:
+
+- `attestation_policy` (String) A base64-encoded attestation policy that verifies the workload before the task runs. Only valid when IsolationMode is CONFIDENTIAL_SANDBOX.
+- `isolation_mode` (String) The isolation mode for the task. SHARED uses standard shared placement. ISOLATED_SANDBOX runs the task in its own isolated sandbox on a shared instance with hypervisor-level isolation. CONFIDENTIAL_SANDBOX runs the task in an isolated sandbox and supports an attestation policy to verify the workload before it runs.
 
 
 <a id="nestedatt--volumes"></a>

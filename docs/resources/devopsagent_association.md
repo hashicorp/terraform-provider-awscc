@@ -37,6 +37,7 @@ resource "awscc_devopsagent_association" "example" {
 
 ### Optional
 
+- `capabilities` (Attributes) Automated AWS DevOps Agent capabilities enabled for this association, such as code change risk analysis (see [below for nested schema](#nestedatt--capabilities))
 - `linked_association_ids` (List of String) Set of linked association IDs for parent-child relationships
 
 ### Read-Only
@@ -64,6 +65,7 @@ Optional:
 - `mcp_server_sig_v4` (Attributes) SigV4-authenticated MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_sig_v4))
 - `mcp_server_splunk` (Attributes) Splunk MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_splunk))
 - `pager_duty` (Attributes) PagerDuty integration configuration (see [below for nested schema](#nestedatt--configuration--pager_duty))
+- `release_management` (Attributes) Configuration for a release management environment. A release management environment defines how AWS DevOps Agent reaches your application, and other associations reference it to run automatic verification testing against that application. (see [below for nested schema](#nestedatt--configuration--release_management))
 - `service_now` (Attributes) ServiceNow integration configuration (see [below for nested schema](#nestedatt--configuration--service_now))
 - `slack` (Attributes) Slack workspace integration configuration (see [below for nested schema](#nestedatt--configuration--slack))
 - `source_aws` (Attributes) AWS association for 'source' account (see [below for nested schema](#nestedatt--configuration--source_aws))
@@ -133,6 +135,7 @@ Optional:
 
 - `owner` (String) Repository owner
 - `owner_type` (String) Type of repository owner
+- `release_management_association_id` (String) The ID of the release management association that this repository uses for automated testing
 - `repo_id` (String) Associated Github repo ID
 - `repo_name` (String) Associated Github repo name
 
@@ -146,6 +149,7 @@ Optional:
 - `instance_identifier` (String) GitLab instance identifier
 - `project_id` (String) GitLab numeric project ID
 - `project_path` (String) Full GitLab project path (e.g., namespace/project-name)
+- `release_management_association_id` (String) The ID of the release management association that this project uses for automated testing
 
 
 <a id="nestedatt--configuration--mcp_server"></a>
@@ -219,6 +223,32 @@ Optional:
 - `customer_email` (String) Email to be used in PagerDuty API header
 - `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
 - `services` (List of String) List of PagerDuty service IDs available for the association
+
+
+<a id="nestedatt--configuration--release_management"></a>
+### Nested Schema for `configuration.release_management`
+
+Optional:
+
+- `name` (String) The name for this release management environment
+- `network_access` (Attributes) Specifies how AWS DevOps Agent reaches your application using this release management environment (see [below for nested schema](#nestedatt--configuration--release_management--network_access))
+
+<a id="nestedatt--configuration--release_management--network_access"></a>
+### Nested Schema for `configuration.release_management.network_access`
+
+Optional:
+
+- `private_access` (Attributes) Private network access to your application inside a VPC, reached through a private connection (see [below for nested schema](#nestedatt--configuration--release_management--network_access--private_access))
+
+<a id="nestedatt--configuration--release_management--network_access--private_access"></a>
+### Nested Schema for `configuration.release_management.network_access.private_access`
+
+Optional:
+
+- `private_connection_name` (String) Name of the private connection that supplies the VPC configuration for this release management environment
+- `runtime_role_arn` (String) Role ARN that AWS DevOps Agent assumes at runtime to connect to your VPC
+
+
 
 
 <a id="nestedatt--configuration--service_now"></a>
@@ -296,6 +326,50 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+
+
+<a id="nestedatt--capabilities"></a>
+### Nested Schema for `capabilities`
+
+Optional:
+
+- `code_change_risk_analysis` (Attributes) Configuration for code change risk analysis, in which AWS DevOps Agent automatically analyzes pull requests and merge requests for deployment risk. (see [below for nested schema](#nestedatt--capabilities--code_change_risk_analysis))
+- `code_change_risk_analysis_automated_testing` (Attributes) Configuration for code change risk analysis automated testing, in which AWS DevOps Agent also runs tests against the change during the analysis. (see [below for nested schema](#nestedatt--capabilities--code_change_risk_analysis_automated_testing))
+
+<a id="nestedatt--capabilities--code_change_risk_analysis"></a>
+### Nested Schema for `capabilities.code_change_risk_analysis`
+
+Optional:
+
+- `enabled` (Boolean) Whether the capability is enabled for this association
+- `trigger_filter_groups` (Attributes List) Filter groups controlling when the capability triggers automatically. The capability triggers when any group matches. When omitted, all applicable events trigger the capability. Retained while the capability is disabled. (see [below for nested schema](#nestedatt--capabilities--code_change_risk_analysis--trigger_filter_groups))
+
+<a id="nestedatt--capabilities--code_change_risk_analysis--trigger_filter_groups"></a>
+### Nested Schema for `capabilities.code_change_risk_analysis.trigger_filter_groups`
+
+Optional:
+
+- `events` (Set of String) Passes when the webhook event is one of the listed events
+- `target_branches` (Attributes) Passes when the change request target branch matches (see [below for nested schema](#nestedatt--capabilities--code_change_risk_analysis--trigger_filter_groups--target_branches))
+
+<a id="nestedatt--capabilities--code_change_risk_analysis--trigger_filter_groups--target_branches"></a>
+### Nested Schema for `capabilities.code_change_risk_analysis.trigger_filter_groups.target_branches`
+
+Optional:
+
+- `patterns` (List of String) Anchored full-match regex patterns, for example 'main' or 'release/.*'
+
+
+
+
+<a id="nestedatt--capabilities--code_change_risk_analysis_automated_testing"></a>
+### Nested Schema for `capabilities.code_change_risk_analysis_automated_testing`
+
+Optional:
+
+- `enabled` (Boolean) Whether the capability is enabled for this association
 
 ## Import
 

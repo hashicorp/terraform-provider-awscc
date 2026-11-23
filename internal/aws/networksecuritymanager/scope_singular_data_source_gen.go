@@ -50,6 +50,7 @@ func scopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A description of the scope.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"scope_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -72,10 +73,25 @@ func scopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the scope.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"scope_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the scope.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SpecializedScopeType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.",
+		//	  "enum": [
+		//	    "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"specialized_scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -184,17 +200,18 @@ func scopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkSecurityManager::Scope").WithTerraformTypeName("awscc_networksecuritymanager_scope")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":                 "Key",
-		"scope_arn":           "ScopeArn",
-		"scope_configuration": "ScopeConfiguration",
-		"scope_description":   "ScopeDescription",
-		"scope_id":            "ScopeId",
-		"scope_name":          "ScopeName",
-		"status":              "Status",
-		"tags":                "Tags",
-		"updated_at":          "UpdatedAt",
-		"value":               "Value",
-		"version":             "Version",
+		"key":                    "Key",
+		"scope_arn":              "ScopeArn",
+		"scope_configuration":    "ScopeConfiguration",
+		"scope_description":      "ScopeDescription",
+		"scope_id":               "ScopeId",
+		"scope_name":             "ScopeName",
+		"specialized_scope_type": "SpecializedScopeType",
+		"status":                 "Status",
+		"tags":                   "Tags",
+		"updated_at":             "UpdatedAt",
+		"value":                  "Value",
+		"version":                "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

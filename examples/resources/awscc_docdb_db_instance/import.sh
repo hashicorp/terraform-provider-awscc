@@ -1,0 +1,1 @@
+$ terraform import awscc_docdb_db_instance.example "db_instance_identifier"

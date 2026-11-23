@@ -182,7 +182,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "VPC",
 		//	    "TransitGateway",
 		//	    "TransitGatewayAttachment",
-		//	    "RegionalNatGateway"
+		//	    "RegionalNatGateway",
+		//	    "CoreNetwork",
+		//	    "CoreNetworkEdge",
+		//	    "CoreNetworkAttachment"
 		//	  ],
 		//	  "type": "string"
 		//	}

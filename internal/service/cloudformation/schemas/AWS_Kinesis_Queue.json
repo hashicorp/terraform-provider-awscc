@@ -1,0 +1,242 @@
+{
+  "tagging": {
+    "permissions": [
+      "kinesis:TagResource",
+      "kinesis:UntagResource",
+      "kinesis:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "kinesis:DescribeQueue",
+        "kinesis:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "kinesis:CreateQueue",
+        "kinesis:AssociateStreamsWithQueue",
+        "kinesis:DescribeQueue",
+        "kinesis:TagResource",
+        "kinesis:ListTagsForResource"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "update": {
+      "permissions": [
+        "kinesis:UpdateQueue",
+        "kinesis:DescribeQueue",
+        "kinesis:TagResource",
+        "kinesis:UntagResource",
+        "kinesis:ListTagsForResource"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "list": {
+      "permissions": [
+        "kinesis:ListQueues"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "kinesis:DeleteQueue",
+        "kinesis:DescribeQueue"
+      ],
+      "timeoutInMinutes": 60
+    }
+  },
+  "typeName": "AWS::Kinesis::Queue",
+  "readOnlyProperties": [
+    "/properties/QueueARN",
+    "/properties/QueueStatus",
+    "/properties/QueueCreationTimestamp"
+  ],
+  "description": "Resource Type definition for AWS::Kinesis::Queue",
+  "writeOnlyProperties": [
+    "/properties/StreamConfigurationList/*/StartingPosition/Timestamp"
+  ],
+  "createOnlyProperties": [
+    "/properties/QueueName",
+    "/properties/StreamConfigurationList"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/QueueARN"
+  ],
+  "definitions": {
+    "QueueStartingPosition": {
+      "description": "The starting position in the source stream from which the queue reads records.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "description": "The starting position type.",
+          "type": "string",
+          "enum": [
+            "TRIM_HORIZON",
+            "LATEST",
+            "AT_TIMESTAMP"
+          ]
+        },
+        "Timestamp": {
+          "format": "date-time",
+          "description": "The timestamp to start reading from. Required when Type is AT_TIMESTAMP; the timestamp must not be in the future.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "Tag": {
+      "description": "An arbitrary set of tags (key-value pairs) to associate with the Kinesis queue.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 255
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "DeadLetterConfiguration": {
+      "description": "Configuration controlling where records are sent after exceeding the maximum receive count.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MaxReceiveCount": {
+          "description": "The maximum number of times a record can be received before it is moved to the dead-letter target. Required when TargetType is BUILT_IN.",
+          "maximum": 1000,
+          "type": "integer",
+          "minimum": 1
+        },
+        "TargetType": {
+          "description": "The dead-letter target type. BUILT_IN uses a service-managed dead-letter target; NONE disables dead-lettering.",
+          "type": "string",
+          "enum": [
+            "BUILT_IN",
+            "NONE"
+          ]
+        }
+      },
+      "required": [
+        "TargetType"
+      ]
+    },
+    "QueueAttributes": {
+      "description": "Mutable attributes that control queue consumption behavior.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "VisibilityTimeoutSeconds": {
+          "default": 30,
+          "description": "The duration, in seconds, that a received record is hidden from subsequent receive calls after being handed out to a consumer. Defaults to 30 seconds.",
+          "maximum": 43200,
+          "type": "integer",
+          "minimum": 0
+        },
+        "DeadLetterConfiguration": {
+          "description": "The dead-letter configuration applied to records that exceed the maximum receive count.",
+          "$ref": "#/definitions/DeadLetterConfiguration"
+        }
+      }
+    },
+    "QueueStreamConfiguration": {
+      "description": "The configuration of the Kinesis stream that the queue reads from.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "StartingPosition": {
+          "description": "The position in the stream from which the queue starts reading records.",
+          "$ref": "#/definitions/QueueStartingPosition"
+        },
+        "StreamARN": {
+          "minLength": 1,
+          "pattern": "^arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
+          "description": "The Amazon resource name (ARN) of the Kinesis data stream that the queue reads from.",
+          "type": "string",
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "StreamARN"
+      ]
+    }
+  },
+  "properties": {
+    "QueueCreationTimestamp": {
+      "description": "Timestamp of when the queue was created.",
+      "type": "string"
+    },
+    "StreamConfigurationList": {
+      "minItems": 1,
+      "maxItems": 10000,
+      "description": "List of stream configurations associated with the queue. v1 supports a single element; the list shape allows future extensibility to fan in from multiple streams.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/QueueStreamConfiguration"
+      }
+    },
+    "QueueName": {
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_.-]+$",
+      "description": "The name of the queue. The name's uniqueness is scoped per AWS account and region.",
+      "type": "string",
+      "maxLength": 128
+    },
+    "QueueARN": {
+      "minLength": 1,
+      "pattern": "^arn:aws.*:kinesis:.*:\\d{12}:queue/\\S+",
+      "description": "The ARN of the queue.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "QueueStatus": {
+      "description": "The status of the queue.",
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "QueueAttributes": {
+      "description": "Mutable attributes that control queue consumption behavior.",
+      "$ref": "#/definitions/QueueAttributes"
+    },
+    "Tags": {
+      "maxItems": 50,
+      "uniqueItems": false,
+      "description": "An arbitrary set of tags (key-value pairs) to associate with the Kinesis queue.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "QueueName",
+    "StreamConfigurationList"
+  ]
+}

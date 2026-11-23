@@ -1,0 +1,249 @@
+{
+  "typeName": "AWS::OpenSearchMemory::Space",
+  "description": "Resource Type definition for AWS::OpenSearchMemory::Space",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9 _-]*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "MemoryStrategies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MemoryStrategy"
+      },
+      "maxItems": 10
+    },
+    "EventExpiryDays": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 365
+    },
+    "MemoryExpiryDays": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3650
+    },
+    "ExtractionModelId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
+    },
+    "SpaceId": {
+      "type": "string",
+      "pattern": "^sp-[a-f0-9]{12}$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "DELETED",
+        "FAILED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the resource.",
+      "pattern": "^arn:aws(?:-[a-z]+)*:osm:(?:[a-z]{2,4}(?:-[a-z0-9]+)+)?:[0-9]{12}:space/(?:sp-[a-f0-9]{12})$"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200
+    }
+  },
+  "definitions": {
+    "MemoryStrategyConfiguration": {
+      "type": "object",
+      "properties": {
+        "ExtractionPrompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30720
+        },
+        "ExtractEveryNMessages": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "ExtractEveryNTokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 80000
+        },
+        "IdleTimeoutSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "ExtractionSeedTopK": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "ExtractionSeedRecentN": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "ConsolidationEnabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MemoryStrategy": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "SEMANTIC",
+            "SUMMARY",
+            "CUSTOM"
+          ]
+        },
+        "Name": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "Description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "Configuration": {
+          "$ref": "#/definitions/MemoryStrategyConfiguration"
+        }
+      },
+      "required": [
+        "Type",
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "EncryptionConfiguration": {
+      "type": "object",
+      "properties": {
+        "KmsKeyArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SpaceId"
+    ]
+  ],
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/SpaceId",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/EncryptionConfiguration"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "osm:ListTagsForResource",
+      "osm:TagResource",
+      "osm:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "kms:CreateGrant",
+        "osm:CreateSpace",
+        "osm:GetSpace",
+        "osm:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "osm:GetSpace",
+        "osm:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "osm:GetSpace",
+        "osm:ListTagsForResource",
+        "osm:TagResource",
+        "osm:UntagResource",
+        "osm:UpdateSpace"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "osm:DeleteSpace",
+        "osm:GetSpace"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "osm:ListSpaces"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

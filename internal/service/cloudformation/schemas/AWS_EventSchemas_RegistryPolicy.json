@@ -21,7 +21,8 @@
     "Policy"
   ],
   "readOnlyProperties": [
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/RevisionId"
   ],
   "primaryIdentifier": [
     "/properties/Id"

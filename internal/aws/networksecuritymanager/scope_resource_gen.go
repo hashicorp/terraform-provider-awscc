@@ -7,6 +7,7 @@ package networksecuritymanager
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -65,12 +66,16 @@ func scopeResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A description of the scope.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"scope_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the scope.",
 			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 _.:/=+\\-@]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -94,13 +99,41 @@ func scopeResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the scope.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"scope_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the scope.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SpecializedScopeType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.",
+		//	  "enum": [
+		//	    "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"specialized_scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -250,17 +283,18 @@ func scopeResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":                 "Key",
-		"scope_arn":           "ScopeArn",
-		"scope_configuration": "ScopeConfiguration",
-		"scope_description":   "ScopeDescription",
-		"scope_id":            "ScopeId",
-		"scope_name":          "ScopeName",
-		"status":              "Status",
-		"tags":                "Tags",
-		"updated_at":          "UpdatedAt",
-		"value":               "Value",
-		"version":             "Version",
+		"key":                    "Key",
+		"scope_arn":              "ScopeArn",
+		"scope_configuration":    "ScopeConfiguration",
+		"scope_description":      "ScopeDescription",
+		"scope_id":               "ScopeId",
+		"scope_name":             "ScopeName",
+		"specialized_scope_type": "SpecializedScopeType",
+		"status":                 "Status",
+		"tags":                   "Tags",
+		"updated_at":             "UpdatedAt",
+		"value":                  "Value",
+		"version":                "Version",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

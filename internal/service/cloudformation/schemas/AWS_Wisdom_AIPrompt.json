@@ -12,6 +12,32 @@
         "TEXT_COMPLETIONS"
       ]
     },
+    "AIPromptInferenceConfiguration": {
+      "type": "object",
+      "properties": {
+        "Temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "TopP": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "TopK": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 200
+        },
+        "MaxTokensToSample": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        }
+      },
+      "additionalProperties": false
+    },
     "AIPromptTemplateConfiguration": {
       "type": "object",
       "oneOf": [
@@ -69,7 +95,7 @@
       "properties": {
         "Text": {
           "type": "string",
-          "maxLength": 200000,
+          "maxLength": 1000000,
           "minLength": 1
         }
       },
@@ -121,6 +147,9 @@
     },
     "TemplateConfiguration": {
       "$ref": "#/definitions/AIPromptTemplateConfiguration"
+    },
+    "InferenceConfiguration": {
+      "$ref": "#/definitions/AIPromptInferenceConfiguration"
     },
     "TemplateType": {
       "$ref": "#/definitions/AIPromptTemplateType"

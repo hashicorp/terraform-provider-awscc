@@ -108,6 +108,7 @@ resource "awscc_mediaconnect_router_input" "example" {
 - `routed_outputs` (Number) The number of router outputs associated with the router input.
 - `router_input_id` (String) The unique identifier of the router input.
 - `state` (String)
+- `stream_details` (Attributes) Configuration details for the router input stream. (see [below for nested schema](#nestedatt--stream_details))
 - `updated_at` (String) The timestamp when the router input was last updated.
 
 <a id="nestedatt--configuration"></a>
@@ -174,6 +175,7 @@ Optional:
 Optional:
 
 - `rist` (Attributes) The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--rist))
+- `rtmp_push` (Attributes) The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--rtmp_push))
 - `rtp` (Attributes) The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--rtp))
 - `srt_caller` (Attributes) The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--srt_caller))
 - `srt_listener` (Attributes) The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--srt_listener))
@@ -185,6 +187,34 @@ Optional:
 
 - `port` (Number) The port number used for the RIST protocol in the router input configuration.
 - `recovery_latency_milliseconds` (Number) The recovery latency in milliseconds for the RIST protocol in the router input configuration.
+
+
+<a id="nestedatt--configuration--failover--protocol_configurations--rtmp_push"></a>
+### Nested Schema for `configuration.failover.protocol_configurations.rtmp_push`
+
+Optional:
+
+- `naming_configuration` (Attributes) The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--rtmp_push--naming_configuration))
+- `naming_type` (String)
+- `port` (Number) The port number for the RTMP protocol. The only valid value is 1935.
+
+<a id="nestedatt--configuration--failover--protocol_configurations--rtmp_push--naming_configuration"></a>
+### Nested Schema for `configuration.failover.protocol_configurations.rtmp_push.naming_configuration`
+
+Optional:
+
+- `automatic` (String) The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.
+- `manual` (Attributes) The manual RTMP naming configuration, where you specify the application and stream names. (see [below for nested schema](#nestedatt--configuration--failover--protocol_configurations--rtmp_push--naming_configuration--manual))
+
+<a id="nestedatt--configuration--failover--protocol_configurations--rtmp_push--naming_configuration--manual"></a>
+### Nested Schema for `configuration.failover.protocol_configurations.rtmp_push.naming_configuration.manual`
+
+Optional:
+
+- `application_name` (String) The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.
+- `stream_name` (String) The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.
+
+
 
 
 <a id="nestedatt--configuration--failover--protocol_configurations--rtp"></a>
@@ -345,6 +375,8 @@ Optional:
 
 - `rist` (Attributes) The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--rist))
 - `rtp` (Attributes) The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--rtp))
+- `srt_caller` (Attributes) The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--srt_caller))
+- `srt_listener` (Attributes) The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--srt_listener))
 
 <a id="nestedatt--configuration--merge--protocol_configurations--rist"></a>
 ### Nested Schema for `configuration.merge.protocol_configurations.rist`
@@ -364,6 +396,62 @@ Optional:
 - `port` (Number) The port number used for the RTP protocol in the router input configuration.
 
 
+<a id="nestedatt--configuration--merge--protocol_configurations--srt_caller"></a>
+### Nested Schema for `configuration.merge.protocol_configurations.srt_caller`
+
+Optional:
+
+- `decryption_configuration` (Attributes) Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--srt_caller--decryption_configuration))
+- `minimum_latency_milliseconds` (Number) The minimum latency in milliseconds for the SRT protocol in caller mode.
+- `source_address` (String) The source IP address for the SRT protocol in caller mode.
+- `source_port` (Number) The source port number for the SRT protocol in caller mode.
+- `stream_id` (String) The stream ID for the SRT protocol in caller mode.
+
+<a id="nestedatt--configuration--merge--protocol_configurations--srt_caller--decryption_configuration"></a>
+### Nested Schema for `configuration.merge.protocol_configurations.srt_caller.decryption_configuration`
+
+Optional:
+
+- `encryption_key` (Attributes) The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--srt_caller--decryption_configuration--encryption_key))
+
+<a id="nestedatt--configuration--merge--protocol_configurations--srt_caller--decryption_configuration--encryption_key"></a>
+### Nested Schema for `configuration.merge.protocol_configurations.srt_caller.decryption_configuration.encryption_key`
+
+Optional:
+
+- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
+- `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
+
+
+
+
+<a id="nestedatt--configuration--merge--protocol_configurations--srt_listener"></a>
+### Nested Schema for `configuration.merge.protocol_configurations.srt_listener`
+
+Optional:
+
+- `decryption_configuration` (Attributes) Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--srt_listener--decryption_configuration))
+- `minimum_latency_milliseconds` (Number) The minimum latency in milliseconds for the SRT protocol in listener mode.
+- `port` (Number) The port number for the SRT protocol in listener mode.
+
+<a id="nestedatt--configuration--merge--protocol_configurations--srt_listener--decryption_configuration"></a>
+### Nested Schema for `configuration.merge.protocol_configurations.srt_listener.decryption_configuration`
+
+Optional:
+
+- `encryption_key` (Attributes) The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--merge--protocol_configurations--srt_listener--decryption_configuration--encryption_key))
+
+<a id="nestedatt--configuration--merge--protocol_configurations--srt_listener--decryption_configuration--encryption_key"></a>
+### Nested Schema for `configuration.merge.protocol_configurations.srt_listener.decryption_configuration.encryption_key`
+
+Optional:
+
+- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
+- `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
+
+
+
+
 
 
 <a id="nestedatt--configuration--standard"></a>
@@ -381,6 +469,7 @@ Optional:
 Optional:
 
 - `rist` (Attributes) The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--rist))
+- `rtmp_push` (Attributes) The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--rtmp_push))
 - `rtp` (Attributes) The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--rtp))
 - `srt_caller` (Attributes) The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--srt_caller))
 - `srt_listener` (Attributes) The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--srt_listener))
@@ -392,6 +481,34 @@ Optional:
 
 - `port` (Number) The port number used for the RIST protocol in the router input configuration.
 - `recovery_latency_milliseconds` (Number) The recovery latency in milliseconds for the RIST protocol in the router input configuration.
+
+
+<a id="nestedatt--configuration--standard--protocol_configuration--rtmp_push"></a>
+### Nested Schema for `configuration.standard.protocol_configuration.rtmp_push`
+
+Optional:
+
+- `naming_configuration` (Attributes) The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--rtmp_push--naming_configuration))
+- `naming_type` (String)
+- `port` (Number) The port number for the RTMP protocol. The only valid value is 1935.
+
+<a id="nestedatt--configuration--standard--protocol_configuration--rtmp_push--naming_configuration"></a>
+### Nested Schema for `configuration.standard.protocol_configuration.rtmp_push.naming_configuration`
+
+Optional:
+
+- `automatic` (String) The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.
+- `manual` (Attributes) The manual RTMP naming configuration, where you specify the application and stream names. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--rtmp_push--naming_configuration--manual))
+
+<a id="nestedatt--configuration--standard--protocol_configuration--rtmp_push--naming_configuration--manual"></a>
+### Nested Schema for `configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual`
+
+Optional:
+
+- `application_name` (String) The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.
+- `stream_name` (String) The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.
+
+
 
 
 <a id="nestedatt--configuration--standard--protocol_configuration--rtp"></a>
@@ -557,6 +674,106 @@ Optional:
 
 - `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
 - `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
+
+
+
+
+<a id="nestedatt--stream_details"></a>
+### Nested Schema for `stream_details`
+
+Read-Only:
+
+- `destination_endpoint` (String) Configuration details for a router input stream that is represented by a destination endpoint.
+- `failover` (Attributes) Configuration details for a failover router input that can automatically switch between two sources. (see [below for nested schema](#nestedatt--stream_details--failover))
+- `media_connect_flow` (String) Configuration details for a MediaConnect flow when used as a router input source.
+- `media_live_channel` (String) Configuration details for a MediaLive channel when used as a router input source.
+- `merge` (Attributes) Configuration details for a merge router input that combines two input sources. (see [below for nested schema](#nestedatt--stream_details--merge))
+- `standard` (Attributes) Configuration details for a standard router input stream type. (see [below for nested schema](#nestedatt--stream_details--standard))
+
+<a id="nestedatt--stream_details--failover"></a>
+### Nested Schema for `stream_details.failover`
+
+Read-Only:
+
+- `source_index_one_stream_details` (Attributes) Configuration details for an indexed stream in a failover router input setup. (see [below for nested schema](#nestedatt--stream_details--failover--source_index_one_stream_details))
+- `source_index_zero_stream_details` (Attributes) Configuration details for an indexed stream in a failover router input setup. (see [below for nested schema](#nestedatt--stream_details--failover--source_index_zero_stream_details))
+
+<a id="nestedatt--stream_details--failover--source_index_one_stream_details"></a>
+### Nested Schema for `stream_details.failover.source_index_one_stream_details`
+
+Read-Only:
+
+- `rtmp_push` (Attributes) Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names. (see [below for nested schema](#nestedatt--stream_details--failover--source_index_one_stream_details--rtmp_push))
+- `source_index` (Number) The index number (0 or 1) assigned to this source in the failover configuration.
+
+<a id="nestedatt--stream_details--failover--source_index_one_stream_details--rtmp_push"></a>
+### Nested Schema for `stream_details.failover.source_index_one_stream_details.rtmp_push`
+
+Read-Only:
+
+- `application_name` (String) The name of the RTMP application.
+- `stream_name` (String) The name of the RTMP stream.
+
+
+
+<a id="nestedatt--stream_details--failover--source_index_zero_stream_details"></a>
+### Nested Schema for `stream_details.failover.source_index_zero_stream_details`
+
+Read-Only:
+
+- `rtmp_push` (Attributes) Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names. (see [below for nested schema](#nestedatt--stream_details--failover--source_index_zero_stream_details--rtmp_push))
+- `source_index` (Number) The index number (0 or 1) assigned to this source in the failover configuration.
+
+<a id="nestedatt--stream_details--failover--source_index_zero_stream_details--rtmp_push"></a>
+### Nested Schema for `stream_details.failover.source_index_zero_stream_details.rtmp_push`
+
+Read-Only:
+
+- `application_name` (String) The name of the RTMP application.
+- `stream_name` (String) The name of the RTMP stream.
+
+
+
+
+<a id="nestedatt--stream_details--merge"></a>
+### Nested Schema for `stream_details.merge`
+
+Read-Only:
+
+- `source_index_one_stream_details` (Attributes) Configuration details for an indexed stream in a merge router input setup. (see [below for nested schema](#nestedatt--stream_details--merge--source_index_one_stream_details))
+- `source_index_zero_stream_details` (Attributes) Configuration details for an indexed stream in a merge router input setup. (see [below for nested schema](#nestedatt--stream_details--merge--source_index_zero_stream_details))
+
+<a id="nestedatt--stream_details--merge--source_index_one_stream_details"></a>
+### Nested Schema for `stream_details.merge.source_index_one_stream_details`
+
+Read-Only:
+
+- `source_index` (Number) The index number (0 or 1) assigned to this source in the merge configuration.
+
+
+<a id="nestedatt--stream_details--merge--source_index_zero_stream_details"></a>
+### Nested Schema for `stream_details.merge.source_index_zero_stream_details`
+
+Read-Only:
+
+- `source_index` (Number) The index number (0 or 1) assigned to this source in the merge configuration.
+
+
+
+<a id="nestedatt--stream_details--standard"></a>
+### Nested Schema for `stream_details.standard`
+
+Read-Only:
+
+- `rtmp_push` (Attributes) Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names. (see [below for nested schema](#nestedatt--stream_details--standard--rtmp_push))
+
+<a id="nestedatt--stream_details--standard--rtmp_push"></a>
+### Nested Schema for `stream_details.standard.rtmp_push`
+
+Read-Only:
+
+- `application_name` (String) The name of the RTMP application.
+- `stream_name` (String) The name of the RTMP stream.
 
 ## Import
 

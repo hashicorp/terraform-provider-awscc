@@ -1,0 +1,1 @@
+$ terraform import awscc_route53_record_set_protection.example "hosted_zone_id|record_name|record_type"

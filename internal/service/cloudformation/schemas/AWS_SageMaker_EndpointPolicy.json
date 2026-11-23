@@ -1,0 +1,90 @@
+{
+  "typeName": "AWS::SageMaker::EndpointPolicy",
+  "description": "Resource Type definition for AWS::SageMaker::EndpointPolicy. Attaches a resource policy to a SageMaker endpoint. The policy grants other AWS accounts access to the endpoint, for example through a SageMaker Inference Router. An endpoint has at most one resource policy, which is removed when the endpoint is deleted.",
+  "sourceUrl": "https://code.amazon.com/packages/UluruResourceStaging/trees/mainline/--/aws/sagemaker/endpointpolicy",
+  "properties": {
+    "EndpointArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the endpoint the policy is attached to. The endpoint must be in the same account and Region as the stack.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:endpoint/"
+    },
+    "EndpointName": {
+      "type": "string",
+      "description": "The name of the endpoint the policy is attached to.",
+      "minLength": 0,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+    },
+    "PolicyDocument": {
+      "type": "object",
+      "description": "The resource policy document, as a JSON object. The service returns the document in its canonical form, so specify principals as full ARNs (for example arn:aws:iam::111122223333:root) and keep the form the service returns, to avoid drift."
+    }
+  },
+  "required": [
+    "EndpointArn",
+    "PolicyDocument"
+  ],
+  "readOnlyProperties": [
+    "/properties/EndpointName"
+  ],
+  "createOnlyProperties": [
+    "/properties/EndpointArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/EndpointArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/EndpointName"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:GetEndpointPolicy",
+        "sagemaker:PutEndpointPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:GetEndpointPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:GetEndpointPolicy",
+        "sagemaker:PutEndpointPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:GetEndpointPolicy",
+        "sagemaker:DeleteEndpointPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:GetEndpointPolicy"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "EndpointArn": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 2048,
+            "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:endpoint/"
+          }
+        },
+        "required": [
+          "EndpointArn"
+        ]
+      }
+    }
+  }
+}

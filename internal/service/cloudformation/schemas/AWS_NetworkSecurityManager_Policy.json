@@ -44,6 +44,64 @@
       ],
       "additionalProperties": false
     },
+    "SubnetConnectivityOverride": {
+      "type": "object",
+      "description": "Applies a connectivity treatment other than the policy default to the subnets that the referenced scope selects.",
+      "properties": {
+        "ConnectivityType": {
+          "type": "string",
+          "description": "The connectivity treatment applied to the subnets that the referenced scope selects.",
+          "enum": [
+            "flexible",
+            "bidirectional",
+            "outbound-only",
+            "exclude"
+          ]
+        },
+        "Scopes": {
+          "type": "array",
+          "description": "The ARN of the IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE scope whose selected subnets receive ConnectivityType.",
+          "insertionOrder": true,
+          "maxItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 1010,
+            "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:(.+)$"
+          }
+        }
+      },
+      "required": [
+        "ConnectivityType",
+        "Scopes"
+      ],
+      "additionalProperties": false
+    },
+    "IgwFirewallConfig": {
+      "type": "object",
+      "description": "Internet gateway firewall policy settings. Populated only for IGW_FIREWALL firewall type policies.",
+      "properties": {
+        "DefaultSubnetConnectivity": {
+          "type": "string",
+          "description": "The default internet connectivity treatment applied to subnets in scope unless a subnet connectivity override applies. Required for IGW_FIREWALL policies.",
+          "enum": [
+            "flexible",
+            "bidirectional",
+            "outbound-only"
+          ]
+        },
+        "SubnetConnectivityOverrides": {
+          "type": "array",
+          "description": "An ordered list of subnet connectivity overrides. When a subnet matches more than one override, the first match applies. At most one override per connectivity type.",
+          "insertionOrder": true,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/definitions/SubnetConnectivityOverride"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "PolicyConfiguration": {
       "type": "object",
       "description": "Configuration settings for policy behavior.",
@@ -58,6 +116,9 @@
         },
         "WafConfig": {
           "$ref": "#/definitions/WafConfig"
+        },
+        "IgwFirewallConfig": {
+          "$ref": "#/definitions/IgwFirewallConfig"
         }
       },
       "additionalProperties": false
@@ -146,7 +207,8 @@
       "type": "string",
       "enum": [
         "WAF",
-        "SHIELD_ADVANCED"
+        "SHIELD_ADVANCED",
+        "IGW_FIREWALL"
       ]
     },
     "PolicyConfiguration": {

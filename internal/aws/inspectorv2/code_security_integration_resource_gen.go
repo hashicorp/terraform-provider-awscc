@@ -205,7 +205,9 @@ func codeSecurityIntegrationResource(ctx context.Context) (resource.Resource, er
 		//	    "IN_PROGRESS",
 		//	    "ACTIVE",
 		//	    "INACTIVE",
-		//	    "DISABLING"
+		//	    "DISABLING",
+		//	    "DELETE_IN_PROGRESS",
+		//	    "DELETE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -453,7 +455,7 @@ func codeSecurityIntegrationResource(ctx context.Context) (resource.Resource, er
 		"/properties/CreateIntegrationDetails",
 		"/properties/UpdateIntegrationDetails",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(15)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

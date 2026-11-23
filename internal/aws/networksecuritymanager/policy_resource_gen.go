@@ -11,6 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -21,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -97,7 +99,8 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of firewall.",
 		//	  "enum": [
 		//	    "WAF",
-		//	    "SHIELD_ADVANCED"
+		//	    "SHIELD_ADVANCED",
+		//	    "IGW_FIREWALL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -108,6 +111,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"WAF",
 					"SHIELD_ADVANCED",
+					"IGW_FIREWALL",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -138,6 +142,61 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration settings for policy behavior.",
 		//	  "properties": {
+		//	    "IgwFirewallConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Internet gateway firewall policy settings. Populated only for IGW_FIREWALL firewall type policies.",
+		//	      "properties": {
+		//	        "DefaultSubnetConnectivity": {
+		//	          "description": "The default internet connectivity treatment applied to subnets in scope unless a subnet connectivity override applies. Required for IGW_FIREWALL policies.",
+		//	          "enum": [
+		//	            "flexible",
+		//	            "bidirectional",
+		//	            "outbound-only"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SubnetConnectivityOverrides": {
+		//	          "description": "An ordered list of subnet connectivity overrides. When a subnet matches more than one override, the first match applies. At most one override per connectivity type.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Applies a connectivity treatment other than the policy default to the subnets that the referenced scope selects.",
+		//	            "properties": {
+		//	              "ConnectivityType": {
+		//	                "description": "The connectivity treatment applied to the subnets that the referenced scope selects.",
+		//	                "enum": [
+		//	                  "flexible",
+		//	                  "bidirectional",
+		//	                  "outbound-only",
+		//	                  "exclude"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Scopes": {
+		//	                "description": "The ARN of the IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE scope whose selected subnets receive ConnectivityType.",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "maxLength": 1010,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:(.+)$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ConnectivityType",
+		//	              "Scopes"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 4,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RemediationEnabled": {
 		//	      "description": "Controls automatic remediation of non-compliant resources.",
 		//	      "type": "boolean"
@@ -178,6 +237,85 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IgwFirewallConfig
+				"igw_firewall_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultSubnetConnectivity
+						"default_subnet_connectivity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The default internet connectivity treatment applied to subnets in scope unless a subnet connectivity override applies. Required for IGW_FIREWALL policies.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"flexible",
+									"bidirectional",
+									"outbound-only",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetConnectivityOverrides
+						"subnet_connectivity_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConnectivityType
+									"connectivity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The connectivity treatment applied to the subnets that the referenced scope selects.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"flexible",
+												"bidirectional",
+												"outbound-only",
+												"exclude",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Scopes
+									"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The ARN of the IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE scope whose selected subnets receive ConnectivityType.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtMost(1),
+											listvalidator.ValueStringsAre(
+												stringvalidator.UTF8LengthBetween(20, 1010),
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:(.+)$"), ""),
+											),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "An ordered list of subnet connectivity overrides. When a subnet matches more than one override, the first match applies. At most one override per connectivity type.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtMost(4),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Internet gateway firewall policy settings. Populated only for IGW_FIREWALL firewall type policies.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: RemediationEnabled
 				"remediation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Controls automatic remediation of non-compliant resources.",
@@ -466,8 +604,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"associated_template_and_rule_list":    "AssociatedTemplateAndRuleList",
 		"conflict_resolution":                  "ConflictResolution",
+		"connectivity_type":                    "ConnectivityType",
+		"default_subnet_connectivity":          "DefaultSubnetConnectivity",
 		"existing_customer_web_acl_resolution": "ExistingCustomerWebACLResolution",
 		"firewall_type":                        "FirewallType",
+		"igw_firewall_config":                  "IgwFirewallConfig",
 		"key":                                  "Key",
 		"policy_arn":                           "PolicyArn",
 		"policy_configuration":                 "PolicyConfiguration",
@@ -478,7 +619,9 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"remediation_enabled":                  "RemediationEnabled",
 		"resources_clean_up":                   "ResourcesCleanUp",
 		"rule_arn":                             "RuleArn",
+		"scopes":                               "Scopes",
 		"status":                               "Status",
+		"subnet_connectivity_overrides":        "SubnetConnectivityOverrides",
 		"tags":                                 "Tags",
 		"template_arn":                         "TemplateArn",
 		"updated_at":                           "UpdatedAt",

@@ -72,7 +72,10 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Supported vendor types for payment providers",
 		//	  "enum": [
 		//	    "CoinbaseCDP",
-		//	    "StripePrivy"
+		//	    "StripePrivy",
+		//	    "Stripe",
+		//	    "PayPal",
+		//	    "AmazonPay"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -83,6 +86,9 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 				stringvalidator.OneOf(
 					"CoinbaseCDP",
 					"StripePrivy",
+					"Stripe",
+					"PayPal",
+					"AmazonPay",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -133,6 +139,87 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "additionalProperties": false,
 		//	  "description": "Provider configuration input containing secrets for creation/update",
 		//	  "properties": {
+		//	    "AmazonPayConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Amazon Pay configuration with merchant identifiers and a delegated authorization token",
+		//	      "properties": {
+		//	        "AmazonPayRegion": {
+		//	          "description": "The Amazon Pay region the merchant's authorization token belongs to. AgentCore uses it to pick the Amazon Pay API host.",
+		//	          "enum": [
+		//	            "NA",
+		//	            "EU",
+		//	            "JP"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "AuthorizationToken": {
+		//	          "description": "The delegated authorization token, supplied inline. Mutually exclusive with AuthorizationTokenConfig.",
+		//	          "maxLength": 8192,
+		//	          "pattern": "^[A-Za-z0-9+/=._\\-]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "AuthorizationTokenConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AuthorizationTokenSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Environment": {
+		//	          "description": "The Amazon Pay API environment",
+		//	          "enum": [
+		//	            "LIVE",
+		//	            "SANDBOX"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "MerchantId": {
+		//	          "description": "The Amazon Pay merchant (seller) ID",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "pattern": "^[A-Z0-9]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "StoreId": {
+		//	          "description": "The Amazon Pay store (client) ID",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9._-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MerchantId",
+		//	        "StoreId",
+		//	        "Environment",
+		//	        "AmazonPayRegion"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "CoinbaseCdpConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "Coinbase CDP configuration with API credentials",
@@ -221,6 +308,120 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	      "required": [
 		//	        "ApiKeyId"
 		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PayPalConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "PayPal configuration with REST app credentials",
+		//	      "properties": {
+		//	        "ClientId": {
+		//	          "description": "The PayPal REST app client ID",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "^[A-Za-z0-9_-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecret": {
+		//	          "description": "The PayPal REST app client secret, supplied inline. Mutually exclusive with ClientSecretConfig.",
+		//	          "maxLength": 512,
+		//	          "pattern": "^[A-Za-z0-9+/=\\-_]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Environment": {
+		//	          "description": "The PayPal API environment",
+		//	          "enum": [
+		//	            "LIVE",
+		//	            "SANDBOX"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClientId",
+		//	        "Environment"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "StripeConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Stripe configuration with a restricted key, supplied inline (MANAGED) or as a Secrets Manager reference (EXTERNAL)",
+		//	      "properties": {
+		//	        "PublishableKey": {
+		//	          "description": "The Stripe publishable key (pk_live_* or pk_test_*). Its mode must match the restricted key's.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "^pk_(live|test)_[A-Za-z0-9]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "RestrictedKey": {
+		//	          "description": "The Stripe restricted key (rk_live_* or rk_test_*), supplied inline. Mutually exclusive with RestrictedKeyConfig.",
+		//	          "maxLength": 512,
+		//	          "pattern": "^[a-zA-Z0-9_]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "RestrictedKeyConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RestrictedKeySource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "StripePrivyConfiguration": {
@@ -325,6 +526,146 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	}
 		"provider_configuration_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonPayConfiguration
+				"amazon_pay_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AmazonPayRegion
+						"amazon_pay_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay region the merchant's authorization token belongs to. AgentCore uses it to pick the Amazon Pay API host.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"NA",
+									"EU",
+									"JP",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationToken
+						"authorization_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The delegated authorization token, supplied inline. Mutually exclusive with AuthorizationTokenConfig.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthAtMost(8192),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9+/=._\\-]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationTokenConfig
+						"authorization_token_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.UTF8LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.UTF8LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationTokenSource
+						"authorization_token_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Environment
+						"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay API environment",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"LIVE",
+									"SANDBOX",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MerchantId
+						"merchant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay merchant (seller) ID",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 64),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z0-9]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StoreId
+						"store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay store (client) ID",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 128),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon Pay configuration with merchant identifiers and a delegated authorization token",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CoinbaseCdpConfiguration
 				"coinbase_cdp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -471,6 +812,201 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Coinbase CDP configuration with API credentials",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PayPalConfiguration
+				"pay_pal_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PayPal REST app client ID",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 128),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_-]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PayPal REST app client secret, supplied inline. Mutually exclusive with ClientSecretConfig.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthAtMost(512),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9+/=\\-_]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.UTF8LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.UTF8LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Environment
+						"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PayPal API environment",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"LIVE",
+									"SANDBOX",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "PayPal configuration with REST app credentials",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StripeConfiguration
+				"stripe_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PublishableKey
+						"publishable_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Stripe publishable key (pk_live_* or pk_test_*). Its mode must match the restricted key's.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 512),
+								stringvalidator.RegexMatches(regexp.MustCompile("^pk_(live|test)_[A-Za-z0-9]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedKey
+						"restricted_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Stripe restricted key (rk_live_* or rk_test_*), supplied inline. Mutually exclusive with RestrictedKeyConfig.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthAtMost(512),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedKeyConfig
+						"restricted_key_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.UTF8LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.UTF8LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedKeySource
+						"restricted_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Stripe configuration with a restricted key, supplied inline (MANAGED) or as a Secrets Manager reference (EXTERNAL)",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -658,6 +1194,79 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "additionalProperties": false,
 		//	  "description": "Provider configuration output containing secret ARNs (no raw secrets)",
 		//	  "properties": {
+		//	    "AmazonPayConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Amazon Pay configuration output with the authorization token secret ARN",
+		//	      "properties": {
+		//	        "AmazonPayRegion": {
+		//	          "description": "The Amazon Pay region the merchant's authorization token belongs to. AgentCore uses it to pick the Amazon Pay API host.",
+		//	          "enum": [
+		//	            "NA",
+		//	            "EU",
+		//	            "JP"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "AuthorizationTokenArn": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about a secret in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "SecretArn": {
+		//	              "description": "The ARN of the secret in AWS Secrets Manager",
+		//	              "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b|aws-iso-e|aws-iso-f|aws-eusc):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AuthorizationTokenJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the authorization token value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "AuthorizationTokenSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Environment": {
+		//	          "description": "The Amazon Pay API environment",
+		//	          "enum": [
+		//	            "LIVE",
+		//	            "SANDBOX"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "MerchantId": {
+		//	          "description": "The Amazon Pay merchant (seller) ID",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "pattern": "^[A-Z0-9]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "StoreId": {
+		//	          "description": "The Amazon Pay store (client) ID",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9._-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MerchantId",
+		//	        "StoreId",
+		//	        "AuthorizationTokenArn",
+		//	        "Environment"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "CoinbaseCdpConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "Coinbase CDP configuration output with secret ARNs",
@@ -730,6 +1339,108 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	      "required": [
 		//	        "ApiKeyId",
 		//	        "ApiKeySecretArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PayPalConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "PayPal configuration output with the client secret ARN",
+		//	      "properties": {
+		//	        "ClientId": {
+		//	          "description": "The PayPal REST app client ID",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "^[A-Za-z0-9_-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretArn": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about a secret in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "SecretArn": {
+		//	              "description": "The ARN of the secret in AWS Secrets Manager",
+		//	              "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b|aws-iso-e|aws-iso-f|aws-eusc):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the client secret value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Environment": {
+		//	          "description": "The PayPal API environment",
+		//	          "enum": [
+		//	            "LIVE",
+		//	            "SANDBOX"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClientId",
+		//	        "ClientSecretArn",
+		//	        "Environment"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "StripeConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Stripe configuration output with the restricted key secret ARN",
+		//	      "properties": {
+		//	        "PublishableKey": {
+		//	          "description": "The Stripe publishable key stored on the provider. Only present when one was supplied.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "^pk_(live|test)_[A-Za-z0-9]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "RestrictedKeyArn": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about a secret in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "SecretArn": {
+		//	              "description": "The ARN of the secret in AWS Secrets Manager",
+		//	              "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b|aws-iso-e|aws-iso-f|aws-eusc):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RestrictedKeyJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the restricted key value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "RestrictedKeySource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RestrictedKeyArn"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -821,6 +1532,55 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	}
 		"provider_configuration_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonPayConfiguration
+				"amazon_pay_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AmazonPayRegion
+						"amazon_pay_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay region the merchant's authorization token belongs to. AgentCore uses it to pick the Amazon Pay API host.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationTokenArn
+						"authorization_token_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationTokenJsonKey
+						"authorization_token_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the authorization token value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationTokenSource
+						"authorization_token_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Environment
+						"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay API environment",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MerchantId
+						"merchant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay merchant (seller) ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StoreId
+						"store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Pay store (client) ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon Pay configuration output with the authorization token secret ARN",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: CoinbaseCdpConfiguration
 				"coinbase_cdp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -875,6 +1635,79 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Coinbase CDP configuration output with secret ARNs",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PayPalConfiguration
+				"pay_pal_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PayPal REST app client ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretArn
+						"client_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretJsonKey
+						"client_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the client secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Environment
+						"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PayPal API environment",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "PayPal configuration output with the client secret ARN",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StripeConfiguration
+				"stripe_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PublishableKey
+						"publishable_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Stripe publishable key stored on the provider. Only present when one was supplied.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedKeyArn
+						"restricted_key_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedKeyJsonKey
+						"restricted_key_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the restricted key value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedKeySource
+						"restricted_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Stripe configuration output with the restricted key secret ARN",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StripePrivyConfiguration
@@ -1047,6 +1880,8 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"amazon_pay_configuration":           "AmazonPayConfiguration",
+		"amazon_pay_region":                  "AmazonPayRegion",
 		"api_key_id":                         "ApiKeyId",
 		"api_key_secret":                     "ApiKeySecret",
 		"api_key_secret_arn":                 "ApiKeySecretArn",
@@ -1065,18 +1900,40 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		"authorization_private_key_config":   "AuthorizationPrivateKeyConfig",
 		"authorization_private_key_json_key": "AuthorizationPrivateKeyJsonKey",
 		"authorization_private_key_source":   "AuthorizationPrivateKeySource",
+		"authorization_token":                "AuthorizationToken",
+		"authorization_token_arn":            "AuthorizationTokenArn",
+		"authorization_token_config":         "AuthorizationTokenConfig",
+		"authorization_token_json_key":       "AuthorizationTokenJsonKey",
+		"authorization_token_source":         "AuthorizationTokenSource",
+		"client_id":                          "ClientId",
+		"client_secret":                      "ClientSecret",
+		"client_secret_arn":                  "ClientSecretArn",
+		"client_secret_config":               "ClientSecretConfig",
+		"client_secret_json_key":             "ClientSecretJsonKey",
+		"client_secret_source":               "ClientSecretSource",
 		"coinbase_cdp_configuration":         "CoinbaseCdpConfiguration",
 		"created_time":                       "CreatedTime",
 		"credential_provider_arn":            "CredentialProviderArn",
 		"credential_provider_vendor":         "CredentialProviderVendor",
+		"environment":                        "Environment",
 		"json_key":                           "JsonKey",
 		"key":                                "Key",
 		"last_updated_time":                  "LastUpdatedTime",
+		"merchant_id":                        "MerchantId",
 		"name":                               "Name",
+		"pay_pal_configuration":              "PayPalConfiguration",
 		"provider_configuration_input":       "ProviderConfigurationInput",
 		"provider_configuration_output":      "ProviderConfigurationOutput",
+		"publishable_key":                    "PublishableKey",
+		"restricted_key":                     "RestrictedKey",
+		"restricted_key_arn":                 "RestrictedKeyArn",
+		"restricted_key_config":              "RestrictedKeyConfig",
+		"restricted_key_json_key":            "RestrictedKeyJsonKey",
+		"restricted_key_source":              "RestrictedKeySource",
 		"secret_arn":                         "SecretArn",
 		"secret_id":                          "SecretId",
+		"store_id":                           "StoreId",
+		"stripe_configuration":               "StripeConfiguration",
 		"stripe_privy_configuration":         "StripePrivyConfiguration",
 		"tags":                               "Tags",
 		"value":                              "Value",

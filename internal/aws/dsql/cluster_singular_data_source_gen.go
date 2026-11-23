@@ -121,6 +121,46 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The KMS key that encrypts data on the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MetricGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Advanced monitoring metric groups to enable on the cluster. Omit to enable none.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An Advanced monitoring metric group.",
+		//	    "properties": {
+		//	      "MetricGroup": {
+		//	        "description": "The name of the metric group. Valid values: STATEMENT_STATISTICS.",
+		//	        "enum": [
+		//	          "STATEMENT_STATISTICS"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "MetricGroup"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"metric_groups": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricGroup
+					"metric_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the metric group. Valid values: STATEMENT_STATISTICS.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The Advanced monitoring metric groups to enable on the cluster. Omit to enable none.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionProperties
 		// CloudFormation resource type schema:
 		//
@@ -302,6 +342,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                         "Key",
 		"kms_encryption_key":          "KmsEncryptionKey",
 		"kms_key_arn":                 "KmsKeyArn",
+		"metric_group":                "MetricGroup",
+		"metric_groups":               "MetricGroups",
 		"multi_region_properties":     "MultiRegionProperties",
 		"policy_document":             "PolicyDocument",
 		"policy_version":              "PolicyVersion",

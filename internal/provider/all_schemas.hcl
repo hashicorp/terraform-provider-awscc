@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1769 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1815 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -36,6 +36,60 @@ resource_schema "aws_acmpca_permission" {
 
 resource_schema "aws_aiops_investigation_group" {
   cloudformation_type_name = "AWS::AIOps::InvestigationGroup"
+}
+
+resource_schema "aws_apiportal_discovery_configuration" {
+  cloudformation_type_name = "AWS::APIPortal::DiscoveryConfiguration"
+}
+
+resource_schema "aws_apiportal_discovery_enablement" {
+  cloudformation_type_name               = "AWS::APIPortal::DiscoveryEnablement"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_apiportal_managed_api" {
+  cloudformation_type_name = "AWS::APIPortal::ManagedApi"
+}
+
+resource_schema "aws_apiportal_organization_discovery_configuration" {
+  cloudformation_type_name = "AWS::APIPortal::OrganizationDiscoveryConfiguration"
+}
+
+resource_schema "aws_apiportal_portal" {
+  cloudformation_type_name = "AWS::APIPortal::Portal"
+}
+
+resource_schema "aws_apiportal_portal_publication" {
+  cloudformation_type_name = "AWS::APIPortal::PortalPublication"
+}
+
+resource_schema "aws_apiportal_product" {
+  cloudformation_type_name = "AWS::APIPortal::Product"
+}
+
+resource_schema "aws_apiportal_product_api_page" {
+  cloudformation_type_name               = "AWS::APIPortal::ProductApiPage"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_apiportal_product_display_order" {
+  cloudformation_type_name = "AWS::APIPortal::ProductDisplayOrder"
+}
+
+resource_schema "aws_apiportal_product_managed_api_association" {
+  cloudformation_type_name = "AWS::APIPortal::ProductManagedApiAssociation"
+}
+
+resource_schema "aws_apiportal_product_page" {
+  cloudformation_type_name               = "AWS::APIPortal::ProductPage"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_apiportal_product_sharing_policy" {
+  cloudformation_type_name = "AWS::APIPortal::ProductSharingPolicy"
 }
 
 resource_schema "aws_aps_anomaly_detector" {
@@ -107,6 +161,10 @@ resource_schema "aws_accountaccess_entitlement" {
   cloudformation_type_name               = "AWS::AccountAccess::Entitlement"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_agentregistry_publisher" {
+  cloudformation_type_name = "AWS::AgentRegistry::Publisher"
 }
 
 resource_schema "aws_agentregistry_registry" {
@@ -692,6 +750,10 @@ resource_schema "aws_athena_prepared_statement" {
   cloudformation_type_name               = "AWS::Athena::PreparedStatement"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_athena_system_tables" {
+  cloudformation_type_name = "AWS::Athena::SystemTables"
 }
 
 resource_schema "aws_athena_work_group" {
@@ -1639,6 +1701,10 @@ resource_schema "aws_cloudwatch_log_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::LogAlarm"
 }
 
+resource_schema "aws_cloudwatch_metric_data_query_definition" {
+  cloudformation_type_name = "AWS::CloudWatch::MetricDataQueryDefinition"
+}
+
 resource_schema "aws_cloudwatch_metric_stream" {
   cloudformation_type_name = "AWS::CloudWatch::MetricStream"
 }
@@ -1764,6 +1830,12 @@ resource_schema "aws_codestarnotifications_notification_rule" {
   cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
 }
 
+resource_schema "aws_cognito_cimd_policy" {
+  cloudformation_type_name               = "AWS::Cognito::CIMDPolicy"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_cognito_identity_pool" {
   cloudformation_type_name = "AWS::Cognito::IdentityPool"
 }
@@ -1817,6 +1889,12 @@ resource_schema "aws_cognito_user_pool_client" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_cognito_user_pool_client_session_configuration_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolClientSessionConfigurationAttachment"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_cognito_user_pool_domain" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolDomain"
   suppress_plural_data_source_generation = true
@@ -1855,6 +1933,12 @@ resource_schema "aws_cognito_user_pool_resource_server" {
 
 resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_cognito_user_pool_session_configuration_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolSessionConfigurationAttachment"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
@@ -2349,6 +2433,10 @@ resource_schema "aws_dms_replication_config" {
   cloudformation_type_name = "AWS::DMS::ReplicationConfig"
 }
 
+resource_schema "aws_dms_replication_instance" {
+  cloudformation_type_name = "AWS::DMS::ReplicationInstance"
+}
+
 resource_schema "aws_dms_replication_subnet_group" {
   cloudformation_type_name = "AWS::DMS::ReplicationSubnetGroup"
 }
@@ -2750,6 +2838,10 @@ resource_schema "aws_docdb_db_cluster_parameter_group" {
   cloudformation_type_name = "AWS::DocDB::DBClusterParameterGroup"
 }
 
+resource_schema "aws_docdb_db_instance" {
+  cloudformation_type_name = "AWS::DocDB::DBInstance"
+}
+
 resource_schema "aws_docdb_db_subnet_group" {
   cloudformation_type_name = "AWS::DocDB::DBSubnetGroup"
 }
@@ -2852,6 +2944,14 @@ resource_schema "aws_ec2_egress_only_internet_gateway" {
 
 resource_schema "aws_ec2_enclave_certificate_iam_role_association" {
   cloudformation_type_name = "AWS::EC2::EnclaveCertificateIamRoleAssociation"
+}
+
+resource_schema "aws_ec2_fca_policy" {
+  cloudformation_type_name = "AWS::EC2::FcaPolicy"
+}
+
+resource_schema "aws_ec2_fca_policy_association" {
+  cloudformation_type_name = "AWS::EC2::FcaPolicyAssociation"
 }
 
 resource_schema "aws_ec2_flow_log" {
@@ -3186,6 +3286,10 @@ resource_schema "aws_ec2_transit_gateway_multicast_group_source" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastGroupSource"
 }
 
+resource_schema "aws_ec2_transit_gateway_network_function_attachment" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayNetworkFunctionAttachment"
+}
+
 resource_schema "aws_ec2_transit_gateway_peering_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
 }
@@ -3289,7 +3393,13 @@ resource_schema "aws_ec2_vpn_concentrator" {
 }
 
 resource_schema "aws_ec2_vpn_connection" {
-  cloudformation_type_name = "AWS::EC2::VPNConnection"
+  cloudformation_type_name                 = "AWS::EC2::VPNConnection"
+  frozen_reason                            = "generation_failed: schema pinned — one JSON backs all three artifacts, cannot partially advance"
+  frozen_since                             = "2026-11-23"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: VpnTunnelOptionsSpecifications/Phase1AdditionalKeyExchanges is of unsupported type: list of "
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: VpnTunnelOptionsSpecifications/Phase1AdditionalKeyExchanges is of unsupported type: list of "
 }
 
 resource_schema "aws_ec2_vpn_connection_route" {
@@ -3854,6 +3964,14 @@ resource_schema "aws_fsx_backup" {
   suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
 }
 
+resource_schema "aws_fsx_cluster_peer" {
+  cloudformation_type_name                 = "AWS::FSx::ClusterPeer"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+}
+
 resource_schema "aws_fsx_data_repository_association" {
   cloudformation_type_name = "AWS::FSx::DataRepositoryAssociation"
 }
@@ -3872,12 +3990,44 @@ resource_schema "aws_fsx_s3_access_point_attachment" {
   frozen_reason            = "manual: schema frozen; newer bytes fail generation — top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3114)"
 }
 
+resource_schema "aws_fsx_snapmirror_policy" {
+  cloudformation_type_name                 = "AWS::FSx::SnapmirrorPolicy"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+}
+
+resource_schema "aws_fsx_snapmirror_relationship" {
+  cloudformation_type_name                 = "AWS::FSx::SnapmirrorRelationship"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+}
+
 resource_schema "aws_fsx_snapshot" {
   cloudformation_type_name = "AWS::FSx::Snapshot"
 }
 
+resource_schema "aws_fsx_snapshot_policy" {
+  cloudformation_type_name                 = "AWS::FSx::SnapshotPolicy"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+}
+
 resource_schema "aws_fsx_storage_virtual_machine" {
   cloudformation_type_name = "AWS::FSx::StorageVirtualMachine"
+}
+
+resource_schema "aws_fsx_storage_virtual_machine_peer" {
+  cloudformation_type_name                 = "AWS::FSx::StorageVirtualMachinePeer"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppression_reason_resource              = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
+  suppression_reason_singular_data_source  = "generation_failed: emitting schema code: top-level property Lifecycle conflicts with Terraform meta-argument: lifecycle"
 }
 
 resource_schema "aws_fsx_volume" {
@@ -4871,6 +5021,10 @@ resource_schema "aws_kinesis_channel" {
   cloudformation_type_name = "AWS::Kinesis::Channel"
 }
 
+resource_schema "aws_kinesis_queue" {
+  cloudformation_type_name = "AWS::Kinesis::Queue"
+}
+
 resource_schema "aws_kinesis_resource_policy" {
   cloudformation_type_name               = "AWS::Kinesis::ResourcePolicy"
   suppress_plural_data_source_generation = true
@@ -4887,6 +5041,10 @@ resource_schema "aws_kinesis_stream_consumer" {
 
 resource_schema "aws_kinesisanalyticsv2_application" {
   cloudformation_type_name = "AWS::KinesisAnalyticsV2::Application"
+}
+
+resource_schema "aws_kinesisanalyticsv2_snapshot" {
+  cloudformation_type_name = "AWS::KinesisAnalyticsV2::Snapshot"
 }
 
 resource_schema "aws_kinesisfirehose_delivery_stream" {
@@ -4988,6 +5146,22 @@ resource_schema "aws_lambda_permission" {
 
 resource_schema "aws_lambda_resource_policy" {
   cloudformation_type_name               = "AWS::Lambda::ResourcePolicy"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_lambda_runtime" {
+  cloudformation_type_name = "AWS::Lambda::Runtime"
+}
+
+resource_schema "aws_lambda_runtime_alias" {
+  cloudformation_type_name               = "AWS::Lambda::RuntimeAlias"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_lambda_runtime_version" {
+  cloudformation_type_name               = "AWS::Lambda::RuntimeVersion"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
@@ -5773,6 +5947,10 @@ resource_schema "aws_networkflowmonitor_monitor" {
   cloudformation_type_name = "AWS::NetworkFlowMonitor::Monitor"
 }
 
+resource_schema "aws_networkflowmonitor_performance_monitor" {
+  cloudformation_type_name = "AWS::NetworkFlowMonitor::PerformanceMonitor"
+}
+
 resource_schema "aws_networkflowmonitor_scope" {
   cloudformation_type_name = "AWS::NetworkFlowMonitor::Scope"
 }
@@ -5783,6 +5961,22 @@ resource_schema "aws_networkmanager_connect_attachment" {
 
 resource_schema "aws_networkmanager_connect_peer" {
   cloudformation_type_name = "AWS::NetworkManager::ConnectPeer"
+}
+
+resource_schema "aws_networkmanager_connection" {
+  cloudformation_type_name               = "AWS::NetworkManager::Connection"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_networkmanager_context_store" {
+  cloudformation_type_name = "AWS::NetworkManager::ContextStore"
+}
+
+resource_schema "aws_networkmanager_context_store_association" {
+  cloudformation_type_name               = "AWS::NetworkManager::ContextStoreAssociation"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_networkmanager_core_network" {
@@ -6099,6 +6293,10 @@ resource_schema "aws_opensearch_data_source" {
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
+resource_schema "aws_opensearchmemory_space" {
+  cloudformation_type_name = "AWS::OpenSearchMemory::Space"
+}
+
 resource_schema "aws_opensearchserverless_access_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::AccessPolicy"
   suppress_plural_data_source_generation = true
@@ -6162,6 +6360,10 @@ resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name               = "AWS::OpenSearchService::Domain"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_opensearchservice_replication_peer" {
+  cloudformation_type_name = "AWS::OpenSearchService::ReplicationPeer"
 }
 
 resource_schema "aws_opsworkscm_server" {
@@ -6921,6 +7123,10 @@ resource_schema "aws_route53_health_check" {
   cloudformation_type_name = "AWS::Route53::HealthCheck"
 }
 
+resource_schema "aws_route53_health_check_source" {
+  cloudformation_type_name = "AWS::Route53::HealthCheckSource"
+}
+
 resource_schema "aws_route53_hosted_zone" {
   cloudformation_type_name = "AWS::Route53::HostedZone"
 }
@@ -6935,6 +7141,12 @@ resource_schema "aws_route53_query_logging_config" {
 
 resource_schema "aws_route53_record_set" {
   cloudformation_type_name               = "AWS::Route53::RecordSet"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_route53_record_set_protection" {
+  cloudformation_type_name               = "AWS::Route53::RecordSetProtection"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
@@ -6957,6 +7169,10 @@ resource_schema "aws_route53globalresolver_access_token" {
   cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessToken"
   suppress_plural_data_source_generation = true
   suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
+resource_schema "aws_route53globalresolver_core_network_endpoint" {
+  cloudformation_type_name = "AWS::Route53GlobalResolver::CoreNetworkEndpoint"
 }
 
 resource_schema "aws_route53globalresolver_dns_view" {
@@ -7435,6 +7651,10 @@ resource_schema "aws_ssm_cloud_connector" {
   cloudformation_type_name = "AWS::SSM::CloudConnector"
 }
 
+resource_schema "aws_ssm_default_host_management_configuration" {
+  cloudformation_type_name = "AWS::SSM::DefaultHostManagementConfiguration"
+}
+
 resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
 }
@@ -7620,6 +7840,12 @@ resource_schema "aws_sagemaker_endpoint_config" {
   cloudformation_type_name = "AWS::SageMaker::EndpointConfig"
 }
 
+resource_schema "aws_sagemaker_endpoint_policy" {
+  cloudformation_type_name               = "AWS::SageMaker::EndpointPolicy"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
+}
+
 resource_schema "aws_sagemaker_experiment" {
   cloudformation_type_name = "AWS::SageMaker::Experiment"
 }
@@ -7629,6 +7855,12 @@ resource_schema "aws_sagemaker_experiment_trial_component" {
   frozen_since             = "2026-07-22"
   non_provisionable        = true
   frozen_reason            = "manual: withdrawn from AWS (TypeNotFoundException), pending v2.0.0 removal (issue: https://github.com/hashicorp/terraform-provider-awscc/issues/3271)"
+}
+
+resource_schema "aws_sagemaker_extension" {
+  cloudformation_type_name               = "AWS::SageMaker::Extension"
+  suppress_plural_data_source_generation = true
+  suppression_reason_plural_data_source  = "structural: no list handler with zero required arguments"
 }
 
 resource_schema "aws_sagemaker_feature_group" {
@@ -7659,6 +7891,10 @@ resource_schema "aws_sagemaker_inference_component" {
 
 resource_schema "aws_sagemaker_inference_experiment" {
   cloudformation_type_name = "AWS::SageMaker::InferenceExperiment"
+}
+
+resource_schema "aws_sagemaker_inference_router" {
+  cloudformation_type_name = "AWS::SageMaker::InferenceRouter"
 }
 
 resource_schema "aws_sagemaker_mlflow_app" {

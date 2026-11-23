@@ -7,6 +7,7 @@ package networksecuritymanager
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -52,7 +53,8 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The type of firewall for this rule.",
 		//	  "enum": [
-		//	    "WAF"
+		//	    "WAF",
+		//	    "IGW_FIREWALL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -63,6 +65,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"WAF",
+					"IGW_FIREWALL",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -89,12 +92,16 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A description of the rule.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"rule_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the rule.",
 			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 _.:/=+\\-@]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -118,11 +125,15 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the rule.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the rule.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

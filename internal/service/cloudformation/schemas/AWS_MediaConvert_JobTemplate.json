@@ -56,6 +56,10 @@
       "description": "An array of key-value pairs to apply to this resource."
     }
   },
+  "propertyTransform": {
+    "/properties/Queue": "Queue $OR $join([\"arn:aws[-a-z]*:mediaconvert:[a-z0-9-]+:[0-9]{12}:queues/\", Queue])",
+    "/properties/HopDestinations/*/Queue": "Queue $OR $join([\"arn:aws[-a-z]*:mediaconvert:[a-z0-9-]+:[0-9]{12}:queues/\", Queue])"
+  },
   "definitions": {
     "AccelerationSettings": {
       "type": "object",

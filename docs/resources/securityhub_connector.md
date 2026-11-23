@@ -18,7 +18,7 @@ Creates a connector to a third-party cloud provider in Security Hub CSPM. A conn
 ### Required
 
 - `name` (String) The name of the connector.
-- `provider_name` (Attributes) (see [below for nested schema](#nestedatt--provider_name))
+- `provider_name` (Attributes) The CSPM provider configuration for the connector (see [below for nested schema](#nestedatt--provider_name))
 
 ### Optional
 
@@ -42,14 +42,15 @@ Creates a connector to a third-party cloud provider in Security Hub CSPM. A conn
 <a id="nestedatt--provider_name"></a>
 ### Nested Schema for `provider_name`
 
-Required:
+Optional:
 
 - `azure` (Attributes) The configuration for connecting to an Azure environment. (see [below for nested schema](#nestedatt--provider_name--azure))
+- `gcp` (Attributes) (see [below for nested schema](#nestedatt--provider_name--gcp))
 
 <a id="nestedatt--provider_name--azure"></a>
 ### Nested Schema for `provider_name.azure`
 
-Required:
+Optional:
 
 - `aws_config_connector_arn` (String) The ARN of the multi-cloud configuration connector used to establish the connection to Azure.
 - `azure_regions` (Set of String) The list of Azure regions to monitor.
@@ -58,13 +59,29 @@ Required:
 <a id="nestedatt--provider_name--azure--scope_configuration"></a>
 ### Nested Schema for `provider_name.azure.scope_configuration`
 
-Required:
+Optional:
 
 - `scope_type` (String) The type of scope. Valid values are ``tenant`` and ``subscription``.
+- `scope_values` (Set of String) The list of scope values, such as subscription IDs, when the scope type is ``subscription``.
+
+
+
+<a id="nestedatt--provider_name--gcp"></a>
+### Nested Schema for `provider_name.gcp`
 
 Optional:
 
-- `scope_values` (Set of String) The list of scope values, such as subscription IDs, when the scope type is ``subscription``.
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for the GCP integration
+- `gcp_regions` (Set of String) The list of GCP regions to include in the connector scope
+- `scope_configuration` (Attributes) (see [below for nested schema](#nestedatt--provider_name--gcp--scope_configuration))
+
+<a id="nestedatt--provider_name--gcp--scope_configuration"></a>
+### Nested Schema for `provider_name.gcp.scope_configuration`
+
+Optional:
+
+- `scope_type` (String) The scope type for the GCP connector
+- `scope_values` (Set of String) The list of scope values for the GCP connector
 
 
 

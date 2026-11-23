@@ -22,13 +22,26 @@ Data Source schema for AWS::EC2::VPCPeeringConnection
 ### Read-Only
 
 - `assume_role_region` (String) The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided. You can update this property.
+- `multipath_resilience_status` (String) The multipath resilience status of the VPC peering connection: enabled when both the requester and accepter sides allow multipath resilience, pending when only one side allows it, and disabled when neither side allows it.
 - `peer_owner_id` (String) The AWS account ID of the owner of the accepter VPC.
 - `peer_region` (String) The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.
 - `peer_role_arn` (String) The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account. You can update this property. To manage PeerVpcPeeringConnectionOptions on a peering connection with another AWS account, the role must allow ec2:DescribeVpcPeeringConnections and ec2:ModifyVpcPeeringConnectionOptions.
 - `peer_vpc_id` (String) The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.
+- `peer_vpc_peering_connection_options` (Attributes) The VPC peering connection options corresponding to the accepter side of the connection. (see [below for nested schema](#nestedatt--peer_vpc_peering_connection_options))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC.
 - `vpc_peering_connection_id` (String)
+- `vpc_peering_connection_options` (Attributes) The VPC peering connection options corresponding to the requester side of the connection. (see [below for nested schema](#nestedatt--vpc_peering_connection_options))
+
+<a id="nestedatt--peer_vpc_peering_connection_options"></a>
+### Nested Schema for `peer_vpc_peering_connection_options`
+
+Read-Only:
+
+- `allow_dns_resolution_from_remote_vpc` (Boolean) If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+- `allow_multipath_resilience` (Boolean) If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.
+- `multipath_resilience_mode` (String) The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -37,3 +50,13 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--vpc_peering_connection_options"></a>
+### Nested Schema for `vpc_peering_connection_options`
+
+Read-Only:
+
+- `allow_dns_resolution_from_remote_vpc` (Boolean) If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+- `allow_multipath_resilience` (Boolean) If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.
+- `multipath_resilience_mode` (String) The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.

@@ -140,9 +140,6 @@
         "ec2:GetVerifiedAccessGroupPolicy",
         "ec2:DescribeTags",
         "kms:DescribeKey",
-        "kms:RetireGrant",
-        "kms:CreateGrant",
-        "kms:GenerateDataKey",
         "kms:Decrypt"
       ]
     },
@@ -170,7 +167,6 @@
         "ec2:DescribeTags",
         "kms:DescribeKey",
         "kms:RetireGrant",
-        "kms:CreateGrant",
         "kms:GenerateDataKey",
         "kms:Decrypt"
       ]
@@ -180,9 +176,6 @@
         "ec2:DescribeVerifiedAccessGroups",
         "ec2:DescribeTags",
         "kms:DescribeKey",
-        "kms:RetireGrant",
-        "kms:CreateGrant",
-        "kms:GenerateDataKey",
         "kms:Decrypt"
       ]
     }

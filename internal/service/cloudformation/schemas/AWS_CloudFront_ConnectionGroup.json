@@ -19,6 +19,20 @@
       ],
       "type": "object",
       "description": "A complex type that contains ``Tag`` key and ``Tag`` value."
+    },
+    "ViewerFallback": {
+      "additionalProperties": false,
+      "properties": {
+        "DistributionId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "DistributionId"
+      ],
+      "type": "object",
+      "description": ""
     }
   },
   "description": "The connection group for your distribution tenants. When you first create a distribution tenant and you don't specify a connection group, CloudFront will automatically create a default connection group for you. When you create a new distribution tenant and don't specify a connection group, the default one will be associated with your distribution tenant.",
@@ -119,6 +133,10 @@
     },
     "ETag": {
       "type": "string",
+      "description": ""
+    },
+    "ViewerFallback": {
+      "$ref": "#/definitions/ViewerFallback",
       "description": ""
     }
   },

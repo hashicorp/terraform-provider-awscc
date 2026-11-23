@@ -60,6 +60,28 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayAttachmentAllowedPrincipals
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"transit_gateway_attachment_allowed_principals": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -90,6 +112,7 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_principals": "AllowedPrincipals",
 		"service_id":         "ServiceId",
+		"transit_gateway_attachment_allowed_principals": "TransitGatewayAttachmentAllowedPrincipals",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

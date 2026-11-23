@@ -24,8 +24,10 @@ Resource Type definition for AWS::CertificateManager::Certificate
 - `certificate_authority_arn` (String) The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate.
 - `certificate_export` (String) Specifies whether the certificate can be exported. ENABLED allows the certificate to be exported, DISABLED prevents export.
 - `certificate_transparency_logging_preference` (String) You can opt out of certificate transparency logging by specifying the DISABLED option. Opt in by specifying ENABLED.
+- `certificate_usage` (String) The extended key usage of an Amazon N2 certificate. Valid only with RootHierarchyType. Defaults to CLIENT_AND_SERVER_AUTH. CLIENT_AUTH_ONLY requires N2_AMAZON_MANAGED.
 - `domain_validation_options` (Attributes List) Domain information that domain name registrars use to verify your identity. (see [below for nested schema](#nestedatt--domain_validation_options))
 - `key_algorithm` (String) Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data.
+- `root_hierarchy_type` (String) The Amazon N2 root hierarchy that issues the certificate. Omit for a public TLS certificate. Amazon N2 roots are not trusted by browsers.
 - `subject_alternative_names` (List of String) Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate.
 - `tags` (Attributes List) Key-value pairs that can identify the certificate. (see [below for nested schema](#nestedatt--tags))
 - `validation_method` (String) The method you want to use to validate that you own or control the domain associated with a public certificate. Valid values are DNS, EMAIL or HTTP

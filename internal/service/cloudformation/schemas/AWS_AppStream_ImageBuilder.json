@@ -70,6 +70,10 @@
     },
     "DisableIMDSV1": {
       "type": "boolean"
+    },
+    "AgentAccessConfig": {
+      "$ref": "#/definitions/AgentAccessConfig",
+      "description": "The configuration for agent access on the image builder. If specified, agent access is enabled for the image builder."
     }
   },
   "definitions": {
@@ -145,6 +149,67 @@
         "Value",
         "Key"
       ]
+    },
+    "AgentAccessSetting": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A permission setting for an agent action. Each setting specifies an agent action and whether it is enabled or disabled.",
+      "properties": {
+        "AgentAction": {
+          "type": "string",
+          "description": "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools."
+        },
+        "Permission": {
+          "type": "string",
+          "description": "Whether the agent action is enabled or disabled."
+        }
+      },
+      "required": [
+        "AgentAction",
+        "Permission"
+      ]
+    },
+    "AgentAccessConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The configuration for agent access on an image builder. Agent access enables AI agents to interact with the image builder desktop.",
+      "properties": {
+        "Settings": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/AgentAccessSetting"
+          },
+          "description": "The list of agent access settings that define permissions for each agent action. You must specify at least one setting. Agent actions that aren't listed are disabled, so list only the actions that you enable."
+        },
+        "ScreenResolution": {
+          "type": "string",
+          "description": "The screen resolution for the agent streaming environment."
+        },
+        "ScreenImageFormat": {
+          "type": "string",
+          "description": "The image format for agent screen captures."
+        },
+        "S3BucketArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true."
+        },
+        "ScreenshotsUploadEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions."
+        },
+        "UserControlMode": {
+          "type": "string",
+          "description": "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED."
+        }
+      },
+      "required": [
+        "Settings",
+        "ScreenResolution",
+        "ScreenImageFormat"
+      ]
     }
   },
   "required": [
@@ -158,7 +223,20 @@
     "/properties/StreamingUrl"
   ],
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/InstanceType",
+    "/properties/ImageArn",
+    "/properties/ImageName",
+    "/properties/IamRoleArn",
+    "/properties/EnableDefaultInternetAccess",
+    "/properties/AppstreamAgentVersion",
+    "/properties/VpcConfig",
+    "/properties/DomainJoinInfo",
+    "/properties/AccessEndpoints",
+    "/properties/SoftwaresToInstall",
+    "/properties/SoftwaresToUninstall",
+    "/properties/RootVolumeConfig",
+    "/properties/DisableIMDSV1"
   ],
   "writeOnlyProperties": [
     "/properties/SoftwaresToInstall",
@@ -180,7 +258,7 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
@@ -204,6 +282,21 @@
         "iam:DeleteServiceLinkedRole",
         "iam:GetServiceLinkedRoleDeletionStatus",
         "iam:PassRole"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appstream:CreateImageBuilderStreamingURL",
+        "appstream:DescribeImageBuilders",
+        "appstream:ListTagsForResource",
+        "appstream:StartImageBuilder",
+        "appstream:StopImageBuilder",
+        "appstream:TagResource",
+        "appstream:UntagResource",
+        "appstream:UpdateImageBuilder",
+        "iam:CreateServiceLinkedRole",
+        "iam:DeleteServiceLinkedRole",
+        "iam:GetServiceLinkedRoleDeletionStatus"
       ]
     },
     "read": {

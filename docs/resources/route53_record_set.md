@@ -23,6 +23,7 @@ Resource Type definition for AWS::Route53::RecordSet.
 ### Optional
 
 - `alias_target` (Attributes) Alias resource record sets only: Information about the AWS resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to. (see [below for nested schema](#nestedatt--alias_target))
+- `az_affinity` (Attributes) AZ affinity resource record sets only: the source location (Availability Zone, Availability Zone group, Region, partition, or global) of the DNS queries that this record set's answers apply to. (see [below for nested schema](#nestedatt--az_affinity))
 - `cidr_routing_config` (Attributes) The object that is specified in resource record set object when you are linking a resource record set to a CIDR location. (see [below for nested schema](#nestedatt--cidr_routing_config))
 - `comment` (String) Optional: Any comments you want to include about a change batch request.
 - `failover` (String) To configure failover, you add the Failover element to two resource record sets. For one resource record set, you specify PRIMARY as the value for Failover; for the other resource record set, you specify SECONDARY. In addition, you include the HealthCheckId element and specify the health check that you want Amazon Route 53 to perform for each resource record set.
@@ -49,6 +50,15 @@ Optional:
 - `dns_name` (String) The value that you specify depends on where you want to route queries.
 - `evaluate_target_health` (Boolean) When EvaluateTargetHealth is true, an alias resource record set inherits the health of the referenced AWS resource, such as an ELB load balancer or another resource record set in the hosted zone.
 - `hosted_zone_id` (String) The value used depends on where you want to route traffic.
+
+
+<a id="nestedatt--az_affinity"></a>
+### Nested Schema for `az_affinity`
+
+Optional:
+
+- `location_id` (String) The ID of the location, for example an Availability Zone ID such as use1-az1, or a Region such as us-east-1.
+- `location_type` (String) The type of the source location that the record set's answers apply to.
 
 
 <a id="nestedatt--cidr_routing_config"></a>

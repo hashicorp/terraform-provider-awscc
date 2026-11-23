@@ -106,6 +106,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The port ranges the resource configuration listens on, as single ports or ranges (for example, 80 or 1001-2000). Applies to SINGLE, GROUP, CHILD, and CIDR resource configurations. For a CIDR resource configuration with ProtocolType TCP_UDP, these ranges cover both TCP and UDP traffic, so include port 53 to carry DNS to the network segment.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 11,
@@ -117,19 +118,23 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	}
 		"port_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The port ranges the resource configuration listens on, as single ports or ranges (for example, 80 or 1001-2000). Applies to SINGLE, GROUP, CHILD, and CIDR resource configurations. For a CIDR resource configuration with ProtocolType TCP_UDP, these ranges cover both TCP and UDP traffic, so include port 53 to carry DNS to the network segment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProtocolType
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The protocol the resource configuration accepts. SINGLE and GROUP resource configurations support TCP. CIDR resource configurations support TCP and TCP_UDP; use TCP_UDP to carry UDP traffic such as DNS on port 53.",
 		//	  "enum": [
-		//	    "TCP"
+		//	    "TCP",
+		//	    "TCP_UDP"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The protocol the resource configuration accepts. SINGLE and GROUP resource configurations support TCP. CIDR resource configurations support TCP and TCP_UDP; use TCP_UDP to carry UDP traffic such as DNS on port 53.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceConfigurationAuthType
 		// CloudFormation resource type schema:
@@ -156,8 +161,10 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	    },
 		//	    "CidrResource": {
 		//	      "additionalProperties": false,
+		//	      "description": "The CIDR ranges that make up a CIDR resource configuration. Only valid when ResourceConfigurationType is CIDR, and the resource gateway must have ResourceConfigDnsResolution set to IN_VPC.",
 		//	      "properties": {
 		//	        "CidrRanges": {
+		//	          "description": "The IPv4 CIDR ranges reachable through this resource configuration, in CIDR notation (for example, 10.0.0.0/24).",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 50,
@@ -217,10 +224,12 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 						// Property: CidrRanges
 						"cidr_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The IPv4 CIDR ranges reachable through this resource configuration, in CIDR notation (for example, 10.0.0.0/24).",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The CIDR ranges that make up a CIDR resource configuration. Only valid when ResourceConfigurationType is CIDR, and the resource gateway must have ResourceConfigDnsResolution set to IN_VPC.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DnsResource
 				"dns_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

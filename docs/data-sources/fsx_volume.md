@@ -37,6 +37,7 @@ Data Source schema for AWS::FSx::Volume
 Read-Only:
 
 - `aggregate_configuration` (Attributes) Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates. (see [below for nested schema](#nestedatt--ontap_configuration--aggregate_configuration))
+- `clone_configuration` (Attributes) Creates the volume as an ONTAP FlexClone of an existing volume. The clone takes SizeInMegabytes and StorageEfficiencyEnabled from the parent volume: omit them, or set them to the parent's values. (see [below for nested schema](#nestedatt--ontap_configuration--clone_configuration))
 - `copy_tags_to_backups` (String) A boolean flag indicating whether tags for the volume should be copied to backups.
 - `junction_path` (String) Specifies the location in the SVM's namespace where the volume is mounted. This parameter is required. The JunctionPath must have a leading forward slash, such as /vol3.
 - `ontap_volume_type` (String) Specifies the type of volume you are creating. Valid values are the following: RW or DP
@@ -57,6 +58,15 @@ Read-Only:
 
 - `aggregates` (List of String) The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier.
 - `constituents_per_aggregate` (Number) Used to explicitly set the number of constituents within the FlexGroup per storage aggregate. This field is optional when creating a FlexGroup volume. If unspecified, the default value will be 8. This field cannot be provided when creating a FlexVol volume.
+
+
+<a id="nestedatt--ontap_configuration--clone_configuration"></a>
+### Nested Schema for `ontap_configuration.clone_configuration`
+
+Read-Only:
+
+- `parent_volume_id` (String) The ID of the volume to clone. It must be in the same storage virtual machine (SVM) as the new volume.
+- `snapshot_id` (String) The ID of a snapshot of the parent volume to clone from. If you omit it, the clone is created from the parent volume's current state. Required when this volume's OntapVolumeType is DP (the parent volume must then also be DP).
 
 
 <a id="nestedatt--ontap_configuration--snaplock_configuration"></a>

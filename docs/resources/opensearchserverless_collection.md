@@ -60,7 +60,7 @@ Contains between 3 and 64 characters
 - `description` (String) The description of the collection
 - `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
 - `standby_replicas` (String) The possible standby replicas for the collection
-- `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) List of tags to associate with the collection. Tag changes are applied in place without replacing the collection. Reading, adding, changing or removing tags requires the aoss:ListTagsForResource, aoss:TagResource and aoss:UntagResource permissions. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
 - `vector_options` (Attributes) Vector search configuration options for the collection (see [below for nested schema](#nestedatt--vector_options))
 

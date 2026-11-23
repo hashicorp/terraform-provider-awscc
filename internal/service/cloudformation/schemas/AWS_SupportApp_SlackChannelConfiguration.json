@@ -78,7 +78,8 @@
     "create": {
       "permissions": [
         "supportapp:CreateSlackChannelConfiguration",
-        "supportapp:ListSlackChannelConfigurations"
+        "supportapp:ListSlackChannelConfigurations",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -89,7 +90,8 @@
     "update": {
       "permissions": [
         "supportapp:UpdateSlackChannelConfiguration",
-        "supportapp:ListSlackChannelConfigurations"
+        "supportapp:ListSlackChannelConfigurations",
+        "iam:PassRole"
       ]
     },
     "delete": {

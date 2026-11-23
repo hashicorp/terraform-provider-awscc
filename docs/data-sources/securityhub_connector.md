@@ -33,7 +33,7 @@ Data Source schema for AWS::SecurityHub::Connector
 - `last_updated_at` (String) The timestamp formatted in ISO8601
 - `message` (String)
 - `name` (String) The name of the connector.
-- `provider_name` (Attributes) (see [below for nested schema](#nestedatt--provider_name))
+- `provider_name` (Attributes) The CSPM provider configuration for the connector (see [below for nested schema](#nestedatt--provider_name))
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--issues"></a>
@@ -51,6 +51,7 @@ Read-Only:
 Read-Only:
 
 - `azure` (Attributes) The configuration for connecting to an Azure environment. (see [below for nested schema](#nestedatt--provider_name--azure))
+- `gcp` (Attributes) (see [below for nested schema](#nestedatt--provider_name--gcp))
 
 <a id="nestedatt--provider_name--azure"></a>
 ### Nested Schema for `provider_name.azure`
@@ -68,3 +69,22 @@ Read-Only:
 
 - `scope_type` (String) The type of scope. Valid values are ``tenant`` and ``subscription``.
 - `scope_values` (Set of String) The list of scope values, such as subscription IDs, when the scope type is ``subscription``.
+
+
+
+<a id="nestedatt--provider_name--gcp"></a>
+### Nested Schema for `provider_name.gcp`
+
+Read-Only:
+
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for the GCP integration
+- `gcp_regions` (Set of String) The list of GCP regions to include in the connector scope
+- `scope_configuration` (Attributes) (see [below for nested schema](#nestedatt--provider_name--gcp--scope_configuration))
+
+<a id="nestedatt--provider_name--gcp--scope_configuration"></a>
+### Nested Schema for `provider_name.gcp.scope_configuration`
+
+Read-Only:
+
+- `scope_type` (String) The scope type for the GCP connector
+- `scope_values` (Set of String) The list of scope values for the GCP connector

@@ -1,81 +1,80 @@
 {
-  "tagging": {
-    "permissions": [
-      "config:TagResource",
-      "config:UntagResource",
-      "config:ListTagsForResource"
-    ],
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
-  },
-  "handlers": {
-    "read": {
-      "permissions": [
-        "config:GetConnector",
-        "config:ListTagsForResource"
-      ]
+  "typeName": "AWS::Config::Connector",
+  "description": "Resource Type definition for AWS::Config::Connector",
+  "additionalProperties": false,
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the connector.",
+      "type": "string"
     },
-    "create": {
-      "permissions": [
-        "config:PutConnector",
-        "config:GetConnector",
-        "config:TagResource",
-        "config:ListTagsForResource",
-        "iam:CreateServiceLinkedRole"
-      ]
+    "Name": {
+      "description": "The name of the connector. AWS Config automatically assigns the name when creating the Connector.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
     },
-    "update": {
-      "permissions": [
-        "config:GetConnector",
-        "config:TagResource",
-        "config:UntagResource",
-        "config:ListTagsForResource"
-      ]
+    "ConnectorConfiguration": {
+      "description": "The configuration for the connector that specifies the third-party cloud provider connection details.",
+      "$ref": "#/definitions/ConnectorConfiguration"
     },
-    "list": {
-      "permissions": [
-        "config:ListConnectors"
-      ]
+    "CreatedTime": {
+      "description": "The time at which the connector was created.",
+      "type": "string"
     },
-    "delete": {
-      "permissions": [
-        "config:DeleteConnector"
-      ]
+    "Tags": {
+      "description": "The tags for the connector.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
-  "typeName": "AWS::Config::Connector",
-  "readOnlyProperties": [
-    "/properties/Arn",
-    "/properties/Name",
-    "/properties/CreatedTime"
-  ],
-  "description": "Resource Type definition for AWS::Config::Connector",
-  "createOnlyProperties": [
-    "/properties/ConnectorConfiguration"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
   "definitions": {
+    "ConnectorConfiguration": {
+      "description": "The configuration for the connector. Specify exactly one third-party cloud provider configuration: Azure or Gcp.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Azure": {
+          "description": "The configuration for connecting to Microsoft Azure.",
+          "$ref": "#/definitions/AzureConnectorConfiguration"
+        },
+        "Gcp": {
+          "description": "The configuration for connecting to Google Cloud.",
+          "$ref": "#/definitions/GcpConnectorConfiguration"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "Azure"
+          ]
+        },
+        {
+          "required": [
+            "Gcp"
+          ]
+        }
+      ]
+    },
     "AzureConnectorConfiguration": {
       "description": "Configuration for connecting to Microsoft Azure.",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "TenantIdentifier": {
-          "minLength": 1,
           "description": "The Azure tenant identifier.",
           "type": "string",
+          "minLength": 1,
           "maxLength": 128
         },
         "ClientIdentifier": {
-          "minLength": 1,
           "description": "The Azure client (application) identifier.",
           "type": "string",
+          "minLength": 1,
           "maxLength": 128
         }
       },
@@ -84,33 +83,53 @@
         "ClientIdentifier"
       ]
     },
-    "ConnectorConfiguration": {
-      "description": "The configuration for the connector. Specify the third-party cloud provider configuration.",
-      "additionalProperties": false,
+    "GcpConnectorConfiguration": {
+      "description": "Configuration for connecting to Google Cloud.",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "Azure": {
-          "description": "The configuration for connecting to Microsoft Azure.",
-          "$ref": "#/definitions/AzureConnectorConfiguration"
+        "GcpOrganizationId": {
+          "description": "The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in ServiceAccountEmail. Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "ServiceAccountEmail": {
+          "description": "The email address of the Google Cloud service account that AWS Config uses.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[a-z][a-z0-9\\-]*@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$"
+        },
+        "WorkloadIdentityPoolProvider": {
+          "description": "The full resource name of the workload identity pool provider that AWS Config uses to federate into Google Cloud.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^projects/[0-9]+/locations/global/workloadIdentityPools/[^/]+/providers/[^/]+$"
         }
-      }
+      },
+      "required": [
+        "ServiceAccountEmail",
+        "WorkloadIdentityPoolProvider"
+      ]
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "Value": {
-          "minLength": 0,
-          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
-          "type": "string",
-          "maxLength": 256
-        },
         "Key": {
-          "minLength": 1,
-          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",
           "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",
+          "minLength": 1,
           "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
+          "minLength": 0,
+          "maxLength": 256
         }
       },
       "required": [
@@ -122,35 +141,63 @@
   "required": [
     "ConnectorConfiguration"
   ],
-  "properties": {
-    "CreatedTime": {
-      "description": "The time at which the connector was created.",
-      "type": "string"
-    },
-    "ConnectorConfiguration": {
-      "description": "The configuration for the connector that specifies the third-party cloud provider connection details.",
-      "$ref": "#/definitions/ConnectorConfiguration"
-    },
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the connector.",
-      "type": "string"
-    },
-    "Tags": {
-      "maxItems": 50,
-      "uniqueItems": true,
-      "description": "The tags for the connector.",
-      "insertionOrder": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    },
-    "Name": {
-      "minLength": 1,
-      "description": "The name of the connector. AWS Config automatically assigns the name when creating the Connector.",
-      "type": "string",
-      "maxLength": 256
-    }
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Name",
+    "/properties/CreatedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/ConnectorConfiguration"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "config:TagResource",
+      "config:UntagResource",
+      "config:ListTagsForResource"
+    ]
   },
-  "replacementStrategy": "delete_then_create"
+  "handlers": {
+    "create": {
+      "permissions": [
+        "config:PutConnector",
+        "config:GetConnector",
+        "config:TagResource",
+        "config:ListTagsForResource",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "config:GetConnector",
+        "config:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "config:GetConnector",
+        "config:TagResource",
+        "config:UntagResource",
+        "config:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "config:DeleteConnector"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "config:ListConnectors"
+      ]
+    }
+  }
 }

@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_cimd_policy.example "user_pool_id|cimd_policy_id"

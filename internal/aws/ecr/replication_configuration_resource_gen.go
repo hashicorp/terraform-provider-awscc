@@ -13,7 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -59,6 +61,20 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 		//	        "additionalProperties": false,
 		//	        "description": "An array of objects representing the replication destinations and repository filters for a replication configuration.",
 		//	        "properties": {
+		//	          "DeleteReplication": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Enabled": {
+		//	                "description": "Whether image deletions and image tag removals in the source registry are replicated to the replication destinations.",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Destinations": {
 		//	            "description": "An array of objects representing the destination for a replication rule.",
 		//	            "items": {
@@ -137,6 +153,29 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteReplication
+							"delete_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether image deletions and image tag removals in the source registry are replicated to the replication destinations.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Destinations
 							"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -249,7 +288,9 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"delete_replication":        "DeleteReplication",
 		"destinations":              "Destinations",
+		"enabled":                   "Enabled",
 		"filter":                    "Filter",
 		"filter_type":               "FilterType",
 		"region":                    "Region",

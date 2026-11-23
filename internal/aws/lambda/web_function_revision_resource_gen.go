@@ -84,10 +84,10 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 		//	      "description": "The runtime configuration for the revision.",
 		//	      "properties": {
 		//	        "Runtime": {
-		//	          "description": "The runtime identifier.",
-		//	          "maxLength": 30,
+		//	          "description": "The runtime identifier. Either a short runtime name (for example, nodejs24.x) or a Lambda runtime ARN.",
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "^[a-z][a-z0-9]*[0-9]+(\\.[a-z0-9]+)*$",
+		//	          "pattern": "^([a-z][a-z0-9]*(\\.[a-z0-9]+)*|arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:.+)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -150,11 +150,11 @@ func webFunctionRevisionResource(ctx context.Context) (resource.Resource, error)
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Runtime
 						"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The runtime identifier.",
+							Description: "The runtime identifier. Either a short runtime name (for example, nodejs24.x) or a Lambda runtime ARN.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.UTF8LengthBetween(1, 30),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*[0-9]+(\\.[a-z0-9]+)*$"), ""),
+								stringvalidator.UTF8LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^([a-z][a-z0-9]*(\\.[a-z0-9]+)*|arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:.+)$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

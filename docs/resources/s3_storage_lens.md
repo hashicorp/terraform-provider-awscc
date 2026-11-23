@@ -114,10 +114,12 @@ Required:
 Optional:
 
 - `aws_org` (Attributes) The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--aws_org))
+- `cost_and_usage_reports_publish` (Attributes) Settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports. (see [below for nested schema](#nestedatt--storage_lens_configuration--cost_and_usage_reports_publish))
 - `data_export` (Attributes) Specifies how Amazon S3 Storage Lens metrics should be exported. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export))
 - `exclude` (Attributes) S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--exclude))
 - `expanded_prefixes_data_export` (Attributes) Expanded Prefixes Data Export. (see [below for nested schema](#nestedatt--storage_lens_configuration--expanded_prefixes_data_export))
 - `include` (Attributes) S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--include))
+- `int_access_tiers` (Attributes) Metric breakdown per Intelligent-Tiering access tiers. (see [below for nested schema](#nestedatt--storage_lens_configuration--int_access_tiers))
 - `prefix_delimiter` (String) The delimiter to divide S3 key into hierarchy of prefixes.
 
 Read-Only:
@@ -286,6 +288,32 @@ Optional:
 - `arn` (String) The Amazon Resource Name (ARN) of the specified resource.
 
 
+<a id="nestedatt--storage_lens_configuration--cost_and_usage_reports_publish"></a>
+### Nested Schema for `storage_lens_configuration.cost_and_usage_reports_publish`
+
+Optional:
+
+- `prefix_level` (Attributes) Prefix-level settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports. (see [below for nested schema](#nestedatt--storage_lens_configuration--cost_and_usage_reports_publish--prefix_level))
+
+<a id="nestedatt--storage_lens_configuration--cost_and_usage_reports_publish--prefix_level"></a>
+### Nested Schema for `storage_lens_configuration.cost_and_usage_reports_publish.prefix_level`
+
+Optional:
+
+- `is_enabled` (Boolean) Specifies whether publishing prefix-level metrics to AWS Cost and Usage Reports is enabled or disabled.
+- `selection_criteria` (Attributes) Selection criteria for the data that Amazon S3 Storage Lens publishes to AWS Cost and Usage Reports. (see [below for nested schema](#nestedatt--storage_lens_configuration--cost_and_usage_reports_publish--prefix_level--selection_criteria))
+
+<a id="nestedatt--storage_lens_configuration--cost_and_usage_reports_publish--prefix_level--selection_criteria"></a>
+### Nested Schema for `storage_lens_configuration.cost_and_usage_reports_publish.prefix_level.selection_criteria`
+
+Optional:
+
+- `max_depth` (Number) The maximum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MaxDepth defaults to 3.
+- `min_depth` (Number) The minimum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MinDepth defaults to 1.
+
+
+
+
 <a id="nestedatt--storage_lens_configuration--data_export"></a>
 ### Nested Schema for `storage_lens_configuration.data_export`
 
@@ -441,6 +469,14 @@ Optional:
 
 - `buckets` (Set of String)
 - `regions` (Set of String)
+
+
+<a id="nestedatt--storage_lens_configuration--int_access_tiers"></a>
+### Nested Schema for `storage_lens_configuration.int_access_tiers`
+
+Optional:
+
+- `is_enabled` (Boolean) Specifies whether metric breakdown per Intelligent-Tiering access tiers is enabled or disabled.
 
 
 

@@ -21,6 +21,7 @@ Data Source schema for AWS::AgentRegistry::RegistryRecord
 
 ### Read-Only
 
+- `artifact` (Attributes) The skill package that the registry stores for a skill record that synchronizes a skill package. The package's download URL isn't returned. (see [below for nested schema](#nestedatt--artifact))
 - `created_at` (String) The timestamp when the registry record was created.
 - `created_by` (String) The identifier of the AWS account that created the registry record.
 - `custom_metadata` (String) The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false).
@@ -34,9 +35,18 @@ Data Source schema for AWS::AgentRegistry::RegistryRecord
 - `record_version` (String) The version of the registry record.
 - `registry_arn` (String) The Amazon Resource Name (ARN) of the registry containing the record.
 - `registry_id` (String) The identifier of the registry in which to create the record. You can specify either the registry ID or the registry Amazon Resource Name (ARN). Use the ARN form to reference a registry shared from another account via AWS Resource Access Manager (RAM).
-- `status` (String) The lifecycle status of the registry record.
+- `status` (String) The lifecycle status of the registry record. CREATE_PENDING_AUTH and UPDATE_PENDING_AUTH mean that the record waits for a user to authorize access to a GitHub source. CloudFormation doesn't support GitHub sources, so a create or update that reaches one of these states fails.
+- `synchronized_source` (Attributes) The source that the registry last synchronized the record's skill content from, and the version that it read. Absent until the first successful synchronization. (see [below for nested schema](#nestedatt--synchronized_source))
 - `tags` (Attributes List) Tags to assign to the registry record. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) The timestamp when the registry record was last updated.
+
+<a id="nestedatt--artifact"></a>
+### Nested Schema for `artifact`
+
+Read-Only:
+
+- `sha_256` (String) The SHA-256 checksum of the skill package, as 64 lowercase hexadecimal characters.
+
 
 <a id="nestedatt--descriptors"></a>
 ### Nested Schema for `descriptors`
@@ -131,6 +141,8 @@ Read-Only:
 Read-Only:
 
 - `skill_md` (Attributes) Markdown-format descriptor containing an agent skills document. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md))
+- `skill_package` (Attributes) The source that the registry synchronizes the full skill package from. You can't set it together with SkillMd.Source or SkillMd Data. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_package))
+- `source_configuration` (Attributes) The provider-specific settings of the record's skill source. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--source_configuration))
 
 <a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_md"></a>
 ### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_md`
@@ -139,22 +151,118 @@ Read-Only:
 
 - `data` (String) Descriptor payload data.
 - `data_schema_version` (String) Version of the descriptor type schema.
-- `source` (Attributes) Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source))
+- `source` (Attributes) The source that the registry synchronizes agent skills content from: a SKILL.md document in SkillMd.Source, or a skill package in SkillPackage.Source. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source))
 
 <a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source"></a>
 ### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_md.source`
 
 Read-Only:
 
-- `from_url` (Attributes) URL-based source for SkillMd content (sync is skipped; content is provided inline via Data). (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url))
+- `from_url` (Attributes) URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url))
 
 <a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url"></a>
 ### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_md.source.from_url`
 
 Read-Only:
 
-- `url` (String) URL source for the SkillMd document.
+- `credential_provider_configurations` (Attributes List) The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url--credential_provider_configurations))
+- `url` (String) The URL of the source. For synchronization, specify an s3://<bucket>/<key> URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.
 
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url--credential_provider_configurations"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations`
+
+Read-Only:
+
+- `credential_provider` (Attributes) The credential provider details. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url--credential_provider_configurations--credential_provider))
+- `credential_provider_type` (String) The type of the credential provider.
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url--credential_provider_configurations--credential_provider"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations.credential_provider`
+
+Read-Only:
+
+- `iam_credential_provider` (Attributes) The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url--credential_provider_configurations--credential_provider--iam_credential_provider))
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_md--source--from_url--credential_provider_configurations--credential_provider--iam_credential_provider"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations.credential_provider.iam_credential_provider`
+
+Read-Only:
+
+- `region` (String) The SigV4 signing region.
+- `role_arn` (String) The ARN of the IAM role.
+- `service` (String) The SigV4 signing service name.
+
+
+
+
+
+
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_package"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_package`
+
+Read-Only:
+
+- `source` (Attributes) The source of the skill package, as an s3:// URL of a ZIP object. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source))
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_package.source`
+
+Read-Only:
+
+- `from_url` (Attributes) URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url))
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_package.source.from_url`
+
+Read-Only:
+
+- `credential_provider_configurations` (Attributes List) The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url--credential_provider_configurations))
+- `url` (String) The URL of the source. For synchronization, specify an s3://<bucket>/<key> URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url--credential_provider_configurations"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations`
+
+Read-Only:
+
+- `credential_provider` (Attributes) The credential provider details. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url--credential_provider_configurations--credential_provider))
+- `credential_provider_type` (String) The type of the credential provider.
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url--credential_provider_configurations--credential_provider"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations.credential_provider`
+
+Read-Only:
+
+- `iam_credential_provider` (Attributes) The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url--credential_provider_configurations--credential_provider--iam_credential_provider))
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--skill_package--source--from_url--credential_provider_configurations--credential_provider--iam_credential_provider"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations.credential_provider.iam_credential_provider`
+
+Read-Only:
+
+- `region` (String) The SigV4 signing region.
+- `role_arn` (String) The ARN of the IAM role.
+- `service` (String) The SigV4 signing service name.
+
+
+
+
+
+
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--source_configuration"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.source_configuration`
+
+Read-Only:
+
+- `s3` (Attributes) The settings of an Amazon S3 source. (see [below for nested schema](#nestedatt--descriptors--agent_skills_definition--additional_data--source_configuration--s3))
+
+<a id="nestedatt--descriptors--agent_skills_definition--additional_data--source_configuration--s3"></a>
+### Nested Schema for `descriptors.agent_skills_definition.additional_data.source_configuration.s3`
+
+Read-Only:
+
+- `bucket_owner_account_id` (String) The ID of the AWS account that owns the source bucket. The registry checks that the bucket belongs to this account each time it reads the source. If you omit it for a source that uses an IAM role, the registry expects the bucket in the role's account. A source without a credential provider, which the registry reads as a public object, requires it.
 
 
 
@@ -298,6 +406,24 @@ Read-Only:
 
 
 
+
+
+
+<a id="nestedatt--synchronized_source"></a>
+### Nested Schema for `synchronized_source`
+
+Read-Only:
+
+- `s3` (Attributes) The Amazon S3 source that the registry read. (see [below for nested schema](#nestedatt--synchronized_source--s3))
+
+<a id="nestedatt--synchronized_source--s3"></a>
+### Nested Schema for `synchronized_source.s3`
+
+Read-Only:
+
+- `e_tag` (String) The entity tag (ETag) of the object that the registry read, without quotes, when the object has no version ID. Not recorded for a SKILL.md source on a registry that is encrypted with a customer managed key.
+- `synchronized_at` (String) The timestamp when the registry read the source.
+- `version_id` (String) The version ID of the object that the registry read. Absent when the bucket isn't versioned.
 
 
 

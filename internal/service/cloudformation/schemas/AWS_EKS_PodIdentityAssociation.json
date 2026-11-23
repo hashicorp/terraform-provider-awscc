@@ -25,6 +25,40 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "WorkloadIdentityConfig": {
+      "description": "The workload identity configuration of the pod identity association. When enabled, the association also provisions a SPIFFE identity for the workload. Setting Enabled to false disables workload identity and keeps the ARNs. Removing the property from the template leaves the association unchanged; set Enabled to false to disable workload identity.",
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "description": "Whether workload identity is enabled for the association. Enabling it requires TemplateArn and ProviderArn, and cannot be combined with TargetRoleArn.",
+          "type": "boolean"
+        },
+        "TemplateArn": {
+          "description": "The ARN of the customer-owned IAM workload identity template that renders the workload's SPIFFE identity.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:workload-identity-template/[^/]+$"
+        },
+        "ProviderArn": {
+          "description": "The ARN of the customer-owned IAM workload identity provider that produces the trusted context assertion for the workload.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^arn:aws[a-zA-Z-]*:iam::([0-9]{12}|o-[a-z0-9]{10,32}):workload-identity-provider/[^/]+$"
+        }
+      },
+      "required": [
+        "Enabled"
+      ],
+      "dependencies": {
+        "TemplateArn": [
+          "ProviderArn"
+        ],
+        "ProviderArn": [
+          "TemplateArn"
+        ]
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -73,6 +107,9 @@
       "description": "The Disable Session Tags of the pod identity association.",
       "type": "boolean",
       "minLength": 1
+    },
+    "WorkloadIdentityConfig": {
+      "$ref": "#/definitions/WorkloadIdentityConfig"
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
@@ -123,7 +160,11 @@
         "eks:DescribePodIdentityAssociation",
         "eks:TagResource",
         "iam:PassRole",
-        "iam:GetRole"
+        "iam:GetRole",
+        "iam:PassWorkloadIdentityTemplate",
+        "iam:GetWorkloadIdentityTemplate",
+        "iam:GetWorkloadIdentityTemplateAttestationPolicy",
+        "iam:GetWorkloadIdentityProvider"
       ]
     },
     "read": {
@@ -138,7 +179,11 @@
         "eks:TagResource",
         "eks:UntagResource",
         "iam:PassRole",
-        "iam:GetRole"
+        "iam:GetRole",
+        "iam:PassWorkloadIdentityTemplate",
+        "iam:GetWorkloadIdentityTemplate",
+        "iam:GetWorkloadIdentityTemplateAttestationPolicy",
+        "iam:GetWorkloadIdentityProvider"
       ]
     },
     "delete": {

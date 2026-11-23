@@ -458,6 +458,14 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "Port": {
 		//	          "type": "integer"
 		//	        },
+		//	        "S3AccessRoleArn": {
+		//	          "description": "The ARN for the role the application uses to access its Amazon S3 bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "S3Path": {
+		//	          "description": "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+		//	          "type": "string"
+		//	        },
 		//	        "SecretsManagerOracleAsmAccessRoleArn": {
 		//	          "type": "string"
 		//	        },
@@ -815,6 +823,16 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3AccessRoleArn
+						"s3_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN for the role the application uses to access its Amazon S3 bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Path
+						"s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SecretsManagerOracleAsmAccessRoleArn
 						"secrets_manager_oracle_asm_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

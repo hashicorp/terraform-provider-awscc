@@ -80,6 +80,7 @@ Required:
 
 Optional:
 
+- `delete_replication` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--delete_replication))
 - `repository_filters` (Attributes List) An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>
@@ -89,6 +90,14 @@ Required:
 
 - `region` (String) The Region to replicate to.
 - `registry_id` (String) The AWS account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.
+
+
+<a id="nestedatt--replication_configuration--rules--delete_replication"></a>
+### Nested Schema for `replication_configuration.rules.delete_replication`
+
+Optional:
+
+- `enabled` (Boolean) Whether image deletions and image tag removals in the source registry are replicated to the replication destinations.
 
 
 <a id="nestedatt--replication_configuration--rules--repository_filters"></a>

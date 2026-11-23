@@ -1,0 +1,1 @@
+$ terraform import awscc_opensearchmemory_space.example "arn"

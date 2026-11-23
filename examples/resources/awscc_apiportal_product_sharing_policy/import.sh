@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_product_sharing_policy.example "product_id"

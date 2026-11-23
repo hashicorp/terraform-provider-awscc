@@ -435,7 +435,8 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "srt-caller",
 		//	    "st2110-jpegxs",
 		//	    "cdi",
-		//	    "ndi-speed-hq"
+		//	    "ndi-speed-hq",
+		//	    "rtmp-push"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -559,6 +560,95 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RtmpPushSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the application and stream names, and optional TLS encryption configuration.",
+		//	  "properties": {
+		//	    "ApplicationName": {
+		//	      "description": "The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName.",
+		//	      "type": "string"
+		//	    },
+		//	    "StreamName": {
+		//	      "description": "The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.",
+		//	      "type": "string"
+		//	    },
+		//	    "TlsEncryption": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.",
+		//	      "properties": {
+		//	        "EncryptionConfiguration": {
+		//	          "description": "The configuration settings for TLS encryption.",
+		//	          "properties": {
+		//	            "Public": {
+		//	              "additionalProperties": false,
+		//	              "description": "The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "EncryptionType": {
+		//	          "enum": [
+		//	            "PUBLIC"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EncryptionConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ApplicationName",
+		//	    "StreamName"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rtmp_push_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationName
+				"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StreamName
+				"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TlsEncryption
+				"tls_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Public
+								"public": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration settings for TLS encryption.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionType
+						"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the application and stream names, and optional TLS encryption configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SmoothingLatency
 		// CloudFormation resource type schema:
 		//
@@ -665,6 +755,7 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                             "Algorithm",
+		"application_name":                      "ApplicationName",
 		"automatic":                             "Automatic",
 		"cidr_allow_list":                       "CidrAllowList",
 		"compression_factor":                    "CompressionFactor",
@@ -677,8 +768,10 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encoding_name":                         "EncodingName",
 		"encoding_parameters":                   "EncodingParameters",
 		"encryption":                            "Encryption",
+		"encryption_configuration":              "EncryptionConfiguration",
 		"encryption_key_configuration":          "EncryptionKeyConfiguration",
 		"encryption_key_type":                   "EncryptionKeyType",
+		"encryption_type":                       "EncryptionType",
 		"flow_arn":                              "FlowArn",
 		"interface":                             "Interface",
 		"key":                                   "Key",
@@ -696,15 +789,19 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_status":                         "OutputStatus",
 		"port":                                  "Port",
 		"protocol":                              "Protocol",
+		"public":                                "Public",
 		"remote_id":                             "RemoteId",
 		"role_arn":                              "RoleArn",
 		"router_integration_state":              "RouterIntegrationState",
 		"router_integration_transit_encryption": "RouterIntegrationTransitEncryption",
+		"rtmp_push_settings":                    "RtmpPushSettings",
 		"secret_arn":                            "SecretArn",
 		"secrets_manager":                       "SecretsManager",
 		"smoothing_latency":                     "SmoothingLatency",
 		"stream_id":                             "StreamId",
+		"stream_name":                           "StreamName",
 		"tags":                                  "Tags",
+		"tls_encryption":                        "TlsEncryption",
 		"value":                                 "Value",
 		"vpc_interface_attachment":              "VpcInterfaceAttachment",
 		"vpc_interface_name":                    "VpcInterfaceName",

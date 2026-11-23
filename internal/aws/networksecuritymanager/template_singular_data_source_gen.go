@@ -153,6 +153,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A description of the template.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"template_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -175,6 +176,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the template.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/

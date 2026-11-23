@@ -22,6 +22,15 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::RolesAnywhere::TrustAnchor resource.
 func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CrlDpRevocationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"crl_dp_revocation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -236,22 +245,23 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::TrustAnchor").WithTerraformTypeName("awscc_rolesanywhere_trust_anchor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"acm_pca_arn":           "AcmPcaArn",
-		"channel":               "Channel",
-		"enabled":               "Enabled",
-		"event":                 "Event",
-		"key":                   "Key",
-		"name":                  "Name",
-		"notification_settings": "NotificationSettings",
-		"source":                "Source",
-		"source_data":           "SourceData",
-		"source_type":           "SourceType",
-		"tags":                  "Tags",
-		"threshold":             "Threshold",
-		"trust_anchor_arn":      "TrustAnchorArn",
-		"trust_anchor_id":       "TrustAnchorId",
-		"value":                 "Value",
-		"x509_certificate_data": "X509CertificateData",
+		"acm_pca_arn":               "AcmPcaArn",
+		"channel":                   "Channel",
+		"crl_dp_revocation_enabled": "CrlDpRevocationEnabled",
+		"enabled":                   "Enabled",
+		"event":                     "Event",
+		"key":                       "Key",
+		"name":                      "Name",
+		"notification_settings":     "NotificationSettings",
+		"source":                    "Source",
+		"source_data":               "SourceData",
+		"source_type":               "SourceType",
+		"tags":                      "Tags",
+		"threshold":                 "Threshold",
+		"trust_anchor_arn":          "TrustAnchorArn",
+		"trust_anchor_id":           "TrustAnchorId",
+		"value":                     "Value",
+		"x509_certificate_data":     "X509CertificateData",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

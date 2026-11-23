@@ -1,0 +1,129 @@
+{
+  "typeName": "AWS::Cognito::CIMDPolicy",
+  "description": "Resource Type definition for AWS::Cognito::CIMDPolicy",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "definitions": {
+    "CIMDPolicyIdType": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9]+$"
+    },
+    "CIMDPolicyNameType": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\p{Z}]+"
+    },
+    "CacheDurationType": {
+      "type": "integer",
+      "minimum": 86400,
+      "maximum": 31556952
+    },
+    "URLPatternType": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 256,
+      "pattern": "^https://[^\\s]+$"
+    },
+    "URLPatternListType": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/definitions/URLPatternType"
+      }
+    }
+  },
+  "properties": {
+    "UserPoolId": {
+      "type": "string"
+    },
+    "ClientId": {
+      "type": "string"
+    },
+    "CIMDPolicyId": {
+      "$ref": "#/definitions/CIMDPolicyIdType"
+    },
+    "PolicyName": {
+      "$ref": "#/definitions/CIMDPolicyNameType"
+    },
+    "CacheDuration": {
+      "$ref": "#/definitions/CacheDurationType"
+    },
+    "URLPatterns": {
+      "$ref": "#/definitions/URLPatternListType"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "UserPoolId",
+    "ClientId",
+    "PolicyName",
+    "URLPatterns"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserPoolId"
+  ],
+  "readOnlyProperties": [
+    "/properties/CIMDPolicyId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientId"
+  ],
+  "primaryIdentifier": [
+    "/properties/UserPoolId",
+    "/properties/CIMDPolicyId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cognito-idp:CreateCIMDPolicy",
+        "cognito-idp:DescribeCIMDPolicy",
+        "cognito-idp:ListCIMDPolicies"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "read": {
+      "permissions": [
+        "cognito-idp:DescribeCIMDPolicy"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "update": {
+      "permissions": [
+        "cognito-idp:UpdateCIMDPolicy"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:DeleteCIMDPolicy"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "list": {
+      "permissions": [
+        "cognito-idp:ListCIMDPolicies"
+      ],
+      "timeoutInMinutes": 2,
+      "handlerSchema": {
+        "properties": {
+          "UserPoolId": {
+            "$ref": "resource-schema.json#/properties/UserPoolId"
+          }
+        },
+        "required": [
+          "UserPoolId"
+        ]
+      }
+    }
+  }
+}

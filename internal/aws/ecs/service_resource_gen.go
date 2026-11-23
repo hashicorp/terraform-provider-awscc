@@ -975,6 +975,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "",
 		//	    "properties": {
+		//	      "DeregistrationDelay": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "TimeoutSeconds": {
+		//	            "maximum": 3600,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "Filters": {
 		//	        "additionalProperties": false,
 		//	        "description": "",
@@ -1052,6 +1064,28 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"gateway_connectors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DeregistrationDelay
+					"deregistration_delay": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TimeoutSeconds
+							"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 3600),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Filters
 					"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3166,6 +3200,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"deployment_circuit_breaker":        "DeploymentCircuitBreaker",
 		"deployment_configuration":          "DeploymentConfiguration",
 		"deployment_controller":             "DeploymentController",
+		"deregistration_delay":              "DeregistrationDelay",
 		"desired_count":                     "DesiredCount",
 		"discovery_name":                    "DiscoveryName",
 		"dns_name":                          "DnsName",
@@ -3269,6 +3304,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"timeout":                           "Timeout",
 		"timeout_configuration":             "TimeoutConfiguration",
 		"timeout_in_minutes":                "TimeoutInMinutes",
+		"timeout_seconds":                   "TimeoutSeconds",
 		"tls":                               "Tls",
 		"type":                              "Type",
 		"unhealthy_threshold_count":         "UnhealthyThresholdCount",

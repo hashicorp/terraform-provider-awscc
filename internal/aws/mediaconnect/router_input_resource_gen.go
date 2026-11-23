@@ -206,6 +206,60 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "RtmpPush": {
+		//	                "additionalProperties": false,
+		//	                "description": "The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol.",
+		//	                "properties": {
+		//	                  "NamingConfiguration": {
+		//	                    "description": "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+		//	                    "properties": {
+		//	                      "Automatic": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Manual": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The manual RTMP naming configuration, where you specify the application and stream names.",
+		//	                        "properties": {
+		//	                          "ApplicationName": {
+		//	                            "description": "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "StreamName": {
+		//	                            "description": "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ApplicationName",
+		//	                          "StreamName"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "NamingType": {
+		//	                    "enum": [
+		//	                      "MANUAL",
+		//	                      "AUTOMATIC"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "The port number for the RTMP protocol. The only valid value is 1935.",
+		//	                    "maximum": 1935,
+		//	                    "minimum": 1935,
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "NamingConfiguration",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "Rtp": {
 		//	                "additionalProperties": false,
 		//	                "description": "The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state.",
@@ -573,6 +627,123 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "Port"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "SrtCaller": {
+		//	                "additionalProperties": false,
+		//	                "description": "The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration.",
+		//	                "properties": {
+		//	                  "DecryptionConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters.",
+		//	                    "properties": {
+		//	                      "EncryptionKey": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+		//	                        "properties": {
+		//	                          "RoleArn": {
+		//	                            "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "SecretArn": {
+		//	                            "description": "The ARN of the Secrets Manager secret used for transit encryption.",
+		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "RoleArn",
+		//	                          "SecretArn"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "EncryptionKey"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "MinimumLatencyMilliseconds": {
+		//	                    "description": "The minimum latency in milliseconds for the SRT protocol in caller mode.",
+		//	                    "maximum": 10000,
+		//	                    "minimum": 10,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "SourceAddress": {
+		//	                    "description": "The source IP address for the SRT protocol in caller mode.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SourcePort": {
+		//	                    "description": "The source port number for the SRT protocol in caller mode.",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1024,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "StreamId": {
+		//	                    "description": "The stream ID for the SRT protocol in caller mode.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MinimumLatencyMilliseconds",
+		//	                  "SourceAddress",
+		//	                  "SourcePort"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SrtListener": {
+		//	                "additionalProperties": false,
+		//	                "description": "The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration.",
+		//	                "properties": {
+		//	                  "DecryptionConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters.",
+		//	                    "properties": {
+		//	                      "EncryptionKey": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+		//	                        "properties": {
+		//	                          "RoleArn": {
+		//	                            "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "SecretArn": {
+		//	                            "description": "The ARN of the Secrets Manager secret used for transit encryption.",
+		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "RoleArn",
+		//	                          "SecretArn"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "EncryptionKey"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "MinimumLatencyMilliseconds": {
+		//	                    "description": "The minimum latency in milliseconds for the SRT protocol in listener mode.",
+		//	                    "maximum": 10000,
+		//	                    "minimum": 10,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "The port number for the SRT protocol in listener mode.",
+		//	                    "maximum": 30000,
+		//	                    "minimum": 3000,
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MinimumLatencyMilliseconds",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -601,7 +772,8 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	            "RTP",
 		//	            "RIST",
 		//	            "SRT_CALLER",
-		//	            "SRT_LISTENER"
+		//	            "SRT_LISTENER",
+		//	            "RTMP_PUSH"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -628,6 +800,60 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		//	              "required": [
 		//	                "Port",
 		//	                "RecoveryLatencyMilliseconds"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "RtmpPush": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol.",
+		//	              "properties": {
+		//	                "NamingConfiguration": {
+		//	                  "description": "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+		//	                  "properties": {
+		//	                    "Automatic": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Manual": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "The manual RTMP naming configuration, where you specify the application and stream names.",
+		//	                      "properties": {
+		//	                        "ApplicationName": {
+		//	                          "description": "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "StreamName": {
+		//	                          "description": "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "ApplicationName",
+		//	                        "StreamName"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "NamingType": {
+		//	                  "enum": [
+		//	                    "MANUAL",
+		//	                    "AUTOMATIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Port": {
+		//	                  "description": "The port number for the RTMP protocol. The only valid value is 1935.",
+		//	                  "maximum": 1935,
+		//	                  "minimum": 1935,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "NamingConfiguration",
+		//	                "Port"
 		//	              ],
 		//	              "type": "object"
 		//	            },
@@ -968,6 +1194,103 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RtmpPush
+									"rtmp_push": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: NamingConfiguration
+											"naming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Automatic
+													"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Manual
+													"manual": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ApplicationName
+															"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: StreamName
+															"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The manual RTMP naming configuration, where you specify the application and stream names.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: NamingType
+											"naming_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"MANUAL",
+														"AUTOMATIC",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The port number for the RTMP protocol. The only valid value is 1935.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(1935, 1935),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1611,6 +1934,203 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: SrtCaller
+									"srt_caller": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DecryptionConfiguration
+											"decryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EncryptionKey
+													"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: RoleArn
+															"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: SecretArn
+															"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MinimumLatencyMilliseconds
+											"minimum_latency_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The minimum latency in milliseconds for the SRT protocol in caller mode.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(10, 10000),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SourceAddress
+											"source_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The source IP address for the SRT protocol in caller mode.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SourcePort
+											"source_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The source port number for the SRT protocol in caller mode.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(1024, 65535),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: StreamId
+											"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The stream ID for the SRT protocol in caller mode.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SrtListener
+									"srt_listener": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DecryptionConfiguration
+											"decryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EncryptionKey
+													"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: RoleArn
+															"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: SecretArn
+															"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MinimumLatencyMilliseconds
+											"minimum_latency_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The minimum latency in milliseconds for the SRT protocol in listener mode.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(10, 10000),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The port number for the SRT protocol in listener mode.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(3000, 30000),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "A list of exactly two protocol configurations for the merge input sources. Both must use the same protocol type.",
@@ -1658,6 +2178,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 									"RIST",
 									"SRT_CALLER",
 									"SRT_LISTENER",
+									"RTMP_PUSH",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1698,6 +2219,103 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RtmpPush
+								"rtmp_push": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: NamingConfiguration
+										"naming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Automatic
+												"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+													CustomType:  jsontypes.NormalizedType{},
+													Description: "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Manual
+												"manual": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ApplicationName
+														"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: StreamName
+														"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The manual RTMP naming configuration, where you specify the application and stream names.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: NamingType
+										"naming_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"MANUAL",
+													"AUTOMATIC",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Port
+										"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The port number for the RTMP protocol. The only valid value is 1935.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1935, 1935),
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for a router input using the RTMP (Real-Time Messaging Protocol) protocol.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2487,6 +3105,319 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StreamDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Configuration details for the router input stream.",
+		//	  "properties": {
+		//	    "DestinationEndpoint": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration details for a router input stream that is represented by a destination endpoint.",
+		//	      "type": "object"
+		//	    },
+		//	    "Failover": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration details for a failover router input that can automatically switch between two sources.",
+		//	      "properties": {
+		//	        "SourceIndexOneStreamDetails": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration details for an indexed stream in a failover router input setup.",
+		//	          "properties": {
+		//	            "RtmpPush": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.",
+		//	              "properties": {
+		//	                "ApplicationName": {
+		//	                  "description": "The name of the RTMP application.",
+		//	                  "type": "string"
+		//	                },
+		//	                "StreamName": {
+		//	                  "description": "The name of the RTMP stream.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ApplicationName",
+		//	                "StreamName"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SourceIndex": {
+		//	              "description": "The index number (0 or 1) assigned to this source in the failover configuration.",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SourceIndex"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SourceIndexZeroStreamDetails": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration details for an indexed stream in a failover router input setup.",
+		//	          "properties": {
+		//	            "RtmpPush": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.",
+		//	              "properties": {
+		//	                "ApplicationName": {
+		//	                  "description": "The name of the RTMP application.",
+		//	                  "type": "string"
+		//	                },
+		//	                "StreamName": {
+		//	                  "description": "The name of the RTMP stream.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ApplicationName",
+		//	                "StreamName"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SourceIndex": {
+		//	              "description": "The index number (0 or 1) assigned to this source in the failover configuration.",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SourceIndex"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceIndexOneStreamDetails",
+		//	        "SourceIndexZeroStreamDetails"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MediaConnectFlow": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration details for a MediaConnect flow when used as a router input source.",
+		//	      "type": "object"
+		//	    },
+		//	    "MediaLiveChannel": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration details for a MediaLive channel when used as a router input source.",
+		//	      "type": "object"
+		//	    },
+		//	    "Merge": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration details for a merge router input that combines two input sources.",
+		//	      "properties": {
+		//	        "SourceIndexOneStreamDetails": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration details for an indexed stream in a merge router input setup.",
+		//	          "properties": {
+		//	            "SourceIndex": {
+		//	              "description": "The index number (0 or 1) assigned to this source in the merge configuration.",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SourceIndex"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SourceIndexZeroStreamDetails": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration details for an indexed stream in a merge router input setup.",
+		//	          "properties": {
+		//	            "SourceIndex": {
+		//	              "description": "The index number (0 or 1) assigned to this source in the merge configuration.",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SourceIndex"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceIndexOneStreamDetails",
+		//	        "SourceIndexZeroStreamDetails"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Standard": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration details for a standard router input stream type.",
+		//	      "properties": {
+		//	        "RtmpPush": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.",
+		//	          "properties": {
+		//	            "ApplicationName": {
+		//	              "description": "The name of the RTMP application.",
+		//	              "type": "string"
+		//	            },
+		//	            "StreamName": {
+		//	              "description": "The name of the RTMP stream.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApplicationName",
+		//	            "StreamName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"stream_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationEndpoint
+				"destination_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Configuration details for a router input stream that is represented by a destination endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Failover
+				"failover": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SourceIndexOneStreamDetails
+						"source_index_one_stream_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RtmpPush
+								"rtmp_push": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ApplicationName
+										"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the RTMP application.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StreamName
+										"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the RTMP stream.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SourceIndex
+								"source_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The index number (0 or 1) assigned to this source in the failover configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration details for an indexed stream in a failover router input setup.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceIndexZeroStreamDetails
+						"source_index_zero_stream_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RtmpPush
+								"rtmp_push": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ApplicationName
+										"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the RTMP application.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StreamName
+										"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the RTMP stream.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SourceIndex
+								"source_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The index number (0 or 1) assigned to this source in the failover configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration details for an indexed stream in a failover router input setup.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration details for a failover router input that can automatically switch between two sources.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MediaConnectFlow
+				"media_connect_flow": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Configuration details for a MediaConnect flow when used as a router input source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MediaLiveChannel
+				"media_live_channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Configuration details for a MediaLive channel when used as a router input source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Merge
+				"merge": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SourceIndexOneStreamDetails
+						"source_index_one_stream_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SourceIndex
+								"source_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The index number (0 or 1) assigned to this source in the merge configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration details for an indexed stream in a merge router input setup.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceIndexZeroStreamDetails
+						"source_index_zero_stream_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SourceIndex
+								"source_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The index number (0 or 1) assigned to this source in the merge configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration details for an indexed stream in a merge router input setup.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration details for a merge router input that combines two input sources.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Standard
+				"standard": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RtmpPush
+						"rtmp_push": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApplicationName
+								"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the RTMP application.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StreamName
+								"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the RTMP stream.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration details for an RTMP (Real-Time Messaging Protocol) router input stream, including the application and stream names.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration details for a standard router input stream type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration details for the router input stream.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2752,6 +3683,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_name":                       "ApplicationName",
 		"arn":                                    "Arn",
 		"associated_destination_endpoint_arns":   "AssociatedDestinationEndpointArns",
 		"automatic":                              "Automatic",
@@ -2782,6 +3714,7 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                    "Key",
 		"maintenance_configuration":              "MaintenanceConfiguration",
 		"maintenance_type":                       "MaintenanceType",
+		"manual":                                 "Manual",
 		"maximum_bitrate":                        "MaximumBitrate",
 		"media_connect_flow":                     "MediaConnectFlow",
 		"media_live_channel":                     "MediaLiveChannel",
@@ -2792,6 +3725,8 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		"merge_recovery_window_milliseconds":     "MergeRecoveryWindowMilliseconds",
 		"minimum_latency_milliseconds":           "MinimumLatencyMilliseconds",
 		"name":                                   "Name",
+		"naming_configuration":                   "NamingConfiguration",
+		"naming_type":                            "NamingType",
 		"network_interface_arn":                  "NetworkInterfaceArn",
 		"port":                                   "Port",
 		"preferred_day_time":                     "PreferredDayTime",
@@ -2806,11 +3741,15 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		"routed_outputs":                         "RoutedOutputs",
 		"router_input_id":                        "Id",
 		"routing_scope":                          "RoutingScope",
+		"rtmp_push":                              "RtmpPush",
 		"rtp":                                    "Rtp",
 		"secret_arn":                             "SecretArn",
 		"secrets_manager":                        "SecretsManager",
 		"silent_audio":                           "SilentAudio",
 		"source_address":                         "SourceAddress",
+		"source_index":                           "SourceIndex",
+		"source_index_one_stream_details":        "SourceIndexOneStreamDetails",
+		"source_index_zero_stream_details":       "SourceIndexZeroStreamDetails",
 		"source_port":                            "SourcePort",
 		"source_priority_mode":                   "SourcePriorityMode",
 		"source_transit_decryption":              "SourceTransitDecryption",
@@ -2819,7 +3758,9 @@ func routerInputResource(ctx context.Context) (resource.Resource, error) {
 		"srt_listener":                           "SrtListener",
 		"standard":                               "Standard",
 		"state":                                  "State",
+		"stream_details":                         "StreamDetails",
 		"stream_id":                              "StreamId",
+		"stream_name":                            "StreamName",
 		"tags":                                   "Tags",
 		"threshold_seconds":                      "ThresholdSeconds",
 		"tier":                                   "Tier",

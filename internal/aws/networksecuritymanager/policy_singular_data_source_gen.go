@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -71,7 +72,8 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of firewall.",
 		//	  "enum": [
 		//	    "WAF",
-		//	    "SHIELD_ADVANCED"
+		//	    "SHIELD_ADVANCED",
+		//	    "IGW_FIREWALL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -100,6 +102,61 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration settings for policy behavior.",
 		//	  "properties": {
+		//	    "IgwFirewallConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Internet gateway firewall policy settings. Populated only for IGW_FIREWALL firewall type policies.",
+		//	      "properties": {
+		//	        "DefaultSubnetConnectivity": {
+		//	          "description": "The default internet connectivity treatment applied to subnets in scope unless a subnet connectivity override applies. Required for IGW_FIREWALL policies.",
+		//	          "enum": [
+		//	            "flexible",
+		//	            "bidirectional",
+		//	            "outbound-only"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SubnetConnectivityOverrides": {
+		//	          "description": "An ordered list of subnet connectivity overrides. When a subnet matches more than one override, the first match applies. At most one override per connectivity type.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Applies a connectivity treatment other than the policy default to the subnets that the referenced scope selects.",
+		//	            "properties": {
+		//	              "ConnectivityType": {
+		//	                "description": "The connectivity treatment applied to the subnets that the referenced scope selects.",
+		//	                "enum": [
+		//	                  "flexible",
+		//	                  "bidirectional",
+		//	                  "outbound-only",
+		//	                  "exclude"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Scopes": {
+		//	                "description": "The ARN of the IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE scope whose selected subnets receive ConnectivityType.",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "maxLength": 1010,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:(.+)$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ConnectivityType",
+		//	              "Scopes"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 4,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RemediationEnabled": {
 		//	      "description": "Controls automatic remediation of non-compliant resources.",
 		//	      "type": "boolean"
@@ -140,6 +197,38 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IgwFirewallConfig
+				"igw_firewall_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultSubnetConnectivity
+						"default_subnet_connectivity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The default internet connectivity treatment applied to subnets in scope unless a subnet connectivity override applies. Required for IGW_FIREWALL policies.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetConnectivityOverrides
+						"subnet_connectivity_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConnectivityType
+									"connectivity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The connectivity treatment applied to the subnets that the referenced scope selects.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Scopes
+									"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The ARN of the IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE scope whose selected subnets receive ConnectivityType.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "An ordered list of subnet connectivity overrides. When a subnet matches more than one override, the first match applies. At most one override per connectivity type.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Internet gateway firewall policy settings. Populated only for IGW_FIREWALL firewall type policies.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: RemediationEnabled
 				"remediation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Controls automatic remediation of non-compliant resources.",
@@ -332,8 +421,11 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"associated_template_and_rule_list":    "AssociatedTemplateAndRuleList",
 		"conflict_resolution":                  "ConflictResolution",
+		"connectivity_type":                    "ConnectivityType",
+		"default_subnet_connectivity":          "DefaultSubnetConnectivity",
 		"existing_customer_web_acl_resolution": "ExistingCustomerWebACLResolution",
 		"firewall_type":                        "FirewallType",
+		"igw_firewall_config":                  "IgwFirewallConfig",
 		"key":                                  "Key",
 		"policy_arn":                           "PolicyArn",
 		"policy_configuration":                 "PolicyConfiguration",
@@ -344,7 +436,9 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"remediation_enabled":                  "RemediationEnabled",
 		"resources_clean_up":                   "ResourcesCleanUp",
 		"rule_arn":                             "RuleArn",
+		"scopes":                               "Scopes",
 		"status":                               "Status",
+		"subnet_connectivity_overrides":        "SubnetConnectivityOverrides",
 		"tags":                                 "Tags",
 		"template_arn":                         "TemplateArn",
 		"updated_at":                           "UpdatedAt",

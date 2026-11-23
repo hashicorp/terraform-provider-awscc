@@ -86,7 +86,7 @@
     }
   },
   "definitions": {
-    "ClaimMatchValue": {
+    "ClaimMatchValueType": {
       "oneOf": [
         {
           "type": "object",
@@ -127,11 +127,11 @@
         }
       ]
     },
-    "AuthorizingClaimMatchValue": {
+    "AuthorizingClaimMatchValueType": {
       "type": "object",
       "properties": {
         "ClaimMatchValue": {
-          "$ref": "#/definitions/ClaimMatchValue"
+          "$ref": "#/definitions/ClaimMatchValueType"
         },
         "ClaimMatchOperator": {
           "type": "string",
@@ -165,7 +165,7 @@
           ]
         },
         "AuthorizingClaimMatchValue": {
-          "$ref": "#/definitions/AuthorizingClaimMatchValue"
+          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
         }
       },
       "required": [
@@ -175,7 +175,7 @@
       ],
       "additionalProperties": false
     },
-    "CustomJWTAuthorizer": {
+    "CustomJWTAuthorizerConfiguration": {
       "type": "object",
       "properties": {
         "DiscoveryUrl": {
@@ -230,7 +230,7 @@
           "title": "CustomJWTAuthorizer",
           "properties": {
             "CustomJWTAuthorizer": {
-              "$ref": "#/definitions/CustomJWTAuthorizer"
+              "$ref": "#/definitions/CustomJWTAuthorizerConfiguration"
             }
           },
           "required": [
@@ -238,8 +238,7 @@
           ],
           "additionalProperties": false
         }
-      ],
-      "description": "The authorizer configuration for the payment manager"
+      ]
     },
     "WorkloadIdentityDetails": {
       "type": "object",
@@ -250,8 +249,7 @@
           "maxLength": 1024
         }
       },
-      "additionalProperties": false,
-      "description": "The workload identity details for the payment manager"
+      "additionalProperties": false
     },
     "Tag": {
       "type": "object",

@@ -1,0 +1,1 @@
+$ terraform import awscc_opensearchservice_replication_peer.example "domain_name|peer_domain_arn"

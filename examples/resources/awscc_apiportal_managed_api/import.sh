@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_managed_api.example "managed_api_arn"

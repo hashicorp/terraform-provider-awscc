@@ -49,7 +49,7 @@ resource "awscc_apigateway_domain_name" "example" {
 - `ownership_verification_certificate_arn` (String) The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.
 - `regional_certificate_arn` (String)
 - `routing_mode` (String)
-- `security_policy` (String)
+- `security_policy` (String) The Transport Layer Security (TLS) version + cipher suite for this DomainName.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -102,6 +102,9 @@
         "Exclude": {
           "$ref": "#/definitions/BucketsAndRegions"
         },
+        "IntAccessTiers": {
+          "$ref": "#/definitions/IntAccessTiers"
+        },
         "IsEnabled": {
           "description": "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
           "type": "boolean"
@@ -128,6 +131,9 @@
         },
         "ExpandedPrefixesDataExport": {
           "$ref": "#/definitions/StorageLensExpandedPrefixesDataExport"
+        },
+        "CostAndUsageReportsPublish": {
+          "$ref": "#/definitions/CostAndUsageReportsPublish"
         }
       },
       "required": [
@@ -178,6 +184,16 @@
       ],
       "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
       "type": "object"
+    },
+    "CostAndUsageReportsPublish": {
+      "description": "Settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "PrefixLevel": {
+          "$ref": "#/definitions/CostAndUsageReportsPrefixLevel"
+        }
+      }
     },
     "DetailedStatusCodesMetrics": {
       "description": "Enables detailed status codes metrics.",
@@ -407,6 +423,17 @@
         "IsEnabled"
       ]
     },
+    "IntAccessTiers": {
+      "description": "Metric breakdown per Intelligent-Tiering access tiers.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "IsEnabled": {
+          "description": "Specifies whether metric breakdown per Intelligent-Tiering access tiers is enabled or disabled.",
+          "type": "boolean"
+        }
+      }
+    },
     "ActivityMetrics": {
       "description": "Enables activity metrics.",
       "additionalProperties": false,
@@ -465,6 +492,25 @@
         "KeyId"
       ]
     },
+    "CostAndUsageReportsSelectionCriteria": {
+      "description": "Selection criteria for the data that Amazon S3 Storage Lens publishes to AWS Cost and Usage Reports.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MaxDepth": {
+          "description": "The maximum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MaxDepth defaults to 3.",
+          "maximum": 15,
+          "type": "integer",
+          "minimum": 1
+        },
+        "MinDepth": {
+          "description": "The minimum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MinDepth defaults to 1.",
+          "maximum": 15,
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
     "AdvancedPerformanceMetrics": {
       "description": "Advanced Performance Metrics.",
       "additionalProperties": false,
@@ -482,6 +528,23 @@
       "description": "The ID that identifies the Amazon S3 Storage Lens configuration.",
       "type": "string",
       "maxLength": 64
+    },
+    "CostAndUsageReportsPrefixLevel": {
+      "description": "Prefix-level settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "IsEnabled": {
+          "description": "Specifies whether publishing prefix-level metrics to AWS Cost and Usage Reports is enabled or disabled.",
+          "type": "boolean"
+        },
+        "SelectionCriteria": {
+          "$ref": "#/definitions/CostAndUsageReportsSelectionCriteria"
+        }
+      },
+      "required": [
+        "IsEnabled"
+      ]
     },
     "Tag": {
       "additionalProperties": false,

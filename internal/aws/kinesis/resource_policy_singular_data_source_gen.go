@@ -34,7 +34,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the AWS Kinesis resource to which the policy applies.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
+		//	  "pattern": "arn:aws.*:kinesis:.*:\\d{12}:(stream|queue)/\\S+",
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

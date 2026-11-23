@@ -1,0 +1,167 @@
+{
+  "typeName": "AWS::APIPortal::ProductPage",
+  "description": "Resource Type definition for AWS::APIPortal::ProductPage. A free-form documentation page within an AWS::APIPortal::Product.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "ProductPageArn": {
+      "type": "string",
+      "description": "The ARN of the product page.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "ProductPageId": {
+      "type": "string",
+      "description": "The product page identifier.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "ProductId": {
+      "type": "string",
+      "description": "The identifier of the parent Product.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "DisplayContent": {
+      "$ref": "#/definitions/DisplayContent"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the product page was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the product page.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "DisplayContent": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The displayed content of the product page.",
+      "properties": {
+        "Title": {
+          "type": "string",
+          "description": "The title of the product page.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "Body": {
+          "type": "string",
+          "description": "Markdown-formatted body of the product page.",
+          "minLength": 1,
+          "maxLength": 32768
+        }
+      },
+      "required": [
+        "Title",
+        "Body"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ProductId",
+    "DisplayContent"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProductId"
+  ],
+  "readOnlyProperties": [
+    "/properties/ProductPageArn",
+    "/properties/ProductPageId",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProductPageArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ProductId",
+      "/properties/ProductPageId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apiportal:TagResource",
+      "apiportal:UntagResource",
+      "apiportal:GetProductPage"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:CreateProductPage",
+        "apiportal:GetProductPage",
+        "apiportal:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetProductPage"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:UpdateProductPage",
+        "apiportal:GetProductPage",
+        "apiportal:TagResource",
+        "apiportal:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DeleteProductPage",
+        "apiportal:GetProductPage"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ProductId": {
+            "$ref": "resource-schema.json#/properties/ProductId"
+          }
+        },
+        "required": [
+          "ProductId"
+        ]
+      },
+      "permissions": [
+        "apiportal:ListProductPages"
+      ]
+    }
+  }
+}

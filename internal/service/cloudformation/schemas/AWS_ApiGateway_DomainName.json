@@ -99,7 +99,7 @@
     },
     "SecurityPolicy": {
       "type": "string",
-      "description": ""
+      "description": "The Transport Layer Security (TLS) version + cipher suite for this DomainName."
     },
     "EndpointAccessMode": {
       "type": "string",

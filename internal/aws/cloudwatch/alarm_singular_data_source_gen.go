@@ -692,7 +692,7 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "Value": {
 		//	        "description": "The value for the specified tag key.",
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },

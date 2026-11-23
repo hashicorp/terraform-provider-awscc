@@ -1820,6 +1820,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "AllowPrivilegeEscalation": {
 		//	                    "type": "boolean"
 		//	                  },
+		//	                  "Capabilities": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Add": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "Drop": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "Privileged": {
 		//	                    "type": "boolean"
 		//	                  },
@@ -1834,6 +1856,21 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  },
 		//	                  "RunAsUser": {
 		//	                    "type": "integer"
+		//	                  },
+		//	                  "SeccompProfile": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "LocalhostProfile": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Type": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Type"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  }
 		//	                },
 		//	                "type": "object"
@@ -1970,6 +2007,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "AllowPrivilegeEscalation": {
 		//	                    "type": "boolean"
 		//	                  },
+		//	                  "Capabilities": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Add": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "Drop": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "Privileged": {
 		//	                    "type": "boolean"
 		//	                  },
@@ -1984,6 +2043,21 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  },
 		//	                  "RunAsUser": {
 		//	                    "type": "integer"
+		//	                  },
+		//	                  "SeccompProfile": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "LocalhostProfile": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Type": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Type"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  }
 		//	                },
 		//	                "type": "object"
@@ -2043,6 +2117,39 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            },
 		//	            "Namespace": {
 		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SecurityContext": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FsGroup": {
+		//	              "type": "integer"
+		//	            },
+		//	            "RunAsGroup": {
+		//	              "type": "integer"
+		//	            },
+		//	            "RunAsNonRoot": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "RunAsUser": {
+		//	              "type": "integer"
+		//	            },
+		//	            "SeccompProfile": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "LocalhostProfile": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -2199,6 +2306,22 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 											"allow_privilege_escalation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: Capabilities
+											"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Add
+													"add": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Drop
+													"drop": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: Privileged
 											"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
@@ -2217,6 +2340,20 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 											}, /*END ATTRIBUTE*/
 											// Property: RunAsUser
 											"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: SeccompProfile
+											"seccomp_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: LocalhostProfile
+													"localhost_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -2337,6 +2474,22 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 											"allow_privilege_escalation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: Capabilities
+											"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Add
+													"add": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Drop
+													"drop": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: Privileged
 											"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
@@ -2355,6 +2508,20 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 											}, /*END ATTRIBUTE*/
 											// Property: RunAsUser
 											"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: SeccompProfile
+											"seccomp_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: LocalhostProfile
+													"localhost_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -2405,6 +2572,42 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 								}, /*END ATTRIBUTE*/
 								// Property: Namespace
 								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecurityContext
+						"security_context": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FsGroup
+								"fs_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: RunAsGroup
+								"run_as_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: RunAsNonRoot
+								"run_as_non_root": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: RunAsUser
+								"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SeccompProfile
+								"seccomp_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LocalhostProfile
+										"localhost_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -3440,6 +3643,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                            "AllowPrivilegeEscalation": {
 		//	                              "type": "boolean"
 		//	                            },
+		//	                            "Capabilities": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Add": {
+		//	                                  "insertionOrder": false,
+		//	                                  "items": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                },
+		//	                                "Drop": {
+		//	                                  "insertionOrder": false,
+		//	                                  "items": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
 		//	                            "Privileged": {
 		//	                              "type": "boolean"
 		//	                            },
@@ -3454,6 +3679,21 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                            },
 		//	                            "RunAsUser": {
 		//	                              "type": "integer"
+		//	                            },
+		//	                            "SeccompProfile": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "LocalhostProfile": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Type": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Type"
+		//	                              ],
+		//	                              "type": "object"
 		//	                            }
 		//	                          },
 		//	                          "type": "object"
@@ -3590,6 +3830,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                            "AllowPrivilegeEscalation": {
 		//	                              "type": "boolean"
 		//	                            },
+		//	                            "Capabilities": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Add": {
+		//	                                  "insertionOrder": false,
+		//	                                  "items": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                },
+		//	                                "Drop": {
+		//	                                  "insertionOrder": false,
+		//	                                  "items": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
 		//	                            "Privileged": {
 		//	                              "type": "boolean"
 		//	                            },
@@ -3604,6 +3866,21 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                            },
 		//	                            "RunAsUser": {
 		//	                              "type": "integer"
+		//	                            },
+		//	                            "SeccompProfile": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "LocalhostProfile": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Type": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Type"
+		//	                              ],
+		//	                              "type": "object"
 		//	                            }
 		//	                          },
 		//	                          "type": "object"
@@ -3663,6 +3940,39 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                      },
 		//	                      "Namespace": {
 		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SecurityContext": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "FsGroup": {
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "RunAsGroup": {
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "RunAsNonRoot": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "RunAsUser": {
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "SeccompProfile": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "LocalhostProfile": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Type": {
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Type"
+		//	                        ],
+		//	                        "type": "object"
 		//	                      }
 		//	                    },
 		//	                    "type": "object"
@@ -4618,6 +4928,22 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 																"allow_privilege_escalation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																	Computed: true,
 																}, /*END ATTRIBUTE*/
+																// Property: Capabilities
+																"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Add
+																		"add": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Drop
+																		"drop": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
 																// Property: Privileged
 																"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																	Computed: true,
@@ -4636,6 +4962,20 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 																}, /*END ATTRIBUTE*/
 																// Property: RunAsUser
 																"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: SeccompProfile
+																"seccomp_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: LocalhostProfile
+																		"localhost_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Type
+																		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
 																	Computed: true,
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
@@ -4756,6 +5096,22 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 																"allow_privilege_escalation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																	Computed: true,
 																}, /*END ATTRIBUTE*/
+																// Property: Capabilities
+																"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Add
+																		"add": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Drop
+																		"drop": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
 																// Property: Privileged
 																"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																	Computed: true,
@@ -4774,6 +5130,20 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 																}, /*END ATTRIBUTE*/
 																// Property: RunAsUser
 																"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: SeccompProfile
+																"seccomp_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: LocalhostProfile
+																		"localhost_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Type
+																		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
 																	Computed: true,
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
@@ -4824,6 +5194,42 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 													}, /*END ATTRIBUTE*/
 													// Property: Namespace
 													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: SecurityContext
+											"security_context": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: FsGroup
+													"fs_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: RunAsGroup
+													"run_as_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: RunAsNonRoot
+													"run_as_non_root": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: RunAsUser
+													"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: SeccompProfile
+													"seccomp_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: LocalhostProfile
+															"localhost_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Type
+															"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
 														Computed: true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -5139,6 +5545,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"access_point_arn":               "AccessPointArn",
 		"access_point_id":                "AccessPointId",
 		"action":                         "Action",
+		"add":                            "Add",
 		"allow_privilege_escalation":     "AllowPrivilegeEscalation",
 		"annotations":                    "Annotations",
 		"args":                           "Args",
@@ -5146,6 +5553,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"attempt_duration_seconds":       "AttemptDurationSeconds",
 		"attempts":                       "Attempts",
 		"authorization_config":           "AuthorizationConfig",
+		"capabilities":                   "Capabilities",
 		"claim_name":                     "ClaimName",
 		"command":                        "Command",
 		"condition":                      "Condition",
@@ -5162,6 +5570,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"depends_on":                     "DependsOn",
 		"devices":                        "Devices",
 		"dns_policy":                     "DnsPolicy",
+		"drop":                           "Drop",
 		"ecs_properties":                 "EcsProperties",
 		"efs_volume_configuration":       "EfsVolumeConfiguration",
 		"eks_properties":                 "EksProperties",
@@ -5177,6 +5586,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"file_system_arn":                "FileSystemArn",
 		"file_system_id":                 "FileSystemId",
 		"firelens_configuration":         "FirelensConfiguration",
+		"fs_group":                       "FsGroup",
 		"hard_limit":                     "HardLimit",
 		"host":                           "Host",
 		"host_network":                   "HostNetwork",
@@ -5196,6 +5606,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"labels":                         "Labels",
 		"limits":                         "Limits",
 		"linux_parameters":               "LinuxParameters",
+		"localhost_profile":              "LocalhostProfile",
 		"log_configuration":              "LogConfiguration",
 		"log_driver":                     "LogDriver",
 		"main_node":                      "MainNode",
@@ -5246,6 +5657,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"runtime_platform":               "RuntimePlatform",
 		"s3_files_volume_configuration":  "S3FilesVolumeConfiguration",
 		"scheduling_priority":            "SchedulingPriority",
+		"seccomp_profile":                "SeccompProfile",
 		"secret":                         "Secret",
 		"secret_name":                    "SecretName",
 		"secret_options":                 "SecretOptions",

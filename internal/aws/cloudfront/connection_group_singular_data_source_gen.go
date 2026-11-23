@@ -204,6 +204,33 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "A complex type that contains zero or more ``Tag`` elements.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ViewerFallback
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "DistributionId": {
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DistributionId"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"viewer_fallback": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DistributionId
+				"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -225,6 +252,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn":                 "Arn",
 		"connection_group_id": "Id",
 		"created_time":        "CreatedTime",
+		"distribution_id":     "DistributionId",
 		"e_tag":               "ETag",
 		"enabled":             "Enabled",
 		"ipv_6_enabled":       "Ipv6Enabled",
@@ -236,6 +264,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		"status":              "Status",
 		"tags":                "Tags",
 		"value":               "Value",
+		"viewer_fallback":     "ViewerFallback",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

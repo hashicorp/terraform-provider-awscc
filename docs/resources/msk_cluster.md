@@ -155,6 +155,7 @@ Optional:
 - `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info))
 - `security_groups` (List of String)
 - `storage_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info))
+- `topic_reassignment` (String)
 
 <a id="nestedatt--broker_node_group_info--connectivity_info"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info`

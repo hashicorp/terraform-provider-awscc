@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_product_managed_api_association.example "product_id"

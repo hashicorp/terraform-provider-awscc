@@ -237,8 +237,8 @@
     },
     "DiscoveryUrl": {
       "type": "string",
-      "pattern": "^.+/\\.well-known/openid-configuration$",
-      "description": "OpenID Connect discovery URL"
+      "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
+      "description": "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL"
     },
     "AllowedAudienceList": {
       "type": "array",
@@ -737,6 +737,102 @@
       "maxItems": 5,
       "insertionOrder": false
     },
+    "RuntimeHooksConfiguration": {
+      "type": "object",
+      "description": "Lifecycle hooks that the platform runs at fixed points in the runtime's lifecycle",
+      "properties": {
+        "Build": {
+          "$ref": "#/definitions/BuildLifecycleHooks"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BuildLifecycleHooks": {
+      "type": "object",
+      "description": "Hooks that run while the platform builds a runtime version, before any session exists",
+      "properties": {
+        "Warmup": {
+          "$ref": "#/definitions/LifecycleHook"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LifecycleHook": {
+      "type": "object",
+      "description": "A lifecycle hook and the action it runs",
+      "properties": {
+        "Action": {
+          "$ref": "#/definitions/LifecycleHookAction"
+        }
+      },
+      "required": [
+        "Action"
+      ],
+      "additionalProperties": false
+    },
+    "LifecycleHookAction": {
+      "type": "object",
+      "description": "The action a lifecycle hook runs. HttpPost is the only action.",
+      "properties": {
+        "HttpPost": {
+          "$ref": "#/definitions/HttpPostLifecycleHookAction"
+        }
+      },
+      "required": [
+        "HttpPost"
+      ],
+      "additionalProperties": false
+    },
+    "HttpPostLifecycleHookAction": {
+      "type": "object",
+      "description": "Sends an HTTP POST to the agent's container. Any 2xx response ends the hook; anything else fails it. The path and port must not be a route the platform already calls on the container, such as the protocol's invocation path or the default health check.",
+      "properties": {
+        "Path": {
+          "$ref": "#/definitions/LifecycleHookPath"
+        },
+        "Port": {
+          "type": "integer",
+          "minimum": 8000,
+          "maximum": 12000,
+          "description": "Port in the agent's container the platform sends the POST to. Defaults to the runtime's server port."
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "additionalProperties": false
+    },
+    "LifecycleHookPath": {
+      "type": "string",
+      "description": "Path the platform sends the POST to. Must start with a slash.",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^/[A-Za-z0-9._~/-]*$"
+    },
+    "ResourceConfiguration": {
+      "type": "object",
+      "description": "Resource configuration for an agent runtime",
+      "properties": {
+        "MinimumMemoryInMiB": {
+          "type": "integer",
+          "description": "The minimum amount of memory in MiB to allocate to the agent runtime"
+        }
+      },
+      "required": [
+        "MinimumMemoryInMiB"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceConfigurations": {
+      "type": "array",
+      "description": "List of resource configurations for an agent runtime",
+      "items": {
+        "$ref": "#/definitions/ResourceConfiguration"
+      },
+      "minItems": 0,
+      "maxItems": 1,
+      "insertionOrder": false
+    },
     "PrivateEndpoint": {
       "type": "object",
       "description": "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
@@ -930,6 +1026,14 @@
       "$ref": "#/definitions/CapacityProviderConfiguration",
       "description": "Capacity provider configuration for the agent runtime"
     },
+    "HooksConfiguration": {
+      "$ref": "#/definitions/RuntimeHooksConfiguration",
+      "description": "Lifecycle hooks for the agent runtime"
+    },
+    "ResourceConfigurations": {
+      "$ref": "#/definitions/ResourceConfigurations",
+      "description": "Resource configurations for the agent runtime"
+    },
     "AgentRuntimeVersion": {
       "$ref": "#/definitions/AgentRuntimeVersion",
       "description": "Version of the Agent"
@@ -1002,10 +1106,12 @@
         "vpc-lattice:GetServiceNetworkResourceAssociation",
         "vpc-lattice:ListServiceNetworkResourceAssociations",
         "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
         "ec2:DescribeVpcs",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
-        "ec2:CreateNetworkInterface"
+        "ec2:CreateNetworkInterface",
+        "secretsmanager:GetSecretValue"
       ]
     },
     "read": {
@@ -1036,10 +1142,12 @@
         "vpc-lattice:GetServiceNetworkResourceAssociation",
         "vpc-lattice:ListServiceNetworkResourceAssociations",
         "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
         "ec2:DescribeVpcs",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
-        "ec2:CreateNetworkInterface"
+        "ec2:CreateNetworkInterface",
+        "secretsmanager:GetSecretValue"
       ]
     },
     "delete": {
@@ -1049,7 +1157,8 @@
         "bedrock-agentcore:DeleteAgentRuntimeEndpoint",
         "bedrock-agentcore:DeleteWorkloadIdentity",
         "bedrock-agentcore:GetAgentRuntime",
-        "bedrock-agentcore:GetAgentRuntimeEndpoint"
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation"
       ]
     },
     "list": {

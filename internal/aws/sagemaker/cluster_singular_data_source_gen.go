@@ -556,7 +556,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
 		//	          "enum": [
 		//	            "InstanceStress",
-		//	            "InstanceConnectivity"
+		//	            "InstanceConnectivity",
+		//	            "MultiNodeTrainingValidation"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -1530,7 +1531,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
 		//	          "enum": [
 		//	            "InstanceStress",
-		//	            "InstanceConnectivity"
+		//	            "InstanceConnectivity",
+		//	            "MultiNodeTrainingValidation"
 		//	          ],
 		//	          "type": "string"
 		//	        },

@@ -207,6 +207,70 @@
               "description": "Deduplication settings applied to the forwarded events on the downstream event bus."
             }
           }
+        },
+        "MskParameters": {
+          "description": "Parameters for producing events to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster, used when TargetArn is an Amazon MSK cluster ARN.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "TopicName": {
+              "description": "Name of the Kafka topic events are produced to. Accepts a literal or a JSONata expression.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            },
+            "Compression": {
+              "description": "Producer compression codec applied to the record batch. Defaults to NONE.",
+              "type": "string",
+              "enum": [
+                "NONE",
+                "GZIP",
+                "SNAPPY",
+                "LZ4",
+                "ZSTD"
+              ]
+            },
+            "Acks": {
+              "description": "Producer acknowledgement mode. ALL waits for all in-sync replicas. LEADER waits for the partition leader only. Defaults to ALL.",
+              "type": "string",
+              "enum": [
+                "ALL",
+                "LEADER"
+              ]
+            },
+            "PartitionKey": {
+              "description": "Kafka record key. Accepts a literal or a JSONata expression; the resolved value selects the destination partition.",
+              "type": "string",
+              "maxLength": 8192
+            },
+            "Headers": {
+              "description": "Kafka record headers attached to each produced record.",
+              "type": "array",
+              "insertionOrder": true,
+              "maxItems": 100,
+              "items": {
+                "$ref": "#/definitions/MskHeader"
+              }
+            },
+            "ClientId": {
+              "description": "Producer client.id passed to the Kafka broker. A literal, not a JSONata expression.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "Connectivity": {
+              "description": "Specifies how the service connects to the Amazon MSK cluster. PUBLIC connects through the cluster's public access. PRIVATE connects through the cluster's multi-VPC private connectivity. You must turn on the chosen connectivity path, with IAM access control, on the cluster.",
+              "type": "string",
+              "enum": [
+                "PUBLIC",
+                "PRIVATE"
+              ]
+            }
+          },
+          "required": [
+            "TopicName",
+            "Connectivity"
+          ]
         }
       },
       "required": [
@@ -279,6 +343,14 @@
             }
           }
         },
+        "MskParameters": {
+          "$comment": "MskParameters is accepted only when TargetArn is an Amazon MSK cluster. Mirrors EventBridgeNexusFrontEndService SubscriberRequestValidator.validateTargetParameters over EventBridgeNexusCommon TargetProtocolResolver (classification by ARN service segment and events resource type); nothing fails the build if the two drift.",
+          "properties": {
+            "TargetArn": {
+              "pattern": "^arn:[^:]*:kafka:"
+            }
+          }
+        },
         "TargetArn": {
           "$comment": "TargetArn is required, so this dependency always applies. The anyOf sits here instead of on InvokeConfiguration itself because the CDK spec importer drops InvokeConfiguration from the generated CfnSubscriber when the object carries its own anyOf.",
           "anyOf": [
@@ -298,6 +370,24 @@
           ]
         }
       }
+    },
+    "MskHeader": {
+      "description": "A single Kafka record header. Key and Value each accept a literal or a JSONata expression.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "Key"
+      ]
     },
     "EventBusV2MetadataMap": {
       "description": "Metadata forwarded with each event, as key-value string pairs, with at most 100 entries. A key or value may also be a JSONata expression.",
@@ -793,7 +883,7 @@
         "events:TagResource",
         "iam:PassRole"
       ],
-      "timeoutInMinutes": 30
+      "timeoutInMinutes": 120
     },
     "read": {
       "permissions": [
@@ -809,7 +899,7 @@
         "events:UntagResource",
         "iam:PassRole"
       ],
-      "timeoutInMinutes": 45
+      "timeoutInMinutes": 120
     },
     "delete": {
       "permissions": [

@@ -276,6 +276,62 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "GCP": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration settings required to establish an integration between AWS Security Hub and GCP",
+		//	      "properties": {
+		//	        "AWSConfigConnectorArn": {
+		//	          "description": "The ARN of the AWS Config connector used for the GCP integration",
+		//	          "type": "string"
+		//	        },
+		//	        "GCPRegions": {
+		//	          "description": "The list of GCP regions to include in the connector scope",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 256,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "ScopeConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The scope configuration for a GCP connector",
+		//	          "properties": {
+		//	            "ScopeType": {
+		//	              "description": "The scope type for the GCP connector",
+		//	              "enum": [
+		//	                "PROJECT",
+		//	                "ORGANIZATION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ScopeValues": {
+		//	              "description": "The list of scope values for the GCP connector",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ScopeType"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AWSConfigConnectorArn",
+		//	        "ScopeConfiguration",
+		//	        "GCPRegions"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "JiraCloud": {
 		//	      "additionalProperties": false,
 		//	      "description": "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
@@ -355,6 +411,42 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration settings required to establish an integration between AWS Security Hub and Azure",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GCP
+				"gcp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AWSConfigConnectorArn
+						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the AWS Config connector used for the GCP integration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GCPRegions
+						"gcp_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of GCP regions to include in the connector scope",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScopeConfiguration
+						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScopeType
+								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The scope type for the GCP connector",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ScopeValues
+								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The list of scope values for the GCP connector",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The scope configuration for a GCP connector",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration settings required to establish an integration between AWS Security Hub and GCP",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: JiraCloud
@@ -440,6 +532,8 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":              "Description",
 		"enablement_status":        "EnablementStatus",
 		"enablement_status_reason": "EnablementStatusReason",
+		"gcp":                      "GCP",
+		"gcp_regions":              "GCPRegions",
 		"instance_name":            "InstanceName",
 		"issues":                   "Issues",
 		"jira_cloud":               "JiraCloud",

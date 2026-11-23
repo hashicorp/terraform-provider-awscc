@@ -71,14 +71,11 @@ resource "awscc_eventschemas_registry_policy" "example" {
 - `policy` (String)
 - `registry_name` (String)
 
-### Optional
-
-- `revision_id` (String)
-
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `registry_policy_id` (String)
+- `revision_id` (String)
 
 ## Import
 

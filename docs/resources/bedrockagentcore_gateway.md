@@ -25,6 +25,7 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 
 - `authorizer_configuration` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration))
 - `description` (String)
+- `domain_override` (Attributes) (see [below for nested schema](#nestedatt--domain_override))
 - `exception_level` (String)
 - `interceptor_configurations` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations))
 - `kms_key_arn` (String)
@@ -64,9 +65,36 @@ exposed in WWW-Authenticate / Protected Resource Metadata.
 - `allowed_audience` (List of String)
 - `allowed_clients` (List of String)
 - `allowed_scopes` (List of String)
+- `certificate_configurations` (Attributes List) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--certificate_configurations))
 - `custom_claims` (Attributes List) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
 - `discovery_url` (String)
 - `private_endpoint` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--certificate_configurations"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.certificate_configurations`
+
+Optional:
+
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--certificate_configurations--s3))
+- `secrets_manager` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--certificate_configurations--secrets_manager))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--certificate_configurations--s3"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.certificate_configurations.s3`
+
+Optional:
+
+- `bucket_owner_account_id` (String)
+- `uri` (String)
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--certificate_configurations--secrets_manager"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.certificate_configurations.secrets_manager`
+
+Optional:
+
+- `secret_arn` (String)
+
+
 
 <a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims"></a>
 ### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims`
@@ -128,6 +156,15 @@ Optional:
 
 
 
+<a id="nestedatt--domain_override"></a>
+### Nested Schema for `domain_override`
+
+Optional:
+
+- `alternate_domains` (List of String)
+- `default_domain` (String)
+
+
 <a id="nestedatt--interceptor_configurations"></a>
 ### Nested Schema for `interceptor_configurations`
 
@@ -136,6 +173,8 @@ Optional:
 - `input_configuration` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration))
 - `interception_points` (List of String)
 - `interceptor` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor))
+- `response_interception_mode` (String)
+- `response_streaming_configuration` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--response_streaming_configuration))
 
 <a id="nestedatt--interceptor_configurations--input_configuration"></a>
 ### Nested Schema for `interceptor_configurations.input_configuration`
@@ -176,6 +215,14 @@ Optional:
 
 - `arn` (String)
 
+
+
+<a id="nestedatt--interceptor_configurations--response_streaming_configuration"></a>
+### Nested Schema for `interceptor_configurations.response_streaming_configuration`
+
+Optional:
+
+- `max_events_per_invocation` (Number)
 
 
 

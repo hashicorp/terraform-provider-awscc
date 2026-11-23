@@ -23,13 +23,15 @@ Data Source schema for AWS::Route53GlobalResolver::AccessSource
 
 - `access_source_id` (String)
 - `arn` (String)
-- `cidr` (String)
+- `cidr` (String) The IP address range (CIDR) whose traffic this access source admits. Required unless the access source uses a core network endpoint.
 - `client_token` (String)
+- `core_network_endpoint_id` (String) The ID of the core network endpoint whose Cloud WAN segment traffic this access source admits. Use together with Segment instead of Cidr. The core network endpoint must be OPERATIONAL.
 - `created_at` (String)
 - `dns_view_id` (String)
 - `ip_address_type` (String)
 - `name` (String)
 - `protocol` (String)
+- `segment` (String) The name of the Cloud WAN segment of the core network endpoint, or * for all of its segments. Requires CoreNetworkEndpointId.
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String)

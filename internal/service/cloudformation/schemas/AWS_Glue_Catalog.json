@@ -36,6 +36,125 @@
         "ConnectionName": {
           "type": "string",
           "description": "The name of the connection to an external data source."
+        },
+        "ConnectionType": {
+          "type": "string",
+          "description": "The type of connection used to access the federated catalog. Synchronization is only supported for certain connection types."
+        },
+        "SyncConfiguration": {
+          "$ref": "#/definitions/SyncConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SyncConfiguration": {
+      "type": "object",
+      "description": "Configuration for synchronizing a federated catalog with its external data source. Removing this property does not disable synchronization: Glue keeps the stored configuration for anything omitted from an update. To stop synchronizing, set the Status of each mode to DISABLED.",
+      "properties": {
+        "RoleArn": {
+          "type": "string",
+          "description": "The IAM role, in the catalog owner's account, that the crawlers Glue manages on your behalf assume."
+        },
+        "AssetsSyncConfiguration": {
+          "$ref": "#/definitions/AssetsSyncConfiguration"
+        },
+        "LineageSyncConfiguration": {
+          "$ref": "#/definitions/LineageSyncConfiguration"
+        }
+      },
+      "required": [
+        "RoleArn"
+      ],
+      "additionalProperties": false
+    },
+    "AssetsSyncConfiguration": {
+      "type": "object",
+      "description": "Configuration for synchronizing assets from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing assets.",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "description": "Whether asset synchronization is enabled.",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "RefreshIntervalMinutes": {
+          "type": "integer",
+          "description": "How often the crawler synchronizes assets, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.",
+          "minimum": 15,
+          "maximum": 10080
+        },
+        "ManagedCrawlerDetails": {
+          "$ref": "#/definitions/ManagedCrawlerDetails"
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
+    },
+    "LineageSyncConfiguration": {
+      "type": "object",
+      "description": "Configuration for synchronizing lineage from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing lineage.",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "description": "Whether lineage synchronization is enabled.",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "RefreshIntervalMinutes": {
+          "type": "integer",
+          "description": "How often the crawler synchronizes lineage, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.",
+          "minimum": 15,
+          "maximum": 10080
+        },
+        "ManagedCrawlerDetails": {
+          "$ref": "#/definitions/ManagedCrawlerDetails"
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedCrawlerDetails": {
+      "type": "object",
+      "description": "The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input.",
+      "properties": {
+        "CrawlerArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the crawler."
+        },
+        "Status": {
+          "type": "string",
+          "description": "The provisioning state of the crawler.",
+          "enum": [
+            "PROVISIONING",
+            "PROVISIONED",
+            "FAILED"
+          ]
+        },
+        "Error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Details about an error.",
+      "properties": {
+        "ErrorCode": {
+          "type": "string",
+          "description": "The code associated with this error."
+        },
+        "ErrorMessage": {
+          "type": "string",
+          "description": "A message describing the error."
         }
       },
       "additionalProperties": false
@@ -264,6 +383,18 @@
     "/properties/CatalogProperties/DataLakeAccessProperties/ManagedWorkgroupStatus",
     "/properties/CatalogProperties/DataLakeAccessProperties/RedshiftDatabaseName",
     "/properties/CatalogProperties/CustomProperties",
+    "/properties/FederatedCatalog/SyncConfiguration/AssetsSyncConfiguration/ManagedCrawlerDetails",
+    "/properties/FederatedCatalog/SyncConfiguration/AssetsSyncConfiguration/ManagedCrawlerDetails/CrawlerArn",
+    "/properties/FederatedCatalog/SyncConfiguration/AssetsSyncConfiguration/ManagedCrawlerDetails/Status",
+    "/properties/FederatedCatalog/SyncConfiguration/AssetsSyncConfiguration/ManagedCrawlerDetails/Error",
+    "/properties/FederatedCatalog/SyncConfiguration/AssetsSyncConfiguration/ManagedCrawlerDetails/Error/ErrorCode",
+    "/properties/FederatedCatalog/SyncConfiguration/AssetsSyncConfiguration/ManagedCrawlerDetails/Error/ErrorMessage",
+    "/properties/FederatedCatalog/SyncConfiguration/LineageSyncConfiguration/ManagedCrawlerDetails",
+    "/properties/FederatedCatalog/SyncConfiguration/LineageSyncConfiguration/ManagedCrawlerDetails/CrawlerArn",
+    "/properties/FederatedCatalog/SyncConfiguration/LineageSyncConfiguration/ManagedCrawlerDetails/Status",
+    "/properties/FederatedCatalog/SyncConfiguration/LineageSyncConfiguration/ManagedCrawlerDetails/Error",
+    "/properties/FederatedCatalog/SyncConfiguration/LineageSyncConfiguration/ManagedCrawlerDetails/Error/ErrorCode",
+    "/properties/FederatedCatalog/SyncConfiguration/LineageSyncConfiguration/ManagedCrawlerDetails/Error/ErrorMessage",
     "/properties/CreateDatabaseDefaultPermissions/*/Principal",
     "/properties/CreateDatabaseDefaultPermissions/*/Principal/DataLakePrincipalIdentifier",
     "/properties/CreateDatabaseDefaultPermissions/*/Permissions",

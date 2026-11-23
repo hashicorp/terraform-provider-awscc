@@ -9,12 +9,15 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -29,6 +32,20 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource.
 func transitGatewayPeeringAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccepterAllowMultipathResilience
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the accepter side of the peering attachment has opted in to MultipathResilience.",
+		//	  "type": "boolean"
+		//	}
+		"accepter_allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the accepter side of the peering attachment has opted in to MultipathResilience.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -44,6 +61,75 @@ func transitGatewayPeeringAttachmentResource(ctx context.Context) (resource.Reso
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MultipathResilienceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The connection-level MultipathResilience status, computed from both sides of the peering attachment. (enabled/pending/disabled)",
+		//	  "type": "string"
+		//	}
+		"multipath_resilience_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection-level MultipathResilience status, computed from both sides of the peering attachment. (enabled/pending/disabled)",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Options
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Options for transit gateway peering attachment",
+		//	  "properties": {
+		//	    "AllowMultipathResilience": {
+		//	      "description": "Whether to enable MultipathResilience on this side of the peering attachment.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultipathResilienceMode": {
+		//	      "description": "The MultipathResilience mode. Only valid when AllowMultipathResilience is true.",
+		//	      "enum": [
+		//	        "always-on"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowMultipathResilience
+				"allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable MultipathResilience on this side of the peering attachment.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MultipathResilienceMode
+				"multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The MultipathResilience mode. Only valid when AllowMultipathResilience is true.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"always-on",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Options for transit gateway peering attachment",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Options is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PeerAccountId
 		// CloudFormation resource type schema:
@@ -85,6 +171,34 @@ func transitGatewayPeeringAttachmentResource(ctx context.Context) (resource.Reso
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequesterAllowMultipathResilience
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the requester side of the peering attachment has opted in to MultipathResilience.",
+		//	  "type": "boolean"
+		//	}
+		"requester_allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the requester side of the peering attachment has opted in to MultipathResilience.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequesterMultipathResilienceMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The MultipathResilience mode chosen by the requester side of the peering attachment.",
+		//	  "type": "string"
+		//	}
+		"requester_multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The MultipathResilience mode chosen by the requester side of the peering attachment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -246,21 +360,31 @@ func transitGatewayPeeringAttachmentResource(ctx context.Context) (resource.Reso
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"code":                          "Code",
-		"creation_time":                 "CreationTime",
-		"key":                           "Key",
-		"message":                       "Message",
-		"peer_account_id":               "PeerAccountId",
-		"peer_region":                   "PeerRegion",
-		"peer_transit_gateway_id":       "PeerTransitGatewayId",
-		"state":                         "State",
-		"status":                        "Status",
-		"tags":                          "Tags",
-		"transit_gateway_attachment_id": "TransitGatewayAttachmentId",
-		"transit_gateway_id":            "TransitGatewayId",
-		"value":                         "Value",
+		"accepter_allow_multipath_resilience":  "AccepterAllowMultipathResilience",
+		"allow_multipath_resilience":           "AllowMultipathResilience",
+		"code":                                 "Code",
+		"creation_time":                        "CreationTime",
+		"key":                                  "Key",
+		"message":                              "Message",
+		"multipath_resilience_mode":            "MultipathResilienceMode",
+		"multipath_resilience_status":          "MultipathResilienceStatus",
+		"options":                              "Options",
+		"peer_account_id":                      "PeerAccountId",
+		"peer_region":                          "PeerRegion",
+		"peer_transit_gateway_id":              "PeerTransitGatewayId",
+		"requester_allow_multipath_resilience": "RequesterAllowMultipathResilience",
+		"requester_multipath_resilience_mode":  "RequesterMultipathResilienceMode",
+		"state":                                "State",
+		"status":                               "Status",
+		"tags":                                 "Tags",
+		"transit_gateway_attachment_id":        "TransitGatewayAttachmentId",
+		"transit_gateway_id":                   "TransitGatewayId",
+		"value":                                "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Options",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

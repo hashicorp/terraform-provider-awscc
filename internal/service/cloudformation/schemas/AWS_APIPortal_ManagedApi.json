@@ -1,0 +1,183 @@
+{
+  "typeName": "AWS::APIPortal::ManagedApi",
+  "description": "Resource Type definition for AWS::APIPortal::ManagedApi. Promotes an API discovered in the API inventory into the managed API list.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "ManagedApiArn": {
+      "type": "string",
+      "description": "The ARN of the managed API.",
+      "minLength": 20,
+      "maxLength": 1011
+    },
+    "ManagedApiId": {
+      "type": "string",
+      "description": "The managed API identifier.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "ApiSignature": {
+      "$ref": "#/definitions/ApiSignature"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the managed API was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the managed API was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the managed API.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "ApiSignature": {
+      "type": "object",
+      "description": "Identifies a discovered API by its source resource, method, hostname, port, and path.",
+      "additionalProperties": false,
+      "properties": {
+        "ResourceArn": {
+          "type": "string",
+          "description": "ARN of the source-service resource (API Gateway stage, load balancer, or CloudFront distribution).",
+          "pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:([0-9]{12})?:.+$",
+          "minLength": 20,
+          "maxLength": 2048
+        },
+        "Method": {
+          "type": "string",
+          "description": "The HTTP method of the API.",
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "PATCH",
+            "ANY",
+            "HEAD",
+            "OPTIONS"
+          ]
+        },
+        "Hostname": {
+          "type": "string",
+          "description": "The front-door hostname of the API.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "Port": {
+          "type": "integer",
+          "description": "The port the API is served on.",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "Path": {
+          "type": "string",
+          "description": "The route path of the API.",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "Method",
+        "Hostname",
+        "Port",
+        "Path"
+      ]
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ApiSignature"
+  ],
+  "createOnlyProperties": [
+    "/properties/ApiSignature"
+  ],
+  "readOnlyProperties": [
+    "/properties/ManagedApiArn",
+    "/properties/ManagedApiId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/ManagedApiArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ManagedApiId"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:CreateManagedApi",
+        "apiportal:GetManagedApi",
+        "apiportal:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetManagedApi"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:GetManagedApi",
+        "apiportal:TagResource",
+        "apiportal:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DeleteManagedApi",
+        "apiportal:GetManagedApi"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:ListManagedApis"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apiportal:TagResource",
+      "apiportal:UntagResource",
+      "apiportal:GetManagedApi"
+    ]
+  }
+}

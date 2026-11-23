@@ -90,7 +90,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Duration in days until memory events expire",
-		//	  "maximum": 365,
+		//	  "maximum": 3650,
 		//	  "minimum": 3,
 		//	  "type": "integer"
 		//	}
@@ -98,7 +98,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Duration in days until memory events expire",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(3, 365),
+				int64validator.Between(3, 3650),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FailureReason

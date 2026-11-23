@@ -133,6 +133,32 @@
       },
       "additionalProperties": false
     },
+    "Environment": {
+      "type": "object",
+      "description": "Contains the environment variables that tasks in a workflow use during execution.",
+      "required": [
+        "Variables"
+      ],
+      "properties": {
+        "Variables": {
+          "$ref": "#/definitions/EnvironmentVariables"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentVariables": {
+      "type": "object",
+      "description": "A map of environment variable names to values. Up to 50 variables. Names must start with a letter and contain only letters, numbers, and underscores. Names starting with AWS_ or AIRFLOW__ are reserved, except AIRFLOW__WORKERS__SECRETS_BACKEND, AIRFLOW__WORKERS__SECRETS_BACKEND_KWARGS, and names prefixed with AIRFLOW__WORKERS__SECRETS_BACKEND_KWARG__.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 255
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 50,
+      "additionalProperties": false
+    },
     "WorkflowVersion": {
       "type": "string",
       "pattern": "^[a-z0-9]{32}$",
@@ -209,6 +235,9 @@
     },
     "NetworkConfiguration": {
       "$ref": "#/definitions/NetworkConfiguration"
+    },
+    "Environment": {
+      "$ref": "#/definitions/Environment"
     },
     "WorkflowVersion": {
       "$ref": "#/definitions/WorkflowVersion"

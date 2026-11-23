@@ -1,0 +1,102 @@
+{
+  "typeName": "AWS::Route53::RecordSetProtection",
+  "description": "Resource Type definition for AWS::Route53::RecordSetProtection. Protects a record set (all record sets with the given name and type) in a hosted zone against changes until the protection is deleted. The protection must DependsOn (or reference with Ref) the AWS::Route53::RecordSet it protects. Adding or removing a protection and changing that record set must be two separate stack updates: a removal is applied in the cleanup phase after updates, and an addition in the same update blocks the record set's rollback. To recover a rollback blocked this way (UPDATE_ROLLBACK_FAILED), delete the protection, then run ContinueUpdateRollback. While a protection exists, creating any record set with its name and type, including one with a new SetIdentifier, is refused. Changing Comment replaces the protection by deleting it first, so the record set is unprotected for the duration of the replacement. While a protection exists, including one kept by DeletionPolicy Retain or created outside the stack, deleting its AWS::Route53::RecordSet fails with ResourceConflict; delete the protection first. When a create is retried after its outcome was lost, an existing protection with the same Comment is taken as the one it created; without a Comment, an existing protection that has no comment is adopted.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53.git",
+  "definitions": {
+    "HostedZoneId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 44
+    },
+    "RecordName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "RecordType": {
+      "type": "string"
+    },
+    "Comment": {
+      "type": "string",
+      "maxLength": 256
+    }
+  },
+  "properties": {
+    "HostedZoneId": {
+      "$ref": "#/definitions/HostedZoneId",
+      "description": "The ID of the hosted zone that contains the record set to protect."
+    },
+    "RecordName": {
+      "$ref": "#/definitions/RecordName",
+      "description": "The name of the record set to protect."
+    },
+    "RecordType": {
+      "$ref": "#/definitions/RecordType",
+      "description": "The DNS record type of the record set to protect."
+    },
+    "Comment": {
+      "$ref": "#/definitions/Comment",
+      "description": "A comment that describes the protection."
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "additionalProperties": false,
+  "required": [
+    "HostedZoneId",
+    "RecordName",
+    "RecordType"
+  ],
+  "primaryIdentifier": [
+    "/properties/HostedZoneId",
+    "/properties/RecordName",
+    "/properties/RecordType"
+  ],
+  "createOnlyProperties": [
+    "/properties/HostedZoneId",
+    "/properties/RecordName",
+    "/properties/RecordType",
+    "/properties/Comment"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "propertyTransform": {
+    "/properties/HostedZoneId": "$replace(HostedZoneId, /^\\/hostedzone\\//, \"\")",
+    "/properties/RecordName": "$lowercase($replace(RecordName, /(.*)\\.$/, \"$1\"))",
+    "/properties/RecordType": "$uppercase(RecordType)"
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53:CreateResourceRecordSetProtections",
+        "route53:ListResourceRecordSetProtections",
+        "route53:ListResourceRecordSets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53:ListResourceRecordSetProtections"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53:DeleteResourceRecordSetProtections",
+        "route53:ListResourceRecordSetProtections"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53:ListResourceRecordSetProtections"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "HostedZoneId": {
+            "$ref": "resource-schema.json#/properties/HostedZoneId"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      }
+    }
+  }
+}

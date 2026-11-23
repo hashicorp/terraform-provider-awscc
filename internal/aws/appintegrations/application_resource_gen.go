@@ -72,9 +72,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Scope"
-		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -94,7 +91,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									"CROSS_CONTACTS",
 									"PER_CONTACT",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -150,9 +146,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ExternalUrlConfig"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"application_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -162,11 +155,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AccessUrl
 						"access_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.UTF8LengthBetween(1, 1000),
 								stringvalidator.RegexMatches(regexp.MustCompile("^\\w+\\:\\/\\/.*$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ApprovedOrigins
 						"approved_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -186,7 +184,11 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Application source config",
@@ -200,7 +202,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "STANDARD",
 		//	    "SERVICE",
-		//	    "MCP_SERVER"
+		//	    "MCP_SERVER",
+		//	    "A2A_SERVER"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -213,10 +216,88 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					"STANDARD",
 					"SERVICE",
 					"MCP_SERVER",
+					"A2A_SERVER",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The authentication configuration. Required when ApplicationType is A2A_SERVER.",
+		//	  "properties": {
+		//	    "AudienceOverride": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "AuthType": {
+		//	      "enum": [
+		//	        "API_KEY",
+		//	        "CONNECT_JWT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CredentialProviderIdentifier": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AuthType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudienceOverride
+				"audience_override": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AuthType
+				"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"API_KEY",
+							"CONNECT_JWT",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CredentialProviderIdentifier
+				"credential_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(1, 2048),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The authentication configuration. Required when ApplicationType is A2A_SERVER.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -340,6 +421,34 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The region in which the application was last modified.",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The region in which the application was last modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time when the application was last modified.",
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time when the application was last modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -514,28 +623,34 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_url":                "AccessUrl",
-		"allow":                     "Allow",
-		"application_arn":           "ApplicationArn",
-		"application_config":        "ApplicationConfig",
-		"application_id":            "Id",
-		"application_source_config": "ApplicationSourceConfig",
-		"application_type":          "ApplicationType",
-		"approved_origins":          "ApprovedOrigins",
-		"contact_handling":          "ContactHandling",
-		"description":               "Description",
-		"external_url_config":       "ExternalUrlConfig",
-		"iframe_config":             "IframeConfig",
-		"initialization_timeout":    "InitializationTimeout",
-		"is_service":                "IsService",
-		"key":                       "Key",
-		"name":                      "Name",
-		"namespace":                 "Namespace",
-		"permissions":               "Permissions",
-		"sandbox":                   "Sandbox",
-		"scope":                     "Scope",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"access_url":                     "AccessUrl",
+		"allow":                          "Allow",
+		"application_arn":                "ApplicationArn",
+		"application_config":             "ApplicationConfig",
+		"application_id":                 "Id",
+		"application_source_config":      "ApplicationSourceConfig",
+		"application_type":               "ApplicationType",
+		"approved_origins":               "ApprovedOrigins",
+		"audience_override":              "AudienceOverride",
+		"auth_config":                    "AuthConfig",
+		"auth_type":                      "AuthType",
+		"contact_handling":               "ContactHandling",
+		"credential_provider_identifier": "CredentialProviderIdentifier",
+		"description":                    "Description",
+		"external_url_config":            "ExternalUrlConfig",
+		"iframe_config":                  "IframeConfig",
+		"initialization_timeout":         "InitializationTimeout",
+		"is_service":                     "IsService",
+		"key":                            "Key",
+		"last_modified_region":           "LastModifiedRegion",
+		"last_modified_time":             "LastModifiedTime",
+		"name":                           "Name",
+		"namespace":                      "Namespace",
+		"permissions":                    "Permissions",
+		"sandbox":                        "Sandbox",
+		"scope":                          "Scope",
+		"tags":                           "Tags",
+		"value":                          "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

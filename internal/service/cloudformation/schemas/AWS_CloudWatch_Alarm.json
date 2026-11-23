@@ -253,7 +253,7 @@
       "type": "object",
       "properties": {
         "Value": {
-          "minLength": 1,
+          "minLength": 0,
           "description": "The value for the specified tag key.",
           "type": "string",
           "maxLength": 256

@@ -135,6 +135,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A description of the deployment.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"deployment_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -157,6 +158,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the deployment.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"deployment_name": schema.StringAttribute{ /*START ATTRIBUTE*/

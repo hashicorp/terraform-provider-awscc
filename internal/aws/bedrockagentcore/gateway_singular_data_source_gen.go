@@ -69,6 +69,46 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
+		//	        "CertificateConfigurations": {
+		//	          "items": {
+		//	            "properties": {
+		//	              "S3": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "BucketOwnerAccountId": {
+		//	                    "pattern": "^[0-9]{12}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Uri": {
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Uri"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SecretsManager": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "SecretArn": {
+		//	                    "pattern": "^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SecretArn"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
 		//	        "CustomClaims": {
 		//	          "items": {
 		//	            "additionalProperties": false,
@@ -247,6 +287,38 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 							ElementType: types.StringType,
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: CertificateConfigurations
+						"certificate_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3
+									"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BucketOwnerAccountId
+											"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Uri
+											"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SecretsManager
+									"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SecretArn
+											"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: CustomClaims
 						"custom_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -385,6 +457,49 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainOverride
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AlternateDomains": {
+		//	      "items": {
+		//	        "maxLength": 253,
+		//	        "minLength": 1,
+		//	        "pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "DefaultDomain": {
+		//	      "maxLength": 253,
+		//	      "minLength": 1,
+		//	      "pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DefaultDomain"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"domain_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlternateDomains
+				"alternate_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultDomain
+				"default_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExceptionLevel
 		// CloudFormation resource type schema:
 		//
@@ -503,6 +618,24 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          }
 		//	        },
 		//	        "type": "object"
+		//	      },
+		//	      "ResponseInterceptionMode": {
+		//	        "enum": [
+		//	          "BUFFERED",
+		//	          "STREAM"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ResponseStreamingConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxEventsPerInvocation": {
+		//	            "maximum": 8192,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -562,6 +695,20 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResponseInterceptionMode
+					"response_interception_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResponseStreamingConfiguration
+					"response_streaming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxEventsPerInvocation
+							"max_events_per_invocation": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -905,18 +1052,23 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"allowed_audience":                  "AllowedAudience",
 		"allowed_clients":                   "AllowedClients",
 		"allowed_scopes":                    "AllowedScopes",
+		"alternate_domains":                 "AlternateDomains",
 		"arn":                               "Arn",
 		"authorizer_configuration":          "AuthorizerConfiguration",
 		"authorizer_type":                   "AuthorizerType",
 		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
+		"bucket_owner_account_id":           "BucketOwnerAccountId",
+		"certificate_configurations":        "CertificateConfigurations",
 		"claim_match_operator":              "ClaimMatchOperator",
 		"claim_match_value":                 "ClaimMatchValue",
 		"created_at":                        "CreatedAt",
 		"custom_claims":                     "CustomClaims",
 		"custom_jwt_authorizer":             "CustomJWTAuthorizer",
+		"default_domain":                    "DefaultDomain",
 		"description":                       "Description",
 		"disable_mcp_list_tools_pagination": "DisableMcpListToolsPagination",
 		"discovery_url":                     "DiscoveryUrl",
+		"domain_override":                   "DomainOverride",
 		"enable_response_streaming":         "EnableResponseStreaming",
 		"endpoint_ip_address_type":          "EndpointIpAddressType",
 		"exception_level":                   "ExceptionLevel",
@@ -938,6 +1090,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"managed_vpc_resource":              "ManagedVpcResource",
 		"match_value_string":                "MatchValueString",
 		"match_value_string_list":           "MatchValueStringList",
+		"max_events_per_invocation":         "MaxEventsPerInvocation",
 		"mcp":                               "Mcp",
 		"mode":                              "Mode",
 		"name":                              "Name",
@@ -948,9 +1101,14 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol_configuration":            "ProtocolConfiguration",
 		"protocol_type":                     "ProtocolType",
 		"resource_configuration_identifier": "ResourceConfigurationIdentifier",
+		"response_interception_mode":        "ResponseInterceptionMode",
+		"response_streaming_configuration":  "ResponseStreamingConfiguration",
 		"role_arn":                          "RoleArn",
 		"routing_domain":                    "RoutingDomain",
+		"s3":                                "S3",
 		"search_type":                       "SearchType",
+		"secret_arn":                        "SecretArn",
+		"secrets_manager":                   "SecretsManager",
 		"security_group_ids":                "SecurityGroupIds",
 		"self_managed_lattice_resource":     "SelfManagedLatticeResource",
 		"session_configuration":             "SessionConfiguration",
@@ -962,6 +1120,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"supported_versions":                "SupportedVersions",
 		"tags":                              "Tags",
 		"updated_at":                        "UpdatedAt",
+		"uri":                               "Uri",
 		"vpc_identifier":                    "VpcIdentifier",
 		"waf_configuration":                 "WafConfiguration",
 		"web_acl_arn":                       "WebAclArn",

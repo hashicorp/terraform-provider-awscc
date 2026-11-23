@@ -72,6 +72,26 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "CloneConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Creates the volume as an ONTAP FlexClone of an existing volume. The clone takes SizeInMegabytes and StorageEfficiencyEnabled from the parent volume: omit them, or set them to the parent's values.",
+		//	      "properties": {
+		//	        "ParentVolumeId": {
+		//	          "description": "The ID of the volume to clone. It must be in the same storage virtual machine (SVM) as the new volume.",
+		//	          "pattern": "^(fsvol-[0-9a-f]{17,})$",
+		//	          "type": "string"
+		//	        },
+		//	        "SnapshotId": {
+		//	          "description": "The ID of a snapshot of the parent volume to clone from. If you omit it, the clone is created from the parent volume's current state. Required when this volume's OntapVolumeType is DP (the parent volume must then also be DP).",
+		//	          "pattern": "^((fs)?volsnap-[0-9a-f]{8,})$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ParentVolumeId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "CopyTagsToBackups": {
 		//	      "description": "A boolean flag indicating whether tags for the volume should be copied to backups.",
 		//	      "type": "string"
@@ -261,6 +281,23 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CloneConfiguration
+				"clone_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ParentVolumeId
+						"parent_volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the volume to clone. It must be in the same storage virtual machine (SVM) as the new volume.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SnapshotId
+						"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of a snapshot of the parent volume to clone from. If you omit it, the clone is created from the parent volume's current state. Required when this volume's OntapVolumeType is DP (the parent volume must then also be DP).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Creates the volume as an ONTAP FlexClone of an existing volume. The clone takes SizeInMegabytes and StorageEfficiencyEnabled from the parent volume: omit them, or set them to the parent's values.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CopyTagsToBackups
@@ -808,6 +845,7 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"backup_id":                         "BackupId",
 		"client_configurations":             "ClientConfigurations",
 		"clients":                           "Clients",
+		"clone_configuration":               "CloneConfiguration",
 		"constituents_per_aggregate":        "ConstituentsPerAggregate",
 		"cooling_period":                    "CoolingPeriod",
 		"copy_strategy":                     "CopyStrategy",
@@ -839,6 +877,7 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"snaplock_configuration":            "SnaplockConfiguration",
 		"snaplock_type":                     "SnaplockType",
 		"snapshot_arn":                      "SnapshotARN",
+		"snapshot_id":                       "SnapshotId",
 		"snapshot_policy":                   "SnapshotPolicy",
 		"storage_capacity_quota_gi_b":       "StorageCapacityQuotaGiB",
 		"storage_capacity_reservation_gi_b": "StorageCapacityReservationGiB",

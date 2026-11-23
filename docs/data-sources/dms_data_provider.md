@@ -147,6 +147,8 @@ Read-Only:
 - `certificate_arn` (String)
 - `database_name` (String)
 - `port` (Number)
+- `s3_access_role_arn` (String) The ARN for the role the application uses to access its Amazon S3 bucket.
+- `s3_path` (String) The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.
 - `secrets_manager_oracle_asm_access_role_arn` (String)
 - `secrets_manager_oracle_asm_secret_id` (String)
 - `secrets_manager_security_db_encryption_access_role_arn` (String)

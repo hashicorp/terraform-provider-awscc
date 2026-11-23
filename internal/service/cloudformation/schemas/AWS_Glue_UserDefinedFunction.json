@@ -59,6 +59,21 @@
         "$ref": "#/definitions/ResourceUri"
       },
       "maxItems": 1000
+    },
+    "ArtifactLocation": {
+      "type": "string",
+      "description": "The registered Amazon S3 location that contains the function artifacts. Required when GovernanceMode is LAKE_FORMATION.",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": ""
+    },
+    "GovernanceMode": {
+      "type": "string",
+      "description": "How access to the function is governed. The mode cannot be changed after creation.",
+      "enum": [
+        "IAM_ONLY",
+        "LAKE_FORMATION"
+      ]
     }
   },
   "definitions": {
@@ -81,6 +96,11 @@
           "minLength": 1,
           "maxLength": 1024,
           "pattern": ""
+        },
+        "LastModified": {
+          "type": "string",
+          "description": "The time at which Glue recorded the resource as last modified in Amazon S3 for a Lake Formation governed function.",
+          "format": "date-time"
         }
       },
       "additionalProperties": false
@@ -92,12 +112,14 @@
   ],
   "additionalProperties": false,
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/ResourceUris/*/LastModified"
   ],
   "createOnlyProperties": [
     "/properties/DatabaseName",
     "/properties/FunctionName",
-    "/properties/FunctionType"
+    "/properties/FunctionType",
+    "/properties/GovernanceMode"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

@@ -39,7 +39,8 @@
         "ec2:DescribeVpcs",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups"
-      ]
+      ],
+      "timeoutInMinutes": 720
     },
     "list": {
       "permissions": [
@@ -69,8 +70,7 @@
     "/properties/VpcIdentifier",
     "/properties/SubnetIds",
     "/properties/IpAddressType",
-    "/properties/Name",
-    "/properties/ResourceConfigDnsResolution"
+    "/properties/Name"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [

@@ -21,6 +21,7 @@ Creates a generated template from existing resources using the CloudFormation Ia
 
 ### Optional
 
+- `stack_id` (String) The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.
 - `template_configuration` (Attributes) The configuration details of the generated template. (see [below for nested schema](#nestedatt--template_configuration))
 
 ### Read-Only

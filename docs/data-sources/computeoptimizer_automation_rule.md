@@ -132,6 +132,9 @@ Read-Only:
 Read-Only:
 
 - `account_ids` (List of String) List of account IDs where the organization rule applies
+- `excluded_account_ids` (List of String) List of account IDs to exclude from the organization rule. Excluded accounts take precedence over included organizational units and accounts.
+- `excluded_organizational_unit_ids` (List of String) List of organizational unit or organization root IDs to exclude from the organization rule. Exclusions include accounts in descendant organizational units and take precedence over included organizational units and accounts.
+- `organizational_unit_ids` (List of String) List of organizational unit or organization root IDs where the organization rule applies. The rule also applies to accounts in descendant organizational units.
 - `rule_apply_order` (String) When the rule should be applied relative to account rules
 
 

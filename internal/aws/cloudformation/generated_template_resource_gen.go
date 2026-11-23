@@ -7,6 +7,7 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -148,6 +149,26 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StackId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.",
+		//	  "pattern": "^arn:aws[a-zA-Z-]*:cloudformation:[a-z0-9-]+:[0-9]{12}:stack/[a-zA-Z][-a-zA-Z0-9]*/[-a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"stack_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:cloudformation:[a-z0-9-]+:[0-9]{12}:stack/[a-zA-Z][-a-zA-Z0-9]*/[-a-zA-Z0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -294,6 +315,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"resources_pending":       "ResourcesPending",
 		"resources_processing":    "ResourcesProcessing",
 		"resources_succeeded":     "ResourcesSucceeded",
+		"stack_id":                "StackId",
 		"status":                  "Status",
 		"template_configuration":  "TemplateConfiguration",
 		"total_warnings":          "TotalWarnings",

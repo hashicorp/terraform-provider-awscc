@@ -127,6 +127,7 @@ resource "awscc_connect_task_template" "example" {
 - `client_token` (String) the client token string in uuid format
 - `constraints` (Attributes) The constraints for the task template (see [below for nested schema](#nestedatt--constraints))
 - `contact_flow_arn` (String) The identifier of the contact flow.
+- `contact_hooks` (Attributes) The contact hooks for the task template. (see [below for nested schema](#nestedatt--contact_hooks))
 - `defaults` (Attributes List) (see [below for nested schema](#nestedatt--defaults))
 - `description` (String) The description of the task template.
 - `fields` (Attributes List) The list of task template's fields (see [below for nested schema](#nestedatt--fields))
@@ -196,6 +197,14 @@ Optional:
 - `name` (String) The name of the task template field
 
 
+
+
+<a id="nestedatt--contact_hooks"></a>
+### Nested Schema for `contact_hooks`
+
+Optional:
+
+- `wrap_up_flow_arn` (String) The identifier (arn) of the flow module that runs when an agent attempts to disconnect from a task created by referencing this template. If no agent ever connects to the task, the flow module runs when the task is terminated.
 
 
 <a id="nestedatt--defaults"></a>

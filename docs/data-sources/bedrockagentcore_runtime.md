@@ -33,12 +33,14 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 - `environment_variables` (Map of String) Environment variables for the agent runtime
 - `failure_reason` (String) The reason for failure if the agent is in a failed state.
 - `filesystem_configurations` (Attributes List) Filesystem configurations for the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations))
+- `hooks_configuration` (Attributes) Lifecycle hooks for the agent runtime (see [below for nested schema](#nestedatt--hooks_configuration))
 - `last_updated_at` (String) When resource was last updated
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
 - `platform_version` (String) The version of the runtime platform
 - `protocol_configuration` (String) Protocol configuration for the agent runtime
 - `request_header_configuration` (Attributes) Configuration for HTTP request headers (see [below for nested schema](#nestedatt--request_header_configuration))
+- `resource_configurations` (Attributes List) Resource configurations for the agent runtime (see [below for nested schema](#nestedatt--resource_configurations))
 - `role_arn` (String) Amazon Resource Name (ARN) of an IAM role
 - `status` (String) Current status of the agent
 - `tags` (Map of String) A map of tag keys and values
@@ -106,7 +108,7 @@ Read-Only:
 - `allowed_scopes` (List of String) List of allowed scopes
 - `allowed_workload_configuration` (Attributes) Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement. (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--allowed_workload_configuration))
 - `custom_claims` (Attributes List) List of required custom claims (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
-- `discovery_url` (String) OpenID Connect discovery URL
+- `discovery_url` (String) OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL
 - `private_endpoint` (Attributes) Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified. (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint))
 - `private_endpoint_overrides` (Attributes List) List of private endpoint overrides (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides))
 
@@ -280,6 +282,47 @@ Read-Only:
 
 
 
+<a id="nestedatt--hooks_configuration"></a>
+### Nested Schema for `hooks_configuration`
+
+Read-Only:
+
+- `build` (Attributes) Hooks that run while the platform builds a runtime version, before any session exists (see [below for nested schema](#nestedatt--hooks_configuration--build))
+
+<a id="nestedatt--hooks_configuration--build"></a>
+### Nested Schema for `hooks_configuration.build`
+
+Read-Only:
+
+- `warmup` (Attributes) A lifecycle hook and the action it runs (see [below for nested schema](#nestedatt--hooks_configuration--build--warmup))
+
+<a id="nestedatt--hooks_configuration--build--warmup"></a>
+### Nested Schema for `hooks_configuration.build.warmup`
+
+Read-Only:
+
+- `action` (Attributes) The action a lifecycle hook runs. HttpPost is the only action. (see [below for nested schema](#nestedatt--hooks_configuration--build--warmup--action))
+
+<a id="nestedatt--hooks_configuration--build--warmup--action"></a>
+### Nested Schema for `hooks_configuration.build.warmup.action`
+
+Read-Only:
+
+- `http_post` (Attributes) Sends an HTTP POST to the agent's container. Any 2xx response ends the hook; anything else fails it. The path and port must not be a route the platform already calls on the container, such as the protocol's invocation path or the default health check. (see [below for nested schema](#nestedatt--hooks_configuration--build--warmup--action--http_post))
+
+<a id="nestedatt--hooks_configuration--build--warmup--action--http_post"></a>
+### Nested Schema for `hooks_configuration.build.warmup.action.http_post`
+
+Read-Only:
+
+- `path` (String) Path the platform sends the POST to. Must start with a slash.
+- `port` (Number) Port in the agent's container the platform sends the POST to. Defaults to the runtime's server port.
+
+
+
+
+
+
 <a id="nestedatt--lifecycle_configuration"></a>
 ### Nested Schema for `lifecycle_configuration`
 
@@ -313,6 +356,14 @@ Read-Only:
 Read-Only:
 
 - `request_header_allowlist` (Set of String) List of allowed HTTP headers for agent runtime requests
+
+
+<a id="nestedatt--resource_configurations"></a>
+### Nested Schema for `resource_configurations`
+
+Read-Only:
+
+- `minimum_memory_in_mi_b` (Number) The minimum amount of memory in MiB to allocate to the agent runtime
 
 
 <a id="nestedatt--workload_identity_details"></a>
