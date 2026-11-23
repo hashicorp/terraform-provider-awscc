@@ -26,9 +26,9 @@
       "pattern": "^\\+[1-9]\\d{1,14}$"
     },
     "SecurityProfileArn": {
-      "description": "The identifier of the security profile for the user.",
+      "description": "The Amazon Resource Name (ARN) of a customer-managed or AWS-managed security profile for the user.",
       "type": "string",
-      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*$"
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:(?:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*|aws:security-profile/[a-zA-Z][a-zA-Z0-9_-]{0,127})$"
     },
     "AfterContactWorkTimeLimit": {
       "description": "The After Call Work (ACW) timeout setting, in seconds.",
@@ -347,7 +347,7 @@
       "maxItems": 10,
       "uniqueItems": true,
       "insertionOrder": false,
-      "description": "One or more security profile arns for the user",
+      "description": "One or more customer-managed or AWS-managed security profile ARNs for the user.",
       "items": {
         "$ref": "#/definitions/SecurityProfileArn"
       }
@@ -487,7 +487,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:TagResource",

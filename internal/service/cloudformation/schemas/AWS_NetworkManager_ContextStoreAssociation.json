@@ -1,0 +1,77 @@
+{
+  "typeName": "AWS::NetworkManager::ContextStoreAssociation",
+  "description": "Associates a Transit Gateway with a Context Store for sharing network context.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-networkmanager.git",
+  "properties": {
+    "ContextStoreId": {
+      "type": "string",
+      "description": "The ID of the context store."
+    },
+    "ResourceArn": {
+      "type": "string",
+      "description": "The ARN of the Transit Gateway to associate."
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the association (ASSOCIATING, ASSOCIATED, DISASSOCIATING, FAILED)."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "Creation timestamp (ISO-8601)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ContextStoreId",
+    "ResourceArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "readOnlyProperties": [
+    "/properties/State",
+    "/properties/CreatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/ContextStoreId",
+    "/properties/ResourceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ContextStoreId",
+    "/properties/ResourceArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "networkmanager:AssociateContextStore",
+        "networkmanager:GetContextStoreAssociation"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "networkmanager:GetContextStoreAssociation"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "networkmanager:DisassociateContextStore",
+        "networkmanager:GetContextStoreAssociation"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ContextStoreId": {
+            "$ref": "resource-schema.json#/properties/ContextStoreId"
+          }
+        },
+        "required": [
+          "ContextStoreId"
+        ]
+      },
+      "permissions": [
+        "networkmanager:ListContextStoreAssociations"
+      ]
+    }
+  }
+}

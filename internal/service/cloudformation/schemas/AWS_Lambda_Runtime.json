@@ -1,0 +1,199 @@
+{
+  "typeName": "AWS::Lambda::Runtime",
+  "description": "Resource Type definition for AWS::Lambda::Runtime. A Lambda runtime backed by an OCI image, used by Lambda functions.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ReleaseLifecycle": {
+      "description": "The publisher's lifecycle declaration for the runtime. Omitting it removes any stored declaration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReleaseState": {
+          "type": "string",
+          "description": "The release state of the runtime. DEPRECATED requires a DeprecationDate on or before today (UTC); PREVIEW and GA require a later DeprecationDate, or none. Reads report DEPRECATED once DeprecationDate is reached.",
+          "enum": [
+            "PREVIEW",
+            "GA",
+            "DEPRECATED"
+          ]
+        },
+        "DeprecationDate": {
+          "type": "string",
+          "description": "The date on which the runtime becomes deprecated. A UTC calendar date in yyyy-mm-dd format.",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "FunctionCreateBlockDate": {
+          "type": "string",
+          "description": "The date on which creating new functions on this runtime is blocked. A UTC calendar date in yyyy-mm-dd format.",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "FunctionUpdateBlockDate": {
+          "type": "string",
+          "description": "The date on which updating existing functions on this runtime is blocked. A UTC calendar date in yyyy-mm-dd format.",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the runtime.",
+      "minLength": 48,
+      "maxLength": 2048,
+      "pattern": "^arn:(aws[a-zA-Z-]*):lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:runtime/[a-z0-9]([a-z0-9_.-]{0,126})?[a-z0-9](/(version|alias)/[^/]{1,128})?$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the runtime.",
+      "minLength": 2,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]([a-z0-9_.-]{0,126})?[a-z0-9]$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the runtime.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "LicenseInfo": {
+      "type": "string",
+      "description": "Licensing information for the runtime.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "ReleaseLifecycle": {
+      "$ref": "#/definitions/ReleaseLifecycle"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to apply to the runtime.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "The lifecycle state of the runtime.",
+      "enum": [
+        "ACTIVE",
+        "PENDING_DELETION",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "Created": {
+      "type": "string",
+      "description": "The timestamp when the runtime was created.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "LastModified": {
+      "type": "string",
+      "description": "The timestamp when the runtime was last modified.",
+      "minLength": 1,
+      "maxLength": 64
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/State",
+    "/properties/Created",
+    "/properties/LastModified"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "lambda:TagResource",
+      "lambda:UntagResource",
+      "lambda:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "lambda:CreateRuntime",
+        "lambda:GetRuntime",
+        "lambda:TagResource",
+        "lambda:ListTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "lambda:GetRuntime",
+        "lambda:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "lambda:UpdateRuntime",
+        "lambda:GetRuntime",
+        "lambda:TagResource",
+        "lambda:UntagResource",
+        "lambda:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "lambda:DeleteRuntime",
+        "lambda:GetRuntime",
+        "lambda:ListTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "lambda:ListRuntimes"
+      ]
+    }
+  }
+}

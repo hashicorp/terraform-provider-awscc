@@ -167,12 +167,30 @@
             }
           },
           "additionalProperties": false
+        },
+        "CpuOptions": {
+          "$ref": "#/definitions/CpuOptions"
         }
       },
       "required": [
         "OperatingSystem",
         "InstanceRequirements"
       ],
+      "additionalProperties": false
+    },
+    "CpuOptions": {
+      "type": "object",
+      "description": "The CPU options for the instances.",
+      "properties": {
+        "NestedVirtualization": {
+          "type": "string",
+          "description": "Indicates whether nested virtualization is enabled on the instances, which exposes hardware virtualization (KVM) to agents. Default: DISABLED.",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
       "additionalProperties": false
     },
     "InstanceRequirements": {

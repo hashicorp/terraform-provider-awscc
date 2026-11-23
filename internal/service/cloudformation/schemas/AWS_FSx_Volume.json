@@ -226,10 +226,34 @@
         "OntapVolumeType": {
           "description": "Specifies the type of volume you are creating. Valid values are the following: RW or DP",
           "type": "string"
+        },
+        "CloneConfiguration": {
+          "description": "Creates the volume as an ONTAP FlexClone of an existing volume. The clone takes SizeInMegabytes and StorageEfficiencyEnabled from the parent volume: omit them, or set them to the parent's values.",
+          "$ref": "#/definitions/CloneConfiguration"
         }
       },
       "required": [
         "StorageVirtualMachineId"
+      ]
+    },
+    "CloneConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Creates the volume as an ONTAP FlexClone of an existing volume in the same SVM. After the volume is created, changing or removing CloneConfiguration isn't supported: the update fails and the clone is unchanged.",
+      "properties": {
+        "ParentVolumeId": {
+          "description": "The ID of the volume to clone. It must be in the same storage virtual machine (SVM) as the new volume.",
+          "type": "string",
+          "pattern": "^(fsvol-[0-9a-f]{17,})$"
+        },
+        "SnapshotId": {
+          "description": "The ID of a snapshot of the parent volume to clone from. If you omit it, the clone is created from the parent volume's current state. Required when this volume's OntapVolumeType is DP (the parent volume must then also be DP).",
+          "type": "string",
+          "pattern": "^((fs)?volsnap-[0-9a-f]{8,})$"
+        }
+      },
+      "required": [
+        "ParentVolumeId"
       ]
     },
     "OpenZFSConfiguration": {

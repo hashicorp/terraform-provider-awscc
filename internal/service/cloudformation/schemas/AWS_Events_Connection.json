@@ -301,7 +301,12 @@
         "secretsmanager:PutSecretValue",
         "iam:CreateServiceLinkedRole",
         "kms:DescribeKey",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:AssociateViaAWSService-EventsAndStates",
+        "vpc-lattice:TagResource"
       ]
     },
     "read": {
@@ -321,7 +326,11 @@
         "kms:Decrypt",
         "kms:DescribeKey",
         "kms:Encrypt",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:AssociateViaAWSService-EventsAndStates",
+        "vpc-lattice:TagResource"
       ]
     },
     "delete": {

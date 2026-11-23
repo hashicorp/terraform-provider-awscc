@@ -31,10 +31,6 @@
     "/properties/ClusterArn"
   ],
   "required": [],
-  "conditionalCreateOnlyProperties": [
-    "/properties/InstanceGroups/*/CustomMetadata",
-    "/properties/RestrictedInstanceGroups/*/CustomMetadata"
-  ],
   "handlers": {
     "read": {
       "permissions": [
@@ -534,7 +530,8 @@
       "type": "string",
       "enum": [
         "InstanceStress",
-        "InstanceConnectivity"
+        "InstanceConnectivity",
+        "MultiNodeTrainingValidation"
       ]
     },
     "SharedEnvironmentConfig": {

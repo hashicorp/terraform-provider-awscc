@@ -42,11 +42,29 @@
             "$ref": "#/definitions/ReplicationDestination"
           },
           "description": "An array of objects representing the destination for a replication rule."
+        },
+        "DeleteReplication": {
+          "$ref": "#/definitions/DeleteReplication",
+          "description": ""
         }
       },
       "description": "An array of objects representing the replication destinations and repository filters for a replication configuration.",
       "required": [
         "Destinations"
+      ],
+      "additionalProperties": false
+    },
+    "DeleteReplication": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "description": "Whether image deletions and image tag removals in the source registry are replicated to the replication destinations."
+        }
+      },
+      "description": "",
+      "required": [
+        "Enabled"
       ],
       "additionalProperties": false
     },

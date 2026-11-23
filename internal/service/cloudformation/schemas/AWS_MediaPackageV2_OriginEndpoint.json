@@ -86,6 +86,13 @@
         }
       ]
     },
+    "DashBandwidthReportingMode": {
+      "type": "string",
+      "enum": [
+        "AVERAGE",
+        "MAX"
+      ]
+    },
     "DashBaseUrl": {
       "type": "object",
       "description": "<p>The base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.</p>",
@@ -536,6 +543,9 @@
         },
         "Compactness": {
           "$ref": "#/definitions/DashCompactness"
+        },
+        "BandwidthReportingMode": {
+          "$ref": "#/definitions/DashBandwidthReportingMode"
         },
         "AudioTimelinePattern": {
           "$ref": "#/definitions/DashAudioTimelinePattern"

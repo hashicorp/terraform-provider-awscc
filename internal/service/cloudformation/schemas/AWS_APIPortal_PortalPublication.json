@@ -1,0 +1,73 @@
+{
+  "typeName": "AWS::APIPortal::PortalPublication",
+  "description": "Resource Type definition for AWS::APIPortal::PortalPublication. Drives the publish/unpublish lifecycle of an AWS::APIPortal::Portal. A separate resource keyed on PortalArn with a customer-controlled ChangeToken as the change-trigger. Customers may set ChangeToken to a literal value, a CFN parameter (manual republish), or a Fn::Sub-composed string referencing dependent resources' UpdatedAt attributes (auto-republish through CFN's dependency graph).",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "PortalArn": {
+      "type": "string",
+      "description": "The ARN of the parent portal that this PortalPublication targets.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "ChangeToken": {
+      "type": "string",
+      "description": "Customer-supplied change-trigger string. Any change forces a republish on UpdateHandler. Customers may set this to a literal token, a CFN parameter, or a Fn::Sub-composed string (for example, a concatenation of dependent resources' UpdatedAt attributes) to chain republish through CFN's dependency graph.",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the changes made in this published version. Forwarded to PublishPortal.description.",
+      "minLength": 0,
+      "maxLength": 1024
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PortalArn",
+    "ChangeToken"
+  ],
+  "createOnlyProperties": [
+    "/properties/PortalArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Description",
+    "/properties/ChangeToken"
+  ],
+  "primaryIdentifier": [
+    "/properties/PortalArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:GetPortal",
+        "apiportal:UpdatePortalPublishStatus"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetPortal"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:ListPortals"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:GetPortal",
+        "apiportal:UpdatePortalPublishStatus"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:GetPortal",
+        "apiportal:UpdatePortalPublishStatus"
+      ]
+    }
+  }
+}

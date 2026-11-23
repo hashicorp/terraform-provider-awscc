@@ -210,6 +210,53 @@
       ],
       "additionalProperties": false
     },
+    "EventBridgeMetadataMap": {
+      "type": "object",
+      "description": "Customer-defined metadata key-value pairs.",
+      "maxProperties": 100,
+      "minProperties": 0,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventBridgePutEventsV2Parameters": {
+      "type": "object",
+      "description": "EventBridge PutEvent V2 predefined target type",
+      "properties": {
+        "DetailType": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "description": "Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail."
+        },
+        "Source": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "",
+          "description": "The source of the event."
+        }
+      },
+      "required": [
+        "DetailType",
+        "Source"
+      ],
+      "additionalProperties": false
+    },
+    "EventBridgePutRawEventsParameters": {
+      "type": "object",
+      "description": "EventBridge PutRawEvent predefined target type",
+      "properties": {
+        "Metadata": {
+          "$ref": "#/definitions/EventBridgeMetadataMap"
+        }
+      },
+      "additionalProperties": false
+    },
     "FlexibleTimeWindow": {
       "type": "object",
       "description": "Flexible time window allows configuration of a window within which a schedule can be invoked",
@@ -451,6 +498,12 @@
         },
         "EventBridgeParameters": {
           "$ref": "#/definitions/EventBridgeParameters"
+        },
+        "EventBridgePutEventsV2Parameters": {
+          "$ref": "#/definitions/EventBridgePutEventsV2Parameters"
+        },
+        "EventBridgePutRawEventsParameters": {
+          "$ref": "#/definitions/EventBridgePutRawEventsParameters"
         },
         "KinesisParameters": {
           "$ref": "#/definitions/KinesisParameters"

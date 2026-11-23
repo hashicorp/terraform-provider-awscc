@@ -1,0 +1,298 @@
+{
+  "typeName": "AWS::EC2::FcaPolicy",
+  "description": "A Flex Cost Allocation (FCA) policy defines how shared network costs (data transfer, data processing) are allocated and reported for network resources such as NAT gateways, EC2 instances, and VPC peering connections.",
+  "properties": {
+    "FcaPolicyId": {
+      "type": "string",
+      "description": "The ID of the FCA policy.",
+      "pattern": "^fcap-[a-f0-9]{17}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the FCA policy."
+    },
+    "NetworkResourceType": {
+      "type": "string",
+      "description": "The type of network resource the FCA policy applies to.",
+      "enum": [
+        "natgw",
+        "pcx",
+        "ec2"
+      ]
+    },
+    "NatFcaPolicyDocument": {
+      "$ref": "#/definitions/NatFcaPolicyDocument"
+    },
+    "InstanceFcaPolicyDocument": {
+      "$ref": "#/definitions/InstanceFcaPolicyDocument"
+    },
+    "PcxFcaPolicyDocument": {
+      "$ref": "#/definitions/PcxFcaPolicyDocument"
+    },
+    "ShowBackEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether show-back reporting is enabled for the FCA policy."
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the FCA policy."
+    },
+    "OwnerAccount": {
+      "type": "string",
+      "description": "The AWS account ID that owns the FCA policy."
+    },
+    "LatestVersion": {
+      "type": "integer",
+      "description": "The latest version number of the FCA policy."
+    },
+    "VersionExpectedEffectiveAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the latest version of the FCA policy is expected to take effect."
+    },
+    "PolicyCreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the FCA policy was created."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the FCA policy.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false,
+      "uniqueItems": true
+    }
+  },
+  "definitions": {
+    "NatFcaPolicyDocument": {
+      "type": "object",
+      "description": "The FCA policy document for NAT gateway cost allocation.",
+      "properties": {
+        "ReportingGranularity": {
+          "$ref": "#/definitions/ReportingGranularityList"
+        },
+        "Dimensions": {
+          "$ref": "#/definitions/DimensionList"
+        },
+        "CidrRangeSpecifications": {
+          "$ref": "#/definitions/CidrRangeSpecifications"
+        }
+      },
+      "required": [
+        "ReportingGranularity",
+        "Dimensions"
+      ],
+      "additionalProperties": false
+    },
+    "InstanceFcaPolicyDocument": {
+      "type": "object",
+      "description": "The FCA policy document for EC2 instance cost allocation.",
+      "properties": {
+        "ReportingGranularity": {
+          "$ref": "#/definitions/ReportingGranularityList"
+        },
+        "Dimensions": {
+          "$ref": "#/definitions/DimensionList"
+        },
+        "CidrRangeSpecifications": {
+          "$ref": "#/definitions/CidrRangeSpecifications"
+        }
+      },
+      "required": [
+        "ReportingGranularity",
+        "Dimensions"
+      ],
+      "additionalProperties": false
+    },
+    "PcxFcaPolicyDocument": {
+      "type": "object",
+      "description": "The FCA policy document for VPC peering connection cost allocation.",
+      "properties": {
+        "ReportingGranularity": {
+          "$ref": "#/definitions/ReportingGranularityList"
+        },
+        "Dimensions": {
+          "$ref": "#/definitions/DimensionList"
+        },
+        "CidrRangeSpecifications": {
+          "$ref": "#/definitions/CidrRangeSpecifications"
+        }
+      },
+      "required": [
+        "ReportingGranularity",
+        "Dimensions"
+      ],
+      "additionalProperties": false
+    },
+    "ReportingGranularityList": {
+      "type": "array",
+      "description": "The granularity at which costs are reported. Contains exactly one value.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "eni",
+          "ec2",
+          "subnet",
+          "vpc",
+          "account",
+          "peering-id",
+          "cidr"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "insertionOrder": false
+    },
+    "DimensionList": {
+      "type": "array",
+      "description": "The cost dimensions to allocate.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "data-transfer",
+          "data-processing"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 2,
+      "insertionOrder": false
+    },
+    "CidrRangeSpecifications": {
+      "type": "object",
+      "description": "CIDR range specifications, used when the reporting granularity is 'cidr'.",
+      "properties": {
+        "PrefixesType": {
+          "type": "string",
+          "description": "The type of prefixes the mappings apply to.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "Prefixes": {
+          "type": "array",
+          "description": "The CIDR range to label mappings.",
+          "items": {
+            "$ref": "#/definitions/CidrMapping"
+          },
+          "minItems": 1,
+          "maxItems": 100,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "PrefixesType",
+        "Prefixes"
+      ],
+      "additionalProperties": false
+    },
+    "CidrMapping": {
+      "type": "object",
+      "description": "A single CIDR range to label mapping.",
+      "properties": {
+        "CidrRange": {
+          "type": "string",
+          "description": "The CIDR range.",
+          "minLength": 1,
+          "maxLength": 43
+        },
+        "CidrLabel": {
+          "type": "string",
+          "description": "The label for the CIDR range.",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-]{0,63}$"
+        }
+      },
+      "required": [
+        "CidrRange",
+        "CidrLabel"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "NetworkResourceType"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/FcaPolicyId",
+    "/properties/Arn",
+    "/properties/OwnerAccount",
+    "/properties/LatestVersion",
+    "/properties/VersionExpectedEffectiveAt",
+    "/properties/PolicyCreatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/NetworkResourceType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/FcaPolicyId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeNetworkingFlexCostAllocationPolicies"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateNetworkingFlexCostAllocationPolicy",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeNetworkingFlexCostAllocationPolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyNetworkingFlexCostAllocationPolicy",
+        "ec2:DescribeNetworkingFlexCostAllocationPolicies",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteNetworkingFlexCostAllocationPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeNetworkingFlexCostAllocationPolicies"
+      ]
+    }
+  }
+}

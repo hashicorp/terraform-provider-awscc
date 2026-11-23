@@ -1,0 +1,255 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::CoreNetworkEndpoint",
+  "description": "Resource schema for AWS::Route53GlobalResolver::CoreNetworkEndpoint. A core network endpoint connects a Route 53 Global Resolver to an AWS Cloud WAN core network and defines the private DNS IP addresses that Cloud WAN traffic uses to reach the resolver.",
+  "sourceUrl": "https://code.amazon.com/packages/AWSCloudFormationResourceProvidersRoute53GlobalResolver",
+  "primaryIdentifier": [
+    "/properties/CoreNetworkEndpointId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CoreNetworkEndpointId",
+    "/properties/AvailableRegions",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/GlobalResolverId",
+    "/properties/CoreNetworkArn",
+    "/properties/ClientToken"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken"
+  ],
+  "required": [
+    "GlobalResolverId",
+    "CoreNetworkArn",
+    "IpAddresses"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Region": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 1
+    },
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "RegionScope": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "REGIONAL"
+      ]
+    },
+    "IpAddress": {
+      "type": "object",
+      "description": "A private DNS IP address of the core network endpoint. Specify exactly one of Ipv4Address or Ipv6Address. The IP address is the key of the entry: changing it adds the new address and then removes the old one.",
+      "properties": {
+        "Ipv4Address": {
+          "type": "string",
+          "maxLength": 15,
+          "minLength": 1,
+          "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$"
+        },
+        "Ipv6Address": {
+          "type": "string",
+          "maxLength": 39,
+          "minLength": 1,
+          "pattern": "^(?:[A-Fa-f0-9]{0,4}:){2,7}[A-Fa-f0-9]{1,4}$"
+        },
+        "DnsLabel": {
+          "type": "string",
+          "description": "Lowercase DNS label for the IP address. The service appends the endpoint ID to build the DNS name. The label of an existing IP address cannot be changed; to use a new label, change the IP address too.",
+          "maxLength": 32,
+          "minLength": 1,
+          "pattern": ""
+        },
+        "RegionScope": {
+          "$ref": "#/definitions/RegionScope",
+          "description": "ALL to serve the IP address in every available region of the endpoint, or REGIONAL to serve it only in Regions."
+        },
+        "Regions": {
+          "type": "array",
+          "description": "Regions that serve the IP address. Required when RegionScope is REGIONAL and not allowed when it is ALL. Must be a subset of AvailableRegions.",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/Region"
+          }
+        }
+      },
+      "required": [
+        "DnsLabel",
+        "RegionScope"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "Ipv4Address"
+          ]
+        },
+        {
+          "required": [
+            "Ipv6Address"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "CoreNetworkEndpointId": {
+      "type": "string",
+      "description": "The ID of the core network endpoint.",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the core network endpoint.",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "GlobalResolverId": {
+      "type": "string",
+      "description": "The ID of the Global Resolver to connect. A Global Resolver can have one core network endpoint.",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[-.a-zA-Z0-9]+$"
+    },
+    "CoreNetworkArn": {
+      "type": "string",
+      "description": "The ARN of the AWS Cloud WAN core network to connect. The core network must be in the same account and AVAILABLE. A core network can have one core network endpoint.",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName",
+      "description": "A name for the core network endpoint."
+    },
+    "IpAddresses": {
+      "type": "array",
+      "description": "The private DNS IP addresses of the endpoint (1 to 5). Each IP address can appear once.",
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/definitions/IpAddress"
+      }
+    },
+    "AvailableRegions": {
+      "type": "array",
+      "description": "Regions where the endpoint can serve DNS: the Global Resolver regions that are also core network edge locations.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Region"
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "CREATING, OPERATIONAL, UPDATING or DELETING. The service can also report FAILURE or ACTION_NEEDED, so this is not an enum."
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "ClientToken": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:CreateCoreNetworkEndpoint",
+        "route53globalresolver:GetCoreNetworkEndpoint",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:ListTagsForResource",
+        "networkmanager:GetCoreNetwork"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetCoreNetworkEndpoint",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:UpdateCoreNetworkEndpoint",
+        "route53globalresolver:GetCoreNetworkEndpoint",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource"
+      ],
+      "timeoutInMinutes": 120
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DeleteCoreNetworkEndpoint",
+        "route53globalresolver:GetCoreNetworkEndpoint"
+      ],
+      "timeoutInMinutes": 70
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListCoreNetworkEndpoints"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "route53globalresolver:TagResource",
+      "route53globalresolver:UntagResource",
+      "route53globalresolver:ListTagsForResource"
+    ]
+  }
+}

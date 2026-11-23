@@ -1,0 +1,268 @@
+{
+  "typeName": "AWS::FSx::SnapshotPolicy",
+  "description": "Creates an Amazon FSx for NetApp ONTAP snapshot policy. A snapshot policy defines up to five schedules that automatically create and retain volume snapshots. A snapshot policy is scoped either to a file system or to a storage virtual machine (SVM).",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-fsx",
+  "additionalProperties": false,
+  "properties": {
+    "SnapshotPolicyId": {
+      "type": "string",
+      "description": "The system-generated, unique ID of the snapshot policy.",
+      "minLength": 29,
+      "maxLength": 29,
+      "pattern": "^snapshotpol-[0-9a-f]{17}$"
+    },
+    "ResourceARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the snapshot policy.",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": ""
+    },
+    "FileSystemId": {
+      "type": "string",
+      "description": "The ID of the FSx for ONTAP file system on which to create a file system-scoped snapshot policy. Specify exactly one of FileSystemId or StorageVirtualMachineId.",
+      "minLength": 11,
+      "maxLength": 21,
+      "pattern": "^(fs-[0-9a-f]{8,})$"
+    },
+    "StorageVirtualMachineId": {
+      "type": "string",
+      "description": "The ID of the storage virtual machine (SVM) on which to create an SVM-scoped snapshot policy. Specify exactly one of FileSystemId or StorageVirtualMachineId.",
+      "minLength": 21,
+      "maxLength": 21,
+      "pattern": "^(svm-[0-9a-f]{17,})$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the snapshot policy.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Enabled": {
+      "type": "boolean",
+      "description": "Whether the snapshot policy is enabled. A disabled policy doesn't create snapshots. If you remove this property from the template, a stack update keeps the current value."
+    },
+    "Schedules": {
+      "type": "array",
+      "description": "The schedules of the snapshot policy. Each schedule creates snapshots on a named ONTAP job schedule and retains a maximum number of them.",
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SnapshotPolicySchedule"
+      }
+    },
+    "Scope": {
+      "type": "string",
+      "description": "Whether the snapshot policy is scoped to a file system or to an SVM.",
+      "enum": [
+        "FILESYSTEM",
+        "SVM"
+      ]
+    },
+    "UUID": {
+      "type": "string",
+      "description": "The UUID of the snapshot policy in ONTAP.",
+      "maxLength": 36,
+      "pattern": ""
+    },
+    "Lifecycle": {
+      "type": "string",
+      "description": "The lifecycle status of the snapshot policy.",
+      "enum": [
+        "CREATING",
+        "CREATED",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to apply to the snapshot policy, with a maximum of 50 tags.",
+      "maxItems": 50,
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "SnapshotPolicySchedule": {
+      "type": "object",
+      "description": "A schedule within a snapshot policy.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the ONTAP job schedule that triggers snapshot creation, for example hourly, daily, or weekly.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "Count": {
+          "type": "integer",
+          "description": "The maximum number of snapshots to retain for this schedule.",
+          "minimum": 0,
+          "maximum": 1023
+        },
+        "Prefix": {
+          "type": "string",
+          "description": "The prefix applied to the names of snapshots created by this schedule.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "SnapmirrorLabel": {
+          "type": "string",
+          "description": "The SnapMirror label applied to snapshots created by this schedule. SnapMirror policies use this label to select snapshots to replicate.",
+          "minLength": 0,
+          "maxLength": 31
+        },
+        "RetentionPeriod": {
+          "$ref": "#/definitions/SnapshotPolicyRetentionPeriod"
+        }
+      },
+      "required": [
+        "Name",
+        "Count"
+      ]
+    },
+    "SnapshotPolicyRetentionPeriod": {
+      "type": "object",
+      "description": "How long to retain snapshots created by a schedule.",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The unit of the retention period, or INFINITE to retain snapshots indefinitely.",
+          "enum": [
+            "SECONDS",
+            "MINUTES",
+            "HOURS",
+            "DAYS",
+            "MONTHS",
+            "YEARS",
+            "INFINITE"
+          ]
+        },
+        "Value": {
+          "type": "integer",
+          "description": "The length of the retention period, in the unit given by Type.",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair used to tag the snapshot policy.",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "Name",
+    "Schedules"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "FileSystemId"
+      ]
+    },
+    {
+      "required": [
+        "StorageVirtualMachineId"
+      ]
+    }
+  ],
+  "readOnlyProperties": [
+    "/properties/SnapshotPolicyId",
+    "/properties/ResourceARN",
+    "/properties/Scope",
+    "/properties/UUID",
+    "/properties/Lifecycle"
+  ],
+  "createOnlyProperties": [
+    "/properties/FileSystemId",
+    "/properties/StorageVirtualMachineId",
+    "/properties/Name",
+    "/properties/Schedules"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SnapshotPolicyId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fsx:ListTagsForResource",
+      "fsx:TagResource",
+      "fsx:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fsx:CreateSnapshotPolicy",
+        "fsx:DescribeSnapshotPolicies",
+        "fsx:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fsx:DescribeSnapshotPolicies",
+        "fsx:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fsx:DescribeSnapshotPolicies",
+        "fsx:UpdateSnapshotPolicy",
+        "fsx:TagResource",
+        "fsx:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fsx:DeleteSnapshotPolicy",
+        "fsx:DescribeSnapshotPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fsx:DescribeSnapshotPolicies"
+      ]
+    }
+  }
+}

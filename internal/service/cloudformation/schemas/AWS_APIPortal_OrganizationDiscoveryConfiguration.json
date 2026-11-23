@@ -1,0 +1,276 @@
+{
+  "typeName": "AWS::APIPortal::OrganizationDiscoveryConfiguration",
+  "description": "Resource Type definition for AWS::APIPortal::OrganizationDiscoveryConfiguration. Organization-wide singleton that configures API discovery across an organization.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the organization discovery configuration.",
+      "pattern": "^arn:aws[a-z\\-]*:apiportal:[a-z0-9\\-]*:[0-9]{12}:orgdiscoveryconfiguration$",
+      "minLength": 20,
+      "maxLength": 1011
+    },
+    "DiscoverySources": {
+      "type": "array",
+      "description": "The AWS services whose resources are scanned to discover APIs.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DiscoverySource"
+      }
+    },
+    "DiscoveryFilters": {
+      "$ref": "#/definitions/DiscoveryFilters"
+    },
+    "DiscoveryFeatures": {
+      "type": "array",
+      "description": "Optional discovery capabilities to enable.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DiscoveryFeature"
+      }
+    },
+    "DiscoveryConfigurationStatus": {
+      "type": "string",
+      "description": "The status of the organization discovery configuration.",
+      "enum": [
+        "DISABLED",
+        "ENABLED",
+        "UPDATING"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the organization discovery configuration was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the organization discovery configuration was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the organization discovery configuration.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "DiscoverySource": {
+      "type": "string",
+      "description": "An AWS service whose resources are scanned to discover APIs.",
+      "enum": [
+        "API_GATEWAY",
+        "ELB",
+        "CLOUDFRONT"
+      ]
+    },
+    "DiscoveryFeature": {
+      "type": "string",
+      "description": "An optional discovery capability.",
+      "enum": [
+        "AI_DISCOVERY"
+      ]
+    },
+    "DiscoveryFilters": {
+      "type": "object",
+      "description": "Scopes organization-wide discovery. Exactly one of ExclusionFilters or InclusionFilters is set.",
+      "additionalProperties": false,
+      "properties": {
+        "ExclusionFilters": {
+          "$ref": "#/definitions/ExclusionFilters"
+        },
+        "InclusionFilters": {
+          "$ref": "#/definitions/InclusionFilters"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "ExclusionFilters"
+          ]
+        },
+        {
+          "required": [
+            "InclusionFilters"
+          ]
+        }
+      ]
+    },
+    "ExclusionFilters": {
+      "type": "object",
+      "description": "Resources matching any of these filters are excluded from discovery.",
+      "additionalProperties": false,
+      "properties": {
+        "OrganizationalUnitIds": {
+          "type": "array",
+          "description": "Organizational unit IDs to exclude from discovery.",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/OrganizationalUnitId"
+          }
+        },
+        "AccountIds": {
+          "type": "array",
+          "description": "AWS account IDs to exclude from discovery.",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AccountId"
+          }
+        },
+        "ResourceArns": {
+          "type": "array",
+          "description": "Resource ARNs to exclude from discovery.",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ResourceArn"
+          }
+        }
+      }
+    },
+    "InclusionFilters": {
+      "type": "object",
+      "description": "Only resources matching any of these filters are included in discovery.",
+      "additionalProperties": false,
+      "properties": {
+        "OrganizationalUnitIds": {
+          "type": "array",
+          "description": "Organizational unit IDs to include in discovery.",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/OrganizationalUnitId"
+          }
+        },
+        "AccountIds": {
+          "type": "array",
+          "description": "AWS account IDs to include in discovery.",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AccountId"
+          }
+        }
+      }
+    },
+    "OrganizationalUnitId": {
+      "type": "string",
+      "description": "An AWS Organizations organizational unit ID.",
+      "pattern": "^ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}$",
+      "minLength": 1,
+      "maxLength": 68
+    },
+    "AccountId": {
+      "type": "string",
+      "description": "A 12-digit AWS account ID.",
+      "pattern": "^[0-9]{12}$"
+    },
+    "ResourceArn": {
+      "type": "string",
+      "description": "ARN of a discovered resource.",
+      "pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:([0-9]{12})?:.+$",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DiscoverySources"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/DiscoveryConfigurationStatus",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:PutOrganizationDiscoveryConfiguration",
+        "apiportal:GetOrganizationDiscoveryConfiguration",
+        "apiportal:TagResource",
+        "iam:CreateServiceLinkedRole",
+        "organizations:ListAWSServiceAccessForOrganization"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetOrganizationDiscoveryConfiguration",
+        "organizations:ListAWSServiceAccessForOrganization"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:PutOrganizationDiscoveryConfiguration",
+        "apiportal:GetOrganizationDiscoveryConfiguration",
+        "apiportal:TagResource",
+        "apiportal:UntagResource",
+        "organizations:ListAWSServiceAccessForOrganization"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DeleteOrganizationDiscoveryConfiguration",
+        "apiportal:GetOrganizationDiscoveryConfiguration",
+        "organizations:ListAWSServiceAccessForOrganization"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:GetOrganizationDiscoveryConfiguration",
+        "organizations:ListAWSServiceAccessForOrganization"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apiportal:TagResource",
+      "apiportal:UntagResource",
+      "apiportal:GetOrganizationDiscoveryConfiguration",
+      "organizations:ListAWSServiceAccessForOrganization"
+    ]
+  }
+}

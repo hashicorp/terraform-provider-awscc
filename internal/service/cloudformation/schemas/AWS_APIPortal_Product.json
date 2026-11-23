@@ -1,0 +1,152 @@
+{
+  "typeName": "AWS::APIPortal::Product",
+  "description": "Resource Type definition for AWS::APIPortal::Product",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "ProductArn": {
+      "type": "string",
+      "description": "The ARN of the product.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "ProductId": {
+      "type": "string",
+      "description": "The product identifier.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The display name of the product.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the product.",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "ApiSelectionConfiguration": {
+      "description": "Configuration controlling how APIs are selected for the product.",
+      "$ref": "#/definitions/ApiSelectionConfiguration"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the product was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the product.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "ApiSelectionConfiguration": {
+      "description": "Configuration controlling how APIs are selected for the product.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ApiSelectionMode": {
+          "type": "string",
+          "description": "The mode used to select APIs for the product.",
+          "enum": [
+            "CUSTOM"
+          ]
+        }
+      },
+      "required": [
+        "ApiSelectionMode"
+      ]
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DisplayName"
+  ],
+  "readOnlyProperties": [
+    "/properties/ProductArn",
+    "/properties/ProductId",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProductArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ProductId"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:CreateProduct",
+        "apiportal:GetProduct",
+        "apiportal:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetProduct"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:UpdateProduct",
+        "apiportal:GetProduct",
+        "apiportal:TagResource",
+        "apiportal:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DeleteProduct",
+        "apiportal:GetProduct"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:ListProducts"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apiportal:TagResource",
+      "apiportal:UntagResource",
+      "apiportal:GetProduct"
+    ]
+  }
+}

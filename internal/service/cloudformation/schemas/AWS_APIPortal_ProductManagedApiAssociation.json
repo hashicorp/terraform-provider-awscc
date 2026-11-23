@@ -1,0 +1,80 @@
+{
+  "typeName": "AWS::APIPortal::ProductManagedApiAssociation",
+  "description": "Resource Type definition for AWS::APIPortal::ProductManagedApiAssociation. Associates a set of AWS::APIPortal::ManagedApi resources with an AWS::APIPortal::Product. The resource owns all of the product's Managed API associations.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "ProductId": {
+      "type": "string",
+      "description": "The identifier of the product. The product must use CUSTOM API selection.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "ManagedApiIds": {
+      "type": "array",
+      "description": "The identifiers of the Managed APIs to associate with the product.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ManagedApiId"
+      }
+    }
+  },
+  "definitions": {
+    "ManagedApiId": {
+      "type": "string",
+      "description": "A Managed API identifier.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ProductId",
+    "ManagedApiIds"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProductId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProductId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:AssociateManagedApis",
+        "apiportal:DisassociateManagedApis",
+        "apiportal:ListManagedApis"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:ListManagedApis"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:AssociateManagedApis",
+        "apiportal:DisassociateManagedApis",
+        "apiportal:ListManagedApis"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DisassociateManagedApis",
+        "apiportal:ListManagedApis"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:ListProducts",
+        "apiportal:ListManagedApis"
+      ]
+    }
+  }
+}

@@ -419,7 +419,12 @@
         "lambda:GetMicrovmImage",
         "lambda:CreateMicrovmImage",
         "lambda:PassNetworkConnector",
-        "iam:PassRole"
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext"
       ]
     },
     "update": {
@@ -433,7 +438,12 @@
         "lambda:PassNetworkConnector",
         "iam:PassRole",
         "lambda:DeleteMicrovmImageVersion",
-        "lambda:GetMicrovmImageVersion"
+        "lambda:GetMicrovmImageVersion",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext"
       ]
     },
     "read": {

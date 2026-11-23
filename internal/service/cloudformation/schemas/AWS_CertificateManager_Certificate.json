@@ -61,6 +61,22 @@
         "DISABLED"
       ],
       "description": "Specifies whether the certificate can be exported. ENABLED allows the certificate to be exported, DISABLED prevents export."
+    },
+    "RootHierarchyType": {
+      "type": "string",
+      "enum": [
+        "N2_AMAZON_MANAGED",
+        "N2_SFG2_AMAZON_MANAGED"
+      ],
+      "description": "The Amazon N2 root hierarchy that issues the certificate. Omit for a public TLS certificate. Amazon N2 roots are not trusted by browsers."
+    },
+    "CertificateUsage": {
+      "type": "string",
+      "enum": [
+        "CLIENT_AND_SERVER_AUTH",
+        "CLIENT_AUTH_ONLY"
+      ],
+      "description": "The extended key usage of an Amazon N2 certificate. Valid only with RootHierarchyType. Defaults to CLIENT_AND_SERVER_AUTH. CLIENT_AUTH_ONLY requires N2_AMAZON_MANAGED."
     }
   },
   "definitions": {
@@ -119,7 +135,9 @@
     "/properties/KeyAlgorithm",
     "/properties/DomainName",
     "/properties/CertificateAuthorityArn",
-    "/properties/CertificateExport"
+    "/properties/CertificateExport",
+    "/properties/RootHierarchyType",
+    "/properties/CertificateUsage"
   ],
   "writeOnlyProperties": [
     "/properties/DomainValidationOptions/*/HostedZoneId",

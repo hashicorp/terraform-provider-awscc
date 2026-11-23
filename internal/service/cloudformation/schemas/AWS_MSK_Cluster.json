@@ -308,7 +308,14 @@
         "InstanceType": {
           "type": "string",
           "minLength": 5,
-          "maxLength": 32
+          "maxLength": 64
+        },
+        "TopicReassignment": {
+          "type": "string",
+          "enum": [
+            "AUTO",
+            "MANUAL"
+          ]
         }
       },
       "required": [
@@ -581,7 +588,8 @@
     "/properties/CurrentVersion"
   ],
   "writeOnlyProperties": [
-    "/properties/ZookeeperAccess"
+    "/properties/ZookeeperAccess",
+    "/properties/BrokerNodeGroupInfo/TopicReassignment"
   ],
   "tagging": {
     "taggable": true,
@@ -607,6 +615,8 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kafka:CreateCluster",
+        "kafka:UpdateConnectivity",
+        "kafka:DescribeClusterOperation",
         "kafka:DescribeCluster",
         "kafka:TagResource",
         "logs:CreateLogDelivery",
@@ -622,7 +632,7 @@
         "firehose:TagDeliveryStream",
         "acm-pca:GetCertificateAuthorityCertificate"
       ],
-      "timeoutInMinutes": 120
+      "timeoutInMinutes": 180
     },
     "update": {
       "permissions": [

@@ -18,13 +18,14 @@
   ],
   "createOnlyProperties": [
     "/properties/DnsViewId",
-    "/properties/ClientToken"
+    "/properties/ClientToken",
+    "/properties/CoreNetworkEndpointId",
+    "/properties/Segment"
   ],
   "writeOnlyProperties": [
     "/properties/ClientToken"
   ],
   "required": [
-    "Cidr",
     "DnsViewId",
     "Protocol"
   ],
@@ -55,6 +56,17 @@
       "maxLength": 64,
       "minLength": 1,
       "pattern": ""
+    },
+    "CoreNetworkEndpointId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[-.a-zA-Z0-9]+$"
+    },
+    "SegmentName": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
     },
     "CRResourceStatus": {
       "type": "string",
@@ -98,7 +110,16 @@
       "minLength": 1
     },
     "Cidr": {
-      "$ref": "#/definitions/Cidr"
+      "$ref": "#/definitions/Cidr",
+      "description": "The IP address range (CIDR) whose traffic this access source admits. Required unless the access source uses a core network endpoint."
+    },
+    "CoreNetworkEndpointId": {
+      "$ref": "#/definitions/CoreNetworkEndpointId",
+      "description": "The ID of the core network endpoint whose Cloud WAN segment traffic this access source admits. Use together with Segment instead of Cidr. The core network endpoint must be OPERATIONAL."
+    },
+    "Segment": {
+      "$ref": "#/definitions/SegmentName",
+      "description": "The name of the Cloud WAN segment of the core network endpoint, or * for all of its segments. Requires CoreNetworkEndpointId."
     },
     "IpAddressType": {
       "$ref": "#/definitions/IpAddressType"

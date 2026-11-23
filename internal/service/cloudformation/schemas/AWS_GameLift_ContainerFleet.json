@@ -595,6 +595,7 @@
       "permissions": [
         "gamelift:CreateContainerFleet",
         "gamelift:DescribeContainerFleet",
+        "gamelift:DescribeFleetCapacity",
         "gamelift:DescribeFleetDeployment",
         "gamelift:DescribeFleetLocationAttributes",
         "gamelift:DescribeFleetLocationCapacity",
@@ -610,6 +611,7 @@
     "read": {
       "permissions": [
         "gamelift:DescribeContainerFleet",
+        "gamelift:DescribeFleetCapacity",
         "gamelift:DescribeFleetLocationAttributes",
         "gamelift:DescribeFleetLocationCapacity",
         "gamelift:DescribeScalingPolicies",
@@ -633,6 +635,7 @@
         "gamelift:DeleteFleetLocations",
         "gamelift:DeleteScalingPolicy",
         "gamelift:DescribeContainerFleet",
+        "gamelift:DescribeFleetCapacity",
         "gamelift:DescribeFleetDeployment",
         "gamelift:DescribeFleetLocationAttributes",
         "gamelift:DescribeFleetLocationCapacity",

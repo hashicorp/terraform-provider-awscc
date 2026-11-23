@@ -1,0 +1,106 @@
+{
+  "typeName": "AWS::EC2::FcaPolicyAssociation",
+  "description": "Associates a Flex Cost Allocation (FCA) policy with a network resource such as a NAT gateway, EC2 instance, or VPC peering connection.",
+  "properties": {
+    "FcaPolicyAssociationId": {
+      "type": "string",
+      "description": "The ID of the FCA policy association.",
+      "pattern": "^fcapassoc-[a-f0-9]{17}$"
+    },
+    "FcaPolicyId": {
+      "type": "string",
+      "description": "The ID of the FCA policy to associate.",
+      "pattern": "^fcap-[a-f0-9]{17}$"
+    },
+    "NetworkResourceId": {
+      "type": "string",
+      "description": "The ID of the network resource to associate the FCA policy with."
+    },
+    "NetworkResourceScopeType": {
+      "type": "string",
+      "description": "Associate by scope instead of directly. When set, NetworkResourceId is the ID of the scope (an account ID, a VPC ID, or a subnet ID) and the association covers every eligible network resource in that scope; when omitted, NetworkResourceId is a direct network resource (for example a NAT gateway or instance) and must match the policy's NetworkResourceType.",
+      "enum": [
+        "account",
+        "vpc",
+        "subnet"
+      ]
+    },
+    "OwnerAccount": {
+      "type": "string",
+      "description": "The AWS account ID that owns the FCA policy association."
+    },
+    "AssociatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the association was created."
+    },
+    "ExpectedEffectiveAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the association is expected to take effect."
+    },
+    "AssociationMode": {
+      "type": "string",
+      "description": "The mode of the association.",
+      "enum": [
+        "direct",
+        "scope"
+      ]
+    },
+    "ManagedBy": {
+      "type": "string",
+      "description": "Who manages the association: the account that created it, or a declarative policy."
+    }
+  },
+  "required": [
+    "FcaPolicyId",
+    "NetworkResourceId"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/FcaPolicyAssociationId",
+    "/properties/OwnerAccount",
+    "/properties/AssociatedAt",
+    "/properties/ExpectedEffectiveAt",
+    "/properties/AssociationMode",
+    "/properties/ManagedBy"
+  ],
+  "createOnlyProperties": [
+    "/properties/FcaPolicyId",
+    "/properties/NetworkResourceId",
+    "/properties/NetworkResourceScopeType"
+  ],
+  "primaryIdentifier": [
+    "/properties/FcaPolicyAssociationId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:AssociateNetworkingFlexCostAllocationPolicy",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNatGateways",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeVpcs"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeNetworkingFlexCostAllocationPolicyAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DisassociateNetworkingFlexCostAllocationPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeNetworkingFlexCostAllocationPolicyAssociations"
+      ]
+    }
+  }
+}

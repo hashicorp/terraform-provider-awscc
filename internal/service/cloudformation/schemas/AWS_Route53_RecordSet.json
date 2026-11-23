@@ -180,6 +180,33 @@
         "Latitude"
       ]
     },
+    "AZAffinity": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LocationId": {
+          "minLength": 1,
+          "description": "The ID of the location, for example an Availability Zone ID such as use1-az1, or a Region such as us-east-1.",
+          "type": "string",
+          "maxLength": 64
+        },
+        "LocationType": {
+          "description": "The type of the source location that the record set's answers apply to.",
+          "type": "string",
+          "enum": [
+            "AvailabilityZone",
+            "AvailabilityZoneGroup",
+            "Region",
+            "Partition",
+            "Global"
+          ]
+        }
+      },
+      "required": [
+        "LocationType",
+        "LocationId"
+      ]
+    },
     "TTL": {
       "type": "string"
     },
@@ -338,6 +365,10 @@
     "SetIdentifier": {
       "description": "An identifier that differentiates among multiple resource record sets that have the same combination of name and type.",
       "$ref": "#/definitions/SetIdentifier"
+    },
+    "AZAffinity": {
+      "description": "AZ affinity resource record sets only: the source location (Availability Zone, Availability Zone group, Region, partition, or global) of the DNS queries that this record set's answers apply to.",
+      "$ref": "#/definitions/AZAffinity"
     },
     "TTL": {
       "description": "The resource record cache time to live (TTL), in seconds.",

@@ -30,7 +30,11 @@
       "type": "string",
       "enum": [
         "CoinbaseCDP",
-        "StripePrivy"
+        "StripePrivy",
+        "Stripe",
+        "PayPal",
+        "AmazonPay",
+        "AwsBilling"
       ]
     },
     "PaymentConnectorProvisionMode": {
@@ -47,6 +51,15 @@
           "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
         },
         "StripePrivy": {
+          "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
+        },
+        "Stripe": {
+          "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
+        },
+        "PayPal": {
+          "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
+        },
+        "AmazonPay": {
           "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
         }
       },
@@ -129,6 +142,13 @@
       "description": "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
       "pattern": "^https://[^\\p{C}]*$",
       "maxLength": 4096
+    },
+    "AwsBillingIamRoleArn": {
+      "type": "string",
+      "description": "The ARN of the AWS Marketplace service-linked role in the payment manager's account, set by the service. Only present for AwsBilling connectors.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"
     }
   },
   "additionalProperties": false,
@@ -143,7 +163,8 @@
     "/properties/ConnectorStatus",
     "/properties/ConnectorCreatedAt",
     "/properties/ConnectorLastUpdatedAt",
-    "/properties/AuthorizationUrl"
+    "/properties/AuthorizationUrl",
+    "/properties/AwsBillingIamRoleArn"
   ],
   "createOnlyProperties": [
     "/properties/PaymentManagerId",
@@ -168,7 +189,8 @@
       "permissions": [
         "bedrock-agentcore:CreatePaymentConnector",
         "bedrock-agentcore:GetPaymentConnector",
-        "bedrock-agentcore:GetPaymentCredentialProvider"
+        "bedrock-agentcore:GetPaymentCredentialProvider",
+        "iam:GetRole"
       ]
     },
     "read": {

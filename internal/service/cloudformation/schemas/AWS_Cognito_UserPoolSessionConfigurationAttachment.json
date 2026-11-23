@@ -1,0 +1,101 @@
+{
+  "typeName": "AWS::Cognito::UserPoolSessionConfigurationAttachment",
+  "description": "Resource Type definition for AWS::Cognito::UserPoolSessionConfigurationAttachment. Manages the session configuration of a user pool: whether user session tracking is enabled and the maximum number of concurrent token sessions per user. The service default (UserSessionTracking DISABLED with TokenSession MaxPerUser 20) cannot be declared; remove the resource to return the user pool to the default.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "TokenSession": {
+      "type": "object",
+      "description": "Token session settings that apply to every app client in the user pool.",
+      "properties": {
+        "MaxPerUser": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "The maximum number of concurrent token sessions per user across all app clients. When a new session would exceed this number, the least recently used session ends."
+        }
+      },
+      "required": [
+        "MaxPerUser"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "UserPoolId": {
+      "type": "string",
+      "description": "The ID of the user pool."
+    },
+    "UserSessionTracking": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "description": "Whether server-side user session tracking is enabled for the user pool. Requires the ESSENTIALS or PLUS feature plan."
+    },
+    "TokenSession": {
+      "$ref": "#/definitions/TokenSession"
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "additionalProperties": false,
+  "required": [
+    "UserPoolId",
+    "UserSessionTracking",
+    "TokenSession"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserPoolId"
+  ],
+  "primaryIdentifier": [
+    "/properties/UserPoolId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cognito-idp:SetUserPoolSessionConfiguration",
+        "cognito-idp:GetUserPoolSessionConfiguration"
+      ],
+      "timeoutInMinutes": 5
+    },
+    "read": {
+      "permissions": [
+        "cognito-idp:GetUserPoolSessionConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cognito-idp:SetUserPoolSessionConfiguration",
+        "cognito-idp:GetUserPoolSessionConfiguration"
+      ],
+      "timeoutInMinutes": 5
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:SetUserPoolSessionConfiguration",
+        "cognito-idp:GetUserPoolSessionConfiguration"
+      ],
+      "timeoutInMinutes": 5
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "UserPoolId": {
+            "$ref": "resource-schema.json#/properties/UserPoolId"
+          }
+        },
+        "required": [
+          "UserPoolId"
+        ]
+      },
+      "permissions": [
+        "cognito-idp:GetUserPoolSessionConfiguration"
+      ]
+    }
+  }
+}

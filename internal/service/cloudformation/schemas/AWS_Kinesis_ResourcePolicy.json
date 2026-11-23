@@ -8,7 +8,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 2048,
-      "pattern": "arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
+      "pattern": "arn:aws.*:kinesis:.*:\\d{12}:(stream|queue)/\\S+",
       "anyOf": [
         {
           "relationshipRef": {

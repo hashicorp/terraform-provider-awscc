@@ -1,0 +1,219 @@
+{
+  "typeName": "AWS::Lambda::RuntimeAlias",
+  "description": "Resource Type definition for AWS::Lambda::RuntimeAlias. A mutable named pointer to a specific runtime version.",
+  "definitions": {
+    "Compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Compatibility matrix for the runtime version the alias points to.",
+      "properties": {
+        "IntegrationModels": {
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "RuntimeAPI"
+            ]
+          }
+        },
+        "Architectures": {
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "x86_64",
+              "arm64"
+            ]
+          }
+        },
+        "ManagedInstances": {
+          "type": "string",
+          "enum": [
+            "Supported",
+            "NotSupported"
+          ]
+        }
+      }
+    },
+    "ReleaseLifecycle": {
+      "description": "The publisher's lifecycle declaration for the alias. Omitting it removes any stored declaration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReleaseState": {
+          "type": "string",
+          "description": "The release state of the alias. DEPRECATED requires a DeprecationDate on or before today (UTC); PREVIEW and GA require a later DeprecationDate, or none. Reads report DEPRECATED once DeprecationDate is reached.",
+          "enum": [
+            "PREVIEW",
+            "GA",
+            "DEPRECATED"
+          ]
+        },
+        "DeprecationDate": {
+          "type": "string",
+          "description": "The date on which the alias becomes deprecated. A UTC calendar date in yyyy-mm-dd format.",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "FunctionCreateBlockDate": {
+          "type": "string",
+          "description": "The date on which creating new functions on this alias is blocked. A UTC calendar date in yyyy-mm-dd format.",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "FunctionUpdateBlockDate": {
+          "type": "string",
+          "description": "The date on which updating existing functions on this alias is blocked. A UTC calendar date in yyyy-mm-dd format.",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the runtime alias.",
+      "minLength": 48,
+      "maxLength": 2048,
+      "pattern": "^arn:(aws[a-zA-Z-]*):lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:runtime/[a-z0-9]([a-z0-9_.-]{0,126})?[a-z0-9](/(version|alias)/[^/]{1,128})?$"
+    },
+    "RuntimeName": {
+      "type": "string",
+      "description": "The name of the parent runtime.",
+      "minLength": 2,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]([a-z0-9_.-]{0,126})?[a-z0-9]$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The alias name.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_]([A-Za-z0-9_.-]{0,126}[A-Za-z0-9_])?$"
+    },
+    "RuntimeVersion": {
+      "type": "string",
+      "description": "The runtime version this alias points to."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the runtime alias.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "ReleaseLifecycle": {
+      "$ref": "#/definitions/ReleaseLifecycle"
+    },
+    "RuntimeVersionArn": {
+      "type": "string",
+      "description": "The ARN of the runtime version this alias points to."
+    },
+    "Compatibility": {
+      "$ref": "#/definitions/Compatibility"
+    },
+    "State": {
+      "type": "string",
+      "description": "The lifecycle state of the runtime alias.",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "PENDING_DELETION"
+      ]
+    },
+    "Created": {
+      "type": "string",
+      "description": "The timestamp when the runtime alias was created.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "LastModified": {
+      "type": "string",
+      "description": "The timestamp when the runtime alias was last modified.",
+      "minLength": 1,
+      "maxLength": 64
+    }
+  },
+  "required": [
+    "RuntimeName",
+    "Name",
+    "RuntimeVersion"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RuntimeName",
+      "/properties/Name"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/RuntimeVersionArn",
+    "/properties/Compatibility",
+    "/properties/State",
+    "/properties/Created",
+    "/properties/LastModified"
+  ],
+  "createOnlyProperties": [
+    "/properties/RuntimeName",
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "lambda:CreateRuntimeAlias",
+        "lambda:GetRuntimeAlias"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "lambda:GetRuntimeAlias"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "lambda:UpdateRuntimeAlias",
+        "lambda:GetRuntimeAlias"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "lambda:DeleteRuntimeAlias",
+        "lambda:GetRuntimeAlias"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "RuntimeName": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9]([a-z0-9_.-]{0,126})?[a-z0-9]$"
+          }
+        },
+        "required": [
+          "RuntimeName"
+        ]
+      },
+      "permissions": [
+        "lambda:ListRuntimeAliases"
+      ]
+    }
+  }
+}

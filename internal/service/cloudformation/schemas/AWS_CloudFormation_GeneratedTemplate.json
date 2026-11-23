@@ -14,6 +14,11 @@
       "minLength": 1,
       "maxLength": 128
     },
+    "StackId": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.",
+      "pattern": "^arn:aws[a-zA-Z-]*:cloudformation:[a-z0-9-]+:[0-9]{12}:stack/[a-zA-Z][-a-zA-Z0-9]*/[-a-zA-Z0-9]+$"
+    },
     "TemplateConfiguration": {
       "$ref": "#/definitions/TemplateConfiguration"
     },
@@ -110,6 +115,9 @@
     "/properties/Progress",
     "/properties/TotalWarnings"
   ],
+  "createOnlyProperties": [
+    "/properties/StackId"
+  ],
   "primaryIdentifier": [
     "/properties/GeneratedTemplateId"
   ],
@@ -120,7 +128,9 @@
     "create": {
       "permissions": [
         "cloudformation:CreateGeneratedTemplate",
-        "cloudformation:DescribeGeneratedTemplate"
+        "cloudformation:DescribeGeneratedTemplate",
+        "cloudformation:DescribeStacks",
+        "cloudformation:GetTemplate"
       ]
     },
     "read": {

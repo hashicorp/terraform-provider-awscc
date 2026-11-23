@@ -1283,7 +1283,7 @@
     "EventExpiryDuration": {
       "type": "integer",
       "minimum": 3,
-      "maximum": 365,
+      "maximum": 3650,
       "description": "Duration in days until memory events expire"
     },
     "MemoryArn": {

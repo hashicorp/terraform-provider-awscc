@@ -235,6 +235,14 @@
             },
             "SecretsManagerSecurityDbEncryptionAccessRoleArn": {
               "type": "string"
+            },
+            "S3Path": {
+              "type": "string",
+              "description": "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema."
+            },
+            "S3AccessRoleArn": {
+              "type": "string",
+              "description": "The ARN for the role the application uses to access its Amazon S3 bucket."
             }
           },
           "required": [

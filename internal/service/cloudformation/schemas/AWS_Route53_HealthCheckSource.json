@@ -1,0 +1,197 @@
+{
+  "typeName": "AWS::Route53::HealthCheckSource",
+  "description": "Resource Type definition for AWS::Route53::HealthCheckSource. The customer VPC, subnets and\nsecurity groups from which Route 53 probes private endpoints (PEHC). Immutable after creation\n(no Update API).",
+  "properties": {
+    "HealthCheckSourceConfig": {
+      "$ref": "#/definitions/HealthCheckSourceConfig",
+      "description": "<p>The VPC, subnets, and security groups for the health check source.</p>"
+    },
+    "HealthCheckSourceId": {
+      "type": "string",
+      "description": "<p>The ID of the health check source. Route\u00a053 assigns this ID when it creates the source.</p>",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "HealthCheckSourceStatus": {
+      "type": "string",
+      "description": "<p>The current status of the health check source. The health check source status can have one of the following values:</p>\n         <dl>\n            <dt>CREATE_PENDING, CREATE_IN_PROGRESS</dt>\n            <dd>\n               <p>Route\u00a053 is creating the source. Health checks that reference the source don't send requests yet.</p>\n            </dd>\n            <dt>CREATE_COMPLETED</dt>\n            <dd>\n               <p>The source is ready to use.</p>\n            </dd>\n            <dt>CREATE_FAILED</dt>\n            <dd>\n               <p>Route\u00a053 couldn't create the source. <code>StatusReasonCode</code> and <code>StatusReason</code> explain why.</p>\n            </dd>\n            <dt>DELETE_PENDING, DELETE_IN_PROGRESS</dt>\n            <dd>\n               <p>Route\u00a053 is deleting the source.</p>\n            </dd>\n            <dt>DELETE_COMPLETED</dt>\n            <dd>\n               <p>Route\u00a053 has deleted the source.</p>\n            </dd>\n            <dt>DELETE_FAILED</dt>\n            <dd>\n               <p>Route\u00a053 couldn't delete the source. <code>StatusReasonCode</code> and <code>StatusReason</code> explain why.</p>\n            </dd>\n         </dl>\n         <p>If the status is <code>CREATE_FAILED</code>, delete the source and create a new one. If the status is <code>DELETE_FAILED</code>, retry the <code>DeleteHealthCheckSource</code> request.</p>",
+      "enum": [
+        "CREATE_PENDING",
+        "CREATE_IN_PROGRESS",
+        "CREATE_COMPLETED",
+        "CREATE_FAILED",
+        "DELETE_PENDING",
+        "DELETE_IN_PROGRESS",
+        "DELETE_COMPLETED",
+        "DELETE_FAILED"
+      ]
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the resource.",
+      "pattern": "^arn:aws(?:-[a-z]+)*:route53:::healthchecksource/.+$"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "definitions": {
+    "SubnetConfiguration": {
+      "type": "object",
+      "properties": {
+        "SubnetId": {
+          "type": "string",
+          "description": "<p>The ID of the subnet. The subnet must have free IP addresses for the network interfaces that Route\u00a053 creates.</p>",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "AvailabilityZoneId": {
+          "type": "string",
+          "description": "<p>The ID of the Availability Zone that contains the subnet, for example <code>use1-az1</code>. Specify the Availability Zone ID, not the Availability Zone name. Each subnet in a health check source must be in a different Availability Zone.</p>",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "SecurityGroupIdList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "description": "<p>The IDs of one to ten security groups in the same VPC to associate with the network interfaces that Route\u00a053 creates in this subnet. The security groups must allow outbound traffic to the endpoints that the health checks monitor.</p>",
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "SubnetId",
+        "AvailabilityZoneId",
+        "SecurityGroupIdList"
+      ],
+      "additionalProperties": false,
+      "description": "<p>A complex type that identifies one subnet for a health check source and the security groups that Route\u00a053 associates with the network interfaces that it creates in that subnet.</p>"
+    },
+    "HealthCheckSourceConfig": {
+      "type": "object",
+      "properties": {
+        "VpcId": {
+          "type": "string",
+          "description": "<p>The ID of the VPC that contains the subnets for the health check source. All subnets in <code>SubnetConfigurationList</code> must belong to this VPC.</p>",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "SubnetConfigurationList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubnetConfiguration"
+          },
+          "description": "<p>A complex type that contains one <code>SubnetConfiguration</code> element for each Availability Zone that Route\u00a053 uses for private endpoint health checks in the Amazon Web Services Region. Each element must be in a different Availability Zone. Most Regions require three elements. Regions that have only two such Availability Zones, such as US West (N. California), require two elements. Route\u00a053 creates network interfaces in each subnet and sends health check requests from all of them.</p>",
+          "minItems": 2,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "VpcId",
+        "SubnetConfigurationList"
+      ],
+      "additionalProperties": false,
+      "description": "<p>A complex type that contains the VPC, subnets, and security groups for a health check source. You can't change these values after you create the source.</p>"
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/HealthCheckSourceId"
+    ]
+  ],
+  "required": [
+    "HealthCheckSourceConfig"
+  ],
+  "readOnlyProperties": [
+    "/properties/HealthCheckSourceId",
+    "/properties/HealthCheckSourceStatus",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/HealthCheckSourceConfig"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "route53:ChangeTagsForResource",
+      "route53:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateServiceLinkedRole",
+        "route53:ChangeTagsForResource",
+        "route53:CreateHealthCheckSource",
+        "route53:GetHealthCheckSource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53:GetHealthCheckSource",
+        "route53:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:CreateServiceLinkedRole",
+        "route53:DeleteHealthCheckSource",
+        "route53:GetHealthCheckSource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53:ListHealthCheckSources"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53:ChangeTagsForResource",
+        "route53:GetHealthCheckSource",
+        "route53:ListTagsForResource"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

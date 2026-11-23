@@ -1,0 +1,85 @@
+{
+  "typeName": "AWS::OpenSearchService::ReplicationPeer",
+  "description": "Resource Type definition for AWS::OpenSearchService::ReplicationPeer. Replicates an Amazon OpenSearch Service domain to a peer domain, in the same or another Region. The domain named in DomainName becomes the primary when the resource is created; switchover and failover are performed outside CloudFormation and do not affect this resource. Creating and deleting the resource requires es:AddReplicationPeer and es:RemoveReplicationPeer on both the domain and the peer domain. After a failover the relationship is EJECTED on both domains (on the former primary once its Region is reachable again) and cannot be resumed. To replicate again, delete this resource, which removes the ejected relationship from both domains, then create a new ReplicationPeer with the new primary as DomainName, in a stack in that domain's Region; the new relationship is set up from scratch. Changing DomainName or PeerDomainArn in a single update fails while either domain is still in the existing relationship, because the replacement is added before the existing relationship is removed.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchservice",
+  "properties": {
+    "DomainName": {
+      "type": "string",
+      "description": "The name of the domain to replicate, which becomes the primary. The domain must be in the same account and Region as the stack. After a switchover or failover this domain may no longer be the primary.",
+      "minLength": 3,
+      "maxLength": 28,
+      "pattern": "^[a-z][a-z0-9\\-]+$"
+    },
+    "PeerDomainArn": {
+      "type": "string",
+      "description": "The ARN of the domain to replicate with, which becomes the secondary. The peer domain must be in the same account and can be in the same or another Region.",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^arn:aws[a-z\\-]*:[a-z]+:[a-z0-9\\-]+:[0-9]+:domain/[a-z0-9\\-]+$"
+    },
+    "DomainArn": {
+      "type": "string",
+      "description": "The ARN of the domain being replicated.",
+      "pattern": "^arn:aws[a-z\\-]*:[a-z]+:[a-z0-9\\-]+:[0-9]+:domain/[a-z0-9\\-]+$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The state of the replication relationship, as of the last time CloudFormation read it."
+    },
+    "Role": {
+      "type": "string",
+      "description": "The replication role of the domain (PRIMARY or SECONDARY), as of the last time CloudFormation read the resource. Switchover and failover change it outside CloudFormation; call DescribeDomainReplication for the current role."
+    },
+    "PeerRole": {
+      "type": "string",
+      "description": "The replication role of the peer domain (PRIMARY or SECONDARY), as of the last time CloudFormation read the resource. Switchover and failover change it outside CloudFormation; call DescribeDomainReplication for the current role."
+    }
+  },
+  "required": [
+    "DomainName",
+    "PeerDomainArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/DomainArn",
+    "/properties/Status",
+    "/properties/Role",
+    "/properties/PeerRole"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainName",
+    "/properties/PeerDomainArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/DomainName",
+    "/properties/PeerDomainArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "es:AddReplicationPeer",
+        "es:DescribeDomainReplication"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "es:DescribeDomainReplication"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "es:RemoveReplicationPeer",
+        "es:DescribeDomainReplication"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "es:ListDomainNames",
+        "es:DescribeDomainReplication"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -86,6 +86,10 @@
       ]
     }
   },
+  "writeOnlyProperties": [
+    "/properties/TrustedExecutionConfiguration",
+    "/properties/TrustedExecutionConfiguration/AttestationPolicy"
+  ],
   "additionalProperties": false,
   "definitions": {
     "SharingStrategy": {
@@ -814,6 +818,29 @@
         }
       }
     },
+    "TrustedExecutionConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "IsolationMode"
+      ],
+      "properties": {
+        "IsolationMode": {
+          "description": "The isolation mode for the task. SHARED uses standard shared placement. ISOLATED_SANDBOX runs the task in its own isolated sandbox on a shared instance with hypervisor-level isolation. CONFIDENTIAL_SANDBOX runs the task in an isolated sandbox and supports an attestation policy to verify the workload before it runs.",
+          "type": "string",
+          "enum": [
+            "SHARED",
+            "ISOLATED_SANDBOX",
+            "CONFIDENTIAL_SANDBOX"
+          ]
+        },
+        "AttestationPolicy": {
+          "description": "A base64-encoded attestation policy that verifies the workload before the task runs. Only valid when IsolationMode is CONFIDENTIAL_SANDBOX.",
+          "type": "string"
+        }
+      }
+    },
     "Device": {
       "description": "The ``Device`` property specifies an object representing a container instance host device.",
       "additionalProperties": false,
@@ -1156,6 +1183,10 @@
       "items": {
         "$ref": "#/definitions/InferenceAccelerator"
       }
+    },
+    "TrustedExecutionConfiguration": {
+      "description": "",
+      "$ref": "#/definitions/TrustedExecutionConfiguration"
     },
     "Memory": {
       "description": "The amount (in MiB) of memory used by the task.\n If your tasks runs on Amazon EC2 instances, you must specify either a task-level memory value or a container-level memory value. This field is optional and any value can be used. If a task-level memory value is specified, the container-level memory value is optional. For more information regarding container-level memory and memory reservation, see [ContainerDefinition](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html).\n If your tasks runs on FARGATElong, this field is required. You must use one of the following values. The value you choose determines your range of valid values for the ``cpu`` parameter.\n  +  512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available ``cpu`` values: 256 (.25 vCPU)\n  +  1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available ``cpu`` values: 512 (.5 vCPU)\n  +  2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available ``cpu`` values: 1024 (1 vCPU)\n  +  Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available ``cpu`` values: 2048 (2 vCPU)\n  +  Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available ``cpu`` values: 4096 (4 vCPU)\n  +  Between 16 GB and 60 GB in 4 GB increments - Available ``cpu`` values: 8192 (8 vCPU)\n This option requires Linux platform ``1.4.0`` or later.\n  +  Between 32GB and 120 GB in 8 GB increments - Available ``cpu`` values: 16384 (16 vCPU)\n This option requires Linux platform ``1.4.0`` or later.",

@@ -143,6 +143,39 @@
           "maxItems": 50,
           "description": "List of account IDs where the organization rule applies",
           "insertionOrder": false
+        },
+        "OrganizationalUnitIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"
+          },
+          "minItems": 1,
+          "maxItems": 150,
+          "description": "List of organizational unit or organization root IDs where the organization rule applies. The rule also applies to accounts in descendant organizational units.",
+          "insertionOrder": false
+        },
+        "ExcludedOrganizationalUnitIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"
+          },
+          "minItems": 1,
+          "maxItems": 150,
+          "description": "List of organizational unit or organization root IDs to exclude from the organization rule. Exclusions include accounts in descendant organizational units and take precedence over included organizational units and accounts.",
+          "insertionOrder": false
+        },
+        "ExcludedAccountIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]{12}$"
+          },
+          "minItems": 1,
+          "maxItems": 50,
+          "description": "List of account IDs to exclude from the organization rule. Excluded accounts take precedence over included organizational units and accounts.",
+          "insertionOrder": false
         }
       },
       "additionalProperties": false

@@ -27,7 +27,9 @@
         "IN_PROGRESS",
         "ACTIVE",
         "INACTIVE",
-        "DISABLING"
+        "DISABLING",
+        "DELETE_IN_PROGRESS",
+        "DELETE_FAILED"
       ]
     },
     "CreateGitLabSelfManagedIntegrationDetail": {
@@ -227,7 +229,8 @@
       "permissions": [
         "inspector2:DeleteCodeSecurityIntegration",
         "inspector2:GetCodeSecurityIntegration"
-      ]
+      ],
+      "timeoutInMinutes": 15
     },
     "list": {
       "permissions": [

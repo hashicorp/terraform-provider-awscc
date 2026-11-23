@@ -1,0 +1,113 @@
+{
+  "typeName": "AWS::APIPortal::ProductDisplayOrder",
+  "description": "Resource Type definition for AWS::APIPortal::ProductDisplayOrder. Singleton sub-property of an AWS::APIPortal::Product capturing its display layout (overview page, top-level ProductPage ordering, and sectioned ProductApiPage arrangement).",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "ProductId": {
+      "type": "string",
+      "description": "The identifier of the parent Product. Singleton key for this CFN type.",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 10,
+      "maxLength": 30
+    },
+    "OverviewPageArn": {
+      "type": "string",
+      "description": "ARN of the ProductPage rendered as the overview/landing page.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "ProductPageArns": {
+      "type": "array",
+      "description": "Top-level ProductPage ARNs in display order.",
+      "uniqueItems": true,
+      "insertionOrder": true,
+      "items": {
+        "type": "string",
+        "minLength": 20,
+        "maxLength": 2048
+      }
+    },
+    "Contents": {
+      "type": "array",
+      "description": "Sectioned arrangement of ProductApiPage ARNs.",
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/Section"
+      }
+    }
+  },
+  "definitions": {
+    "Section": {
+      "type": "object",
+      "description": "A named grouping of ProductApiPage ARNs inside DisplayOrder.Contents. To represent a labeled placeholder section without endpoints, supply an empty ProductApiPageArns list.",
+      "additionalProperties": false,
+      "properties": {
+        "SectionName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "ProductApiPageArns": {
+          "type": "array",
+          "description": "Ordered ProductApiPage ARNs shown under this section. Required; use an empty list for a placeholder section.",
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "items": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 2048
+          }
+        }
+      },
+      "required": [
+        "SectionName",
+        "ProductApiPageArns"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ProductId"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProductId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProductId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:UpdateProduct",
+        "apiportal:GetProduct"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetProduct"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:ListProducts",
+        "apiportal:GetProduct"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:UpdateProduct",
+        "apiportal:GetProduct"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:UpdateProduct",
+        "apiportal:GetProduct"
+      ]
+    }
+  }
+}

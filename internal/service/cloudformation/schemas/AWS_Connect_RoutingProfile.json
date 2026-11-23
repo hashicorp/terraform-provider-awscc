@@ -201,7 +201,7 @@
       "description": "The manual assignment queues to associate with this routing profile.",
       "type": "array",
       "minItems": 1,
-      "maxItems": 10,
+      "maxItems": 50,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/RoutingProfileManualAssignmentQueueConfig"
@@ -237,6 +237,7 @@
     "create": {
       "permissions": [
         "connect:CreateRoutingProfile",
+        "connect:AssociateRoutingProfileQueues",
         "connect:TagResource"
       ]
     },
@@ -297,7 +298,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:TagResource",

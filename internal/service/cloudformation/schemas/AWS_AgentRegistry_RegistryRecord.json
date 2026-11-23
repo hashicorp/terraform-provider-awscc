@@ -15,7 +15,7 @@
     },
     "RegistryRecordStatus": {
       "type": "string",
-      "description": "The lifecycle status of the registry record.",
+      "description": "The lifecycle status of the registry record. CREATE_PENDING_AUTH and UPDATE_PENDING_AUTH mean that the record waits for a user to authorize access to a GitHub source. CloudFormation doesn't support GitHub sources, so a create or update that reaches one of these states fails.",
       "enum": [
         "DRAFT",
         "PENDING_APPROVAL",
@@ -25,7 +25,9 @@
         "CREATING",
         "UPDATING",
         "CREATE_FAILED",
-        "UPDATE_FAILED"
+        "UPDATE_FAILED",
+        "CREATE_PENDING_AUTH",
+        "UPDATE_PENDING_AUTH"
       ]
     },
     "Descriptors": {
@@ -145,6 +147,14 @@
       "properties": {
         "SkillMd": {
           "$ref": "#/definitions/AgentSkillsMdDescriptor"
+        },
+        "SkillPackage": {
+          "$ref": "#/definitions/AgentSkillsPackageDescriptor",
+          "description": "The source that the registry synchronizes the full skill package from. You can't set it together with SkillMd.Source or SkillMd Data."
+        },
+        "SourceConfiguration": {
+          "$ref": "#/definitions/AgentSkillsSourceConfiguration",
+          "description": "The provider-specific settings of the record's skill source."
         }
       },
       "additionalProperties": false
@@ -166,6 +176,100 @@
           "maxLength": 255
         }
       },
+      "additionalProperties": false
+    },
+    "AgentSkillsPackageDescriptor": {
+      "type": "object",
+      "description": "The skill package descriptor. It names the source that the registry synchronizes a skill package (a ZIP archive that follows the Agent Skills specification) from. The registry validates the package, stores it, and sets SkillMd Data from the package's SKILL.md.",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/SkillMdSource",
+          "description": "The source of the skill package, as an s3:// URL of a ZIP object."
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSkillsSourceConfiguration": {
+      "type": "object",
+      "description": "The provider-specific settings of a skill source. Specify the member that matches the source's provider, such as S3 for an Amazon S3 source.",
+      "properties": {
+        "S3": {
+          "$ref": "#/definitions/S3SourceConfiguration",
+          "description": "The settings of an Amazon S3 source."
+        }
+      },
+      "required": [
+        "S3"
+      ],
+      "additionalProperties": false
+    },
+    "S3SourceConfiguration": {
+      "type": "object",
+      "description": "The settings of a skill source that the registry reads from Amazon S3.",
+      "properties": {
+        "BucketOwnerAccountId": {
+          "type": "string",
+          "description": "The ID of the AWS account that owns the source bucket. The registry checks that the bucket belongs to this account each time it reads the source. If you omit it for a source that uses an IAM role, the registry expects the bucket in the role's account. A source without a credential provider, which the registry reads as a public object, requires it.",
+          "minLength": 12,
+          "maxLength": 12,
+          "pattern": "^[0-9]{12}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistryRecordArtifact": {
+      "type": "object",
+      "description": "The skill package that the registry stores for the record.",
+      "properties": {
+        "Sha256": {
+          "type": "string",
+          "description": "The SHA-256 checksum of the skill package, as 64 lowercase hexadecimal characters.",
+          "minLength": 64,
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistryRecordSynchronizedSource": {
+      "type": "object",
+      "description": "The source that the registry last synchronized the record's skill content from.",
+      "properties": {
+        "S3": {
+          "$ref": "#/definitions/S3SynchronizedSource",
+          "description": "The Amazon S3 source that the registry read."
+        }
+      },
+      "required": [
+        "S3"
+      ],
+      "additionalProperties": false
+    },
+    "S3SynchronizedSource": {
+      "type": "object",
+      "description": "An Amazon S3 source that the registry synchronized the skill content from, and the object version that it read. At most one of VersionId and ETag is set.",
+      "properties": {
+        "VersionId": {
+          "type": "string",
+          "description": "The version ID of the object that the registry read. Absent when the bucket isn't versioned.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "ETag": {
+          "type": "string",
+          "description": "The entity tag (ETag) of the object that the registry read, without quotes, when the object has no version ID. Not recorded for a SKILL.md source on a registry that is encrypted with a customer managed key.",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "SynchronizedAt": {
+          "type": "string",
+          "description": "The timestamp when the registry read the source.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "SynchronizedAt"
+      ],
       "additionalProperties": false
     },
     "CustomDescriptor": {
@@ -395,14 +499,22 @@
     },
     "SkillMdSourceFromUrl": {
       "type": "object",
-      "description": "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
+      "description": "URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data.",
       "properties": {
         "Url": {
           "type": "string",
-          "description": "URL source for the SkillMd document.",
+          "description": "The URL of the source. For synchronization, specify an s3://<bucket>/<key> URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.",
           "minLength": 1,
           "maxLength": 2048,
-          "pattern": "^https://.*$"
+          "pattern": "^(https|s3)://.*$"
+        },
+        "CredentialProviderConfigurations": {
+          "type": "array",
+          "description": "The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead.",
+          "items": {
+            "$ref": "#/definitions/SkillSourceCredentialProviderConfiguration"
+          },
+          "maxItems": 1
         }
       },
       "required": [
@@ -410,9 +522,42 @@
       ],
       "additionalProperties": false
     },
+    "SkillSourceCredentialProviderConfiguration": {
+      "type": "object",
+      "description": "A credential provider configuration that the registry uses to read an agent skills source. An Amazon S3 source takes an IAM role.",
+      "properties": {
+        "CredentialProviderType": {
+          "type": "string",
+          "description": "The type of the credential provider.",
+          "enum": [
+            "IAM"
+          ]
+        },
+        "CredentialProvider": {
+          "$ref": "#/definitions/SkillSourceCredentialProviderUnion",
+          "description": "The credential provider details."
+        }
+      },
+      "required": [
+        "CredentialProviderType",
+        "CredentialProvider"
+      ],
+      "additionalProperties": false
+    },
+    "SkillSourceCredentialProviderUnion": {
+      "type": "object",
+      "description": "The credential provider details of an agent skills source. Specify IamCredentialProvider.",
+      "properties": {
+        "IamCredentialProvider": {
+          "$ref": "#/definitions/RegistryRecordIamCredentialProvider",
+          "description": "The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region."
+        }
+      },
+      "additionalProperties": false
+    },
     "SkillMdSource": {
       "type": "object",
-      "description": "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
+      "description": "The source that the registry synchronizes agent skills content from: a SKILL.md document in SkillMd.Source, or a skill package in SkillPackage.Source.",
       "properties": {
         "FromUrl": {
           "$ref": "#/definitions/SkillMdSourceFromUrl"
@@ -514,6 +659,14 @@
     "CustomMetadata": {
       "type": "object",
       "description": "The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (true or false)."
+    },
+    "Artifact": {
+      "$ref": "#/definitions/RegistryRecordArtifact",
+      "description": "The skill package that the registry stores for a skill record that synchronizes a skill package. The package's download URL isn't returned."
+    },
+    "SynchronizedSource": {
+      "$ref": "#/definitions/RegistryRecordSynchronizedSource",
+      "description": "The source that the registry last synchronized the record's skill content from, and the version that it read. Absent until the first successful synchronization."
     }
   },
   "required": [
@@ -528,7 +681,9 @@
     "/properties/Status",
     "/properties/CreatedAt",
     "/properties/UpdatedAt",
-    "/properties/CreatedBy"
+    "/properties/CreatedBy",
+    "/properties/Artifact",
+    "/properties/SynchronizedSource"
   ],
   "createOnlyProperties": [
     "/properties/RegistryId",
@@ -570,7 +725,8 @@
         "bedrock-agentcore:GetWorkloadAccessToken",
         "bedrock-agentcore:GetResourceOauth2Token",
         "secretsmanager:GetSecretValue",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "read": {
@@ -591,7 +747,8 @@
         "bedrock-agentcore:GetWorkloadAccessToken",
         "bedrock-agentcore:GetResourceOauth2Token",
         "secretsmanager:GetSecretValue",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "delete": {

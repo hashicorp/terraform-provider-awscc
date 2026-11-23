@@ -1,21 +1,188 @@
 {
+  "typeName": "AWS::ApiGateway::Authorizer",
+  "description": "The ``AWS::ApiGateway::Authorizer`` resource creates an authorization layer that API Gateway activates for methods that have authorization enabled. API Gateway activates the authorizer when a client calls those methods.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway.git",
+  "properties": {
+    "RestApiId": {
+      "description": "",
+      "type": "string"
+    },
+    "AuthorizerId": {
+      "type": "string",
+      "description": ""
+    },
+    "AuthType": {
+      "description": "",
+      "type": "string"
+    },
+    "AuthorizerCredentials": {
+      "description": "",
+      "type": "string"
+    },
+    "AuthorizerResultTtlInSeconds": {
+      "description": "",
+      "type": "integer"
+    },
+    "AuthorizerUri": {
+      "description": "",
+      "type": "string"
+    },
+    "IdentitySource": {
+      "description": "",
+      "type": "string"
+    },
+    "IdentityValidationExpression": {
+      "description": "",
+      "type": "string"
+    },
+    "Name": {
+      "description": "",
+      "type": "string"
+    },
+    "ProviderARNs": {
+      "description": "",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "Type": {
+      "description": "",
+      "type": "string"
+    },
+    "JwtConfiguration": {
+      "description": "",
+      "$ref": "#/definitions/JwtConfiguration"
+    }
+  },
+  "definitions": {
+    "JwtConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Issuers": {
+          "description": "The token issuers the authorizer accepts.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/JwtIssuer"
+          }
+        },
+        "DefaultAlgorithms": {
+          "description": "The signing algorithms the authorizer accepts: RS256, RS384, RS512, ES256, ES384 or ES512.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Issuers",
+        "DefaultAlgorithms"
+      ],
+      "description": ""
+    },
+    "JwtIssuer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Issuer": {
+          "description": "The HTTPS URL that the token's iss claim must match.",
+          "type": "string"
+        },
+        "Audiences": {
+          "description": "The values that the token's aud claim must contain at least one of.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "AdditionalClaims": {
+          "description": "Other claims the token must carry.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/JwtAdditionalClaim"
+          }
+        }
+      },
+      "required": [
+        "Issuer",
+        "Audiences"
+      ],
+      "description": ""
+    },
+    "JwtAdditionalClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClaimName": {
+          "description": "The claim name. Can't be iss, aud, exp, nbf, iat, scope or scp.",
+          "type": "string"
+        },
+        "Format": {
+          "description": "The claim's format. SINGLE_STRING is the only format.",
+          "type": "string"
+        },
+        "Required": {
+          "description": "Whether the token must carry the claim. Defaults to false.",
+          "type": "boolean"
+        },
+        "ExpectedValues": {
+          "description": "The value the claim must have. Leave it out to check only that the claim is present.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ClaimName",
+        "Format"
+      ],
+      "description": ""
+    }
+  },
   "tagging": {
     "taggable": false,
     "tagOnCreate": false,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false
   },
+  "additionalProperties": false,
+  "required": [
+    "RestApiId",
+    "Type",
+    "Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/RestApiId"
+  ],
+  "primaryIdentifier": [
+    "/properties/RestApiId",
+    "/properties/AuthorizerId"
+  ],
+  "readOnlyProperties": [
+    "/properties/AuthorizerId"
+  ],
   "handlers": {
-    "read": {
-      "permissions": [
-        "apigateway:GET"
-      ]
-    },
     "create": {
       "permissions": [
         "apigateway:POST",
         "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apigateway:GET"
       ]
     },
     "update": {
@@ -25,10 +192,12 @@
         "iam:PassRole"
       ]
     },
-    "list": {
+    "delete": {
       "permissions": [
-        "apigateway:GET"
-      ],
+        "apigateway:DELETE"
+      ]
+    },
+    "list": {
       "handlerSchema": {
         "properties": {
           "RestApiId": {
@@ -38,82 +207,10 @@
         "required": [
           "RestApiId"
         ]
-      }
-    },
-    "delete": {
+      },
       "permissions": [
-        "apigateway:DELETE"
+        "apigateway:GET"
       ]
-    }
-  },
-  "typeName": "AWS::ApiGateway::Authorizer",
-  "readOnlyProperties": [
-    "/properties/AuthorizerId"
-  ],
-  "description": "The ``AWS::ApiGateway::Authorizer`` resource creates an authorization layer that API Gateway activates for methods that have authorization enabled. API Gateway activates the authorizer when a client calls those methods.",
-  "createOnlyProperties": [
-    "/properties/RestApiId"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/RestApiId",
-    "/properties/AuthorizerId"
-  ],
-  "definitions": {},
-  "required": [
-    "RestApiId",
-    "Type",
-    "Name"
-  ],
-  "properties": {
-    "ProviderARNs": {
-      "uniqueItems": true,
-      "description": "",
-      "insertionOrder": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "AuthorizerCredentials": {
-      "description": "",
-      "type": "string"
-    },
-    "IdentityValidationExpression": {
-      "description": "",
-      "type": "string"
-    },
-    "Type": {
-      "description": "",
-      "type": "string"
-    },
-    "AuthorizerUri": {
-      "description": "",
-      "type": "string"
-    },
-    "AuthorizerId": {
-      "description": "",
-      "type": "string"
-    },
-    "AuthorizerResultTtlInSeconds": {
-      "description": "",
-      "type": "integer"
-    },
-    "RestApiId": {
-      "description": "",
-      "type": "string"
-    },
-    "IdentitySource": {
-      "description": "",
-      "type": "string"
-    },
-    "AuthType": {
-      "description": "",
-      "type": "string"
-    },
-    "Name": {
-      "description": "",
-      "type": "string"
     }
   }
 }

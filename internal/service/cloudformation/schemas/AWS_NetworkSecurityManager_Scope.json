@@ -12,15 +12,24 @@
     },
     "ScopeName": {
       "description": "The name of the scope.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$"
     },
     "ScopeDescription": {
       "description": "A description of the scope.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$"
     },
     "ScopeConfiguration": {
       "description": "The scope configuration as a JSON string.",
       "type": "string"
+    },
+    "SpecializedScopeType": {
+      "description": "Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.",
+      "type": "string",
+      "enum": [
+        "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
+      ]
     },
     "Status": {
       "description": "The status of the scope.",
@@ -81,7 +90,8 @@
     "ScopeName"
   ],
   "createOnlyProperties": [
-    "/properties/ScopeName"
+    "/properties/ScopeName",
+    "/properties/SpecializedScopeType"
   ],
   "readOnlyProperties": [
     "/properties/ScopeId",

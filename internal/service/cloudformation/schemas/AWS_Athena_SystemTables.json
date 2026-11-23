@@ -1,0 +1,130 @@
+{
+  "typeName": "AWS::Athena::SystemTables",
+  "description": "Resource schema for AWS::Athena::SystemTables. Manages the account-level System Tables configuration. System Tables is a single account-wide switch: the reserved name ALL turns all system tables on; the existence of the configuration is the switch.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-athena.git",
+  "properties": {
+    "TableName": {
+      "description": "The reserved keyword identifying the account-level System Tables configuration. The only accepted value is ALL, which enables all system tables for the account. This is the resource's primary identifier.",
+      "type": "string",
+      "enum": [
+        "ALL"
+      ]
+    },
+    "KmsKeyArn": {
+      "description": "The ARN of the customer managed AWS KMS key used to encrypt the system table data. Specify a key ARN (not an alias); the key must be in the same account and Region. The encryption choice is permanent for the account and Region: it cannot be changed or removed after creation, and it persists after this resource is deleted.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[a-z\\-]*:kms:[a-z0-9\\-]+:[0-9]{12}:key/(mrk-)?[0-9a-f\\-]+$"
+    },
+    "CreatedAt": {
+      "description": "The time the configuration was created, set by the service.",
+      "type": "string"
+    },
+    "LastModifiedAt": {
+      "description": "The time the configuration was last modified, set by the service.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to the system tables configuration.",
+      "$ref": "#/definitions/Tags"
+    }
+  },
+  "definitions": {
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "The tag key."
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "description": "The tag value."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "TableName"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/LastModifiedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/TableName",
+    "/properties/KmsKeyArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/TableName"
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "athena:UntagResource",
+      "athena:TagResource",
+      "athena:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "athena:CreateSystemTableConfiguration",
+        "athena:GetSystemTableConfiguration",
+        "athena:TagResource",
+        "athena:ListTagsForResource",
+        "kms:DescribeKey",
+        "s3tables:CreateTableBucket",
+        "s3tables:PutTableBucketPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "athena:GetSystemTableConfiguration",
+        "athena:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "athena:GetSystemTableConfiguration",
+        "athena:TagResource",
+        "athena:UntagResource",
+        "athena:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "athena:DeleteSystemTableConfiguration",
+        "athena:GetSystemTableConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "athena:GetSystemTableConfiguration"
+      ]
+    }
+  }
+}

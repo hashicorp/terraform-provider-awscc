@@ -204,7 +204,40 @@
             21,
             22,
             23,
-            24
+            24,
+            35
+          ]
+        }
+      }
+    },
+    "Phase1EncryptionAlgorithmsRequestListValue": {
+      "description": "Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE negotiations.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "The value for the encryption algorithm.",
+          "type": "string",
+          "enum": [
+            "AES128",
+            "AES256",
+            "AES128-GCM-16",
+            "AES256-GCM-16"
+          ]
+        }
+      }
+    },
+    "IKEVersionsRequestListValue": {
+      "description": "The IKE version that is permitted for the VPN tunnel.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "The IKE version.",
+          "type": "string",
+          "enum": [
+            "ikev1",
+            "ikev2"
           ]
         }
       }
@@ -243,6 +276,13 @@
             "add",
             "start"
           ]
+        },
+        "Phase2AdditionalKeyExchanges": {
+          "uniqueItems": false,
+          "description": "",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {}
         },
         "TunnelInsideCidr": {
           "description": "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
@@ -293,6 +333,13 @@
             "none",
             "restart"
           ]
+        },
+        "Phase1AdditionalKeyExchanges": {
+          "uniqueItems": false,
+          "description": "",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {}
         },
         "Phase2LifetimeSeconds": {
           "description": "The lifetime for phase 2 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 3,600. The value must be less than the value for ``Phase1LifetimeSeconds``.\n Default: ``3600``",
@@ -350,38 +397,6 @@
         }
       }
     },
-    "Phase1EncryptionAlgorithmsRequestListValue": {
-      "description": "Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE negotiations.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "description": "The value for the encryption algorithm.",
-          "type": "string",
-          "enum": [
-            "AES128",
-            "AES256",
-            "AES128-GCM-16",
-            "AES256-GCM-16"
-          ]
-        }
-      }
-    },
-    "IKEVersionsRequestListValue": {
-      "description": "The IKE version that is permitted for the VPN tunnel.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "description": "The IKE version.",
-          "type": "string",
-          "enum": [
-            "ikev1",
-            "ikev2"
-          ]
-        }
-      }
-    },
     "Tag": {
       "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
       "additionalProperties": false,
@@ -433,7 +448,10 @@
             21,
             22,
             23,
-            24
+            24,
+            35,
+            36,
+            37
           ]
         }
       }

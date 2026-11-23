@@ -12,7 +12,8 @@
   },
   "typeName": "AWS::EC2::VPCPeeringConnection",
   "readOnlyProperties": [
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/MultipathResilienceStatus"
   ],
   "description": "Resource Type definition for AWS::EC2::VPCPeeringConnection",
   "createOnlyProperties": [
@@ -73,6 +74,27 @@
   ],
   "additionalProperties": false,
   "definitions": {
+    "VpcPeeringConnectionOptions": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AllowDnsResolutionFromRemoteVpc": {
+          "description": "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+          "type": "boolean"
+        },
+        "MultipathResilienceMode": {
+          "description": "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+          "type": "string",
+          "enum": [
+            "always-on"
+          ]
+        },
+        "AllowMultipathResilience": {
+          "description": "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+          "type": "boolean"
+        }
+      }
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "additionalProperties": false,
@@ -94,6 +116,10 @@
     }
   },
   "properties": {
+    "PeerVpcPeeringConnectionOptions": {
+      "description": "The VPC peering connection options corresponding to the accepter side of the connection.",
+      "$ref": "#/definitions/VpcPeeringConnectionOptions"
+    },
     "PeerRoleArn": {
       "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account. You can update this property. To manage PeerVpcPeeringConnectionOptions on a peering connection with another AWS account, the role must allow ec2:DescribeVpcPeeringConnections and ec2:ModifyVpcPeeringConnectionOptions.",
       "type": "string"
@@ -105,6 +131,10 @@
     "PeerVpcId": {
       "description": "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
       "type": "string"
+    },
+    "VpcPeeringConnectionOptions": {
+      "description": "The VPC peering connection options corresponding to the requester side of the connection.",
+      "$ref": "#/definitions/VpcPeeringConnectionOptions"
     },
     "AssumeRoleRegion": {
       "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided. You can update this property.",
@@ -128,6 +158,15 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "MultipathResilienceStatus": {
+      "description": "The multipath resilience status of the VPC peering connection: enabled when both the requester and accepter sides allow multipath resilience, pending when only one side allows it, and disabled when neither side allows it.",
+      "type": "string",
+      "enum": [
+        "pending",
+        "enabled",
+        "disabled"
+      ]
     }
   }
 }

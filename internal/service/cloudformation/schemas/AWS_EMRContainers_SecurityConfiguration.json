@@ -58,7 +58,7 @@
         "IdentityCenterInstanceARN": {
           "description": "The ARN of the Identity Center instance.",
           "type": "string",
-          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+          "pattern": "^arn:aws[a-z0-9-]*:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
         }
       }
     },
@@ -70,7 +70,7 @@
         "SystemRole": {
           "description": "The system role ARN.",
           "type": "string",
-          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::\\d{12}:role/.+$"
+          "pattern": "^arn:aws[a-z0-9-]*:iam::\\d{12}:role/.+$"
         }
       }
     },
@@ -91,7 +91,7 @@
         "QueryEngineRoleArn": {
           "description": "The ARN of the query engine role.",
           "type": "string",
-          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::\\d{12}:role/.+$"
+          "pattern": "^arn:aws[a-z0-9-]*:iam::\\d{12}:role/.+$"
         },
         "QueryAccessControlEnabled": {
           "description": "Whether query access control is enabled.",

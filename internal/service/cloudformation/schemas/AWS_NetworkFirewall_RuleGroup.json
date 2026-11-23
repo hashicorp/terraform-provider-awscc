@@ -197,7 +197,8 @@
       "type": "string",
       "enum": [
         "TLS_SNI",
-        "HTTP_HOST"
+        "HTTP_HOST",
+        "AWS_ROUTE_53_RESOLVED_DOMAIN"
       ]
     },
     "SummaryRuleOption": {

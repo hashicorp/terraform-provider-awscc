@@ -101,6 +101,9 @@
         },
         "EnableTLSSessionHolding": {
           "type": "boolean"
+        },
+        "Route53ResolvedIPValidation": {
+          "$ref": "#/definitions/Route53ResolvedIPValidation"
         }
       },
       "required": [
@@ -291,6 +294,72 @@
         "CONTINUE",
         "REJECT"
       ]
+    },
+    "Route53ResolvedIPValidation": {
+      "type": "object",
+      "properties": {
+        "Action": {
+          "type": "string",
+          "enum": [
+            "REJECT",
+            "DROP",
+            "ALERT"
+          ]
+        },
+        "DNSFirewallRuleGroupId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^rslvr-frg-[0-9a-f]+$"
+        },
+        "DNSExpiryExceptionPolicy": {
+          "type": "string",
+          "enum": [
+            "REJECT",
+            "DROP",
+            "CONTINUE"
+          ]
+        },
+        "BypassDestinationValidationIPRanges": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": false,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "SourceIPRanges": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": false,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        }
+      },
+      "required": [
+        "Action",
+        "DNSFirewallRuleGroupId",
+        "DNSExpiryExceptionPolicy"
+      ],
+      "additionalProperties": false
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "AddressDefinition": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$"
+        }
+      },
+      "required": [
+        "AddressDefinition"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -360,7 +429,9 @@
         "network-firewall:DescribeFirewallPolicy",
         "network-firewall:ListTLSInspectionConfigurations",
         "network-firewall:TagResource",
-        "network-firewall:ListRuleGroups"
+        "network-firewall:ListRuleGroups",
+        "route53resolver:GetFirewallRuleGroup",
+        "route53resolver:AssociateFirewallRuleGroupWithService"
       ]
     },
     "read": {
@@ -376,7 +447,9 @@
         "network-firewall:TagResource",
         "network-firewall:UntagResource",
         "network-firewall:ListRuleGroups",
-        "network-firewall:ListTLSInspectionConfigurations"
+        "network-firewall:ListTLSInspectionConfigurations",
+        "route53resolver:GetFirewallRuleGroup",
+        "route53resolver:AssociateFirewallRuleGroupWithService"
       ]
     },
     "delete": {

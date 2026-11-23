@@ -1,0 +1,176 @@
+{
+  "typeName": "AWS::APIPortal::DiscoveryConfiguration",
+  "description": "Resource Type definition for AWS::APIPortal::DiscoveryConfiguration. Represents an API discovery configuration that controls how APIs are discovered in the account",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apiportal.git",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the discovery configuration.",
+      "pattern": "^arn:aws[a-z\\-]*:apiportal:[a-z0-9\\-]*:[0-9]{12}:discoveryconfiguration$",
+      "minLength": 20,
+      "maxLength": 1011
+    },
+    "DiscoverySources": {
+      "type": "array",
+      "description": "The AWS services whose resources are scanned to discover APIs.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DiscoverySource"
+      }
+    },
+    "ExcludedResources": {
+      "type": "array",
+      "description": "ARNs of resources to exclude from discovery.",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ResourceArn"
+      }
+    },
+    "DiscoveryFeatures": {
+      "type": "array",
+      "description": "Optional discovery capabilities to enable.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DiscoveryFeature"
+      }
+    },
+    "DiscoveryConfigurationStatus": {
+      "type": "string",
+      "description": "The status of the discovery configuration.",
+      "enum": [
+        "DISABLED",
+        "ENABLED",
+        "UPDATING"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the discovery configuration was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the discovery configuration was last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the discovery configuration.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "DiscoverySource": {
+      "type": "string",
+      "description": "An AWS service whose resources are scanned to discover APIs.",
+      "enum": [
+        "API_GATEWAY",
+        "ELB",
+        "CLOUDFRONT"
+      ]
+    },
+    "DiscoveryFeature": {
+      "type": "string",
+      "description": "An optional discovery capability.",
+      "enum": [
+        "AI_DISCOVERY"
+      ]
+    },
+    "ResourceArn": {
+      "type": "string",
+      "description": "ARN of a discovered resource.",
+      "pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:([0-9]{12})?:.+$",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DiscoverySources"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/DiscoveryConfigurationStatus",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apiportal:PutDiscoveryConfiguration",
+        "apiportal:GetDiscoveryConfiguration",
+        "apiportal:TagResource",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apiportal:GetDiscoveryConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apiportal:PutDiscoveryConfiguration",
+        "apiportal:GetDiscoveryConfiguration",
+        "apiportal:TagResource",
+        "apiportal:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apiportal:DeleteDiscoveryConfiguration",
+        "apiportal:GetDiscoveryConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apiportal:GetDiscoveryConfiguration"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apiportal:TagResource",
+      "apiportal:UntagResource",
+      "apiportal:GetDiscoveryConfiguration"
+    ]
+  }
+}

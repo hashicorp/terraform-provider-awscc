@@ -12,13 +12,15 @@
     },
     "RuleName": {
       "description": "The name of the rule.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$"
     },
     "FirewallType": {
       "description": "The type of firewall for this rule.",
       "type": "string",
       "enum": [
-        "WAF"
+        "WAF",
+        "IGW_FIREWALL"
       ]
     },
     "RuleType": {
@@ -31,7 +33,8 @@
     },
     "RuleDescription": {
       "description": "A description of the rule.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$"
     },
     "Configuration": {
       "description": "The rule configuration as a JSON string.",
@@ -133,7 +136,26 @@
         "network-security-manager:CreateRule",
         "network-security-manager:GetRule",
         "network-security-manager:TagResource",
-        "network-security-manager:ListTagsForResource"
+        "network-security-manager:ListTagsForResource",
+        "network-firewall:CreateFirewallPolicyV2",
+        "network-firewall:TagResource",
+        "network-firewall:UpdateLoggingConfiguration",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:PutResourcePolicy",
+        "s3:GetBucketAcl",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:ListBucket",
+        "firehose:DescribeDeliveryStream",
+        "firehose:TagDeliveryStream",
+        "iam:GetRole",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {
@@ -148,7 +170,26 @@
         "network-security-manager:GetRule",
         "network-security-manager:TagResource",
         "network-security-manager:UntagResource",
-        "network-security-manager:ListTagsForResource"
+        "network-security-manager:ListTagsForResource",
+        "network-firewall:CreateFirewallPolicyV2",
+        "network-firewall:TagResource",
+        "network-firewall:UpdateLoggingConfiguration",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:PutResourcePolicy",
+        "s3:GetBucketAcl",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:ListBucket",
+        "firehose:DescribeDeliveryStream",
+        "firehose:TagDeliveryStream",
+        "iam:GetRole",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "delete": {

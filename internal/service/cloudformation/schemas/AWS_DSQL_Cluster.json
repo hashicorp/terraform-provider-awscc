@@ -23,16 +23,20 @@
     "create": {
       "permissions": [
         "dsql:CreateCluster",
+        "dsql:CreateClusterFromSource",
         "dsql:UpdateCluster",
+        "dsql:UpdateClusterRecoveryConfiguration",
         "dsql:GetCluster",
         "dsql:GetClusterPolicy",
         "dsql:TagResource",
+        "dsql:UntagResource",
         "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
         "dsql:PutMultiRegionProperties",
         "dsql:AddPeerCluster",
         "dsql:PutClusterPolicy",
+        "dsql:DeleteClusterPolicy",
         "dsql:PutWitnessRegion",
         "kms:Decrypt",
         "kms:Encrypt",
@@ -43,6 +47,7 @@
     "update": {
       "permissions": [
         "dsql:UpdateCluster",
+        "dsql:UpdateClusterRecoveryConfiguration",
         "dsql:GetCluster",
         "dsql:GetClusterPolicy",
         "dsql:UntagResource",
@@ -96,6 +101,23 @@
     "/properties/Identifier"
   ],
   "definitions": {
+    "MetricGroup": {
+      "description": "An Advanced monitoring metric group.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MetricGroup": {
+          "description": "The name of the metric group. Valid values: STATEMENT_STATISTICS.",
+          "type": "string",
+          "enum": [
+            "STATEMENT_STATISTICS"
+          ]
+        }
+      },
+      "required": [
+        "MetricGroup"
+      ]
+    },
     "Tag": {
       "description": "A map of key and value pairs to use to tag your cluster.",
       "additionalProperties": false,
@@ -192,6 +214,16 @@
     "Endpoint": {
       "description": "The DSQL cluster endpoint.",
       "type": "string"
+    },
+    "MetricGroups": {
+      "maxItems": 20,
+      "uniqueItems": true,
+      "description": "The Advanced monitoring metric groups to enable on the cluster. Omit to enable none.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MetricGroup"
+      }
     },
     "CreationTime": {
       "description": "The time of when the cluster was created in ISO-8601 format.",

@@ -244,6 +244,73 @@
       "type": "object",
       "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
       "additionalProperties": false
+    },
+    "TlsEncryption": {
+      "type": "object",
+      "description": "The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.",
+      "properties": {
+        "EncryptionType": {
+          "$ref": "#/definitions/TlsEncryptionType"
+        },
+        "EncryptionConfiguration": {
+          "$ref": "#/definitions/TlsEncryptionConfiguration"
+        }
+      },
+      "required": [
+        "EncryptionConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "PublicTlsEncryptionConfiguration": {
+      "type": "object",
+      "description": "The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.",
+      "additionalProperties": false
+    },
+    "TlsEncryptionConfiguration": {
+      "description": "The configuration settings for TLS encryption.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Public",
+          "properties": {
+            "Public": {
+              "$ref": "#/definitions/PublicTlsEncryptionConfiguration"
+            }
+          },
+          "required": [
+            "Public"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TlsEncryptionType": {
+      "type": "string",
+      "enum": [
+        "PUBLIC"
+      ]
+    },
+    "RtmpPushSettings": {
+      "type": "object",
+      "description": "The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the application and stream names, and optional TLS encryption configuration.",
+      "properties": {
+        "ApplicationName": {
+          "type": "string",
+          "description": "The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName."
+        },
+        "StreamName": {
+          "type": "string",
+          "description": "The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path."
+        },
+        "TlsEncryption": {
+          "$ref": "#/definitions/TlsEncryption"
+        }
+      },
+      "required": [
+        "ApplicationName",
+        "StreamName"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -304,7 +371,8 @@
         "srt-caller",
         "st2110-jpegxs",
         "cdi",
-        "ndi-speed-hq"
+        "ndi-speed-hq",
+        "rtmp-push"
       ],
       "description": "The protocol that is used by the source or output."
     },
@@ -370,6 +438,9 @@
     },
     "RouterIntegrationTransitEncryption": {
       "$ref": "#/definitions/FlowTransitEncryption"
+    },
+    "RtmpPushSettings": {
+      "$ref": "#/definitions/RtmpPushSettings"
     },
     "Tags": {
       "type": "array",
