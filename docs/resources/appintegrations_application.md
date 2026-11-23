@@ -54,6 +54,7 @@ resource "awscc_appintegrations_application" "example" {
 
 - `application_config` (Attributes) The application configuration. Cannot be used when IsService is true. (see [below for nested schema](#nestedatt--application_config))
 - `application_type` (String) The type of application
+- `auth_config` (Attributes) The authentication configuration. Required when ApplicationType is A2A_SERVER. (see [below for nested schema](#nestedatt--auth_config))
 - `description` (String) The application description.
 - `iframe_config` (Attributes) The iframe configuration (see [below for nested schema](#nestedatt--iframe_config))
 - `initialization_timeout` (Number) The initialization timeout in milliseconds. Required when IsService is true.
@@ -66,23 +67,22 @@ resource "awscc_appintegrations_application" "example" {
 - `application_arn` (String) The Amazon Resource Name (ARN) of the application.
 - `application_id` (String) The id of the application.
 - `id` (String) Uniquely identifies the resource.
+- `last_modified_region` (String) The region in which the application was last modified.
+- `last_modified_time` (String) The time when the application was last modified.
 
 <a id="nestedatt--application_source_config"></a>
 ### Nested Schema for `application_source_config`
 
-Required:
+Optional:
 
 - `external_url_config` (Attributes) (see [below for nested schema](#nestedatt--application_source_config--external_url_config))
 
 <a id="nestedatt--application_source_config--external_url_config"></a>
 ### Nested Schema for `application_source_config.external_url_config`
 
-Required:
-
-- `access_url` (String)
-
 Optional:
 
+- `access_url` (String)
 - `approved_origins` (List of String)
 
 
@@ -101,6 +101,16 @@ Optional:
 
 - `scope` (String)
 
+
+
+<a id="nestedatt--auth_config"></a>
+### Nested Schema for `auth_config`
+
+Optional:
+
+- `audience_override` (String)
+- `auth_type` (String)
+- `credential_provider_identifier` (String)
 
 
 <a id="nestedatt--iframe_config"></a>

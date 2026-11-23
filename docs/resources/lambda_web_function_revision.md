@@ -70,7 +70,7 @@ Optional:
 
 Required:
 
-- `runtime` (String) The runtime identifier.
+- `runtime` (String) The runtime identifier. Either a short runtime name (for example, nodejs24.x) or a Lambda runtime ARN.
 
 
 

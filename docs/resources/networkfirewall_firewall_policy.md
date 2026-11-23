@@ -79,6 +79,7 @@ Optional:
 
 - `enable_tls_session_holding` (Boolean)
 - `policy_variables` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables))
+- `route_53_resolved_ip_validation` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--route_53_resolved_ip_validation))
 - `stateful_default_actions` (List of String)
 - `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
 - `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
@@ -99,6 +100,34 @@ Optional:
 Optional:
 
 - `definition` (List of String)
+
+
+
+<a id="nestedatt--firewall_policy--route_53_resolved_ip_validation"></a>
+### Nested Schema for `firewall_policy.route_53_resolved_ip_validation`
+
+Optional:
+
+- `action` (String)
+- `bypass_destination_validation_ip_ranges` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--route_53_resolved_ip_validation--bypass_destination_validation_ip_ranges))
+- `dns_expiry_exception_policy` (String)
+- `dns_firewall_rule_group_id` (String)
+- `source_ip_ranges` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--route_53_resolved_ip_validation--source_ip_ranges))
+
+<a id="nestedatt--firewall_policy--route_53_resolved_ip_validation--bypass_destination_validation_ip_ranges"></a>
+### Nested Schema for `firewall_policy.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges`
+
+Optional:
+
+- `address_definition` (String)
+
+
+<a id="nestedatt--firewall_policy--route_53_resolved_ip_validation--source_ip_ranges"></a>
+### Nested Schema for `firewall_policy.route_53_resolved_ip_validation.source_ip_ranges`
+
+Optional:
+
+- `address_definition` (String)
 
 
 

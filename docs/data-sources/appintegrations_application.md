@@ -26,10 +26,13 @@ Data Source schema for AWS::AppIntegrations::Application
 - `application_id` (String) The id of the application.
 - `application_source_config` (Attributes) Application source config (see [below for nested schema](#nestedatt--application_source_config))
 - `application_type` (String) The type of application
+- `auth_config` (Attributes) The authentication configuration. Required when ApplicationType is A2A_SERVER. (see [below for nested schema](#nestedatt--auth_config))
 - `description` (String) The application description.
 - `iframe_config` (Attributes) The iframe configuration (see [below for nested schema](#nestedatt--iframe_config))
 - `initialization_timeout` (Number) The initialization timeout in milliseconds. Required when IsService is true.
 - `is_service` (Boolean) Indicates if the application is a service
+- `last_modified_region` (String) The region in which the application was last modified.
+- `last_modified_time` (String) The time when the application was last modified.
 - `name` (String) The name of the application.
 - `namespace` (String) The namespace of the application.
 - `permissions` (List of String) The configuration of events or requests that the application has access to.
@@ -66,6 +69,16 @@ Read-Only:
 - `access_url` (String)
 - `approved_origins` (List of String)
 
+
+
+<a id="nestedatt--auth_config"></a>
+### Nested Schema for `auth_config`
+
+Read-Only:
+
+- `audience_override` (String)
+- `auth_type` (String)
+- `credential_provider_identifier` (String)
 
 
 <a id="nestedatt--iframe_config"></a>

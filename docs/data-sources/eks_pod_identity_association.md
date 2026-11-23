@@ -32,6 +32,7 @@ Data Source schema for AWS::EKS::PodIdentityAssociation
 - `service_account` (String) The Kubernetes service account that the pod identity association is created for.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `target_role_arn` (String) The Target Role Arn of the pod identity association.
+- `workload_identity_config` (Attributes) The workload identity configuration of the pod identity association. When enabled, the association also provisions a SPIFFE identity for the workload. Setting Enabled to false disables workload identity and keeps the ARNs. Removing the property from the template leaves the association unchanged; set Enabled to false to disable workload identity. (see [below for nested schema](#nestedatt--workload_identity_config))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -40,3 +41,13 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--workload_identity_config"></a>
+### Nested Schema for `workload_identity_config`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether workload identity is enabled for the association. Enabling it requires TemplateArn and ProviderArn, and cannot be combined with TargetRoleArn.
+- `provider_arn` (String) The ARN of the customer-owned IAM workload identity provider that produces the trusted context assertion for the workload.
+- `template_arn` (String) The ARN of the customer-owned IAM workload identity template that renders the workload's SPIFFE identity.

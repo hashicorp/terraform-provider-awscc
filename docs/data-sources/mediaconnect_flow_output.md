@@ -41,6 +41,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - `remote_id` (String) The remote ID for the Zixi-pull stream.
 - `router_integration_state` (String)
 - `router_integration_transit_encryption` (Attributes) The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow. (see [below for nested schema](#nestedatt--router_integration_transit_encryption))
+- `rtmp_push_settings` (Attributes) The settings for an output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the application and stream names, and optional TLS encryption configuration. (see [below for nested schema](#nestedatt--rtmp_push_settings))
 - `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
 - `tags` (Attributes Set) Key-value pairs that can be used to tag and organize this flow output. (see [below for nested schema](#nestedatt--tags))
@@ -118,6 +119,33 @@ Read-Only:
 
 - `role_arn` (String) The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager.
 - `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.
+
+
+
+
+<a id="nestedatt--rtmp_push_settings"></a>
+### Nested Schema for `rtmp_push_settings`
+
+Read-Only:
+
+- `application_name` (String) The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://destinationAddress/applicationName/streamName.
+- `stream_name` (String) The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.
+- `tls_encryption` (Attributes) The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination. (see [below for nested schema](#nestedatt--rtmp_push_settings--tls_encryption))
+
+<a id="nestedatt--rtmp_push_settings--tls_encryption"></a>
+### Nested Schema for `rtmp_push_settings.tls_encryption`
+
+Read-Only:
+
+- `encryption_configuration` (Attributes) The configuration settings for TLS encryption. (see [below for nested schema](#nestedatt--rtmp_push_settings--tls_encryption--encryption_configuration))
+- `encryption_type` (String)
+
+<a id="nestedatt--rtmp_push_settings--tls_encryption--encryption_configuration"></a>
+### Nested Schema for `rtmp_push_settings.tls_encryption.encryption_configuration`
+
+Read-Only:
+
+- `public` (String) The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.
 
 
 

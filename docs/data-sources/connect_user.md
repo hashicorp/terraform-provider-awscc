@@ -32,7 +32,7 @@ Data Source schema for AWS::Connect::User
 - `phone_config` (Attributes) The phone settings for the user. (see [below for nested schema](#nestedatt--phone_config))
 - `phone_number_configs` (Attributes List) Phone Number configurations of a user. (see [below for nested schema](#nestedatt--phone_number_configs))
 - `routing_profile_arn` (String) The identifier of the routing profile for the user.
-- `security_profile_arns` (Set of String) One or more security profile arns for the user
+- `security_profile_arns` (Set of String) One or more customer-managed or AWS-managed security profile ARNs for the user.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `user_arn` (String) The Amazon Resource Name (ARN) for the user.
 - `user_proficiencies` (Attributes List) One or more predefined attributes assigned to a user, with a level that indicates how skilled they are. (see [below for nested schema](#nestedatt--user_proficiencies))

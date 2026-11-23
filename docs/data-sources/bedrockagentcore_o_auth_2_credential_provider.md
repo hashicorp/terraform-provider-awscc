@@ -83,6 +83,7 @@ Read-Only:
 
 Read-Only:
 
+- `certificate_configurations` (Attributes List) Private certificate authority (CA) configurations for the identity provider, referenced by Amazon S3 object or AWS Secrets Manager secret (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--certificate_configurations))
 - `client_authentication_method` (String) The client authentication method to use when authenticating with the token endpoint
 - `client_id` (String) The client ID for the custom OAuth2 provider
 - `client_secret` (String) The client secret for the custom OAuth2 provider
@@ -93,6 +94,32 @@ Read-Only:
 - `private_endpoint` (Attributes) The private endpoint configuration for connecting to private resources in your VPC (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint))
 - `private_endpoint_overrides` (Attributes List) A list of private endpoint overrides. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations. (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides))
 - `private_key_jwt_config` (Attributes) Configuration for private_key_jwt client authentication (RFC 7523) (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--certificate_configurations"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.certificate_configurations`
+
+Read-Only:
+
+- `s3` (Attributes) A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--certificate_configurations--s3))
+- `secrets_manager` (Attributes) A reference to a PEM-encoded private CA certificate stored in an AWS Secrets Manager secret (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--certificate_configurations--secrets_manager))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--certificate_configurations--s3"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.certificate_configurations.s3`
+
+Read-Only:
+
+- `bucket_owner_account_id` (String) The account ID of the Amazon S3 bucket owner, used for cross-account access to the bucket
+- `uri` (String) The URI of the Amazon S3 object that contains the PEM-encoded certificate
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--certificate_configurations--secrets_manager"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.certificate_configurations.secrets_manager`
+
+Read-Only:
+
+- `secret_arn` (String) The ARN of the AWS Secrets Manager secret that contains the PEM-encoded certificate
+
+
 
 <a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--client_secret_config"></a>
 ### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.client_secret_config`
@@ -109,7 +136,7 @@ Read-Only:
 Read-Only:
 
 - `authorization_server_metadata` (Attributes) Authorization server metadata for the OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery--authorization_server_metadata))
-- `discovery_url` (String) The discovery URL for the OAuth2 provider
+- `discovery_url` (String) OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL
 
 <a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery--authorization_server_metadata"></a>
 ### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata`
@@ -388,6 +415,7 @@ Read-Only:
 
 Read-Only:
 
+- `certificate_configurations` (Attributes List) Private certificate authority (CA) configurations for the identity provider, referenced by Amazon S3 object or AWS Secrets Manager secret (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--certificate_configurations))
 - `client_authentication_method` (String) The client authentication method used when authenticating with the token endpoint
 - `client_id` (String)
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--oauth_discovery))
@@ -396,13 +424,39 @@ Read-Only:
 - `private_endpoint_overrides` (Attributes List) The list of private endpoint overrides for the OAuth2 provider. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations. (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint_overrides))
 - `private_key_jwt_config` (Attributes) Configuration for private_key_jwt client authentication (RFC 7523) (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_key_jwt_config))
 
+<a id="nestedatt--oauth_2_provider_config_output--certificate_configurations"></a>
+### Nested Schema for `oauth_2_provider_config_output.certificate_configurations`
+
+Read-Only:
+
+- `s3` (Attributes) A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--certificate_configurations--s3))
+- `secrets_manager` (Attributes) A reference to a PEM-encoded private CA certificate stored in an AWS Secrets Manager secret (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--certificate_configurations--secrets_manager))
+
+<a id="nestedatt--oauth_2_provider_config_output--certificate_configurations--s3"></a>
+### Nested Schema for `oauth_2_provider_config_output.certificate_configurations.s3`
+
+Read-Only:
+
+- `bucket_owner_account_id` (String) The account ID of the Amazon S3 bucket owner, used for cross-account access to the bucket
+- `uri` (String) The URI of the Amazon S3 object that contains the PEM-encoded certificate
+
+
+<a id="nestedatt--oauth_2_provider_config_output--certificate_configurations--secrets_manager"></a>
+### Nested Schema for `oauth_2_provider_config_output.certificate_configurations.secrets_manager`
+
+Read-Only:
+
+- `secret_arn` (String) The ARN of the AWS Secrets Manager secret that contains the PEM-encoded certificate
+
+
+
 <a id="nestedatt--oauth_2_provider_config_output--oauth_discovery"></a>
 ### Nested Schema for `oauth_2_provider_config_output.oauth_discovery`
 
 Read-Only:
 
 - `authorization_server_metadata` (Attributes) Authorization server metadata for the OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--oauth_discovery--authorization_server_metadata))
-- `discovery_url` (String) The discovery URL for the OAuth2 provider
+- `discovery_url` (String) OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL
 
 <a id="nestedatt--oauth_2_provider_config_output--oauth_discovery--authorization_server_metadata"></a>
 ### Nested Schema for `oauth_2_provider_config_output.oauth_discovery.authorization_server_metadata`

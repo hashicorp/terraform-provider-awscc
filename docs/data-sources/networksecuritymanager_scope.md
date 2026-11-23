@@ -26,6 +26,7 @@ Data Source schema for AWS::NetworkSecurityManager::Scope
 - `scope_description` (String) A description of the scope.
 - `scope_id` (String) The unique identifier of the scope.
 - `scope_name` (String) The name of the scope.
+- `specialized_scope_type` (String) Marks the scope as built for one specific use. Omit for a standard scope. A specialized scope cannot be associated with a deployment. Cannot be changed after creation.
 - `status` (String) The status of the scope.
 - `tags` (Attributes Set) The tags associated with the scope. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) An ISO 8601 timestamp indicating when the scope was last modified.

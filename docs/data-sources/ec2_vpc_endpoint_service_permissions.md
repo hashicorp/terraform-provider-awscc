@@ -23,3 +23,4 @@ Data Source schema for AWS::EC2::VPCEndpointServicePermissions
 
 - `allowed_principals` (List of String)
 - `service_id` (String)
+- `transit_gateway_attachment_allowed_principals` (List of String) The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.

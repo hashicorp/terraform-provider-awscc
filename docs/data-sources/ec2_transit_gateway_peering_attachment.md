@@ -21,15 +21,29 @@ Data Source schema for AWS::EC2::TransitGatewayPeeringAttachment
 
 ### Read-Only
 
+- `accepter_allow_multipath_resilience` (Boolean) Whether the accepter side of the peering attachment has opted in to MultipathResilience.
 - `creation_time` (String) The time the transit gateway peering attachment was created.
+- `multipath_resilience_status` (String) The connection-level MultipathResilience status, computed from both sides of the peering attachment. (enabled/pending/disabled)
+- `options` (Attributes) Options for transit gateway peering attachment (see [below for nested schema](#nestedatt--options))
 - `peer_account_id` (String) The ID of the peer account
 - `peer_region` (String) Peer Region
 - `peer_transit_gateway_id` (String) The ID of the peer transit gateway.
+- `requester_allow_multipath_resilience` (Boolean) Whether the requester side of the peering attachment has opted in to MultipathResilience.
+- `requester_multipath_resilience_mode` (String) The MultipathResilience mode chosen by the requester side of the peering attachment.
 - `state` (String) The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
 - `status` (Attributes) The status of the transit gateway peering attachment. (see [below for nested schema](#nestedatt--status))
 - `tags` (Attributes List) The tags for the transit gateway peering attachment. (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_attachment_id` (String) The ID of the transit gateway peering attachment.
 - `transit_gateway_id` (String) The ID of the transit gateway.
+
+<a id="nestedatt--options"></a>
+### Nested Schema for `options`
+
+Read-Only:
+
+- `allow_multipath_resilience` (Boolean) Whether to enable MultipathResilience on this side of the peering attachment.
+- `multipath_resilience_mode` (String) The MultipathResilience mode. Only valid when AllowMultipathResilience is true.
+
 
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`

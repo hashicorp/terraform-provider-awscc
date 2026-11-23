@@ -32,6 +32,7 @@ Data Source schema for AWS::Route53GlobalResolver::GlobalResolver
 - `ip_address_type` (String)
 - `name` (String)
 - `observability_region` (String)
+- `public_ip_status` (String) Whether the Global Resolver's public IP addresses are enabled and reserved. Change it one step at a time: ENABLED_RESERVED <-> DISABLED_RESERVED, DISABLED_RESERVED -> DISABLED_RELEASED, DISABLED_RELEASED -> ENABLED_RESERVED (new public IP addresses). DISABLED_RELEASED gives the public IP addresses back and cannot be undone. DISABLED_RESERVED is not allowed at create.
 - `regions` (List of String) The list of regions the Global Resolver exists in. Regions can be added or removed on update; the order of this list is not significant.
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

@@ -1,5 +1,151 @@
 ## 1.111.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_agentregistry_publisher`
+* **New Data Source:** `awscc_agentregistry_publishers`
+* **New Data Source:** `awscc_apiportal_discovery_configuration`
+* **New Data Source:** `awscc_apiportal_discovery_configurations`
+* **New Data Source:** `awscc_apiportal_discovery_enablement`
+* **New Data Source:** `awscc_apiportal_managed_api`
+* **New Data Source:** `awscc_apiportal_managed_apis`
+* **New Data Source:** `awscc_apiportal_organization_discovery_configuration`
+* **New Data Source:** `awscc_apiportal_organization_discovery_configurations`
+* **New Data Source:** `awscc_apiportal_portal`
+* **New Data Source:** `awscc_apiportal_portal_publication`
+* **New Data Source:** `awscc_apiportal_portal_publications`
+* **New Data Source:** `awscc_apiportal_portals`
+* **New Data Source:** `awscc_apiportal_product`
+* **New Data Source:** `awscc_apiportal_product_api_page`
+* **New Data Source:** `awscc_apiportal_product_display_order`
+* **New Data Source:** `awscc_apiportal_product_display_orders`
+* **New Data Source:** `awscc_apiportal_product_managed_api_association`
+* **New Data Source:** `awscc_apiportal_product_managed_api_associations`
+* **New Data Source:** `awscc_apiportal_product_page`
+* **New Data Source:** `awscc_apiportal_product_sharing_policies`
+* **New Data Source:** `awscc_apiportal_product_sharing_policy`
+* **New Data Source:** `awscc_apiportal_products`
+* **New Data Source:** `awscc_athena_system_tables`
+* **New Data Source:** `awscc_athena_system_tables_plural`
+* **New Data Source:** `awscc_cloudwatch_metric_data_query_definition`
+* **New Data Source:** `awscc_cloudwatch_metric_data_query_definitions`
+* **New Data Source:** `awscc_cognito_cimd_policy`
+* **New Data Source:** `awscc_cognito_user_pool_client_session_configuration_attachment`
+* **New Data Source:** `awscc_cognito_user_pool_session_configuration_attachment`
+* **New Data Source:** `awscc_dms_replication_instance`
+* **New Data Source:** `awscc_dms_replication_instances`
+* **New Data Source:** `awscc_docdb_db_instance`
+* **New Data Source:** `awscc_docdb_db_instances`
+* **New Data Source:** `awscc_ec2_fca_policies`
+* **New Data Source:** `awscc_ec2_fca_policy`
+* **New Data Source:** `awscc_ec2_fca_policy_association`
+* **New Data Source:** `awscc_ec2_fca_policy_associations`
+* **New Data Source:** `awscc_ec2_transit_gateway_network_function_attachment`
+* **New Data Source:** `awscc_ec2_transit_gateway_network_function_attachments`
+* **New Data Source:** `awscc_fsx_cluster_peers`
+* **New Data Source:** `awscc_fsx_snapmirror_policies`
+* **New Data Source:** `awscc_fsx_snapmirror_relationships`
+* **New Data Source:** `awscc_fsx_snapshot_policies`
+* **New Data Source:** `awscc_fsx_storage_virtual_machine_peers`
+* **New Data Source:** `awscc_kinesis_queue`
+* **New Data Source:** `awscc_kinesis_queues`
+* **New Data Source:** `awscc_kinesisanalyticsv2_snapshot`
+* **New Data Source:** `awscc_kinesisanalyticsv2_snapshots`
+* **New Data Source:** `awscc_lambda_runtime`
+* **New Data Source:** `awscc_lambda_runtime_alias`
+* **New Data Source:** `awscc_lambda_runtime_version`
+* **New Data Source:** `awscc_lambda_runtimes`
+* **New Data Source:** `awscc_networkflowmonitor_performance_monitor`
+* **New Data Source:** `awscc_networkflowmonitor_performance_monitors`
+* **New Data Source:** `awscc_networkmanager_connection`
+* **New Data Source:** `awscc_networkmanager_context_store`
+* **New Data Source:** `awscc_networkmanager_context_store_association`
+* **New Data Source:** `awscc_networkmanager_context_stores`
+* **New Data Source:** `awscc_opensearchmemory_space`
+* **New Data Source:** `awscc_opensearchmemory_spaces`
+* **New Data Source:** `awscc_opensearchservice_replication_peer`
+* **New Data Source:** `awscc_opensearchservice_replication_peers`
+* **New Data Source:** `awscc_route53_health_check_source`
+* **New Data Source:** `awscc_route53_health_check_sources`
+* **New Data Source:** `awscc_route53_record_set_protection`
+* **New Data Source:** `awscc_route53globalresolver_core_network_endpoint`
+* **New Data Source:** `awscc_route53globalresolver_core_network_endpoints`
+* **New Data Source:** `awscc_sagemaker_endpoint_policy`
+* **New Data Source:** `awscc_sagemaker_extension`
+* **New Data Source:** `awscc_sagemaker_inference_router`
+* **New Data Source:** `awscc_sagemaker_inference_routers`
+* **New Data Source:** `awscc_ssm_default_host_management_configuration`
+* **New Data Source:** `awscc_ssm_default_host_management_configurations`
+* **New List Resource:** `awscc_agentregistry_publisher`
+* **New List Resource:** `awscc_apiportal_discovery_configuration`
+* **New List Resource:** `awscc_apiportal_managed_api`
+* **New List Resource:** `awscc_apiportal_organization_discovery_configuration`
+* **New List Resource:** `awscc_apiportal_portal`
+* **New List Resource:** `awscc_apiportal_portal_publication`
+* **New List Resource:** `awscc_apiportal_product`
+* **New List Resource:** `awscc_apiportal_product_display_order`
+* **New List Resource:** `awscc_apiportal_product_managed_api_association`
+* **New List Resource:** `awscc_apiportal_product_sharing_policy`
+* **New List Resource:** `awscc_athena_system_tables`
+* **New List Resource:** `awscc_cloudwatch_metric_data_query_definition`
+* **New List Resource:** `awscc_dms_replication_instance`
+* **New List Resource:** `awscc_docdb_db_instance`
+* **New List Resource:** `awscc_ec2_fca_policy`
+* **New List Resource:** `awscc_ec2_fca_policy_association`
+* **New List Resource:** `awscc_ec2_transit_gateway_network_function_attachment`
+* **New List Resource:** `awscc_kinesis_queue`
+* **New List Resource:** `awscc_kinesisanalyticsv2_snapshot`
+* **New List Resource:** `awscc_lambda_runtime`
+* **New List Resource:** `awscc_networkflowmonitor_performance_monitor`
+* **New List Resource:** `awscc_networkmanager_context_store`
+* **New List Resource:** `awscc_opensearchmemory_space`
+* **New List Resource:** `awscc_opensearchservice_replication_peer`
+* **New List Resource:** `awscc_route53_health_check_source`
+* **New List Resource:** `awscc_route53globalresolver_core_network_endpoint`
+* **New List Resource:** `awscc_sagemaker_inference_router`
+* **New List Resource:** `awscc_ssm_default_host_management_configuration`
+* **New Resource:** `awscc_agentregistry_publisher`
+* **New Resource:** `awscc_apiportal_discovery_configuration`
+* **New Resource:** `awscc_apiportal_discovery_enablement`
+* **New Resource:** `awscc_apiportal_managed_api`
+* **New Resource:** `awscc_apiportal_organization_discovery_configuration`
+* **New Resource:** `awscc_apiportal_portal`
+* **New Resource:** `awscc_apiportal_portal_publication`
+* **New Resource:** `awscc_apiportal_product`
+* **New Resource:** `awscc_apiportal_product_api_page`
+* **New Resource:** `awscc_apiportal_product_display_order`
+* **New Resource:** `awscc_apiportal_product_managed_api_association`
+* **New Resource:** `awscc_apiportal_product_page`
+* **New Resource:** `awscc_apiportal_product_sharing_policy`
+* **New Resource:** `awscc_athena_system_tables`
+* **New Resource:** `awscc_cloudwatch_metric_data_query_definition`
+* **New Resource:** `awscc_cognito_cimd_policy`
+* **New Resource:** `awscc_cognito_user_pool_client_session_configuration_attachment`
+* **New Resource:** `awscc_cognito_user_pool_session_configuration_attachment`
+* **New Resource:** `awscc_dms_replication_instance`
+* **New Resource:** `awscc_docdb_db_instance`
+* **New Resource:** `awscc_ec2_fca_policy`
+* **New Resource:** `awscc_ec2_fca_policy_association`
+* **New Resource:** `awscc_ec2_transit_gateway_network_function_attachment`
+* **New Resource:** `awscc_kinesis_queue`
+* **New Resource:** `awscc_kinesisanalyticsv2_snapshot`
+* **New Resource:** `awscc_lambda_runtime`
+* **New Resource:** `awscc_lambda_runtime_alias`
+* **New Resource:** `awscc_lambda_runtime_version`
+* **New Resource:** `awscc_networkflowmonitor_performance_monitor`
+* **New Resource:** `awscc_networkmanager_connection`
+* **New Resource:** `awscc_networkmanager_context_store`
+* **New Resource:** `awscc_networkmanager_context_store_association`
+* **New Resource:** `awscc_opensearchmemory_space`
+* **New Resource:** `awscc_opensearchservice_replication_peer`
+* **New Resource:** `awscc_route53_health_check_source`
+* **New Resource:** `awscc_route53_record_set_protection`
+* **New Resource:** `awscc_route53globalresolver_core_network_endpoint`
+* **New Resource:** `awscc_sagemaker_endpoint_policy`
+* **New Resource:** `awscc_sagemaker_extension`
+* **New Resource:** `awscc_sagemaker_inference_router`
+* **New Resource:** `awscc_ssm_default_host_management_configuration`
+
 BUG FIXES:
 
 * provider: Update string length validation to use character rather than byte length

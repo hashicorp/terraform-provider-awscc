@@ -59,6 +59,7 @@ Optional:
 - `http_parameters` (Attributes) Parameters for invoking an HTTP endpoint target, such as an Amazon API Gateway endpoint or an EventBridge API destination. (see [below for nested schema](#nestedatt--invoke_configuration--http_parameters))
 - `kinesis_parameters` (Attributes) Parameters for writing events to an Amazon Kinesis Data Streams target. (see [below for nested schema](#nestedatt--invoke_configuration--kinesis_parameters))
 - `lambda_parameters` (Attributes) Parameters for invoking an AWS Lambda function target. (see [below for nested schema](#nestedatt--invoke_configuration--lambda_parameters))
+- `msk_parameters` (Attributes) Parameters for producing events to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster, used when TargetArn is an Amazon MSK cluster ARN. (see [below for nested schema](#nestedatt--invoke_configuration--msk_parameters))
 - `sns_parameters` (Attributes) Parameters for publishing events to an Amazon SNS topic target. (see [below for nested schema](#nestedatt--invoke_configuration--sns_parameters))
 - `sqs_parameters` (Attributes) Parameters for sending events to an Amazon SQS queue target. (see [below for nested schema](#nestedatt--invoke_configuration--sqs_parameters))
 - `step_functions_parameters` (Attributes) Parameters for starting an AWS Step Functions state machine execution target. (see [below for nested schema](#nestedatt--invoke_configuration--step_functions_parameters))
@@ -121,6 +122,29 @@ Optional:
 - `invocation_type` (String) How the function is invoked: EVENT (asynchronous) or REQUEST_RESPONSE (synchronous).
 - `qualifier` (String) The version or alias of the Lambda function to invoke. Accepts a literal value or a JSONata expression.
 - `tenant_id` (String) The tenant identifier for multi-tenant Lambda functions. Accepts a literal value or a JSONata expression.
+
+
+<a id="nestedatt--invoke_configuration--msk_parameters"></a>
+### Nested Schema for `invoke_configuration.msk_parameters`
+
+Optional:
+
+- `acks` (String) Producer acknowledgement mode. ALL waits for all in-sync replicas. LEADER waits for the partition leader only. Defaults to ALL.
+- `client_id` (String) Producer client.id passed to the Kafka broker. A literal, not a JSONata expression.
+- `compression` (String) Producer compression codec applied to the record batch. Defaults to NONE.
+- `connectivity` (String) Specifies how the service connects to the Amazon MSK cluster. PUBLIC connects through the cluster's public access. PRIVATE connects through the cluster's multi-VPC private connectivity. You must turn on the chosen connectivity path, with IAM access control, on the cluster.
+- `headers` (Attributes List) Kafka record headers attached to each produced record. (see [below for nested schema](#nestedatt--invoke_configuration--msk_parameters--headers))
+- `partition_key` (String) Kafka record key. Accepts a literal or a JSONata expression; the resolved value selects the destination partition.
+- `topic_name` (String) Name of the Kafka topic events are produced to. Accepts a literal or a JSONata expression.
+
+<a id="nestedatt--invoke_configuration--msk_parameters--headers"></a>
+### Nested Schema for `invoke_configuration.msk_parameters.headers`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--invoke_configuration--sns_parameters"></a>

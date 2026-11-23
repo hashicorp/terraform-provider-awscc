@@ -1,0 +1,1 @@
+$ terraform import awscc_kinesisanalyticsv2_snapshot.example "snapshot_arn"

@@ -22,6 +22,7 @@ Data Source schema for AWS::SageMaker::EndpointConfig
 ### Read-Only
 
 - `async_inference_config` (Attributes) Specifies configuration for how an endpoint performs asynchronous inference. (see [below for nested schema](#nestedatt--async_inference_config))
+- `cross_region_traffic_config` (Attributes) Limits the requests per second that the endpoint accepts from other AWS Regions. The limit is MaxCrossRegionPercentPerEndpoint percent of MaxInvocationsPerSecondPerInstance multiplied by the number of InService instances, shared by all production variants and inference components of the endpoint. Requests from the endpoint's own Region are not counted. Not supported with serverless variants or AsyncInferenceConfig. If you don't specify it, requests from other Regions are not limited. (see [below for nested schema](#nestedatt--cross_region_traffic_config))
 - `data_capture_config` (Attributes) Specifies how to capture endpoint data for model monitor. The data capture configuration applies to all production variants hosted at the endpoint. (see [below for nested schema](#nestedatt--data_capture_config))
 - `enable_network_isolation` (Boolean) Sets whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.
 - `endpoint_config_arn` (String) The Amazon Resource Name (ARN) of the endpoint configuration.
@@ -71,6 +72,15 @@ Read-Only:
 - `success_topic` (String) Amazon SNS topic to post a notification to when an inference completes successfully. If no topic is provided, no notification is sent on success.
 
 
+
+
+<a id="nestedatt--cross_region_traffic_config"></a>
+### Nested Schema for `cross_region_traffic_config`
+
+Read-Only:
+
+- `max_cross_region_percent_per_endpoint` (Number) The percentage of the endpoint's capacity (MaxInvocationsPerSecondPerInstance multiplied by the number of InService instances) that requests from other Regions can use. Valid values are 1 to 100.
+- `max_invocations_per_second_per_instance` (Number) The number of invocations per second that one InService instance can serve, used to size the limit on requests from other Regions. One value applies to every production variant, whatever its instance type. Valid values are 1 to 10000.
 
 
 <a id="nestedatt--data_capture_config"></a>

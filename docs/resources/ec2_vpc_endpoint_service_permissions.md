@@ -100,6 +100,7 @@ resource "awscc_ec2_vpc_endpoint_service_permissions" "example" {
 ### Optional
 
 - `allowed_principals` (List of String)
+- `transit_gateway_attachment_allowed_principals` (List of String) The AWS account root ARNs (arn:aws:iam::account-id:root) allowed to create transit gateway attachments that connect to this Gateway Load Balancer endpoint service.
 
 ### Read-Only
 

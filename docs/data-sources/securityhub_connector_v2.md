@@ -52,6 +52,7 @@ Read-Only:
 Read-Only:
 
 - `azure` (Attributes) The configuration settings required to establish an integration between AWS Security Hub and Azure (see [below for nested schema](#nestedatt--provider_name--azure))
+- `gcp` (Attributes) The configuration settings required to establish an integration between AWS Security Hub and GCP (see [below for nested schema](#nestedatt--provider_name--gcp))
 - `jira_cloud` (Attributes) The initial configuration settings required to establish an integration between Security Hub and Jira Cloud (see [below for nested schema](#nestedatt--provider_name--jira_cloud))
 - `service_now` (Attributes) The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM (see [below for nested schema](#nestedatt--provider_name--service_now))
 
@@ -71,6 +72,25 @@ Read-Only:
 
 - `scope_type` (String) The scope type for the Azure connector
 - `scope_values` (Set of String) The list of scope values for the Azure connector
+
+
+
+<a id="nestedatt--provider_name--gcp"></a>
+### Nested Schema for `provider_name.gcp`
+
+Read-Only:
+
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for the GCP integration
+- `gcp_regions` (Set of String) The list of GCP regions to include in the connector scope
+- `scope_configuration` (Attributes) The scope configuration for a GCP connector (see [below for nested schema](#nestedatt--provider_name--gcp--scope_configuration))
+
+<a id="nestedatt--provider_name--gcp--scope_configuration"></a>
+### Nested Schema for `provider_name.gcp.scope_configuration`
+
+Read-Only:
+
+- `scope_type` (String) The scope type for the GCP connector
+- `scope_values` (Set of String) The list of scope values for the GCP connector
 
 
 

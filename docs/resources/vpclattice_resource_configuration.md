@@ -41,8 +41,8 @@ resource "awscc_vpclattice_resource_configuration" "example" {
 - `custom_domain_name` (String)
 - `domain_verification_id` (String)
 - `group_domain` (String)
-- `port_ranges` (List of String)
-- `protocol_type` (String)
+- `port_ranges` (List of String) The port ranges the resource configuration listens on, as single ports or ranges (for example, 80 or 1001-2000). Applies to SINGLE, GROUP, CHILD, and CIDR resource configurations. For a CIDR resource configuration with ProtocolType TCP_UDP, these ranges cover both TCP and UDP traffic, so include port 53 to carry DNS to the network segment.
+- `protocol_type` (String) The protocol the resource configuration accepts. SINGLE and GROUP resource configurations support TCP. CIDR resource configurations support TCP and TCP_UDP; use TCP_UDP to carry UDP traffic such as DNS on port 53.
 - `resource_configuration_auth_type` (String)
 - `resource_configuration_definition` (Attributes) (see [below for nested schema](#nestedatt--resource_configuration_definition))
 - `resource_configuration_group_id` (String)
@@ -61,7 +61,7 @@ resource "awscc_vpclattice_resource_configuration" "example" {
 Optional:
 
 - `arn_resource` (String)
-- `cidr_resource` (Attributes) (see [below for nested schema](#nestedatt--resource_configuration_definition--cidr_resource))
+- `cidr_resource` (Attributes) The CIDR ranges that make up a CIDR resource configuration. Only valid when ResourceConfigurationType is CIDR, and the resource gateway must have ResourceConfigDnsResolution set to IN_VPC. (see [below for nested schema](#nestedatt--resource_configuration_definition--cidr_resource))
 - `dns_resource` (Attributes) (see [below for nested schema](#nestedatt--resource_configuration_definition--dns_resource))
 - `ip_resource` (String)
 
@@ -70,7 +70,7 @@ Optional:
 
 Optional:
 
-- `cidr_ranges` (List of String)
+- `cidr_ranges` (List of String) The IPv4 CIDR ranges reachable through this resource configuration, in CIDR notation (for example, 10.0.0.0/24).
 
 
 <a id="nestedatt--resource_configuration_definition--dns_resource"></a>

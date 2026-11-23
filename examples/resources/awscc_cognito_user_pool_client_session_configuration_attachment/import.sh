@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_user_pool_client_session_configuration_attachment.example "user_pool_id|client_id"

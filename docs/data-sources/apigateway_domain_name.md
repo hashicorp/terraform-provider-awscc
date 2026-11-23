@@ -34,7 +34,7 @@ Data Source schema for AWS::ApiGateway::DomainName
 - `regional_domain_name` (String)
 - `regional_hosted_zone_id` (String)
 - `routing_mode` (String)
-- `security_policy` (String)
+- `security_policy` (String) The Transport Layer Security (TLS) version + cipher suite for this DomainName.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--endpoint_configuration"></a>

@@ -32,6 +32,7 @@ resource "awscc_dsql_cluster" "example" {
 
 - `deletion_protection_enabled` (Boolean) Whether deletion protection is enabled in this cluster.
 - `kms_encryption_key` (String) The KMS key that encrypts data on the cluster.
+- `metric_groups` (Attributes Set) The Advanced monitoring metric groups to enable on the cluster. Omit to enable none. (see [below for nested schema](#nestedatt--metric_groups))
 - `multi_region_properties` (Attributes) The Multi-region properties associated to this cluster. (see [below for nested schema](#nestedatt--multi_region_properties))
 - `policy_document` (String) The IAM policy applied to the cluster resource.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -48,6 +49,14 @@ resource "awscc_dsql_cluster" "example" {
 - `status` (String) The status of the cluster.
 - `vpc_endpoint` (String) The DSQL cluster VPC endpoint.
 - `vpc_endpoint_service_name` (String) The VPC endpoint service name.
+
+<a id="nestedatt--metric_groups"></a>
+### Nested Schema for `metric_groups`
+
+Optional:
+
+- `metric_group` (String) The name of the metric group. Valid values: STATEMENT_STATISTICS.
+
 
 <a id="nestedatt--multi_region_properties"></a>
 ### Nested Schema for `multi_region_properties`

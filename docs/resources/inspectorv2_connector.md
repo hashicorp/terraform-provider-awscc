@@ -3,12 +3,12 @@
 page_title: "awscc_inspectorv2_connector Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulnerability scanning of Azure resources.
+  Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulnerability scanning of Azure or GCP resources.
 ---
 
 # awscc_inspectorv2_connector (Resource)
 
-Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulnerability scanning of Azure resources.
+Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulnerability scanning of Azure or GCP resources.
 
 
 
@@ -39,31 +39,29 @@ Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulne
 <a id="nestedatt--provider_configuration"></a>
 ### Nested Schema for `provider_configuration`
 
-Required:
+Optional:
 
 - `azure` (Attributes) (see [below for nested schema](#nestedatt--provider_configuration--azure))
+- `gcp` (Attributes) (see [below for nested schema](#nestedatt--provider_configuration--gcp))
 
 <a id="nestedatt--provider_configuration--azure"></a>
 ### Nested Schema for `provider_configuration.azure`
 
-Required:
-
-- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for Azure resource discovery.
-- `azure_regions` (List of String) List of Azure regions to scan.
-- `scope_configuration` (Attributes) Defines which resource types to scan and at what scope level. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration))
-
 Optional:
 
 - `auto_install_vm_scanner` (Boolean) Whether to automatically install the VM scanner. Defaults to true.
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for Azure resource discovery.
+- `azure_regions` (List of String) List of Azure regions to scan.
+- `scope_configuration` (Attributes) Defines which resource types to scan and at what scope level. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration))
 
 <a id="nestedatt--provider_configuration--azure--scope_configuration"></a>
 ### Nested Schema for `provider_configuration.azure.scope_configuration`
 
 Optional:
 
-- `container_image_scanning` (Attributes) Defines the scope of Azure resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--container_image_scanning))
-- `serverless_scanning` (Attributes) Defines the scope of Azure resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--serverless_scanning))
-- `vm_scanning` (Attributes) Defines the scope of Azure resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--vm_scanning))
+- `container_image_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--container_image_scanning))
+- `serverless_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--serverless_scanning))
+- `vm_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--vm_scanning))
 
 <a id="nestedatt--provider_configuration--azure--scope_configuration--container_image_scanning"></a>
 ### Nested Schema for `provider_configuration.azure.scope_configuration.container_image_scanning`
@@ -71,7 +69,7 @@ Optional:
 Optional:
 
 - `scope_type` (String)
-- `scope_values` (List of String) List of subscription IDs. Empty for TENANT scope.
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
 
 Read-Only:
 
@@ -85,7 +83,7 @@ Read-Only:
 Optional:
 
 - `scope_type` (String)
-- `scope_values` (List of String) List of subscription IDs. Empty for TENANT scope.
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
 
 Read-Only:
 
@@ -99,7 +97,70 @@ Read-Only:
 Optional:
 
 - `scope_type` (String)
-- `scope_values` (List of String) List of subscription IDs. Empty for TENANT scope.
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
+
+Read-Only:
+
+- `state` (String)
+- `state_reason` (String) Reason for the current scope state.
+
+
+
+
+<a id="nestedatt--provider_configuration--gcp"></a>
+### Nested Schema for `provider_configuration.gcp`
+
+Optional:
+
+- `auto_install_vm_scanner` (Boolean) Whether to automatically install the VM scanner. Defaults to true.
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for GCP resource discovery.
+- `gcp_regions` (List of String) List of GCP regions to scan (e.g. us-central1).
+- `scope_configuration` (Attributes) Defines which GCP resource types to scan and at what scope level. GCP supports multiple capabilities per connector. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration))
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration`
+
+Optional:
+
+- `container_image_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration--container_image_scanning))
+- `serverless_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration--serverless_scanning))
+- `vm_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration--vm_scanning))
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration--container_image_scanning"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration.container_image_scanning`
+
+Optional:
+
+- `scope_type` (String)
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
+
+Read-Only:
+
+- `state` (String)
+- `state_reason` (String) Reason for the current scope state.
+
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration--serverless_scanning"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration.serverless_scanning`
+
+Optional:
+
+- `scope_type` (String)
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
+
+Read-Only:
+
+- `state` (String)
+- `state_reason` (String) Reason for the current scope state.
+
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration--vm_scanning"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration.vm_scanning`
+
+Optional:
+
+- `scope_type` (String)
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
 
 Read-Only:
 

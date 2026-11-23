@@ -1,0 +1,1 @@
+$ terraform import awscc_kinesis_queue.example "queue_arn"

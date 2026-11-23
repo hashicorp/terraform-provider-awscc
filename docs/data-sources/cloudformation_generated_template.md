@@ -26,6 +26,7 @@ Data Source schema for AWS::CloudFormation::GeneratedTemplate
 - `generated_template_name` (String) The name assigned to the generated template.
 - `last_updated_time` (String) The time the generated template was last updated.
 - `progress` (Attributes) A summary of the progress of the template generation. (see [below for nested schema](#nestedatt--progress))
+- `stack_id` (String) The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.
 - `status` (String) The status of the template generation.
 - `template_configuration` (Attributes) The configuration details of the generated template. (see [below for nested schema](#nestedatt--template_configuration))
 - `total_warnings` (Number) The number of warnings generated for this template.

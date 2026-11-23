@@ -167,6 +167,8 @@ Optional:
 - `dead_letter_config` (Attributes) A DeadLetterConfig object that contains information about a dead-letter queue configuration. (see [below for nested schema](#nestedatt--target--dead_letter_config))
 - `ecs_parameters` (Attributes) The custom parameters to be used when the target is an Amazon ECS task. (see [below for nested schema](#nestedatt--target--ecs_parameters))
 - `event_bridge_parameters` (Attributes) EventBridge PutEvent predefined target type. (see [below for nested schema](#nestedatt--target--event_bridge_parameters))
+- `event_bridge_put_events_v2_parameters` (Attributes) EventBridge PutEvent V2 predefined target type (see [below for nested schema](#nestedatt--target--event_bridge_put_events_v2_parameters))
+- `event_bridge_put_raw_events_parameters` (Attributes) EventBridge PutRawEvent predefined target type (see [below for nested schema](#nestedatt--target--event_bridge_put_raw_events_parameters))
 - `input` (String) The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target, the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler delivers a default notification to the target.
 - `kinesis_parameters` (Attributes) The custom parameter you can use to control the shard to which EventBridge Scheduler sends the event. (see [below for nested schema](#nestedatt--target--kinesis_parameters))
 - `retry_policy` (Attributes) A RetryPolicy object that includes information about the retry policy settings. (see [below for nested schema](#nestedatt--target--retry_policy))
@@ -255,6 +257,23 @@ Optional:
 
 - `detail_type` (String) Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
 - `source` (String) The source of the event.
+
+
+<a id="nestedatt--target--event_bridge_put_events_v2_parameters"></a>
+### Nested Schema for `target.event_bridge_put_events_v2_parameters`
+
+Optional:
+
+- `detail_type` (String) Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+- `source` (String) The source of the event.
+
+
+<a id="nestedatt--target--event_bridge_put_raw_events_parameters"></a>
+### Nested Schema for `target.event_bridge_put_raw_events_parameters`
+
+Optional:
+
+- `metadata` (Map of String) Customer-defined metadata key-value pairs.
 
 
 <a id="nestedatt--target--kinesis_parameters"></a>

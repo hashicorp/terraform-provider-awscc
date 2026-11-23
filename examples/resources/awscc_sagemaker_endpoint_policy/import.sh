@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_endpoint_policy.example "endpoint_arn"

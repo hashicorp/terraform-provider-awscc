@@ -48,6 +48,7 @@ Data Source schema for AWS::Route53::HostedZone
 Read-Only:
 
 - `comment` (String) Any comments that you want to include about the hosted zone.
+- `hosted_zone_tier` (String)
 
 
 <a id="nestedatt--hosted_zone_features"></a>
@@ -55,7 +56,28 @@ Read-Only:
 
 Read-Only:
 
+- `change_guardrails` (Attributes Set) (see [below for nested schema](#nestedatt--hosted_zone_features--change_guardrails))
+- `change_history` (Attributes) (see [below for nested schema](#nestedatt--hosted_zone_features--change_history))
 - `enable_accelerated_recovery` (Boolean)
+- `enable_public_dns_fallback` (Boolean)
+
+<a id="nestedatt--hosted_zone_features--change_guardrails"></a>
+### Nested Schema for `hosted_zone_features.change_guardrails`
+
+Read-Only:
+
+- `name` (String) The name of the Change Guardrail.
+- `status` (String) The status of the Change Guardrail. ENABLED makes Route 53 block the corresponding destructive change; DISABLED turns the guardrail off.
+
+
+<a id="nestedatt--hosted_zone_features--change_history"></a>
+### Nested Schema for `hosted_zone_features.change_history`
+
+Read-Only:
+
+- `retention_starts_at` (String) The earliest time the hosted zone's change history can be read from, as an ISO 8601 timestamp. Present only when Status is ENABLED.
+- `status` (String) Whether change history is enabled for the hosted zone.
+
 
 
 <a id="nestedatt--hosted_zone_tags"></a>

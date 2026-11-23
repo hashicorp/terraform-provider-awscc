@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_core_network_endpoint.example "core_network_endpoint_id"

@@ -25,8 +25,10 @@ The distribution tenant.
 
 - `connection_group_id` (String) The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.
 - `customizations` (Attributes) Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant. (see [below for nested schema](#nestedatt--customizations))
+- `domain_mappings` (Attributes List) (see [below for nested schema](#nestedatt--domain_mappings))
 - `enabled` (Boolean) Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.
 - `managed_certificate_request` (Attributes) An object that represents the request for the Amazon CloudFront managed ACM certificate. (see [below for nested schema](#nestedatt--managed_certificate_request))
+- `on_domain_takeover` (String)
 - `parameters` (Attributes List) A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution. (see [below for nested schema](#nestedatt--parameters))
 - `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
@@ -80,6 +82,15 @@ Optional:
 
 
 
+<a id="nestedatt--domain_mappings"></a>
+### Nested Schema for `domain_mappings`
+
+Optional:
+
+- `domain` (String) The domain to serve only on the Anycast IP list. Must be lowercase and must also be listed in `Domains`.
+- `serve_on` (String) Set to `anycast-ip-list-only` to serve the domain only on the Anycast IP list of the tenant's connection group. To serve a domain normally, on all CloudFront IP addresses, omit it from `DomainMappings`.
+
+
 <a id="nestedatt--managed_certificate_request"></a>
 ### Nested Schema for `managed_certificate_request`
 
@@ -118,7 +129,10 @@ Optional:
 Read-Only:
 
 - `domain` (String) The specified domain.
+- `serve_on` (String)
 - `status` (String) Whether the domain is active or inactive.
+- `status_reason` (String)
+- `status_reason_code` (String)
 
 ## Import
 

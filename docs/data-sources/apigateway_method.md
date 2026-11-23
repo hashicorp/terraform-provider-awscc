@@ -24,7 +24,7 @@ Data Source schema for AWS::ApiGateway::Method
 - `api_key_required` (Boolean)
 - `authorization_scopes` (List of String)
 - `authorization_type` (String) The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.
-  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.
+  If you specify the ``AuthorizerId`` property, specify ``CUSTOM``, ``COGNITO_USER_POOLS``, or ``JWT`` for this property.
 - `authorizer_id` (String)
 - `http_method` (String)
 - `integration` (Attributes) ``Integration`` is a property of the [AWS::ApiGateway::Method](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html) resource that specifies information about the target backend that a method calls. (see [below for nested schema](#nestedatt--integration))

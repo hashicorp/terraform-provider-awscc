@@ -38,23 +38,21 @@ Resource Type definition for AWS::SSM::CloudConnector. Enables AWS Systems Manag
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
-Required:
+Optional:
 
 - `azure_configuration` (Attributes) Configuration for connecting to Azure. (see [below for nested schema](#nestedatt--configuration--azure_configuration))
+- `gcp_configuration` (Attributes) Configuration for connecting to Google Cloud. (see [below for nested schema](#nestedatt--configuration--gcp_configuration))
 
 <a id="nestedatt--configuration--azure_configuration"></a>
 ### Nested Schema for `configuration.azure_configuration`
 
-Required:
-
-- `application_id` (String) The Azure AD application ID.
-- `tenant_id` (String) The Azure AD tenant ID. Cannot be changed after creation.
-
 Optional:
 
 - `application_display_name` (String) The display name of the Azure AD application.
+- `application_id` (String) The Azure AD application ID.
 - `targets` (Attributes) The targets for the cloud connector. If omitted, the entire tenant is targeted. (see [below for nested schema](#nestedatt--configuration--azure_configuration--targets))
 - `tenant_display_name` (String) The display name of the Azure AD tenant.
+- `tenant_id` (String) The Azure AD tenant ID. Cannot be changed after creation.
 
 <a id="nestedatt--configuration--azure_configuration--targets"></a>
 ### Nested Schema for `configuration.azure_configuration.targets`
@@ -70,6 +68,34 @@ Optional:
 
 - `display_name` (String) The display name of the Azure subscription.
 - `id` (String) The Azure subscription ID.
+
+
+
+
+<a id="nestedatt--configuration--gcp_configuration"></a>
+### Nested Schema for `configuration.gcp_configuration`
+
+Optional:
+
+- `organization_id` (String) The GCP organization ID. Required when Targets is omitted, which targets the entire organization. Cannot be changed after creation.
+- `service_account_email` (String) The GCP service account the connector impersonates. Its project is the connector's management project. Cannot be changed after creation.
+- `targets` (Attributes) The targets for the cloud connector. If omitted, the entire organization is targeted. (see [below for nested schema](#nestedatt--configuration--gcp_configuration--targets))
+- `workload_identity_pool_provider` (String) The resource name of the workload identity pool provider that trusts the connector's IAM role.
+
+<a id="nestedatt--configuration--gcp_configuration--targets"></a>
+### Nested Schema for `configuration.gcp_configuration.targets`
+
+Optional:
+
+- `projects` (Attributes List) List of GCP projects. (see [below for nested schema](#nestedatt--configuration--gcp_configuration--targets--projects))
+
+<a id="nestedatt--configuration--gcp_configuration--targets--projects"></a>
+### Nested Schema for `configuration.gcp_configuration.targets.projects`
+
+Optional:
+
+- `project_display_name` (String) The display name of the GCP project.
+- `project_id` (String) The GCP project ID.
 
 
 

@@ -36,8 +36,17 @@ Read-Only:
 
 Read-Only:
 
+- `delete_replication` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--delete_replication))
 - `destinations` (Attributes List) An array of objects representing the destination for a replication rule. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
 - `repository_filters` (Attributes List) An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
+
+<a id="nestedatt--replication_configuration--rules--delete_replication"></a>
+### Nested Schema for `replication_configuration.rules.delete_replication`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether image deletions and image tag removals in the source registry are replicated to the replication destinations.
+
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>
 ### Nested Schema for `replication_configuration.rules.destinations`

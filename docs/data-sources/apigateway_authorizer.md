@@ -28,7 +28,35 @@ Data Source schema for AWS::ApiGateway::Authorizer
 - `authorizer_uri` (String)
 - `identity_source` (String)
 - `identity_validation_expression` (String)
+- `jwt_configuration` (Attributes) (see [below for nested schema](#nestedatt--jwt_configuration))
 - `name` (String)
 - `provider_ar_ns` (Set of String)
 - `rest_api_id` (String)
 - `type` (String)
+
+<a id="nestedatt--jwt_configuration"></a>
+### Nested Schema for `jwt_configuration`
+
+Read-Only:
+
+- `default_algorithms` (Set of String) The signing algorithms the authorizer accepts: RS256, RS384, RS512, ES256, ES384 or ES512.
+- `issuers` (Attributes List) The token issuers the authorizer accepts. (see [below for nested schema](#nestedatt--jwt_configuration--issuers))
+
+<a id="nestedatt--jwt_configuration--issuers"></a>
+### Nested Schema for `jwt_configuration.issuers`
+
+Read-Only:
+
+- `additional_claims` (Attributes List) Other claims the token must carry. (see [below for nested schema](#nestedatt--jwt_configuration--issuers--additional_claims))
+- `audiences` (Set of String) The values that the token's aud claim must contain at least one of.
+- `issuer` (String) The HTTPS URL that the token's iss claim must match.
+
+<a id="nestedatt--jwt_configuration--issuers--additional_claims"></a>
+### Nested Schema for `jwt_configuration.issuers.additional_claims`
+
+Read-Only:
+
+- `claim_name` (String) The claim name. Can't be iss, aud, exp, nbf, iat, scope or scp.
+- `expected_values` (Set of String) The value the claim must have. Leave it out to check only that the claim is present.
+- `format` (String) The claim's format. SINGLE_STRING is the only format.
+- `required` (Boolean) Whether the token must carry the claim. Defaults to false.

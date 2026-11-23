@@ -53,7 +53,9 @@ Optional:
 
 Optional:
 
-- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.
+- `kms_key_arn` (String) The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. The key must be in the same Region as the stack, and ReplaySessionEnabled must be true. To remove the key, use AttributesToDelete with the AGENT_ACCESS_CONFIG_KMS_KEY_ARN value.
+- `replay_session_enabled` (Boolean) Indicates whether Replay Session is enabled for agent sessions. WorkSpaces Applications delivers a video combining session screenshots, a transcript, and a report for each session. Requires the COMPUTER_VISION agent action. Setting this attribute to false also removes the KmsKeyArn value from the stack.
+- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored. Required when ScreenshotsUploadEnabled or ReplaySessionEnabled is true.
 - `screen_image_format` (String) The image format for agent screen captures.
 - `screen_resolution` (String) The screen resolution for the agent streaming environment.
 - `screenshots_upload_enabled` (Boolean) Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.

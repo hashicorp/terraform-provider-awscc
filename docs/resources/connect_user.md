@@ -236,7 +236,7 @@ resource "awscc_connect_user" "example" {
 
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
 - `routing_profile_arn` (String) The identifier of the routing profile for the user.
-- `security_profile_arns` (Set of String) One or more security profile arns for the user
+- `security_profile_arns` (Set of String) One or more customer-managed or AWS-managed security profile ARNs for the user.
 - `username` (String) The user name for the account.
 
 ### Optional

@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_portal_publication.example "portal_arn"

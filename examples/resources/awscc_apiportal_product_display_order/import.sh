@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_product_display_order.example "product_id"

@@ -30,6 +30,7 @@ Resource Type definition for AWS::BedrockAgentCore::PaymentConnector
 ### Read-Only
 
 - `authorization_url` (String) The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.
+- `aws_billing_iam_role_arn` (String) The ARN of the AWS Marketplace service-linked role in the payment manager's account, set by the service. Only present for AwsBilling connectors.
 - `connector_created_at` (String) The timestamp when the connector was created
 - `connector_last_updated_at` (String) The timestamp when the connector was last updated
 - `connector_status` (String)
@@ -42,11 +43,38 @@ Resource Type definition for AWS::BedrockAgentCore::PaymentConnector
 
 Optional:
 
+- `amazon_pay` (Attributes) (see [below for nested schema](#nestedatt--credential_provider_configurations--amazon_pay))
 - `coinbase_cdp` (Attributes) (see [below for nested schema](#nestedatt--credential_provider_configurations--coinbase_cdp))
+- `pay_pal` (Attributes) (see [below for nested schema](#nestedatt--credential_provider_configurations--pay_pal))
+- `stripe` (Attributes) (see [below for nested schema](#nestedatt--credential_provider_configurations--stripe))
 - `stripe_privy` (Attributes) (see [below for nested schema](#nestedatt--credential_provider_configurations--stripe_privy))
+
+<a id="nestedatt--credential_provider_configurations--amazon_pay"></a>
+### Nested Schema for `credential_provider_configurations.amazon_pay`
+
+Optional:
+
+- `credential_provider_arn` (String) The ARN of the payment credential provider
+
 
 <a id="nestedatt--credential_provider_configurations--coinbase_cdp"></a>
 ### Nested Schema for `credential_provider_configurations.coinbase_cdp`
+
+Optional:
+
+- `credential_provider_arn` (String) The ARN of the payment credential provider
+
+
+<a id="nestedatt--credential_provider_configurations--pay_pal"></a>
+### Nested Schema for `credential_provider_configurations.pay_pal`
+
+Optional:
+
+- `credential_provider_arn` (String) The ARN of the payment credential provider
+
+
+<a id="nestedatt--credential_provider_configurations--stripe"></a>
+### Nested Schema for `credential_provider_configurations.stripe`
 
 Optional:
 

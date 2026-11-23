@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_product.example "product_arn"

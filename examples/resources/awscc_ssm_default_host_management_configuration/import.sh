@@ -1,0 +1,1 @@
+$ terraform import awscc_ssm_default_host_management_configuration.example "setting_id"

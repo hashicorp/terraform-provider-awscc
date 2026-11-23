@@ -42,9 +42,28 @@ Resource Type definition for AWS::NetworkSecurityManager::Policy. Creates and ma
 
 Optional:
 
+- `igw_firewall_config` (Attributes) Internet gateway firewall policy settings. Populated only for IGW_FIREWALL firewall type policies. (see [below for nested schema](#nestedatt--policy_configuration--igw_firewall_config))
 - `remediation_enabled` (Boolean) Controls automatic remediation of non-compliant resources.
 - `resources_clean_up` (Boolean) Controls automatic cleanup of unused resources.
 - `waf_config` (Attributes) WAF-specific policy settings. Populated only for WAF firewall type policies. (see [below for nested schema](#nestedatt--policy_configuration--waf_config))
+
+<a id="nestedatt--policy_configuration--igw_firewall_config"></a>
+### Nested Schema for `policy_configuration.igw_firewall_config`
+
+Optional:
+
+- `default_subnet_connectivity` (String) The default internet connectivity treatment applied to subnets in scope unless a subnet connectivity override applies. Required for IGW_FIREWALL policies.
+- `subnet_connectivity_overrides` (Attributes List) An ordered list of subnet connectivity overrides. When a subnet matches more than one override, the first match applies. At most one override per connectivity type. (see [below for nested schema](#nestedatt--policy_configuration--igw_firewall_config--subnet_connectivity_overrides))
+
+<a id="nestedatt--policy_configuration--igw_firewall_config--subnet_connectivity_overrides"></a>
+### Nested Schema for `policy_configuration.igw_firewall_config.subnet_connectivity_overrides`
+
+Optional:
+
+- `connectivity_type` (String) The connectivity treatment applied to the subnets that the referenced scope selects.
+- `scopes` (List of String) The ARN of the IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE scope whose selected subnets receive ConnectivityType.
+
+
 
 <a id="nestedatt--policy_configuration--waf_config"></a>
 ### Nested Schema for `policy_configuration.waf_config`

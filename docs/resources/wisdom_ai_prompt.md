@@ -65,6 +65,7 @@ resource "awscc_wisdom_ai_prompt" "example" {
 
 - `assistant_id` (String)
 - `description` (String)
+- `inference_configuration` (Attributes) (see [below for nested schema](#nestedatt--inference_configuration))
 - `name` (String)
 - `tags` (Map of String)
 
@@ -89,6 +90,18 @@ Optional:
 Optional:
 
 - `text` (String)
+
+
+
+<a id="nestedatt--inference_configuration"></a>
+### Nested Schema for `inference_configuration`
+
+Optional:
+
+- `max_tokens_to_sample` (Number)
+- `temperature` (Number)
+- `top_k` (Number)
+- `top_p` (Number)
 
 ## Import
 

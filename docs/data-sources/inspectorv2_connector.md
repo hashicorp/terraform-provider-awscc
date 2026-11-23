@@ -49,6 +49,7 @@ Read-Only:
 Read-Only:
 
 - `azure` (Attributes) (see [below for nested schema](#nestedatt--provider_configuration--azure))
+- `gcp` (Attributes) (see [below for nested schema](#nestedatt--provider_configuration--gcp))
 
 <a id="nestedatt--provider_configuration--azure"></a>
 ### Nested Schema for `provider_configuration.azure`
@@ -65,9 +66,9 @@ Read-Only:
 
 Read-Only:
 
-- `container_image_scanning` (Attributes) Defines the scope of Azure resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--container_image_scanning))
-- `serverless_scanning` (Attributes) Defines the scope of Azure resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--serverless_scanning))
-- `vm_scanning` (Attributes) Defines the scope of Azure resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--vm_scanning))
+- `container_image_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--container_image_scanning))
+- `serverless_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--serverless_scanning))
+- `vm_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--azure--scope_configuration--vm_scanning))
 
 <a id="nestedatt--provider_configuration--azure--scope_configuration--container_image_scanning"></a>
 ### Nested Schema for `provider_configuration.azure.scope_configuration.container_image_scanning`
@@ -75,7 +76,7 @@ Read-Only:
 Read-Only:
 
 - `scope_type` (String)
-- `scope_values` (List of String) List of subscription IDs. Empty for TENANT scope.
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
 - `state` (String)
 - `state_reason` (String) Reason for the current scope state.
 
@@ -86,7 +87,7 @@ Read-Only:
 Read-Only:
 
 - `scope_type` (String)
-- `scope_values` (List of String) List of subscription IDs. Empty for TENANT scope.
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
 - `state` (String)
 - `state_reason` (String) Reason for the current scope state.
 
@@ -97,7 +98,61 @@ Read-Only:
 Read-Only:
 
 - `scope_type` (String)
-- `scope_values` (List of String) List of subscription IDs. Empty for TENANT scope.
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
+- `state` (String)
+- `state_reason` (String) Reason for the current scope state.
+
+
+
+
+<a id="nestedatt--provider_configuration--gcp"></a>
+### Nested Schema for `provider_configuration.gcp`
+
+Read-Only:
+
+- `auto_install_vm_scanner` (Boolean) Whether to automatically install the VM scanner. Defaults to true.
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for GCP resource discovery.
+- `gcp_regions` (List of String) List of GCP regions to scan (e.g. us-central1).
+- `scope_configuration` (Attributes) Defines which GCP resource types to scan and at what scope level. GCP supports multiple capabilities per connector. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration))
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration`
+
+Read-Only:
+
+- `container_image_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration--container_image_scanning))
+- `serverless_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration--serverless_scanning))
+- `vm_scanning` (Attributes) Defines the scope of cloud resources to monitor for a specific resource type. (see [below for nested schema](#nestedatt--provider_configuration--gcp--scope_configuration--vm_scanning))
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration--container_image_scanning"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration.container_image_scanning`
+
+Read-Only:
+
+- `scope_type` (String)
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
+- `state` (String)
+- `state_reason` (String) Reason for the current scope state.
+
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration--serverless_scanning"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration.serverless_scanning`
+
+Read-Only:
+
+- `scope_type` (String)
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
+- `state` (String)
+- `state_reason` (String) Reason for the current scope state.
+
+
+<a id="nestedatt--provider_configuration--gcp--scope_configuration--vm_scanning"></a>
+### Nested Schema for `provider_configuration.gcp.scope_configuration.vm_scanning`
+
+Read-Only:
+
+- `scope_type` (String)
+- `scope_values` (List of String) List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).
 - `state` (String)
 - `state_reason` (String) Reason for the current scope state.
 

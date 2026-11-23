@@ -1,0 +1,1 @@
+$ terraform import awscc_apiportal_discovery_enablement.example "id"

@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_fca_policy.example "arn"

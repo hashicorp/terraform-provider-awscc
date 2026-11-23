@@ -34,6 +34,7 @@ Data Source schema for AWS::CloudFront::ConnectionGroup
 - `routing_endpoint` (String)
 - `status` (String)
 - `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
+- `viewer_fallback` (Attributes) (see [below for nested schema](#nestedatt--viewer_fallback))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -44,3 +45,11 @@ Read-Only:
  The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 - `value` (String) A string that contains an optional ``Tag`` value.
  The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+
+
+<a id="nestedatt--viewer_fallback"></a>
+### Nested Schema for `viewer_fallback`
+
+Read-Only:
+
+- `distribution_id` (String)

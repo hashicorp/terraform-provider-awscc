@@ -76,6 +76,7 @@ resource "awscc_mediaconnect_flow_source" "example" {
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `protocol` (String) The protocol that is used by the source.
+- `rtmp_push_settings` (Attributes) The settings for the RTMP (Real-Time Messaging Protocol) source. (see [below for nested schema](#nestedatt--rtmp_push_settings))
 - `sender_control_port` (Number) The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.
 - `sender_ip_address` (String) The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.
 - `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
@@ -89,6 +90,7 @@ resource "awscc_mediaconnect_flow_source" "example" {
 
 - `id` (String) Uniquely identifies the resource.
 - `ingest_ip` (String) The IP address that the flow will be listening on for incoming content.
+- `rtmp_push_details` (Attributes) The read-only details for the RTMP (Real-Time Messaging Protocol) source. (see [below for nested schema](#nestedatt--rtmp_push_details))
 - `source_arn` (String) The ARN of the source.
 - `source_ingest_port` (String) The port that the flow will be listening on for incoming content.(ReadOnly)
 
@@ -125,6 +127,32 @@ Optional:
 
 
 
+<a id="nestedatt--rtmp_push_settings"></a>
+### Nested Schema for `rtmp_push_settings`
+
+Optional:
+
+- `naming_configuration` (Attributes) The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names. (see [below for nested schema](#nestedatt--rtmp_push_settings--naming_configuration))
+
+<a id="nestedatt--rtmp_push_settings--naming_configuration"></a>
+### Nested Schema for `rtmp_push_settings.naming_configuration`
+
+Optional:
+
+- `automatic` (String) The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.
+- `manual` (Attributes) The manual RTMP naming configuration, where you specify the application and stream names. (see [below for nested schema](#nestedatt--rtmp_push_settings--naming_configuration--manual))
+
+<a id="nestedatt--rtmp_push_settings--naming_configuration--manual"></a>
+### Nested Schema for `rtmp_push_settings.naming_configuration.manual`
+
+Optional:
+
+- `application_name` (String) The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.
+- `stream_name` (String) The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.
+
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -132,6 +160,15 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--rtmp_push_details"></a>
+### Nested Schema for `rtmp_push_details`
+
+Read-Only:
+
+- `application_name` (String) The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.
+- `stream_name` (String) The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.
 
 ## Import
 

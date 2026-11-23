@@ -48,6 +48,16 @@ Read-Only:
 Read-Only:
 
 - `non_filterable_metadata_keys` (Set of String) Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys cannot be used as query filters. Non-filterable metadata keys can be retrieved but cannot be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors.
+- `text_search_configurations` (Attributes Set) (see [below for nested schema](#nestedatt--metadata_configuration--text_search_configurations))
+
+<a id="nestedatt--metadata_configuration--text_search_configurations"></a>
+### Nested Schema for `metadata_configuration.text_search_configurations`
+
+Read-Only:
+
+- `language` (String)
+- `metadata_key` (String)
+
 
 
 <a id="nestedatt--tags"></a>

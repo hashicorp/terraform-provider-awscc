@@ -110,6 +110,7 @@ Optional:
 
 - `audio_timeline_pattern` (String)
 - `availability_start_time_configuration` (Attributes) <p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p> (see [below for nested schema](#nestedatt--dash_manifests--availability_start_time_configuration))
+- `bandwidth_reporting_mode` (String)
 - `base_urls` (Attributes List) <p>The base URL to use for retrieving segments.</p> (see [below for nested schema](#nestedatt--dash_manifests--base_urls))
 - `compactness` (String)
 - `drm_signaling` (String)
