@@ -128,6 +128,21 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	                  },
 		//	                  "type": "object"
 		//	                },
+		//	                "CpuOptions": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The CPU options for the instances.",
+		//	                  "properties": {
+		//	                    "NestedVirtualization": {
+		//	                      "description": "Indicates whether nested virtualization is enabled on the instances, which exposes hardware virtualization (KVM) to agents. Default: DISABLED.",
+		//	                      "enum": [
+		//	                        "ENABLED",
+		//	                        "DISABLED"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
 		//	                "EphemeralVolumes": {
 		//	                  "description": "The block device mapping for ephemeral (instance store) volumes.",
 		//	                  "insertionOrder": false,
@@ -586,6 +601,32 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The Capacity Reservation targeting option.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: CpuOptions
+										"cpu_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: NestedVirtualization
+												"nested_virtualization": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether nested virtualization is enabled on the instances, which exposes hardware virtualization (KVM) to agents. Default: DISABLED.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"ENABLED",
+															"DISABLED",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The CPU options for the instances.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1436,6 +1477,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_reservation_specification":      "CapacityReservationSpecification",
 		"capacity_reservation_target":             "CapacityReservationTarget",
 		"compute_configuration":                   "ComputeConfiguration",
+		"cpu_options":                             "CpuOptions",
 		"created_at":                              "CreatedAt",
 		"description":                             "Description",
 		"device_name":                             "DeviceName",
@@ -1461,6 +1503,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"max_lifetime":                            "MaxLifetime",
 		"monitoring":                              "Monitoring",
 		"name":                                    "Name",
+		"nested_virtualization":                   "NestedVirtualization",
 		"operating_system":                        "OperatingSystem",
 		"permissions_configuration":               "PermissionsConfiguration",
 		"propagated_tags":                         "PropagatedTags",

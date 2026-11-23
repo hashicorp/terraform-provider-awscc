@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -255,6 +256,46 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "Arn"
 		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "CostAndUsageReportsPublish": {
+		//	      "additionalProperties": false,
+		//	      "description": "Settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+		//	      "properties": {
+		//	        "PrefixLevel": {
+		//	          "additionalProperties": false,
+		//	          "description": "Prefix-level settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+		//	          "properties": {
+		//	            "IsEnabled": {
+		//	              "description": "Specifies whether publishing prefix-level metrics to AWS Cost and Usage Reports is enabled or disabled.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "SelectionCriteria": {
+		//	              "additionalProperties": false,
+		//	              "description": "Selection criteria for the data that Amazon S3 Storage Lens publishes to AWS Cost and Usage Reports.",
+		//	              "properties": {
+		//	                "MaxDepth": {
+		//	                  "description": "The maximum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MaxDepth defaults to 3.",
+		//	                  "maximum": 15,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "MinDepth": {
+		//	                  "description": "The minimum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MinDepth defaults to 1.",
+		//	                  "maximum": 15,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsEnabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "DataExport": {
@@ -546,6 +587,17 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "type": "array",
 		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "IntAccessTiers": {
+		//	      "additionalProperties": false,
+		//	      "description": "Metric breakdown per Intelligent-Tiering access tiers.",
+		//	      "properties": {
+		//	        "IsEnabled": {
+		//	          "description": "Specifies whether metric breakdown per Intelligent-Tiering access tiers is enabled or disabled.",
+		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -914,6 +966,75 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CostAndUsageReportsPublish
+				"cost_and_usage_reports_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrefixLevel
+						"prefix_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether publishing prefix-level metrics to AWS Cost and Usage Reports is enabled or disabled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionCriteria
+								"selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxDepth
+										"max_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MaxDepth defaults to 3.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 15),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MinDepth
+										"min_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minimum prefix depth to publish to AWS Cost and Usage Reports. You must specify MinDepth and MaxDepth together, or neither. If you specify neither, MinDepth defaults to 1.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 15),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Selection criteria for the data that Amazon S3 Storage Lens publishes to AWS Cost and Usage Reports.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Prefix-level settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for publishing Amazon S3 Storage Lens metrics to AWS Cost and Usage Reports.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1407,6 +1528,26 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: IntAccessTiers
+				"int_access_tiers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsEnabled
+						"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether metric breakdown per Intelligent-Tiering access tiers is enabled or disabled.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Metric breakdown per Intelligent-Tiering access tiers.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: IsEnabled
 				"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
@@ -1543,6 +1684,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"bucket_level":                          "BucketLevel",
 		"buckets":                               "Buckets",
 		"cloudwatch_metrics":                    "CloudWatchMetrics",
+		"cost_and_usage_reports_publish":        "CostAndUsageReportsPublish",
 		"data_export":                           "DataExport",
 		"delimiter":                             "Delimiter",
 		"detailed_status_codes_metrics":         "DetailedStatusCodesMetrics",
@@ -1552,10 +1694,12 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"format":                                "Format",
 		"id":                                    "Id",
 		"include":                               "Include",
+		"int_access_tiers":                      "IntAccessTiers",
 		"is_enabled":                            "IsEnabled",
 		"key":                                   "Key",
 		"key_id":                                "KeyId",
 		"max_depth":                             "MaxDepth",
+		"min_depth":                             "MinDepth",
 		"min_storage_bytes_percentage":          "MinStorageBytesPercentage",
 		"output_schema_version":                 "OutputSchemaVersion",
 		"prefix":                                "Prefix",

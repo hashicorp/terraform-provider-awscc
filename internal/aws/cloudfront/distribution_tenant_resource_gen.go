@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -256,6 +257,80 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 			Description: "The ID of the multi-tenant distribution.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Domain": {
+		//	        "description": "The domain to serve only on the Anycast IP list. Must be lowercase and must also be listed in `Domains`.",
+		//	        "type": "string"
+		//	      },
+		//	      "ServeOn": {
+		//	        "description": "Set to `anycast-ip-list-only` to serve the domain only on the Anycast IP list of the tenant's connection group. To serve a domain normally, on all CloudFront IP addresses, omit it from `DomainMappings`.",
+		//	        "enum": [
+		//	          "anycast-ip-list-only"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Domain",
+		//	      "ServeOn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"domain_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Domain
+					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The domain to serve only on the Anycast IP list. Must be lowercase and must also be listed in `Domains`.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ServeOn
+					"serve_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Set to `anycast-ip-list-only` to serve the domain only on the Anycast IP list of the tenant's connection group. To serve a domain normally, on all CloudFront IP addresses, omit it from `DomainMappings`.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"anycast-ip-list-only",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainResults
 		// CloudFormation resource type schema:
 		//
@@ -269,12 +344,24 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	        "description": "The specified domain.",
 		//	        "type": "string"
 		//	      },
+		//	      "ServeOn": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
 		//	      "Status": {
 		//	        "description": "Whether the domain is active or inactive.",
 		//	        "enum": [
 		//	          "active",
 		//	          "inactive"
 		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "StatusReason": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
+		//	      "StatusReasonCode": {
+		//	        "description": "",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -291,9 +378,24 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 						Description: "The specified domain.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ServeOn
+					"serve_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Whether the domain is active or inactive.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusReason
+					"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusReasonCode
+					"status_reason_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -473,6 +575,32 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OnDomainTakeover
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "allow",
+		//	    "reject"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"on_domain_takeover": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"allow",
+					"reject",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// OnDomainTakeover is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -642,6 +770,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		"distribution_id":                             "DistributionId",
 		"distribution_tenant_id":                      "Id",
 		"domain":                                      "Domain",
+		"domain_mappings":                             "DomainMappings",
 		"domain_results":                              "DomainResults",
 		"domains":                                     "Domains",
 		"e_tag":                                       "ETag",
@@ -652,10 +781,14 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		"locations":                                   "Locations",
 		"managed_certificate_request":                 "ManagedCertificateRequest",
 		"name":                                        "Name",
+		"on_domain_takeover":                          "OnDomainTakeover",
 		"parameters":                                  "Parameters",
 		"primary_domain_name":                         "PrimaryDomainName",
 		"restriction_type":                            "RestrictionType",
+		"serve_on":                                    "ServeOn",
 		"status":                                      "Status",
+		"status_reason":                               "StatusReason",
+		"status_reason_code":                          "StatusReasonCode",
 		"tags":                                        "Tags",
 		"validation_token_host":                       "ValidationTokenHost",
 		"value":                                       "Value",
@@ -664,6 +797,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ManagedCertificateRequest",
+		"/properties/OnDomainTakeover",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

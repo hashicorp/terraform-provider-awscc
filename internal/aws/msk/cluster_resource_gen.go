@@ -146,7 +146,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InstanceType": {
-		//	      "maxLength": 32,
+		//	      "maxLength": 64,
 		//	      "minLength": 5,
 		//	      "type": "string"
 		//	    },
@@ -186,6 +186,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "TopicReassignment": {
+		//	      "enum": [
+		//	        "AUTO",
+		//	        "MANUAL"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -359,7 +366,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.UTF8LengthBetween(5, 32),
+						stringvalidator.UTF8LengthBetween(5, 64),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
@@ -429,6 +436,21 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopicReassignment
+				"topic_reassignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AUTO",
+							"MANUAL",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// TopicReassignment is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
@@ -1491,6 +1513,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"storage_mode":                   "StorageMode",
 		"tags":                           "Tags",
 		"tls":                            "Tls",
+		"topic_reassignment":             "TopicReassignment",
 		"type":                           "Type",
 		"unauthenticated":                "Unauthenticated",
 		"volume_size":                    "VolumeSize",
@@ -1501,8 +1524,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ZookeeperAccess",
+		"/properties/BrokerNodeGroupInfo/TopicReassignment",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(30)
+	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(30)
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 

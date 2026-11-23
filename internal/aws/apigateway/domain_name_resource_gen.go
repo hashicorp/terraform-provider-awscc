@@ -307,11 +307,11 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Transport Layer Security (TLS) version + cipher suite for this DomainName.",
 		//	  "type": "string"
 		//	}
 		"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The Transport Layer Security (TLS) version + cipher suite for this DomainName.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

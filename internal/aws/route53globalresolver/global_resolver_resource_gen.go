@@ -218,6 +218,33 @@ func globalResolverResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PublicIpStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the Global Resolver's public IP addresses are enabled and reserved. Change it one step at a time: ENABLED_RESERVED \u003c-\u003e DISABLED_RESERVED, DISABLED_RESERVED -\u003e DISABLED_RELEASED, DISABLED_RELEASED -\u003e ENABLED_RESERVED (new public IP addresses). DISABLED_RELEASED gives the public IP addresses back and cannot be undone. DISABLED_RESERVED is not allowed at create.",
+		//	  "enum": [
+		//	    "ENABLED_RESERVED",
+		//	    "DISABLED_RESERVED",
+		//	    "DISABLED_RELEASED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"public_ip_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the Global Resolver's public IP addresses are enabled and reserved. Change it one step at a time: ENABLED_RESERVED <-> DISABLED_RESERVED, DISABLED_RESERVED -> DISABLED_RELEASED, DISABLED_RELEASED -> ENABLED_RESERVED (new public IP addresses). DISABLED_RELEASED gives the public IP addresses back and cannot be undone. DISABLED_RESERVED is not allowed at create.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED_RESERVED",
+					"DISABLED_RESERVED",
+					"DISABLED_RELEASED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Regions
 		// CloudFormation resource type schema:
 		//
@@ -379,6 +406,7 @@ func globalResolverResource(ctx context.Context) (resource.Resource, error) {
 		"key":                  "Key",
 		"name":                 "Name",
 		"observability_region": "ObservabilityRegion",
+		"public_ip_status":     "PublicIpStatus",
 		"regions":              "Regions",
 		"status":               "Status",
 		"tags":                 "Tags",

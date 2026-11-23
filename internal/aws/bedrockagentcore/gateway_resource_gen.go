@@ -11,12 +11,14 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -82,6 +84,46 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$",
 		//	            "type": "string"
 		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "CertificateConfigurations": {
+		//	          "items": {
+		//	            "properties": {
+		//	              "S3": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "BucketOwnerAccountId": {
+		//	                    "pattern": "^[0-9]{12}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Uri": {
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Uri"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SecretsManager": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "SecretArn": {
+		//	                    "pattern": "^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SecretArn"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
@@ -287,6 +329,75 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.UTF8LengthBetween(1, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"), ""),
 								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CertificateConfigurations
+						"certificate_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3
+									"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BucketOwnerAccountId
+											"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Uri
+											"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SecretsManager
+									"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SecretArn
+											"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
@@ -607,6 +718,73 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DomainOverride
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AlternateDomains": {
+		//	      "items": {
+		//	        "maxLength": 253,
+		//	        "minLength": 1,
+		//	        "pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "DefaultDomain": {
+		//	      "maxLength": 253,
+		//	      "minLength": 1,
+		//	      "pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DefaultDomain"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"domain_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlternateDomains
+				"alternate_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+						listvalidator.ValueStringsAre(
+							stringvalidator.UTF8LengthBetween(1, 253),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultDomain
+				"default_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(1, 253),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExceptionLevel
 		// CloudFormation resource type schema:
 		//
@@ -743,6 +921,24 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	          }
 		//	        },
 		//	        "type": "object"
+		//	      },
+		//	      "ResponseInterceptionMode": {
+		//	        "enum": [
+		//	          "BUFFERED",
+		//	          "STREAM"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ResponseStreamingConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxEventsPerInvocation": {
+		//	            "maximum": 8192,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -869,6 +1065,41 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.Object{ /*START VALIDATORS*/
 							fwvalidators.NotNullObject(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ResponseInterceptionMode
+					"response_interception_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"BUFFERED",
+								"STREAM",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ResponseStreamingConfiguration
+					"response_streaming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxEventsPerInvocation
+							"max_events_per_invocation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(1, 8192),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -1357,18 +1588,23 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"allowed_audience":                  "AllowedAudience",
 		"allowed_clients":                   "AllowedClients",
 		"allowed_scopes":                    "AllowedScopes",
+		"alternate_domains":                 "AlternateDomains",
 		"arn":                               "Arn",
 		"authorizer_configuration":          "AuthorizerConfiguration",
 		"authorizer_type":                   "AuthorizerType",
 		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
+		"bucket_owner_account_id":           "BucketOwnerAccountId",
+		"certificate_configurations":        "CertificateConfigurations",
 		"claim_match_operator":              "ClaimMatchOperator",
 		"claim_match_value":                 "ClaimMatchValue",
 		"created_at":                        "CreatedAt",
 		"custom_claims":                     "CustomClaims",
 		"custom_jwt_authorizer":             "CustomJWTAuthorizer",
+		"default_domain":                    "DefaultDomain",
 		"description":                       "Description",
 		"disable_mcp_list_tools_pagination": "DisableMcpListToolsPagination",
 		"discovery_url":                     "DiscoveryUrl",
+		"domain_override":                   "DomainOverride",
 		"enable_response_streaming":         "EnableResponseStreaming",
 		"endpoint_ip_address_type":          "EndpointIpAddressType",
 		"exception_level":                   "ExceptionLevel",
@@ -1390,6 +1626,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"managed_vpc_resource":              "ManagedVpcResource",
 		"match_value_string":                "MatchValueString",
 		"match_value_string_list":           "MatchValueStringList",
+		"max_events_per_invocation":         "MaxEventsPerInvocation",
 		"mcp":                               "Mcp",
 		"mode":                              "Mode",
 		"name":                              "Name",
@@ -1400,9 +1637,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"protocol_configuration":            "ProtocolConfiguration",
 		"protocol_type":                     "ProtocolType",
 		"resource_configuration_identifier": "ResourceConfigurationIdentifier",
+		"response_interception_mode":        "ResponseInterceptionMode",
+		"response_streaming_configuration":  "ResponseStreamingConfiguration",
 		"role_arn":                          "RoleArn",
 		"routing_domain":                    "RoutingDomain",
+		"s3":                                "S3",
 		"search_type":                       "SearchType",
+		"secret_arn":                        "SecretArn",
+		"secrets_manager":                   "SecretsManager",
 		"security_group_ids":                "SecurityGroupIds",
 		"self_managed_lattice_resource":     "SelfManagedLatticeResource",
 		"session_configuration":             "SessionConfiguration",
@@ -1414,6 +1656,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"supported_versions":                "SupportedVersions",
 		"tags":                              "Tags",
 		"updated_at":                        "UpdatedAt",
+		"uri":                               "Uri",
 		"vpc_identifier":                    "VpcIdentifier",
 		"waf_configuration":                 "WafConfiguration",
 		"web_acl_arn":                       "WebAclArn",

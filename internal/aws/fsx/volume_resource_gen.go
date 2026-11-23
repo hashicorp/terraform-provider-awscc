@@ -7,7 +7,9 @@ package fsx
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -86,6 +88,26 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "integer"
 		//	        }
 		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CloneConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Creates the volume as an ONTAP FlexClone of an existing volume. The clone takes SizeInMegabytes and StorageEfficiencyEnabled from the parent volume: omit them, or set them to the parent's values.",
+		//	      "properties": {
+		//	        "ParentVolumeId": {
+		//	          "description": "The ID of the volume to clone. It must be in the same storage virtual machine (SVM) as the new volume.",
+		//	          "pattern": "^(fsvol-[0-9a-f]{17,})$",
+		//	          "type": "string"
+		//	        },
+		//	        "SnapshotId": {
+		//	          "description": "The ID of a snapshot of the parent volume to clone from. If you omit it, the clone is created from the parent volume's current state. Required when this volume's OntapVolumeType is DP (the parent volume must then also be DP).",
+		//	          "pattern": "^((fs)?volsnap-[0-9a-f]{8,})$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ParentVolumeId"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "CopyTagsToBackups": {
@@ -294,6 +316,42 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 						objectplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CloneConfiguration
+				"clone_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ParentVolumeId
+						"parent_volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the volume to clone. It must be in the same storage virtual machine (SVM) as the new volume.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^(fsvol-[0-9a-f]{17,})$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SnapshotId
+						"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of a snapshot of the parent volume to clone from. If you omit it, the clone is created from the parent volume's current state. Required when this volume's OntapVolumeType is DP (the parent volume must then also be DP).",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^((fs)?volsnap-[0-9a-f]{8,})$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Creates the volume as an ONTAP FlexClone of an existing volume. The clone takes SizeInMegabytes and StorageEfficiencyEnabled from the parent volume: omit them, or set them to the parent's values.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CopyTagsToBackups
@@ -1162,6 +1220,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"backup_id":                         "BackupId",
 		"client_configurations":             "ClientConfigurations",
 		"clients":                           "Clients",
+		"clone_configuration":               "CloneConfiguration",
 		"constituents_per_aggregate":        "ConstituentsPerAggregate",
 		"cooling_period":                    "CoolingPeriod",
 		"copy_strategy":                     "CopyStrategy",
@@ -1193,6 +1252,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"snaplock_configuration":            "SnaplockConfiguration",
 		"snaplock_type":                     "SnaplockType",
 		"snapshot_arn":                      "SnapshotARN",
+		"snapshot_id":                       "SnapshotId",
 		"snapshot_policy":                   "SnapshotPolicy",
 		"storage_capacity_quota_gi_b":       "StorageCapacityQuotaGiB",
 		"storage_capacity_reservation_gi_b": "StorageCapacityReservationGiB",

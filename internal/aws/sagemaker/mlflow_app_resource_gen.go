@@ -360,7 +360,7 @@ func mlflowAppResource(ctx context.Context) (resource.Resource, error) {
 		"weekly_maintenance_window_start": "WeeklyMaintenanceWindowStart",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(190).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

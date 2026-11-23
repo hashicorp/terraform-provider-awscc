@@ -503,8 +503,8 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "array"
 		//	        },
 		//	        "DiscoveryUrl": {
-		//	          "description": "OpenID Connect discovery URL",
-		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
+		//	          "description": "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL",
+		//	          "pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$",
 		//	          "type": "string"
 		//	        },
 		//	        "PrivateEndpoint": {
@@ -919,11 +919,11 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: DiscoveryUrl
 						"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "OpenID Connect discovery URL",
+							Description: "OpenID Connect discovery URL or OAuth 2.0 authorization server metadata URL",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^.+/\\.well-known/openid-configuration$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1598,6 +1598,152 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: HooksConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Lifecycle hooks for the agent runtime",
+		//	  "properties": {
+		//	    "Build": {
+		//	      "additionalProperties": false,
+		//	      "description": "Hooks that run while the platform builds a runtime version, before any session exists",
+		//	      "properties": {
+		//	        "Warmup": {
+		//	          "additionalProperties": false,
+		//	          "description": "A lifecycle hook and the action it runs",
+		//	          "properties": {
+		//	            "Action": {
+		//	              "additionalProperties": false,
+		//	              "description": "The action a lifecycle hook runs. HttpPost is the only action.",
+		//	              "properties": {
+		//	                "HttpPost": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Sends an HTTP POST to the agent's container. Any 2xx response ends the hook; anything else fails it. The path and port must not be a route the platform already calls on the container, such as the protocol's invocation path or the default health check.",
+		//	                  "properties": {
+		//	                    "Path": {
+		//	                      "description": "Path the platform sends the POST to. Must start with a slash.",
+		//	                      "maxLength": 32,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^/[A-Za-z0-9._~/-]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Port": {
+		//	                      "description": "Port in the agent's container the platform sends the POST to. Defaults to the runtime's server port.",
+		//	                      "maximum": 12000,
+		//	                      "minimum": 8000,
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Path"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "HttpPost"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Action"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"hooks_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Build
+				"build": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Warmup
+						"warmup": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Action
+								"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: HttpPost
+										"http_post": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Path
+												"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Path the platform sends the POST to. Must start with a slash.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.UTF8LengthBetween(1, 32),
+														stringvalidator.RegexMatches(regexp.MustCompile("^/[A-Za-z0-9._~/-]*$"), ""),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Port
+												"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "Port in the agent's container the platform sends the POST to. Defaults to the runtime's server port.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(8000, 12000),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Sends an HTTP POST to the agent's container. Any 2xx response ends the hook; anything else fails it. The path and port must not be a route the platform already calls on the container, such as the protocol's invocation path or the default health check.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The action a lifecycle hook runs. HttpPost is the only action.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A lifecycle hook and the action it runs",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Hooks that run while the platform builds a runtime version, before any session exists",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Lifecycle hooks for the agent runtime",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1900,6 +2046,58 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Resource configurations for the agent runtime",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Resource configuration for an agent runtime",
+		//	    "properties": {
+		//	      "MinimumMemoryInMiB": {
+		//	        "description": "The minimum amount of memory in MiB to allocate to the agent runtime",
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "MinimumMemoryInMiB"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"resource_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MinimumMemoryInMiB
+					"minimum_memory_in_mi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The minimum amount of memory in MiB to allocate to the agent runtime",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Resource configurations for the agent runtime",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -2028,6 +2226,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_point_arn":                  "AccessPointArn",
+		"action":                            "Action",
 		"agent_runtime_arn":                 "AgentRuntimeArn",
 		"agent_runtime_artifact":            "AgentRuntimeArtifact",
 		"agent_runtime_id":                  "AgentRuntimeId",
@@ -2041,6 +2240,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"authorizer_configuration":          "AuthorizerConfiguration",
 		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
 		"bucket":                            "Bucket",
+		"build":                             "Build",
 		"capacity_provider_arn":             "CapacityProviderArn",
 		"capacity_provider_configuration":   "CapacityProviderConfiguration",
 		"capacity_provider_volume":          "CapacityProviderVolume",
@@ -2062,7 +2262,9 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"environment_variables":             "EnvironmentVariables",
 		"failure_reason":                    "FailureReason",
 		"filesystem_configurations":         "FilesystemConfigurations",
+		"hooks_configuration":               "HooksConfiguration",
 		"hosting_environments":              "HostingEnvironments",
+		"http_post":                         "HttpPost",
 		"idle_runtime_session_timeout":      "IdleRuntimeSessionTimeout",
 		"inbound_token_claim_name":          "InboundTokenClaimName",
 		"inbound_token_claim_value_type":    "InboundTokenClaimValueType",
@@ -2072,11 +2274,14 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"match_value_string":                "MatchValueString",
 		"match_value_string_list":           "MatchValueStringList",
 		"max_lifetime":                      "MaxLifetime",
+		"minimum_memory_in_mi_b":            "MinimumMemoryInMiB",
 		"mount_path":                        "MountPath",
 		"network_configuration":             "NetworkConfiguration",
 		"network_mode":                      "NetworkMode",
 		"network_mode_config":               "NetworkModeConfig",
+		"path":                              "Path",
 		"platform_version":                  "PlatformVersion",
+		"port":                              "Port",
 		"prefix":                            "Prefix",
 		"private_endpoint":                  "PrivateEndpoint",
 		"private_endpoint_overrides":        "PrivateEndpointOverrides",
@@ -2084,6 +2289,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"request_header_allowlist":          "RequestHeaderAllowlist",
 		"request_header_configuration":      "RequestHeaderConfiguration",
 		"resource_configuration_identifier": "ResourceConfigurationIdentifier",
+		"resource_configurations":           "ResourceConfigurations",
 		"role_arn":                          "RoleArn",
 		"routing_domain":                    "RoutingDomain",
 		"runtime":                           "Runtime",
@@ -2100,6 +2306,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"version_id":                        "VersionId",
 		"volume_name":                       "VolumeName",
 		"vpc_identifier":                    "VpcIdentifier",
+		"warmup":                            "Warmup",
 		"workload_identities":               "WorkloadIdentities",
 		"workload_identity_arn":             "WorkloadIdentityArn",
 		"workload_identity_details":         "WorkloadIdentityDetails",

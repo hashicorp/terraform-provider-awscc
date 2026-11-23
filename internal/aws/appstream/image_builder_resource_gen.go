@@ -8,6 +8,7 @@ package appstream
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -87,6 +88,171 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AgentAccessConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for agent access on the image builder. If specified, agent access is enabled for the image builder.",
+		//	  "properties": {
+		//	    "S3BucketArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+		//	      "type": "string"
+		//	    },
+		//	    "ScreenImageFormat": {
+		//	      "description": "The image format for agent screen captures.",
+		//	      "type": "string"
+		//	    },
+		//	    "ScreenResolution": {
+		//	      "description": "The screen resolution for the agent streaming environment.",
+		//	      "type": "string"
+		//	    },
+		//	    "ScreenshotsUploadEnabled": {
+		//	      "description": "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Settings": {
+		//	      "description": "The list of agent access settings that define permissions for each agent action. You must specify at least one setting. Agent actions that aren't listed are disabled, so list only the actions that you enable.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A permission setting for an agent action. Each setting specifies an agent action and whether it is enabled or disabled.",
+		//	        "properties": {
+		//	          "AgentAction": {
+		//	            "description": "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools.",
+		//	            "type": "string"
+		//	          },
+		//	          "Permission": {
+		//	            "description": "Whether the agent action is enabled or disabled.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AgentAction",
+		//	          "Permission"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "UserControlMode": {
+		//	      "description": "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Settings",
+		//	    "ScreenResolution",
+		//	    "ScreenImageFormat"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"agent_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3BucketArn
+				"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenImageFormat
+				"screen_image_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The image format for agent screen captures.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenResolution
+				"screen_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The screen resolution for the agent streaming environment.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenshotsUploadEnabled
+				"screenshots_upload_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Settings
+				"settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AgentAction
+							"agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Permission
+							"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether the agent action is enabled or disabled.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of agent access settings that define permissions for each agent action. You must specify at least one setting. Agent actions that aren't listed are disabled, so list only the actions that you enable.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserControlMode
+				"user_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for agent access on the image builder. If specified, agent access is enabled for the image builder.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AppstreamAgentVersion
@@ -100,6 +266,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -126,6 +293,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
@@ -179,6 +347,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnableDefaultInternetAccess
@@ -192,6 +361,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IamRoleArn
@@ -205,6 +375,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ImageArn
@@ -218,6 +389,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ImageName
@@ -231,6 +403,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ImageName is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -242,6 +415,9 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -282,6 +458,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SoftwaresToInstall
@@ -299,6 +476,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SoftwaresToInstall is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -317,6 +495,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SoftwaresToUninstall is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -436,6 +615,7 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -467,6 +647,8 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_endpoints":                       "AccessEndpoints",
+		"agent_access_config":                    "AgentAccessConfig",
+		"agent_action":                           "AgentAction",
 		"appstream_agent_version":                "AppstreamAgentVersion",
 		"description":                            "Description",
 		"directory_name":                         "DirectoryName",
@@ -482,13 +664,20 @@ func imageBuilderResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                    "Key",
 		"name":                                   "Name",
 		"organizational_unit_distinguished_name": "OrganizationalUnitDistinguishedName",
+		"permission":                             "Permission",
 		"root_volume_config":                     "RootVolumeConfig",
+		"s3_bucket_arn":                          "S3BucketArn",
+		"screen_image_format":                    "ScreenImageFormat",
+		"screen_resolution":                      "ScreenResolution",
+		"screenshots_upload_enabled":             "ScreenshotsUploadEnabled",
 		"security_group_ids":                     "SecurityGroupIds",
+		"settings":                               "Settings",
 		"softwares_to_install":                   "SoftwaresToInstall",
 		"softwares_to_uninstall":                 "SoftwaresToUninstall",
 		"streaming_url":                          "StreamingUrl",
 		"subnet_ids":                             "SubnetIds",
 		"tags":                                   "Tags",
+		"user_control_mode":                      "UserControlMode",
 		"value":                                  "Value",
 		"volume_size_in_gb":                      "VolumeSizeInGb",
 		"vpc_config":                             "VpcConfig",

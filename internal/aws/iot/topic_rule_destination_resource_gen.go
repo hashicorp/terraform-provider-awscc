@@ -187,7 +187,8 @@ func topicRuleDestinationResource(ctx context.Context) (resource.Resource, error
 		//	  "enum": [
 		//	    "ENABLED",
 		//	    "IN_PROGRESS",
-		//	    "DISABLED"
+		//	    "DISABLED",
+		//	    "ERROR"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -200,6 +201,7 @@ func topicRuleDestinationResource(ctx context.Context) (resource.Resource, error
 					"ENABLED",
 					"IN_PROGRESS",
 					"DISABLED",
+					"ERROR",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

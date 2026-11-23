@@ -9,10 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -136,6 +139,88 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InferenceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxTokensToSample": {
+		//	      "maximum": 4096,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Temperature": {
+		//	      "maximum": 1,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "TopK": {
+		//	      "maximum": 200,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "TopP": {
+		//	      "maximum": 1,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"inference_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxTokensToSample
+				"max_tokens_to_sample": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 4096),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Temperature
+				"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(0.000000, 1.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopK
+				"top_k": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 200),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopP
+				"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(0.000000, 1.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ModelId
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +301,7 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Text": {
-		//	          "maxLength": 200000,
+		//	          "maxLength": 1000000,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
@@ -239,7 +324,7 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.UTF8LengthBetween(1, 200000),
+								stringvalidator.UTF8LengthBetween(1, 1000000),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -350,21 +435,26 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ai_prompt_arn":          "AIPromptArn",
-		"ai_prompt_id":           "AIPromptId",
-		"api_format":             "ApiFormat",
-		"assistant_arn":          "AssistantArn",
-		"assistant_id":           "AssistantId",
-		"description":            "Description",
-		"model_id":               "ModelId",
-		"modified_time_seconds":  "ModifiedTimeSeconds",
-		"name":                   "Name",
-		"tags":                   "Tags",
-		"template_configuration": "TemplateConfiguration",
-		"template_type":          "TemplateType",
-		"text":                   "Text",
+		"ai_prompt_arn":           "AIPromptArn",
+		"ai_prompt_id":            "AIPromptId",
+		"api_format":              "ApiFormat",
+		"assistant_arn":           "AssistantArn",
+		"assistant_id":            "AssistantId",
+		"description":             "Description",
+		"inference_configuration": "InferenceConfiguration",
+		"max_tokens_to_sample":    "MaxTokensToSample",
+		"model_id":                "ModelId",
+		"modified_time_seconds":   "ModifiedTimeSeconds",
+		"name":                    "Name",
+		"tags":                    "Tags",
+		"temperature":             "Temperature",
+		"template_configuration":  "TemplateConfiguration",
+		"template_type":           "TemplateType",
+		"text":                    "Text",
 		"text_full_ai_prompt_edit_template_configuration": "TextFullAIPromptEditTemplateConfiguration",
-		"type": "Type",
+		"top_k": "TopK",
+		"top_p": "TopP",
+		"type":  "Type",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

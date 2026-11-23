@@ -7,6 +7,7 @@ package route53globalresolver
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -62,15 +63,21 @@ func accessSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IP address range (CIDR) whose traffic this access source admits. Required unless the access source uses a core network endpoint.",
 		//	  "maxLength": 42,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The IP address range (CIDR) whose traffic this access source admits. Required unless the access source uses a core network endpoint.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.UTF8LengthBetween(1, 42),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ClientToken
 		// CloudFormation resource type schema:
@@ -91,6 +98,29 @@ func accessSourceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ClientToken is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: CoreNetworkEndpointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the core network endpoint whose Cloud WAN segment traffic this access source admits. Use together with Segment instead of Cidr. The core network endpoint must be OPERATIONAL.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[-.a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"core_network_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the core network endpoint whose Cloud WAN segment traffic this access source admits. Use together with Segment instead of Cidr. The core network endpoint must be OPERATIONAL.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.UTF8LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[-.a-zA-Z0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
@@ -183,6 +213,27 @@ func accessSourceResource(ctx context.Context) (resource.Resource, error) {
 					"DOT",
 				),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Segment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Cloud WAN segment of the core network endpoint, or * for all of its segments. Requires CoreNetworkEndpointId.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"segment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Cloud WAN segment of the core network endpoint, or * for all of its segments. Requires CoreNetworkEndpointId.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.UTF8LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -307,20 +358,22 @@ func accessSourceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_source_id": "AccessSourceId",
-		"arn":              "Arn",
-		"cidr":             "Cidr",
-		"client_token":     "ClientToken",
-		"created_at":       "CreatedAt",
-		"dns_view_id":      "DnsViewId",
-		"ip_address_type":  "IpAddressType",
-		"key":              "Key",
-		"name":             "Name",
-		"protocol":         "Protocol",
-		"status":           "Status",
-		"tags":             "Tags",
-		"updated_at":       "UpdatedAt",
-		"value":            "Value",
+		"access_source_id":         "AccessSourceId",
+		"arn":                      "Arn",
+		"cidr":                     "Cidr",
+		"client_token":             "ClientToken",
+		"core_network_endpoint_id": "CoreNetworkEndpointId",
+		"created_at":               "CreatedAt",
+		"dns_view_id":              "DnsViewId",
+		"ip_address_type":          "IpAddressType",
+		"key":                      "Key",
+		"name":                     "Name",
+		"protocol":                 "Protocol",
+		"segment":                  "Segment",
+		"status":                   "Status",
+		"tags":                     "Tags",
+		"updated_at":               "UpdatedAt",
+		"value":                    "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

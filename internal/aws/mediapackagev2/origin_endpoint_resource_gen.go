@@ -170,6 +170,13 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "BandwidthReportingMode": {
+		//	        "enum": [
+		//	          "AVERAGE",
+		//	          "MAX"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "BaseUrls": {
 		//	        "description": "\u003cp\u003eThe base URL to use for retrieving segments.\u003c/p\u003e",
 		//	        "items": {
@@ -573,6 +580,20 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BandwidthReportingMode
+					"bandwidth_reporting_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"AVERAGE",
+								"MAX",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: BaseUrls
@@ -3252,6 +3273,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                                   "Arn",
 		"audio_timeline_pattern":                "AudioTimelinePattern",
 		"availability_start_time_configuration": "AvailabilityStartTimeConfiguration",
+		"bandwidth_reporting_mode":              "BandwidthReportingMode",
 		"base_urls":                             "BaseUrls",
 		"certificate_arn":                       "CertificateArn",
 		"channel_group_name":                    "ChannelGroupName",

@@ -40,7 +40,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the AWS Kinesis resource to which the policy applies.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
+		//	  "pattern": "arn:aws.*:kinesis:.*:\\d{12}:(stream|queue)/\\S+",
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -48,7 +48,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.UTF8LengthBetween(1, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws.*:kinesis:.*:\\d{12}:(stream|queue)/\\S+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

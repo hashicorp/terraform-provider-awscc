@@ -85,7 +85,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "MskClusterArn": {
 		//	            "description": "The ARN of an Amazon MSK cluster.",
-		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -330,7 +330,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafka:.*"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"), ""),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -977,7 +977,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "SourceKafkaClusterArn": {
 		//	        "description": "Amazon Resource Name of the source Kafka cluster.",
-		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceKafkaClusterId": {
@@ -997,7 +997,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "TargetKafkaClusterArn": {
 		//	        "description": "Amazon Resource Name of the target Kafka cluster.",
-		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetKafkaClusterId": {
@@ -1170,7 +1170,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafka:.*"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1205,7 +1205,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafka:.*"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1347,7 +1347,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Amazon Resource Name for the created replicator.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	  "type": "string"
 		//	}
 		"replicator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1383,14 +1383,14 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role used by the replicator to access external resources.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*",
 		//	  "type": "string"
 		//	}
 		"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the IAM role used by the replicator to access external resources.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):iam:.*"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

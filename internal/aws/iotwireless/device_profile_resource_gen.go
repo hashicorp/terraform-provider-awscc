@@ -102,7 +102,7 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxEirp": {
-		//	      "maximum": 15,
+		//	      "maximum": 36,
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
@@ -118,7 +118,7 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "PingSlotPeriod": {
 		//	      "maximum": 4096,
-		//	      "minimum": 128,
+		//	      "minimum": 32,
 		//	      "type": "integer"
 		//	    },
 		//	    "RegParamsRevision": {
@@ -230,7 +230,7 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(0, 15),
+						int64validator.Between(0, 36),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -263,7 +263,7 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(128, 4096),
+						int64validator.Between(32, 4096),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),

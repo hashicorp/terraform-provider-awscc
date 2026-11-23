@@ -8,9 +8,12 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -53,6 +56,25 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MultipathResilienceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The multipath resilience status of the VPC peering connection: enabled when both the requester and accepter sides allow multipath resilience, pending when only one side allows it, and disabled when neither side allows it.",
+		//	  "enum": [
+		//	    "pending",
+		//	    "enabled",
+		//	    "disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"multipath_resilience_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The multipath resilience status of the VPC peering connection: enabled when both the requester and accepter sides allow multipath resilience, pending when only one side allows it, and disabled when neither side allows it.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -117,6 +139,73 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PeerVpcPeeringConnectionOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The VPC peering connection options corresponding to the accepter side of the connection.",
+		//	  "properties": {
+		//	    "AllowDnsResolutionFromRemoteVpc": {
+		//	      "description": "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "AllowMultipathResilience": {
+		//	      "description": "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultipathResilienceMode": {
+		//	      "description": "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+		//	      "enum": [
+		//	        "always-on"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"peer_vpc_peering_connection_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowDnsResolutionFromRemoteVpc
+				"allow_dns_resolution_from_remote_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowMultipathResilience
+				"allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MultipathResilienceMode
+				"multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"always-on",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC peering connection options corresponding to the accepter side of the connection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -196,6 +285,73 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcPeeringConnectionOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The VPC peering connection options corresponding to the requester side of the connection.",
+		//	  "properties": {
+		//	    "AllowDnsResolutionFromRemoteVpc": {
+		//	      "description": "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "AllowMultipathResilience": {
+		//	      "description": "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultipathResilienceMode": {
+		//	      "description": "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+		//	      "enum": [
+		//	        "always-on"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vpc_peering_connection_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowDnsResolutionFromRemoteVpc
+				"allow_dns_resolution_from_remote_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowMultipathResilience
+				"allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MultipathResilienceMode
+				"multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"always-on",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC peering connection options corresponding to the requester side of the connection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -224,16 +380,22 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assume_role_region":        "AssumeRoleRegion",
-		"key":                       "Key",
-		"peer_owner_id":             "PeerOwnerId",
-		"peer_region":               "PeerRegion",
-		"peer_role_arn":             "PeerRoleArn",
-		"peer_vpc_id":               "PeerVpcId",
-		"tags":                      "Tags",
-		"value":                     "Value",
-		"vpc_id":                    "VpcId",
-		"vpc_peering_connection_id": "Id",
+		"allow_dns_resolution_from_remote_vpc": "AllowDnsResolutionFromRemoteVpc",
+		"allow_multipath_resilience":           "AllowMultipathResilience",
+		"assume_role_region":                   "AssumeRoleRegion",
+		"key":                                  "Key",
+		"multipath_resilience_mode":            "MultipathResilienceMode",
+		"multipath_resilience_status":          "MultipathResilienceStatus",
+		"peer_owner_id":                        "PeerOwnerId",
+		"peer_region":                          "PeerRegion",
+		"peer_role_arn":                        "PeerRoleArn",
+		"peer_vpc_id":                          "PeerVpcId",
+		"peer_vpc_peering_connection_options":  "PeerVpcPeeringConnectionOptions",
+		"tags":                                 "Tags",
+		"value":                                "Value",
+		"vpc_id":                               "VpcId",
+		"vpc_peering_connection_id":            "Id",
+		"vpc_peering_connection_options":       "VpcPeeringConnectionOptions",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

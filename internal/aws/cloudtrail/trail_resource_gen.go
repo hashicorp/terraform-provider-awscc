@@ -767,6 +767,21 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RecursiveLogging
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether recursive logging is enabled for the trail. When set to false, CloudTrail will suppress recursive delivery events (such as PutObject events generated when CloudTrail delivers log files to the trail S3 bucket). The default is true.",
+		//	  "type": "boolean"
+		//	}
+		"recursive_logging": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether recursive logging is enabled for the trail. When set to false, CloudTrail will suppress recursive delivery events (such as PutObject events generated when CloudTrail delivers log files to the trail S3 bucket). The default is true.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: S3BucketName
 		// CloudFormation resource type schema:
 		//
@@ -969,6 +984,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 		"not_equals":                       "NotEquals",
 		"not_starts_with":                  "NotStartsWith",
 		"read_write_type":                  "ReadWriteType",
+		"recursive_logging":                "RecursiveLogging",
 		"s3_bucket_name":                   "S3BucketName",
 		"s3_key_prefix":                    "S3KeyPrefix",
 		"sns_topic_arn":                    "SnsTopicArn",

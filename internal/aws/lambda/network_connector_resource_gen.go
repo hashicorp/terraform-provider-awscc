@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -75,6 +76,24 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxItems": 1,
 		//	          "minItems": 1,
 		//	          "type": "array"
+		//	        },
+		//	        "ElasticIpConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies whether Lambda assigns an Elastic IP address to each of the network connector's elastic network interfaces (ENIs). If you don't specify an Elastic IP configuration, no Elastic IP address is assigned. When you update this configuration, the change applies to the ENIs of the new connector version.",
+		//	          "properties": {
+		//	            "Type": {
+		//	              "description": "The Elastic IP address type for the connector's ENIs. With None, Lambda doesn't assign an Elastic IP address. With ServiceManaged, Lambda allocates a service-managed Elastic IP address in your account for each ENI, associates it with that ENI, and releases it when it deletes the ENI. The connector's operator role must allow the ec2:AllocateAddress and ec2:AssociateAddress actions on Elastic IP addresses and on the connector's ENIs.",
+		//	              "enum": [
+		//	                "None",
+		//	                "ServiceManaged"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Type"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "NetworkProtocol": {
 		//	          "description": "The network protocol for the connector. Specify IPv4 for IPv4-only networking, or DualStack for both IPv4 and IPv6.",
@@ -146,6 +165,33 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ElasticIpConfiguration
+						"elastic_ip_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Elastic IP address type for the connector's ENIs. With None, Lambda doesn't assign an Elastic IP address. With ServiceManaged, Lambda allocates a service-managed Elastic IP address in your account for each ENI, associates it with that ENI, and releases it when it deletes the ENI. The connector's operator role must allow the ec2:AllocateAddress and ec2:AssociateAddress actions on Elastic IP addresses and on the connector's ENIs.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"None",
+											"ServiceManaged",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies whether Lambda assigns an Elastic IP address to each of the network connector's elastic network interfaces (ENIs). If you don't specify an Elastic IP configuration, no Elastic IP address is assigned. When you update this configuration, the change applies to the ENIs of the new connector version.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: NetworkProtocol
@@ -398,6 +444,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                               "Arn",
 		"associated_compute_resource_types": "AssociatedComputeResourceTypes",
 		"configuration":                     "Configuration",
+		"elastic_ip_configuration":          "ElasticIpConfiguration",
 		"key":                               "Key",
 		"latest_version":                    "LatestVersion",
 		"latest_version_arn":                "LatestVersionArn",
@@ -408,6 +455,7 @@ func networkConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"state":                             "State",
 		"subnet_ids":                        "SubnetIds",
 		"tags":                              "Tags",
+		"type":                              "Type",
 		"value":                             "Value",
 		"vpc_egress_configuration":          "VpcEgressConfiguration",
 	})

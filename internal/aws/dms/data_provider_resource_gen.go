@@ -521,6 +521,14 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Port": {
 		//	          "type": "integer"
 		//	        },
+		//	        "S3AccessRoleArn": {
+		//	          "description": "The ARN for the role the application uses to access its Amazon S3 bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "S3Path": {
+		//	          "description": "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+		//	          "type": "string"
+		//	        },
 		//	        "SecretsManagerOracleAsmAccessRoleArn": {
 		//	          "type": "string"
 		//	        },
@@ -1209,6 +1217,24 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3AccessRoleArn
+						"s3_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN for the role the application uses to access its Amazon S3 bucket.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3Path
+						"s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SecretsManagerOracleAsmAccessRoleArn

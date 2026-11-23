@@ -77,6 +77,14 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 		//	    "EnableSNI": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "EndpointType": {
+		//	      "description": "Whether the health check targets a public endpoint or a private endpoint inside a VPC. Defaults to PUBLIC. Adding this property to an existing health check's template replaces the health check; leave it unset for existing public health checks.",
+		//	      "enum": [
+		//	        "PUBLIC",
+		//	        "PRIVATE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "FailureThreshold": {
 		//	      "maximum": 10,
 		//	      "minimum": 1,
@@ -84,6 +92,16 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "FullyQualifiedDomainName": {
 		//	      "maxLength": 255,
+		//	      "type": "string"
+		//	    },
+		//	    "HealthCheckSourceId": {
+		//	      "description": "The ID of the health check source that Route 53 uses to reach a private endpoint. Required when EndpointType is PRIVATE.",
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/HealthCheckSourceId",
+		//	        "typeName": "AWS::Route53::HealthCheckSource"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "HealthThreshold": {
@@ -219,6 +237,22 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: EndpointType
+				"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether the health check targets a public endpoint or a private endpoint inside a VPC. Defaults to PUBLIC. Adding this property to an existing health check's template replaces the health check; leave it unset for existing public health checks.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PUBLIC",
+							"PRIVATE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: FailureThreshold
 				"failure_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -236,6 +270,18 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.UTF8LengthAtMost(255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HealthCheckSourceId
+				"health_check_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the health check source that Route 53 uses to reach a private endpoint. Required when EndpointType is PRIVATE.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(1, 64),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -500,10 +546,12 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 		"alarm_identifier":                "AlarmIdentifier",
 		"child_health_checks":             "ChildHealthChecks",
 		"enable_sni":                      "EnableSNI",
+		"endpoint_type":                   "EndpointType",
 		"failure_threshold":               "FailureThreshold",
 		"fully_qualified_domain_name":     "FullyQualifiedDomainName",
 		"health_check_config":             "HealthCheckConfig",
 		"health_check_id":                 "HealthCheckId",
+		"health_check_source_id":          "HealthCheckSourceId",
 		"health_check_tags":               "HealthCheckTags",
 		"health_threshold":                "HealthThreshold",
 		"insufficient_data_health_status": "InsufficientDataHealthStatus",

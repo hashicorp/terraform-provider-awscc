@@ -9,11 +9,13 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -502,9 +504,145 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The name of the connection to an external data source.",
 		//	      "type": "string"
 		//	    },
+		//	    "ConnectionType": {
+		//	      "description": "The type of connection used to access the federated catalog. Synchronization is only supported for certain connection types.",
+		//	      "type": "string"
+		//	    },
 		//	    "Identifier": {
 		//	      "description": "A unique identifier for the federated catalog.",
 		//	      "type": "string"
+		//	    },
+		//	    "SyncConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for synchronizing a federated catalog with its external data source. Removing this property does not disable synchronization: Glue keeps the stored configuration for anything omitted from an update. To stop synchronizing, set the Status of each mode to DISABLED.",
+		//	      "properties": {
+		//	        "AssetsSyncConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for synchronizing assets from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing assets.",
+		//	          "properties": {
+		//	            "ManagedCrawlerDetails": {
+		//	              "additionalProperties": false,
+		//	              "description": "The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input.",
+		//	              "properties": {
+		//	                "CrawlerArn": {
+		//	                  "description": "The Amazon Resource Name (ARN) of the crawler.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Error": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Details about an error.",
+		//	                  "properties": {
+		//	                    "ErrorCode": {
+		//	                      "description": "The code associated with this error.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ErrorMessage": {
+		//	                      "description": "A message describing the error.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Status": {
+		//	                  "description": "The provisioning state of the crawler.",
+		//	                  "enum": [
+		//	                    "PROVISIONING",
+		//	                    "PROVISIONED",
+		//	                    "FAILED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshIntervalMinutes": {
+		//	              "description": "How often the crawler synchronizes assets, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.",
+		//	              "maximum": 10080,
+		//	              "minimum": 15,
+		//	              "type": "integer"
+		//	            },
+		//	            "Status": {
+		//	              "description": "Whether asset synchronization is enabled.",
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Status"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "LineageSyncConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for synchronizing lineage from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing lineage.",
+		//	          "properties": {
+		//	            "ManagedCrawlerDetails": {
+		//	              "additionalProperties": false,
+		//	              "description": "The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input.",
+		//	              "properties": {
+		//	                "CrawlerArn": {
+		//	                  "description": "The Amazon Resource Name (ARN) of the crawler.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Error": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Details about an error.",
+		//	                  "properties": {
+		//	                    "ErrorCode": {
+		//	                      "description": "The code associated with this error.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ErrorMessage": {
+		//	                      "description": "A message describing the error.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Status": {
+		//	                  "description": "The provisioning state of the crawler.",
+		//	                  "enum": [
+		//	                    "PROVISIONING",
+		//	                    "PROVISIONED",
+		//	                    "FAILED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshIntervalMinutes": {
+		//	              "description": "How often the crawler synchronizes lineage, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.",
+		//	              "maximum": 10080,
+		//	              "minimum": 15,
+		//	              "type": "integer"
+		//	            },
+		//	            "Status": {
+		//	              "description": "Whether lineage synchronization is enabled.",
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Status"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RoleArn": {
+		//	          "description": "The IAM role, in the catalog owner's account, that the crawlers Glue manages on your behalf assume.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RoleArn"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -520,6 +658,15 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: ConnectionType
+				"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of connection used to access the federated catalog. Synchronization is only supported for certain connection types.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Identifier
 				"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A unique identifier for the federated catalog.",
@@ -527,6 +674,181 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SyncConfiguration
+				"sync_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssetsSyncConfiguration
+						"assets_sync_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedCrawlerDetails
+								"managed_crawler_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CrawlerArn
+										"crawler_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the crawler.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Error
+										"error": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ErrorCode
+												"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code associated with this error.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: ErrorMessage
+												"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A message describing the error.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Details about an error.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Status
+										"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The provisioning state of the crawler.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input.",
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshIntervalMinutes
+								"refresh_interval_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "How often the crawler synchronizes assets, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(15, 10080),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Status
+								"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether asset synchronization is enabled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ENABLED",
+											"DISABLED",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for synchronizing assets from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing assets.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LineageSyncConfiguration
+						"lineage_sync_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedCrawlerDetails
+								"managed_crawler_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CrawlerArn
+										"crawler_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the crawler.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Error
+										"error": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ErrorCode
+												"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code associated with this error.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: ErrorMessage
+												"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A message describing the error.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Details about an error.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Status
+										"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The provisioning state of the crawler.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The state of the crawler Glue manages on your behalf for a synchronization mode. Returned by the service; Glue rejects it as input.",
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshIntervalMinutes
+								"refresh_interval_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "How often the crawler synchronizes lineage, in minutes. Glue enforces a service-side minimum that may be higher than the minimum accepted here.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(15, 10080),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Status
+								"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether lineage synchronization is enabled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ENABLED",
+											"DISABLED",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for synchronizing lineage from the external data source. Omitting this property on an update leaves the stored configuration unchanged; set Status to DISABLED to stop synchronizing lineage.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IAM role, in the catalog owner's account, that the crawlers Glue manages on your behalf assume.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for synchronizing a federated catalog with its external data source. Removing this property does not disable synchronization: Glue keeps the stored configuration for anything omitted from an update. To stop synchronizing, set the Status of each mode to DISABLED.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -773,11 +1095,14 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_full_table_external_data_access": "AllowFullTableExternalDataAccess",
+		"assets_sync_configuration":             "AssetsSyncConfiguration",
 		"catalog_arn":                           "CatalogArn",
 		"catalog_id":                            "CatalogId",
 		"catalog_properties":                    "CatalogProperties",
 		"catalog_type":                          "CatalogType",
 		"connection_name":                       "ConnectionName",
+		"connection_type":                       "ConnectionType",
+		"crawler_arn":                           "CrawlerArn",
 		"create_database_default_permissions":   "CreateDatabaseDefaultPermissions",
 		"create_table_default_permissions":      "CreateTableDefaultPermissions",
 		"create_time":                           "CreateTime",
@@ -787,23 +1112,32 @@ func catalogResource(ctx context.Context) (resource.Resource, error) {
 		"data_lake_principal_identifier":        "DataLakePrincipalIdentifier",
 		"data_transfer_role":                    "DataTransferRole",
 		"description":                           "Description",
+		"error":                                 "Error",
+		"error_code":                            "ErrorCode",
+		"error_message":                         "ErrorMessage",
 		"federated_catalog":                     "FederatedCatalog",
 		"identifier":                            "Identifier",
 		"key":                                   "Key",
 		"kms_key":                               "KmsKey",
+		"lineage_sync_configuration":            "LineageSyncConfiguration",
+		"managed_crawler_details":               "ManagedCrawlerDetails",
 		"managed_workgroup_name":                "ManagedWorkgroupName",
 		"managed_workgroup_status":              "ManagedWorkgroupStatus",
 		"name":                                  "Name",
 		"overwrite_child_resource_permissions_with_default": "OverwriteChildResourcePermissionsWithDefault",
-		"parameters":              "Parameters",
-		"permissions":             "Permissions",
-		"principal":               "Principal",
-		"redshift_database_name":  "RedshiftDatabaseName",
-		"resource_arn":            "ResourceArn",
-		"tags":                    "Tags",
-		"target_redshift_catalog": "TargetRedshiftCatalog",
-		"update_time":             "UpdateTime",
-		"value":                   "Value",
+		"parameters":               "Parameters",
+		"permissions":              "Permissions",
+		"principal":                "Principal",
+		"redshift_database_name":   "RedshiftDatabaseName",
+		"refresh_interval_minutes": "RefreshIntervalMinutes",
+		"resource_arn":             "ResourceArn",
+		"role_arn":                 "RoleArn",
+		"status":                   "Status",
+		"sync_configuration":       "SyncConfiguration",
+		"tags":                     "Tags",
+		"target_redshift_catalog":  "TargetRedshiftCatalog",
+		"update_time":              "UpdateTime",
+		"value":                    "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -171,7 +171,8 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	              "items": {
 		//	                "enum": [
 		//	                  "TLS_SNI",
-		//	                  "HTTP_HOST"
+		//	                  "HTTP_HOST",
+		//	                  "AWS_ROUTE_53_RESOLVED_DOMAIN"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -742,6 +743,7 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"TLS_SNI",
 												"HTTP_HOST",
+												"AWS_ROUTE_53_RESOLVED_DOMAIN",
 											),
 										),
 										fwvalidators.NotNullList(),

@@ -629,7 +629,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
 		//	          "enum": [
 		//	            "InstanceStress",
-		//	            "InstanceConnectivity"
+		//	            "InstanceConnectivity",
+		//	            "MultiNodeTrainingValidation"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -1488,6 +1489,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"InstanceStress",
 									"InstanceConnectivity",
+									"MultiNodeTrainingValidation",
 								),
 							),
 						}, /*END VALIDATORS*/
@@ -2208,7 +2210,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
 		//	          "enum": [
 		//	            "InstanceStress",
-		//	            "InstanceConnectivity"
+		//	            "InstanceConnectivity",
+		//	            "MultiNodeTrainingValidation"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -2549,6 +2552,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"InstanceStress",
 									"InstanceConnectivity",
+									"MultiNodeTrainingValidation",
 								),
 							),
 						}, /*END VALIDATORS*/

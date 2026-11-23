@@ -103,8 +103,16 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for agent access on the stack. If specified, agent access is enabled for the stack.",
 		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. The key must be in the same Region as the stack, and ReplaySessionEnabled must be true. To remove the key, use AttributesToDelete with the AGENT_ACCESS_CONFIG_KMS_KEY_ARN value.",
+		//	      "type": "string"
+		//	    },
+		//	    "ReplaySessionEnabled": {
+		//	      "description": "Indicates whether Replay Session is enabled for agent sessions. WorkSpaces Applications delivers a video combining session screenshots, a transcript, and a report for each session. Requires the COMPUTER_VISION agent action. Setting this attribute to false also removes the KmsKeyArn value from the stack.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "S3BucketArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+		//	      "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored. Required when ScreenshotsUploadEnabled or ReplaySessionEnabled is true.",
 		//	      "type": "string"
 		//	    },
 		//	    "ScreenImageFormat": {
@@ -158,9 +166,27 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"agent_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. The key must be in the same Region as the stack, and ReplaySessionEnabled must be true. To remove the key, use AttributesToDelete with the AGENT_ACCESS_CONFIG_KMS_KEY_ARN value.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReplaySessionEnabled
+				"replay_session_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether Replay Session is enabled for agent sessions. WorkSpaces Applications delivers a video combining session screenshots, a transcript, and a report for each session. Requires the COMPUTER_VISION agent action. Setting this attribute to false also removes the KmsKeyArn value from the stack.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: S3BucketArn
 				"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+					Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored. Required when ScreenshotsUploadEnabled or ReplaySessionEnabled is true.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -849,11 +875,13 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		"feedback_url":                     "FeedbackURL",
 		"host_to_client":                   "HostToClient",
 		"key":                              "Key",
+		"kms_key_arn":                      "KmsKeyArn",
 		"maximum_length":                   "MaximumLength",
 		"name":                             "Name",
 		"permission":                       "Permission",
 		"preferred_protocol":               "PreferredProtocol",
 		"redirect_url":                     "RedirectURL",
+		"replay_session_enabled":           "ReplaySessionEnabled",
 		"resource_identifier":              "ResourceIdentifier",
 		"s3_bucket_arn":                    "S3BucketArn",
 		"screen_image_format":              "ScreenImageFormat",

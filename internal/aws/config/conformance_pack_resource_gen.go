@@ -181,6 +181,109 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The global tag scope of the managed conformance pack. If specified, only resources with this tag key and value pair are in scope of the conformance pack.",
+		//	  "properties": {
+		//	    "TagKey": {
+		//	      "description": "The tag key of the tag scope. Only resources with this tag key are in scope of the conformance pack.",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "TagValue": {
+		//	      "description": "The tag value of the tag scope. If omitted, resources are in scope based on the presence of the tag key alone, regardless of its value.",
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TagKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TagKey
+				"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tag key of the tag scope. Only resources with this tag key are in scope of the conformance pack.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(1, 128),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TagValue
+				"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tag value of the tag scope. If omitted, resources are in scope based on the presence of the tag key alone, regardless of its value.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(0, 256),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The global tag scope of the managed conformance pack. If specified, only resources with this tag key and value pair are in scope of the conformance pack.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Source
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source of a managed conformance pack. Specifying Source creates a managed conformance pack, whose Config rules are managed by AWS. You can only specify one of Source or the template body or template S3Uri fields.",
+		//	  "properties": {
+		//	    "SourceIdentifier": {
+		//	      "description": "The identifier specifying which managed conformance pack is being deployed.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SourceIdentifier"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceIdentifier
+				"source_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier specifying which managed conformance pack is being deployed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.UTF8LengthBetween(1, 256),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source of a managed conformance pack. Specifying Source creates a managed conformance pack, whose Config rules are managed by AWS. You can only specify one of Source or the template body or template S3Uri fields.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -352,6 +455,24 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// TemplateSSMDocumentDetails is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the conformance pack. CUSTOM for a conformance pack whose Config rules are managed by the customer; MANAGED for a managed conformance pack whose Config rules are managed by AWS.",
+		//	  "enum": [
+		//	    "CUSTOM",
+		//	    "MANAGED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the conformance pack. CUSTOM for a conformance pack whose Config rules are managed by the customer; MANAGED for a managed conformance pack whose Config rules are managed by AWS.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -391,10 +512,16 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"key":                               "Key",
 		"parameter_name":                    "ParameterName",
 		"parameter_value":                   "ParameterValue",
+		"scope":                             "Scope",
+		"source":                            "Source",
+		"source_identifier":                 "SourceIdentifier",
+		"tag_key":                           "TagKey",
+		"tag_value":                         "TagValue",
 		"tags":                              "Tags",
 		"template_body":                     "TemplateBody",
 		"template_s3_uri":                   "TemplateS3Uri",
 		"template_ssm_document_details":     "TemplateSSMDocumentDetails",
+		"type":                              "Type",
 		"value":                             "Value",
 	})
 

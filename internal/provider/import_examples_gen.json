@@ -22,6 +22,63 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_apiportal_discovery_configuration",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_apiportal_discovery_enablement",
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_apiportal_managed_api",
+        "generateListResource": true,
+        "identifier": ["ManagedApiArn"]
+    },
+    {
+        "resource": "awscc_apiportal_organization_discovery_configuration",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_apiportal_portal",
+        "generateListResource": true,
+        "identifier": ["PortalArn"]
+    },
+    {
+        "resource": "awscc_apiportal_portal_publication",
+        "generateListResource": true,
+        "identifier": ["PortalArn"]
+    },
+    {
+        "resource": "awscc_apiportal_product",
+        "generateListResource": true,
+        "identifier": ["ProductArn"]
+    },
+    {
+        "resource": "awscc_apiportal_product_api_page",
+        "identifier": ["ProductApiPageArn"]
+    },
+    {
+        "resource": "awscc_apiportal_product_display_order",
+        "generateListResource": true,
+        "identifier": ["ProductId"]
+    },
+    {
+        "resource": "awscc_apiportal_product_managed_api_association",
+        "generateListResource": true,
+        "identifier": ["ProductId"]
+    },
+    {
+        "resource": "awscc_apiportal_product_page",
+        "identifier": ["ProductPageArn"]
+    },
+    {
+        "resource": "awscc_apiportal_product_sharing_policy",
+        "generateListResource": true,
+        "identifier": ["ProductId"]
+    },
+    {
         "resource": "awscc_aps_anomaly_detector",
         "identifier": ["Arn"]
     },
@@ -76,6 +133,11 @@
     {
         "resource": "awscc_accountaccess_entitlement",
         "identifier": ["ApplicationArn","EntitlementId"]
+    },
+    {
+        "resource": "awscc_agentregistry_publisher",
+        "generateListResource": true,
+        "identifier": ["PublisherArn"]
     },
     {
         "resource": "awscc_agentregistry_registry",
@@ -554,6 +616,11 @@
     {
         "resource": "awscc_athena_prepared_statement",
         "identifier": ["StatementName","WorkGroup"]
+    },
+    {
+        "resource": "awscc_athena_system_tables",
+        "generateListResource": true,
+        "identifier": ["TableName"]
     },
     {
         "resource": "awscc_athena_work_group",
@@ -1467,6 +1534,11 @@
         "identifier": ["AlarmName"]
     },
     {
+        "resource": "awscc_cloudwatch_metric_data_query_definition",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_cloudwatch_metric_stream",
         "generateListResource": true,
         "identifier": ["Name"]
@@ -1598,6 +1670,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_cognito_cimd_policy",
+        "identifier": ["UserPoolId","CIMDPolicyId"]
+    },
+    {
         "resource": "awscc_cognito_identity_pool",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -1627,6 +1703,10 @@
         "identifier": ["UserPoolId","ClientId"]
     },
     {
+        "resource": "awscc_cognito_user_pool_client_session_configuration_attachment",
+        "identifier": ["UserPoolId","ClientId"]
+    },
+    {
         "resource": "awscc_cognito_user_pool_domain",
         "identifier": ["UserPoolId","Domain"]
     },
@@ -1653,6 +1733,10 @@
     {
         "resource": "awscc_cognito_user_pool_risk_configuration_attachment",
         "identifier": ["UserPoolId","ClientId"]
+    },
+    {
+        "resource": "awscc_cognito_user_pool_session_configuration_attachment",
+        "identifier": ["UserPoolId"]
     },
     {
         "resource": "awscc_cognito_user_pool_ui_customization_attachment",
@@ -2025,6 +2109,11 @@
         "resource": "awscc_dms_replication_config",
         "generateListResource": true,
         "identifier": ["ReplicationConfigArn"]
+    },
+    {
+        "resource": "awscc_dms_replication_instance",
+        "generateListResource": true,
+        "identifier": ["ReplicationInstanceArn"]
     },
     {
         "resource": "awscc_dms_replication_subnet_group",
@@ -2408,6 +2497,11 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_docdb_db_instance",
+        "generateListResource": true,
+        "identifier": ["DBInstanceIdentifier"]
+    },
+    {
         "resource": "awscc_docdb_db_subnet_group",
         "generateListResource": true,
         "identifier": ["DBSubnetGroupName"]
@@ -2523,6 +2617,16 @@
         "resource": "awscc_ec2_enclave_certificate_iam_role_association",
         "generateListResource": true,
         "identifier": ["CertificateArn","RoleArn"]
+    },
+    {
+        "resource": "awscc_ec2_fca_policy",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_ec2_fca_policy_association",
+        "generateListResource": true,
+        "identifier": ["FcaPolicyAssociationId"]
     },
     {
         "resource": "awscc_ec2_flow_log",
@@ -2898,6 +3002,11 @@
         "identifier": ["TransitGatewayMulticastDomainId","GroupIpAddress","NetworkInterfaceId"]
     },
     {
+        "resource": "awscc_ec2_transit_gateway_network_function_attachment",
+        "generateListResource": true,
+        "identifier": ["TransitGatewayAttachmentId"]
+    },
+    {
         "resource": "awscc_ec2_transit_gateway_peering_attachment",
         "generateListResource": true,
         "identifier": ["TransitGatewayAttachmentId"]
@@ -2999,11 +3108,6 @@
         "resource": "awscc_ec2_vpn_concentrator",
         "generateListResource": true,
         "identifier": ["VpnConcentratorId"]
-    },
-    {
-        "resource": "awscc_ec2_vpn_connection",
-        "generateListResource": true,
-        "identifier": ["VpnConnectionId"]
     },
     {
         "resource": "awscc_ec2_vpn_connection_route",
@@ -4553,6 +4657,11 @@
         "identifier": ["ChannelARN"]
     },
     {
+        "resource": "awscc_kinesis_queue",
+        "generateListResource": true,
+        "identifier": ["QueueARN"]
+    },
+    {
         "resource": "awscc_kinesis_resource_policy",
         "identifier": ["ResourceArn"]
     },
@@ -4570,6 +4679,11 @@
         "resource": "awscc_kinesisanalyticsv2_application",
         "generateListResource": true,
         "identifier": ["ApplicationName"]
+    },
+    {
+        "resource": "awscc_kinesisanalyticsv2_snapshot",
+        "generateListResource": true,
+        "identifier": ["SnapshotArn"]
     },
     {
         "resource": "awscc_kinesisfirehose_delivery_stream",
@@ -4662,6 +4776,19 @@
     {
         "resource": "awscc_lambda_resource_policy",
         "identifier": ["ResourceArn"]
+    },
+    {
+        "resource": "awscc_lambda_runtime",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_lambda_runtime_alias",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_lambda_runtime_version",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_lambda_url",
@@ -5443,6 +5570,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_networkflowmonitor_performance_monitor",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_networkflowmonitor_scope",
         "generateListResource": true,
         "identifier": ["ScopeArn"]
@@ -5456,6 +5588,19 @@
         "resource": "awscc_networkmanager_connect_peer",
         "generateListResource": true,
         "identifier": ["ConnectPeerId"]
+    },
+    {
+        "resource": "awscc_networkmanager_connection",
+        "identifier": ["ConnectionArn"]
+    },
+    {
+        "resource": "awscc_networkmanager_context_store",
+        "generateListResource": true,
+        "identifier": ["ContextStoreId"]
+    },
+    {
+        "resource": "awscc_networkmanager_context_store_association",
+        "identifier": ["ContextStoreId","ResourceArn"]
     },
     {
         "resource": "awscc_networkmanager_core_network",
@@ -5732,6 +5877,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_opensearchmemory_space",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_opensearchserverless_access_policy",
         "identifier": ["Type","Name"]
     },
@@ -5774,6 +5924,11 @@
     {
         "resource": "awscc_opensearchservice_domain",
         "identifier": ["DomainName"]
+    },
+    {
+        "resource": "awscc_opensearchservice_replication_peer",
+        "generateListResource": true,
+        "identifier": ["DomainName","PeerDomainArn"]
     },
     {
         "resource": "awscc_opsworkscm_server",
@@ -6503,6 +6658,11 @@
         "identifier": ["HealthCheckId"]
     },
     {
+        "resource": "awscc_route53_health_check_source",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_route53_hosted_zone",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -6522,6 +6682,10 @@
         "identifier": ["Name","HostedZoneId","Type","SetIdentifier"]
     },
     {
+        "resource": "awscc_route53_record_set_protection",
+        "identifier": ["HostedZoneId","RecordName","RecordType"]
+    },
+    {
         "resource": "awscc_route53_traffic_policy",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -6538,6 +6702,11 @@
     {
         "resource": "awscc_route53globalresolver_access_token",
         "identifier": ["AccessTokenId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_core_network_endpoint",
+        "generateListResource": true,
+        "identifier": ["CoreNetworkEndpointId"]
     },
     {
         "resource": "awscc_route53globalresolver_dns_view",
@@ -7037,6 +7206,11 @@
         "identifier": ["CloudConnectorArn"]
     },
     {
+        "resource": "awscc_ssm_default_host_management_configuration",
+        "generateListResource": true,
+        "identifier": ["SettingId"]
+    },
+    {
         "resource": "awscc_ssm_document",
         "generateListResource": true,
         "identifier": ["Name"]
@@ -7239,6 +7413,10 @@
         "identifier": ["EndpointConfigArn"]
     },
     {
+        "resource": "awscc_sagemaker_endpoint_policy",
+        "identifier": ["EndpointArn"]
+    },
+    {
         "resource": "awscc_sagemaker_experiment",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -7247,6 +7425,10 @@
         "resource": "awscc_sagemaker_experiment_trial_component",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_sagemaker_extension",
+        "identifier": ["ExtensionArn"]
     },
     {
         "resource": "awscc_sagemaker_feature_group",
@@ -7281,6 +7463,11 @@
         "resource": "awscc_sagemaker_inference_experiment",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_sagemaker_inference_router",
+        "generateListResource": true,
+        "identifier": ["InferenceRouterArn"]
     },
     {
         "resource": "awscc_sagemaker_mlflow_app",

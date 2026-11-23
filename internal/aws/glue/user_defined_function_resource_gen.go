@@ -8,6 +8,7 @@ package glue
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -39,6 +40,27 @@ func userDefinedFunctionResource(ctx context.Context) (resource.Resource, error)
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the user-defined function.",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ArtifactLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The registered Amazon S3 location that contains the function artifacts. Required when GovernanceMode is LAKE_FORMATION.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"artifact_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The registered Amazon S3 location that contains the function artifacts. Required when GovernanceMode is LAKE_FORMATION.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.UTF8LengthBetween(1, 1024),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -132,6 +154,32 @@ func userDefinedFunctionResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GovernanceMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "How access to the function is governed. The mode cannot be changed after creation.",
+		//	  "enum": [
+		//	    "IAM_ONLY",
+		//	    "LAKE_FORMATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"governance_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How access to the function is governed. The mode cannot be changed after creation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IAM_ONLY",
+					"LAKE_FORMATION",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerName
 		// CloudFormation resource type schema:
 		//
@@ -189,6 +237,11 @@ func userDefinedFunctionResource(ctx context.Context) (resource.Resource, error)
 		//	    "additionalProperties": false,
 		//	    "description": "The URIs for function resources.",
 		//	    "properties": {
+		//	      "LastModified": {
+		//	        "description": "The time at which Glue recorded the resource as last modified in Amazon S3 for a Lake Formation governed function.",
+		//	        "format": "date-time",
+		//	        "type": "string"
+		//	      },
 		//	      "ResourceType": {
 		//	        "description": "The type of the resource.",
 		//	        "enum": [
@@ -214,6 +267,16 @@ func userDefinedFunctionResource(ctx context.Context) (resource.Resource, error)
 		"resource_uris": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LastModified
+					"last_modified": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  timetypes.RFC3339Type{},
+						Description: "The time at which Glue recorded the resource as last modified in Amazon S3 for a Lake Formation governed function.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of the resource.",
@@ -283,16 +346,19 @@ func userDefinedFunctionResource(ctx context.Context) (resource.Resource, error)
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"class_name":    "ClassName",
-		"database_name": "DatabaseName",
-		"function_name": "FunctionName",
-		"function_type": "FunctionType",
-		"owner_name":    "OwnerName",
-		"owner_type":    "OwnerType",
-		"resource_type": "ResourceType",
-		"resource_uris": "ResourceUris",
-		"uri":           "Uri",
+		"arn":               "Arn",
+		"artifact_location": "ArtifactLocation",
+		"class_name":        "ClassName",
+		"database_name":     "DatabaseName",
+		"function_name":     "FunctionName",
+		"function_type":     "FunctionType",
+		"governance_mode":   "GovernanceMode",
+		"last_modified":     "LastModified",
+		"owner_name":        "OwnerName",
+		"owner_type":        "OwnerType",
+		"resource_type":     "ResourceType",
+		"resource_uris":     "ResourceUris",
+		"uri":               "Uri",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

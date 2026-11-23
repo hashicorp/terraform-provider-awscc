@@ -64,7 +64,6 @@ func registryPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

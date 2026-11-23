@@ -222,7 +222,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The cloud provider for this connector.",
 		//	  "enum": [
-		//	    "AZURE"
+		//	    "AZURE",
+		//	    "GCP"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -232,6 +233,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"AZURE",
+					"GCP",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -244,6 +246,18 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "Provider-specific configuration including regions and scope.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Azure"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Gcp"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "Azure": {
 		//	      "additionalProperties": false,
@@ -257,7 +271,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The ARN of the AWS Config connector used for Azure resource discovery.",
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)",
+		//	          "pattern": "^arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)$",
 		//	          "type": "string"
 		//	        },
 		//	        "AzureRegions": {
@@ -275,17 +289,19 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	          "properties": {
 		//	            "ContainerImageScanning": {
 		//	              "additionalProperties": false,
-		//	              "description": "Defines the scope of Azure resources to monitor for a specific resource type.",
+		//	              "description": "Defines the scope of cloud resources to monitor for a specific resource type.",
 		//	              "properties": {
 		//	                "ScopeType": {
 		//	                  "enum": [
 		//	                    "TENANT",
-		//	                    "SUBSCRIPTION"
+		//	                    "SUBSCRIPTION",
+		//	                    "ORGANIZATION",
+		//	                    "PROJECT"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
 		//	                "ScopeValues": {
-		//	                  "description": "List of subscription IDs. Empty for TENANT scope.",
+		//	                  "description": "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -314,17 +330,19 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "ServerlessScanning": {
 		//	              "additionalProperties": false,
-		//	              "description": "Defines the scope of Azure resources to monitor for a specific resource type.",
+		//	              "description": "Defines the scope of cloud resources to monitor for a specific resource type.",
 		//	              "properties": {
 		//	                "ScopeType": {
 		//	                  "enum": [
 		//	                    "TENANT",
-		//	                    "SUBSCRIPTION"
+		//	                    "SUBSCRIPTION",
+		//	                    "ORGANIZATION",
+		//	                    "PROJECT"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
 		//	                "ScopeValues": {
-		//	                  "description": "List of subscription IDs. Empty for TENANT scope.",
+		//	                  "description": "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -353,17 +371,19 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "VmScanning": {
 		//	              "additionalProperties": false,
-		//	              "description": "Defines the scope of Azure resources to monitor for a specific resource type.",
+		//	              "description": "Defines the scope of cloud resources to monitor for a specific resource type.",
 		//	              "properties": {
 		//	                "ScopeType": {
 		//	                  "enum": [
 		//	                    "TENANT",
-		//	                    "SUBSCRIPTION"
+		//	                    "SUBSCRIPTION",
+		//	                    "ORGANIZATION",
+		//	                    "PROJECT"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
 		//	                "ScopeValues": {
-		//	                  "description": "List of subscription IDs. Empty for TENANT scope.",
+		//	                  "description": "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -400,11 +420,170 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AzureRegions"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "Gcp": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AutoInstallVMScanner": {
+		//	          "default": true,
+		//	          "description": "Whether to automatically install the VM scanner. Defaults to true.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "AwsConfigConnectorArn": {
+		//	          "description": "The ARN of the AWS Config connector used for GCP resource discovery.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)$",
+		//	          "type": "string"
+		//	        },
+		//	        "GcpRegions": {
+		//	          "description": "List of GCP regions to scan (e.g. us-central1).",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "ScopeConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Defines which GCP resource types to scan and at what scope level. GCP supports multiple capabilities per connector.",
+		//	          "properties": {
+		//	            "ContainerImageScanning": {
+		//	              "additionalProperties": false,
+		//	              "description": "Defines the scope of cloud resources to monitor for a specific resource type.",
+		//	              "properties": {
+		//	                "ScopeType": {
+		//	                  "enum": [
+		//	                    "TENANT",
+		//	                    "SUBSCRIPTION",
+		//	                    "ORGANIZATION",
+		//	                    "PROJECT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ScopeValues": {
+		//	                  "description": "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "type": "array"
+		//	                },
+		//	                "State": {
+		//	                  "enum": [
+		//	                    "ACTIVE",
+		//	                    "PENDING",
+		//	                    "ERROR",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "StateReason": {
+		//	                  "description": "Reason for the current scope state.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ScopeType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ServerlessScanning": {
+		//	              "additionalProperties": false,
+		//	              "description": "Defines the scope of cloud resources to monitor for a specific resource type.",
+		//	              "properties": {
+		//	                "ScopeType": {
+		//	                  "enum": [
+		//	                    "TENANT",
+		//	                    "SUBSCRIPTION",
+		//	                    "ORGANIZATION",
+		//	                    "PROJECT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ScopeValues": {
+		//	                  "description": "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "type": "array"
+		//	                },
+		//	                "State": {
+		//	                  "enum": [
+		//	                    "ACTIVE",
+		//	                    "PENDING",
+		//	                    "ERROR",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "StateReason": {
+		//	                  "description": "Reason for the current scope state.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ScopeType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "VmScanning": {
+		//	              "additionalProperties": false,
+		//	              "description": "Defines the scope of cloud resources to monitor for a specific resource type.",
+		//	              "properties": {
+		//	                "ScopeType": {
+		//	                  "enum": [
+		//	                    "TENANT",
+		//	                    "SUBSCRIPTION",
+		//	                    "ORGANIZATION",
+		//	                    "PROJECT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ScopeValues": {
+		//	                  "description": "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "type": "array"
+		//	                },
+		//	                "State": {
+		//	                  "enum": [
+		//	                    "ACTIVE",
+		//	                    "PENDING",
+		//	                    "ERROR",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "StateReason": {
+		//	                  "description": "Reason for the current scope state.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ScopeType"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AwsConfigConnectorArn",
+		//	        "ScopeConfiguration",
+		//	        "GcpRegions"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Azure"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -425,25 +604,31 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AwsConfigConnectorArn
 						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the AWS Config connector used for Azure resource discovery.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.UTF8LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AzureRegions
 						"azure_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "List of Azure regions to scan.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
+								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ScopeConfiguration
@@ -460,6 +645,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 												stringvalidator.OneOf(
 													"TENANT",
 													"SUBSCRIPTION",
+													"ORGANIZATION",
+													"PROJECT",
 												),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -470,7 +657,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ScopeValues
 										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "List of subscription IDs. Empty for TENANT scope.",
+											Description: "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
@@ -497,7 +684,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
+									Description: "Defines the scope of cloud resources to monitor for a specific resource type.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -515,6 +702,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 												stringvalidator.OneOf(
 													"TENANT",
 													"SUBSCRIPTION",
+													"ORGANIZATION",
+													"PROJECT",
 												),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -525,7 +714,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ScopeValues
 										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "List of subscription IDs. Empty for TENANT scope.",
+											Description: "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
@@ -552,7 +741,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
+									Description: "Defines the scope of cloud resources to monitor for a specific resource type.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -570,6 +759,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 												stringvalidator.OneOf(
 													"TENANT",
 													"SUBSCRIPTION",
+													"ORGANIZATION",
+													"PROJECT",
 												),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -580,7 +771,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ScopeValues
 										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "List of subscription IDs. Empty for TENANT scope.",
+											Description: "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
@@ -607,7 +798,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
+									Description: "Defines the scope of cloud resources to monitor for a specific resource type.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -616,10 +807,256 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Defines which resource types to scan and at what scope level.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Gcp
+				"gcp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoInstallVMScanner
+						"auto_install_vm_scanner": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to automatically install the VM scanner. Defaults to true.",
+							Optional:    true,
+							Computed:    true,
+							Default:     booldefault.StaticBool(true),
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AwsConfigConnectorArn
+						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the AWS Config connector used for GCP resource discovery.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 512),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: GcpRegions
+						"gcp_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of GCP regions to scan (e.g. us-central1).",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtLeast(1),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ScopeConfiguration
+						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerImageScanning
+								"container_image_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ScopeType
+										"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"TENANT",
+													"SUBSCRIPTION",
+													"ORGANIZATION",
+													"PROJECT",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScopeValues
+										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtMost(100),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: State
+										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: StateReason
+										"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Reason for the current scope state.",
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Defines the scope of cloud resources to monitor for a specific resource type.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ServerlessScanning
+								"serverless_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ScopeType
+										"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"TENANT",
+													"SUBSCRIPTION",
+													"ORGANIZATION",
+													"PROJECT",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScopeValues
+										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtMost(100),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: State
+										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: StateReason
+										"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Reason for the current scope state.",
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Defines the scope of cloud resources to monitor for a specific resource type.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: VmScanning
+								"vm_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ScopeType
+										"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"TENANT",
+													"SUBSCRIPTION",
+													"ORGANIZATION",
+													"PROJECT",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScopeValues
+										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "List of scope identifiers. For Azure, subscription IDs (empty for TENANT scope). For GCP, project IDs or organization ID (empty for ORGANIZATION scope).",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtMost(100),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: State
+										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: StateReason
+										"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Reason for the current scope state.",
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Defines the scope of cloud resources to monitor for a specific resource type.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Defines which GCP resource types to scan and at what scope level. GCP supports multiple capabilities per connector.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Provider-specific configuration including regions and scope.",
@@ -710,7 +1147,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulnerability scanning of Azure resources.",
+		Description: "Creates and manages a multi-cloud connector for Amazon Inspector, enabling vulnerability scanning of Azure or GCP resources.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -738,6 +1175,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"description":              "Description",
 		"enablement_status":        "EnablementStatus",
 		"enablement_status_reason": "EnablementStatusReason",
+		"gcp":                      "Gcp",
+		"gcp_regions":              "GcpRegions",
 		"health":                   "Health",
 		"key":                      "Key",
 		"last_checked_at":          "LastCheckedAt",

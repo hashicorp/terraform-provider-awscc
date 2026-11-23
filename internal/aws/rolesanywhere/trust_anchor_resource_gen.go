@@ -34,6 +34,19 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::RolesAnywhere::TrustAnchor resource.
 func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CrlDpRevocationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"crl_dp_revocation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -348,22 +361,23 @@ func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"acm_pca_arn":           "AcmPcaArn",
-		"channel":               "Channel",
-		"enabled":               "Enabled",
-		"event":                 "Event",
-		"key":                   "Key",
-		"name":                  "Name",
-		"notification_settings": "NotificationSettings",
-		"source":                "Source",
-		"source_data":           "SourceData",
-		"source_type":           "SourceType",
-		"tags":                  "Tags",
-		"threshold":             "Threshold",
-		"trust_anchor_arn":      "TrustAnchorArn",
-		"trust_anchor_id":       "TrustAnchorId",
-		"value":                 "Value",
-		"x509_certificate_data": "X509CertificateData",
+		"acm_pca_arn":               "AcmPcaArn",
+		"channel":                   "Channel",
+		"crl_dp_revocation_enabled": "CrlDpRevocationEnabled",
+		"enabled":                   "Enabled",
+		"event":                     "Event",
+		"key":                       "Key",
+		"name":                      "Name",
+		"notification_settings":     "NotificationSettings",
+		"source":                    "Source",
+		"source_data":               "SourceData",
+		"source_type":               "SourceType",
+		"tags":                      "Tags",
+		"threshold":                 "Threshold",
+		"trust_anchor_arn":          "TrustAnchorArn",
+		"trust_anchor_id":           "TrustAnchorId",
+		"value":                     "Value",
+		"x509_certificate_data":     "X509CertificateData",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -96,6 +96,81 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "Route53ResolvedIPValidation": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Action": {
+		//	          "enum": [
+		//	            "REJECT",
+		//	            "DROP",
+		//	            "ALERT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "BypassDestinationValidationIPRanges": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AddressDefinition": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AddressDefinition"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DNSExpiryExceptionPolicy": {
+		//	          "enum": [
+		//	            "REJECT",
+		//	            "DROP",
+		//	            "CONTINUE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "DNSFirewallRuleGroupId": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^rslvr-frg-[0-9a-f]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "SourceIPRanges": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AddressDefinition": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AddressDefinition"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Action",
+		//	        "DNSFirewallRuleGroupId",
+		//	        "DNSExpiryExceptionPolicy"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "StatefulDefaultActions": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -329,6 +404,119 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Route53ResolvedIPValidation
+				"route_53_resolved_ip_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Action
+						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"REJECT",
+									"DROP",
+									"ALERT",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BypassDestinationValidationIPRanges
+						"bypass_destination_validation_ip_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AddressDefinition
+									"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.UTF8LengthBetween(1, 255),
+											stringvalidator.RegexMatches(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtMost(100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DNSExpiryExceptionPolicy
+						"dns_expiry_exception_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"REJECT",
+									"DROP",
+									"CONTINUE",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DNSFirewallRuleGroupId
+						"dns_firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.UTF8LengthBetween(1, 256),
+								stringvalidator.RegexMatches(regexp.MustCompile("^rslvr-frg-[0-9a-f]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceIPRanges
+						"source_ip_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AddressDefinition
+									"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.UTF8LengthBetween(1, 255),
+											stringvalidator.RegexMatches(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtMost(100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -762,39 +950,45 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                             "Action",
-		"action_definition":                  "ActionDefinition",
-		"action_name":                        "ActionName",
-		"deep_threat_inspection":             "DeepThreatInspection",
-		"definition":                         "Definition",
-		"description":                        "Description",
-		"dimensions":                         "Dimensions",
-		"enable_tls_session_holding":         "EnableTLSSessionHolding",
-		"firewall_policy":                    "FirewallPolicy",
-		"firewall_policy_arn":                "FirewallPolicyArn",
-		"firewall_policy_id":                 "FirewallPolicyId",
-		"firewall_policy_name":               "FirewallPolicyName",
-		"flow_timeouts":                      "FlowTimeouts",
-		"key":                                "Key",
-		"override":                           "Override",
-		"policy_variables":                   "PolicyVariables",
-		"priority":                           "Priority",
-		"publish_metric_action":              "PublishMetricAction",
-		"resource_arn":                       "ResourceArn",
-		"rule_order":                         "RuleOrder",
-		"rule_variables":                     "RuleVariables",
-		"stateful_default_actions":           "StatefulDefaultActions",
-		"stateful_engine_options":            "StatefulEngineOptions",
-		"stateful_rule_group_references":     "StatefulRuleGroupReferences",
-		"stateless_custom_actions":           "StatelessCustomActions",
-		"stateless_default_actions":          "StatelessDefaultActions",
-		"stateless_fragment_default_actions": "StatelessFragmentDefaultActions",
-		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
-		"stream_exception_policy":            "StreamExceptionPolicy",
-		"tags":                               "Tags",
-		"tcp_idle_timeout_seconds":           "TcpIdleTimeoutSeconds",
-		"tls_inspection_configuration_arn":   "TLSInspectionConfigurationArn",
-		"value":                              "Value",
+		"action":             "Action",
+		"action_definition":  "ActionDefinition",
+		"action_name":        "ActionName",
+		"address_definition": "AddressDefinition",
+		"bypass_destination_validation_ip_ranges": "BypassDestinationValidationIPRanges",
+		"deep_threat_inspection":                  "DeepThreatInspection",
+		"definition":                              "Definition",
+		"description":                             "Description",
+		"dimensions":                              "Dimensions",
+		"dns_expiry_exception_policy":             "DNSExpiryExceptionPolicy",
+		"dns_firewall_rule_group_id":              "DNSFirewallRuleGroupId",
+		"enable_tls_session_holding":              "EnableTLSSessionHolding",
+		"firewall_policy":                         "FirewallPolicy",
+		"firewall_policy_arn":                     "FirewallPolicyArn",
+		"firewall_policy_id":                      "FirewallPolicyId",
+		"firewall_policy_name":                    "FirewallPolicyName",
+		"flow_timeouts":                           "FlowTimeouts",
+		"key":                                     "Key",
+		"override":                                "Override",
+		"policy_variables":                        "PolicyVariables",
+		"priority":                                "Priority",
+		"publish_metric_action":                   "PublishMetricAction",
+		"resource_arn":                            "ResourceArn",
+		"route_53_resolved_ip_validation":         "Route53ResolvedIPValidation",
+		"rule_order":                              "RuleOrder",
+		"rule_variables":                          "RuleVariables",
+		"source_ip_ranges":                        "SourceIPRanges",
+		"stateful_default_actions":                "StatefulDefaultActions",
+		"stateful_engine_options":                 "StatefulEngineOptions",
+		"stateful_rule_group_references":          "StatefulRuleGroupReferences",
+		"stateless_custom_actions":                "StatelessCustomActions",
+		"stateless_default_actions":               "StatelessDefaultActions",
+		"stateless_fragment_default_actions":      "StatelessFragmentDefaultActions",
+		"stateless_rule_group_references":         "StatelessRuleGroupReferences",
+		"stream_exception_policy":                 "StreamExceptionPolicy",
+		"tags":                                    "Tags",
+		"tcp_idle_timeout_seconds":                "TcpIdleTimeoutSeconds",
+		"tls_inspection_configuration_arn":        "TLSInspectionConfigurationArn",
+		"value":                                   "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
