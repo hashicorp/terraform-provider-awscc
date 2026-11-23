@@ -8,6 +8,7 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -299,12 +300,130 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "rtp",
 		//	    "rist",
 		//	    "srt-listener",
-		//	    "srt-caller"
+		//	    "srt-caller",
+		//	    "rtmp-push"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The protocol that is used by the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RtmpPushDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The read-only details for the RTMP (Real-Time Messaging Protocol) source.",
+		//	  "properties": {
+		//	    "ApplicationName": {
+		//	      "description": "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+		//	      "type": "string"
+		//	    },
+		//	    "StreamName": {
+		//	      "description": "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ApplicationName",
+		//	    "StreamName"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rtmp_push_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationName
+				"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StreamName
+				"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The read-only details for the RTMP (Real-Time Messaging Protocol) source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RtmpPushSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The settings for the RTMP (Real-Time Messaging Protocol) source.",
+		//	  "properties": {
+		//	    "NamingConfiguration": {
+		//	      "description": "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+		//	      "properties": {
+		//	        "Automatic": {
+		//	          "additionalProperties": false,
+		//	          "description": "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+		//	          "type": "object"
+		//	        },
+		//	        "Manual": {
+		//	          "additionalProperties": false,
+		//	          "description": "The manual RTMP naming configuration, where you specify the application and stream names.",
+		//	          "properties": {
+		//	            "ApplicationName": {
+		//	              "description": "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+		//	              "type": "string"
+		//	            },
+		//	            "StreamName": {
+		//	              "description": "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApplicationName",
+		//	            "StreamName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "NamingConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rtmp_push_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NamingConfiguration
+				"naming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Automatic
+						"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "The automatic RTMP naming configuration, where MediaConnect generates the application and stream names. This type does not require any additional settings.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Manual
+						"manual": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApplicationName
+								"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the RTMP application. Together with the stream name, the application name forms the RTMP URL path, in the pattern rtmp://ingestAddress/applicationName/streamName.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StreamName
+								"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the RTMP stream. The stream name forms the final segment of the RTMP URL path.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The manual RTMP naming configuration, where you specify the application and stream names.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration settings for the RTMP (Real-Time Messaging Protocol) application and stream names.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The settings for the RTMP (Real-Time Messaging Protocol) source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SenderControlPort
@@ -465,6 +584,8 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                      "Algorithm",
+		"application_name":               "ApplicationName",
+		"automatic":                      "Automatic",
 		"bridge_arn":                     "BridgeArn",
 		"constant_initialization_vector": "ConstantInitializationVector",
 		"decryption":                     "Decryption",
@@ -477,14 +598,18 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ingest_port":                    "IngestPort",
 		"key":                            "Key",
 		"key_type":                       "KeyType",
+		"manual":                         "Manual",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
 		"min_latency":                    "MinLatency",
 		"name":                           "Name",
+		"naming_configuration":           "NamingConfiguration",
 		"protocol":                       "Protocol",
 		"region":                         "Region",
 		"resource_id":                    "ResourceId",
 		"role_arn":                       "RoleArn",
+		"rtmp_push_details":              "RtmpPushDetails",
+		"rtmp_push_settings":             "RtmpPushSettings",
 		"secret_arn":                     "SecretArn",
 		"sender_control_port":            "SenderControlPort",
 		"sender_ip_address":              "SenderIpAddress",
@@ -493,6 +618,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_listener_address":        "SourceListenerAddress",
 		"source_listener_port":           "SourceListenerPort",
 		"stream_id":                      "StreamId",
+		"stream_name":                    "StreamName",
 		"tags":                           "Tags",
 		"url":                            "Url",
 		"value":                          "Value",

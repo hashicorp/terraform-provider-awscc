@@ -42,6 +42,22 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MultipathResilienceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The multipath resilience status of the VPC peering connection: enabled when both the requester and accepter sides allow multipath resilience, pending when only one side allows it, and disabled when neither side allows it.",
+		//	  "enum": [
+		//	    "pending",
+		//	    "enabled",
+		//	    "disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"multipath_resilience_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The multipath resilience status of the VPC peering connection: enabled when both the requester and accepter sides allow multipath resilience, pending when only one side allows it, and disabled when neither side allows it.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerOwnerId
 		// CloudFormation resource type schema:
 		//
@@ -84,6 +100,52 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	}
 		"peer_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PeerVpcPeeringConnectionOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The VPC peering connection options corresponding to the accepter side of the connection.",
+		//	  "properties": {
+		//	    "AllowDnsResolutionFromRemoteVpc": {
+		//	      "description": "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "AllowMultipathResilience": {
+		//	      "description": "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultipathResilienceMode": {
+		//	      "description": "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+		//	      "enum": [
+		//	        "always-on"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"peer_vpc_peering_connection_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowDnsResolutionFromRemoteVpc
+				"allow_dns_resolution_from_remote_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowMultipathResilience
+				"allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultipathResilienceMode
+				"multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC peering connection options corresponding to the accepter side of the connection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -141,6 +203,52 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 			Description: "The ID of the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcPeeringConnectionOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The VPC peering connection options corresponding to the requester side of the connection.",
+		//	  "properties": {
+		//	    "AllowDnsResolutionFromRemoteVpc": {
+		//	      "description": "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "AllowMultipathResilience": {
+		//	      "description": "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultipathResilienceMode": {
+		//	      "description": "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+		//	      "enum": [
+		//	        "always-on"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vpc_peering_connection_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowDnsResolutionFromRemoteVpc
+				"allow_dns_resolution_from_remote_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, enables a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowMultipathResilience
+				"allow_multipath_resilience": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, allows multipath resilience on this side of the peering connection. Multipath resilience is enabled only when both the requester and accepter sides allow it; MultipathResilienceStatus reports the result.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultipathResilienceMode
+				"multipath_resilience_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of multipath resilience on the peering connection. Applies when AllowMultipathResilience is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC peering connection options corresponding to the requester side of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -158,16 +266,22 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCPeeringConnection").WithTerraformTypeName("awscc_ec2_vpc_peering_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assume_role_region":        "AssumeRoleRegion",
-		"key":                       "Key",
-		"peer_owner_id":             "PeerOwnerId",
-		"peer_region":               "PeerRegion",
-		"peer_role_arn":             "PeerRoleArn",
-		"peer_vpc_id":               "PeerVpcId",
-		"tags":                      "Tags",
-		"value":                     "Value",
-		"vpc_id":                    "VpcId",
-		"vpc_peering_connection_id": "Id",
+		"allow_dns_resolution_from_remote_vpc": "AllowDnsResolutionFromRemoteVpc",
+		"allow_multipath_resilience":           "AllowMultipathResilience",
+		"assume_role_region":                   "AssumeRoleRegion",
+		"key":                                  "Key",
+		"multipath_resilience_mode":            "MultipathResilienceMode",
+		"multipath_resilience_status":          "MultipathResilienceStatus",
+		"peer_owner_id":                        "PeerOwnerId",
+		"peer_region":                          "PeerRegion",
+		"peer_role_arn":                        "PeerRoleArn",
+		"peer_vpc_id":                          "PeerVpcId",
+		"peer_vpc_peering_connection_options":  "PeerVpcPeeringConnectionOptions",
+		"tags":                                 "Tags",
+		"value":                                "Value",
+		"vpc_id":                               "VpcId",
+		"vpc_peering_connection_id":            "Id",
+		"vpc_peering_connection_options":       "VpcPeeringConnectionOptions",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

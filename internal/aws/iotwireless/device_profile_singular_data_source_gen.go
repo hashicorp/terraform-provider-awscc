@@ -82,7 +82,7 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxEirp": {
-		//	      "maximum": 15,
+		//	      "maximum": 36,
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
@@ -98,7 +98,7 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    },
 		//	    "PingSlotPeriod": {
 		//	      "maximum": 4096,
-		//	      "minimum": 128,
+		//	      "minimum": 32,
 		//	      "type": "integer"
 		//	    },
 		//	    "RegParamsRevision": {

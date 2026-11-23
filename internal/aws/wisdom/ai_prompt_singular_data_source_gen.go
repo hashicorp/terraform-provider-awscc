@@ -90,6 +90,56 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: InferenceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxTokensToSample": {
+		//	      "maximum": 4096,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Temperature": {
+		//	      "maximum": 1,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "TopK": {
+		//	      "maximum": 200,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "TopP": {
+		//	      "maximum": 1,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"inference_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxTokensToSample
+				"max_tokens_to_sample": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Temperature
+				"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopK
+				"top_k": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopP
+				"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelId
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +200,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Text": {
-		//	          "maxLength": 200000,
+		//	          "maxLength": 1000000,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
@@ -230,21 +280,26 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AIPrompt").WithTerraformTypeName("awscc_wisdom_ai_prompt")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ai_prompt_arn":          "AIPromptArn",
-		"ai_prompt_id":           "AIPromptId",
-		"api_format":             "ApiFormat",
-		"assistant_arn":          "AssistantArn",
-		"assistant_id":           "AssistantId",
-		"description":            "Description",
-		"model_id":               "ModelId",
-		"modified_time_seconds":  "ModifiedTimeSeconds",
-		"name":                   "Name",
-		"tags":                   "Tags",
-		"template_configuration": "TemplateConfiguration",
-		"template_type":          "TemplateType",
-		"text":                   "Text",
+		"ai_prompt_arn":           "AIPromptArn",
+		"ai_prompt_id":            "AIPromptId",
+		"api_format":              "ApiFormat",
+		"assistant_arn":           "AssistantArn",
+		"assistant_id":            "AssistantId",
+		"description":             "Description",
+		"inference_configuration": "InferenceConfiguration",
+		"max_tokens_to_sample":    "MaxTokensToSample",
+		"model_id":                "ModelId",
+		"modified_time_seconds":   "ModifiedTimeSeconds",
+		"name":                    "Name",
+		"tags":                    "Tags",
+		"temperature":             "Temperature",
+		"template_configuration":  "TemplateConfiguration",
+		"template_type":           "TemplateType",
+		"text":                    "Text",
 		"text_full_ai_prompt_edit_template_configuration": "TextFullAIPromptEditTemplateConfiguration",
-		"type": "Type",
+		"top_k": "TopK",
+		"top_p": "TopP",
+		"type":  "Type",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

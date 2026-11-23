@@ -62,7 +62,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "MskClusterArn": {
 		//	            "description": "The ARN of an Amazon MSK cluster.",
-		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	            "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -693,7 +693,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "SourceKafkaClusterArn": {
 		//	        "description": "Amazon Resource Name of the source Kafka cluster.",
-		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceKafkaClusterId": {
@@ -713,7 +713,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "TargetKafkaClusterArn": {
 		//	        "description": "Amazon Resource Name of the target Kafka cluster.",
-		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetKafkaClusterId": {
@@ -939,7 +939,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Amazon Resource Name for the created replicator.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):kafka:.*",
 		//	  "type": "string"
 		//	}
 		"replicator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -965,7 +965,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role used by the replicator to access external resources.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-eusc):iam:.*",
 		//	  "type": "string"
 		//	}
 		"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -74,10 +74,10 @@ func webFunctionRevisionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	      "description": "The runtime configuration for the revision.",
 		//	      "properties": {
 		//	        "Runtime": {
-		//	          "description": "The runtime identifier.",
-		//	          "maxLength": 30,
+		//	          "description": "The runtime identifier. Either a short runtime name (for example, nodejs24.x) or a Lambda runtime ARN.",
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "^[a-z][a-z0-9]*[0-9]+(\\.[a-z0-9]+)*$",
+		//	          "pattern": "^([a-z][a-z0-9]*(\\.[a-z0-9]+)*|arn:(aws[a-z-]*):lambda:[a-z0-9-]+:[0-9]{12}:.+)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -129,7 +129,7 @@ func webFunctionRevisionDataSource(ctx context.Context) (datasource.DataSource, 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Runtime
 						"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The runtime identifier.",
+							Description: "The runtime identifier. Either a short runtime name (for example, nodejs24.x) or a Lambda runtime ARN.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

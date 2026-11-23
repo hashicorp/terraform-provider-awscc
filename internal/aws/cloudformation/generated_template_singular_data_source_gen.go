@@ -127,6 +127,18 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "A summary of the progress of the template generation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StackId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.",
+		//	  "pattern": "^arn:aws[a-zA-Z-]*:cloudformation:[a-z0-9-]+:[0-9]{12}:stack/[a-zA-Z][-a-zA-Z0-9]*/[-a-zA-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"stack_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the stack to use as the base stack for the generated template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -229,6 +241,7 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		"resources_pending":       "ResourcesPending",
 		"resources_processing":    "ResourcesProcessing",
 		"resources_succeeded":     "ResourcesSucceeded",
+		"stack_id":                "StackId",
 		"status":                  "Status",
 		"template_configuration":  "TemplateConfiguration",
 		"total_warnings":          "TotalWarnings",

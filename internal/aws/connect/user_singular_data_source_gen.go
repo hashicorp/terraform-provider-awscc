@@ -508,11 +508,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "One or more security profile arns for the user",
+		//	  "description": "One or more customer-managed or AWS-managed security profile ARNs for the user.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "The identifier of the security profile for the user.",
-		//	    "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*$",
+		//	    "description": "The Amazon Resource Name (ARN) of a customer-managed or AWS-managed security profile for the user.",
+		//	    "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:(?:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*|aws:security-profile/[a-zA-Z][a-zA-Z0-9_-]{0,127})$",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 10,
@@ -522,7 +522,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"security_profile_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "One or more security profile arns for the user",
+			Description: "One or more customer-managed or AWS-managed security profile ARNs for the user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

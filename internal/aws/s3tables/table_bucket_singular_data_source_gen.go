@@ -60,6 +60,95 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies encryption settings for the table bucket",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Describes where logs are stored and the prefix that Amazon S3 assigns to all log object keys for a table bucket.",
+		//	  "properties": {
+		//	    "TargetBucket": {
+		//	      "description": "The name of the general purpose bucket that logs are delivered to. The bucket must be in the same AWS Region and owned by the same AWS account as the table bucket. The bucket can't use SSE-KMS or DSSE-KMS default encryption, can't have S3 Object Lock enabled, and can't have Requester Pays enabled. You can deliver logs from multiple table buckets to the same target bucket. In this case, choose a different TargetPrefix for each table bucket so that you can tell their log objects apart.",
+		//	      "maxLength": 63,
+		//	      "minLength": 3,
+		//	      "type": "string"
+		//	    },
+		//	    "TargetObjectKeyFormat": {
+		//	      "additionalProperties": false,
+		//	      "description": "The key format of the log objects. Only PartitionedPrefix is supported.",
+		//	      "properties": {
+		//	        "PartitionedPrefix": {
+		//	          "additionalProperties": false,
+		//	          "description": "Amazon S3 keys for log objects are partitioned in the following format: [TargetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]",
+		//	          "properties": {
+		//	            "PartitionDateSource": {
+		//	              "description": "The date to use for the log object key partitions. Valid values are EventTime, the time that the requests in the log were made, and DeliveryTime, the time that the log was delivered.",
+		//	              "enum": [
+		//	                "EventTime",
+		//	                "DeliveryTime"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "PartitionDateSource"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PartitionedPrefix"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TargetPrefix": {
+		//	      "description": "The prefix for the keys of the log objects that are delivered to the target bucket.",
+		//	      "maxLength": 1024,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TargetBucket",
+		//	    "TargetPrefix",
+		//	    "TargetObjectKeyFormat"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TargetBucket
+				"target_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the general purpose bucket that logs are delivered to. The bucket must be in the same AWS Region and owned by the same AWS account as the table bucket. The bucket can't use SSE-KMS or DSSE-KMS default encryption, can't have S3 Object Lock enabled, and can't have Requester Pays enabled. You can deliver logs from multiple table buckets to the same target bucket. In this case, choose a different TargetPrefix for each table bucket so that you can tell their log objects apart.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetObjectKeyFormat
+				"target_object_key_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PartitionedPrefix
+						"partitioned_prefix": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PartitionDateSource
+								"partition_date_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The date to use for the log object key partitions. Valid values are EventTime, the time that the requests in the log were made, and DeliveryTime, the time that the log was delivered.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Amazon S3 keys for log objects are partitioned in the following format: [TargetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The key format of the log objects. Only PartitionedPrefix is supported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetPrefix
+				"target_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The prefix for the keys of the log objects that are delivered to the target bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes where logs are stored and the prefix that Amazon S3 assigns to all log object keys for a table bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -353,8 +442,11 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_configuration":     "EncryptionConfiguration",
 		"key":                          "Key",
 		"kms_key_arn":                  "KMSKeyArn",
+		"logging_configuration":        "LoggingConfiguration",
 		"metrics_configuration":        "MetricsConfiguration",
 		"noncurrent_days":              "NoncurrentDays",
+		"partition_date_source":        "PartitionDateSource",
+		"partitioned_prefix":           "PartitionedPrefix",
 		"replication_configuration":    "ReplicationConfiguration",
 		"role":                         "Role",
 		"rules":                        "Rules",
@@ -365,6 +457,9 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"table_bucket_arn":             "TableBucketARN",
 		"table_bucket_name":            "TableBucketName",
 		"tags":                         "Tags",
+		"target_bucket":                "TargetBucket",
+		"target_object_key_format":     "TargetObjectKeyFormat",
+		"target_prefix":                "TargetPrefix",
 		"unreferenced_days":            "UnreferencedDays",
 		"unreferenced_file_removal":    "UnreferencedFileRemoval",
 		"value":                        "Value",

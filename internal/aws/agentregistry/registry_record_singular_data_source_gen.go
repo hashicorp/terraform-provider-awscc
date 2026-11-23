@@ -25,6 +25,34 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::AgentRegistry::RegistryRecord resource.
 func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Artifact
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The skill package that the registry stores for a skill record that synchronizes a skill package. The package's download URL isn't returned.",
+		//	  "properties": {
+		//	    "Sha256": {
+		//	      "description": "The SHA-256 checksum of the skill package, as 64 lowercase hexadecimal characters.",
+		//	      "maxLength": 64,
+		//	      "minLength": 64,
+		//	      "pattern": "^[0-9a-f]{64}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Sha256
+				"sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The SHA-256 checksum of the skill package, as 64 lowercase hexadecimal characters.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The skill package that the registry stores for a skill record that synchronizes a skill package. The package's download URL isn't returned.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -251,17 +279,75 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                },
 		//	                "Source": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
+		//	                  "description": "The source that the registry synchronizes agent skills content from: a SKILL.md document in SkillMd.Source, or a skill package in SkillPackage.Source.",
 		//	                  "properties": {
 		//	                    "FromUrl": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
+		//	                      "description": "URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data.",
 		//	                      "properties": {
+		//	                        "CredentialProviderConfigurations": {
+		//	                          "description": "The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead.",
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "A credential provider configuration that the registry uses to read an agent skills source. An Amazon S3 source takes an IAM role.",
+		//	                            "properties": {
+		//	                              "CredentialProvider": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The credential provider details.",
+		//	                                "properties": {
+		//	                                  "IamCredentialProvider": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region.",
+		//	                                    "properties": {
+		//	                                      "Region": {
+		//	                                        "description": "The SigV4 signing region.",
+		//	                                        "maxLength": 64,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "^[a-z0-9-]+$",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "RoleArn": {
+		//	                                        "description": "The ARN of the IAM role.",
+		//	                                        "maxLength": 2048,
+		//	                                        "minLength": 20,
+		//	                                        "pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Service": {
+		//	                                        "description": "The SigV4 signing service name.",
+		//	                                        "maxLength": 128,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "^[a-zA-Z0-9_-]+$",
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "CredentialProviderType": {
+		//	                                "description": "The type of the credential provider.",
+		//	                                "enum": [
+		//	                                  "IAM"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "CredentialProviderType",
+		//	                              "CredentialProvider"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "type": "array"
+		//	                        },
 		//	                        "Url": {
-		//	                          "description": "URL source for the SkillMd document.",
+		//	                          "description": "The URL of the source. For synchronization, specify an s3://\u003cbucket\u003e/\u003ckey\u003e URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.",
 		//	                          "maxLength": 2048,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^https://.*$",
+		//	                          "pattern": "^(https|s3)://.*$",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -274,6 +360,119 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                  "type": "object"
 		//	                }
 		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "SkillPackage": {
+		//	              "additionalProperties": false,
+		//	              "description": "The source that the registry synchronizes the full skill package from. You can't set it together with SkillMd.Source or SkillMd Data.",
+		//	              "properties": {
+		//	                "Source": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The source of the skill package, as an s3:// URL of a ZIP object.",
+		//	                  "properties": {
+		//	                    "FromUrl": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data.",
+		//	                      "properties": {
+		//	                        "CredentialProviderConfigurations": {
+		//	                          "description": "The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead.",
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "A credential provider configuration that the registry uses to read an agent skills source. An Amazon S3 source takes an IAM role.",
+		//	                            "properties": {
+		//	                              "CredentialProvider": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The credential provider details.",
+		//	                                "properties": {
+		//	                                  "IamCredentialProvider": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region.",
+		//	                                    "properties": {
+		//	                                      "Region": {
+		//	                                        "description": "The SigV4 signing region.",
+		//	                                        "maxLength": 64,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "^[a-z0-9-]+$",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "RoleArn": {
+		//	                                        "description": "The ARN of the IAM role.",
+		//	                                        "maxLength": 2048,
+		//	                                        "minLength": 20,
+		//	                                        "pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Service": {
+		//	                                        "description": "The SigV4 signing service name.",
+		//	                                        "maxLength": 128,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "^[a-zA-Z0-9_-]+$",
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "CredentialProviderType": {
+		//	                                "description": "The type of the credential provider.",
+		//	                                "enum": [
+		//	                                  "IAM"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "CredentialProviderType",
+		//	                              "CredentialProvider"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "type": "array"
+		//	                        },
+		//	                        "Url": {
+		//	                          "description": "The URL of the source. For synchronization, specify an s3://\u003cbucket\u003e/\u003ckey\u003e URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.",
+		//	                          "maxLength": 2048,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(https|s3)://.*$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Url"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "SourceConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The provider-specific settings of the record's skill source.",
+		//	              "properties": {
+		//	                "S3": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The settings of an Amazon S3 source.",
+		//	                  "properties": {
+		//	                    "BucketOwnerAccountId": {
+		//	                      "description": "The ID of the AWS account that owns the source bucket. The registry checks that the bucket belongs to this account each time it reads the source. If you omit it for a source that uses an IAM role, the registry expects the bucket in the role's account. A source without a credential provider, which the registry reads as a public object, requires it.",
+		//	                      "maxLength": 12,
+		//	                      "minLength": 12,
+		//	                      "pattern": "^[0-9]{12}$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "S3"
+		//	              ],
 		//	              "type": "object"
 		//	            }
 		//	          },
@@ -673,21 +872,152 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 												// Property: FromUrl
 												"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CredentialProviderConfigurations
+														"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CredentialProvider
+																	"credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: IamCredentialProvider
+																			"iam_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Region
+																					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SigV4 signing region.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: RoleArn
+																					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The ARN of the IAM role.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Service
+																					"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SigV4 signing service name.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The credential provider details.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: CredentialProviderType
+																	"credential_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The type of the credential provider.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
 														// Property: Url
 														"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "URL source for the SkillMd document.",
+															Description: "The URL of the source. For synchronization, specify an s3://<bucket>/<key> URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
+													Description: "URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Description: "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
+											Description: "The source that the registry synchronizes agent skills content from: a SKILL.md document in SkillMd.Source, or a skill package in SkillPackage.Source.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Markdown-format descriptor containing an agent skills document.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SkillPackage
+								"skill_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Source
+										"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FromUrl
+												"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CredentialProviderConfigurations
+														"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CredentialProvider
+																	"credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: IamCredentialProvider
+																			"iam_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Region
+																					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SigV4 signing region.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: RoleArn
+																					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The ARN of the IAM role.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Service
+																					"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SigV4 signing service name.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The IAM role that the registry assumes to read the source. For an Amazon S3 source, omit Service or set it to s3, and omit Region or set it to the registry's Region.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The credential provider details.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: CredentialProviderType
+																	"credential_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The type of the credential provider.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The credential provider that the registry uses to read the source. For an Amazon S3 source, specify an IAM role in your account that the agent-registry.amazonaws.com service principal can assume and that can read the object. Omit it to read a public object, and set SourceConfiguration.S3.BucketOwnerAccountId instead.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Url
+														"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The URL of the source. For synchronization, specify an s3://<bucket>/<key> URL that names one object in a bucket in the same AWS Region as the registry: a SKILL.md object for SkillMd, or a skill package ZIP object for SkillPackage.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "URL-based source of agent skills content. With an s3:// URL, the registry reads the Amazon S3 object when the record is created, and again whenever the URL, the credential provider or the bucket owner changes. Each read replaces the SKILL.md Data and sets the record's Name and Description from the name and description in the SKILL.md frontmatter, so set Name and Description to the same values and don't set SkillMd Data. An https:// URL is a reference URL that the registry doesn't synchronize from: where Amazon S3 skill synchronization is available, the registry accepts an https:// URL only on a record that already stores it, with the content provided inline in SkillMd Data.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The source of the skill package, as an s3:// URL of a ZIP object.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The source that the registry synchronizes the full skill package from. You can't set it together with SkillMd.Source or SkillMd Data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SourceConfiguration
+								"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: S3
+										"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: BucketOwnerAccountId
+												"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ID of the AWS account that owns the source bucket. The registry checks that the bucket belongs to this account each time it reads the source. If you omit it for a source that uses an IAM role, the registry expects the bucket in the role's account. A source without a credential provider, which the registry reads as a public object, requires it.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The settings of an Amazon S3 source.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The provider-specific settings of the record's skill source.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1026,7 +1356,7 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The lifecycle status of the registry record.",
+		//	  "description": "The lifecycle status of the registry record. CREATE_PENDING_AUTH and UPDATE_PENDING_AUTH mean that the record waits for a user to authorize access to a GitHub source. CloudFormation doesn't support GitHub sources, so a create or update that reaches one of these states fails.",
 		//	  "enum": [
 		//	    "DRAFT",
 		//	    "PENDING_APPROVAL",
@@ -1036,12 +1366,83 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "CREATING",
 		//	    "UPDATING",
 		//	    "CREATE_FAILED",
-		//	    "UPDATE_FAILED"
+		//	    "UPDATE_FAILED",
+		//	    "CREATE_PENDING_AUTH",
+		//	    "UPDATE_PENDING_AUTH"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The lifecycle status of the registry record.",
+			Description: "The lifecycle status of the registry record. CREATE_PENDING_AUTH and UPDATE_PENDING_AUTH mean that the record waits for a user to authorize access to a GitHub source. CloudFormation doesn't support GitHub sources, so a create or update that reaches one of these states fails.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SynchronizedSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source that the registry last synchronized the record's skill content from, and the version that it read. Absent until the first successful synchronization.",
+		//	  "properties": {
+		//	    "S3": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 source that the registry read.",
+		//	      "properties": {
+		//	        "ETag": {
+		//	          "description": "The entity tag (ETag) of the object that the registry read, without quotes, when the object has no version ID. Not recorded for a SKILL.md source on a registry that is encrypted with a customer managed key.",
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "SynchronizedAt": {
+		//	          "description": "The timestamp when the registry read the source.",
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "VersionId": {
+		//	          "description": "The version ID of the object that the registry read. Absent when the bucket isn't versioned.",
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SynchronizedAt"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"synchronized_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3
+				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ETag
+						"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The entity tag (ETag) of the object that the registry read, without quotes, when the object has no version ID. Not recorded for a SKILL.md source on a registry that is encrypted with a customer managed key.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SynchronizedAt
+						"synchronized_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "The timestamp when the registry read the source.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VersionId
+						"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The version ID of the object that the registry read. Absent when the bucket isn't versioned.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 source that the registry read.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source that the registry last synchronized the record's skill content from, and the version that it read. Absent until the first successful synchronization.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1130,6 +1531,8 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		"additional_data":                    "AdditionalData",
 		"agent_skills_definition":            "AgentSkillsDefinition",
 		"agui":                               "Agui",
+		"artifact":                           "Artifact",
+		"bucket_owner_account_id":            "BucketOwnerAccountId",
 		"created_at":                         "CreatedAt",
 		"created_by":                         "CreatedBy",
 		"credential_provider":                "CredentialProvider",
@@ -1143,6 +1546,7 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		"description":                        "Description",
 		"descriptors":                        "Descriptors",
 		"display_name":                       "DisplayName",
+		"e_tag":                              "ETag",
 		"from_url":                           "FromUrl",
 		"grant_type":                         "GrantType",
 		"http":                               "Http",
@@ -1160,16 +1564,23 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		"registry_arn":                       "RegistryArn",
 		"registry_id":                        "RegistryId",
 		"role_arn":                           "RoleArn",
+		"s3":                                 "S3",
 		"scopes":                             "Scopes",
 		"service":                            "Service",
+		"sha_256":                            "Sha256",
 		"skill_md":                           "SkillMd",
+		"skill_package":                      "SkillPackage",
 		"source":                             "Source",
+		"source_configuration":               "SourceConfiguration",
 		"status":                             "Status",
+		"synchronized_at":                    "SynchronizedAt",
+		"synchronized_source":                "SynchronizedSource",
 		"tags":                               "Tags",
 		"tools":                              "Tools",
 		"updated_at":                         "UpdatedAt",
 		"url":                                "Url",
 		"value":                              "Value",
+		"version_id":                         "VersionId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

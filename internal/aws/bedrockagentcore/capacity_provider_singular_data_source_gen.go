@@ -106,6 +106,21 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                  },
 		//	                  "type": "object"
 		//	                },
+		//	                "CpuOptions": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The CPU options for the instances.",
+		//	                  "properties": {
+		//	                    "NestedVirtualization": {
+		//	                      "description": "Indicates whether nested virtualization is enabled on the instances, which exposes hardware virtualization (KVM) to agents. Default: DISABLED.",
+		//	                      "enum": [
+		//	                        "ENABLED",
+		//	                        "DISABLED"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
 		//	                "EphemeralVolumes": {
 		//	                  "description": "The block device mapping for ephemeral (instance store) volumes.",
 		//	                  "insertionOrder": false,
@@ -533,6 +548,18 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The Capacity Reservation targeting option.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: CpuOptions
+										"cpu_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: NestedVirtualization
+												"nested_virtualization": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether nested virtualization is enabled on the instances, which exposes hardware virtualization (KVM) to agents. Default: DISABLED.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The CPU options for the instances.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: EphemeralVolumes
@@ -985,6 +1012,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"capacity_reservation_specification":      "CapacityReservationSpecification",
 		"capacity_reservation_target":             "CapacityReservationTarget",
 		"compute_configuration":                   "ComputeConfiguration",
+		"cpu_options":                             "CpuOptions",
 		"created_at":                              "CreatedAt",
 		"description":                             "Description",
 		"device_name":                             "DeviceName",
@@ -1010,6 +1038,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"max_lifetime":                            "MaxLifetime",
 		"monitoring":                              "Monitoring",
 		"name":                                    "Name",
+		"nested_virtualization":                   "NestedVirtualization",
 		"operating_system":                        "OperatingSystem",
 		"permissions_configuration":               "PermissionsConfiguration",
 		"propagated_tags":                         "PropagatedTags",

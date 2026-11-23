@@ -337,6 +337,85 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "MskParameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "Parameters for producing events to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster, used when TargetArn is an Amazon MSK cluster ARN.",
+		//	      "properties": {
+		//	        "Acks": {
+		//	          "description": "Producer acknowledgement mode. ALL waits for all in-sync replicas. LEADER waits for the partition leader only. Defaults to ALL.",
+		//	          "enum": [
+		//	            "ALL",
+		//	            "LEADER"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ClientId": {
+		//	          "description": "Producer client.id passed to the Kafka broker. A literal, not a JSONata expression.",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Compression": {
+		//	          "description": "Producer compression codec applied to the record batch. Defaults to NONE.",
+		//	          "enum": [
+		//	            "NONE",
+		//	            "GZIP",
+		//	            "SNAPPY",
+		//	            "LZ4",
+		//	            "ZSTD"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Connectivity": {
+		//	          "description": "Specifies how the service connects to the Amazon MSK cluster. PUBLIC connects through the cluster's public access. PRIVATE connects through the cluster's multi-VPC private connectivity. You must turn on the chosen connectivity path, with IAM access control, on the cluster.",
+		//	          "enum": [
+		//	            "PUBLIC",
+		//	            "PRIVATE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Headers": {
+		//	          "description": "Kafka record headers attached to each produced record.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A single Kafka record header. Key and Value each accept a literal or a JSONata expression.",
+		//	            "properties": {
+		//	              "Key": {
+		//	                "maxLength": 8192,
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 8192,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Key"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "PartitionKey": {
+		//	          "description": "Kafka record key. Accepts a literal or a JSONata expression; the resolved value selects the destination partition.",
+		//	          "maxLength": 8192,
+		//	          "type": "string"
+		//	        },
+		//	        "TopicName": {
+		//	          "description": "Name of the Kafka topic events are produced to. Accepts a literal or a JSONata expression.",
+		//	          "maxLength": 8192,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TopicName",
+		//	        "Connectivity"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "RoleArn": {
 		//	      "description": "The ARN of the IAM role the service assumes to invoke the target. The role must belong to the same account as the subscriber.",
 		//	      "maxLength": 1600,
@@ -655,6 +734,60 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters for invoking an AWS Lambda function target.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MskParameters
+				"msk_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Acks
+						"acks": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Producer acknowledgement mode. ALL waits for all in-sync replicas. LEADER waits for the partition leader only. Defaults to ALL.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Producer client.id passed to the Kafka broker. A literal, not a JSONata expression.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Compression
+						"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Producer compression codec applied to the record batch. Defaults to NONE.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Connectivity
+						"connectivity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies how the service connects to the Amazon MSK cluster. PUBLIC connects through the cluster's public access. PRIVATE connects through the cluster's multi-VPC private connectivity. You must turn on the chosen connectivity path, with IAM access control, on the cluster.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Headers
+						"headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Kafka record headers attached to each produced record.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PartitionKey
+						"partition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Kafka record key. Accepts a literal or a JSONata expression; the resolved value selects the destination partition.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TopicName
+						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the Kafka topic events are produced to. Accepts a literal or a JSONata expression.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Parameters for producing events to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster, used when TargetArn is an Amazon MSK cluster ARN.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RoleArn
@@ -1240,10 +1373,14 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EventsV2::Subscriber").WithTerraformTypeName("awscc_eventsv2_subscriber")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"acks":                        "Acks",
 		"arn":                         "Arn",
 		"batch_configuration":         "BatchConfiguration",
 		"binary_value":                "BinaryValue",
 		"bus_name":                    "BusName",
+		"client_id":                   "ClientId",
+		"compression":                 "Compression",
+		"connectivity":                "Connectivity",
 		"creation_time":               "CreationTime",
 		"data_type":                   "DataType",
 		"deduplication_configuration": "DeduplicationConfiguration",
@@ -1261,6 +1398,7 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filter_configuration":        "FilterConfiguration",
 		"filters":                     "Filters",
 		"header_parameters":           "HeaderParameters",
+		"headers":                     "Headers",
 		"http_parameters":             "HttpParameters",
 		"include_payload":             "IncludePayload",
 		"input":                       "Input",
@@ -1285,6 +1423,7 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"message_structure":           "MessageStructure",
 		"message_system_attributes":   "MessageSystemAttributes",
 		"metadata":                    "Metadata",
+		"msk_parameters":              "MskParameters",
 		"name":                        "Name",
 		"on_failure_configuration":    "OnFailureConfiguration",
 		"partition_key":               "PartitionKey",
@@ -1312,6 +1451,7 @@ func subscriberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                        "Tags",
 		"target_arn":                  "TargetArn",
 		"tenant_id":                   "TenantId",
+		"topic_name":                  "TopicName",
 		"trace_header":                "TraceHeader",
 		"transformer":                 "Transformer",
 		"type":                        "Type",

@@ -67,6 +67,18 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for the cloud connector.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "AzureConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "GcpConfiguration"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "AzureConfiguration": {
 		//	      "additionalProperties": false,
@@ -143,11 +155,81 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "ApplicationId"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "GcpConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for connecting to Google Cloud.",
+		//	      "properties": {
+		//	        "OrganizationId": {
+		//	          "description": "The GCP organization ID. Required when Targets is omitted, which targets the entire organization. Cannot be changed after creation.",
+		//	          "maxLength": 19,
+		//	          "minLength": 1,
+		//	          "pattern": "^[1-9][0-9]{0,18}$",
+		//	          "type": "string"
+		//	        },
+		//	        "ServiceAccountEmail": {
+		//	          "description": "The GCP service account the connector impersonates. Its project is the connector's management project. Cannot be changed after creation.",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-z][a-z0-9\\-]*[a-z0-9]@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$",
+		//	          "type": "string"
+		//	        },
+		//	        "Targets": {
+		//	          "additionalProperties": false,
+		//	          "description": "The targets for the cloud connector. If omitted, the entire organization is targeted.",
+		//	          "properties": {
+		//	            "Projects": {
+		//	              "description": "List of GCP projects.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "A GCP project with its ID and optional display name.",
+		//	                "properties": {
+		//	                  "ProjectDisplayName": {
+		//	                    "description": "The display name of the GCP project.",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ProjectId": {
+		//	                    "description": "The GCP project ID.",
+		//	                    "maxLength": 30,
+		//	                    "minLength": 6,
+		//	                    "pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ProjectId"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 75,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Projects"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "WorkloadIdentityPoolProvider": {
+		//	          "description": "The resource name of the workload identity pool provider that trusts the connector's IAM role.",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^projects/[1-9][0-9]{0,18}/locations/global/workloadIdentityPools/[a-z0-9-]{4,32}/providers/[a-z0-9-]{4,32}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "WorkloadIdentityPoolProvider",
+		//	        "ServiceAccountEmail"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "AzureConfiguration"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -203,6 +285,54 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for connecting to Azure.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GcpConfiguration
+				"gcp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OrganizationId
+						"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GCP organization ID. Required when Targets is omitted, which targets the entire organization. Cannot be changed after creation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceAccountEmail
+						"service_account_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The GCP service account the connector impersonates. Its project is the connector's management project. Cannot be changed after creation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Targets
+						"targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Projects
+								"projects": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ProjectDisplayName
+											"project_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The display name of the GCP project.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ProjectId
+											"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The GCP project ID.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of GCP projects.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The targets for the cloud connector. If omitted, the entire organization is targeted.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkloadIdentityPoolProvider
+						"workload_identity_pool_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The resource name of the workload identity pool provider that trusts the connector's IAM role.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for connecting to Google Cloud.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -339,26 +469,33 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::CloudConnector").WithTerraformTypeName("awscc_ssm_cloud_connector")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_display_name": "ApplicationDisplayName",
-		"application_id":           "ApplicationId",
-		"azure_configuration":      "AzureConfiguration",
-		"cloud_connector_arn":      "CloudConnectorArn",
-		"cloud_connector_id":       "CloudConnectorId",
-		"config_connector_arn":     "ConfigConnectorArn",
-		"configuration":            "Configuration",
-		"created_at":               "CreatedAt",
-		"description":              "Description",
-		"display_name":             "DisplayName",
-		"id":                       "Id",
-		"key":                      "Key",
-		"role_arn":                 "RoleArn",
-		"subscriptions":            "Subscriptions",
-		"tags":                     "Tags",
-		"targets":                  "Targets",
-		"tenant_display_name":      "TenantDisplayName",
-		"tenant_id":                "TenantId",
-		"updated_at":               "UpdatedAt",
-		"value":                    "Value",
+		"application_display_name":        "ApplicationDisplayName",
+		"application_id":                  "ApplicationId",
+		"azure_configuration":             "AzureConfiguration",
+		"cloud_connector_arn":             "CloudConnectorArn",
+		"cloud_connector_id":              "CloudConnectorId",
+		"config_connector_arn":            "ConfigConnectorArn",
+		"configuration":                   "Configuration",
+		"created_at":                      "CreatedAt",
+		"description":                     "Description",
+		"display_name":                    "DisplayName",
+		"gcp_configuration":               "GcpConfiguration",
+		"id":                              "Id",
+		"key":                             "Key",
+		"organization_id":                 "OrganizationId",
+		"project_display_name":            "ProjectDisplayName",
+		"project_id":                      "ProjectId",
+		"projects":                        "Projects",
+		"role_arn":                        "RoleArn",
+		"service_account_email":           "ServiceAccountEmail",
+		"subscriptions":                   "Subscriptions",
+		"tags":                            "Tags",
+		"targets":                         "Targets",
+		"tenant_display_name":             "TenantDisplayName",
+		"tenant_id":                       "TenantId",
+		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
+		"workload_identity_pool_provider": "WorkloadIdentityPoolProvider",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -131,7 +131,8 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "enum": [
 		//	    "ENABLED",
 		//	    "IN_PROGRESS",
-		//	    "DISABLED"
+		//	    "DISABLED",
+		//	    "ERROR"
 		//	  ],
 		//	  "type": "string"
 		//	}

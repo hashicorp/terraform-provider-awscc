@@ -226,11 +226,11 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Transport Layer Security (TLS) version + cipher suite for this DomainName.",
 		//	  "type": "string"
 		//	}
 		"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The Transport Layer Security (TLS) version + cipher suite for this DomainName.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

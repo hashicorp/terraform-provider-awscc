@@ -198,8 +198,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The CSPM provider configuration for the connector",
 		//	  "properties": {
 		//	    "Azure": {
 		//	      "additionalProperties": false,
@@ -256,11 +255,64 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "AzureRegions"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "GCP": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "AWSConfigConnectorArn": {
+		//	          "description": "The ARN of the AWS Config connector used for the GCP integration",
+		//	          "type": "string"
+		//	        },
+		//	        "GCPRegions": {
+		//	          "description": "The list of GCP regions to include in the connector scope",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 256,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "ScopeConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "ScopeType": {
+		//	              "description": "The scope type for the GCP connector",
+		//	              "enum": [
+		//	                "PROJECT",
+		//	                "ORGANIZATION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ScopeValues": {
+		//	              "description": "The list of scope values for the GCP connector",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ScopeType"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AWSConfigConnectorArn",
+		//	        "ScopeConfiguration",
+		//	        "GCPRegions"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Azure"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -301,8 +353,44 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The configuration for connecting to an Azure environment.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: GCP
+				"gcp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AWSConfigConnectorArn
+						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the AWS Config connector used for the GCP integration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GCPRegions
+						"gcp_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of GCP regions to include in the connector scope",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScopeConfiguration
+						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScopeType
+								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The scope type for the GCP connector",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ScopeValues
+								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The list of scope values for the GCP connector",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The CSPM provider configuration for the connector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -355,6 +443,8 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_by":               "CreatedBy",
 		"description":              "Description",
 		"enablement_status":        "EnablementStatus",
+		"gcp":                      "GCP",
+		"gcp_regions":              "GCPRegions",
 		"issues":                   "Issues",
 		"last_checked_at":          "LastCheckedAt",
 		"last_updated_at":          "LastUpdatedAt",

@@ -45,7 +45,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "properties": {
 		//	    "SecretArn": {
 		//	      "description": "The ARN of the secret in AWS Secrets Manager",
-		//	      "pattern": "^arn:(aws|aws-us-gov):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
+		//	      "pattern": "^arn:aws(-cn|-us-gov)?:secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -153,7 +153,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the API key credential provider",
-		//	  "pattern": "^arn:(aws|aws-us-gov):bedrock-agentcore:[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/apikeycredentialprovider/[a-zA-Z0-9-]+$",
+		//	  "pattern": "^arn:aws(-cn|-us-gov)?:bedrock-agentcore:[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/apikeycredentialprovider/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
 		"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

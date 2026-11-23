@@ -100,6 +100,157 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: JwtConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "DefaultAlgorithms": {
+		//	      "description": "The signing algorithms the authorizer accepts: RS256, RS384, RS512, ES256, ES384 or ES512.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Issuers": {
+		//	      "description": "The token issuers the authorizer accepts.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "description": "Other claims the token must carry.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "ClaimName": {
+		//	                  "description": "The claim name. Can't be iss, aud, exp, nbf, iat, scope or scp.",
+		//	                  "type": "string"
+		//	                },
+		//	                "ExpectedValues": {
+		//	                  "description": "The value the claim must have. Leave it out to check only that the claim is present.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                },
+		//	                "Format": {
+		//	                  "description": "The claim's format. SINGLE_STRING is the only format.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Required": {
+		//	                  "description": "Whether the token must carry the claim. Defaults to false.",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ClaimName",
+		//	                "Format"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "Audiences": {
+		//	            "description": "The values that the token's aud claim must contain at least one of.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "description": "The HTTPS URL that the token's iss claim must match.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Issuer",
+		//	          "Audiences"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Issuers",
+		//	    "DefaultAlgorithms"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"jwt_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultAlgorithms
+				"default_algorithms": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The signing algorithms the authorizer accepts: RS256, RS384, RS512, ES256, ES384 or ES512.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Issuers
+				"issuers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ClaimName
+										"claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The claim name. Can't be iss, aud, exp, nbf, iat, scope or scp.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ExpectedValues
+										"expected_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The value the claim must have. Leave it out to check only that the claim is present.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The claim's format. SINGLE_STRING is the only format.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Required
+										"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Whether the token must carry the claim. Defaults to false.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Other claims the token must carry.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Audiences
+							"audiences": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The values that the token's aud claim must contain at least one of.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTPS URL that the token's iss claim must match.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The token issuers the authorizer accepts.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -167,15 +318,25 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Authorizer").WithTerraformTypeName("awscc_apigateway_authorizer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_claims":                "AdditionalClaims",
+		"audiences":                        "Audiences",
 		"auth_type":                        "AuthType",
 		"authorizer_credentials":           "AuthorizerCredentials",
 		"authorizer_id":                    "AuthorizerId",
 		"authorizer_result_ttl_in_seconds": "AuthorizerResultTtlInSeconds",
 		"authorizer_uri":                   "AuthorizerUri",
+		"claim_name":                       "ClaimName",
+		"default_algorithms":               "DefaultAlgorithms",
+		"expected_values":                  "ExpectedValues",
+		"format":                           "Format",
 		"identity_source":                  "IdentitySource",
 		"identity_validation_expression":   "IdentityValidationExpression",
+		"issuer":                           "Issuer",
+		"issuers":                          "Issuers",
+		"jwt_configuration":                "JwtConfiguration",
 		"name":                             "Name",
 		"provider_ar_ns":                   "ProviderARNs",
+		"required":                         "Required",
 		"rest_api_id":                      "RestApiId",
 		"type":                             "Type",
 	})

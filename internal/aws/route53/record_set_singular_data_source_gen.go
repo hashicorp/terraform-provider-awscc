@@ -23,6 +23,53 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Route53::RecordSet resource.
 func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AZAffinity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "AZ affinity resource record sets only: the source location (Availability Zone, Availability Zone group, Region, partition, or global) of the DNS queries that this record set's answers apply to.",
+		//	  "properties": {
+		//	    "LocationId": {
+		//	      "description": "The ID of the location, for example an Availability Zone ID such as use1-az1, or a Region such as us-east-1.",
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "LocationType": {
+		//	      "description": "The type of the source location that the record set's answers apply to.",
+		//	      "enum": [
+		//	        "AvailabilityZone",
+		//	        "AvailabilityZoneGroup",
+		//	        "Region",
+		//	        "Partition",
+		//	        "Global"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "LocationType",
+		//	    "LocationId"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"az_affinity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LocationId
+				"location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the location, for example an Availability Zone ID such as use1-az1, or a Region such as us-east-1.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LocationType
+				"location_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the source location that the record set's answers apply to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AZ affinity resource record sets only: the source location (Availability Zone, Availability Zone group, Region, partition, or global) of the DNS queries that this record set's answers apply to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AliasTarget
 		// CloudFormation resource type schema:
 		//
@@ -355,6 +402,7 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alias_target":           "AliasTarget",
+		"az_affinity":            "AZAffinity",
 		"cidr_routing_config":    "CidrRoutingConfig",
 		"collection_id":          "CollectionId",
 		"comment":                "Comment",
@@ -367,7 +415,9 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"health_check_id":        "HealthCheckId",
 		"hosted_zone_id":         "HostedZoneId",
 		"hosted_zone_name":       "HostedZoneName",
+		"location_id":            "LocationId",
 		"location_name":          "LocationName",
+		"location_type":          "LocationType",
 		"multi_value_answer":     "MultiValueAnswer",
 		"name":                   "Name",
 		"region":                 "Region",

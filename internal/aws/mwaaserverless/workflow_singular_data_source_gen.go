@@ -193,6 +193,43 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Environment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the environment variables that tasks in a workflow use during execution.",
+		//	  "properties": {
+		//	    "Variables": {
+		//	      "additionalProperties": false,
+		//	      "description": "A map of environment variable names to values. Up to 50 variables. Names must start with a letter and contain only letters, numbers, and underscores. Names starting with AWS_ or AIRFLOW__ are reserved, except AIRFLOW__WORKERS__SECRETS_BACKEND, AIRFLOW__WORKERS__SECRETS_BACKEND_KWARGS, and names prefixed with AIRFLOW__WORKERS__SECRETS_BACKEND_KWARG__.",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "maxLength": 255,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Variables"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"environment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Variables
+				"variables":         // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A map of environment variable names to values. Up to 50 variables. Names must start with a letter and contain only letters, numbers, and underscores. Names starting with AWS_ or AIRFLOW__ are reserved, except AIRFLOW__WORKERS__SECRETS_BACKEND, AIRFLOW__WORKERS__SECRETS_BACKEND_KWARGS, and names prefixed with AIRFLOW__WORKERS__SECRETS_BACKEND_KWARG__.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the environment variables that tasks in a workflow use during execution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -405,6 +442,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"definition_s3_location":   "DefinitionS3Location",
 		"description":              "Description",
 		"encryption_configuration": "EncryptionConfiguration",
+		"environment":              "Environment",
 		"kms_key_id":               "KmsKeyId",
 		"log_group_name":           "LogGroupName",
 		"logging_configuration":    "LoggingConfiguration",
@@ -420,6 +458,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                     "Tags",
 		"trigger_mode":             "TriggerMode",
 		"type":                     "Type",
+		"variables":                "Variables",
 		"version_id":               "VersionId",
 		"workflow_arn":             "WorkflowArn",
 		"workflow_status":          "WorkflowStatus",

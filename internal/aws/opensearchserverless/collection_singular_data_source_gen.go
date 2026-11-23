@@ -212,7 +212,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "List of tags to be added to the resource",
+		//	  "description": "List of tags to associate with the collection. Tag changes are applied in place without replacing the collection. Reading, adding, changing or removing tags requires the aoss:ListTagsForResource, aoss:TagResource and aoss:UntagResource permissions.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -256,7 +256,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "List of tags to be added to the resource",
+			Description: "List of tags to associate with the collection. Tag changes are applied in place without replacing the collection. Reading, adding, changing or removing tags requires the aoss:ListTagsForResource, aoss:TagResource and aoss:UntagResource permissions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type

@@ -126,6 +126,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "BandwidthReportingMode": {
+		//	        "enum": [
+		//	          "AVERAGE",
+		//	          "MAX"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "BaseUrls": {
 		//	        "description": "\u003cp\u003eThe base URL to use for retrieving segments.\u003c/p\u003e",
 		//	        "items": {
@@ -512,6 +519,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 						}, /*END SCHEMA*/
 						Description: "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>",
 						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BandwidthReportingMode
+					"bandwidth_reporting_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: BaseUrls
 					"base_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2112,6 +2123,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn":                                   "Arn",
 		"audio_timeline_pattern":                "AudioTimelinePattern",
 		"availability_start_time_configuration": "AvailabilityStartTimeConfiguration",
+		"bandwidth_reporting_mode":              "BandwidthReportingMode",
 		"base_urls":                             "BaseUrls",
 		"certificate_arn":                       "CertificateArn",
 		"channel_group_name":                    "ChannelGroupName",

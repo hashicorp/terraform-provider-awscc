@@ -8,6 +8,7 @@ package glue
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -31,6 +32,20 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the user-defined function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ArtifactLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The registered Amazon S3 location that contains the function artifacts. Required when GovernanceMode is LAKE_FORMATION.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"artifact_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The registered Amazon S3 location that contains the function artifacts. Required when GovernanceMode is LAKE_FORMATION.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClassName
@@ -91,6 +106,21 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 			Description: "The type of the function.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GovernanceMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "How access to the function is governed. The mode cannot be changed after creation.",
+		//	  "enum": [
+		//	    "IAM_ONLY",
+		//	    "LAKE_FORMATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"governance_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How access to the function is governed. The mode cannot be changed after creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerName
 		// CloudFormation resource type schema:
 		//
@@ -130,6 +160,11 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	    "additionalProperties": false,
 		//	    "description": "The URIs for function resources.",
 		//	    "properties": {
+		//	      "LastModified": {
+		//	        "description": "The time at which Glue recorded the resource as last modified in Amazon S3 for a Lake Formation governed function.",
+		//	        "format": "date-time",
+		//	        "type": "string"
+		//	      },
 		//	      "ResourceType": {
 		//	        "description": "The type of the resource.",
 		//	        "enum": [
@@ -155,6 +190,12 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		"resource_uris": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LastModified
+					"last_modified": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  timetypes.RFC3339Type{},
+						Description: "The time at which Glue recorded the resource as last modified in Amazon S3 for a Lake Formation governed function.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of the resource.",
@@ -187,16 +228,19 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::UserDefinedFunction").WithTerraformTypeName("awscc_glue_user_defined_function")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"class_name":    "ClassName",
-		"database_name": "DatabaseName",
-		"function_name": "FunctionName",
-		"function_type": "FunctionType",
-		"owner_name":    "OwnerName",
-		"owner_type":    "OwnerType",
-		"resource_type": "ResourceType",
-		"resource_uris": "ResourceUris",
-		"uri":           "Uri",
+		"arn":               "Arn",
+		"artifact_location": "ArtifactLocation",
+		"class_name":        "ClassName",
+		"database_name":     "DatabaseName",
+		"function_name":     "FunctionName",
+		"function_type":     "FunctionType",
+		"governance_mode":   "GovernanceMode",
+		"last_modified":     "LastModified",
+		"owner_name":        "OwnerName",
+		"owner_type":        "OwnerType",
+		"resource_type":     "ResourceType",
+		"resource_uris":     "ResourceUris",
+		"uri":               "Uri",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

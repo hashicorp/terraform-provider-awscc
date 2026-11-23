@@ -46,6 +46,20 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	        "additionalProperties": false,
 		//	        "description": "An array of objects representing the replication destinations and repository filters for a replication configuration.",
 		//	        "properties": {
+		//	          "DeleteReplication": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Enabled": {
+		//	                "description": "Whether image deletions and image tag removals in the source registry are replicated to the replication destinations.",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Destinations": {
 		//	            "description": "An array of objects representing the destination for a replication rule.",
 		//	            "items": {
@@ -124,6 +138,18 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteReplication
+							"delete_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether image deletions and image tag removals in the source registry are replicated to the replication destinations.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Destinations
 							"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -188,7 +214,9 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("awscc_ecr_replication_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"delete_replication":        "DeleteReplication",
 		"destinations":              "Destinations",
+		"enabled":                   "Enabled",
 		"filter":                    "Filter",
 		"filter_type":               "FilterType",
 		"region":                    "Region",

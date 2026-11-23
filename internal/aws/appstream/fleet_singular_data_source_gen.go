@@ -178,7 +178,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws(?:\\-cn|\\-iso\\-b|\\-iso|\\-us\\-gov)?:iam::[0-9]{12}:role/.+$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -200,7 +200,6 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "maxLength": 1024,
-		//	  "pattern": "^arn:[a-z-]+:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:.+$",
 		//	  "type": "string"
 		//	}
 		"image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

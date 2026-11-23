@@ -40,7 +40,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The type of firewall for this rule.",
 		//	  "enum": [
-		//	    "WAF"
+		//	    "WAF",
+		//	    "IGW_FIREWALL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -64,6 +65,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A description of the rule.",
+		//	  "pattern": "^[a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"rule_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -86,6 +88,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the rule.",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _.:/=+\\-@]*$",
 		//	  "type": "string"
 		//	}
 		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/

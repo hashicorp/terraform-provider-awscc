@@ -187,6 +187,55 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The ID of the multi-tenant distribution.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Domain": {
+		//	        "description": "The domain to serve only on the Anycast IP list. Must be lowercase and must also be listed in `Domains`.",
+		//	        "type": "string"
+		//	      },
+		//	      "ServeOn": {
+		//	        "description": "Set to `anycast-ip-list-only` to serve the domain only on the Anycast IP list of the tenant's connection group. To serve a domain normally, on all CloudFront IP addresses, omit it from `DomainMappings`.",
+		//	        "enum": [
+		//	          "anycast-ip-list-only"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Domain",
+		//	      "ServeOn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"domain_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Domain
+					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The domain to serve only on the Anycast IP list. Must be lowercase and must also be listed in `Domains`.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ServeOn
+					"serve_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Set to `anycast-ip-list-only` to serve the domain only on the Anycast IP list of the tenant's connection group. To serve a domain normally, on all CloudFront IP addresses, omit it from `DomainMappings`.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainResults
 		// CloudFormation resource type schema:
 		//
@@ -200,12 +249,24 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	        "description": "The specified domain.",
 		//	        "type": "string"
 		//	      },
+		//	      "ServeOn": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
 		//	      "Status": {
 		//	        "description": "Whether the domain is active or inactive.",
 		//	        "enum": [
 		//	          "active",
 		//	          "inactive"
 		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "StatusReason": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
+		//	      "StatusReasonCode": {
+		//	        "description": "",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -222,9 +283,24 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 						Description: "The specified domain.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ServeOn
+					"serve_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Whether the domain is active or inactive.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusReason
+					"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusReasonCode
+					"status_reason_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -356,6 +432,21 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The name of the distribution tenant.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OnDomainTakeover
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "allow",
+		//	    "reject"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"on_domain_takeover": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -480,6 +571,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		"distribution_id":                             "DistributionId",
 		"distribution_tenant_id":                      "Id",
 		"domain":                                      "Domain",
+		"domain_mappings":                             "DomainMappings",
 		"domain_results":                              "DomainResults",
 		"domains":                                     "Domains",
 		"e_tag":                                       "ETag",
@@ -490,10 +582,14 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		"locations":                                   "Locations",
 		"managed_certificate_request":                 "ManagedCertificateRequest",
 		"name":                                        "Name",
+		"on_domain_takeover":                          "OnDomainTakeover",
 		"parameters":                                  "Parameters",
 		"primary_domain_name":                         "PrimaryDomainName",
 		"restriction_type":                            "RestrictionType",
+		"serve_on":                                    "ServeOn",
 		"status":                                      "Status",
+		"status_reason":                               "StatusReason",
+		"status_reason_code":                          "StatusReasonCode",
 		"tags":                                        "Tags",
 		"validation_token_host":                       "ValidationTokenHost",
 		"value":                                       "Value",

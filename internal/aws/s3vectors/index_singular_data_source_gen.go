@@ -166,6 +166,42 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": true
+		//	    },
+		//	    "TextSearchConfigurations": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Language": {
+		//	            "enum": [
+		//	              "en",
+		//	              "fr",
+		//	              "es",
+		//	              "pt",
+		//	              "it",
+		//	              "de",
+		//	              "nl",
+		//	              "zh",
+		//	              "ja",
+		//	              "ko"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "MetadataKey": {
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MetadataKey"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -177,6 +213,22 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 					ElementType: types.StringType,
 					Description: "Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys cannot be used as query filters. Non-filterable metadata keys can be retrieved but cannot be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors.",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TextSearchConfigurations
+				"text_search_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Language
+							"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MetadataKey
+							"metadata_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The metadata configuration for the vector index.",
@@ -283,10 +335,13 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"index_name":                   "IndexName",
 		"key":                          "Key",
 		"kms_key_arn":                  "KmsKeyArn",
+		"language":                     "Language",
 		"metadata_configuration":       "MetadataConfiguration",
+		"metadata_key":                 "MetadataKey",
 		"non_filterable_metadata_keys": "NonFilterableMetadataKeys",
 		"sse_type":                     "SseType",
 		"tags":                         "Tags",
+		"text_search_configurations":   "TextSearchConfigurations",
 		"value":                        "Value",
 		"vector_bucket_arn":            "VectorBucketArn",
 		"vector_bucket_name":           "VectorBucketName",

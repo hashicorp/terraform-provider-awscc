@@ -39,6 +39,18 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for the connector that specifies the third-party cloud provider connection details.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Azure"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Gcp"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "Azure": {
 		//	      "additionalProperties": false,
@@ -62,6 +74,37 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ClientIdentifier"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "Gcp": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for connecting to Google Cloud.",
+		//	      "properties": {
+		//	        "GcpOrganizationId": {
+		//	          "description": "The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in ServiceAccountEmail. Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.",
+		//	          "maxLength": 20,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ServiceAccountEmail": {
+		//	          "description": "The email address of the Google Cloud service account that AWS Config uses.",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-z][a-z0-9\\-]*@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$",
+		//	          "type": "string"
+		//	        },
+		//	        "WorkloadIdentityPoolProvider": {
+		//	          "description": "The full resource name of the workload identity pool provider that AWS Config uses to federate into Google Cloud.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "^projects/[0-9]+/locations/global/workloadIdentityPools/[^/]+/providers/[^/]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServiceAccountEmail",
+		//	        "WorkloadIdentityPoolProvider"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -83,6 +126,28 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration for connecting to Microsoft Azure.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Gcp
+				"gcp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GcpOrganizationId
+						"gcp_organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in ServiceAccountEmail. Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceAccountEmail
+						"service_account_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The email address of the Google Cloud service account that AWS Config uses.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkloadIdentityPoolProvider
+						"workload_identity_pool_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The full resource name of the workload identity pool provider that AWS Config uses to federate into Google Cloud.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for connecting to Google Cloud.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -181,16 +246,20 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Config::Connector").WithTerraformTypeName("awscc_config_connector")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"azure":                   "Azure",
-		"client_identifier":       "ClientIdentifier",
-		"connector_configuration": "ConnectorConfiguration",
-		"created_time":            "CreatedTime",
-		"key":                     "Key",
-		"name":                    "Name",
-		"tags":                    "Tags",
-		"tenant_identifier":       "TenantIdentifier",
-		"value":                   "Value",
+		"arn":                             "Arn",
+		"azure":                           "Azure",
+		"client_identifier":               "ClientIdentifier",
+		"connector_configuration":         "ConnectorConfiguration",
+		"created_time":                    "CreatedTime",
+		"gcp":                             "Gcp",
+		"gcp_organization_id":             "GcpOrganizationId",
+		"key":                             "Key",
+		"name":                            "Name",
+		"service_account_email":           "ServiceAccountEmail",
+		"tags":                            "Tags",
+		"tenant_identifier":               "TenantIdentifier",
+		"value":                           "Value",
+		"workload_identity_pool_provider": "WorkloadIdentityPoolProvider",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

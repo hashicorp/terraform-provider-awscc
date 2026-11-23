@@ -116,7 +116,7 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
+		//	  "maxItems": 50,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
