@@ -5,6 +5,7 @@ package generic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -615,19 +616,12 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap}
+	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, pathAwareNames: r.pathAwareNames, pathCfToTfNameMap: r.pathCfToTfNameMap, unorderedPaths: r.unorderedArrayPaths()}
 	schema := currentState.Schema
-	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
-	// so plan shows no diff regardless of user config order.
-	var priorMap map[string]any
-	if !currentState.Raw.IsNull() && currentState.Raw.IsKnown() {
-		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, pathAwareNames: r.pathAwareNames, pathTfToCfNameMap: r.pathTfToCfNameMap}
-		var err error
-		priorMap, err = toCC.AsRaw(ctx, schema, currentState.Raw)
-		if err != nil {
-			tflog.Warn(ctx, "Failed to extract prior state for list ordering", map[string]any{"error": err.Error()})
-		}
-	}
+	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) and unordered object lists
+	// (e.g. SageMaker Cluster InstanceGroups) to match prior state so plan shows no diff
+	// regardless of the order Cloud Control returns them in.
+	priorMap := r.priorStateMap(ctx, currentState)
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), priorMap)
 
 	if err != nil {
@@ -740,9 +734,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	unorderedPaths := unorderedArrayPaths(r.tfSchema.Attributes, r.tfToCfNameMap)
-
-	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState, unorderedPaths)
+	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState, r.unorderedArrayPaths())
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -1001,7 +993,8 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 		return diags
 	}
 
-	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)
+	resourceModel := r.matchUnorderedListsToState(ctx, aws.ToString(description.Properties), state)
+	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, resourceModel, r.cfToTfNameMap)
 
 	if err != nil {
 		diags.AddError(
@@ -1013,6 +1006,57 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 	}
 
 	return nil
+}
+
+// unorderedArrayPaths returns the CloudFormation paths of the resource's order-unstable arrays.
+func (r *genericResource) unorderedArrayPaths() map[string]bool {
+	return unorderedArrayPaths(r.tfSchema.Attributes, r.tfToCfNameMap)
+}
+
+// priorStateMap returns state as a raw Cloud Control ResourceModel, for use as the reference
+// order when reordering lists returned by Cloud Control. Unknown values are omitted.
+// Returns nil if state is null or unknown, or cannot be translated.
+func (r *genericResource) priorStateMap(ctx context.Context, state *tfsdk.State) map[string]any {
+	if state.Raw.IsNull() || !state.Raw.IsKnown() {
+		return nil
+	}
+
+	toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, pathAwareNames: r.pathAwareNames, pathTfToCfNameMap: r.pathTfToCfNameMap}
+	priorMap, err := toCC.AsRaw(ctx, state.Schema, state.Raw)
+	if err != nil {
+		tflog.Warn(ctx, "Failed to extract prior state for list ordering", map[string]any{"error": err.Error()})
+
+		return nil
+	}
+
+	return priorMap
+}
+
+// matchUnorderedListsToState reorders the elements of unordered object lists (e.g. SageMaker
+// Cluster InstanceGroups) in a Cloud Control ResourceModel to match state, by identity field.
+// Unknown values are copied from the ResourceModel by path, so without this a Computed value
+// inside such a list element would be taken from whichever element Cloud Control returned at the
+// same index. Other lists are left in Cloud Control order. Returns resourceModel unchanged if it
+// cannot be matched.
+func (r *genericResource) matchUnorderedListsToState(ctx context.Context, resourceModel string, state *tfsdk.State) string {
+	prior := r.priorStateMap(ctx, state)
+	if prior == nil {
+		return resourceModel
+	}
+
+	var m map[string]any
+	if err := json.Unmarshal([]byte(resourceModel), &m); err != nil {
+		return resourceModel
+	}
+
+	sliceMatcher{unorderedPaths: r.unorderedArrayPaths(), identityOnly: true}.reorder(m, prior, "")
+
+	b, err := json.Marshal(m)
+	if err != nil {
+		return resourceModel
+	}
+
+	return string(b)
 }
 
 // bootstrapContext injects the CloudFormation type name into logger contexts

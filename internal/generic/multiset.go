@@ -34,9 +34,6 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 		return
 	}
 
-	// If the current value is semantically equivalent to the planned value
-	// then return the current value, else return the planned value.
-
 	planned, diags := request.PlanValue.ToListValue(ctx)
 	response.Diagnostics.Append(diags...)
 	if response.Diagnostics.HasError() {
@@ -49,8 +46,15 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 		return
 	}
 
+	// Resolve unknown (Computed) values inside object elements from the state element with
+	// the same identity, before the nested UseStateForUnknown modifiers pair them by index.
+	planned = fillUnknownsFromMatchedState(ctx, planned, request.ConfigValue, current)
+
+	// If the current value is semantically equivalent to the planned value
+	// then return the current value, else return the planned value.
+
 	if len(planned.Elements()) != len(current.Elements()) {
-		response.PlanValue = request.PlanValue
+		response.PlanValue = planned
 
 		return
 	}
@@ -73,6 +77,6 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 		// Every planned value is equal to a current value.
 		response.PlanValue = request.StateValue
 	} else {
-		response.PlanValue = request.PlanValue
+		response.PlanValue = planned
 	}
 }

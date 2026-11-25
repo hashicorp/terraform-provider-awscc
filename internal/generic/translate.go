@@ -211,6 +211,10 @@ type toTerraform struct {
 	cfToTfNameMap     map[string]string
 	pathAwareNames    bool
 	pathCfToTfNameMap map[string]string // "CfParentPath/CfProp" → TF attribute name
+	// unorderedPaths holds the CloudFormation JSON Pointer paths (array indices stripped)
+	// of "insertionOrder": false arrays, as returned by unorderedArrayPaths. Object arrays
+	// at these paths are matched to prior state by an identity field (see identityField).
+	unorderedPaths map[string]bool
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
@@ -219,9 +223,9 @@ func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, 
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
-// If priorStateMap is non-nil (e.g. from a previous Read), key-value list attributes
-// (Tags, TargetGroupAttributes, LoadBalancerAttributes, etc.) in the resource model
-// are reordered to match prior state so plan shows no diff regardless of user config order.
+// If priorStateMap is non-nil (e.g. from a previous Read), list attributes in the resource model
+// are reordered to match prior state (see sliceMatcher) so plan shows no diff regardless of the
+// order Cloud Control returns them in.
 func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string, priorStateMap map[string]any) (tftypes.Value, error) {
 	var v any
 
@@ -231,7 +235,7 @@ func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPathe
 
 	if m, ok := v.(map[string]any); ok {
 		if priorStateMap != nil {
-			reorderKeyValueSlicesToMatchPrior(m, priorStateMap)
+			sliceMatcher{unorderedPaths: t.unorderedPaths}.reorder(m, priorStateMap, "")
 		} else {
 			normalizeKeyValueSlices(m)
 		}
@@ -245,42 +249,214 @@ func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPathe
 // lists by key, primitive lists by value). Recurses into nested objects (e.g. VpcConfig).
 // Preserves the user's order from the last apply so plan shows no diff.
 func reorderKeyValueSlicesToMatchPrior(m, prior map[string]any) {
+	sliceMatcher{}.reorder(m, prior, "")
+}
+
+// sliceMatcher reorders the lists in a Cloud Control resource model to match prior state, so
+// that each list element lines up with the prior element it corresponds to:
+//   - key-value lists (elements with "Key"/"key", e.g. Tags) by key;
+//   - object lists at an unordered path by an identity field chosen from the data (see
+//     identityField), e.g. SageMaker Cluster InstanceGroups by InstanceGroupName;
+//   - primitive lists by value.
+//
+// It recurses into nested objects and into list elements, pairing each element with its
+// matched prior element.
+type sliceMatcher struct {
+	// unorderedPaths is the set of unordered array paths (see toTerraform.unorderedPaths).
+	unorderedPaths map[string]bool
+	// identityOnly restricts reordering to unordered object lists that have an identity field,
+	// leaving all other lists in Cloud Control order.
+	identityOnly bool
+}
+
+// reorder reorders the lists in m to match prior. prefix is the CloudFormation JSON Pointer
+// path of m with array indices stripped ("" for the resource model).
+func (sm sliceMatcher) reorder(m, prior map[string]any, prefix string) {
 	for key, val := range m {
+		path := prefix + "/" + key
+
 		switch v := val.(type) {
 		case map[string]any:
 			priorMap, _ := prior[key].(map[string]any)
 			if priorMap != nil {
-				reorderKeyValueSlicesToMatchPrior(v, priorMap)
+				sm.reorder(v, priorMap, path)
 			}
 		case []any:
 			if len(v) == 0 {
 				continue
 			}
 			priorSlice, _ := prior[key].([]any)
-			reordered := reorderKeyValueSliceToMatch(v, priorSlice)
-			if reordered != nil {
-				m[key] = reordered
-				for i, el := range reordered {
-					if elMap, ok := el.(map[string]any); ok {
-						var priorElMap map[string]any
-						if i < len(priorSlice) {
-							priorElMap, _ = priorSlice[i].(map[string]any)
-						}
-						reorderKeyValueSlicesToMatchPrior(elMap, priorElMap)
-					}
+
+			if !sm.identityOnly {
+				if reordered := reorderKeyValueSliceToMatch(v, priorSlice); reordered != nil {
+					m[key] = reordered
+					sm.reorderMatchedElements(reordered, priorSlice, keyFromMap, path)
+					continue
 				}
-			} else if reorderedPrim := reorderPrimitiveSliceToMatch(v, priorSlice); reorderedPrim != nil {
+			}
+
+			if sm.unorderedPaths[path] {
+				if field := identityField(v, priorSlice); field != "" {
+					keyOf := fieldKey(field)
+					reordered := reorderSliceByKeyToMatch(v, priorSlice, keyOf)
+					m[key] = reordered
+					sm.reorderMatchedElements(reordered, priorSlice, keyOf, path)
+					continue
+				}
+			}
+
+			if sm.identityOnly {
+				continue
+			}
+
+			if reorderedPrim := reorderPrimitiveSliceToMatch(v, priorSlice); reorderedPrim != nil {
 				m[key] = reorderedPrim
 			} else {
 				sortSliceByKey(v)
 				for _, el := range v {
 					if elMap, ok := el.(map[string]any); ok {
-						reorderKeyValueSlicesToMatchPrior(elMap, nil)
+						sm.reorder(elMap, nil, path)
 					}
 				}
 			}
 		}
 	}
+}
+
+// reorderMatchedElements recurses into each object element of current, pairing it with the
+// prior element that has the same key (as returned by keyOf).
+func (sm sliceMatcher) reorderMatchedElements(current, prior []any, keyOf func(map[string]any) string, path string) {
+	priorByKey := make(map[string]map[string]any, len(prior))
+	for _, el := range prior {
+		if p, ok := el.(map[string]any); ok {
+			if k := keyOf(p); k != "" {
+				priorByKey[k] = p
+			}
+		}
+	}
+	for _, el := range current {
+		if elMap, ok := el.(map[string]any); ok {
+			sm.reorder(elMap, priorByKey[keyOf(elMap)], path)
+		}
+	}
+}
+
+// identityField picks the field that identifies each element of an object array, so
+// that current elements (from Cloud Control) can be paired with prior state elements
+// regardless of order.
+//
+// Candidate fields are named "Name"/"Id" or end in "Name"/"Id" (e.g. "InstanceGroupName"),
+// tried in that preference order and then alphabetically. The first candidate whose
+// value is a non-empty scalar on every element and unique within both current and prior,
+// and that shares at least one value between them, is returned. Returns "" if there is
+// no such field, in which case the array should be left as is.
+//
+// Any field that qualifies gives a valid pairing, because reordering only permutes the
+// Cloud Control elements and never changes their values.
+func identityField(current, prior []any) string {
+	if len(current) == 0 || len(prior) == 0 {
+		return ""
+	}
+
+	first, ok := current[0].(map[string]any)
+	if !ok {
+		return ""
+	}
+
+	candidates := make([]string, 0, len(first))
+	for field := range first {
+		if identityFieldRank(field) != identityRankNone {
+			candidates = append(candidates, field)
+		}
+	}
+	sort.Slice(candidates, func(i, j int) bool {
+		ri, rj := identityFieldRank(candidates[i]), identityFieldRank(candidates[j])
+		if ri != rj {
+			return ri < rj
+		}
+		return candidates[i] < candidates[j]
+	})
+
+	for _, field := range candidates {
+		keyOf := fieldKey(field)
+		currentKeys, ok := uniqueKeys(current, keyOf)
+		if !ok {
+			continue
+		}
+		priorKeys, ok := uniqueKeys(prior, keyOf)
+		if !ok {
+			continue
+		}
+		for k := range currentKeys {
+			if priorKeys[k] {
+				return field
+			}
+		}
+	}
+
+	return ""
+}
+
+// identity field rank constants for identityFieldRank return value (lower is preferred).
+const (
+	identityRankNone = iota - 1
+	identityRankName
+	identityRankNameSuffix
+	identityRankId
+	identityRankIdSuffix
+)
+
+// identityFieldRank returns the preference rank of a candidate identity field name,
+// or identityRankNone if the name is not a candidate.
+// Both CloudFormation (e.g. "InstanceGroupName") and Terraform (e.g. "instance_group_name")
+// naming is supported.
+func identityFieldRank(field string) int {
+	switch {
+	case field == "Name" || field == "name":
+		return identityRankName
+	case len(field) > len("Name") && (strings.HasSuffix(field, "Name") || strings.HasSuffix(field, "_name")):
+		return identityRankNameSuffix
+	case field == "Id" || field == "id":
+		return identityRankId
+	case len(field) > len("Id") && (strings.HasSuffix(field, "Id") || strings.HasSuffix(field, "_id")):
+		return identityRankIdSuffix
+	default:
+		return identityRankNone
+	}
+}
+
+// fieldKey returns a function that extracts the scalar value of field from an object
+// element as a string, or "" if the field is missing, empty, or not a scalar.
+func fieldKey(field string) func(map[string]any) string {
+	return func(m map[string]any) string {
+		switch v := m[field].(type) {
+		case string:
+			return v
+		case float64:
+			return primitiveKey(v)
+		default:
+			return ""
+		}
+	}
+}
+
+// uniqueKeys returns the set of keys of slice's elements, and false if any element is
+// not an object, has an empty key, or shares its key with another element.
+func uniqueKeys(slice []any, keyOf func(map[string]any) string) (map[string]bool, bool) {
+	keys := make(map[string]bool, len(slice))
+	for _, el := range slice {
+		m, ok := el.(map[string]any)
+		if !ok {
+			return nil, false
+		}
+		k := keyOf(m)
+		if k == "" || keys[k] {
+			return nil, false
+		}
+		keys[k] = true
+	}
+
+	return keys, true
 }
 
 // reorderPrimitiveSliceToMatch reorders current to match the element order in prior.
@@ -369,15 +545,28 @@ func reorderKeyValueSliceToMatch(current, prior []any) []any {
 	if len(current) == 0 {
 		return current
 	}
-	// Build current by key
-	byKey := make(map[string]map[string]any, len(current))
 	for _, el := range current {
 		m, ok := el.(map[string]any)
 		if !ok || (m["Key"] == nil && m["key"] == nil) {
 			return nil
 		}
-		k := keyFromMap(m)
-		byKey[k] = m
+	}
+
+	return reorderSliceByKeyToMatch(current, prior, keyFromMap)
+}
+
+// reorderSliceByKeyToMatch reorders current (a slice of objects) to match the key order
+// in prior, where each element's key is returned by keyOf. Keys in current that are not
+// in prior are appended at the end in sorted order.
+func reorderSliceByKeyToMatch(current, prior []any, keyOf func(map[string]any) string) []any {
+	if len(current) == 0 {
+		return current
+	}
+	// Build current by key
+	byKey := make(map[string]map[string]any, len(current))
+	for _, el := range current {
+		m := el.(map[string]any)
+		byKey[keyOf(m)] = m
 	}
 	// Build result: first in prior order, then any keys only in current (sorted)
 	result := make([]any, 0, len(current))
@@ -387,7 +576,7 @@ func reorderKeyValueSliceToMatch(current, prior []any) []any {
 			if !ok {
 				continue
 			}
-			k := keyFromMap(p)
+			k := keyOf(p)
 			if k == "" {
 				continue
 			}
